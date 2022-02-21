@@ -1,0 +1,39 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "CLOB",
+    "commitlint",
+    "middleware",
+    "middlewares",
+    "NCHAR",
+    "NVARCHAR",
+    "SMALLINT",
+    "typedoc",
+    "VARBINARY",
+    "VARCHAR"
+  ],
+  "ignoreWords": [
+    "postbuild",
+    "subpackage",
+    "SUBPACKAGELIST",
+    "PKGJSON"
+  ],
+  "flagWords": [],
+  "ignorePaths": [
+    "**/*.log",
+    "**/lib/**",
+    "**/node_modules/**",
+    "**/package-lock.json",
+    "**/package.json",
+    "**/tsconfig.*",
+    "**/yarn.lock",
+    "CODEOWNERS",
+    "CODE_OF_CONDUCT.md",
+    "coverage/**",
+    "docs/**",
+    "public/**",
+    "typedoc.json",
+    "cSpell.json"
+  ]
+}

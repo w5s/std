@@ -1,0 +1,21 @@
+{
+  "external-modulemap": ".*packages/([^/]+)/.*",
+  "out": "public",
+  "tsconfig": "tsconfig.json",
+  "exclude": [
+    "**/build/**/*",
+    "**/example/**/*",
+    "**/lib/**/*",
+    "**/node_modules/**",
+    "**/__tests__/*.(ts|tsx)",
+    "**/*.(spec|test).(ts|tsx)"
+  ],
+  "excludePrivate": true,
+  "excludeExternals": true,
+  "readme": "README.md",
+  "theme": "default",
+  "entryPoints": [
+    "packages/database-client/src/index.ts",
+    "packages/std/src/index.ts"
+  ]
+}

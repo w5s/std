@@ -1,0 +1,14 @@
+{
+  "extends": "@w5s/ts-config",
+  "exclude": [
+    "**/*.(spec|test).tsx?",
+    "**/__tests__/**"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "DOM",
+      "ESNext",
+      "ScriptHost"
+    ]
+  }
+}

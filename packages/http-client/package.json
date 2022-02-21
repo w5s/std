@@ -1,0 +1,60 @@
+{
+  "name": "@w5s/http-client",
+  "version": "1.0.0-alpha.0",
+  "private": true,
+  "description": "HTTP Client module",
+  "keywords": [
+    "fp",
+    "functional",
+    "http",
+    "client",
+    "fetch"
+  ],
+  "homepage": "https://github.com/w5s/std/tree/master/packages/fetch#readme",
+  "bugs": {
+    "url": "https://github.com/w5s/std/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w5s/std.git"
+  },
+  "license": "MIT",
+  "author": "Julien Polo <julien.polo@gmail.com>",
+  "type": "module",
+  "exports": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "files": [
+    "lib/**/!(*.spec).d.ts",
+    "lib/**/!(*.spec).js.map",
+    "lib/**/!(*.spec).js",
+    "src/**/!(*.spec).ts"
+  ],
+  "scripts": {
+    "build": "npm run build:src",
+    "build:src": "tsc",
+    "clean": "npx rimraf lib",
+    "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
+    "format": "eslint . --ext .js,.ts --fix --cache",
+    "lint": "eslint . --ext .js,.ts --cache",
+    "test": "jest .",
+    "tsc": "tsc",
+    "validate": "npm run build && npm run test"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    }
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "dependencies": {
+    "@w5s/core": "^1.0.0-alpha.0"
+  },
+  "peerDependencies": {
+    "typescript": "^3.8.0 || ^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

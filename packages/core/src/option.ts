@@ -1,0 +1,231 @@
+/* eslint-disable unicorn/no-null */
+
+// https://doc.rust-lang.org/std/option/enum.Option.html
+
+type EmptyValue = null | undefined;
+type Nullable<T> = EmptyValue | T;
+
+/**
+ * `Option<Value>` is the type used to represent either a defined value `Some<Value>` or `None` (i.e. `null` or `undefined`)
+ *
+ * This module focuses on handling `null` and `undefined` values in a functional style, to avoid throwing errors at runtime.
+ * Because `Option.None = undefined`, this modules provides an opinionated way to remove confusion between `null` and `undefined`.
+ *
+ * Some other libraries uses object to implement Maybe/Option monad but has drawbacks :
+ * - ECMAScript already uses nullable/undefined values everywhere
+ * - Each library that does not uses the `Some/None` must be patched / overridden
+ * - it creates a third empty value `None` in addition to `null` and `undefined`
+ *
+ * @example
+ * ```typescript
+ * const getName = (num) => num % 2 === 0? Option.Some('Django') : Option.None;
+ * const displayName = (option) => Option.map(option, (value) => 'name: '+ value);
+ * const print = (option) => {
+ *   if (Option.isNone(option)) {
+ *     console.warn('None');
+ *   } else {
+ *     console.log('Some(', option, ')');
+ *   }
+ * }
+ *
+ * for (let i = 0; i < 6; i++) {
+ *   const option = displayName(getName(i));
+ *   print(option); // alternate console.log('Some(Django)'); and console.warn('None');
+ * }
+ * ```
+ *
+ * @param Value the type of the contained value
+ */
+export type Option<Value> = Value | Option.None;
+
+export namespace Option {
+  /**
+   * Alias for `undefined`
+   */
+  export type None = undefined;
+
+  /**
+   * Alias for `undefined`. It is an opinionated choice that discourages the use of `null`
+   */
+  export const None = undefined;
+
+  /**
+   * Non `null` and non `undefined` value
+   */
+  export type Some<Value> = Value extends EmptyValue ? never : Value;
+
+  /**
+   * An identity function that validates passed value
+   *
+   * @category Constructor
+   * @param value - the non empty value
+   */
+  export function Some<Value>(value: Some<Value>): Value {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (value == null) {
+      throw new TypeError('Value must be non null, non undefined value');
+    }
+
+    return value;
+  }
+
+  /**
+   * Try to coerce value to `Option`
+   *
+   * @example
+   * ```typescript
+   * Option.from(null);// undefined
+   * Option.from(undefined);// undefined
+   * Option.from('foo');// 'foo'
+   * ```
+   *
+   * @category Constructor
+   * @param value
+   */
+  export function from<Value>(value: Value): Option<Exclude<Value, null>> {
+    return value === null ? None : (value as Exclude<Value, null>);
+  }
+
+  /**
+   * Return `true` if `anyValue` is `null`or `undefined`
+   *
+   * @example
+   * ```typescript
+   * Option.isNone(None);// true
+   * Option.isNone(undefined);// true
+   * Option.isNone(null);// true
+   *
+   * Option.isNone(Some('foo'));// false
+   * Option.isNone('foo');// false
+   * ```
+   * @category Guard
+   * @param anyValue - the value to test
+   */
+  export function isNone(anyValue: unknown): anyValue is EmptyValue {
+    return anyValue == null;
+  }
+
+  /**
+   * Return `true` if `anyValue` is neither `null` nor `undefined`
+   *
+   * @example
+   * ```typescript
+   * Option.isSome(Option.None);// false
+   * Option.isSome(undefined);// false
+   * Option.isSome(null);// false
+   *
+   * Option.isSome(Option.Some('foo'));// true
+   * Option.isSome('foo');// true
+   * ```
+   * @category Guard
+   * @param anyValue - the value to test
+   */
+  export function isSome<Value>(anyValue: Value): anyValue is Exclude<Value, EmptyValue> {
+    return !isNone(anyValue);
+  }
+
+  /**
+   * Maps a `Option<Value>` to `Option<U>` by applying a function to a contained `Some` value, leaving a `None` value untouched.
+   * This function can be used to compose the results of two functions.
+   *
+   * @example
+   * ```typescript
+   * const x = Some('foo');
+   * Option.map(x, (value) => `${value}_bar`));// Some('foo_bar') == 'foo_bar'
+   * ```
+   *
+   * @param option an Option object
+   * @param fn the mapper function
+   */
+  export function map<ValueFrom, ValueTo>(
+    option: Nullable<ValueFrom>,
+    fn: (value: ValueFrom) => NonNullable<ValueTo>
+  ): Option<ValueTo> {
+    return isNone(option) ? None : fn(option);
+  }
+
+  /**
+   * Returns the `value` if `Some`, `getDefaultValue()` if `None`.
+   *
+   * @example
+   * ```typescript
+   * const x = Some('foo');
+   * Option.getOrElse(x, () => 'bar');// 'foo'
+   *
+   * const x = None;
+   * Option.getOrElse(x, () => 'bar');// 'bar'
+   * ```
+   *
+   * @category Accessor
+   * @param option an Option object
+   * @param getDefaultValue
+   */
+  export function getOrElse<Value, DefaultValue>(
+    option: Nullable<Value>,
+    getDefaultValue: () => DefaultValue
+  ): Value | DefaultValue {
+    return isSome(option) ? option : getDefaultValue();
+  }
+
+  /**
+   * Returns the value if `Some`, throw an error if `None`
+   *
+   * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+   * @example
+   * ```typescript
+   * let x = Some('foo');
+   * Option.getOrThrow(x);// 'foo'
+   *
+   * let x = None;
+   * Option.getOrThrow(x);// throw TypeError('option must not be a null|undefined')
+   * ```
+   * @category Accessor
+   * @param option an Option object
+   */
+  export function getOrThrow<Value>(option: Nullable<Value>): Value {
+    if (isSome(option)) {
+      return option;
+    }
+    throw new TypeError('option must not be a null|undefined');
+  }
+
+  /**
+   * Returns `Option.None` if the option is `Option.None`, otherwise calls `fn` with the value and returns the result.
+   * Some languages call this operation `flatMap` or `chain`.
+   *
+   * @example
+   * ```typescript
+   * const square = (x: number): Option<number> => Option.Some(x * x);
+   *
+   * Option.andThen(Option.Some(2), square); // Option.Some(16)
+   * Option.andThen(Option.None, square); // Option.None
+   * ```
+   *
+   * @param option an Option object
+   * @param fn
+   */
+  export function andThen<ValueFrom, ValueTo>(
+    option: Nullable<ValueFrom>,
+    fn: (value: ValueFrom) => Nullable<ValueTo>
+  ): Option<ValueTo> {
+    return isSome(option) ? from(fn(option)) : None;
+  }
+
+  /**
+   * Returns the option if it contains a value, otherwise calls `fn` and returns the result.
+   *
+   * @example
+   * ```typescript
+   * const alt = () => Some('bar')
+   *
+   * Option.orElse(Option.Some('foo'), alt); // Option.Some('foo')
+   * Option.orElse(Option.None, alt); // Option.Some('bar')
+   * ```
+   *
+   * @param option an Option object
+   * @param fn
+   */
+  export function orElse<ValueFrom>(option: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
+    return isSome(option) ? option : from(fn());
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../../tsconfig.settings.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": "../../",
+    "paths": {
+      "@w5s/core": [
+        "./std"
+      ]
+    }
+  }
+}

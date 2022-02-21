@@ -1,0 +1,17 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "version": "1.0.0-rc.54",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "npmClient": "npm"
+    },
+    "version": {
+      "message": "chore(release): publish %s"
+    }
+  },
+  "npmClient": "yarn",
+  "useWorkspaces": true
+}

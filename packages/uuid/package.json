@@ -1,0 +1,60 @@
+{
+  "name": "@w5s/uuid",
+  "version": "1.0.0-alpha.0",
+  "description": "UUID generator",
+  "keywords": [
+    "fp",
+    "functional",
+    "task",
+    "uuid"
+  ],
+  "homepage": "https://github.com/w5s/std/tree/master/packages/uuid#readme",
+  "bugs": {
+    "url": "https://github.com/w5s/std/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w5s/std.git",
+    "directory": "packages/uuid"
+  },
+  "license": "MIT",
+  "author": "Julien Polo <julien.polo@gmail.com>",
+  "type": "module",
+  "exports": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "files": [
+    "lib/**/!(*.spec).d.ts",
+    "lib/**/!(*.spec).js.map",
+    "lib/**/!(*.spec).js",
+    "src/**/!(*.spec).ts"
+  ],
+  "scripts": {
+    "build": "npm run build:src",
+    "build:src": "tsc",
+    "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
+    "clean": "npm run tsc -- --build --clean",
+    "format": "eslint . --ext .js,.ts --fix",
+    "lint": "eslint . --ext .js,.ts",
+    "test": "jest .",
+    "tsc": "tsc",
+    "validate": "npm run lint && npm run build && npm run test"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    }
+  },
+  "eslintIgnore": [
+    "lib"
+  ],
+  "dependencies": {
+    "@w5s/core": "^1.0.0-alpha.0",
+    "uuid": "^8.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^3.8.0 || ^4.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

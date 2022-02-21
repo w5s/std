@@ -1,0 +1,117 @@
+{
+  "name": "@w5s/core-src",
+  "private": true,
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "build": "npm-run-all -p \"build:*\"",
+    "build:empty": ":",
+    "build:packages": "lerna run build",
+    "clean": "lerna run clean",
+    "configure": "npm run mrm -- configure",
+    "coverage": ":",
+    "docs": "md-magic --path './*.md' --ignore='node_modules' && lerna run docs && typedoc",
+    "format": "eslint . --quiet --cache --fix --ext .js,.jsx,.ts,.tsx,.json",
+    "lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx,.json",
+    "mrm": "mrm --preset @w5s/mrm-preset",
+    "release": "CI=$(is-ci) lerna publish ${CI:+\"--yes\"}",
+    "rescue": "git clean -fdx;yarn install",
+    "test": "lerna run test",
+    "validate": "npm run build && npm run lint && npm test && npx cspell '**'",
+    "prepare:husky": "is-ci || husky install",
+    "dev": ":",
+    "prepare": "npm-run-all -p \"prepare:*\"",
+    "prepare:empty": ":",
+    "prepare:packages": "lerna bootstrap",
+    "develop": ":"
+  },
+  "commitlint": {
+    "extends": [
+      "@w5s/commitlint-config"
+    ],
+    "rules": {}
+  },
+  "lint-staged": {
+    "*.js?(x)": [
+      "bash -c 'tsc --noEmit'",
+      "eslint",
+      "jest --ci --bail --findRelatedTests"
+    ],
+    "*.ts?(x)": [
+      "bash -c 'tsc --noEmit'",
+      "eslint",
+      "jest --ci --bail --findRelatedTests"
+    ],
+    "*.json": [
+      "eslint"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "@w5s/eslint-config"
+    ],
+    "rules": {
+      "jsdoc/check-tag-names": "off"
+    },
+    "root": true
+  },
+  "eslintIgnore": [
+    "lib/",
+    "node_modules/",
+    "coverage/",
+    "build/",
+    ".cache/",
+    "**/tsconfig.json",
+    ".vscode/**",
+    "public/"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "7.15.5",
+    "@babel/eslint-parser": "7.17.0",
+    "@babel/plugin-syntax-jsx": "7.16.7",
+    "@commitlint/cli": "16.2.1",
+    "@strictsoftware/typedoc-plugin-monorepo": "0.4.2",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.18",
+    "@w5s/commitlint-config": "1.0.0-alpha.2",
+    "@w5s/eslint-config": "1.0.0-alpha.8",
+    "@w5s/mrm-preset": "1.0.0-alpha.5",
+    "@w5s/ts-config": "1.0.0-alpha.3",
+    "babel-jest": "27.5.1",
+    "cspell": "5.9.0",
+    "es-jest": "^1.5.0",
+    "eslint": "7.32.0",
+    "husky": "7.0.2",
+    "is-ci": "3.0.0",
+    "jest": "27.5.1",
+    "lerna": "4.0.0",
+    "lint-staged": "11.1.2",
+    "markdown-magic": "2.5.2",
+    "markdown-magic-package-json": "2.0.2",
+    "markdown-magic-subpackage-list": "1.1.1",
+    "mrm": "3.0.8",
+    "npm-run-all": "4.1.5",
+    "prettier": "2.3.2",
+    "typedoc": "0.22.11",
+    "typescript": "4.5.5"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0",
+    "yarn": ">=1.0.0"
+  },
+  "mrmConfig": {
+    "packageArchetype": "workspace"
+  }
+}
