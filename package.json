@@ -116,5 +116,6 @@
   },
   "mrmConfig": {
     "packageArchetype": "workspace"
-  }
+  },
+  "packageManager": "yarn@1.22.17"
 }
