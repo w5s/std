@@ -26,7 +26,6 @@ export namespace JSON {
    * const invalid = '{ "a": }';
    * JSON.parse(invalid); // Result.Error(new SyntaxError('Unexpected token } in JSON at position 7'))
    * ```
-   *
    * @param anyString the string to parse
    */
   export function parse(anyString: string): Result<JSONValue, SyntaxError> {

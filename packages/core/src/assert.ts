@@ -12,7 +12,6 @@
  *   }
  * }
  * ```
- *
  * @param subject the never value that should be reported
  */
 export function assertNever(subject: never): never;
@@ -30,7 +29,6 @@ export function assertNever(subject: never): never;
  *   }
  * }
  * ```
- *
  * @param subject the never value that should be reported
  * @param returnValue the value returned
  */
@@ -56,8 +54,7 @@ export function assertNever(subject: never, returnValue?: unknown): unknown | ne
  * assertType<'foo', Expected>(true);// -> everything is fine
  * assertType<'bar', Expected>(true);// -> ts raises an error
  * ```
- *
- * @param _shouldBeEqual
+ * @param _shouldBeEqual an inferred value
  */
 export function assertType<Actual, Expected>(_shouldBeEqual: IsExact<Actual, Expected>): void {}
 
@@ -86,7 +83,6 @@ type AnyToBrand<T> = IsAny<T> extends true ? { __assertTypeAny__: undefined } : 
  * invariant(true, 'this should be true');// pass
  * invariant(false, 'this should be true');// throw new Error('this should be true')
  * ```
- *
  * @param condition the predicate result
  * @param message an optional message for Error
  */

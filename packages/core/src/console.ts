@@ -22,8 +22,7 @@ export namespace Console {
    * ```typescript
    * runTask(Console.debug('Hello', 'World !'));// > Hello World !
    * ```
-   *
-   * @param parameters
+   * @param parameters an array of values to be logged
    */
   export function debug(...parameters: Parameters): Task.Sync<void, never> {
     return createTask('debug', parameters);
@@ -36,7 +35,7 @@ export namespace Console {
    * ```typescript
    * runTask(Console.log('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters
+   * @param parameters an array of values to be logged
    */
   export function log(...parameters: Parameters): Task.Sync<void, never> {
     return createTask('log', parameters);
@@ -49,7 +48,7 @@ export namespace Console {
    * ```typescript
    * runTask(Console.info('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters
+   * @param parameters an array of values to be logged
    */
   export function info(...parameters: Parameters): Task.Sync<void, never> {
     return createTask('info', parameters);
@@ -62,7 +61,7 @@ export namespace Console {
    * ```typescript
    * runTask(Console.warn('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters
+   * @param parameters an array of values to be logged
    */
   export function warn(...parameters: Parameters): Task.Sync<void, never> {
     return createTask('warn', parameters);
@@ -75,7 +74,7 @@ export namespace Console {
    * ```typescript
    * runTask(Console.error('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters
+   * @param parameters an array of values to be logged
    */
   export function error(...parameters: Parameters): Task.Sync<void, never> {
     return createTask('error', parameters);

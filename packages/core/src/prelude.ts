@@ -12,7 +12,6 @@ import type { Spread } from './type.js';
  * ```typescript
  * identity('foo');// 'foo'
  * ```
- *
  * @param value the input and return value
  */
 export function identity<T>(value: T): T {
@@ -27,7 +26,6 @@ export function identity<T>(value: T): T {
  * const constFoo = constant('foo');
  * constFoo();// 'foo'
  * ```
- *
  * @param value the input and return value
  */
 export function constant<T>(value: T): (anyValue?: unknown) => T {
@@ -42,7 +40,6 @@ export function constant<T>(value: T): (anyValue?: unknown) => T {
  * const unknownValue: unknown = 123;
  * const stringValue = typeof unknownValue === 'string' ? unknownValue : throwError(new Error('not a string'));
  * ```
- *
  * @param error the error to throw
  */
 export function throwError(error: unknown): never {
@@ -55,8 +52,8 @@ export function throwError(error: unknown): never {
  * - `properties` cannot contain new property
  * - `properties` cannot change the type of a value
  *
- * @param source
- * @param properties
+ * @param source a base object
+ * @param properties an extension object map
  */
 export function assign<T>(source: T, properties: Partial<T> | undefined | null): T {
   return mergeObject(source, properties);
@@ -68,8 +65,8 @@ export function assign<T>(source: T, properties: Partial<T> | undefined | null):
  * - `extension` can add new properties
  * - `extension` can override the type of `source`
  *
- * @param source
- * @param extension
+ * @param source a base object
+ * @param extension an extension object map
  */
 export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
   return mergeObject(source, extension);
@@ -85,7 +82,6 @@ export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
  * pipe(value).to(f, g);// g(f(value)) or value |> f |> g
  * // and so on...
  * ```
- *
  * @param value the value to pass to the first function
  * @returns a { to } object
  */

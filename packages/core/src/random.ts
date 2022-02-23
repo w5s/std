@@ -40,7 +40,7 @@ export namespace Random {
    * runTask(dummyGenerator); // 1
    * ```
    * @category Constructor
-   * @param getNextValue
+   * @param getNextValue an impure function that returns a new value
    */
   export function Generator(getNextValue: () => Random.Value): Generator {
     return Task.Sync(({ ok }) => ok(getNextValue()));
@@ -59,8 +59,7 @@ export namespace Random {
      * const next = generator(-10, 10);
      * runTask(next);// Result.Ok(F); where F is a floating number between -10 and 10
      * ```
-     *
-     * @param generator
+     * @param generator a base random generator
      */
     export function number(generator: Generator) {
       return (min: number, max: number): Task.Sync<number, never> =>
@@ -76,8 +75,7 @@ export namespace Random {
      * const next = generator(-10, 10);
      * runTask(next);// Result.Ok(N); where N is an integer between -10 and 10
      * ```
-     *
-     * @param generator
+     * @param generator a base random generator
      */
     export function int(generator: Generator) {
       const randomNumber = number(generator);
@@ -94,8 +92,7 @@ export namespace Random {
      * const next = generator(0.7);
      * runTask(next);// Result.Ok(true|false);
      * ```
-     *
-     * @param generator
+     * @param generator a base random generator
      */
     export function boolean(generator: Generator) {
       return (trueWeight = 0.5): Task.Sync<boolean, never> => Task.map(generator, (_) => _ > trueWeight);

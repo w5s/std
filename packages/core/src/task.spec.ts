@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-export */
 /* eslint-disable max-classes-per-file */
 import { assertType } from './assert.js';
 import { Ref } from './ref.js';

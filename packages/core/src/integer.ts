@@ -12,7 +12,7 @@ export type Int = Tag<number, { integral: true }>;
 
 /**
  * @category Constructor
- * @param value
+ * @param value an initial numeric value
  */
 export function Int(value: number): Int {
   return value < MIN_SAFE_INTEGER
@@ -82,7 +82,7 @@ export namespace Int {
    * Int.hasInstance(Int.max + 1);// false
    * ```
    * @category Guard
-   * @param anyValue
+   * @param anyValue a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Int {
     return Number.isSafeInteger(anyValue);
@@ -97,7 +97,6 @@ export namespace Int {
    * Int.parse('1');// Option.Some(1)
    * Int.parse('invalid');// Option.None
    * ```
-   *
    * @param expression an integer expression
    * @param radix an optional base (ex: 10, 16)
    */
@@ -116,7 +115,6 @@ export namespace Int {
    * Int.stringify(Int(1), 10);// '1'
    * Int.stringify(Int(10), 16);// 'A'
    * ```
-   *
    * @param intValue an integer
    * @param radix an optional base (ex: 10, 16)
    */

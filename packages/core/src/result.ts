@@ -147,7 +147,6 @@ export namespace Result {
    * const result = Ok('foo');
    * Result.map(result, (value) => `${value}_bar`));// Ok('foo_bar')
    * ```
-   *
    * @param result a Result object
    * @param fn the mapper function
    */
@@ -164,7 +163,6 @@ export namespace Result {
    * const result = Error('foo');
    * Result.mapError(result, (value) => `${value}_bar`));// Error('foo_bar')
    * ```
-   *
    * @param result a Result object
    * @param fn the error  mapper function
    */
@@ -204,7 +202,6 @@ export namespace Result {
    * let x = Error('foo');
    * Result.error(x);// Option.Some('foo')
    * ```
-   *
    * @category Accessor
    * @param result a Result object
    */
@@ -226,10 +223,9 @@ export namespace Result {
    * let x = Error('foo');
    * Result.getOrElse(x, () => 'bar');// 'bar'
    * ```
-   *
    * @category Accessor
    * @param result a Result object
-   * @param getDefaultValue
+   * @param getDefaultValue a function that returns default value
    */
   export function getOrElse<V, VDefault>(result: Result<V, unknown>, getDefaultValue: () => VDefault): V | VDefault {
     return isOk(result) ? result.value : getDefaultValue();
@@ -267,7 +263,6 @@ export namespace Result {
    * Result.andThen(Result.Ok(4), square); // Result.Ok(16)
    * Result.andThen(Result.Error('TestError'), square); // Result.Error('TestError')
    * ```
-   *
    * @param result a Result object
    * @param fn a value mapping function
    */
@@ -288,7 +283,6 @@ export namespace Result {
    * Result.orElse(Result.Error('TestError'), square); // Result.Ok('TestError_handled')
    * Result.orElse(Result.Ok(4), square); // Result.Ok(4)
    * ```
-   *
    * @param result a Result object
    * @param fn a error mapping function
    */
@@ -316,7 +310,6 @@ export namespace Result {
    *  () => new FetchError()
    * );
    * ```
-   *
    * @param block A function that will be called
    * @param onError An error handler that transforms `unknown` to a normalized and typed error
    */

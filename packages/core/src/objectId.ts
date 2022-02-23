@@ -44,8 +44,7 @@ export type ObjectId = Tag<Int, { objectId: true }>;
  * const object = {};
  * objectId(object);// an integer
  * ```
- *
- * @param objectOrFunction
+ * @param objectOrFunction a non literal object
  */
 export function objectId(objectOrFunction: AnyObject | AnyFunction): ObjectId {
   const state = objectIdState();

@@ -29,8 +29,7 @@ export type DataObject<
  *   foo: true
  * })
  * ```
- *
- * @param properties
+ * @param properties - the data object properties
  */
 export function DataObject<Properties extends { [DataObject.type]: string }>(
   properties: Properties
@@ -57,7 +56,6 @@ export namespace DataObject {
      * if(MyRecord.hasInstance(anyValue)) {
      *   console.log(anyValue.anyProperty);// type is correctly refined here
      * }
-     *
      * @param anyValue the value to be tested
      */
     readonly hasInstance: (anyValue: unknown) => anyValue is Model;
@@ -82,7 +80,6 @@ export namespace DataObject {
    * Model.typeName === 'Model' // true
    * Model.hasInstance(instance); // true
    * ```
-   *
    * @param typeName the type unique name
    */
   export function Make<Model extends DataObject<{ [DataObject.type]: string }>>(
@@ -108,7 +105,6 @@ export namespace DataObject {
    * Model.typeName === 'Model'/ true
    * Model.hasInstance(instance); // true
    * ```
-   *
    * @param typeName the type unique name
    * @param getConstructor a function that returns an object factory
    */

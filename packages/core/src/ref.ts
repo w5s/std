@@ -32,7 +32,6 @@ export namespace Ref {
    * const ref = Ref('foo');
    * Ref.read(ref); // 'foo'
    * ```
-   *
    * @category Accessor
    * @param ref the reference object
    */
@@ -48,7 +47,6 @@ export namespace Ref {
    * const ref = Ref('foo');
    * Ref.write(ref, 'bar'); // Ref.read(ref) == 'bar'
    * ```
-   *
    * @category Accessor
    * @param ref the reference object
    * @param newValue the new value to be set

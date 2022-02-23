@@ -86,7 +86,7 @@ export namespace HTTPClient {
    * HTTP header record constructor
    *
    * @category Constructor
-   * @param values
+   * @param values - a record or iterable to initialize
    */
   export function Headers(values: Iterable<readonly [string, string]> | Record<string, string>): Headers {
     if (Symbol.iterator in values) {
@@ -172,8 +172,7 @@ export namespace HTTPClient {
    *   parse: parseText,
    * });
    * ```
-   *
-   * @param requestObject
+   * @param requestObject - the request parameters
    */
   export function request<Value, Error>(
     requestObject: request.Request<Value, Error>

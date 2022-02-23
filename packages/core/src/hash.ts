@@ -61,7 +61,6 @@ export namespace Hash {
    * ```typescript
    * HashCode.combine(HashCode.from(...), HashCode.from(...))
    * ```
-   *
    * @param left hash code
    * @param right hash code
    */

@@ -16,7 +16,6 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
  * ```typescript
  * const duration = TimeDuration(0);// typeof duration === 'number'
  * ```
-
  * @param milliseconds Number of milliseconds
  */
 export function TimeDuration(milliseconds: number): TimeDuration {
@@ -36,7 +35,7 @@ export namespace TimeDuration {
    * Return `true` if `anyValue` is a valid `TimeDuration` value
    *
    * @category Guard
-   * @param anyValue
+   * @param anyValue - the tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is TimeDuration {
     return typeof anyValue === 'number' && !Number.isNaN(anyValue);
@@ -134,7 +133,7 @@ export namespace Time {
    * Return `true` if `anyValue` is a valid `Time` value
    *
    * @category Guard
-   * @param anyValue
+   * @param anyValue - the tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Time {
     return typeof anyValue === 'number' && anyValue >= 0 && !Number.isNaN(anyValue);

@@ -24,7 +24,7 @@ export namespace Iterable {
    * const iterator = Iterable.iterator(iterable);// { next () { 1, 2, 3, done } }
    * ```
    * @category Accessor
-   * @param iterable
+   * @param iterable an object that have `[Symbol.iterator]`
    */
   export function iterator<Value>(iterable: Iterable<Value>) {
     return iterable[Symbol.iterator]();
@@ -96,7 +96,6 @@ export namespace Iterable {
    * const iterable = [1, 2, 3];
    * Iterable.map(iterator, (value) => value * 2);// { next () { 2, 4, 6, done } }
    * ```
-   *
    * @param source the iterable source
    * @param mapFn a function that returns a new value
    */
@@ -125,7 +124,6 @@ export namespace Iterable {
    * const iterator = [1, 2, 3];
    * Iterable.filter(iterator, (value) => value > 1);// { next () { 2, 3, done } }
    * ```
-   *
    * @param source - the iterator to be filtered
    * @param predicate - a function that returns a boolean
    */
@@ -154,7 +152,6 @@ export namespace Iterable {
    * const iterable = [1, 2, 3];
    * Iterable.reduce(iterable, (total, value) => total + value, 0);// 6
    * ```
-   *
    * @param source the iterator reduced
    * @param reducer the reducer function
    * @param initialValue the initial value passed to the reducer
@@ -190,7 +187,6 @@ export namespace Iterable {
    * const right = ['a', 'b'];
    * Iterable.zip(left, right);// [[1, 'a'], [2, 'b']]
    * ```
-   *
    * @param left Left iterable
    * @param right Right iterable
    */

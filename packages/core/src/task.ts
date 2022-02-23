@@ -162,7 +162,7 @@ export namespace Task {
      * Task.Sync.hasInstance({}); // false
      * ```
      * @category Guard
-     * @param anyValue
+     * @param anyValue a tested value
      */
     export function hasInstance(anyValue: unknown): anyValue is Task.Sync<unknown, unknown> {
       return isObject(anyValue) && anyValue[type] === 'sync' && typeof anyValue[run] === 'function';
@@ -212,7 +212,6 @@ export namespace Task {
      *  (error) => new InvalidURLError()
      * );
      * ```
-     *
      * @param sideEffect A function that will be called
      * @param onError An error handler that transforms `unknown` to a normalized and typed error
      */
@@ -287,7 +286,7 @@ export namespace Task {
      * Task.Async.hasInstance({}); // false
      * ```
      * @category Guard
-     * @param anyValue
+     * @param anyValue a tested value
      */
     export function hasInstance(anyValue: unknown): anyValue is Task.Async<unknown, unknown> {
       return isObject(anyValue) && anyValue[type] === 'async' && typeof anyValue[run] === 'function';
@@ -337,7 +336,6 @@ export namespace Task {
      *  (error) => new FetchError()
      * );
      * ```
-     *
      * @param sideEffect A function that will be called
      * @param onError An error handler that transforms `unknown` to a normalized and typed error
      */
@@ -364,7 +362,6 @@ export namespace Task {
    * const task = Task.Sync.resolve('foo');
    * Task.map(task, (value) => `${value}_bar`));// Task.Sync.resolve('foo_bar')
    * ```
-   *
    * @param task a Task object
    * @param fn the mapper function
    */
@@ -386,7 +383,6 @@ export namespace Task {
    * const task = Task.Sync.reject('error');
    * Task.mapError(task, (value) => `${value}_bar`));// Task.Sync.reject('error_bar')
    * ```
-   *
    * @param task a Task object
    * @param fn the error mapper function
    */
@@ -479,7 +475,6 @@ export namespace Task {
  * const getMessage = Task.Sync.resolve('Hello World!');
  * const messageResult = runTask(getMessage);// Result.Ok('Hello World!')
  * ```
- *
  * @param task the task to be run
  */
 export function runTask<Type extends AnyType, Value, Error>(

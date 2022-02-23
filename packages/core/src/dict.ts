@@ -65,7 +65,6 @@ export namespace Dict {
    * Dict.has(dict, 'myProperty'); // true
    * Dict.has(dict, 'nonExistent'); // false
    * ```
-   *
    * @param dict the dictionary
    * @param key the entry key
    */
@@ -81,7 +80,6 @@ export namespace Dict {
    * const dict = { first: 1, second: 2 };
    * Array.from(Dict.keys(dict)); // ['first', 'second']
    * ```
-   *
    * @param dict the dictionary
    */
   export function keys(dict: Dict<any>): IterableIterator<string> {
@@ -96,7 +94,6 @@ export namespace Dict {
    * const dict = { first: 1, second: 2 };
    * Array.from(Dict.entries(dict)); // [['first', 1], ['second', 2]]
    * ```
-   *
    * @param dict the dictionary
    */
   export function* entries<V>(dict: Dict<V>): IterableIterator<[string, V]> {
@@ -113,7 +110,6 @@ export namespace Dict {
    * const dict = { first: 1, second: 2 };
    * Array.from(Dict.entries(dict)); // [1, 2]
    * ```
-   *
    * @param dict the dictionary
    */
   export function* values<V>(dict: Dict<V>): IterableIterator<V> {
@@ -147,7 +143,6 @@ export namespace Dict {
    * const dict = { myProperty: 'myValue' };
    * Dict.set(dict, 'myOtherProperty', 'myOtherValue'); // { myProperty: 'myValue', myOtherProperty: 'myOtherValue' }
    * ```
-   *
    * @param dict the dictionary
    * @param key the entry key
    * @param value the entry value
@@ -172,7 +167,6 @@ export namespace Dict {
    *  // call (2, 'second', dict)
    * }); // 2
    * ```
-   *
    * @param dict the dictionary
    * @param fn callback called on each entry
    */
@@ -207,7 +201,6 @@ export declare namespace Dict {
    * const dict = { myProperty: 'myValue' };
    * Dict.delete(dict, 'myProperty'); // {}
    * ```
-   *
    * @param dict the dictionary
    * @param key the entry key
    */

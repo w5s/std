@@ -44,7 +44,7 @@ export namespace Array {
    * Array.hasInstance(null)) // false
    * ```
    * @category Guard
-   * @param anyValue
+   * @param anyValue a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Array<unknown> {
     return NativeArray.isArray(anyValue);
@@ -543,7 +543,6 @@ export namespace Array {
    * ```typescript
    * Array.sort([11, 2, 22, 1], (a, b) => a - b);// [1, 2, 11, 22]
    * ```
-   *
    * @param array The array object
    * @param compareFn Function used to determine the order of the items. It is expected to return
    * a negative value if first argument is less than second argument, zero if they're equal and a positive
@@ -564,7 +563,6 @@ export namespace Array {
    * ```typescript
    * Array.sort([1, 2, 3, 4], 1, 3);// [2, 3]
    * ```
-   *
    * @param array The array object
    * @param start The beginning of the specified portion of the array.
    * @param end The end of the specified portion of the array. This is exclusive of the item at the index `end`.
@@ -604,7 +602,6 @@ export namespace Array {
    * ```typescript
    * Array.concat([1, 2], [3, 4], [5, 6]);// [1, 2, 3, 4, 5, 6]
    * ```
-   *
    * @param array The array object
    * @param extensions The other arrays to append
    */
@@ -638,7 +635,6 @@ export namespace Array {
    * ```typescript
    * Array.reverse([1, 2, 3]);// [3, 2, 1]
    * ```
-   *
    * @param array The array object
    */
   export function reverse<Item>(array: Array<Item>): Array<Item> {

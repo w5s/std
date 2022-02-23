@@ -31,8 +31,7 @@ export type DataError<Properties extends { name: string }> = DataObject<
  *   cause: parentError, // Error that caused this error (optional)
  * })
  * ```
- *
- * @param properties
+ * @param properties initial properties
  */
 export function DataError<Properties extends { name: string; message?: string; cause?: unknown }>(
   properties: Properties
@@ -125,7 +124,6 @@ export namespace DataError {
    * CustomError.errorName === 'CustomError' // true
    * CustomError.hasInstance(instance); // true
    * ```
-   *
    * @param errorName the error unique name
    */
   export function Make<Model extends DataError<{ name: string }>>(
@@ -152,7 +150,6 @@ export namespace DataError {
    * CustomError.errorName === 'CustomError'/ true
    * CustomError.hasInstance(instance); // true
    * ```
-   *
    * @param errorName the error unique name
    * @param getConstructor a function that returns an error factory
    */
