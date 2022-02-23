@@ -35,16 +35,12 @@
     "build:src": "tsc",
     "clean": "npm run tsc -- --build --clean",
     "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
-    "format": "eslint . --ext .js,.ts --fix",
-    "lint": "eslint . --ext .js,.ts",
+    "format": "eslint . --ext=cjs,js,jsx,ts,tsx,json --fix",
+    "lint": "eslint . --ext=cjs,js,jsx,ts,tsx,json",
     "test": "jest .",
     "tsc": "tsc",
     "validate": "npm run lint && npm run build && npm run test"
   },
-  "eslintConfig": {},
-  "eslintIgnore": [
-    "lib"
-  ],
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"
   },
