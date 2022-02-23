@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
-module.exports = {
-  ...require('../../jest.config.cjs'),
-};
+const { defaultJestConfig } = require('../../jest.settings.cjs');
+
+module.exports = defaultJestConfig({});

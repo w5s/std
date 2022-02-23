@@ -38,13 +38,11 @@
   "lint-staged": {
     "*.js?(x)": [
       "bash -c 'tsc --noEmit'",
-      "eslint",
-      "jest --ci --bail --findRelatedTests"
+      "eslint"
     ],
     "*.ts?(x)": [
       "bash -c 'tsc --noEmit'",
-      "eslint",
-      "jest --ci --bail --findRelatedTests"
+      "eslint"
     ],
     "*.json": [
       "eslint"
@@ -75,11 +73,16 @@
     ".vscode/**",
     "public/"
   ],
+  "jest": {
+    "preset": "es-jest",
+    "projects": [
+      "<rootDir>/packages/*"
+    ]
+  },
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "7.15.5",
     "@babel/eslint-parser": "7.17.0",
-    "@babel/plugin-syntax-jsx": "7.16.7",
     "@commitlint/cli": "16.2.1",
     "@strictsoftware/typedoc-plugin-monorepo": "0.4.2",
     "@types/jest": "^27.4.0",
