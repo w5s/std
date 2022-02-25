@@ -3,7 +3,7 @@
 import { assertType } from './assert.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
-import { runTask, Task } from './task.js';
+import { Task } from './task.js';
 
 const anyObject = { foo: true };
 const anyOtherObject = { bar: true };
@@ -88,38 +88,38 @@ namespace ExpectTask {
   }
 }
 
-describe(runTask, () => {
-  test('should return the result of task[Task.run]() for sync', () => {
-    expect(runTask(Task.Sync(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
-  });
-  test('should run throwing task', () => {
-    const task = Task.Sync(() => {
-      throw new Error('TestError');
-    });
-    expect(() => runTask(task)).toThrow(new Error('TestError'));
-  });
-  test('should return the result of task[Task.run]() for async', async () => {
-    await expect(
-      runTask(
-        Task.Async(
-          ({ ok }) =>
-            new Promise<Task.Result<typeof anyObject, never>>((resolve) => {
-              setTimeout(() => resolve(ok(anyObject)), 0);
-            })
-        )
-      )
-    ).resolves.toEqual(Result.Ok(anyObject));
-  });
-  test('should run rejected task', async () => {
-    const task = Task.Async(() => Promise.reject(new Error('TestError')));
-    await expect(runTask(task)).rejects.toEqual(new Error('TestError'));
-  });
-  test('should throw error when nothing is resolved or rejected', () => {
-    const task = Task('sync', () => {});
-    expect(() => runTask(task)).toThrow(new Error('Task was never resolved nor rejected'));
-  });
-});
 describe('Task', () => {
+  describe(Task.unsafeRun, () => {
+    test('should return the result of task[Task.run]() for sync', () => {
+      expect(Task.unsafeRun(Task.Sync(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
+    });
+    test('should run throwing task', () => {
+      const task = Task.Sync(() => {
+        throw new Error('TestError');
+      });
+      expect(() => Task.unsafeRun(task)).toThrow(new Error('TestError'));
+    });
+    test('should return the result of task[Task.run]() for async', async () => {
+      await expect(
+        Task.unsafeRun(
+          Task.Async(
+            ({ ok }) =>
+              new Promise<Task.Result<typeof anyObject, never>>((resolve) => {
+                setTimeout(() => resolve(ok(anyObject)), 0);
+              })
+          )
+        )
+      ).resolves.toEqual(Result.Ok(anyObject));
+    });
+    test('should run rejected task', async () => {
+      const task = Task.Async(() => Promise.reject(new Error('TestError')));
+      await expect(Task.unsafeRun(task)).rejects.toEqual(new Error('TestError'));
+    });
+    test('should throw error when nothing is resolved or rejected', () => {
+      const task = Task('sync', () => {});
+      expect(() => Task.unsafeRun(task)).toThrow(new Error('Task was never resolved nor rejected'));
+    });
+  });
   describe(Task.Sync, () => {
     test('should construct a success sync task', () => {
       const task = Task.Sync(({ ok }) => ok('foo'));

@@ -1,4 +1,4 @@
-import { Result, runTask, Task } from '@w5s/core';
+import { Result, Task } from '@w5s/core';
 import { HTTPClient } from './client';
 
 describe(HTTPClient.request, () => {
@@ -17,7 +17,7 @@ describe(HTTPClient.request, () => {
       parse,
       globalFetch,
     });
-    const result = await runTask(task);
+    const result = await Task.unsafeRun(task);
     expect(globalFetch).toHaveBeenLastCalledWith(url, { method: 'GET' });
     expect(parse).toHaveBeenLastCalledWith(anyResponse);
     expect(result).toEqual(Result.Ok('TestReturn'));
@@ -31,7 +31,7 @@ describe(HTTPClient.request, () => {
       parse: anyParser,
       globalFetch,
     });
-    const result = await runTask(task);
+    const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(HTTPClient.NetworkError({ cause: anyError })));
   });
   test('should convert reject parse errors', async () => {
@@ -43,7 +43,7 @@ describe(HTTPClient.request, () => {
       parse: failParser,
       globalFetch,
     });
-    const result = await runTask(task);
+    const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(anyError));
   });
 });

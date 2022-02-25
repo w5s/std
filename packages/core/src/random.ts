@@ -37,7 +37,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const dummyGenerator = Random.Generator(() => Random.Value(1));
-   * runTask(dummyGenerator); // 1
+   * Task.unsafeRun(dummyGenerator); // 1
    * ```
    * @category Constructor
    * @param getNextValue an impure function that returns a new value
@@ -57,7 +57,7 @@ export namespace Random {
      * ```typescript
      * const generator = Random.Generator.number(generator);
      * const next = generator(-10, 10);
-     * runTask(next);// Result.Ok(F); where F is a floating number between -10 and 10
+     * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
      * ```
      * @param generator a base random generator
      */
@@ -73,7 +73,7 @@ export namespace Random {
      * ```typescript
      * const generator = Random.Generator.int(generator);
      * const next = generator(-10, 10);
-     * runTask(next);// Result.Ok(N); where N is an integer between -10 and 10
+     * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
      * ```
      * @param generator a base random generator
      */
@@ -90,7 +90,7 @@ export namespace Random {
      * ```typescript
      * const generator = Random.Generator.boolean(generator);
      * const next = generator(0.7);
-     * runTask(next);// Result.Ok(true|false);
+     * Task.unsafeRun(next);// Result.Ok(true|false);
      * ```
      * @param generator a base random generator
      */
@@ -111,7 +111,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.number(generator)(-10, 10);
-   * runTask(next);// Result.Ok(F); where F is a floating number between -10 and 10
+   * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
    * ```
    * @param min the minimum inclusive bound for generated value
    * @param max the maximum inclusive bound for generated value
@@ -125,7 +125,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.int(generator)(-10, 10);
-   * runTask(next);// Result.Ok(N); where N is an integer between -10 and 10
+   * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
    * ```
    * @param min the minimum inclusive bound for generated value
    * @param max the maximum inclusive bound for generated value
@@ -139,7 +139,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.boolean(generator)(0.7);
-   * runTask(next);// Result.Ok(true|false);
+   * Task.unsafeRun(next);// Result.Ok(true|false);
    * ```
    * @param trueWeight the probability to obtain true
    */

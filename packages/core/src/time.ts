@@ -219,7 +219,7 @@ export namespace Time {
    * ```typescript
    * const wait2s = Time.delay(TimeDuration.seconds(2));
    * const logTime = Task.andThen(wait2s, (time) => Console.debug(time));
-   * runTask(logTime);// wait 2 seconds then console.debug(Date.now())
+   * Task.unsafeRun(logTime);// wait 2 seconds then console.debug(Date.now())
    * ```
    * @param duration delay in milliseconds to wait
    */

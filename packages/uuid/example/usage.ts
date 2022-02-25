@@ -1,5 +1,5 @@
 import { randomUUID } from '@w5s/uuid';
-import { runTask, Task } from '@w5s/core';
+import { Task } from '@w5s/core';
 
 function createUser(name: string) {
   return Task.map(randomUUID, (uuid) => ({
@@ -10,5 +10,5 @@ function createUser(name: string) {
 
 export function main(): void {
   const userTask = createUser('John Doe');
-  console.log(runTask(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
+  console.log(Task.unsafeRun(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
 }

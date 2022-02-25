@@ -1,5 +1,5 @@
 import { HTTPClient, parseJSON } from '@w5s/http-client';
-import { runTask, Console, Task, assertNever } from '@w5s/core';
+import { Console, Task, assertNever } from '@w5s/core';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
@@ -23,4 +23,4 @@ export function program() {
   return handled;
 }
 
-runTask(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>
+Task.unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>

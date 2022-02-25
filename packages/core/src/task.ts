@@ -1,4 +1,4 @@
-import { Result } from './result.js';
+import { Result as StdResult } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 
@@ -175,7 +175,7 @@ export namespace Task {
      * @example
      * ```typescript
      * const task = Task.Sync.resolve(1);
-     * const result = runTask(task);// Result.Ok(1)
+     * const result = Task.unsafeRun(task);// Result.Ok(1)
      * ```
      * @category Constructor
      * @param value the success value
@@ -191,7 +191,7 @@ export namespace Task {
      * @example
      * ```typescript
      * const task = Task.Sync.reject(1);
-     * const result = runTask(task);// Result.Error(1)
+     * const result = Task.unsafeRun(task);// Result.Error(1)
      * ```
      * @category Constructor
      * @param errorValue the error value
@@ -299,7 +299,7 @@ export namespace Task {
      * @example
      * ```typescript
      * const task = Task.Async.resolve(1);
-     * const result = await runTask(task);// Result.Ok(1)
+     * const result = await Task.unsafeRun(task);// Result.Ok(1)
      * ```
      * @category Constructor
      * @param value the success value
@@ -315,7 +315,7 @@ export namespace Task {
      * @example
      * ```typescript
      * const task = Task.Async.reject(1);
-     * const result = await runTask(task);// Result.Error(1)
+     * const result = await Task.unsafeRun(task);// Result.Error(1)
      * ```
      * @category Constructor
      * @param errorValue the error value
@@ -464,67 +464,67 @@ export namespace Task {
       task[run](_resolve, (error) => fn(error)[run](_resolve, _reject, cancelerRef), cancelerRef)
     );
   }
-}
 
-/**
- * Run `task` and return the result or a promise of the result
- *
- * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
- * @example
- * ```typescript
- * const getMessage = Task.Sync.resolve('Hello World!');
- * const messageResult = runTask(getMessage);// Result.Ok('Hello World!')
- * ```
- * @param task the task to be run
- */
-export function runTask<Type extends AnyType, Value, Error>(
-  task: Task<Type, Value, Error>
-): Type extends 'async'
-  ? Type extends 'sync'
-    ? Awaitable<Result<Value, Error>>
-    : Promise<Result<Value, Error>>
-  : Result<Value, Error> {
-  const cancelerRef: Ref<() => void> = { current: Task.defaultCanceler };
-  const block = (resolve: (result: Result<Value, Error>) => void, reject: (err: unknown) => void) => {
-    try {
-      const returnValue: void | Promise<void> = task[Task.run](
-        (value) => {
-          resolve(Result.Ok(value));
+  /**
+   * Run `task` and return the result or a promise of the result
+   *
+   * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+   * @example
+   * ```typescript
+   * const getMessage = Task.Sync.resolve('Hello World!');
+   * const messageResult = Task.unsafeRun(getMessage);// Result.Ok('Hello World!')
+   * ```
+   * @param task the task to be run
+   */
+  export function unsafeRun<Type extends AnyType, Value, Error>(
+    task: Task<Type, Value, Error>
+  ): Type extends 'async'
+    ? Type extends 'sync'
+      ? Awaitable<StdResult<Value, Error>>
+      : Promise<StdResult<Value, Error>>
+    : StdResult<Value, Error> {
+    const cancelerRef: Ref<() => void> = { current: Task.defaultCanceler };
+    const block = (resolve: (result: StdResult<Value, Error>) => void, reject: (err: unknown) => void) => {
+      try {
+        const returnValue: void | Promise<void> = task[Task.run](
+          (value) => {
+            resolve(StdResult.Ok(value));
+          },
+          (error) => {
+            resolve(StdResult.Error(error));
+          },
+          cancelerRef
+        );
+        // Try to catch promise errors
+        if (isPromise(returnValue)) {
+          returnValue.catch(reject);
+        }
+      } catch (error_: unknown) {
+        reject(error_);
+      }
+    };
+
+    if (task[Task.type] === 'sync') {
+      let returnValue: StdResult<Value, Error> | undefined;
+      block(
+        (result: StdResult<Value, Error>) => {
+          returnValue = result;
         },
         (error) => {
-          resolve(Result.Error(error));
-        },
-        cancelerRef
+          throw error;
+        }
       );
-      // Try to catch promise errors
-      if (isPromise(returnValue)) {
-        returnValue.catch(reject);
+      if (returnValue === undefined) {
+        throw new Error('Task was never resolved nor rejected');
       }
-    } catch (error_: unknown) {
-      reject(error_);
-    }
-  };
 
-  if (task[Task.type] === 'sync') {
-    let returnValue: Result<Value, Error> | undefined;
-    block(
-      (result: Result<Value, Error>) => {
-        returnValue = result;
-      },
-      (error) => {
-        throw error;
-      }
-    );
-    if (returnValue === undefined) {
-      throw new Error('Task was never resolved nor rejected');
+      // @ts-expect-error return type is conditional
+      return returnValue;
     }
 
     // @ts-expect-error return type is conditional
-    return returnValue;
+    return new Promise(block);
   }
-
-  // @ts-expect-error return type is conditional
-  return new Promise(block);
 }
 
 function isObject(anyValue: unknown): anyValue is Record<string, unknown> {

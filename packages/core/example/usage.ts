@@ -1,4 +1,4 @@
-import { Result, runTask, Console } from '@w5s/core';
+import { Result, Console, Task } from '@w5s/core';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);
@@ -18,4 +18,4 @@ export function main() {
 }
 
 // runTask is impure and should be put at the edge of the program
-runTask(main()); // prints { _type: 'Result/Ok', value: 3.1 }
+Task.unsafeRun(main()); // prints { _type: 'Result/Ok', value: 3.1 }

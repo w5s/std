@@ -46,7 +46,7 @@ export function program() {
   return handled;
 }
 
-runTask(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>
+Task.unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

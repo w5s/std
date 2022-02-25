@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { Console } from './console.js';
-import { runTask } from './task.js';
+import { Task } from './task.js';
 
 describe('Console', () => {
   const doNothing = () => undefined;
@@ -14,7 +14,7 @@ describe('Console', () => {
   ] as const)('%p', (task, consoleProperty) => {
     test(`should call console.${consoleProperty}`, () => {
       jest.spyOn(console, consoleProperty).mockImplementation(doNothing);
-      runTask(task('a', 'b'));
+      Task.unsafeRun(task('a', 'b'));
       expect(console[consoleProperty]).toHaveBeenLastCalledWith('a', 'b');
     });
   });

@@ -1,7 +1,7 @@
 import { Option } from './option.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
-import { runTask, Task } from './task.js';
+import { Task } from './task.js';
 import { TimeDuration, Time } from './time.js';
 
 describe(Time, () => {
@@ -56,7 +56,7 @@ describe(Time, () => {
     test('should return Date.now()', () => {
       const nowMs = 123;
       jest.spyOn(Date, 'now').mockReturnValue(nowMs);
-      expect(runTask(Time.now)).toEqual(Result.Ok(123));
+      expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(123));
     });
   });
   describe(Time.delay, () => {
@@ -69,7 +69,7 @@ describe(Time, () => {
       const task = Time.delay(duration);
       expect(setTimeout).toHaveBeenCalledTimes(0);
 
-      const promise = runTask(task);
+      const promise = Task.unsafeRun(task);
       expect(setTimeout).toHaveBeenCalledTimes(1);
       expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), duration);
       jest.runAllTimers();

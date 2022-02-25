@@ -1,4 +1,4 @@
-import { runTask, Result, Task } from '@w5s/core';
+import { Result, Task } from '@w5s/core';
 import { HTTPClient } from './client';
 import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser';
 
@@ -20,7 +20,7 @@ const expectToRejectFetchResponseError = async (
   response[mockProperty].mockRejectedValue(thrownError);
   const task = fn(response);
 
-  await expect(runTask(task)).resolves.toEqual(Result.Error(HTTPClient.ParserError({ cause: thrownError })));
+  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPClient.ParserError({ cause: thrownError })));
 };
 const expectToResolveValue = async (
   fn: (response: HTTPClient.Response) => Task.Async<unknown, unknown>,
@@ -30,7 +30,7 @@ const expectToResolveValue = async (
   const returnValue = {} as any;
   response[mockProperty].mockResolvedValue(returnValue);
   const task = fn(response);
-  await expect(runTask(task)).resolves.toEqual(Result.Ok(returnValue));
+  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));
 };
 describe(parseArrayBuffer, () => {
   test('should parse as ArrayBuffer', async () => expectToResolveValue(parseArrayBuffer, 'arrayBuffer'));
