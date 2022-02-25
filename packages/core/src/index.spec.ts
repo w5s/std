@@ -28,7 +28,6 @@ describe('index', () => {
         'Ref',
         'Random',
         'Result',
-        'runTask',
         'throwError',
         'Task',
         'Time',
