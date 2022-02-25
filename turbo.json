@@ -1,0 +1,28 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "lib/**",
+        "dist/**",
+        ".next/**"
+      ]
+    },
+    "docs": {},
+    "test": {},
+    "lint": {},
+    "format": {},
+    "clean": {
+      "cache": false
+    },
+    "develop": {
+      "cache": false
+    }
+  },
+  "globalDependencies": [
+    "tsconfig.settings.json"
+  ]
+}
