@@ -8,6 +8,7 @@
     "middlewares",
     "NCHAR",
     "NVARCHAR",
+    "plusplus",
     "SMALLINT",
     "typedoc",
     "VARBINARY",
