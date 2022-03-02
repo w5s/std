@@ -1,5 +1,5 @@
 import { JSONValue, Task } from '@w5s/core';
-import { HTTPClient } from './client';
+import { HTTPClient } from './client.js';
 
 function handleError(error: unknown) {
   return HTTPClient.ParserError({

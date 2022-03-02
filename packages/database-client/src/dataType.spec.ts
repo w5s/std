@@ -1,4 +1,4 @@
-import { SQLDataType } from './dataType';
+import { SQLDataType } from './dataType.js';
 
 describe('SQLDataType', () => {
   describe('.CHAR', () => {

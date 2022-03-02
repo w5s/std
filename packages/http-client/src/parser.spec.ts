@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
-import { HTTPClient } from './client';
-import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser';
+import { HTTPClient } from './client.js';
+import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser.js';
 
 const mockResponse = (): jest.Mocked<HTTPClient.Response> =>
   ({

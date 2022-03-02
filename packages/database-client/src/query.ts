@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
 import { assertNever, DataObject } from '@w5s/core';
-import { sql, SQLStatement } from './sql';
-import { SQLDataType } from './dataType';
+import { sql, SQLStatement } from './sql.js';
+import { SQLDataType } from './dataType.js';
 
 export type SQLQuery =
   | SQLQuery.AddColumn

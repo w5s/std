@@ -1,9 +1,9 @@
 import { Result, Task } from '@w5s/core';
-import { executeQuery } from './execute';
-import { DatabaseClientError } from './error';
-import { sql } from './sql';
-import { SQLQuery } from './query';
-import './driver/all';
+import { executeQuery } from './execute.js';
+import { DatabaseClientError } from './error.js';
+import { sql } from './sql.js';
+import { SQLQuery } from './query.js';
+import './driver/all.js';
 
 describe(executeQuery, () => {
   const anyQuery = sql`SELECT id from table`;

@@ -1,4 +1,4 @@
-import * as Fetch from './index';
+import * as Fetch from './index.js';
 
 describe('index', () => {
   test('exports', () => {

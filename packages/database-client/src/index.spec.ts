@@ -1,4 +1,4 @@
-import * as Module from './index';
+import * as Module from './index.js';
 
 describe('index', () => {
   test('exports', () => {

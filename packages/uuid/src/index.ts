@@ -1,2 +1,2 @@
-export * from './data';
-export * from './random';
+export * from './data.js';
+export * from './random.js';

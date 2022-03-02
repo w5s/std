@@ -1,8 +1,8 @@
 import { Task } from '@w5s/core';
-import { DatabaseClient, DatabaseDriver } from './driver';
-import { SQLStatement } from './sql';
-import { SQLQuery } from './query';
-import { DatabaseClientError } from './error';
+import { DatabaseClient, DatabaseDriver } from './driver.js';
+import { SQLStatement } from './sql.js';
+import { SQLQuery } from './query.js';
+import { DatabaseClientError } from './error.js';
 
 /**
  * Execute the `sqlStatement` on an `client`

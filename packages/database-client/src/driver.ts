@@ -1,5 +1,5 @@
-import type { SQLStatement } from './sql';
-import { DatabaseClientError } from './error';
+import type { SQLStatement } from './sql.js';
+import { DatabaseClientError } from './error.js';
 
 export namespace DatabaseDriver {
   const driverMap: Record<string, any> = {};

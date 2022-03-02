@@ -1,4 +1,4 @@
-import { DatabaseClientError } from './error';
+import { DatabaseClientError } from './error.js';
 
 describe(DatabaseClientError, () => {
   test('should construct DatabaseClientError', () => {

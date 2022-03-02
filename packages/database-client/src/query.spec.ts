@@ -1,6 +1,6 @@
-import { SQLDataType } from './dataType';
-import { sql } from './sql';
-import { SQLQuery } from './query';
+import { SQLDataType } from './dataType.js';
+import { sql } from './sql.js';
+import { SQLQuery } from './query.js';
 
 describe('SQLQuery', () => {
   describe('.toSQLStatement()', () => {
