@@ -23,7 +23,7 @@ npm install @w5s/uuid
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { randomUUID } from '@w5s/uuid';
-import { runTask, Task } from '@w5s/core';
+import { Task } from '@w5s/core';
 
 function createUser(name: string) {
   return Task.map(randomUUID, (uuid) => ({

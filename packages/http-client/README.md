@@ -23,13 +23,14 @@ npm install @w5s/http-client
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { HTTPClient, parseJSON } from '@w5s/http-client';
-import { runTask, Console, Task, assertNever } from '@w5s/core';
+import { Console, Task, assertNever } from '@w5s/core';
+
+const getText = (id: number) => ({
+  url: `http://localhost/${id}`,
+  parse: parseJSON<{ foo: boolean }>('unsafe'),
+});
 
 export function program() {
-  const getText = (id: number) => ({
-    url: `http://localhost/${id}`,
-    parse: parseJSON<{ foo: boolean }>('unsafe'),
-  });
   const task = HTTPClient.request(getText(123));
   const log = Task.andThen(task, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
