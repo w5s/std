@@ -74,7 +74,7 @@ export namespace DataObject {
    * @example
    * ```typescript
    * type Model = DataObject<{ [DataObject.type]: 'Model', foo: boolean }>
-   * const Model = DataError.Make<Model>('Model');
+   * const Model = DataObject.Make<Model>('Model');
    *
    * const instance = Model({ foo: true }); // { _type: 'Model', foo: true }
    * Model.typeName === 'Model' // true
