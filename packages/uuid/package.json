@@ -31,8 +31,8 @@
   "scripts": {
     "build": "npm run build:src",
     "build:src": "tsc",
-    "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
     "clean": "npm run tsc -- --build --clean",
+    "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
     "format": "eslint . --ext=cjs,js,jsx,ts,tsx,json --fix",
     "lint": "eslint . --ext=cjs,js,jsx,ts,tsx,json",
     "test": "jest .",
