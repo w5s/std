@@ -84,7 +84,7 @@
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.18",
     "@w5s/commitlint-config": "1.0.0-alpha.2",
-    "@w5s/eslint-config": "1.0.0-alpha.9",
+    "@w5s/eslint-config": "1.0.0-alpha.10",
     "@w5s/mrm-preset": "1.0.0-alpha.6",
     "@w5s/ts-config": "1.0.0-alpha.4",
     "cspell": "5.18.5",
