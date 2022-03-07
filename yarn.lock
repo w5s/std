@@ -2255,10 +2255,10 @@
     eslint-plugin-total-functions "^5.0.0"
     eslint-plugin-unicorn "^41.0.0"
 
-"@w5s/mrm-preset@1.0.0-alpha.6":
-  version "1.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@w5s/mrm-preset/-/mrm-preset-1.0.0-alpha.6.tgz#611e597ac660b9fb0b1ca3c5d544255f82d085c4"
-  integrity sha512-0pbN5F5tj7QG0nPc9iutmwP69ANqjq/8VtUoRG1gmbx6c10oOmGI9k+tEN8g1SVbUX8eGZNUk7uWB5baBmyI9Q==
+"@w5s/mrm-preset@1.0.0-alpha.7":
+  version "1.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@w5s/mrm-preset/-/mrm-preset-1.0.0-alpha.7.tgz#ad911a6abc124b7a59f555c2c1b3595a8d922566"
+  integrity sha512-srGfvzZYxe6hj9KcSOvNJ5MJzG1avvIa1lj2MVo6x5YhcBNVpz4JQY2aefGcCGa6BQl8NeXiUSNgBI1XJ8gazQ==
   dependencies:
     debug "^4.3.3"
     mrm-core "^6.0.0"
