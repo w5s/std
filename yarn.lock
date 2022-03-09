@@ -2212,10 +2212,10 @@
   dependencies:
     "@commitlint/config-conventional" "^16.0.0"
 
-"@w5s/eslint-config@1.0.0-alpha.10":
-  version "1.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@w5s/eslint-config/-/eslint-config-1.0.0-alpha.10.tgz#597d1dfbe7e22d0f6bdb4258037cf7b0554d8a5c"
-  integrity sha512-ACMMv0hv2JJRI4+bKTkdsDFTpK+7SHF8PBzY7qcU/Mj8KgLfjAcBoHR6SjRF7ivqaEyYI5IpFNDjr/h8nfnziQ==
+"@w5s/eslint-config@1.0.0-alpha.11":
+  version "1.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@w5s/eslint-config/-/eslint-config-1.0.0-alpha.11.tgz#4e2638eba47c827ff327e05ae1e011b62afb5918"
+  integrity sha512-qCJOcpUVzvS/odUohKT0ygtr0d4Gg6biYeV62JWatKfGnhoWY4rAySK/nWKWAE9+yQhXSJzD49BDwb7+/1NsTQ==
   dependencies:
     "@babel/eslint-parser" "^7.0.0"
     "@babel/plugin-syntax-class-properties" "^7.0.0"
