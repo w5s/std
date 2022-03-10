@@ -78,7 +78,6 @@
       "<rootDir>/packages/*"
     ]
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "7.17.5",
     "@babel/eslint-parser": "7.17.0",
@@ -115,5 +114,5 @@
   "mrmConfig": {
     "packageArchetype": "workspace"
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "yarn@3.2.0"
 }
