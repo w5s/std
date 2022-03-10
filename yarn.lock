@@ -2244,10 +2244,10 @@
     semver-intersect "^1.4.0"
     sync-directory "^4.0.0"
 
-"@w5s/ts-config@1.0.0-alpha.4":
-  version "1.0.0-alpha.4"
-  resolved "https://registry.yarnpkg.com/@w5s/ts-config/-/ts-config-1.0.0-alpha.4.tgz#5a5031da9aa95e2d6f45dd5c9184880158374899"
-  integrity sha512-DVIlXJfMc9JA3+7VRoXdcZTeyhbJn6f964sxmxmBA6ohV8b68IJA7EqJZPfjqCw+poy8IHaQgTyHg6YuOxLO2A==
+"@w5s/ts-config@1.0.0-alpha.5":
+  version "1.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@w5s/ts-config/-/ts-config-1.0.0-alpha.5.tgz#4e9b5d6da465981e6863815057a27fd05d21456d"
+  integrity sha512-WLZP2JDGbHhmGB57+GAyJ5bIjHvFyM1Wb0p1GN3db+4zOrng/g3hHu4Mm3ojbdfi83uBJpyicrFwGC2fOEHzng==
 
 JSONStream@^1.0.4:
   version "1.3.5"
