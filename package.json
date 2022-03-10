@@ -36,11 +36,9 @@
   },
   "lint-staged": {
     "*.js?(x)": [
-      "bash -c 'tsc --noEmit'",
       "eslint"
     ],
     "*.ts?(x)": [
-      "bash -c 'tsc --noEmit'",
       "eslint"
     ],
     "*.json": [
