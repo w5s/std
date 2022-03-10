@@ -1,6 +1,10 @@
 {
-  "out": "public",
   "tsconfig": "tsconfig.json",
+  "excludePrivate": true,
+  "excludeExternals": true,
+  "readme": "README.md",
+  "theme": "default",
+  "out": "public",
   "exclude": [
     "**/build/**/*",
     "**/example/**/*",
@@ -9,9 +13,5 @@
     "**/__tests__/*.(ts|tsx)",
     "**/*.(spec|test).(ts|tsx)"
   ],
-  "excludePrivate": true,
-  "excludeExternals": true,
-  "readme": "README.md",
-  "theme": "default",
   "entryPointStrategy": "packages"
 }

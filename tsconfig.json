@@ -1,3 +1,4 @@
 {
-  "extends": "./tsconfig.settings.json"
+  "extends": "./tsconfig.settings.json",
+  "$schema": "https://json.schemastore.org/tsconfig"
 }
