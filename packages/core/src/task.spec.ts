@@ -104,7 +104,7 @@ describe('Task', () => {
         Task.unsafeRun(
           Task.Async(
             ({ ok }) =>
-              new Promise<Task.Result<typeof anyObject, never>>((resolve) => {
+              new Promise<Result<typeof anyObject, never>>((resolve) => {
                 setTimeout(() => resolve(ok(anyObject)), 0);
               })
           )

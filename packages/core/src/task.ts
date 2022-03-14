@@ -1,4 +1,4 @@
-import { Result as StdResult } from './result.js';
+import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 
@@ -62,32 +62,13 @@ export function Task<Type extends AnyType, Value, Error>(
 }
 
 export namespace Task {
-  /**
-   * Task Ok result interface (used in task constructor)
-   */
-  export interface OkResult<V> {
-    ok: true;
-    value: V;
-  }
-  /**
-   * Task Error result interface (used in task constructor)
-   */
-  export interface ErrorResult<E> {
-    ok: false;
-    error: E;
-  }
-  /**
-   * Either Ok or Error result (used in task constructor)
-   */
-  export type Result<V, E> = OkResult<V> | ErrorResult<E>;
-
   // private constructors
   const TaskResult = Object.freeze({
-    ok<V>(value: V): Task.Result<V, never> {
-      return { ok: true, value };
+    ok<V>(value: V): Result<V, never> {
+      return { _type: 'Result/Ok', value };
     },
-    error<E>(error: E): Task.Result<never, E> {
-      return { ok: false, error };
+    error<E>(error: E): Result<never, E> {
+      return { _type: 'Result/Error', error };
     },
   });
 
@@ -133,18 +114,18 @@ export namespace Task {
       /**
        * Return a new ok object
        */
-      ok: <VV>(value: VV) => Task.Result<VV, never>;
+      ok: <VV>(value: VV) => Result<VV, never>;
       /**
        * Return a new error object
        */
-      error: <EE>(errorValue: EE) => Task.Result<never, EE>;
-    }) => Task.Result<Value, Error>
+      error: <EE>(errorValue: EE) => Result<never, EE>;
+    }) => Result<Value, Error>
   ): Sync<Value, Error> {
     return Task('sync', (_resolve, _reject, cancelerRef) => {
       // Drop cancelerRef because Sync task are not cancelable
       cancelerRef.current = defaultCanceler;
       const result = sideEffect(TaskResult);
-      if (result.ok) {
+      if (result._type === 'Result/Ok') {
         _resolve(result.value);
       } else {
         _reject(result.error);
@@ -247,16 +228,16 @@ export namespace Task {
       /**
        * Return a new ok object
        */
-      ok: <VV>(value: VV) => Task.Result<VV, never>;
+      ok: <VV>(value: VV) => Result<VV, never>;
       /**
        * return a new error object
        */
-      error: <EE>(errorValue: EE) => Task.Result<never, EE>;
+      error: <EE>(errorValue: EE) => Result<never, EE>;
       /**
        * Canceler setter
        */
       onCancel: (canceler: Canceler) => void;
-    }) => Awaitable<Task.Result<Value, Error>>
+    }) => Awaitable<Result<Value, Error>>
   ): Async<Value, Error> {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     return Task('async', async (_resolve, _reject, cancelerRef) => {
@@ -268,7 +249,7 @@ export namespace Task {
           cancelerRef.current = canceler;
         },
       });
-      if (result.ok) {
+      if (result._type === 'Result/Ok') {
         _resolve(result.value);
       } else {
         _reject(result.error);
@@ -480,18 +461,18 @@ export namespace Task {
     task: Task<Type, Value, Error>
   ): Type extends 'async'
     ? Type extends 'sync'
-      ? Awaitable<StdResult<Value, Error>>
-      : Promise<StdResult<Value, Error>>
-    : StdResult<Value, Error> {
+      ? Awaitable<Result<Value, Error>>
+      : Promise<Result<Value, Error>>
+    : Result<Value, Error> {
     const cancelerRef: Ref<() => void> = { current: Task.defaultCanceler };
-    const block = (resolve: (result: StdResult<Value, Error>) => void, reject: (err: unknown) => void) => {
+    const block = (resolve: (result: Result<Value, Error>) => void, reject: (err: unknown) => void) => {
       try {
         const returnValue: void | Promise<void> = task[Task.run](
           (value) => {
-            resolve(StdResult.Ok(value));
+            resolve(TaskResult.ok(value));
           },
           (error) => {
-            resolve(StdResult.Error(error));
+            resolve(TaskResult.error(error));
           },
           cancelerRef
         );
@@ -505,9 +486,9 @@ export namespace Task {
     };
 
     if (task[Task.type] === 'sync') {
-      let returnValue: StdResult<Value, Error> | undefined;
+      let returnValue: Result<Value, Error> | undefined;
       block(
-        (result: StdResult<Value, Error>) => {
+        (result: Result<Value, Error>) => {
           returnValue = result;
         },
         (error) => {
