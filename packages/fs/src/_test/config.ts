@@ -1,14 +1,23 @@
 import { Task } from '@w5s/core';
 import * as path from 'node:path';
+import * as fs from 'node:fs';
 // import * as url from 'node:url';
 
 // eslint-disable-next-line unicorn/prefer-module
 export const fsTestDir = __dirname; // path.dirname(url.fileURLToPath(import.meta.url));
-export const anyNonExistFile = path.join(fsTestDir, 'not_exist_file.txt');
-export const anyExistFile = path.join(fsTestDir, 'existing.txt');
+export const fsTestFile = (...parts: string[]) => path.join(fsTestDir, ...parts);
 
-export const anyNonExistDir = path.join(fsTestDir, 'not_exist_dir');
-export const anyExistDir = fsTestDir;
+export const withTmpDirectory =
+  (block: (context: { path: (...parts: string[]) => string }) => Promise<void>) => async () => {
+    const filePath = fsTestFile(`test${Math.random().toString(36)}`);
+    try {
+      await block({
+        path: (...parts) => path.join(filePath, ...parts),
+      });
+    } finally {
+      await fs.promises.rm(filePath, { recursive: true });
+    }
+  };
 
 export const expectTask = <Type extends 'sync' | 'async', Value, Error>(t: Task<Type, Value, Error>) => ({
   get result() {
@@ -19,5 +28,11 @@ export const expectTask = <Type extends 'sync' | 'async', Value, Error>(t: Task<
   },
   get rejects() {
     return this.result.rejects;
+  },
+});
+
+export const expectFile = (filePath: string) => ({
+  async toExist() {
+    await expect(fs.promises.stat(filePath)).resolves.not.toThrow();
   },
 });

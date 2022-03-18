@@ -2602,7 +2602,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:^17.0.18":
+"@types/node@npm:*, @types/node@npm:>=12, @types/node@npm:^17.0.18, @types/node@npm:^17.0.21":
   version: 17.0.21
   resolution: "@types/node@npm:17.0.21"
   checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
@@ -2928,6 +2928,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/fs@workspace:packages/fs"
   dependencies:
+    "@types/node": ^17.0.21
     "@w5s/core": ^1.0.0-alpha.0
   peerDependencies:
     typescript: ^3.8.0 || ^4.0.0

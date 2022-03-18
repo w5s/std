@@ -16,8 +16,8 @@ describe('FileSystem', () => {
     expect(Object.keys(Module.FileSystem).sort()).toEqual(
       [
         // List of all public exports
-        'exists',
-        'existsSync',
+        'ensureDirectory',
+        'ensureDirectorySync',
       ].sort()
     );
   });

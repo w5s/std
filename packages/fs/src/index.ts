@@ -1,7 +1,7 @@
-import * as fsExists from './exists.js';
+import * as fsEnsureDirectory from './ensureDirectory';
 
 export * from './data.js';
 
 export namespace FileSystem {
-  export const { exists, existsSync } = fsExists;
+  export const { ensureDirectory, ensureDirectorySync } = fsEnsureDirectory;
 }

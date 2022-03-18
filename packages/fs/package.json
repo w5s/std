@@ -42,6 +42,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
+    "@types/node": "^17.0.21",
     "@w5s/core": "^1.0.0-alpha.0"
   },
   "peerDependencies": {
