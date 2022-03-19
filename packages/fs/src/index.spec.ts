@@ -6,6 +6,7 @@ describe('index', () => {
       [
         // List of all public exports
         'FileSystem',
+        'FileType',
         'default',
       ].sort()
     );
