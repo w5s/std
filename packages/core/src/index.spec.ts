@@ -19,6 +19,7 @@ describe('index', () => {
         'Hash',
         'Int',
         'identity',
+        'ignore',
         'invariant',
         'Iterable',
         'JSON',

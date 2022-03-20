@@ -6,6 +6,20 @@
 import type { Spread } from './type.js';
 
 /**
+ * Always return `undefined` and ignore passed value
+ *
+ * @example
+ * ```typescript
+ * const doSomething = () => 'foo
+ * const doSomethingIgnore = () => ignore(doSomething());// undefined
+ * ```
+ * @param _anyValue any value that should be ignored
+ */
+export function ignore(_anyValue: unknown): void {
+  return undefined;
+}
+
+/**
  * Return the unchanged given `value`
  *
  * @example

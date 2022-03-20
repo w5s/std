@@ -1,10 +1,15 @@
 /* eslint-disable id-length */
 import { assertType } from './assert.js';
-import { assign, extend, identity, constant, pipe, throwError } from './prelude.js';
+import { assign, extend, identity, constant, pipe, throwError, ignore } from './prelude.js';
 
 describe(identity, () => {
   test.each([1, undefined, {}])('should return the same unchanged value', (value) => {
     expect(identity(value)).toBe(value);
+  });
+});
+describe(ignore, () => {
+  test.each([1, undefined, {}])('should return undefined', (value) => {
+    expect(ignore(value)).toBe(undefined);
   });
 });
 describe(constant, () => {
