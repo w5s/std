@@ -1,35 +1,36 @@
-import { Task, Result } from '@w5s/core';
-import type { FilePath, FileType } from './data';
+import { Task, Option, ignore } from '@w5s/core';
+import type { FilePath, FileStats } from './data';
 import { FileError } from './error';
-import { fsLinkType, fsLinkTypeSync, fsMkdir, fsMkdirSync } from './internal';
+import { linkStat, linkStatSync, mkdir, mkdirSync } from './internal';
+
+type FileType = 'file' | 'directory' | 'symlink';
 
 export function ensureDirectory(filePath: FilePath): Task.Async<void, FileError> {
-  return Task.Async(async ({ ok }) => {
-    const fileType = await fsLinkType(filePath);
-    if (fileType === undefined) {
-      await fsMkdir(filePath, { recursive: true });
-      return ok(undefined);
-    }
-    return ensureType(filePath, fileType);
-  });
+  const statTask = Task.map(linkStat(filePath), (_) => Option.andThen(_, fileTypeFromStats));
+  return Task.andThen(statTask, (linkType) =>
+    linkType === undefined
+      ? Task.map(mkdir(filePath, { recursive: true }), ignore)
+      : ensureType(filePath, 'directory', linkType)
+  );
 }
 
 export function ensureDirectorySync(filePath: FilePath): Task.Sync<void, FileError> {
-  return Task.Sync(({ ok }) => {
-    const fileType = fsLinkTypeSync(filePath);
-    if (fileType === undefined) {
-      fsMkdirSync(filePath, { recursive: true });
-      return ok(undefined);
-    }
-    return ensureType(filePath, fileType);
-  });
+  const statTask = Task.map(linkStatSync(filePath), (_) => Option.andThen(_, fileTypeFromStats));
+  return Task.andThen(statTask, (linkType) =>
+    linkType === undefined
+      ? Task.map(mkdirSync(filePath, { recursive: true }), ignore)
+      : ensureType(filePath, 'directory', linkType)
+  );
 }
 
-function ensureType(filePath: FilePath, actualType: FileType) {
-  if (actualType !== 'directory') {
-    return Result.Error(ensureTypeError(filePath, 'directory', actualType));
-  }
-  return Result.Ok(undefined);
+function fileTypeFromStats(stats: FileStats): Option<FileType> {
+  return stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : Option.None;
+}
+
+function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
+  return actualType !== expectedType
+    ? Task.Sync.reject(ensureTypeError(filePath, expectedType, actualType))
+    : Task.Sync.resolve(undefined);
 }
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {

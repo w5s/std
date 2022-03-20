@@ -1,6 +1,9 @@
+import { Task, Option } from '@w5s/core';
 import * as fs from 'node:fs';
+import { MakeDirectoryOptions } from 'node:fs';
 import * as path from 'node:path';
-import { FileType } from './data';
+import { FilePath, FileStats } from './data';
+import { FileError } from './error';
 
 export function pathInclude(source: string, destination: string, separator: string = path.sep): boolean {
   if (source === destination) {
@@ -37,27 +40,32 @@ export const fsRename = fs.promises.rename;
 
 export const fsRenameSync = fs.renameSync;
 
-export const fsMkdir = fs.promises.mkdir;
+export function linkStat(filePath: FilePath): Task.Async<Option<FileStats>, FileError> {
+  return Task.Async(async ({ ok }) => {
+    try {
+      return ok(await fs.promises.lstat(filePath));
+    } catch {
+      // throw error;
+      return ok(undefined);
+    }
+  });
+}
 
-export const fsMkdirSync = fs.mkdirSync;
+export function linkStatSync(filePath: FilePath): Task.Sync<Option<FileStats>, FileError> {
+  return Task.Sync(({ ok }) => {
+    try {
+      return ok(fs.lstatSync(filePath));
+    } catch {
+      // throw error;
+      return ok(undefined);
+    }
+  });
+}
 
-export const fsLinkType = async (p: string) => {
-  try {
-    return fileTypeFromStats(await fs.promises.lstat(p));
-  } catch {
-    // throw error;
-    return undefined;
-  }
-};
+export function mkdir(filePath: FilePath, options?: MakeDirectoryOptions) {
+  return Task.Async(async ({ ok }) => ok(await fs.promises.mkdir(filePath, options)));
+}
 
-export const fsLinkTypeSync = (p: string) => {
-  try {
-    return fileTypeFromStats(fs.lstatSync(p));
-  } catch {
-    return undefined;
-  }
-};
-
-function fileTypeFromStats(stats: fs.Stats): FileType | undefined {
-  return stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : undefined;
+export function mkdirSync(filePath: FilePath, options?: MakeDirectoryOptions) {
+  return Task.Sync(({ ok }) => ok(fs.mkdirSync(filePath, options)));
 }
