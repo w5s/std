@@ -12,14 +12,3 @@ describe('index', () => {
     );
   });
 });
-describe('FileSystem', () => {
-  test('exports', () => {
-    expect(Object.keys(Module.FileSystem).sort()).toEqual(
-      [
-        // List of all public exports
-        'ensureDirectory',
-        'ensureDirectorySync',
-      ].sort()
-    );
-  });
-});
