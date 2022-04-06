@@ -21,7 +21,7 @@
 //   | ResourceVanished
 //   | Interrupted
 import { DataError, type Option } from '@w5s/core';
-import type { FilePath } from './data';
+import type { FilePath } from './path';
 
 export type FileErrorType = 'AlreadyExists' | 'IllegalOperation';
 
@@ -43,12 +43,3 @@ export interface FileError
  * @category Constructor
  */
 export const FileError = DataError.Make<FileError>('FileError');
-
-// export function errnoExceptionToFileError({ errno, code, path, syscall }: NodeJS.ErrnoException) {
-//   return FileError({
-//     errno,
-//     code,
-//     path,
-//     syscall,
-//   });
-// }

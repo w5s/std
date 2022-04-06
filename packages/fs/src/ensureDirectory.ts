@@ -1,5 +1,6 @@
 import { Task, Option, ignore } from '@w5s/core';
-import type { FilePath, FileStats } from './data';
+import type { FileStats } from './data';
+import type { FilePath } from './path';
 import { FileError } from './error';
 import { linkStat, linkStatSync, mkdir, mkdirSync } from './internal';
 

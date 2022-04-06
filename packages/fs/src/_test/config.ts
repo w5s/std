@@ -1,18 +1,19 @@
 import { Task } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
+import { FilePath } from '../path';
 // import * as url from 'node:url';
 
 // eslint-disable-next-line unicorn/prefer-module
 export const fsTestDir = __dirname; // path.dirname(url.fileURLToPath(import.meta.url));
-export const fsTestFile = (...parts: string[]) => path.join(fsTestDir, ...parts);
+export const fsTestFile = (...parts: string[]) => path.join(fsTestDir, ...parts) as FilePath;
 
 export const withTmpDirectory =
-  (block: (context: { path: (...parts: string[]) => string }) => Promise<void>) => async () => {
+  (block: (context: { path: (...parts: string[]) => FilePath }) => Promise<void>) => async () => {
     const filePath = fsTestFile(`test${Math.random().toString(36)}`);
     try {
       await block({
-        path: (...parts) => path.join(filePath, ...parts),
+        path: (...parts) => path.join(filePath, ...parts) as FilePath,
       });
     } finally {
       await fs.promises.rm(filePath, { recursive: true });

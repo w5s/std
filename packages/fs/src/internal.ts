@@ -2,7 +2,8 @@ import { Task, Option } from '@w5s/core';
 import * as fs from 'node:fs';
 import { MakeDirectoryOptions } from 'node:fs';
 import * as path from 'node:path';
-import { FilePath, FileStats } from './data';
+import { FileStats } from './data';
+import { FilePath } from './path';
 import { FileError } from './error';
 
 export function pathInclude(source: string, destination: string, separator: string = path.sep): boolean {
