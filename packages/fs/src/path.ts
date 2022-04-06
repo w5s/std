@@ -6,9 +6,9 @@ export type FileName = string;
 
 export type FilePath = Tag<string, { filePath: true }>;
 export namespace FilePath {
-  export type Delimiter = string;
-  export type Extension = string;
-  export type Separator = '/';
+  export type Delimiter = ':' | ';';
+  export type Extension = `.${string}`;
+  export type Separator = '/' | '\\';
 
   export interface Parsed {
     readonly root: Option<FilePath>;
@@ -30,7 +30,7 @@ export namespace FilePath {
     return pathString as FilePath;
   }
 
-  export const delimiter: Delimiter = nodePath.delimiter;
+  export const delimiter: Delimiter = nodePath.delimiter as Delimiter;
   export const separator: Separator = nodePath.sep as Separator;
 
   export function normalize(path: FilePath): FilePath {
@@ -46,7 +46,7 @@ export namespace FilePath {
   }
 
   export function extname(path: FilePath): Extension {
-    return nodePath.extname(path);
+    return nodePath.extname(path) as Extension;
   }
 
   export function format(parsed: Partial<Parsed>): FilePath {
