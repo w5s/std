@@ -1,10 +1,29 @@
-import { Task, Option } from '@w5s/core';
+import { Task } from '@w5s/core';
 import * as fs from 'node:fs';
-import { MakeDirectoryOptions } from 'node:fs';
 import * as path from 'node:path';
-import { FileStats } from './data';
-import { FilePath } from './path';
-import { FileError } from './error';
+
+export type ErrnoException = NodeJS.ErrnoException;
+
+const taskCreator =
+  <A extends unknown[], R>(fn: (...args: A) => Promise<R>) =>
+  (...args: A) =>
+    Task.Async(async ({ ok, error }) => {
+      try {
+        return ok(await fn(...args));
+      } catch (error_: unknown) {
+        return error(error_ as ErrnoException);
+      }
+    });
+const taskCreatorSync =
+  <A extends unknown[], R>(fn: (...args: A) => R extends Promise<unknown> ? never : R) =>
+  (...args: A) =>
+    Task.Sync(({ ok, error }) => {
+      try {
+        return ok(fn(...args));
+      } catch (error_: unknown) {
+        return error(error_ as ErrnoException);
+      }
+    });
 
 export function pathInclude(source: string, destination: string, separator: string = path.sep): boolean {
   if (source === destination) {
@@ -33,40 +52,15 @@ export function fsExistsSync(filePath: string) {
   }
 }
 
-export const fsRemove = fs.promises.rm;
-
-export const fsRemoveSync = fs.rmSync;
-
-export const fsRename = fs.promises.rename;
-
-export const fsRenameSync = fs.renameSync;
-
-export function linkStat(filePath: FilePath): Task.Async<Option<FileStats>, FileError> {
-  return Task.Async(async ({ ok }) => {
-    try {
-      return ok(await fs.promises.lstat(filePath));
-    } catch {
-      // throw error;
-      return ok(undefined);
-    }
-  });
-}
-
-export function linkStatSync(filePath: FilePath): Task.Sync<Option<FileStats>, FileError> {
-  return Task.Sync(({ ok }) => {
-    try {
-      return ok(fs.lstatSync(filePath));
-    } catch {
-      // throw error;
-      return ok(undefined);
-    }
-  });
-}
-
-export function mkdir(filePath: FilePath, options?: MakeDirectoryOptions) {
-  return Task.Async(async ({ ok }) => ok(await fs.promises.mkdir(filePath, options)));
-}
-
-export function mkdirSync(filePath: FilePath, options?: MakeDirectoryOptions) {
-  return Task.Sync(({ ok }) => ok(fs.mkdirSync(filePath, options)));
-}
+export const rm = taskCreator(fs.promises.rm);
+export const rmSync = taskCreatorSync(fs.rmSync);
+export const rename = taskCreator(fs.promises.rename);
+export const renameSync = taskCreatorSync(fs.renameSync);
+export const lstat = taskCreator<[pathLike: fs.PathLike], fs.Stats>((pathLike) =>
+  fs.promises.lstat(pathLike, { bigint: false })
+);
+export const lstatSync = taskCreatorSync<[pathLike: fs.PathLike], fs.Stats>((pathLike) =>
+  fs.lstatSync(pathLike, { bigint: false })
+);
+export const mkdir = taskCreator(fs.promises.mkdir);
+export const mkdirSync = taskCreatorSync(fs.mkdirSync);
