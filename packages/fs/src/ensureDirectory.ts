@@ -6,32 +6,30 @@ import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync } from './nodejs';
 type FileType = 'file' | 'directory' | 'symlink';
 
 export function ensureDirectory(filePath: FilePath): Task.Async<void, FileError> {
-  const handleError = errnoExceptionHandler(filePath);
   return pipe(lstat(filePath)).to(
     (_) => Task.map(_, fileTypeFromStats),
     (_) => Task.orElse(_, noneWhenNotFound),
     (_) =>
       Task.andThen(_, (linkType) =>
         Option.isNone(linkType)
-          ? Task.mapError(Task.map(mkdir(filePath, { recursive: true }), ignore), handleError)
+          ? Task.mapError(Task.map(mkdir(filePath, { recursive: true }), ignore), errnoExceptionHandler)
           : ensureType(filePath, 'directory', linkType)
       ),
-    (_) => Task.mapError(_, handleError)
+    (_) => Task.mapError(_, errnoExceptionHandler)
   );
 }
 
 export function ensureDirectorySync(filePath: FilePath): Task.Sync<void, FileError> {
-  const handleError = errnoExceptionHandler(filePath);
   return pipe(lstatSync(filePath)).to(
     (_) => Task.map(_, fileTypeFromStats),
     (_) => Task.orElse(_, noneWhenNotFound),
     (_) =>
       Task.andThen(_, (linkType) =>
         Option.isNone(linkType)
-          ? Task.mapError(Task.map(mkdirSync(filePath, { recursive: true }), ignore), handleError)
+          ? Task.mapError(Task.map(mkdirSync(filePath, { recursive: true }), ignore), errnoExceptionHandler)
           : ensureType(filePath, 'directory', linkType)
       ),
-    (_) => Task.mapError(_, handleError)
+    (_) => Task.mapError(_, errnoExceptionHandler)
   );
 }
 

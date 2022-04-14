@@ -45,25 +45,24 @@ export interface FileError
  */
 export const FileError = DataError.Make<FileError>('FileError');
 
-export function errnoExceptionHandler(path: FilePath) {
-  return (error: unknown): FileError =>
-    FileError.hasInstance(error)
-      ? error
-      : ErrnoException.hasInstance(error)
-      ? FileError({
-          fileErrorType: 'OtherError',
-          path,
-          cause: error,
-          syscall: error.syscall,
-          errno: error.errno,
-          code: error.code,
-        })
-      : FileError({
-          fileErrorType: 'OtherError',
-          path,
-          cause: error,
-          syscall: Option.None,
-          errno: Option.None,
-          code: Option.None,
-        });
+export function errnoExceptionHandler(error: unknown): FileError {
+  return FileError.hasInstance(error)
+    ? error
+    : ErrnoException.hasInstance(error)
+    ? FileError({
+        fileErrorType: 'OtherError',
+        path: error.path as FilePath,
+        cause: error,
+        syscall: error.syscall,
+        errno: error.errno,
+        code: error.code,
+      })
+    : FileError({
+        fileErrorType: 'OtherError',
+        path: Option.None,
+        cause: error,
+        syscall: Option.None,
+        errno: Option.None,
+        code: Option.None,
+      });
 }

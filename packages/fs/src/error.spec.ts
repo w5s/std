@@ -16,7 +16,7 @@ describe(errnoExceptionHandler, () => {
   })();
 
   test('should convert anything to "OtherError"', () => {
-    expect(errnoExceptionHandler(anyPath)('anything')).toEqual(
+    expect(errnoExceptionHandler('anything')).toEqual(
       FileError({
         fileErrorType: 'OtherError',
         path: anyPath,
@@ -28,10 +28,10 @@ describe(errnoExceptionHandler, () => {
     );
   });
   test('should convert any ErrnoException to "OtherError" and forward properties', () => {
-    expect(errnoExceptionHandler(anyPath)(anyErrnoException)).toEqual(
+    expect(errnoExceptionHandler(anyErrnoException)).toEqual(
       FileError({
         fileErrorType: 'OtherError',
-        path: anyPath,
+        path: anyErrnoException.path as FilePath,
         cause: anyErrnoException,
         syscall: anyErrnoException.syscall,
         errno: anyErrnoException.errno,
