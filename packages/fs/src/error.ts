@@ -20,22 +20,23 @@
 //   | TimeExpired
 //   | ResourceVanished
 //   | Interrupted
-import { DataError, type Option } from '@w5s/core';
+import { DataError, Option } from '@w5s/core';
+import { ErrnoException } from './nodejs';
 import type { FilePath } from './path';
 
-export type FileErrorType = 'AlreadyExists' | 'IllegalOperation';
+export type FileErrorType = 'AlreadyExists' | 'IllegalOperation' | 'UserError' | 'OtherError';
 
 /**
- * A network error when `fetch` fails
+ * An error when a file system call fails
  */
 export interface FileError
   extends DataError<{
     name: 'FileError';
-    errorType: FileErrorType;
-    // errno: Option<number>;
-    // code: Option<string>;
+    fileErrorType: FileErrorType;
+    errno: Option<number>;
+    code: Option<string>;
     path: Option<FilePath>;
-    // syscall: Option<string>;
+    syscall: Option<string>;
   }> {}
 /**
  * FileError constructor
@@ -43,3 +44,26 @@ export interface FileError
  * @category Constructor
  */
 export const FileError = DataError.Make<FileError>('FileError');
+
+export function errnoExceptionHandler(path: FilePath) {
+  return (error: unknown): FileError =>
+    FileError.hasInstance(error)
+      ? error
+      : ErrnoException.hasInstance(error)
+      ? FileError({
+          fileErrorType: 'OtherError',
+          path,
+          cause: error,
+          syscall: error.syscall,
+          errno: error.errno,
+          code: error.code,
+        })
+      : FileError({
+          fileErrorType: 'OtherError',
+          path,
+          cause: error,
+          syscall: Option.None,
+          errno: Option.None,
+          code: Option.None,
+        });
+}

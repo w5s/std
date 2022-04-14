@@ -1,12 +1,12 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import type { FilePath } from './path';
-import { FileError } from './error';
-import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync } from './internal';
+import { errnoExceptionHandler, FileError } from './error';
+import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync } from './nodejs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
 export function ensureDirectory(filePath: FilePath): Task.Async<void, FileError> {
-  const handleError = toFileError(filePath);
+  const handleError = errnoExceptionHandler(filePath);
   return pipe(lstat(filePath)).to(
     (_) => Task.map(_, fileTypeFromStats),
     (_) => Task.orElse(_, noneWhenNotFound),
@@ -21,7 +21,7 @@ export function ensureDirectory(filePath: FilePath): Task.Async<void, FileError>
 }
 
 export function ensureDirectorySync(filePath: FilePath): Task.Sync<void, FileError> {
-  const handleError = toFileError(filePath);
+  const handleError = errnoExceptionHandler(filePath);
   return pipe(lstatSync(filePath)).to(
     (_) => Task.map(_, fileTypeFromStats),
     (_) => Task.orElse(_, noneWhenNotFound),
@@ -61,19 +61,11 @@ function ensureType(filePath: FilePath, expectedType: FileType, actualType: File
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   return FileError({
-    errorType: 'IllegalOperation',
+    fileErrorType: 'UserError',
     message: `Ensure path exists, expected '${expectedType}', got '${actualType}'`,
     path: filePath,
+    syscall: Option.None,
+    errno: Option.None,
+    code: Option.None,
   });
-}
-
-function toFileError(path: FilePath) {
-  return (error: FileError | ErrnoException) =>
-    FileError.hasInstance(error)
-      ? error
-      : FileError({
-          errorType: 'IllegalOperation', // TODO: improve handling
-          path,
-          cause: error,
-        });
 }
