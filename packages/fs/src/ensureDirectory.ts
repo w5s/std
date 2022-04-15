@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import type { FilePath } from './path';
-import { errnoExceptionHandler, FileError } from './error';
-import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync } from './nodejs';
+import { FileError } from './error';
+import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync, errnoExceptionHandler } from './nodejs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 

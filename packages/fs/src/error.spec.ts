@@ -1,42 +1,30 @@
 import { Option } from '@w5s/core';
-import * as nodeFS from 'node:fs';
-import { errnoExceptionHandler, FileError } from './error';
+import { FileError } from './error';
 import { FilePath } from './path';
-import { ErrnoException } from './nodejs.js';
 
-describe(errnoExceptionHandler, () => {
+describe(FileError, () => {
   const anyPath = 'anyPath' as FilePath;
-  const anyErrnoException = (() => {
-    try {
-      nodeFS.lstatSync('non-existent-file');
-      return undefined as never;
-    } catch (error: unknown) {
-      return error as ErrnoException;
-    }
-  })();
 
-  test('should convert anything to "OtherError"', () => {
-    expect(errnoExceptionHandler('anything')).toEqual(
-      FileError({
-        fileErrorType: 'OtherError',
-        path: anyPath,
-        cause: 'anything',
-        syscall: Option.None,
-        errno: Option.None,
-        code: Option.None,
-      })
-    );
-  });
-  test('should convert any ErrnoException to "OtherError" and forward properties', () => {
-    expect(errnoExceptionHandler(anyErrnoException)).toEqual(
-      FileError({
-        fileErrorType: 'OtherError',
-        path: anyErrnoException.path as FilePath,
-        cause: anyErrnoException,
-        syscall: anyErrnoException.syscall,
-        errno: anyErrnoException.errno,
-        code: anyErrnoException.code,
-      })
-    );
+  describe('()', () => {
+    test('should construct FileError instance', () => {
+      expect(
+        FileError({
+          fileErrorType: 'OtherError',
+          code: 'ENOENT',
+          errno: Option.Some(2),
+          path: Option.Some(anyPath),
+          syscall: Option.Some('read'),
+        })
+      ).toEqual(
+        expect.objectContaining({
+          _type: 'DataError',
+          name: 'FileError',
+          fileErrorType: 'OtherError',
+          code: 'ENOENT',
+          path: anyPath,
+          syscall: 'read',
+        })
+      );
+    });
   });
 });

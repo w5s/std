@@ -1,5 +1,7 @@
-import { Task } from '@w5s/core';
+import { Option, Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
+import { FileError } from './error';
+import { FilePath } from './path';
 
 export type ErrnoException = NodeJS.ErrnoException;
 export const ErrnoException = {
@@ -28,6 +30,28 @@ function taskCreatorSync<A extends unknown[], R>(fn: (...args: A) => R extends P
         return error(error_ as ErrnoException);
       }
     });
+}
+
+export function errnoExceptionHandler(error: unknown): FileError {
+  return FileError.hasInstance(error)
+    ? error
+    : ErrnoException.hasInstance(error)
+    ? FileError({
+        fileErrorType: 'OtherError',
+        path: error.path as FilePath,
+        cause: error,
+        syscall: error.syscall,
+        errno: error.errno,
+        code: error.code,
+      })
+    : FileError({
+        fileErrorType: 'OtherError',
+        path: Option.None,
+        cause: error,
+        syscall: Option.None,
+        errno: Option.None,
+        code: Option.None,
+      });
 }
 
 export const rm = taskCreator(nodeFS.promises.rm);

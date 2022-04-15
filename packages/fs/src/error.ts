@@ -21,7 +21,6 @@
 //   | ResourceVanished
 //   | Interrupted
 import { DataError, Option } from '@w5s/core';
-import { ErrnoException } from './nodejs';
 import type { FilePath } from './path';
 
 export type FileErrorType = 'AlreadyExists' | 'IllegalOperation' | 'UserError' | 'OtherError';
@@ -44,25 +43,3 @@ export interface FileError
  * @category Constructor
  */
 export const FileError = DataError.Make<FileError>('FileError');
-
-export function errnoExceptionHandler(error: unknown): FileError {
-  return FileError.hasInstance(error)
-    ? error
-    : ErrnoException.hasInstance(error)
-    ? FileError({
-        fileErrorType: 'OtherError',
-        path: error.path as FilePath,
-        cause: error,
-        syscall: error.syscall,
-        errno: error.errno,
-        code: error.code,
-      })
-    : FileError({
-        fileErrorType: 'OtherError',
-        path: Option.None,
-        cause: error,
-        syscall: Option.None,
-        errno: Option.None,
-        code: Option.None,
-      });
-}
