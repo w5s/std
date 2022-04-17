@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import type { FilePath } from './path';
 import { FileError } from './error';
-import { ErrnoException, lstat, lstatSync, mkdir, mkdirSync, errnoExceptionHandler } from './nodejs';
+import { lstat, lstatSync, mkdir, mkdirSync } from './nodejs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
@@ -12,10 +12,9 @@ export function ensureDirectory(filePath: FilePath): Task.Async<void, FileError>
     (_) =>
       Task.andThen(_, (linkType) =>
         Option.isNone(linkType)
-          ? Task.mapError(Task.map(mkdir(filePath, { recursive: true }), ignore), errnoExceptionHandler)
+          ? Task.map(mkdir(filePath, { recursive: true }), ignore)
           : ensureType(filePath, 'directory', linkType)
-      ),
-    (_) => Task.mapError(_, errnoExceptionHandler)
+      )
   );
 }
 
@@ -26,10 +25,9 @@ export function ensureDirectorySync(filePath: FilePath): Task.Sync<void, FileErr
     (_) =>
       Task.andThen(_, (linkType) =>
         Option.isNone(linkType)
-          ? Task.mapError(Task.map(mkdirSync(filePath, { recursive: true }), ignore), errnoExceptionHandler)
+          ? Task.map(mkdirSync(filePath, { recursive: true }), ignore)
           : ensureType(filePath, 'directory', linkType)
-      ),
-    (_) => Task.mapError(_, errnoExceptionHandler)
+      )
   );
 }
 
@@ -47,7 +45,7 @@ function fileTypeFromStats(
     : Option.None;
 }
 
-function noneWhenNotFound(error: ErrnoException): Task.Sync<Option<never>, ErrnoException> {
+function noneWhenNotFound(error: FileError): Task.Sync<Option<never>, FileError> {
   return error.code === 'ENOENT' ? Task.Sync.resolve(undefined) : Task.Sync.reject(error);
 }
 

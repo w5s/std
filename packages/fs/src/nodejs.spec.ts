@@ -1,20 +1,21 @@
-import { Option } from '@w5s/core';
+import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { FileError } from './error.js';
-import { ErrnoException, errnoExceptionHandler } from './nodejs.js';
+import { ErrnoException, errnoExceptionHandler, taskCreator, taskCreatorSync } from './nodejs.js';
 import { FilePath } from './path.js';
+import { expectTask } from './_test/config.js';
 
+const anyPath = 'anyPath' as FilePath;
+const anyError = new Error('AnyError');
+const anyErrnoException = (() => {
+  try {
+    nodeFS.lstatSync('non-existent-file');
+    return undefined as never;
+  } catch (error: unknown) {
+    return error as ErrnoException;
+  }
+})();
 describe('ErrnoException', () => {
-  const anyError = new Error('AnyError');
-  const anyErrnoException = (() => {
-    try {
-      nodeFS.lstatSync('non-existent-file');
-      return undefined as never;
-    } catch (error: unknown) {
-      return error as ErrnoException;
-    }
-  })();
-
   describe(ErrnoException.hasInstance, () => {
     test('should return true for ErrnoException', () => {
       expect(ErrnoException.hasInstance(anyErrnoException)).toBe(true);
@@ -28,16 +29,6 @@ describe('ErrnoException', () => {
   });
 });
 describe(errnoExceptionHandler, () => {
-  const anyPath = 'anyPath' as FilePath;
-  const anyErrnoException = (() => {
-    try {
-      nodeFS.lstatSync('non-existent-file');
-      return undefined as never;
-    } catch (error: unknown) {
-      return error as ErrnoException;
-    }
-  })();
-
   test('should convert anything to "OtherError"', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
       FileError({
@@ -61,5 +52,38 @@ describe(errnoExceptionHandler, () => {
         code: anyErrnoException.code,
       })
     );
+  });
+});
+
+describe(taskCreatorSync, () => {
+  test('should transform return value', () => {
+    const original = () => true;
+    const transformed = taskCreatorSync(original);
+
+    expectTask(transformed()).result.toEqual(Result.Ok(true));
+  });
+  test('should transform thrown error with errnoExceptionHandler', () => {
+    const original = () => {
+      throw anyError;
+    };
+    const transformed = taskCreatorSync(original);
+
+    expectTask(transformed()).result.toEqual(Result.Error(errnoExceptionHandler(anyError)));
+  });
+});
+describe(taskCreator, () => {
+  test('should transform return value', async () => {
+    const original = async () => true;
+    const transformed = taskCreator(original);
+
+    await expectTask(transformed()).resolves.toEqual(Result.Ok(true));
+  });
+  test('should transform thrown error with errnoExceptionHandler', async () => {
+    const original = async () => {
+      throw anyError;
+    };
+    const transformed = taskCreator(original);
+
+    await expectTask(transformed()).resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
   });
 });

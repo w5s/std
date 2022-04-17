@@ -10,24 +10,24 @@ export const ErrnoException = {
   },
 };
 
-function taskCreator<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
+export function taskCreator<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
   return (...args: A) =>
     Task.Async(async ({ ok, error }) => {
       try {
         return ok(await fn(...args));
       } catch (error_: unknown) {
-        return error(error_ as ErrnoException);
+        return error(errnoExceptionHandler(error_));
       }
     });
 }
 
-function taskCreatorSync<A extends unknown[], R>(fn: (...args: A) => R extends Promise<unknown> ? never : R) {
+export function taskCreatorSync<A extends unknown[], R>(fn: (...args: A) => R extends Promise<unknown> ? never : R) {
   return (...args: A) =>
     Task.Sync(({ ok, error }) => {
       try {
         return ok(fn(...args));
       } catch (error_: unknown) {
-        return error(error_ as ErrnoException);
+        return error(errnoExceptionHandler(error_));
       }
     });
 }
