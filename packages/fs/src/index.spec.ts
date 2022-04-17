@@ -7,6 +7,8 @@ describe('index', () => {
         // List of all public exports
         'FileSystem',
         'FilePath',
+        'FileError',
+        'FileErrorType',
         'default',
       ].sort()
     );
