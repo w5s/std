@@ -1,29 +1,13 @@
-// data IOErrorType
-//   -- Haskell 2010:
-//   = AlreadyExists
-//   | NoSuchThing
-//   | ResourceBusy
-//   | ResourceExhausted
-//   | EOF
-//   | IllegalOperation
-//   | PermissionDenied
-//   | UserError
-//   -- GHC only:
-//   | UnsatisfiedConstraints
-//   | SystemError
-//   | ProtocolError
-//   | OtherError
-//   | InvalidArgument
-//   | InappropriateType
-//   | HardwareFault
-//   | UnsupportedOperation
-//   | TimeExpired
-//   | ResourceVanished
-//   | Interrupted
 import { DataError, Option } from '@w5s/core';
 import type { FilePath } from './path';
 
-export type FileErrorType = 'AlreadyExists' | 'IllegalOperation' | 'UserError' | 'OtherError';
+export const FileErrorType = {
+  AlreadyExists: 'AlreadyExists',
+  IllegalOperation: 'IllegalOperation',
+  UserError: 'UserError',
+  OtherError: 'OtherError',
+} as const;
+export type FileErrorType = typeof FileErrorType[keyof typeof FileErrorType];
 
 /**
  * An error when a file system call fails
