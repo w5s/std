@@ -5,7 +5,6 @@ import type { Awaitable } from './type.js';
 type NonPromise<V> = Exclude<V, Promise<unknown>>;
 
 type AnyType = 'async' | 'sync';
-type CombineType<Type extends AnyType> = Type extends 'sync' ? 'sync' : AnyType;
 
 /**
  * Base type for Task
@@ -71,6 +70,20 @@ export namespace Task {
       return { _type: 'Result/Error', error };
     },
   });
+
+  /**
+   * An utility type to ensure that a task can only be combined :
+   * - sync with sync
+   * - async with async or sync
+   *
+   * @example
+   * ```typescript
+   * Task.ChainType<'sync', V, E> // Task<'sync', V, E>
+   * Task.ChainType<'async', V, E> // Task<'sync'|'async', V, E>
+   * ```
+   */
+  export interface ChainType<Type, Value, Error>
+    extends Task<Type extends 'sync' ? 'sync' : 'async' | 'sync', Value, Error> {}
 
   /**
    * String symbol to contain the execution of the side effect.
@@ -393,7 +406,7 @@ export namespace Task {
    */
   export function andThen<Type extends AnyType, ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
     task: Task<Type, ValueFrom, ErrorFrom>,
-    fn: (value: ValueFrom) => Task<CombineType<Type>, ValueTo, ErrorTo>
+    fn: (value: ValueFrom) => Task.ChainType<Type, ValueTo, ErrorTo>
   ): Task<Type, ValueTo, ErrorFrom | ErrorTo> {
     return Task<Type, ValueTo, ErrorFrom | ErrorTo>(task[type], (_resolve, _reject, cancelerRef) =>
       task[run]((value) => fn(value)[run](_resolve, _reject, cancelerRef), _reject, cancelerRef)
@@ -417,7 +430,7 @@ export namespace Task {
    */
   export function andRun<Type extends AnyType, Value, ErrorFrom, ErrorTo>(
     task: Task<Type, Value, ErrorFrom>,
-    fn: (value: Value) => Task<CombineType<Type>, any, ErrorTo>
+    fn: (value: Value) => Task.ChainType<Type, any, ErrorTo>
   ): Task<Type, Value, ErrorFrom | ErrorTo> {
     return andThen(task, (value) => map(fn(value), () => value));
   }
@@ -439,7 +452,7 @@ export namespace Task {
    */
   export function orElse<Type extends AnyType, ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
     task: Task<Type, ValueFrom, ErrorFrom>,
-    fn: (error: ErrorFrom) => Task<CombineType<Type>, ValueTo, ErrorTo>
+    fn: (error: ErrorFrom) => Task.ChainType<Type, ValueTo, ErrorTo>
   ): Task<Type, ValueFrom | ValueTo, ErrorTo> {
     return Task<Type, ValueFrom | ValueTo, ErrorTo>(task[type], (_resolve, _reject, cancelerRef) =>
       task[run](_resolve, (error) => fn(error)[run](_resolve, _reject, cancelerRef), cancelerRef)
