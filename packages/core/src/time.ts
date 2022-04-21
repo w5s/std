@@ -210,10 +210,10 @@ export namespace Time {
    * });
    * ```
    */
-  export const now = Task.Sync<Time, never>(({ ok }) => ok(Date.now() as Time));
+  export const now = Task<Time, never>(({ ok }) => ok(Date.now() as Time));
 
   /**
-   * Return a new `Task.Async` that resolves the current time in milliseconds after waiting `duration`.
+   * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
    *
    * @example
    * ```typescript
@@ -223,8 +223,8 @@ export namespace Time {
    * ```
    * @param duration delay in milliseconds to wait
    */
-  export function delay(duration: TimeDuration): Task.Async<Time, never> {
-    return Task.Async(
+  export function delay(duration: TimeDuration): Task<Time, never> {
+    return Task(
       ({ ok, onCancel }) =>
         new Promise((resolve) => {
           let timeoutId: ReturnType<typeof setTimeout> | undefined;

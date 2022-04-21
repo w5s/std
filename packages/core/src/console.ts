@@ -4,11 +4,8 @@ import { Task } from './task.js';
 export namespace Console {
   type Parameters = [required: unknown, ...optionalParameters: unknown[]];
 
-  function createTask(
-    method: 'debug' | 'log' | 'info' | 'warn' | 'error',
-    message: Parameters
-  ): Task.Sync<void, never> {
-    return Task.Sync(({ ok }) => {
+  function createTask(method: 'debug' | 'log' | 'info' | 'warn' | 'error', message: Parameters): Task<void, never> {
+    return Task(({ ok }) => {
       console[method](...message);
 
       return ok(undefined);
@@ -24,7 +21,7 @@ export namespace Console {
    * ```
    * @param parameters an array of values to be logged
    */
-  export function debug(...parameters: Parameters): Task.Sync<void, never> {
+  export function debug(...parameters: Parameters): Task<void, never> {
     return createTask('debug', parameters);
   }
 
@@ -37,7 +34,7 @@ export namespace Console {
    * ```
    * @param parameters an array of values to be logged
    */
-  export function log(...parameters: Parameters): Task.Sync<void, never> {
+  export function log(...parameters: Parameters): Task<void, never> {
     return createTask('log', parameters);
   }
 
@@ -50,7 +47,7 @@ export namespace Console {
    * ```
    * @param parameters an array of values to be logged
    */
-  export function info(...parameters: Parameters): Task.Sync<void, never> {
+  export function info(...parameters: Parameters): Task<void, never> {
     return createTask('info', parameters);
   }
 
@@ -63,7 +60,7 @@ export namespace Console {
    * ```
    * @param parameters an array of values to be logged
    */
-  export function warn(...parameters: Parameters): Task.Sync<void, never> {
+  export function warn(...parameters: Parameters): Task<void, never> {
     return createTask('warn', parameters);
   }
 
@@ -76,7 +73,7 @@ export namespace Console {
    * ```
    * @param parameters an array of values to be logged
    */
-  export function error(...parameters: Parameters): Task.Sync<void, never> {
+  export function error(...parameters: Parameters): Task<void, never> {
     return createTask('error', parameters);
   }
 }

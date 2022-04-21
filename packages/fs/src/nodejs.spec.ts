@@ -1,7 +1,7 @@
 import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { FileError } from './error.js';
-import { ErrnoException, errnoExceptionHandler, taskCreator, taskCreatorSync } from './nodejs.js';
+import { ErrnoException, errnoExceptionHandler, taskCreator } from './nodejs.js';
 import { FilePath } from './path.js';
 import { expectTask } from './_test/config.js';
 
@@ -55,22 +55,6 @@ describe(errnoExceptionHandler, () => {
   });
 });
 
-describe(taskCreatorSync, () => {
-  test('should transform return value', () => {
-    const original = () => true;
-    const transformed = taskCreatorSync(original);
-
-    expectTask(transformed()).result.toEqual(Result.Ok(true));
-  });
-  test('should transform thrown error with errnoExceptionHandler', () => {
-    const original = () => {
-      throw anyError;
-    };
-    const transformed = taskCreatorSync(original);
-
-    expectTask(transformed()).result.toEqual(Result.Error(errnoExceptionHandler(anyError)));
-  });
-});
 describe(taskCreator, () => {
   test('should transform return value', async () => {
     const original = async () => true;

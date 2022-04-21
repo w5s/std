@@ -10,7 +10,7 @@ import { DatabaseClientError } from './error.js';
  * @example
  * ```typescript
  * const query = executeQuery(client, SQLQuery.CreateTable({ tableName: 'test_table' }))
- * const result = await runTask(query);
+ * const result = await Task.unsafeRun(query);
  * if (Result.isOk(result)) {
  *   console.log(result.value)
  * } else {
@@ -23,10 +23,10 @@ import { DatabaseClientError } from './error.js';
 export function executeQuery(
   client: DatabaseClient,
   sqlOrQuery: SQLStatement | SQLQuery
-): Task.Async<unknown, DatabaseClientError> {
+): Task<unknown, DatabaseClientError> {
   const driver = DatabaseDriver.get(client.databaseType);
 
-  return Task.Async(async ({ ok, error }) => {
+  return Task(async ({ ok, error }) => {
     try {
       const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
       const returnValue = await driver.executeQuery(client, sqlStatement);

@@ -12,9 +12,9 @@ describe('Console', () => {
     [Console.warn, 'warn'],
     [Console.error, 'error'],
   ] as const)('%p', (task, consoleProperty) => {
-    test(`should call console.${consoleProperty}`, () => {
+    test(`should call console.${consoleProperty}`, async () => {
       jest.spyOn(console, consoleProperty).mockImplementation(doNothing);
-      Task.unsafeRun(task('a', 'b'));
+      await Task.unsafeRun(task('a', 'b'));
       expect(console[consoleProperty]).toHaveBeenLastCalledWith('a', 'b');
     });
   });

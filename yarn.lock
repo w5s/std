@@ -2984,9 +2984,9 @@ __metadata:
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
     "@w5s/commitlint-config": 1.0.0-alpha.2
-    "@w5s/eslint-config": 1.0.0-alpha.11
-    "@w5s/mrm-preset": 1.0.0-alpha.8
-    "@w5s/ts-config": 1.0.0-alpha.5
+    "@w5s/eslint-config": 1.0.0-alpha.12
+    "@w5s/mrm-preset": 1.0.0-alpha.9
+    "@w5s/ts-config": 1.0.0-alpha.6
     cspell: 5.19.7
     es-jest: 1.5.0
     eslint: 8.13.0
@@ -2994,14 +2994,14 @@ __metadata:
     is-ci: 3.0.1
     jest: 27.5.1
     lerna: 4.0.0
-    lint-staged: 12.3.7
+    lint-staged: 12.3.8
     markdown-magic: 2.6.0
     markdown-magic-package-json: 2.0.2
     markdown-magic-subpackage-list: 1.1.2
     mrm: 4.0.0
     npm-run-all: 4.1.5
     prettier: 2.6.2
-    turbo: 1.2.2
+    turbo: 1.2.4
     typedoc: 0.22.15
     typescript: 4.6.3
   languageName: unknown
@@ -3029,9 +3029,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.11":
-  version: 1.0.0-alpha.11
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.11"
+"@w5s/eslint-config@npm:1.0.0-alpha.12":
+  version: 1.0.0-alpha.12
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.12"
   dependencies:
     "@babel/eslint-parser": ^7.0.0
     "@babel/plugin-syntax-class-properties": ^7.0.0
@@ -3048,7 +3048,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-react: ^7.28.0
     eslint-plugin-total-functions: ^5.0.0
-    eslint-plugin-unicorn: ^41.0.0
+    eslint-plugin-unicorn: ^42.0.0
   peerDependencies:
     eslint: 5.x || 6.x || 7.x || 8.x
     prettier: 2.x
@@ -3056,7 +3056,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 444ba2ba9fb7224acd75eecc08733f4de4a4d5ae1ed838bad2087a15b30d04f66504cfe29616dc2e6f2a1306b06080b5c6d6debb53992effa2c62acdc468c9bb
+  checksum: 5a367051d1a916cb460ca731480d8b43c1431c8746c38d1a1524b957857de15b52ab31c009223e2152e06a05567ffe31f7bee7975592ba46f1b4c3c940ddfb81
   languageName: node
   linkType: hard
 
@@ -3081,24 +3081,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/mrm-preset@npm:1.0.0-alpha.8":
-  version: 1.0.0-alpha.8
-  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.8"
+"@w5s/mrm-preset@npm:1.0.0-alpha.9":
+  version: 1.0.0-alpha.9
+  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.9"
   dependencies:
     debug: ^4.3.3
-    mrm-core: ^6.0.0
+    mrm-core: ^7.0.0
     semver-intersect: ^1.4.0
     sync-directory: ^4.0.0
-  checksum: 462f5cfa1166e78a03550932ae31b113b2aa24ed2ddae7a16e3cedbe98c70ed9822d225af061321d67af110281ffc4953398ef9b2be0b7a3156c653c018a9583
+  checksum: 277d31ceddaddfdaacd43a27ee8ad3e0d81305e62b343d81808ef5d386e576c9859507556ca97c70d057cc2a6b5d14ed39f637113a19bc960b173e389ee85edc
   languageName: node
   linkType: hard
 
-"@w5s/ts-config@npm:1.0.0-alpha.5":
-  version: 1.0.0-alpha.5
-  resolution: "@w5s/ts-config@npm:1.0.0-alpha.5"
+"@w5s/ts-config@npm:1.0.0-alpha.6":
+  version: 1.0.0-alpha.6
+  resolution: "@w5s/ts-config@npm:1.0.0-alpha.6"
   peerDependencies:
     typescript: 3.x || 4.x
-  checksum: 616adee7d26d7d8890e5177720abe28d028cea019ba4d782815471979cf98f03097cb791925b690f7e164374229b071da0bc68de5e551f3e579ca57ff3909668
+  checksum: 2e2a3440859294735c9c23708a958d71c46d8b675b646a08d805f925252e2a421363329cb80d75c63cfc20b754362715fce54bf8d31213245b8dd4dc5dfc4700
   languageName: node
   linkType: hard
 
@@ -5845,9 +5845,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-unicorn@npm:^41.0.0":
-  version: 41.0.0
-  resolution: "eslint-plugin-unicorn@npm:41.0.0"
+"eslint-plugin-unicorn@npm:^42.0.0":
+  version: 42.0.0
+  resolution: "eslint-plugin-unicorn@npm:42.0.0"
   dependencies:
     "@babel/helper-validator-identifier": ^7.15.7
     ci-info: ^3.3.0
@@ -5865,7 +5865,7 @@ __metadata:
     strip-indent: ^3.0.0
   peerDependencies:
     eslint: ">=8.8.0"
-  checksum: 661d572b244f9f61121806cb0b9b4914f37e978089633e8b401d95b736f5acb9ed70f398de9cebcdbb1456961e7360c2b196483a793f6f1613c2a4989a298488
+  checksum: 03757cbf417d39691fe04048ac9352585162a4dd68c2f26f5bc0956409625c7c4841487f0fa623e0d6dd5ff9cc3e758b74e4d170e3b0a877bbd0114995310058
   languageName: node
   linkType: hard
 
@@ -8795,9 +8795,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:12.3.7":
-  version: 12.3.7
-  resolution: "lint-staged@npm:12.3.7"
+"lint-staged@npm:12.3.8":
+  version: 12.3.8
+  resolution: "lint-staged@npm:12.3.8"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -8815,7 +8815,7 @@ __metadata:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: b595097556880eb2ab7ce2cf105047f6f22525ccfd608fbdc63ab243259aa36a26949576fadff673748fb885e7cb37ad3f4471d964ad54c1205d57a58999ba24
+  checksum: af6a89ae4244e4eac7180c6e7da452f378fd156ff38eaa666ecbb78f1e2efb7f1a9fc766dcc1cdde2bd76e03da68e602056ca9d2f1c6e46cf10aa83d20bf4d49
   languageName: node
   linkType: hard
 
@@ -9724,34 +9724,6 @@ __metadata:
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1"
   checksum: 8296610c608bc97b03c2cf889c6cdf4517e32fa2d836440096374c2209f6b7b3e256c209493a0b32584b9cb32d528e99d0dd19dcd9a14d2d915a312d391cc7e9
-  languageName: node
-  linkType: hard
-
-"mrm-core@npm:^6.0.0":
-  version: 6.1.7
-  resolution: "mrm-core@npm:6.1.7"
-  dependencies:
-    babel-code-frame: ^6.26.0
-    comment-json: ^2.2.0
-    detect-indent: ^6.0.0
-    editorconfig: ^0.15.3
-    find-up: ^4.1.0
-    fs-extra: ^8.1.0
-    kleur: ^3.0.3
-    listify: ^1.0.0
-    lodash: ^4.17.15
-    minimist: ^1.2.0
-    prop-ini: ^0.0.2
-    rc: ^1.2.8
-    readme-badger: ^0.3.0
-    semver: ^6.3.0
-    smpltmpl: ^1.0.2
-    split-lines: ^2.0.0
-    strip-bom: ^4.0.0
-    validate-npm-package-name: ^3.0.0
-    webpack-merge: ^4.2.2
-    yaml: ^2.0.0-1
-  checksum: 59040b97d34fb12b7821b55247619f91fdcc5284f68b034f1fee40e401e87c48f980af4cdb08c663eae30006e4ca1674ccd3eb81b419cdb594314e8331c2f0d1
   languageName: node
   linkType: hard
 
@@ -13023,106 +12995,106 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-darwin-64@npm:1.2.2"
+"turbo-darwin-64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-darwin-64@npm:1.2.4"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-darwin-arm64@npm:1.2.2"
+"turbo-darwin-arm64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-darwin-arm64@npm:1.2.4"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-freebsd-64@npm:1.2.2"
+"turbo-freebsd-64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-freebsd-64@npm:1.2.4"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-freebsd-arm64@npm:1.2.2"
+"turbo-freebsd-arm64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-freebsd-arm64@npm:1.2.4"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-32@npm:1.2.2"
+"turbo-linux-32@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-32@npm:1.2.4"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-64@npm:1.2.2"
+"turbo-linux-64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-64@npm:1.2.4"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-arm64@npm:1.2.2"
+"turbo-linux-arm64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-arm64@npm:1.2.4"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-arm@npm:1.2.2"
+"turbo-linux-arm@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-arm@npm:1.2.4"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-mips64le@npm:1.2.2"
+"turbo-linux-mips64le@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-mips64le@npm:1.2.4"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-linux-ppc64le@npm:1.2.2"
+"turbo-linux-ppc64le@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-linux-ppc64le@npm:1.2.4"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-windows-32@npm:1.2.2"
+"turbo-windows-32@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-windows-32@npm:1.2.4"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo-windows-64@npm:1.2.2"
+"turbo-windows-64@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo-windows-64@npm:1.2.4"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.2.2":
-  version: 1.2.2
-  resolution: "turbo@npm:1.2.2"
+"turbo@npm:1.2.4":
+  version: 1.2.4
+  resolution: "turbo@npm:1.2.4"
   dependencies:
-    turbo-darwin-64: 1.2.2
-    turbo-darwin-arm64: 1.2.2
-    turbo-freebsd-64: 1.2.2
-    turbo-freebsd-arm64: 1.2.2
-    turbo-linux-32: 1.2.2
-    turbo-linux-64: 1.2.2
-    turbo-linux-arm: 1.2.2
-    turbo-linux-arm64: 1.2.2
-    turbo-linux-mips64le: 1.2.2
-    turbo-linux-ppc64le: 1.2.2
-    turbo-windows-32: 1.2.2
-    turbo-windows-64: 1.2.2
+    turbo-darwin-64: 1.2.4
+    turbo-darwin-arm64: 1.2.4
+    turbo-freebsd-64: 1.2.4
+    turbo-freebsd-arm64: 1.2.4
+    turbo-linux-32: 1.2.4
+    turbo-linux-64: 1.2.4
+    turbo-linux-arm: 1.2.4
+    turbo-linux-arm64: 1.2.4
+    turbo-linux-mips64le: 1.2.4
+    turbo-linux-ppc64le: 1.2.4
+    turbo-windows-32: 1.2.4
+    turbo-windows-64: 1.2.4
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -13150,7 +13122,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: 161cb5f927205d9426c50443255d24a0c6adb4a64af12ea0f37bd8578046f6a5162ca91697eed03847e4d5d8126c4f88443bf1f41a07b97dc7eebbedbd52740a
+  checksum: a68362a1722136b4d26c9217b7da5272ea6d82b70a7855f4c2260d02aac402bbf0c866dcbd7e55a040b4327107e70dbfd357550042c02b601669477788385711
   languageName: node
   linkType: hard
 

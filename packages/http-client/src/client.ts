@@ -131,7 +131,7 @@ export namespace HTTPClient {
     > {}
 
   export interface Parser<Value, Error> {
-    (response: HTTPClient.Response): Task.Async<Value, Error>;
+    (response: HTTPClient.Response): Task<Value, Error>;
   }
 
   /**
@@ -176,7 +176,7 @@ export namespace HTTPClient {
    */
   export function request<Value, Error>(
     requestObject: request.Request<Value, Error>
-  ): Task.Async<Value, HTTPClient.NetworkError | Error> {
+  ): Task<Value, HTTPClient.NetworkError | Error> {
     const { parse, ...fetchRequest } = requestObject;
     const responseTask = fetchResponse(fetchRequest);
     const parseTask = Task.andThen(responseTask, parse);
@@ -191,8 +191,8 @@ export namespace HTTPClient {
   }
 }
 
-function fetchResponse(request: fetchResponse.Request): Task.Async<HTTPClient.Response, HTTPClient.NetworkError> {
-  return Task.Async(async ({ ok, error }) => {
+function fetchResponse(request: fetchResponse.Request): Task<HTTPClient.Response, HTTPClient.NetworkError> {
+  return Task(async ({ ok, error }) => {
     const { url, globalFetch = globalThis.fetch, ...requestInfo } = request;
 
     try {
