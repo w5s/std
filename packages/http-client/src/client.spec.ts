@@ -4,12 +4,12 @@ import { HTTPClient } from './client';
 describe(HTTPClient.request, () => {
   const anyURL = 'https://localhost';
   const anyError = new Error('AnyError');
-  const anyParser = jest.fn(() => Task.Async.resolve('MockParsed'));
+  const anyParser = jest.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
 
   test('should call global fetch and send to parser', async () => {
     const globalFetch = jest.fn(async () => anyResponse);
-    const parse = jest.fn(() => Task.Async.resolve('TestReturn'));
+    const parse = jest.fn(() => Task.resolve('TestReturn'));
     const url = 'http://localhost#test';
     const task = HTTPClient.request({
       url,
@@ -36,7 +36,7 @@ describe(HTTPClient.request, () => {
   });
   test('should convert reject parse errors', async () => {
     const globalFetch = jest.fn(async () => anyResponse);
-    const failParser = jest.fn(() => Task.Async.reject(anyError));
+    const failParser = jest.fn(() => Task.reject(anyError));
 
     const task = HTTPClient.request({
       url: anyURL,

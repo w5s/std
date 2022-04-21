@@ -7,19 +7,9 @@ export type ErrnoException = NodeJS.ErrnoException;
 const taskCreator =
   <A extends unknown[], R>(fn: (...args: A) => Promise<R>) =>
   (...args: A) =>
-    Task.Async(async ({ ok, error }) => {
+    Task(async ({ ok, error }) => {
       try {
         return ok(await fn(...args));
-      } catch (error_: unknown) {
-        return error(error_ as ErrnoException);
-      }
-    });
-const taskCreatorSync =
-  <A extends unknown[], R>(fn: (...args: A) => R extends Promise<unknown> ? never : R) =>
-  (...args: A) =>
-    Task.Sync(({ ok, error }) => {
-      try {
-        return ok(fn(...args));
       } catch (error_: unknown) {
         return error(error_ as ErrnoException);
       }
@@ -53,14 +43,8 @@ export function fsExistsSync(filePath: string) {
 }
 
 export const rm = taskCreator(fs.promises.rm);
-export const rmSync = taskCreatorSync(fs.rmSync);
 export const rename = taskCreator(fs.promises.rename);
-export const renameSync = taskCreatorSync(fs.renameSync);
 export const lstat = taskCreator<[pathLike: fs.PathLike], fs.Stats>((pathLike) =>
   fs.promises.lstat(pathLike, { bigint: false })
 );
-export const lstatSync = taskCreatorSync<[pathLike: fs.PathLike], fs.Stats>((pathLike) =>
-  fs.lstatSync(pathLike, { bigint: false })
-);
 export const mkdir = taskCreator(fs.promises.mkdir);
-export const mkdirSync = taskCreatorSync(fs.mkdirSync);

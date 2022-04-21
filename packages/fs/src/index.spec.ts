@@ -17,7 +17,6 @@ describe('FileSystem', () => {
       [
         // List of all public exports
         'ensureDirectory',
-        'ensureDirectorySync',
       ].sort()
     );
   });

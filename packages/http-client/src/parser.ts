@@ -8,22 +8,22 @@ function handleError(error: unknown) {
 }
 
 export function parseArrayBuffer(response: HTTPClient.Response) {
-  return Task.Async.tryCall<ArrayBuffer, HTTPClient.ParserError>(() => response.arrayBuffer(), handleError);
+  return Task.tryCall<ArrayBuffer, HTTPClient.ParserError>(() => response.arrayBuffer(), handleError);
 }
 
 export function parseJSON<Return extends JSONValue>(_decode: 'unsafe') {
   return (response: HTTPClient.Response) =>
-    Task.Async.tryCall<Return, HTTPClient.ParserError>(() => response.json(), handleError);
+    Task.tryCall<Return, HTTPClient.ParserError>(() => response.json(), handleError);
 }
 
 export function parseBlob(response: HTTPClient.Response) {
-  return Task.Async.tryCall<Blob, HTTPClient.ParserError>(() => response.blob(), handleError);
+  return Task.tryCall<Blob, HTTPClient.ParserError>(() => response.blob(), handleError);
 }
 
 export function parseText(response: HTTPClient.Response) {
-  return Task.Async.tryCall<string, HTTPClient.ParserError>(() => response.text(), handleError);
+  return Task.tryCall<string, HTTPClient.ParserError>(() => response.text(), handleError);
 }
 
 export function parseFormData(response: HTTPClient.Response) {
-  return Task.Async.tryCall<FormData, HTTPClient.ParserError>(() => response.formData(), handleError);
+  return Task.tryCall<FormData, HTTPClient.ParserError>(() => response.formData(), handleError);
 }

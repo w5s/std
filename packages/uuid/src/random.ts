@@ -20,7 +20,7 @@ const randomUUIDRef: Ref<() => UUID> = Ref<() => UUID>(
  * ```
  */
 export const randomUUID = Object.assign(
-  Task.Sync<UUID, never>(({ ok }) => ok(randomUUIDRef.current())),
+  Task<UUID, never>(({ ok }) => ok(randomUUIDRef.current())),
   {
     ref: randomUUIDRef,
   }

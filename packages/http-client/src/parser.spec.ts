@@ -12,7 +12,7 @@ const mockResponse = (): jest.Mocked<HTTPClient.Response> =>
   } as any);
 
 const expectToRejectFetchResponseError = async (
-  fn: (response: HTTPClient.Response) => Task.Async<unknown, unknown>,
+  fn: (response: HTTPClient.Response) => Task<unknown, unknown>,
   mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json'
 ) => {
   const response = mockResponse();
@@ -23,7 +23,7 @@ const expectToRejectFetchResponseError = async (
   await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPClient.ParserError({ cause: thrownError })));
 };
 const expectToResolveValue = async (
-  fn: (response: HTTPClient.Response) => Task.Async<unknown, unknown>,
+  fn: (response: HTTPClient.Response) => Task<unknown, unknown>,
   mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json'
 ) => {
   const response = mockResponse();

@@ -31,10 +31,10 @@ describe('Random', () => {
       [{ genValue: 0, min: -2, max: 2 }, -2],
       [{ genValue: 0.5, min: -2, max: 2 }, 0],
       [{ genValue: 1, min: -2, max: 2 }, 2],
-    ])('should return correct bounded values %s', ({ genValue, min, max }, expected) => {
+    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
       const gen = generatorOf(genValue);
       const genNum = Random.Generator.number(gen)(min, max);
-      expect(Result.value(Task.unsafeRun(genNum))).toBe(expected);
+      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
     });
   });
   describe(Random.Generator.int, () => {
@@ -43,10 +43,10 @@ describe('Random', () => {
       [{ genValue: 0.5, min: Int(-2), max: Int(2) }, 0],
       [{ genValue: 0.8, min: Int(-2), max: Int(2) }, 1],
       [{ genValue: 1, min: Int(-2), max: Int(2) }, 2],
-    ])('should return correct bounded values %s', ({ genValue, min, max }, expected) => {
+    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
       const gen = generatorOf(genValue);
       const genNum = Random.Generator.int(gen)(min, max);
-      expect(Result.value(Task.unsafeRun(genNum))).toBe(expected);
+      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
     });
   });
   describe(Random.Generator.boolean, () => {
@@ -56,38 +56,38 @@ describe('Random', () => {
       [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 }, true],
       [{ genValue: 1, trueWeight: 0.5 }, true],
       [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 + Number.EPSILON }, false],
-    ])('should return correct bounded values %s', ({ genValue, trueWeight }, expected) => {
+    ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
       const gen = generatorOf(genValue);
       const genBool = Random.Generator.boolean(gen)(trueWeight);
-      expect(Result.value(Task.unsafeRun(genBool))).toBe(expected);
+      expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
     });
   });
   describe('defaultGenerator', () => {
-    test('should use Math.random', () => {
+    test('should use Math.random', async () => {
       const nextRandom = 0.123;
       jest.spyOn(Math, 'random').mockReturnValue(nextRandom);
-      expect(Result.value(Task.unsafeRun(Random.defaultGenerator))).toBe(nextRandom);
+      expect(Task.unsafeRun(Random.defaultGenerator)).toEqual(Result.Ok(nextRandom));
     });
   });
   describe('.number', () => {
-    test('should use defaultGenerator', () => {
+    test('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Result.value(Task.unsafeRun(Random.number(-2, 2)))).toBe(-1.508);
+      expect(Task.unsafeRun(Random.number(-2, 2))).toEqual(Result.Ok(-1.508));
     });
   });
   describe('.int', () => {
-    test('should use defaultGenerator', () => {
+    test('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Result.value(Task.unsafeRun(Random.int(Int(-10), Int(10))))).toBe(-8);
+      expect(Task.unsafeRun(Random.int(Int(-10), Int(10)))).toEqual(Result.Ok(-8));
     });
   });
   describe('.boolean', () => {
-    test('should use defaultGenerator', () => {
+    test('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Result.value(Task.unsafeRun(Random.boolean()))).toBe(false);
+      expect(Task.unsafeRun(Random.boolean())).toEqual(Result.Ok(false));
     });
   });
 });

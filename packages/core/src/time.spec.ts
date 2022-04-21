@@ -53,7 +53,7 @@ describe(Time, () => {
     });
   });
   describe('now', () => {
-    test('should return Date.now()', () => {
+    test('should return Date.now()', async () => {
       const nowMs = 123;
       jest.spyOn(Date, 'now').mockReturnValue(nowMs);
       expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(123));

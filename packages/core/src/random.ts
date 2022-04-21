@@ -29,7 +29,7 @@ export namespace Random {
     }
   }
 
-  export interface Generator extends Task.Sync<Random.Value, never> {}
+  export interface Generator extends Task<Random.Value, never> {}
 
   /**
    * Return a new generator from a callback
@@ -43,7 +43,7 @@ export namespace Random {
    * @param getNextValue an impure function that returns a new value
    */
   export function Generator(getNextValue: () => Random.Value): Generator {
-    return Task.Sync(({ ok }) => ok(getNextValue()));
+    return Task(({ ok }) => ok(getNextValue()));
   }
   export namespace Generator {
     const floor = (value: number) => Math.floor(value) as Int;
@@ -62,7 +62,7 @@ export namespace Random {
      * @param generator a base random generator
      */
     export function number(generator: Generator) {
-      return (min: number, max: number): Task.Sync<number, never> =>
+      return (min: number, max: number): Task<number, never> =>
         Task.map(generator, (value) => min + (max - min) * value);
     }
 
@@ -95,7 +95,7 @@ export namespace Random {
      * @param generator a base random generator
      */
     export function boolean(generator: Generator) {
-      return (trueWeight = 0.5): Task.Sync<boolean, never> => Task.map(generator, (_) => _ > trueWeight);
+      return (trueWeight = 0.5): Task<boolean, never> => Task.map(generator, (_) => _ > trueWeight);
     }
   }
 

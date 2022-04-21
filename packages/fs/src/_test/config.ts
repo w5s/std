@@ -19,7 +19,7 @@ export const withTmpDirectory =
     }
   };
 
-export const expectTask = <Type extends 'sync' | 'async', Value, Error>(t: Task<Type, Value, Error>) => ({
+export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
   get result() {
     return expect(Task.unsafeRun(t));
   },
