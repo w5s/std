@@ -10,7 +10,7 @@ export const ErrnoException = {
   },
 };
 
-export function taskCreator<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
+export function taskCreator<A extends unknown[], R>(fn: (...args: A) => R | Promise<R>) {
   return (...args: A) =>
     Task(async ({ ok, error }) => {
       try {
