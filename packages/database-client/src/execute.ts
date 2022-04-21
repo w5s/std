@@ -10,7 +10,7 @@ import { DatabaseClientError } from './error.js';
  * @example
  * ```typescript
  * const query = executeQuery(client, SQLQuery.CreateTable({ tableName: 'test_table' }))
- * const result = await runTask(query);
+ * const result = await Task.unsafeRun(query);
  * if (Result.isOk(result)) {
  *   console.log(result.value)
  * } else {
