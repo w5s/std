@@ -2,15 +2,13 @@ import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 
-// private constructors
-const TaskResult = Object.freeze({
-  ok<V>(value: V): Result<V, never> {
-    return { _type: 'Result/Ok', value };
-  },
-  error<E>(error: E): Result<never, E> {
-    return { _type: 'Result/Error', error };
-  },
-});
+// inline private constructors
+function createOk<V>(value: V): Result<V, never> {
+  return { _type: 'Result/Ok', value };
+}
+function createError<E>(error: E): Result<never, E> {
+  return { _type: 'Result/Error', error };
+}
 
 /**
  * Base type for Task
@@ -66,8 +64,8 @@ export function Task<Value, Error = never>(
   return Task.wrap((_resolve, _reject, cancelerRef) => {
     cancelerRef.current = Task.defaultCanceler;
     const resultOrPromise = sideEffect({
-      ok: TaskResult.ok,
-      error: TaskResult.error,
+      ok: createOk,
+      error: createError,
       onCancel: (canceler) => {
         cancelerRef.current = canceler;
       },
@@ -336,8 +334,8 @@ export namespace Task {
     };
     let rejectHandler = (_error: unknown) => {};
     const runValue: void | Promise<void> = task[Task.run](
-      (value) => resolveHandler(TaskResult.ok(value)),
-      (error) => resolveHandler(TaskResult.error(error)),
+      (value) => resolveHandler(createOk(value)),
+      (error) => resolveHandler(createError(error)),
       cancelerRef
     );
     // Try to catch promise errors
