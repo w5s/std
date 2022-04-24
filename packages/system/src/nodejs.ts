@@ -43,6 +43,18 @@ export function errnoExceptionHandler(error: unknown): FileError {
       });
 }
 
+export const readdir = taskCreator<
+  [
+    path: nodeFS.PathLike,
+    options?:
+      | (nodeFS.ObjectEncodingOptions & {
+          withFileTypes?: false | undefined;
+        })
+      | BufferEncoding
+      | null
+  ],
+  string[]
+>(nodeFS.promises.readdir);
 export const rm = taskCreator(nodeFS.promises.rm);
 export const rename = taskCreator(nodeFS.promises.rename);
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
