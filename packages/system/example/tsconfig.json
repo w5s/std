@@ -7,8 +7,8 @@
       "@w5s/core": [
         "./core"
       ],
-      "@w5s/fs": [
-        "./fs"
+      "@w5s/system": [
+        "./system"
       ]
     }
   },
