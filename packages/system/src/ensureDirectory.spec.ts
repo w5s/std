@@ -5,11 +5,11 @@ import { expectFile, expectTask, withTmpDirectory } from './_test/config.js';
 describe(ensureDirectory, () => {
   test(
     'should work for existing and non existing files',
-    withTmpDirectory(async ({ path }) => {
-      const testDir = path('test');
+    withTmpDirectory(async ({ filePath }) => {
+      const ensuredDir = filePath('test');
 
-      await expectTask(ensureDirectory(testDir)).resolves.toEqual(Result.Ok(undefined));
-      await expectFile(testDir).toExist();
+      await expectTask(ensureDirectory(ensuredDir)).resolves.toEqual(Result.Ok(undefined));
+      await expectFile(ensuredDir).toExist();
     })
   );
 });
