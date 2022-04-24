@@ -1,22 +1,22 @@
 {
-  "name": "@w5s/fs",
+  "name": "@w5s/system",
   "version": "1.0.0-alpha.0",
   "private": true,
-  "description": "Filesystem",
+  "description": "System module for w5s",
   "keywords": [
     "fp",
     "functional",
     "task",
     "fs"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/fs#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/system#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/w5s/std.git",
-    "directory": "packages/fs"
+    "directory": "packages/system"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

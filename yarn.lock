@@ -3060,17 +3060,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/fs@workspace:packages/fs":
-  version: 0.0.0-use.local
-  resolution: "@w5s/fs@workspace:packages/fs"
-  dependencies:
-    "@types/node": ^17.0.21
-    "@w5s/core": ^1.0.0-alpha.0
-  peerDependencies:
-    typescript: ^3.8.0 || ^4.0.0
-  languageName: unknown
-  linkType: soft
-
 "@w5s/http-client@workspace:packages/http-client":
   version: 0.0.0-use.local
   resolution: "@w5s/http-client@workspace:packages/http-client"
@@ -3092,6 +3081,17 @@ __metadata:
   checksum: 277d31ceddaddfdaacd43a27ee8ad3e0d81305e62b343d81808ef5d386e576c9859507556ca97c70d057cc2a6b5d14ed39f637113a19bc960b173e389ee85edc
   languageName: node
   linkType: hard
+
+"@w5s/system@workspace:packages/system":
+  version: 0.0.0-use.local
+  resolution: "@w5s/system@workspace:packages/system"
+  dependencies:
+    "@types/node": ^17.0.21
+    "@w5s/core": ^1.0.0-alpha.0
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0
+  languageName: unknown
+  linkType: soft
 
 "@w5s/ts-config@npm:1.0.0-alpha.6":
   version: 1.0.0-alpha.6
