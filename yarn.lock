@@ -1119,9 +1119,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "@eslint/eslintrc@npm:1.2.1"
+"@eslint/eslintrc@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@eslint/eslintrc@npm:1.2.2"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
@@ -1132,7 +1132,7 @@ __metadata:
     js-yaml: ^4.1.0
     minimatch: ^3.0.4
     strip-json-comments: ^3.1.1
-  checksum: 1f797b9f94d71b965992cf6c44e3bcb574643014fd1e3d4862d25056bd5568f59c488461a7e9a1c1758ca7f0def5d3cb69c3d8b38581bcf4a53af74371243797
+  checksum: d891036bbffb0efec1462aa4a603ed6e349d546b1632dde7d474ddd15c2a8b6895671b25293f1d3ba10ff629c24a3649ad049373fe695a0e44b612537088563c
   languageName: node
   linkType: hard
 
@@ -2989,19 +2989,19 @@ __metadata:
     "@w5s/ts-config": 1.0.0-alpha.6
     cspell: 5.19.7
     es-jest: 1.5.0
-    eslint: 8.13.0
+    eslint: 8.14.0
     husky: 7.0.4
     is-ci: 3.0.1
     jest: 27.5.1
     lerna: 4.0.0
-    lint-staged: 12.3.8
+    lint-staged: 12.4.0
     markdown-magic: 2.6.0
     markdown-magic-package-json: 2.0.2
     markdown-magic-subpackage-list: 1.1.2
     mrm: 4.0.0
     npm-run-all: 4.1.5
     prettier: 2.6.2
-    turbo: 1.2.4
+    turbo: 1.2.5
     typedoc: 0.22.15
     typescript: 4.6.3
   languageName: unknown
@@ -5914,11 +5914,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:8.13.0":
-  version: 8.13.0
-  resolution: "eslint@npm:8.13.0"
+"eslint@npm:8.14.0":
+  version: 8.14.0
+  resolution: "eslint@npm:8.14.0"
   dependencies:
-    "@eslint/eslintrc": ^1.2.1
+    "@eslint/eslintrc": ^1.2.2
     "@humanwhocodes/config-array": ^0.9.2
     ajv: ^6.10.0
     chalk: ^4.0.0
@@ -5955,7 +5955,7 @@ __metadata:
     v8-compile-cache: ^2.0.3
   bin:
     eslint: bin/eslint.js
-  checksum: bc7d2fc9a046d42cb2c8987573ecaf534c1fae14747c4695e32388e179c5f21b83eefdb3e4f35924bf76152e226d7cc9dfb21f12348baf12c803109005b17439
+  checksum: 87d2e3e5eb93216d4ab36006e7b8c0bfad02f40b0a0f193f1d42754512cd3a9d8244152f1c69df5db2e135b3c4f1c10d0ed2f0881fe8a8c01af55465968174c1
   languageName: node
   linkType: hard
 
@@ -8795,9 +8795,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:12.3.8":
-  version: 12.3.8
-  resolution: "lint-staged@npm:12.3.8"
+"lint-staged@npm:12.4.0":
+  version: 12.4.0
+  resolution: "lint-staged@npm:12.4.0"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -8815,7 +8815,7 @@ __metadata:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: af6a89ae4244e4eac7180c6e7da452f378fd156ff38eaa666ecbb78f1e2efb7f1a9fc766dcc1cdde2bd76e03da68e602056ca9d2f1c6e46cf10aa83d20bf4d49
+  checksum: e25b273a73b79f224ff1ccb22432c34a9050fe8318b9cf7e08c748e2efc80e1f48ed4f2aa61cd16a701bb7fd6323ecf0d94a497c97732db04f2b5382d6b70131
   languageName: node
   linkType: hard
 
@@ -12995,106 +12995,106 @@ __metadata:
   languageName: node
   linkType: hard
 
-"turbo-darwin-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-darwin-64@npm:1.2.4"
+"turbo-darwin-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-darwin-64@npm:1.2.5"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-darwin-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-darwin-arm64@npm:1.2.4"
+"turbo-darwin-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-darwin-arm64@npm:1.2.5"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-freebsd-64@npm:1.2.4"
+"turbo-freebsd-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-freebsd-64@npm:1.2.5"
   conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-freebsd-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-freebsd-arm64@npm:1.2.4"
+"turbo-freebsd-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-freebsd-arm64@npm:1.2.5"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-32@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-32@npm:1.2.4"
+"turbo-linux-32@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-32@npm:1.2.5"
   conditions: os=linux & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-linux-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-64@npm:1.2.4"
+"turbo-linux-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-64@npm:1.2.5"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-arm64@npm:1.2.4"
+"turbo-linux-arm64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-arm64@npm:1.2.5"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"turbo-linux-arm@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-arm@npm:1.2.4"
+"turbo-linux-arm@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-arm@npm:1.2.5"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"turbo-linux-mips64le@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-mips64le@npm:1.2.4"
+"turbo-linux-mips64le@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-mips64le@npm:1.2.5"
   conditions: os=linux & cpu=mips64el
   languageName: node
   linkType: hard
 
-"turbo-linux-ppc64le@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-linux-ppc64le@npm:1.2.4"
+"turbo-linux-ppc64le@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-linux-ppc64le@npm:1.2.5"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
-"turbo-windows-32@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-windows-32@npm:1.2.4"
+"turbo-windows-32@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-windows-32@npm:1.2.5"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
-"turbo-windows-64@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo-windows-64@npm:1.2.4"
+"turbo-windows-64@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo-windows-64@npm:1.2.5"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"turbo@npm:1.2.4":
-  version: 1.2.4
-  resolution: "turbo@npm:1.2.4"
+"turbo@npm:1.2.5":
+  version: 1.2.5
+  resolution: "turbo@npm:1.2.5"
   dependencies:
-    turbo-darwin-64: 1.2.4
-    turbo-darwin-arm64: 1.2.4
-    turbo-freebsd-64: 1.2.4
-    turbo-freebsd-arm64: 1.2.4
-    turbo-linux-32: 1.2.4
-    turbo-linux-64: 1.2.4
-    turbo-linux-arm: 1.2.4
-    turbo-linux-arm64: 1.2.4
-    turbo-linux-mips64le: 1.2.4
-    turbo-linux-ppc64le: 1.2.4
-    turbo-windows-32: 1.2.4
-    turbo-windows-64: 1.2.4
+    turbo-darwin-64: 1.2.5
+    turbo-darwin-arm64: 1.2.5
+    turbo-freebsd-64: 1.2.5
+    turbo-freebsd-arm64: 1.2.5
+    turbo-linux-32: 1.2.5
+    turbo-linux-64: 1.2.5
+    turbo-linux-arm: 1.2.5
+    turbo-linux-arm64: 1.2.5
+    turbo-linux-mips64le: 1.2.5
+    turbo-linux-ppc64le: 1.2.5
+    turbo-windows-32: 1.2.5
+    turbo-windows-64: 1.2.5
   dependenciesMeta:
     turbo-darwin-64:
       optional: true
@@ -13122,7 +13122,7 @@ __metadata:
       optional: true
   bin:
     turbo: bin/turbo
-  checksum: a68362a1722136b4d26c9217b7da5272ea6d82b70a7855f4c2260d02aac402bbf0c866dcbd7e55a040b4327107e70dbfd357550042c02b601669477788385711
+  checksum: cba41a5c0e586f47f30e37424a112923fab5b29fda84bf6e28dfd56e981babc3787b3c1ce487bcff1feb828045ea0369f9ec5b32b495778285aa0983d417693c
   languageName: node
   linkType: hard
 
