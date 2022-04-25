@@ -62,7 +62,7 @@ export function Task<Value, Error = never>(
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return Task.wrap((_resolve, _reject, cancelerRef) => {
-    cancelerRef.current = Task.defaultCanceler;
+    resetCanceler(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: createOk,
       error: createError,
@@ -81,6 +81,9 @@ export function Task<Value, Error = never>(
   });
 }
 export namespace Task {
+  type ValueType<T> = T extends Task<infer V, any> ? V : never;
+  type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
+
   /**
    * String symbol to contain the execution of the side effect.
    * It is long to discourage the direct use of `task['Task/run']()`
@@ -126,6 +129,71 @@ export namespace Task {
     return {
       [run]: taskRun,
     };
+  }
+
+  /**
+   * Resolves with the array of all task values, or reject with the first error
+   *
+   * @example
+   * ```typescript
+   * const success = Task.all([
+   *   Task.resolve(1),
+   *   Task.resolve(2),
+   * ]);
+   * const successResult = Task.unsafeRun(task);// Result.Ok([1, 2])
+   *
+   * const failure = Task.all([
+   *   Task.resolve(1),
+   *   Task.reject('error'),
+   * ]);
+   * const failureResult = Task.unsafeRun(task);// Result.Error('error')
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
+  export function all<T extends readonly Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
+  export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
+  export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
+    return Task.wrap((taskResolve, taskReject, cancelerRef) => {
+      const taskArray = Array.from(tasks).map((task) => ({
+        task,
+        cancelerRef: { current: defaultCanceler },
+      }));
+      const taskCount = taskArray.length;
+
+      // Set taskArrayCancel as global canceler
+      const taskArrayCancel = () => taskArray.forEach((task) => triggerCanceler(task.cancelerRef));
+      cancelerRef.current = taskArrayCancel;
+
+      let taskFinished = 0;
+      // eslint-disable-next-line unicorn/no-new-array
+      const values = new Array<Value | undefined>(taskCount);
+
+      taskArray.forEach(({ task, cancelerRef: cancel }, taskIndex) => {
+        task[run](
+          (value: Value) => {
+            values[taskIndex] = value;
+            taskFinished += 1;
+            if (taskFinished === taskCount) {
+              taskResolve(values as ReadonlyArray<Value>);
+            }
+          },
+          (error: Error) => {
+            if (taskFinished < taskCount) {
+              taskFinished = taskCount;
+              taskReject(error);
+
+              // unset canceler
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              resetCanceler(taskArray[taskIndex]!.cancelerRef);
+              taskArrayCancel();
+            }
+          },
+          cancel
+        );
+      });
+    });
   }
 
   /**
@@ -361,4 +429,11 @@ function isPromiseLike<V>(anyValue: unknown): anyValue is PromiseLike<V> {
 }
 function isPromise<V>(anyValue: unknown): anyValue is Promise<V> {
   return isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
+}
+function resetCanceler(cancelerRef: Ref<Task.Canceler>) {
+  cancelerRef.current = Task.defaultCanceler;
+}
+function triggerCanceler(cancelerRef: Ref<Task.Canceler>) {
+  cancelerRef.current();
+  resetCanceler(cancelerRef);
 }

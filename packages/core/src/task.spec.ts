@@ -15,7 +15,7 @@ const waitMs = (ms: number) =>
         setTimeout(() => resolve(), ms);
       });
 
-const generateTask = <V, E>(
+const generateTask = <V, E = never>(
   options: {
     async?: boolean | undefined;
     cancel?: () => void;
@@ -284,6 +284,71 @@ describe('Task', () => {
         );
         expect(Ref.read(ref)).toBe(canceler);
       });
+    });
+  });
+  describe(Task.all, () => {
+    test('should reject first error', async () => {
+      const allTask = Task.all([
+        generateTask({ async: true, value: 'value1' }),
+        generateTask({ async: true, error: 'error1' }),
+        generateTask({ async: true, value: 'value2' }),
+        generateTask({ async: true, error: 'error2' }),
+      ]);
+      await ExpectTask.toReject(allTask, 'error1');
+    });
+
+    test('should cancel other tasks', async () => {
+      const taskCount = 4;
+      const cancelers = Array.from({ length: taskCount }, () => jest.fn());
+
+      const allTask = Task.all(
+        cancelers.map((canceler, cancelerIndex) =>
+          cancelerIndex === 0
+            ? generateTask({ async: true, error: `error${cancelerIndex}`, cancel: canceler, delay: 100 })
+            : generateTask({ async: true, value: `value${cancelerIndex}`, cancel: canceler })
+        )
+      );
+      await ExpectTask.toReject(allTask, 'error0');
+
+      cancelers.forEach((canceler, cancelerIndex) => {
+        expect(canceler).toHaveBeenCalledTimes(cancelerIndex === 0 ? 0 : 1);
+      });
+    });
+    test('should cancel every tasks when canceled', async () => {
+      const taskCount = 4;
+      const cancels = Array.from({ length: taskCount }, () => jest.fn());
+
+      const allTask = Task.all(
+        cancels.map((cancel, cancelIndex) =>
+          generateTask({ async: true, value: `value${cancelIndex}`, cancel, delay: 2 })
+        )
+      );
+      const report = await ExpectTask.run(allTask);
+      report.cancelerRef.current();
+
+      cancels.forEach((cancel) => {
+        expect(cancel).toHaveBeenCalledTimes(1);
+      });
+    });
+    test('should resolve array of values', async () => {
+      const allTask = Task.all([
+        generateTask<'value1', 'error1'>({ async: true, value: 'value1' }),
+        generateTask<'value2', 'error2'>({ async: true, value: 'value2' }),
+        generateTask<'value3', 'error3'>({ async: true, value: 'value3' }),
+      ]);
+      assertType<typeof allTask, Task<['value1', 'value2', 'value3'], 'error1' | 'error2' | 'error3'>>(true);
+      await ExpectTask.toResolve(allTask, ['value1', 'value2', 'value3']);
+    });
+    test('should handle iterable values', async () => {
+      const taskArray = [
+        generateTask({ async: true, value: 'value1' }),
+        generateTask({ async: true, value: 'value2' }),
+        generateTask({ async: true, value: 'value3' }),
+      ];
+      const allTask = Task.all({
+        [Symbol.iterator]: () => taskArray[Symbol.iterator](),
+      });
+      await ExpectTask.toResolve(allTask, ['value1', 'value2', 'value3']);
     });
   });
   describe(Task.map, () => {
