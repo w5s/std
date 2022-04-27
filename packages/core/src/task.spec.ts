@@ -18,18 +18,18 @@ const waitMs = (ms: number) =>
 const generateTask = <V, E = never>(
   options: {
     async?: boolean | undefined;
-    cancel?: () => void;
+    canceler?: () => void;
     delay?: number;
   } & ({ value: V } | { error: E })
 ) => {
-  const { cancel = () => {}, async } = options;
+  const { canceler = () => {}, async } = options;
 
   return async !== true
     ? Task<V, E>(({ ok: resultOk, error: resultError }) =>
         'value' in options ? resultOk(options.value) : resultError(options.error)
       )
     : Task<V, E>(async ({ ok: resultOk, error: resultError, onCancel }) => {
-        onCancel(cancel);
+        onCancel(canceler);
         await waitMs(options.delay ?? 0);
         return 'value' in options ? resultOk(options.value) : resultError(options.error);
       });
@@ -299,35 +299,39 @@ describe('Task', () => {
 
     test('should cancel other tasks', async () => {
       const taskCount = 4;
-      const cancelers = Array.from({ length: taskCount }, () => jest.fn());
-
-      const allTask = Task.all(
-        cancelers.map((canceler, cancelerIndex) =>
-          cancelerIndex === 0
-            ? generateTask({ async: true, error: `error${cancelerIndex}`, cancel: canceler, delay: 100 })
-            : generateTask({ async: true, value: `value${cancelerIndex}`, cancel: canceler })
-        )
-      );
+      const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
+        const canceler = jest.fn();
+        return {
+          task:
+            taskIndex === 0
+              ? generateTask({ async: true, error: `error${taskIndex}`, canceler })
+              : generateTask({ async: true, value: `value${taskIndex}`, canceler, delay: 100 }),
+          canceler,
+        };
+      });
+      const allTask = Task.all(taskData.map((_) => _.task));
       await ExpectTask.toReject(allTask, 'error0');
 
-      cancelers.forEach((canceler, cancelerIndex) => {
+      taskData.forEach(({ canceler }, cancelerIndex) => {
         expect(canceler).toHaveBeenCalledTimes(cancelerIndex === 0 ? 0 : 1);
       });
     });
     test('should cancel every tasks when canceled', async () => {
       const taskCount = 4;
-      const cancels = Array.from({ length: taskCount }, () => jest.fn());
+      const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
+        const canceler = jest.fn();
+        return {
+          task: generateTask({ async: true, value: `value${taskIndex}`, canceler, delay: 2 }),
+          canceler,
+        };
+      });
 
-      const allTask = Task.all(
-        cancels.map((cancel, cancelIndex) =>
-          generateTask({ async: true, value: `value${cancelIndex}`, cancel, delay: 2 })
-        )
-      );
+      const allTask = Task.all(taskData.map((_) => _.task));
       const report = await ExpectTask.run(allTask);
       report.cancelerRef.current();
 
-      cancels.forEach((cancel) => {
-        expect(cancel).toHaveBeenCalledTimes(1);
+      taskData.forEach(({ canceler }) => {
+        expect(canceler).toHaveBeenCalledTimes(1);
       });
     });
     test('should resolve array of values', async () => {
