@@ -131,6 +131,62 @@ export namespace Task {
     };
   }
 
+  class TaskAggregateState<Value, Error> {
+    readonly tasks: ReadonlyArray<
+      Readonly<{
+        task: Task<Value, Error>;
+        cancelerRef: Ref<Canceler>;
+      }>
+    >;
+
+    readonly taskCount: number;
+
+    taskFinished = 0;
+
+    constructor(tasks: Iterable<Task<Value, Error>>) {
+      this.tasks = Array.from(tasks).map((task) => ({
+        task,
+        cancelerRef: { current: defaultCanceler },
+      }));
+      this.taskCount = this.tasks.length;
+    }
+
+    isFinished() {
+      return this.taskFinished === this.taskCount;
+    }
+
+    finish() {
+      this.taskFinished = this.taskCount;
+    }
+
+    cancelAll() {
+      this.tasks.forEach((task) => triggerCanceler(task.cancelerRef));
+    }
+
+    runAll(
+      resolveTask: (value: Value, entry: typeof this.tasks[0], index: number) => void,
+      rejectTask: (error: Error, entry: typeof this.tasks[0], index: number) => void
+    ) {
+      this.tasks.forEach((entry, taskIndex) => {
+        entry.task[run](
+          (value: Value) => {
+            if (!this.isFinished()) {
+              this.taskFinished += 1;
+              resolveTask(value, entry, taskIndex);
+            }
+          },
+          (error: Error) => {
+            if (!this.isFinished()) {
+              this.taskFinished += 1;
+              rejectTask(error, entry, taskIndex);
+            }
+          },
+          entry.cancelerRef
+        );
+      });
+    }
+  }
+
   /**
    * Resolves with the array of all task values, or reject with the first error
    *
@@ -155,44 +211,62 @@ export namespace Task {
   ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
-    return Task.wrap((taskResolve, taskReject, cancelerRef) => {
-      const taskArray = Array.from(tasks).map((task) => ({
-        task,
-        cancelerRef: { current: defaultCanceler },
-      }));
-      const taskCount = taskArray.length;
+    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // Set global canceler
+      taskCancelerRef.current = state.cancelAll.bind(state);
 
-      // Set taskArrayCancel as global canceler
-      const taskArrayCancel = () => taskArray.forEach((task) => triggerCanceler(task.cancelerRef));
-      cancelerRef.current = taskArrayCancel;
-
-      let taskFinished = 0;
       // eslint-disable-next-line unicorn/no-new-array
-      const values = new Array<Value | undefined>(taskCount);
+      const values = new Array<Value | undefined>(state.taskCount);
+      state.runAll(
+        (value, entry, index) => {
+          values[index] = value;
+          if (state.isFinished()) {
+            taskResolve(values as ReadonlyArray<Value>);
+          }
+        },
+        (error: Error, entry) => {
+          if (!state.isFinished()) {
+            state.finish();
+            taskReject(error);
+            // cancel all but the current task
+            resetCanceler(entry.cancelerRef);
+            state.cancelAll();
+          }
+        }
+      );
+    });
+  }
 
-      taskArray.forEach(({ task, cancelerRef: cancel }, taskIndex) => {
-        task[run](
-          (value: Value) => {
-            values[taskIndex] = value;
-            taskFinished += 1;
-            if (taskFinished === taskCount) {
-              taskResolve(values as ReadonlyArray<Value>);
-            }
-          },
-          (error: Error) => {
-            if (taskFinished < taskCount) {
-              taskFinished = taskCount;
-              taskReject(error);
+  export function any<T extends readonly Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<ValueType<T[keyof T]>, { [K in keyof T]: ErrorType<T[K]> }>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, ReadonlyArray<Error>>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, ReadonlyArray<Error>> {
+    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // Set global canceler
+      taskCancelerRef.current = state.cancelAll.bind(state);
 
-              // unset canceler
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              resetCanceler(taskArray[taskIndex]!.cancelerRef);
-              taskArrayCancel();
-            }
-          },
-          cancel
-        );
-      });
+      // eslint-disable-next-line unicorn/no-new-array
+      const errors = new Array<Error | undefined>(state.taskCount);
+      state.runAll(
+        (value, entry) => {
+          if (!state.isFinished()) {
+            state.finish();
+            taskResolve(value);
+            // cancel all but the current task
+            resetCanceler(entry.cancelerRef);
+            state.cancelAll();
+          }
+        },
+        (error, entry, index) => {
+          errors[index] = error;
+          if (state.isFinished()) {
+            taskReject(errors as ReadonlyArray<Error>);
+          }
+        }
+      );
     });
   }
 
