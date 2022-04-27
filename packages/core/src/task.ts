@@ -238,6 +238,25 @@ export namespace Task {
     });
   }
 
+  /**
+   * Resolves with the first value, or reject with an aggregated error
+   *
+   * @example
+   * ```typescript
+   * const success = Task.any([
+   *   Task.reject(1),
+   *   Task.resolve(2),
+   * ]);
+   * const successResult = Task.unsafeRun(task);// Result.Ok(2)
+   *
+   * const failure = Task.any([
+   *   Task.reject('error1'),
+   *   Task.reject('error2'),
+   * ]);
+   * const failureResult = Task.unsafeRun(task);// Result.Error(['error1', 'error2'])
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
   export function any<T extends readonly Task<any, any>[]>(
     tasks: [...T]
   ): Task<ValueType<T[keyof T]>, { [K in keyof T]: ErrorType<T[K]> }>;
