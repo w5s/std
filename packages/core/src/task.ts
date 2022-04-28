@@ -1,6 +1,7 @@
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
+import { AggregateError } from './error.js';
 
 // inline private constructors
 function createOk<V>(value: V): Result<V, never> {
@@ -257,11 +258,11 @@ export namespace Task {
    * ```
    * @param tasks tasks to be run in parallel
    */
-  export function any<T extends readonly Task<any, any>[]>(
+  export function any<T extends Task<any, any>[]>(
     tasks: [...T]
-  ): Task<ValueType<T[keyof T]>, { [K in keyof T]: ErrorType<T[K]> }>;
-  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, ReadonlyArray<Error>>;
-  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, ReadonlyArray<Error>> {
+  ): Task<ValueType<T[keyof T]>, AggregateError<{ [K in keyof T]: ErrorType<T[K]> }>>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
     return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
       const state = new TaskAggregateState(tasks);
       // Set global canceler
@@ -282,7 +283,7 @@ export namespace Task {
         (error, entry, index) => {
           errors[index] = error;
           if (state.isFinished()) {
-            taskReject(errors as ReadonlyArray<Error>);
+            taskReject(AggregateError({ errors: errors as Error[] }));
           }
         }
       );

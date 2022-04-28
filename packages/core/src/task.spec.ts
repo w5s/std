@@ -1,6 +1,7 @@
 /* eslint-disable jest/no-export */
 /* eslint-disable max-classes-per-file */
 import { assertType } from './assert.js';
+import { AggregateError } from './error.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
 import { Task } from './task.js';
@@ -414,8 +415,10 @@ describe('Task', () => {
         generateTask<'value2', 'error2'>({ async: true, error: 'error2' }),
         generateTask<'value3', 'error3'>({ async: true, error: 'error3' }),
       ]);
-      assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', ['error1', 'error2', 'error3']>>(true);
-      await ExpectTask.toReject(anyTask, ['error1', 'error2', 'error3']);
+      assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
+        true
+      );
+      await ExpectTask.toReject(anyTask, AggregateError({ errors: ['error1', 'error2', 'error3'] }));
     });
     test('should handle iterable values', async () => {
       const taskArray = [
