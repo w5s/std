@@ -5,6 +5,7 @@ describe('FileSystem', () => {
     expect(Object.keys(FileSystem).sort()).toEqual(
       [
         // List of all public exports
+        'emptyDirectory',
         'ensureDirectory',
       ].sort()
     );
