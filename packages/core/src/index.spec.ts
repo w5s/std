@@ -6,6 +6,7 @@ describe('index', () => {
       [
         'Math',
         'Array',
+        'AggregateError',
         'assertNever',
         'assertType',
         'assign',

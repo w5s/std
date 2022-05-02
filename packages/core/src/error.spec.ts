@@ -1,5 +1,5 @@
 import { DataObject } from './data.js';
-import { DataError } from './error.js';
+import { AggregateError, DataError } from './error.js';
 
 describe(DataError, () => {
   const anyString = 'AnyString';
@@ -112,5 +112,18 @@ describe(DataError, () => {
         expect(TestError.hasInstance(TestError({ email: '' }))).toBe(true);
       });
     });
+  });
+});
+describe(AggregateError, () => {
+  test('should return instance of Error', () => {
+    const errors = ['foo'];
+    expect(AggregateError({ errors, message: 'my message' })).toEqual(
+      expect.objectContaining({
+        _type: 'DataError',
+        name: 'AggregateError',
+        message: 'my message',
+        errors,
+      })
+    );
   });
 });

@@ -172,6 +172,18 @@ export namespace DataError {
   }
 }
 
+export interface AggregateError<Errors extends any[]>
+  extends DataError<{
+    name: 'AggregateError';
+    errors: Readonly<[...Errors]>;
+  }> {}
+export const AggregateError = DataError.MakeGeneric(
+  'AggregateError',
+  (create) =>
+    <T extends any[]>(params: DataError.Parameters<AggregateError<T>>): AggregateError<T> =>
+      create(params)
+);
+
 function setDefaultValue<O extends Record<any, any>, K extends keyof O>(object: O, name: K, defaultValue: O[K]) {
   if (!(name in object)) {
     object[name] = defaultValue;

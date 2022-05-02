@@ -1,16 +1,15 @@
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
+import { AggregateError } from './error.js';
 
-// private constructors
-const TaskResult = Object.freeze({
-  ok<V>(value: V): Result<V, never> {
-    return { _type: 'Result/Ok', value };
-  },
-  error<E>(error: E): Result<never, E> {
-    return { _type: 'Result/Error', error };
-  },
-});
+// inline private constructors
+function createOk<V>(value: V): Result<V, never> {
+  return { _type: 'Result/Ok', value };
+}
+function createError<E>(error: E): Result<never, E> {
+  return { _type: 'Result/Error', error };
+}
 
 /**
  * Base type for Task
@@ -64,10 +63,10 @@ export function Task<Value, Error = never>(
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return Task.wrap((_resolve, _reject, cancelerRef) => {
-    cancelerRef.current = Task.defaultCanceler;
+    resetCanceler(cancelerRef);
     const resultOrPromise = sideEffect({
-      ok: TaskResult.ok,
-      error: TaskResult.error,
+      ok: createOk,
+      error: createError,
       onCancel: (canceler) => {
         cancelerRef.current = canceler;
       },
@@ -83,6 +82,9 @@ export function Task<Value, Error = never>(
   });
 }
 export namespace Task {
+  type ValueType<T> = T extends Task<infer V, any> ? V : never;
+  type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
+
   /**
    * String symbol to contain the execution of the side effect.
    * It is long to discourage the direct use of `task['Task/run']()`
@@ -128,6 +130,208 @@ export namespace Task {
     return {
       [run]: taskRun,
     };
+  }
+
+  class TaskAggregateState<Value, Error> {
+    readonly tasks: ReadonlyArray<
+      Readonly<{
+        task: Task<Value, Error>;
+        cancelerRef: Ref<Canceler>;
+      }>
+    >;
+
+    readonly taskCount: number;
+
+    taskFinished = 0;
+
+    constructor(tasks: Iterable<Task<Value, Error>>) {
+      this.tasks = Array.from(tasks).map((task) => ({
+        task,
+        cancelerRef: { current: defaultCanceler },
+      }));
+      this.taskCount = this.tasks.length;
+    }
+
+    isFinished() {
+      return this.taskFinished === this.taskCount;
+    }
+
+    finish() {
+      this.taskFinished = this.taskCount;
+    }
+
+    cancelAll() {
+      this.tasks.forEach((task) => triggerCanceler(task.cancelerRef));
+    }
+
+    runAll(
+      resolveTask: (value: Value, entry: typeof this.tasks[0], index: number) => void,
+      rejectTask: (error: Error, entry: typeof this.tasks[0], index: number) => void
+    ) {
+      this.tasks.forEach((entry, taskIndex) => {
+        entry.task[run](
+          (value: Value) => {
+            if (!this.isFinished()) {
+              this.taskFinished += 1;
+              resolveTask(value, entry, taskIndex);
+            }
+          },
+          (error: Error) => {
+            if (!this.isFinished()) {
+              this.taskFinished += 1;
+              rejectTask(error, entry, taskIndex);
+            }
+          },
+          entry.cancelerRef
+        );
+      });
+    }
+  }
+
+  /**
+   * Resolves with the array of all task values, or reject with the first error
+   *
+   * @example
+   * ```typescript
+   * const success = Task.all([
+   *   Task.resolve(1),
+   *   Task.resolve(2),
+   * ]);
+   * const successResult = Task.unsafeRun(success);// Result.Ok([1, 2])
+   *
+   * const failure = Task.all([
+   *   Task.resolve(1),
+   *   Task.reject('error'),
+   * ]);
+   * const failureResult = Task.unsafeRun(failure);// Result.Error('error')
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
+  export function all<T extends readonly Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
+  export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
+  export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
+    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // Set global canceler
+      taskCancelerRef.current = state.cancelAll.bind(state);
+
+      // eslint-disable-next-line unicorn/no-new-array
+      const values = new Array<Value | undefined>(state.taskCount);
+      state.runAll(
+        (value, entry, index) => {
+          values[index] = value;
+          if (state.isFinished()) {
+            taskResolve(values as ReadonlyArray<Value>);
+          }
+        },
+        (error: Error, entry) => {
+          if (!state.isFinished()) {
+            state.finish();
+            taskReject(error);
+            // cancel all but the current task
+            resetCanceler(entry.cancelerRef);
+            state.cancelAll();
+          }
+        }
+      );
+    });
+  }
+
+  /**
+   * Resolves with the first value, or reject with an aggregated error
+   *
+   * @example
+   * ```typescript
+   * const success = Task.any([
+   *   Task.reject(1),
+   *   Task.resolve(2),
+   * ]);
+   * const successResult = Task.unsafeRun(success);// Result.Ok(2)
+   *
+   * const failure = Task.any([
+   *   Task.reject('error1'),
+   *   Task.reject('error2'),
+   * ]);
+   * const failureResult = Task.unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
+  export function any<T extends Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<ValueType<T[keyof T]>, AggregateError<{ [K in keyof T]: ErrorType<T[K]> }>>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>>;
+  export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
+    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // Set global canceler
+      taskCancelerRef.current = state.cancelAll.bind(state);
+
+      // eslint-disable-next-line unicorn/no-new-array
+      const errors = new Array<Error | undefined>(state.taskCount);
+      state.runAll(
+        (value, entry) => {
+          if (!state.isFinished()) {
+            state.finish();
+            taskResolve(value);
+            // cancel all but the current task
+            resetCanceler(entry.cancelerRef);
+            state.cancelAll();
+          }
+        },
+        (error, entry, index) => {
+          errors[index] = error;
+          if (state.isFinished()) {
+            taskReject(AggregateError({ errors: errors as Error[] }));
+          }
+        }
+      );
+    });
+  }
+
+  /**
+   * Resolves an array of all task results
+   *
+   * @example
+   * ```typescript
+   * const task = Task.allSettled([
+   *   Task.reject(1),
+   *   Task.resolve(2),
+   * ]);
+   * const taskResults = Task.unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
+  export function allSettled<T extends Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<{ [K in keyof T]: Result<ValueType<T[K]>, ErrorType<T[K]>> }, never>;
+  export function allSettled<Value, Error>(
+    tasks: Iterable<Task<Value, Error>>
+  ): Task<ReadonlyArray<Result<Value, Error>>, never>;
+  export function allSettled<Value, Error>(
+    tasks: Iterable<Task<Value, Error>>
+  ): Task<ReadonlyArray<Result<Value, Error>>, never> {
+    return Task.wrap((taskResolve, _taskReject, _taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // eslint-disable-next-line unicorn/no-new-array
+      const results = new Array<Result<Value, Error>>(state.taskCount);
+      const finish = () => {
+        if (state.isFinished()) {
+          taskResolve(Object.freeze(results));
+        }
+      };
+      state.runAll(
+        (value, entry, index) => {
+          results[index] = createOk(value);
+          finish();
+        },
+        (error, entry, index) => {
+          results[index] = createError(error);
+          finish();
+        }
+      );
+    });
   }
 
   /**
@@ -336,8 +540,8 @@ export namespace Task {
     };
     let rejectHandler = (_error: unknown) => {};
     const runValue: void | Promise<void> = task[Task.run](
-      (value) => resolveHandler(TaskResult.ok(value)),
-      (error) => resolveHandler(TaskResult.error(error)),
+      (value) => resolveHandler(createOk(value)),
+      (error) => resolveHandler(createError(error)),
       cancelerRef
     );
     // Try to catch promise errors
@@ -363,4 +567,11 @@ function isPromiseLike<V>(anyValue: unknown): anyValue is PromiseLike<V> {
 }
 function isPromise<V>(anyValue: unknown): anyValue is Promise<V> {
   return isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
+}
+function resetCanceler(cancelerRef: Ref<Task.Canceler>) {
+  cancelerRef.current = Task.defaultCanceler;
+}
+function triggerCanceler(cancelerRef: Ref<Task.Canceler>) {
+  cancelerRef.current();
+  resetCanceler(cancelerRef);
 }
