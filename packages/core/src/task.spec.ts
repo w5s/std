@@ -432,6 +432,22 @@ describe('Task', () => {
       await ExpectTask.toResolve(anyTask, 'value2');
     });
   });
+  describe(Task.allSettled, () => {
+    test('should resolve array of results', async () => {
+      const anyTask = Task.allSettled([
+        generateTask({ async: true, value: 'value1' }),
+        generateTask({ async: true, error: 'error1' }),
+        generateTask({ async: true, value: 'value2' }),
+        generateTask({ async: true, error: 'error2' }),
+      ]);
+      await ExpectTask.toResolve(anyTask, [
+        Result.Ok('value1'),
+        Result.Error('error1'),
+        Result.Ok('value2'),
+        Result.Error('error2'),
+      ]);
+    });
+  });
   describe(Task.map, () => {
     test('should keep unchanged when failure', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ async: false, error: anyError });

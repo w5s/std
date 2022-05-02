@@ -197,13 +197,13 @@ export namespace Task {
    *   Task.resolve(1),
    *   Task.resolve(2),
    * ]);
-   * const successResult = Task.unsafeRun(task);// Result.Ok([1, 2])
+   * const successResult = Task.unsafeRun(success);// Result.Ok([1, 2])
    *
    * const failure = Task.all([
    *   Task.resolve(1),
    *   Task.reject('error'),
    * ]);
-   * const failureResult = Task.unsafeRun(task);// Result.Error('error')
+   * const failureResult = Task.unsafeRun(failure);// Result.Error('error')
    * ```
    * @param tasks tasks to be run in parallel
    */
@@ -248,13 +248,13 @@ export namespace Task {
    *   Task.reject(1),
    *   Task.resolve(2),
    * ]);
-   * const successResult = Task.unsafeRun(task);// Result.Ok(2)
+   * const successResult = Task.unsafeRun(success);// Result.Ok(2)
    *
    * const failure = Task.any([
    *   Task.reject('error1'),
    *   Task.reject('error2'),
    * ]);
-   * const failureResult = Task.unsafeRun(task);// Result.Error(['error1', 'error2'])
+   * const failureResult = Task.unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
    * ```
    * @param tasks tasks to be run in parallel
    */
@@ -285,6 +285,50 @@ export namespace Task {
           if (state.isFinished()) {
             taskReject(AggregateError({ errors: errors as Error[] }));
           }
+        }
+      );
+    });
+  }
+
+  /**
+   * Resolves an array of all task results
+   *
+   * @example
+   * ```typescript
+   * const task = Task.allSettled([
+   *   Task.reject(1),
+   *   Task.resolve(2),
+   * ]);
+   * const taskResults = Task.unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
+   * ```
+   * @param tasks tasks to be run in parallel
+   */
+  export function allSettled<T extends Task<any, any>[]>(
+    tasks: [...T]
+  ): Task<{ [K in keyof T]: Result<ValueType<T[K]>, ErrorType<T[K]>> }, never>;
+  export function allSettled<Value, Error>(
+    tasks: Iterable<Task<Value, Error>>
+  ): Task<ReadonlyArray<Result<Value, Error>>, never>;
+  export function allSettled<Value, Error>(
+    tasks: Iterable<Task<Value, Error>>
+  ): Task<ReadonlyArray<Result<Value, Error>>, never> {
+    return Task.wrap((taskResolve, _taskReject, _taskCancelerRef) => {
+      const state = new TaskAggregateState(tasks);
+      // eslint-disable-next-line unicorn/no-new-array
+      const results = new Array<Result<Value, Error>>(state.taskCount);
+      const finish = () => {
+        if (state.isFinished()) {
+          taskResolve(Object.freeze(results));
+        }
+      };
+      state.runAll(
+        (value, entry, index) => {
+          results[index] = createOk(value);
+          finish();
+        },
+        (error, entry, index) => {
+          results[index] = createError(error);
+          finish();
         }
       );
     });
