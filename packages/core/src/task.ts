@@ -132,6 +132,8 @@ export namespace Task {
     };
   }
 
+  const emptyArray = Object.freeze([]);
+
   class TaskAggregateState<Value, Error> {
     readonly tasks: ReadonlyArray<
       Readonly<{
@@ -214,28 +216,32 @@ export namespace Task {
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
     return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
       const state = new TaskAggregateState(tasks);
-      // Set global canceler
-      taskCancelerRef.current = state.cancelAll.bind(state);
+      if (state.taskCount === 0) {
+        taskResolve(emptyArray);
+      } else {
+        // Set global canceler
+        taskCancelerRef.current = state.cancelAll.bind(state);
 
-      // eslint-disable-next-line unicorn/no-new-array
-      const values = new Array<Value | undefined>(state.taskCount);
-      state.runAll(
-        (value, entry, index) => {
-          values[index] = value;
-          if (state.isFinished()) {
-            taskResolve(values as ReadonlyArray<Value>);
+        // eslint-disable-next-line unicorn/no-new-array
+        const values = new Array<Value | undefined>(state.taskCount);
+        state.runAll(
+          (value, entry, index) => {
+            values[index] = value;
+            if (state.isFinished()) {
+              taskResolve(values as ReadonlyArray<Value>);
+            }
+          },
+          (error: Error, entry) => {
+            if (!state.isFinished()) {
+              state.finish();
+              taskReject(error);
+              // cancel all but the current task
+              resetCanceler(entry.cancelerRef);
+              state.cancelAll();
+            }
           }
-        },
-        (error: Error, entry) => {
-          if (!state.isFinished()) {
-            state.finish();
-            taskReject(error);
-            // cancel all but the current task
-            resetCanceler(entry.cancelerRef);
-            state.cancelAll();
-          }
-        }
-      );
+        );
+      }
     });
   }
 
@@ -265,28 +271,33 @@ export namespace Task {
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
     return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
       const state = new TaskAggregateState(tasks);
-      // Set global canceler
-      taskCancelerRef.current = state.cancelAll.bind(state);
 
-      // eslint-disable-next-line unicorn/no-new-array
-      const errors = new Array<Error | undefined>(state.taskCount);
-      state.runAll(
-        (value, entry) => {
-          if (!state.isFinished()) {
-            state.finish();
-            taskResolve(value);
-            // cancel all but the current task
-            resetCanceler(entry.cancelerRef);
-            state.cancelAll();
+      if (state.taskCount === 0) {
+        taskReject(AggregateError({ errors: [] }));
+      } else {
+        // Set global canceler
+        taskCancelerRef.current = state.cancelAll.bind(state);
+
+        // eslint-disable-next-line unicorn/no-new-array
+        const errors = new Array<Error | undefined>(state.taskCount);
+        state.runAll(
+          (value, entry) => {
+            if (!state.isFinished()) {
+              state.finish();
+              taskResolve(value);
+              // cancel all but the current task
+              resetCanceler(entry.cancelerRef);
+              state.cancelAll();
+            }
+          },
+          (error, entry, index) => {
+            errors[index] = error;
+            if (state.isFinished()) {
+              taskReject(AggregateError({ errors: errors as Error[] }));
+            }
           }
-        },
-        (error, entry, index) => {
-          errors[index] = error;
-          if (state.isFinished()) {
-            taskReject(AggregateError({ errors: errors as Error[] }));
-          }
-        }
-      );
+        );
+      }
     });
   }
 
@@ -314,23 +325,27 @@ export namespace Task {
   ): Task<ReadonlyArray<Result<Value, Error>>, never> {
     return Task.wrap((taskResolve, _taskReject, _taskCancelerRef) => {
       const state = new TaskAggregateState(tasks);
-      // eslint-disable-next-line unicorn/no-new-array
-      const results = new Array<Result<Value, Error>>(state.taskCount);
-      const finish = () => {
-        if (state.isFinished()) {
-          taskResolve(Object.freeze(results));
-        }
-      };
-      state.runAll(
-        (value, entry, index) => {
-          results[index] = createOk(value);
-          finish();
-        },
-        (error, entry, index) => {
-          results[index] = createError(error);
-          finish();
-        }
-      );
+      if (state.taskCount === 0) {
+        taskResolve(emptyArray);
+      } else {
+        // eslint-disable-next-line unicorn/no-new-array
+        const results = new Array<Result<Value, Error>>(state.taskCount);
+        const finish = () => {
+          if (state.isFinished()) {
+            taskResolve(Object.freeze(results));
+          }
+        };
+        state.runAll(
+          (value, entry, index) => {
+            results[index] = createOk(value);
+            finish();
+          },
+          (error, entry, index) => {
+            results[index] = createError(error);
+            finish();
+          }
+        );
+      }
     });
   }
 

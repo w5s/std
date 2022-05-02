@@ -290,6 +290,10 @@ describe('Task', () => {
     });
   });
   describe(Task.all, () => {
+    test('should return empty array if empty', async () => {
+      const allTask = Task.all([]);
+      await ExpectTask.toResolve(allTask, []);
+    });
     test('should reject first error', async () => {
       const allTask = Task.all([
         generateTask({ async: true, value: 'value1' }),
@@ -360,6 +364,10 @@ describe('Task', () => {
     });
   });
   describe(Task.any, () => {
+    test('should return empty array if empty', async () => {
+      const allTask = Task.any([]);
+      await ExpectTask.toReject(allTask, AggregateError({ errors: [] }));
+    });
     test('should resolve first value', async () => {
       const anyTask = Task.any([
         generateTask({ async: true, value: 'value1' }),
@@ -433,6 +441,10 @@ describe('Task', () => {
     });
   });
   describe(Task.allSettled, () => {
+    test('should return empty array if empty', async () => {
+      const allTask = Task.allSettled([]);
+      await ExpectTask.toResolve(allTask, []);
+    });
     test('should resolve array of results', async () => {
       const anyTask = Task.allSettled([
         generateTask({ async: true, value: 'value1' }),
