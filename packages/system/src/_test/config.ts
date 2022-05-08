@@ -46,6 +46,26 @@ export const expectFile = (filePath: string) => ({
   async toExist() {
     await expect(fs.promises.stat(filePath)).resolves.not.toThrow();
   },
+  async toBeADirectory() {
+    try {
+      const stat = await fs.promises.lstat(filePath);
+      if (!stat.isDirectory()) {
+        throw new Error(`Expected ${filePath} to be a directory`);
+      }
+    } catch {
+      throw new Error(`Expected ${filePath} to exist`);
+    }
+  },
+  async toBeAFile() {
+    try {
+      const stat = await fs.promises.lstat(filePath);
+      if (!stat.isFile()) {
+        throw new Error(`Expected ${filePath} to be a file`);
+      }
+    } catch {
+      throw new Error(`Expected ${filePath} to exist`);
+    }
+  },
 });
 
 export const expectDir = (filePath: string) => ({

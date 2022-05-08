@@ -7,6 +7,7 @@ describe('FileSystem', () => {
         // List of all public exports
         'emptyDirectory',
         'ensureDirectory',
+        'ensureFile',
       ].sort()
     );
   });

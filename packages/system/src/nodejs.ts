@@ -60,7 +60,11 @@ export const rename = taskCreator(nodeFS.promises.rename);
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   nodeFS.promises.lstat(pathLike, { bigint: false })
 );
+export const stat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
+  nodeFS.promises.stat(pathLike, { bigint: false })
+);
 export const mkdir = taskCreator(nodeFS.promises.mkdir);
+export const writeFile = taskCreator(nodeFS.promises.writeFile);
 
 function isError(anyValue: unknown): anyValue is Error {
   return Object.prototype.toString.call(anyValue) === '[object Error]';

@@ -1,39 +1,41 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
-import type { FilePath } from './path';
+import { FilePath } from './path';
 import { FileError } from './error';
-import { lstat, mkdir } from './nodejs';
+import { lstat, mkdir, writeFile } from './nodejs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
 export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
-  return pipe(lstat(filePath)).to(
-    (_) => Task.map(_, fileTypeFromStats),
-    (_) => Task.orElse(_, noneWhenNotFound),
-    (_) =>
-      Task.andThen(_, (linkType) =>
-        Option.isNone(linkType)
-          ? Task.map(mkdir(filePath, { recursive: true }), ignore)
-          : ensureType(filePath, 'directory', linkType)
-      )
+  return Task.andThen(linkStat(filePath), (linkType) =>
+    Option.isNone(linkType)
+      ? Task.map(mkdir(filePath, { recursive: true }), ignore)
+      : ensureType(filePath, 'directory', linkType)
   );
 }
 
-function fileTypeFromStats(
-  stats: import('node:fs').Stats | import('node:fs').BigIntStats | undefined
-): Option<FileType> {
-  return stats == null
-    ? stats
-    : stats.isFile()
-    ? 'file'
-    : stats.isDirectory()
-    ? 'directory'
-    : stats.isSymbolicLink()
-    ? 'symlink'
-    : Option.None;
+export function ensureFile(filePath: FilePath): Task<void, FileError> {
+  return Task.andThen(linkStat(filePath), (linkType) =>
+    Option.isNone(linkType)
+      ? Task.andThen(ensureDirectory(FilePath.dirname(filePath)), () => writeFile(filePath, new Uint8Array()))
+      : ensureType(filePath, 'file', linkType)
+  );
 }
 
-function noneWhenNotFound(error: FileError): Task<Option<never>, FileError> {
-  return error.code === 'ENOENT' ? Task.resolve(undefined) : Task.reject(error);
+function linkStat(filePath: FilePath) {
+  return pipe(lstat(filePath)).to(
+    (_) =>
+      Task.map(
+        _,
+        (stats): Option<FileType> =>
+          stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : Option.None
+      ),
+    (_) =>
+      Task.orElse(
+        _,
+        (error: FileError): Task<Option<never>, FileError> =>
+          error.code === 'ENOENT' ? Task.resolve(undefined) : Task.reject(error)
+      )
+  );
 }
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType): Task<void, FileError> {
