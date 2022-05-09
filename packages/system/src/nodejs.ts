@@ -65,6 +65,7 @@ export const stat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((path
 );
 export const mkdir = taskCreator(nodeFS.promises.mkdir);
 export const writeFile = taskCreator(nodeFS.promises.writeFile);
+export const symlink = taskCreator(nodeFS.promises.symlink);
 
 function isError(anyValue: unknown): anyValue is Error {
   return Object.prototype.toString.call(anyValue) === '[object Error]';

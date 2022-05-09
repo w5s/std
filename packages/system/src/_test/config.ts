@@ -66,6 +66,16 @@ export const expectFile = (filePath: string) => ({
       throw new Error(`Expected ${filePath} to exist`);
     }
   },
+  async toBeASymbolicLink() {
+    try {
+      const stat = await fs.promises.lstat(filePath);
+      if (!stat.isSymbolicLink()) {
+        throw new Error(`Expected ${filePath} to be a symbolic link`);
+      }
+    } catch {
+      throw new Error(`Expected ${filePath} to exist`);
+    }
+  },
 });
 
 export const expectDir = (filePath: string) => ({

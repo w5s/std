@@ -8,6 +8,7 @@ describe('FileSystem', () => {
         'emptyDirectory',
         'ensureDirectory',
         'ensureFile',
+        'ensureSymbolicLink',
       ].sort()
     );
   });
