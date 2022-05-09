@@ -9,6 +9,7 @@ describe('index', () => {
         'FilePath',
         'FileError',
         'FileErrorType',
+        'Process',
         'default',
       ].sort()
     );
