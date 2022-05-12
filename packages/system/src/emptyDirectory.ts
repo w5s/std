@@ -1,6 +1,6 @@
 import { ignore, pipe, Task } from '@w5s/core';
 import { FileError } from './error';
-import { readdir, mkdir, rm } from './nodejs';
+import { readdir, mkdir, remove } from './nodejs';
 import { FilePath } from './path';
 
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
@@ -9,7 +9,7 @@ export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
       Task.andThen(_, (items) =>
         Task.all(
           items.map((item) =>
-            rm(FilePath.join(filePath, item), {
+            remove(FilePath.join(filePath, item), {
               force: true,
               recursive: true,
             })

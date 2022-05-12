@@ -21,6 +21,9 @@ export function taskCreator<A extends unknown[], R>(fn: (...args: A) => R | Prom
     });
 }
 
+/**
+ * Converts an ErrnoException to a FileError.
+ */
 export function errnoExceptionHandler(error: unknown): FileError {
   return FileError.hasInstance(error)
     ? error
@@ -43,6 +46,14 @@ export function errnoExceptionHandler(error: unknown): FileError {
       });
 }
 
+/**
+ * NodeJS module reference (for mocking)
+ */
+export const NodeJS = {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  FS: { ...nodeFS.promises } as typeof nodeFS.promises,
+};
+
 export const readdir = taskCreator<
   [
     path: nodeFS.PathLike,
@@ -55,7 +66,6 @@ export const readdir = taskCreator<
   ],
   string[]
 >(nodeFS.promises.readdir);
-export const rm = taskCreator(nodeFS.promises.rm);
 export const rename = taskCreator(nodeFS.promises.rename);
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   nodeFS.promises.lstat(pathLike, { bigint: false })
@@ -67,6 +77,13 @@ export const mkdir = taskCreator(nodeFS.promises.mkdir);
 export const writeFile = taskCreator(nodeFS.promises.writeFile);
 export const symlink = taskCreator(nodeFS.promises.symlink);
 export const copyFile = taskCreator(nodeFS.promises.copyFile);
+
+export function remove(filePath: FilePath, options?: remove.Options): Task<void, FileError> {
+  return taskCreator(NodeJS.FS.rm)(filePath, options);
+}
+export namespace remove {
+  export type Options = nodeFS.RmOptions;
+}
 
 function isError(anyValue: unknown): anyValue is Error {
   return Object.prototype.toString.call(anyValue) === '[object Error]';

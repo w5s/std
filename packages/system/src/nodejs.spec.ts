@@ -1,7 +1,7 @@
 import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { FileError } from './error.js';
-import { ErrnoException, errnoExceptionHandler, taskCreator } from './nodejs.js';
+import { ErrnoException, errnoExceptionHandler, taskCreator, NodeJS, remove } from './nodejs.js';
 import { FilePath } from './path.js';
 import { expectTask } from './_test/config.js';
 
@@ -69,5 +69,18 @@ describe(taskCreator, () => {
     const transformed = taskCreator(original);
 
     await expectTask(transformed()).resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
+  });
+});
+describe(remove, () => {
+  test('should call fs.promises.rm', async () => {
+    const removeMocked = jest.spyOn(NodeJS.FS, 'rm').mockImplementation(
+      () =>
+        // do nothing
+        undefined as never
+    );
+    const args = ['anyPath' as FilePath, { recursive: true }] as const;
+    const task = remove(...args);
+    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
+    expect(removeMocked).toHaveBeenCalledWith(...args);
   });
 });
