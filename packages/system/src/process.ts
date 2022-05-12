@@ -1,10 +1,10 @@
 import { Task } from '@w5s/core';
 import * as nodeProcess from 'node:process';
 
-export namespace Process {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  export const __internal__ = { ...nodeProcess };
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const __nodeProcess__ = { ...nodeProcess };
 
+export namespace Process {
   /**
    * Exits the process with the specified exit `code`.
    *
@@ -16,6 +16,6 @@ export namespace Process {
    * @param code the exit code
    */
   export function exit(code: number): Task<never, never> {
-    return Task(({ ok }) => ok(__internal__.exit(code)));
+    return Task(({ ok }) => ok(__nodeProcess__.exit(code)));
   }
 }
