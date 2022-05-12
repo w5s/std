@@ -5,5 +5,5 @@ import * as fs from './fileSystem/fs';
 export namespace FileSystem {
   export const { emptyDirectory } = fsEmptyDirectory;
   export const { ensureDirectory, ensureFile, ensureSymbolicLink } = fsEnsureDirectory;
-  export const { remove, rename } = fs;
+  export const { listDirectory, remove, rename } = fs;
 }

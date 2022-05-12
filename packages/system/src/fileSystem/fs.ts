@@ -1,4 +1,4 @@
-import { Option, Task } from '@w5s/core';
+import { Option, Task, Array } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import { FileError } from '../error';
 import { Internal } from '../internal';
@@ -47,18 +47,17 @@ export function errnoExceptionHandler(error: unknown): FileError {
       });
 }
 
-export const readdir = taskCreator<
-  [
-    path: nodeFS.PathLike,
-    options?:
-      | (nodeFS.ObjectEncodingOptions & {
-          withFileTypes?: false | undefined;
-        })
-      | BufferEncoding
-      | null
-  ],
-  string[]
->(Internal.FS.readdir);
+export function listDirectory(filePath: FilePath, options?: listDirectory.Options): Task<Array<FilePath>, FileError> {
+  // @ts-ignore - `readdir` returns an array of strings instead of a Array<FilePath>
+  return taskCreator<[path: nodeFS.PathLike, options?: BufferEncoding], string[]>(Internal.FS.readdir)(
+    filePath,
+    options
+  );
+}
+export namespace listDirectory {
+  export type Options = BufferEncoding;
+}
+
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   Internal.FS.lstat(pathLike, { bigint: false })
 );

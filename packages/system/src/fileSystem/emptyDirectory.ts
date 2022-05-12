@@ -1,10 +1,10 @@
 import { ignore, pipe, Task } from '@w5s/core';
 import { FileError } from '../error';
-import { readdir, mkdir, remove } from './fs';
+import { listDirectory, mkdir, remove } from './fs';
 import { FilePath } from '../path';
 
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
-  return pipe(readdir(filePath)).to(
+  return pipe(listDirectory(filePath)).to(
     (_) =>
       Task.andThen(_, (items) =>
         Task.all(

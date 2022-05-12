@@ -9,6 +9,7 @@ describe('FileSystem', () => {
         'ensureDirectory',
         'ensureFile',
         'ensureSymbolicLink',
+        'listDirectory',
         'remove',
         'rename',
       ].sort()
