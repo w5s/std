@@ -5,6 +5,9 @@ import * as nodePath from 'node:path';
 export type FileName = string;
 
 export type FilePath = Tag<string, { filePath: true }>;
+export function FilePath(value: string): FilePath {
+  return value as FilePath;
+}
 export namespace FilePath {
   export type Delimiter = ':' | ';';
   export type Extension = `.${string}`;

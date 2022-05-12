@@ -1,5 +1,5 @@
 import { Option, Task } from '@w5s/core';
-import * as nodeFS from 'node:fs';
+import type * as nodeFS from 'node:fs';
 import { FileError } from '../error';
 import { Internal } from '../internal';
 import { FilePath } from '../path';
@@ -58,18 +58,21 @@ export const readdir = taskCreator<
       | null
   ],
   string[]
->(nodeFS.promises.readdir);
-export const rename = taskCreator(nodeFS.promises.rename);
+>(Internal.FS.readdir);
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
-  nodeFS.promises.lstat(pathLike, { bigint: false })
+  Internal.FS.lstat(pathLike, { bigint: false })
 );
 export const stat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
-  nodeFS.promises.stat(pathLike, { bigint: false })
+  Internal.FS.stat(pathLike, { bigint: false })
 );
-export const mkdir = taskCreator(nodeFS.promises.mkdir);
-export const writeFile = taskCreator(nodeFS.promises.writeFile);
-export const symlink = taskCreator(nodeFS.promises.symlink);
-export const copyFile = taskCreator(nodeFS.promises.copyFile);
+export const mkdir = taskCreator(Internal.FS.mkdir);
+export const writeFile = taskCreator(Internal.FS.writeFile);
+export const symlink = taskCreator(Internal.FS.symlink);
+export const copyFile = taskCreator(Internal.FS.copyFile);
+
+export function rename(oldPath: FilePath, newPath: FilePath): Task<void, FileError> {
+  return taskCreator(Internal.FS.rename)(oldPath, newPath);
+}
 
 export function remove(filePath: FilePath, options?: remove.Options): Task<void, FileError> {
   return taskCreator(Internal.FS.rm)(filePath, options);

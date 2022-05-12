@@ -1,7 +1,7 @@
 import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { FileError } from '../error.js';
-import { ErrnoException, errnoExceptionHandler, taskCreator, remove } from './fs.js';
+import { ErrnoException, errnoExceptionHandler, taskCreator, remove, rename } from './fs.js';
 import { FilePath } from '../path.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
@@ -79,9 +79,22 @@ describe(remove, () => {
         // do nothing
         undefined as never
     );
-    const args = ['anyPath' as FilePath, { recursive: true }] as const;
+    const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = remove(...args);
     await expectTask(task).resolves.toEqual(Result.Ok(undefined));
     expect(removeMocked).toHaveBeenCalledWith(...args);
+  });
+});
+describe(rename, () => {
+  test('should call fs.promises.rename', async () => {
+    const renameMocked = jest.spyOn(Internal.FS, 'rename').mockImplementation(
+      () =>
+        // do nothing
+        undefined as never
+    );
+    const args = [FilePath('oldPath'), FilePath('newPath')] as const;
+    const task = rename(...args);
+    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
+    expect(renameMocked).toHaveBeenCalledWith(...args);
   });
 });

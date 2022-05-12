@@ -10,6 +10,7 @@ describe('FileSystem', () => {
         'ensureFile',
         'ensureSymbolicLink',
         'remove',
+        'rename',
       ].sort()
     );
   });
