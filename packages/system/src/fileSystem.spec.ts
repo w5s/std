@@ -1,4 +1,4 @@
-import { FileSystem } from './system';
+import { FileSystem } from './fileSystem';
 
 describe('FileSystem', () => {
   test('exports', () => {

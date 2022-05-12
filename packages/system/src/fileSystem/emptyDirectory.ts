@@ -1,7 +1,7 @@
 import { ignore, pipe, Task } from '@w5s/core';
-import { FileError } from './error';
-import { readdir, mkdir, remove } from './nodejs';
-import { FilePath } from './path';
+import { FileError } from '../error';
+import { readdir, mkdir, remove } from './fs';
+import { FilePath } from '../path';
 
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
   return pipe(readdir(filePath)).to(

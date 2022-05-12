@@ -1,9 +1,10 @@
 import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
-import { FileError } from './error.js';
-import { ErrnoException, errnoExceptionHandler, taskCreator, NodeJS, remove } from './nodejs.js';
-import { FilePath } from './path.js';
-import { expectTask } from './_test/config.js';
+import { FileError } from '../error.js';
+import { ErrnoException, errnoExceptionHandler, taskCreator, remove } from './fs.js';
+import { FilePath } from '../path.js';
+import { expectTask } from '../_test/config.js';
+import { Internal } from '../internal.js';
 
 const anyPath = 'anyPath' as FilePath;
 const anyError = new Error('AnyError');
@@ -73,7 +74,7 @@ describe(taskCreator, () => {
 });
 describe(remove, () => {
   test('should call fs.promises.rm', async () => {
-    const removeMocked = jest.spyOn(NodeJS.FS, 'rm').mockImplementation(
+    const removeMocked = jest.spyOn(Internal.FS, 'rm').mockImplementation(
       () =>
         // do nothing
         undefined as never

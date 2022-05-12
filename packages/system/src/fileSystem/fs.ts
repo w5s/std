@@ -1,7 +1,8 @@
 import { Option, Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
-import { FileError } from './error';
-import { FilePath } from './path';
+import { FileError } from '../error';
+import { Internal } from '../internal';
+import { FilePath } from '../path';
 
 export type ErrnoException = NodeJS.ErrnoException;
 export const ErrnoException = {
@@ -46,14 +47,6 @@ export function errnoExceptionHandler(error: unknown): FileError {
       });
 }
 
-/**
- * NodeJS module reference (for mocking)
- */
-export const NodeJS = {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  FS: { ...nodeFS.promises } as typeof nodeFS.promises,
-};
-
 export const readdir = taskCreator<
   [
     path: nodeFS.PathLike,
@@ -79,7 +72,7 @@ export const symlink = taskCreator(nodeFS.promises.symlink);
 export const copyFile = taskCreator(nodeFS.promises.copyFile);
 
 export function remove(filePath: FilePath, options?: remove.Options): Task<void, FileError> {
-  return taskCreator(NodeJS.FS.rm)(filePath, options);
+  return taskCreator(Internal.FS.rm)(filePath, options);
 }
 export namespace remove {
   export type Options = nodeFS.RmOptions;

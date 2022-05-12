@@ -1,6 +1,6 @@
 import { Result } from '@w5s/core';
 import { emptyDirectory } from './emptyDirectory';
-import { expectDir, expectTask, withTmpDirectory } from './_test/config';
+import { expectDir, expectTask, withTmpDirectory } from '../_test/config';
 
 describe(emptyDirectory, () => {
   test(

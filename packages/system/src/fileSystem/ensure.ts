@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
-import { FilePath } from './path';
-import { FileError } from './error';
-import { lstat, mkdir, symlink, writeFile } from './nodejs';
+import { FilePath } from '../path';
+import { FileError } from '../error';
+import { lstat, mkdir, symlink, writeFile } from './fs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
