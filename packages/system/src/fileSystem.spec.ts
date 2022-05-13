@@ -9,6 +9,7 @@ describe('FileSystem', () => {
         'ensureDirectory',
         'ensureFile',
         'ensureSymbolicLink',
+        'copyFile',
         'listDirectory',
         'remove',
         'rename',

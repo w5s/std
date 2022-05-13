@@ -67,7 +67,10 @@ export const stat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((path
 export const mkdir = taskCreator(Internal.FS.mkdir);
 export const writeFile = taskCreator(Internal.FS.writeFile);
 export const symlink = taskCreator(Internal.FS.symlink);
-export const copyFile = taskCreator(Internal.FS.copyFile);
+
+export function copyFile(source: FilePath, destination: FilePath): Task<void, FileError> {
+  return taskCreator(Internal.FS.copyFile)(source, destination);
+}
 
 export function rename(oldPath: FilePath, newPath: FilePath): Task<void, FileError> {
   return taskCreator(Internal.FS.rename)(oldPath, newPath);
