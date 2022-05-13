@@ -19,14 +19,14 @@
     "release": "is-ci && lerna publish --yes || lerna publish",
     "rescue": "git clean -fdx;yarn install",
     "test": "turbo run test --parallel",
-    "validate": "npm run build && npm run lint && npm test && npx cspell '**'",
+    "validate": "npm run build && npm run lint && npm test && npm run spellcheck",
     "prepare:husky": "is-ci || husky install",
     "develop": ":",
     "prepare": "npm-run-all -p \"prepare:*\"",
     "prepare:empty": ":",
     "prepare:packages": "lerna bootstrap",
     "code-analysis": ":",
-    "cspell": "cspell"
+    "spellcheck": "cspell '**'"
   },
   "commitlint": {
     "extends": [
