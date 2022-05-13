@@ -1,7 +1,8 @@
 import { Task } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import { FilePath } from '../path';
+import type { FilePath } from '../path';
+import type { ErrnoException } from '../internal';
 // import * as url from 'node:url';
 
 // eslint-disable-next-line unicorn/prefer-module
@@ -29,6 +30,17 @@ export const withTmpDirectory =
       await fs.promises.rm(filePath, { recursive: true });
     }
   };
+
+export const anyPath = 'anyPath' as FilePath;
+export const anyError = new Error('AnyError');
+export const anyErrnoException = (() => {
+  try {
+    fs.lstatSync('non-existent-file');
+    return undefined as never;
+  } catch (error: unknown) {
+    return error as ErrnoException;
+  }
+})();
 
 export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
   get result() {
