@@ -1,14 +1,14 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import { FilePath } from '../path';
 import { FileError } from '../error';
-import { lstat, mkdir, symlink, writeFile } from './fs';
+import { lstat, createDirectory, symlink, writeFile } from './fs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
 export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
   return Task.andThen(linkStat(filePath), (linkType) =>
     Option.isNone(linkType)
-      ? Task.map(mkdir(filePath, { recursive: true }), ignore)
+      ? Task.map(createDirectory(filePath, { recursive: true }), ignore)
       : ensureType(filePath, 'directory', linkType)
   );
 }

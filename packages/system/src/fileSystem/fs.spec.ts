@@ -1,7 +1,16 @@
 import { Option, Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { FileError } from '../error.js';
-import { ErrnoException, errnoExceptionHandler, taskCreator, copyFile, remove, rename, listDirectory } from './fs.js';
+import {
+  ErrnoException,
+  errnoExceptionHandler,
+  taskCreator,
+  copyFile,
+  remove,
+  rename,
+  listDirectory,
+  createDirectory,
+} from './fs.js';
 import { FilePath } from '../path.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
@@ -85,7 +94,15 @@ describe(copyFile, () => {
     expect(copyFileMocked).toHaveBeenCalledWith(...args);
   });
 });
-
+describe(createDirectory, () => {
+  test('should call fs.promises.mkdir', async () => {
+    const mkdirMocked = jest.spyOn(Internal.FS, 'mkdir').mockImplementation(() => Promise.resolve(undefined));
+    const args = [FilePath('anyPath'), { recursive: true }] as const;
+    const task = createDirectory(...args);
+    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
+    expect(mkdirMocked).toHaveBeenCalledWith(...args);
+  });
+});
 describe(listDirectory, () => {
   test('should call fs.promises.readdir', async () => {
     const readdirMocked = jest

@@ -1,6 +1,6 @@
 import { ignore, pipe, Task } from '@w5s/core';
 import { FileError } from '../error';
-import { listDirectory, mkdir, remove } from './fs';
+import { listDirectory, createDirectory, remove } from './fs';
 import { FilePath } from '../path';
 
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
@@ -16,7 +16,7 @@ export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
           )
         )
       ),
-    (_) => Task.orElse(_, () => mkdir(filePath, { recursive: true })),
+    (_) => Task.orElse(_, () => createDirectory(filePath, { recursive: true })),
     (_) => Task.map(_, ignore)
   );
 }

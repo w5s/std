@@ -5,11 +5,12 @@ describe('FileSystem', () => {
     expect(Object.keys(FileSystem).sort()).toEqual(
       [
         // List of all public exports
+        'copyFile',
+        'createDirectory',
         'emptyDirectory',
         'ensureDirectory',
         'ensureFile',
         'ensureSymbolicLink',
-        'copyFile',
         'listDirectory',
         'remove',
         'rename',

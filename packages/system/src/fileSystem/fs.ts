@@ -1,4 +1,4 @@
-import { Option, Task, Array } from '@w5s/core';
+import { Option, Task, Array, ignore } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import { FileError } from '../error';
 import { Internal } from '../internal';
@@ -58,13 +58,19 @@ export namespace listDirectory {
   export type Options = BufferEncoding;
 }
 
+export function createDirectory(path: FilePath, options?: createDirectory.Options): Task<void, FileError> {
+  return Task.map(taskCreator(Internal.FS.mkdir)(path, options), ignore);
+}
+export namespace createDirectory {
+  export type Options = nodeFS.MakeDirectoryOptions;
+}
+
 export const lstat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   Internal.FS.lstat(pathLike, { bigint: false })
 );
 export const stat = taskCreator<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   Internal.FS.stat(pathLike, { bigint: false })
 );
-export const mkdir = taskCreator(Internal.FS.mkdir);
 export const writeFile = taskCreator(Internal.FS.writeFile);
 export const symlink = taskCreator(Internal.FS.symlink);
 
