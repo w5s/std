@@ -1,3 +1,4 @@
+import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
@@ -58,7 +59,7 @@ export function Task<Value, Error = never>(
     /**
      * Canceler setter
      */
-    onCancel: (canceler: Task.Canceler) => void;
+    setCanceler: (canceler: Option<Task.Canceler>) => void;
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -67,8 +68,8 @@ export function Task<Value, Error = never>(
     const resultOrPromise = sideEffect({
       ok: createOk,
       error: createError,
-      onCancel: (canceler) => {
-        cancelerRef.current = canceler;
+      setCanceler: (canceler) => {
+        cancelerRef.current = canceler ?? Task.defaultCanceler;
       },
     });
     const handleResult = (result: Result<Value, Error>) => {

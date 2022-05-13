@@ -225,11 +225,11 @@ export namespace Time {
    */
   export function delay(duration: TimeDuration): Task<Time, never> {
     return Task(
-      ({ ok, onCancel }) =>
+      ({ ok, setCanceler }) =>
         new Promise((resolve) => {
           let timeoutId: ReturnType<typeof setTimeout> | undefined;
           // Set Canceler
-          onCancel(() => {
+          setCanceler(() => {
             if (timeoutId != null) {
               clearTimeout(timeoutId);
               timeoutId = undefined;
