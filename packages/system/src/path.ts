@@ -90,4 +90,23 @@ export namespace FilePath {
   export function isAbsolute(path: FilePath): boolean {
     return nodePath.isAbsolute(path);
   }
+
+  export function isRelative(path: FilePath): boolean {
+    return !nodePath.isAbsolute(path);
+  }
+
+  export function isParentOf(parentPath: FilePath, childPath: FilePath): boolean {
+    const parentPathNormalized = nodePath.normalize(parentPath);
+
+    if (childPath.length <= parentPathNormalized.length) {
+      return false;
+    }
+
+    const subPathNormalized = nodePath.normalize(childPath);
+    const subPathWithTrailingSep = !subPathNormalized.endsWith(nodePath.sep)
+      ? subPathNormalized + nodePath.sep
+      : subPathNormalized;
+
+    return subPathWithTrailingSep.startsWith(parentPathNormalized);
+  }
 }

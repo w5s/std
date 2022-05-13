@@ -92,4 +92,26 @@ describe('FilePath', () => {
       expect(FilePath.isAbsolute(relative)).toBe(false);
     });
   });
+  describe(FilePath.isRelative, () => {
+    test('return absolute path', () => {
+      const absolute = absolutePath('world', 'file.log.txt');
+      expect(FilePath.isRelative(absolute)).toBe(false);
+      const relative = relativePath('.', 'world', 'file.log.txt');
+      expect(FilePath.isRelative(relative)).toBe(true);
+    });
+  });
+  describe(FilePath.isParentOf, () => {
+    test.each([
+      [{ parent: '', child: '' }, false],
+      [{ parent: '/first/second', child: '/first' }, false],
+      [{ parent: '/first', child: '/first' }, false],
+      [{ parent: '/first', child: '/first/second' }, true],
+      [{ parent: 'first', child: 'first/second' }, true],
+      [{ parent: '../first', child: '../first/second' }, true],
+      [{ parent: 'c:\\first', child: 'c:\\first' }, false],
+      [{ parent: 'c:\\first', child: 'c:\\first\\second' }, true],
+    ] as const)('should return correct value for %s', ({ parent, child }, expected) => {
+      expect(FilePath.isParentOf(FilePath(parent), FilePath(child))).toBe(expected);
+    });
+  });
 });
