@@ -16,7 +16,7 @@ export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
 export function ensureFile(filePath: FilePath): Task<void, FileError> {
   return Task.andThen(linkStat(filePath), (linkType) =>
     Option.isNone(linkType)
-      ? Task.andThen(ensureDirectory(FilePath.dirname(filePath)), () => writeFile(filePath, new Uint8Array()))
+      ? Task.andThen(ensureDirectory(FilePath.dirname(filePath)), () => writeFile(filePath, ''))
       : ensureType(filePath, 'file', linkType)
   );
 }
