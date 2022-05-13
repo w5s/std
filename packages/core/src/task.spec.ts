@@ -29,8 +29,8 @@ const generateTask = <V = never, E = never>(
     ? Task<V, E>(({ ok: resultOk, error: resultError }) =>
         'value' in options ? resultOk(options.value) : resultError(options.error)
       )
-    : Task<V, E>(async ({ ok: resultOk, error: resultError, onCancel }) => {
-        onCancel(canceler);
+    : Task<V, E>(async ({ ok: resultOk, error: resultError, setCanceler }) => {
+        setCanceler(canceler);
         await waitMs(options.delay ?? 0);
         return 'value' in options ? resultOk(options.value) : resultError(options.error);
       });
@@ -270,11 +270,28 @@ describe('Task', () => {
         );
         expect(Ref.read(ref)).toBe(Task.defaultCanceler);
       });
+      test('should set default canceler setCanceler(undefined)', () => {
+        const canceler = () => {};
+        const task = Task(async ({ ok, setCanceler }) => {
+          setCanceler(canceler);
+          setCanceler(undefined);
+
+          return ok(undefined);
+        });
+        const ref = Ref(() => {});
+
+        task[Task.run](
+          () => {},
+          () => {},
+          ref
+        );
+        expect(Ref.read(ref)).toBe(Task.defaultCanceler);
+      });
 
       test('should set canceler', () => {
         const canceler = () => {};
-        const task = Task(async ({ ok, onCancel }) => {
-          onCancel(canceler);
+        const task = Task(async ({ ok, setCanceler }) => {
+          setCanceler(canceler);
 
           return ok(undefined);
         });
