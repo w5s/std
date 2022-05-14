@@ -1,7 +1,7 @@
-import { Task, Array, ignore } from '@w5s/core';
+import { Task, Array, ignore, Option } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import { FileError } from '../error';
-import { Internal, errnoTask } from '../internal';
+import { Internal, errnoTask, errnoExceptionHandler } from '../internal';
 import { FilePath } from '../path';
 
 export function listDirectory(filePath: FilePath, options?: listDirectory.Options): Task<Array<FilePath>, FileError> {
@@ -25,7 +25,6 @@ export const lstat = errnoTask<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathL
 export const stat = errnoTask<[pathLike: nodeFS.PathLike], nodeFS.Stats>((pathLike) =>
   Internal.FS.stat(pathLike, { bigint: false })
 );
-export const writeFile = errnoTask(Internal.FS.writeFile);
 export const symlink = errnoTask(Internal.FS.symlink);
 
 export function copyFile(source: FilePath, destination: FilePath): Task<void, FileError> {
@@ -41,4 +40,58 @@ export function remove(filePath: FilePath, options?: remove.Options): Task<void,
 }
 export namespace remove {
   export type Options = nodeFS.RmOptions;
+}
+
+/**
+ * Asynchronously writes data to a file, replacing the file if it already exists.
+ *
+ * @example
+ * ```ts
+ * const write = writeFile(FilePath('my/file'), 'my content');
+ * Task.unsafeRun(write);
+ * ```
+ * @param file Path to the file to be read.
+ * @param data The buffer that the data will be appended to.
+ * @param options An object of write options
+ */
+export function writeFile(
+  file: FilePath,
+  data:
+    | string
+    | NodeJS.TypedArray
+    | DataView
+    | AsyncIterable<string | NodeJS.TypedArray | DataView>
+    | Iterable<string | NodeJS.TypedArray | DataView>,
+  options?: writeFile.Options
+): Task<void, FileError> {
+  return Task(async ({ ok, error, setCanceler }) => {
+    const controller = new AbortController();
+    setCanceler(() => controller.abort());
+    try {
+      return ok(
+        await Internal.FS.writeFile(file, data, {
+          ...options,
+          signal: controller.signal,
+        })
+      );
+    } catch (error_: unknown) {
+      return error(errnoExceptionHandler(error_));
+    }
+  });
+}
+export namespace writeFile {
+  export type Options = {
+    /**
+     * The file encoding
+     */
+    encoding?: Option<BufferEncoding>;
+    /**
+     * The file mode
+     */
+    mode?: Option<nodeFS.Mode>;
+    /**
+     * The system flag used to determine if the file should be truncated
+     */
+    flag?: Option<nodeFS.OpenMode>;
+  };
 }
