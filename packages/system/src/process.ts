@@ -1,5 +1,7 @@
 import { Task } from '@w5s/core';
-import { Internal } from './internal';
+import { FileError } from './error';
+import { errnoTaskSync, Internal } from './internal';
+import { FilePath } from './path';
 
 export namespace Process {
   /**
@@ -14,5 +16,33 @@ export namespace Process {
    */
   export function exit(code: number): Task<never, never> {
     return Task(({ ok }) => ok(Internal.Process.exit(code)));
+  }
+
+  /**
+   * Returns the current working directory of the process
+   *
+   * @example
+   * ```ts
+   * const task = Process.getCurrentDirectory();
+   * Task.unsafeRun(task);// Result.Ok(FilePath('current/working/directory'))
+   * ```
+   */
+  export function getCurrentDirectory(): Task<FilePath, never> {
+    return Task(({ ok }) => ok(Internal.Process.cwd() as FilePath));
+  }
+
+  /**
+   * Sets the current working directory of the process or rejects an error if doing so fails (for instance, if the specified `directory` does not exist).
+   *
+   * @example
+   * ```ts
+   * const task = Process.setCurrentDirectory(FilePath('other/directory'));
+   * Task.unsafeRun(task);// Result.Ok(undefined)
+   * ```
+   * @param directory the directory to set as the current working directory
+   */
+  export function setCurrentDirectory(directory: FilePath): Task<void, FileError> {
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    return errnoTaskSync(Internal.Process.chdir)(directory);
   }
 }
