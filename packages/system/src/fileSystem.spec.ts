@@ -14,6 +14,7 @@ describe('FileSystem', () => {
         'listDirectory',
         'remove',
         'rename',
+        'writeFile',
       ].sort()
     );
   });
