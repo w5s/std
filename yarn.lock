@@ -3051,7 +3051,7 @@ __metadata:
     "@w5s/commitlint-config": 1.0.0-alpha.2
     "@w5s/eslint-config": 1.0.0-alpha.13
     "@w5s/mrm-preset": 1.0.0-alpha.10
-    "@w5s/ts-config": 1.0.0-alpha.6
+    "@w5s/ts-config": 1.0.0-alpha.7
     cspell: 5.20.0
     es-jest: 1.5.0
     eslint: 8.15.0
@@ -3147,12 +3147,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/ts-config@npm:1.0.0-alpha.6":
-  version: 1.0.0-alpha.6
-  resolution: "@w5s/ts-config@npm:1.0.0-alpha.6"
+"@w5s/ts-config@npm:1.0.0-alpha.7":
+  version: 1.0.0-alpha.7
+  resolution: "@w5s/ts-config@npm:1.0.0-alpha.7"
   peerDependencies:
     typescript: 3.x || 4.x
-  checksum: 2e2a3440859294735c9c23708a958d71c46d8b675b646a08d805f925252e2a421363329cb80d75c63cfc20b754362715fce54bf8d31213245b8dd4dc5dfc4700
+  checksum: 19d19a69c7b59b27cd5af182b92fdea2b5eb016c9666004dfdc8ff8505fe44ad1cb81846372604b567a4ccfc63a0add99961156e794f716752c0a7c68f1fd0d6
   languageName: node
   linkType: hard
 
