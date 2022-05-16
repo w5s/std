@@ -7,6 +7,7 @@ describe('index', () => {
         // List of all public exports
         'FileSystem',
         'FilePath',
+        'FileSize',
         'FileError',
         'FileErrorType',
         'Process',
