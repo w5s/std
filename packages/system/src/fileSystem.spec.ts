@@ -12,6 +12,8 @@ describe('FileSystem', () => {
         'ensureFile',
         'ensureSymbolicLink',
         'listDirectory',
+        'readFileStatus',
+        'readSymbolicLinkStatus',
         'remove',
         'rename',
         'writeFile',

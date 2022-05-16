@@ -1,8 +1,70 @@
 import { Result, Task } from '@w5s/core';
-import { copyFile, remove, rename, listDirectory, createDirectory, writeFile } from './fs.js';
+import * as nodeFS from 'node:fs';
+import {
+  copyFile,
+  remove,
+  rename,
+  listDirectory,
+  createDirectory,
+  writeFile,
+  readSymbolicLinkStatus,
+  readFileStatus,
+} from './fs.js';
 import { FilePath } from '../path.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
+
+const randomBoolean = () => Math.random() >= 0.5;
+const randomInt = () => Math.floor(Math.random() * 10_000_000_000);
+const randomDate = () => new Date(Math.floor(Math.random() * 10_000_000_000));
+const generateStats = (): nodeFS.Stats => {
+  const isFile = randomBoolean();
+  const isDirectory = randomBoolean();
+  const isSymbolicLink = randomBoolean();
+  const isBlockDevice = randomBoolean();
+  const isCharacterDevice = randomBoolean();
+  const isFIFO = randomBoolean();
+  const isSocket = randomBoolean();
+  return {
+    isFile: () => isFile,
+    isDirectory: () => isDirectory,
+    isSymbolicLink: () => isSymbolicLink,
+    isBlockDevice: () => isBlockDevice,
+    isCharacterDevice: () => isCharacterDevice,
+    isFIFO: () => isFIFO,
+    isSocket: () => isSocket,
+    size: 0,
+    atime: randomDate(),
+    get atimeMs() {
+      return this.atime.getTime();
+    },
+    // atimeNs: Math.random(),
+    mtime: randomDate(),
+    get mtimeMs() {
+      return this.mtime.getTime();
+    },
+    // mtimeNs: Math.random(),
+    ctime: randomDate(),
+    get ctimeMs() {
+      return this.ctime.getTime();
+    },
+    // ctimeNs: Math.random(),
+    birthtime: randomDate(),
+    get birthtimeMs() {
+      return this.birthtime.getTime();
+    },
+    // birthtimeNs: Math.random(),
+    dev: randomInt(),
+    ino: randomInt(),
+    mode: randomInt(),
+    nlink: randomInt(),
+    uid: randomInt(),
+    gid: randomInt(),
+    rdev: randomInt(),
+    blksize: randomInt(),
+    blocks: randomInt(),
+  };
+};
 
 describe(copyFile, () => {
   test('should call fs.promises.rename', async () => {
@@ -103,5 +165,66 @@ describe(writeFile, () => {
       cancelerRef
     );
     expect(fileContent).toEqual('0123456789');
+  });
+});
+describe(readSymbolicLinkStatus, () => {
+  test('should convert fs.Stat to FileStatus', async () => {
+    const stats = generateStats();
+    const lstatMocked = jest.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
+    const args = [FilePath('path')] as const;
+    const task = readSymbolicLinkStatus(...args);
+    await expectTask(task).resolves.toEqual(
+      Result.Ok({
+        accessTime: stats.atimeMs,
+        deviceID: stats.dev,
+        fileGroup: stats.gid,
+        fileID: stats.ino,
+        fileOwner: stats.uid,
+        fileSize: stats.size,
+        isBlockDevice: stats.isBlockDevice(),
+        isCharacterDevice: stats.isCharacterDevice(),
+        isDirectory: stats.isDirectory(),
+        isFile: stats.isFile(),
+        isNamedPipe: stats.isFIFO(),
+        isSocket: stats.isSocket(),
+        isSymbolicLink: stats.isSymbolicLink(),
+        linkCount: stats.nlink,
+        modificationTime: stats.mtimeMs,
+        specialDeviceID: stats.rdev,
+        statusChangeTime: stats.ctimeMs,
+      })
+    );
+    expect(lstatMocked).toHaveBeenCalledWith(...args);
+  });
+});
+
+describe(readFileStatus, () => {
+  test('should convert fs.Stat to FileStatus', async () => {
+    const stats = generateStats();
+    const statMocked = jest.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
+    const args = [FilePath('path')] as const;
+    const task = readFileStatus(...args);
+    await expectTask(task).resolves.toEqual(
+      Result.Ok({
+        accessTime: stats.atimeMs,
+        deviceID: stats.dev,
+        fileGroup: stats.gid,
+        fileID: stats.ino,
+        fileOwner: stats.uid,
+        fileSize: stats.size,
+        isBlockDevice: stats.isBlockDevice(),
+        isCharacterDevice: stats.isCharacterDevice(),
+        isDirectory: stats.isDirectory(),
+        isFile: stats.isFile(),
+        isNamedPipe: stats.isFIFO(),
+        isSocket: stats.isSocket(),
+        isSymbolicLink: stats.isSymbolicLink(),
+        linkCount: stats.nlink,
+        modificationTime: stats.mtimeMs,
+        specialDeviceID: stats.rdev,
+        statusChangeTime: stats.ctimeMs,
+      })
+    );
+    expect(statMocked).toHaveBeenCalledWith(...args);
   });
 });

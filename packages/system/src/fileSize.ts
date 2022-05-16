@@ -24,7 +24,7 @@ export namespace FileSize {
   }
 
   /**
-   * Returns a file size of `amount` kilo bytes
+   * Returns a file size of `amount` kilobytes
    *
    * @example
    * ```ts
@@ -37,7 +37,7 @@ export namespace FileSize {
   }
 
   /**
-   * Returns a file size of `amount` mega bytes
+   * Returns a file size of `amount` megabytes
    *
    * @example
    * ```ts
@@ -50,7 +50,7 @@ export namespace FileSize {
   }
 
   /**
-   * Returns a file size of `amount` giga bytes
+   * Returns a file size of `amount` gigabytes
    *
    * @example
    * ```ts
@@ -63,7 +63,7 @@ export namespace FileSize {
   }
 
   /**
-   * Returns a file size of `amount` tera bytes
+   * Returns a file size of `amount` terabytes
    *
    * @example
    * ```ts

@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import { FilePath } from '../path';
 import { FileError } from '../error';
-import { lstat, createDirectory, symlink, writeFile } from './fs';
+import { readSymbolicLinkStatus, createDirectory, symlink, writeFile } from './fs';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
@@ -30,12 +30,12 @@ export function ensureSymbolicLink(source: FilePath, destination: FilePath): Tas
 }
 
 function linkStat(filePath: FilePath) {
-  return pipe(lstat(filePath)).to(
+  return pipe(readSymbolicLinkStatus(filePath)).to(
     (_) =>
       Task.map(
         _,
         (stats): Option<FileType> =>
-          stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : Option.None
+          stats.isFile ? 'file' : stats.isDirectory ? 'directory' : stats.isSymbolicLink ? 'symlink' : Option.None
       ),
     (_) =>
       Task.orElse(
