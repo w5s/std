@@ -26,4 +26,16 @@ export interface FileError
  *
  * @category Constructor
  */
-export const FileError = DataError.Make<FileError>('FileError');
+export const FileError = DataError.MakeGeneric(
+  'FileError',
+  (create) =>
+    (parameters: Partial<DataError.Parameters<FileError>>): FileError =>
+      create({
+        fileErrorType: 'UserError',
+        errno: Option.None,
+        code: Option.None,
+        path: Option.None,
+        syscall: Option.None,
+        ...parameters,
+      })
+);

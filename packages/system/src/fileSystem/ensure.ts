@@ -57,8 +57,5 @@ function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType:
     fileErrorType: 'UserError',
     message: `Ensure path exists, expected '${expectedType}', got '${actualType}'`,
     path: filePath,
-    syscall: Option.None,
-    errno: Option.None,
-    code: Option.None,
   });
 }

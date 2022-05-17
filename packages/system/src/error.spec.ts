@@ -26,5 +26,17 @@ describe(FileError, () => {
         })
       );
     });
+    test('should set default default parameters', () => {
+      expect(FileError({})).toEqual(
+        expect.objectContaining({
+          _type: 'DataError',
+          name: 'FileError',
+          fileErrorType: 'UserError',
+          code: Option.None,
+          path: Option.None,
+          syscall: Option.None,
+        })
+      );
+    });
   });
 });
