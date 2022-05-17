@@ -1,9 +1,9 @@
 import { Task, Array, ignore, Option, Tag, Int, Time } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
-import { FileError } from '../error';
-import { FileSize } from '../fileSize';
-import { Internal, errnoTask, errnoExceptionHandler } from '../internal';
-import { FilePath } from '../path';
+import { FileError } from '../error.js';
+import { FileSize } from '../fileSize.js';
+import { Internal, errnoTask, errnoExceptionHandler } from '../internal.js';
+import { FilePath } from '../path.js';
 
 export type DeviceID = Tag<Int, { deviceID: true }>;
 

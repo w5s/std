@@ -2,8 +2,8 @@
 import { Option, Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import * as nodeProcess from 'node:process';
-import { FileError } from './error';
-import type { FilePath } from './path';
+import { FileError } from './error.js';
+import type { FilePath } from './path.js';
 
 export const Internal = {
   FS: { ...nodeFS.promises } as typeof nodeFS.promises,

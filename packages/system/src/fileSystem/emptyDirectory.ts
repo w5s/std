@@ -1,7 +1,7 @@
 import { ignore, pipe, Task } from '@w5s/core';
-import { FileError } from '../error';
-import { listDirectory, createDirectory, remove } from './fs';
-import { FilePath } from '../path';
+import { FileError } from '../error.js';
+import { listDirectory, createDirectory, remove } from './fs.js';
+import { FilePath } from '../path.js';
 
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
   return pipe(listDirectory(filePath)).to(

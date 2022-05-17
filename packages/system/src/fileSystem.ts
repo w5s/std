@@ -1,6 +1,6 @@
-import * as fsEmptyDirectory from './fileSystem/emptyDirectory';
-import * as fsEnsureDirectory from './fileSystem/ensure';
-import * as fs from './fileSystem/fs';
+import * as fsEmptyDirectory from './fileSystem/emptyDirectory.js';
+import * as fsEnsureDirectory from './fileSystem/ensure.js';
+import * as fs from './fileSystem/fs.js';
 
 export namespace FileSystem {
   export const { emptyDirectory } = fsEmptyDirectory;

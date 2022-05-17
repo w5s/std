@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
-import { FilePath } from '../path';
-import { FileError } from '../error';
-import { readSymbolicLinkStatus, createDirectory, symlink, writeFile } from './fs';
+import { FilePath } from '../path.js';
+import { FileError } from '../error.js';
+import { readSymbolicLinkStatus, createDirectory, symlink, writeFile } from './fs.js';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
