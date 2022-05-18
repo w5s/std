@@ -55,8 +55,17 @@ export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
 });
 
 export const expectFile = (filePath: string) => ({
+  not: {
+    async toExist() {
+      await expect(fs.promises.stat(filePath)).rejects.toEqual(expect.anything());
+    },
+  },
+  async toHaveContent(expectedContent: string) {
+    const actualContent = await fs.promises.readFile(filePath, 'utf8');
+    expect(actualContent).toEqual(expectedContent);
+  },
   async toExist() {
-    await expect(fs.promises.stat(filePath)).resolves.not.toThrow();
+    await expect(fs.promises.stat(filePath)).resolves.toEqual(expect.anything());
   },
   async toBeADirectory() {
     try {
