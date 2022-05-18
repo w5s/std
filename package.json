@@ -85,7 +85,7 @@
     "@w5s/eslint-config": "1.0.0-alpha.13",
     "@w5s/mrm-preset": "1.0.0-alpha.10",
     "@w5s/ts-config": "1.0.0-alpha.7",
-    "cspell": "5.20.0",
+    "cspell": "5.21.0",
     "es-jest": "1.5.0",
     "eslint": "8.15.0",
     "husky": "8.0.1",
