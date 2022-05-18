@@ -7,7 +7,7 @@ describe(DatabaseClientError, () => {
     expect(DatabaseClientError({ message: 'Message', cause })).toEqual(
       expect.objectContaining({
         name: 'DatabaseClientError',
-        message: 'Message: MockError',
+        message: 'Message',
         cause,
       })
     );
