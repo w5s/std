@@ -14,6 +14,7 @@ describe('FileSystem', () => {
         'listDirectory',
         'readFileStatus',
         'readSymbolicLinkStatus',
+        'move',
         'remove',
         'rename',
         'writeFile',
