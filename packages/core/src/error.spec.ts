@@ -27,11 +27,11 @@ describe(DataError, () => {
         })
       );
     });
-    test('should use cause error', () => {
+    test('should keep original message', () => {
       const cause = new Error('CauseMessage');
       expect(DataError({ name: anyString, message: 'OriginalMessage', cause })).toEqual(
         expect.objectContaining({
-          message: 'OriginalMessage: CauseMessage',
+          message: 'OriginalMessage',
           cause,
         })
       );
@@ -43,7 +43,7 @@ describe(DataError, () => {
       [DataError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
       [
         DataError({ name: 'CustomError', message: 'CustomMessage', cause: new Error('CauseMessage') }),
-        'CustomError: CustomMessage: CauseMessage',
+        'CustomError: CustomMessage',
       ],
     ])('should return correctly formatted string representation', (error, expected) => {
       expect(String(error)).toEqual(expected);
@@ -59,7 +59,7 @@ describe(DataError, () => {
       });
       const lines = (error.stack ?? '').split('\n');
       // eslint-disable-next-line jest/no-standalone-expect
-      expect(lines[0]).toEqual('CustomError: CustomMessage: CauseMessage');
+      expect(lines[0]).toEqual('CustomError: CustomMessage');
       // eslint-disable-next-line jest/no-standalone-expect
       expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
     });

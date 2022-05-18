@@ -49,12 +49,6 @@ export function DataError<Properties extends { name: string; message?: string; c
   setDefaultValue(returnValue, 'stack', undefined);
   setDefaultValue(returnValue, 'cause', undefined);
 
-  // Improve message
-  const causeMessage = properties.cause != null ? getErrorMessage(properties.cause) : undefined;
-  if (causeMessage != null) {
-    returnValue.message = `${properties.message ?? ''}: ${causeMessage}`;
-  }
-
   // Capture stack trace
   if (typeof Error.captureStackTrace === 'function') {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -188,9 +182,4 @@ function setDefaultValue<O extends Record<any, any>, K extends keyof O>(object: 
   if (!(name in object)) {
     object[name] = defaultValue;
   }
-}
-
-function getErrorMessage(error: unknown): string | undefined {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
-  return (error as any)?.message ?? undefined;
 }
