@@ -6,7 +6,7 @@ import { FileError } from './error.js';
 import type { FilePath } from './path.js';
 
 export const Internal = {
-  FS: { ...nodeFS.promises } as typeof nodeFS.promises,
+  FS: { ...nodeFS.promises, ...nodeFS.constants },
   Process: { ...nodeProcess },
 };
 

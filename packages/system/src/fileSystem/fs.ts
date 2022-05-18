@@ -277,3 +277,14 @@ export namespace writeFile {
     flag?: Option<nodeFS.OpenMode>;
   };
 }
+
+export function _exists(filePath: FilePath): Task<boolean, FileError> {
+  return errnoTask(async (path: string) => {
+    try {
+      await Internal.FS.access(path, Internal.FS.F_OK);
+      return true;
+    } catch {
+      return false;
+    }
+  })(filePath);
+}
