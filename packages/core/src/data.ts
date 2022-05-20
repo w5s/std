@@ -56,7 +56,7 @@ export namespace DataObject {
      * if(MyRecord.hasInstance(anyValue)) {
      *   console.log(anyValue.anyProperty);// type is correctly refined here
      * }
-     * @param anyValue the value to be tested
+     * @param anyValue - the value to be tested
      */
     readonly hasInstance: (anyValue: unknown) => anyValue is Model;
   }
@@ -80,7 +80,7 @@ export namespace DataObject {
    * Model.typeName === 'Model' // true
    * Model.hasInstance(instance); // true
    * ```
-   * @param typeName the type unique name
+   * @param typeName - the type unique name
    */
   export function Make<Model extends DataObject<{ [DataObject.type]: string }>>(
     typeName: Model[DataObject.type]
@@ -105,8 +105,8 @@ export namespace DataObject {
    * Model.typeName === 'Model'/ true
    * Model.hasInstance(instance); // true
    * ```
-   * @param typeName the type unique name
-   * @param getConstructor a function that returns an object factory
+   * @param typeName - the type unique name
+   * @param getConstructor - a function that returns an object factory
    */
   export function MakeGeneric<
     Name extends string,

@@ -33,7 +33,7 @@ export namespace Math {
    * Math.floor(0.5);// 0
    * Math.floor(-0.5);// -1
    * ```
-   * @param value A numeric expression.
+   * @param value - A numeric expression.
    */
   export declare function floor(value: number): Int;
   alias('floor');
@@ -47,7 +47,7 @@ export namespace Math {
    * Math.ceil(0.5);// 1
    * Math.ceil(-0.5);// 0
    * ```
-   * @param value A numeric expression.
+   * @param value - A numeric expression.
    */
   export declare function ceil(value: number): Int;
   alias('ceil');
@@ -62,7 +62,7 @@ export namespace Math {
    * Math.round(-0.5);// 0
    * Math.round(-0.6);// -1
    * ```
-   * @param value The value to be rounded to the nearest integer.
+   * @param value - The value to be rounded to the nearest integer.
    */
   export declare function round(value: number): Int;
   alias('round');
@@ -78,7 +78,7 @@ export namespace Math {
    * Math.truncate(1.7);// 1
    * Math.truncate(-1.7);// -1
    * ```
-   * @param value A numeric expression.
+   * @param value - A numeric expression.
    */
   export declare function truncate(value: number): Int;
   alias('trunc', 'truncate');

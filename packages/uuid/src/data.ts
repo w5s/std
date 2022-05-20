@@ -11,7 +11,7 @@ const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{
  * UUID constructor
  *
  * @category Constructor
- * @param value the string representation
+ * @param value - the string representation
  */
 export function UUID(value: `${string}-${string}-${string}-${string}`): UUID {
   invariant(UUID.hasInstance(value), `${value} is not a valid UUID`);
@@ -36,7 +36,7 @@ export namespace UUID {
    * UUID.hasInstance('c106a26a-21bb-5538-8bf2-57095d1976c1');// true
    * ```
    * @category Guard
-   * @param anyValue the value to tested
+   * @param anyValue - the value to tested
    */
   export function hasInstance(anyValue: unknown): anyValue is UUID {
     return typeof anyValue === 'string' && uuidRegexp.test(anyValue);

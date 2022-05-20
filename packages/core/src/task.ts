@@ -44,7 +44,7 @@ export interface Task<Value, Error> {
  * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok(undefined)); }), ms));
  * ```
  * @category Constructor
- * @param sideEffect the effect function
+ * @param sideEffect - the effect function
  */
 export function Task<Value, Error = never>(
   sideEffect: (resolver: {
@@ -110,7 +110,7 @@ export namespace Task {
    * Prefer {@link Task} for convenience
    *
    * @protected
-   * @param taskRun the side effect function
+   * @param taskRun - the side effect function
    */
   export function wrap<Value, Error>(
     taskRun: (
@@ -208,7 +208,7 @@ export namespace Task {
    * ]);
    * const failureResult = Task.unsafeRun(failure);// Result.Error('error')
    * ```
-   * @param tasks tasks to be run in parallel
+   * @param tasks - tasks to be run in parallel
    */
   export function all<T extends readonly Task<any, any>[]>(
     tasks: [...T]
@@ -263,7 +263,7 @@ export namespace Task {
    * ]);
    * const failureResult = Task.unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
    * ```
-   * @param tasks tasks to be run in parallel
+   * @param tasks - tasks to be run in parallel
    */
   export function any<T extends Task<any, any>[]>(
     tasks: [...T]
@@ -313,7 +313,7 @@ export namespace Task {
    * ]);
    * const taskResults = Task.unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
    * ```
-   * @param tasks tasks to be run in parallel
+   * @param tasks - tasks to be run in parallel
    */
   export function allSettled<T extends Task<any, any>[]>(
     tasks: [...T]
@@ -359,7 +359,7 @@ export namespace Task {
    * Task.hasInstance({}); // false
    * ```
    * @category Guard
-   * @param anyValue a tested value
+   * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Task<unknown, unknown> {
     return isObject(anyValue) && typeof anyValue[run] === 'function';
@@ -375,7 +375,7 @@ export namespace Task {
    * const result = Task.unsafeRun(task);// Result.Ok(1)
    * ```
    * @category Constructor
-   * @param value the success value
+   * @param value - the success value
    */
   export function resolve<Value, Error = never>(value: Value): Task<Value, Error> {
     return wrap((resolveTask) => resolveTask(value));
@@ -391,7 +391,7 @@ export namespace Task {
    * const result = Task.unsafeRun(task);// Result.Error(1)
    * ```
    * @category Constructor
-   * @param errorValue the error value
+   * @param errorValue - the error value
    */
   export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error> {
     return wrap((_, _reject) => _reject(errorValue));
@@ -409,8 +409,8 @@ export namespace Task {
    *  (error) => new FetchError()
    * );
    * ```
-   * @param sideEffect A function that will be called
-   * @param onError An error handler that transforms `unknown` to a normalized and typed error
+   * @param sideEffect - A function that will be called
+   * @param onError - An error handler that transforms `unknown` to a normalized and typed error
    */
   export function tryCall<Value, Error>(
     sideEffect: () => Awaitable<Value>,
@@ -434,8 +434,8 @@ export namespace Task {
    * const task = Task.resolve('foo');
    * Task.map(task, (value) => `${value}_bar`));// Task.resolve('foo_bar')
    * ```
-   * @param task a Task object
-   * @param fn the mapper function
+   * @param task - a Task object
+   * @param fn - the mapper function
    */
   export function map<ValueFrom, ValueTo, Error>(
     task: Task<ValueFrom, Error>,
@@ -455,8 +455,8 @@ export namespace Task {
    * const task = Task.reject('error');
    * Task.mapError(task, (value) => `${value}_bar`));// Task.reject('error_bar')
    * ```
-   * @param task a Task object
-   * @param fn the error mapper function
+   * @param task - a Task object
+   * @param fn - the error mapper function
    */
   export function mapError<Value, ErrorFrom, ErrorTo>(
     task: Task<Value, ErrorFrom>,
@@ -479,8 +479,8 @@ export namespace Task {
    * const failure = Task.reject('PreviousError');
    * Task.andThen(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
    * ```
-   * @param task a Task object
-   * @param fn the value mapper function
+   * @param task - a Task object
+   * @param fn - the value mapper function
    */
   export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
     task: Task<ValueFrom, ErrorFrom>,
@@ -503,8 +503,8 @@ export namespace Task {
    * const failure = Task.reject('PreviousError');
    * Task.andRun(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
    * ```
-   * @param task a Task object
-   * @param fn the value mapper function
+   * @param task - a Task object
+   * @param fn - the value mapper function
    */
   export function andRun<Value, ErrorFrom, ErrorTo>(
     task: Task<Value, ErrorFrom>,
@@ -525,8 +525,8 @@ export namespace Task {
    * const failure = Task.reject('PreviousError');
    * Task.orElse(failure, (error) => Task.reject(`${value}_caught`));// Task.reject('PreviousError_caught')
    * ```
-   * @param task a Task object
-   * @param fn the error mapper function
+   * @param task - a Task object
+   * @param fn - the error mapper function
    */
   export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
     task: Task<ValueFrom, ErrorFrom>,
@@ -546,7 +546,7 @@ export namespace Task {
    * const getMessage = Task.resolve('Hello World!');
    * const messageResult = Task.unsafeRun(getMessage);// Result.Ok('Hello World!')
    * ```
-   * @param task the task to be run
+   * @param task - the task to be run
    */
   export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Result<Value, Error>> {
     const cancelerRef: Ref<() => void> = { current: Task.defaultCanceler };

@@ -33,7 +33,7 @@ type Nullable<T> = EmptyValue | T;
  *   print(option); // alternate console.log('Some(Django)'); and console.warn('None');
  * }
  * ```
- * @param Value the type of the contained value
+ * @param Value - the type of the contained value
  */
 export type Option<Value> = Value | Option.None;
 
@@ -131,8 +131,8 @@ export namespace Option {
    * const x = Some('foo');
    * Option.map(x, (value) => `${value}_bar`));// Some('foo_bar') == 'foo_bar'
    * ```
-   * @param option an Option object
-   * @param fn the mapper function
+   * @param option - an Option object
+   * @param fn - the mapper function
    */
   export function map<ValueFrom, ValueTo>(
     option: Nullable<ValueFrom>,
@@ -153,8 +153,8 @@ export namespace Option {
    * Option.getOrElse(x, () => 'bar');// 'bar'
    * ```
    * @category Accessor
-   * @param option an Option object
-   * @param getDefaultValue a default value
+   * @param option - an Option object
+   * @param getDefaultValue - a default value
    */
   export function getOrElse<Value, DefaultValue>(
     option: Nullable<Value>,
@@ -176,7 +176,7 @@ export namespace Option {
    * Option.getOrThrow(x);// throw TypeError('option must not be a null|undefined')
    * ```
    * @category Accessor
-   * @param option an Option object
+   * @param option - an Option object
    */
   export function getOrThrow<Value>(option: Nullable<Value>): Value {
     if (isSome(option)) {
@@ -196,8 +196,8 @@ export namespace Option {
    * Option.andThen(Option.Some(2), square); // Option.Some(16)
    * Option.andThen(Option.None, square); // Option.None
    * ```
-   * @param option an Option object
-   * @param fn a callback
+   * @param option - an Option object
+   * @param fn - a callback
    */
   export function andThen<ValueFrom, ValueTo>(
     option: Nullable<ValueFrom>,
@@ -216,8 +216,8 @@ export namespace Option {
    * Option.orElse(Option.Some('foo'), alt); // Option.Some('foo')
    * Option.orElse(Option.None, alt); // Option.Some('bar')
    * ```
-   * @param option an Option object
-   * @param fn a callback
+   * @param option - an Option object
+   * @param fn - a callback
    */
   export function orElse<ValueFrom>(option: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
     return isSome(option) ? option : from(fn());

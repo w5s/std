@@ -13,7 +13,7 @@ export interface Ref<Value> {
  * const ref = Ref(123);// { current: initialValue }
  * ```
  * @category Constructor
- * @param initialValue the initial value contained
+ * @param initialValue - the initial value contained
  */
 export function Ref<Value>(initialValue: Value): Ref<Value> {
   return { current: initialValue };
@@ -33,7 +33,7 @@ export namespace Ref {
    * Ref.read(ref); // 'foo'
    * ```
    * @category Accessor
-   * @param ref the reference object
+   * @param ref - the reference object
    */
   export function read<Value>(ref: Ref<Value>): Value {
     return ref.current;
@@ -48,8 +48,8 @@ export namespace Ref {
    * Ref.write(ref, 'bar'); // Ref.read(ref) == 'bar'
    * ```
    * @category Accessor
-   * @param ref the reference object
-   * @param newValue the new value to be set
+   * @param ref - the reference object
+   * @param newValue - the new value to be set
    */
   export function write<Value>(ref: Ref<Value>, newValue: Value): void {
     ref.current = newValue;

@@ -61,8 +61,8 @@ export namespace Hash {
    * ```typescript
    * HashCode.combine(HashCode.from(...), HashCode.from(...))
    * ```
-   * @param left hash code
-   * @param right hash code
+   * @param left - hash code
+   * @param right - hash code
    */
   export function combine(left: Value, right: Value): Value {
     return int32SMI(left ^ ((right as number) + 0x9e_37_79_b9 + (left << 6) + (left >> 2)));
@@ -78,7 +78,7 @@ export namespace Hash {
    * Hash.from('foo-bar'); //-682120564
    * ```
    * @category Constructor
-   * @param anyValue hashed value
+   * @param anyValue - hashed value
    */
   export function from(anyValue: undefined | null | boolean | number | string): Value {
     switch (typeof anyValue) {

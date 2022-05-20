@@ -2,7 +2,7 @@
  * Iterable constructor
  *
  * @category Constructor
- * @param iterator function that creates a new iterator
+ * @param iterator - function that creates a new iterator
  */
 export function Iterable<Value>(iterator: () => Iterator<Value>) {
   return {
@@ -24,7 +24,7 @@ export namespace Iterable {
    * const iterator = Iterable.iterator(iterable);// { next () { 1, 2, 3, done } }
    * ```
    * @category Accessor
-   * @param iterable an object that have `[Symbol.iterator]`
+   * @param iterable - an object that have `[Symbol.iterator]`
    */
   export function iterator<Value>(iterable: Iterable<Value>) {
     return iterable[Symbol.iterator]();
@@ -42,9 +42,9 @@ export namespace Iterable {
   /**
    * Create an iterable from `start` to `end` (excluded)
    *
-   * @param start inclusive minimum
-   * @param end exclusive maximum value
-   * @param step optional step between iteration
+   * @param start - inclusive minimum
+   * @param end - exclusive maximum value
+   * @param step - optional step between iteration
    */
   export function range(start: number, end: number, step?: number): Iterable<number> {
     const incrementValue = Math.abs(step ?? 1);
@@ -96,8 +96,8 @@ export namespace Iterable {
    * const iterable = [1, 2, 3];
    * Iterable.map(iterator, (value) => value * 2);// { next () { 2, 4, 6, done } }
    * ```
-   * @param source the iterable source
-   * @param mapFn a function that returns a new value
+   * @param source - the iterable source
+   * @param mapFn - a function that returns a new value
    */
   export function map<ValueFrom, ValueTo>(
     source: Iterable<ValueFrom>,
@@ -152,9 +152,9 @@ export namespace Iterable {
    * const iterable = [1, 2, 3];
    * Iterable.reduce(iterable, (total, value) => total + value, 0);// 6
    * ```
-   * @param source the iterator reduced
-   * @param reducer the reducer function
-   * @param initialValue the initial value passed to the reducer
+   * @param source - the iterator reduced
+   * @param reducer - the reducer function
+   * @param initialValue - the initial value passed to the reducer
    */
   export function reduce<Value, Return>(
     source: Iterable<Value>,
@@ -187,8 +187,8 @@ export namespace Iterable {
    * const right = ['a', 'b'];
    * Iterable.zip(left, right);// [[1, 'a'], [2, 'b']]
    * ```
-   * @param left Left iterable
-   * @param right Right iterable
+   * @param left - Left iterable
+   * @param right - Right iterable
    */
   export function zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
     return Iterable(() => {

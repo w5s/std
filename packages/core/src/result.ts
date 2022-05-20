@@ -48,7 +48,7 @@ export namespace Result {
    * Create a new `Ok` object
    *
    * @category Constructor
-   * @param resultValue the success value
+   * @param resultValue - the success value
    */
   export function Ok<V>(resultValue: V): Result<V, never> {
     return DataObject({
@@ -71,7 +71,7 @@ export namespace Result {
    * Create a new `Error` object
    *
    * @category Constructor
-   * @param resultError the failure value
+   * @param resultError - the failure value
    */
   export function Error<E>(resultError: E): Result<never, E> {
     return DataObject({
@@ -85,7 +85,7 @@ export namespace Result {
    * Return `true` if `anyValue` is {@link Result.Ok} or {@link Result.Error}
    *
    * @category Guard
-   * @param anyValue the value to tested
+   * @param anyValue - the value to tested
    */
   export function hasInstance(anyValue: unknown): anyValue is Result<unknown, unknown> {
     return (
@@ -114,7 +114,7 @@ export namespace Result {
    * console.log(Result.isOk(x));// false
    * ```
    * @category Guard
-   * @param anyValue the value to tested
+   * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
     return anyValue[DataObject.type] === Ok.typeName;
@@ -132,7 +132,7 @@ export namespace Result {
    * console.log(Result.isError(x));// true
    * ```
    * @category Guard
-   * @param anyValue the value to tested
+   * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {
     return anyValue[DataObject.type] === Error.typeName;
@@ -147,8 +147,8 @@ export namespace Result {
    * const result = Ok('foo');
    * Result.map(result, (value) => `${value}_bar`));// Ok('foo_bar')
    * ```
-   * @param result a Result object
-   * @param fn the mapper function
+   * @param result - a Result object
+   * @param fn - the mapper function
    */
   export function map<VFrom, VTo, E>(result: Result<VFrom, E>, fn: (value: VFrom) => VTo): Result<VTo, E> {
     return isOk(result) ? Ok(fn(result.value)) : result;
@@ -163,8 +163,8 @@ export namespace Result {
    * const result = Error('foo');
    * Result.mapError(result, (value) => `${value}_bar`));// Error('foo_bar')
    * ```
-   * @param result a Result object
-   * @param fn the error  mapper function
+   * @param result - a Result object
+   * @param fn - the error  mapper function
    */
   export function mapError<V, EFrom, ETo>(result: Result<V, EFrom>, fn: (error: EFrom) => ETo): Result<V, ETo> {
     return isOk(result) ? result : Error(fn(result.error));
@@ -182,7 +182,7 @@ export namespace Result {
    * Result.value(x);// Option.None
    * ```
    * @category Accessor
-   * @param result a Result object
+   * @param result - a Result object
    */
   export function value<V>(result: Ok<V> | Result<V, never>): Option.Some<V>;
   export function value(result: Error<unknown> | Result<never, unknown>): Option.None;
@@ -203,7 +203,7 @@ export namespace Result {
    * Result.error(x);// Option.Some('foo')
    * ```
    * @category Accessor
-   * @param result a Result object
+   * @param result - a Result object
    */
   export function error<E>(result: Error<E> | Result<never, E>): Option.Some<E>;
   export function error(result: Ok<unknown> | Result<unknown, never>): Option.None;
@@ -224,8 +224,8 @@ export namespace Result {
    * Result.getOrElse(x, () => 'bar');// 'bar'
    * ```
    * @category Accessor
-   * @param result a Result object
-   * @param getDefaultValue a function that returns default value
+   * @param result - a Result object
+   * @param getDefaultValue - a function that returns default value
    */
   export function getOrElse<V, VDefault>(result: Result<V, unknown>, getDefaultValue: () => VDefault): V | VDefault {
     return isOk(result) ? result.value : getDefaultValue();
@@ -244,7 +244,7 @@ export namespace Result {
    * Result.getOrThrow(x);// throw 'error'
    * ```
    * @category Accessor
-   * @param result a Result object
+   * @param result - a Result object
    */
   export function getOrThrow<V>(result: Result<V, unknown>): V {
     if (isOk(result)) {
@@ -263,8 +263,8 @@ export namespace Result {
    * Result.andThen(Result.Ok(4), square); // Result.Ok(16)
    * Result.andThen(Result.Error('TestError'), square); // Result.Error('TestError')
    * ```
-   * @param result a Result object
-   * @param fn a value mapping function
+   * @param result - a Result object
+   * @param fn - a value mapping function
    */
   export function andThen<VFrom, EFrom, VTo, ETo>(
     result: Result<VFrom, EFrom>,
@@ -283,8 +283,8 @@ export namespace Result {
    * Result.orElse(Result.Error('TestError'), square); // Result.Ok('TestError_handled')
    * Result.orElse(Result.Ok(4), square); // Result.Ok(4)
    * ```
-   * @param result a Result object
-   * @param fn a error mapping function
+   * @param result - a Result object
+   * @param fn - a error mapping function
    */
   export function orElse<VFrom, EFrom, VTo, ETo>(
     result: Result<VFrom, EFrom>,
@@ -310,8 +310,8 @@ export namespace Result {
    *  () => new FetchError()
    * );
    * ```
-   * @param block A function that will be called
-   * @param onError An error handler that transforms `unknown` to a normalized and typed error
+   * @param block - A function that will be called
+   * @param onError - An error handler that transforms `unknown` to a normalized and typed error
    */
   export function tryCall<V, E>(
     block: () => Promise<V>,

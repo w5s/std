@@ -44,7 +44,7 @@ export namespace Array {
    * Array.hasInstance(null)) // false
    * ```
    * @category Guard
-   * @param anyValue a tested value
+   * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Array<unknown> {
     return NativeArray.isArray(anyValue);
@@ -71,7 +71,7 @@ export namespace Array {
    * Array.of(1, 2, 3);// [1, 2, 3]
    * ```
    * @category Constructor
-   * @param items A set of items to include in the new array object.
+   * @param items - A set of items to include in the new array object.
    */
   export function of<Item>(...items: Item[]): Array<Item> {
     return readonly(items);
@@ -80,16 +80,16 @@ export namespace Array {
   /**
    * Creates an array from an iterable object.
    *
-   * @param array The array object
-   * @param iterable An iterable object to convert to an array.
+   * @param array - The array object
+   * @param iterable - An iterable object to convert to an array.
    */
   // export function from<Item>(iterable: Iterable<Item> | ArrayLike<Item>): Array<Item>;
   /**
    * Creates an array from an iterable object.
    *
-   * @param array The array object
-   * @param iterable An iterable object to convert to an array.
-   * @param mapFn A mapping function to call on every element of the array.
+   * @param array - The array object
+   * @param iterable - An iterable object to convert to an array.
+   * @param mapFn - A mapping function to call on every element of the array.
    */
   // export function from<ItemFrom, ItemTo>(
   //   iterable: Iterable<ItemFrom> | ArrayLike<ItemFrom>,
@@ -103,7 +103,7 @@ export namespace Array {
    * Return true if the size of the array is 0
    *
    * @category Guard
-   * @param array The array object
+   * @param array - The array object
    */
   export function isEmpty(array: ArrayLike<unknown>): boolean {
     return array.length === 0;
@@ -120,8 +120,8 @@ export namespace Array {
    * Array.at(array, 99) // Option.None
    * ```
    * @category Accessor
-   * @param array The array object
-   * @param index The zero based position
+   * @param array - The array object
+   * @param index - The zero based position
    */
   export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
     const arrayIndex = index < 0 ? index + array.length : index;
@@ -138,7 +138,7 @@ export namespace Array {
    * Array.size(['foo', 'bar']) // 2
    * ```
    * @category Accessor
-   * @param array The array object
+   * @param array - The array object
    */
   export function size(array: ArrayLike<unknown>): Int {
     return array.length as Int;
@@ -153,9 +153,9 @@ export namespace Array {
    * Array.indexOf(['a', '', 'a',  '', 'a'], 'a', 1); // 2
    * Array.indexOf(['a', 'b'], 'absent'); // -1
    * ```
-   * @param array The array object
-   * @param searchItem The item to locate in the array.
-   * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
+   * @param array - The array object
+   * @param searchItem - The item to locate in the array.
+   * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */
   export function indexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
     const returnValue = none;
@@ -200,9 +200,9 @@ export namespace Array {
    * Array.lastIndexOf(['a', 'b', 'a', 'b', 'a'], 'a', 4); // 2
    * Array.lastIndexOf(['a', 'b'], 'absent') // -1
    * ```
-   * @param array The array object
-   * @param searchItem The item to locate in the array.
-   * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
+   * @param array - The array object
+   * @param searchItem - The item to locate in the array.
+   * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
    */
   export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
     const returnValue = none;
@@ -252,9 +252,9 @@ export namespace Array {
    * Array.includes(['a', '', 'a',  '', 'a'], 'a', 1); // true
    * Array.includes(['a', 'b'], 'absent'); // false
    * ```
-   * @param array The array object
-   * @param searchItem The item to search for.
-   * @param fromIndex The position in this array at which to begin searching for searchItem.
+   * @param array - The array object
+   * @param searchItem - The item to search for.
+   * @param fromIndex - The position in this array at which to begin searching for searchItem.
    */
   export function includes<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): boolean {
     return indexOf(array, searchItem, fromIndex) !== none;
@@ -271,8 +271,8 @@ export namespace Array {
    * const double = (_: number) => _ * 2;
    * Array.map(array, double); // [2, 4, 6]
    * ```
-   * @param array The array object
-   * @param mapFn A function that accepts up to three arguments. The map method calls the function one time for each item in the array.
+   * @param array - The array object
+   * @param mapFn - A function that accepts up to three arguments. The map method calls the function one time for each item in the array.
    */
   export function map<FromItem, ToItem>(
     array: Array<FromItem>,
@@ -317,8 +317,8 @@ export namespace Array {
    * const concat = (_: string) => [_ + '_1', _ + '_2'];
    * Array.flatMap(array, concat); // ['a_1', 'a_2', 'b_1', 'b_2', 'c_1', 'c_2']
    * ```
-   * @param array The array object
-   * @param mapFn A function that accepts up to three arguments. The map method calls the function one time for each item in the array and returns an array that will be concatenated.
+   * @param array - The array object
+   * @param mapFn - A function that accepts up to three arguments. The map method calls the function one time for each item in the array and returns an array that will be concatenated.
    */
   export function flatMap<FromItem, ToItem>(
     array: Array<FromItem>,
@@ -352,9 +352,9 @@ export namespace Array {
    * const concat = (_: string, item: string) => _ + ':' + item;
    * Array.reduce(array, concat, '$') // '$foo:bar:baz'
    * ```
-   * @param array The array object
-   * @param reduceFn A function that accepts up to four arguments. The reduce method calls the function one time for each item in the array.
-   * @param initialValue Initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
+   * @param array - The array object
+   * @param reduceFn - A function that accepts up to four arguments. The reduce method calls the function one time for each item in the array.
+   * @param initialValue - Initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
    */
   export function reduce<Item, ReturnValue>(
     array: Array<Item>,
@@ -373,9 +373,9 @@ export namespace Array {
    * const concat = (_: string, item: string) => _ + ':' + item;
    * Array.reduceRight(array, concat, '$') // '$baz:bar:foo'
    * ```
-   * @param array The array object
-   * @param reduceFn A function that accepts up to four arguments. The reduce method calls the function one time for each item in the array.
-   * @param initialValue Initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
+   * @param array - The array object
+   * @param reduceFn - A function that accepts up to four arguments. The reduce method calls the function one time for each item in the array.
+   * @param initialValue - Initial value to start the accumulation. The first call to the callbackfn function provides this value as an argument instead of an array value.
    */
   export function reduceRight<Item, ReturnValue>(
     array: Array<Item>,
@@ -394,8 +394,8 @@ export namespace Array {
    * const isEven = (_: number) => _ % 2 === 0;
    * Array.filter(array, isEven); // [2, 4]
    * ```
-   * @param array The array object
-   * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each item in the array.
+   * @param array - The array object
+   * @param predicate - A function that accepts up to three arguments. The filter method calls the predicate function one time for each item in the array.
    */
   export function filter<Item, RefinedItem extends Item>(
     array: Array<Item>,
@@ -437,8 +437,8 @@ export namespace Array {
    * Array.some([1, 3], isEven); // false
    * Array.some([], (value) => true); // false
    * ```
-   * @param array The array object
-   * @param predicate The predicate function is called until it returns `true`, or until the end of the array.
+   * @param array - The array object
+   * @param predicate - The predicate function is called until it returns `true`, or until the end of the array.
    */
   export function some<Item>(
     array: Array<Item>,
@@ -457,8 +457,8 @@ export namespace Array {
    * Array.every([2, 4], isEven); // true
    * Array.every([], (value) => false); // true
    * ```
-   * @param array The array object
-   * @param predicate The predicate function is called until it returns `false`, or until the end of the array.
+   * @param array - The array object
+   * @param predicate - The predicate function is called until it returns `false`, or until the end of the array.
    */
   export function every<Item, RefinedItem extends Item>(
     array: Array<Item>,
@@ -484,8 +484,8 @@ export namespace Array {
    * Array.find(['aa', 'ab', 'abc'], (value) => (value[1] === 'b'));// Option.Some('ab')
    * Array.find(['a', 'b', 'a'], (value) => false);// Option.None
    * ```
-   * @param array The array object
-   * @param predicate find calls predicate once for each element of the array, in ascending
+   * @param array - The array object
+   * @param predicate - find calls predicate once for each element of the array, in ascending
    * order, until it finds one where predicate returns true. If such an element is found, find
    * immediately returns that element value. Otherwise, find returns Option.None.
    */
@@ -509,8 +509,8 @@ export namespace Array {
    * Array.findIndex(['a', 'b', 'a'], (value) => (value === 'a'));// Option.Some(0)
    * Array.findIndex(['a', 'b', 'a'], (value) => false);// Option.None
    * ```
-   * @param array The array object
-   * @param predicate find calls predicate once for each element of the array, in ascending
+   * @param array - The array object
+   * @param predicate - find calls predicate once for each element of the array, in ascending
    * order, until it finds one where predicate returns true. If such an element is found, find
    * immediately returns that element value. Otherwise, find returns Option.None.
    */
@@ -543,8 +543,8 @@ export namespace Array {
    * ```typescript
    * Array.sort([11, 2, 22, 1], (a, b) => a - b);// [1, 2, 11, 22]
    * ```
-   * @param array The array object
-   * @param compareFn Function used to determine the order of the items. It is expected to return
+   * @param array - The array object
+   * @param compareFn - Function used to determine the order of the items. It is expected to return
    * a negative value if first argument is less than second argument, zero if they're equal and a positive
    * value otherwise.
    */
@@ -563,9 +563,9 @@ export namespace Array {
    * ```typescript
    * Array.sort([1, 2, 3, 4], 1, 3);// [2, 3]
    * ```
-   * @param array The array object
-   * @param start The beginning of the specified portion of the array.
-   * @param end The end of the specified portion of the array. This is exclusive of the item at the index `end`.
+   * @param array - The array object
+   * @param start - The beginning of the specified portion of the array.
+   * @param end - The end of the specified portion of the array. This is exclusive of the item at the index `end`.
    */
   export function slice<Item>(array: Array<Item>, start?: Option<number>, end?: Option<number>): Array<Item> {
     const arrayLength = array.length;
@@ -602,8 +602,8 @@ export namespace Array {
    * ```typescript
    * Array.concat([1, 2], [3, 4], [5, 6]);// [1, 2, 3, 4, 5, 6]
    * ```
-   * @param array The array object
-   * @param extensions The other arrays to append
+   * @param array - The array object
+   * @param extensions - The other arrays to append
    */
   export function concat<Item>(array: Array<Item>, ...extensions: Array<Item>[]): Array<Item> {
     const extensionsLength = extensions.length;
@@ -635,7 +635,7 @@ export namespace Array {
    * ```typescript
    * Array.reverse([1, 2, 3]);// [3, 2, 1]
    * ```
-   * @param array The array object
+   * @param array - The array object
    */
   export function reverse<Item>(array: Array<Item>): Array<Item> {
     return map(array, reverseFunction);
@@ -663,9 +663,9 @@ export namespace Array {
    * ```typescript
    * Array.insertAt(['a', 'b', 'c'], 1, '$');// ['a', '$', 'b', 'c']
    * ```
-   * @param array The array object
-   * @param index The position of the inserted item in the array
-   * @param item The item to insert
+   * @param array - The array object
+   * @param index - The position of the inserted item in the array
+   * @param item - The item to insert
    */
   export function insertAt<Item>(array: Array<Item>, index: number, item: Item): Array<Item> {
     const arrayLength = array.length;
@@ -692,9 +692,9 @@ export namespace Array {
    * ```typescript
    * Array.updateAt(['a', 'b', 'c'], 1, '$');// ['a', '$', 'c']
    * ```
-   * @param array The array object
-   * @param index The position of the updated item in the array
-   * @param item The item to insert
+   * @param array - The array object
+   * @param index - The position of the updated item in the array
+   * @param item - The item to insert
    */
   export function updateAt<Item>(array: Array<Item>, index: number, item: Item): Array<Item> {
     const arrayLength = array.length;
@@ -721,8 +721,8 @@ export namespace Array {
    * ```typescript
    * Array.deletedAt([1, 2, 3, 4], 1);// [1, 3, 4]
    * ```
-   * @param array The array object
-   * @param index The position of the deleted item in the array
+   * @param array - The array object
+   * @param index - The position of the deleted item in the array
    */
   export function deleteAt<Item>(array: Array<Item>, index: number): Array<Item> {
     const arrayLength = array.length;
