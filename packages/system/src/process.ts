@@ -12,7 +12,7 @@ export namespace Process {
    * const exitTask = Process.exit(0);
    * Task.unsafeRun(exitTask);// Will exit program with code 0
    * ```
-   * @param code the exit code
+   * @param code - the exit code
    */
   export function exit(code: number): Task<never, never> {
     return Task(({ ok }) => ok(Internal.Process.exit(code)));
@@ -39,7 +39,7 @@ export namespace Process {
    * const task = Process.setCurrentDirectory(FilePath('other/directory'));
    * Task.unsafeRun(task);// Result.Ok(undefined)
    * ```
-   * @param directory the directory to set as the current working directory
+   * @param directory - the directory to set as the current working directory
    */
   export function setCurrentDirectory(directory: FilePath): Task<void, FileError> {
     // eslint-disable-next-line @typescript-eslint/unbound-method

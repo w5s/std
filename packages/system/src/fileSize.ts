@@ -17,7 +17,7 @@ export namespace FileSize {
    * ```ts
    * const size = FileSize.bytes(123);
    * ```
-   * @param amount The amount of bytes
+   * @param amount - The amount of bytes
    */
   export function bytes(amount: number): FileSize {
     return FileSize(amount);
@@ -30,7 +30,7 @@ export namespace FileSize {
    * ```ts
    * const size = FileSize.kilobytes(123);
    * ```
-   * @param amount The amount of kilobytes
+   * @param amount - The amount of kilobytes
    */
   export function kilobytes(amount: number): FileSize {
     return FileSize(amount * KILOBYTES);
@@ -43,7 +43,7 @@ export namespace FileSize {
    * ```ts
    * const size = FileSize.megabytes(123);
    * ```
-   * @param amount The amount of megabytes
+   * @param amount - The amount of megabytes
    */
   export function megabytes(amount: number): FileSize {
     return FileSize(amount * MEGABYTES);
@@ -56,7 +56,7 @@ export namespace FileSize {
    * ```ts
    * const size = FileSize.gigabytes(123);
    * ```
-   * @param amount The amount of gigabytes
+   * @param amount - The amount of gigabytes
    */
   export function gigabytes(amount: number): FileSize {
     return FileSize(amount * GIGABYTES);
@@ -69,7 +69,7 @@ export namespace FileSize {
    * ```ts
    * const size = FileSize.terabytes(123);
    * ```
-   * @param amount The amount of terabytes
+   * @param amount - The amount of terabytes
    */
   export function terabytes(amount: number): FileSize {
     return FileSize(amount * TERABYTES);

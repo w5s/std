@@ -12,9 +12,9 @@ import { readFileStatus, remove, _exists } from './fs.js';
  * const moveTask = move(FilePath('source'), FilePath('destination'));
  * Task.unsafeRun(moveTask);
  * ```
- * @param source The source path
- * @param destination The destination path
- * @param options The options to use
+ * @param source - The source path
+ * @param destination - The destination path
+ * @param options - The options to use
  */
 export function move(source: FilePath, destination: FilePath, options?: move.Options): Task<void, FileError> {
   return Task.andThen(readFileStatus(source), (sourceStatus) =>

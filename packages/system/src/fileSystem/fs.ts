@@ -94,7 +94,7 @@ export interface FileStatus {
  * const task = FileSystem.readSymbolicLinkStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```
- * @param filePath The path to the file
+ * @param filePath - The path to the file
  */
 export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, FileError> {
   return Task.map(errnoTask(Internal.FS.lstat as (p: string) => Promise<nodeFS.Stats>)(filePath), toFileStatus);
@@ -108,7 +108,7 @@ export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, Fil
  * const task = FileSystem.readFileStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```
- * @param filePath The path to the file
+ * @param filePath - The path to the file
  */
 export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> {
   return Task.map(errnoTask(Internal.FS.stat as (p: string) => Promise<nodeFS.Stats>)(filePath), toFileStatus);
@@ -232,9 +232,9 @@ export namespace remove {
  * const write = writeFile(FilePath('my/file'), 'my content');
  * Task.unsafeRun(write);
  * ```
- * @param file Path to the file to be read.
- * @param data The buffer that the data will be appended to.
- * @param options An object of write options
+ * @param file - Path to the file to be read.
+ * @param data - The buffer that the data will be appended to.
+ * @param options - An object of write options
  */
 export function writeFile(
   file: FilePath,
