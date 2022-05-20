@@ -52,7 +52,7 @@ npm install @w5s/core
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result, Console, Task } from '@w5s/core';
+import { Result, Console, Task, ignore } from '@w5s/core';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);
@@ -72,7 +72,7 @@ export function main() {
 }
 
 // runTask is impure and should be put at the edge of the program
-Task.unsafeRun(main()); // prints { _type: 'Result/Ok', value: 3.1 }
+ignore(Task.unsafeRun(main())); // prints { _type: 'Result/Ok', value: 3.1 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
