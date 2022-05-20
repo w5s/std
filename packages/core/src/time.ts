@@ -16,7 +16,7 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
  * ```typescript
  * const duration = TimeDuration(0);// typeof duration === 'number'
  * ```
- * @param milliseconds Number of milliseconds
+ * @param milliseconds - Number of milliseconds
  */
 export function TimeDuration(milliseconds: number): TimeDuration {
   invariant(TimeDuration.hasInstance(milliseconds), `${milliseconds} is not a valid duration value`);
@@ -49,7 +49,7 @@ export namespace TimeDuration {
    * const duration = TimeDuration.milliseconds(1);// 1
    * ```
    * @category Constructor
-   * @param amount Number of milliseconds
+   * @param amount - Number of milliseconds
    */
   export function milliseconds(amount: number) {
     return TimeDuration(amount);
@@ -63,7 +63,7 @@ export namespace TimeDuration {
    * const duration = TimeDuration.seconds(1);// 1000
    * ```
    * @category Constructor
-   * @param amount Number of seconds
+   * @param amount - Number of seconds
    */
   export function seconds(amount: number) {
     return TimeDuration(amount * SECONDS);
@@ -77,7 +77,7 @@ export namespace TimeDuration {
    * const duration = TimeDuration.minutes(1);// 1000 * 60
    * ```
    * @category Constructor
-   * @param amount Number of minutes
+   * @param amount - Number of minutes
    */
   export function minutes(amount: number) {
     return TimeDuration(amount * MINUTES);
@@ -91,7 +91,7 @@ export namespace TimeDuration {
    * const duration = TimeDuration.hours(1);// 1000 * 60 * 60
    * ```
    * @category Constructor
-   * @param amount Number of hours
+   * @param amount - Number of hours
    */
   export function hours(amount: number) {
     return TimeDuration(amount * HOURS);
@@ -105,7 +105,7 @@ export namespace TimeDuration {
    * const duration = TimeDuration.days(1);// 1000 * 60 * 60 * 24
    * ```
    * @category Constructor
-   * @param amount Number of days
+   * @param amount - Number of days
    */
   export function days(amount: number) {
     return TimeDuration(amount * DAYS);
@@ -121,7 +121,7 @@ export type Time = Tag<number, { time: 'ms' }>;
  * Create a new Time value
  *
  * @category Constructor
- * @param milliseconds the value in milliseconds
+ * @param milliseconds - the value in milliseconds
  */
 export function Time(milliseconds: number): Time {
   invariant(Time.hasInstance(milliseconds), `${milliseconds} is not a valid time value`);
@@ -146,7 +146,7 @@ export namespace Time {
    * ```typescript
    * Time.parseISOString('1970-01-01T00:00:00.000Z');// 0
    * ```
-   * @param str an expression
+   * @param str - an expression
    */
   export function parseISOString(str: string): Option<Time> {
     const time = Date.parse(str);
@@ -162,7 +162,7 @@ export namespace Time {
    * const time = Time(0);
    * Time.toISOString(time);// '1970-01-01T00:00:00.000Z'
    * ```
-   * @param time A time value
+   * @param time - A time value
    */
   export function toISOString(time: Time): string {
     return new Date(time).toISOString();
@@ -177,8 +177,8 @@ export namespace Time {
    * const duration = TimeDuration(10);
    * Time.add(now, duration);// now + 10ms
    * ```
-   * @param time A time value
-   * @param duration A duration value
+   * @param time - A time value
+   * @param duration - A duration value
    */
   export function add(time: Time, duration: TimeDuration): Time {
     return Time((time as number) + (duration as number));
@@ -193,8 +193,8 @@ export namespace Time {
    * const end = Time(10);
    * Time.diff(end, begin);// TimeDuration(10)
    * ```
-   * @param left A time value
-   * @param right A time value
+   * @param left - A time value
+   * @param right - A time value
    */
   export function diff(left: Time, right: Time): TimeDuration {
     return TimeDuration(left - right);
@@ -221,7 +221,7 @@ export namespace Time {
    * const logTime = Task.andThen(wait2s, (time) => Console.debug(time));
    * Task.unsafeRun(logTime);// wait 2 seconds then console.debug(Date.now())
    * ```
-   * @param duration delay in milliseconds to wait
+   * @param duration - delay in milliseconds to wait
    */
   export function delay(duration: TimeDuration): Task<Time, never> {
     return Task(

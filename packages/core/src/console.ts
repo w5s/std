@@ -19,7 +19,7 @@ export namespace Console {
    * ```typescript
    * Task.unsafeRun(Console.debug('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters an array of values to be logged
+   * @param parameters - an array of values to be logged
    */
   export function debug(...parameters: Parameters): Task<void, never> {
     return createTask('debug', parameters);
@@ -32,7 +32,7 @@ export namespace Console {
    * ```typescript
    * Task.unsafeRun(Console.log('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters an array of values to be logged
+   * @param parameters - an array of values to be logged
    */
   export function log(...parameters: Parameters): Task<void, never> {
     return createTask('log', parameters);
@@ -45,7 +45,7 @@ export namespace Console {
    * ```typescript
    * Task.unsafeRun(Console.info('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters an array of values to be logged
+   * @param parameters - an array of values to be logged
    */
   export function info(...parameters: Parameters): Task<void, never> {
     return createTask('info', parameters);
@@ -58,7 +58,7 @@ export namespace Console {
    * ```typescript
    * Task.unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters an array of values to be logged
+   * @param parameters - an array of values to be logged
    */
   export function warn(...parameters: Parameters): Task<void, never> {
     return createTask('warn', parameters);
@@ -71,7 +71,7 @@ export namespace Console {
    * ```typescript
    * Task.unsafeRun(Console.error('Hello', 'World !'));// > Hello World !
    * ```
-   * @param parameters an array of values to be logged
+   * @param parameters - an array of values to be logged
    */
   export function error(...parameters: Parameters): Task<void, never> {
     return createTask('error', parameters);

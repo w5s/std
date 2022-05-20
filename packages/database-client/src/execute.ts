@@ -17,8 +17,8 @@ import { DatabaseClientError } from './error.js';
  *   console.error(result.error);
  * }
  * ```
- * @param client created with a database adapter `createEnvironment(environmentConfig)` function
- * @param sqlOrQuery SQL query object or a raw sql statement
+ * @param client - created with a database adapter `createEnvironment(environmentConfig)` function
+ * @param sqlOrQuery - SQL query object or a raw sql statement
  */
 export function executeQuery(
   client: DatabaseClient,

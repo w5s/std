@@ -11,7 +11,7 @@ export namespace Random {
    * An invariant error is thrown when invalid number is given
    *
    * @category Constructor
-   * @param numeric numeric value >=0 and <=1
+   * @param numeric - numeric value >=0 and <=1
    */
   export function Value(numeric: number): Value {
     invariant(Value.hasInstance(numeric), `Random value should be between 0 and 1. Got ${numeric}`);
@@ -22,7 +22,7 @@ export namespace Random {
     /**
      * Return `true` if `anyValue` is a valid `Random.Value`
      *
-     * @param anyValue an unknown value to be refined
+     * @param anyValue - an unknown value to be refined
      */
     export function hasInstance(anyValue: unknown): anyValue is Value {
       return typeof anyValue === 'number' && !Number.isNaN(anyValue) && anyValue >= 0 && anyValue <= 1;
@@ -40,7 +40,7 @@ export namespace Random {
    * Task.unsafeRun(dummyGenerator); // 1
    * ```
    * @category Constructor
-   * @param getNextValue an impure function that returns a new value
+   * @param getNextValue - an impure function that returns a new value
    */
   export function Generator(getNextValue: () => Random.Value): Generator {
     return Task(({ ok }) => ok(getNextValue()));
@@ -59,7 +59,7 @@ export namespace Random {
      * const next = generator(-10, 10);
      * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
      * ```
-     * @param generator a base random generator
+     * @param generator - a base random generator
      */
     export function number(generator: Generator) {
       return (min: number, max: number): Task<number, never> =>
@@ -75,7 +75,7 @@ export namespace Random {
      * const next = generator(-10, 10);
      * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
      * ```
-     * @param generator a base random generator
+     * @param generator - a base random generator
      */
     export function int(generator: Generator) {
       const randomNumber = number(generator);
@@ -92,7 +92,7 @@ export namespace Random {
      * const next = generator(0.7);
      * Task.unsafeRun(next);// Result.Ok(true|false);
      * ```
-     * @param generator a base random generator
+     * @param generator - a base random generator
      */
     export function boolean(generator: Generator) {
       return (trueWeight = 0.5): Task<boolean, never> => Task.map(generator, (_) => _ > trueWeight);
@@ -113,8 +113,8 @@ export namespace Random {
    * const next = Random.number(generator)(-10, 10);
    * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
    * ```
-   * @param min the minimum inclusive bound for generated value
-   * @param max the maximum inclusive bound for generated value
+   * @param min - the minimum inclusive bound for generated value
+   * @param max - the maximum inclusive bound for generated value
    */
   export const number = Generator.number(defaultGenerator);
 
@@ -127,8 +127,8 @@ export namespace Random {
    * const next = Random.int(generator)(-10, 10);
    * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
    * ```
-   * @param min the minimum inclusive bound for generated value
-   * @param max the maximum inclusive bound for generated value
+   * @param min - the minimum inclusive bound for generated value
+   * @param max - the maximum inclusive bound for generated value
    */
   export const int = Generator.int(defaultGenerator);
 
@@ -141,7 +141,7 @@ export namespace Random {
    * const next = Random.boolean(generator)(0.7);
    * Task.unsafeRun(next);// Result.Ok(true|false);
    * ```
-   * @param trueWeight the probability to obtain true
+   * @param trueWeight - the probability to obtain true
    */
   export const boolean = Generator.boolean(defaultGenerator);
 }

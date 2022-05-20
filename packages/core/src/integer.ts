@@ -12,7 +12,7 @@ export type Int = Tag<number, { integral: true }>;
 
 /**
  * @category Constructor
- * @param value an initial numeric value
+ * @param value - an initial numeric value
  */
 export function Int(value: number): Int {
   return value < MIN_SAFE_INTEGER
@@ -82,7 +82,7 @@ export namespace Int {
    * Int.hasInstance(Int.max + 1);// false
    * ```
    * @category Guard
-   * @param anyValue a tested value
+   * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Int {
     return Number.isSafeInteger(anyValue);
@@ -97,8 +97,8 @@ export namespace Int {
    * Int.parse('1');// Option.Some(1)
    * Int.parse('invalid');// Option.None
    * ```
-   * @param expression an integer expression
-   * @param radix an optional base (ex: 10, 16)
+   * @param expression - an integer expression
+   * @param radix - an optional base (ex: 10, 16)
    */
   export function parse(expression: string, radix?: Radix36): Option<Int> {
     /* eslint-disable unicorn/prefer-number-properties */
@@ -115,8 +115,8 @@ export namespace Int {
    * Int.stringify(Int(1), 10);// '1'
    * Int.stringify(Int(10), 16);// 'A'
    * ```
-   * @param intValue an integer
-   * @param radix an optional base (ex: 10, 16)
+   * @param intValue - an integer
+   * @param radix - an optional base (ex: 10, 16)
    */
   export function stringify(intValue: Int, radix?: Radix36): string {
     return intValue.toString(radix);
