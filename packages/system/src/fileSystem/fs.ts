@@ -3,7 +3,7 @@ import type * as nodeFS from 'node:fs';
 import { FileError } from '../error.js';
 import { FileSize } from '../fileSize.js';
 import { Internal, errnoTask, errnoExceptionHandler } from '../internal.js';
-import { FilePath } from '../path.js';
+import { FilePath } from '../filePath.js';
 
 export type DeviceID = Tag<Int, { deviceID: true }>;
 

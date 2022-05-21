@@ -10,7 +10,7 @@ import {
   readSymbolicLinkStatus,
   readFileStatus,
 } from './fs.js';
-import { FilePath } from '../path.js';
+import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 

@@ -1,6 +1,6 @@
 import { Result } from '@w5s/core';
 import { errnoExceptionHandler, Internal } from './internal';
-import { FilePath } from './path';
+import { FilePath } from './filePath';
 import { Process } from './process';
 import { anyErrnoException, expectTask } from './_test/config';
 

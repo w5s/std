@@ -3,7 +3,7 @@ import { Option, Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import * as nodeProcess from 'node:process';
 import { FileError } from './error.js';
-import type { FilePath } from './path.js';
+import type { FilePath } from './filePath.js';
 
 export const Internal = {
   FS: { ...nodeFS.promises, ...nodeFS.constants },

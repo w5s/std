@@ -1,5 +1,5 @@
 import { Option } from '@w5s/core';
-import { FilePath } from './path';
+import { FilePath } from './filePath';
 
 describe('FilePath', () => {
   const absolutePath = (...parts: string[]) => (FilePath.separator + parts.join(FilePath.separator)) as FilePath;

@@ -1,7 +1,7 @@
 import { pipe, Task } from '@w5s/core';
 import { FileError } from '../error.js';
 import { errnoTask, Internal } from '../internal.js';
-import { FilePath } from '../path.js';
+import { FilePath } from '../filePath.js';
 import { readFileStatus, remove, _exists } from './fs.js';
 
 /**

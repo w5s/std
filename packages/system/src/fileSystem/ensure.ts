@@ -1,5 +1,5 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
-import { FilePath } from '../path.js';
+import { FilePath } from '../filePath.js';
 import { FileError } from '../error.js';
 import { readSymbolicLinkStatus, createDirectory, symlink, writeFile } from './fs.js';
 

@@ -1,5 +1,5 @@
 import { DataError, Option } from '@w5s/core';
-import type { FilePath } from './path.js';
+import type { FilePath } from './filePath.js';
 
 export const FileErrorType = {
   AlreadyExists: 'AlreadyExists',

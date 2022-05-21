@@ -1,6 +1,6 @@
 import { Option } from '@w5s/core';
 import { FileError } from './error';
-import { FilePath } from './path';
+import { FilePath } from './filePath';
 
 describe(FileError, () => {
   const anyPath = 'anyPath' as FilePath;

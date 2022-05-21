@@ -1,7 +1,7 @@
 import { Task } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import type { FilePath } from '../path';
+import type { FilePath } from '../filePath';
 import type { ErrnoException } from '../internal';
 // import * as url from 'node:url';
 
