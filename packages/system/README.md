@@ -22,13 +22,19 @@ npm install @w5s/fs
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { FileSystem } from '@w5s/fs';
-import { Task } from '@w5s/core';
+import { FileSystem, FilePath } from '@w5s/system';
+import { Task, Console } from '@w5s/core';
 
-export function main(): void {
-  const existTask = FileSystem.exists('some/file.txt');
-  console.log(Task.unsafeRun(existTask)); // > Result.Ok(false)
+export function program(): Task<void, never> {
+  const rootDirectory = FilePath('root_dir');
+  const file = FilePath.join(rootDirectory, 'file.txt');
+  const ensureTask = FileSystem.ensureFile(file);
+  const logTask = Task.andThen(ensureTask, () => Console.debug(`Directory ${file} ensured`));
+  const handledTask = Task.orElse(logTask, (error) => Console.error(`An error occurred: ${error.message}`));
+  return handledTask;
 }
+
+Task.unsafeRun(program());
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
