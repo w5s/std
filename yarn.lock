@@ -3098,7 +3098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/http-client@workspace:packages/http-client":
+"@w5s/http-client@^1.0.0-alpha.0, @w5s/http-client@workspace:packages/http-client":
   version: 0.0.0-use.local
   resolution: "@w5s/http-client@workspace:packages/http-client"
   dependencies:
@@ -3119,6 +3119,17 @@ __metadata:
   checksum: a6730eb24960a58fab0ff046b075927b886272fe05caa95be8d4311e239b1549671342001a722b080573a5e6d9fd08df8344eab4e58ea74c61069f6151e4fcf3
   languageName: node
   linkType: hard
+
+"@w5s/playground@workspace:packages/playground":
+  version: 0.0.0-use.local
+  resolution: "@w5s/playground@workspace:packages/playground"
+  dependencies:
+    "@w5s/core": ^1.0.0-alpha.0
+    "@w5s/http-client": ^1.0.0-alpha.0
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0
+  languageName: unknown
+  linkType: soft
 
 "@w5s/ts-config@npm:1.0.0-alpha.7":
   version: 1.0.0-alpha.7
