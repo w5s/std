@@ -83,7 +83,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/eslint-parser@npm:7.17.0, @babel/eslint-parser@npm:^7.0.0":
+"@babel/eslint-parser@npm:7.18.2":
+  version: 7.18.2
+  resolution: "@babel/eslint-parser@npm:7.18.2"
+  dependencies:
+    eslint-scope: ^5.1.1
+    eslint-visitor-keys: ^2.1.0
+    semver: ^6.3.0
+  peerDependencies:
+    "@babel/core": ">=7.11.0"
+    eslint: ^7.5.0 || ^8.0.0
+  checksum: dc9328cf3304b25c9029682e6b6196761e18d3ab80d66c3085a69c6f240fa2db91b824a61672e94139e73683b7ceeefe9ff58acac1ee89fe73274007b16e43d5
+  languageName: node
+  linkType: hard
+
+"@babel/eslint-parser@npm:^7.0.0":
   version: 7.17.0
   resolution: "@babel/eslint-parser@npm:7.17.0"
   dependencies:
@@ -3064,7 +3078,7 @@ __metadata:
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@babel/core": 7.18.2
-    "@babel/eslint-parser": 7.17.0
+    "@babel/eslint-parser": 7.18.2
     "@commitlint/cli": 17.0.1
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
