@@ -1,6 +1,22 @@
 import { DataError, Ref, Task, TimeDuration } from '@w5s/core';
 
-export interface TimeoutError extends DataError<{ name: 'TimeoutError'; delay: TimeDuration }> {}
+/**
+ * An error reported when a task times out
+ */
+export interface TimeoutError
+  extends DataError<{
+    name: 'TimeoutError';
+    /**
+     * The delay that was used
+     */
+    delay: TimeDuration;
+  }> {}
+
+/**
+ * TimeoutError constructor
+ *
+ * @category Constructor
+ */
 export const TimeoutError = DataError.Make<TimeoutError>('TimeoutError');
 
 /**
