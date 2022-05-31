@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { Option, Tag } from '@w5s/core';
+import { JSONValue, Option, Tag } from '@w5s/core';
 import { HTTPClient, parseJSON } from '@w5s/http-client';
-import { URL } from 'node:url';
 
 export interface SlackClient {
   readonly slackAPIToken: string;
@@ -21,7 +20,7 @@ export namespace SlackClient {
     return Id;
   }
 
-  export type URL = string;
+  // export type URL = string;
 
   export type ChannelId = Id<'Channel'>;
   export const ChannelId = MakeId<ChannelId>();
@@ -44,20 +43,26 @@ export namespace SlackClient {
   export type SubTeamId = Id<'SubTeam'>;
   export const SubTeamId = MakeId<SubTeamId>();
 
-  function apiCall(client: SlackClient, method: HTTPClient.Method, parameters: { [key: string]: unknown }) {
-    const urlObject = new URL(`https://slack.com/api/${method}`);
-    const requestParameters = {
-      token: client.slackAPIToken,
-      ...parameters,
-    };
-    for (const [key, value] of Object.entries(requestParameters)) {
+  function urlWithQuery(url: string, parameters: { [key: string]: string }) {
+    const urlObject = new URL(url);
+    for (const [key, value] of Object.entries(parameters)) {
       urlObject.searchParams.append(key, value);
     }
+    return urlObject.toString();
+  }
 
+  function apiCall<Response extends JSONValue>(
+    client: SlackClient,
+    method: HTTPClient.Method,
+    parameters: { [key: string]: unknown }
+  ) {
     return HTTPClient.request({
-      url: urlObject.toString(),
+      url: urlWithQuery(`https://slack.com/api/${method}`, {
+        token: client.slackAPIToken,
+        ...parameters,
+      }),
       method: 'POST',
-      parse: parseJSON<chat_postMessage.Response>('unsafe'),
+      parse: parseJSON<Response>('unsafe'),
     });
   }
 
