@@ -5,6 +5,16 @@ import { Task } from './task.js';
 import { TimeDuration, Time } from './time.js';
 
 describe(Time, () => {
+  jest.useFakeTimers();
+  const anyDuration = TimeDuration.seconds(12);
+  const setTimeoutSpy = jest.spyOn(globalThis, 'setTimeout');
+  const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
+  const dateNowSpy = jest.spyOn(Date, 'now');
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('()', () => {
     test('should throw invariant error', () => {
       expect(() => Time(-1)).toThrow('-1 is not a valid time value');
@@ -55,31 +65,31 @@ describe(Time, () => {
   describe('now', () => {
     test('should return Date.now()', async () => {
       const nowMs = 123;
-      jest.spyOn(Date, 'now').mockReturnValue(nowMs);
-      expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(123));
+      dateNowSpy.mockReturnValue(nowMs);
+      expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
     });
   });
   describe(Time.delay, () => {
     test('should return a task that resolves after duration', async () => {
-      const fakeNow = 123;
-      jest.useFakeTimers();
-      jest.spyOn(globalThis, 'setTimeout');
-      jest.spyOn(Date, 'now').mockReturnValue(fakeNow);
-      const duration = TimeDuration.seconds(1);
-      const task = Time.delay(duration);
-      expect(setTimeout).toHaveBeenCalledTimes(0);
+      const now = Date.now();
+      const task = Time.delay(anyDuration);
+      expect(setTimeoutSpy).toHaveBeenCalledTimes(0);
 
       const promise = Task.unsafeRun(task);
-      expect(setTimeout).toHaveBeenCalledTimes(1);
-      expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), duration);
+      expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
+      expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), anyDuration);
       jest.runAllTimers();
-      await expect(promise).resolves.toEqual(Result.Ok(fakeNow));
+      await expect(promise).resolves.toEqual(Result.Ok(now));
+    });
+    test.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
+      const now = Date.now();
+      const task = Time.delay(TimeDuration(delay));
+      const promise = Task.unsafeRun(task);
+      expect(setTimeoutSpy).not.toHaveBeenCalled();
+      jest.runAllTimers();
+      await expect(promise).resolves.toEqual(Result.Ok(now));
     });
     test('should be cancelable', () => {
-      const globalClearTimeout = jest.spyOn(globalThis, 'clearTimeout');
-      const globalSetTimeout = jest.spyOn(globalThis, 'setTimeout');
-      jest.useFakeTimers();
-
       const duration = TimeDuration.seconds(1);
       const task = Time.delay(duration);
 
@@ -90,7 +100,7 @@ describe(Time, () => {
       // Run task
       task[Task.run](resolve, reject, cancelerRef);
       // Memorize the last setTimeout call
-      const setTimeoutResult = globalSetTimeout.mock.results[globalSetTimeout.mock.results.length - 1]?.value;
+      const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 
       // Trigger cancellation
       Ref.read(cancelerRef)();
@@ -99,8 +109,8 @@ describe(Time, () => {
 
       expect(resolve).not.toHaveBeenCalled();
       expect(reject).not.toHaveBeenCalled();
-      expect(globalClearTimeout).toHaveBeenCalledTimes(1);
-      expect(globalClearTimeout).toHaveBeenLastCalledWith(setTimeoutResult);
+      expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
+      expect(clearTimeoutSpy).toHaveBeenLastCalledWith(setTimeoutResult);
     });
   });
 });

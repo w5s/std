@@ -224,23 +224,24 @@ export namespace Time {
    * @param duration - delay in milliseconds to wait
    */
   export function delay(duration: TimeDuration): Task<Time, never> {
-    return Task(
-      ({ ok, setCanceler }) =>
-        new Promise((resolve) => {
-          let timeoutId: ReturnType<typeof setTimeout> | undefined;
-          // Set Canceler
-          setCanceler(() => {
-            if (timeoutId != null) {
-              clearTimeout(timeoutId);
+    return Task(({ ok, setCanceler }) =>
+      duration <= 0
+        ? Promise.resolve(ok(Date.now() as Time))
+        : new Promise((resolve) => {
+            let timeoutId: ReturnType<typeof setTimeout> | undefined;
+            // Set Canceler
+            setCanceler(() => {
+              if (timeoutId != null) {
+                clearTimeout(timeoutId);
+                timeoutId = undefined;
+              }
+            });
+            // Run timeout
+            timeoutId = setTimeout(() => {
               timeoutId = undefined;
-            }
-          });
-          // Run timeout
-          timeoutId = setTimeout(() => {
-            timeoutId = undefined;
-            resolve(ok(Date.now() as Time));
-          }, duration);
-        })
+              resolve(ok(Date.now() as Time));
+            }, duration);
+          })
     );
   }
 }
