@@ -47,7 +47,7 @@ export const defaultRetryState: RetryState = RetryState({
 });
 
 export interface RetryPolicy {
-  (state: RetryState): Option<TimeDuration>;
+  (state: RetryState): Task<Option<TimeDuration>, never>;
 }
 export namespace RetryPolicy {
   /**
@@ -63,15 +63,16 @@ export namespace RetryPolicy {
    * @param policy - The policy to apply
    * @param state - The current state of the retry operation
    */
-  export function apply(policy: RetryPolicy, state: RetryState): Option<RetryState> {
-    const retryPreviousDelay = policy(state);
-    return Option.isNone(retryPreviousDelay)
-      ? retryPreviousDelay
-      : RetryState({
-          retryIndex: (+state.retryIndex + 1) as Int,
-          retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
-          retryPreviousDelay,
-        });
+  export function apply(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
+    return Task.map(policy(state), (retryPreviousDelay) =>
+      Option.isNone(retryPreviousDelay)
+        ? retryPreviousDelay
+        : RetryState({
+            retryIndex: (+state.retryIndex + 1) as Int,
+            retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
+            retryPreviousDelay,
+          })
+    );
   }
 
   /**
@@ -89,23 +90,22 @@ export namespace RetryPolicy {
    * @param right - The right policy
    */
   export function append(left: RetryPolicy, right: RetryPolicy): RetryPolicy {
-    return (state: RetryState) => {
-      const leftResult = left(state);
-      if (Option.isNone(leftResult)) {
-        return leftResult;
-      }
-      const rightResult = right(state);
-      if (Option.isNone(rightResult)) {
-        return rightResult;
-      }
-      return Math.max(+leftResult, +rightResult) as TimeDuration;
-    };
+    return (state: RetryState) =>
+      pipe([left(state), right(state)] as const).to(
+        (_) => Task.all(_),
+        (_) =>
+          Task.map(_, ([leftResult, rightResult]) =>
+            Option.isNone(leftResult) || Option.isNone(rightResult)
+              ? Option.None
+              : Option.Some(Math.max(+leftResult, +rightResult) as TimeDuration)
+          )
+      );
   }
 
   /**
    * A retry policy that never retries
    */
-  export const never: RetryPolicy = (_state) => Option.None;
+  export const never: RetryPolicy = (_state) => Task.resolve(Option.None);
 
   /**
    * A retry policy with a constant delay and unlimited retries.
@@ -119,7 +119,7 @@ export namespace RetryPolicy {
    * @param delay - The waiting delay between two attempts
    */
   export function wait(delay: TimeDuration): RetryPolicy {
-    return (_state) => delay;
+    return (_state) => Task.resolve(delay);
   }
 
   /**
@@ -135,7 +135,7 @@ export namespace RetryPolicy {
    * @param initialDelay - The initial delay
    */
   export function waitExponential(initialDelay: TimeDuration): RetryPolicy {
-    return (status) => Option.Some((initialDelay * 2 ** status.retryIndex) as TimeDuration);
+    return (status) => Task.resolve(Option.Some((initialDelay * 2 ** status.retryIndex) as TimeDuration));
   }
 
   /**
@@ -145,14 +145,15 @@ export namespace RetryPolicy {
    * @param count - The number of retries to allow
    */
   export function retries(count: Int): RetryPolicy {
-    return ({ retryIndex }) => (retryIndex >= count ? Option.None : Option.Some(0 as TimeDuration));
+    return ({ retryIndex }) => Task.resolve(retryIndex >= count ? Option.None : Option.Some(0 as TimeDuration));
   }
 
   function transform(
     policy: RetryPolicy,
     mapFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>
   ): RetryPolicy {
-    return (state) => Option.andThen(policy(state), (delayMs) => mapFn(delayMs, state));
+    return (state) =>
+      Task.map(policy(state), (delayMs) => (Option.isSome(delayMs) ? mapFn(delayMs, state) : Option.None));
   }
 
   /**
@@ -167,10 +168,11 @@ export namespace RetryPolicy {
 }
 
 export function waitForNextRetryState(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
-  const nextStatus = RetryPolicy.apply(policy, state);
-  return Option.isNone(nextStatus) || Option.isNone(nextStatus.retryPreviousDelay)
-    ? Task.resolve(nextStatus)
-    : Task.map(Time.delay(nextStatus.retryPreviousDelay), () => nextStatus);
+  return Task.andThen(RetryPolicy.apply(policy, state), (nextStatus) =>
+    Option.isNone(nextStatus) || Option.isNone(nextStatus.retryPreviousDelay)
+      ? Task.resolve(nextStatus)
+      : Task.map(Time.delay(nextStatus.retryPreviousDelay), () => nextStatus)
+  );
 }
 
 export function retrying<Value, Error>(
