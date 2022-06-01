@@ -1,4 +1,4 @@
-import { TimeDuration, Int, Option, Task, Result } from '@w5s/core';
+import { TimeDuration, Int, Option, Task, Result, Random } from '@w5s/core';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry';
 
 describe(RetryState, () => {
@@ -67,8 +67,22 @@ describe('RetryPolicy', () => {
   });
 
   describe(RetryPolicy.waitExponential, () => {
-    test('should return a constant delay', () => {
+    test('should return an exponential evolution of values', () => {
       expect(generateDelays(RetryPolicy.waitExponential(TimeDuration(1)), 5)).toEqual([1, 2, 4, 8, 16]);
+    });
+  });
+
+  describe(RetryPolicy.waitExponentialJitter, () => {
+    test.each([
+      [TimeDuration(1), 0, [0, 1, 2, 4, 8]],
+      [TimeDuration(1), 0.5, [0, 1, 3, 6, 12]],
+      [TimeDuration(1), 1, [0, 2, 4, 8, 16]],
+      [TimeDuration(2), 0, [1, 2, 4, 8, 16]],
+      [TimeDuration(2), 0.5, [1, 3, 6, 12, 24]],
+      [TimeDuration(3), 1, [2, 6, 12, 24, 48]],
+    ])('should return a custom value evolution with random', (base, rand, expected) => {
+      const generator = Random.Generator(() => rand as Random.Value);
+      expect(generateDelays(RetryPolicy.waitExponentialJitter(base, generator), 5)).toEqual(expected);
     });
   });
 

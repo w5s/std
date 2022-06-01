@@ -1,4 +1,4 @@
-import { Int, Option, pipe, Result, Task, Time, TimeDuration } from '@w5s/core';
+import { Int, Option, pipe, Random, Result, Task, Time, TimeDuration } from '@w5s/core';
 
 /**
  * A structure that represents the current state of a retry operation.
@@ -135,7 +135,31 @@ export namespace RetryPolicy {
    * @param initialDelay - The initial delay
    */
   export function waitExponential(initialDelay: TimeDuration): RetryPolicy {
-    return (status) => Task.resolve(Option.Some((initialDelay * 2 ** status.retryIndex) as TimeDuration));
+    return ({ retryIndex }) => Task.resolve(Option.Some((initialDelay * 2 ** retryIndex) as TimeDuration));
+  }
+
+  /**
+   * FullJitter exponential backoff as explained in AWS Architecture
+   * temp = min(cap, initialDelay * 2 ** attempt)
+   * sleep = temp / 2 + random_between(0, temp / 2)
+   *
+   * @see https://aws.amazon.com/fr/blogs/architecture/exponential-backoff-and-jitter/
+   * @category Constructor
+   * @example
+   * ```ts
+   * const initialDelay = TimeDuration.milliseconds(1);
+   * const policy = RetryPolicy.waitFullJitter(initialDelay); // 0ms, 1 + rand(0, 1) ms, 2 + rand(0, 2)ms, ...
+   * ```
+   * @param initialDelay - The initial delay
+   * @param generator - The random generator
+   */
+  export function waitExponentialJitter(initialDelay: TimeDuration, generator = Random.defaultGenerator): RetryPolicy {
+    return ({ retryIndex }) => {
+      const temporary = Int((initialDelay * 2 ** retryIndex) / 2);
+      return Task.map(Random.Generator.int(generator)(Int(0), temporary), (randomValue) =>
+        Option.Some((+temporary + +randomValue) as TimeDuration)
+      );
+    };
   }
 
   /**
