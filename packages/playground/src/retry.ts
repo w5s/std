@@ -158,7 +158,7 @@ export namespace RetryPolicy {
   }
 
   /**
-   * FullJitter exponential backoff as explained in AWS Architecture
+   * FullJitter exponential delay as explained in AWS Architecture
    * temp = min(cap, initialDelay * 2 ** attempt)
    * sleep = temp / 2 + random_between(0, temp / 2)
    *
