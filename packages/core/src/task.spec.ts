@@ -2,11 +2,12 @@
 /* eslint-disable max-classes-per-file */
 import { assertType } from './assert.js';
 import { AggregateError } from './error.js';
+import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
 import { Task } from './task.js';
 
-const anyObject = { foo: true };
+const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
 const anyError = new Error('TestError');
 const waitMs = (ms: number) =>
@@ -18,21 +19,29 @@ const waitMs = (ms: number) =>
 
 const generateTask = <V = never, E = never>(
   options: {
-    async?: boolean | undefined;
     canceler?: () => void;
-    delay?: number;
-  } & ({ value: V } | { error: E })
+    delayMs?: number;
+  } & ({ value: V } | { error: E } | { throwError: unknown })
 ) => {
-  const { canceler = () => {}, async } = options;
+  const { canceler = () => {} } = options;
+  const isAsync = options.delayMs != null && options.delayMs >= 0;
 
-  return async !== true
+  return isAsync !== true
     ? Task<V, E>(({ ok: resultOk, error: resultError }) =>
-        'value' in options ? resultOk(options.value) : resultError(options.error)
+        'value' in options
+          ? resultOk(options.value)
+          : 'error' in options
+          ? resultError(options.error)
+          : throwError(options.throwError)
       )
     : Task<V, E>(async ({ ok: resultOk, error: resultError, setCanceler }) => {
         setCanceler(canceler);
-        await waitMs(options.delay ?? 0);
-        return 'value' in options ? resultOk(options.value) : resultError(options.error);
+        await waitMs(options.delayMs ?? 0);
+        return 'value' in options
+          ? resultOk(options.value)
+          : 'error' in options
+          ? resultError(options.error)
+          : throwError(options.throwError);
       });
 };
 
@@ -121,6 +130,27 @@ describe('Task', () => {
     test('should run rejected task', async () => {
       const task = Task(() => Promise.reject(new Error('TestError')));
       await expect(Task.unsafeRun(task)).rejects.toEqual(new Error('TestError'));
+    });
+  });
+  describe(Task.unsafeRunOk, () => {
+    test('should run throwing task', () => {
+      const task = generateTask({ throwError: anyError });
+
+      expect(() => Task.unsafeRunOk(task)).toThrow(anyError);
+    });
+    test('should return the result of task[Task.run]() for sync', () => {
+      const task = generateTask({ value: anyObject });
+
+      expect(Task.unsafeRunOk(task)).toEqual(anyObject);
+    });
+    test('should return the result of task[Task.run]() for async', async () => {
+      const task = generateTask({ value: anyObject, delayMs: 1 });
+
+      await expect(Task.unsafeRunOk(task)).resolves.toEqual(anyObject);
+    });
+    test('should run rejected task', async () => {
+      const task = Task(() => Promise.reject(new Error('TestError')));
+      await expect(Task.unsafeRunOk(task)).rejects.toEqual(new Error('TestError'));
     });
   });
   describe(Task.resolve, () => {
@@ -313,10 +343,10 @@ describe('Task', () => {
     });
     test('should reject first error', async () => {
       const allTask = Task.all([
-        generateTask({ async: true, value: 'value1' }),
-        generateTask({ async: true, error: 'error1' }),
-        generateTask({ async: true, value: 'value2' }),
-        generateTask({ async: true, error: 'error2' }),
+        generateTask({ delayMs: 0, value: 'value1' }),
+        generateTask({ delayMs: 0, error: 'error1' }),
+        generateTask({ delayMs: 0, value: 'value2' }),
+        generateTask({ delayMs: 0, error: 'error2' }),
       ]);
       await ExpectTask.toReject(allTask, 'error1');
     });
@@ -328,8 +358,8 @@ describe('Task', () => {
         return {
           task:
             taskIndex === 0
-              ? generateTask({ async: true, error: `error${taskIndex}`, canceler })
-              : generateTask({ async: true, value: `value${taskIndex}`, canceler, delay: 100 }),
+              ? generateTask({ delayMs: 0, error: `error${taskIndex}`, canceler })
+              : generateTask({ delayMs: 100, value: `value${taskIndex}`, canceler }),
           canceler,
         };
       });
@@ -345,7 +375,7 @@ describe('Task', () => {
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
         const canceler = jest.fn();
         return {
-          task: generateTask({ async: true, value: `value${taskIndex}`, canceler, delay: 2 }),
+          task: generateTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
           canceler,
         };
       });
@@ -361,18 +391,18 @@ describe('Task', () => {
     });
     test('should resolve array of values', async () => {
       const allTask = Task.all([
-        generateTask<'value1', 'error1'>({ async: true, value: 'value1' }),
-        generateTask<'value2', 'error2'>({ async: true, value: 'value2' }),
-        generateTask<'value3', 'error3'>({ async: true, value: 'value3' }),
+        generateTask<'value1', 'error1'>({ delayMs: 0, value: 'value1' }),
+        generateTask<'value2', 'error2'>({ delayMs: 0, value: 'value2' }),
+        generateTask<'value3', 'error3'>({ delayMs: 0, value: 'value3' }),
       ]);
       assertType<typeof allTask, Task<['value1', 'value2', 'value3'], 'error1' | 'error2' | 'error3'>>(true);
       await ExpectTask.toResolve(allTask, ['value1', 'value2', 'value3']);
     });
     test('should handle iterable values', async () => {
       const taskArray = [
-        generateTask({ async: true, value: 'value1' }),
-        generateTask({ async: true, value: 'value2' }),
-        generateTask({ async: true, value: 'value3' }),
+        generateTask({ delayMs: 0, value: 'value1' }),
+        generateTask({ delayMs: 0, value: 'value2' }),
+        generateTask({ delayMs: 0, value: 'value3' }),
       ];
       const allTask = Task.all({
         [Symbol.iterator]: () => taskArray[Symbol.iterator](),
@@ -387,10 +417,10 @@ describe('Task', () => {
     });
     test('should resolve first value', async () => {
       const anyTask = Task.any([
-        generateTask({ async: true, value: 'value1' }),
-        generateTask({ async: true, error: 'error1' }),
-        generateTask({ async: true, value: 'value2' }),
-        generateTask({ async: true, error: 'error2' }),
+        generateTask({ delayMs: 0, value: 'value1' }),
+        generateTask({ delayMs: 0, error: 'error1' }),
+        generateTask({ delayMs: 0, value: 'value2' }),
+        generateTask({ delayMs: 0, error: 'error2' }),
       ]);
       await ExpectTask.toResolve(anyTask, 'value1');
     });
@@ -402,8 +432,8 @@ describe('Task', () => {
         return {
           task:
             taskIndex === 0
-              ? generateTask({ async: true, value: `value${taskIndex}`, canceler })
-              : generateTask({ async: true, error: `error${taskIndex}`, canceler, delay: 100 }),
+              ? generateTask({ delayMs: 0, value: `value${taskIndex}`, canceler })
+              : generateTask({ delayMs: 100, error: `error${taskIndex}`, canceler }),
           canceler,
         };
       });
@@ -420,7 +450,7 @@ describe('Task', () => {
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
         const canceler = jest.fn();
         return {
-          task: generateTask({ async: true, value: `value${taskIndex}`, canceler, delay: 2 }),
+          task: generateTask({ delayMs: 2, value: `value${taskIndex}`, canceler }),
           canceler,
         };
       });
@@ -436,9 +466,9 @@ describe('Task', () => {
     });
     test('should reject an aggregate of errors', async () => {
       const anyTask = Task.any([
-        generateTask<'value1', 'error1'>({ async: true, error: 'error1' }),
-        generateTask<'value2', 'error2'>({ async: true, error: 'error2' }),
-        generateTask<'value3', 'error3'>({ async: true, error: 'error3' }),
+        generateTask<'value1', 'error1'>({ delayMs: 0, error: 'error1' }),
+        generateTask<'value2', 'error2'>({ delayMs: 0, error: 'error2' }),
+        generateTask<'value3', 'error3'>({ delayMs: 0, error: 'error3' }),
       ]);
       assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
         true
@@ -447,9 +477,9 @@ describe('Task', () => {
     });
     test('should handle iterable values', async () => {
       const taskArray = [
-        generateTask({ async: true, value: 'value1', delay: 1 }),
-        generateTask({ async: true, value: 'value2' }),
-        generateTask({ async: true, value: 'value3', delay: 1 }),
+        generateTask({ delayMs: 1, value: 'value1' }),
+        generateTask({ delayMs: 0, value: 'value2' }),
+        generateTask({ delayMs: 1, value: 'value3' }),
       ];
       const anyTask = Task.any({
         [Symbol.iterator]: () => taskArray[Symbol.iterator](),
@@ -464,10 +494,10 @@ describe('Task', () => {
     });
     test('should resolve array of results', async () => {
       const anyTask = Task.allSettled([
-        generateTask({ async: true, value: 'value1' }),
-        generateTask({ async: true, error: 'error1' }),
-        generateTask({ async: true, value: 'value2' }),
-        generateTask({ async: true, error: 'error2' }),
+        generateTask({ delayMs: 0, value: 'value1' }),
+        generateTask({ delayMs: 0, error: 'error1' }),
+        generateTask({ delayMs: 0, value: 'value2' }),
+        generateTask({ delayMs: 0, error: 'error2' }),
       ]);
       await ExpectTask.toResolve(anyTask, [
         Result.Ok('value1'),
@@ -479,13 +509,13 @@ describe('Task', () => {
   });
   describe(Task.map, () => {
     test('should keep unchanged when failure', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: false, error: anyError });
+      const task = generateTask<typeof anyObject, typeof anyError>({ error: anyError });
       const mapTask = Task.map(task, (_) => ({ ..._, bar: true }));
 
       await ExpectTask.toReject(mapTask, anyError);
     });
     test('should map value when success', async () => {
-      const task = generateTask({ async: false, value: anyObject });
+      const task = generateTask({ value: anyObject });
       const mapTask = Task.map(task, (_) => ({ ..._, bar: true }));
       await ExpectTask.toResolve(mapTask, {
         ...anyObject,
@@ -493,7 +523,7 @@ describe('Task', () => {
       });
     });
     test('should map value when async success', async () => {
-      const task = generateTask({ async: true, value: anyObject });
+      const task = generateTask({ delayMs: 0, value: anyObject });
       const mapTask = Task.map(task, (_) => ({ ..._, bar: true }));
 
       await ExpectTask.toResolve(mapTask, {
@@ -502,7 +532,7 @@ describe('Task', () => {
       });
     });
     test('should forward canceler', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: true, value: anyObject });
+      const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.map(task, (_) => _);
       jest.spyOn(task, Task.run);
       const runReport = ExpectTask.run(mapTask);
@@ -513,13 +543,13 @@ describe('Task', () => {
 
   describe(Task.mapError, () => {
     test('should keep unchanged when success', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: false, value: anyObject });
+      const task = generateTask<typeof anyObject, typeof anyError>({ value: anyObject });
       const mapTask = Task.mapError(task, (_) => ({ ..._, bar: true }));
 
       await ExpectTask.toResolve(mapTask, anyObject);
     });
     test('should map error when success', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: false, error: anyError });
+      const task = generateTask<typeof anyObject, typeof anyError>({ error: anyError });
       const mapTask = Task.mapError(task, (_) => ({ ..._, bar: true }));
 
       await ExpectTask.toReject(mapTask, {
@@ -528,7 +558,7 @@ describe('Task', () => {
       });
     });
     test('should map error when async failure', async () => {
-      const task = generateTask({ async: true, error: anyError });
+      const task = generateTask({ delayMs: 0, error: anyError });
       const mapTask = Task.mapError(task, (_) => ({ ..._, bar: true }));
 
       await ExpectTask.toReject(mapTask, {
@@ -537,7 +567,7 @@ describe('Task', () => {
       });
     });
     test('should forward canceler', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: true, value: anyObject });
+      const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.mapError(task, (_) => _);
       jest.spyOn(task, Task.run);
       const runReport = ExpectTask.run(mapTask);
@@ -549,16 +579,19 @@ describe('Task', () => {
   describe(Task.andThen, () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
       const stringify = (num: number) =>
-        generateTask<string, 'TestError'>({ async: after === 'async', value: String(num) });
+        generateTask<string, 'TestError'>({ delayMs: after === 'async' ? 0 : undefined, value: String(num) });
 
       test('should return unchanged result when failure', async () => {
-        const task = generateTask<number, 'TestError'>({ async: before === 'async', error: 'TestError' });
+        const task = generateTask<number, 'TestError'>({
+          delayMs: before === 'async' ? 0 : undefined,
+          error: 'TestError',
+        });
         const thenTask = Task.andThen(task, stringify);
 
         await ExpectTask.toReject(thenTask, 'TestError');
       });
       test('should map value when success', async () => {
-        const task = generateTask<number, 'TestError'>({ async: before === 'async', value: 4 });
+        const task = generateTask<number, 'TestError'>({ delayMs: before === 'async' ? 0 : undefined, value: 4 });
         const thenTask = Task.andThen(task, stringify);
 
         await ExpectTask.toResolve(thenTask, '4');
@@ -566,8 +599,8 @@ describe('Task', () => {
     });
 
     test('should forward canceler', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: true, value: anyObject });
-      const afterTask = generateTask<typeof anyObject, typeof anyError>({ async: true, value: anyObject });
+      const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
+      const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.andThen(task, (_) => afterTask);
       jest.spyOn(task, Task.run);
       jest.spyOn(afterTask, Task.run);
@@ -584,8 +617,8 @@ describe('Task', () => {
 
   describe(Task.andRun, () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
-      const task = generateTask({ async: before === 'async', value: anyObject });
-      const andTask = generateTask({ async: after === 'async', value: anyOtherObject });
+      const task = generateTask({ delayMs: before === 'async' ? 0 : undefined, value: anyObject });
+      const andTask = generateTask({ delayMs: after === 'async' ? 0 : undefined, value: anyOtherObject });
 
       test('should return a new task with same value', async () => {
         await ExpectTask.toResolve(
@@ -612,23 +645,29 @@ describe('Task', () => {
   describe(Task.orElse, () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
       const handleError = (message: string) =>
-        generateTask<string, string>({ async: after === 'async', value: `${message}_handled` });
+        generateTask<string, string>({ delayMs: after === 'async' ? 0 : undefined, value: `${message}_handled` });
 
       test('should return unchanged result when Result.Ok', async () => {
-        const task = generateTask<string, 'TestError'>({ async: before === 'async', value: 'anyValue' });
+        const task = generateTask<string, 'TestError'>({
+          delayMs: before === 'async' ? 0 : undefined,
+          value: 'anyValue',
+        });
         const taskElse = Task.orElse(task, handleError);
         await ExpectTask.toResolve(taskElse, 'anyValue');
       });
       test('should map value when Result.Ok', async () => {
-        const task = generateTask<string, 'TestError'>({ async: before === 'async', error: 'TestError' });
+        const task = generateTask<string, 'TestError'>({
+          delayMs: before === 'async' ? 0 : undefined,
+          error: 'TestError',
+        });
         const taskElse = Task.orElse(task, handleError);
         await ExpectTask.toResolve(taskElse, 'TestError_handled');
       });
     });
 
     test('should forward canceler', async () => {
-      const task = generateTask<typeof anyObject, typeof anyError>({ async: true, error: anyError });
-      const afterTask = generateTask<typeof anyObject, typeof anyError>({ async: true, value: anyObject });
+      const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, error: anyError });
+      const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.orElse(task, (_) => afterTask);
       jest.spyOn(task, Task.run);
       jest.spyOn(afterTask, Task.run);

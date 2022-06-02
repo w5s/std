@@ -4,14 +4,6 @@ import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 import { AggregateError } from './error.js';
 
-// inline private constructors
-function createOk<V>(value: V): Result<V, never> {
-  return { _type: 'Result/Ok', value };
-}
-function createError<E>(error: E): Result<never, E> {
-  return { _type: 'Result/Error', error };
-}
-
 /**
  * Base type for Task
  *
@@ -66,8 +58,8 @@ export function Task<Value, Error = never>(
   return Task.wrap((_resolve, _reject, cancelerRef) => {
     resetCanceler(cancelerRef);
     const resultOrPromise = sideEffect({
-      ok: createOk,
-      error: createError,
+      ok: resultOk,
+      error: resultError,
       setCanceler: (canceler) => {
         cancelerRef.current = canceler ?? Task.defaultCanceler;
       },
@@ -338,11 +330,11 @@ export namespace Task {
         };
         state.runAll(
           (value, entry, index) => {
-            results[index] = createOk(value);
+            results[index] = resultOk(value);
             finish();
           },
           (error, entry, index) => {
-            results[index] = createError(error);
+            results[index] = resultError(error);
             finish();
           }
         );
@@ -556,8 +548,8 @@ export namespace Task {
     };
     let rejectHandler = (_error: unknown) => {};
     const runValue: void | Promise<void> = task[Task.run](
-      (value) => resolveHandler(createOk(value)),
-      (error) => resolveHandler(createError(error)),
+      (value) => resolveHandler(resultOk(value)),
+      (error) => resolveHandler(resultError(error)),
       cancelerRef
     );
     // Try to catch promise errors
@@ -573,8 +565,41 @@ export namespace Task {
 
     return returnValue;
   }
+
+  /**
+   * Run `task` that never fails and return the value or a promise of the value
+   *
+   * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+   * @example
+   * ```typescript
+   * const getMessage = Task.resolve('Hello World!');
+   * const messageResult = Task.unsafeRunOk(getMessage);// 'Hello World!'
+   * ```
+   * @param task - the task to be run
+   */
+  export function unsafeRunOk<Value>(task: Task<Value, never>): Awaitable<Value> {
+    const promiseOrValue = unsafeRun(task);
+    // @ts-ignore - we assume PromiseLike.then returns a Promise
+    return isPromise(promiseOrValue) ? promiseOrValue.then(unsafeResultValue) : unsafeResultValue(promiseOrValue);
+  }
 }
 
+// inline private constructors
+function resultOk<V>(value: V): Result<V, never> {
+  return { _type: 'Result/Ok', value };
+}
+function resultError<E>(error: E): Result<never, E> {
+  return { _type: 'Result/Error', error };
+}
+function unsafeResultValue<V, E>(result: Result<V, E>) {
+  if (result._type === 'Result/Ok') {
+    return result.value;
+  }
+  // eslint-disable-next-line @typescript-eslint/no-throw-literal
+  throw result.error;
+}
+
+// utils
 function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
   return typeof anyValue === 'object' && anyValue !== null;
 }
