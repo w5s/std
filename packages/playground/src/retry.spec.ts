@@ -6,8 +6,8 @@ describe(RetryState, () => {
     expect(
       RetryState({
         retryIndex: Int(1),
-        retryCumulativeDelay: TimeDuration.milliseconds(2),
-        retryPreviousDelay: TimeDuration.milliseconds(3),
+        retryCumulativeDelay: TimeDuration(2),
+        retryPreviousDelay: TimeDuration(3),
       })
     ).toEqual({
       retryIndex: 1,
@@ -35,8 +35,8 @@ describe('defaultRetryState', () => {
 describe('RetryPolicy', () => {
   const anyState = RetryState({
     retryIndex: Int(1),
-    retryCumulativeDelay: TimeDuration.milliseconds(2),
-    retryPreviousDelay: TimeDuration.milliseconds(3),
+    retryCumulativeDelay: TimeDuration(2),
+    retryPreviousDelay: TimeDuration(3),
   });
   const anyDuration = TimeDuration(123);
   const unsafeRunOk = <V>(task: Task<V, never>): V | Promise<V> => {
@@ -143,17 +143,17 @@ describe('RetryPolicy', () => {
       expect(unsafeRunOk(RetryPolicy.apply(policy, anyState))).toEqual(Option.None);
     });
     test('should return a new state', () => {
-      const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.milliseconds(1)));
+      const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration(1)));
       const state = RetryState({
         retryIndex: Int(1),
-        retryCumulativeDelay: TimeDuration.milliseconds(2),
-        retryPreviousDelay: TimeDuration.milliseconds(3),
+        retryCumulativeDelay: TimeDuration(2),
+        retryPreviousDelay: TimeDuration(3),
       });
       expect(unsafeRunOk(RetryPolicy.apply(policy, state))).toEqual(
         RetryState({
           retryIndex: Int(2),
-          retryCumulativeDelay: TimeDuration.milliseconds(3),
-          retryPreviousDelay: TimeDuration.milliseconds(1),
+          retryCumulativeDelay: TimeDuration(3),
+          retryPreviousDelay: TimeDuration(1),
         })
       );
     });
@@ -165,17 +165,17 @@ describe('RetryPolicy', () => {
       await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, anyState))).resolves.toEqual(Option.None);
     });
     test('should return a new state', async () => {
-      const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.milliseconds(1)));
+      const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration(1)));
       const state = RetryState({
         retryIndex: Int(1),
-        retryCumulativeDelay: TimeDuration.milliseconds(2),
-        retryPreviousDelay: TimeDuration.milliseconds(3),
+        retryCumulativeDelay: TimeDuration(2),
+        retryPreviousDelay: TimeDuration(3),
       });
       await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, state))).resolves.toEqual(
         RetryState({
           retryIndex: Int(2),
-          retryCumulativeDelay: TimeDuration.milliseconds(3),
-          retryPreviousDelay: TimeDuration.milliseconds(1),
+          retryCumulativeDelay: TimeDuration(3),
+          retryPreviousDelay: TimeDuration(1),
         })
       );
     });
