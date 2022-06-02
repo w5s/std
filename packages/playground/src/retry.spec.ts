@@ -159,6 +159,28 @@ describe('RetryPolicy', () => {
     });
   });
 
+  describe(RetryPolicy.applyAndDelay, () => {
+    test('should None when policy returns None', async () => {
+      const policy: RetryPolicy = (_state) => Task.resolve(Option.None);
+      await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, anyState))).resolves.toEqual(Option.None);
+    });
+    test('should return a new state', async () => {
+      const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.milliseconds(1)));
+      const state = RetryState({
+        retryIndex: Int(1),
+        retryCumulativeDelay: TimeDuration.milliseconds(2),
+        retryPreviousDelay: TimeDuration.milliseconds(3),
+      });
+      await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, state))).resolves.toEqual(
+        RetryState({
+          retryIndex: Int(2),
+          retryCumulativeDelay: TimeDuration.milliseconds(3),
+          retryPreviousDelay: TimeDuration.milliseconds(1),
+        })
+      );
+    });
+  });
+
   describe(RetryPolicy.append, () => {
     test('should return None if left returns None', () => {
       const left = RetryPolicy.never;
