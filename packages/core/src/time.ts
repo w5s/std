@@ -1,8 +1,16 @@
 /* eslint-disable no-bitwise */
 import { invariant } from './assert.js';
 import type { Option } from './option.js';
-import { Task } from './task.js';
+import type { Task } from './task.js';
 import type { Tag } from './type.js';
+
+// Inline private constructor
+const createTask: typeof Task.wrap = (fn) => ({
+  'Task/run': fn,
+});
+// Call a function as a microtask
+const callImmediate: typeof globalThis.queueMicrotask =
+  typeof queueMicrotask !== 'undefined' ? queueMicrotask : (fn) => Promise.resolve().then(fn);
 
 /**
  * Represent a duration in milliseconds
@@ -210,7 +218,7 @@ export namespace Time {
    * });
    * ```
    */
-  export const now = Task<Time, never>(({ ok }) => ok(Date.now() as Time));
+  export const now: Task<Time, never> = createTask((resolve) => resolve(Date.now() as Time));
 
   /**
    * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
@@ -224,24 +232,25 @@ export namespace Time {
    * @param duration - delay in milliseconds to wait
    */
   export function delay(duration: TimeDuration): Task<Time, never> {
-    return Task(({ ok, setCanceler }) =>
-      duration <= 0
-        ? Promise.resolve(ok(Date.now() as Time))
-        : new Promise((resolve) => {
-            let timeoutId: ReturnType<typeof setTimeout> | undefined;
-            // Set Canceler
-            setCanceler(() => {
-              if (timeoutId != null) {
-                clearTimeout(timeoutId);
-                timeoutId = undefined;
-              }
-            });
-            // Run timeout
-            timeoutId = setTimeout(() => {
-              timeoutId = undefined;
-              resolve(ok(Date.now() as Time));
-            }, duration);
-          })
-    );
+    return createTask((resolve, _reject, cancelerRef) => {
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+      if (duration <= 0) {
+        callImmediate(() => resolve(Date.now() as Time));
+      } else {
+        // Set Canceler
+        cancelerRef.current = () => {
+          if (timeoutId != null) {
+            clearTimeout(timeoutId);
+            timeoutId = undefined;
+          }
+        };
+        // Run timeout
+        timeoutId = setTimeout(() => {
+          timeoutId = undefined;
+          resolve(Date.now() as Time);
+        }, duration);
+      }
+    });
   }
 }
