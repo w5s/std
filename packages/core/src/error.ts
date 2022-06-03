@@ -1,4 +1,4 @@
-import { DataObject } from './data';
+import type { DataObject } from './data';
 import type { Option } from './option';
 
 export type DataError<Properties extends { name: string }> = DataObject<
@@ -42,7 +42,7 @@ export function DataError<Properties extends { name: string; message?: string; c
 
   // eslint-disable-next-line unicorn/error-message,@typescript-eslint/no-unsafe-assignment
   const returnValue: MutableError = new Error('') as any;
-  returnValue[DataObject.type] = DataError.typeName;
+  returnValue['_type'] = DataError.typeName;
 
   // Assign properties
   Object.assign(returnValue, properties);
