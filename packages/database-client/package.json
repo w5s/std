@@ -30,7 +30,9 @@
     "lib/**/!(*.spec).d.ts",
     "lib/**/!(*.spec).js.map",
     "lib/**/!(*.spec).js",
-    "src/**/!(*.spec).ts"
+    "src/**/!(*.spec).ts",
+    "!example/**/*",
+    "!*.cjs"
   ],
   "scripts": {
     "build": "npm run build:src",
