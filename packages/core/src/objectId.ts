@@ -1,5 +1,5 @@
 import type { Int } from './integer.js';
-import { Tag } from './type.js';
+import type { Tag } from './type.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type AnyObject = Record<string | symbol | number, unknown>;
