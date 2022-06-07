@@ -8,9 +8,11 @@ export namespace FileSystem {
   export const { ensureDirectory, ensureFile, ensureSymbolicLink } = fsEnsureDirectory;
   export const {
     createDirectory,
+    createSymbolicLink,
     copyFile,
     listDirectory,
     readFileStatus,
+    readSymbolicLink,
     readSymbolicLinkStatus,
     remove,
     rename,

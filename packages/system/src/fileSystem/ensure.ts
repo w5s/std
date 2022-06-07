@@ -1,7 +1,7 @@
 import { Task, Option, ignore, pipe } from '@w5s/core';
 import { FilePath } from '../filePath.js';
 import { FileError } from '../error.js';
-import { readSymbolicLinkStatus, createDirectory, symlink, writeFile } from './fs.js';
+import { readSymbolicLinkStatus, createDirectory, createSymbolicLink, writeFile } from './fs.js';
 
 type FileType = 'file' | 'directory' | 'symlink';
 
@@ -24,7 +24,7 @@ export function ensureFile(filePath: FilePath): Task<void, FileError> {
 export function ensureSymbolicLink(source: FilePath, destination: FilePath): Task<void, FileError> {
   return Task.andThen(linkStat(destination), (destinationLinkType) =>
     Option.isNone(destinationLinkType)
-      ? Task.andThen(ensureDirectory(FilePath.dirname(destination)), () => symlink(source, destination))
+      ? Task.andThen(ensureDirectory(FilePath.dirname(destination)), () => createSymbolicLink(source, destination))
       : ensureType(destination, 'symlink', destinationLinkType)
   );
 }
