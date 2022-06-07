@@ -3,6 +3,16 @@ import { FileError } from '../error.js';
 import { listDirectory, createDirectory, remove } from './fs.js';
 import { FilePath } from '../filePath.js';
 
+/**
+ * Ensures that a directory is empty. Deletes directory contents if the directory is not empty. If the directory does not exist, it is created. The directory itself is not deleted.
+ *
+ * @example
+ * ```ts
+ * const task = emptyDirectory(FilePath('/path/to/directory'));
+ * await Task.unsafeRun(task);// Will delete directory contents
+ * ```
+ * @param filePath - The directory to empty
+ */
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
   return pipe(listDirectory(filePath)).to(
     (_) =>
