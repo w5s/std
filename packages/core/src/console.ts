@@ -1,16 +1,19 @@
 /* eslint-disable no-console */
-import { Task } from './task.js';
+import type { Task } from './task.js';
 
 export namespace Console {
   type Parameters = [required: unknown, ...optionalParameters: unknown[]];
 
-  function createTask(method: 'debug' | 'log' | 'info' | 'warn' | 'error', message: Parameters): Task<void, never> {
-    return Task(({ ok }) => {
+  const createLogTask = (
+    method: 'debug' | 'log' | 'info' | 'warn' | 'error',
+    message: Parameters
+  ): Task<void, never> => ({
+    'Task/run': (resolve) => {
       console[method](...message);
 
-      return ok(undefined);
-    });
-  }
+      resolve(undefined);
+    },
+  });
 
   /**
    * Display a message in console with `debug` level
@@ -22,7 +25,7 @@ export namespace Console {
    * @param parameters - an array of values to be logged
    */
   export function debug(...parameters: Parameters): Task<void, never> {
-    return createTask('debug', parameters);
+    return createLogTask('debug', parameters);
   }
 
   /**
@@ -35,7 +38,7 @@ export namespace Console {
    * @param parameters - an array of values to be logged
    */
   export function log(...parameters: Parameters): Task<void, never> {
-    return createTask('log', parameters);
+    return createLogTask('log', parameters);
   }
 
   /**
@@ -48,7 +51,7 @@ export namespace Console {
    * @param parameters - an array of values to be logged
    */
   export function info(...parameters: Parameters): Task<void, never> {
-    return createTask('info', parameters);
+    return createLogTask('info', parameters);
   }
 
   /**
@@ -61,7 +64,7 @@ export namespace Console {
    * @param parameters - an array of values to be logged
    */
   export function warn(...parameters: Parameters): Task<void, never> {
-    return createTask('warn', parameters);
+    return createLogTask('warn', parameters);
   }
 
   /**
@@ -74,6 +77,6 @@ export namespace Console {
    * @param parameters - an array of values to be logged
    */
   export function error(...parameters: Parameters): Task<void, never> {
-    return createTask('error', parameters);
+    return createLogTask('error', parameters);
   }
 }

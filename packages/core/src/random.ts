@@ -110,7 +110,7 @@ export namespace Random {
    *
    * @example
    * ```typescript
-   * const next = Random.number(generator)(-10, 10);
+   * const next = Random.number(-10, 10);
    * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
    * ```
    * @param min - the minimum inclusive bound for generated value
@@ -124,7 +124,7 @@ export namespace Random {
    *
    * @example
    * ```typescript
-   * const next = Random.int(generator)(-10, 10);
+   * const next = Random.int(-10, 10);
    * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
    * ```
    * @param min - the minimum inclusive bound for generated value
@@ -138,7 +138,7 @@ export namespace Random {
    *
    * @example
    * ```typescript
-   * const next = Random.boolean(generator)(0.7);
+   * const next = Random.boolean(0.7);
    * Task.unsafeRun(next);// Result.Ok(true|false);
    * ```
    * @param trueWeight - the probability to obtain true

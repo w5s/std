@@ -1,15 +1,9 @@
 {
-  "name": "@w5s/http-client",
+  "name": "@w5s/playground",
   "version": "1.0.0-alpha.0",
-  "description": "HTTP Client module",
-  "keywords": [
-    "fp",
-    "functional",
-    "http",
-    "client",
-    "fetch"
-  ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/fetch#readme",
+  "private": true,
+  "description": "Examples",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/playground#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
@@ -20,16 +14,7 @@
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
   "type": "module",
-  "exports": "./lib/index.js",
-  "typings": "./lib/index.d.ts",
-  "files": [
-    "lib/**/!(*.spec).d.ts",
-    "lib/**/!(*.spec).js.map",
-    "lib/**/!(*.spec).js",
-    "src/**/!(*.spec).ts",
-    "!example/**/*",
-    "!*.cjs"
-  ],
+  "files": [],
   "scripts": {
     "build": "npm run build:src",
     "build:src": "tsc",
@@ -43,13 +28,10 @@
     "validate": "npm run build && npm run test"
   },
   "dependencies": {
-    "@w5s/core": "^1.0.0-alpha.0"
+    "@w5s/core": "^1.0.0-alpha.0",
+    "@w5s/http-client": "^1.0.0-alpha.0"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "typedocMain": "./src/index.ts"
+  }
 }

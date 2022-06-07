@@ -1,12 +1,12 @@
-import { Ref, Task } from '@w5s/core';
+import type { Ref, Task } from '@w5s/core';
 // @ts-ignore Avoid depending on @types/uuid for just one line of code
 import { v4 as uuidV4 } from 'uuid';
 import { UUID } from './data.js';
 
-const randomUUIDRef: Ref<() => UUID> = Ref<() => UUID>(
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  uuidV4
-);
+const randomUUIDRef: Ref<() => UUID> = {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  current: uuidV4,
+};
 
 /**
  * A task that returns a new `UUID`
@@ -19,9 +19,9 @@ const randomUUIDRef: Ref<() => UUID> = Ref<() => UUID>(
  * }));
  * ```
  */
-export const randomUUID = Object.assign(
-  Task<UUID, never>(({ ok }) => ok(randomUUIDRef.current())),
-  {
-    ref: randomUUIDRef,
-  }
-);
+export const randomUUID: Task<UUID, never> & {
+  ref: Ref<() => UUID>;
+} = {
+  'Task/run': (resolve) => resolve(randomUUIDRef.current()),
+  ref: randomUUIDRef,
+};

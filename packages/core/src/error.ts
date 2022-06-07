@@ -1,5 +1,5 @@
-import { DataObject } from './data';
-import { Option } from './option';
+import type { DataObject } from './data';
+import type { Option } from './option';
 
 export type DataError<Properties extends { name: string }> = DataObject<
   {
@@ -42,7 +42,7 @@ export function DataError<Properties extends { name: string; message?: string; c
 
   // eslint-disable-next-line unicorn/error-message,@typescript-eslint/no-unsafe-assignment
   const returnValue: MutableError = new Error('') as any;
-  returnValue[DataObject.type] = DataError.typeName;
+  returnValue['_type'] = DataError.typeName;
 
   // Assign properties
   Object.assign(returnValue, properties);
@@ -166,11 +166,19 @@ export namespace DataError {
   }
 }
 
+/**
+ * An error to aggregate multiple errors
+ */
 export interface AggregateError<Errors extends any[]>
   extends DataError<{
     name: 'AggregateError';
     errors: Readonly<[...Errors]>;
   }> {}
+/**
+ * AggregateError constructor
+ *
+ * @category Constructor
+ */
 export const AggregateError = DataError.MakeGeneric(
   'AggregateError',
   (create) =>

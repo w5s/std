@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-yields */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
