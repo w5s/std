@@ -36,22 +36,75 @@ export namespace FilePath {
   export const delimiter: Delimiter = nodePath.delimiter as Delimiter;
   export const separator: Separator = nodePath.sep as Separator;
 
+  /**
+   * Normalize a string path, reducing '..' and '.' parts. When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.
+   *
+   * @example
+   * ```ts
+   * const path = FilePath.normalize('foo/./bar/../baz//quux/');// FilePath('foo/baz/quux/')
+   * ```
+   * @param path - The path to normalize
+   */
   export function normalize(path: FilePath): FilePath {
     return wrap(nodePath.normalize(path));
   }
 
+  /**
+   * Return the last portion of a path. Similar to the Unix basename command.
+   * Often used to extract the file name from a fully qualified path.
+   *
+   * @example
+   * ```ts
+   * const path = FilePath.basename('/foo/bar.html');// 'bar.html'
+   * ```
+   * @param path - The path to extract base name from
+   * @param extension - The extension to remove
+   */
   export function basename(path: FilePath, extension?: Option<Extension>): FileName {
     return wrap(nodePath.basename(path, extension));
   }
 
+  /**
+   * Return the directory name of a path. Similar to the Unix dirname command.
+   *
+   * @example
+   * ```ts
+   * const path = FilePath.dirname('/foo/bar.html');// '/foo'
+   * ```
+   * @param path - The path to extract directory name from
+   */
   export function dirname(path: FilePath): FilePath {
     return wrap(nodePath.dirname(path));
   }
 
+  /**
+   * Return the extension of the path, from the last '.' to end of string in the last portion of the path.
+   * If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string
+   *
+   * @example
+   * ```ts
+   * const path = FilePath.extname('/foo/bar.html');// '.html'
+   * ```
+   * @param path - The path to extract extension name from
+   */
   export function extname(path: FilePath): Extension {
     return nodePath.extname(path) as Extension;
   }
 
+  /**
+   * Returns a path string from an object - the opposite of `parse()`.
+   *
+   * @example
+   * ```ts
+   * const formatted = FilePath.format({
+   *   root: '/',
+   *   dir: '/home/user/dir',
+   *   base: 'file.txt',
+   *   ext: '.txt',
+   *   name: 'file'
+   * });// FilePath('/home/user/dir/file.txt')
+   * @param parsed - The parsed path
+   */
   export function format(parsed: Partial<Parsed>): FilePath {
     return wrap(
       nodePath.format({
@@ -64,6 +117,15 @@ export namespace FilePath {
     );
   }
 
+  /**
+   * Returns an object from a path string - the opposite of `format()`.
+   *
+   * @example
+   * ```ts
+   * const path = FilePath.parse('/foo/bar.html');// { root: '/', dir: '/foo', base: 'bar.html', ext: '.html', name: 'bar' }
+   * ```
+   * @param string - The path to parse
+   */
   export function parse(string: FilePath): Parsed {
     const parsed = nodePath.parse(string);
     return {
@@ -75,6 +137,11 @@ export namespace FilePath {
     };
   }
 
+  /**
+   *
+   * @param from - The source path
+   * @param to - The target path
+   */
   export function relative(from: FilePath, to: FilePath): FilePath {
     return wrap(nodePath.relative(from, to));
   }
