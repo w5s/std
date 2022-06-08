@@ -127,4 +127,22 @@ describe('Option', () => {
       expect(Option.orElse(Option.Some('foo'), () => Option.Some('bar'))).toEqual(Option.Some('foo'));
     });
   });
+  describe(Option.match, () => {
+    test('should call matchers.None when None', () => {
+      expect(
+        Option.match(Option.None, {
+          None: () => 'none',
+          Some: (value) => `${value}_some`,
+        })
+      ).toEqual('none');
+    });
+    test('should call matchers.Some when Some', () => {
+      expect(
+        Option.match(Option.Some('foo'), {
+          None: () => 'none',
+          Some: (value) => `${value}_some`,
+        })
+      ).toEqual('foo_some');
+    });
+  });
 });
