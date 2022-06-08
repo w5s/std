@@ -137,6 +137,14 @@ describe('RetryPolicy', () => {
     });
   });
 
+  describe(RetryPolicy.map, () => {
+    test('should always return None', () => {
+      const policy = RetryPolicy.wait(TimeDuration(2));
+      const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration(delay * 3));
+      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.Some(6));
+    });
+  });
+
   describe(RetryPolicy.apply, () => {
     test('should None when policy returns None', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.None);

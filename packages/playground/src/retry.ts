@@ -53,6 +53,21 @@ export interface RetryPolicy {
 }
 export namespace RetryPolicy {
   /**
+   * Map the policy delay using `mapFn(delay)`
+   *
+   * @example
+   * ```ts
+   * const policy = RetryPolicy.wait(TimeDuration(2));// Wait 2 seconds policy
+   * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration(delay * 3));// Wait 6 seconds policy
+   * ```
+   * @param policy - The policy
+   * @param mapFn - The map function
+   */
+  export function map(policy: RetryPolicy, mapFn: (delay: TimeDuration) => TimeDuration): RetryPolicy {
+    return (state: RetryState) => Task.map(policy(state), (delay) => Option.map(delay, mapFn));
+  }
+
+  /**
    * Apply a retry policy to a retry state.
    *
    * @example
@@ -92,7 +107,7 @@ export namespace RetryPolicy {
    */
   export function applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
     return Task.andRun(apply(policy, state), (nextStatus) =>
-      Time.delay(nextStatus?.retryPreviousDelay ?? TimeDuration(0))
+      Time.delay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration))
     );
   }
 
@@ -209,6 +224,22 @@ export namespace RetryPolicy {
   }
 }
 
+interface RetryDoneResult {
+  readonly done: true;
+}
+interface RetryContinueResult {
+  readonly done: false;
+  readonly value: Option<TimeDuration>;
+}
+
+/**
+ * Acts like the iterator protocol for retry attempts.
+ * When `{ done: true }` is returned, the retry operation is complete.
+ * When `{ done: false, value: Option.None }` is returned, the retry operation will be done using the default policy delay.
+ * When `{ done: false, value: Option.Some(TimeDuration(...)) }` is returned, the retry operation will be done using given delay.
+ */
+export type RetryResult = RetryDoneResult | RetryContinueResult;
+
 export function retrying<Value, Error>(
   taskOrGetter: Task<Value, Error> | ((state: RetryState) => Task<Value, Error>),
   options: retrying.Options<Value, Error>
@@ -219,12 +250,24 @@ export function retrying<Value, Error>(
       typeof taskOrGetter === 'function' ? taskOrGetter(state) : taskOrGetter,
 
       (result) =>
-        Task.andThen(check(result), (shouldRetry) =>
-          shouldRetry
-            ? Task.andThen(RetryPolicy.applyAndDelay(policy, state), (appliedStatus) =>
-                Option.isNone(appliedStatus) ? Task(() => result) : go(appliedStatus)
+        Task.andThen(check(result), (retryResult) =>
+          retryResult.done === true
+            ? Task(() => result)
+            : pipe(policy).to(
+                (_) =>
+                  Option.match(retryResult.value, {
+                    Some: (value) => RetryPolicy.map(_, () => value),
+                    None: () => _,
+                  }),
+                (_) => RetryPolicy.applyAndDelay(_, state),
+                (_) =>
+                  Task.andThen(_, (appliedStatus) =>
+                    Option.match(appliedStatus, {
+                      None: () => Task(() => result),
+                      Some: go,
+                    })
+                  )
               )
-            : Task(() => result)
         )
     );
 
@@ -234,7 +277,7 @@ export namespace retrying {
   export type Options<Value, Error> = {
     policy: RetryPolicy;
     initialState?: RetryState;
-    check: (result: Result<Value, Error>) => Task<boolean, never>;
+    check: (result: Result<Value, Error>) => Task<RetryResult, never>;
   };
 }
 
