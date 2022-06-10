@@ -3216,7 +3216,7 @@ __metadata:
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
     "@w5s/commitlint-config": 1.0.0-alpha.4
-    "@w5s/eslint-config": 1.0.0-alpha.15
+    "@w5s/eslint-config": 1.0.0-alpha.17
     "@w5s/mrm-preset": 1.0.0-alpha.13
     "@w5s/ts-config": 1.0.0-alpha.9
     cspell: 6.1.1
@@ -3261,9 +3261,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.15":
-  version: 1.0.0-alpha.15
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.15"
+"@w5s/eslint-config@npm:1.0.0-alpha.17":
+  version: 1.0.0-alpha.17
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.17"
   dependencies:
     "@babel/eslint-parser": ^7.0.0
     "@babel/plugin-syntax-class-properties": ^7.0.0
@@ -3288,7 +3288,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: e243fe93c86ee5a6aaf0354edd01f9c437eb5439729882ec54d77e4ca4726142e9a5eeb63c0ef9d1c0ef4c548820da4f07eadc2dfb1e427a44932462d2acb96a
+  checksum: 8f7b6e27a24c35edba6847fb67dc36de8a2856cdcc3fd0f9f23fd8a4b2c1ca3b886ffbfea7c169fcf46ea55f6bf1761f99c13cb422fe4898917ad1a77363f652
   languageName: node
   linkType: hard
 
