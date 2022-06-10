@@ -1,7 +1,7 @@
 /* eslint-disable jest/no-export */
 /* eslint-disable max-classes-per-file */
 import { assertType } from './assert.js';
-import { AggregateError } from './error.js';
+import { AggregateError } from './error/aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
