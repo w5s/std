@@ -1,4 +1,9 @@
-import { DataError, Ref, Task, TimeDuration } from '@w5s/core';
+/* eslint-disable import/extensions */
+import { DataError } from '@w5s/core/lib/dataError.js';
+import type { Task } from '@w5s/core/lib/task.js';
+import type { TimeDuration } from '@w5s/core/lib/time.js';
+
+const defaultCanceler = () => {};
 
 /**
  * An error reported when a task times out
@@ -36,41 +41,43 @@ export function timeout<Value, Error>(
   task: Task<Value, Error>,
   delay: TimeDuration
 ): Task<Value, TimeoutError | Error> {
-  return Task.wrap((resolve, reject, cancelerRef) => {
-    const taskCancelerRef = Ref(Task.defaultCanceler);
-    const taskCancel = () => {
-      taskCancelerRef.current();
-      taskCancelerRef.current = Task.defaultCanceler;
-    };
+  return {
+    'Task/run': (resolve, reject, cancelerRef) => {
+      const taskCancelerRef = { current: defaultCanceler };
+      const taskCancel = () => {
+        taskCancelerRef.current();
+        taskCancelerRef.current = defaultCanceler;
+      };
 
-    const timeoutId = setTimeout(() => {
-      taskCancel();
-      reject(
-        TimeoutError({
-          message: `Task timed out after ${stringifyDelay(delay)}`,
-          delay,
-        })
+      const timeoutId = setTimeout(() => {
+        taskCancel();
+        reject(
+          TimeoutError({
+            message: `Task timed out after ${stringifyDelay(delay)}`,
+            delay,
+          })
+        );
+      }, delay);
+      const timeoutCancel = () => clearTimeout(timeoutId);
+
+      cancelerRef.current = () => {
+        taskCancel();
+        timeoutCancel();
+      };
+
+      task['Task/run'](
+        (value) => {
+          timeoutCancel();
+          resolve(value);
+        },
+        (error) => {
+          timeoutCancel();
+          reject(error);
+        },
+        taskCancelerRef
       );
-    }, delay);
-    const timeoutCancel = () => clearTimeout(timeoutId);
-
-    Ref.write(cancelerRef, () => {
-      taskCancel();
-      timeoutCancel();
-    });
-
-    task[Task.run](
-      (value) => {
-        timeoutCancel();
-        resolve(value);
-      },
-      (error) => {
-        timeoutCancel();
-        reject(error);
-      },
-      taskCancelerRef
-    );
-  });
+    },
+  };
 }
 
 function stringifyDelay(delay: TimeDuration) {
