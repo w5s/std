@@ -5,7 +5,7 @@ import { SlackClient } from './slackClient';
 import { timeout, TimeoutError } from './timeout';
 
 function main() {
-  const client = SlackClient('token');
+  const client = SlackClient({ token: 'token' });
   const task = pipe(SlackClient.chat_postMessage(client, {})).to(
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
