@@ -1,4 +1,4 @@
-import { invariant } from './assert.js';
+import { invariant } from './invariant.js';
 import type { Int } from './integer.js';
 import type { Task } from './task.js';
 import type { Tag } from './type.js';

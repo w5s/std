@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-import { invariant } from './assert.js';
+import { invariant } from './invariant.js';
 import type { Option } from './option.js';
 import type { Task } from './task.js';
 import type { Tag } from './type.js';
@@ -10,6 +10,7 @@ const createTask: typeof Task.wrap = (fn) => ({
 });
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =
+  // eslint-disable-next-line promise/prefer-await-to-then
   typeof queueMicrotask !== 'undefined' ? queueMicrotask : (fn) => Promise.resolve().then(fn);
 
 /**
@@ -134,7 +135,7 @@ export type Time = Tag<number, { time: 'ms' }>;
 export function Time(milliseconds: number): Time {
   invariant(Time.hasInstance(milliseconds), `${milliseconds} is not a valid time value`);
 
-  return milliseconds as Time;
+  return milliseconds;
 }
 export namespace Time {
   /**

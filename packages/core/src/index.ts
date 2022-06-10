@@ -6,6 +6,7 @@ export * from './dataError.js';
 export * from './dict.js';
 export * from './hash.js';
 export * from './integer.js';
+export * from './invariant.js';
 export * from './iterable.js';
 export * from './json.js';
 export * from './math.js';
