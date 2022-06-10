@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { assertNever, invariant } from './assert.js';
+import { assertNever, assertType, invariant } from './assert.js';
 
 describe(assertNever, () => {
   const anyValue = undefined;
@@ -75,5 +75,12 @@ describe(invariant, () => {
     expect(getThrownError(() => invariant(false, 'my message'))).toEqual(
       expect.objectContaining({ message: 'my message' })
     );
+  });
+  test('should refine typing', () => {
+    const value: unknown = true;
+    const isBoolean = (anyValue: unknown): anyValue is boolean => typeof anyValue === 'boolean';
+    invariant(isBoolean(value));
+
+    assertType<typeof value, boolean>(true);
   });
 });

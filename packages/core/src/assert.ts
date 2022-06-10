@@ -86,7 +86,7 @@ type AnyToBrand<T> = IsAny<T> extends true ? { __assertTypeAny__: undefined } : 
  * @param condition - the predicate result
  * @param message - an optional message for Error
  */
-export function invariant(condition: boolean, message?: string | null): void {
+export function invariant(condition: boolean, message?: string | null): asserts condition {
   if (!condition) {
     const error = new Error(message == null ? '' : message);
     error.name = 'InvariantError';
