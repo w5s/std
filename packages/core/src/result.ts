@@ -322,6 +322,7 @@ export namespace Result {
     try {
       const returnValue = block();
       if (isPromise(returnValue)) {
+        // eslint-disable-next-line promise/prefer-await-to-then
         return returnValue.then(Result.Ok, async (rejectError) => Result.Error(await onError(rejectError)));
       }
 
@@ -329,6 +330,7 @@ export namespace Result {
     } catch (thrownError: unknown) {
       const resultError = onError(thrownError);
 
+      // eslint-disable-next-line promise/prefer-await-to-then
       return isPromise(resultError) ? resultError.then(Result.Error) : Result.Error(resultError);
     }
   }

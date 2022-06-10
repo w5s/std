@@ -28,6 +28,7 @@ export const SQLite3 = {
       const queryResultPromise = new Promise((resolve, reject) => {
         database.all(sql, params, (error, result) => (error != null ? reject(error) : resolve(result)));
       });
+      // eslint-disable-next-line promise/prefer-await-to-then
       return queryResultPromise.finally(() => database.close());
     }
   ),

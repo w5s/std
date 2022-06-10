@@ -42,6 +42,7 @@ describe('RetryPolicy', () => {
   const unsafeRunOk = <V>(task: Task<V, never>): V | Promise<V> => {
     const promiseOrValue = Task.unsafeRun(task);
     // @ts-ignore - we know this is a promise
+    // eslint-disable-next-line promise/prefer-await-to-then
     return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.value) : Result.value(promiseOrValue);
   };
   const generateDelays = (policy: RetryPolicy, limit: number) => {

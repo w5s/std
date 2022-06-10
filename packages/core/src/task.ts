@@ -71,6 +71,7 @@ export function Task<Value, Error = never>(
         _reject(result.error);
       }
     };
+    // eslint-disable-next-line promise/prefer-await-to-then
     return isPromiseLike(resultOrPromise) ? resultOrPromise.then(handleResult) : handleResult(resultOrPromise);
   });
 }
@@ -554,9 +555,11 @@ export namespace Task {
     );
     // Try to catch promise errors
     if (isPromise(runValue)) {
+      // eslint-disable-next-line promise/prefer-await-to-then
       runValue.catch((error) => rejectHandler(error));
     }
     if (returnValue === undefined) {
+      // eslint-disable-next-line promise/param-names
       return new Promise<Result<Value, Error>>((resolvePromise, rejectPromise) => {
         resolveHandler = resolvePromise;
         rejectHandler = rejectPromise;
@@ -580,6 +583,7 @@ export namespace Task {
   export function unsafeRunOk<Value>(task: Task<Value, never>): Awaitable<Value> {
     const promiseOrValue = unsafeRun(task);
     // @ts-ignore - we assume PromiseLike.then returns a Promise
+    // eslint-disable-next-line promise/prefer-await-to-then
     return isPromise(promiseOrValue) ? promiseOrValue.then(unsafeResultValue) : unsafeResultValue(promiseOrValue);
   }
 }
