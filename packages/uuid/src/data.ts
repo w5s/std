@@ -1,4 +1,6 @@
-import { invariant, Tag } from '@w5s/core';
+// eslint-disable-next-line import/extensions
+import { invariant } from '@w5s/core/lib/invariant.js';
+import type { Tag } from '@w5s/core';
 
 /**
  * UUID string type
@@ -16,7 +18,7 @@ const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{
 export function UUID(value: `${string}-${string}-${string}-${string}`): UUID {
   invariant(UUID.hasInstance(value), `${value} is not a valid UUID`);
 
-  return value as UUID;
+  return value;
 }
 export namespace UUID {
   /**
