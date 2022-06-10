@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@w5s/core": "^1.0.0-alpha.0",
-    "@w5s/http-client": "^1.0.0-alpha.0"
+    "@w5s/http-client": "^1.0.0-alpha.0",
+    "@w5s/uuid": "^1.0.0-alpha.0"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

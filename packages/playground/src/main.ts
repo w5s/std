@@ -1,12 +1,14 @@
 import { assertNever, Console, Int, Option, pipe, Task, TimeDuration } from '@w5s/core';
 import { HTTPClient } from '@w5s/http-client';
+import { randomUUID } from '@w5s/uuid';
 import { retrying, RetryPolicy } from './retry';
 import { SlackClient } from './slackClient';
 import { timeout, TimeoutError } from './timeout';
 
 function main() {
   const client = SlackClient({ token: 'token' });
-  const task = pipe(SlackClient.chat_postMessage(client, {})).to(
+  const task = pipe(randomUUID).to(
+    (_) => Task.andThen(_, (uuid) => SlackClient.chat_postMessage(client, { text: uuid })),
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
