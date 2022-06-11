@@ -323,15 +323,15 @@ export namespace Result {
       const returnValue = block();
       if (isPromise(returnValue)) {
         // eslint-disable-next-line promise/prefer-await-to-then
-        return returnValue.then(Result.Ok, async (rejectError) => Result.Error(await onError(rejectError)));
+        return returnValue.then(Ok, async (rejectError) => Error(await onError(rejectError)));
       }
 
-      return Result.Ok(returnValue);
+      return Ok(returnValue);
     } catch (thrownError: unknown) {
       const resultError = onError(thrownError);
 
       // eslint-disable-next-line promise/prefer-await-to-then
-      return isPromise(resultError) ? resultError.then(Result.Error) : Result.Error(resultError);
+      return isPromise(resultError) ? resultError.then(Error) : Error(resultError);
     }
   }
 
