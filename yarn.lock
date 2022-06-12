@@ -3195,14 +3195,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/commitlint-config@npm:1.0.0-alpha.4":
-  version: 1.0.0-alpha.4
-  resolution: "@w5s/commitlint-config@npm:1.0.0-alpha.4"
+"@w5s/commitlint-config@npm:1.0.0-alpha.5":
+  version: 1.0.0-alpha.5
+  resolution: "@w5s/commitlint-config@npm:1.0.0-alpha.5"
   dependencies:
     "@commitlint/config-conventional": ^17.0.0
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
-  checksum: a4695ecf94a2386dce60e70887ff70f65d6efcc4ac7f0a619e6610126cefd98ca8994afa8b2695c130855c12f9deb2484b3d708a5d7f268968371289b5d0dce3
+  checksum: effb816dd6e9c1b5b7c0217ec50b98126255b942abb6df5c5592efc1d53b99e13b77494ce797915fcb139eb98fe5606f2dfad612bcdcab3a24c1859a6d38ed7d
   languageName: node
   linkType: hard
 
@@ -3215,10 +3215,10 @@ __metadata:
     "@commitlint/cli": 17.0.2
     "@types/jest": ^27.4.0
     "@types/node": ^17.0.18
-    "@w5s/commitlint-config": 1.0.0-alpha.4
+    "@w5s/commitlint-config": 1.0.0-alpha.5
     "@w5s/eslint-config": 1.0.0-alpha.20
-    "@w5s/mrm-preset": 1.0.0-alpha.13
-    "@w5s/ts-config": 1.0.0-alpha.9
+    "@w5s/mrm-preset": 1.0.0-alpha.14
+    "@w5s/ts-config": 1.0.0-alpha.10
     cspell: 6.1.1
     es-jest: 1.5.0
     eslint: 8.17.0
@@ -3303,16 +3303,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/mrm-preset@npm:1.0.0-alpha.13":
-  version: 1.0.0-alpha.13
-  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.13"
+"@w5s/mrm-preset@npm:1.0.0-alpha.14":
+  version: 1.0.0-alpha.14
+  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.14"
   dependencies:
     debug: ^4.3.3
     glob: ^8.0.3
     mrm-core: ^7.0.0
     semver-intersect: ^1.4.0
     sync-directory: ^5.0.0
-  checksum: 83b8750ed6d61ef080a35282d4c25335dc1fcac59aaa2465b08225d2a48fdbe6375d897b5badac9f25efaaaab5a77846187e2599fc6df988d00cd71aa0be7702
+  checksum: 0111b99b5ea91d6ae34a0e56dc2b5ca8065cf8978e758eeeef7350d3fbb8bc3e4fbfe06c1fbb12fad76c25753a1d45ad0ef879aa7a79904bfa64ba2c797ef5b5
   languageName: node
   linkType: hard
 
@@ -3328,12 +3328,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:1.0.0-alpha.9":
-  version: 1.0.0-alpha.9
-  resolution: "@w5s/ts-config@npm:1.0.0-alpha.9"
+"@w5s/ts-config@npm:1.0.0-alpha.10":
+  version: 1.0.0-alpha.10
+  resolution: "@w5s/ts-config@npm:1.0.0-alpha.10"
   peerDependencies:
     typescript: 3.x || 4.x
-  checksum: 6bc49b1b2c25e745edfbf8df8d41d7cd2c79054171d95403c7b317691522ce757dc5ade7f2621836144b03e1aaffaf01fda0c98948e0a5b727df7d33a6310098
+  checksum: 7cbf48f1d1654c0fcff450c03df1d67b03dfeb972206d55a8547d34b42269e662e61beabd62735bbff4c4a5adafae9f30676ef391b7e555c70e5fe855a49f415
   languageName: node
   linkType: hard
 
