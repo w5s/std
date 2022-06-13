@@ -30,8 +30,7 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
 export function TimeDuration(milliseconds: number): TimeDuration {
   invariant(TimeDuration.hasInstance(milliseconds), `${milliseconds} is not a valid duration value`);
 
-  // eslint-disable-next-line unicorn/prefer-math-trunc
-  return (milliseconds | 0) as TimeDuration;
+  return milliseconds;
 }
 
 export namespace TimeDuration {

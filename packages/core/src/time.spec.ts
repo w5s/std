@@ -122,7 +122,7 @@ describe(TimeDuration, () => {
     test.each([
       [1, 1],
       [-1, -1],
-      [1.1, 1],
+      [1.1, 1.1],
     ])('should return an int value', (input, expected) => {
       expect(TimeDuration(input)).toBe(expected);
     });
