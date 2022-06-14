@@ -53,18 +53,41 @@ export interface RetryPolicy {
 }
 export namespace RetryPolicy {
   /**
-   * Map the policy delay using `mapFn(delay)`
+   * Map the policy delay using `mapFn(delay, state)`
    *
    * @example
    * ```ts
-   * const policy = RetryPolicy.wait(TimeDuration(2));// Wait 2 seconds policy
+   * const policy = RetryPolicy.wait(TimeDuration(2));
    * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration(delay * 3));// Wait 6 seconds policy
    * ```
    * @param policy - The policy
-   * @param mapFn - The map function
+   * @param thenFn - The map function
    */
-  export function map(policy: RetryPolicy, mapFn: (delay: TimeDuration) => TimeDuration): RetryPolicy {
-    return (state: RetryState) => Task.map(policy(state), (delay) => Option.map(delay, mapFn));
+  export function andThen(
+    policy: RetryPolicy,
+    thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>
+  ): RetryPolicy {
+    return (state) =>
+      Task.map(policy(state), (delayMs) => (Option.isSome(delayMs) ? thenFn(delayMs, state) : Option.None));
+  }
+
+  /**
+   * Filter the policy delay using `predicate(delay, state)`
+   *
+   * @example
+   * ```ts
+   * const maxDelay = TimeDuration(4);
+   * const policy = RetryPolicy.wait(TimeDuration(2));
+   * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
+   * ```
+   * @param policy - The policy
+   * @param predicate - The predicate function
+   */
+  export function filter(
+    policy: RetryPolicy,
+    predicate: (delay: TimeDuration, state: RetryState) => boolean
+  ): RetryPolicy {
+    return andThen(policy, (delay, state) => (predicate(delay, state) ? Option.Some(delay) : Option.None));
   }
 
   /**
@@ -205,14 +228,6 @@ export namespace RetryPolicy {
     return ({ retryIndex }) => Task.resolve(retryIndex >= count ? Option.None : Option.Some(0 as TimeDuration));
   }
 
-  function transform(
-    policy: RetryPolicy,
-    mapFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>
-  ): RetryPolicy {
-    return (state) =>
-      Task.map(policy(state), (delayMs) => (Option.isSome(delayMs) ? mapFn(delayMs, state) : Option.None));
-  }
-
   /**
    * Set a time upper bound for any delays that may be directed by the given policy.
    *
@@ -220,7 +235,7 @@ export namespace RetryPolicy {
    * @param maxDelay - The maximum delay between two attempts
    */
   export function waitMax(policy: RetryPolicy, maxDelay: TimeDuration): RetryPolicy {
-    return transform(policy, (delay) => Math.min(maxDelay, delay) as TimeDuration);
+    return andThen(policy, (delay) => Math.min(maxDelay, delay) as TimeDuration);
   }
 }
 
@@ -256,7 +271,7 @@ export function retrying<Value, Error>(
             : pipe(policy).to(
                 (_) =>
                   Option.match(retryResult.value, {
-                    Some: (value) => RetryPolicy.map(_, () => value),
+                    Some: (value) => RetryPolicy.andThen(_, () => value),
                     None: () => _,
                   }),
                 (_) => RetryPolicy.applyAndDelay(_, state),
