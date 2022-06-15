@@ -160,9 +160,11 @@ export namespace DataError {
         // @ts-ignore We know what we are doing
         anyValue?.name === errorName,
     };
+    const constructor = getConstructor(create);
+    Object.defineProperty(constructor, 'name', { writable: false, value: errorName });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(getConstructor(create), properties);
+    return Object.assign(constructor, properties);
   }
 }
 

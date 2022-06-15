@@ -99,6 +99,11 @@ describe(DataError, () => {
         })
       );
     });
+    describe('name', () => {
+      test('should set name', () => {
+        expect(TestError.name).toBe('TestError');
+      });
+    });
     describe('errorName', () => {
       test('should set errorName', () => {
         expect(TestError.errorName).toBe('TestError');
