@@ -1,6 +1,6 @@
-import { SQLStatement } from '../sql';
-import { AbstractDatabaseClient } from '../client';
-import { DatabaseDriver } from '../driver';
+import { SQLStatement } from '../sql.js';
+import { AbstractDatabaseClient } from '../client.js';
+import { DatabaseDriver } from '../driver.js';
 
 export interface MockClient extends AbstractDatabaseClient<'mock'> {
   mockExecuteQuery?: (sqlStatement: SQLStatement) => Promise<unknown>;
@@ -16,7 +16,7 @@ export const Mock = DatabaseDriver.Make(
   }
 );
 
-declare module '../driver' {
+declare module '../driver.js' {
   interface DatabaseClientMap {
     mock: MockClient;
   }

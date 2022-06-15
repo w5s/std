@@ -1,5 +1,5 @@
-import { assertType } from './assert';
-import { invariant } from './invariant';
+import { assertType } from './assert.js';
+import { invariant } from './invariant.js';
 
 describe(invariant, () => {
   const getThrownError = (fn: () => void) => {

@@ -1,9 +1,9 @@
 import { assertNever, Console, Int, Option, pipe, Task, TimeDuration } from '@w5s/core';
 import { HTTPClient } from '@w5s/http-client';
 import { randomUUID } from '@w5s/uuid';
-import { retrying, RetryPolicy } from './retry';
-import { SlackClient } from './slackClient';
-import { timeout, TimeoutError } from './timeout';
+import { retrying, RetryPolicy } from './retry.js';
+import { SlackClient } from './slackClient.js';
+import { timeout, TimeoutError } from './timeout.js';
 
 function main() {
   const client = SlackClient({ token: 'token' });

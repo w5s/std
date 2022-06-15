@@ -1,5 +1,5 @@
 import { TimeDuration, Int, Option, Task, Result, Random } from '@w5s/core';
-import { defaultRetryState, RetryPolicy, RetryState } from './retry';
+import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
 describe(RetryState, () => {
   test('should return a new state', () => {

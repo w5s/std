@@ -1,7 +1,7 @@
 import { Database } from 'sqlite3';
-import { SQLStatement } from '../sql';
-import { AbstractDatabaseClient } from '../client';
-import { DatabaseDriver } from '../driver';
+import { SQLStatement } from '../sql.js';
+import { AbstractDatabaseClient } from '../client.js';
+import { DatabaseDriver } from '../driver.js';
 
 function sqlite3SQLStatement(statement: SQLStatement) {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -34,7 +34,7 @@ export const SQLite3 = {
   ),
 };
 
-declare module '../driver' {
+declare module '../driver.js' {
   interface DatabaseClientMap {
     sqlite3: SQLite3Client;
   }

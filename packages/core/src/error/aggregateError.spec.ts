@@ -1,4 +1,4 @@
-import { AggregateError } from './aggregateError';
+import { AggregateError } from './aggregateError.js';
 
 describe(AggregateError, () => {
   test('should return instance of Error', () => {

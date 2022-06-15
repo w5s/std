@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
 import { HTTPClient, parseJSON } from '@w5s/http-client';
-import { timeout } from './timeout';
+import { timeout } from './timeout.js';
 
 export interface SlackClient {
   /**

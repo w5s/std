@@ -1,5 +1,5 @@
-import type { DataObject } from './data';
-import type { Option } from './option';
+import type { DataObject } from './data.js';
+import type { Option } from './option.js';
 
 export type DataError<Properties extends { name: string }> = DataObject<
   {
