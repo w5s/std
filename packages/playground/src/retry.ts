@@ -164,7 +164,9 @@ export namespace RetryPolicy {
   /**
    * A retry policy that never retries
    */
-  export const never: RetryPolicy = (_state) => resolveNone;
+  export const never: RetryPolicy = function never(_state) {
+    return resolveNone;
+  };
 
   /**
    * A retry policy with a constant delay and unlimited retries.
