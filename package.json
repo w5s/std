@@ -80,7 +80,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@babel/eslint-parser": "7.18.2",
     "@commitlint/cli": "17.0.2",
     "@types/jest": "^27.4.0",
@@ -90,12 +90,12 @@
     "@w5s/mrm-preset": "1.0.0-alpha.14",
     "@w5s/ts-config": "1.0.0-alpha.10",
     "cspell": "6.1.2",
-    "es-jest": "1.5.0",
+    "es-jest": "2.0.0",
     "eslint": "8.17.0",
     "husky": "8.0.1",
     "is-ci": "3.0.1",
     "jest": "27.5.1",
-    "lerna": "5.1.1",
+    "lerna": "5.1.2",
     "lint-staged": "13.0.1",
     "markdown-magic": "2.6.0",
     "markdown-magic-package-json": "2.0.2",
