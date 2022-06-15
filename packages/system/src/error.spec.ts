@@ -1,6 +1,7 @@
 import { Option } from '@w5s/core';
-import { FileError } from './error';
-import { FilePath } from './filePath';
+import { describe, test, expect } from '@jest/globals';
+import { FileError } from './error.js';
+import { FilePath } from './filePath.js';
 
 describe(FileError, () => {
   const anyPath = 'anyPath' as FilePath;

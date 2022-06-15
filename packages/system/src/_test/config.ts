@@ -1,8 +1,10 @@
 import { Task } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
-import type { FilePath } from '../filePath';
-import type { ErrnoException } from '../internal';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { expect } from '@jest/globals';
+import type { FilePath } from '../filePath.js';
+import type { ErrnoException } from '../internal.js';
 // import * as url from 'node:url';
 
 // eslint-disable-next-line unicorn/prefer-module

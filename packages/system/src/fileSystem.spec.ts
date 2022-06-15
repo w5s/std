@@ -1,4 +1,5 @@
-import { FileSystem } from './fileSystem';
+import { describe, test, expect } from '@jest/globals';
+import { FileSystem } from './fileSystem.js';
 
 describe('FileSystem', () => {
   test('exports', () => {

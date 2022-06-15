@@ -1,8 +1,9 @@
 import { Option, Result } from '@w5s/core';
-import { FileError } from './error';
-import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './internal';
-import { FilePath } from './filePath';
-import { anyErrnoException, anyError, anyPath, expectTask } from './_test/config';
+import { describe, test, expect } from '@jest/globals';
+import { FileError } from './error.js';
+import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './internal.js';
+import { FilePath } from './filePath.js';
+import { anyErrnoException, anyError, anyPath, expectTask } from './_test/config.js';
 
 describe('ErrnoException', () => {
   describe(ErrnoException.hasInstance, () => {

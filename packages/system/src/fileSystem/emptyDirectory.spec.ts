@@ -1,6 +1,7 @@
 import { Result } from '@w5s/core';
-import { emptyDirectory } from './emptyDirectory';
-import { expectDir, expectTask, withTmpDirectory } from '../_test/config';
+import { describe, test } from '@jest/globals';
+import { emptyDirectory } from './emptyDirectory.js';
+import { expectDir, expectTask, withTmpDirectory } from '../_test/config.js';
 
 describe(emptyDirectory, () => {
   test(

@@ -1,5 +1,6 @@
 import { Option } from '@w5s/core';
-import { FilePath } from './filePath';
+import { describe, test, expect } from '@jest/globals';
+import { FilePath } from './filePath.js';
 
 describe('FilePath', () => {
   const absolutePath = (...parts: string[]) => (FilePath.separator + parts.join(FilePath.separator)) as FilePath;
@@ -110,8 +111,11 @@ describe('FilePath', () => {
       [{ parent: '../first', child: '../first/second' }, true],
       [{ parent: 'c:\\first', child: 'c:\\first' }, false],
       [{ parent: 'c:\\first', child: 'c:\\first\\second' }, true],
-    ] as const)('should return correct value for %s', ({ parent, child }, expected) => {
-      expect(FilePath.isParentOf(FilePath(parent), FilePath(child))).toBe(expected);
-    });
+    ] as [{ parent: string; child: string }, boolean][])(
+      'should return correct value for %s',
+      ({ parent, child }, expected) => {
+        expect(FilePath.isParentOf(FilePath(parent), FilePath(child))).toBe(expected);
+      }
+    );
   });
 });

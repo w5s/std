@@ -1,8 +1,9 @@
 import { Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
-import { FileError } from '../error';
-import { expectFile, expectTask, withTmpDirectory } from '../_test/config';
-import { move } from './move';
+import { describe, test } from '@jest/globals';
+import { FileError } from '../error.js';
+import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
+import { move } from './move.js';
 
 describe(move, () => {
   test(

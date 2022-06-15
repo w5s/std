@@ -1,8 +1,9 @@
 import { Result } from '@w5s/core';
-import { errnoExceptionHandler, Internal } from './internal';
-import { FilePath } from './filePath';
-import { Process } from './process';
-import { anyErrnoException, expectTask } from './_test/config';
+import { describe, test, expect, jest } from '@jest/globals';
+import { errnoExceptionHandler, Internal } from './internal.js';
+import { FilePath } from './filePath.js';
+import { Process } from './process.js';
+import { anyErrnoException, expectTask } from './_test/config.js';
 
 describe('Process', () => {
   describe(Process.exit, () => {

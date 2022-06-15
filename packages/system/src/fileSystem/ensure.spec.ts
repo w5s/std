@@ -1,7 +1,8 @@
 import { Result } from '@w5s/core';
 import * as fs from 'node:fs/promises';
-import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure';
-import { FileError } from '../error';
+import { describe, test } from '@jest/globals';
+import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
+import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
 
 describe(ensureDirectory, () => {

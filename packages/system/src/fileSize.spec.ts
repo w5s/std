@@ -1,4 +1,5 @@
-import { FileSize } from './fileSize';
+import { describe, test, expect } from '@jest/globals';
+import { FileSize } from './fileSize.js';
 
 describe(FileSize, () => {
   const anyNumber = 123;
