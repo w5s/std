@@ -131,7 +131,7 @@ export namespace Option {
    * const x = Some('foo');
    * Option.map(x, (value) => `${value}_bar`));// Some('foo_bar') == 'foo_bar'
    * ```
-   * @param option - an Option object
+   * @param option - an optional value
    * @param fn - the mapper function
    */
   export function map<ValueFrom, ValueTo>(
@@ -153,7 +153,7 @@ export namespace Option {
    * Option.getOrElse(x, () => 'bar');// 'bar'
    * ```
    * @category Accessor
-   * @param option - an Option object
+   * @param option - an optional value
    * @param getDefaultValue - a default value
    */
   export function getOrElse<Value, DefaultValue>(
@@ -176,7 +176,7 @@ export namespace Option {
    * Option.getOrThrow(x);// throw TypeError('option must not be a null|undefined')
    * ```
    * @category Accessor
-   * @param option - an Option object
+   * @param option - an optional value
    */
   export function getOrThrow<Value>(option: Nullable<Value>): Value {
     if (isSome(option)) {
@@ -196,7 +196,7 @@ export namespace Option {
    * Option.andThen(Option.Some(2), square); // Option.Some(16)
    * Option.andThen(Option.None, square); // Option.None
    * ```
-   * @param option - an Option object
+   * @param option - an optional value
    * @param fn - a callback
    */
   export function andThen<ValueFrom, ValueTo>(
@@ -216,10 +216,38 @@ export namespace Option {
    * Option.orElse(Option.Some('foo'), alt); // Option.Some('foo')
    * Option.orElse(Option.None, alt); // Option.Some('bar')
    * ```
-   * @param option - an Option object
+   * @param option - an optional value
    * @param fn - a callback
    */
   export function orElse<ValueFrom>(option: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
     return isSome(option) ? option : from(fn());
+  }
+
+  /**
+   * Return `matchers.Some(value)` if `option` is `Some`, otherwise `matchers.None()`
+   *
+   * @example
+   * ```typescript
+   * const stringify = (opt: Option<{foo: string}>) => Option.match(opt, {
+   *  Some: ({ foo }) => foo + '_baz',
+   *  None: () => 'none'
+   * });
+   *
+   * const someString = stringify(Option.Some({ foo: 'bar' })); // 'bar_baz'
+   * const noneString = stringify(Option.None); // 'none'
+   * ```
+   * @param option - an optional value
+   * @param matchers - a matchers object with None and Some case
+   * @param matchers.None - a callback to be called if the option is None
+   * @param matchers.Some - a callback to be called if the option is Some
+   */
+  export function match<Value, Return>(
+    option: Nullable<Value>,
+    matchers: {
+      Some: (value: Value) => Return;
+      None: () => Return;
+    }
+  ): Return {
+    return isNone(option) ? matchers.None() : matchers.Some(option);
   }
 }

@@ -1,5 +1,5 @@
-import type { DataObject } from './data';
-import type { Option } from './option';
+import type { DataObject } from './data.js';
+import type { Option } from './option.js';
 
 export type DataError<Properties extends { name: string }> = DataObject<
   {
@@ -160,31 +160,13 @@ export namespace DataError {
         // @ts-ignore We know what we are doing
         anyValue?.name === errorName,
     };
+    const constructor = getConstructor(create);
+    Object.defineProperty(constructor, 'name', { writable: false, value: errorName });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(getConstructor(create), properties);
+    return Object.assign(constructor, properties);
   }
 }
-
-/**
- * An error to aggregate multiple errors
- */
-export interface AggregateError<Errors extends any[]>
-  extends DataError<{
-    name: 'AggregateError';
-    errors: Readonly<[...Errors]>;
-  }> {}
-/**
- * AggregateError constructor
- *
- * @category Constructor
- */
-export const AggregateError = DataError.MakeGeneric(
-  'AggregateError',
-  (create) =>
-    <T extends any[]>(params: DataError.Parameters<AggregateError<T>>): AggregateError<T> =>
-      create(params)
-);
 
 function setDefaultValue<O extends Record<any, any>, K extends keyof O>(object: O, name: K, defaultValue: O[K]) {
   if (!(name in object)) {

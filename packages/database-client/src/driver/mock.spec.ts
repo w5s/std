@@ -1,6 +1,7 @@
-import { sql } from '../sql';
-import { DatabaseDriver } from '../driver';
-import { Mock } from './mock';
+import { describe, test, expect, jest } from '@jest/globals';
+import { sql } from '../sql.js';
+import { DatabaseDriver } from '../driver.js';
+import { Mock } from './mock.js';
 
 describe('Mock', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;

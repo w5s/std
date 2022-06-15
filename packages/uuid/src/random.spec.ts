@@ -1,4 +1,5 @@
 import { Result, Task } from '@w5s/core';
+import { describe, test, expect, jest } from '@jest/globals';
 // @ts-ignore do not depend on definition
 import { v4 as uuidV4 } from 'uuid';
 import { UUID } from './data.js';

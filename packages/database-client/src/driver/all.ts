@@ -1,3 +1,3 @@
-import './mock';
-import './sqlite3';
-import './mysql';
+import './mock.js';
+import './sqlite3.js';
+import './mysql.js';

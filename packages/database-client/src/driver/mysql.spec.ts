@@ -1,7 +1,8 @@
 import * as mysql from 'mysql';
-import { sql } from '../sql';
-import { DatabaseDriver } from '../driver';
-import { MySQL } from './mysql';
+import { describe, test, expect, jest } from '@jest/globals';
+import { sql } from '../sql.js';
+import { DatabaseDriver } from '../driver.js';
+import { MySQL } from './mysql.js';
 
 describe('MySQL', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;

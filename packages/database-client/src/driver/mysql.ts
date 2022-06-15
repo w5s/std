@@ -1,7 +1,7 @@
 import { createConnection, ConnectionConfig } from 'mysql';
-import { SQLStatement } from '../sql';
-import type { AbstractDatabaseClient } from '../client';
-import { DatabaseDriver } from '../driver';
+import { SQLStatement } from '../sql.js';
+import type { AbstractDatabaseClient } from '../client.js';
+import { DatabaseDriver } from '../driver.js';
 
 function mysqlSQLStatement(statement: SQLStatement) {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
@@ -36,7 +36,7 @@ export const MySQL = {
   }),
 };
 
-declare module '../driver' {
+declare module '../driver.js' {
   interface DatabaseClientMap {
     mysql: MySQLClient;
   }

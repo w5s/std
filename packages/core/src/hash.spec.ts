@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { Hash } from './hash.js';
 import { Int } from './integer.js';
 

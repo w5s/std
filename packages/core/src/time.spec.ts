@@ -1,3 +1,4 @@
+import { describe, test, expect, jest, beforeEach } from '@jest/globals';
 import { Option } from './option.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
@@ -122,7 +123,7 @@ describe(TimeDuration, () => {
     test.each([
       [1, 1],
       [-1, -1],
-      [1.1, 1],
+      [1.1, 1.1],
     ])('should return an int value', (input, expected) => {
       expect(TimeDuration(input)).toBe(expected);
     });

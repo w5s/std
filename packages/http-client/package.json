@@ -20,7 +20,10 @@
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
   "type": "module",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./lib/*": "./lib/*"
+  },
   "typings": "./lib/index.d.ts",
   "files": [
     "lib/**/!(*.spec).d.ts",
@@ -44,6 +47,9 @@
   },
   "dependencies": {
     "@w5s/core": "^1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "28.1.1"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

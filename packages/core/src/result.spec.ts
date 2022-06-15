@@ -1,3 +1,4 @@
+import { describe, test, expect, jest } from '@jest/globals';
 import { assertType } from './assert.js';
 import { DataObject } from './data.js';
 import { Result } from './result.js';
@@ -181,6 +182,24 @@ describe('Result', () => {
         );
         expect(onError).toHaveBeenCalledWith(thrownError);
       });
+    });
+  });
+  describe(Result.match, () => {
+    test('should call matchers.Ok when Ok', () => {
+      expect(
+        Result.match(Result.Ok('ok'), {
+          Ok: (value) => `${value}_value`,
+          Error: (error) => `${error}_error`,
+        })
+      ).toEqual('ok_value');
+    });
+    test('should call matchers.Error when Error', () => {
+      expect(
+        Result.match(Result.Error('error'), {
+          Ok: (value) => `${value}_value`,
+          Error: (error) => `${error}_error`,
+        })
+      ).toEqual('error_error');
     });
   });
 });

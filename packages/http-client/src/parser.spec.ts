@@ -1,8 +1,10 @@
 import { Result, Task } from '@w5s/core';
+import { describe, test, expect, jest } from '@jest/globals';
+import type { Mocked } from 'jest-mock';
 import { HTTPClient } from './client.js';
 import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser.js';
 
-const mockResponse = (): jest.Mocked<HTTPClient.Response> =>
+const mockResponse = (): Mocked<HTTPClient.Response> =>
   ({
     arrayBuffer: jest.fn(),
     formData: jest.fn(),

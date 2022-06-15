@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { Math } from './math.js';
 
 describe('Math', () => {

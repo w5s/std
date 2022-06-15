@@ -1,5 +1,6 @@
 import { Ref, Result, Task, TimeDuration } from '@w5s/core';
-import { timeout, TimeoutError } from './timeout';
+import { describe, test, expect, jest } from '@jest/globals';
+import { timeout, TimeoutError } from './timeout.js';
 
 describe(timeout, () => {
   const anyDelay = TimeDuration.milliseconds(4);

@@ -1,5 +1,6 @@
 import { TimeDuration, Int, Option, Task, Result, Random } from '@w5s/core';
-import { defaultRetryState, RetryPolicy, RetryState } from './retry';
+import { describe, test, expect, jest } from '@jest/globals';
+import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
 describe(RetryState, () => {
   test('should return a new state', () => {
@@ -42,6 +43,7 @@ describe('RetryPolicy', () => {
   const unsafeRunOk = <V>(task: Task<V, never>): V | Promise<V> => {
     const promiseOrValue = Task.unsafeRun(task);
     // @ts-ignore - we know this is a promise
+    // eslint-disable-next-line promise/prefer-await-to-then
     return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.value) : Result.value(promiseOrValue);
   };
   const generateDelays = (policy: RetryPolicy, limit: number) => {
@@ -137,6 +139,19 @@ describe('RetryPolicy', () => {
     });
   });
 
+  describe(RetryPolicy.andThen, () => {
+    test('should not call callback when Option.None', () => {
+      const mappedPolicy = RetryPolicy.andThen(RetryPolicy.never, () => Option.Some(anyDuration));
+      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+    });
+    test('should call callback(delay, state) when Option.Some', () => {
+      const thenFn = jest.fn(() => Option.Some(TimeDuration(6)));
+      const mappedPolicy = RetryPolicy.andThen(RetryPolicy.wait(anyDuration), thenFn);
+      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.Some(6));
+      expect(thenFn).toHaveBeenCalledWith(anyDuration, anyState);
+    });
+  });
+
   describe(RetryPolicy.apply, () => {
     test('should None when policy returns None', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.None);
@@ -206,6 +221,18 @@ describe('RetryPolicy', () => {
       expect(unsafeRunOk(RetryPolicy.waitMax(overDelayPolicy, limit)(anyState))).toEqual(limit);
       const validPolicy = RetryPolicy.wait(TimeDuration(limit - 1));
       expect(unsafeRunOk(RetryPolicy.waitMax(validPolicy, limit)(anyState))).toEqual(limit - 1);
+    });
+  });
+  describe(RetryPolicy.filter, () => {
+    test('should not call callback when Option.None', () => {
+      const mappedPolicy = RetryPolicy.filter(RetryPolicy.never, () => true);
+      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+    });
+    test('should call callback(delay, state) when Option.Some', () => {
+      const filterFn = jest.fn(() => false);
+      const mappedPolicy = RetryPolicy.filter(RetryPolicy.wait(anyDuration), filterFn);
+      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+      expect(filterFn).toHaveBeenCalledWith(anyDuration, anyState);
     });
   });
 });

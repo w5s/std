@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import * as Std from './index.js';
 
 describe('index', () => {

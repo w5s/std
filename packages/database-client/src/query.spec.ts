@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { SQLDataType } from './dataType.js';
 import { sql } from './sql.js';
 import { SQLQuery } from './query.js';

@@ -1,4 +1,4 @@
-import { Result } from './result.js';
+import type { Result } from './result.js';
 
 export type JSONValue =
   | null
@@ -14,6 +14,14 @@ export namespace JSON {
   const globalObject =
     typeof globalThis !== 'undefined' ? globalThis : typeof global !== 'undefined' ? global : (undefined as never);
   const NativeJSON = globalObject.JSON;
+  const resultOk = <V>(value: V): Result<V, never> => ({
+    _type: 'Result/Ok',
+    value,
+  });
+  const resultError = <E>(error: E): Result<never, E> => ({
+    _type: 'Result/Error',
+    error,
+  });
 
   /**
    * Parse using `JSON.parse()` and return a `Result`.
@@ -30,9 +38,9 @@ export namespace JSON {
    */
   export function parse(anyString: string): Result<JSONValue, SyntaxError> {
     try {
-      return Result.Ok(NativeJSON.parse(anyString));
+      return resultOk(NativeJSON.parse(anyString));
     } catch (error: unknown) {
-      return Result.Error(error as SyntaxError);
+      return resultError(error as SyntaxError);
     }
   }
 
@@ -55,9 +63,9 @@ export namespace JSON {
    */
   export function stringify(anyValue: unknown): Result<string, TypeError> {
     try {
-      return Result.Ok(NativeJSON.stringify(anyValue));
+      return resultOk(NativeJSON.stringify(anyValue));
     } catch (error: unknown) {
-      return Result.Error(error as TypeError);
+      return resultError(error as TypeError);
     }
   }
 }

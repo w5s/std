@@ -1,10 +1,12 @@
-import { invariant } from './assert.js';
+import { invariant } from './invariant.js';
 import type { Int } from './integer.js';
-import { Task } from './task.js';
+import type { Task } from './task.js';
 import type { Tag } from './type.js';
 
 export namespace Random {
   export type Value = Tag<number, { min: 0; max: 1 }>;
+
+  const taskRun = 'Task/run';
 
   /**
    * Return a new random value from number 0<= N <=1.
@@ -16,7 +18,7 @@ export namespace Random {
   export function Value(numeric: number): Value {
     invariant(Value.hasInstance(numeric), `Random value should be between 0 and 1. Got ${numeric}`);
 
-    return numeric as Value;
+    return numeric;
   }
   export namespace Value {
     /**
@@ -43,7 +45,7 @@ export namespace Random {
    * @param getNextValue - an impure function that returns a new value
    */
   export function Generator(getNextValue: () => Random.Value): Generator {
-    return Task(({ ok }) => ok(getNextValue()));
+    return { [taskRun]: (resolve) => resolve(getNextValue()) };
   }
   export namespace Generator {
     const floor = (value: number) => Math.floor(value) as Int;
@@ -62,8 +64,11 @@ export namespace Random {
      * @param generator - a base random generator
      */
     export function number(generator: Generator) {
-      return (min: number, max: number): Task<number, never> =>
-        Task.map(generator, (value) => min + (max - min) * value);
+      return (min: number, max: number): Task<number, never> => ({
+        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
+          generator[taskRun]((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef);
+        },
+      });
     }
 
     /**
@@ -80,7 +85,11 @@ export namespace Random {
     export function int(generator: Generator) {
       const randomNumber = number(generator);
 
-      return (min: Int, max: Int) => Task.map(randomNumber(min, max), floor);
+      return (min: Int, max: Int): Task<Int, never> => ({
+        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
+          randomNumber(min, max)[taskRun]((value) => resolveTask(floor(value)), rejectTask, cancelerRef);
+        },
+      });
     }
 
     /**
@@ -95,7 +104,11 @@ export namespace Random {
      * @param generator - a base random generator
      */
     export function boolean(generator: Generator) {
-      return (trueWeight = 0.5): Task<boolean, never> => Task.map(generator, (_) => _ > trueWeight);
+      return (trueWeight = 0.5): Task<boolean, never> => ({
+        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
+          generator[taskRun]((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef);
+        },
+      });
     }
   }
 

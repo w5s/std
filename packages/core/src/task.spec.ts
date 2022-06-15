@@ -1,7 +1,9 @@
 /* eslint-disable jest/no-export */
 /* eslint-disable max-classes-per-file */
+import { describe, test, expect, jest } from '@jest/globals';
+import type { Mocked } from 'jest-mock';
 import { assertType } from './assert.js';
-import { AggregateError } from './error.js';
+import { AggregateError } from './error/aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
@@ -49,10 +51,10 @@ namespace ExpectTask {
   export function run<Value, Error>(
     task: Task<Value, Error>
   ): {
-    resolve: jest.Mocked<(value: Value) => void>;
-    reject: jest.Mocked<(error: Error) => void>;
-    initialCanceler: jest.Mocked<() => void>;
-    cancelerRef: Ref<jest.Mocked<() => void>>;
+    resolve: Mocked<(value: Value) => void>;
+    reject: Mocked<(error: Error) => void>;
+    initialCanceler: Mocked<() => void>;
+    cancelerRef: Ref<Mocked<() => void>>;
     finished: Promise<void>;
   } {
     const resolveTask = jest.fn();

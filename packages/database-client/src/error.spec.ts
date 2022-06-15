@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { DatabaseClientError } from './error.js';
 
 describe(DatabaseClientError, () => {

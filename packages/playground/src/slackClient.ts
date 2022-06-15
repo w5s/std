@@ -1,13 +1,28 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import { JSONValue, Option, Tag } from '@w5s/core';
+import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
 import { HTTPClient, parseJSON } from '@w5s/http-client';
+import { timeout } from './timeout.js';
 
 export interface SlackClient {
-  readonly slackAPIToken: string;
+  /**
+   * Slack API token
+   */
+  readonly slackToken: string;
+  /**
+   * HTTP client default request timeout
+   */
+  readonly slackRequestTimeout: Option<TimeDuration>;
 }
-export function SlackClient(slackAPIToken: string): SlackClient {
+export function SlackClient({
+  timeout: slackRequestTimeout,
+  token: slackToken,
+}: {
+  timeout?: SlackClient['slackRequestTimeout'];
+  token: SlackClient['slackToken'];
+}): SlackClient {
   return {
-    slackAPIToken,
+    slackToken,
+    slackRequestTimeout,
   };
 }
 
@@ -56,18 +71,22 @@ export namespace SlackClient {
     method: HTTPClient.Method,
     parameters: { [key: string]: unknown }
   ) {
-    return HTTPClient.request({
+    const request = HTTPClient.request({
       url: urlWithQuery(`https://slack.com/api/${method}`, {
-        token: client.slackAPIToken,
+        token: client.slackToken,
         ...parameters,
       }),
       method: 'POST',
       parse: parseJSON<Response>('unsafe'),
     });
+    const requestWithTimeout = Option.isSome(client.slackRequestTimeout)
+      ? timeout(request, client.slackRequestTimeout)
+      : request;
+    return requestWithTimeout;
   }
 
   export function chat_postMessage(client: SlackClient, request: chat_postMessage.Request) {
-    return apiCall(client, 'chat.postMessage', { as_user: 'true', ...request });
+    return apiCall<chat_postMessage.Response>(client, 'chat.postMessage', { as_user: 'true', ...request });
   }
   export namespace chat_postMessage {
     export interface Request

@@ -1,5 +1,6 @@
 import { Result, Task } from '@w5s/core';
-import { HTTPClient } from './client';
+import { describe, test, expect, jest } from '@jest/globals';
+import { HTTPClient } from './client.js';
 
 describe(HTTPClient.request, () => {
   const anyURL = 'https://localhost';
