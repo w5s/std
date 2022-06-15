@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-import { Tag, Option } from '@w5s/core';
+import type { Tag, Option } from '@w5s/core';
 import * as nodePath from 'node:path';
 
 export type FileName = string;
@@ -26,7 +26,7 @@ export namespace FilePath {
   }
 
   function filterNotEmpty<V extends string>(value: string): Option<V> {
-    return value !== '' ? (value as V) : Option.None;
+    return value !== '' ? (value as V) : undefined;
   }
 
   function wrap(pathString: string): FilePath {
