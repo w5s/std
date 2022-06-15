@@ -88,7 +88,7 @@
     "@w5s/commitlint-config": "1.0.0-alpha.5",
     "@w5s/eslint-config": "1.0.0-alpha.20",
     "@w5s/mrm-preset": "1.0.0-alpha.14",
-    "@w5s/ts-config": "1.0.0-alpha.10",
+    "@w5s/ts-config": "1.0.0-alpha.11",
     "cspell": "6.1.2",
     "es-jest": "2.0.0",
     "eslint": "8.17.0",
