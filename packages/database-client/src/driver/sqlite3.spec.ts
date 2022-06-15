@@ -1,3 +1,4 @@
+import { describe, test, expect, jest } from '@jest/globals';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { SQLite3 } from './sqlite3.js';

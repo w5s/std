@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { UUID } from './data.js';
 
 describe(UUID, () => {

@@ -1,4 +1,5 @@
 import { Ref, Result, Task, TimeDuration } from '@w5s/core';
+import { describe, test, expect, jest } from '@jest/globals';
 import { timeout, TimeoutError } from './timeout.js';
 
 describe(timeout, () => {

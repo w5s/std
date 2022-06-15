@@ -1,4 +1,5 @@
 import { Result, Task } from '@w5s/core';
+import { describe, test, expect, jest } from '@jest/globals';
 import { HTTPClient } from './client.js';
 
 describe(HTTPClient.request, () => {

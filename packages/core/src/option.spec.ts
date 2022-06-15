@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/no-null */
+import { describe, test, expect } from '@jest/globals';
 import { Option } from './option.js';
 import { assertType } from './assert.js';
 

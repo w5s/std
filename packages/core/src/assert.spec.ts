@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { describe, test, expect } from '@jest/globals';
 import { assertNever } from './assert.js';
 
 describe(assertNever, () => {

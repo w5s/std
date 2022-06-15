@@ -1,4 +1,5 @@
 /* eslint-disable id-length */
+import { describe, test, expect } from '@jest/globals';
 import { assertType } from './assert.js';
 import { assign, extend, identity, constant, pipe, throwError, ignore } from './prelude.js';
 

@@ -1,3 +1,4 @@
+import { describe, test, expect, jest } from '@jest/globals';
 import { Result, Task } from '@w5s/core';
 import { executeQuery } from './execute.js';
 import { DatabaseClientError } from './error.js';

@@ -1,3 +1,4 @@
+import { describe, test, expect } from '@jest/globals';
 import { JSON } from './json.js';
 import { Result } from './result.js';
 

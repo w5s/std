@@ -1,3 +1,4 @@
+import { describe, test, expect, jest } from '@jest/globals';
 import { Int } from './integer.js';
 import { Random } from './random.js';
 import { Result } from './result.js';
