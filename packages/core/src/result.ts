@@ -339,7 +339,7 @@ export namespace Result {
    * Return `matchers.Ok(value)` if `result` is `Ok`, otherwise `matchers.Error(error)`
    *
    * @example
-   * ```ts
+   * ```typescript
    * const stringify = (opt: Result<{foo: string}, { bar: string}>) => Option.match(opt, {
    *  Ok: ({ foo }) => foo + '_ok',
    *  Error: ({ bar }) => bar + '_error',

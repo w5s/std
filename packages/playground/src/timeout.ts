@@ -28,7 +28,7 @@ export const TimeoutError = DataError.Make<TimeoutError>('TimeoutError');
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
  *
  * @example
- * ```ts
+ * ```typescript
  * const longTask = Task.delay(TimeDuration.hours(1));
  * const timeoutTask = timeout(longTask, TimeDuration.milliseconds(4));
  * Task.unsafeRun(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))

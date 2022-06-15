@@ -227,7 +227,7 @@ export namespace Option {
    * Return `matchers.Some(value)` if `option` is `Some`, otherwise `matchers.None()`
    *
    * @example
-   * ```ts
+   * ```typescript
    * const stringify = (opt: Option<{foo: string}>) => Option.match(opt, {
    *  Some: ({ foo }) => foo + '_baz',
    *  None: () => 'none'

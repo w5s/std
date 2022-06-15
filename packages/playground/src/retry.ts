@@ -23,7 +23,7 @@ export interface RetryState {
  * RetryState constructor
  *
  * @example
- * ```ts
+ * ```typescript
  * const retryState = new RetryState({
  *  retryIndex: Int(0),
  *  retryCumulativeDelay: TimeDuration.seconds(1),
@@ -56,7 +56,7 @@ export namespace RetryPolicy {
    * Map the policy delay using `mapFn(delay, state)`
    *
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration(2));
    * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration(delay * 3));// Wait 6 seconds policy
    * ```
@@ -75,7 +75,7 @@ export namespace RetryPolicy {
    * Filter the policy delay using `predicate(delay, state)`
    *
    * @example
-   * ```ts
+   * ```typescript
    * const maxDelay = TimeDuration(4);
    * const policy = RetryPolicy.wait(TimeDuration(2));
    * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
@@ -94,7 +94,7 @@ export namespace RetryPolicy {
    * Apply a retry policy to a retry state.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration(1));
    * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.apply(policy, retryState);
@@ -119,7 +119,7 @@ export namespace RetryPolicy {
    * Apply a retry policy to a retry state and wait `state.retryPreviousDelay` milliseconds.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration(1));
    * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.applyAndDelay(policy, retryState);
@@ -140,7 +140,7 @@ export namespace RetryPolicy {
    * - `Option.Some(max(leftDelay, rightDelay))`, else
    *
    * @example
-   * ```ts
+   * ```typescript
    * const retryWait1ms = RetryPolicy.wait(TimeDuration(1));
    * const retryLimit3 = RetryPolicy.limitRetries(3);
    * const retryWait1msAndLimit3 = RetryPolicy.append(retryWait1ms, retryLimit3);
@@ -171,7 +171,7 @@ export namespace RetryPolicy {
    *
    * @category Constructor
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration(1)); // 1ms, 1ms, 1ms, 1ms, ...
    * ```
    * @param delay - The waiting delay between two attempts
@@ -186,7 +186,7 @@ export namespace RetryPolicy {
    *
    * @category Constructor
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.waitExponential(TimeDuration(1)); // 1ms, 2ms, 4ms, 8ms, ...
    * ```
    * @param initialDelay - The initial delay
@@ -203,7 +203,7 @@ export namespace RetryPolicy {
    * @see https://aws.amazon.com/fr/blogs/architecture/exponential-backoff-and-jitter/
    * @category Constructor
    * @example
-   * ```ts
+   * ```typescript
    * const policy = RetryPolicy.waitFullJitter(TimeDuration(1)); // 0ms, 1 + rand(0, 1) ms, 2 + rand(0, 2)ms, ...
    * ```
    * @param initialDelay - The initial delay
