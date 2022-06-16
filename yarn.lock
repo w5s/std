@@ -3279,7 +3279,7 @@ __metadata:
     "@types/node": ^17.0.18
     "@w5s/commitlint-config": 1.0.0-alpha.5
     "@w5s/eslint-config": 1.0.0-alpha.21
-    "@w5s/mrm-preset": 1.0.0-alpha.14
+    "@w5s/mrm-preset": 1.0.0-alpha.15
     "@w5s/ts-config": 1.0.0-alpha.11
     cspell: 6.1.2
     es-jest: 2.0.0
@@ -3369,16 +3369,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/mrm-preset@npm:1.0.0-alpha.14":
-  version: 1.0.0-alpha.14
-  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.14"
+"@w5s/mrm-preset@npm:1.0.0-alpha.15":
+  version: 1.0.0-alpha.15
+  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.15"
   dependencies:
     debug: ^4.3.3
     glob: ^8.0.3
     mrm-core: ^7.0.0
     semver-intersect: ^1.4.0
     sync-directory: ^5.0.0
-  checksum: 0111b99b5ea91d6ae34a0e56dc2b5ca8065cf8978e758eeeef7350d3fbb8bc3e4fbfe06c1fbb12fad76c25753a1d45ad0ef879aa7a79904bfa64ba2c797ef5b5
+  checksum: f8f7ff664c79dfdbf5f34785cdbb95786367fdd04b7e5c3a2845e5fde02813894bcc6d3a6193c9edb9b59011d6a4249e89899476179a7e8475532cc2e8dd4954
   languageName: node
   linkType: hard
 
