@@ -21,15 +21,15 @@
     "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json --ignore-pattern='packages/*/**'",
     "lint": "npm-run-all -p \"lint:*\"",
     "mrm": "mrm --preset @w5s/mrm-preset",
-    "prepare:empty": ":",
     "prepare:husky": "is-ci || husky install",
+    "prepare:packages": "turbo run prepare",
     "prepare": "npm-run-all -p \"prepare:*\"",
     "release": "is-ci && lerna publish --yes || lerna publish",
     "rescue": "git clean -fdx;yarn install",
     "spellcheck": "cspell --no-progress '**' --exclude='packages/*/**' && turbo run spellcheck",
-    "test": "npm-run-all -p \"test:*\"",
     "test:packages": "turbo run test",
-    "validate": "npm run build && npm run lint && npm test && npm run spellcheck"
+    "test": "npm-run-all -p \"test:*\"",
+    "validate": "npm run build && npm run lint && npm test"
   },
   "commitlint": {
     "extends": [
