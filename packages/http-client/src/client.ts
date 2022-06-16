@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import { DataError } from '@w5s/core/lib/dataError.js';
 import { Task } from '@w5s/core/lib/task.js';
-import type { Tag } from '@w5s/core';
+import type { Tag } from '@w5s/core/lib/type.js';
 
 /**
  * Types
