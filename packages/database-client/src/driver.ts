@@ -1,5 +1,6 @@
 import type { SQLStatement } from './sql.js';
 import { DatabaseClientError } from './error.js';
+import type { DatabaseClientMap } from './index.js';
 
 export namespace DatabaseDriver {
   const driverMap: Record<string, any> = {};
@@ -45,8 +46,5 @@ export namespace DatabaseDriver {
   type ClientOf<Name extends keyof DatabaseClientMap> = DatabaseClientMap[Name];
   type ModuleOf<Name extends keyof DatabaseClientMap> = Module<Name, ClientOf<Name>>;
 }
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface DatabaseClientMap {}
 
 export type DatabaseClient = DatabaseClientMap[keyof DatabaseClientMap];
