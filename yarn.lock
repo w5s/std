@@ -689,15 +689,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/config-conventional@npm:^17.0.0":
-  version: 17.0.2
-  resolution: "@commitlint/config-conventional@npm:17.0.2"
-  dependencies:
-    conventional-changelog-conventionalcommits: ^5.0.0
-  checksum: 6effb4f68d7bc24baebb65c57801b416e108ac4dfcc7a349dfc03cf4f3250f87520835934e474d2fd3c9e978a5435e606d1605038ebdc94dcd914a1818a5f54d
-  languageName: node
-  linkType: hard
-
 "@commitlint/config-validator@npm:^17.0.0":
   version: 17.0.0
   resolution: "@commitlint/config-validator@npm:17.0.0"
@@ -1256,6 +1247,20 @@ __metadata:
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
+  languageName: node
+  linkType: hard
+
+"@gitmoji/commit-types@npm:^1.1.5":
+  version: 1.1.5
+  resolution: "@gitmoji/commit-types@npm:1.1.5"
+  checksum: 132aa891aff0b23e0db3e9aa629ed758e5432465e8af9bc32e6a7a186a9708fc83dced2d6ef75eb43b725a3de0ef33908012c7d0cf2e8e7a9716d170e2814adc
+  languageName: node
+  linkType: hard
+
+"@gitmoji/parser-opts@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@gitmoji/parser-opts@npm:1.3.0"
+  checksum: 86ada608666f8b686f0b261b7485140efff8ee0c2e27998f3597cd302e899dab3abc493047ea5c959efe004ca6374fd23df81fb5d19b3ac8276ba8f70e03ed35
   languageName: node
   linkType: hard
 
@@ -3258,14 +3263,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/commitlint-config@npm:1.0.0-alpha.5":
-  version: 1.0.0-alpha.5
-  resolution: "@w5s/commitlint-config@npm:1.0.0-alpha.5"
+"@w5s/commitlint-config@npm:1.0.0-alpha.6":
+  version: 1.0.0-alpha.6
+  resolution: "@w5s/commitlint-config@npm:1.0.0-alpha.6"
   dependencies:
-    "@commitlint/config-conventional": ^17.0.0
+    "@commitlint/types": ^17.0.0
+    "@gitmoji/commit-types": ^1.1.5
+    "@gitmoji/parser-opts": ^1.3.0
+    commitlint-plugin-gitmoji: ^2.2.0
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
-  checksum: effb816dd6e9c1b5b7c0217ec50b98126255b942abb6df5c5592efc1d53b99e13b77494ce797915fcb139eb98fe5606f2dfad612bcdcab3a24c1859a6d38ed7d
+  checksum: 5cb95092cebdf3f0aee92b5680ccf65373033c177f26d345aa77e5b47ceee5e103cc41d745d91afce32705f6e81a167e34369f48be32b8c1def0321bf1f96b0d
   languageName: node
   linkType: hard
 
@@ -3277,7 +3285,7 @@ __metadata:
     "@babel/eslint-parser": 7.18.2
     "@commitlint/cli": 17.0.2
     "@types/node": ^17.0.18
-    "@w5s/commitlint-config": 1.0.0-alpha.5
+    "@w5s/commitlint-config": 1.0.0-alpha.6
     "@w5s/eslint-config": 1.0.0-alpha.22
     "@w5s/mrm-preset": 1.0.0-alpha.16
     "@w5s/ts-config": 1.0.0-alpha.11
@@ -4720,6 +4728,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commitlint-plugin-gitmoji@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "commitlint-plugin-gitmoji@npm:2.2.0"
+  dependencies:
+    dotenv: ^8.2.0
+    emoji-name-map: ^1.2.9
+  peerDependencies:
+    commitlint: ^11.0.0
+  checksum: 7e803534e4a037668174fcde6102f123184d52974dccd189611ce12f446b4da99afa06c9b80147e5317e91c3f004e548104336a479c35f6ca097c2859ac2b192
+  languageName: node
+  linkType: hard
+
 "common-ancestor-path@npm:^1.0.1":
   version: 1.0.1
   resolution: "common-ancestor-path@npm:1.0.1"
@@ -4834,17 +4854,6 @@ __metadata:
     compare-func: ^2.0.0
     q: ^1.5.1
   checksum: 6ed4972fce25a50f9f038c749cc9db501363131b0fb2efc1fccecba14e4b1c80651d0d758d4c350a609f32010c66fa343eefd49c02e79e911884be28f53f3f90
-  languageName: node
-  linkType: hard
-
-"conventional-changelog-conventionalcommits@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "conventional-changelog-conventionalcommits@npm:5.0.0"
-  dependencies:
-    compare-func: ^2.0.0
-    lodash: ^4.17.15
-    q: ^1.5.1
-  checksum: b67d12e4e0fdde5baa32c3d77af472de38646a18657b26f5543eecce041a318103092fbfcef247e2319a16957c9ac78c6ea78acc11a5db6acf74be79a28c561f
   languageName: node
   linkType: hard
 
@@ -5501,6 +5510,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv@npm:^8.2.0":
+  version: 8.6.0
+  resolution: "dotenv@npm:8.6.0"
+  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
+  languageName: node
+  linkType: hard
+
 "duplexer3@npm:^0.1.4":
   version: 0.1.4
   resolution: "duplexer3@npm:0.1.4"
@@ -5567,6 +5583,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emoji-name-map@npm:^1.2.9":
+  version: 1.2.9
+  resolution: "emoji-name-map@npm:1.2.9"
+  dependencies:
+    emojilib: ^2.0.2
+    iterate-object: ^1.3.1
+    map-o: ^2.0.1
+  checksum: 3ab0b30d3322afa75ee7620dc0657722cbf2875a8e57f3126173ba35469a182574c2cc6ebedee307e699b87be42eed267df54a303949594a5b62e7e291649cc4
+  languageName: node
+  linkType: hard
+
 "emoji-regex@npm:^10.0.0":
   version: 10.0.0
   resolution: "emoji-regex@npm:10.0.0"
@@ -5592,6 +5619,13 @@ __metadata:
   version: 9.2.2
   resolution: "emoji-regex@npm:9.2.2"
   checksum: 8487182da74aabd810ac6d6f1994111dfc0e331b01271ae01ec1eb0ad7b5ecc2bbbbd2f053c05cb55a1ac30449527d819bbfbf0e3de1023db308cbcb47f86601
+  languageName: node
+  linkType: hard
+
+"emojilib@npm:^2.0.2":
+  version: 2.4.0
+  resolution: "emojilib@npm:2.4.0"
+  checksum: ea241c342abda5a86ffd3a15d8f4871a616d485f700e03daea38c6ce38205847cea9f6ff8d5e962c00516b004949cc96c6e37b05559ea71a0a496faba53b56da
   languageName: node
   linkType: hard
 
@@ -8258,6 +8292,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"iterate-object@npm:^1.3.0, iterate-object@npm:^1.3.1":
+  version: 1.3.4
+  resolution: "iterate-object@npm:1.3.4"
+  checksum: b63496c489177babccb4b487322279ea4377e08d02b93902c3ffba3032a788f014a74e03c615da2a24807fa3fca872f69c9570f7801c8e88181df7a49298904b
+  languageName: node
+  linkType: hard
+
 "jest-changed-files@npm:^28.0.2":
   version: 28.0.2
   resolution: "jest-changed-files@npm:28.0.2"
@@ -9449,6 +9490,15 @@ __metadata:
   dependencies:
     tmpl: 1.0.5
   checksum: b38a025a12c8146d6eeea5a7f2bf27d51d8ad6064da8ca9405fcf7bf9b54acd43e3b30ddd7abb9b1bfa4ddb266019133313482570ddb207de568f71ecfcf6060
+  languageName: node
+  linkType: hard
+
+"map-o@npm:^2.0.1":
+  version: 2.0.10
+  resolution: "map-o@npm:2.0.10"
+  dependencies:
+    iterate-object: ^1.3.0
+  checksum: 1372253182149bd860cf9f81807e19492a10b182262f13cd61408454afa7a9912d40cee843746b84bc71da43b47281e626df289e5c545464664643a50e650bc1
   languageName: node
   linkType: hard
 
