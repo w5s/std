@@ -2,9 +2,11 @@
   "name": "@w5s/core-src",
   "private": true,
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
   "scripts": {
     "build:packages": "turbo run build",
     "build": "npm-run-all -p \"build:*\"",
@@ -88,6 +90,7 @@
     "@w5s/eslint-config": "1.0.0-alpha.24",
     "@w5s/mrm-preset": "1.0.0-alpha.18",
     "@w5s/ts-config": "1.0.0-alpha.11",
+    "conventional-changelog-gitmoji-config": "latest",
     "cspell": "6.1.2",
     "es-jest": "2.0.0",
     "eslint": "8.18.0",

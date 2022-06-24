@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "packages/*"
-  ],
+  "$schema": "https://json.schemastore.org/lerna.json",
   "version": "1.0.0-rc.54",
   "command": {
     "publish": {
@@ -9,9 +7,10 @@
       "npmClient": "npm"
     },
     "version": {
-      "message": "chore(release): publish %s"
+      "message": "🔖 Publish %s"
     }
   },
   "npmClient": "yarn",
-  "useWorkspaces": true
+  "useWorkspaces": true,
+  "changelogPreset": "gitmoji-config"
 }
