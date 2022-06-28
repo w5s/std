@@ -31,6 +31,7 @@ describe('index', () => {
         'Ref',
         'Random',
         'Result',
+        'String',
         'throwError',
         'Task',
         'Time',
