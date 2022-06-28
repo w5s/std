@@ -102,6 +102,11 @@ export namespace Array {
   /**
    * Return true if the size of the array is 0
    *
+   * @example
+   * ```typescript
+   * Array.isEmpty([]);// true
+   * Array.isEmpty(['a', 'b', 'c']);// false
+   * ```
    * @category Guard
    * @param array - The array object
    */
