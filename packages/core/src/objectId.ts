@@ -2,7 +2,7 @@ import type { Int } from './integer.js';
 import type { Tag } from './type.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-type AnyObject = Record<string | symbol | number, unknown>;
+type AnyObject = Object;
 // eslint-disable-next-line @typescript-eslint/ban-types
 type AnyFunction = Function;
 type State = {
