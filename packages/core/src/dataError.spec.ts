@@ -1,5 +1,5 @@
 import { describe, test, expect } from '@jest/globals';
-import { DataObject } from './data.js';
+import { DataObject } from './dataObject.js';
 import { DataError } from './dataError.js';
 
 describe(DataError, () => {

@@ -1,4 +1,4 @@
-import { DataObject } from './data.js';
+import { DataObject } from './dataObject.js';
 import type { Option } from './option.js';
 
 // https://doc.rust-lang.org/std/result/enum.Result.html
