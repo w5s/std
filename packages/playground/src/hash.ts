@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise */
 // see https://github.com/facebook/immutable-js/blob/master/src/Hash.js
 
-import type { Int } from './integer.js';
+import type { Int } from '@w5s/core/lib/integer.js';
 
 export namespace Hash {
   export type Value = Int;

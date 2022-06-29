@@ -18,7 +18,6 @@ describe('index', () => {
         'Dict',
         'extend',
         'default', // FIXME: no key exist in reality
-        'Hash',
         'Int',
         'identity',
         'ignore',

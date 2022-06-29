@@ -1,6 +1,6 @@
 import { describe, test, expect } from '@jest/globals';
+import { Int } from '@w5s/core/lib/integer.js';
 import { Hash } from './hash.js';
-import { Int } from './integer.js';
 
 describe(`Hash`, () => {
   describe(Hash.from, () => {
