@@ -21,6 +21,7 @@ export namespace Array {
   const readonly = <Item>(array: NativeArray<Item>): ReadonlyArray<Item> => array;
   const none = undefined;
   const isBetween = (value: number, min: number, max: number) => value >= min && value <= max;
+  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
   const copySlice = <Item>(
     array: NativeArray<Item>,
     arrayStartIndex: number,
@@ -283,33 +284,20 @@ export namespace Array {
     array: Array<FromItem>,
     mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => ToItem
   ): Array<ToItem> {
-    const arrayLength = array.length;
-
-    if (arrayLength === 0) {
+    if (array.length === 0) {
       return array as Array<never>;
     }
-    let index = 0;
     let changed = false;
-    const returnValue = new NativeArray(arrayLength);
-
-    // 1. map and check changes
-    while (index < arrayLength) {
-      const previousValue = array[index]!;
-      const nextValue = mapFn(previousValue, index as Int, array);
-      returnValue[index] = nextValue;
-      index += 1;
-      if ((nextValue as any) !== previousValue) {
+    const returnValue = array.map((previousValue, index, thisArray) => {
+      const nextValue = mapFn(previousValue, index as Int, thisArray);
+      if (!changed && (nextValue as any) !== previousValue) {
         changed = true;
-        break;
       }
-    }
-    // 2. map all rest values
-    while (index < arrayLength) {
-      returnValue[index] = mapFn(array[index]!, index as Int, array);
-      index += 1;
-    }
+      return nextValue;
+    });
 
-    return changed ? readonly(returnValue) : array;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    return changed ? readonly(returnValue) : (array as unknown as Array<ToItem>);
   }
 
   /**
@@ -415,20 +403,11 @@ export namespace Array {
     if (arrayLength === 0) {
       return array;
     }
-
-    const returnValue = [];
-    let returnIndex = 0;
-    let index = 0;
-    while (index < arrayLength) {
-      const value = array[index];
-      if (predicate(array[index]!, index as Int, array)) {
-        returnValue[returnIndex] = value;
-        returnIndex += 1;
-      }
-      index += 1;
-    }
+    const returnValue = array.filter(
+      // @ts-ignore number !== Int
+      predicate
+    );
     const returnValueLength = returnValue.length;
-
     return returnValueLength === 0 ? emptyArray : returnValueLength === arrayLength ? array : readonly(returnValue);
   }
 
@@ -523,22 +502,12 @@ export namespace Array {
     array: Array<Item>,
     predicate: (value: Item, index: Int, array: Array<Item>) => boolean
   ): Option<Int> {
-    const returnValue = none;
-    const arrayLength = array.length;
-
-    if (arrayLength > 0) {
-      let index = 0;
-
-      while (index < arrayLength) {
-        if (predicate(array[index]!, index as Int, array)) {
-          return index as Int;
-        }
-
-        index += 1;
-      }
-    }
-
-    return returnValue;
+    return indexToOption(
+      array.findIndex(
+        // @ts-ignore number !== Int
+        predicate
+      )
+    );
   }
 
   /**
@@ -554,11 +523,7 @@ export namespace Array {
    * value otherwise.
    */
   export function sort<Item>(array: Array<Item>, compareFn: (a: Item, b: Item) => number) {
-    if (array.length === 0) {
-      return array;
-    }
-
-    return readonly(copy(array).sort(compareFn));
+    return array.length === 0 ? array : readonly(copy(array).sort(compareFn));
   }
 
   /**

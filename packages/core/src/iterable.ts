@@ -60,6 +60,7 @@ export namespace Iterable {
    *
    * @example
    * ```typescript
+   * Iterable.generate(3, () => 'a');// == Iterable.of('a', 'a', 'a')
    * Iterable.generate(3, (index) => index * 2);// == Iterable.of(0, 2, 4)
    * ```
    * @category Constructor
