@@ -60,7 +60,7 @@ export namespace Iterable {
    *
    * @example
    * ```typescript
-   * Iterable.generate(3, (index) => index * 2);// { next () { 0, 2, 4, done } }
+   * Iterable.generate(3, (index) => index * 2);// == Iterable.of(0, 2, 4)
    * ```
    * @category Constructor
    * @param length - The number of elements
@@ -89,8 +89,8 @@ export namespace Iterable {
    *
    * @example
    * ```typescript
-   * Iterable.range(1, 4);// { next () { => 1, 2, 3, done } }
-   * Iterable.range(1, 7, 2);// { next () { => 1, 3, 5, done } }
+   * Iterable.range(1, 4);// == Iterable.of(1, 2, 3)
+   * Iterable.range(1, 7, 2);// == Iterable.of(1, 3, 5)
    * ```
    * @param start - inclusive minimum
    * @param end - exclusive maximum value
@@ -144,7 +144,7 @@ export namespace Iterable {
    * @example
    * ```typescript
    * const iterable = [1, 2, 3];
-   * Iterable.map(iterator, (value) => value * 2);// { next () { 2, 4, 6, done } }
+   * Iterable.map(iterator, (value) => value * 2);// == Iterable.of(2, 4, 6)
    * ```
    * @param source - the iterable source
    * @param mapFn - a function that returns a new value
@@ -172,7 +172,7 @@ export namespace Iterable {
    * @example
    * ```typescript
    * const iterator = [1, 2, 3];
-   * Iterable.filter(iterator, (value) => value > 1);// { next () { 2, 3, done } }
+   * Iterable.filter(iterator, (value) => value > 1);// == Iterable.of(2, 3)
    * ```
    * @param source - the iterator to be filtered
    * @param predicate - a function that returns a boolean
@@ -235,7 +235,7 @@ export namespace Iterable {
    * ```typescript
    * const left = [1, 2, 3];
    * const right = ['a', 'b'];
-   * Iterable.zip(left, right);// [[1, 'a'], [2, 'b']]
+   * Iterable.zip(left, right);// == Iterable.of([1, 'a'], [2, 'b'])
    * ```
    * @param left - Left iterable
    * @param right - Right iterable
