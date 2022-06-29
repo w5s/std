@@ -111,6 +111,14 @@ describe('Array', () => {
       expect(Array.empty()).toBe(empty);
     });
   });
+  describe(Array.generate, () => {
+    test('should return an empty iterable when 0', () => {
+      expect(Array.generate(0, () => 'a')).toEqual([]);
+    });
+    test('should use mapFn(index) to generate values', () => {
+      expect(Array.generate(3, (_) => _)).toEqual([0, 1, 2]);
+    });
+  });
   describe(Array.of, () => {
     test('should return empty array when no argument', () => {
       expect(Array.of()).toEqual([]);
