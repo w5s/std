@@ -1,3 +1,5 @@
+import type { Int } from './integer.js';
+
 /**
  * Iterable constructor
  *
@@ -37,6 +39,35 @@ export namespace Iterable {
    */
   export function empty() {
     return emptyIterable;
+  }
+
+  /**
+   * Generate an iterable of `length` using `mapFn(index)` on each element
+   *
+   * @example
+   * ```typescript
+   * Iterable.generate(3, (index) => index * 2);// { next () { 0, 2, 4, done } }
+   * ```
+   * @category Constructor
+   * @param length - The number of elements
+   * @param mapFn - The mapping function
+   */
+  export function generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
+    let currentIndex = 0;
+    return length === 0
+      ? emptyIterable
+      : Iterable(() => ({
+          next() {
+            const index = currentIndex;
+            if (index < length) {
+              currentIndex += 1;
+
+              return resultValue(mapFn(index as Int));
+            }
+
+            return resultDone;
+          },
+        }));
   }
 
   /**

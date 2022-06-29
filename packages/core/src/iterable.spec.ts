@@ -8,6 +8,15 @@ describe(Iterable, () => {
     }
   }
 
+  describe(Iterable.generate, () => {
+    test('should return an empty iterable when 0', () => {
+      expect(Array.from(Iterable.generate(0, () => 'a'))).toEqual([]);
+    });
+    test('should use mapFn(index) to generate values', () => {
+      expect(Array.from(Iterable.generate(3, (_) => _))).toEqual([0, 1, 2]);
+    });
+  });
+
   describe(Iterable.filter, () => {
     test('should return a filtered iterator', () => {
       expect(Array.from(Iterable.filter(generatorOf(1, 3, 2), (value) => value >= 2))).toEqual([3, 2]);
