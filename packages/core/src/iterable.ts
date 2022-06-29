@@ -73,6 +73,11 @@ export namespace Iterable {
   /**
    * Create an iterable from `start` to `end` (excluded)
    *
+   * @example
+   * ```typescript
+   * Iterable.range(1, 4);// { next () { => 1, 2, 3, done } }
+   * Iterable.range(1, 7, 2);// { next () { => 1, 3, 5, done } }
+   * ```
    * @param start - inclusive minimum
    * @param end - exclusive maximum value
    * @param step - optional step between iteration
