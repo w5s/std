@@ -8,6 +8,15 @@ describe(Iterable, () => {
     }
   }
 
+  describe(Iterable.of, () => {
+    test('should return an empty iterable when 0', () => {
+      expect(Array.from(Iterable.of())).toEqual([]);
+    });
+    test('should use mapFn(index) to generate values', () => {
+      expect(Array.from(Iterable.of(1, 2, 3))).toEqual([1, 2, 3]);
+    });
+  });
+
   describe(Iterable.generate, () => {
     test('should return an empty iterable when 0', () => {
       expect(Array.from(Iterable.generate(0, () => 'a'))).toEqual([]);
