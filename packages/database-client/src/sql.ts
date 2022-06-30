@@ -42,12 +42,12 @@ export function SQLStatement({
   strings?: ReadonlyArray<string>;
   values?: ReadonlyArray<SQLStatement.Value>;
 }): SQLStatement {
-  return DataObject({
+  return {
     _type: SQLStatement.typeName,
     strings:
       strings.length <= values.length ? strings.concat(Array(values.length + 1 - strings.length).fill('')) : strings,
     values,
-  });
+  };
 }
 export namespace SQLStatement {
   export type Value = unknown;

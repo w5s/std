@@ -19,23 +19,6 @@ export type DataObject<
   }
 > = Readonly<Properties>;
 
-/**
- * Return a new `DataObject`
- *
- * @example
- * ```typescript
- * const data = DataObject({
- *   [DataObject.type]: 'FooError' as const, // this is required
- *   foo: true
- * })
- * ```
- * @param properties - the data object properties
- */
-export function DataObject<Properties extends { [DataObject.type]: string }>(
-  properties: Properties
-): DataObject<Properties> {
-  return properties;
-}
 export namespace DataObject {
   /**
    * Extract all parameters to create a new DataError
@@ -117,7 +100,11 @@ export namespace DataObject {
       create: <Properties>(properties: Properties) => DataObject<{ [DataObject.type]: Name } & Properties>
     ) => Constructor
   ): Constructor & Module<ReturnType<Constructor>> {
-    const create = (properties: any) => DataObject({ [DataObject.type]: typeName, ...properties });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    const create = (properties: any) => ({
+      [DataObject.type]: typeName,
+      ...properties,
+    });
     const properties = {
       typeName,
       hasInstance: (anyValue: unknown): boolean =>
