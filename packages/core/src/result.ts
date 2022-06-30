@@ -1,4 +1,4 @@
-import { DataObject } from './dataObject.js';
+import type { DataObject } from './dataObject.js';
 import type { Option } from './option.js';
 
 // https://doc.rust-lang.org/std/result/enum.Result.html
@@ -55,10 +55,10 @@ export namespace Result {
    * @param resultValue - the success value
    */
   export function Ok<V>(resultValue: V): Result<V, never> {
-    return DataObject({
-      [DataObject.type]: Ok.typeName,
+    return {
+      _type: Ok.typeName,
       value: resultValue,
-    });
+    };
   }
   Ok.typeName = 'Result/Ok' as const;
 
@@ -82,10 +82,10 @@ export namespace Result {
    * @param resultError - the failure value
    */
   export function Error<E>(resultError: E): Result<never, E> {
-    return DataObject({
-      [DataObject.type]: Error.typeName,
+    return {
+      _type: Error.typeName,
       error: resultError,
-    });
+    };
   }
   Error.typeName = 'Result/Error' as const;
 
@@ -130,7 +130,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
-    return anyValue[DataObject.type] === Ok.typeName;
+    return anyValue._type === Ok.typeName;
   }
 
   /**
@@ -148,7 +148,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {
-    return anyValue[DataObject.type] === Error.typeName;
+    return anyValue._type === Error.typeName;
   }
 
   /**
