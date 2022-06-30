@@ -18,6 +18,11 @@ export type Dict<V> = Readonly<{
 /**
  * Dict constructor. Alias of `from`
  *
+ * @example
+ * ```typescript
+ * const dict = Dict({ a: 1, b: 2 })
+ * const dictEntries = Dict([['a', 1], ['b', 2]])
+ * ```
  * @category Constructor
  */
 export function Dict<V>(iterable: Iterable<[string, V]>): Dict<V> {

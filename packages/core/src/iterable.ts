@@ -3,6 +3,12 @@ import type { Int } from './integer.js';
 /**
  * Iterable constructor
  *
+ * @example
+ * ```typescript
+ * const iterable = Iterable(() => ({
+ *   next() { ... }
+ * }))
+ * ```
  * @category Constructor
  * @param iterator - function that creates a new iterator
  */
@@ -35,6 +41,10 @@ export namespace Iterable {
   /**
    * Returns an iterable that have no value
    *
+   * @example
+   * ```typescript
+   * Array.from(Iterable.empty()) // == []
+   * ```
    * @category Constructor
    */
   export function empty() {
@@ -136,8 +146,6 @@ export namespace Iterable {
           }
     );
   }
-
-  // export function repeat() {}
 
   /**
    * Return a new Iterable which applies `mapFn` to each values

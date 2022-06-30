@@ -12,6 +12,10 @@ export namespace Random {
    * Return a new random value from number 0<= N <=1.
    * An invariant error is thrown when invalid number is given
    *
+   * @example
+   * ```typescript
+   * const random = Random.Value(0);
+   * ```
    * @category Constructor
    * @param numeric - numeric value >=0 and <=1
    */
@@ -24,6 +28,11 @@ export namespace Random {
     /**
      * Return `true` if `anyValue` is a valid `Random.Value`
      *
+     * @example
+     * ```typescript
+     * Random.Value.hasInstance(null); // === false
+     * Random.Value.hasInstance(Random.Value(0)); // === true
+     * ```
      * @param anyValue - an unknown value to be refined
      */
     export function hasInstance(anyValue: unknown): anyValue is Value {

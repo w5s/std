@@ -47,6 +47,10 @@ export namespace Result {
   /**
    * Create a new `Ok` object
    *
+   * @example
+   * ```typescript
+   * Result.Ok('value');// { _type: 'Result/Ok', value: 'value'}
+   * ```
    * @category Constructor
    * @param resultValue - the success value
    */
@@ -70,6 +74,10 @@ export namespace Result {
   /**
    * Create a new `Error` object
    *
+   * @example
+   * ```typescript
+   * Result.Error(new Error('my message'));// { _type: 'Result/Error', error: Error}
+   * ```
    * @category Constructor
    * @param resultError - the failure value
    */
@@ -84,6 +92,11 @@ export namespace Result {
   /**
    * Return `true` if `anyValue` is {@link Result.Ok} or {@link Result.Error}
    *
+   * @example
+   * ```typescript
+   * Result.hasInstance(null); // === false
+   * Result.hasInstance(Result.Ok(null)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the value to tested
    */

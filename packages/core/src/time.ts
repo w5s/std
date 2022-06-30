@@ -42,6 +42,11 @@ export namespace TimeDuration {
   /**
    * Return `true` if `anyValue` is a valid `TimeDuration` value
    *
+   * @example
+   * ```typescript
+   * TimeDuration.hasInstance(null); // === false
+   * TimeDuration.hasInstance(TimeDuration(0)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the tested value
    */
@@ -128,6 +133,10 @@ export type Time = Tag<number, { time: 'ms' }>;
 /**
  * Create a new Time value
  *
+ * @example
+ * ```typescript
+ * const time = Time(0);
+ * ```
  * @category Constructor
  * @param milliseconds - the value in milliseconds
  */
@@ -140,6 +149,11 @@ export namespace Time {
   /**
    * Return `true` if `anyValue` is a valid `Time` value
    *
+   * @example
+   * ```typescript
+   * Time.hasInstance(null); // === false
+   * Time.hasInstance(Time(0)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the tested value
    */

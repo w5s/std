@@ -56,6 +56,9 @@ export namespace Option {
   /**
    * An identity function that validates passed value
    *
+   * @example
+   * ```typescript
+   * ```
    * @category Constructor
    * @param value - the non empty value
    */

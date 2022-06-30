@@ -66,6 +66,11 @@ export function throwError(error: unknown): never {
  * - `properties` cannot contain new property
  * - `properties` cannot change the type of a value
  *
+ * @example
+ * ```typescript
+ * const base = { a: 1 }
+ * const newObject = assign(base, { a: 2 });// { a: 2 }
+ * ```
  * @param source - a base object
  * @param properties - an extension object map
  */
@@ -79,6 +84,11 @@ export function assign<T>(source: T, properties: Partial<T> | undefined | null):
  * - `extension` can add new properties
  * - `extension` can override the type of `source`
  *
+ * @example
+ * ```typescript
+ * const base = { a: 1 }
+ * const newObject = assign(base, { b: 3 });// { a: 2, b: 3 }
+ * ```
  * @param source - a base object
  * @param extension - an extension object map
  */
