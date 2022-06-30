@@ -61,8 +61,27 @@
       "@w5s/eslint-config"
     ],
     "rules": {
-      "jsdoc/check-tag-names": "off"
+      "jsdoc/check-tag-names": "off",
+      "jsdoc/require-example": [
+        "warn",
+        {
+          "checkConstructors": false,
+          "exemptedBy": [
+            "type"
+          ]
+        }
+      ]
     },
+    "overrides": [
+      {
+        "files": [
+          "**/*.spec.*"
+        ],
+        "rules": {
+          "jsdoc/require-example": "off"
+        }
+      }
+    ],
     "root": true
   },
   "eslintIgnore": [
