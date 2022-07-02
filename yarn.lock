@@ -3651,7 +3651,7 @@ __metadata:
     "@w5s/commitlint-config": 1.0.0-alpha.7
     "@w5s/eslint-config": 1.0.0-alpha.25
     "@w5s/mrm-preset": 1.0.0-alpha.19
-    "@w5s/ts-config": 1.0.0-alpha.12
+    "@w5s/ts-config": 1.0.0-alpha.13
     conventional-changelog-gitmoji-config: latest
     cspell: 6.1.2
     es-jest: 2.0.0
@@ -3767,12 +3767,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:1.0.0-alpha.12":
-  version: 1.0.0-alpha.12
-  resolution: "@w5s/ts-config@npm:1.0.0-alpha.12"
+"@w5s/ts-config@npm:1.0.0-alpha.13":
+  version: 1.0.0-alpha.13
+  resolution: "@w5s/ts-config@npm:1.0.0-alpha.13"
   peerDependencies:
     typescript: 3.x || 4.x
-  checksum: 2f2fcdc7d098273106395afacc25f2005443c58793abdcb473f84bc3f6e82ab46a1de00da02737c9d65dc89269a09686eeadf1152a1be792a01cf1faf0938d27
+  checksum: 6decd920db8831cd2d721486af013231d9a9b8f4bf9b27ea5a012d61f7ca0c7bb78ac8d2cfb9d30a918d6ecf95706cd8b8641ab2594b85b47a3f7e4b32f407ec
   languageName: node
   linkType: hard
 
