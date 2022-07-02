@@ -22,6 +22,6 @@ const randomUUIDRef: Ref<() => UUID> = {
 export const randomUUID: Task<UUID, never> & {
   ref: Ref<() => UUID>;
 } = {
-  'Task/run': (resolve) => resolve(randomUUIDRef.current()),
+  taskRun: (resolve) => resolve(randomUUIDRef.current()),
   ref: randomUUIDRef,
 };

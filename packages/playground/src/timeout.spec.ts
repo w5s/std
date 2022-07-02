@@ -25,7 +25,7 @@ describe(timeout, () => {
     });
     const task = timeout(canceled, anyDelay);
     const cancelerRef = Ref(canceler);
-    task[Task.run](
+    task.taskRun(
       () => {},
       () => {},
       cancelerRef

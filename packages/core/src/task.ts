@@ -10,7 +10,10 @@ import { AggregateError } from './error/aggregateError.js';
  * @protected
  */
 export interface Task<Value, Error> {
-  readonly [Task.run]: (
+  /**
+   * A callback with side effets
+   */
+  readonly taskRun: (
     /**
      * Resolve callback
      */
@@ -80,13 +83,6 @@ export namespace Task {
   type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
 
   /**
-   * String symbol to contain the execution of the side effect.
-   * It is long to discourage the direct use of `task['Task/run']()`
-   * Type `string` was chosen over a `symbol` so it is "less opaque" and compatible even for older browser
-   */
-  export const run = 'Task/run';
-
-  /**
    * Interface used to cancel running task
    */
   export interface Canceler {
@@ -95,6 +91,8 @@ export namespace Task {
 
   /**
    * An empty function representing that can be used for non cancelable tasks
+   *
+   * @example
    */
   export const defaultCanceler: Canceler = () => {};
 
@@ -102,6 +100,7 @@ export namespace Task {
    * Base Task constructor
    * Prefer {@link Task} for convenience
    *
+   * @example
    * @protected
    * @param taskRun - the side effect function
    */
@@ -122,7 +121,7 @@ export namespace Task {
     ) => void
   ): Task<Value, Error> {
     return {
-      [run]: taskRun,
+      taskRun,
     };
   }
 
@@ -165,7 +164,7 @@ export namespace Task {
       rejectTask: (error: Error, entry: typeof this.tasks[0], index: number) => void
     ) {
       this.tasks.forEach((entry, taskIndex) => {
-        entry.task[run](
+        entry.task.taskRun(
           (value: Value) => {
             if (!this.isFinished()) {
               this.taskFinished += 1;
@@ -355,7 +354,7 @@ export namespace Task {
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Task<unknown, unknown> {
-    return isObject(anyValue) && typeof anyValue[run] === 'function';
+    return isObject(anyValue) && typeof anyValue['taskRun'] === 'function';
   }
 
   /**
@@ -435,7 +434,7 @@ export namespace Task {
     fn: (value: ValueFrom) => ValueTo
   ): Task<ValueTo, Error> {
     return wrap<ValueTo, Error>((resolveTask, rejectTask, cancelerRef) =>
-      task[run]((value) => resolveTask(fn(value)), rejectTask, cancelerRef)
+      task.taskRun((value) => resolveTask(fn(value)), rejectTask, cancelerRef)
     );
   }
 
@@ -456,7 +455,7 @@ export namespace Task {
     fn: (error: ErrorFrom) => ErrorTo
   ): Task<Value, ErrorTo> {
     return wrap<Value, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run](resolveTask, (error) => rejectTask(fn(error)), cancelerRef)
+      task.taskRun(resolveTask, (error) => rejectTask(fn(error)), cancelerRef)
     );
   }
 
@@ -480,7 +479,7 @@ export namespace Task {
     fn: (value: ValueFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueTo, ErrorFrom | ErrorTo> {
     return wrap<ValueTo, ErrorFrom | ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run]((value) => fn(value)[run](resolveTask, rejectTask, cancelerRef), rejectTask, cancelerRef)
+      task.taskRun((value) => fn(value).taskRun(resolveTask, rejectTask, cancelerRef), rejectTask, cancelerRef)
     );
   }
 
@@ -526,7 +525,7 @@ export namespace Task {
     fn: (error: ErrorFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueFrom | ValueTo, ErrorTo> {
     return wrap<ValueFrom | ValueTo, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run](resolveTask, (error) => fn(error)[run](resolveTask, rejectTask, cancelerRef), cancelerRef)
+      task.taskRun(resolveTask, (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef), cancelerRef)
     );
   }
 
@@ -548,7 +547,7 @@ export namespace Task {
       returnValue = result;
     };
     let rejectHandler = (_error: unknown) => {};
-    const runValue: void | Promise<void> = task[Task.run](
+    const runValue: void | Promise<void> = task.taskRun(
       (value) => resolveHandler(resultOk(value)),
       (error) => resolveHandler(resultError(error)),
       cancelerRef

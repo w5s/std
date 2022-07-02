@@ -7,7 +7,7 @@ import { Task } from './task.js';
 describe('Random', () => {
   const generatorOf = (value: number) => Random.Generator(() => Random.Value(value));
   const mockDefaultGenerator = (value: number) =>
-    jest.spyOn(Random.defaultGenerator, 'Task/run').mockImplementation((resolve) => resolve(Random.Value(value)));
+    jest.spyOn(Random.defaultGenerator, 'taskRun').mockImplementation((resolve) => resolve(Random.Value(value)));
 
   describe(Random.Value, () => {
     test('should return new random value', () => {

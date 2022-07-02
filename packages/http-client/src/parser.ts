@@ -4,7 +4,7 @@ import { HTTPClient } from './client.js';
 function tryCall<V>(fn: () => Promise<V>): Task<V, HTTPClient.ParserError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    'Task/run': async (resolve, reject) => {
+    taskRun: async (resolve, reject) => {
       try {
         resolve(await fn());
       } catch (error: unknown) {

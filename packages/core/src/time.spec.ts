@@ -99,7 +99,7 @@ describe(Time, () => {
       const reject = jest.fn();
 
       // Run task
-      task[Task.run](resolve, reject, cancelerRef);
+      task.taskRun(resolve, reject, cancelerRef);
       // Memorize the last setTimeout call
       const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 

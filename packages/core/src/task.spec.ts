@@ -67,7 +67,7 @@ namespace ExpectTask {
       initialCanceler,
       cancelerRef,
       finished: new Promise((resolve, _reject) => {
-        task[Task.run](
+        task.taskRun(
           (value) => {
             resolveTask(value);
             resolve();
@@ -114,10 +114,10 @@ describe('Task', () => {
       });
       expect(() => Task.unsafeRun(task)).toThrow(anyError);
     });
-    test('should return the result of task[Task.run]() for sync', () => {
+    test('should return the result of task.taskRun() for sync', () => {
       expect(Task.unsafeRun(Task(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
     });
-    test('should return the result of task[Task.run]() for async', async () => {
+    test('should return the result of task.taskRun() for async', async () => {
       await expect(
         Task.unsafeRun(
           Task(
@@ -140,12 +140,12 @@ describe('Task', () => {
 
       expect(() => Task.unsafeRunOk(task)).toThrow(anyError);
     });
-    test('should return the result of task[Task.run]() for sync', () => {
+    test('should return the result of task.taskRun() for sync', () => {
       const task = generateTask({ value: anyObject });
 
       expect(Task.unsafeRunOk(task)).toEqual(anyObject);
     });
-    test('should return the result of task[Task.run]() for async', async () => {
+    test('should return the result of task.taskRun() for async', async () => {
       const task = generateTask({ value: anyObject, delayMs: 1 });
 
       await expect(Task.unsafeRunOk(task)).resolves.toEqual(anyObject);
@@ -242,26 +242,26 @@ describe('Task', () => {
       test('should construct a success sync task', async () => {
         const task = Task(({ ok }) => ok('foo'));
         expect(task).toEqual({
-          [Task.run]: expect.any(Function),
+          taskRun: expect.any(Function),
         });
 
         const ref = Ref(() => {});
         const resolve = jest.fn();
         const reject = jest.fn();
-        task[Task.run](resolve, reject, ref);
+        task.taskRun(resolve, reject, ref);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('foo');
       });
       test('should construct a failure sync task', async () => {
         const task = Task<never, 'err'>(({ error }) => error('err'));
         expect(task).toEqual({
-          [Task.run]: expect.any(Function),
+          taskRun: expect.any(Function),
         });
 
         const ref = Ref(() => {});
         const resolve = jest.fn();
         const reject = jest.fn();
-        task[Task.run](resolve, reject, ref);
+        task.taskRun(resolve, reject, ref);
         expect(reject).toHaveBeenCalledTimes(1);
         expect(reject).toHaveBeenCalledWith('err');
       });
@@ -269,7 +269,7 @@ describe('Task', () => {
         const task = Task(({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
-        task[Task.run](
+        task.taskRun(
           () => {},
           () => {},
           ref
@@ -281,13 +281,13 @@ describe('Task', () => {
       test('should construct an success async task', async () => {
         const task = Task(async ({ ok }) => ok('value'));
         expect(task).toEqual({
-          [Task.run]: expect.any(Function),
+          taskRun: expect.any(Function),
         });
         const ref = Ref(() => {});
         const resolve = jest.fn();
         const reject = jest.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
-        await task[Task.run](resolve, reject, ref);
+        await task.taskRun(resolve, reject, ref);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('value');
       });
@@ -295,7 +295,7 @@ describe('Task', () => {
         const task = Task(async ({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
-        task[Task.run](
+        task.taskRun(
           () => {},
           () => {},
           ref
@@ -312,7 +312,7 @@ describe('Task', () => {
         });
         const ref = Ref(() => {});
 
-        task[Task.run](
+        task.taskRun(
           () => {},
           () => {},
           ref
@@ -329,7 +329,7 @@ describe('Task', () => {
         });
         const ref = Ref(() => {});
 
-        task[Task.run](
+        task.taskRun(
           () => {},
           () => {},
           ref
@@ -536,9 +536,9 @@ describe('Task', () => {
     test('should forward canceler', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.map(task, (_) => _);
-      jest.spyOn(task, Task.run);
+      jest.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
-      expect(task[Task.run]).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
+      expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       await runReport.finished;
     });
   });
@@ -571,9 +571,9 @@ describe('Task', () => {
     test('should forward canceler', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.mapError(task, (_) => _);
-      jest.spyOn(task, Task.run);
+      jest.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
-      expect(task[Task.run]).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
+      expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       await runReport.finished;
     });
   });
@@ -604,16 +604,12 @@ describe('Task', () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.andThen(task, (_) => afterTask);
-      jest.spyOn(task, Task.run);
-      jest.spyOn(afterTask, Task.run);
+      jest.spyOn(task, 'taskRun');
+      jest.spyOn(afterTask, 'taskRun');
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
-      expect(task[Task.run]).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
-      expect(afterTask[Task.run]).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef
-      );
+      expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
+      expect(afterTask.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
     });
   });
 
@@ -671,17 +667,13 @@ describe('Task', () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, error: anyError });
       const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.orElse(task, (_) => afterTask);
-      jest.spyOn(task, Task.run);
-      jest.spyOn(afterTask, Task.run);
+      jest.spyOn(task, 'taskRun');
+      jest.spyOn(afterTask, 'taskRun');
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
 
-      expect(task[Task.run]).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
-      expect(afterTask[Task.run]).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef
-      );
+      expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
+      expect(afterTask.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
     });
   });
 });

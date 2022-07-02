@@ -8,7 +8,7 @@ export namespace Console {
     method: 'debug' | 'log' | 'info' | 'warn' | 'error',
     message: Parameters
   ): Task<void, never> => ({
-    'Task/run': (resolve) => {
+    taskRun: (resolve) => {
       console[method](...message);
 
       resolve(undefined);

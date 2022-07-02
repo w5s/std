@@ -6,7 +6,7 @@ import type { Tag } from './type.js';
 
 // Inline private constructor
 const createTask: typeof Task.wrap = (fn) => ({
-  'Task/run': fn,
+  taskRun: fn,
 });
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =

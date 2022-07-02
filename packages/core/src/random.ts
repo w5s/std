@@ -6,8 +6,6 @@ import type { Tag } from './type.js';
 export namespace Random {
   export type Value = Tag<number, { min: 0; max: 1 }>;
 
-  const taskRun = 'Task/run';
-
   /**
    * Return a new random value from number 0<= N <=1.
    * An invariant error is thrown when invalid number is given
@@ -54,7 +52,7 @@ export namespace Random {
    * @param getNextValue - an impure function that returns a new value
    */
   export function Generator(getNextValue: () => Random.Value): Generator {
-    return { [taskRun]: (resolve) => resolve(getNextValue()) };
+    return { taskRun: (resolve) => resolve(getNextValue()) };
   }
   export namespace Generator {
     const floor = (value: number) => Math.floor(value) as Int;
@@ -74,8 +72,8 @@ export namespace Random {
      */
     export function number(generator: Generator) {
       return (min: number, max: number): Task<number, never> => ({
-        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
-          generator[taskRun]((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef);
+        taskRun: (resolveTask, rejectTask, cancelerRef) => {
+          generator.taskRun((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef);
         },
       });
     }
@@ -95,8 +93,8 @@ export namespace Random {
       const randomNumber = number(generator);
 
       return (min: Int, max: Int): Task<Int, never> => ({
-        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
-          randomNumber(min, max)[taskRun]((value) => resolveTask(floor(value)), rejectTask, cancelerRef);
+        taskRun: (resolveTask, rejectTask, cancelerRef) => {
+          randomNumber(min, max).taskRun((value) => resolveTask(floor(value)), rejectTask, cancelerRef);
         },
       });
     }
@@ -114,8 +112,8 @@ export namespace Random {
      */
     export function boolean(generator: Generator) {
       return (trueWeight = 0.5): Task<boolean, never> => ({
-        [taskRun]: (resolveTask, rejectTask, cancelerRef) => {
-          generator[taskRun]((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef);
+        taskRun: (resolveTask, rejectTask, cancelerRef) => {
+          generator.taskRun((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef);
         },
       });
     }
