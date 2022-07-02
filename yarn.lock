@@ -3649,7 +3649,7 @@ __metadata:
     "@commitlint/cli": 17.0.3
     "@types/node": ^17.0.18
     "@w5s/commitlint-config": 1.0.0-alpha.7
-    "@w5s/eslint-config": 1.0.0-alpha.24
+    "@w5s/eslint-config": 1.0.0-alpha.25
     "@w5s/mrm-preset": 1.0.0-alpha.18
     "@w5s/ts-config": 1.0.0-alpha.12
     conventional-changelog-gitmoji-config: latest
@@ -3698,9 +3698,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.24":
-  version: 1.0.0-alpha.24
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.24"
+"@w5s/eslint-config@npm:1.0.0-alpha.25":
+  version: 1.0.0-alpha.25
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.25"
   dependencies:
     "@babel/eslint-parser": ^7.0.0
     "@babel/plugin-syntax-class-properties": ^7.0.0
@@ -3726,7 +3726,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: d0db9276899ac54c8761797aac2a765be9bab80598289101d4c80ff8a0b865851eb69c43476abe50eb29d14e0c46104ea938a2001d99cda56ff4803937a3a484
+  checksum: 5ef312ad11e5ecb38ea2ca2ce7f87dc6793f9dd623901ce9362c1b614a287caa091dd33842f22a1e8ead28401523a6841f15f0cb7da032bdeaff35a2f8fe2b9a
   languageName: node
   linkType: hard
 
