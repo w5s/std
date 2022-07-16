@@ -253,9 +253,11 @@ export namespace SQLDataType {
   }
 
   /**
-   *
+   * @example
+   * ```typescript
+   * SQLDataType.stringify(SQLDataType.BINARY(1)); 'BINARY(1)'
+   * ```
    * @param data - the data to stringify
-   * @returns the string representation
    */
   export function stringify(data: SQLDataType): string {
     const { keys } = Modules[data.dataType];

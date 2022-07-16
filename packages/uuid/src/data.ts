@@ -12,6 +12,10 @@ const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{
 /**
  * UUID constructor
  *
+ * @example
+ * ```typescript
+ * const uuid = UUID('1c19548b-7cac-4222-b722-dc38f2870669');
+ * ```
  * @category Constructor
  * @param value - the string representation
  */
@@ -23,6 +27,11 @@ export function UUID(value: `${string}-${string}-${string}-${string}`): UUID {
 export namespace UUID {
   /**
    * Returns an `UUID` with only `0`
+   *
+   * @example
+   * ```typescript
+   * const emptyUUID = UUID.empty();// '00000000-0000-0000-0000-000000000000'
+   * ```
    */
   export function empty(): UUID {
     return '00000000-0000-0000-0000-000000000000' as UUID;

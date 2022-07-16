@@ -163,6 +163,12 @@ export namespace RetryPolicy {
 
   /**
    * A retry policy that never retries
+   *
+   * @example
+   * ```typescript
+   * const policy: RetryPolicy = ...;
+   * const policyDisabled = someCondition ? policy : RetryPolicy.never;
+   * ```
    */
   export const never: RetryPolicy = function never(_state) {
     return resolveNone;
@@ -223,6 +229,10 @@ export namespace RetryPolicy {
   /**
    * A retry policy that retries immediately, but only up to `count` times.
    *
+   * @example
+   * ```typescript
+   * const policy = RetryPolicy.retries(Int(3));// Retry 3 times
+   * ```
    * @category Constructor
    * @param count - The number of retries to allow
    */
@@ -233,6 +243,11 @@ export namespace RetryPolicy {
   /**
    * Set a time upper bound for any delays that may be directed by the given policy.
    *
+   * @example
+   * ```typescript
+   * const wait1_2_3ms: RetryPolicy; // Wait 1ms, 2ms, 3ms
+   * const policy = RetryPolicy.waitMax(wait1_2_3ms, TimeDuration(2));// Wait 1ms, 2ms, 2ms
+   * ```
    * @param policy - The policy to limit
    * @param maxDelay - The maximum delay between two attempts
    */

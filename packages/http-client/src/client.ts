@@ -88,6 +88,17 @@ export namespace HTTPClient {
   /**
    * HTTP header record constructor
    *
+   * @example
+   * ```typescript
+   * const headersFromIterable = Headers([
+   *  ['key1', 'value1'],
+   *  ['key2', 'value2']
+   * ]);// { key1: 'value1, key2: 'value2' }
+   * const headersFromObject = Headers({
+   *  key1: 'value1',
+   *  key2: 'value2'
+   * });// { key1: 'value1, key2: 'value2' }
+   *```
    * @category Constructor
    * @param values - a record or iterable to initialize
    */
