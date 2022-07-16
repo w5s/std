@@ -9,7 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/w5s/std.git"
+    "url": "https://github.com/w5s/std.git",
+    "directory": "packages/playground"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
