@@ -26,5 +26,6 @@
   },
   "globalDependencies": [
     "tsconfig.settings.json"
-  ]
+  ],
+  "baseBranch": "origin/main"
 }
