@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.settings.json",
   "$schema": "https://json.schemastore.org/tsconfig",
-  // "exclude": [
-  //   "**/*.test.*",
-  //   "**/*.spec.*",
-  //   "**/__tests__/**"
-  // ],
+  "exclude": [
+    "**/*.test.*",
+    "**/*.spec.*",
+    "**/__tests__/**"
+  ],
 }
