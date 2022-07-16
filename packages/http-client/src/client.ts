@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
 import { DataError } from '@w5s/core/lib/dataError.js';
-import { Task } from '@w5s/core/lib/task.js';
+import type { Task } from '@w5s/core/lib/task.js';
 import type { Tag } from '@w5s/core/lib/type.js';
 
 /**
@@ -193,9 +193,11 @@ export namespace HTTPClient {
   ): Task<Value, HTTPClient.NetworkError | Error> {
     const { parse, ...fetchRequest } = requestObject;
     const responseTask = fetchResponse(fetchRequest);
-    const parseTask = Task.andThen(responseTask, parse);
-
-    return parseTask;
+    return {
+      taskRun(resolve, reject, cancelerRef) {
+        responseTask.taskRun((value) => parse(value).taskRun(resolve, reject, cancelerRef), reject, cancelerRef);
+      },
+    };
   }
   export namespace request {
     // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -206,17 +208,20 @@ export namespace HTTPClient {
 }
 
 function fetchResponse(request: fetchResponse.Request): Task<HTTPClient.Response, HTTPClient.NetworkError> {
-  return Task(async ({ ok, error }) => {
-    const { url, globalFetch = globalThis.fetch, ...requestInfo } = request;
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    taskRun: async (resolve, reject) => {
+      const { url, globalFetch = globalThis.fetch, ...requestInfo } = request;
 
-    try {
-      const response = await globalFetch(url, requestInfo);
+      try {
+        const response = await globalFetch(url, requestInfo);
 
-      return ok(response);
-    } catch (networkError: unknown) {
-      return error(HTTPClient.NetworkError({ cause: networkError }));
-    }
-  });
+        resolve(response);
+      } catch (networkError: unknown) {
+        reject(HTTPClient.NetworkError({ cause: networkError }));
+      }
+    },
+  };
 }
 namespace fetchResponse {
   export interface Request extends HTTPClient.Request {
