@@ -1,4 +1,4 @@
-import { Result, Task } from '@w5s/core';
+import { Ref, Result, Task } from '@w5s/core';
 import { describe, test, expect, jest } from '@jest/globals';
 import { HTTPClient } from './client.js';
 
@@ -7,6 +7,22 @@ describe(HTTPClient.request, () => {
   const anyError = new Error('AnyError');
   const anyParser = jest.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
+  const defer = <V>(): {
+    resolve(value: V | PromiseLike<V>): void;
+    reject(error: unknown): void;
+    promise: Promise<V>;
+  } => {
+    const state: any = { resolve: (_: V) => undefined, reject: (_: unknown) => undefined };
+    const promise = new Promise<V>((resolve, reject) => {
+      state.resolve = resolve;
+      state.reject = reject;
+    });
+    return {
+      resolve: (_) => state.resolve(_),
+      reject: (_) => state.reject(_),
+      promise,
+    };
+  };
 
   test('should call global fetch and send to parser', async () => {
     const globalFetch = jest.fn(async () => anyResponse);
@@ -19,7 +35,7 @@ describe(HTTPClient.request, () => {
       globalFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(globalFetch).toHaveBeenLastCalledWith(url, { method: 'GET' });
+    expect(globalFetch).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
     expect(parse).toHaveBeenLastCalledWith(anyResponse);
     expect(result).toEqual(Result.Ok('TestReturn'));
   });
@@ -46,6 +62,47 @@ describe(HTTPClient.request, () => {
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(anyError));
+  });
+  test('should be cancelable', async () => {
+    const finished = defer();
+    const respondAfter = (ms: number) =>
+      new Promise<typeof anyResponse>((resolve) => {
+        setTimeout(() => {
+          resolve(anyResponse);
+        }, ms);
+      });
+
+    const globalFetch = jest.fn(async (_, { signal }) => {
+      if (signal != null) {
+        signal.addEventListener('abort', () => {
+          finished.resolve(undefined);
+        });
+      }
+      try {
+        await respondAfter(5);
+        return anyResponse;
+      } finally {
+        queueMicrotask(() => {
+          finished.resolve(undefined);
+        });
+      }
+    });
+    const parse = jest.fn(() => Task.reject(new Error('NeverParsedError')));
+
+    const task = HTTPClient.request({
+      url: anyURL,
+      parse,
+      globalFetch,
+    });
+    const resolve = jest.fn();
+    const reject = jest.fn();
+    const cancelerRef = Ref(Task.defaultCanceler);
+    task.taskRun(resolve, reject, cancelerRef);
+    cancelerRef.current();
+
+    await finished.promise;
+    expect(resolve).not.toHaveBeenCalled();
+    expect(reject).not.toHaveBeenCalled();
   });
 });
 describe(HTTPClient.Headers, () => {

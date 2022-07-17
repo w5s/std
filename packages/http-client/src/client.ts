@@ -210,11 +210,17 @@ export namespace HTTPClient {
 function fetchResponse(request: fetchResponse.Request): Task<HTTPClient.Response, HTTPClient.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject) => {
+    taskRun: async (resolve, reject, cancelerRef) => {
       const { url, globalFetch = globalThis.fetch, ...requestInfo } = request;
 
+      const controller = new AbortController();
+      cancelerRef.current = controller.abort.bind(controller);
+
       try {
-        const response = await globalFetch(url, requestInfo);
+        const response = await globalFetch(url, {
+          signal: controller.signal,
+          ...requestInfo,
+        });
 
         resolve(response);
       } catch (networkError: unknown) {
