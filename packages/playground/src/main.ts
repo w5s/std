@@ -21,6 +21,8 @@ function main() {
         switch (error.name) {
           case TimeoutError.errorName:
             return Console.error(`TimeoutError:${error.message}`);
+          case HTTPClient.InvalidURLError.errorName:
+            return Console.error(`InvalidURLError:${error.message}`);
           case HTTPClient.NetworkError.errorName:
             return Console.error(`NetworkError:${error.message}`);
           case HTTPClient.ParserError.errorName:
