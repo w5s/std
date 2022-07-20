@@ -7,6 +7,7 @@ describe(HTTPClient.request, () => {
   const anyError = new Error('AnyError');
   const anyParser = jest.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
+  const anyFetch = async () => anyResponse;
   const defer = <V>(): {
     resolve(value: V | PromiseLike<V>): void;
     reject(error: unknown): void;
@@ -38,6 +39,15 @@ describe(HTTPClient.request, () => {
     expect(globalFetch).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
     expect(parse).toHaveBeenLastCalledWith(anyResponse);
     expect(result).toEqual(Result.Ok('TestReturn'));
+  });
+  test('should handle malformed URL', async () => {
+    const task = HTTPClient.request({
+      url: 'http://www.exam ple.com', // invalid url
+      parse: anyParser,
+      globalFetch: anyFetch,
+    });
+    const result = await Task.unsafeRun(task);
+    expect(result).toEqual(Result.Error(HTTPClient.InvalidURLError({ message: 'Invalid URL' })));
   });
   test('should convert fetch error to NetworkError', async () => {
     const globalFetch = jest.fn(async () => {

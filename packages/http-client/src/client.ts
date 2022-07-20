@@ -1,4 +1,5 @@
 /* eslint-disable import/extensions */
+import { invariant } from '@w5s/core/lib/invariant.js';
 import { DataError } from '@w5s/core/lib/dataError.js';
 import type { Task } from '@w5s/core/lib/task.js';
 import type { Tag } from '@w5s/core/lib/type.js';
@@ -149,6 +150,20 @@ export namespace HTTPClient {
   }
 
   /**
+   * An error when url passed is invalid
+   */
+  export interface InvalidURLError
+    extends DataError<{
+      name: 'HTTPClientInvalidURLError';
+    }> {}
+  /**
+   * InvalidURLError constructor
+   *
+   * @category Constructor
+   */
+  export const InvalidURLError = DataError.Make<InvalidURLError>('HTTPClientInvalidURLError');
+
+  /**
    * A network error when `fetch` fails
    */
   export interface NetworkError
@@ -177,6 +192,11 @@ export namespace HTTPClient {
   export const ParserError = DataError.Make<ParserError>('HTTPClientParserError');
 
   /**
+   * Union type of http client errors
+   */
+  export type AnyError = NetworkError | InvalidURLError;
+
+  /**
    * Return a new {@link Task} that will send an HTTP request
    *
    * @example
@@ -188,9 +208,7 @@ export namespace HTTPClient {
    * ```
    * @param requestObject - the request parameters
    */
-  export function request<Value, Error>(
-    requestObject: request.Request<Value, Error>
-  ): Task<Value, HTTPClient.NetworkError | Error> {
+  export function request<Value, Error>(requestObject: request.Request<Value, Error>): Task<Value, AnyError | Error> {
     const { parse, ...fetchRequest } = requestObject;
     const responseTask = fetchResponse(fetchRequest);
     return {
@@ -207,24 +225,46 @@ export namespace HTTPClient {
   }
 }
 
-function fetchResponse(request: fetchResponse.Request): Task<HTTPClient.Response, HTTPClient.NetworkError> {
+function isValidURL(url: string): boolean {
+  try {
+    // eslint-disable-next-line no-new
+    new globalThis.URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+function getDefaultFetch() {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  invariant(globalThis.fetch != null, 'globalThis.fetch is not defined');
+  return globalThis.fetch;
+}
+
+function fetchResponse(
+  request: fetchResponse.Request
+): Task<HTTPClient.Response, HTTPClient.InvalidURLError | HTTPClient.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     taskRun: async (resolve, reject, cancelerRef) => {
-      const { url, globalFetch = globalThis.fetch, ...requestInfo } = request;
+      const { url, globalFetch = getDefaultFetch(), ...requestInfo } = request;
 
       const controller = new AbortController();
       cancelerRef.current = controller.abort.bind(controller);
 
-      try {
-        const response = await globalFetch(url, {
-          signal: controller.signal,
-          ...requestInfo,
-        });
+      if (!isValidURL(url)) {
+        reject(HTTPClient.InvalidURLError({ message: 'Invalid URL' }));
+      } else {
+        try {
+          const response = await globalFetch(url, {
+            signal: controller.signal,
+            ...requestInfo,
+          });
 
-        resolve(response);
-      } catch (networkError: unknown) {
-        reject(HTTPClient.NetworkError({ cause: networkError }));
+          resolve(response);
+        } catch (networkError: unknown) {
+          reject(HTTPClient.NetworkError({ cause: networkError }));
+        }
       }
     },
   };
