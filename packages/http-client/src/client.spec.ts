@@ -33,7 +33,7 @@ describe(HTTPClient.request, () => {
       url,
       method: 'GET',
       parse,
-      globalFetch,
+      fetch: globalFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(globalFetch).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
@@ -44,7 +44,7 @@ describe(HTTPClient.request, () => {
     const task = HTTPClient.request({
       url: 'http://www.exam ple.com', // invalid url
       parse: anyParser,
-      globalFetch: anyFetch,
+      fetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(HTTPClient.InvalidURLError({ message: 'Invalid URL' })));
@@ -56,7 +56,7 @@ describe(HTTPClient.request, () => {
     const task = HTTPClient.request({
       url: anyURL,
       parse: anyParser,
-      globalFetch,
+      fetch: globalFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(HTTPClient.NetworkError({ cause: anyError })));
@@ -67,7 +67,7 @@ describe(HTTPClient.request, () => {
     const task = HTTPClient.request({
       url: anyURL,
       parse: failParser,
-      globalFetch: anyFetch,
+      fetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(anyError));
@@ -101,7 +101,7 @@ describe(HTTPClient.request, () => {
     const task = HTTPClient.request({
       url: anyURL,
       parse,
-      globalFetch,
+      fetch: globalFetch,
     });
     const resolve = jest.fn();
     const reject = jest.fn();

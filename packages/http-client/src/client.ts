@@ -209,8 +209,8 @@ export namespace HTTPClient {
    * @param requestObject - the request parameters
    */
   export function request<Value, Error>(requestObject: request.Request<Value, Error>): Task<Value, AnyError | Error> {
-    const { parse, ...fetchRequest } = requestObject;
-    const responseTask = fetchResponse(fetchRequest);
+    const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
+    const responseTask = applyFetch(localFetch, fetchRequest);
     return {
       taskRun(resolve, reject, cancelerRef) {
         responseTask.taskRun((value) => parse(value).taskRun(resolve, reject, cancelerRef), reject, cancelerRef);
@@ -219,8 +219,12 @@ export namespace HTTPClient {
   }
   export namespace request {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    export interface Request<Value, Error> extends fetchResponse.Request {
+    export interface Request<Value, Error> extends HTTPClient.Request {
       readonly parse: HTTPClient.Parser<Value, Error>;
+      /**
+       * The optional fetch function
+       */
+      readonly fetch?: NativeFetch;
     }
   }
 }
@@ -241,13 +245,14 @@ function getDefaultFetch() {
   return globalThis.fetch;
 }
 
-function fetchResponse(
-  request: fetchResponse.Request
+function applyFetch(
+  fetchFn: NativeFetch,
+  request: HTTPClient.Request
 ): Task<HTTPClient.Response, HTTPClient.InvalidURLError | HTTPClient.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     taskRun: async (resolve, reject, cancelerRef) => {
-      const { url, globalFetch = getDefaultFetch(), ...requestInfo } = request;
+      const { url, ...requestInfo } = request;
 
       const controller = new AbortController();
       cancelerRef.current = controller.abort.bind(controller);
@@ -256,7 +261,7 @@ function fetchResponse(
         reject(HTTPClient.InvalidURLError({ message: 'Invalid URL' }));
       } else {
         try {
-          const response = await globalFetch(url, {
+          const response = await fetchFn(url, {
             signal: controller.signal,
             ...requestInfo,
           });
@@ -268,9 +273,4 @@ function fetchResponse(
       }
     },
   };
-}
-namespace fetchResponse {
-  export interface Request extends HTTPClient.Request {
-    readonly globalFetch?: NativeFetch;
-  }
 }
