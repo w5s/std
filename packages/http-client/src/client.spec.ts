@@ -62,13 +62,12 @@ describe(HTTPClient.request, () => {
     expect(result).toEqual(Result.Error(HTTPClient.NetworkError({ cause: anyError })));
   });
   test('should convert reject parse errors', async () => {
-    const globalFetch = jest.fn(async () => anyResponse);
     const failParser = jest.fn(() => Task.reject(anyError));
 
     const task = HTTPClient.request({
       url: anyURL,
       parse: failParser,
-      globalFetch,
+      globalFetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(Result.Error(anyError));
