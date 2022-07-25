@@ -1,0 +1,35 @@
+import { Currency } from './currency.js';
+import { CurrencyRegistry, currencyRegistry } from './currencyRegistry.js';
+import { Amount, Money } from './money.js';
+
+export function moneyFactory(
+  currencyParameters: Parameters<typeof Currency>['0'],
+  options?: {
+    registry?: CurrencyRegistry;
+  }
+) {
+  const currency = Currency(currencyParameters);
+  // Register
+  (options?.registry ?? currencyRegistry).add(currency);
+  return (amount: Amount): Money => Money({ currency, amount });
+}
+
+export const USD = moneyFactory({
+  code: 'USD',
+  // decimalDigits: 2,
+  name: 'US Dollar',
+  namePlural: 'US dollars',
+  // rounding: 0,
+  symbol: '$',
+  // symbolNative: '$',
+});
+
+export const EUR = moneyFactory({
+  code: 'EUR',
+  // decimalDigits: 2,
+  name: 'Euro',
+  namePlural: 'Euros',
+  // rounding: 0,
+  symbol: '€',
+  // symbolNative: '€',
+});

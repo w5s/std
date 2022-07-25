@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EUR() should be a valid money factory: currency 1`] = `
+Object {
+  "_type": "Currency",
+  "code": "EUR",
+  "name": "Euro",
+  "namePlural": "Euros",
+  "precision": 2,
+  "rounding": 0,
+  "symbol": "€",
+  "symbolNative": "€",
+}
+`;
+
+exports[`USD() should be a valid money factory: currency 1`] = `
+Object {
+  "_type": "Currency",
+  "code": "USD",
+  "name": "US Dollar",
+  "namePlural": "US dollars",
+  "precision": 2,
+  "rounding": 0,
+  "symbol": "$",
+  "symbolNative": "$",
+}
+`;
