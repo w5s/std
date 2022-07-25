@@ -13,23 +13,3 @@ export function moneyFactory(
   (options?.registry ?? currencyRegistry).add(currency);
   return (amount: Amount): Money => Money({ currency, amount });
 }
-
-export const USD = moneyFactory({
-  code: 'USD',
-  // decimalDigits: 2,
-  name: 'US Dollar',
-  namePlural: 'US dollars',
-  // rounding: 0,
-  symbol: '$',
-  // symbolNative: '$',
-});
-
-export const EUR = moneyFactory({
-  code: 'EUR',
-  // decimalDigits: 2,
-  name: 'Euro',
-  namePlural: 'Euros',
-  // rounding: 0,
-  symbol: '€',
-  // symbolNative: '€',
-});

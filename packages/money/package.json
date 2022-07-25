@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "build": "concurrently \"npm:build:*\" ",
-    "build:src": "tsc",
+    "build:src": "node scripts/buildCurrencies.js  && tsc",
     "clean": "concurrently \"npm:clean:*\" \":\"",
     "docs": "md-magic --path '**/*.md' --ignore='node_modules'",
     "format": "concurrently \"npm:format:*\" \":\"",
@@ -53,7 +53,8 @@
     "@w5s/core": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@jest/globals": "28.1.3"
+    "@jest/globals": "28.1.3",
+    "currencies.json": "1.0.2"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

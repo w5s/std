@@ -5,7 +5,7 @@ Object {
   "_type": "Currency",
   "code": "EUR",
   "name": "Euro",
-  "namePlural": "Euros",
+  "namePlural": "euros",
   "precision": 2,
   "rounding": 0,
   "symbol": "€",
