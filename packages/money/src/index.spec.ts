@@ -6,6 +6,9 @@ describe('module public API', () => {
     expect(Module).toEqual({
       Currency: expect.any(Function),
       Money: expect.any(Function),
+      EUR: expect.any(Function),
+      USD: expect.any(Function),
+      moneyFactory: expect.any(Function),
     });
   });
 });
