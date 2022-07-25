@@ -1,13 +1,14 @@
 import { describe, expect, test } from '@jest/globals';
+import { Int } from '@w5s/core';
 import { Currency } from './currency.js';
 
 describe('Currency', () => {
   const anyProperties = {
     name: 'Name',
     namePlural: 'Name plural',
-    decimalDigits: 2,
+    precision: Int(2),
     code: 'EUR',
-    rounding: 0,
+    rounding: Int(0),
     symbol: '$',
     symbolNative: '$',
   };
@@ -28,17 +29,17 @@ describe('Currency', () => {
     expect(Currency(parameters)).toEqual(
       Currency({
         ...parameters,
-        rounding: 0,
+        rounding: Int(0),
       })
     );
   });
-  test('should have default decimalDigits', () => {
-    const parameters = omitProperty(anyProperties, 'decimalDigits');
+  test('should have default precision', () => {
+    const parameters = omitProperty(anyProperties, 'precision');
 
     expect(Currency(parameters)).toEqual(
       Currency({
         ...parameters,
-        decimalDigits: 2,
+        precision: Int(2),
       })
     );
   });

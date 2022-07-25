@@ -1,3 +1,4 @@
+import type { Int } from '@w5s/core/lib/integer.js';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
 
 export interface Currency
@@ -18,35 +19,55 @@ export interface Currency
      */
     code: string;
     /**
-     * Currency decimal digits after zero
+     * Currency precision
      */
-    decimalDigits: number;
-    rounding: number;
+    precision: Int;
+    /**
+     * Default rounding
+     */
+    rounding: Int;
     /**
      * Currency symbol
      *
      * @example '$'
      */
     symbol: string;
+    /**
+     * Currency native symbol
+     *
+     * @example '$'
+     */
     symbolNative: string;
   }> {}
-export const Currency = DataObject.MakeGeneric(
-  'Currency',
-  (create) =>
-    (parameters: {
-      name: Currency['name'];
-      namePlural?: Currency['namePlural'];
-      code: Currency['code'];
-      decimalDigits?: Currency['decimalDigits'];
-      rounding?: Currency['rounding'];
-      symbol: Currency['symbol'];
-      symbolNative?: Currency['symbolNative'];
-    }): Currency =>
-      create({
-        rounding: 0,
-        decimalDigits: 2,
-        namePlural: parameters.name,
-        symbolNative: parameters.symbol,
-        ...parameters,
-      })
+export const Currency = Object.assign(
+  DataObject.MakeGeneric(
+    'Currency',
+    (create) =>
+      (parameters: {
+        name: Currency['name'];
+        namePlural?: Currency['namePlural'];
+        code: Currency['code'];
+        precision?: Currency['precision'];
+        rounding?: Currency['rounding'];
+        symbol: Currency['symbol'];
+        symbolNative?: Currency['symbolNative'];
+      }): Currency =>
+        create({
+          rounding: Currency.defaultRounding,
+          precision: Currency.defaultPrecision,
+          namePlural: parameters.name,
+          symbolNative: parameters.symbol,
+          ...parameters,
+        })
+  ),
+  {
+    /**
+     * Default rounding when omitted
+     */
+    defaultRounding: 0 as Int,
+    /**
+     * Default precision when omitted
+     */
+    defaultPrecision: 2 as Int,
+  }
 );
