@@ -12,16 +12,17 @@ describe(moneyFactory, () => {
   });
 
   test('should register a new currency', () => {
-    moneyFactory(
-      {
+    registry.add(
+      Currency({
         name: 'test',
         code: 'TEST',
         symbol: '#',
-      },
-      {
-        registry,
-      }
+      })
     );
+
+    moneyFactory('TEST', {
+      registry,
+    });
     const currency = registry.getByCode('TEST');
     expect(currency).toEqual(
       Currency({
@@ -36,16 +37,17 @@ describe(moneyFactory, () => {
     );
   });
   test('should return a new factory', () => {
-    const factory = moneyFactory(
-      {
+    registry.add(
+      Currency({
         name: 'test',
         code: 'TEST',
         symbol: '#',
-      },
-      {
-        registry,
-      }
+      })
     );
+
+    const factory = moneyFactory('TEST', {
+      registry,
+    });
     const currency = Currency({
       code: 'TEST',
       precision: Int(2),
