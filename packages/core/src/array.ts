@@ -146,9 +146,7 @@ export namespace Array {
    * @param index - The zero based position
    */
   export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
-    const arrayIndex = index < 0 ? index + array.length : index;
-
-    return array[arrayIndex];
+    return array[index < 0 ? index + array.length : index];
   }
 
   /**
@@ -180,37 +178,27 @@ export namespace Array {
    * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */
   export function indexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
-    const returnValue = none;
     const arrayLength = array.length;
 
     if (arrayLength > 0) {
-      let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;
-
       // eslint-disable-next-line no-self-compare
       if (searchItem === searchItem) {
-        // not NaN
-        while (index < arrayLength) {
-          if (array[index] === searchItem) {
-            return index as Int;
-          }
-
-          index += 1;
+        return indexToOption(array.indexOf(searchItem, fromIndex));
+      }
+      // NaN
+      let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;
+      while (index < arrayLength) {
+        const value = array[index];
+        // eslint-disable-next-line no-self-compare
+        if (value !== value) {
+          return index as Int;
         }
-      } else {
-        // NaN
-        while (index < arrayLength) {
-          const value = array[index];
-          // eslint-disable-next-line no-self-compare
-          if (value !== value) {
-            return index as Int;
-          }
 
-          index += 1;
-        }
+        index += 1;
       }
     }
 
-    return returnValue;
+    return none;
   }
 
   /**
@@ -227,42 +215,33 @@ export namespace Array {
    * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
    */
   export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
-    const returnValue = none;
     const arrayLength = array.length;
 
     if (arrayLength > 0) {
+      // eslint-disable-next-line no-self-compare
+      if (searchItem === searchItem) {
+        // not NaN
+        return indexToOption(array.lastIndexOf(searchItem, fromIndex));
+      }
       let index =
         fromIndex == null
           ? arrayLength - 1
           : fromIndex < 0
           ? Math.max(arrayLength + fromIndex, 0)
           : Math.min(fromIndex, arrayLength - 1);
-
-      // eslint-disable-next-line no-self-compare
-      if (searchItem === searchItem) {
-        // not NaN
-        while (index >= 0) {
-          if (array[index] === searchItem) {
-            return index as Int;
-          }
-
-          index -= 1;
+      // NaN
+      while (index >= 0) {
+        const value = array[index];
+        // eslint-disable-next-line no-self-compare
+        if (value !== value) {
+          return index as Int;
         }
-      } else {
-        // NaN
-        while (index >= 0) {
-          const value = array[index];
-          // eslint-disable-next-line no-self-compare
-          if (value !== value) {
-            return index as Int;
-          }
 
-          index -= 1;
-        }
+        index -= 1;
       }
     }
 
-    return returnValue;
+    return none;
   }
 
   /**
@@ -558,26 +537,15 @@ export namespace Array {
     if (arrayLength === 0) {
       return array;
     }
-    const startIndex = start == null ? 0 : start;
-    const endIndex = end == null ? arrayLength : end > arrayLength ? arrayLength : end;
-
-    const startNormalized =
-      (startIndex < 0 ? (-startIndex > arrayLength ? 0 : arrayLength + startIndex) : startIndex) >>> 0;
-    const endNormalized = endIndex < 0 ? endIndex + arrayLength : endIndex;
-    const sliceLength = startNormalized > endNormalized ? 0 : (endNormalized - startNormalized) >>> 0;
-    // start >>>= 0;
-
-    if (sliceLength === 0) {
+    const sliceArray = array.slice(start, end);
+    const sliceArrayLength = sliceArray.length;
+    if (sliceArrayLength === 0) {
       return emptyArray;
     }
-    if (sliceLength === arrayLength) {
+    if (sliceArrayLength === arrayLength) {
       return array;
     }
-
-    const result = new NativeArray(sliceLength);
-    copySlice(result, 0, array, startNormalized, endNormalized);
-
-    return readonly(result);
+    return readonly(sliceArray);
   }
 
   /**
@@ -592,26 +560,7 @@ export namespace Array {
    * @param extensions - The other arrays to append
    */
   export function concat<Item>(array: Array<Item>, ...extensions: Array<Item>[]): Array<Item> {
-    const extensionsLength = extensions.length;
-    if (extensionsLength > 0) {
-      const arrayLength = array.length;
-      let returnValue: NativeArray<Item> | undefined;
-      for (let extensionIndex = 0; extensionIndex < extensionsLength; extensionIndex += 1) {
-        const extension = extensions[extensionIndex]!;
-        const extensionLength = extension.length;
-        if (extensionLength > 0) {
-          if (returnValue === undefined) {
-            returnValue = [];
-            copySlice(returnValue, returnValue.length, array, 0, arrayLength);
-          }
-          copySlice(returnValue, returnValue.length, extension, 0, extensionLength);
-        }
-      }
-
-      return returnValue === undefined ? array : readonly(returnValue);
-    }
-
-    return array;
+    return extensions.length > 0 && !extensions.every(isEmpty) ? array.concat(...extensions) : array;
   }
 
   /**
@@ -687,15 +636,9 @@ export namespace Array {
     if (arrayLength === 0 || !isBetween(index, 0, arrayLength - 1) || array[index] === item) {
       return array;
     }
-
-    const returnValue = new NativeArray<Item>(arrayLength);
-
-    // Copy before index
-    copySlice(returnValue, 0, array, 0, index);
+    const returnValue = copy(array);
     // Set at the index
     returnValue[index] = item;
-    // Copy after index
-    copySlice(returnValue, index + 1, array, index + 1, arrayLength);
 
     return readonly(returnValue);
   }
