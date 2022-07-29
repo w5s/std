@@ -2,10 +2,8 @@ import { describe, test, expect } from '@jest/globals';
 import { Iterable } from './iterable.js';
 
 describe(Iterable, () => {
-  function* generatorOf<T>(...values: T[]): Iterable<T> {
-    for (const value of values) {
-      yield value;
-    }
+  function iteratorOf<T>(...values: T[]): Iterable<T> {
+    return values;
   }
   function expectIterable<V>(iterable: Iterable<V>) {
     return {
@@ -41,19 +39,27 @@ describe(Iterable, () => {
 
   describe(Iterable.filter, () => {
     test('should return a filtered iterator', () => {
-      expectIterable(Iterable.filter(generatorOf(1, 3, 2), (value) => value >= 2)).toHaveValues([3, 2]);
+      const source = iteratorOf(1, 3, 2);
+      expectIterable(Iterable.filter(source, (value) => value >= 2)).toHaveValues([3, 2]);
+    });
+    test('should be idempotent', () => {
+      const source = iteratorOf(1, 3, 2);
+      expectIterable(Iterable.filter(source, (value) => value >= 2)).toBeIdemPotent();
     });
   });
 
   describe(Iterable.map, () => {
     test('should return a mapped iterator', () => {
-      expectIterable(Iterable.map(generatorOf(1, 3, 2), (value) => value * 2)).toHaveValues([2, 6, 4]);
+      const source = iteratorOf(1, 3, 2);
+      expectIterable(Iterable.map(source, (value) => value * 2)).toHaveValues([2, 6, 4]);
     });
   });
 
   describe(Iterable.reduce, () => {
     test('should return reduce for each value using initialValue', () => {
-      expect(Iterable.reduce(generatorOf(1, 3, 2), (acc, value) => acc + String(value), '')).toEqual('132');
+      const source = iteratorOf(1, 3, 2);
+
+      expect(Iterable.reduce(source, (acc, value) => acc + String(value), '')).toEqual('132');
     });
   });
 
@@ -78,13 +84,19 @@ describe(Iterable, () => {
 
   describe(Iterable.zip, () => {
     test('should return have size of left when size(left) < size(right)', () => {
-      expectIterable(Iterable.zip(generatorOf(1), generatorOf('a', 'b', 'c'))).toHaveValues([[1, 'a']]);
+      const source = iteratorOf(1);
+
+      expectIterable(Iterable.zip(source, iteratorOf('a', 'b', 'c'))).toHaveValues([[1, 'a']]);
     });
     test('should return have size of right when size(left) > size(right)', () => {
-      expectIterable(Iterable.zip(generatorOf(1, 2, 3), generatorOf('a'))).toHaveValues([[1, 'a']]);
+      const source = iteratorOf(1, 2, 3);
+
+      expectIterable(Iterable.zip(source, iteratorOf('a'))).toHaveValues([[1, 'a']]);
     });
     test('should return an iterable of tuples', () => {
-      expectIterable(Iterable.zip(generatorOf(1, 2, 3), generatorOf('a', 'b', 'c'))).toHaveValues([
+      const source = iteratorOf(1, 2, 3);
+
+      expectIterable(Iterable.zip(source, iteratorOf('a', 'b', 'c'))).toHaveValues([
         [1, 'a'],
         [2, 'b'],
         [3, 'c'],
