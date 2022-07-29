@@ -7,10 +7,7 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
-const globalObject =
-  typeof globalThis !== 'undefined' ? globalThis : typeof global !== 'undefined' ? global : (undefined as never);
-
-const NativeArray = globalObject.Array;
+const NativeArray = globalThis.Array;
 type NativeArray<T> = globalThis.Array<T>;
 type UnsafeArray = any;
 

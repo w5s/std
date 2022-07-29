@@ -11,9 +11,7 @@ export type JSONValue =
     };
 
 export namespace JSON {
-  const globalObject =
-    typeof globalThis !== 'undefined' ? globalThis : typeof global !== 'undefined' ? global : (undefined as never);
-  const NativeJSON = globalObject.JSON;
+  const NativeJSON = globalThis.JSON;
   const resultOk = <V>(value: V): Result<V, never> => ({
     _type: 'Result/Ok',
     value,
