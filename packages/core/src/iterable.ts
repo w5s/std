@@ -78,21 +78,24 @@ export namespace Iterable {
    * @param mapFn - The mapping function
    */
   export function generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
-    let currentIndex = 0;
     return length === 0
       ? emptyIterable
-      : Iterable(() => ({
-          next() {
-            const index = currentIndex;
-            if (index < length) {
-              currentIndex += 1;
+      : Iterable(() => {
+          let currentIndex = 0;
 
-              return resultValue(mapFn(index as Int));
-            }
+          return {
+            next() {
+              const index = currentIndex;
+              if (index < length) {
+                currentIndex += 1;
 
-            return resultDone;
-          },
-        }));
+                return resultValue(mapFn(index as Int));
+              }
+
+              return resultDone;
+            },
+          };
+        });
   }
 
   /**
