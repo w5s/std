@@ -19,7 +19,7 @@ describe('Currency', () => {
   };
   test('should initialize Currency', () => {
     expect(Currency(anyProperties)).toEqual({
-      _type: 'Currency',
+      _: 'Currency',
       ...anyProperties,
     });
   });

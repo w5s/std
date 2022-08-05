@@ -42,7 +42,7 @@ export function DataError<Properties extends { name: string; message?: string; c
 
   // eslint-disable-next-line unicorn/error-message,@typescript-eslint/no-unsafe-assignment
   const returnValue: MutableError = new Error('') as any;
-  returnValue['_type'] = DataError.typeName;
+  returnValue['_'] = DataError.typeName;
 
   // Assign properties
   Object.assign(returnValue, properties);
@@ -61,7 +61,7 @@ export namespace DataError {
   /**
    * Extract all parameters to create a new DataError
    */
-  export type Parameters<Model> = Omit<Model, '_type' | 'name' | 'stack' | 'message' | 'cause'> & {
+  export type Parameters<Model> = Omit<Model, DataObject.type | 'name' | 'stack' | 'message' | 'cause'> & {
     message?: string;
     cause?: unknown;
   };
@@ -114,7 +114,7 @@ export namespace DataError {
    * type CustomError = DataError<{ name: 'CustomError', foo: boolean }>
    * const CustomError = DataError.Make<CustomError>('CustomError');
    *
-   * const instance = CustomError({ foo: true, message: 'hey!' }); // Error{ _type: 'DataError', name: 'CustomError', message: 'hey!', foo: true }
+   * const instance = CustomError({ foo: true, message: 'hey!' }); // Error{ _: 'DataError', name: 'CustomError', message: 'hey!', foo: true }
    * CustomError.errorName === 'CustomError' // true
    * CustomError.hasInstance(instance); // true
    * ```
@@ -135,12 +135,12 @@ export namespace DataError {
    * ```typescript
    * const CustomError = DataError.MakeGeneric(
    *   'CustomError',
-   *   (create) => // a helper that creates Error{ _type: 'DataError', name: 'CustomError' }
+   *   (create) => // a helper that creates Error{ _: 'DataError', name: 'CustomError' }
    *     // the constructor
    *     (foo: boolean) => create({ foo, message: 'hello!' })
    * );
    *
-   * const instance = CustomError(true); // Error{ _type: 'DataError', name: 'CustomError', message: 'hello', foo: true }
+   * const instance = CustomError(true); // Error{ _: 'DataError', name: 'CustomError', message: 'hello', foo: true }
    * CustomError.errorName === 'CustomError'/ true
    * CustomError.hasInstance(instance); // true
    * ```

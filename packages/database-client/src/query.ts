@@ -92,7 +92,7 @@ export namespace SQLQuery {
 
   export interface AddColumn
     extends DataObject<{
-      _type: 'SQLAddColumn';
+      [DataObject.type]: 'SQLAddColumn';
       tableName: string;
       columnName: string;
       columnAttributes: ColumnAttributes;
@@ -101,7 +101,7 @@ export namespace SQLQuery {
 
   export interface AddConstraint
     extends DataObject<{
-      _type: 'SQLAddConstraint';
+      [DataObject.type]: 'SQLAddConstraint';
       tableName: string;
       constraintName: string;
     }> {}
@@ -109,14 +109,14 @@ export namespace SQLQuery {
 
   export interface CreateSchema
     extends DataObject<{
-      _type: 'SQLCreateSchema';
+      [DataObject.type]: 'SQLCreateSchema';
       schemaName: string;
     }> {}
   export const CreateSchema = DataObject.Make<CreateSchema>('SQLCreateSchema');
 
   export interface CreateTable
     extends DataObject<{
-      _type: 'SQLCreateTable';
+      [DataObject.type]: 'SQLCreateTable';
       tableName: string;
       tableAttributes: TableAttributes;
     }> {}
@@ -124,21 +124,21 @@ export namespace SQLQuery {
 
   export interface DropSchema
     extends DataObject<{
-      _type: 'SQLDropSchema';
+      [DataObject.type]: 'SQLDropSchema';
       schemaName: string;
     }> {}
   export const DropSchema = DataObject.Make<DropSchema>('SQLDropSchema');
 
   export interface DropTable
     extends DataObject<{
-      _type: 'SQLDropTable';
+      [DataObject.type]: 'SQLDropTable';
       tableName: string;
     }> {}
   export const DropTable = DataObject.Make<DropTable>('SQLDropTable');
 
   export interface RemoveConstraint
     extends DataObject<{
-      _type: 'SQLRemoveConstraint';
+      [DataObject.type]: 'SQLRemoveConstraint';
       tableName: string;
       constraintName: string;
     }> {}
@@ -146,7 +146,7 @@ export namespace SQLQuery {
 
   export interface RemoveColumn
     extends DataObject<{
-      _type: 'SQLRemoveColumn';
+      [DataObject.type]: 'SQLRemoveColumn';
       tableName: string;
       columnName: string;
     }> {}
@@ -177,7 +177,7 @@ export namespace SQLQuery {
 
   export function toSQLStatement(query: SQLQuery): SQLStatement {
     const identifier = sql.raw;
-    switch (query._type) {
+    switch (query._) {
       case AddColumn.typeName:
         return alterTable(
           query.tableName,

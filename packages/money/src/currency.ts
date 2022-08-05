@@ -3,7 +3,7 @@ import { DataObject } from '@w5s/core/lib/dataObject.js';
 
 export interface Currency
   extends DataObject<{
-    _type: 'Currency';
+    [DataObject.type]: 'Currency';
     /**
      * Name
      */

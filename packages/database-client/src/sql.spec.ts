@@ -4,7 +4,7 @@ import { sql, SQLStatement } from './sql.js';
 describe(SQLStatement, () => {
   test('should empty statement', () => {
     expect(SQLStatement({})).toEqual({
-      _type: 'SQLStatement',
+      _: 'SQLStatement',
       strings: [''],
       values: [],
     });
@@ -16,7 +16,7 @@ describe(SQLStatement, () => {
         values: [123],
       })
     ).toEqual({
-      _type: 'SQLStatement',
+      _: 'SQLStatement',
       strings: ['foo', 'bar'],
       values: [123],
     });
@@ -28,7 +28,7 @@ describe(SQLStatement, () => {
         values: [123, 345],
       })
     ).toEqual({
-      _type: 'SQLStatement',
+      _: 'SQLStatement',
       strings: ['foo', '', ''],
       values: [123, 345],
     });

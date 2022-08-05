@@ -5,7 +5,7 @@ export type Amount = number;
 
 export interface Money
   extends DataObject<{
-    _type: 'Money';
+    [DataObject.type]: 'Money';
     /**
      * Amount of currency
      */

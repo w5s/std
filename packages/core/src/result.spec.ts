@@ -1,6 +1,5 @@
 import { describe, test, expect, jest } from '@jest/globals';
 import { assertType } from './assert.js';
-import { DataObject } from './dataObject.js';
 import { Result } from './result.js';
 
 describe('Result', () => {
@@ -10,12 +9,12 @@ describe('Result', () => {
 
   describe(Result.Ok, () => {
     test('should return a new object', () => {
-      expect(Result.Ok(anyValue)).toEqual({ [DataObject.type]: 'Result/Ok', value: anyValue });
+      expect(Result.Ok(anyValue)).toEqual({ _: 'Ok', value: anyValue });
     });
   });
   describe(Result.Error, () => {
     test('should return a new object', () => {
-      expect(Result.Error(anyValue)).toEqual({ [DataObject.type]: 'Result/Error', error: anyValue });
+      expect(Result.Error(anyValue)).toEqual({ _: 'Error', error: anyValue });
     });
   });
 
@@ -26,7 +25,7 @@ describe('Result', () => {
     });
     test('should return false for any other value', () => {
       expect(Result.hasInstance(undefined)).toEqual(false);
-      expect(Result.hasInstance({ [DataObject.type]: 'anyType' })).toEqual(false);
+      expect(Result.hasInstance({ _: 'anyType' })).toEqual(false);
     });
   });
 

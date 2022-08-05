@@ -18,4 +18,4 @@ export function main() {
 }
 
 // runTask is impure and should be put at the edge of the program
-ignore(Task.unsafeRun(main())); // prints { _type: 'Result/Ok', value: 3.1 }
+ignore(Task.unsafeRun(main())); // prints { _: 'Result/Ok', value: 3.1 }

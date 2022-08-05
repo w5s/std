@@ -2,17 +2,11 @@ import { describe, test, expect } from '@jest/globals';
 import { DataObject } from './dataObject.js';
 
 describe('DataObject', () => {
-  describe('.type', () => {
-    test('should be "_type"', () => {
-      expect(DataObject.type).toEqual('_type');
-    });
-  });
-
   describe(DataObject.MakeGeneric, () => {
     const Test = DataObject.MakeGeneric('Test', (create) => (email: string) => create({ email }));
     test('should create a new constructor', () => {
       expect(Test('foo@bar.com')).toEqual({
-        _type: 'Test',
+        _: 'Test',
         email: 'foo@bar.com',
       });
     });
@@ -31,11 +25,11 @@ describe('DataObject', () => {
     });
   });
   describe(DataObject.Make, () => {
-    type Test = DataObject<{ [DataObject.type]: 'Test'; email: string }>;
+    type Test = DataObject<{ _: 'Test'; email: string }>;
     const Test = DataObject.Make<Test>('Test');
     test('should create a new constructor', () => {
       expect(Test({ email: 'foo@bar.com' })).toEqual({
-        [DataObject.type]: 'Test',
+        _: 'Test',
         email: 'foo@bar.com',
       });
     });

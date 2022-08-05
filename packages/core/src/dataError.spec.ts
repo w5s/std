@@ -1,5 +1,4 @@
 import { describe, test, expect } from '@jest/globals';
-import { DataObject } from './dataObject.js';
 import { DataError } from './dataError.js';
 
 describe(DataError, () => {
@@ -9,7 +8,7 @@ describe(DataError, () => {
       expect(DataError({ name: anyString })).toBeInstanceOf(globalThis.Error);
     });
     test('should return DataObject.type == "DataError"', () => {
-      expect(DataError({ name: anyString })[DataObject.type]).toEqual('DataError');
+      expect(DataError({ name: anyString })._).toEqual('DataError');
     });
     test('should return Error with default properties', () => {
       expect(DataError({ name: anyString })).toEqual(

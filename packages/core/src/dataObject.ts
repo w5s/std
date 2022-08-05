@@ -5,7 +5,7 @@
  * ```typescript
  * // Interface have a better appearance in VSCode
  * export interface MyType extends DataObject<{
- *  [DataObject.type]: 'my_type',
+ *  [DataObject.type]: 'MyType',
  *  foo: boolean;
  * }> {}
  * ```
@@ -46,7 +46,7 @@ export namespace DataObject {
   /**
    * The type property discriminator
    */
-  export const type = '_type' as const;
+  export const type = '_' as const;
   // eslint-disable-next-line @typescript-eslint/naming-convention
   export type type = typeof type;
 
@@ -59,7 +59,7 @@ export namespace DataObject {
    * type Model = DataObject<{ [DataObject.type]: 'Model', foo: boolean }>
    * const Model = DataObject.Make<Model>('Model');
    *
-   * const instance = Model({ foo: true }); // { _type: 'Model', foo: true }
+   * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
    * Model.typeName === 'Model' // true
    * Model.hasInstance(instance); // true
    * ```
@@ -80,11 +80,11 @@ export namespace DataObject {
    * ```typescript
    * const Model = DataObject.MakeGeneric(
    *   'Model',
-   *   (create) => // a helper that creates { _type: 'Model' }
+   *   (create) => // a helper that creates { _: 'Model' }
    *     // the constructor
    *     (foo: boolean) => create({ foo })
    * );
-   * const instance = Model(true); // { _type: 'Model', foo: true }
+   * const instance = Model(true); // { _: 'Model', foo: true }
    * Model.typeName === 'Model'/ true
    * Model.hasInstance(instance); // true
    * ```

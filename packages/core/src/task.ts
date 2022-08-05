@@ -68,7 +68,7 @@ export function Task<Value, Error = never>(
       },
     });
     const handleResult = (result: Result<Value, Error>) => {
-      if (result._type === 'Result/Ok') {
+      if (result._ === 'Ok') {
         _resolve(result.value);
       } else {
         _reject(result.error);
@@ -589,13 +589,13 @@ export namespace Task {
 
 // inline private constructors
 function resultOk<V>(value: V): Result<V, never> {
-  return { _type: 'Result/Ok', value };
+  return { _: 'Ok', value };
 }
 function resultError<E>(error: E): Result<never, E> {
-  return { _type: 'Result/Error', error };
+  return { _: 'Error', error };
 }
 function unsafeResultValue<V, E>(result: Result<V, E>) {
-  if (result._type === 'Result/Ok') {
+  if (result._ === 'Ok') {
     return result.value;
   }
   // eslint-disable-next-line @typescript-eslint/no-throw-literal

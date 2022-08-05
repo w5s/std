@@ -31,7 +31,7 @@ const append = ({ strings: targetStrings, values: targetValues }: SQLBuffer, { s
 
 export interface SQLStatement
   extends DataObject<{
-    _type: 'SQLStatement';
+    [DataObject.type]: 'SQLStatement';
     strings: ReadonlyArray<string>;
     values: ReadonlyArray<SQLStatement.Value>;
   }> {}
@@ -43,7 +43,7 @@ export function SQLStatement({
   values?: ReadonlyArray<SQLStatement.Value>;
 }): SQLStatement {
   return {
-    _type: SQLStatement.typeName,
+    _: SQLStatement.typeName,
     strings:
       strings.length <= values.length ? strings.concat(Array(values.length + 1 - strings.length).fill('')) : strings,
     values,

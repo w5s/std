@@ -11,7 +11,7 @@ describe(Money, () => {
   const anyAmount = 1;
   test('should initialize Money', () => {
     expect(Money({ currency: anyCurrency, amount: anyAmount })).toEqual({
-      _type: 'Money',
+      _: 'Money',
       currency: anyCurrency,
       amount: anyAmount,
     });

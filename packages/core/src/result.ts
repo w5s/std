@@ -37,7 +37,7 @@ export namespace Result {
 
   export interface Ok<V>
     extends DataObject<{
-      [DataObject.type]: 'Result/Ok';
+      [DataObject.type]: 'Ok';
       /**
        * The success value
        */
@@ -49,22 +49,22 @@ export namespace Result {
    *
    * @example
    * ```typescript
-   * Result.Ok('value');// { _type: 'Result/Ok', value: 'value'}
+   * Result.Ok('value');// { _: 'Ok', value: 'value'}
    * ```
    * @category Constructor
    * @param resultValue - the success value
    */
   export function Ok<V>(resultValue: V): Result<V, never> {
     return {
-      _type: Ok.typeName,
+      _: Ok.typeName,
       value: resultValue,
     };
   }
-  Ok.typeName = 'Result/Ok' as const;
+  Ok.typeName = 'Ok' as const;
 
   export interface Error<E>
     extends DataObject<{
-      [DataObject.type]: 'Result/Error';
+      [DataObject.type]: 'Error';
       /**
        * The error value
        */
@@ -76,18 +76,18 @@ export namespace Result {
    *
    * @example
    * ```typescript
-   * Result.Error(new Error('my message'));// { _type: 'Result/Error', error: Error}
+   * Result.Error(new Error('my message'));// { _: 'Error', error: Error}
    * ```
    * @category Constructor
    * @param resultError - the failure value
    */
   export function Error<E>(resultError: E): Result<never, E> {
     return {
-      _type: Error.typeName,
+      _: Error.typeName,
       error: resultError,
     };
   }
-  Error.typeName = 'Result/Error' as const;
+  Error.typeName = 'Error' as const;
 
   /**
    * Return `true` if `anyValue` is {@link Result.Ok} or {@link Result.Error}
@@ -130,7 +130,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
-    return anyValue._type === Ok.typeName;
+    return anyValue._ === Ok.typeName;
   }
 
   /**
@@ -148,7 +148,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {
-    return anyValue._type === Error.typeName;
+    return anyValue._ === Error.typeName;
   }
 
   /**
