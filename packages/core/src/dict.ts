@@ -3,8 +3,9 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
-const hasOwn = Object.prototype.hasOwnProperty;
+const hasOwn: typeof Object.hasOwn =
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  Object.hasOwn ?? ((object, property) => Object.prototype.hasOwnProperty.call(object, property));
 const emptyDictionary = Object.freeze({});
 const keyIterator = (dict: Dict<any>): IterableIterator<string> => Object.keys(dict).values();
 
@@ -75,7 +76,7 @@ export namespace Dict {
    * @param key - the entry key
    */
   export function has(dict: Dict<any>, key: string): boolean {
-    return hasOwn.call(dict, key);
+    return hasOwn(dict, key);
   }
 
   /**
@@ -138,7 +139,7 @@ export namespace Dict {
    * @param key - the entry key
    */
   export function get<V>(dict: Dict<V>, key: string): Option<V> {
-    return hasOwn.call(dict, key) ? dict[key] : undefined;
+    return hasOwn(dict, key) ? dict[key] : undefined;
   }
 
   /**
@@ -216,7 +217,7 @@ export declare namespace Dict {
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 (Dict as any).delete = function _delete<V>(dict: Dict<V>, key: string): Dict<V> {
-  if (hasOwn.call(dict, key)) {
+  if (hasOwn(dict, key)) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { [key]: _, ...newDict } = dict;
 
