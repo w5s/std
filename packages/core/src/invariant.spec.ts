@@ -1,6 +1,6 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, test, expect, jest } from '@jest/globals';
 import { assertType } from './assert.js';
-import { invariant } from './invariant.js';
+import { invariant, warning } from './invariant.js';
 
 describe(invariant, () => {
   const getThrownError = (fn: () => void) => {
@@ -33,5 +33,22 @@ describe(invariant, () => {
     invariant(isBoolean(value));
 
     assertType<typeof value, boolean>(true);
+  });
+});
+describe(warning, () => {
+  test('should not call warning.print when condition is true', () => {
+    const printSpy = jest.spyOn(warning, 'print');
+    warning(true, 'message');
+    expect(printSpy).not.toHaveBeenCalled();
+  });
+  test('should call warning.print when condition is false', () => {
+    const printSpy = jest.spyOn(warning, 'print');
+    warning(false, 'message');
+    expect(printSpy).toHaveBeenCalledWith('Warning: message');
+  });
+  test('should call warning.print with an empty string when message is not defined', () => {
+    const printSpy = jest.spyOn(warning, 'print');
+    warning(false, undefined);
+    expect(printSpy).toHaveBeenCalledWith('Warning: ');
   });
 });

@@ -35,6 +35,7 @@ describe('index', () => {
         'Task',
         'Time',
         'TimeDuration',
+        'warning',
       ].sort()
     );
   });
