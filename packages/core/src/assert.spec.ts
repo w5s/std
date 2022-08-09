@@ -13,23 +13,11 @@ describe(assertNever, () => {
       assertNever(anyValue);
     };
   });
-  test('should throw error', () => {
-    expect(() => {
-      assertNever(neverValue);
-    }).toThrow(TypeError);
-  });
-  test('should not throw error if second parameter', () => {
-    const returnValue = {};
-    expect(() => {
-      assertNever(neverValue, returnValue);
-    }).not.toThrow();
-    expect(assertNever(neverValue, returnValue)).toBe(returnValue);
-  });
 
   /**
    * Type check
    */
-  const typeTestThrow = (fruit: 'banana' | 'kiwi'): string => {
+  const typeTestExhaustive = (fruit: 'banana' | 'kiwi'): string => {
     switch (fruit) {
       case 'banana':
         return '🍌 Banana';
@@ -39,15 +27,13 @@ describe(assertNever, () => {
         return assertNever(fruit);
     }
   };
-
-  const typeTestNoThrow = (fruit: 'banana' | 'kiwi'): string | { test: true } => {
+  const typeTestNonExhaustive = (fruit: 'banana' | 'kiwi'): string => {
     switch (fruit) {
       case 'banana':
         return '🍌 Banana';
-      case 'kiwi':
-        return '🥝 Kiwi';
       default:
-        return assertNever(fruit, { test: true });
+        // @ts-expect-error anyValue is not never
+        return assertNever(fruit);
     }
   };
 });

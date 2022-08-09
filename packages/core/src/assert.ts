@@ -14,34 +14,8 @@
  * ```
  * @param subject - the never value that should be reported
  */
-export function assertNever(subject: never): never;
-/**
- * Raise a compile error when accessing this function and returns `returnValue`.
- * This is useful for exhaustive switch check.
- *
- * @example
- * ```typescript
- * const print = (fruit: 'banana'|'kiwi') => {
- *   switch (fruit) {
- *     case 'banana': return '🍌 Banana';
- *     case 'kiwi': return '🥝 Kiwi';
- *     default: return assertNever(fruit); // <- This line will report an error if a case is missing
- *   }
- * }
- * ```
- * @param subject - the never value that should be reported
- * @param returnValue - the value returned
- */
-export function assertNever<V>(subject: never, returnValue: V): V;
-export function assertNever(subject: never, returnValue?: unknown): unknown | never {
-  if (arguments.length < 2) {
-    const error = new TypeError(subject);
-    // @ts-ignore framesToPop is not defined
-    error.framesToPop = 1; // Ignore call to assertNever() in stacktrace
-    throw error;
-  }
-
-  return returnValue;
+export function assertNever<V extends never>(subject: V): V {
+  return subject;
 }
 
 /**
