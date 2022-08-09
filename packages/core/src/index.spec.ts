@@ -24,7 +24,6 @@ describe('index', () => {
         'invariant',
         'Iterable',
         'JSON',
-        'objectId',
         'Option',
         'pipe',
         'Ref',

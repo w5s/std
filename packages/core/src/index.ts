@@ -9,7 +9,6 @@ export * from './invariant.js';
 export * from './iterable.js';
 export * from './json.js';
 export * from './math.js';
-export * from './objectId.js';
 export * from './option.js';
 export * from './prelude.js';
 export * from './random.js';

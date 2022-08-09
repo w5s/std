@@ -1,5 +1,5 @@
-import type { Int } from './integer.js';
-import type { Tag } from './type.js';
+import type { Int } from '@w5s/core/lib/integer.js';
+import type { Tag } from '@w5s/core/lib/type.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type AnyObject = Object;
