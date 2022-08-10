@@ -3,7 +3,16 @@ import { DataObject } from './dataObject.js';
 
 describe('DataObject', () => {
   describe(DataObject.MakeGeneric, () => {
-    const Test = DataObject.MakeGeneric('Test', (create) => (email: string) => create({ email }));
+    interface Test {
+      _: 'Test';
+      email: string;
+    }
+    const Test = DataObject.MakeGeneric(
+      'Test',
+      (create) =>
+        (email: string): Test =>
+          create({ email })
+    );
     test('should create a new constructor', () => {
       expect(Test('foo@bar.com')).toEqual({
         _: 'Test',
@@ -13,6 +22,11 @@ describe('DataObject', () => {
     describe('typeName', () => {
       test('should set typeName', () => {
         expect(Test.typeName).toBe('Test');
+      });
+    });
+    describe(Test.create, () => {
+      test('should return false for instance', () => {
+        expect(Test.create({ email: 'foo@bar.com' })).toEqual({ _: 'Test', email: 'foo@bar.com' });
       });
     });
     describe(Test.hasInstance, () => {

@@ -27,6 +27,12 @@ export namespace DataObject {
 
   export interface Module<Model extends DataObject<{ [DataObject.type]: string }>> {
     /**
+     * Construct a new model
+     *
+     * @param properties - The properties for initialization
+     */
+    readonly create: (properties: Parameters<Model>) => Model;
+    /**
      * The factory type constant
      */
     readonly typeName: Model[DataObject.type];
@@ -107,6 +113,7 @@ export namespace DataObject {
     });
     const properties = {
       typeName,
+      create,
       hasInstance: (anyValue: unknown): boolean =>
         // @ts-ignore We know what we are doing
         anyValue != null ? anyValue[type] === typeName : false,
