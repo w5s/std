@@ -3,7 +3,7 @@ export * from './assert.js';
 export * from './console.js';
 export * from './dataError.js';
 export * from './dataObject.js';
-export * from './dict.js';
+export * from './record.js';
 export * from './integer.js';
 export * from './invariant.js';
 export * from './iterable.js';

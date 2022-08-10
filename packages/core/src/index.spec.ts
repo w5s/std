@@ -15,7 +15,6 @@ describe('index', () => {
         'Console',
         'DataObject',
         'DataError',
-        'Dict',
         'extend',
         'default', // FIXME: no key exist in reality
         'Int',
@@ -28,6 +27,7 @@ describe('index', () => {
         'pipe',
         'Ref',
         'Random',
+        'Record',
         'Result',
         'String',
         'throwError',
