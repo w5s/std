@@ -69,5 +69,17 @@ export const Currency = Object.assign(
      * Default precision when omitted
      */
     defaultPrecision: 2 as Int,
+
+    /**
+     * @example
+     * ```typescript
+     * const euro = Currency({ code: 'EUR', ... });
+     * Currency['=='](euro, Currency({ code: 'USD', ... }));// false
+     * Currency['=='](euro, Currency({ code: 'EUR', ... }));// true
+     * ```
+     * @param left - Left operand currency
+     * @param right - Right operand currency
+     */
+    '==': (left: Currency, right: Currency) => left.code === right.code,
   }
 );

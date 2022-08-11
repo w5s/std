@@ -67,4 +67,17 @@ describe('Currency', () => {
       })
     );
   });
+
+  describe('==', () => {
+    test('should return false by default', () => {
+      const left = Currency({ ...anyProperties, code: 'A' });
+      const right = Currency({ ...anyProperties, code: 'B' });
+      expect(Currency['=='](left, right)).toBe(false);
+    });
+    test('should return true if code are the same', () => {
+      const left = Currency({ ...anyProperties, code: 'A' });
+      const right = Currency({ ...anyProperties, code: 'A' });
+      expect(Currency['=='](left, right)).toBe(true);
+    });
+  });
 });
