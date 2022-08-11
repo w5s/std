@@ -16,4 +16,22 @@ describe(Money, () => {
       amount: anyAmount,
     });
   });
+
+  describe('==', () => {
+    test.each([
+      [Money({ currency: anyCurrency, amount: anyAmount }), Money({ currency: anyCurrency, amount: anyAmount }), true],
+      [
+        Money({ currency: anyCurrency, amount: anyAmount }),
+        Money({ currency: anyCurrency, amount: anyAmount + 1 }),
+        false,
+      ],
+      [
+        Money({ currency: anyCurrency, amount: anyAmount }),
+        Money({ currency: { ...anyCurrency, code: 'TMP' }, amount: anyAmount }),
+        false,
+      ],
+    ])('should return by default false', (left, right, expected) => {
+      expect(Money['=='](left, right)).toEqual(expected);
+    });
+  });
 });
