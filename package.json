@@ -109,7 +109,7 @@
     "@w5s/commitlint-config": "1.0.0-alpha.8",
     "@w5s/eslint-config": "1.0.0-alpha.25",
     "@w5s/mrm-preset": "1.0.0-alpha.21",
-    "@w5s/ts-config": "1.0.0-alpha.13",
+    "@w5s/ts-config": "1.0.0-alpha.14",
     "concurrently": "7.3.0",
     "conventional-changelog-gitmoji-config": "latest",
     "cspell": "6.6.0",
