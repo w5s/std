@@ -1,5 +1,5 @@
 import { describe, test, expect, jest } from '@jest/globals';
-import { assertType } from './assert.js';
+import { assertType } from './type.js';
 import { Result } from './result.js';
 
 describe('Result', () => {

@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/no-null */
 import { describe, test, expect } from '@jest/globals';
 import { Option } from './option.js';
-import { assertType } from './assert.js';
+import { assertType } from './type.js';
 
 describe('Option', () => {
   describe('.None', () => {

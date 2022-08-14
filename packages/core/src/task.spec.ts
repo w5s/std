@@ -2,7 +2,7 @@
 /* eslint-disable max-classes-per-file */
 import { describe, test, expect, jest } from '@jest/globals';
 import type { Mocked } from 'jest-mock';
-import { assertType } from './assert.js';
+import { assertType } from './type.js';
 import { AggregateError } from './error/aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';

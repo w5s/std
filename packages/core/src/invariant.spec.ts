@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, test, expect, jest } from '@jest/globals';
-import { assertType } from './assert.js';
+import { assertType } from './type.js';
 import { invariant, warning, assertNever } from './invariant.js';
 
 describe(invariant, () => {
