@@ -66,4 +66,4 @@ export async function main() {
   const targetPath = getTargetPath();
   await writeFile(targetPath, contents);
 }
-main();
+await main();
