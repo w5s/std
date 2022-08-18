@@ -25,6 +25,7 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
  * ```typescript
  * const duration = TimeDuration(0);// typeof duration === 'number'
  * ```
+ * @category Constructor
  * @param milliseconds - Number of milliseconds
  */
 export function TimeDuration(milliseconds: number): TimeDuration {

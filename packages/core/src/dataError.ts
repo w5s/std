@@ -31,6 +31,7 @@ export type DataError<Properties extends { name: string }> = DataObject<
  *   cause: parentError, // Error that caused this error (optional)
  * })
  * ```
+ * @category Constructor
  * @param properties - initial properties
  */
 export function DataError<Properties extends { name: string; message?: string; cause?: unknown }>(
