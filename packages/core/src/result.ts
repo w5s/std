@@ -29,8 +29,10 @@ import type { Option } from './option.js';
  *   print(result); // alternate console.log('name: Django'); and console.error('error!');
  * }
  * ```
+ * @param Value - the type of value in case of `Ok`
+ * @param Error - the type of error in case of `Error`
  */
-export type Result<V, E> = Result.Ok<V> | Result.Error<E>;
+export type Result<Value, Error> = Result.Ok<Value> | Result.Error<Error>;
 
 export namespace Result {
   type NonPromise<V> = Exclude<V, Promise<unknown>>;
