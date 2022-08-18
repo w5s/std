@@ -35,6 +35,8 @@ export function program() {
   const log = Task.andThen(task, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
+      case HTTPClient.InvalidURLError.errorName:
+        return Console.error(`A wrong url was passed. Got ${error.input}`);
       case HTTPClient.NetworkError.errorName:
         return Console.error('A network error occurred');
       case HTTPClient.ParserError.errorName:

@@ -155,6 +155,7 @@ export namespace HTTPClient {
   export interface InvalidURLError
     extends DataError<{
       name: 'HTTPClientInvalidURLError';
+      input: string;
     }> {}
   /**
    * InvalidURLError constructor
@@ -258,7 +259,12 @@ function applyFetch(
       cancelerRef.current = controller.abort.bind(controller);
 
       if (!isValidURL(url)) {
-        reject(HTTPClient.InvalidURLError({ message: 'Invalid URL' }));
+        reject(
+          HTTPClient.InvalidURLError({
+            message: 'Invalid URL',
+            input: url,
+          })
+        );
       } else {
         try {
           const response = await fetchFn(url, {

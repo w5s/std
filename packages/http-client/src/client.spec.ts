@@ -47,7 +47,9 @@ describe(HTTPClient.request, () => {
       fetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(result).toEqual(Result.Error(HTTPClient.InvalidURLError({ message: 'Invalid URL' })));
+    expect(result).toEqual(
+      Result.Error(HTTPClient.InvalidURLError({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
+    );
   });
   test('should convert fetch error to NetworkError', async () => {
     const globalFetch = jest.fn(async () => {
