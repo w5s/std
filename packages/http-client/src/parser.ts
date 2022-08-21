@@ -19,24 +19,16 @@ function tryCall<V>(fn: () => Promise<V>): Task<V, HTTPClientError.ParserError> 
   };
 }
 
-export function parseArrayBuffer(response: HTTPClient.Response): Task<ArrayBuffer, HTTPClientError.ParserError> {
-  return tryCall(() => response.arrayBuffer());
-}
+export const parseArrayBuffer: HTTPClient.Parser<ArrayBuffer> = (response) => tryCall(() => response.arrayBuffer());
 
-export function parseJSON<Return extends JSONValue>(_decode: 'unsafe') {
-  return (response: HTTPClient.Response): Task<Return, HTTPClientError.ParserError> =>
+export function parseJSON<Return extends JSONValue>(_decode: 'unsafe'): HTTPClient.Parser<Return> {
+  return (response) =>
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     tryCall(() => response.json());
 }
 
-export function parseBlob(response: HTTPClient.Response): Task<Blob, HTTPClientError.ParserError> {
-  return tryCall(() => response.blob());
-}
+export const parseBlob: HTTPClient.Parser<Blob> = (response) => tryCall(() => response.blob());
 
-export function parseText(response: HTTPClient.Response): Task<string, HTTPClientError.ParserError> {
-  return tryCall(() => response.text());
-}
+export const parseText: HTTPClient.Parser<string> = (response) => tryCall(() => response.text());
 
-export function parseFormData(response: HTTPClient.Response): Task<FormData, HTTPClientError.ParserError> {
-  return tryCall(() => response.formData());
-}
+export const parseFormData: HTTPClient.Parser<FormData> = (response) => tryCall(() => response.formData());

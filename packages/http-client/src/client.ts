@@ -145,8 +145,8 @@ export namespace HTTPClient {
       }
     > {}
 
-  export interface Parser<Value, Error> {
-    (response: HTTPClient.Response): Task<Value, Error>;
+  export interface Parser<Value> {
+    (response: HTTPClient.Response): Task<Value, HTTPClientError.ParserError>;
   }
 
   /**
@@ -161,9 +161,7 @@ export namespace HTTPClient {
    * ```
    * @param requestObject - the request parameters
    */
-  export function request<Value, Error>(
-    requestObject: request.Request<Value, Error>
-  ): Task<Value, HTTPClientError | Error> {
+  export function request<Value>(requestObject: request.Request<Value>): Task<Value, HTTPClientError> {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
     const responseTask = applyFetch(localFetch, fetchRequest);
     return {
@@ -174,8 +172,11 @@ export namespace HTTPClient {
   }
   export namespace request {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    export interface Request<Value, Error> extends HTTPClient.Request {
-      readonly parse: HTTPClient.Parser<Value, Error>;
+    export interface Request<Value> extends HTTPClient.Request {
+      /**
+       * Response Parser
+       */
+      readonly parse: HTTPClient.Parser<Value>;
       /**
        * The optional fetch function
        */

@@ -3,7 +3,7 @@ import { DataError } from '@w5s/core/lib/dataError.js';
 /**
  * Union type of http client errors
  */
-export type HTTPClientError = HTTPClientError.NetworkError | HTTPClientError.InvalidURL;
+export type HTTPClientError = HTTPClientError.NetworkError | HTTPClientError.InvalidURL | HTTPClientError.ParserError;
 
 export namespace HTTPClientError {
   /**

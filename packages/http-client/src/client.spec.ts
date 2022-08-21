@@ -5,7 +5,7 @@ import { HTTPClientError } from './error.js';
 
 describe(HTTPClient.request, () => {
   const anyURL = 'https://localhost';
-  const anyError = new Error('AnyError');
+  const anyHttpError = HTTPClientError.ParserError('AnyError');
   const anyParser = jest.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
   const anyFetch = async () => anyResponse;
@@ -53,8 +53,9 @@ describe(HTTPClient.request, () => {
     );
   });
   test('should convert fetch error to NetworkError', async () => {
+    const fetchError = new Error('FetchError');
     const globalFetch = jest.fn(async () => {
-      throw anyError;
+      throw fetchError;
     });
     const task = HTTPClient.request({
       url: anyURL,
@@ -62,10 +63,10 @@ describe(HTTPClient.request, () => {
       fetch: globalFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(result).toEqual(Result.Error(HTTPClientError.NetworkError({ cause: anyError })));
+    expect(result).toEqual(Result.Error(HTTPClientError.NetworkError({ cause: fetchError })));
   });
   test('should convert reject parse errors', async () => {
-    const failParser = jest.fn(() => Task.reject(anyError));
+    const failParser = jest.fn(() => Task.reject(anyHttpError));
 
     const task = HTTPClient.request({
       url: anyURL,
@@ -73,7 +74,7 @@ describe(HTTPClient.request, () => {
       fetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(result).toEqual(Result.Error(anyError));
+    expect(result).toEqual(Result.Error(anyHttpError));
   });
   test('should be cancelable', async () => {
     const finished = defer();
@@ -99,7 +100,7 @@ describe(HTTPClient.request, () => {
         });
       }
     });
-    const parse = jest.fn(() => Task.reject(new Error('NeverParsedError')));
+    const parse = jest.fn(() => Task.reject(HTTPClientError.ParserError({ message: 'NeverParsedError' })));
 
     const task = HTTPClient.request({
       url: anyURL,
