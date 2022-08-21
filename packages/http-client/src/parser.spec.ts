@@ -3,6 +3,7 @@ import { describe, test, expect, jest } from '@jest/globals';
 import type { Mocked } from 'jest-mock';
 import { HTTPClient } from './client.js';
 import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser.js';
+import { HTTPClientError } from './error.js';
 
 const mockResponse = (): Mocked<HTTPClient.Response> =>
   ({
@@ -22,7 +23,9 @@ const expectToRejectFetchResponseError = async (
   response[mockProperty].mockRejectedValue(thrownError);
   const task = fn(response);
 
-  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPClient.ParserError({ cause: thrownError })));
+  await expect(Task.unsafeRun(task)).resolves.toEqual(
+    Result.Error(HTTPClientError.ParserError({ cause: thrownError }))
+  );
 };
 const expectToResolveValue = async (
   fn: (response: HTTPClient.Response) => Task<unknown, unknown>,

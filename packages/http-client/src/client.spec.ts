@@ -1,6 +1,7 @@
 import { Ref, Result, Task } from '@w5s/core';
 import { describe, test, expect, jest } from '@jest/globals';
 import { HTTPClient } from './client.js';
+import { HTTPClientError } from './error.js';
 
 describe(HTTPClient.request, () => {
   const anyURL = 'https://localhost';
@@ -48,7 +49,7 @@ describe(HTTPClient.request, () => {
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(
-      Result.Error(HTTPClient.InvalidURLError({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
+      Result.Error(HTTPClientError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
     );
   });
   test('should convert fetch error to NetworkError', async () => {
@@ -61,7 +62,7 @@ describe(HTTPClient.request, () => {
       fetch: globalFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(result).toEqual(Result.Error(HTTPClient.NetworkError({ cause: anyError })));
+    expect(result).toEqual(Result.Error(HTTPClientError.NetworkError({ cause: anyError })));
   });
   test('should convert reject parse errors', async () => {
     const failParser = jest.fn(() => Task.reject(anyError));

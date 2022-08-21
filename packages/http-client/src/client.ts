@@ -1,8 +1,8 @@
 /* eslint-disable import/extensions */
 import { invariant } from '@w5s/core/lib/invariant.js';
-import { DataError } from '@w5s/core/lib/dataError.js';
 import type { Task } from '@w5s/core/lib/task.js';
 import type { Tag } from '@w5s/core/lib/type.js';
+import { HTTPClientError } from './error.js';
 
 /**
  * Types
@@ -150,54 +150,6 @@ export namespace HTTPClient {
   }
 
   /**
-   * An error when url passed is invalid
-   */
-  export interface InvalidURLError
-    extends DataError<{
-      name: 'HTTPClientInvalidURLError';
-      input: string;
-    }> {}
-  /**
-   * InvalidURLError constructor
-   *
-   * @category Constructor
-   */
-  export const InvalidURLError = DataError.Make<InvalidURLError>('HTTPClientInvalidURLError');
-
-  /**
-   * A network error when `fetch` fails
-   */
-  export interface NetworkError
-    extends DataError<{
-      name: 'HTTPClientNetworkError';
-    }> {}
-  /**
-   * NetworkError constructor
-   *
-   * @category Constructor
-   */
-  export const NetworkError = DataError.Make<NetworkError>('HTTPClientNetworkError');
-
-  /**
-   * A parsing error when the body cannot be parsed
-   */
-  export interface ParserError
-    extends DataError<{
-      name: 'HTTPClientParserError';
-    }> {}
-  /**
-   * ParserError constructor
-   *
-   * @category Constructor
-   */
-  export const ParserError = DataError.Make<ParserError>('HTTPClientParserError');
-
-  /**
-   * Union type of http client errors
-   */
-  export type AnyError = NetworkError | InvalidURLError;
-
-  /**
    * Return a new {@link Task} that will send an HTTP request
    *
    * @example
@@ -209,7 +161,9 @@ export namespace HTTPClient {
    * ```
    * @param requestObject - the request parameters
    */
-  export function request<Value, Error>(requestObject: request.Request<Value, Error>): Task<Value, AnyError | Error> {
+  export function request<Value, Error>(
+    requestObject: request.Request<Value, Error>
+  ): Task<Value, HTTPClientError | Error> {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
     const responseTask = applyFetch(localFetch, fetchRequest);
     return {
@@ -249,7 +203,7 @@ function getDefaultFetch() {
 function applyFetch(
   fetchFn: NativeFetch,
   request: HTTPClient.Request
-): Task<HTTPClient.Response, HTTPClient.InvalidURLError | HTTPClient.NetworkError> {
+): Task<HTTPClient.Response, HTTPClientError.InvalidURL | HTTPClientError.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     taskRun: async (resolve, reject, cancelerRef) => {
@@ -260,7 +214,7 @@ function applyFetch(
 
       if (!isValidURL(url)) {
         reject(
-          HTTPClient.InvalidURLError({
+          HTTPClientError.InvalidURL({
             message: 'Invalid URL',
             input: url,
           })
@@ -274,7 +228,7 @@ function applyFetch(
 
           resolve(response);
         } catch (networkError: unknown) {
-          reject(HTTPClient.NetworkError({ cause: networkError }));
+          reject(HTTPClientError.NetworkError({ cause: networkError }));
         }
       }
     },

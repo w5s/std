@@ -6,6 +6,7 @@ describe('index', () => {
     expect(Object.keys(Fetch).sort()).toEqual(
       [
         'HTTPClient',
+        'HTTPClientError',
         'parseArrayBuffer',
         'parseBlob',
         'parseFormData',
