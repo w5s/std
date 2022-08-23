@@ -1,6 +1,8 @@
-import { EUR } from '@w5s/money';
+import { Money, EUR } from '@w5s/money';
 
 export function main(): void {
-  const money = EUR(1);
-  console.log(money); // > { _: 'Money', amount: 1, currency: { _: 'Currency', code: 'EUR', ... } }
+  const price = EUR(10);
+  const discount = EUR(2);
+  const result = Money['-'](price, discount);
+  console.log(result); // > Result.Ok(EUR(8))
 }

@@ -22,19 +22,12 @@ npm install @w5s/uuid
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { randomUUID } from '@w5s/uuid';
-import { Task } from '@w5s/core';
-
-function createUser(name: string) {
-  return Task.map(randomUUID, (uuid) => ({
-    id: uuid,
-    name,
-  }));
-}
+import { Money, EUR } from '@w5s/money';
 
 export function main(): void {
-  const userTask = createUser('John Doe');
-  console.log(Task.unsafeRun(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
+  const price = EUR(10);
+  const discount = EUR(2);
+  const result = Money['-'](price, discount);// > Result.Ok(EUR(8))
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
