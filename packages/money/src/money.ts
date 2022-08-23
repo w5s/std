@@ -65,4 +65,17 @@ export const Money = Object.assign(DataObject.Make<Money>('Money'), {
    * @param right - Right operand currency
    */
   '+': createOperator((left, right) => left + right),
+
+  /**
+   * Subtract operator
+   *
+   * @example
+   * ```typescript
+   * Money['-'](EUR(2), EUR(1));// Result.Ok(EUR(1))
+   * Money['-'](EUR(1), USD(2));// Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
+   * ```
+   * @param left - Left operand currency
+   * @param right - Right operand currency
+   */
+  '-': createOperator((left, right) => left - right),
 });

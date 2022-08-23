@@ -50,4 +50,13 @@ describe(Money, () => {
       expect(Money['+'](left, right)).toEqual(expected);
     });
   });
+  describe('-', () => {
+    test.each([
+      [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
+      [EUR(2), EUR(1), Result.Ok(EUR(1))],
+      [EUR(1), EUR(2), Result.Ok(EUR(-1))],
+    ])('should return correct result', (left, right, expected) => {
+      expect(Money['-'](left, right)).toEqual(expected);
+    });
+  });
 });
