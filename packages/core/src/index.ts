@@ -18,3 +18,4 @@ export * from './task.js';
 export * from './time.js';
 export * from './type.js';
 export * from './error/aggregateError.js';
+export * from './error/argumentError.js';

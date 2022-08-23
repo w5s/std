@@ -8,6 +8,7 @@ describe('index', () => {
         'Math',
         'Array',
         'AggregateError',
+        'ArgumentError',
         'assertNever',
         'assertType',
         'assign',
