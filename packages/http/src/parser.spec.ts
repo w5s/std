@@ -1,11 +1,11 @@
 import { Result, Task } from '@w5s/core';
 import { describe, test, expect, jest } from '@jest/globals';
 import type { Mocked } from 'jest-mock';
-import { HTTPClient } from './client.js';
+import { HTTP } from './client.js';
 import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser.js';
-import { HTTPClientError } from './error.js';
+import { HTTPError } from './error.js';
 
-const mockResponse = (): Mocked<HTTPClient.Response> =>
+const mockResponse = (): Mocked<HTTP.Response> =>
   ({
     arrayBuffer: jest.fn(),
     formData: jest.fn(),
@@ -15,7 +15,7 @@ const mockResponse = (): Mocked<HTTPClient.Response> =>
   } as any);
 
 const expectToRejectFetchResponseError = async (
-  fn: (response: HTTPClient.Response) => Task<unknown, unknown>,
+  fn: (response: HTTP.Response) => Task<unknown, unknown>,
   mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json'
 ) => {
   const response = mockResponse();
@@ -23,12 +23,10 @@ const expectToRejectFetchResponseError = async (
   response[mockProperty].mockRejectedValue(thrownError);
   const task = fn(response);
 
-  await expect(Task.unsafeRun(task)).resolves.toEqual(
-    Result.Error(HTTPClientError.ParserError({ cause: thrownError }))
-  );
+  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPError.ParserError({ cause: thrownError })));
 };
 const expectToResolveValue = async (
-  fn: (response: HTTPClient.Response) => Task<unknown, unknown>,
+  fn: (response: HTTP.Response) => Task<unknown, unknown>,
   mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json'
 ) => {
   const response = mockResponse();

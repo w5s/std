@@ -1,5 +1,5 @@
 import { assertNever, Console, Int, Option, pipe, Task, TimeDuration } from '@w5s/core';
-import { HTTPClientError } from '@w5s/http-client';
+import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/uuid';
 import { retrying, RetryPolicy } from './retry.js';
 import { SlackClient } from './slackClient.js';
@@ -21,11 +21,11 @@ function main() {
         switch (error.name) {
           case TimeoutError.errorName:
             return Console.error(`TimeoutError:${error.message}`);
-          case HTTPClientError.InvalidURL.errorName:
+          case HTTPError.InvalidURL.errorName:
             return Console.error(`InvalidURLError:${error.message}`);
-          case HTTPClientError.NetworkError.errorName:
+          case HTTPError.NetworkError.errorName:
             return Console.error(`NetworkError:${error.message}`);
-          case HTTPClientError.ParserError.errorName:
+          case HTTPError.ParserError.errorName:
             return Console.error(`ParserError:${error.message}`);
           default:
             // return Console.error(`Unknown Error:${error.message}`);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
-import { HTTPClient, parseJSON } from '@w5s/http-client';
+import { HTTP, parseJSON } from '@w5s/http';
 import { timeout } from './timeout.js';
 
 export interface SlackClient {
@@ -68,10 +68,10 @@ export namespace SlackClient {
 
   function apiCall<Response extends JSONValue>(
     client: SlackClient,
-    method: HTTPClient.Method,
+    method: HTTP.Method,
     parameters: { [key: string]: unknown }
   ) {
-    const request = HTTPClient.request({
+    const request = HTTP.request({
       url: urlWithQuery(`https://slack.com/api/${method}`, {
         token: client.slackToken,
         ...parameters,

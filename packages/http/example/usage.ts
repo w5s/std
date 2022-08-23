@@ -1,4 +1,4 @@
-import { HTTPClient, HTTPClientError, parseJSON } from '@w5s/http-client';
+import { HTTP, HTTPError, parseJSON } from '@w5s/http';
 import { Console, Task, assertNever } from '@w5s/core';
 
 const getText = (id: number) => ({
@@ -7,15 +7,15 @@ const getText = (id: number) => ({
 });
 
 export function program() {
-  const task = HTTPClient.request(getText(123));
+  const task = HTTP.request(getText(123));
   const log = Task.andThen(task, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
-      case HTTPClientError.InvalidURL.errorName:
+      case HTTPError.InvalidURL.errorName:
         return Console.error(`A wrong url was passed. Got ${error.input}`);
-      case HTTPClientError.NetworkError.errorName:
+      case HTTPError.NetworkError.errorName:
         return Console.error('A network error occurred');
-      case HTTPClientError.ParserError.errorName:
+      case HTTPError.ParserError.errorName:
         return Console.error('A parser error occurred');
       default:
         return assertNever(error);

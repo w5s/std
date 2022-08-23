@@ -3902,9 +3902,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/http-client@^1.0.0-alpha.0, @w5s/http-client@workspace:packages/http-client":
+"@w5s/http@^1.0.0-alpha.0, @w5s/http@workspace:packages/http":
   version: 0.0.0-use.local
-  resolution: "@w5s/http-client@workspace:packages/http-client"
+  resolution: "@w5s/http@workspace:packages/http"
   dependencies:
     "@jest/globals": 28.1.3
     "@w5s/core": ^1.0.0-alpha.0
@@ -3944,7 +3944,7 @@ __metadata:
   dependencies:
     "@jest/globals": 28.1.3
     "@w5s/core": ^1.0.0-alpha.0
-    "@w5s/http-client": ^1.0.0-alpha.0
+    "@w5s/http": ^1.0.0-alpha.0
     "@w5s/uuid": ^1.0.0-alpha.0
   peerDependencies:
     typescript: ^3.8.0 || ^4.0.0

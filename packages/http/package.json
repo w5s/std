@@ -1,5 +1,5 @@
 {
-  "name": "@w5s/http-client",
+  "name": "@w5s/http",
   "version": "1.0.0-alpha.0",
   "description": "HTTP Client module",
   "keywords": [
@@ -9,14 +9,14 @@
     "client",
     "fetch"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/fetch#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/http#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/http-client"
+    "directory": "packages/http"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

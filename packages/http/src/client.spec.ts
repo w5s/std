@@ -1,11 +1,11 @@
 import { Ref, Result, Task } from '@w5s/core';
 import { describe, test, expect, jest } from '@jest/globals';
-import { HTTPClient } from './client.js';
-import { HTTPClientError } from './error.js';
+import { HTTP } from './client.js';
+import { HTTPError } from './error.js';
 
-describe(HTTPClient.request, () => {
+describe(HTTP.request, () => {
   const anyURL = 'https://localhost';
-  const anyHttpError = HTTPClientError.ParserError('AnyError');
+  const anyHttpError = HTTPError.ParserError('AnyError');
   const anyParser = jest.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
   const anyFetch = async () => anyResponse;
@@ -30,7 +30,7 @@ describe(HTTPClient.request, () => {
     const globalFetch = jest.fn(async () => anyResponse);
     const parse = jest.fn(() => Task.resolve('TestReturn'));
     const url = 'http://localhost#test';
-    const task = HTTPClient.request({
+    const task = HTTP.request({
       url,
       method: 'GET',
       parse,
@@ -42,14 +42,14 @@ describe(HTTPClient.request, () => {
     expect(result).toEqual(Result.Ok('TestReturn'));
   });
   test('should handle malformed URL', async () => {
-    const task = HTTPClient.request({
+    const task = HTTP.request({
       url: 'http://www.exam ple.com', // invalid url
       parse: anyParser,
       fetch: anyFetch,
     });
     const result = await Task.unsafeRun(task);
     expect(result).toEqual(
-      Result.Error(HTTPClientError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
+      Result.Error(HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
     );
   });
   test('should convert fetch error to NetworkError', async () => {
@@ -57,18 +57,18 @@ describe(HTTPClient.request, () => {
     const globalFetch = jest.fn(async () => {
       throw fetchError;
     });
-    const task = HTTPClient.request({
+    const task = HTTP.request({
       url: anyURL,
       parse: anyParser,
       fetch: globalFetch,
     });
     const result = await Task.unsafeRun(task);
-    expect(result).toEqual(Result.Error(HTTPClientError.NetworkError({ cause: fetchError })));
+    expect(result).toEqual(Result.Error(HTTPError.NetworkError({ cause: fetchError })));
   });
   test('should convert reject parse errors', async () => {
     const failParser = jest.fn(() => Task.reject(anyHttpError));
 
-    const task = HTTPClient.request({
+    const task = HTTP.request({
       url: anyURL,
       parse: failParser,
       fetch: anyFetch,
@@ -100,9 +100,9 @@ describe(HTTPClient.request, () => {
         });
       }
     });
-    const parse = jest.fn(() => Task.reject(HTTPClientError.ParserError({ message: 'NeverParsedError' })));
+    const parse = jest.fn(() => Task.reject(HTTPError.ParserError({ message: 'NeverParsedError' })));
 
-    const task = HTTPClient.request({
+    const task = HTTP.request({
       url: anyURL,
       parse,
       fetch: globalFetch,
@@ -118,21 +118,21 @@ describe(HTTPClient.request, () => {
     expect(reject).not.toHaveBeenCalled();
   });
 });
-describe(HTTPClient.Headers, () => {
+describe(HTTP.Headers, () => {
   test('should return immutable copy of headers', () => {
     const init = {
       foo: 'bar',
     };
-    expect(HTTPClient.Headers(init)).toEqual({
+    expect(HTTP.Headers(init)).toEqual({
       foo: 'bar',
     });
-    expect(HTTPClient.Headers(init)).not.toBe(init);
+    expect(HTTP.Headers(init)).not.toBe(init);
   });
   test('should work with iterable of tuple', () => {
     const init = [['foo', 'bar'] as const];
-    expect(HTTPClient.Headers(init)).toEqual({
+    expect(HTTP.Headers(init)).toEqual({
       foo: 'bar',
     });
-    expect(HTTPClient.Headers(init)).not.toBe(init);
+    expect(HTTP.Headers(init)).not.toBe(init);
   });
 });

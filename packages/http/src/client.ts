@@ -2,14 +2,14 @@
 import { invariant } from '@w5s/core/lib/invariant.js';
 import type { Task } from '@w5s/core/lib/task.js';
 import type { Tag } from '@w5s/core/lib/type.js';
-import { HTTPClientError } from './error.js';
+import { HTTPError } from './error.js';
 
 /**
  * Types
  */
 type NativeFetch = typeof globalThis.fetch;
 
-export namespace HTTPClient {
+export namespace HTTP {
   /**
    * HTTP URL type
    *
@@ -84,7 +84,7 @@ export namespace HTTPClient {
   /**
    * HTTP header record type
    */
-  export type Headers = Tag<Readonly<Record<string, string>>, { HTTPClientHeaders: true }>;
+  export type Headers = Tag<Readonly<Record<string, string>>, { HTTPHeaders: true }>;
 
   /**
    * HTTP header record constructor
@@ -128,13 +128,13 @@ export namespace HTTPClient {
     extends Readonly<
       Omit<globalThis.RequestInit, 'headers' | 'clone' | 'method'> & {
         // https://fetch.spec.whatwg.org/#requests
-        url: HTTPClient.URL;
-        headers?: HTTPClient.Headers;
-        cache?: HTTPClient.Cache;
-        redirect?: HTTPClient.Redirect;
-        referrerPolicy?: HTTPClient.ReferrerPolicy;
-        destination?: HTTPClient.RequestDestination;
-        method?: HTTPClient.Method;
+        url: HTTP.URL;
+        headers?: HTTP.Headers;
+        cache?: HTTP.Cache;
+        redirect?: HTTP.Redirect;
+        referrerPolicy?: HTTP.ReferrerPolicy;
+        destination?: HTTP.RequestDestination;
+        method?: HTTP.Method;
       }
     > {}
 
@@ -146,7 +146,7 @@ export namespace HTTPClient {
     > {}
 
   export interface Parser<Value> {
-    (response: HTTPClient.Response): Task<Value, HTTPClientError.ParserError>;
+    (response: HTTP.Response): Task<Value, HTTPError.ParserError>;
   }
 
   /**
@@ -154,14 +154,14 @@ export namespace HTTPClient {
    *
    * @example
    * ```typescript
-   * const responseTask = HTTPClient.request({
+   * const responseTask = HTTP.request({
    *   url: 'http://someurl.com',
    *   parse: parseText,
    * });
    * ```
    * @param requestObject - the request parameters
    */
-  export function request<Value>(requestObject: request.Request<Value>): Task<Value, HTTPClientError> {
+  export function request<Value>(requestObject: request.Request<Value>): Task<Value, HTTPError> {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
     const responseTask = applyFetch(localFetch, fetchRequest);
     return {
@@ -172,11 +172,11 @@ export namespace HTTPClient {
   }
   export namespace request {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    export interface Request<Value> extends HTTPClient.Request {
+    export interface Request<Value> extends HTTP.Request {
       /**
        * Response Parser
        */
-      readonly parse: HTTPClient.Parser<Value>;
+      readonly parse: HTTP.Parser<Value>;
       /**
        * The optional fetch function
        */
@@ -203,8 +203,8 @@ function getDefaultFetch() {
 
 function applyFetch(
   fetchFn: NativeFetch,
-  request: HTTPClient.Request
-): Task<HTTPClient.Response, HTTPClientError.InvalidURL | HTTPClientError.NetworkError> {
+  request: HTTP.Request
+): Task<HTTP.Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     taskRun: async (resolve, reject, cancelerRef) => {
@@ -215,7 +215,7 @@ function applyFetch(
 
       if (!isValidURL(url)) {
         reject(
-          HTTPClientError.InvalidURL({
+          HTTPError.InvalidURL({
             message: 'Invalid URL',
             input: url,
           })
@@ -229,7 +229,7 @@ function applyFetch(
 
           resolve(response);
         } catch (networkError: unknown) {
-          reject(HTTPClientError.NetworkError({ cause: networkError }));
+          reject(HTTPError.NetworkError({ cause: networkError }));
         }
       }
     },

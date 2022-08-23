@@ -1,12 +1,12 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=# W5s Fetch Module _(${name})_) -->
-# W5s Fetch Module _(@w5s/http-client)_
+<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=# W5s HTTP Module _(${name})_) -->
+# W5s HTTP Module _(@w5s/http)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=> ${description}&unknownTxt= ) -->
-> HTTP Client module
+> HTTP module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -22,7 +22,7 @@ npm install @w5s/http-client
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { HTTPClient, parseJSON } from '@w5s/http-client';
+import { HTTP, HTTPError, parseJSON } from '@w5s/http';
 import { Console, Task, assertNever } from '@w5s/core';
 
 const getText = (id: number) => ({
@@ -31,15 +31,15 @@ const getText = (id: number) => ({
 });
 
 export function program() {
-  const task = HTTPClient.request(getText(123));
+  const task = HTTP.request(getText(123));
   const log = Task.andThen(task, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
-      case HTTPClient.InvalidURLError.errorName:
+      case HTTPError.InvalidURL.errorName:
         return Console.error(`A wrong url was passed. Got ${error.input}`);
-      case HTTPClient.NetworkError.errorName:
+      case HTTPError.NetworkError.errorName:
         return Console.error('A network error occurred');
-      case HTTPClient.ParserError.errorName:
+      case HTTPError.ParserError.errorName:
         return Console.error('A parser error occurred');
       default:
         return assertNever(error);

@@ -5,8 +5,8 @@ describe('index', () => {
   test('exports', () => {
     expect(Object.keys(Fetch).sort()).toEqual(
       [
-        'HTTPClient',
-        'HTTPClientError',
+        'HTTP',
+        'HTTPError',
         'parseArrayBuffer',
         'parseBlob',
         'parseFormData',

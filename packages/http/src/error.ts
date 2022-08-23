@@ -3,15 +3,15 @@ import { DataError } from '@w5s/core/lib/dataError.js';
 /**
  * Union type of http client errors
  */
-export type HTTPClientError = HTTPClientError.NetworkError | HTTPClientError.InvalidURL | HTTPClientError.ParserError;
+export type HTTPError = HTTPError.NetworkError | HTTPError.InvalidURL | HTTPError.ParserError;
 
-export namespace HTTPClientError {
+export namespace HTTPError {
   /**
    * An error when url passed is invalid
    */
   export interface InvalidURL
     extends DataError<{
-      name: 'HTTPClientInvalidURLError';
+      name: 'HTTPInvalidURLError';
       input: string;
     }> {}
   /**
@@ -19,33 +19,33 @@ export namespace HTTPClientError {
    *
    * @category Constructor
    */
-  export const InvalidURL = DataError.Make<InvalidURL>('HTTPClientInvalidURLError');
+  export const InvalidURL = DataError.Make<InvalidURL>('HTTPInvalidURLError');
 
   /**
    * A network error when `fetch` fails
    */
   export interface NetworkError
     extends DataError<{
-      name: 'HTTPClientNetworkError';
+      name: 'HTTPNetworkError';
     }> {}
   /**
    * NetworkError constructor
    *
    * @category Constructor
    */
-  export const NetworkError = DataError.Make<NetworkError>('HTTPClientNetworkError');
+  export const NetworkError = DataError.Make<NetworkError>('HTTPNetworkError');
 
   /**
    * A parsing error when the body cannot be parsed
    */
   export interface ParserError
     extends DataError<{
-      name: 'HTTPClientParserError';
+      name: 'HTTPParserError';
     }> {}
   /**
    * ParserError constructor
    *
    * @category Constructor
    */
-  export const ParserError = DataError.Make<ParserError>('HTTPClientParserError');
+  export const ParserError = DataError.Make<ParserError>('HTTPParserError');
 }
