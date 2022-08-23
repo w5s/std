@@ -1,4 +1,4 @@
-import { DataError } from '@w5s/core';
+import { DataError } from '@w5s/core/lib/dataError.js';
 
 /**
  * An error reported when the DatabaseClient fails to perform an operation

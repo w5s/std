@@ -1,4 +1,4 @@
-import { Task } from '@w5s/core';
+import type { Task } from '@w5s/core/lib/task.js';
 import { DatabaseClient, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
 import { SQLQuery } from './query.js';
@@ -26,15 +26,18 @@ export function executeQuery(
 ): Task<unknown, DatabaseClientError> {
   const driver = DatabaseDriver.get(client.databaseType);
 
-  return Task(async ({ ok, error }) => {
-    try {
-      const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
-      const returnValue = await driver.executeQuery(client, sqlStatement);
-      return ok(returnValue);
-    } catch (error_: unknown) {
-      const caughtError = await driver.handleError(error_);
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    taskRun: async (resolve, reject, _cancelerRef) => {
+      try {
+        const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
+        const returnValue = await driver.executeQuery(client, sqlStatement);
+        resolve(returnValue);
+      } catch (error_: unknown) {
+        const caughtError = await driver.handleError(error_);
 
-      return error(caughtError);
-    }
-  });
+        reject(caughtError);
+      }
+    },
+  };
 }
