@@ -13,7 +13,7 @@
 
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=```console\nnpm install ${name}\n```) -->
 ```console
-npm install @w5s/http-client
+npm install @w5s/http
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -61,10 +61,10 @@ Task.unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchPa
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/http-client.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/http.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/http-client
+[package-url]: https://www.npmjs.com/package/@w5s/http
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
