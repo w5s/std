@@ -1,5 +1,5 @@
 {
-  "name": "@w5s/database-client",
+  "name": "@w5s/database",
   "version": "1.0.0-alpha.0",
   "description": "Database client library",
   "keywords": [
@@ -12,14 +12,14 @@
     "pgsql",
     "client"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/database-client#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/database#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/database-client"
+    "directory": "packages/database"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

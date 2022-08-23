@@ -7,8 +7,8 @@
       "@w5s/core": [
         "./core"
       ],
-      "@w5s/database-client": [
-        "./database-client"
+      "@w5s/database": [
+        "./database"
       ]
     }
   },

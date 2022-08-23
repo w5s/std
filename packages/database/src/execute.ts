@@ -1,8 +1,8 @@
 import type { Task } from '@w5s/core/lib/task.js';
-import { DatabaseClient, DatabaseDriver } from './driver.js';
+import { Database, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
 import { SQLQuery } from './query.js';
-import { DatabaseClientError } from './error.js';
+import { DatabaseError } from './error.js';
 
 /**
  * Execute the `sqlStatement` on an `client`
@@ -20,10 +20,7 @@ import { DatabaseClientError } from './error.js';
  * @param client - created with a database adapter `createEnvironment(environmentConfig)` function
  * @param sqlOrQuery - SQL query object or a raw sql statement
  */
-export function executeQuery(
-  client: DatabaseClient,
-  sqlOrQuery: SQLStatement | SQLQuery
-): Task<unknown, DatabaseClientError> {
+export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQuery): Task<unknown, DatabaseError> {
   const driver = DatabaseDriver.get(client.databaseType);
 
   return {

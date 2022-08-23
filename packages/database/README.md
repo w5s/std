@@ -1,5 +1,5 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=# Generic Database client _(${name})_) -->
-# Generic Database client _(@w5s/database-client)_
+# Generic Database client _(@w5s/database)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
@@ -13,7 +13,7 @@
 
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/database-client
+npm install @w5s/database
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -22,7 +22,7 @@ npm install @w5s/database-client
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { sql, executeQuery, DatabaseClient } from '@w5s/database-client';
+import { sql, executeQuery, Database } from '@w5s/database';
 import { Task } from '@w5s/core';
 
 interface User {
@@ -30,7 +30,7 @@ interface User {
   name: string;
 }
 
-export function getUserById(client: DatabaseClient, id: User['id']) {
+export function getUserById(client: Database, id: User['id']) {
   const sqlStatement = sql`SELECT id, name FROM user WHERE id=${String(id)}`;
   const task = executeQuery(client, sqlStatement);
 
@@ -38,7 +38,7 @@ export function getUserById(client: DatabaseClient, id: User['id']) {
 }
 
 export async function main(): Promise<void> {
-  const client: DatabaseClient = {
+  const client: Database = {
     databaseType: 'mysql',
     database: '',
     user: '',
@@ -58,10 +58,10 @@ export async function main(): Promise<void> {
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/database-client.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/database.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/database-client
+[package-url]: https://www.npmjs.com/package/@w5s/database
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square

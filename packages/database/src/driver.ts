@@ -1,5 +1,5 @@
 import type { SQLStatement } from './sql.js';
-import { DatabaseClientError } from './error.js';
+import { DatabaseError } from './error.js';
 import type { DatabaseDriverMap } from './index.js';
 
 export namespace DatabaseDriver {
@@ -30,7 +30,7 @@ export namespace DatabaseDriver {
       adapter,
       executeQuery,
       async handleError(cause: unknown) {
-        return DatabaseClientError({ cause });
+        return DatabaseError({ cause });
       },
     };
   }
@@ -40,11 +40,11 @@ export namespace DatabaseDriver {
 
     executeQuery(client: Client, sqlStatement: SQLStatement): Promise<unknown>;
 
-    handleError(cause: unknown): Promise<DatabaseClientError>;
+    handleError(cause: unknown): Promise<DatabaseError>;
   }
 
   type ClientOf<Name extends keyof DatabaseDriverMap> = DatabaseDriverMap[Name];
   type ModuleOf<Name extends keyof DatabaseDriverMap> = Module<Name, ClientOf<Name>>;
 }
 
-export type DatabaseClient = DatabaseDriverMap[keyof DatabaseDriverMap];
+export type Database = DatabaseDriverMap[keyof DatabaseDriverMap];

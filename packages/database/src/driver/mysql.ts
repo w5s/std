@@ -1,6 +1,6 @@
 import { createConnection, ConnectionConfig } from 'mysql';
 import { SQLStatement } from '../sql.js';
-import type { AbstractDatabaseClient } from '../client.js';
+import type { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';
 
 function mysqlSQLStatement(statement: SQLStatement) {
@@ -13,7 +13,7 @@ function mysqlSQLStatement(statement: SQLStatement) {
   };
 }
 
-export interface MySQLClient extends AbstractDatabaseClient<'mysql'>, ConnectionConfig {}
+export interface MySQLClient extends AbstractDatabase<'mysql'>, ConnectionConfig {}
 
 export const MySQL = {
   createConnection,
@@ -36,7 +36,7 @@ export const MySQL = {
   }),
 };
 
-declare module '@w5s/database-client' {
+declare module '@w5s/database' {
   interface DatabaseDriverMap {
     mysql: MySQLClient;
   }

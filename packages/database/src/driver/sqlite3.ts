@@ -1,6 +1,6 @@
 import { Database } from 'sqlite3';
 import { SQLStatement } from '../sql.js';
-import { AbstractDatabaseClient } from '../client.js';
+import { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';
 
 function sqlite3SQLStatement(statement: SQLStatement) {
@@ -13,7 +13,7 @@ function sqlite3SQLStatement(statement: SQLStatement) {
   };
 }
 
-export interface SQLite3Client extends AbstractDatabaseClient<'sqlite3'> {
+export interface SQLite3Client extends AbstractDatabase<'sqlite3'> {
   filename: string;
 }
 export const SQLite3 = {
@@ -34,7 +34,7 @@ export const SQLite3 = {
   ),
 };
 
-declare module '@w5s/database-client' {
+declare module '@w5s/database' {
   interface DatabaseDriverMap {
     sqlite3: SQLite3Client;
   }

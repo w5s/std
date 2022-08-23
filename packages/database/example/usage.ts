@@ -1,4 +1,4 @@
-import { sql, executeQuery, DatabaseClient } from '@w5s/database-client';
+import { sql, executeQuery, Database } from '@w5s/database';
 import { Task } from '@w5s/core';
 
 interface User {
@@ -6,7 +6,7 @@ interface User {
   name: string;
 }
 
-export function getUserById(client: DatabaseClient, id: User['id']) {
+export function getUserById(client: Database, id: User['id']) {
   const sqlStatement = sql`SELECT id, name FROM user WHERE id=${String(id)}`;
   const task = executeQuery(client, sqlStatement);
 
@@ -14,7 +14,7 @@ export function getUserById(client: DatabaseClient, id: User['id']) {
 }
 
 export async function main(): Promise<void> {
-  const client: DatabaseClient = {
+  const client: Database = {
     databaseType: 'mysql',
     database: '',
     user: '',

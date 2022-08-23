@@ -1,7 +1,7 @@
 import { describe, test, expect, jest } from '@jest/globals';
 import { Result, Task } from '@w5s/core';
 import { executeQuery } from './execute.js';
-import { DatabaseClientError } from './error.js';
+import { DatabaseError } from './error.js';
 import { sql } from './sql.js';
 import { SQLQuery } from './query.js';
 import './driver/all.js';
@@ -31,7 +31,7 @@ describe(executeQuery, () => {
     const client = createClient();
     client.mockExecuteQuery.mockReturnValue(Promise.reject('MockClientError')); // eslint-disable-line prefer-promise-reject-errors
     await expect(Task.unsafeRun(executeQuery(client, anyQuery))).resolves.toEqual(
-      Result.Error(DatabaseClientError({ cause: 'MockClientError' }))
+      Result.Error(DatabaseError({ cause: 'MockClientError' }))
     );
   });
 
