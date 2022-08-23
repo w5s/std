@@ -37,7 +37,7 @@ export const MySQL = {
 };
 
 declare module '@w5s/database-client' {
-  interface DatabaseClientMap {
+  interface DatabaseDriverMap {
     mysql: MySQLClient;
   }
 }

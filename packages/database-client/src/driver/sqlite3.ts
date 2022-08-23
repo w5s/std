@@ -35,7 +35,7 @@ export const SQLite3 = {
 };
 
 declare module '@w5s/database-client' {
-  interface DatabaseClientMap {
+  interface DatabaseDriverMap {
     sqlite3: SQLite3Client;
   }
 }

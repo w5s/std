@@ -17,7 +17,7 @@ export const Mock = DatabaseDriver.Make(
 );
 
 declare module '@w5s/database-client' {
-  interface DatabaseClientMap {
+  interface DatabaseDriverMap {
     mock: MockClient;
   }
 }

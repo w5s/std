@@ -1,6 +1,6 @@
 import type { SQLStatement } from './sql.js';
 import { DatabaseClientError } from './error.js';
-import type { DatabaseClientMap } from './index.js';
+import type { DatabaseDriverMap } from './index.js';
 
 export namespace DatabaseDriver {
   const driverMap: Record<string, any> = {};
@@ -13,12 +13,12 @@ export namespace DatabaseDriver {
     throw new ReferenceError(`${name} driver not found`);
   }
 
-  export function get<Name extends keyof DatabaseClientMap>(name: Name): ModuleOf<Name> {
+  export function get<Name extends keyof DatabaseDriverMap>(name: Name): ModuleOf<Name> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return getRegistry()[name] ?? notFound(name);
   }
 
-  export function set<Name extends keyof DatabaseClientMap>(name: Name, module: ModuleOf<Name>): void {
+  export function set<Name extends keyof DatabaseDriverMap>(name: Name, module: ModuleOf<Name>): void {
     getRegistry()[name] = module;
   }
 
@@ -43,8 +43,8 @@ export namespace DatabaseDriver {
     handleError(cause: unknown): Promise<DatabaseClientError>;
   }
 
-  type ClientOf<Name extends keyof DatabaseClientMap> = DatabaseClientMap[Name];
-  type ModuleOf<Name extends keyof DatabaseClientMap> = Module<Name, ClientOf<Name>>;
+  type ClientOf<Name extends keyof DatabaseDriverMap> = DatabaseDriverMap[Name];
+  type ModuleOf<Name extends keyof DatabaseDriverMap> = Module<Name, ClientOf<Name>>;
 }
 
-export type DatabaseClient = DatabaseClientMap[keyof DatabaseClientMap];
+export type DatabaseClient = DatabaseDriverMap[keyof DatabaseDriverMap];
