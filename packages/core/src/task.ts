@@ -2,7 +2,7 @@ import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
-import { AggregateError } from './error/aggregateError.js';
+import { AggregateError } from './aggregateError.js';
 
 /**
  * Base type for Task

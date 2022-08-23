@@ -17,5 +17,5 @@ export * from './string.js';
 export * from './task.js';
 export * from './time.js';
 export * from './type.js';
-export * from './error/aggregateError.js';
-export * from './error/argumentError.js';
+export * from './aggregateError.js';
+export * from './argumentError.js';

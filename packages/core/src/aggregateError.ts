@@ -1,4 +1,4 @@
-import { DataError } from '../dataError.js';
+import { DataError } from './dataError.js';
 
 /**
  * An error to aggregate multiple errors

@@ -1,4 +1,4 @@
-import { DataError } from '../dataError.js';
+import { DataError } from './dataError.js';
 
 /**
  * An error when wrong argument is passed to a function

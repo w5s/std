@@ -3,7 +3,7 @@
 import { describe, test, expect, jest } from '@jest/globals';
 import type { Mocked } from 'jest-mock';
 import { assertType } from './type.js';
-import { AggregateError } from './error/aggregateError.js';
+import { AggregateError } from './aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
