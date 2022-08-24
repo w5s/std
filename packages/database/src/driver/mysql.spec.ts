@@ -1,5 +1,6 @@
 import * as mysql from 'mysql';
 import { describe, test, expect, jest } from '@jest/globals';
+import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { MySQL } from './mysql.js';
@@ -35,14 +36,15 @@ describe('MySQL', () => {
     });
   });
 
-  describe('.executeQuery()', () => {
+  describe('.execute', () => {
     test('should open connection', async () => {
       mockConnection();
       const client = {
         databaseType: 'mysql',
         host: 'foo.com',
       } as const;
-      await MySQL.executeQuery(client, anyStatement);
+      const cancelerRef = Ref(() => {});
+      await MySQL.execute(client, anyStatement, cancelerRef);
 
       expect(MySQL.createConnection).toHaveBeenLastCalledWith(client);
     });
@@ -53,8 +55,9 @@ describe('MySQL', () => {
       mockConnection({
         query,
       });
+      const cancelerRef = Ref(() => {});
 
-      await MySQL.executeQuery(anyClient, anyStatement);
+      await MySQL.execute(anyClient, anyStatement, cancelerRef);
 
       expect(query).toHaveBeenLastCalledWith('SELECT author FROM books WHERE name=?', ['Toto'], expect.any(Function));
     });
@@ -64,8 +67,9 @@ describe('MySQL', () => {
       mockConnection({
         end,
       });
+      const cancelerRef = Ref(() => {});
 
-      await MySQL.executeQuery(anyClient, anyStatement);
+      await MySQL.execute(anyClient, anyStatement, cancelerRef);
       expect(end).toHaveBeenCalledTimes(1);
     });
 
@@ -80,8 +84,9 @@ describe('MySQL', () => {
         end,
         query,
       });
+      const cancelerRef = Ref(() => {});
 
-      await expect(MySQL.executeQuery(anyClient, anyStatement)).rejects.toThrow();
+      await expect(MySQL.execute(anyClient, anyStatement, cancelerRef)).rejects.toThrow();
       expect(end).toHaveBeenCalledTimes(1);
     });
   });

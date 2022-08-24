@@ -1,4 +1,5 @@
 import { describe, test, expect, jest } from '@jest/globals';
+import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { Mock } from './mock.js';
@@ -13,14 +14,15 @@ describe('Mock', () => {
       expect(Mock.adapter).toBe('mock');
     });
   });
-  describe('.executeQuery()', () => {
+  describe('.execute', () => {
     test('should use mockExecuteQuery function', async () => {
       const mockExecuteQuery = jest.fn(() => Promise.resolve('returnValue'));
       const mockClient = {
         databaseType: 'mock' as const,
         mockExecuteQuery,
       };
-      await expect(Mock.executeQuery(mockClient, anyStatement)).resolves.toEqual('returnValue');
+      const cancelerRef = Ref(jest.fn());
+      await expect(Mock.execute(mockClient, anyStatement, cancelerRef)).resolves.toEqual('returnValue');
       expect(mockExecuteQuery).toHaveBeenCalledWith(anyStatement);
     });
   });

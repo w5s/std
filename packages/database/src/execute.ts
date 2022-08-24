@@ -21,14 +21,15 @@ import { DatabaseError } from './error.js';
  * @param sqlOrQuery - SQL query object or a raw sql statement
  */
 export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQuery): Task<unknown, DatabaseError> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const driver = DatabaseDriver.get(client.databaseType);
 
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject, _cancelerRef) => {
+    taskRun: async (resolve, reject, cancelerRef) => {
       try {
         const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
-        const returnValue = await driver.executeQuery(client, sqlStatement);
+        const returnValue = await driver.execute(client, sqlStatement, cancelerRef);
         resolve(returnValue);
       } catch (error_: unknown) {
         const caughtError = await driver.handleError(error_);
