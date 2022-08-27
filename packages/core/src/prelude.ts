@@ -107,7 +107,6 @@ export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
  * // and so on...
  * ```
  * @param value - the value to pass to the first function
- * @returns a { to } object
  */
 export function pipe<Value>(value: Value): Pipe<Value> {
   return {
