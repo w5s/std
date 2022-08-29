@@ -1,5 +1,5 @@
 import { describe, test, expect } from '@jest/globals';
-import { Result } from '@w5s/core';
+import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, lazy, option, dateISO, array, object } from './codec.js';
 
 // Example of codec
