@@ -1,8 +1,8 @@
 import type { Ref } from '@w5s/core/lib/ref.js';
 import type { Task } from '@w5s/core/lib/task.js';
+import type { DatabaseDriverMap } from '@w5s/database';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
-import type { DatabaseDriverMap } from './index.js';
 
 export namespace DatabaseDriver {
   const driverMap: Record<string, any> = {};
