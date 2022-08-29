@@ -91,7 +91,6 @@
     "coverage/",
     "build/",
     ".cache/",
-    "**/tsconfig.json",
     ".vscode/**",
     "public/"
   ],
