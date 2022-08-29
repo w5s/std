@@ -3856,7 +3856,7 @@ __metadata:
     "@commitlint/cli": 17.1.1
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.0-alpha.8
-    "@w5s/eslint-config": 1.0.0-alpha.27
+    "@w5s/eslint-config": 1.0.0-alpha.28
     "@w5s/mrm-preset": 1.0.0-alpha.21
     "@w5s/ts-config": 1.0.0-alpha.14
     concurrently: 7.3.0
@@ -3905,9 +3905,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.27":
-  version: 1.0.0-alpha.27
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.27"
+"@w5s/eslint-config@npm:1.0.0-alpha.28":
+  version: 1.0.0-alpha.28
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.28"
   dependencies:
     "@babel/core": "*"
     "@babel/eslint-parser": "*"
@@ -3933,7 +3933,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 38234bdaca1ee94dcf62b4ad196a5be23651845666e39fc09387683304ccfc632230902274721756a5e3cf8b83541543f9f23576bc7d8fffdc441e56d1a905a0
+  checksum: d7e30684dfad7b469fd59b6bc97eabd5e1c84e86862feaf353a78cc0bb6981d6fa2d8a1e86ce61e42be48301a431b605d00d6d7fe6e955213d9b196f7a86def8
   languageName: node
   linkType: hard
 
