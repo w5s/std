@@ -12,7 +12,7 @@ import type { Int } from './integer.js';
  * @category Constructor
  * @param iterator - function that creates a new iterator
  */
-export function Iterable<Value>(iterator: () => Iterator<Value>) {
+export function Iterable<Value>(iterator: () => Iterator<Value>): Iterable<Value> {
   return {
     [Symbol.iterator]: iterator,
   };
@@ -21,7 +21,7 @@ export namespace Iterable {
   const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
   const resultValue = <V>(value: V) => ({ value, done: false });
   const emptyIterator = { next: () => resultDone };
-  const emptyIterable = Iterable(() => emptyIterator);
+  const emptyIterable = Iterable<never>(() => emptyIterator);
 
   /**
    * Return a new iterator from iterable
@@ -80,7 +80,7 @@ export namespace Iterable {
   export function generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
     return length === 0
       ? emptyIterable
-      : Iterable(() => {
+      : Iterable<Value>(() => {
           let currentIndex = 0;
 
           return {
@@ -113,7 +113,7 @@ export namespace Iterable {
   export function range(start: number, end: number, step?: number): Iterable<number> {
     const incrementValue = Math.abs(step ?? 1);
 
-    return Iterable(
+    return Iterable<number>(
       start < end
         ? () => {
             let currentValue = start;
@@ -253,7 +253,7 @@ export namespace Iterable {
    * @param right - Right iterable
    */
   export function zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
-    return Iterable(() => {
+    return Iterable<[L, R]>(() => {
       const leftIterator = iterator(left);
       const rightIterator = iterator(right);
 
@@ -264,7 +264,7 @@ export namespace Iterable {
 
           return leftResult.done === true || rightResult.done === true
             ? resultDone
-            : resultValue([leftResult.value, rightResult.value]);
+            : resultValue([leftResult.value, rightResult.value] as [L, R]);
         },
       };
     });
