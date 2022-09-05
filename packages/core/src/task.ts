@@ -58,7 +58,7 @@ export function Task<Value, Error = never>(
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return Task.wrap((_resolve, _reject, cancelerRef) => {
+  return Task.wrap((resolveTask, rejectTask, cancelerRef) => {
     resetCanceler(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: resultOk,
@@ -69,9 +69,9 @@ export function Task<Value, Error = never>(
     });
     const handleResult = (result: Result<Value, Error>) => {
       if (result._ === 'Ok') {
-        _resolve(result.value);
+        resolveTask(result.value);
       } else {
-        _reject(result.error);
+        rejectTask(result.error);
       }
     };
     // eslint-disable-next-line promise/prefer-await-to-then
@@ -386,7 +386,7 @@ export namespace Task {
    * @param errorValue - the error value
    */
   export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error> {
-    return wrap((_, _reject) => _reject(errorValue));
+    return wrap((_, rejectTask) => rejectTask(errorValue));
   }
 
   /**
