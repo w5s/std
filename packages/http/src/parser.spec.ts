@@ -2,7 +2,7 @@ import { Result, Task } from '@w5s/core';
 import { describe, test, expect, jest } from '@jest/globals';
 import type { Mocked } from 'jest-mock';
 import { HTTP } from './client.js';
-import { parseArrayBuffer, parseBlob, parseFormData, parseJSON, parseText } from './parser.js';
+import { HTTPParser } from './parser.js';
 import { HTTPError } from './error.js';
 
 const mockResponse = (): Mocked<HTTP.Response> =>
@@ -35,28 +35,31 @@ const expectToResolveValue = async (
   const task = fn(response);
   await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));
 };
-describe(parseArrayBuffer, () => {
-  test('should parse as ArrayBuffer', async () => expectToResolveValue(parseArrayBuffer, 'arrayBuffer'));
-  test('should reject FetchResponseError', async () =>
-    expectToRejectFetchResponseError(parseArrayBuffer, 'arrayBuffer'));
-});
+describe('HTTPParser', () => {
+  describe('arrayBuffer', () => {
+    test('should parse as ArrayBuffer', async () => expectToResolveValue(HTTPParser.arrayBuffer, 'arrayBuffer'));
+    test('should reject FetchResponseError', async () =>
+      expectToRejectFetchResponseError(HTTPParser.arrayBuffer, 'arrayBuffer'));
+  });
+  describe('formData', () => {
+    test('should parse as FormData', async () => expectToResolveValue(HTTPParser.formData, 'formData'));
+    test('should reject FetchResponseError', async () =>
+      expectToRejectFetchResponseError(HTTPParser.formData, 'formData'));
+  });
+  describe('text', () => {
+    test('should parse as text', async () => expectToResolveValue(HTTPParser.text, 'text'));
 
-describe(parseFormData, () => {
-  test('should parse as FormData', async () => expectToResolveValue(parseFormData, 'formData'));
-  test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(parseFormData, 'formData'));
-});
-describe(parseText, () => {
-  test('should parse as text', async () => expectToResolveValue(parseText, 'text'));
+    test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(HTTPParser.text, 'text'));
+  });
+  describe('blob', () => {
+    test('should parse as blob', async () => expectToResolveValue(HTTPParser.blob, 'blob'));
 
-  test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(parseText, 'text'));
-});
-describe(parseBlob, () => {
-  test('should parse as blob', async () => expectToResolveValue(parseBlob, 'blob'));
+    test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(HTTPParser.blob, 'blob'));
+  });
+  describe('json', () => {
+    test('should parse as JSON', async () => expectToResolveValue(HTTPParser.json('unsafe'), 'json'));
 
-  test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(parseBlob, 'blob'));
-});
-describe(parseJSON, () => {
-  test('should parse as JSON', async () => expectToResolveValue(parseJSON('unsafe'), 'json'));
-
-  test('should reject FetchResponseError', async () => expectToRejectFetchResponseError(parseJSON('unsafe'), 'json'));
+    test('should reject FetchResponseError', async () =>
+      expectToRejectFetchResponseError(HTTPParser.json('unsafe'), 'json'));
+  });
 });

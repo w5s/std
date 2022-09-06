@@ -7,11 +7,7 @@ describe('index', () => {
       [
         'HTTP',
         'HTTPError',
-        'parseArrayBuffer',
-        'parseBlob',
-        'parseFormData',
-        'parseJSON',
-        'parseText',
+        'HTTPParser',
         'default', // FIXME: no key exist in reality
       ].sort()
     );

@@ -3,6 +3,7 @@ import { invariant } from '@w5s/core/lib/invariant.js';
 import type { Task } from '@w5s/core/lib/task.js';
 import type { Tag } from '@w5s/core/lib/type.js';
 import { HTTPError } from './error.js';
+import type { HTTPParser } from './parser.js';
 
 /**
  * Types
@@ -145,10 +146,6 @@ export namespace HTTP {
       }
     > {}
 
-  export interface Parser<Value> {
-    (response: HTTP.Response): Task<Value, HTTPError.ParserError>;
-  }
-
   /**
    * Return a new {@link Task} that will send an HTTP request
    *
@@ -176,7 +173,7 @@ export namespace HTTP {
       /**
        * Response Parser
        */
-      readonly parse: HTTP.Parser<Value>;
+      readonly parse: HTTPParser<Value>;
       /**
        * The optional fetch function
        */
