@@ -6,8 +6,6 @@ import { AggregateError } from './aggregateError.js';
 
 /**
  * Base type for Task
- *
- * @protected
  */
 export interface Task<Value, Error> {
   /**
