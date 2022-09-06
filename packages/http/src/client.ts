@@ -147,7 +147,7 @@ export namespace HTTP {
     > {}
 
   /**
-   * Return a new {@link Task} that will send an HTTP request
+   * Return a new {@link @w5s/core!Task} that will send an HTTP request
    *
    * @example
    * ```typescript
