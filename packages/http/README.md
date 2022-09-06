@@ -22,12 +22,12 @@ npm install @w5s/http
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { HTTP, HTTPError, parseJSON } from '@w5s/http';
+import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
 import { Console, Task, assertNever } from '@w5s/core';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
-  parse: parseJSON<{ foo: boolean }>('unsafe'),
+  parse: HTTPParser.json<{ foo: boolean }>('unsafe'),
 });
 
 export function program() {
