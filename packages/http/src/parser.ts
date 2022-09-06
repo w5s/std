@@ -2,6 +2,9 @@ import type { JSONValue, Task } from '@w5s/core';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
 
+/**
+ * A transformation function taking an {@link HTTP.Response} as input
+ */
 export interface HTTPParser<Value> {
   (response: HTTP.Response): Task<Value, HTTPError.ParserError>;
 }
