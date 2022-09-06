@@ -38,14 +38,19 @@ export function invariant(condition: boolean, message?: Option<string>): asserts
  */
 export function warning(condition: boolean, message?: Option<string>): void {
   if (!condition) {
-    warning.print(`Warning: ${message ?? ''}`);
+    warning.current(`Warning: ${message ?? ''}`);
   }
 }
+// eslint-disable-next-line jsdoc/require-example
+/**
+ *
+ * @internal
+ */
 export namespace warning {
-  export function print(message: Option<string>): void {
+  export const current = (message: Option<string>): void => {
     // eslint-disable-next-line no-console
     console.warn(message);
-  }
+  };
 }
 
 /**

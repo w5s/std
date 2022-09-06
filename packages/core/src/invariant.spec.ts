@@ -38,21 +38,21 @@ describe(invariant, () => {
 });
 describe(warning, () => {
   test('should not call warning.print when condition is true', () => {
-    const printSpy = jest.spyOn(warning, 'print').mockImplementationOnce(() => {
+    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(true, 'message');
     expect(printSpy).not.toHaveBeenCalled();
   });
   test('should call warning.print when condition is false', () => {
-    const printSpy = jest.spyOn(warning, 'print').mockImplementationOnce(() => {
+    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(false, 'message');
     expect(printSpy).toHaveBeenCalledWith('Warning: message');
   });
   test('should call warning.print with an empty string when message is not defined', () => {
-    const printSpy = jest.spyOn(warning, 'print').mockImplementationOnce(() => {
+    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(false, undefined);
