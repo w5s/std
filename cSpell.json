@@ -14,12 +14,7 @@
     "VARBINARY",
     "VARCHAR"
   ],
-  "ignoreWords": [
-    "postbuild",
-    "subpackage",
-    "SUBPACKAGELIST",
-    "PKGJSON"
-  ],
+  "ignoreWords": ["postbuild", "subpackage", "SUBPACKAGELIST", "PKGJSON"],
   "flagWords": [],
   "ignorePaths": [
     "**/build/**",
