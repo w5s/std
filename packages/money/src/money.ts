@@ -1,6 +1,6 @@
 import { ArgumentError } from '@w5s/core/lib/argumentError.js';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
-import type { Result } from '@w5s/core/lib/result.js';
+import type { Result } from '@w5s/core';
 import { Currency } from './currency.js';
 
 export type Amount = number;

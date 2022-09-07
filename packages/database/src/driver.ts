@@ -1,5 +1,4 @@
-import type { Ref } from '@w5s/core/lib/ref.js';
-import type { Task } from '@w5s/core/lib/task.js';
+import type { Ref, Task } from '@w5s/core';
 import type { DatabaseDriverMap } from '@w5s/database';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';

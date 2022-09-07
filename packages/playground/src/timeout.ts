@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import { DataError } from '@w5s/core/lib/dataError.js';
-import type { Task } from '@w5s/core/lib/task.js';
-import type { TimeDuration } from '@w5s/core/lib/time.js';
+import type { Task, TimeDuration } from '@w5s/core';
 
 const defaultCanceler = () => {};
 

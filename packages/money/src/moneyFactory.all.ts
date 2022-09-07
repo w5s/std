@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core/lib/integer.js';
+import type { Int } from '@w5s/core';
 import { Currency } from './currency.js';
 import { moneyFactory } from './moneyFactory.js';
 import { currencyRegistry } from './currencyRegistry.js';
