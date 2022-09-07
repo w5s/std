@@ -1,9 +1,8 @@
 /* eslint-disable unicorn/no-null */
 
-// https://doc.rust-lang.org/std/option/enum.Option.html
+import { Nullable } from './type.js';
 
-type EmptyValue = null | undefined;
-type Nullable<T> = EmptyValue | T;
+// https://doc.rust-lang.org/std/option/enum.Option.html
 
 /**
  * `Option<Value>` is the type used to represent either a defined value `Some<Value>` or `None` (i.e. `null` or `undefined`)
@@ -51,7 +50,7 @@ export namespace Option {
   /**
    * Non `null` and non `undefined` value
    */
-  export type Some<Value> = Value extends EmptyValue ? never : Value;
+  export type Some<Value> = Value extends Nullable ? never : Value;
 
   /**
    * An identity function that validates passed value
@@ -102,7 +101,7 @@ export namespace Option {
    * @category Guard
    * @param anyValue - the value to test
    */
-  export function isNone(anyValue: unknown): anyValue is EmptyValue {
+  export function isNone(anyValue: unknown): anyValue is Nullable {
     return anyValue == null;
   }
 
@@ -121,7 +120,7 @@ export namespace Option {
    * @category Guard
    * @param anyValue - the value to test
    */
-  export function isSome<Value>(anyValue: Value): anyValue is Exclude<Value, EmptyValue> {
+  export function isSome<Value>(anyValue: Value): anyValue is Exclude<Value, Nullable> {
     return !isNone(anyValue);
   }
 
