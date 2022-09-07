@@ -1,10 +1,7 @@
 {
   "extends": "@w5s/ts-config",
   "compilerOptions": {
-    "lib": [
-      "DOM",
-      "ESNext",
-      "ScriptHost"
-    ]
+    "forceConsistentCasingInFileNames": false,
+    "lib": ["DOM", "ESNext", "ScriptHost"]
   }
 }

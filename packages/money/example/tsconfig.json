@@ -1,15 +1,11 @@
 {
   "extends": "../../../tsconfig.settings.json",
   "compilerOptions": {
-    "noEmit": true,
     "baseUrl": "../../",
+    "noEmit": true,
     "paths": {
-      "@w5s/core": [
-        "./core"
-      ],
-      "@w5s/money": [
-        "./money"
-      ]
+      "@w5s/core": ["./core"],
+      "@w5s/money": ["./money"]
     }
   },
   "include": ["."]

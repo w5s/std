@@ -2,14 +2,8 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
-    "outDir": "./lib",
-    "lib": [
-      "DOM",
-      "ESNext",
-      "ScriptHost"
-    ],
+    "lib": ["DOM", "ESNext", "ScriptHost"],
+    "outDir": "./lib"
   },
-  "include": [
-    "./src"
-  ]
+  "include": ["./src"]
 }
