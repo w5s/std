@@ -77,8 +77,14 @@ export function Task<Value, Error = never>(
   });
 }
 export namespace Task {
-  type ValueType<T> = T extends Task<infer V, any> ? V : never;
-  type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
+  /**
+   * Extracts value type of task T
+   */
+  export type ValueType<T> = T extends Task<infer V, any> ? V : never;
+  /**
+   * Extracts error type of task T
+   */
+  export type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
 
   /**
    * Interface used to cancel running task
