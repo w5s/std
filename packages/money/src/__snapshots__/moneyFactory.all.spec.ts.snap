@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EUR() should be a valid money factory: currency 1`] = `
-Object {
+{
   "_": "Currency",
   "code": "EUR",
   "name": "Euro",
@@ -14,7 +14,7 @@ Object {
 `;
 
 exports[`USD() should be a valid money factory: currency 1`] = `
-Object {
+{
   "_": "Currency",
   "code": "USD",
   "name": "US Dollar",
