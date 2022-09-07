@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/extensions
 import { invariant } from '@w5s/core/lib/invariant.js';
-import type { Tag } from '@w5s/core/lib/type.js';
+import type { Tag } from '@w5s/core';
 
 /**
  * UUID string type

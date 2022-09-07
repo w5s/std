@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core/lib/integer.js';
+import type { Int } from '@w5s/core';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
 
 export interface Currency

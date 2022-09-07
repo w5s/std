@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 /**
+ * A type that can be either `undefined`, `null`, or `T`
+ */
+export type Nullable<T = never> = null | undefined | T;
+
+/**
  * Type for something that can be used with `await`.
  * It can be either `T` or `Promise<T>`
  *

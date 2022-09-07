@@ -1,4 +1,4 @@
-import type { Task } from '@w5s/core/lib/task.js';
+import type { Task } from '@w5s/core';
 import { Database, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
 import { SQLQuery } from './query.js';
