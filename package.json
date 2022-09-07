@@ -107,7 +107,7 @@
     "@types/node": "17.0.45",
     "@w5s/commitlint-config": "1.0.0-alpha.12",
     "@w5s/eslint-config": "1.0.0-alpha.31",
-    "@w5s/mrm-preset": "1.0.0-alpha.24",
+    "@w5s/mrm-preset": "1.0.0-alpha.25",
     "@w5s/ts-config": "1.0.0-alpha.16",
     "concurrently": "7.3.0",
     "conventional-changelog-gitmoji-config": "latest",
