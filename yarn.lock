@@ -3999,8 +3999,8 @@ __metadata:
     prettier: 2.7.1
     ts-node: 10.9.1
     turbo: 1.4.5
-    typedoc: 0.23.11
-    typescript: 4.8.2
+    typedoc: 0.23.14
+    typescript: 4.8.3
   languageName: unknown
   linkType: soft
 
@@ -14588,9 +14588,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.23.11":
-  version: 0.23.11
-  resolution: "typedoc@npm:0.23.11"
+"typedoc@npm:0.23.14":
+  version: 0.23.14
+  resolution: "typedoc@npm:0.23.14"
   dependencies:
     lunr: ^2.3.9
     marked: ^4.0.19
@@ -14600,11 +14600,21 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x
   bin:
     typedoc: bin/typedoc
-  checksum: 02bc1e4c15ea064c0a35e049500b40f99ce8dec1d2778edd9dbc12c0ca348c630253ad17e1c2b901961fcd56e3eea31fd62f82eed4ff95864e9e1d2e5e7564d7
+  checksum: 4037dc0db4aa8b205ac505bdc191de404ea2da3eb8dabbf8172851c239b85a96fbfd81503dc2d4789066d6901d76c552abc73ee04a239763b69b90587d44527b
   languageName: node
   linkType: hard
 
-"typescript@npm:4.8.2, typescript@npm:^3 || ^4":
+"typescript@npm:4.8.3":
+  version: 4.8.3
+  resolution: "typescript@npm:4.8.3"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 8286a5edcaf3d68e65c451aa1e7150ad1cf53ee0813c07ec35b7abdfdb10f355ecaa13c6a226a694ae7a67785fd7eeebf89f845da0b4f7e4a35561ddc459aba0
+  languageName: node
+  linkType: hard
+
+"typescript@npm:^3 || ^4":
   version: 4.8.2
   resolution: "typescript@npm:4.8.2"
   bin:
@@ -14624,7 +14634,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@4.8.2#~builtin<compat/typescript>, typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>":
+"typescript@patch:typescript@4.8.3#~builtin<compat/typescript>":
+  version: 4.8.3
+  resolution: "typescript@patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 2222d2382fb3146089b1d27ce2b55e9d1f99cc64118f1aba75809b693b856c5d3c324f052f60c75b577947fc538bc1c27bad0eb76cbdba9a63a253489504ba7e
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^3 || ^4#~builtin<compat/typescript>":
   version: 4.8.2
   resolution: "typescript@patch:typescript@npm%3A4.8.2#~builtin<compat/typescript>::version=4.8.2&hash=a1c5e5"
   bin:
