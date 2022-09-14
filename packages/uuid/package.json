@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@w5s/core": "^1.0.0-alpha.0",
-    "uuid": "^8.3.0"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@jest/globals": "29.0.3"
