@@ -60,7 +60,7 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
-    "@jest/globals": "29.0.2"
+    "@jest/globals": "29.0.3"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

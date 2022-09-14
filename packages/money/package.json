@@ -53,7 +53,7 @@
     "@w5s/core": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@jest/globals": "29.0.2",
+    "@jest/globals": "29.0.3",
     "currencies.json": "1.0.2"
   },
   "peerDependencies": {
