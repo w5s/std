@@ -583,7 +583,7 @@ export namespace Task {
    * ```
    * @param task - the task to be run
    */
-  export function unsafeRunOk<Value>(task: Task<Value, never>): Awaitable<Value> {
+  export function unsafeRunOk<Value>(task: Task<Value, unknown>): Awaitable<Value> {
     const promiseOrValue = unsafeRun(task);
     // @ts-ignore - we assume PromiseLike.then returns a Promise
     // eslint-disable-next-line promise/prefer-await-to-then
