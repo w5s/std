@@ -18,6 +18,5 @@
       "cache": false
     }
   },
-  "globalDependencies": ["tsconfig.settings.json"],
-  "baseBranch": "origin/main"
+  "globalDependencies": ["tsconfig.settings.json"]
 }
