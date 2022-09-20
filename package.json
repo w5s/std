@@ -105,7 +105,7 @@
     "@babel/eslint-parser": "7.19.1",
     "@commitlint/cli": "17.1.2",
     "@types/node": "17.0.45",
-    "@w5s/commitlint-config": "1.0.0-alpha.12",
+    "@w5s/commitlint-config": "1.0.0-alpha.13",
     "@w5s/eslint-config": "1.0.0-alpha.31",
     "@w5s/mrm-preset": "1.0.0-alpha.25",
     "@w5s/ts-config": "1.0.0-alpha.17",
