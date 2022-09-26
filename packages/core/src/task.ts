@@ -379,7 +379,9 @@ export namespace Task {
    * @category Constructor
    * @param value - the success value
    */
-  export function resolve<Value, Error = never>(value: Value): Task<Value, Error> {
+  export function resolve<Error = never>(): Task<void, Error>;
+  export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
+  export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
     return wrap((resolveTask) => resolveTask(value));
   }
 
@@ -395,7 +397,9 @@ export namespace Task {
    * @category Constructor
    * @param errorValue - the error value
    */
-  export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error> {
+  export function reject<Value = never>(): Task<Value, void>;
+  export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
+  export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
     return wrap((_, rejectTask) => rejectTask(errorValue));
   }
 

@@ -160,11 +160,21 @@ describe('Task', () => {
       const task = Task.resolve(anyObject);
       await ExpectTask.toResolve(task, anyObject);
     });
+    test('should resolve void task', async () => {
+      const task = Task.resolve();
+      assertType<typeof task, Task<void, never>>(true);
+      await ExpectTask.toResolve(task, undefined);
+    });
   });
   describe(Task.reject, () => {
     test('should construct a sync task', async () => {
       const task = Task.reject(anyError);
       await ExpectTask.toReject(task, anyError);
+    });
+    test('should reject void task', async () => {
+      const task = Task.reject();
+      assertType<typeof task, Task<never, void>>(true);
+      await ExpectTask.toReject(task, undefined);
     });
   });
   describe(Task.tryCall, () => {
