@@ -52,11 +52,14 @@ export namespace Result {
    * @example
    * ```typescript
    * Result.Ok('value');// { _: 'Ok', value: 'value'}
+   * Result.Ok();// { _: 'Ok', value: undefined }
    * ```
    * @category Constructor
    * @param resultValue - the success value
    */
-  export function Ok<V>(resultValue: V): Result<V, never> {
+  export function Ok(): Result<void, never>;
+  export function Ok<V>(resultValue: V): Result<V, never>;
+  export function Ok(resultValue?: unknown): Result<unknown, never> {
     return {
       _: Ok.typeName,
       value: resultValue,
@@ -79,11 +82,14 @@ export namespace Result {
    * @example
    * ```typescript
    * Result.Error(new Error('my message'));// { _: 'Error', error: Error}
+   * Result.Error();// { _: 'Error', value: undefined }
    * ```
    * @category Constructor
    * @param resultError - the failure value
    */
-  export function Error<E>(resultError: E): Result<never, E> {
+  export function Error(): Result<never, void>;
+  export function Error<E>(resultError: E): Result<never, E>;
+  export function Error(resultError?: unknown): Result<never, unknown> {
     return {
       _: Error.typeName,
       error: resultError,
