@@ -11,6 +11,7 @@ import { Task } from './task.js';
 const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
 const anyError = new Error('TestError');
+const anyCancelerRef = Ref(() => {});
 const waitMs = (ms: number) =>
   ms === 0
     ? Promise.resolve()
@@ -238,29 +239,27 @@ describe('Task', () => {
 
   describe(Task, () => {
     describe('sync', () => {
-      test('should construct a success sync task', async () => {
+      test('should construct a success sync task', () => {
         const task = Task(({ ok }) => ok('foo'));
-        expect(task).toEqual({
-          taskRun: expect.any(Function),
-        });
-
-        const ref = Ref(() => {});
         const resolve = jest.fn();
         const reject = jest.fn();
-        task.taskRun(resolve, reject, ref);
+        task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('foo');
       });
-      test('should construct a failure sync task', async () => {
-        const task = Task<never, 'err'>(({ error }) => error('err'));
-        expect(task).toEqual({
-          taskRun: expect.any(Function),
-        });
-
-        const ref = Ref(() => {});
+      test('should construct a void task', () => {
+        const task = Task(({ ok }) => ok());
         const resolve = jest.fn();
         const reject = jest.fn();
-        task.taskRun(resolve, reject, ref);
+        task.taskRun(resolve, reject, anyCancelerRef);
+        expect(resolve).toHaveBeenCalledTimes(1);
+        expect(resolve).toHaveBeenCalledWith(undefined);
+      });
+      test('should construct a failure sync task', async () => {
+        const task = Task<never, 'err'>(({ error }) => error('err'));
+        const resolve = jest.fn();
+        const reject = jest.fn();
+        task.taskRun(resolve, reject, anyCancelerRef);
         expect(reject).toHaveBeenCalledTimes(1);
         expect(reject).toHaveBeenCalledWith('err');
       });
@@ -279,16 +278,21 @@ describe('Task', () => {
     describe('async', () => {
       test('should construct an success async task', async () => {
         const task = Task(async ({ ok }) => ok('value'));
-        expect(task).toEqual({
-          taskRun: expect.any(Function),
-        });
-        const ref = Ref(() => {});
         const resolve = jest.fn();
         const reject = jest.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
-        await task.taskRun(resolve, reject, ref);
+        await task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('value');
+      });
+      test('should construct a void task', async () => {
+        const task = Task(async ({ ok }) => ok());
+        const resolve = jest.fn();
+        const reject = jest.fn();
+        // eslint-disable-next-line @typescript-eslint/await-thenable
+        await task.taskRun(resolve, reject, anyCancelerRef);
+        expect(resolve).toHaveBeenCalledTimes(1);
+        expect(resolve).toHaveBeenCalledWith(undefined);
       });
       test('should set default canceler if omitted', () => {
         const task = Task(async ({ ok }) => ok(undefined));
@@ -324,7 +328,7 @@ describe('Task', () => {
         const task = Task(async ({ ok, setCanceler }) => {
           setCanceler(canceler);
 
-          return ok(undefined);
+          return ok();
         });
         const ref = Ref(() => {});
 

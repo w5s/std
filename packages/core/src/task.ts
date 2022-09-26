@@ -34,7 +34,7 @@ export interface Task<Value, Error> {
  * ```typescript
  * const getTime = Task(({ ok }) => ok(Date.now()));
  * const fetchTask = (url: string) => Task(({ ok, error }) => fetch(url).then(ok, error));
- * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok(undefined)); }), ms));
+ * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok()); }), ms));
  * ```
  * @category Constructor
  * @param sideEffect - the effect function
@@ -44,11 +44,17 @@ export function Task<Value, Error = never>(
     /**
      * Return a new ok object
      */
-    ok: <VV>(value: VV) => Result<VV, never>;
+    ok: {
+      (): Result<void, never>;
+      <VV>(value: VV): Result<VV, never>;
+    };
     /**
-     * return a new error object
+     * Return a new error object
      */
-    error: <EE>(errorValue: EE) => Result<never, EE>;
+    error: {
+      (): Result<never, void>;
+      <EE>(errorValue: EE): Result<never, EE>;
+    };
     /**
      * Canceler setter
      */
@@ -592,10 +598,14 @@ export namespace Task {
 }
 
 // inline private constructors
-function resultOk<V>(value: V): Result<V, never> {
+function resultOk(): Result<void, never>;
+function resultOk<V>(value: V): Result<V, never>;
+function resultOk(value?: unknown): Result<unknown, never> {
   return { _: 'Ok', value };
 }
-function resultError<E>(error: E): Result<never, E> {
+function resultError(): Result<never, void>;
+function resultError<E>(error: E): Result<never, E>;
+function resultError(error?: unknown): Result<never, unknown> {
   return { _: 'Error', error };
 }
 function unsafeResultValue<V, E>(result: Result<V, E>) {
