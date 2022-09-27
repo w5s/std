@@ -1898,7 +1898,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/globals@npm:29.0.3, @jest/globals@npm:^29.0.3":
+"@jest/globals@npm:29.0.3, @jest/globals@npm:^29.0.3, @jest/globals@npm:latest":
   version: 29.0.3
   resolution: "@jest/globals@npm:29.0.3"
   dependencies:
@@ -4028,6 +4028,7 @@ __metadata:
     "@babel/core": 7.19.1
     "@babel/eslint-parser": 7.19.1
     "@commitlint/cli": 17.1.2
+    "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.0-alpha.14
     "@w5s/eslint-config": 1.0.0-alpha.33

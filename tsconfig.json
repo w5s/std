@@ -1,10 +1,4 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig.json",
   "extends": "./tsconfig.settings.json"
-  // This breaks vscode eslint fix
-  // "exclude": [
-  //   "**/*.test.*",
-  //   "**/*.spec.*",
-  //   "**/__tests__/**"
-  // ]
 }
