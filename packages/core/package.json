@@ -52,7 +52,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
-    "@jest/globals": "29.0.3"
+    "@jest/globals": "29.1.2"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"
