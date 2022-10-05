@@ -7,37 +7,12 @@ describe(Application, () => {
   const appId = () => `app-${appId.current++}`;
   appId.current = 0;
 
-  describe('Internal', () => {
-    const { state, defaultState, ref } = Application.Internal;
-    describe('state', () => {
-      test('should be a symbol', () => {
-        expect(typeof state).toBe('symbol');
-      });
-    });
-    describe('defaultState', () => {
-      test('should equal correct data', () => {
-        expect(defaultState).toEqual({
-          application: {},
-          status: {},
-          configuration: {},
-        });
-      });
-    });
-    describe('ref()', () => {
-      test('should have a current getter that defaults to Application.defaultState', () => {
-        const globalMock = {};
-        const _stateRef = ref(globalMock);
-        expect(_stateRef.current).toBe(defaultState);
-      });
-      test('should have a current setter that will set value', () => {
-        const globalMock = {};
-        const _stateRef = ref(globalMock);
-        const nextState = { ...defaultState };
-        _stateRef.current = nextState;
-        expect(_stateRef.current).toBe(nextState);
-      });
+  describe('state', () => {
+    test('should be a symbol', () => {
+      expect(typeof Application.state).toBe('symbol');
     });
   });
+
   describe('()', () => {
     const applicationDidChange = () => Task.resolve(undefined);
     const applicationStart = () => Task.resolve(undefined);
@@ -136,17 +111,20 @@ describe(Application, () => {
       const app = Application({
         applicationId: appId(),
         applicationStart: () =>
-          Task(({ ok }) => {
+          Task.wrap((resolve) => {
             expect(Application.get(app, 'foo')).toBe(true);
             run();
-            return ok();
+            setTimeout(resolve, 10);
           }),
         applicationDefault,
       });
       Application.set(app, 'foo', true);
-      await expect(Task.unsafeRunOk(Application.start(app))).resolves.toBe(undefined);
+      const startFirst = Task.unsafeRunOk(Application.start(app));
+      const startSecond = Task.unsafeRunOk(Application.start(app));
+
+      await expect(startFirst).resolves.toBe(undefined);
       expect(run).toHaveBeenCalledTimes(1);
-      await expect(Task.unsafeRunOk(Application.start(app))).resolves.toBe(undefined);
+      await expect(startSecond).resolves.toBe(undefined);
       expect(run).toHaveBeenCalledTimes(1);
     });
   });
