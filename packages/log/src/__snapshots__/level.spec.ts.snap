@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LogLevel Critical should have correct value: Critical 1`] = `
+{
+  "logLevel": 50,
+  "logLevelName": "Critical",
+}
+`;
+
+exports[`LogLevel Debug should have correct value: Debug 1`] = `
+{
+  "logLevel": 10,
+  "logLevelName": "Debug",
+}
+`;
+
+exports[`LogLevel Error should have correct value: Error 1`] = `
+{
+  "logLevel": 40,
+  "logLevelName": "Error",
+}
+`;
+
+exports[`LogLevel Info should have correct value: Info 1`] = `
+{
+  "logLevel": 20,
+  "logLevelName": "Info",
+}
+`;
+
+exports[`LogLevel Warning should have correct value: Warning 1`] = `
+{
+  "logLevel": 30,
+  "logLevelName": "Warning",
+}
+`;
