@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // List of all public exports
         'LogLevel',
+        'LogMessage',
         'default', // FIXME: no key exist in reality
       ].sort()
     );
