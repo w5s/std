@@ -40,10 +40,10 @@ describe(LogLevel, () => {
 
   describe(LogLevel.match, () => {
     test('should return undefined if empty cases', () => {
-      expect(LogLevel.match([])(LogLevel.Critical.logLevel)).toBe(undefined);
+      expect(LogLevel.match([])(LogLevel.Critical)).toBe(undefined);
     });
     test('should return default value if defined', () => {
-      expect(LogLevel.match([], 'defaultValue')(LogLevel.Critical.logLevel)).toBe('defaultValue');
+      expect(LogLevel.match([], 'defaultValue')(LogLevel.Critical)).toBe('defaultValue');
     });
     test('should return value if level exact value is found', () => {
       const matcherFunction = LogLevel.match([
@@ -51,7 +51,7 @@ describe(LogLevel, () => {
         [LogLevel.Error, 'bar'],
         [LogLevel.Critical, 'baz'],
       ]);
-      expect(matcherFunction(LogLevel.Error.logLevel)).toBe('bar');
+      expect(matcherFunction(LogLevel.Error)).toBe('bar');
     });
     test('should select first superior or equal matcher', () => {
       const matcherFunction = LogLevel.match([
@@ -60,9 +60,9 @@ describe(LogLevel, () => {
         [LogLevel.Critical, 'baz'],
       ]);
 
-      expect(matcherFunction(LogLevel.Error.logLevel)).toBe('bar');
-      expect(matcherFunction(LogLevel.Warning.logLevel)).toBe('foo');
-      expect(matcherFunction(LogLevel.Info.logLevel)).toBe(undefined);
+      expect(matcherFunction(LogLevel.Error)).toBe('bar');
+      expect(matcherFunction(LogLevel.Warning)).toBe('foo');
+      expect(matcherFunction(LogLevel.Info)).toBe(undefined);
     });
 
     test('should return defaultValue if no matcher is fulfilled', () => {
@@ -74,7 +74,7 @@ describe(LogLevel, () => {
         ],
         'defaultValue'
       );
-      expect(matcherFunction(LogLevel.Info.logLevel)).toBe('defaultValue');
+      expect(matcherFunction(LogLevel.Info)).toBe('defaultValue');
     });
   });
 });

@@ -99,12 +99,9 @@ export namespace LogLevel {
    *
    * @param matchers
    */
-  export function match<T>(matchers: [LogLevel, T][]): (anyLevelValue: LogLevel['logLevel']) => Option<T>;
-  export function match<T>(matchers: [LogLevel, T][], defaultValue: T): (anyLevelValue: LogLevel['logLevel']) => T;
-  export function match<T>(
-    matchers: [LogLevel, T][],
-    defaultValue?: T
-  ): (anyLevelValue: LogLevel['logLevel']) => Option<T> {
+  export function match<T>(matchers: [LogLevel, T][]): (anyLevel: LogLevel) => Option<T>;
+  export function match<T>(matchers: [LogLevel, T][], defaultValue: T): (anyLevel: LogLevel) => T;
+  export function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLevel) => Option<T> {
     const orderedMatchers = [...matchers];
     const level = 0;
     const returnValue = 1;
@@ -112,10 +109,10 @@ export namespace LogLevel {
 
     return orderedMatchers.length === 0
       ? () => defaultValue
-      : (anyLevelValue) =>
+      : (anyLevel) =>
           orderedMatchers.reduce(
             (acc, matcher) =>
-              compare(matcher[level], acc[level]) > 0 && anyLevelValue >= matcher[level].logLevel ? matcher : acc,
+              compare(matcher[level], acc[level]) > 0 && anyLevel.logLevel >= matcher[level].logLevel ? matcher : acc,
             first
           )[returnValue];
   }
