@@ -9,6 +9,7 @@ describe('index', () => {
         'LogLevel',
         'LogMessage',
         'LogRecord',
+        'LogHandler',
         'default', // FIXME: no key exist in reality
       ].sort()
     );
