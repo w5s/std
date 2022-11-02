@@ -14,7 +14,7 @@ export namespace LogHandler {
    * @example
    * ```ts
    * const handler: LogHandler;
-   * const filtered = LogHandler.filter((record) => )(handler);
+   * const filtered = LogHandler.filter(handler, (record) => record.logCategory === 'foo');
    * ```
    * @param handler - the handler function
    * @param predicate - the predicate applied on log record
