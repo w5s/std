@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core/lib/option.js';
+import type { Option } from '@w5s/core';
 
 export interface LogLevel {
   /**
