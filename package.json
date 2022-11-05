@@ -101,7 +101,7 @@
     "@commitlint/cli": "17.2.0",
     "@jest/globals": "latest",
     "@types/node": "17.0.45",
-    "@w5s/commitlint-config": "1.0.0-alpha.14",
+    "@w5s/commitlint-config": "1.0.0-alpha.15",
     "@w5s/eslint-config": "1.0.0-alpha.33",
     "@w5s/mrm-preset": "1.0.0-alpha.27",
     "@w5s/ts-config": "1.0.0-alpha.19",
