@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { ArgumentError, Result } from '@w5s/core';
 import { Currency } from './currency.js';
 import { Money } from './money.js';
@@ -24,7 +24,7 @@ describe(Money, () => {
   const EUR = (amount = anyAmount) => money(currencyEuro, amount);
   const USD = (amount = anyAmount) => money(currencyDollar, amount);
 
-  test('should initialize Money', () => {
+  it('should initialize Money', () => {
     expect(Money({ currency: anyCurrency, amount: anyAmount })).toEqual({
       _: 'Money',
       currency: anyCurrency,
@@ -33,7 +33,7 @@ describe(Money, () => {
   });
 
   describe('==', () => {
-    test.each([
+    it.each([
       [EUR(anyAmount), EUR(anyAmount), true],
       [EUR(anyAmount), EUR(anyAmount + 1), false],
       [EUR(anyAmount), USD(anyAmount), false],
@@ -42,7 +42,7 @@ describe(Money, () => {
     });
   });
   describe('+', () => {
-    test.each([
+    it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
       [EUR(1), EUR(2), Result.Ok(EUR(3))],
       [EUR(2), EUR(1), Result.Ok(EUR(3))],
@@ -51,7 +51,7 @@ describe(Money, () => {
     });
   });
   describe('-', () => {
-    test.each([
+    it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
       [EUR(2), EUR(1), Result.Ok(EUR(1))],
       [EUR(1), EUR(2), Result.Ok(EUR(-1))],

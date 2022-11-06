@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, lazy, option, dateISO, array, object } from './codec.js';
 
@@ -18,7 +18,7 @@ const underscoreString = Codec<string>({
 });
 describe(Codec, () => {
   describe(Codec.encode, () => {
-    test('should call codecEncode', () => {
+    it('should call codecEncode', () => {
       const codec = {
         codecEncode: (_: string) => `test_${_}`,
       };
@@ -26,7 +26,7 @@ describe(Codec, () => {
     });
   });
   describe(Codec.decode, () => {
-    test('should call codecEncode', () => {
+    it('should call codecEncode', () => {
       const codec = {
         codecDecode: (_: unknown) => Result.Ok(`test_${_}`),
       };
@@ -38,12 +38,12 @@ describe(Codec, () => {
 describe('boolean', () => {
   const subject = boolean;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       expect(Codec.schema(subject)).toEqual({ type: 'boolean' });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [true, true],
       [false, false],
     ])('should decode values', (input, expected) => {
@@ -51,7 +51,7 @@ describe('boolean', () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid boolean', input: undefined }))],
       [0, Result.Error(DecodeError({ message: '0 is not a valid boolean', input: 0 }))],
       [true, Result.Ok(true)],
@@ -64,12 +64,12 @@ describe('boolean', () => {
 describe('number', () => {
   const subject = number;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       expect(Codec.schema(subject)).toEqual({ type: 'number' });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [0, 0],
       [1, 1],
       [Number.NaN, Number.NaN],
@@ -78,7 +78,7 @@ describe('number', () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid number', input: undefined }))],
       [0, Result.Ok(0)],
       [true, Result.Error(DecodeError({ message: 'true is not a valid number', input: true }))],
@@ -90,12 +90,12 @@ describe('number', () => {
 describe('string', () => {
   const subject = string;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       expect(Codec.schema(subject)).toEqual({ type: 'string' });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       ['', ''],
       ['abc', 'abc'],
     ])('should decode values', (input, expected) => {
@@ -103,7 +103,7 @@ describe('string', () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid string', input: undefined }))],
       [0, Result.Error(DecodeError({ message: '0 is not a valid string', input: 0 }))],
       [true, Result.Error(DecodeError({ message: 'true is not a valid string', input: true }))],
@@ -123,19 +123,19 @@ describe(lazy, () => {
     });
 
   describe('.codecSchema', () => {
-    test('should forward schema', () => {
+    it('should forward schema', () => {
       const codec = subject(getCodec);
       expect(Codec.schema(codec)).toEqual({ type: 'string', format: 'test' });
     });
   });
   describe('.codecEncode', () => {
-    test('should forward encode', () => {
+    it('should forward encode', () => {
       const codec = subject(getCodec);
       expect(Codec.encode(codec, 'a')).toEqual('__a');
     });
   });
   describe('.codecDecode', () => {
-    test('should forward decode', () => {
+    it('should forward decode', () => {
       const codec = subject(getCodec);
       expect(Codec.decode(codec, '__a')).toEqual(Result.Ok('a'));
     });
@@ -145,13 +145,13 @@ describe(option, () => {
   const subject = option;
 
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       const optionalString = subject(underscoreString);
       expect(Codec.schema(optionalString)).toEqual({ type: 'string', format: 'custom_underscore' });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [undefined, null],
       ['', '_'],
       ['abc', '_abc'],
@@ -161,7 +161,7 @@ describe(option, () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [undefined, Result.Ok(undefined)],
       [null, Result.Ok(undefined)],
       ['_', Result.Ok('')],
@@ -175,13 +175,13 @@ describe(option, () => {
 describe(array, () => {
   const subject = array;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       const codec = subject(underscoreString);
       expect(Codec.schema(codec)).toEqual({ type: 'array', item: { type: 'string', format: 'custom_underscore' } });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [
         ['a', 'b', 'c'],
         ['_a', '_b', '_c'],
@@ -192,7 +192,7 @@ describe(array, () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [['_a', '_b', '_c'], Result.Ok(['a', 'b', 'c'])],
       [
         ['a', '_b', '_c'],
@@ -212,7 +212,7 @@ describe(array, () => {
 describe(object, () => {
   const subject = object;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       const codec = subject({ foo: underscoreString });
       expect(Codec.schema(codec)).toEqual({
         type: 'object',
@@ -227,7 +227,7 @@ describe(object, () => {
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [
         { foo: 'a', bar: 'b' },
         { foo: '_a', bar: '_b' },
@@ -241,7 +241,7 @@ describe(object, () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],
       [
         { foo: '' },
@@ -264,12 +264,12 @@ describe(object, () => {
 describe('dateISO', () => {
   const subject = dateISO;
   describe('.codecSchema', () => {
-    test('should return correct schema', () => {
+    it('should return correct schema', () => {
       expect(Codec.schema(subject)).toEqual({ type: 'string', format: 'date-time' });
     });
   });
   describe('.codecEncode', () => {
-    test.each([
+    it.each([
       [new Date(0), '1970-01-01T00:00:00.000Z'],
       [new Date('2022-08-01T20:14:09.721Z'), '2022-08-01T20:14:09.721Z'],
     ])('should encode values', (input, expected) => {
@@ -277,7 +277,7 @@ describe('dateISO', () => {
     });
   });
   describe('.codecDecode', () => {
-    test.each([
+    it.each([
       ['1970-01-01T00:00:00.000Z', Result.Ok(new Date(0))],
       ['2022-08-01T20:14:09.721Z', Result.Ok(new Date('2022-08-01T20:14:09.721Z'))],
       [

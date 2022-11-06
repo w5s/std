@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
@@ -27,17 +27,17 @@ describe('MySQL', () => {
     host: 'foo.com',
   };
 
-  test('should be registered as driver', () => {
+  it('should be registered as driver', () => {
     expect(DatabaseDriver.get('mysql')).toBe(MySQL);
   });
   describe('.adapter', () => {
-    test('should be "sqlite3"', () => {
+    it('should be "sqlite3"', () => {
       expect(MySQL.adapter).toBe('mysql');
     });
   });
 
   describe('.execute', () => {
-    test('should open connection', async () => {
+    it('should open connection', async () => {
       mockConnection();
       const client = {
         databaseType: 'mysql',
@@ -48,7 +48,7 @@ describe('MySQL', () => {
 
       expect(MySQL.createConnection).toHaveBeenLastCalledWith(client);
     });
-    test('should send query to connection', async () => {
+    it('should send query to connection', async () => {
       const query = jest.fn((_sql: string, _params: any, callback: (error: Error | null, result: number) => void) => {
         callback(null, 2);
       });
@@ -62,7 +62,7 @@ describe('MySQL', () => {
       expect(query).toHaveBeenLastCalledWith('SELECT author FROM books WHERE name=?', ['Toto'], expect.any(Function));
     });
 
-    test('should close connection', async () => {
+    it('should close connection', async () => {
       const end = jest.fn();
       mockConnection({
         end,
@@ -73,7 +73,7 @@ describe('MySQL', () => {
       expect(end).toHaveBeenCalledTimes(1);
     });
 
-    test('should close connection when callback error', async () => {
+    it('should close connection when callback error', async () => {
       const end = jest.fn();
       const query = jest.fn(
         (queryObject: mysql.Query, callback: (error: Error | null, result: number | null) => void) => {

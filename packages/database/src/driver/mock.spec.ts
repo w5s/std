@@ -1,4 +1,4 @@
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
@@ -6,16 +6,16 @@ import { Mock } from './mock.js';
 
 describe('Mock', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;
-  test('should be registered as driver', () => {
+  it('should be registered as driver', () => {
     expect(DatabaseDriver.get('mock')).toBe(Mock);
   });
   describe('.adapter', () => {
-    test('should be "mock"', () => {
+    it('should be "mock"', () => {
       expect(Mock.adapter).toBe('mock');
     });
   });
   describe('.execute', () => {
-    test('should use mockExecuteQuery function', async () => {
+    it('should use mockExecuteQuery function', async () => {
       const mockExecuteQuery = jest.fn(() => Promise.resolve('returnValue'));
       const mockClient = {
         databaseType: 'mock' as const,

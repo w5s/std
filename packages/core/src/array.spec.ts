@@ -1,4 +1,4 @@
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Array } from './array.js';
 import { Option } from './option.js';
 
@@ -28,7 +28,7 @@ describe('Array', () => {
   };
 
   describe(generate, () => {
-    test('should generate data for test cases', () => {
+    it('should generate data for test cases', () => {
       expect(
         generate({
           start: [undefined, 0, 1, -1],
@@ -103,88 +103,88 @@ describe('Array', () => {
     });
   });
   describe(Array.empty, () => {
-    test('should return an array with no element', () => {
+    it('should return an array with no element', () => {
       expect(Array.empty()).toEqual([]);
     });
-    test('should same instance', () => {
+    it('should same instance', () => {
       const empty = Array.empty();
       expect(Array.empty()).toBe(empty);
     });
   });
   describe(Array.generate, () => {
-    test('should return an empty iterable when 0', () => {
+    it('should return an empty iterable when 0', () => {
       expect(Array.generate(0, () => 'a')).toEqual([]);
     });
-    test('should use mapFn(index) to generate values', () => {
+    it('should use mapFn(index) to generate values', () => {
       expect(Array.generate(3, (_) => _)).toEqual([0, 1, 2]);
     });
   });
   describe(Array.of, () => {
-    test('should return empty array when no argument', () => {
+    it('should return empty array when no argument', () => {
       expect(Array.of()).toEqual([]);
     });
-    test('should return an array of items', () => {
+    it('should return an array of items', () => {
       expect(Array.of(1, 2, 3)).toEqual([1, 2, 3]);
     });
   });
   describe(Array.at, () => {
-    test('should return Option.None when index is not defined', () => {
+    it('should return Option.None when index is not defined', () => {
       expect(Array.at([1], 1)).toBe(Option.None);
     });
-    test('should return element at index', () => {
+    it('should return element at index', () => {
       expect(Array.at([1], 0)).toBe(1);
     });
-    test('should return last when negative', () => {
+    it('should return last when negative', () => {
       expect(Array.at([1, 2], -1)).toBe(2);
     });
   });
   describe(Array.size, () => {
-    test('should return 0 for empty array', () => {
+    it('should return 0 for empty array', () => {
       expect(Array.size([])).toBe(0);
     });
-    test('should return element at index', () => {
+    it('should return element at index', () => {
       expect(Array.size([1, 2, 3])).toBe(3);
     });
   });
   describe(Array.hasInstance, () => {
-    test('should return true for Array', () => {
+    it('should return true for Array', () => {
       expect(Array.hasInstance(Array.empty())).toEqual(true);
     });
-    test('should return false for any other value', () => {
+    it('should return false for any other value', () => {
       expect(Array.hasInstance(null)).toBe(false);
       expect(Array.hasInstance({ length: 0 })).toBe(false);
     });
   });
   describe(Array.isEmpty, () => {
-    test('should return true when array is empty', () => {
+    it('should return true when array is empty', () => {
       expect(Array.isEmpty([])).toEqual(true);
     });
-    test('should same instance', () => {
+    it('should same instance', () => {
       expect(Array.isEmpty([1])).toBe(false);
     });
   });
   describe(Array.map, () => {
-    test('should return unchanged if empty', () => {
+    it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.map(emptyArray, (_) => _ * 2)).toBe(emptyArray);
     });
-    test('should return same ref when no changed value', () => {
+    it('should return same ref when no changed value', () => {
       const array = [1, 2, 3];
       const identity = (_: number) => _;
       expect(Array.map(array, identity)).toBe(array);
     });
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
       const double = (_: number) => _ * 2;
       expect(Array.map(array, double)).toEqual(array.map(double));
     });
   });
   describe(Array.flatMap, () => {
-    test('should return unchanged if empty', () => {
+    it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.flatMap(emptyArray, (_) => [_ * 2, _ * 3])).toBe(emptyArray);
     });
-    test('should call with (item, index, array)', () => {
+    it('should call with (item, index, array)', () => {
       const array = ['a', 'b', 'c'];
       const mapFn = jest.fn(() => []);
       Array.flatMap(array, mapFn);
@@ -193,14 +193,14 @@ describe('Array', () => {
       expect(mapFn).toHaveBeenNthCalledWith(2, 'b', 1, array);
       expect(mapFn).toHaveBeenNthCalledWith(3, 'c', 2, array);
     });
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
       const mapFn = (_: number) => [_ * 2, _ * 3];
       expect(Array.flatMap(array, mapFn)).toEqual([2, 3, 4, 6, 6, 9]);
     });
   });
   describe(Array.reduce, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['foo', 'bar', 'baz'];
       const concat = (_: string, value: string) => `${_}:${value}`;
       jest.spyOn(array, 'reduce' as any);
@@ -210,7 +210,7 @@ describe('Array', () => {
     });
   });
   describe(Array.reduceRight, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['foo', 'bar', 'baz'];
       const concat = (_: string, value: string) => `${_}:${value}`;
       jest.spyOn(array, 'reduceRight' as any);
@@ -220,7 +220,7 @@ describe('Array', () => {
     });
   });
   describe(Array.find, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['a', 'b', 'c'];
       jest.spyOn(array, 'find' as any);
 
@@ -229,7 +229,7 @@ describe('Array', () => {
     });
   });
   describe(Array.findIndex, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['a', 'b', 'c'];
 
       expect(Array.findIndex(array, (_) => _ === 'a')).toEqual(0);
@@ -237,63 +237,63 @@ describe('Array', () => {
     });
   });
   describe(Array.indexOf, () => {
-    test('should return index of element', () => {
+    it('should return index of element', () => {
       const array = ['a', '', 'a', '', 'a'];
       expect(Array.indexOf(array, 'a', 1)).toEqual(2);
     });
-    test('should work with NaN', () => {
+    it('should work with NaN', () => {
       const array = ['a', Number.NaN, 'a', '', 'a'];
 
       expect(Array.indexOf(array, Number.NaN)).toEqual(1);
     });
-    test('should return Option.None when not found', () => {
+    it('should return Option.None when not found', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.indexOf(array, 'non_existent', 1)).toEqual(Option.None);
     });
   });
   describe(Array.lastIndexOf, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['a', '', 'a', '', 'a'];
 
       expect(Array.lastIndexOf(array, 'a', 1)).toEqual(0);
     });
-    test('should work with NaN', () => {
+    it('should work with NaN', () => {
       const array = ['a', Number.NaN, 'a', Number.NaN, 'a'];
 
       expect(Array.lastIndexOf(array, Number.NaN)).toEqual(3);
     });
-    test('should return Option.None when not found', () => {
+    it('should return Option.None when not found', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.lastIndexOf(array, 'non_existent', 1)).toEqual(Option.None);
     });
   });
   describe(Array.includes, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = ['a', '', 'a', '', 'a'];
 
       expect(Array.includes(array, 'a', 1)).toEqual(true);
       expect(Array.includes(array, 'absent')).toEqual(false);
     });
-    test('should work with NaN', () => {
+    it('should work with NaN', () => {
       const array = ['a', Number.NaN, 'a', '', 'a'];
 
       expect(Array.includes(array, Number.NaN)).toEqual(true);
     });
   });
   describe(Array.filter, () => {
-    test('should return unchanged if empty', () => {
+    it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.filter(emptyArray, () => true)).toBe(emptyArray);
     });
-    test('should return same array if no value changed', () => {
+    it('should return same array if no value changed', () => {
       const array = [1, 2, 3];
       expect(Array.filter(array, () => true)).toBe(array);
     });
-    test('should return empty() if always false', () => {
+    it('should return empty() if always false', () => {
       const array = [1, 2, 3];
       expect(Array.filter(array, () => false)).toBe(Array.empty());
     });
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
 
       const minOne = (_: number) => _ > 1;
@@ -301,7 +301,7 @@ describe('Array', () => {
     });
   });
   describe(Array.some, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
       jest.spyOn(array, 'some' as any);
 
@@ -312,7 +312,7 @@ describe('Array', () => {
     });
   });
   describe(Array.every, () => {
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
       jest.spyOn(array, 'every' as any);
 
@@ -323,38 +323,38 @@ describe('Array', () => {
     });
   });
   describe(Array.concat, () => {
-    test('should return unchanged if no extension is passed', () => {
+    it('should return unchanged if no extension is passed', () => {
       const array = [1, 2, 3];
       expect(Array.concat(array)).toBe(array);
     });
-    test('should append values', () => {
+    it('should append values', () => {
       expect(Array.concat([1, 2], [3, 4], [5, 6])).toEqual([1, 2, 3, 4, 5, 6]);
     });
-    test('should return same array when no changes', () => {
+    it('should return same array when no changes', () => {
       const array = [1, 2];
       expect(Array.concat(array, [])).toBe(array);
     });
   });
   describe(Array.reverse, () => {
-    test('should return unchanged if empty', () => {
+    it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.reverse(emptyArray)).toBe(emptyArray);
     });
-    test('should return same array if no value changed', () => {
+    it('should return same array if no value changed', () => {
       const array = [1, 2, 1];
       expect(Array.reverse(array)).toBe(array);
     });
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [1, 2, 3];
       expect(Array.reverse(array)).toEqual(array.slice().reverse());
     });
   });
   describe(Array.sort, () => {
-    test('should return unchanged if empty', () => {
+    it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.sort(emptyArray, (left, right) => left - right)).toBe(emptyArray);
     });
-    test('should map each value to callback', () => {
+    it('should map each value to callback', () => {
       const array = [11, 4, 6, 2];
 
       expect(Array.sort(array, (left, right) => left - right)).toEqual([2, 4, 6, 11]);
@@ -363,16 +363,16 @@ describe('Array', () => {
   describe(Array.slice, () => {
     const anyArray = [11, 4, 6, 2];
 
-    test('should return unchanged when empty', () => {
+    it('should return unchanged when empty', () => {
       const empty = Array.empty();
       expect(Array.slice(empty, 0, 1)).toBe(empty);
     });
-    test('should return empty if start >= end', () => {
+    it('should return empty if start >= end', () => {
       expect(Array.slice([1, 2, 3], 1, 1)).toBe(Array.empty());
       expect(Array.slice([1, 2, 3], 0, 0)).toBe(Array.empty());
       expect(Array.slice([1, 2, 3], 1, 0)).toBe(Array.empty());
     });
-    test.each(
+    it.each(
       generate({
         start: [undefined, 0],
         end: [undefined, anyArray.length, anyArray.length + 1],
@@ -381,7 +381,7 @@ describe('Array', () => {
       expect(Array.slice(anyArray, start, end)).toBe(anyArray);
     });
 
-    test.each(
+    it.each(
       generate({
         start: [undefined, 0, 1, -1],
         end: [undefined, -1, 1, anyArray.length - 1, anyArray.length, anyArray.length + 1],
@@ -391,41 +391,41 @@ describe('Array', () => {
     });
   });
   describe(Array.deleteAt, () => {
-    test('should return unchanged when empty', () => {
+    it('should return unchanged when empty', () => {
       const empty = Array.empty();
       expect(Array.deleteAt(empty, 1)).toBe(empty);
     });
-    test('should return empty() when only one element is removed', () => {
+    it('should return empty() when only one element is removed', () => {
       const array = [1];
       expect(Array.deleteAt(array, 0)).toBe(Array.empty());
     });
-    test('should return unchanged when index is < 0', () => {
+    it('should return unchanged when index is < 0', () => {
       const array = [1, 2, 3];
       expect(Array.deleteAt(array, -1)).toBe(array);
     });
-    test('should return unchanged when index is >= array length', () => {
+    it('should return unchanged when index is >= array length', () => {
       const array = [1, 2, 3];
       expect(Array.deleteAt(array, 3)).toBe(array);
     });
-    test('should return new array without element', () => {
+    it('should return new array without element', () => {
       const array = [1, 2, 3, 4, 5];
       expect(Array.deleteAt(array, 2)).toEqual([1, 2, 4, 5]);
     });
   });
   describe(Array.insertAt, () => {
-    test('should return a new array', () => {
+    it('should return a new array', () => {
       const array = Array.empty<string>();
       expect(Array.insertAt(array, 0, '$')).toEqual(['$']);
     });
-    test('should return unchanged when index < 0', () => {
+    it('should return unchanged when index < 0', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.insertAt(array, -1, '$')).toBe(array);
     });
-    test('should return unchanged when index > array.length', () => {
+    it('should return unchanged when index > array.length', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.insertAt(array, array.length + 1, '$')).toBe(array);
     });
-    test('should return new array', () => {
+    it('should return new array', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.insertAt(array, 0, '$')).toEqual(['$', 'a', 'b', 'c']);
       expect(Array.insertAt(array, 1, '$')).toEqual(['a', '$', 'b', 'c']);
@@ -434,19 +434,19 @@ describe('Array', () => {
     });
   });
   describe(Array.updateAt, () => {
-    test('should return unchanged when index < 0', () => {
+    it('should return unchanged when index < 0', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.updateAt(array, -1, '$')).toBe(array);
     });
-    test('should return unchanged when index > array.length', () => {
+    it('should return unchanged when index > array.length', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.updateAt(array, array.length + 1, '$')).toBe(array);
     });
-    test('should return unchanged when value is strict equal', () => {
+    it('should return unchanged when value is strict equal', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.updateAt(array, 1, 'b')).toBe(array);
     });
-    test('should return new array', () => {
+    it('should return new array', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.updateAt(array, 0, '$')).toEqual(['$', 'b', 'c']);
       expect(Array.updateAt(array, 1, '$')).toEqual(['a', '$', 'c']);

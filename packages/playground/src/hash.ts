@@ -82,21 +82,26 @@ export namespace Hash {
    */
   export function from(anyValue: undefined | null | boolean | number | string): Value {
     switch (typeof anyValue) {
-      case 'boolean':
+      case 'boolean': {
         return anyValue ? TRUE : FALSE;
-      case 'number':
+      }
+      case 'number': {
         return hashNumber(anyValue);
-      case 'undefined':
+      }
+      case 'undefined': {
         return UNDEFINED;
-      case 'string':
+      }
+      case 'string': {
         return hashString(anyValue);
-      default:
+      }
+      default: {
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (anyValue === null) {
           return NULL;
         }
 
         return ZERO;
+      }
     }
   }
 }

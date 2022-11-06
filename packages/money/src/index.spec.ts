@@ -1,9 +1,9 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import currencyData from 'currencies.json';
 import * as Module from './index.js';
 
 describe('module public API', () => {
-  test('should return correct values', () => {
+  it('should return correct values', () => {
     expect(Module).toEqual(
       expect.objectContaining({
         Currency: expect.any(Function),
@@ -12,7 +12,7 @@ describe('module public API', () => {
       })
     );
   });
-  test.each(currencyData.currencies.map((_) => _.code))('%s() should be a function', (factoryName) => {
+  it.each(currencyData.currencies.map((_) => _.code))('%s() should be a function', (factoryName) => {
     const factory: typeof Module['EUR'] | undefined = Module[factoryName as 'EUR'];
     expect(factory).toEqual(expect.any(Function));
   });

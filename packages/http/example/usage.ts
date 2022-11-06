@@ -11,14 +11,18 @@ export function program() {
   const log = Task.andThen(task, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
-      case HTTPError.InvalidURL.errorName:
+      case HTTPError.InvalidURL.errorName: {
         return Console.error(`A wrong url was passed. Got ${error.input}`);
-      case HTTPError.NetworkError.errorName:
+      }
+      case HTTPError.NetworkError.errorName: {
         return Console.error('A network error occurred');
-      case HTTPError.ParserError.errorName:
+      }
+      case HTTPError.ParserError.errorName: {
         return Console.error('A parser error occurred');
-      default:
+      }
+      default: {
         return assertNever(error);
+      }
     }
   });
 

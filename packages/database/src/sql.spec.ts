@@ -1,15 +1,15 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { sql, SQLStatement } from './sql.js';
 
 describe(SQLStatement, () => {
-  test('should empty statement', () => {
+  it('should empty statement', () => {
     expect(SQLStatement({})).toEqual({
       _: 'SQLStatement',
       strings: [''],
       values: [],
     });
   });
-  test('should return new SQLStatement struct', () => {
+  it('should return new SQLStatement struct', () => {
     expect(
       SQLStatement({
         strings: ['foo', 'bar'],
@@ -21,7 +21,7 @@ describe(SQLStatement, () => {
       values: [123],
     });
   });
-  test('should append empty strings until values.length=1', () => {
+  it('should append empty strings until values.length=1', () => {
     expect(
       SQLStatement({
         strings: ['foo'],
@@ -35,7 +35,7 @@ describe(SQLStatement, () => {
   });
 
   describe(SQLStatement.concat, () => {
-    test('should concat two values', () => {
+    it('should concat two values', () => {
       expect(
         SQLStatement.concat(
           SQLStatement({
@@ -60,7 +60,7 @@ describe(SQLStatement, () => {
   });
 
   describe(SQLStatement.format, () => {
-    test('should return a formatted string', () =>
+    it('should return a formatted string', () =>
       expect(
         SQLStatement.format(sql`SELECT ${'foo'}`, {
           formatString: (str) => `_:${str}`,
@@ -70,21 +70,21 @@ describe(SQLStatement, () => {
   });
 
   describe(sql, () => {
-    test('should return empty string', () => {
+    it('should return empty string', () => {
       expect(sql``).toEqual(
         SQLStatement({
           strings: [''],
         })
       );
     });
-    test('should return interpolated string', () => {
+    it('should return interpolated string', () => {
       expect(sql`SELECT * FROM foo`).toEqual(
         SQLStatement({
           strings: ['SELECT * FROM foo'],
         })
       );
     });
-    test('should add values', () => {
+    it('should add values', () => {
       expect(sql`SELECT * FROM foo ${'bar'} ${'baz'}`).toEqual(
         SQLStatement({
           strings: ['SELECT * FROM foo ', ' ', ''],
@@ -92,7 +92,7 @@ describe(SQLStatement, () => {
         })
       );
     });
-    test('should concat nested statements', () => {
+    it('should concat nested statements', () => {
       expect(sql`SELECT * FROM ${sql`foo WHERE ${'bar'}`} ${'baz'}`).toEqual(
         SQLStatement({
           strings: ['SELECT * FROM foo WHERE ', ' ', ''],
@@ -102,7 +102,7 @@ describe(SQLStatement, () => {
     });
 
     describe(sql.raw, () => {
-      test('should return statement', () => {
+      it('should return statement', () => {
         expect(sql.raw('foo')).toEqual(
           SQLStatement({
             strings: ['foo'],

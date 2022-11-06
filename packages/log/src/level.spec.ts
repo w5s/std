@@ -1,19 +1,19 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { LogLevel } from './level.js';
 
 describe(LogLevel, () => {
   describe('()', () => {
-    test('should return a new object', () => {
+    it('should return a new object', () => {
       expect(LogLevel('Test', 3)).toEqual({ logLevelName: 'Test', logLevel: 3 });
     });
   });
   describe.each(['Critical', 'Error', 'Warning', 'Info', 'Debug'] as const)('%s', (name) => {
-    test('should have correct value', () => {
+    it('should have correct value', () => {
       expect(LogLevel[name]).toMatchSnapshot(name);
     });
   });
   describe(LogLevel.value, () => {
-    test.each([
+    it.each([
       [LogLevel.Critical, 50],
       [LogLevel.Error, 40],
       [LogLevel.Warning, 30],
@@ -25,27 +25,27 @@ describe(LogLevel, () => {
   });
 
   describe(LogLevel.compare, () => {
-    test('should return 1 if superior', () => {
+    it('should return 1 if superior', () => {
       expect(LogLevel.compare(LogLevel.Error, LogLevel.Warning)).toBe(1);
     });
 
-    test('should return 0 if equal', () => {
+    it('should return 0 if equal', () => {
       expect(LogLevel.compare(LogLevel.Error, LogLevel.Error)).toBe(0);
     });
 
-    test('should return -1 if inferior', () => {
+    it('should return -1 if inferior', () => {
       expect(LogLevel.compare(LogLevel.Warning, LogLevel.Error)).toBe(-1);
     });
   });
 
   describe(LogLevel.match, () => {
-    test('should return undefined if empty cases', () => {
+    it('should return undefined if empty cases', () => {
       expect(LogLevel.match([])(LogLevel.Critical)).toBe(undefined);
     });
-    test('should return default value if defined', () => {
+    it('should return default value if defined', () => {
       expect(LogLevel.match([], 'defaultValue')(LogLevel.Critical)).toBe('defaultValue');
     });
-    test('should return value if level exact value is found', () => {
+    it('should return value if level exact value is found', () => {
       const matcherFunction = LogLevel.match([
         [LogLevel.Warning, 'foo'],
         [LogLevel.Error, 'bar'],
@@ -53,7 +53,7 @@ describe(LogLevel, () => {
       ]);
       expect(matcherFunction(LogLevel.Error)).toBe('bar');
     });
-    test('should select first superior or equal matcher', () => {
+    it('should select first superior or equal matcher', () => {
       const matcherFunction = LogLevel.match([
         [LogLevel.Warning, 'foo'],
         [LogLevel.Error, 'bar'],
@@ -65,7 +65,7 @@ describe(LogLevel, () => {
       expect(matcherFunction(LogLevel.Info)).toBe(undefined);
     });
 
-    test('should return defaultValue if no matcher is fulfilled', () => {
+    it('should return defaultValue if no matcher is fulfilled', () => {
       const matcherFunction = LogLevel.match(
         [
           [LogLevel.Warning, 'foo'],

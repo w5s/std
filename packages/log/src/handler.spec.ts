@@ -1,4 +1,4 @@
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Task } from '@w5s/core';
 import { UUID } from '@w5s/uuid';
 import { LogHandler } from './handler.js';
@@ -8,7 +8,7 @@ import { generateTime } from './__stub__.js';
 
 describe('LogHandler', () => {
   describe(LogHandler.filter, () => {
-    test('should filter input', async () => {
+    it('should filter input', async () => {
       const handler = jest.fn(() => Task.resolve());
       const filtered = LogHandler.filter(handler, (record) => record.logCategory === 'foo');
       const defaultProps = LogRecord({

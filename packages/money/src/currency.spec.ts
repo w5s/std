@@ -1,4 +1,4 @@
-import { describe, expect, test } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { Int } from '@w5s/core';
 import { Currency } from './currency.js';
 
@@ -17,14 +17,14 @@ describe('Currency', () => {
     const { [name]: _, ...rest } = parameters;
     return rest;
   };
-  test('should initialize Currency', () => {
+  it('should initialize Currency', () => {
     expect(Currency(anyProperties)).toEqual({
       _: 'Currency',
       ...anyProperties,
     });
   });
 
-  test('should have default rounding', () => {
+  it('should have default rounding', () => {
     const parameters = omitProperty(anyProperties, 'rounding');
     expect(Currency(parameters)).toEqual(
       Currency({
@@ -33,7 +33,7 @@ describe('Currency', () => {
       })
     );
   });
-  test('should have default precision', () => {
+  it('should have default precision', () => {
     const parameters = omitProperty(anyProperties, 'precision');
 
     expect(Currency(parameters)).toEqual(
@@ -43,7 +43,7 @@ describe('Currency', () => {
       })
     );
   });
-  test('should have default symbolNative to symbol', () => {
+  it('should have default symbolNative to symbol', () => {
     const parameters = omitProperty(anyProperties, 'symbolNative');
     const symbol = 'A';
 
@@ -55,7 +55,7 @@ describe('Currency', () => {
       })
     );
   });
-  test('should have default namePlural to name', () => {
+  it('should have default namePlural to name', () => {
     const parameters = omitProperty(anyProperties, 'namePlural');
     const name = 'Name test';
 
@@ -69,12 +69,12 @@ describe('Currency', () => {
   });
 
   describe('==', () => {
-    test('should return false by default', () => {
+    it('should return false by default', () => {
       const left = Currency({ ...anyProperties, code: 'A' });
       const right = Currency({ ...anyProperties, code: 'B' });
       expect(Currency['=='](left, right)).toBe(false);
     });
-    test('should return true if code are the same', () => {
+    it('should return true if code are the same', () => {
       const left = Currency({ ...anyProperties, code: 'A' });
       const right = Currency({ ...anyProperties, code: 'A' });
       expect(Currency['=='](left, right)).toBe(true);
