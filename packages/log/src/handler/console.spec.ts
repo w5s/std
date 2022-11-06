@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Task } from '@w5s/core';
 import { LogLevel } from '../level.js';
 import { LogMessage } from '../message.js';
@@ -15,27 +15,27 @@ describe('.ConsoleHandler', () => {
   jest.spyOn(console, 'warn').mockImplementation(noop);
   jest.spyOn(console, 'error').mockImplementation(noop);
 
-  test('should send to console.debug when level=LogLevel.Debug', async () => {
+  it('should send to console.debug when level=LogLevel.Debug', async () => {
     await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Debug, logMessage: ['test'] })));
     expect(console.debug).toHaveBeenLastCalledWith('test');
   });
 
-  test('should send to console.info when level=LogLevel.Info', async () => {
+  it('should send to console.info when level=LogLevel.Info', async () => {
     await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Info, logMessage: ['test'] })));
     expect(console.info).toHaveBeenLastCalledWith('test');
   });
 
-  test('should send to console.warn when level=LogLevel.Warning', async () => {
+  it('should send to console.warn when level=LogLevel.Warning', async () => {
     await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Warning, logMessage: ['test'] })));
     expect(console.warn).toHaveBeenLastCalledWith('test');
   });
 
-  test('should send to console.warn when level=LogLevel.Error', async () => {
+  it('should send to console.warn when level=LogLevel.Error', async () => {
     await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Error, logMessage: ['test'] })));
     expect(console.error).toHaveBeenLastCalledWith('test');
   });
 
-  test('should format logCategory and logMessage correctly', async () => {
+  it('should format logCategory and logMessage correctly', async () => {
     await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({
@@ -48,7 +48,7 @@ describe('.ConsoleHandler', () => {
     expect(console.debug).toHaveBeenLastCalledWith('[logCategory]', 'message', 'bar');
   });
 
-  test('should not add logCategory if empty', async () => {
+  it('should not add logCategory if empty', async () => {
     await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({

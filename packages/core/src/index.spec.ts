@@ -1,8 +1,8 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import * as Std from './index.js';
 
 describe('index', () => {
-  test('exports', () => {
+  it('exports', () => {
     expect(Object.keys(Std).sort()).toEqual(
       [
         'Math',

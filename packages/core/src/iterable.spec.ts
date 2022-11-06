@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { Iterable } from './iterable.js';
 
 describe(Iterable, () => {
@@ -17,46 +17,46 @@ describe(Iterable, () => {
   }
 
   describe(Iterable.of, () => {
-    test('should return an empty iterable when 0', () => {
+    it('should return an empty iterable when 0', () => {
       expectIterable(Iterable.of()).toHaveValues([]);
     });
-    test('should use mapFn(index) to generate values', () => {
+    it('should use mapFn(index) to generate values', () => {
       expectIterable(Iterable.of(1, 2, 3)).toHaveValues([1, 2, 3]);
     });
   });
 
   describe(Iterable.generate, () => {
-    test('should return an empty iterable when 0', () => {
+    it('should return an empty iterable when 0', () => {
       expectIterable(Iterable.generate(0, () => 'a')).toHaveValues([]);
     });
-    test('should use mapFn(index) to generate values', () => {
+    it('should use mapFn(index) to generate values', () => {
       expectIterable(Iterable.generate(3, (_) => _)).toHaveValues([0, 1, 2]);
     });
-    test('should be idempotent', () => {
+    it('should be idempotent', () => {
       expectIterable(Iterable.generate(3, (_) => _)).toBeIdemPotent();
     });
   });
 
   describe(Iterable.filter, () => {
-    test('should return a filtered iterator', () => {
+    it('should return a filtered iterator', () => {
       const source = iteratorOf(1, 3, 2);
       expectIterable(Iterable.filter(source, (value) => value >= 2)).toHaveValues([3, 2]);
     });
-    test('should be idempotent', () => {
+    it('should be idempotent', () => {
       const source = iteratorOf(1, 3, 2);
       expectIterable(Iterable.filter(source, (value) => value >= 2)).toBeIdemPotent();
     });
   });
 
   describe(Iterable.map, () => {
-    test('should return a mapped iterator', () => {
+    it('should return a mapped iterator', () => {
       const source = iteratorOf(1, 3, 2);
       expectIterable(Iterable.map(source, (value) => value * 2)).toHaveValues([2, 6, 4]);
     });
   });
 
   describe(Iterable.reduce, () => {
-    test('should return reduce for each value using initialValue', () => {
+    it('should return reduce for each value using initialValue', () => {
       const source = iteratorOf(1, 3, 2);
 
       expect(Iterable.reduce(source, (acc, value) => acc + String(value), '')).toEqual('132');
@@ -64,36 +64,36 @@ describe(Iterable, () => {
   });
 
   describe(Iterable.empty, () => {
-    test('should return empty', () => {
+    it('should return empty', () => {
       expectIterable(Iterable.empty()).toHaveValues([]);
     });
   });
 
   describe(Iterable.range, () => {
-    test('should return a range of number', () => {
+    it('should return a range of number', () => {
       expectIterable(Iterable.range(1, 4)).toHaveValues([1, 2, 3]);
     });
 
-    test('should use step', () => {
+    it('should use step', () => {
       expectIterable(Iterable.range(1, 6, 2)).toHaveValues([1, 3, 5]);
     });
-    test('should handle reversed range', () => {
+    it('should handle reversed range', () => {
       expectIterable(Iterable.range(6, 1, 2)).toHaveValues([6, 4, 2]);
     });
   });
 
   describe(Iterable.zip, () => {
-    test('should return have size of left when size(left) < size(right)', () => {
+    it('should return have size of left when size(left) < size(right)', () => {
       const source = iteratorOf(1);
 
       expectIterable(Iterable.zip(source, iteratorOf('a', 'b', 'c'))).toHaveValues([[1, 'a']]);
     });
-    test('should return have size of right when size(left) > size(right)', () => {
+    it('should return have size of right when size(left) > size(right)', () => {
       const source = iteratorOf(1, 2, 3);
 
       expectIterable(Iterable.zip(source, iteratorOf('a'))).toHaveValues([[1, 'a']]);
     });
-    test('should return an iterable of tuples', () => {
+    it('should return an iterable of tuples', () => {
       const source = iteratorOf(1, 2, 3);
 
       expectIterable(Iterable.zip(source, iteratorOf('a', 'b', 'c'))).toHaveValues([

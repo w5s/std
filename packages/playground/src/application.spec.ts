@@ -1,4 +1,4 @@
-import { describe, expect, test, jest } from '@jest/globals';
+import { describe, expect, it, jest } from '@jest/globals';
 import { Task } from '@w5s/core';
 import { Application } from './application.js';
 
@@ -8,7 +8,7 @@ describe(Application, () => {
   appId.current = 0;
 
   describe('state', () => {
-    test('should be a symbol', () => {
+    it('should be a symbol', () => {
       expect(typeof Application.state).toBe('symbol');
     });
   });
@@ -17,7 +17,7 @@ describe(Application, () => {
     const applicationDidChange = () => Task.resolve(undefined);
     const applicationStart = () => Task.resolve(undefined);
     const applicationDefault = { foo: true };
-    test('should return a new application', () => {
+    it('should return a new application', () => {
       const applicationId = appId();
 
       expect(
@@ -34,7 +34,7 @@ describe(Application, () => {
         applicationDidChange,
       });
     });
-    test('should have default applicationDidChange', () => {
+    it('should have default applicationDidChange', () => {
       const applicationId = appId();
       const app = Application({
         applicationId,
@@ -44,7 +44,7 @@ describe(Application, () => {
       const task = app.applicationDidChange(applicationDefault, applicationDefault);
       expect(Task.unsafeRunOk(task)).toEqual(undefined);
     });
-    test('should have default applicationStart', () => {
+    it('should have default applicationStart', () => {
       const applicationId = appId();
       const app = Application({
         applicationId,
@@ -65,7 +65,7 @@ describe(Application, () => {
       bar: 1,
     };
     const applicationStart = () => Task.resolve(undefined);
-    test('should return default value', async () => {
+    it('should return default value', async () => {
       const app = Application({
         applicationId: appId(),
         applicationStart,
@@ -73,7 +73,7 @@ describe(Application, () => {
       });
       expect(Application.get(app, 'foo')).toBe(true);
     });
-    test('should run applicationDidChange task', () =>
+    it('should run applicationDidChange task', () =>
       new Promise((resolve) => {
         const app = Application({
           applicationId: appId(),
@@ -82,7 +82,7 @@ describe(Application, () => {
         });
         Application.set(app, 'foo', false);
       }));
-    test('should return state value if present', () =>
+    it('should return state value if present', () =>
       new Promise((resolve) => {
         const app = Application({
           applicationId: appId(),
@@ -106,7 +106,7 @@ describe(Application, () => {
       foo: false,
     };
 
-    test('should run start task once', async () => {
+    it('should run start task once', async () => {
       const run = jest.fn();
       const app = Application({
         applicationId: appId(),

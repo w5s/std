@@ -19,17 +19,22 @@ function main() {
     (_) =>
       Task.orElse(_, (error) => {
         switch (error.name) {
-          case TimeoutError.errorName:
+          case TimeoutError.errorName: {
             return Console.error(`TimeoutError:${error.message}`);
-          case HTTPError.InvalidURL.errorName:
+          }
+          case HTTPError.InvalidURL.errorName: {
             return Console.error(`InvalidURLError:${error.message}`);
-          case HTTPError.NetworkError.errorName:
+          }
+          case HTTPError.NetworkError.errorName: {
             return Console.error(`NetworkError:${error.message}`);
-          case HTTPError.ParserError.errorName:
+          }
+          case HTTPError.ParserError.errorName: {
             return Console.error(`ParserError:${error.message}`);
-          default:
+          }
+          default: {
             // return Console.error(`Unknown Error:${error.message}`);
             return assertNever(error);
+          }
         }
       })
   );

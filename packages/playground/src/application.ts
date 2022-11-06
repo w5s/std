@@ -315,8 +315,9 @@ export namespace Application {
             case ApplicationStatus.Started: {
               return resolveTask();
             }
-            default:
+            default: {
               throw new ReferenceError('NeverError');
+            }
           }
         });
       },

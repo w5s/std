@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { DataObject } from './dataObject.js';
 
 describe('DataObject', () => {
@@ -13,27 +13,27 @@ describe('DataObject', () => {
         (email: string): Test =>
           create({ email })
     );
-    test('should create a new constructor', () => {
+    it('should create a new constructor', () => {
       expect(Test('foo@bar.com')).toEqual({
         _: 'Test',
         email: 'foo@bar.com',
       });
     });
     describe('typeName', () => {
-      test('should set typeName', () => {
+      it('should set typeName', () => {
         expect(Test.typeName).toBe('Test');
       });
     });
     describe(Test.create, () => {
-      test('should return false for instance', () => {
+      it('should return false for instance', () => {
         expect(Test.create({ email: 'foo@bar.com' })).toEqual({ _: 'Test', email: 'foo@bar.com' });
       });
     });
     describe(Test.hasInstance, () => {
-      test.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(Test.hasInstance(value)).toBe(false);
       });
-      test('should return false for instance', () => {
+      it('should return false for instance', () => {
         expect(Test.hasInstance(Test(''))).toBe(true);
       });
     });
@@ -41,22 +41,22 @@ describe('DataObject', () => {
   describe(DataObject.Make, () => {
     type Test = DataObject<{ _: 'Test'; email: string }>;
     const Test = DataObject.Make<Test>('Test');
-    test('should create a new constructor', () => {
+    it('should create a new constructor', () => {
       expect(Test({ email: 'foo@bar.com' })).toEqual({
         _: 'Test',
         email: 'foo@bar.com',
       });
     });
     describe('[DataObject.type]', () => {
-      test('should set [DataObject.type]:', () => {
+      it('should set [DataObject.type]:', () => {
         expect(Test.typeName).toBe('Test');
       });
     });
     describe(Test.hasInstance, () => {
-      test.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(Test.hasInstance(value)).toBe(false);
       });
-      test('should return true for instance', () => {
+      it('should return true for instance', () => {
         expect(Test.hasInstance(Test({ email: '' }))).toBe(true);
       });
     });

@@ -1,8 +1,8 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { HTTPError } from './error.js';
 
 describe(HTTPError.InvalidURL, () => {
-  test('should constructor new error', () => {
+  it('should constructor new error', () => {
     expect(HTTPError.InvalidURL({ message: 'test', input: 'abc' })).toEqual(
       expect.objectContaining({
         _: 'DataError',
@@ -14,7 +14,7 @@ describe(HTTPError.InvalidURL, () => {
   });
 });
 describe(HTTPError.NetworkError, () => {
-  test('should constructor new error', () => {
+  it('should constructor new error', () => {
     expect(HTTPError.NetworkError({ message: 'test' })).toEqual(
       expect.objectContaining({
         _: 'DataError',
@@ -25,7 +25,7 @@ describe(HTTPError.NetworkError, () => {
   });
 });
 describe(HTTPError.ParserError, () => {
-  test('should constructor new error', () => {
+  it('should constructor new error', () => {
     expect(HTTPError.ParserError({ message: 'test' })).toEqual(
       expect.objectContaining({
         _: 'DataError',

@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { Time } from '@w5s/core';
 import { UUID } from '@w5s/uuid';
 import { LogRecord } from './record.js';
@@ -7,7 +7,7 @@ import { LogMessage } from './message.js';
 
 describe(LogRecord, () => {
   describe('()', () => {
-    test('should return a new message', () => {
+    it('should return a new message', () => {
       expect(
         LogRecord({
           logId: UUID.empty(),

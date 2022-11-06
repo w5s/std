@@ -1,8 +1,8 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { Tag } from './type.js';
 
 describe('type', () => {
-  test('Tag<T, { tag1: ... }>', () => {
+  it('Tag<T, { tag1: ... }>', () => {
     expect(true).toBe(true);
 
     type PositiveNumber = Tag<number, { positive: true }>;

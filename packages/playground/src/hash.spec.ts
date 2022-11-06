@@ -1,4 +1,4 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { Int } from '@w5s/core/lib/integer.js';
 import { Hash } from './hash.js';
 
@@ -6,19 +6,19 @@ describe(`Hash`, () => {
   describe(Hash.from, () => {
     // compliant with https://github.com/immutable-js/immutable-js/blob/master/__tests__/hash.ts
 
-    test('for true', () => {
+    it('for true', () => {
       expect(Hash.from(true)).toBe(0x42_10_84_21);
     });
-    test('for false', () => {
+    it('for false', () => {
       expect(Hash.from(false)).toBe(0x42_10_84_20);
     });
-    test('for undefined', () => {
+    it('for undefined', () => {
       expect(Hash.from(undefined)).toBe(0x42_10_84_23);
     });
-    test('for null', () => {
+    it('for null', () => {
       expect(Hash.from(null)).toBe(0x42_10_84_22);
     });
-    test('for number', () => {
+    it('for number', () => {
       expect(Hash.from(0)).toBe(0);
       expect(Hash.from(123)).toBe(123);
       expect(Hash.from(-1)).toBe(-1);
@@ -28,17 +28,17 @@ describe(`Hash`, () => {
       expect(Hash.from(Number.MAX_SAFE_INTEGER)).toBe(0);
       expect(Hash.from(-Number.MAX_SAFE_INTEGER)).toBe(1);
     });
-    test('for string', () => {
+    it('for string', () => {
       expect(Hash.from('a')).toBe(97);
       expect(Hash.from('foo-bar')).toBe(-682_120_564);
     });
 
-    test('generates different hashes for decimal values', () => {
+    it('generates different hashes for decimal values', () => {
       expect(Hash.from(123.456)).toBe(884_763_256);
       expect(Hash.from(123.4567)).toBe(887_769_707);
     });
 
-    test('for any value', () => {
+    it('for any value', () => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       expect(Hash.from({} as any)).toBe(0);
     });
@@ -58,7 +58,7 @@ describe(`Hash`, () => {
     // });
   });
   describe(Hash.combine, () => {
-    test('should combine two hashes', () => {
+    it('should combine two hashes', () => {
       expect(Hash.combine(Int(0), Int(1))).toBe(-566_789_702);
       expect(Hash.combine(Int(0), Int(-1))).toBe(-566_789_704);
       expect(Hash.combine(Int(0), Int(0))).toBe(-566_789_703);

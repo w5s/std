@@ -179,27 +179,35 @@ export namespace SQLQuery {
   export function toSQLStatement(query: SQLQuery): SQLStatement {
     const identifier = sql.raw;
     switch (query._) {
-      case AddColumn.typeName:
+      case AddColumn.typeName: {
         return alterTable(
           query.tableName,
           `ADD ${query.columnName} ${stringifyColumnAttributes(query.columnAttributes)}`
         );
-      case AddConstraint.typeName:
+      }
+      case AddConstraint.typeName: {
         return alterTable(query.tableName, `ADD CONSTRAINT ${query.constraintName}`);
-      case CreateSchema.typeName:
+      }
+      case CreateSchema.typeName: {
         return sql`CREATE SCHEMA ${identifier(query.schemaName)}`;
-      case CreateTable.typeName:
+      }
+      case CreateTable.typeName: {
         return sql`CREATE TABLE ${identifier(query.tableName)} (${sql.raw(
           stringifyTableAttributes(query.tableAttributes)
         )}\n)`;
-      case DropSchema.typeName:
+      }
+      case DropSchema.typeName: {
         return sql`DROP SCHEMA ${identifier(query.schemaName)}`;
-      case DropTable.typeName:
+      }
+      case DropTable.typeName: {
         return sql`DROP TABLE ${identifier(query.tableName)}`;
-      case RemoveConstraint.typeName:
+      }
+      case RemoveConstraint.typeName: {
         return alterTable(query.tableName, `DROP CONSTRAINT ${query.constraintName}`);
-      case RemoveColumn.typeName:
+      }
+      case RemoveColumn.typeName: {
         return alterTable(query.tableName, `DROP COLUMN ${query.columnName}`);
+      }
       default: {
         return assertNever(query);
       }
