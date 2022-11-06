@@ -52,6 +52,8 @@ export namespace Ref {
    * @param newValue - the new value to be set
    */
   export function write<Value>(ref: Ref<Value>, newValue: Value): void {
-    ref.current = newValue;
+    if (!Object.is(ref.current, newValue)) {
+      ref.current = newValue;
+    }
   }
 }

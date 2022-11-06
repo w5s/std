@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from './ref.js';
 
 describe(Ref, () => {
@@ -16,6 +16,34 @@ describe(Ref, () => {
       const ref = Ref(123);
       Ref.write(ref, 456);
       expect(ref).toEqual({ [Ref.current]: 456 });
+    });
+    it('should not set value if strict equal', () => {
+      const anyValue = 123;
+      const spy = jest.fn();
+      const ref = {
+        get [Ref.current]() {
+          return anyValue;
+        },
+        set [Ref.current](value) {
+          spy(value);
+        },
+      };
+      Ref.write(ref, anyValue);
+      expect(spy).not.toHaveBeenCalled();
+    });
+    it('should not set value if NaN', () => {
+      const anyValue = Number.NaN;
+      const spy = jest.fn();
+      const ref = {
+        get [Ref.current]() {
+          return anyValue;
+        },
+        set [Ref.current](value) {
+          spy(value);
+        },
+      };
+      Ref.write(ref, anyValue);
+      expect(spy).not.toHaveBeenCalled();
     });
   });
 });
