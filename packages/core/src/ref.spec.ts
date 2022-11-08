@@ -1,9 +1,34 @@
 import { describe, it, expect } from '@jest/globals';
 import { Ref } from './ref.js';
+import { assertType } from './type.js';
 
 describe(Ref, () => {
+  const anyValue = 123;
   it('should return the current value', () => {
-    expect(Ref(123)).toEqual({ [Ref.current]: 123 });
+    expect(Ref(anyValue)).toEqual({ [Ref.current]: anyValue });
+  });
+  describe(Ref.hasInstance, () => {
+    it.each([
+      [Ref(anyValue), true],
+      [
+        {
+          get current() {
+            return undefined;
+          },
+        },
+        true,
+      ],
+      [null, false],
+      [undefined, false],
+    ])('should return true for Ref', (object, expected) => {
+      expect(Ref.hasInstance(object)).toEqual(expected);
+    });
+    it('should refine type', () => {
+      const unknownValue: unknown = Ref(anyValue);
+      if (Ref.hasInstance(unknownValue)) {
+        assertType<typeof unknownValue, Ref<unknown>>(true);
+      }
+    });
   });
   describe(Ref.read, () => {
     it('should return current value', () => {

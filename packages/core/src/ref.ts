@@ -25,6 +25,21 @@ export namespace Ref {
   export const current = 'current' as const;
 
   /**
+   * Returns `true` when `anyValue` has a `current` property
+   *
+   * @example
+   * ```typescript
+   * Ref.hasInstance(Ref(123)) // true
+   * Ref.hasInstance(null)) // false
+   * ```
+   * @category Guard
+   * @param anyValue - a tested value
+   */
+  export function hasInstance(anyValue: unknown): anyValue is Ref<unknown> {
+    return anyValue != null && 'current' in anyValue;
+  }
+
+  /**
    * Returns the current ref value
    *
    * @example
