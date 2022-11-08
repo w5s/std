@@ -52,8 +52,22 @@ export namespace Ref {
    * @param newValue - the new value to be set
    */
   export function write<Value>(ref: Ref<Value>, newValue: Value): void {
-    if (!Object.is(ref.current, newValue)) {
-      ref.current = newValue;
-    }
+    ref.current = newValue;
+  }
+
+  /**
+   * Change the current value using a mapping function that returns the new value
+   *
+   * @example
+   *```typescript
+   * const ref = Ref('foo');
+   * Ref.modify(ref, (current) => current + 'bar'); // Ref.read(ref) == 'foobar'
+   * ```
+   * @category Accessor
+   * @param ref - the reference object
+   * @param mapFn - the mapping function that will be applied
+   */
+  export function modify<Value>(ref: Ref<Value>, mapFn: (current: Value) => Value): void {
+    ref.current = mapFn(ref.current);
   }
 }
