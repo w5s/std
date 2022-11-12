@@ -8,7 +8,7 @@ describe('JSON', () => {
       expect(JSON.parse('{ "a": true }')).toEqual(Result.Ok({ a: true }));
     });
     it('should return a Result.Error for invalid JSON', () => {
-      expect(JSON.parse('{ "a": }')).toEqual(Result.Error(new SyntaxError('Unexpected token } in JSON at position 7')));
+      expect(JSON.parse('{ "a": }')).toEqual(Result.Error(expect.any(SyntaxError)));
     });
   });
   describe(JSON.stringify, () => {
