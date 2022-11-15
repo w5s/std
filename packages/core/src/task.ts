@@ -9,7 +9,7 @@ import { AggregateError } from './aggregateError.js';
  */
 export interface Task<Value, Error> {
   /**
-   * A callback with side effets
+   * A callback with side effects
    */
   readonly taskRun: (
     /**

@@ -1,3 +1,4 @@
+/* cSpell:disable */
 import type { Int } from '@w5s/core';
 import { Currency } from './currency.js';
 import { moneyFactory } from './moneyFactory.js';
