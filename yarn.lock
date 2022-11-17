@@ -4177,7 +4177,7 @@ __metadata:
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.0-alpha.16
     "@w5s/eslint-config": 1.0.0-alpha.36
-    "@w5s/mrm-preset": 1.0.0-alpha.29
+    "@w5s/mrm-preset": 1.0.0-alpha.30
     "@w5s/ts-config": 1.0.0-alpha.20
     concurrently: 7.5.0
     conventional-changelog-gitmoji-config: latest
@@ -4296,16 +4296,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/mrm-preset@npm:1.0.0-alpha.29":
-  version: 1.0.0-alpha.29
-  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.29"
+"@w5s/mrm-preset@npm:1.0.0-alpha.30":
+  version: 1.0.0-alpha.30
+  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.30"
   dependencies:
     debug: ^4.3.3
     glob: ^8.0.3
     mrm-core: ^7.0.0
     semver-intersect: ^1.4.0
     sync-directory: ^5.0.0
-  checksum: 875f789464e7a37935d3fd1089af5c6026310299bcc0ae844f909317589c07aaafe74c4e347abea6b736e183e1c0210316a1bbb3fa473c78f687d41bad9b1a3b
+  checksum: 69777f489659d899f81148f5c9570414c81f82408c0180c546910d5a42b8fb30f01efa681d3753bab8ad3024546ec0fc4434de4074a7996c4c35c0b55979c63c
   languageName: node
   linkType: hard
 
