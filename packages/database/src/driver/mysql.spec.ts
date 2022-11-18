@@ -7,9 +7,12 @@ import { MySQL } from './mysql.js';
 
 describe('MySQL', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;
-  const mockConnection = (connectionProperties?: any) => {
-    const connection = {
-      query: jest.fn((_sql, _params, callback) => callback(null, [])),
+  const mockConnection = (connectionProperties?: any): jest.Mocked<mysql.Connection> => {
+    const connection: jest.Mocked<mysql.Connection> = {
+      query: jest.fn<mysql.Connection['query']>(
+        // @ts-ignore mock partial signature
+        (_sql, _params, callback?) => callback(null, [])
+      ),
       connect: jest.fn(),
       end: jest.fn(),
       ...connectionProperties,
@@ -49,9 +52,10 @@ describe('MySQL', () => {
       expect(MySQL.createConnection).toHaveBeenLastCalledWith(client);
     });
     it('should send query to connection', async () => {
-      const query = jest.fn((_sql: string, _params: any, callback: (error: Error | null, result: number) => void) => {
-        callback(null, 2);
-      });
+      const query = jest.fn<mysql.QueryFunction>(
+        // @ts-ignore mock partial signature
+        (_sql, _params, callback) => callback(null, 2)
+      );
       mockConnection({
         query,
       });
@@ -74,11 +78,10 @@ describe('MySQL', () => {
     });
 
     it('should close connection when callback error', async () => {
-      const end = jest.fn();
-      const query = jest.fn(
-        (queryObject: mysql.Query, callback: (error: Error | null, result: number | null) => void) => {
-          callback(new Error('mock error'), null);
-        }
+      const end = jest.fn<mysql.Connection['end']>();
+      const query = jest.fn<mysql.Connection['query']>(
+        // @ts-ignore mock partial signature
+        (_queryObject, callback) => callback(new Error('mock error'), null)
       );
       mockConnection({
         end,

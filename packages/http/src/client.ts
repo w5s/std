@@ -106,6 +106,7 @@ export namespace HTTP {
   export function Headers(values: Iterable<readonly [string, string]> | Record<string, string>): Headers {
     if (Symbol.iterator in values) {
       const returnValue: Record<string, string> = {};
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       for (const [key, value] of values as Iterable<readonly [string, string]>) {
         returnValue[key] = value;
       }

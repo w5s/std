@@ -137,13 +137,13 @@ export namespace Task {
 
   const emptyArray = Object.freeze([]);
 
+  type TaskEntry<Value, Error> = Readonly<{
+    task: Task<Value, Error>;
+    cancelerRef: Ref<Canceler>;
+  }>;
+
   class TaskAggregateState<Value, Error> {
-    readonly tasks: ReadonlyArray<
-      Readonly<{
-        task: Task<Value, Error>;
-        cancelerRef: Ref<Canceler>;
-      }>
-    >;
+    readonly tasks: ReadonlyArray<TaskEntry<Value, Error>>;
 
     readonly taskCount: number;
 
@@ -170,8 +170,8 @@ export namespace Task {
     }
 
     runAll(
-      resolveTask: (value: Value, entry: typeof this.tasks[0], index: number) => void,
-      rejectTask: (error: Error, entry: typeof this.tasks[0], index: number) => void
+      resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
+      rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void
     ) {
       this.tasks.forEach((entry, taskIndex) => {
         entry.task.taskRun(

@@ -18,6 +18,8 @@ describe(Ref, () => {
         },
         true,
       ],
+      [() => {}, false],
+      ['string', false],
       [null, false],
       [undefined, false],
     ])('should return true for Ref', (object, expected) => {
