@@ -638,11 +638,11 @@ describe('Task', () => {
         );
       });
       it('should call callback and run task', async () => {
-        const taskCallbackRun = jest.fn(({ ok }) => ok(anyOtherObject));
-        const taskCallback = Task(taskCallbackRun);
+        const taskCallback = Task(({ ok }) => ok(anyOtherObject));
+        const taskCallbackSpy = jest.spyOn(taskCallback, 'taskRun');
         await ExpectTask.run(Task.andRun(task, () => taskCallback)).finished;
 
-        expect(taskCallbackRun).toHaveBeenCalled();
+        expect(taskCallbackSpy).toHaveBeenCalled();
       });
       it('should call callback with task value', async () => {
         const callback = jest.fn(() => andTask);

@@ -36,7 +36,9 @@ export namespace Ref {
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Ref<unknown> {
-    return anyValue != null && 'current' in anyValue;
+    return (
+      anyValue != null && (typeof anyValue === 'object' || typeof anyValue === 'function') && 'current' in anyValue
+    );
   }
 
   /**

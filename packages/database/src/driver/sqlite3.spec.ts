@@ -1,14 +1,15 @@
 import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from '@w5s/core';
+import { Database } from 'sqlite3';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { SQLite3 } from './sqlite3.js';
 
-const mockDatabase = () => {
-  const database = {
-    all: jest.fn((_sql, values, callback) => callback(null, null)),
+const mockDatabase = (): jest.Mocked<Database> => {
+  const database: jest.Mocked<Database> = {
+    all: jest.fn<Database['all']>((_sql, _values, callback?) => callback(null, null)),
     close: jest.fn(),
-  };
+  } as any;
   jest.spyOn(SQLite3, 'createDatabase').mockImplementation(
     // @ts-ignore All methods are not required
     () => database
@@ -53,7 +54,10 @@ describe('SQLite3', () => {
 
     it('should close connection when callback error', async () => {
       const { all, close } = mockDatabase();
-      all.mockImplementation((sqlObject, values, callback) => callback(new Error('MockSQLite3Error')));
+      all.mockImplementation(
+        // @ts-ignore mock partial signature
+        (_sqlObject, _values, callback) => callback(new Error('MockSQLite3Error'), null)
+      );
       const cancelerRef = Ref(() => {});
 
       await expect(

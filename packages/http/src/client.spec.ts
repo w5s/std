@@ -85,7 +85,7 @@ describe(HTTP.request, () => {
         }, ms);
       });
 
-    const globalFetch = jest.fn(async (_, { signal }) => {
+    const globalFetch = jest.fn<typeof fetch>(async (_, { signal } = {}) => {
       if (signal != null) {
         signal.addEventListener('abort', () => {
           finished.resolve(undefined);
