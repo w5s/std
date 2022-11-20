@@ -108,7 +108,7 @@
     "@w5s/ts-config": "1.0.0-alpha.20",
     "concurrently": "7.5.0",
     "conventional-changelog-gitmoji-config": "latest",
-    "cspell": "6.14.2",
+    "cspell": "6.14.3",
     "es-jest": "2.1.0",
     "eslint": "8.28.0",
     "husky": "8.0.2",
