@@ -31,6 +31,7 @@ describe('index', () => {
         'Record',
         'Result',
         'String',
+        'Symbol',
         'throwError',
         'Task',
         'Time',
