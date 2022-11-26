@@ -4181,7 +4181,7 @@ __metadata:
     "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.1
-    "@w5s/eslint-config": 1.0.0-alpha.36
+    "@w5s/eslint-config": 1.0.0-alpha.39
     "@w5s/mrm-preset": 1.0.0-alpha.31
     "@w5s/ts-config": 1.0.0-alpha.22
     concurrently: 7.6.0
@@ -4231,15 +4231,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.36":
-  version: 1.0.0-alpha.36
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.36"
+"@w5s/eslint-config@npm:1.0.0-alpha.39":
+  version: 1.0.0-alpha.39
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.39"
   dependencies:
     "@babel/core": "*"
     "@babel/eslint-parser": "*"
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
+    "@w5s/prettier-config": ^1.0.2
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
     eslint-plugin-functional: ^4.2.0
@@ -4254,7 +4255,7 @@ __metadata:
     eslint-plugin-unicorn: ^44.0.0
     eslint-plugin-yml: ^1.1.0
     find-up: ^5.0.0
-    parse-gitignore: ^1.0.1
+    parse-gitignore: ^2.0.0
   peerDependencies:
     eslint: 8.x
     prettier: 2.x
@@ -4262,7 +4263,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 3668dd2ecac5e100bc105a93032dcbe65a44eb82ea85d66a08381fa006858e4b80db76e3a1fe16c5b725c2e9ffdbbd689664d7ec3a17ba1ef05e70684a3e7a0a
+  checksum: 1b58b2bbc6cefb6cad4c3f873b1ad60dda0b938e0fb45db9ff9112eba7d3f02133c73c369619ceefc3c0ba2c2beea9ba74358f9c9e114642cf085d7d960a3b0a
   languageName: node
   linkType: hard
 
@@ -4326,6 +4327,18 @@ __metadata:
     typescript: ^3.8.0 || ^4.0.0
   languageName: unknown
   linkType: soft
+
+"@w5s/prettier-config@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@w5s/prettier-config@npm:1.0.2"
+  peerDependencies:
+    prettier: ">= 2.0"
+  peerDependenciesMeta:
+    prettier:
+      optional: true
+  checksum: ad573d72c1b5879dd4e6785bb2f9e520be79cbfce8a10997cf385df68c6eb187a73e40fe9617db3223ee9cb0bda853dbc11891bd472e29b3bb62b3f652761f53
+  languageName: node
+  linkType: hard
 
 "@w5s/ts-config@npm:1.0.0-alpha.22":
   version: 1.0.0-alpha.22
@@ -12409,10 +12422,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse-gitignore@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "parse-gitignore@npm:1.0.1"
-  checksum: 3ccb72ebe7dcc05c3bd43452c6afb733e3df90bc9c596fc92f16abed30fa3498ebe73045265cb1d45e0de4603f9be42a71101bd03b0db6470374340139bd307e
+"parse-gitignore@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "parse-gitignore@npm:2.0.0"
+  checksum: 81e2fc56aefe004bb1c2b70f69a4a599969c21d2e4ee66e1e9c7eb84ae30286a25cf84d3a3b09e8b1772fd0e2b028560d97998f2e2ad1c3eebb89f84cedf36ea
   languageName: node
   linkType: hard
 
