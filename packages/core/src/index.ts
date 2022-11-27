@@ -2,6 +2,7 @@ export * from './array.js';
 export * from './console.js';
 export * from './dataError.js';
 export * from './dataObject.js';
+export * from './disposable.js';
 export * from './record.js';
 export * from './integer.js';
 export * from './invariant.js';
