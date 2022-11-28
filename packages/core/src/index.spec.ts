@@ -9,6 +9,7 @@ describe('index', () => {
         'Array',
         'AggregateError',
         'ArgumentError',
+        'AsyncDisposable',
         'assertNever',
         'assertType',
         'assign',
@@ -16,6 +17,7 @@ describe('index', () => {
         'Console',
         'DataObject',
         'DataError',
+        'Disposable',
         'extend',
         'default', // FIXME: no key exist in reality
         'Int',
