@@ -6,6 +6,7 @@ describe('Disposable', () => {
   describe(Disposable.hasInstance, () => {
     it.each([
       [{ [Symbol.dispose]: () => {} }, true],
+      [{ [Symbol.dispose]: 'not_a_function' }, false],
       [{ [Symbol.asyncDispose]: () => {} }, false],
       [{ [Symbol.dispose]: true }, false],
       [{}, false],
@@ -22,6 +23,7 @@ describe('AsyncDisposable', () => {
     it.each([
       [{ [Symbol.dispose]: () => {} }, false],
       [{ [Symbol.asyncDispose]: () => {} }, true],
+      [{ [Symbol.asyncDispose]: 'not_a_function' }, false],
       [{ [Symbol.dispose]: true }, false],
       [{}, false],
       ['string', false],
