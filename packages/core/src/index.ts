@@ -14,6 +14,7 @@ export * from './prelude.js';
 export * from './random.js';
 export * from './ref.js';
 export * from './result.js';
+export * from './shallowEqual.js';
 export * from './string.js';
 export * from './symbol.js';
 export * from './task.js';
