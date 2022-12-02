@@ -1,21 +1,26 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
+type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
+type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
+
 /**
+ * Returns `true` when left and right are strictly equal or have same properties
+ *
  * @example
  * ```ts
  * shallowEqual(true, true);// true
  * shallowEqual(NaN, NaN);// true
  * shallowEqual({ a: 1 }, { a: 1 });// true
- * shallowEqual(anyObject, anyObject);// true
+ * shallowEqual({ a: 1 }, { a: 2 });// false
  * ```
  * @param left - the left operand
  * @param right  - the right operand
- * @param equalFn - the property equality function
+ * @param equalValueFn - the property equality function
  */
 export function shallowEqual<T = unknown>(
   left: T,
   right: T,
-  equalFn?: (left: any, right: any, key: keyof T) => boolean
+  equalValueFn?: (left: ValueOf<T>, right: ValueOf<T>, key: KeyOf<T>) => boolean
 ): boolean {
   const objectIs = Object.is;
 
@@ -33,7 +38,7 @@ export function shallowEqual<T = unknown>(
   }
   const rightHasOwnProperty = Object.prototype.hasOwnProperty.bind(right);
 
-  if (equalFn == null) {
+  if (equalValueFn == null) {
     // Test for A's keys different from B.
     // eslint-disable-next-line unicorn/no-for-loop
     for (let index = 0; index < leftKeys.length; index += 1) {
@@ -59,7 +64,8 @@ export function shallowEqual<T = unknown>(
       }
 
       // @ts-ignore Wrong typing
-      if (!equalFn(left[key], right[key], key)) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      if (!equalValueFn(left[key], right[key], key)) {
         return false;
       }
     }
