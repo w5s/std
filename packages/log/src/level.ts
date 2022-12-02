@@ -1,15 +1,17 @@
-import type { Option } from '@w5s/core';
+import type { DataObject, Option } from '@w5s/core';
 
-export interface LogLevel {
-  /**
-   * The log level string representation
-   */
-  readonly logLevelName: string;
-  /**
-   * The log level numeric value
-   */
-  readonly logLevel: number;
-}
+export interface LogLevel
+  extends DataObject<{
+    [DataObject.type]: 'LogLevel';
+    /**
+     * The log level string representation
+     */
+    name: string;
+    /**
+     * The log level numeric value
+     */
+    value: number;
+  }> {}
 
 /**
  * Construct a new `LogLevel`
@@ -19,11 +21,11 @@ export interface LogLevel {
  * const level = LogLevel('UberCritical', 60);// { levelName: 'UberCritical', level: 60 }
  * ```
  * @category Constructor
- * @param levelName - the level string representation
- * @param level - the level value
+ * @param name - the level string representation
+ * @param value - the level value
  */
-export function LogLevel(levelName: string, level: number): LogLevel {
-  return { logLevelName: levelName, logLevel: level };
+export function LogLevel(name: string, value: number): LogLevel {
+  return { _: 'LogLevel', name, value };
 }
 export namespace LogLevel {
   /**
@@ -77,7 +79,7 @@ export namespace LogLevel {
    * @param level - the log level
    */
   export function stringify(level: LogLevel): string {
-    return level.logLevelName;
+    return level.name;
   }
 
   /**
@@ -91,7 +93,7 @@ export namespace LogLevel {
    * @param level - the log level
    */
   export function value(level: LogLevel): number {
-    return level.logLevel;
+    return level.value;
   }
 
   /**
@@ -112,7 +114,7 @@ export namespace LogLevel {
       : (anyLevel) =>
           orderedMatchers.reduce(
             (acc, matcher) =>
-              compare(matcher[level], acc[level]) > 0 && anyLevel.logLevel >= matcher[level].logLevel ? matcher : acc,
+              compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value ? matcher : acc,
             first
           )[returnValue];
   }

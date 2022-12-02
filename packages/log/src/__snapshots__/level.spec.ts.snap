@@ -2,35 +2,40 @@
 
 exports[`LogLevel Critical should have correct value: Critical 1`] = `
 {
-  "logLevel": 50,
-  "logLevelName": "Critical",
+  "_": "LogLevel",
+  "name": "Critical",
+  "value": 50,
 }
 `;
 
 exports[`LogLevel Debug should have correct value: Debug 1`] = `
 {
-  "logLevel": 10,
-  "logLevelName": "Debug",
+  "_": "LogLevel",
+  "name": "Debug",
+  "value": 10,
 }
 `;
 
 exports[`LogLevel Error should have correct value: Error 1`] = `
 {
-  "logLevel": 40,
-  "logLevelName": "Error",
+  "_": "LogLevel",
+  "name": "Error",
+  "value": 40,
 }
 `;
 
 exports[`LogLevel Info should have correct value: Info 1`] = `
 {
-  "logLevel": 20,
-  "logLevelName": "Info",
+  "_": "LogLevel",
+  "name": "Info",
+  "value": 20,
 }
 `;
 
 exports[`LogLevel Warning should have correct value: Warning 1`] = `
 {
-  "logLevel": 30,
-  "logLevelName": "Warning",
+  "_": "LogLevel",
+  "name": "Warning",
+  "value": 30,
 }
 `;

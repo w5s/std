@@ -4,7 +4,11 @@ import { LogLevel } from './level.js';
 describe(LogLevel, () => {
   describe('()', () => {
     it('should return a new object', () => {
-      expect(LogLevel('Test', 3)).toEqual({ logLevelName: 'Test', logLevel: 3 });
+      expect(LogLevel('Test', 3)).toEqual({
+        _: 'LogLevel',
+        name: 'Test',
+        value: 3,
+      });
     });
   });
   describe.each(['Critical', 'Error', 'Warning', 'Info', 'Debug'] as const)('%s', (name) => {
