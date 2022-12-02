@@ -10,20 +10,21 @@ describe(LogRecord, () => {
     it('should return a new message', () => {
       expect(
         LogRecord({
-          logId: UUID.empty(),
-          logCategory: 'category',
-          logLevel: LogLevel.Warning,
-          logMessage: LogMessage(['foo', 'bar', '']),
-          logData: {},
-          logCreated: Time(1),
+          id: UUID.empty(),
+          category: 'category',
+          level: LogLevel.Warning,
+          message: LogMessage(['foo', 'bar', '']),
+          data: {},
+          created: Time(1),
         })
       ).toEqual({
-        logId: UUID.empty(),
-        logCategory: 'category',
-        logLevel: LogLevel.Warning,
-        logMessage: ['foobar'],
-        logData: {},
-        logCreated: 1,
+        _: 'LogRecord',
+        id: UUID.empty(),
+        category: 'category',
+        level: LogLevel.Warning,
+        message: ['foobar'],
+        data: {},
+        created: 1,
       });
     });
   });

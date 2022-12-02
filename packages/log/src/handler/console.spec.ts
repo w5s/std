@@ -16,32 +16,32 @@ describe('.ConsoleHandler', () => {
   jest.spyOn(console, 'error').mockImplementation(noop);
 
   it('should send to console.debug when level=LogLevel.Debug', async () => {
-    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Debug, logMessage: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Debug, message: ['test'] })));
     expect(console.debug).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.info when level=LogLevel.Info', async () => {
-    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Info, logMessage: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Info, message: ['test'] })));
     expect(console.info).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.warn when level=LogLevel.Warning', async () => {
-    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Warning, logMessage: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Warning, message: ['test'] })));
     expect(console.warn).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.warn when level=LogLevel.Error', async () => {
-    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ logLevel: LogLevel.Error, logMessage: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Error, message: ['test'] })));
     expect(console.error).toHaveBeenLastCalledWith('test');
   });
 
-  it('should format logCategory and logMessage correctly', async () => {
+  it('should format logCategory and message correctly', async () => {
     await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({
-          logCategory: 'logCategory',
-          logLevel: LogLevel.Debug,
-          logMessage: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
+          category: 'logCategory',
+          level: LogLevel.Debug,
+          message: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
         })
       )
     );
@@ -52,8 +52,8 @@ describe('.ConsoleHandler', () => {
     await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({
-          logLevel: LogLevel.Debug,
-          logMessage: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
+          level: LogLevel.Debug,
+          message: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
         })
       )
     );

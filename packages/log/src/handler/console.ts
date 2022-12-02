@@ -21,9 +21,9 @@ const consoleLevel = LogLevel.match(
  */
 export const ConsoleHandler: LogHandler = (logRecord) => ({
   taskRun(resolve) {
-    const prefix = logRecord.logCategory.length > 0 ? [`[${logRecord.logCategory}]`] : [];
-    const suffix = logRecord.logMessage.map((part) => (typeof part === 'string' ? part : part.logRefValue));
-    consoleLevel(logRecord.logLevel)(console)(...prefix, ...suffix);
+    const prefix = logRecord.category.length > 0 ? [`[${logRecord.category}]`] : [];
+    const suffix = logRecord.message.map((part) => (typeof part === 'string' ? part : part.logRefValue));
+    consoleLevel(logRecord.level)(console)(...prefix, ...suffix);
     resolve();
   },
 });

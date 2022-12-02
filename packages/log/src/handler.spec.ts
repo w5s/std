@@ -10,20 +10,20 @@ describe('LogHandler', () => {
   describe(LogHandler.filter, () => {
     it('should filter input', async () => {
       const handler = jest.fn(() => Task.resolve());
-      const filtered = LogHandler.filter(handler, (record) => record.logCategory === 'foo');
+      const filtered = LogHandler.filter(handler, (record) => record.category === 'foo');
       const defaultProps = LogRecord({
-        logId: UUID.empty(),
-        logCategory: 'not_foo',
-        logLevel: LogLevel.Warning,
-        logCreated: generateTime(),
-        logMessage: [],
-        logData: {},
+        id: UUID.empty(),
+        category: 'not_foo',
+        level: LogLevel.Warning,
+        created: generateTime(),
+        message: [],
+        data: {},
       });
       await Task.unsafeRunOk(
         filtered(
           LogRecord({
             ...defaultProps,
-            logCategory: 'not_foo',
+            category: 'not_foo',
           })
         )
       );
@@ -32,13 +32,13 @@ describe('LogHandler', () => {
         filtered(
           LogRecord({
             ...defaultProps,
-            logCategory: 'foo',
+            category: 'foo',
           })
         )
       );
       expect(handler).not.toHaveBeenLastCalledWith({
-        logId: '',
-        logCategory: 'foo',
+        id: '',
+        category: 'foo',
       });
     });
   });

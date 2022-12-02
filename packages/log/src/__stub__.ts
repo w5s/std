@@ -7,19 +7,19 @@ import { LogMessage } from './message.js';
 export const generateTime = (ms = 0) => Time(ms);
 
 export const generateLogRecord = ({
-  logLevel = LogLevel.Debug,
-  logMessage = LogMessage(['test']),
-  logCategory = '',
+  level = LogLevel.Debug,
+  message = LogMessage(['test']),
+  category = '',
 }: Partial<
-  Pick<LogRecord, 'logMessage' | 'logCategory'> & {
-    logLevel?: LogLevel;
+  Pick<LogRecord, 'message' | 'category'> & {
+    level?: LogLevel;
   }
 > = {}): LogRecord =>
   LogRecord({
-    logId: UUID.empty(),
-    logCategory,
-    logLevel,
-    logMessage,
-    logData: {},
-    logCreated: generateTime(),
+    id: UUID.empty(),
+    category,
+    level,
+    message,
+    data: {},
+    created: generateTime(),
   });

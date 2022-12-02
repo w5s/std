@@ -1,34 +1,36 @@
-import type { Time } from '@w5s/core';
+import type { DataObject, Time } from '@w5s/core';
 import type { UUID } from '@w5s/uuid';
 import { LogMessage } from './message.js';
 import { LogLevel } from './level.js';
 
-export interface LogRecord {
-  /**
-   * Event identifier
-   */
-  readonly logId: UUID;
-  /**
-   * The log category / logger name
-   */
-  readonly logCategory: string;
-  /**
-   * The log category / logger name
-   */
-  readonly logLevel: LogLevel;
-  /**
-   * Additional data
-   */
-  readonly logData: Readonly<{ [key: string]: unknown }>;
-  /**
-   * Unformatted message
-   */
-  readonly logMessage: LogMessage;
-  /**
-   * Time when the record was created
-   */
-  readonly logCreated: Time;
-}
+export interface LogRecord
+  extends DataObject<{
+    [DataObject.type]: 'LogRecord';
+    /**
+     * Event identifier
+     */
+    id: UUID;
+    /**
+     * The log category / logger name
+     */
+    category: string;
+    /**
+     * The log category / logger name
+     */
+    level: LogLevel;
+    /**
+     * Additional data
+     */
+    data: Readonly<{ [key: string]: unknown }>;
+    /**
+     * Unformatted message
+     */
+    message: LogMessage;
+    /**
+     * Time when the record was created
+     */
+    created: Time;
+  }> {}
 
 /**
  * Construct LogRecord
@@ -36,30 +38,31 @@ export interface LogRecord {
  * @example
  * ```ts
  * const logRecord = LogRecord({
- *   logId: UUID.empty(),
- *   logCategory: 'any category',
- *   logLevel: LogLevel.Critical,
- *   logData: { foo: true },
- *   logMessage: LogMessage('message'),
- *   logCreated: Time(Date.now()),
+ *   id: UUID.empty(),
+ *   category: 'any category',
+ *   level: LogLevel.Critical,
+ *   data: { foo: true },
+ *   message: LogMessage('message'),
+ *   created: Time(Date.now()),
  * });
  * ```
  * @param properties - constructor parameters
  */
 export function LogRecord(properties: {
-  logId: LogRecord['logId'];
-  logCategory: LogRecord['logCategory'];
-  logLevel: LogRecord['logLevel'];
-  logData: LogRecord['logData'];
-  logMessage: LogRecord['logMessage'];
-  logCreated: LogRecord['logCreated'];
+  id: LogRecord['id'];
+  category: LogRecord['category'];
+  level: LogRecord['level'];
+  data: LogRecord['data'];
+  message: LogRecord['message'];
+  created: LogRecord['created'];
 }): LogRecord {
   return {
-    logLevel: properties.logLevel,
-    logId: properties.logId,
-    logCategory: properties.logCategory,
-    logData: properties.logData,
-    logMessage: properties.logMessage,
-    logCreated: properties.logCreated,
+    _: 'LogRecord',
+    level: properties.level,
+    id: properties.id,
+    category: properties.category,
+    data: properties.data,
+    message: properties.message,
+    created: properties.created,
   };
 }
