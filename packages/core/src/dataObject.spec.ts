@@ -6,6 +6,7 @@ describe('DataObject', () => {
     interface Test {
       _: 'Test';
       email: string;
+      optional?: boolean;
     }
     const Test = DataObject.MakeGeneric(
       'Test',
@@ -35,6 +36,14 @@ describe('DataObject', () => {
       });
       it('should return false for instance', () => {
         expect(Test.hasInstance(Test(''))).toBe(true);
+      });
+    });
+    describe('==', () => {
+      it.each([
+        [Test.create({ email: 'foo@bar.com' }), Test.create({ email: 'foo@bar.com' }), true],
+        [Test.create({ email: 'foo@bar.com' }), Test.create({ email: 'foo@bar.co' }), false],
+      ])('should return false for %s', (left, right, expected) => {
+        expect(Test['=='](left, right)).toBe(expected);
       });
     });
   });

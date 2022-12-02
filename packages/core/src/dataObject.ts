@@ -1,3 +1,6 @@
+import type { Equal } from './equal.js';
+import { shallowEqual } from './shallowEqual.js';
+
 /**
  * An Immutable Data Object with a `type` identifier
  *
@@ -25,7 +28,7 @@ export namespace DataObject {
    */
   export type Parameters<Model> = Omit<Model, DataObject.type>;
 
-  export interface Module<Model extends DataObject<{ [DataObject.type]: string }>> {
+  export interface Module<Model extends DataObject<{ [DataObject.type]: string }>> extends Equal<Model> {
     /**
      * Construct a new model
      *
@@ -112,6 +115,7 @@ export namespace DataObject {
       ...properties,
     });
     const properties = {
+      '==': shallowEqual,
       typeName,
       create,
       hasInstance: (anyValue: unknown): boolean =>

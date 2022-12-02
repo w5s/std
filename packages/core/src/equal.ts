@@ -11,5 +11,5 @@ export interface Equal<T> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  ['=='](left: T, right: T): boolean;
+  readonly ['==']: (left: T, right: T) => boolean;
 }
