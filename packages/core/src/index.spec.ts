@@ -14,6 +14,7 @@ describe('index', () => {
         'assertType',
         'assign',
         'constant',
+        'Comparable',
         'Console',
         'DataObject',
         'DataError',
