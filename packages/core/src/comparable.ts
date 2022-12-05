@@ -1,13 +1,83 @@
 export interface Comparable<T> {
   /**
    * Return a number that represents comparison
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * const sorted = [3, 1, 1].sort(NumberCompare.compare);
+   * ```
    */
   readonly compare: (left: T, right: T) => number;
+  /**
+   * "Not equal to" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['!='](0, 1); // true
+   * NumberCompare['!='](0, 0); // false
+   * ```
+   */
   readonly '!=': (left: T, right: T) => boolean;
+  /**
+   * "Equal to" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['=='](0, 0); // true
+   * NumberCompare['=='](0, 1); // false
+   * ```
+   */
   readonly '==': (left: T, right: T) => boolean;
+  /**
+   * "Less than or equal to" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['<='](0, 0); // true
+   * NumberCompare['<='](0, 1); // true
+   * NumberCompare['<='](0, -1); // false
+   * ```
+   */
   readonly '<=': (left: T, right: T) => boolean;
+  /**
+   * "Less than" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['<'](0, 0); // false
+   * NumberCompare['<'](0, 1); // true
+   * NumberCompare['<'](0, -1); // false
+   * ```
+   */
   readonly '<': (left: T, right: T) => boolean;
+  /**
+   * "Greater than or equal to" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['>='](0, 0); // true
+   * NumberCompare['>='](0, 1); // false
+   * NumberCompare['>='](0, -1); // true
+   * ```
+   */
   readonly '>=': (left: T, right: T) => boolean;
+  /**
+   * "Greater than" operator
+   *
+   * @example
+   * ```ts
+   * const NumberCompare: Compare<number>;
+   * NumberCompare['>'](0, 0); // false
+   * NumberCompare['>'](0, 1); // false
+   * NumberCompare['>'](0, -1); // true
+   * ```
+   */
   readonly '>': (left: T, right: T) => boolean;
 }
 
