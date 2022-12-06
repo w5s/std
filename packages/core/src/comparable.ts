@@ -4,7 +4,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * const sorted = [3, 1, 1].sort(NumberCompare.compare);
    * ```
    */
@@ -14,7 +14,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['!='](0, 1); // true
    * NumberCompare['!='](0, 0); // false
    * ```
@@ -25,7 +25,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['=='](0, 0); // true
    * NumberCompare['=='](0, 1); // false
    * ```
@@ -36,7 +36,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['<='](0, 0); // true
    * NumberCompare['<='](0, 1); // true
    * NumberCompare['<='](0, -1); // false
@@ -48,7 +48,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['<'](0, 0); // false
    * NumberCompare['<'](0, 1); // true
    * NumberCompare['<'](0, -1); // false
@@ -60,7 +60,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['>='](0, 0); // true
    * NumberCompare['>='](0, 1); // false
    * NumberCompare['>='](0, -1); // true
@@ -72,7 +72,7 @@ export interface Comparable<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Compare<number>;
+   * const NumberCompare: Comparable<number>;
    * NumberCompare['>'](0, 0); // false
    * NumberCompare['>'](0, 1); // false
    * NumberCompare['>'](0, -1); // true
