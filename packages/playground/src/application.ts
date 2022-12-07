@@ -146,16 +146,16 @@ export namespace Application {
         updateState(
           applicationId,
           (currentState) =>
-            currentState.configurationPatch != null
-              ? {
+            currentState.configurationPatch == null
+              ? currentState
+              : {
                   ...currentState,
                   configuration: {
                     ...currentState.configuration,
                     ...currentState.configurationPatch,
                   },
                   configurationPatch: undefined,
-                }
-              : currentState,
+                },
           didChange
         );
       }
