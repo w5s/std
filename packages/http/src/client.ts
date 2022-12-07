@@ -210,14 +210,7 @@ function applyFetch(
       const controller = new AbortController();
       cancelerRef.current = controller.abort.bind(controller);
 
-      if (!isValidURL(url)) {
-        reject(
-          HTTPError.InvalidURL({
-            message: 'Invalid URL',
-            input: url,
-          })
-        );
-      } else {
+      if (isValidURL(url)) {
         try {
           const response = await fetchFn(url, {
             signal: controller.signal,
@@ -228,6 +221,13 @@ function applyFetch(
         } catch (networkError: unknown) {
           reject(HTTPError.NetworkError({ cause: networkError }));
         }
+      } else {
+        reject(
+          HTTPError.InvalidURL({
+            message: 'Invalid URL',
+            input: url,
+          })
+        );
       }
     },
   };

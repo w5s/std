@@ -51,7 +51,7 @@ describe(DataError, () => {
   });
   describe('#stack', () => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    (Error.captureStackTrace != null ? it : it.skip)('should capture stack', () => {
+    (Error.captureStackTrace == null ? it.skip : it)('should capture stack', () => {
       const error = DataError({
         name: 'CustomError',
         message: 'CustomMessage',

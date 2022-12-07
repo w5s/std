@@ -11,7 +11,7 @@ const createTask: typeof Task.wrap = (fn) => ({
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
-  typeof queueMicrotask !== 'undefined' ? queueMicrotask : (fn) => Promise.resolve().then(fn);
+  typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
 
 /**
  * Represent a duration in milliseconds
