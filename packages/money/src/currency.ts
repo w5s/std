@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
+import { Comparable } from '@w5s/core/lib/comparable.js';
 
 export interface Currency
   extends DataObject<{
@@ -70,16 +71,9 @@ export const Currency = Object.assign(
      */
     defaultPrecision: 2 as Int,
 
-    /**
-     * @example
-     * ```typescript
-     * const euro = Currency({ code: 'EUR', ... });
-     * Currency['=='](euro, Currency({ code: 'USD', ... }));// false
-     * Currency['=='](euro, Currency({ code: 'EUR', ... }));// true
-     * ```
-     * @param left - Left operand currency
-     * @param right - Right operand currency
-     */
-    '==': (left: Currency, right: Currency) => left.code === right.code,
+    ...Comparable<Currency>({
+      '<': (left, right) => left.code < right.code,
+      '==': (left, right) => left.code === right.code,
+    }),
   }
 );

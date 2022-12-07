@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { Int } from '@w5s/core';
 import { Currency } from './currency.js';
+import { describeComparable } from './describeComparable.js';
 
 describe('Currency', () => {
   const anyProperties = {
@@ -68,16 +69,9 @@ describe('Currency', () => {
     );
   });
 
-  describe('==', () => {
-    it('should return false by default', () => {
-      const left = Currency({ ...anyProperties, code: 'A' });
-      const right = Currency({ ...anyProperties, code: 'B' });
-      expect(Currency['=='](left, right)).toBe(false);
-    });
-    it('should return true if code are the same', () => {
-      const left = Currency({ ...anyProperties, code: 'A' });
-      const right = Currency({ ...anyProperties, code: 'A' });
-      expect(Currency['=='](left, right)).toBe(true);
-    });
+  describeComparable(Currency, {
+    base: () => Currency({ ...anyProperties, code: 'B' }),
+    inferior: () => Currency({ ...anyProperties, code: 'A' }),
+    superior: () => Currency({ ...anyProperties, code: 'C' }),
   });
 });
