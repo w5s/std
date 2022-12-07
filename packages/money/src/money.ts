@@ -1,5 +1,6 @@
 import { ArgumentError } from '@w5s/core/lib/argumentError.js';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
+import { Comparable } from '@w5s/core/lib/comparable.js';
 import type { Result } from '@w5s/core';
 import { Currency } from './currency.js';
 
@@ -37,21 +38,10 @@ const createOperator =
         };
 
 export const Money = Object.assign(DataObject.Make<Money>('Money'), {
-  /**
-   * Equality operator
-   *
-   * @example
-   * ```typescript
-   * const oneEuro = EUR(1);
-   * Money['=='](oneEuro, EUR(2));// false
-   * Money['=='](oneEuro, USD(1));// false
-   * Money['=='](oneEuro, EUR(1));// true
-   * ```
-   * @param left - Left operand currency
-   * @param right - Right operand currency
-   */
-  '==': (left: Money, right: Money): boolean =>
-    left.amount === right.amount && Currency['=='](left.currency, right.currency),
+  ...Comparable<Money>({
+    '==': (left, right) => left.amount === right.amount && Currency['=='](left.currency, right.currency),
+    '<': (left, right) => Currency['<'](left.currency, right.currency) || left.amount < right.amount,
+  }),
 
   /**
    * Addition operator

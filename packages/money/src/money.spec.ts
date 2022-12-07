@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { ArgumentError, Result } from '@w5s/core';
 import { Currency } from './currency.js';
+import { describeComparable } from './describeComparable.js';
 import { Money } from './money.js';
 
 describe(Money, () => {
@@ -32,15 +33,12 @@ describe(Money, () => {
     });
   });
 
-  describe('==', () => {
-    it.each([
-      [EUR(anyAmount), EUR(anyAmount), true],
-      [EUR(anyAmount), EUR(anyAmount + 1), false],
-      [EUR(anyAmount), USD(anyAmount), false],
-    ])('should return by default false', (left, right, expected) => {
-      expect(Money['=='](left, right)).toEqual(expected);
-    });
+  describeComparable(Money, {
+    base: () => EUR(anyAmount),
+    inferior: () => [EUR(anyAmount - 1), Money({ currency: anyCurrency, amount: anyAmount })],
+    superior: () => [EUR(anyAmount + 1), USD(anyAmount)],
   });
+
   describe('+', () => {
     it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
