@@ -155,12 +155,12 @@ export namespace Record {
    * @param value - the entry value
    */
   export function set<V>(record: Record<V>, key: string, value: V): Record<V> {
-    return record[key] !== value
-      ? {
+    return record[key] === value
+      ? record
+      : {
           ...record,
           [key]: value,
-        }
-      : record;
+        };
   }
 
   /**

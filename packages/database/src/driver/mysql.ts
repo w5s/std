@@ -24,7 +24,7 @@ export const MySQL = {
       connection.connect();
       const queryResultPromise = new Promise((resolve, reject) => {
         const { sql, params } = mysqlSQLStatement(sqlStatement);
-        connection.query(sql, params, (error, result) => (error != null ? reject(error) : resolve(result)));
+        connection.query(sql, params, (error, result) => (error == null ? resolve(result) : reject(error)));
       });
 
       const queryResult = await queryResultPromise;

@@ -44,10 +44,10 @@ describe('Option', () => {
     });
     it('should narrow type in typescript', () => {
       const anyValue: Option<string> = '';
-      if (!Option.isNone(anyValue)) {
+      if (Option.isNone(anyValue)) {
+        // @ts-expect-error anyValue is not a string
         anyValue.trim();
       } else {
-        // @ts-expect-error anyValue is not a string
         anyValue.trim();
       }
     });

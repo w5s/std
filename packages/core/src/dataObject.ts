@@ -120,7 +120,7 @@ export namespace DataObject {
       create,
       hasInstance: (anyValue: unknown): boolean =>
         // @ts-ignore We know what we are doing
-        anyValue != null ? anyValue[type] === typeName : false,
+        anyValue == null ? false : anyValue[type] === typeName,
     };
 
     // @ts-ignore We know what we are doing

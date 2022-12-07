@@ -26,7 +26,7 @@ export const SQLite3 = {
       const { sql, params } = sqlite3SQLStatement(sqlStatement);
       const database = SQLite3.createDatabase(sqlite3Client.filename);
       const queryResultPromise = new Promise((resolve, reject) => {
-        database.all(sql, params, (error, result) => (error != null ? reject(error) : resolve(result)));
+        database.all(sql, params, (error, result) => (error == null ? resolve(result) : reject(error)));
       });
       // eslint-disable-next-line promise/prefer-await-to-then
       return queryResultPromise.finally(() => database.close());

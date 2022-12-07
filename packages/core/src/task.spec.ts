@@ -28,15 +28,8 @@ const generateTask = <V = never, E = never>(
   const { canceler = () => {} } = options;
   const isAsync = options.delayMs != null && options.delayMs >= 0;
 
-  return isAsync !== true
-    ? Task<V, E>(({ ok: resultOk, error: resultError }) =>
-        'value' in options
-          ? resultOk(options.value)
-          : 'error' in options
-          ? resultError(options.error)
-          : throwError(options.throwError)
-      )
-    : Task<V, E>(async ({ ok: resultOk, error: resultError, setCanceler }) => {
+  return isAsync === true
+    ? Task<V, E>(async ({ ok: resultOk, error: resultError, setCanceler }) => {
         setCanceler(canceler);
         await waitMs(options.delayMs ?? 0);
         return 'value' in options
@@ -44,7 +37,14 @@ const generateTask = <V = never, E = never>(
           : 'error' in options
           ? resultError(options.error)
           : throwError(options.throwError);
-      });
+      })
+    : Task<V, E>(({ ok: resultOk, error: resultError }) =>
+        'value' in options
+          ? resultOk(options.value)
+          : 'error' in options
+          ? resultError(options.error)
+          : throwError(options.throwError)
+      );
 };
 
 namespace ExpectTask {
