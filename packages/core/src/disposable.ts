@@ -1,14 +1,5 @@
 import { Symbol } from './symbol.js';
 
-// https://github.com/tc39/proposal-explicit-resource-management
-
-declare global {
-  interface SymbolConstructor {
-    readonly dispose: unique symbol;
-    readonly asyncDispose: unique symbol;
-  }
-}
-
 export interface Disposable {
   /**
    * Disposes of resources within this object.

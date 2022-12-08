@@ -1,4 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
+// https://github.com/tc39/proposal-explicit-resource-management
+
+declare global {
+  interface SymbolConstructor {
+    readonly dispose: unique symbol;
+    readonly asyncDispose: unique symbol;
+  }
+}
+
 export namespace Symbol {
   const GlobalSymbol = globalThis.Symbol;
 
