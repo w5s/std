@@ -76,33 +76,16 @@ export interface Comparable<T> extends Equal<T> {
  * @category Functor
  * @param properties
  */
-export function Comparable<T>(
-  properties:
-    | { compare: (left: T, right: T) => number }
-    | { '<': (left: T, right: T) => boolean; '==': (left: T, right: T) => boolean }
-): Comparable<T> {
-  if ('compare' in properties) {
-    const { compare } = properties;
-    return {
-      compare,
-      '==': (left, right) => compare(left, right) === 0,
-      '!=': (left, right) => compare(left, right) !== 0,
-      '<': (left, right) => compare(left, right) < 0,
-      '<=': (left, right) => compare(left, right) <= 0,
-      '>': (left, right) => compare(left, right) > 0,
-      '>=': (left, right) => compare(left, right) >= 0,
-    };
-  }
-  const equal = properties['=='];
-  const lessThan = properties['<'];
-
+export function Comparable<T>(properties: { compare: (left: T, right: T) => number }): Comparable<T> {
+  const { compare } = properties;
   return {
-    compare: (left, right) => (equal(left, right) ? 0 : lessThan(left, right) ? -1 : 1),
-    '==': equal,
-    '!=': (left, right) => !equal(left, right),
-    '<': lessThan,
-    '<=': (left, right) => lessThan(left, right) || equal(left, right),
-    '>': (left, right) => !(lessThan(left, right) || equal(left, right)),
-    '>=': (left, right) => !lessThan(left, right),
+    compare,
+    '==': (left, right) => compare(left, right) === 0,
+    '!=': (left, right) => compare(left, right) !== 0,
+    '<': (left, right) => compare(left, right) < 0,
+    '<=': (left, right) => compare(left, right) <= 0,
+    '>': (left, right) => compare(left, right) > 0,
+    '>=': (left, right) => compare(left, right) >= 0,
   };
 }
+export namespace Comparable {}
