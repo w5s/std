@@ -1,4 +1,6 @@
-export interface Comparable<T> {
+import type { Equal } from './equal.js';
+
+export interface Comparable<T> extends Equal<T> {
   /**
    * Return a number that represents comparison
    *
@@ -9,28 +11,6 @@ export interface Comparable<T> {
    * ```
    */
   readonly compare: (left: T, right: T) => number;
-  /**
-   * "Not equal to" operator
-   *
-   * @example
-   * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['!='](0, 1); // true
-   * NumberCompare['!='](0, 0); // false
-   * ```
-   */
-  readonly '!=': (left: T, right: T) => boolean;
-  /**
-   * "Equal to" operator
-   *
-   * @example
-   * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['=='](0, 0); // true
-   * NumberCompare['=='](0, 1); // false
-   * ```
-   */
-  readonly '==': (left: T, right: T) => boolean;
   /**
    * "Less than or equal to" operator
    *
@@ -93,7 +73,7 @@ export interface Comparable<T> {
  * NumberComparable['<'](0, 1); // true
  * NumberComparable['>'](0, 1); // false
  * ```
- * @category Constructor
+ * @category Functor
  * @param properties
  */
 export function Comparable<T>(

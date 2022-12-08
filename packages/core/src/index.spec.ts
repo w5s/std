@@ -19,6 +19,7 @@ describe('index', () => {
         'DataObject',
         'DataError',
         'Disposable',
+        'Equal',
         'extend',
         'default', // FIXME: no key exist in reality
         'Int',

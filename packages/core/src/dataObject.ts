@@ -116,6 +116,7 @@ export namespace DataObject {
     });
     const properties = {
       '==': shallowEqual,
+      '!=': (left: any, right: any) => !shallowEqual(left, right),
       typeName,
       create,
       hasInstance: (anyValue: unknown): boolean =>
