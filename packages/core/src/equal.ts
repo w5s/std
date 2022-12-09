@@ -1,5 +1,16 @@
 export interface Equal<T> {
   /**
+   * Alias to '=='
+   *
+   * @example
+   * ```ts
+   * const NumberEqual: Equal<number>;
+   * NumberEqual[Equal.equals](0, 1); // true
+   * NumberEqual[Equal.equals](0, 0); // false
+   * ```
+   */
+  readonly equals: (left: T, right: T) => boolean;
+  /**
    * "Not equal to" operator
    *
    * @example
@@ -38,10 +49,11 @@ export interface Equal<T> {
  * ```
  * @category Functor
  */
-export function Equal<T>(properties: { '==': (left: T, right: T) => boolean }): Equal<T> {
-  const equals = properties['=='];
-  const notEquals = (left: T, right: T) => !equals(left, right);
+export function Equal<T>(properties: { equals: (left: T, right: T) => boolean }): Equal<T> {
+  const equals = (left: T, right: T) => properties.equals(left, right);
+  const notEquals = (left: T, right: T) => !properties.equals(left, right);
   return {
+    equals: properties.equals,
     '==': equals,
     '!=': notEquals,
   };

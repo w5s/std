@@ -39,8 +39,12 @@ const createOperator =
 
 export const Money = Object.assign(DataObject.Make<Money>('Money'), {
   ...Comparable<Money>({
-    '==': (left, right) => left.amount === right.amount && Currency['=='](left.currency, right.currency),
-    '<': (left, right) => Currency['<'](left.currency, right.currency) || left.amount < right.amount,
+    compare: (left, right) =>
+      left.amount === right.amount && Currency['=='](left.currency, right.currency)
+        ? 0
+        : Currency['<'](left.currency, right.currency) || left.amount < right.amount
+        ? -1
+        : 1,
   }),
 
   /**

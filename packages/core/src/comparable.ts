@@ -78,14 +78,15 @@ export interface Comparable<T> extends Equal<T> {
  */
 export function Comparable<T>(properties: { compare: (left: T, right: T) => number }): Comparable<T> {
   const { compare } = properties;
+  const equals = (left: T, right: T) => compare(left, right) === 0;
   return {
     compare,
-    '==': (left, right) => compare(left, right) === 0,
-    '!=': (left, right) => compare(left, right) !== 0,
-    '<': (left, right) => compare(left, right) < 0,
-    '<=': (left, right) => compare(left, right) <= 0,
-    '>': (left, right) => compare(left, right) > 0,
-    '>=': (left, right) => compare(left, right) >= 0,
+    equals,
+    '==': equals,
+    '!=': (left: T, right: T) => compare(left, right) !== 0,
+    '<': (left: T, right: T) => compare(left, right) < 0,
+    '<=': (left: T, right: T) => compare(left, right) <= 0,
+    '>': (left: T, right: T) => compare(left, right) > 0,
+    '>=': (left: T, right: T) => compare(left, right) >= 0,
   };
 }
-export namespace Comparable {}

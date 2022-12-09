@@ -2,8 +2,13 @@ import { describe, expect, it } from '@jest/globals';
 import { Equal } from './equal.js';
 
 describe(Equal, () => {
-  const NumberEqual = Equal<number>({ '==': (left, right) => left === right });
-
+  const equals = (left: number, right: number) => left === right;
+  const NumberEqual = Equal<number>({ equals });
+  describe('.equals', () => {
+    it('should return true only when left == right', () => {
+      expect(NumberEqual.equals).toBe(equals);
+    });
+  });
   describe('==', () => {
     it.each([
       [0, 0, true],

@@ -72,8 +72,7 @@ export const Currency = Object.assign(
     defaultPrecision: 2 as Int,
 
     ...Comparable<Currency>({
-      '<': (left, right) => left.code < right.code,
-      '==': (left, right) => left.code === right.code,
+      compare: (left, right) => (left.code === right.code ? 0 : left.code < right.code ? -1 : 1),
     }),
   }
 );
