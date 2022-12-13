@@ -4249,7 +4249,7 @@ __metadata:
     "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.2
-    "@w5s/eslint-config": 1.0.0-alpha.40
+    "@w5s/eslint-config": 1.0.0-alpha.42
     "@w5s/mrm-preset": 1.0.0-alpha.32
     "@w5s/ts-config": 1.0.0-alpha.22
     concurrently: 7.6.0
@@ -4299,16 +4299,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.40":
-  version: 1.0.0-alpha.40
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.40"
+"@w5s/eslint-config@npm:1.0.0-alpha.42":
+  version: 1.0.0-alpha.42
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.42"
   dependencies:
     "@babel/core": "*"
     "@babel/eslint-parser": "*"
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
-    "@w5s/prettier-config": ^1.0.3
+    "@w5s/prettier-config": ^1.0.4
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
     eslint-plugin-functional: ^4.2.0
@@ -4330,7 +4330,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: a1675ff45dd6b2e89fa7a642923034653c624f48b68a85ed089187443ad8d68782024720f842726010ec798f2873c3b0924e01745b84c55c39e035a9577013c4
+  checksum: 0ae883983eb9dd9a6e43db66995a505062356131f378da1eae4ef3893121a034d8e6e8fccfb7449b661106ea791f8cfc7ff7dbde5a07a7df6194d5b32d25e63c
   languageName: node
   linkType: hard
 
@@ -4395,15 +4395,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/prettier-config@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "@w5s/prettier-config@npm:1.0.3"
+"@w5s/prettier-config@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "@w5s/prettier-config@npm:1.0.4"
   peerDependencies:
     prettier: 2.x
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 870aedf2c424885a298d252d7da0defaa10971892558a8db81734d5e22908c5a396b785154f65cf8cc3cff45f16ac22e235be0e1c9408621ecad4538c07c7e25
+  checksum: 27348708e41ecace8a6aa309b11cbf5f0061d587ec41261b9776e3129f7f479051a054f8fc87daf892a74a4b12cd5feb438b833477782e877db76186ac54720c
   languageName: node
   linkType: hard
 
