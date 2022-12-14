@@ -4226,16 +4226,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/commitlint-config@npm:1.0.2":
-  version: 1.0.2
-  resolution: "@w5s/commitlint-config@npm:1.0.2"
+"@w5s/commitlint-config@npm:1.0.3":
+  version: 1.0.3
+  resolution: "@w5s/commitlint-config@npm:1.0.3"
   dependencies:
     "@commitlint/types": ^17.0.0
     emoji-regex: ^10.2.1
     gitmojis: ^3.13.0
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
-  checksum: 05995287892feb340d68f10776c79ed2de2711de1c1705a4eaf20a137ca8f4de6bc5a8bae71d2fc2e3b317194cce41c7a7068e64b91f0d452a079f4113049bd4
+  checksum: b8a3cb171be82b628c72513192961dc47de70f6a5ef59582dd992c5ffb31407cd1d468c7e73eb7469cf153f1dd3f541d1b7285a24944509a00beacacc70ca118
   languageName: node
   linkType: hard
 
@@ -4248,7 +4248,7 @@ __metadata:
     "@commitlint/cli": 17.3.0
     "@jest/globals": latest
     "@types/node": 17.0.45
-    "@w5s/commitlint-config": 1.0.2
+    "@w5s/commitlint-config": 1.0.3
     "@w5s/eslint-config": 1.0.0-alpha.42
     "@w5s/mrm-preset": 1.0.0-alpha.34
     "@w5s/ts-config": 1.0.0-alpha.23
