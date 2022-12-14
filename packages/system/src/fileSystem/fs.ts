@@ -1,90 +1,9 @@
-import { Task, Array, ignore, Option, Tag, Int, Time } from '@w5s/core';
+import { Task, Array, ignore, Option } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import { FileError } from '../error.js';
-import { FileSize } from '../fileSize.js';
 import { Internal, errnoTask, errnoExceptionHandler } from '../internal.js';
 import { FilePath } from '../filePath.js';
-
-export type DeviceID = Tag<Int, { deviceID: true }>;
-
-export type FileID = Tag<Int, { fileID: true }>;
-
-export type UserID = Tag<Int, { userID: true }>;
-
-export type GroupID = Tag<Int, { groupID: true }>;
-
-export interface FileStatus {
-  /**
-   * The device identifier
-   */
-  deviceID: DeviceID;
-  /**
-   * The file identifier
-   */
-  fileID: FileID;
-  // fileMode: FileMode;
-  /**
-   * The amount of links to the file
-   */
-  linkCount: Int;
-  /**
-   * The owner identifier of the file
-   */
-  fileOwner: UserID;
-  /**
-   * The group identifier of the file
-   */
-  fileGroup: GroupID;
-  /**
-   * The id of the special device
-   */
-  specialDeviceID: DeviceID;
-  /**
-   * The size of the file (in bytes)
-   */
-  fileSize: FileSize;
-  /**
-   * Time of last access
-   */
-  accessTime: Time;
-  /**
-   * Time of last modification.
-   */
-  modificationTime: Time;
-  /**
-   * Time of last status change (i.e. owner, group, link count, mode, etc.).
-   */
-  statusChangeTime: Time;
-  /**
-   * Checks if this file is a block device.
-   */
-  isBlockDevice: boolean;
-  /**
-   * Checks if this file is a character device.
-   */
-  isCharacterDevice: boolean;
-  /**
-   * Checks if this file is a named pipe device.
-   */
-  isNamedPipe: boolean;
-  /**
-   * Checks if this file is a regular file device.
-   */
-  isFile: boolean;
-  /**
-   * Checks if this file is a directory device.
-   */
-  isDirectory: boolean;
-  /**
-   * Checks if this file is a symbolic link device.
-   */
-  isSymbolicLink: boolean;
-  /**
-   * Checks if this file is a socket device.
-   */
-  isSocket: boolean;
-}
-// export function FileStatus(): FileStatus {}
+import { FileStatus } from '../fileStatus.js';
 
 /**
  * Returns a `FileStatus` object for the given `filePath`, if `filePath` refers to a symbolic link it returns the status of the link.
@@ -97,7 +16,10 @@ export interface FileStatus {
  * @param filePath - The path to the file
  */
 export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, FileError> {
-  return Task.map(errnoTask(Internal.FS.lstat as (p: string) => Promise<nodeFS.Stats>)(filePath), toFileStatus);
+  return Task.map(
+    errnoTask(Internal.FS.lstat as (p: string) => Promise<nodeFS.Stats>)(filePath),
+    FileStatus.fromNodeJSStats
+  );
 }
 
 /**
@@ -111,30 +33,10 @@ export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, Fil
  * @param filePath - The path to the file
  */
 export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> {
-  return Task.map(errnoTask(Internal.FS.stat as (p: string) => Promise<nodeFS.Stats>)(filePath), toFileStatus);
-}
-
-function toFileStatus(stats: nodeFS.Stats): FileStatus {
-  return {
-    accessTime: stats.atimeMs as Time,
-    deviceID: stats.dev as DeviceID,
-    fileGroup: stats.gid as GroupID,
-    fileID: stats.ino as FileID,
-    fileOwner: stats.uid as UserID,
-    fileSize: stats.size as FileSize,
-    isBlockDevice: stats.isBlockDevice(),
-    isCharacterDevice: stats.isCharacterDevice(),
-    isDirectory: stats.isDirectory(),
-    isFile: stats.isFile(),
-    isNamedPipe: stats.isFIFO(),
-    isSocket: stats.isSocket(),
-    isSymbolicLink: stats.isSymbolicLink(),
-    linkCount: stats.nlink as Int,
-    modificationTime: stats.mtimeMs as Time,
-    specialDeviceID: stats.rdev as DeviceID,
-    statusChangeTime: stats.ctimeMs as Time,
-    // fileMode: FileMode(stats.mode),
-  };
+  return Task.map(
+    errnoTask(Internal.FS.stat as (p: string) => Promise<nodeFS.Stats>)(filePath),
+    FileStatus.fromNodeJSStats
+  );
 }
 
 /**

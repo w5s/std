@@ -1,4 +1,5 @@
-import { DataError, Option } from '@w5s/core';
+import type { Option } from '@w5s/core';
+import { DataError } from '@w5s/core/lib/dataError.js';
 import type { FilePath } from './filePath.js';
 
 export const FileErrorType = {
@@ -32,10 +33,10 @@ export const FileError = DataError.MakeGeneric(
     (parameters: Partial<DataError.Parameters<FileError>>): FileError =>
       create({
         fileErrorType: 'UserError',
-        errno: Option.None,
-        code: Option.None,
-        path: Option.None,
-        syscall: Option.None,
+        errno: undefined,
+        code: undefined,
+        path: undefined,
+        syscall: undefined,
         ...parameters,
       })
 );

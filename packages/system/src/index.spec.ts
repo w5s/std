@@ -6,12 +6,17 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // List of all public exports
-        'FileSystem',
-        'FilePath',
-        'FileSize',
+        'DeviceID',
         'FileError',
         'FileErrorType',
+        'FileID',
+        'FilePath',
+        'FileSize',
+        'FileStatus',
+        'FileSystem',
+        'GroupID',
         'Process',
+        'UserID',
         'default',
       ].sort()
     );

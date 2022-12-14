@@ -1,4 +1,4 @@
-import { Result, Task } from '@w5s/core';
+import { Int, Result, Task, Time } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import { describe, it, expect, jest } from '@jest/globals';
 import {
@@ -16,6 +16,8 @@ import {
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
+import { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
+import { FileSize } from '../fileSize.js';
 
 const randomBoolean = () => Math.random() >= 0.5;
 const randomInt = () => Math.floor(Math.random() * 10_000_000_000);
@@ -177,25 +179,27 @@ describe(readSymbolicLinkStatus, () => {
     const args = [FilePath('path')] as const;
     const task = readSymbolicLinkStatus(...args);
     await expectTask(task).resolves.toEqual(
-      Result.Ok({
-        accessTime: stats.atimeMs,
-        deviceID: stats.dev,
-        fileGroup: stats.gid,
-        fileID: stats.ino,
-        fileOwner: stats.uid,
-        fileSize: stats.size,
-        isBlockDevice: stats.isBlockDevice(),
-        isCharacterDevice: stats.isCharacterDevice(),
-        isDirectory: stats.isDirectory(),
-        isFile: stats.isFile(),
-        isNamedPipe: stats.isFIFO(),
-        isSocket: stats.isSocket(),
-        isSymbolicLink: stats.isSymbolicLink(),
-        linkCount: stats.nlink,
-        modificationTime: stats.mtimeMs,
-        specialDeviceID: stats.rdev,
-        statusChangeTime: stats.ctimeMs,
-      })
+      Result.Ok(
+        FileStatus({
+          accessTime: Time(stats.atimeMs),
+          deviceID: DeviceID(stats.dev),
+          fileGroup: GroupID(stats.gid),
+          fileID: FileID(stats.ino),
+          fileOwner: UserID(stats.uid),
+          fileSize: FileSize(stats.size),
+          isBlockDevice: stats.isBlockDevice(),
+          isCharacterDevice: stats.isCharacterDevice(),
+          isDirectory: stats.isDirectory(),
+          isFile: stats.isFile(),
+          isNamedPipe: stats.isFIFO(),
+          isSocket: stats.isSocket(),
+          isSymbolicLink: stats.isSymbolicLink(),
+          linkCount: Int(stats.nlink),
+          modificationTime: Time(stats.mtimeMs),
+          specialDeviceID: DeviceID(stats.rdev),
+          statusChangeTime: Time(stats.ctimeMs),
+        })
+      )
     );
     expect(lstatMocked).toHaveBeenCalledWith(...args);
   });
@@ -208,25 +212,27 @@ describe(readFileStatus, () => {
     const args = [FilePath('path')] as const;
     const task = readFileStatus(...args);
     await expectTask(task).resolves.toEqual(
-      Result.Ok({
-        accessTime: stats.atimeMs,
-        deviceID: stats.dev,
-        fileGroup: stats.gid,
-        fileID: stats.ino,
-        fileOwner: stats.uid,
-        fileSize: stats.size,
-        isBlockDevice: stats.isBlockDevice(),
-        isCharacterDevice: stats.isCharacterDevice(),
-        isDirectory: stats.isDirectory(),
-        isFile: stats.isFile(),
-        isNamedPipe: stats.isFIFO(),
-        isSocket: stats.isSocket(),
-        isSymbolicLink: stats.isSymbolicLink(),
-        linkCount: stats.nlink,
-        modificationTime: stats.mtimeMs,
-        specialDeviceID: stats.rdev,
-        statusChangeTime: stats.ctimeMs,
-      })
+      Result.Ok(
+        FileStatus({
+          accessTime: Time(stats.atimeMs),
+          deviceID: DeviceID(stats.dev),
+          fileGroup: GroupID(stats.gid),
+          fileID: FileID(stats.ino),
+          fileOwner: UserID(stats.uid),
+          fileSize: FileSize(stats.size),
+          isBlockDevice: stats.isBlockDevice(),
+          isCharacterDevice: stats.isCharacterDevice(),
+          isDirectory: stats.isDirectory(),
+          isFile: stats.isFile(),
+          isNamedPipe: stats.isFIFO(),
+          isSocket: stats.isSocket(),
+          isSymbolicLink: stats.isSymbolicLink(),
+          linkCount: Int(stats.nlink),
+          modificationTime: Time(stats.mtimeMs),
+          specialDeviceID: DeviceID(stats.rdev),
+          statusChangeTime: Time(stats.ctimeMs),
+        })
+      )
     );
     expect(statMocked).toHaveBeenCalledWith(...args);
   });
