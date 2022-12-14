@@ -1,5 +1,4 @@
-import { Int, Result, Task, Time } from '@w5s/core';
-import * as nodeFS from 'node:fs';
+import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
 import {
   copyFile,
@@ -8,68 +7,12 @@ import {
   listDirectory,
   createDirectory,
   writeFile,
-  readSymbolicLinkStatus,
-  readFileStatus,
   createSymbolicLink,
   readSymbolicLink,
 } from './fs.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
-import { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
-import { FileSize } from '../fileSize.js';
-
-const randomBoolean = () => Math.random() >= 0.5;
-const randomInt = () => Math.floor(Math.random() * 10_000_000_000);
-const randomDate = () => new Date(Math.floor(Math.random() * 10_000_000_000));
-const generateStats = (): nodeFS.Stats => {
-  const isFile = randomBoolean();
-  const isDirectory = randomBoolean();
-  const isSymbolicLink = randomBoolean();
-  const isBlockDevice = randomBoolean();
-  const isCharacterDevice = randomBoolean();
-  const isFIFO = randomBoolean();
-  const isSocket = randomBoolean();
-  return {
-    isFile: () => isFile,
-    isDirectory: () => isDirectory,
-    isSymbolicLink: () => isSymbolicLink,
-    isBlockDevice: () => isBlockDevice,
-    isCharacterDevice: () => isCharacterDevice,
-    isFIFO: () => isFIFO,
-    isSocket: () => isSocket,
-    size: 0,
-    atime: randomDate(),
-    get atimeMs() {
-      return this.atime.getTime();
-    },
-    // atimeNs: Math.random(),
-    mtime: randomDate(),
-    get mtimeMs() {
-      return this.mtime.getTime();
-    },
-    // mtimeNs: Math.random(),
-    ctime: randomDate(),
-    get ctimeMs() {
-      return this.ctime.getTime();
-    },
-    // ctimeNs: Math.random(),
-    birthtime: randomDate(),
-    get birthtimeMs() {
-      return this.birthtime.getTime();
-    },
-    // birthtimeNs: Math.random(),
-    dev: randomInt(),
-    ino: randomInt(),
-    mode: randomInt(),
-    nlink: randomInt(),
-    uid: randomInt(),
-    gid: randomInt(),
-    rdev: randomInt(),
-    blksize: randomInt(),
-    blocks: randomInt(),
-  };
-};
 
 describe(copyFile, () => {
   it('should call fs.promises.rename', async () => {
@@ -172,90 +115,25 @@ describe(writeFile, () => {
     expect(fileContent).toEqual('0123456789');
   });
 });
-describe(readSymbolicLinkStatus, () => {
-  it('should convert fs.Stat to FileStatus', async () => {
-    const stats = generateStats();
-    const lstatMocked = jest.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
-    const args = [FilePath('path')] as const;
-    const task = readSymbolicLinkStatus(...args);
-    await expectTask(task).resolves.toEqual(
-      Result.Ok(
-        FileStatus({
-          accessTime: Time(stats.atimeMs),
-          deviceID: DeviceID(stats.dev),
-          fileGroup: GroupID(stats.gid),
-          fileID: FileID(stats.ino),
-          fileOwner: UserID(stats.uid),
-          fileSize: FileSize(stats.size),
-          isBlockDevice: stats.isBlockDevice(),
-          isCharacterDevice: stats.isCharacterDevice(),
-          isDirectory: stats.isDirectory(),
-          isFile: stats.isFile(),
-          isNamedPipe: stats.isFIFO(),
-          isSocket: stats.isSocket(),
-          isSymbolicLink: stats.isSymbolicLink(),
-          linkCount: Int(stats.nlink),
-          modificationTime: Time(stats.mtimeMs),
-          specialDeviceID: DeviceID(stats.rdev),
-          statusChangeTime: Time(stats.ctimeMs),
-        })
-      )
-    );
-    expect(lstatMocked).toHaveBeenCalledWith(...args);
+
+describe(createSymbolicLink, () => {
+  it('should call fs.promises.symlink', async () => {
+    const symlinkMocked = jest.spyOn(Internal.FS, 'symlink').mockImplementation(() => Promise.resolve(undefined));
+    const args = [FilePath('target'), FilePath('path')] as const;
+    const task = createSymbolicLink(...args);
+    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
+    expect(symlinkMocked).toHaveBeenCalledWith(...args);
   });
 });
 
-describe(readFileStatus, () => {
-  it('should convert fs.Stat to FileStatus', async () => {
-    const stats = generateStats();
-    const statMocked = jest.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
-    const args = [FilePath('path')] as const;
-    const task = readFileStatus(...args);
-    await expectTask(task).resolves.toEqual(
-      Result.Ok(
-        FileStatus({
-          accessTime: Time(stats.atimeMs),
-          deviceID: DeviceID(stats.dev),
-          fileGroup: GroupID(stats.gid),
-          fileID: FileID(stats.ino),
-          fileOwner: UserID(stats.uid),
-          fileSize: FileSize(stats.size),
-          isBlockDevice: stats.isBlockDevice(),
-          isCharacterDevice: stats.isCharacterDevice(),
-          isDirectory: stats.isDirectory(),
-          isFile: stats.isFile(),
-          isNamedPipe: stats.isFIFO(),
-          isSocket: stats.isSocket(),
-          isSymbolicLink: stats.isSymbolicLink(),
-          linkCount: Int(stats.nlink),
-          modificationTime: Time(stats.mtimeMs),
-          specialDeviceID: DeviceID(stats.rdev),
-          statusChangeTime: Time(stats.ctimeMs),
-        })
-      )
-    );
-    expect(statMocked).toHaveBeenCalledWith(...args);
-  });
-
-  describe(createSymbolicLink, () => {
-    it('should call fs.promises.symlink', async () => {
-      const symlinkMocked = jest.spyOn(Internal.FS, 'symlink').mockImplementation(() => Promise.resolve(undefined));
-      const args = [FilePath('target'), FilePath('path')] as const;
-      const task = createSymbolicLink(...args);
-      await expectTask(task).resolves.toEqual(Result.Ok(undefined));
-      expect(symlinkMocked).toHaveBeenCalledWith(...args);
-    });
-  });
-
-  describe(readSymbolicLink, () => {
-    it('should call fs.promises.readLink', async () => {
-      const readLinkMocked = jest
-        .spyOn(Internal.FS, 'readlink')
-        .mockImplementation(() => Promise.resolve(FilePath('path')));
-      const args = [FilePath('target'), { encoding: 'utf8' }] as const;
-      const task = readSymbolicLink(...args);
-      await expectTask(task).resolves.toEqual(Result.Ok(FilePath('path')));
-      expect(readLinkMocked).toHaveBeenCalledWith(...args);
-    });
+describe(readSymbolicLink, () => {
+  it('should call fs.promises.readLink', async () => {
+    const readLinkMocked = jest
+      .spyOn(Internal.FS, 'readlink')
+      .mockImplementation(() => Promise.resolve(FilePath('path')));
+    const args = [FilePath('target'), { encoding: 'utf8' }] as const;
+    const task = readSymbolicLink(...args);
+    await expectTask(task).resolves.toEqual(Result.Ok(FilePath('path')));
+    expect(readLinkMocked).toHaveBeenCalledWith(...args);
   });
 });

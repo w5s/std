@@ -2,7 +2,8 @@ import { pipe, Task } from '@w5s/core';
 import { FileError } from '../error.js';
 import { errnoTask, Internal } from '../internal.js';
 import { FilePath } from '../filePath.js';
-import { readFileStatus, remove, _exists } from './fs.js';
+import { remove, _exists } from './fs.js';
+import { readFileStatus } from './readFileStatus.js';
 
 /**
  * Move a `source` file or directory to `destination`
