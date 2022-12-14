@@ -1,4 +1,4 @@
-import { describe, test, expect, jest, beforeEach } from '@jest/globals';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 import { Option } from './option.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
@@ -17,19 +17,19 @@ describe(Time, () => {
   });
 
   describe('()', () => {
-    test('should throw invariant error', () => {
+    it('should throw invariant error', () => {
       expect(() => Time(-1)).toThrow('-1 is not a valid time value');
       expect(() => Time(Number.NaN)).toThrow('NaN is not a valid time value');
     });
-    test('should return unchanged value when positive', () => {
+    it('should return unchanged value when positive', () => {
       expect(Time(1)).toBe(1);
     });
   });
   describe(Time.hasInstance, () => {
-    test('should return true for valid values', () => {
+    it('should return true for valid values', () => {
       expect(Time.hasInstance(Time(1))).toBe(true);
     });
-    test('should return false for invalid values', () => {
+    it('should return false for invalid values', () => {
       expect(Time.hasInstance(null)).toBe(false);
       expect(Time.hasInstance(undefined)).toBe(false);
       expect(Time.hasInstance([])).toBe(false);
@@ -38,40 +38,40 @@ describe(Time, () => {
     });
   });
   describe(Time.add, () => {
-    test('should return difference between two times', () => {
+    it('should return difference between two times', () => {
       expect(Time.add(Time(1), TimeDuration(3))).toBe(4);
     });
   });
   describe(Time.diff, () => {
-    test('should return difference between two times', () => {
+    it('should return difference between two times', () => {
       expect(Time.diff(Time(1), Time(3))).toBe(-2);
     });
   });
   describe(Time.parseISOString, () => {
-    test('should return None for invalid representations', () => {
+    it('should return None for invalid representations', () => {
       expect(Time.parseISOString('abc')).toBe(Option.None);
       expect(Time.parseISOString('')).toBe(Option.None);
     });
-    test('should parse valid string ISO', () => {
+    it('should parse valid string ISO', () => {
       expect(Time.parseISOString('1970-01-01T00:00:00.000Z')).toBe(0);
       expect(Time.parseISOString('2021-05-27T12:55:11.480Z')).toBe(1_622_120_111_480);
     });
   });
   describe(Time.toISOString, () => {
-    test('should return a valid string ISO representation', () => {
+    it('should return a valid string ISO representation', () => {
       expect(Time.toISOString(Time(0))).toBe('1970-01-01T00:00:00.000Z');
       expect(Time.toISOString(Time(1_622_120_111_480))).toBe('2021-05-27T12:55:11.480Z');
     });
   });
   describe('now', () => {
-    test('should return Date.now()', async () => {
+    it('should return Date.now()', async () => {
       const nowMs = 123;
       dateNowSpy.mockReturnValue(nowMs);
       expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
     });
   });
   describe(Time.delay, () => {
-    test('should return a task that resolves after duration', async () => {
+    it('should return a task that resolves after duration', async () => {
       const now = Date.now();
       const task = Time.delay(anyDuration);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(0);
@@ -82,7 +82,7 @@ describe(Time, () => {
       jest.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));
     });
-    test.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
+    it.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
       const now = Date.now();
       const task = Time.delay(TimeDuration(delay));
       const promise = Task.unsafeRun(task);
@@ -90,7 +90,7 @@ describe(Time, () => {
       jest.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));
     });
-    test('should be cancelable', () => {
+    it('should be cancelable', () => {
       const duration = TimeDuration.seconds(1);
       const task = Time.delay(duration);
 
@@ -99,7 +99,7 @@ describe(Time, () => {
       const reject = jest.fn();
 
       // Run task
-      task[Task.run](resolve, reject, cancelerRef);
+      task.taskRun(resolve, reject, cancelerRef);
       // Memorize the last setTimeout call
       const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 
@@ -117,10 +117,10 @@ describe(Time, () => {
 });
 describe(TimeDuration, () => {
   describe('()', () => {
-    test('should throw invariant error', () => {
+    it('should throw invariant error', () => {
       expect(() => TimeDuration(Number.NaN)).toThrow('NaN is not a valid duration value');
     });
-    test.each([
+    it.each([
       [1, 1],
       [-1, -1],
       [1.1, 1.1],
@@ -129,11 +129,11 @@ describe(TimeDuration, () => {
     });
   });
   describe(TimeDuration.hasInstance, () => {
-    test('should return true for valid values', () => {
+    it('should return true for valid values', () => {
       expect(TimeDuration.hasInstance(1)).toBe(true);
       expect(TimeDuration.hasInstance(-1)).toBe(true);
     });
-    test('should return false for invalid values', () => {
+    it('should return false for invalid values', () => {
       expect(TimeDuration.hasInstance(null)).toBe(false);
       expect(TimeDuration.hasInstance(undefined)).toBe(false);
       expect(TimeDuration.hasInstance([])).toBe(false);
@@ -141,27 +141,27 @@ describe(TimeDuration, () => {
     });
   });
   describe(TimeDuration.milliseconds, () => {
-    test('should return an int value', () => {
+    it('should return an int value', () => {
       expect(TimeDuration.milliseconds(1)).toBe(1);
     });
   });
   describe(TimeDuration.seconds, () => {
-    test('should return an int value', () => {
+    it('should return an int value', () => {
       expect(TimeDuration.seconds(1)).toBe(1000);
     });
   });
   describe(TimeDuration.minutes, () => {
-    test('should return an int value', () => {
+    it('should return an int value', () => {
       expect(TimeDuration.minutes(1)).toBe(1000 * 60);
     });
   });
   describe(TimeDuration.hours, () => {
-    test('should return an int value', () => {
+    it('should return an int value', () => {
       expect(TimeDuration.hours(1)).toBe(1000 * 60 * 60);
     });
   });
   describe(TimeDuration.days, () => {
-    test('should return an int value', () => {
+    it('should return an int value', () => {
       expect(TimeDuration.days(1)).toBe(1000 * 60 * 60 * 24);
     });
   });

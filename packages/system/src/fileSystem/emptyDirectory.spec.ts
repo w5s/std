@@ -1,10 +1,10 @@
 import { Result } from '@w5s/core';
-import { describe, test } from '@jest/globals';
+import { describe, it } from '@jest/globals';
 import { emptyDirectory } from './emptyDirectory.js';
 import { expectDir, expectTask, withTmpDirectory } from '../_test/config.js';
 
 describe(emptyDirectory, () => {
-  test(
+  it(
     'should delete all of the items when not empty',
     withTmpDirectory(async ({ filePath: testDir, createDir, createFile }) => {
       await Promise.all([
@@ -19,7 +19,7 @@ describe(emptyDirectory, () => {
     })
   );
 
-  test(
+  it(
     'should do nothing when empty',
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir();
@@ -29,7 +29,7 @@ describe(emptyDirectory, () => {
     })
   );
 
-  test(
+  it(
     'should create directory when does not exist',
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir('does-not-exist');

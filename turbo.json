@@ -2,28 +2,38 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        "lib/**",
-        "dist/**",
-        ".next/**"
-      ]
+      "dependsOn": ["^build", "//#build:root"],
+      "outputs": ["lib/**", "dist/**", ".next/**"]
     },
-    "test": {},
-    "lint": {},
-    "format": {},
+    "//#build:root": {},
+    "test": {
+      "dependsOn": ["^build", "//#test:root"]
+    },
+    "//#test:root": {},
+    "lint": {
+      "dependsOn": ["^build", "//#lint:root"]
+    },
+    "//#lint:root": {},
+    "prepare": {},
+    "format": {
+      "dependsOn": ["//#format:root"]
+    },
+    "//#format:root": {},
     "docs": {},
-    "spellcheck": {},
+    "spellcheck": {
+      "dependsOn": ["//#spellcheck:root"]
+    },
+    "//#spellcheck:root": {},
     "clean": {
+      "dependsOn": ["//#clean:root"],
+      "cache": false
+    },
+    "//#clean:root": {
       "cache": false
     },
     "develop": {
       "cache": false
     }
   },
-  "globalDependencies": [
-    "tsconfig.settings.json"
-  ]
+  "globalDependencies": ["tsconfig.settings.json"]
 }

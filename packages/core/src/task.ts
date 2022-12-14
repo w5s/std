@@ -2,15 +2,16 @@ import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
-import { AggregateError } from './error/aggregateError.js';
+import { AggregateError } from './aggregateError.js';
 
 /**
  * Base type for Task
- *
- * @protected
  */
 export interface Task<Value, Error> {
-  readonly [Task.run]: (
+  /**
+   * A callback with side effects
+   */
+  readonly taskRun: (
     /**
      * Resolve callback
      */
@@ -33,7 +34,7 @@ export interface Task<Value, Error> {
  * ```typescript
  * const getTime = Task(({ ok }) => ok(Date.now()));
  * const fetchTask = (url: string) => Task(({ ok, error }) => fetch(url).then(ok, error));
- * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok(undefined)); }), ms));
+ * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok()); }), ms));
  * ```
  * @category Constructor
  * @param sideEffect - the effect function
@@ -43,11 +44,17 @@ export function Task<Value, Error = never>(
     /**
      * Return a new ok object
      */
-    ok: <VV>(value: VV) => Result<VV, never>;
+    ok: {
+      (): Result<void, never>;
+      <VV>(value: VV): Result<VV, never>;
+    };
     /**
-     * return a new error object
+     * Return a new error object
      */
-    error: <EE>(errorValue: EE) => Result<never, EE>;
+    error: {
+      (): Result<never, void>;
+      <EE>(errorValue: EE): Result<never, EE>;
+    };
     /**
      * Canceler setter
      */
@@ -55,7 +62,7 @@ export function Task<Value, Error = never>(
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return Task.wrap((_resolve, _reject, cancelerRef) => {
+  return Task.wrap((resolveTask, rejectTask, cancelerRef) => {
     resetCanceler(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: resultOk,
@@ -65,10 +72,10 @@ export function Task<Value, Error = never>(
       },
     });
     const handleResult = (result: Result<Value, Error>) => {
-      if (result._type === 'Result/Ok') {
-        _resolve(result.value);
+      if (result._ === 'Ok') {
+        resolveTask(result.value);
       } else {
-        _reject(result.error);
+        rejectTask(result.error);
       }
     };
     // eslint-disable-next-line promise/prefer-await-to-then
@@ -76,15 +83,14 @@ export function Task<Value, Error = never>(
   });
 }
 export namespace Task {
-  type ValueType<T> = T extends Task<infer V, any> ? V : never;
-  type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
-
   /**
-   * String symbol to contain the execution of the side effect.
-   * It is long to discourage the direct use of `task['Task/run']()`
-   * Type `string` was chosen over a `symbol` so it is "less opaque" and compatible even for older browser
+   * Extracts value type of task T
    */
-  export const run = 'Task/run';
+  export type ValueType<T> = T extends Task<infer V, any> ? V : never;
+  /**
+   * Extracts error type of task T
+   */
+  export type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
 
   /**
    * Interface used to cancel running task
@@ -95,6 +101,8 @@ export namespace Task {
 
   /**
    * An empty function representing that can be used for non cancelable tasks
+   *
+   * @example
    */
   export const defaultCanceler: Canceler = () => {};
 
@@ -102,6 +110,7 @@ export namespace Task {
    * Base Task constructor
    * Prefer {@link Task} for convenience
    *
+   * @example
    * @protected
    * @param taskRun - the side effect function
    */
@@ -122,19 +131,19 @@ export namespace Task {
     ) => void
   ): Task<Value, Error> {
     return {
-      [run]: taskRun,
+      taskRun,
     };
   }
 
   const emptyArray = Object.freeze([]);
 
+  type TaskEntry<Value, Error> = Readonly<{
+    task: Task<Value, Error>;
+    cancelerRef: Ref<Canceler>;
+  }>;
+
   class TaskAggregateState<Value, Error> {
-    readonly tasks: ReadonlyArray<
-      Readonly<{
-        task: Task<Value, Error>;
-        cancelerRef: Ref<Canceler>;
-      }>
-    >;
+    readonly tasks: ReadonlyArray<TaskEntry<Value, Error>>;
 
     readonly taskCount: number;
 
@@ -161,11 +170,11 @@ export namespace Task {
     }
 
     runAll(
-      resolveTask: (value: Value, entry: typeof this.tasks[0], index: number) => void,
-      rejectTask: (error: Error, entry: typeof this.tasks[0], index: number) => void
+      resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
+      rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void
     ) {
       this.tasks.forEach((entry, taskIndex) => {
-        entry.task[run](
+        entry.task.taskRun(
           (value: Value) => {
             if (!this.isFinished()) {
               this.taskFinished += 1;
@@ -355,7 +364,7 @@ export namespace Task {
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Task<unknown, unknown> {
-    return isObject(anyValue) && typeof anyValue[run] === 'function';
+    return isObject(anyValue) && typeof anyValue['taskRun'] === 'function';
   }
 
   /**
@@ -370,7 +379,9 @@ export namespace Task {
    * @category Constructor
    * @param value - the success value
    */
-  export function resolve<Value, Error = never>(value: Value): Task<Value, Error> {
+  export function resolve<Error = never>(): Task<void, Error>;
+  export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
+  export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
     return wrap((resolveTask) => resolveTask(value));
   }
 
@@ -386,8 +397,10 @@ export namespace Task {
    * @category Constructor
    * @param errorValue - the error value
    */
-  export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error> {
-    return wrap((_, _reject) => _reject(errorValue));
+  export function reject<Value = never>(): Task<Value, void>;
+  export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
+  export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
+    return wrap((_, rejectTask) => rejectTask(errorValue));
   }
 
   /**
@@ -435,7 +448,7 @@ export namespace Task {
     fn: (value: ValueFrom) => ValueTo
   ): Task<ValueTo, Error> {
     return wrap<ValueTo, Error>((resolveTask, rejectTask, cancelerRef) =>
-      task[run]((value) => resolveTask(fn(value)), rejectTask, cancelerRef)
+      task.taskRun((value) => resolveTask(fn(value)), rejectTask, cancelerRef)
     );
   }
 
@@ -456,7 +469,7 @@ export namespace Task {
     fn: (error: ErrorFrom) => ErrorTo
   ): Task<Value, ErrorTo> {
     return wrap<Value, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run](resolveTask, (error) => rejectTask(fn(error)), cancelerRef)
+      task.taskRun(resolveTask, (error) => rejectTask(fn(error)), cancelerRef)
     );
   }
 
@@ -480,7 +493,7 @@ export namespace Task {
     fn: (value: ValueFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueTo, ErrorFrom | ErrorTo> {
     return wrap<ValueTo, ErrorFrom | ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run]((value) => fn(value)[run](resolveTask, rejectTask, cancelerRef), rejectTask, cancelerRef)
+      task.taskRun((value) => fn(value).taskRun(resolveTask, rejectTask, cancelerRef), rejectTask, cancelerRef)
     );
   }
 
@@ -526,7 +539,7 @@ export namespace Task {
     fn: (error: ErrorFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueFrom | ValueTo, ErrorTo> {
     return wrap<ValueFrom | ValueTo, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task[run](resolveTask, (error) => fn(error)[run](resolveTask, rejectTask, cancelerRef), cancelerRef)
+      task.taskRun(resolveTask, (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef), cancelerRef)
     );
   }
 
@@ -548,7 +561,7 @@ export namespace Task {
       returnValue = result;
     };
     let rejectHandler = (_error: unknown) => {};
-    const runValue: void | Promise<void> = task[Task.run](
+    const runValue: void | Promise<void> = task.taskRun(
       (value) => resolveHandler(resultOk(value)),
       (error) => resolveHandler(resultError(error)),
       cancelerRef
@@ -580,7 +593,7 @@ export namespace Task {
    * ```
    * @param task - the task to be run
    */
-  export function unsafeRunOk<Value>(task: Task<Value, never>): Awaitable<Value> {
+  export function unsafeRunOk<Value>(task: Task<Value, unknown>): Awaitable<Value> {
     const promiseOrValue = unsafeRun(task);
     // @ts-ignore - we assume PromiseLike.then returns a Promise
     // eslint-disable-next-line promise/prefer-await-to-then
@@ -589,14 +602,18 @@ export namespace Task {
 }
 
 // inline private constructors
-function resultOk<V>(value: V): Result<V, never> {
-  return { _type: 'Result/Ok', value };
+function resultOk(): Result<void, never>;
+function resultOk<V>(value: V): Result<V, never>;
+function resultOk(value?: unknown): Result<unknown, never> {
+  return { _: 'Ok', value };
 }
-function resultError<E>(error: E): Result<never, E> {
-  return { _type: 'Result/Error', error };
+function resultError(): Result<never, void>;
+function resultError<E>(error: E): Result<never, E>;
+function resultError(error?: unknown): Result<never, unknown> {
+  return { _: 'Error', error };
 }
 function unsafeResultValue<V, E>(result: Result<V, E>) {
-  if (result._type === 'Result/Ok') {
+  if (result._ === 'Ok') {
     return result.value;
   }
   // eslint-disable-next-line @typescript-eslint/no-throw-literal

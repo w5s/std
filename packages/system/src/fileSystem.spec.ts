@@ -1,8 +1,8 @@
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { FileSystem } from './fileSystem.js';
 
 describe('FileSystem', () => {
-  test('exports', () => {
+  it('exports', () => {
     expect(Object.keys(FileSystem).sort()).toEqual(
       [
         // List of all public exports

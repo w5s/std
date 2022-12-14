@@ -26,7 +26,7 @@ export namespace FilePath {
   }
 
   function filterNotEmpty<V extends string>(value: string): Option<V> {
-    return value !== '' ? (value as V) : undefined;
+    return value === '' ? undefined : (value as V);
   }
 
   function wrap(pathString: string): FilePath {
@@ -141,6 +141,7 @@ export namespace FilePath {
    *
    * @param from - The source path
    * @param to - The target path
+   * @example
    */
   export function relative(from: FilePath, to: FilePath): FilePath {
     return wrap(nodePath.relative(from, to));
@@ -170,9 +171,9 @@ export namespace FilePath {
     }
 
     const subPathNormalized = nodePath.normalize(childPath);
-    const subPathWithTrailingSep = !subPathNormalized.endsWith(nodePath.sep)
-      ? subPathNormalized + nodePath.sep
-      : subPathNormalized;
+    const subPathWithTrailingSep = subPathNormalized.endsWith(nodePath.sep)
+      ? subPathNormalized
+      : subPathNormalized + nodePath.sep;
 
     return subPathWithTrailingSep.startsWith(parentPathNormalized);
   }

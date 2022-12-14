@@ -6,12 +6,12 @@ import type { Tag } from './type.js';
 
 // Inline private constructor
 const createTask: typeof Task.wrap = (fn) => ({
-  'Task/run': fn,
+  taskRun: fn,
 });
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
-  typeof queueMicrotask !== 'undefined' ? queueMicrotask : (fn) => Promise.resolve().then(fn);
+  typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
 
 /**
  * Represent a duration in milliseconds
@@ -25,6 +25,7 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
  * ```typescript
  * const duration = TimeDuration(0);// typeof duration === 'number'
  * ```
+ * @category Constructor
  * @param milliseconds - Number of milliseconds
  */
 export function TimeDuration(milliseconds: number): TimeDuration {
@@ -42,6 +43,11 @@ export namespace TimeDuration {
   /**
    * Return `true` if `anyValue` is a valid `TimeDuration` value
    *
+   * @example
+   * ```typescript
+   * TimeDuration.hasInstance(null); // === false
+   * TimeDuration.hasInstance(TimeDuration(0)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the tested value
    */
@@ -128,6 +134,10 @@ export type Time = Tag<number, { time: 'ms' }>;
 /**
  * Create a new Time value
  *
+ * @example
+ * ```typescript
+ * const time = Time(0);
+ * ```
  * @category Constructor
  * @param milliseconds - the value in milliseconds
  */
@@ -140,6 +150,11 @@ export namespace Time {
   /**
    * Return `true` if `anyValue` is a valid `Time` value
    *
+   * @example
+   * ```typescript
+   * Time.hasInstance(null); // === false
+   * Time.hasInstance(Time(0)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the tested value
    */

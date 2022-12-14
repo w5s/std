@@ -7,10 +7,7 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
-const globalObject =
-  typeof globalThis !== 'undefined' ? globalThis : typeof global !== 'undefined' ? global : (undefined as never);
-
-const NativeArray = globalObject.Array;
+const NativeArray = globalThis.Array;
 type NativeArray<T> = globalThis.Array<T>;
 type UnsafeArray = any;
 
@@ -21,6 +18,7 @@ export namespace Array {
   const readonly = <Item>(array: NativeArray<Item>): ReadonlyArray<Item> => array;
   const none = undefined;
   const isBetween = (value: number, min: number, max: number) => value >= min && value <= max;
+  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
   const copySlice = <Item>(
     array: NativeArray<Item>,
     arrayStartIndex: number,
@@ -64,6 +62,22 @@ export namespace Array {
   }
 
   /**
+   * Generate an array of `length` using `mapFn(index)` on each element
+   *
+   * @example
+   * ```typescript
+   * Array.generate(3, () => 'a');// == ['a', 'a', 'a']
+   * Array.generate(3, (index) => index * 2);// == [0, 2, 4]
+   * ```
+   * @category Constructor
+   * @param length - The number of elements
+   * @param mapFn - The mapping function
+   */
+  export function generate<Value>(length: number, mapFn: (index: Int) => Value): Array<Value> {
+    return length === 0 ? emptyArray : NativeArray.from({ length }, (_, index) => mapFn(index as Int));
+  }
+
+  /**
    * Returns a new array from a set of items.
    *
    * @example
@@ -102,6 +116,11 @@ export namespace Array {
   /**
    * Return true if the size of the array is 0
    *
+   * @example
+   * ```typescript
+   * Array.isEmpty([]);// true
+   * Array.isEmpty(['a', 'b', 'c']);// false
+   * ```
    * @category Guard
    * @param array - The array object
    */
@@ -124,9 +143,7 @@ export namespace Array {
    * @param index - The zero based position
    */
   export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
-    const arrayIndex = index < 0 ? index + array.length : index;
-
-    return array[arrayIndex];
+    return array[index < 0 ? index + array.length : index];
   }
 
   /**
@@ -158,37 +175,27 @@ export namespace Array {
    * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */
   export function indexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
-    const returnValue = none;
     const arrayLength = array.length;
 
     if (arrayLength > 0) {
-      let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;
-
       // eslint-disable-next-line no-self-compare
       if (searchItem === searchItem) {
-        // not NaN
-        while (index < arrayLength) {
-          if (array[index] === searchItem) {
-            return index as Int;
-          }
-
-          index += 1;
+        return indexToOption(array.indexOf(searchItem, fromIndex));
+      }
+      // NaN
+      let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;
+      while (index < arrayLength) {
+        const value = array[index];
+        // eslint-disable-next-line no-self-compare
+        if (value !== value) {
+          return index as Int;
         }
-      } else {
-        // NaN
-        while (index < arrayLength) {
-          const value = array[index];
-          // eslint-disable-next-line no-self-compare
-          if (value !== value) {
-            return index as Int;
-          }
 
-          index += 1;
-        }
+        index += 1;
       }
     }
 
-    return returnValue;
+    return none;
   }
 
   /**
@@ -205,42 +212,33 @@ export namespace Array {
    * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
    */
   export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
-    const returnValue = none;
     const arrayLength = array.length;
 
     if (arrayLength > 0) {
+      // eslint-disable-next-line no-self-compare
+      if (searchItem === searchItem) {
+        // not NaN
+        return indexToOption(array.lastIndexOf(searchItem, fromIndex));
+      }
       let index =
         fromIndex == null
           ? arrayLength - 1
           : fromIndex < 0
           ? Math.max(arrayLength + fromIndex, 0)
           : Math.min(fromIndex, arrayLength - 1);
-
-      // eslint-disable-next-line no-self-compare
-      if (searchItem === searchItem) {
-        // not NaN
-        while (index >= 0) {
-          if (array[index] === searchItem) {
-            return index as Int;
-          }
-
-          index -= 1;
+      // NaN
+      while (index >= 0) {
+        const value = array[index];
+        // eslint-disable-next-line no-self-compare
+        if (value !== value) {
+          return index as Int;
         }
-      } else {
-        // NaN
-        while (index >= 0) {
-          const value = array[index];
-          // eslint-disable-next-line no-self-compare
-          if (value !== value) {
-            return index as Int;
-          }
 
-          index -= 1;
-        }
+        index -= 1;
       }
     }
 
-    return returnValue;
+    return none;
   }
 
   /**
@@ -278,33 +276,20 @@ export namespace Array {
     array: Array<FromItem>,
     mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => ToItem
   ): Array<ToItem> {
-    const arrayLength = array.length;
-
-    if (arrayLength === 0) {
+    if (array.length === 0) {
       return array as Array<never>;
     }
-    let index = 0;
     let changed = false;
-    const returnValue = new NativeArray(arrayLength);
-
-    // 1. map and check changes
-    while (index < arrayLength) {
-      const previousValue = array[index]!;
-      const nextValue = mapFn(previousValue, index as Int, array);
-      returnValue[index] = nextValue;
-      index += 1;
-      if ((nextValue as any) !== previousValue) {
+    const returnValue = array.map((previousValue, index, thisArray) => {
+      const nextValue = mapFn(previousValue, index as Int, thisArray);
+      if (!changed && (nextValue as any) !== previousValue) {
         changed = true;
-        break;
       }
-    }
-    // 2. map all rest values
-    while (index < arrayLength) {
-      returnValue[index] = mapFn(array[index]!, index as Int, array);
-      index += 1;
-    }
+      return nextValue;
+    });
 
-    return changed ? readonly(returnValue) : array;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    return changed ? readonly(returnValue) : (array as unknown as Array<ToItem>);
   }
 
   /**
@@ -410,20 +395,11 @@ export namespace Array {
     if (arrayLength === 0) {
       return array;
     }
-
-    const returnValue = [];
-    let returnIndex = 0;
-    let index = 0;
-    while (index < arrayLength) {
-      const value = array[index];
-      if (predicate(array[index]!, index as Int, array)) {
-        returnValue[returnIndex] = value;
-        returnIndex += 1;
-      }
-      index += 1;
-    }
+    const returnValue = array.filter(
+      // @ts-ignore number !== Int
+      predicate
+    );
     const returnValueLength = returnValue.length;
-
     return returnValueLength === 0 ? emptyArray : returnValueLength === arrayLength ? array : readonly(returnValue);
   }
 
@@ -518,22 +494,12 @@ export namespace Array {
     array: Array<Item>,
     predicate: (value: Item, index: Int, array: Array<Item>) => boolean
   ): Option<Int> {
-    const returnValue = none;
-    const arrayLength = array.length;
-
-    if (arrayLength > 0) {
-      let index = 0;
-
-      while (index < arrayLength) {
-        if (predicate(array[index]!, index as Int, array)) {
-          return index as Int;
-        }
-
-        index += 1;
-      }
-    }
-
-    return returnValue;
+    return indexToOption(
+      array.findIndex(
+        // @ts-ignore number !== Int
+        predicate
+      )
+    );
   }
 
   /**
@@ -549,11 +515,7 @@ export namespace Array {
    * value otherwise.
    */
   export function sort<Item>(array: Array<Item>, compareFn: (a: Item, b: Item) => number) {
-    if (array.length === 0) {
-      return array;
-    }
-
-    return readonly(copy(array).sort(compareFn));
+    return array.length === 0 ? array : readonly(copy(array).sort(compareFn));
   }
 
   /**
@@ -572,26 +534,15 @@ export namespace Array {
     if (arrayLength === 0) {
       return array;
     }
-    const startIndex = start == null ? 0 : start;
-    const endIndex = end == null ? arrayLength : end > arrayLength ? arrayLength : end;
-
-    const startNormalized =
-      (startIndex < 0 ? (-startIndex > arrayLength ? 0 : arrayLength + startIndex) : startIndex) >>> 0;
-    const endNormalized = endIndex < 0 ? endIndex + arrayLength : endIndex;
-    const sliceLength = startNormalized > endNormalized ? 0 : (endNormalized - startNormalized) >>> 0;
-    // start >>>= 0;
-
-    if (sliceLength === 0) {
+    const sliceArray = array.slice(start, end);
+    const sliceArrayLength = sliceArray.length;
+    if (sliceArrayLength === 0) {
       return emptyArray;
     }
-    if (sliceLength === arrayLength) {
+    if (sliceArrayLength === arrayLength) {
       return array;
     }
-
-    const result = new NativeArray(sliceLength);
-    copySlice(result, 0, array, startNormalized, endNormalized);
-
-    return readonly(result);
+    return readonly(sliceArray);
   }
 
   /**
@@ -606,26 +557,7 @@ export namespace Array {
    * @param extensions - The other arrays to append
    */
   export function concat<Item>(array: Array<Item>, ...extensions: Array<Item>[]): Array<Item> {
-    const extensionsLength = extensions.length;
-    if (extensionsLength > 0) {
-      const arrayLength = array.length;
-      let returnValue: NativeArray<Item> | undefined;
-      for (let extensionIndex = 0; extensionIndex < extensionsLength; extensionIndex += 1) {
-        const extension = extensions[extensionIndex]!;
-        const extensionLength = extension.length;
-        if (extensionLength > 0) {
-          if (returnValue === undefined) {
-            returnValue = [];
-            copySlice(returnValue, returnValue.length, array, 0, arrayLength);
-          }
-          copySlice(returnValue, returnValue.length, extension, 0, extensionLength);
-        }
-      }
-
-      return returnValue === undefined ? array : readonly(returnValue);
-    }
-
-    return array;
+    return extensions.length > 0 && !extensions.every(isEmpty) ? array.concat(...extensions) : array;
   }
 
   /**
@@ -701,15 +633,9 @@ export namespace Array {
     if (arrayLength === 0 || !isBetween(index, 0, arrayLength - 1) || array[index] === item) {
       return array;
     }
-
-    const returnValue = new NativeArray<Item>(arrayLength);
-
-    // Copy before index
-    copySlice(returnValue, 0, array, 0, index);
+    const returnValue = copy(array);
     // Set at the index
     returnValue[index] = item;
-    // Copy after index
-    copySlice(returnValue, index + 1, array, index + 1, arrayLength);
 
     return readonly(returnValue);
   }

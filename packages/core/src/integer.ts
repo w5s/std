@@ -11,6 +11,10 @@ const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
 export type Int = Tag<number, { integral: true }>;
 
 /**
+ * @example
+ * ```typescript
+ * const intValue = Int(0.5);// 0
+ * ```
  * @category Constructor
  * @param value - an initial numeric value
  */

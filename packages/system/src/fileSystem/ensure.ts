@@ -78,9 +78,9 @@ function linkStat(filePath: FilePath) {
 }
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType): Task<void, FileError> {
-  return actualType !== expectedType
-    ? Task.reject(ensureTypeError(filePath, expectedType, actualType))
-    : Task.resolve(undefined);
+  return actualType === expectedType
+    ? Task.resolve(undefined)
+    : Task.reject(ensureTypeError(filePath, expectedType, actualType));
 }
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {

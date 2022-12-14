@@ -66,6 +66,11 @@ export function throwError(error: unknown): never {
  * - `properties` cannot contain new property
  * - `properties` cannot change the type of a value
  *
+ * @example
+ * ```typescript
+ * const base = { a: 1 }
+ * const newObject = assign(base, { a: 2 });// { a: 2 }
+ * ```
  * @param source - a base object
  * @param properties - an extension object map
  */
@@ -79,6 +84,11 @@ export function assign<T>(source: T, properties: Partial<T> | undefined | null):
  * - `extension` can add new properties
  * - `extension` can override the type of `source`
  *
+ * @example
+ * ```typescript
+ * const base = { a: 1 }
+ * const newObject = assign(base, { b: 3 });// { a: 2, b: 3 }
+ * ```
  * @param source - a base object
  * @param extension - an extension object map
  */
@@ -97,7 +107,6 @@ export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
  * // and so on...
  * ```
  * @param value - the value to pass to the first function
- * @returns a { to } object
  */
 export function pipe<Value>(value: Value): Pipe<Value> {
   return {
@@ -123,48 +132,69 @@ export function pipe<Value>(value: Value): Pipe<Value> {
       st?: Function
     ) {
       switch (arguments.length) {
-        case 0:
+        case 0: {
           return value;
-        case 1:
+        }
+        case 1: {
           return ab!(value);
-        case 2:
+        }
+        case 2: {
           return bc!(ab!(value));
-        case 3:
+        }
+        case 3: {
           return cd!(bc!(ab!(value)));
-        case 4:
+        }
+        case 4: {
           return de!(cd!(bc!(ab!(value))));
-        case 5:
+        }
+        case 5: {
           return ef!(de!(cd!(bc!(ab!(value)))));
-        case 6:
+        }
+        case 6: {
           return fg!(ef!(de!(cd!(bc!(ab!(value))))));
-        case 7:
+        }
+        case 7: {
           return gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))));
-        case 8:
+        }
+        case 8: {
           return hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))));
-        case 9:
+        }
+        case 9: {
           return ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))));
-        case 10:
+        }
+        case 10: {
           return jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))));
-        case 11:
+        }
+        case 11: {
           return kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))));
-        case 12:
+        }
+        case 12: {
           return lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))));
-        case 13:
+        }
+        case 13: {
           return mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))));
-        case 14:
+        }
+        case 14: {
           return no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))));
-        case 15:
+        }
+        case 15: {
           return op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))));
-        case 16:
+        }
+        case 16: {
           return pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))));
-        case 17:
+        }
+        case 17: {
           return qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))));
-        case 18:
+        }
+        case 18: {
           return rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))))));
-        case 19:
+        }
+        case 19: {
           return st!(rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))))));
-        default:
+        }
+        default: {
           throw new TypeError('Wrong arity');
+        }
       }
     },
   };

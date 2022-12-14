@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
-import { describe, test, expect, jest } from '@jest/globals';
+import { describe, it, expect, jest } from '@jest/globals';
 import {
   copyFile,
   remove,
@@ -70,7 +70,7 @@ const generateStats = (): nodeFS.Stats => {
 };
 
 describe(copyFile, () => {
-  test('should call fs.promises.rename', async () => {
+  it('should call fs.promises.rename', async () => {
     const copyFileMocked = jest.spyOn(Internal.FS, 'copyFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), FilePath('newPath')] as const;
     const task = copyFile(...args);
@@ -79,7 +79,7 @@ describe(copyFile, () => {
   });
 });
 describe(createDirectory, () => {
-  test('should call fs.promises.mkdir', async () => {
+  it('should call fs.promises.mkdir', async () => {
     const mkdirMocked = jest.spyOn(Internal.FS, 'mkdir').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = createDirectory(...args);
@@ -88,7 +88,7 @@ describe(createDirectory, () => {
   });
 });
 describe(listDirectory, () => {
-  test('should call fs.promises.readdir', async () => {
+  it('should call fs.promises.readdir', async () => {
     const readdirMocked = jest
       .spyOn(Internal.FS, 'readdir')
       .mockImplementation(() => Promise.resolve(['file1', 'file2'] as any));
@@ -99,7 +99,7 @@ describe(listDirectory, () => {
   });
 });
 describe(remove, () => {
-  test('should call fs.promises.rm', async () => {
+  it('should call fs.promises.rm', async () => {
     const removeMocked = jest.spyOn(Internal.FS, 'rm').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = remove(...args);
@@ -108,7 +108,7 @@ describe(remove, () => {
   });
 });
 describe(rename, () => {
-  test('should call fs.promises.rename', async () => {
+  it('should call fs.promises.rename', async () => {
     const renameMocked = jest.spyOn(Internal.FS, 'rename').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), FilePath('newPath')] as const;
     const task = rename(...args);
@@ -117,7 +117,7 @@ describe(rename, () => {
   });
 });
 describe(writeFile, () => {
-  test('should call fs.promises.writeFile', async () => {
+  it('should call fs.promises.writeFile', async () => {
     const writeFileMocked = jest.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
@@ -128,7 +128,7 @@ describe(writeFile, () => {
       expect.objectContaining({ encoding: 'utf8' })
     );
   });
-  test('should be cancelable', async () => {
+  it('should be cancelable', async () => {
     let fileContent = '';
     jest.spyOn(Internal.FS, 'writeFile').mockImplementation(async (_file, content: any, options: any) => {
       for (const contentChar of content) {
@@ -162,7 +162,7 @@ describe(writeFile, () => {
       }),
     };
     const task = writeFile(FilePath('oldPath'), content);
-    task[Task.run](
+    task.taskRun(
       () => {},
       () => {},
       cancelerRef
@@ -171,7 +171,7 @@ describe(writeFile, () => {
   });
 });
 describe(readSymbolicLinkStatus, () => {
-  test('should convert fs.Stat to FileStatus', async () => {
+  it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
     const lstatMocked = jest.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
@@ -202,7 +202,7 @@ describe(readSymbolicLinkStatus, () => {
 });
 
 describe(readFileStatus, () => {
-  test('should convert fs.Stat to FileStatus', async () => {
+  it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
     const statMocked = jest.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
@@ -232,7 +232,7 @@ describe(readFileStatus, () => {
   });
 
   describe(createSymbolicLink, () => {
-    test('should call fs.promises.symlink', async () => {
+    it('should call fs.promises.symlink', async () => {
       const symlinkMocked = jest.spyOn(Internal.FS, 'symlink').mockImplementation(() => Promise.resolve(undefined));
       const args = [FilePath('target'), FilePath('path')] as const;
       const task = createSymbolicLink(...args);
@@ -242,7 +242,7 @@ describe(readFileStatus, () => {
   });
 
   describe(readSymbolicLink, () => {
-    test('should call fs.promises.readLink', async () => {
+    it('should call fs.promises.readLink', async () => {
       const readLinkMocked = jest
         .spyOn(Internal.FS, 'readlink')
         .mockImplementation(() => Promise.resolve(FilePath('path')));

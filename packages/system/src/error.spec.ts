@@ -1,5 +1,5 @@
 import { Option } from '@w5s/core';
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { FileError } from './error.js';
 import { FilePath } from './filePath.js';
 
@@ -7,7 +7,7 @@ describe(FileError, () => {
   const anyPath = 'anyPath' as FilePath;
 
   describe('()', () => {
-    test('should construct FileError instance', () => {
+    it('should construct FileError instance', () => {
       expect(
         FileError({
           fileErrorType: 'OtherError',
@@ -18,7 +18,7 @@ describe(FileError, () => {
         })
       ).toEqual(
         expect.objectContaining({
-          _type: 'DataError',
+          _: 'DataError',
           name: 'FileError',
           fileErrorType: 'OtherError',
           code: 'ENOENT',
@@ -27,10 +27,10 @@ describe(FileError, () => {
         })
       );
     });
-    test('should set default default parameters', () => {
+    it('should set default default parameters', () => {
       expect(FileError({})).toEqual(
         expect.objectContaining({
-          _type: 'DataError',
+          _: 'DataError',
           name: 'FileError',
           fileErrorType: 'UserError',
           code: Option.None,

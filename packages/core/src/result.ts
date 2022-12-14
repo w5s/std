@@ -1,4 +1,4 @@
-import { DataObject } from './data.js';
+import type { DataObject } from './dataObject.js';
 import type { Option } from './option.js';
 
 // https://doc.rust-lang.org/std/result/enum.Result.html
@@ -29,15 +29,17 @@ import type { Option } from './option.js';
  *   print(result); // alternate console.log('name: Django'); and console.error('error!');
  * }
  * ```
+ * @param Value - the type of value in case of `Ok`
+ * @param Error - the type of error in case of `Error`
  */
-export type Result<V, E> = Result.Ok<V> | Result.Error<E>;
+export type Result<Value, Error> = Result.Ok<Value> | Result.Error<Error>;
 
 export namespace Result {
   type NonPromise<V> = Exclude<V, Promise<unknown>>;
 
   export interface Ok<V>
     extends DataObject<{
-      [DataObject.type]: 'Result/Ok';
+      [DataObject.type]: 'Ok';
       /**
        * The success value
        */
@@ -47,20 +49,27 @@ export namespace Result {
   /**
    * Create a new `Ok` object
    *
+   * @example
+   * ```typescript
+   * Result.Ok('value');// { _: 'Ok', value: 'value'}
+   * Result.Ok();// { _: 'Ok', value: undefined }
+   * ```
    * @category Constructor
    * @param resultValue - the success value
    */
-  export function Ok<V>(resultValue: V): Result<V, never> {
-    return DataObject({
-      [DataObject.type]: Ok.typeName,
+  export function Ok(): Result<void, never>;
+  export function Ok<V>(resultValue: V): Result<V, never>;
+  export function Ok(resultValue?: unknown): Result<unknown, never> {
+    return {
+      _: Ok.typeName,
       value: resultValue,
-    });
+    };
   }
-  Ok.typeName = 'Result/Ok' as const;
+  Ok.typeName = 'Ok' as const;
 
   export interface Error<E>
     extends DataObject<{
-      [DataObject.type]: 'Result/Error';
+      [DataObject.type]: 'Error';
       /**
        * The error value
        */
@@ -70,20 +79,32 @@ export namespace Result {
   /**
    * Create a new `Error` object
    *
+   * @example
+   * ```typescript
+   * Result.Error(new Error('my message'));// { _: 'Error', error: Error}
+   * Result.Error();// { _: 'Error', value: undefined }
+   * ```
    * @category Constructor
    * @param resultError - the failure value
    */
-  export function Error<E>(resultError: E): Result<never, E> {
-    return DataObject({
-      [DataObject.type]: Error.typeName,
+  export function Error(): Result<never, void>;
+  export function Error<E>(resultError: E): Result<never, E>;
+  export function Error(resultError?: unknown): Result<never, unknown> {
+    return {
+      _: Error.typeName,
       error: resultError,
-    });
+    };
   }
-  Error.typeName = 'Result/Error' as const;
+  Error.typeName = 'Error' as const;
 
   /**
    * Return `true` if `anyValue` is {@link Result.Ok} or {@link Result.Error}
    *
+   * @example
+   * ```typescript
+   * Result.hasInstance(null); // === false
+   * Result.hasInstance(Result.Ok(null)); // === true
+   * ```
    * @category Guard
    * @param anyValue - the value to tested
    */
@@ -117,7 +138,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
-    return anyValue[DataObject.type] === Ok.typeName;
+    return anyValue._ === Ok.typeName;
   }
 
   /**
@@ -135,7 +156,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {
-    return anyValue[DataObject.type] === Error.typeName;
+    return anyValue._ === Error.typeName;
   }
 
   /**

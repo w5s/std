@@ -1,5 +1,5 @@
 import { assertNever, Console, Int, Option, pipe, Task, TimeDuration } from '@w5s/core';
-import { HTTPClient } from '@w5s/http-client';
+import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/uuid';
 import { retrying, RetryPolicy } from './retry.js';
 import { SlackClient } from './slackClient.js';
@@ -19,15 +19,22 @@ function main() {
     (_) =>
       Task.orElse(_, (error) => {
         switch (error.name) {
-          case TimeoutError.errorName:
+          case TimeoutError.errorName: {
             return Console.error(`TimeoutError:${error.message}`);
-          case HTTPClient.NetworkError.errorName:
+          }
+          case HTTPError.InvalidURL.errorName: {
+            return Console.error(`InvalidURLError:${error.message}`);
+          }
+          case HTTPError.NetworkError.errorName: {
             return Console.error(`NetworkError:${error.message}`);
-          case HTTPClient.ParserError.errorName:
+          }
+          case HTTPError.ParserError.errorName: {
             return Console.error(`ParserError:${error.message}`);
-          default:
+          }
+          default: {
             // return Console.error(`Unknown Error:${error.message}`);
             return assertNever(error);
+          }
         }
       })
   );

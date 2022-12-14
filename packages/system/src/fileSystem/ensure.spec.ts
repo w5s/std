@@ -1,12 +1,12 @@
 import { Result } from '@w5s/core';
 import * as fs from 'node:fs/promises';
-import { describe, test } from '@jest/globals';
+import { describe, it } from '@jest/globals';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
 
 describe(ensureDirectory, () => {
-  test(
+  it(
     'should work for existing directory',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath('test');
@@ -16,7 +16,7 @@ describe(ensureDirectory, () => {
       await expectFile(ensured).toBeADirectory();
     })
   );
-  test(
+  it(
     'should work for non existing directory',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath('test');
@@ -25,7 +25,7 @@ describe(ensureDirectory, () => {
       await expectFile(ensured).toBeADirectory();
     })
   );
-  test(
+  it(
     'should return error for file',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath('test');
@@ -48,7 +48,7 @@ describe(ensureDirectory, () => {
 });
 
 describe(ensureFile, () => {
-  test(
+  it(
     'should work for existing file',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath('test');
@@ -58,7 +58,7 @@ describe(ensureFile, () => {
       await expectFile(ensured).toBeAFile();
     })
   );
-  test(
+  it(
     'should work for non-existing files',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath('test');
@@ -67,7 +67,7 @@ describe(ensureFile, () => {
       await expectFile(ensured).toBeAFile();
     })
   );
-  test(
+  it(
     'should return error for directory',
     withTmpDirectory(async ({ filePath }) => {
       const ensured = filePath();
@@ -89,7 +89,7 @@ describe(ensureFile, () => {
 });
 
 describe(ensureSymbolicLink, () => {
-  test(
+  it(
     'should work for existing link',
     withTmpDirectory(async ({ filePath }) => {
       const source = filePath('src');
@@ -101,7 +101,7 @@ describe(ensureSymbolicLink, () => {
       await expectFile(destination).toBeASymbolicLink();
     })
   );
-  test(
+  it(
     'should work for non-existing files',
     withTmpDirectory(async ({ filePath }) => {
       const source = filePath('src');
@@ -111,7 +111,7 @@ describe(ensureSymbolicLink, () => {
       await expectFile(destination).toBeASymbolicLink();
     })
   );
-  test(
+  it(
     'should return error for directory, file',
     withTmpDirectory(async ({ filePath }) => {
       const source = filePath('src');

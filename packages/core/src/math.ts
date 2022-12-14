@@ -1,9 +1,7 @@
 import type { Int } from './integer.js';
 
 export namespace Math {
-  const globalObject =
-    typeof globalThis !== 'undefined' ? globalThis : typeof global !== 'undefined' ? global : (undefined as never);
-  const NativeMath = globalObject.Math;
+  const NativeMath = globalThis.Math;
   const alias = (name: keyof typeof NativeMath, nameAlias?: string) => {
     // @ts-expect-error Int is not assignable to number
     Math[nameAlias ?? name] = NativeMath[name];

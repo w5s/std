@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import { DataError } from '@w5s/core/lib/dataError.js';
-import type { Task } from '@w5s/core/lib/task.js';
-import type { TimeDuration } from '@w5s/core/lib/time.js';
+import type { Task, TimeDuration } from '@w5s/core';
 
 const defaultCanceler = () => {};
 
@@ -42,7 +41,7 @@ export function timeout<Value, Error>(
   delay: TimeDuration
 ): Task<Value, TimeoutError | Error> {
   return {
-    'Task/run': (resolve, reject, cancelerRef) => {
+    taskRun: (resolve, reject, cancelerRef) => {
       const taskCancelerRef = { current: defaultCanceler };
       const taskCancel = () => {
         taskCancelerRef.current();
@@ -65,7 +64,7 @@ export function timeout<Value, Error>(
         timeoutCancel();
       };
 
-      task['Task/run'](
+      task.taskRun(
         (value) => {
           timeoutCancel();
           resolve(value);

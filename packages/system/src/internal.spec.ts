@@ -1,5 +1,5 @@
 import { Option, Result } from '@w5s/core';
-import { describe, test, expect } from '@jest/globals';
+import { describe, it, expect } from '@jest/globals';
 import { FileError } from './error.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './internal.js';
 import { FilePath } from './filePath.js';
@@ -7,19 +7,19 @@ import { anyErrnoException, anyError, anyPath, expectTask } from './_test/config
 
 describe('ErrnoException', () => {
   describe(ErrnoException.hasInstance, () => {
-    test('should return true for ErrnoException', () => {
+    it('should return true for ErrnoException', () => {
       expect(ErrnoException.hasInstance(anyErrnoException)).toBe(true);
       expect(ErrnoException.hasInstance(anyError)).toBe(true);
     });
 
-    test('should return false for ErrnoException', () => {
+    it('should return false for ErrnoException', () => {
       expect(ErrnoException.hasInstance({})).toBe(false);
       expect(ErrnoException.hasInstance(undefined)).toBe(false);
     });
   });
 });
 describe(errnoExceptionHandler, () => {
-  test('should convert anything to "OtherError"', () => {
+  it('should convert anything to "OtherError"', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
       FileError({
         fileErrorType: 'OtherError',
@@ -31,7 +31,7 @@ describe(errnoExceptionHandler, () => {
       })
     );
   });
-  test('should convert any ErrnoException to "OtherError" and forward properties', () => {
+  it('should convert any ErrnoException to "OtherError" and forward properties', () => {
     expect(errnoExceptionHandler(anyErrnoException)).toEqual(
       FileError({
         fileErrorType: 'OtherError',
@@ -45,13 +45,13 @@ describe(errnoExceptionHandler, () => {
   });
 });
 describe(errnoTask, () => {
-  test('should transform return value', async () => {
+  it('should transform return value', async () => {
     const original = async () => true;
     const transformed = errnoTask(original);
 
     await expectTask(transformed()).resolves.toEqual(Result.Ok(true));
   });
-  test('should transform thrown error with errnoExceptionHandler', async () => {
+  it('should transform thrown error with errnoExceptionHandler', async () => {
     const original = async () => {
       throw anyError;
     };
@@ -61,13 +61,13 @@ describe(errnoTask, () => {
   });
 });
 describe(errnoTaskSync, () => {
-  test('should transform return value', () => {
+  it('should transform return value', () => {
     const original = () => true;
     const transformed = errnoTaskSync(original);
 
     expectTask(transformed()).result.toEqual(Result.Ok(true));
   });
-  test('should transform thrown error with errnoExceptionHandler', () => {
+  it('should transform thrown error with errnoExceptionHandler', () => {
     const original = () => {
       throw anyError;
     };

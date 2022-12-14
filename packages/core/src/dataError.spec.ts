@@ -1,17 +1,16 @@
-import { describe, test, expect } from '@jest/globals';
-import { DataObject } from './data.js';
+import { describe, it, expect } from '@jest/globals';
 import { DataError } from './dataError.js';
 
 describe(DataError, () => {
   const anyString = 'AnyString';
   describe('()', () => {
-    test('should return instance of Error', () => {
+    it('should return instance of Error', () => {
       expect(DataError({ name: anyString })).toBeInstanceOf(globalThis.Error);
     });
-    test('should return DataObject.type == "DataError"', () => {
-      expect(DataError({ name: anyString })[DataObject.type]).toEqual('DataError');
+    it('should return DataObject.type == "DataError"', () => {
+      expect(DataError({ name: anyString })._).toEqual('DataError');
     });
-    test('should return Error with default properties', () => {
+    it('should return Error with default properties', () => {
       expect(DataError({ name: anyString })).toEqual(
         expect.objectContaining({
           message: '',
@@ -19,7 +18,7 @@ describe(DataError, () => {
         })
       );
     });
-    test('should merge custom properties', () => {
+    it('should merge custom properties', () => {
       expect(DataError({ name: 'MockError', message: 'custom message', foo: true })).toEqual(
         expect.objectContaining({
           name: 'MockError',
@@ -28,7 +27,7 @@ describe(DataError, () => {
         })
       );
     });
-    test('should keep original message', () => {
+    it('should keep original message', () => {
       const cause = new Error('CauseMessage');
       expect(DataError({ name: anyString, message: 'OriginalMessage', cause })).toEqual(
         expect.objectContaining({
@@ -39,7 +38,7 @@ describe(DataError, () => {
     });
   });
   describe('#toString()', () => {
-    test.each([
+    it.each([
       [DataError({ name: 'CustomError' }), 'CustomError'],
       [DataError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
       [
@@ -52,7 +51,7 @@ describe(DataError, () => {
   });
   describe('#stack', () => {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    (Error.captureStackTrace != null ? test : test.skip)('should capture stack', () => {
+    (Error.captureStackTrace == null ? it.skip : it)('should capture stack', () => {
       const error = DataError({
         name: 'CustomError',
         message: 'CustomMessage',
@@ -67,7 +66,7 @@ describe(DataError, () => {
   });
   describe(DataError.MakeGeneric, () => {
     const TestError = DataError.MakeGeneric('TestError', (create) => (email: string) => create({ email }));
-    test('should create a new constructor', () => {
+    it('should create a new constructor', () => {
       expect(TestError('foo@bar.com')).toEqual(
         DataError({
           name: 'TestError',
@@ -76,15 +75,15 @@ describe(DataError, () => {
       );
     });
     describe('errorName', () => {
-      test('should set errorName', () => {
+      it('should set errorName', () => {
         expect(TestError.errorName).toBe('TestError');
       });
     });
     describe(TestError.hasInstance, () => {
-      test.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(TestError.hasInstance(value)).toBe(false);
       });
-      test('should return true for instance', () => {
+      it('should return true for instance', () => {
         expect(TestError.hasInstance(TestError(''))).toBe(true);
       });
     });
@@ -92,7 +91,7 @@ describe(DataError, () => {
   describe(DataError.Make, () => {
     type TestError = DataError<{ name: 'TestError'; email: string }>;
     const TestError = DataError.Make<TestError>('TestError');
-    test('should create a new constructor', () => {
+    it('should create a new constructor', () => {
       expect(TestError({ email: 'foo@bar.com' })).toEqual(
         DataError({
           name: 'TestError',
@@ -101,20 +100,20 @@ describe(DataError, () => {
       );
     });
     describe('name', () => {
-      test('should set name', () => {
+      it('should set name', () => {
         expect(TestError.name).toBe('TestError');
       });
     });
     describe('errorName', () => {
-      test('should set errorName', () => {
+      it('should set errorName', () => {
         expect(TestError.errorName).toBe('TestError');
       });
     });
     describe(TestError.hasInstance, () => {
-      test.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(TestError.hasInstance(value)).toBe(false);
       });
-      test('should return true for instance', () => {
+      it('should return true for instance', () => {
         expect(TestError.hasInstance(TestError({ email: '' }))).toBe(true);
       });
     });

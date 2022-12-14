@@ -25,6 +25,23 @@ export namespace Ref {
   export const current = 'current' as const;
 
   /**
+   * Returns `true` when `anyValue` has a `current` property
+   *
+   * @example
+   * ```typescript
+   * Ref.hasInstance(Ref(123)) // true
+   * Ref.hasInstance(null)) // false
+   * ```
+   * @category Guard
+   * @param anyValue - a tested value
+   */
+  export function hasInstance(anyValue: unknown): anyValue is Ref<unknown> {
+    return (
+      anyValue != null && (typeof anyValue === 'object' || typeof anyValue === 'function') && 'current' in anyValue
+    );
+  }
+
+  /**
    * Returns the current ref value
    *
    * @example
@@ -53,5 +70,21 @@ export namespace Ref {
    */
   export function write<Value>(ref: Ref<Value>, newValue: Value): void {
     ref.current = newValue;
+  }
+
+  /**
+   * Change the current value using a mapping function that returns the new value
+   *
+   * @example
+   *```typescript
+   * const ref = Ref('foo');
+   * Ref.modify(ref, (current) => current + 'bar'); // Ref.read(ref) == 'foobar'
+   * ```
+   * @category Accessor
+   * @param ref - the reference object
+   * @param mapFn - the mapping function that will be applied
+   */
+  export function modify<Value>(ref: Ref<Value>, mapFn: (current: Value) => Value): void {
+    ref.current = mapFn(ref.current);
   }
 }

@@ -2,13 +2,11 @@
 import type { Task } from './task.js';
 
 export namespace Console {
-  type Parameters = [required: unknown, ...optionalParameters: unknown[]];
-
   const createLogTask = (
     method: 'debug' | 'log' | 'info' | 'warn' | 'error',
-    message: Parameters
+    message: [required: unknown, ...optionalParameters: unknown[]]
   ): Task<void, never> => ({
-    'Task/run': (resolve) => {
+    taskRun: (resolve) => {
       console[method](...message);
 
       resolve(undefined);
@@ -24,7 +22,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function debug(...parameters: Parameters): Task<void, never> {
+  export function debug(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('debug', parameters);
   }
 
@@ -37,7 +35,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function log(...parameters: Parameters): Task<void, never> {
+  export function log(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('log', parameters);
   }
 
@@ -50,7 +48,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function info(...parameters: Parameters): Task<void, never> {
+  export function info(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('info', parameters);
   }
 
@@ -63,7 +61,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function warn(...parameters: Parameters): Task<void, never> {
+  export function warn(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('warn', parameters);
   }
 
@@ -76,7 +74,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function error(...parameters: Parameters): Task<void, never> {
+  export function error(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('error', parameters);
   }
 }

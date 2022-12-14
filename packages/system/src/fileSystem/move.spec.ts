@@ -1,12 +1,12 @@
 import { Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
-import { describe, test } from '@jest/globals';
+import { describe, it } from '@jest/globals';
 import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
 import { move } from './move.js';
 
 describe(move, () => {
-  test(
+  it(
     'should reject if source directory does not exist',
     withTmpDirectory(async ({ filePath }) => {
       const srcDir = filePath('src');
@@ -16,7 +16,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should move directory if destination does not exist',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
@@ -28,7 +28,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should move directory if destination does not exist and overwrite is true',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
@@ -40,7 +40,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should reject if source file does not exists',
     withTmpDirectory(async ({ filePath }) => {
       const srcFile = filePath('src', 'test.txt');
@@ -50,7 +50,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should move file if destination exists',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
@@ -81,7 +81,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should move directory',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
@@ -102,7 +102,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should move if source and destination exists and overwrite is true',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
@@ -123,7 +123,7 @@ describe(move, () => {
     })
   );
 
-  test(
+  it(
     'should rejects if moving to a sub directory of source',
     withTmpDirectory(async ({ filePath, createDir }) => {
       const srcDir = filePath('src');
