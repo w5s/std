@@ -4249,7 +4249,7 @@ __metadata:
     "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.3
-    "@w5s/eslint-config": 1.0.0-alpha.42
+    "@w5s/eslint-config": 1.0.0-alpha.43
     "@w5s/mrm-preset": 1.0.0-alpha.34
     "@w5s/ts-config": 1.0.0-alpha.23
     concurrently: 7.6.0
@@ -4299,9 +4299,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.42":
-  version: 1.0.0-alpha.42
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.42"
+"@w5s/eslint-config@npm:1.0.0-alpha.43":
+  version: 1.0.0-alpha.43
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.43"
   dependencies:
     "@babel/core": "*"
     "@babel/eslint-parser": "*"
@@ -4330,7 +4330,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 0ae883983eb9dd9a6e43db66995a505062356131f378da1eae4ef3893121a034d8e6e8fccfb7449b661106ea791f8cfc7ff7dbde5a07a7df6194d5b32d25e63c
+  checksum: 98405f325cae71b02742153a608bc3e87b5c32cf9a636f858421afa95283e1c46fa384902b0602438c4946bfcb2035cbfa014e7319c051982ae1a20d4ea1f0c0
   languageName: node
   linkType: hard
 
