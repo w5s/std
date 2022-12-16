@@ -2,7 +2,6 @@ import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
 import {
   copyFile,
-  remove,
   rename,
   listDirectory,
   createDirectory,
@@ -41,15 +40,6 @@ describe(listDirectory, () => {
     const task = listDirectory(...args);
     await expectTask(task).resolves.toEqual(Result.Ok(['file1', 'file2']));
     expect(readdirMocked).toHaveBeenCalledWith(...args);
-  });
-});
-describe(remove, () => {
-  it('should call fs.promises.rm', async () => {
-    const removeMocked = jest.spyOn(Internal.FS, 'rm').mockImplementation(() => Promise.resolve(undefined));
-    const args = [FilePath('anyPath'), { recursive: true }] as const;
-    const task = remove(...args);
-    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
-    expect(removeMocked).toHaveBeenCalledWith(...args);
   });
 });
 describe(rename, () => {

@@ -110,24 +110,6 @@ export function rename(oldPath: FilePath, newPath: FilePath): Task<void, FileErr
 }
 
 /**
- * Removes files and directories (modeled on the standard POSIX `rm` utility).
- *
- * @example
- * ```ts
- * const task = remove(FilePath('/path/to/file.txt'));
- * Task.unsafeRun(task);
- * ```
- * @param filePath - The path to the file to be removed.
- * @param options - The options to be used when removing the file.
- */
-export function remove(filePath: FilePath, options?: remove.Options): Task<void, FileError> {
-  return errnoTask(Internal.FS.rm)(filePath, options);
-}
-export namespace remove {
-  export type Options = nodeFS.RmOptions;
-}
-
-/**
  * Asynchronously writes data to a file, replacing the file if it already exists.
  *
  * @example
