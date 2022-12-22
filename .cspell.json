@@ -2,13 +2,5 @@
   "version": "0.2",
   "language": "en",
   "import": ["@w5s/cspell-config"],
-  "words": [
-    "CLOB",
-    "NCHAR",
-    "NVARCHAR",
-    "plusplus",
-    "SMALLINT",
-    "VARBINARY",
-    "VARCHAR"
-  ]
+  "words": ["CLOB", "NCHAR", "NVARCHAR", "SMALLINT", "VARBINARY", "VARCHAR"]
 }
