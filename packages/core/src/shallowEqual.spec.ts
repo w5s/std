@@ -46,7 +46,7 @@ describe(shallowEqual, () => {
     expect(shallowEqual({ a: 1, b: 2, c: {} }, { a: 1, b: 2, c: {} })).toEqual(false);
   });
 
-  it('should provide the correct `customizer` arguments', () => {
+  it('should provide the correct `equalValueFn` arguments', () => {
     type TestObject = {
       a: number[];
       b: typeof objectCommon;

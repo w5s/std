@@ -1,10 +1,7 @@
 /* eslint-disable global-require, unicorn/prefer-module, import/no-extraneous-dependencies */
 module.exports = {
   transforms: {
-    PKGJSON: require('markdown-magic-package-json'),
-    SUBPACKAGELIST: require('markdown-magic-subpackage-list'),
-  },
-  callback() {
-    // console.log('done')
+    PKG_JSON: require('markdown-magic-package-json'),
+    SUBPACKAGE_LIST: require('markdown-magic-subpackage-list'),
   },
 };

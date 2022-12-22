@@ -1,17 +1,17 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=# W5s HTTP Module _(${name})_) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5s HTTP Module _(${name})_) -->
 # W5s HTTP Module _(@w5s/http)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
 
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=> ${description}&unknownTxt= ) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
 > HTTP module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=```console\nnpm install ${name}\n```) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```console\nnpm install ${name}\n```) -->
 ```console
 npm install @w5s/http
 ```
@@ -54,19 +54,19 @@ Task.unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchPa
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## License
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[${license}][license-url] © ${author}) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[${license}][license-url] © ${author}) -->
 [MIT][license-url] © Julien Polo <julien.polo@gmail.com>
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 <!-- VARIABLES -->
 
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
 [package-version-svg]: https://img.shields.io/npm/v/@w5s/http.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
 [package-url]: https://www.npmjs.com/package/@w5s/http
 <!-- AUTO-GENERATED-CONTENT:END -->
-<!-- AUTO-GENERATED-CONTENT:START (PKGJSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 [license-url]: ../../LICENSE

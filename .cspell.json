@@ -1,0 +1,15 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "import": ["@w5s/cspell-config"],
+  "words": [
+    "pgsql",
+    "CLOB",
+    "NCHAR",
+    "NVARCHAR",
+    "plusplus",
+    "SMALLINT",
+    "VARBINARY",
+    "VARCHAR"
+  ]
+}
