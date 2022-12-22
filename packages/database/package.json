@@ -9,7 +9,7 @@
     "database",
     "mysql",
     "sqlite",
-    "pgsql",
+    "postgresql",
     "client"
   ],
   "homepage": "https://github.com/w5s/std/tree/master/packages/database#readme",
