@@ -1,6 +1,5 @@
-import { Task } from '@w5s/core';
-import type * as nodeFS from 'node:fs';
-import { FileError } from '../error.js';
+import type { Task } from '@w5s/core';
+import type { FileError } from '../error.js';
 import { Internal, errnoTask } from '../internal.js';
 import { FilePath } from '../filePath.js';
 import { FileStatus } from '../fileStatus.js';
@@ -16,10 +15,7 @@ import { FileStatus } from '../fileStatus.js';
  * @param filePath - The path to the file
  */
 export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> {
-  return Task.map(
-    errnoTask(Internal.FS.stat as (p: string) => Promise<nodeFS.Stats>)(filePath),
-    FileStatus.fromNodeJSStats
-  );
+  return errnoTask(async (p: string) => FileStatus.fromNodeJSStats(await Internal.FS.stat(p)))(filePath);
 }
 
 /**
@@ -33,8 +29,5 @@ export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> 
  * @param filePath - The path to the file
  */
 export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, FileError> {
-  return Task.map(
-    errnoTask(Internal.FS.lstat as (p: string) => Promise<nodeFS.Stats>)(filePath),
-    FileStatus.fromNodeJSStats
-  );
+  return errnoTask(async (p: string) => FileStatus.fromNodeJSStats(await Internal.FS.lstat(p)))(filePath);
 }
