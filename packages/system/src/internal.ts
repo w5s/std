@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { Option, Task } from '@w5s/core';
+import type { Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import * as nodeProcess from 'node:process';
 import { FileError } from './error.js';
@@ -36,34 +36,37 @@ export function errnoExceptionHandler(error: unknown): FileError {
       })
     : FileError({
         fileErrorType: 'OtherError',
-        path: Option.None,
+        path: undefined,
         cause: error,
-        syscall: Option.None,
-        errno: Option.None,
-        code: Option.None,
+        syscall: undefined,
+        errno: undefined,
+        code: undefined,
       });
 }
 
 export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
-  return (...args: A) =>
-    Task(async ({ ok, error }) => {
+  return (...args: A): Task<Awaited<R>, FileError> => ({
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    taskRun: async (resolve, reject) => {
       try {
-        return ok(await fn(...args));
+        resolve(await fn(...args));
       } catch (error_: unknown) {
-        return error(errnoExceptionHandler(error_));
+        reject(errnoExceptionHandler(error_));
       }
-    });
+    },
+  });
 }
 
 export function errnoTaskSync<A extends unknown[], R>(fn: (...args: A) => R) {
-  return (...args: A) =>
-    Task(({ ok, error }) => {
+  return (...args: A): Task<R, FileError> => ({
+    taskRun: (resolve, reject) => {
       try {
-        return ok(fn(...args));
+        resolve(fn(...args));
       } catch (error_: unknown) {
-        return error(errnoExceptionHandler(error_));
+        reject(errnoExceptionHandler(error_));
       }
-    });
+    },
+  });
 }
 
 function isError(anyValue: unknown): anyValue is Error {

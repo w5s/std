@@ -1,4 +1,4 @@
-import { Task } from '@w5s/core';
+import type { Task } from '@w5s/core';
 import { FileError } from './error.js';
 import { errnoTaskSync, Internal } from './internal.js';
 import { FilePath } from './filePath.js';
@@ -15,7 +15,7 @@ export namespace Process {
    * @param code - the exit code
    */
   export function exit(code: number): Task<never, never> {
-    return Task(({ ok }) => ok(Internal.Process.exit(code)));
+    return { taskRun: (resolve) => resolve(Internal.Process.exit(code)) };
   }
 
   /**
@@ -28,7 +28,7 @@ export namespace Process {
    * ```
    */
   export function getCurrentDirectory(): Task<FilePath, never> {
-    return Task(({ ok }) => ok(Internal.Process.cwd() as FilePath));
+    return { taskRun: (resolve) => resolve(Internal.Process.cwd() as FilePath) };
   }
 
   /**
