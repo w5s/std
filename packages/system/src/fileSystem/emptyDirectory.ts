@@ -1,6 +1,7 @@
 import { ignore, pipe, Task } from '@w5s/core';
 import { FileError } from '../error.js';
-import { listDirectory, createDirectory } from './fs.js';
+import { createDirectory } from './fs.js';
+import { listDirectory } from './listDirectory.js';
 import { remove } from './remove.js';
 import { FilePath } from '../filePath.js';
 

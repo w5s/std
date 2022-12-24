@@ -1,14 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
-import {
-  copyFile,
-  rename,
-  listDirectory,
-  createDirectory,
-  writeFile,
-  createSymbolicLink,
-  readSymbolicLink,
-} from './fs.js';
+import { copyFile, rename, createDirectory, writeFile, createSymbolicLink, readSymbolicLink } from './fs.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
@@ -31,17 +23,7 @@ describe(createDirectory, () => {
     expect(mkdirMocked).toHaveBeenCalledWith(...args);
   });
 });
-describe(listDirectory, () => {
-  it('should call fs.promises.readdir', async () => {
-    const readdirMocked = jest
-      .spyOn(Internal.FS, 'readdir')
-      .mockImplementation(() => Promise.resolve(['file1', 'file2'] as any));
-    const args = [FilePath('anyPath'), 'utf8'] as const;
-    const task = listDirectory(...args);
-    await expectTask(task).resolves.toEqual(Result.Ok(['file1', 'file2']));
-    expect(readdirMocked).toHaveBeenCalledWith(...args);
-  });
-});
+
 describe(rename, () => {
   it('should call fs.promises.rename', async () => {
     const renameMocked = jest.spyOn(Internal.FS, 'rename').mockImplementation(() => Promise.resolve(undefined));
