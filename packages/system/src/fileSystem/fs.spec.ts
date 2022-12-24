@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
-import { copyFile, rename, createDirectory, writeFile, createSymbolicLink, readSymbolicLink } from './fs.js';
+import { copyFile, rename, writeFile, createSymbolicLink, readSymbolicLink } from './fs.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
@@ -12,15 +12,6 @@ describe(copyFile, () => {
     const task = copyFile(...args);
     await expectTask(task).resolves.toEqual(Result.Ok(undefined));
     expect(copyFileMocked).toHaveBeenCalledWith(...args);
-  });
-});
-describe(createDirectory, () => {
-  it('should call fs.promises.mkdir', async () => {
-    const mkdirMocked = jest.spyOn(Internal.FS, 'mkdir').mockImplementation(() => Promise.resolve(undefined));
-    const args = [FilePath('anyPath'), { recursive: true }] as const;
-    const task = createDirectory(...args);
-    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
-    expect(mkdirMocked).toHaveBeenCalledWith(...args);
   });
 });
 
