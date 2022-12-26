@@ -5,29 +5,6 @@ import { Internal, errnoTask, errnoExceptionHandler } from '../internal.js';
 import { FilePath } from '../filePath.js';
 
 /**
- * Reads the contents of the symbolic link referred to by path.
- *
- * @example
- * ```ts
- * const task = readSymbolicLink(FilePath('/path/to/symlink'));
- * await Task.unsafeRun(task); // Result.Ok(FilePath('...'))
- * ```
- * @param path - The path to the file.
- * @param options - The options to use.
- */
-export function readSymbolicLink(path: FilePath, options?: readSymbolicLink.Options): Task<FilePath, FileError> {
-  return errnoTask(Internal.FS.readlink)(path, options) as Task<FilePath, FileError>;
-}
-export namespace readSymbolicLink {
-  export type Options = {
-    /**
-     * The file encoding
-     */
-    encoding?: Option<BufferEncoding>;
-  };
-}
-
-/**
  * Asynchronously copies `source` to `destination`. By default, `destination` is overwritten if it already exists.
  *
  * @example

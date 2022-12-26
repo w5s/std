@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
-import { copyFile, rename, writeFile, readSymbolicLink } from './fs.js';
+import { copyFile, rename, writeFile } from './fs.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
@@ -76,17 +76,5 @@ describe(writeFile, () => {
       cancelerRef
     );
     expect(fileContent).toEqual('0123456789');
-  });
-});
-
-describe(readSymbolicLink, () => {
-  it('should call fs.promises.readLink', async () => {
-    const readLinkMocked = jest
-      .spyOn(Internal.FS, 'readlink')
-      .mockImplementation(() => Promise.resolve(FilePath('path')));
-    const args = [FilePath('target'), { encoding: 'utf8' }] as const;
-    const task = readSymbolicLink(...args);
-    await expectTask(task).resolves.toEqual(Result.Ok(FilePath('path')));
-    expect(readLinkMocked).toHaveBeenCalledWith(...args);
   });
 });
