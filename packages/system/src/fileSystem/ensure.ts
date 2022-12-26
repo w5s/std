@@ -1,11 +1,18 @@
-import { Task, Option, ignore, pipe } from '@w5s/core';
+import type { Task, Option } from '@w5s/core';
 import { FilePath } from '../filePath.js';
 import { FileError } from '../error.js';
-import { createSymbolicLink, writeFile } from './fs.js';
-import { createDirectory } from './createDirectory.js';
-import { readSymbolicLinkStatus } from './readFileStatus.js';
+import { ErrnoException, errnoTask, Internal } from '../internal.js';
 
 type FileType = 'file' | 'directory' | 'symlink';
+
+export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
+  const linkType = await linkStat(filePath);
+  if (linkType == null) {
+    await Internal.FS.mkdir(filePath, { recursive: true });
+  } else {
+    ensureType(filePath, 'directory', linkType);
+  }
+}
 
 /**
  * Ensures that the directory exists. If the directory structure does not exist, it is created.
@@ -18,11 +25,17 @@ type FileType = 'file' | 'directory' | 'symlink';
  * @param filePath - The path to ensure
  */
 export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
-  return Task.andThen(linkStat(filePath), (linkType) =>
-    Option.isNone(linkType)
-      ? Task.map(createDirectory(filePath, { recursive: true }), ignore)
-      : ensureType(filePath, 'directory', linkType)
-  );
+  return errnoTask(ensureDirectoryAsync)(filePath);
+}
+
+export async function ensureFileAsync(filePath: FilePath): Promise<void> {
+  const linkType = await linkStat(filePath);
+  if (linkType == null) {
+    await ensureDirectoryAsync(FilePath.dirname(filePath));
+    await Internal.FS.writeFile(filePath, '');
+  } else {
+    ensureType(filePath, 'file', linkType);
+  }
 }
 
 /**
@@ -36,11 +49,17 @@ export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
  * @param filePath - The path to ensure
  */
 export function ensureFile(filePath: FilePath): Task<void, FileError> {
-  return Task.andThen(linkStat(filePath), (linkType) =>
-    Option.isNone(linkType)
-      ? Task.andThen(ensureDirectory(FilePath.dirname(filePath)), () => writeFile(filePath, ''))
-      : ensureType(filePath, 'file', linkType)
-  );
+  return errnoTask(ensureFileAsync)(filePath);
+}
+
+export async function ensureSymbolicLinkAsync(source: FilePath, destination: FilePath): Promise<void> {
+  const destinationLinkType = await linkStat(destination);
+  if (destinationLinkType == null) {
+    await ensureDirectoryAsync(FilePath.dirname(destination));
+    await Internal.FS.symlink(source, destination);
+  } else {
+    ensureType(destination, 'symlink', destinationLinkType);
+  }
 }
 
 /**
@@ -55,34 +74,27 @@ export function ensureFile(filePath: FilePath): Task<void, FileError> {
  * @param destination - The destination path
  */
 export function ensureSymbolicLink(source: FilePath, destination: FilePath): Task<void, FileError> {
-  return Task.andThen(linkStat(destination), (destinationLinkType) =>
-    Option.isNone(destinationLinkType)
-      ? Task.andThen(ensureDirectory(FilePath.dirname(destination)), () => createSymbolicLink(source, destination))
-      : ensureType(destination, 'symlink', destinationLinkType)
-  );
+  return errnoTask(ensureSymbolicLinkAsync)(source, destination);
 }
 
-function linkStat(filePath: FilePath) {
-  return pipe(readSymbolicLinkStatus(filePath)).to(
-    (_) =>
-      Task.map(
-        _,
-        (stats): Option<FileType> =>
-          stats.isFile ? 'file' : stats.isDirectory ? 'directory' : stats.isSymbolicLink ? 'symlink' : Option.None
-      ),
-    (_) =>
-      Task.orElse(
-        _,
-        (error: FileError): Task<Option<never>, FileError> =>
-          error.code === 'ENOENT' ? Task.resolve(undefined) : Task.reject(error)
-      )
-  );
+async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
+  try {
+    const stats = await Internal.FS.lstat(filePath);
+
+    return stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : undefined;
+  } catch (error: unknown) {
+    if ((error as ErrnoException).code === 'ENOENT') {
+      return undefined;
+    }
+    throw error;
+  }
 }
 
-function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType): Task<void, FileError> {
-  return actualType === expectedType
-    ? Task.resolve(undefined)
-    : Task.reject(ensureTypeError(filePath, expectedType, actualType));
+function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
+  if (actualType !== expectedType) {
+    // eslint-disable-next-line @typescript-eslint/no-throw-literal
+    throw ensureTypeError(filePath, expectedType, actualType);
+  }
 }
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {
