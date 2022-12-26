@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import type { Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
+import * as nodePath from 'node:path';
 import * as nodeProcess from 'node:process';
 import { FileError } from './error.js';
 import type { FilePath } from './filePath.js';
 
 export const Internal = {
   FS: { ...nodeFS.promises, ...nodeFS.constants },
+  Path: nodePath,
   Process: { ...nodeProcess },
 };
 

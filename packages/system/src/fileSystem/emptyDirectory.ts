@@ -1,9 +1,23 @@
-import { ignore, pipe, Task } from '@w5s/core';
+import type { Task } from '@w5s/core';
+import { Internal, errnoTask } from '../internal.js';
 import { FileError } from '../error.js';
-import { createDirectory } from './createDirectory.js';
-import { listDirectory } from './listDirectory.js';
-import { remove } from './remove.js';
 import { FilePath } from '../filePath.js';
+
+export async function emptyDirectoryAsync(path: string): Promise<void> {
+  try {
+    const items = await Internal.FS.readdir(path);
+    await Promise.all(
+      items.map((item) =>
+        Internal.FS.rm(Internal.Path.join(path, item), {
+          force: true,
+          recursive: true,
+        })
+      )
+    );
+  } catch {
+    await Internal.FS.mkdir(path, { recursive: true });
+  }
+}
 
 /**
  * Ensures that a directory is empty. Deletes directory contents if the directory is not empty. If the directory does not exist, it is created. The directory itself is not deleted.
@@ -16,19 +30,5 @@ import { FilePath } from '../filePath.js';
  * @param filePath - The directory to empty
  */
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
-  return pipe(listDirectory(filePath)).to(
-    (_) =>
-      Task.andThen(_, (items) =>
-        Task.all(
-          items.map((item) =>
-            remove(FilePath.join(filePath, item), {
-              force: true,
-              recursive: true,
-            })
-          )
-        )
-      ),
-    (_) => Task.orElse(_, () => createDirectory(filePath, { recursive: true })),
-    (_) => Task.map(_, ignore)
-  );
+  return errnoTask(emptyDirectoryAsync)(filePath);
 }
