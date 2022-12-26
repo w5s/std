@@ -2,7 +2,6 @@ import { pipe, Task } from '@w5s/core';
 import { FileError } from '../error.js';
 import { errnoTask, Internal } from '../internal.js';
 import { FilePath } from '../filePath.js';
-import { _exists } from './fs.js';
 import { remove } from './remove.js';
 import { readFileStatus } from './readFileStatus.js';
 
@@ -58,4 +57,15 @@ function alreadyExistError(destination: FilePath) {
     message: 'Destination already exists',
     path: destination,
   });
+}
+
+export function _exists(filePath: FilePath): Task<boolean, FileError> {
+  return errnoTask(async (path: string) => {
+    try {
+      await Internal.FS.access(path, Internal.FS.F_OK);
+      return true;
+    } catch {
+      return false;
+    }
+  })(filePath);
 }

@@ -1,7 +1,7 @@
-import { Task, Option } from '@w5s/core';
+import type { Task, Option } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import { FileError } from '../error.js';
-import { Internal, errnoTask, errnoExceptionHandler } from '../internal.js';
+import { Internal, errnoExceptionHandler } from '../internal.js';
 import { FilePath } from '../filePath.js';
 
 /**
@@ -26,20 +26,23 @@ export function writeFile(
     | Iterable<string | NodeJS.TypedArray | DataView>,
   options?: writeFile.Options
 ): Task<void, FileError> {
-  return Task(async ({ ok, error, setCanceler }) => {
-    const controller = new AbortController();
-    setCanceler(() => controller.abort());
-    try {
-      return ok(
-        await Internal.FS.writeFile(file, data, {
-          ...options,
-          signal: controller.signal,
-        })
-      );
-    } catch (error_: unknown) {
-      return error(errnoExceptionHandler(error_));
-    }
-  });
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    taskRun: async (resolve, reject, cancelerRef) => {
+      const controller = new AbortController();
+      cancelerRef.current = () => controller.abort();
+      try {
+        resolve(
+          await Internal.FS.writeFile(file, data, {
+            ...options,
+            signal: controller.signal,
+          })
+        );
+      } catch (error_: unknown) {
+        reject(errnoExceptionHandler(error_));
+      }
+    },
+  };
 }
 export namespace writeFile {
   export type Options = {
@@ -56,15 +59,4 @@ export namespace writeFile {
      */
     flag?: Option<nodeFS.OpenMode>;
   };
-}
-
-export function _exists(filePath: FilePath): Task<boolean, FileError> {
-  return errnoTask(async (path: string) => {
-    try {
-      await Internal.FS.access(path, Internal.FS.F_OK);
-      return true;
-    } catch {
-      return false;
-    }
-  })(filePath);
 }

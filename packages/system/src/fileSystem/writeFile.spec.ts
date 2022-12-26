@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
-import { writeFile } from './fs.js';
+import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
