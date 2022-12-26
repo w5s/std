@@ -1,9 +1,25 @@
-import { pipe, Task } from '@w5s/core';
+/* eslint-disable @typescript-eslint/no-throw-literal */
+import type { Task } from '@w5s/core';
 import { FileError } from '../error.js';
 import { errnoTask, Internal } from '../internal.js';
 import { FilePath } from '../filePath.js';
-import { remove } from './remove.js';
-import { readFileStatus } from './readFileStatus.js';
+
+export async function moveAsync(source: FilePath, destination: FilePath, options?: move.Options): Promise<void> {
+  const sourceStatus = await Internal.FS.stat(source);
+  if (sourceStatus.isDirectory() && FilePath.isParentOf(source, destination)) {
+    throw subdirectoryError(source, destination);
+  }
+  const existResult = await existsAsync(destination);
+  if (existResult) {
+    if (options?.overwrite === true) {
+      await Internal.FS.rm(destination, { recursive: true });
+    } else {
+      throw alreadyExistError(destination);
+    }
+  }
+
+  await Internal.FS.rename(source, destination);
+}
 
 /**
  * Move a `source` file or directory to `destination`
@@ -18,21 +34,7 @@ import { readFileStatus } from './readFileStatus.js';
  * @param options - The options to use
  */
 export function move(source: FilePath, destination: FilePath, options?: move.Options): Task<void, FileError> {
-  return Task.andThen(readFileStatus(source), (sourceStatus) =>
-    sourceStatus.isDirectory && FilePath.isParentOf(source, destination)
-      ? Task.reject(subdirectoryError(source, destination))
-      : pipe(_exists(destination)).to(
-          (_) =>
-            Task.andThen(_, (existResult) =>
-              existResult
-                ? options?.overwrite === true
-                  ? remove(destination, { recursive: true })
-                  : Task.reject(alreadyExistError(destination))
-                : Task.resolve(undefined)
-            ),
-          (_) => Task.andThen(_, () => errnoTask(Internal.FS.rename)(source, destination))
-        )
-  );
+  return errnoTask(moveAsync)(source, destination, options);
 }
 export namespace move {
   export type Options = {
@@ -59,13 +61,11 @@ function alreadyExistError(destination: FilePath) {
   });
 }
 
-export function _exists(filePath: FilePath): Task<boolean, FileError> {
-  return errnoTask(async (path: string) => {
-    try {
-      await Internal.FS.access(path, Internal.FS.F_OK);
-      return true;
-    } catch {
-      return false;
-    }
-  })(filePath);
+async function existsAsync(filePath: FilePath): Promise<boolean> {
+  try {
+    await Internal.FS.access(filePath, Internal.FS.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
 }
