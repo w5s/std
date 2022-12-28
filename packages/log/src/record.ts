@@ -48,14 +48,7 @@ export interface LogRecord
  * ```
  * @param properties - constructor parameters
  */
-export function LogRecord(properties: {
-  id: LogRecord['id'];
-  category: LogRecord['category'];
-  level: LogRecord['level'];
-  data: LogRecord['data'];
-  message: LogRecord['message'];
-  created: LogRecord['created'];
-}): LogRecord {
+export function LogRecord(properties: DataObject.Parameters<LogRecord>): LogRecord {
   return {
     _: 'LogRecord',
     level: properties.level,
