@@ -17,7 +17,6 @@ describe('index', () => {
         'GroupID',
         'Process',
         'UserID',
-        'default',
       ].sort()
     );
   });

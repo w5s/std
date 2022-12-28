@@ -10,7 +10,6 @@ describe('index', () => {
         'LogMessage',
         'LogRecord',
         'LogHandler',
-        'default', // FIXME: no key exist in reality
       ].sort()
     );
   });

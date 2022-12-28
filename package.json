@@ -58,6 +58,7 @@
       "@w5s/eslint-config"
     ],
     "rules": {
+      "@typescript-eslint/naming-convention": "off",
       "jsdoc/check-tag-names": "off",
       "jsdoc/require-example": [
         "warn",

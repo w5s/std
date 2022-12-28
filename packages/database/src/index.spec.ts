@@ -13,7 +13,6 @@ describe('index', () => {
         'SQLStatement',
         'sql',
         'executeQuery',
-        'default', // FIXME: no key exist in reality
       ].sort()
     );
   });
