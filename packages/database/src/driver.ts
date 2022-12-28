@@ -1,4 +1,4 @@
-import type { Ref, Task } from '@w5s/core';
+import type { TaskCanceler } from '@w5s/core';
 import type { DatabaseDriverMap } from '@w5s/database';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
@@ -25,7 +25,7 @@ export namespace DatabaseDriver {
 
   export function Make<Name extends string, Client>(
     adapter: Name,
-    execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: Ref<Task.Canceler>) => Promise<unknown>
+    execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler) => Promise<unknown>
   ): Module<Name, Client> {
     return {
       adapter,
@@ -39,7 +39,7 @@ export namespace DatabaseDriver {
   export interface Module<Name extends string, Client> {
     adapter: Name;
 
-    execute(client: Client, sqlStatement: SQLStatement, cancelerRef: Ref<Task.Canceler>): Promise<unknown>;
+    execute(client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler): Promise<unknown>;
 
     handleError(cause: unknown): Promise<DatabaseError>;
   }

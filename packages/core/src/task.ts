@@ -5,6 +5,44 @@ import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
 
 /**
+ * Interface used to cancel running task
+ */
+export interface TaskCanceler extends Ref<Option<() => void>> {}
+export namespace TaskCanceler {
+  /**
+   * Clear the current value of canceler
+   *
+   * @example
+   * ```ts
+   * const canceler: TaskCanceler = { current: () => {} };
+   * TaskCanceler.clear(canceler);// canceler.current === undefined
+   * ```
+   * @param canceler
+   */
+  export function clear(canceler: TaskCanceler) {
+    canceler.current = undefined;
+  }
+
+  /**
+   * Trigger cancelation once
+   *
+   * @example
+   * ```ts
+   * const canceler: TaskCanceler = { current: () => { console.log('cancel'); } };
+   * TaskCanceler.cancel(canceler);// console.log('cancel');
+   * TaskCanceler.cancel(canceler);// do nothing
+   * ```
+   * @param canceler
+   */
+  export function cancel(canceler: TaskCanceler) {
+    if (canceler.current != null) {
+      canceler.current();
+    }
+    clear(canceler);
+  }
+}
+
+/**
  * Base type for Task
  */
 export interface Task<Value, Error> {
@@ -23,7 +61,7 @@ export interface Task<Value, Error> {
     /**
      * Reference to cancel function
      */
-    canceler: Ref<Task.Canceler>
+    canceler: TaskCanceler
   ) => void;
 }
 
@@ -58,17 +96,17 @@ export function Task<Value, Error = never>(
     /**
      * Canceler setter
      */
-    setCanceler: (canceler: Option<Task.Canceler>) => void;
+    setCanceler: (canceler: Option<() => void>) => void;
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return Task.wrap((resolveTask, rejectTask, cancelerRef) => {
-    resetCanceler(cancelerRef);
+    TaskCanceler.clear(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: resultOk,
       error: resultError,
       setCanceler: (canceler) => {
-        cancelerRef.current = canceler ?? Task.defaultCanceler;
+        cancelerRef.current = canceler;
       },
     });
     const handleResult = (result: Result<Value, Error>) => {
@@ -93,20 +131,6 @@ export namespace Task {
   export type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
 
   /**
-   * Interface used to cancel running task
-   */
-  export interface Canceler {
-    (): void;
-  }
-
-  /**
-   * An empty function representing that can be used for non cancelable tasks
-   *
-   * @example
-   */
-  export const defaultCanceler: Canceler = () => {};
-
-  /**
    * Base Task constructor
    * Prefer {@link Task} for convenience
    *
@@ -127,7 +151,7 @@ export namespace Task {
       /**
        * Canceler reference
        */
-      canceler: Ref<Task.Canceler>
+      canceler: TaskCanceler
     ) => void
   ): Task<Value, Error> {
     return {
@@ -139,7 +163,7 @@ export namespace Task {
 
   type TaskEntry<Value, Error> = Readonly<{
     task: Task<Value, Error>;
-    cancelerRef: Ref<Canceler>;
+    cancelerRef: TaskCanceler;
   }>;
 
   class TaskAggregateState<Value, Error> {
@@ -152,7 +176,7 @@ export namespace Task {
     constructor(tasks: Iterable<Task<Value, Error>>) {
       this.tasks = Array.from(tasks).map((task) => ({
         task,
-        cancelerRef: { current: defaultCanceler },
+        cancelerRef: { current: undefined },
       }));
       this.taskCount = this.tasks.length;
     }
@@ -166,7 +190,7 @@ export namespace Task {
     }
 
     cancelAll() {
-      this.tasks.forEach((task) => triggerCanceler(task.cancelerRef));
+      this.tasks.forEach((task) => TaskCanceler.cancel(task.cancelerRef));
     }
 
     runAll(
@@ -239,7 +263,7 @@ export namespace Task {
               state.finish();
               taskReject(error);
               // cancel all but the current task
-              resetCanceler(entry.cancelerRef);
+              TaskCanceler.clear(entry.cancelerRef);
               state.cancelAll();
             }
           }
@@ -289,7 +313,7 @@ export namespace Task {
               state.finish();
               taskResolve(value);
               // cancel all but the current task
-              resetCanceler(entry.cancelerRef);
+              TaskCanceler.clear(entry.cancelerRef);
               state.cancelAll();
             }
           },
@@ -555,7 +579,7 @@ export namespace Task {
    * @param task - the task to be run
    */
   export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Result<Value, Error>> {
-    const cancelerRef: Ref<() => void> = { current: Task.defaultCanceler };
+    const cancelerRef: TaskCanceler = { current: undefined };
     let returnValue: Result<Value, Error> | undefined;
     let resolveHandler = (result: Result<Value, Error>) => {
       returnValue = result;
@@ -629,11 +653,4 @@ function isPromiseLike<V>(anyValue: unknown): anyValue is PromiseLike<V> {
 }
 function isPromise<V>(anyValue: unknown): anyValue is Promise<V> {
   return isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
-}
-function resetCanceler(cancelerRef: Ref<Task.Canceler>) {
-  cancelerRef.current = Task.defaultCanceler;
-}
-function triggerCanceler(cancelerRef: Ref<Task.Canceler>) {
-  cancelerRef.current();
-  resetCanceler(cancelerRef);
 }

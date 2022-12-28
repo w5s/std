@@ -1,4 +1,4 @@
-import { Ref, Result, Task } from '@w5s/core';
+import { Result, Task, TaskCanceler } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
@@ -109,9 +109,9 @@ describe(HTTP.request, () => {
     });
     const resolve = jest.fn();
     const reject = jest.fn();
-    const cancelerRef = Ref(Task.defaultCanceler);
+    const cancelerRef: TaskCanceler = { current: undefined };
     task.taskRun(resolve, reject, cancelerRef);
-    cancelerRef.current();
+    TaskCanceler.cancel(cancelerRef);
 
     await finished.promise;
     expect(resolve).not.toHaveBeenCalled();

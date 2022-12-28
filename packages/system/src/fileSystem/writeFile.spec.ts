@@ -1,4 +1,4 @@
-import { Result, Task } from '@w5s/core';
+import { Result, TaskCanceler } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
@@ -29,7 +29,7 @@ describe(writeFile, () => {
       }
     });
     let index = 0;
-    const cancelerRef = { current: Task.defaultCanceler };
+    const cancelerRef: TaskCanceler = { current: undefined };
     const content: Iterable<string> = {
       [Symbol.iterator]: () => ({
         next: () => {
@@ -37,7 +37,7 @@ describe(writeFile, () => {
           index += 1;
           let value = currentIndex.toString(16);
           if (currentIndex > 9) {
-            cancelerRef.current();
+            TaskCanceler.cancel(cancelerRef);
             value = 'X';
           }
           if (currentIndex >= 16) {

@@ -38,6 +38,7 @@ describe('index', () => {
         'Symbol',
         'throwError',
         'Task',
+        'TaskCanceler',
         'Time',
         'TimeDuration',
         'warning',

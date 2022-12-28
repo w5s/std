@@ -6,7 +6,7 @@ import { AggregateError } from './aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
-import { Task } from './task.js';
+import { Task, TaskCanceler } from './task.js';
 
 const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
@@ -282,7 +282,7 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(Task.defaultCanceler);
+        expect(Ref.read(ref)).toBe(undefined);
       });
     });
     describe('async', () => {
@@ -313,7 +313,7 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(Task.defaultCanceler);
+        expect(Ref.read(ref)).toBe(undefined);
       });
       it('should set default canceler setCanceler(undefined)', () => {
         const canceler = () => {};
@@ -330,7 +330,7 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(Task.defaultCanceler);
+        expect(Ref.read(ref)).toBe(undefined);
       });
 
       it('should set canceler', () => {
@@ -687,6 +687,24 @@ describe('Task', () => {
 
       expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       expect(afterTask.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
+    });
+  });
+});
+describe('TaskCanceler', () => {
+  describe(TaskCanceler.clear, () => {
+    it('should unset current value', () => {
+      const canceler = { current: () => {} };
+      TaskCanceler.clear(canceler);
+      expect(canceler.current).toBe(undefined);
+    });
+  });
+  describe(TaskCanceler.cancel, () => {
+    it('should call current only once', () => {
+      const cancel = jest.fn();
+      const canceler = { current: cancel };
+      TaskCanceler.cancel(canceler);
+      TaskCanceler.cancel(canceler);
+      expect(cancel).toHaveBeenCalledTimes(1);
     });
   });
 });
