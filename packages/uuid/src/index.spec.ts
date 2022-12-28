@@ -7,7 +7,6 @@ describe('index', () => {
       [
         // List of all public exports
         'UUID',
-        'default', // FIXME: no key exist in reality
         'randomUUID',
       ].sort()
     );

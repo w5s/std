@@ -21,7 +21,6 @@ describe('index', () => {
         'Disposable',
         'Equal',
         'extend',
-        'default', // FIXME: no key exist in reality
         'Int',
         'identity',
         'ignore',
