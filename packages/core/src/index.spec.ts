@@ -17,7 +17,6 @@ describe('index', () => {
         'constant',
         'DataError',
         'DataObject',
-        'default',
         'Disposable',
         'Equal',
         'extend',
