@@ -1,8 +1,8 @@
 import type { Option, TimeDuration, Int, Result } from '@w5s/core';
-import { Random } from '@w5s/core/lib/random.js';
 import { Task } from '@w5s/core/lib/task.js';
 import { Time } from '@w5s/core/lib/time.js';
 
+const defaultRandom: Task<number, never> = { taskRun: (resolve) => resolve(Math.random()) };
 const timeDelay = Time.delay;
 const resolveTask = <T>(value: T): Task<T, never> => ({ taskRun: (resolve) => resolve(value) });
 const resolveNone = resolveTask(undefined);
@@ -217,13 +217,10 @@ export namespace RetryPolicy {
    * @param initialDelay - The initial delay
    * @param generator - The random generator
    */
-  export function waitExponentialJitter(initialDelay: TimeDuration, generator = Random.defaultGenerator): RetryPolicy {
+  export function waitExponentialJitter(initialDelay: TimeDuration, generator = defaultRandom): RetryPolicy {
     return ({ retryIndex }) => {
       const temporary = Math.trunc((initialDelay * 2 ** retryIndex) / 2) as Int;
-      return Task.map(
-        Random.Generator.int(generator)(0 as Int, temporary),
-        (randomValue) => (+temporary + +randomValue) as TimeDuration
-      );
+      return Task.map(generator, (randomValue) => (+temporary + Math.trunc(randomValue * temporary)) as TimeDuration);
     };
   }
 
