@@ -3,7 +3,7 @@ import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
 import { HTTP, HTTPParser } from '@w5s/http';
 import { timeout } from './timeout.js';
 
-export interface SlackClient {
+export interface Slack {
   /**
    * Slack API token
    */
@@ -13,20 +13,20 @@ export interface SlackClient {
    */
   readonly slackRequestTimeout: Option<TimeDuration>;
 }
-export function SlackClient({
+export function Slack({
   timeout: slackRequestTimeout,
   token: slackToken,
 }: {
-  timeout?: SlackClient['slackRequestTimeout'];
-  token: SlackClient['slackToken'];
-}): SlackClient {
+  timeout?: Slack['slackRequestTimeout'];
+  token: Slack['slackToken'];
+}): Slack {
   return {
     slackToken,
     slackRequestTimeout,
   };
 }
 
-export namespace SlackClient {
+export namespace Slack {
   type Id<T> = Tag<string, { slackId: T }>;
   function MakeId<IdType extends Id<any>>() {
     function Id(value: string): IdType {
@@ -67,7 +67,7 @@ export namespace SlackClient {
   }
 
   function apiCall<Response extends JSONValue>(
-    client: SlackClient,
+    client: Slack,
     method: HTTP.Method,
     parameters: { [key: string]: unknown }
   ) {
@@ -85,21 +85,23 @@ export namespace SlackClient {
     return requestWithTimeout;
   }
 
-  export function chat_postMessage(client: SlackClient, request: chat_postMessage.Request) {
-    return apiCall<chat_postMessage.Response>(client, 'chat.postMessage', { as_user: 'true', ...request });
-  }
-  export namespace chat_postMessage {
-    export interface Request
-      extends Readonly<{
-        // username?: SlackClient.UserId;
-        text?: Option<string>;
-        channel?: Option<SlackClient.ChannelId>;
-        // blocks?: Array<unknown>;
-        attachments?: Array<unknown>;
-      }> {}
-    export interface Response
-      extends Readonly<{
-        ok: boolean;
-      }> {}
+  export namespace Chat {
+    export function postMessage(client: Slack, request: postMessage.Request) {
+      return apiCall<postMessage.Response>(client, 'chat.postMessage', { as_user: 'true', ...request });
+    }
+    export namespace postMessage {
+      export interface Request
+        extends Readonly<{
+          // username?: Slack.UserId;
+          text?: Option<string>;
+          channel?: Option<Slack.ChannelId>;
+          // blocks?: Array<unknown>;
+          attachments?: Array<unknown>;
+        }> {}
+      export interface Response
+        extends Readonly<{
+          ok: boolean;
+        }> {}
+    }
   }
 }
