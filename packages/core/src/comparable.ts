@@ -75,6 +75,7 @@ export interface Comparable<T> extends Equal<T> {
  * ```
  * @category Functor
  * @param properties
+ * @param properties.compare - the comparison function
  */
 export function Comparable<T>(properties: { compare: (left: T, right: T) => number }): Comparable<T> {
   const { compare } = properties;

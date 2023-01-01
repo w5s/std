@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/require-example */
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import type { Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
@@ -21,8 +22,6 @@ export const ErrnoException = {
 
 /**
  * Converts an ErrnoException to a FileError.
- *
- * @example
  */
 export function errnoExceptionHandler(error: unknown): FileError {
   return FileError.hasInstance(error)

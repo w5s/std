@@ -1,6 +1,5 @@
 import type { Int, Tag, Time } from '@w5s/core';
 import { DataObject } from '@w5s/core/lib/dataObject.js';
-import type * as nodeFS from 'node:fs';
 import type { FileSize } from './fileSize.js';
 
 /**
@@ -153,32 +152,4 @@ export interface FileStatus
  *
  * @category Constructor
  */
-export const FileStatus = Object.assign(DataObject.Make<FileStatus>('FileStatus'), {
-  /**
-   * Returns a new FileStatus from a NodeJS Stats
-   *
-   * @example
-   * @param stats
-   */
-  fromNodeJSStats: (stats: nodeFS.Stats): FileStatus => ({
-    _: 'FileStatus',
-    accessTime: stats.atimeMs as Time,
-    deviceID: stats.dev as DeviceID,
-    fileGroup: stats.gid as GroupID,
-    fileID: stats.ino as FileID,
-    fileOwner: stats.uid as UserID,
-    fileSize: stats.size as FileSize,
-    isBlockDevice: stats.isBlockDevice(),
-    isCharacterDevice: stats.isCharacterDevice(),
-    isDirectory: stats.isDirectory(),
-    isFile: stats.isFile(),
-    isNamedPipe: stats.isFIFO(),
-    isSocket: stats.isSocket(),
-    isSymbolicLink: stats.isSymbolicLink(),
-    linkCount: stats.nlink as Int,
-    modificationTime: stats.mtimeMs as Time,
-    specialDeviceID: stats.rdev as DeviceID,
-    statusChangeTime: stats.ctimeMs as Time,
-    // fileMode: FileMode(stats.mode),
-  }),
-});
+export const FileStatus = DataObject.Make<FileStatus>('FileStatus');
