@@ -2,6 +2,8 @@ import { describe, it, expect, jest } from '@jest/globals';
 import { Record } from './record.js';
 
 describe('Dict', () => {
+  const anySymbolKey = Symbol('anySymbolKey');
+
   function toArray<V>(iterator: IterableIterator<V>): Array<V> {
     return Array.from(iterator);
   }
@@ -29,6 +31,16 @@ describe('Dict', () => {
           })
         )
       ).toEqual(['anyKey', 'anyOtherKey']);
+    });
+    it('should handle symbol keys', () => {
+      expect(
+        toArray(
+          Record.keys({
+            [anySymbolKey]: 'anyValue',
+            anyOtherKey: 'anyOtherValue',
+          })
+        )
+      ).toEqual(['anyOtherKey', anySymbolKey]);
     });
   });
   describe(Record.values, () => {
@@ -60,59 +72,60 @@ describe('Dict', () => {
   });
   describe(Record.has, () => {
     it('should return false if key does not exist', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.has(dict, 'anyOtherKey')).toBe(false);
+      const record: Record<string, string> = { anyKey: 'anyValue' };
+      expect(Record.has(record, 'anyOtherKey')).toBe(false);
     });
     it('should true if key exist', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.has(dict, 'anyKey')).toBe(true);
+      const record = { anyKey: 'anyValue' };
+      expect(Record.has(record, 'anyKey')).toBe(true);
     });
   });
   describe(Record.get, () => {
     it('should return undefined if key does not exist', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.get(dict, 'anyOtherKey')).toBe(undefined);
+      const record: Record<string, string> = { anyKey: 'anyValue' };
+      expect(Record.get(record, 'anyOtherKey')).toBe(undefined);
     });
     it('should return value if key exist', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.get(dict, 'anyKey')).toBe('anyValue');
+      const record = { anyKey: 'anyValue' };
+      expect(Record.get(record, 'anyKey')).toBe('anyValue');
     });
   });
   describe(Record.set, () => {
     it('should set value for key', () => {
-      expect(Record.set({ anyKey: 'anyValue' }, 'anyOtherKey', 'anyOtherValue')).toEqual({
+      const record: Record<string, string> = { anyKey: 'anyValue' };
+      expect(Record.set(record, 'anyOtherKey', 'anyOtherValue')).toEqual({
         anyKey: 'anyValue',
         anyOtherKey: 'anyOtherValue',
       });
     });
     it('should return unchanged dict if value is the same', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.set(dict, 'anyKey', 'anyValue')).toStrictEqual(dict);
+      const record = { anyKey: 'anyValue' };
+      expect(Record.set(record, 'anyKey', 'anyValue')).toStrictEqual(record);
     });
   });
   describe(Record.delete, () => {
     it('should return identity for empty dictionary', () => {
-      const dict = {};
-      expect(Record.delete(dict, 'anyKey')).toBe(dict);
+      const record: Record<string, string> = {};
+      expect(Record.delete(record, 'anyKey')).toBe(record);
     });
     it('should return identity if key is not found', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.delete(dict, 'anyOtherKey')).toBe(dict);
+      const record: Record<string, string> = { anyKey: 'anyValue' };
+      expect(Record.delete(record, 'anyOtherKey')).toBe(record);
     });
     it('should return a new dictionary without key', () => {
-      const dict = { anyKey: 'anyValue' };
-      expect(Record.delete(dict, 'anyKey')).toEqual({});
+      const record = { anyKey: 'anyValue' };
+      expect(Record.delete(record, 'anyKey')).toEqual({});
     });
   });
 
   describe(Record.forEach, () => {
     it('should return an array of keys', () => {
       const fn = jest.fn();
-      const dict = { anyKey: 'anyValue', anyOtherKey: 'anyOtherValue' };
-      Record.forEach(dict, fn);
+      const record = { anyKey: 'anyValue', anyOtherKey: 'anyOtherValue' };
+      Record.forEach(record, fn);
       expect(fn.mock.calls).toEqual([
-        ['anyValue', 'anyKey', dict],
-        ['anyOtherValue', 'anyOtherKey', dict],
+        ['anyValue', 'anyKey', record],
+        ['anyOtherValue', 'anyOtherKey', record],
       ]);
     });
   });

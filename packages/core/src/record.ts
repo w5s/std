@@ -6,15 +6,17 @@ import type { Option } from './option.js';
 const hasOwn: typeof Object.hasOwn =
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   Object.hasOwn ?? ((object, property) => Object.prototype.hasOwnProperty.call(object, property));
-const emptyRecord = Object.freeze({});
-const keyIterator = (record: Record<any>): IterableIterator<string> => Object.keys(record).values();
+const emptyRecord = Object.freeze({}) as Record<any, any>;
+const ownKeys = <Key extends AnyKey>(record: Record<Key, any>) => Reflect.ownKeys(record) as Key[];
+
+type AnyKey = string | symbol;
 
 /**
  * A Record is an immutable mapping `{ [string]: value }`
  */
-export type Record<V> = Readonly<{
-  [key: string]: V;
-}>;
+export type Record<Key extends AnyKey, Value> = {
+  readonly [P in Key]: Value;
+};
 
 /**
  * Record constructor. Alias of `from`
@@ -26,7 +28,7 @@ export type Record<V> = Readonly<{
  * ```
  * @category Constructor
  */
-export function Record<V>(iterable: Iterable<[string, V]>): Record<V> {
+export function Record<Key extends AnyKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
   return Record.from(iterable);
 }
 export namespace Record {
@@ -39,10 +41,10 @@ export namespace Record {
    * ```
    * @category Constructor
    */
-  export function from<V>(iterable: Iterable<[string, V]>): Record<V> {
-    const returnValue: {
-      [key: string]: V;
-    } = {};
+  export function from<Key extends AnyKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
+    const returnValue = {} as unknown as {
+      [P in Key]: Value;
+    };
     for (const [key, value] of iterable) {
       returnValue[key] = value;
     }
@@ -59,7 +61,7 @@ export namespace Record {
    * ```
    * @category Constructor
    */
-  export function empty<V = any>(): Record<V> {
+  export function empty<Key extends AnyKey, Value = any>(): Record<Key, Value> {
     return emptyRecord;
   }
 
@@ -75,7 +77,7 @@ export namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  export function has(record: Record<any>, key: string): boolean {
+  export function has<Key extends AnyKey>(record: Record<Key, any>, key: Key): boolean {
     return hasOwn(record, key);
   }
 
@@ -89,8 +91,8 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function keys(record: Record<any>): IterableIterator<string> {
-    return keyIterator(record);
+  export function keys<Key extends AnyKey>(record: Record<Key, any>): IterableIterator<Key> {
+    return ownKeys(record).values();
   }
 
   /**
@@ -103,8 +105,8 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function* entries<V>(record: Record<V>): IterableIterator<[string, V]> {
-    for (const key of keyIterator(record)) {
+  export function* entries<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<[Key, Value]> {
+    for (const key of ownKeys(record)) {
       yield [key, record[key]!];
     }
   }
@@ -119,8 +121,8 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function* values<V>(record: Record<V>): IterableIterator<V> {
-    for (const key of keyIterator(record)) {
+  export function* values<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<Value> {
+    for (const key of ownKeys(record)) {
       yield record[key]!;
     }
   }
@@ -138,7 +140,7 @@ export namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  export function get<V>(record: Record<V>, key: string): Option<V> {
+  export function get<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
     return hasOwn(record, key) ? record[key] : undefined;
   }
 
@@ -154,7 +156,11 @@ export namespace Record {
    * @param key - the entry key
    * @param value - the entry value
    */
-  export function set<V>(record: Record<V>, key: string, value: V): Record<V> {
+  export function set<Key extends AnyKey, Value>(
+    record: Record<Key, Value>,
+    key: Key,
+    value: Value
+  ): Record<Key, Value> {
     return record[key] === value
       ? record
       : {
@@ -177,8 +183,11 @@ export namespace Record {
    * @param record - the record
    * @param fn - callback called on each entry
    */
-  export function forEach<V, D extends Record<V>>(record: D, fn: (value: V, key: string, record: D) => unknown): void {
-    for (const key of keyIterator(record)) {
+  export function forEach<Key extends AnyKey, Value, D extends Record<Key, Value>>(
+    record: D,
+    fn: (value: Value, key: Key, record: D) => unknown
+  ): void {
+    for (const key of ownKeys(record)) {
       fn(record[key]!, key, record);
     }
   }
@@ -194,7 +203,7 @@ export namespace Record {
    * @category Accessor
    * @param record - the record
    */
-  export function size<D extends Record<any>>(record: D): Int {
+  export function size<D extends Record<AnyKey, any>>(record: D): Int {
     return Object.keys(record).length as Int;
   }
 }
@@ -211,17 +220,20 @@ export declare namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  function _delete<V>(record: Record<V>, key: string): Record<V>;
+  function _delete<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Record<Key, Value>;
   export { _delete as delete };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-(Record as any).delete = function _delete<V>(record: Record<V>, key: string): Record<V> {
+(Record as any).delete = function _delete<Key extends AnyKey, Value>(
+  record: Record<Key, Value>,
+  key: Key
+): Record<Key, Value> {
   if (hasOwn(record, key)) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { [key]: _, ...newRecord } = record;
 
-    return newRecord;
+    return newRecord as Record<Key, Value>;
   }
 
   return record;
