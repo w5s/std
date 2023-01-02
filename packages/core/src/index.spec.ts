@@ -20,6 +20,7 @@ describe('index', () => {
         'Disposable',
         'Equal',
         'extend',
+        'globalStorage',
         'identity',
         'ignore',
         'Int',
