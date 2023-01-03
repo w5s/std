@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-null */
 
-import { Nullable } from './type.js';
+import type { Nullable } from './type.js';
 
 // https://doc.rust-lang.org/std/option/enum.Option.html
 
@@ -37,6 +37,8 @@ import { Nullable } from './type.js';
 export type Option<Value> = Value | Option.None;
 
 export namespace Option {
+  type NullableValues = Exclude<Nullable, None>;
+
   /**
    * Alias for `undefined`
    */
@@ -82,8 +84,8 @@ export namespace Option {
    * @category Constructor
    * @param value - the converted value
    */
-  export function from<Value>(value: Value): Option<Exclude<Value, null>> {
-    return value === null ? None : (value as Exclude<Value, null>);
+  export function from<Value>(value: Value): Option<Exclude<Value, NullableValues>> {
+    return value == null ? None : (value as Exclude<Value, NullableValues>);
   }
 
   /**
@@ -162,7 +164,7 @@ export namespace Option {
     option: Nullable<Value>,
     getDefaultValue: () => DefaultValue
   ): Value | DefaultValue {
-    return isSome(option) ? option : getDefaultValue();
+    return option == null ? getDefaultValue() : option;
   }
 
   /**
@@ -205,7 +207,7 @@ export namespace Option {
     option: Nullable<ValueFrom>,
     fn: (value: ValueFrom) => Nullable<ValueTo>
   ): Option<ValueTo> {
-    return isSome(option) ? from(fn(option)) : None;
+    return option == null ? None : from(fn(option));
   }
 
   /**
@@ -222,7 +224,7 @@ export namespace Option {
    * @param fn - a callback
    */
   export function orElse<ValueFrom>(option: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
-    return isSome(option) ? option : from(fn());
+    return option == null ? from(fn()) : option;
   }
 
   /**

@@ -5,6 +5,7 @@ import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { JSONValue } from './json.js';
 
+const none = undefined;
 const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', value });
 const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', error });
 const isOk = <V>(result: Result<V, unknown>): result is Result.Ok<V> => result._ === 'Ok';
@@ -208,7 +209,7 @@ export function lazy<T>(getCodec: () => Codec<T>): Codec<T> {
 export function option<V>(codec: Codec<V>): Codec<Option<V>> {
   return Codec({
     encode: (input) => (input == null ? null : Codec.encode(codec, input)),
-    decode: (input) => (input == null ? Ok(undefined) : Codec.decode(codec, input)),
+    decode: (input) => (input == null ? Ok(none) : Codec.decode(codec, input)),
     schema: () => Codec.schema(codec),
   });
 }

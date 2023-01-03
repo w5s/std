@@ -1,6 +1,8 @@
 import type { DataObject } from './dataObject.js';
 import type { Option } from './option.js';
 
+const none = undefined;
+
 // https://doc.rust-lang.org/std/result/enum.Result.html
 
 /**
@@ -209,7 +211,7 @@ export namespace Result {
   export function value(result: Error<unknown> | Result<never, unknown>): Option.None;
   export function value<V>(result: Result<V, unknown>): Option<V>;
   export function value<V>(result: Result<V, unknown>): Option<V> {
-    return isError(result) ? undefined : result.value;
+    return isError(result) ? none : result.value;
   }
 
   /**
@@ -230,7 +232,7 @@ export namespace Result {
   export function error(result: Ok<unknown> | Result<unknown, never>): Option.None;
   export function error<E>(result: Result<unknown, E>): Option<E>;
   export function error<E>(result: Result<unknown, E>): Option<E> {
-    return isError(result) ? result.error : undefined;
+    return isError(result) ? result.error : none;
   }
 
   /**

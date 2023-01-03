@@ -7,6 +7,7 @@ import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
 import { Task, TaskCanceler } from './task.js';
+import { Option } from './option.js';
 
 const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
@@ -282,7 +283,7 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(undefined);
+        expect(Ref.read(ref)).toBe(Option.None);
       });
     });
     describe('async', () => {
@@ -313,15 +314,15 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(undefined);
+        expect(Ref.read(ref)).toBe(Option.None);
       });
       it('should set default canceler setCanceler(undefined)', () => {
         const canceler = () => {};
         const task = Task(async ({ ok, setCanceler }) => {
           setCanceler(canceler);
-          setCanceler(undefined);
+          setCanceler(Option.None);
 
-          return ok(undefined);
+          return ok(Option.None);
         });
         const ref = Ref(() => {});
 
@@ -330,7 +331,7 @@ describe('Task', () => {
           () => {},
           ref
         );
-        expect(Ref.read(ref)).toBe(undefined);
+        expect(Ref.read(ref)).toBe(Option.None);
       });
 
       it('should set canceler', () => {
@@ -695,7 +696,7 @@ describe('TaskCanceler', () => {
     it('should unset current value', () => {
       const canceler = { current: () => {} };
       TaskCanceler.clear(canceler);
-      expect(canceler.current).toBe(undefined);
+      expect(canceler.current).toBe(Option.None);
     });
   });
   describe(TaskCanceler.cancel, () => {

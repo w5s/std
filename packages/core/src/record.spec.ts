@@ -1,4 +1,5 @@
 import { describe, it, expect, jest } from '@jest/globals';
+import { Option } from './option.js';
 import { Record } from './record.js';
 
 describe('Dict', () => {
@@ -83,7 +84,7 @@ describe('Dict', () => {
   describe(Record.get, () => {
     it('should return undefined if key does not exist', () => {
       const record: Record<string, string> = { anyKey: 'anyValue' };
-      expect(Record.get(record, 'anyOtherKey')).toBe(undefined);
+      expect(Record.get(record, 'anyOtherKey')).toBe(Option.None);
     });
     it('should return value if key exist', () => {
       const record = { anyKey: 'anyValue' };

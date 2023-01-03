@@ -3,6 +3,7 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
+const none = undefined;
 const hasOwn: typeof Object.hasOwn =
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   Object.hasOwn ?? ((object, property) => Object.prototype.hasOwnProperty.call(object, property));
@@ -141,7 +142,7 @@ export namespace Record {
    * @param key - the entry key
    */
   export function get<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
-    return hasOwn(record, key) ? record[key] : undefined;
+    return hasOwn(record, key) ? record[key] : none;
   }
 
   /**

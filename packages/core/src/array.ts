@@ -18,7 +18,7 @@ export namespace Array {
   const readonly = <Item>(array: NativeArray<Item>): ReadonlyArray<Item> => array;
   const none = undefined;
   const isBetween = (value: number, min: number, max: number) => value >= min && value <= max;
-  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
+  const indexToOption = (value: number): Option<Int> => (value < 0 ? none : (value as Int));
   const copySlice = <Item>(
     array: NativeArray<Item>,
     arrayStartIndex: number,
@@ -143,7 +143,7 @@ export namespace Array {
    * @param index - The zero based position
    */
   export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
-    return array[index < 0 ? index + array.length : index];
+    return array[index < 0 ? index + array.length : index] ?? none;
   }
 
   /**

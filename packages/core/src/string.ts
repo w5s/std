@@ -1,6 +1,8 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
+const none = undefined;
+
 export namespace String {
   /**
    * Return the character at the `index` position
@@ -19,7 +21,7 @@ export namespace String {
   export function at(string: string, index: number): Option<string> {
     const stringIndex = index < 0 ? index + string.length : index;
 
-    return string[stringIndex];
+    return string[stringIndex] ?? none;
   }
 
   /**

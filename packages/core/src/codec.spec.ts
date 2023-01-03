@@ -1,6 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, lazy, option, dateISO, array, object } from './codec.js';
+import { Option } from './option.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -152,7 +153,7 @@ describe(option, () => {
   });
   describe('.codecEncode', () => {
     it.each([
-      [undefined, null],
+      [Option.None, null],
       ['', '_'],
       ['abc', '_abc'],
     ])('should encode values', (input, expected) => {
@@ -162,8 +163,8 @@ describe(option, () => {
   });
   describe('.codecDecode', () => {
     it.each([
-      [undefined, Result.Ok(undefined)],
-      [null, Result.Ok(undefined)],
+      [undefined, Result.Ok(Option.None)],
+      [null, Result.Ok(Option.None)],
       ['_', Result.Ok('')],
       ['_abc', Result.Ok('abc')],
     ])('should encode values', (input, expected) => {

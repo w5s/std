@@ -4,6 +4,8 @@ import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
 
+const none = undefined;
+
 /**
  * Interface used to cancel running task
  */
@@ -20,7 +22,7 @@ export namespace TaskCanceler {
    * @param canceler
    */
   export function clear(canceler: TaskCanceler) {
-    canceler.current = undefined;
+    canceler.current = none;
   }
 
   /**
@@ -176,7 +178,7 @@ export namespace Task {
     constructor(tasks: Iterable<Task<Value, Error>>) {
       this.tasks = Array.from(tasks).map((task) => ({
         task,
-        cancelerRef: { current: undefined },
+        cancelerRef: { current: none },
       }));
       this.taskCount = this.tasks.length;
     }
@@ -579,7 +581,7 @@ export namespace Task {
    * @param task - the task to be run
    */
   export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Result<Value, Error>> {
-    const cancelerRef: TaskCanceler = { current: undefined };
+    const cancelerRef: TaskCanceler = { current: none };
     let returnValue: Result<Value, Error> | undefined;
     let resolveHandler = (result: Result<Value, Error>) => {
       returnValue = result;

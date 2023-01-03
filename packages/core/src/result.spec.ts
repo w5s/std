@@ -1,6 +1,7 @@
 import { describe, it, expect, jest } from '@jest/globals';
 import { assertType } from './type.js';
 import { Result } from './result.js';
+import { Option } from './option.js';
 
 describe('Result', () => {
   const anyValue = 'anyValue' as const;
@@ -76,8 +77,8 @@ describe('Result', () => {
   describe(Result.value, () => {
     it('should return undefined for Result.Error', () => {
       const value = Result.value(Result.Error(anyError));
-      expect(value).toBe(undefined);
-      assertType<typeof value, undefined>(true);
+      expect(value).toBe(Option.None);
+      assertType<typeof value, Option.None>(true);
     });
     it('should return value for Result.Ok', () => {
       const value = Result.value(Result.Ok(anyValue));
@@ -85,14 +86,14 @@ describe('Result', () => {
       assertType<typeof value, typeof anyValue>(true);
 
       const optValue = Result.value(anyResult);
-      assertType<typeof optValue, typeof anyValue | undefined>(true);
+      assertType<typeof optValue, typeof anyValue | Option.None>(true);
     });
   });
   describe(Result.error, () => {
     it('should return undefined for Result.Ok', () => {
       const error = Result.error(Result.Ok(anyValue));
-      expect(error).toBe(undefined);
-      assertType<typeof error, undefined>(true);
+      expect(error).toBe(Option.None);
+      assertType<typeof error, Option.None>(true);
     });
     it('should return error for Result.Ok', () => {
       const error = Result.error(Result.Error(anyError));
@@ -100,7 +101,7 @@ describe('Result', () => {
       assertType<typeof error, typeof anyError>(true);
 
       const optError = Result.error(anyResult);
-      assertType<typeof optError, typeof anyError | undefined>(true);
+      assertType<typeof optError, typeof anyError | Option.None>(true);
     });
   });
   describe(Result.getOrElse, () => {

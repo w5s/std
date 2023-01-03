@@ -5,7 +5,7 @@ import { assertType } from './type.js';
 
 describe('Option', () => {
   describe('.None', () => {
-    it('should be an alias for null', () => {
+    it('should be an alias for undefined', () => {
       expect(Option.None).toBe(undefined);
     });
     it('should be compatible with JSON.stringify/parse', () => {
@@ -82,8 +82,8 @@ describe('Option', () => {
       expect(Option.map(Option.Some('foo'), (value) => `${value}_suffix`)).toEqual(Option.Some('foo_suffix'));
     });
     it('should return false for None values', () => {
-      expect(Option.map(undefined, (value) => `${value}_suffix`)).toEqual(undefined);
-      expect(Option.map(null, (value) => `${value}_suffix`)).toEqual(undefined);
+      expect(Option.map(undefined, (value) => `${value}_suffix`)).toEqual(Option.None);
+      expect(Option.map(null, (value) => `${value}_suffix`)).toEqual(Option.None);
     });
   });
   describe(Option.getOrElse, () => {
