@@ -6,12 +6,6 @@ import { FilePath } from '../filePath.js';
 import type { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
 import type { FileSize } from '../fileSize.js';
 
-/**
- * Returns a new FileStatus from a NodeJS Stats
- *
- * @example
- * @param stats
- */
 function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
   return {
     _: 'FileStatus',
