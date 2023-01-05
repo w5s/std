@@ -8,6 +8,8 @@ const $globalStorage = Symbol.for('@w5s/globalStorage');
  */
 export interface GlobalStorage extends Map<GlobalStorage.Key, GlobalStorage.Value> {}
 
+export const GlobalStorage = Map;
+
 export namespace GlobalStorage {
   /**
    * Typeof globalStorage keys
@@ -28,5 +30,7 @@ export const globalStorage: GlobalStorage = (() => {
   };
 
   // eslint-disable-next-line no-return-assign
-  return (globalObject[$globalStorage] as Option<GlobalStorage>) ?? (globalObject[$globalStorage] = new Map());
+  return (
+    (globalObject[$globalStorage] as Option<GlobalStorage>) ?? (globalObject[$globalStorage] = new GlobalStorage())
+  );
 })();
