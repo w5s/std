@@ -1,4 +1,4 @@
-import { Option } from '@w5s/core';
+import { Option, Task } from '@w5s/core';
 import { describe, it, expect } from '@jest/globals';
 import { FilePath } from './filePath.js';
 
@@ -21,10 +21,29 @@ describe('FilePath', () => {
   });
 
   describe(FilePath.resolve, () => {
-    it('return a resolved path', () => {
-      expect(FilePath.resolve([absolutePath('goodbye'), absolutePath('hello')], relativePath('world'))).toBe(
-        absolutePath('hello', 'world')
+    it('return a resolved path', async () => {
+      expect(
+        Task.unsafeRunOk(
+          FilePath.resolve(
+            [absolutePath(''), relativePath('bar', 'baz'), relativePath('..', 'baz2')],
+            relativePath('foo')
+          )
+        )
+      ).toBe(absolutePath('bar', 'baz2', 'foo'));
+      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz')))).toBe(
+        absolutePath('foo', 'bar', 'baz')
       );
+      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', '')))).toBe(
+        absolutePath('tmp', 'file')
+      );
+      expect(
+        Task.unsafeRunOk(
+          FilePath.resolve(
+            [relativePath('wwwroot'), relativePath('static_files', 'png')],
+            relativePath('..', 'gif', 'image.gif')
+          )
+        )
+      ).toBe(relativePath(process.cwd(), 'wwwroot', 'static_files', 'gif', 'image.gif'));
     });
   });
 
@@ -58,8 +77,8 @@ describe('FilePath', () => {
   describe(FilePath.relative, () => {
     it('should return a relative path', () => {
       const from = absolutePath('home', 'hello', 'world');
-      const to = absolutePath('user', 'hello', 'earth');
-      expect(FilePath.relative(from, to)).toBe(relativePath('..', '..', '..', 'user', 'hello', 'earth'));
+      const to = absolutePath('home', 'earth');
+      expect(FilePath.relative(from, to)).toBe(relativePath('..', '..', 'earth'));
     });
   });
 

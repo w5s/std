@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring */
-import type { Tag, Option } from '@w5s/core';
+import type { Tag, Option, Task } from '@w5s/core';
 import * as nodePath from 'node:path';
 
 export type FileName = string;
@@ -138,17 +138,43 @@ export namespace FilePath {
   }
 
   /**
+   * Solve the relative path from `from` to `to`.
+   * At times we have two absolute paths, and we need to derive the relative path from one to the other. This is actually the reverse transform of {@link resolve}.
    *
-   * @param from - The source path
-   * @param to - The target path
    * @example
+   * ```ts
+   * const from = FilePath('home/hello/world');
+   * const to = FilePath('home/earth');
+   * FilePath.relative(from, to);// FilePath('../../earth')
+   * ```
+   * @param from - The source path
+   * @param to - The destination path
    */
   export function relative(from: FilePath, to: FilePath): FilePath {
     return wrap(nodePath.relative(from, to));
   }
 
-  export function resolve(from: ReadonlyArray<FilePath>, to: FilePath): FilePath {
-    return wrap(nodePath.resolve(...from, to));
+  /**
+   * The right-most parameter is considered `to`.  Other parameters are considered an array of `from`.
+   *
+   * Starting from leftmost `from` parameter, resolves `to` to an absolute path.
+   *
+   * If `to` isn't already absolute, `from` arguments are prepended in right to left order,
+   * until an absolute path is found. If after using all `from` paths still no absolute path is found,
+   * the current working directory is used as well. The resulting path is normalized,
+   * and trailing slashes are removed unless the path gets resolved to the root directory.
+   *
+   * @example
+   * ```ts
+   * const from = [FilePath('/goodbye'), FilePath('/hello')];
+   * const to = FilePath('./world');
+   * FilePath.resolve(from, to);// Task.resolve(FilePath('/hello/world'))
+   * ```
+   * @param from - The source path
+   * @param to - The destination path
+   */
+  export function resolve(from: ReadonlyArray<FilePath>, to: FilePath): Task<FilePath, never> {
+    return { taskRun: (resolveTask) => resolveTask(wrap(nodePath.resolve(...from, to))) };
   }
 
   export function join(...paths: (FilePath | FileName)[]): FilePath {
