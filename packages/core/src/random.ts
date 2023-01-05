@@ -4,6 +4,8 @@ import type { Task } from './task.js';
 import type { Tag } from './type.js';
 
 export namespace Random {
+  const floor = (value: number) => Math.floor(value) as Int;
+
   export type Value = Tag<number, { min: 0; max: 1 }>;
 
   /**
@@ -54,70 +56,6 @@ export namespace Random {
   export function Generator(getNextValue: () => Random.Value): Generator {
     return { taskRun: (resolve) => resolve(getNextValue()) };
   }
-  export namespace Generator {
-    const floor = (value: number) => Math.floor(value) as Int;
-
-    /* eslint-disable @typescript-eslint/no-shadow */
-
-    /**
-     * Return a factory of Task that will generate floating numbers between [`min`, `max`]
-     *
-     * @example
-     * ```typescript
-     * const generator = Random.Generator.number(generator);
-     * const next = generator(-10, 10);
-     * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
-     * ```
-     * @param generator - a base random generator
-     */
-    export function number(generator: Generator) {
-      return (min: number, max: number): Task<number, never> => ({
-        taskRun: (resolveTask, rejectTask, cancelerRef) => {
-          generator.taskRun((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef);
-        },
-      });
-    }
-
-    /**
-     * Return a factory of Task that will generate floating numbers between [`min`, `max`]
-     *
-     * @example
-     * ```typescript
-     * const generator = Random.Generator.int(generator);
-     * const next = generator(-10, 10);
-     * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
-     * ```
-     * @param generator - a base random generator
-     */
-    export function int(generator: Generator) {
-      const randomNumber = number(generator);
-
-      return (min: Int, max: Int): Task<Int, never> => ({
-        taskRun: (resolveTask, rejectTask, cancelerRef) => {
-          randomNumber(min, max).taskRun((value) => resolveTask(floor(value)), rejectTask, cancelerRef);
-        },
-      });
-    }
-
-    /**
-     * Return a factory of Task that will generate boolean using a `trueWeight` for the probability to return `true`
-     *
-     * @example
-     * ```typescript
-     * const generator = Random.Generator.boolean(generator);
-     * const next = generator(0.7);
-     * Task.unsafeRun(next);// Result.Ok(true|false);
-     * ```
-     * @param generator - a base random generator
-     */
-    export function boolean(generator: Generator) {
-      return (trueWeight = 0.5): Task<boolean, never> => ({
-        taskRun: (resolveTask, rejectTask, cancelerRef) => {
-          generator.taskRun((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef);
-        },
-      });
-    }
-  }
 
   /**
    * Default generator, using `Math.random`
@@ -136,7 +74,12 @@ export namespace Random {
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
    */
-  export const number = Generator.number(defaultGenerator);
+  export function number(min: number, max: number, generator: Generator = defaultGenerator): Task<number, never> {
+    return {
+      taskRun: (resolveTask, rejectTask, cancelerRef) =>
+        generator.taskRun((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef),
+    };
+  }
 
   /**
    * Return a Task that will generate integers between [`min`, `max`].
@@ -150,7 +93,12 @@ export namespace Random {
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
    */
-  export const int = Generator.int(defaultGenerator);
+  export function int(min: Int, max: Int, generator: Generator = defaultGenerator): Task<Int, never> {
+    return {
+      taskRun: (resolveTask, rejectTask, cancelerRef) =>
+        number(min, max, generator).taskRun((value) => resolveTask(floor(value)), rejectTask, cancelerRef),
+    };
+  }
 
   /**
    * Return a Task that will generate booleans.
@@ -163,5 +111,10 @@ export namespace Random {
    * ```
    * @param trueWeight - the probability to obtain true
    */
-  export const boolean = Generator.boolean(defaultGenerator);
+  export function boolean(trueWeight = 0.5, generator: Generator = defaultGenerator): Task<boolean, never> {
+    return {
+      taskRun: (resolveTask, rejectTask, cancelerRef) =>
+        generator.taskRun((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef),
+    };
+  }
 }

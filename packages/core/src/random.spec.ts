@@ -27,42 +27,7 @@ describe('Random', () => {
       expect(Random.Value.hasInstance(invalidValue)).toBe(false);
     });
   });
-  describe(Random.Generator.number, () => {
-    it.each([
-      [{ genValue: 0, min: -2, max: 2 }, -2],
-      [{ genValue: 0.5, min: -2, max: 2 }, 0],
-      [{ genValue: 1, min: -2, max: 2 }, 2],
-    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
-      const gen = generatorOf(genValue);
-      const genNum = Random.Generator.number(gen)(min, max);
-      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
-    });
-  });
-  describe(Random.Generator.int, () => {
-    it.each([
-      [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
-      [{ genValue: 0.5, min: Int(-2), max: Int(2) }, 0],
-      [{ genValue: 0.8, min: Int(-2), max: Int(2) }, 1],
-      [{ genValue: 1, min: Int(-2), max: Int(2) }, 2],
-    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
-      const gen = generatorOf(genValue);
-      const genNum = Random.Generator.int(gen)(min, max);
-      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
-    });
-  });
-  describe(Random.Generator.boolean, () => {
-    it.each([
-      [{ genValue: 0, trueWeight: 0.5 }, false],
-      [{ genValue: 0.5, trueWeight: 0.5 }, false],
-      [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 }, true],
-      [{ genValue: 1, trueWeight: 0.5 }, true],
-      [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 + Number.EPSILON }, false],
-    ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
-      const gen = generatorOf(genValue);
-      const genBool = Random.Generator.boolean(gen)(trueWeight);
-      expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
-    });
-  });
+
   describe('defaultGenerator', () => {
     it('should use Math.random', async () => {
       const nextRandom = 0.123;
@@ -71,6 +36,15 @@ describe('Random', () => {
     });
   });
   describe('.number', () => {
+    it.each([
+      [{ genValue: 0, min: -2, max: 2 }, -2],
+      [{ genValue: 0.5, min: -2, max: 2 }, 0],
+      [{ genValue: 1, min: -2, max: 2 }, 2],
+    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
+      const gen = generatorOf(genValue);
+      const genNum = Random.number(min, max, gen);
+      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
+    });
     it('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
@@ -83,12 +57,33 @@ describe('Random', () => {
       mockDefaultGenerator(nextRandom);
       expect(Task.unsafeRun(Random.int(Int(-10), Int(10)))).toEqual(Result.Ok(-8));
     });
+    it.each([
+      [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
+      [{ genValue: 0.5, min: Int(-2), max: Int(2) }, 0],
+      [{ genValue: 0.8, min: Int(-2), max: Int(2) }, 1],
+      [{ genValue: 1, min: Int(-2), max: Int(2) }, 2],
+    ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
+      const gen = generatorOf(genValue);
+      const genNum = Random.int(min, max, gen);
+      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
+    });
   });
   describe('.boolean', () => {
     it('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
       expect(Task.unsafeRun(Random.boolean())).toEqual(Result.Ok(false));
+    });
+    it.each([
+      [{ genValue: 0, trueWeight: 0.5 }, false],
+      [{ genValue: 0.5, trueWeight: 0.5 }, false],
+      [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 }, true],
+      [{ genValue: 1, trueWeight: 0.5 }, true],
+      [{ genValue: 0.5 + Number.EPSILON, trueWeight: 0.5 + Number.EPSILON }, false],
+    ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
+      const gen = generatorOf(genValue);
+      const genBool = Random.boolean(trueWeight, gen);
+      expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
     });
   });
 });
