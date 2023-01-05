@@ -177,7 +177,17 @@ export namespace FilePath {
     return { taskRun: (resolveTask) => resolveTask(wrap(nodePath.resolve(...from, to))) };
   }
 
-  export function join(...paths: (FilePath | FileName)[]): FilePath {
+  /**
+   * Join all arguments together and normalize the resulting path.
+   *
+   * @example
+   * ```ts
+   * const paths = [FilePath('hello'), FilePath('world')];
+   * FilePath.concat(paths);// FilePath('hello/world')
+   * ```
+   * @param paths - paths to join.
+   */
+  export function concat(paths: ReadonlyArray<FilePath | FileName>): FilePath {
     return wrap(nodePath.join(...paths));
   }
 

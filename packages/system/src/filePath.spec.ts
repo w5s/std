@@ -12,11 +12,11 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.join, () => {
+  describe(FilePath.concat, () => {
     it('should return joined path using separator', () => {
       const first = absolutePath('hello', 'world');
       const second = relativePath('..', 'earth');
-      expect(FilePath.join(first, second)).toBe(absolutePath('hello', 'earth'));
+      expect(FilePath.concat([first, second])).toBe(absolutePath('hello', 'earth'));
     });
   });
 
