@@ -29,10 +29,6 @@ export namespace FilePath {
     return value === '' ? undefined : (value as V);
   }
 
-  function wrap(pathString: string): FilePath {
-    return pathString as FilePath;
-  }
-
   export const delimiter: Delimiter = nodePath.delimiter as Delimiter;
   export const separator: Separator = nodePath.sep as Separator;
 
@@ -46,7 +42,7 @@ export namespace FilePath {
    * @param path - The path to normalize
    */
   export function normalize(path: FilePath): FilePath {
-    return wrap(nodePath.normalize(path));
+    return nodePath.normalize(path) as FilePath;
   }
 
   /**
@@ -61,7 +57,7 @@ export namespace FilePath {
    * @param extension - The extension to remove
    */
   export function basename(path: FilePath, extension?: Option<Extension>): FileName {
-    return wrap(nodePath.basename(path, extension));
+    return nodePath.basename(path, extension) as FilePath;
   }
 
   /**
@@ -74,7 +70,7 @@ export namespace FilePath {
    * @param path - The path to extract directory name from
    */
   export function dirname(path: FilePath): FilePath {
-    return wrap(nodePath.dirname(path));
+    return nodePath.dirname(path) as FilePath;
   }
 
   /**
@@ -106,15 +102,13 @@ export namespace FilePath {
    * @param parsed - The parsed path
    */
   export function format(parsed: Partial<Parsed>): FilePath {
-    return wrap(
-      nodePath.format({
-        root: orEmpty(parsed.root),
-        dir: orEmpty(parsed.dir),
-        base: orEmpty(parsed.base),
-        ext: orEmpty(parsed.ext),
-        name: orEmpty(parsed.name),
-      })
-    );
+    return nodePath.format({
+      root: orEmpty(parsed.root),
+      dir: orEmpty(parsed.dir),
+      base: orEmpty(parsed.base),
+      ext: orEmpty(parsed.ext),
+      name: orEmpty(parsed.name),
+    }) as FilePath;
   }
 
   /**
@@ -151,7 +145,7 @@ export namespace FilePath {
    * @param to - The destination path
    */
   export function relative(from: FilePath, to: FilePath): FilePath {
-    return wrap(nodePath.relative(from, to));
+    return nodePath.relative(from, to) as FilePath;
   }
 
   /**
@@ -174,7 +168,7 @@ export namespace FilePath {
    * @param to - The destination path
    */
   export function resolve(from: ReadonlyArray<FilePath>, to: FilePath): Task<FilePath, never> {
-    return { taskRun: (resolveTask) => resolveTask(wrap(nodePath.resolve(...from, to))) };
+    return { taskRun: (resolveTask) => resolveTask(nodePath.resolve(...from, to) as FilePath) };
   }
 
   /**
@@ -188,7 +182,7 @@ export namespace FilePath {
    * @param paths - paths to join.
    */
   export function concat(paths: ReadonlyArray<FilePath | FileName>): FilePath {
-    return wrap(nodePath.join(...paths));
+    return nodePath.join(...paths) as FilePath;
   }
 
   export function isAbsolute(path: FilePath): boolean {
