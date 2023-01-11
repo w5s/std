@@ -3386,7 +3386,7 @@ __metadata:
     "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.5
-    "@w5s/cspell-config": 1.0.0-alpha.3
+    "@w5s/cspell-config": 1.0.0-alpha.4
     "@w5s/eslint-config": 1.0.0-alpha.44
     "@w5s/mrm-preset": 1.0.0-alpha.36
     "@w5s/ts-config": 1.0.0-alpha.24
@@ -3422,14 +3422,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/cspell-config@npm:1.0.0-alpha.3":
-  version: 1.0.0-alpha.3
-  resolution: "@w5s/cspell-config@npm:1.0.0-alpha.3"
+"@w5s/cspell-config@npm:1.0.0-alpha.4":
+  version: 1.0.0-alpha.4
+  resolution: "@w5s/cspell-config@npm:1.0.0-alpha.4"
   dependencies:
     "@cspell/cspell-bundled-dicts": ^6.0.0
   peerDependencies:
     cspell: ^6.0.0
-  checksum: 6536ac7e0bbebc09299f0eca9af9eda0895bffabeb85e423f6fecd467af11ba6626cb8f525fa41e4392d8bf7beba10ef92bc426679151e8bcde59674a9111e9d
+  peerDependenciesMeta:
+    cspell:
+      optional: true
+  checksum: 5ef81d669109c8848725cd70f17d59416ef774cced8a9a29c3d6c85bd5cd7a7c4004b401c8696730584addad867db078d085438c77fd9492cbad0b688bc73274
   languageName: node
   linkType: hard
 

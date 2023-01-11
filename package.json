@@ -104,7 +104,7 @@
     "@jest/globals": "latest",
     "@types/node": "17.0.45",
     "@w5s/commitlint-config": "1.0.5",
-    "@w5s/cspell-config": "1.0.0-alpha.3",
+    "@w5s/cspell-config": "1.0.0-alpha.4",
     "@w5s/eslint-config": "1.0.0-alpha.44",
     "@w5s/mrm-preset": "1.0.0-alpha.36",
     "@w5s/ts-config": "1.0.0-alpha.24",
