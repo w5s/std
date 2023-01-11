@@ -3360,16 +3360,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/commitlint-config@npm:1.0.4":
-  version: 1.0.4
-  resolution: "@w5s/commitlint-config@npm:1.0.4"
+"@w5s/commitlint-config@npm:1.0.5":
+  version: 1.0.5
+  resolution: "@w5s/commitlint-config@npm:1.0.5"
   dependencies:
     "@commitlint/types": ^17.0.0
     emoji-regex: ^10.2.1
     gitmojis: ^3.13.0
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
-  checksum: dec0346e2111cc82381f9b366ca254cd1ecce720f994e81f31eb0af986e4be920fd428fc2a6a1e1eb9478dc0f5beeec3e3cc7f0c0b77f5fcff4419fa6bdb9a21
+  peerDependenciesMeta:
+    "@commitlint/cli":
+      optional: true
+  checksum: 3e04121df0114579d160d5def355c972b374bd846ad1efa4bdd57524b265e79e0b17abee54d25244e93dff7cf44b7da8feec9b97578923d7b0f4f7725bc2dfbd
   languageName: node
   linkType: hard
 
@@ -3382,7 +3385,7 @@ __metadata:
     "@commitlint/cli": 17.4.1
     "@jest/globals": latest
     "@types/node": 17.0.45
-    "@w5s/commitlint-config": 1.0.4
+    "@w5s/commitlint-config": 1.0.5
     "@w5s/cspell-config": 1.0.0-alpha.3
     "@w5s/eslint-config": 1.0.0-alpha.44
     "@w5s/mrm-preset": 1.0.0-alpha.36
