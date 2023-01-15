@@ -20,7 +20,6 @@ describe('Array', () => {
 
     // @ts-ignore hard to type
     return Object.keys(input).reduce((acc, property) => {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const values = input[property]!;
 
       return acc.length === 0 ? addProperty({}, property, values) : genArray(acc, property, values);

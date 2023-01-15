@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import { invariant } from './invariant.js';
 import type { Option } from './option.js';
 import type { Task } from './task.js';

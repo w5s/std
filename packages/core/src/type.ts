@@ -95,5 +95,4 @@ type IsAny<T> = 0 extends 1 & T ? true : false;
 type TupleMatches<T, U> = Matches<[T], [U]> extends true ? true : false;
 type Matches<T, U> = T extends U ? (U extends T ? true : false) : false;
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
 type AnyToBrand<T> = IsAny<T> extends true ? { __assertTypeAny__: undefined } : T;

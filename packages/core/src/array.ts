@@ -1,9 +1,8 @@
-/* eslint-disable no-bitwise */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable unicorn/no-for-loop */
+
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 

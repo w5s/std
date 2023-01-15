@@ -78,7 +78,7 @@ export namespace LogMessage {
    */
   export function data(message: LogMessage): { [key: string]: unknown } {
     const returnValue: { [key: string]: unknown } = {};
-    // eslint-disable-next-line unicorn/no-for-loop
+
     for (let index = 0; index < message.length; index += 1) {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const part = message[index]!;

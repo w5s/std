@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any,no-console */
 import { LogHandler } from '../handler.js';
 import { LogLevel } from '../level.js';
 

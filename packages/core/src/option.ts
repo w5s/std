@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/no-null */
-
 import type { Nullable } from './type.js';
 
 // https://doc.rust-lang.org/std/option/enum.Option.html

@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { DataObject } from '@w5s/core/lib/dataObject.js';
 import { assertNever } from '@w5s/core/lib/invariant.js';
 import { sql, SQLStatement } from './sql.js';

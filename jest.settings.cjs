@@ -26,7 +26,6 @@ function concatArray(left, right) {
 
 /** @type {(...configs: JestConfig[]) => JestConfig} */
 function concatJestConfig(...configs) {
-  // eslint-disable-next-line unicorn/prefer-object-from-entries
   return configs.reduce(
     (
       /** @type {JestConfig} */ returnValue,

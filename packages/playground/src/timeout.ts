@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import { DataError } from '@w5s/core/lib/dataError.js';
 import type { Task, TimeDuration } from '@w5s/core';
 

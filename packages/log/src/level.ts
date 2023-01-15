@@ -99,6 +99,17 @@ export namespace LogLevel {
   /**
    * Build a matching function `(anyLevelValue) => value` from a list of tuples `[level1, value1], [level2, value2], ...`
    *
+   * @example
+   * ```ts
+   * const matcher = LogLevel.match([
+   *  [LogLevel.Error, 'This is error'],
+   *  [LogLevel.Warning, 'This is warning'],
+   * ]);
+   * matcher(LogLevel.Critical);// 'This is error'
+   * matcher(LogLevel.Error);// 'This is error'
+   * matcher(LogLevel.Warning);// 'This is warning'
+   * matcher(LogLevel.Info);// undefined
+   * ```
    * @param matchers
    */
   export function match<T>(matchers: [LogLevel, T][]): (anyLevel: LogLevel) => Option<T>;

@@ -21,7 +21,6 @@ import { DatabaseError } from './error.js';
  * @param sqlOrQuery - SQL query object or a raw sql statement
  */
 export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQuery): Task<unknown, DatabaseError> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const driver = DatabaseDriver.get(client.databaseType);
 
   return {

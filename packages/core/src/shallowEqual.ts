@@ -42,7 +42,6 @@ export function shallowEqual<T = unknown>(
     // Test for A's keys different from B.
     // eslint-disable-next-line unicorn/no-for-loop
     for (let index = 0; index < leftKeys.length; index += 1) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const key = leftKeys[index]!;
 
       if (

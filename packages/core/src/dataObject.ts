@@ -56,7 +56,7 @@ export namespace DataObject {
    * The type property discriminator
    */
   export const type = '_' as const;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+
   export type type = typeof type;
 
   /**

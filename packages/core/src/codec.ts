@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
 import { DataError } from './dataError.js';
 import type { Array } from './array.js';
 import type { Option } from './option.js';
@@ -299,7 +298,7 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
     schema: () =>
       propertyNames.reduce(
         (acc, propertyName) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-non-null-assertion
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           acc.properties[propertyName] = Codec.schema(codecMap[propertyName]!);
 
           return acc;

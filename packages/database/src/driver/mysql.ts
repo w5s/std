@@ -4,7 +4,6 @@ import type { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';
 
 function mysqlSQLStatement(statement: SQLStatement) {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return {
     sql: SQLStatement.format(statement, {
       formatValue: () => '?',

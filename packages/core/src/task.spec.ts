@@ -1,5 +1,5 @@
 /* eslint-disable jest/no-export */
-/* eslint-disable max-classes-per-file */
+
 import { describe, it, expect, jest } from '@jest/globals';
 import { assertType } from './type.js';
 import { AggregateError } from './aggregateError.js';

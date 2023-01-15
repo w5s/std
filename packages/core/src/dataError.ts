@@ -52,7 +52,6 @@ export function DataError<Properties extends { name: string; message?: string; c
 
   // Capture stack trace
   if (typeof Error.captureStackTrace === 'function') {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     Error.captureStackTrace(returnValue, DataError);
   }
 

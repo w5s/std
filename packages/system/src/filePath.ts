@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import type { Tag, Option, Task } from '@w5s/core';
 import * as nodePath from 'node:path';
 

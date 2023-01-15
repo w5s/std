@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import { invariant } from '@w5s/core/lib/invariant.js';
 import type { Task, Tag } from '@w5s/core';
 import { HTTPError } from './error.js';

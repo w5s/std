@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export type SQLDataType =
   | SQLDataType.CHAR
   | SQLDataType.VARCHAR
@@ -37,7 +36,7 @@ export namespace SQLDataType {
   function create<T, P extends AnyObject = EmptyObject>(constructor: { dataType: T }, params: P): DataType<T, P> {
     return {
       dataType: constructor.dataType,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
       ...params,
     };
   }
@@ -262,7 +261,7 @@ export namespace SQLDataType {
   export function stringify(data: SQLDataType): string {
     const { keys } = Modules[data.dataType];
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
     return `${data.dataType}${isEmpty(keys) ? '' : `(${keys.map((key) => (data as any)[key]).join(',')})`}`;
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable jsdoc/require-example */
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
+
 import type { Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import * as nodePath from 'node:path';

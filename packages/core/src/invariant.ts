@@ -41,7 +41,7 @@ export function warning(condition: boolean, message?: Option<string>): void {
     warning.current(`Warning: ${message ?? ''}`);
   }
 }
-// eslint-disable-next-line jsdoc/require-example
+
 /**
  *
  * @internal

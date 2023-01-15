@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
 import { HTTP, HTTPParser } from '@w5s/http';
 import { timeout } from './timeout.js';

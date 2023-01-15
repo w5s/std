@@ -47,7 +47,7 @@ export const anyErrnoException = (() => {
 const randomBoolean = () => Math.random() >= 0.5;
 const randomInt = () => Math.floor(Math.random() * 10_000_000_000);
 const randomDate = () => new Date(Math.floor(Math.random() * 10_000_000_000));
-// eslint-disable-next-line jest/no-export
+
 export const generateStats = (): fs.Stats => {
   const isFile = randomBoolean();
   const isDirectory = randomBoolean();
