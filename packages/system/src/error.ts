@@ -8,7 +8,7 @@ export const FileErrorType = {
   UserError: 'UserError',
   OtherError: 'OtherError',
 } as const;
-export type FileErrorType = typeof FileErrorType[keyof typeof FileErrorType];
+export type FileErrorType = (typeof FileErrorType)[keyof typeof FileErrorType];
 
 /**
  * An error when a file system call fails

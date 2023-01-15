@@ -11,7 +11,7 @@ describe.each(['USD', 'EUR'] as const)('%s()', (factoryName) => {
   });
 });
 describe.each(currencyData.currencies.map((_) => _.code))('%s()', (factoryName) => {
-  const factory: typeof MoneyFactory['EUR'] | undefined = MoneyFactory[factoryName as 'EUR'];
+  const factory: (typeof MoneyFactory)['EUR'] | undefined = MoneyFactory[factoryName as 'EUR'];
   it('should be a function', () => {
     expect(factory).toEqual(expect.any(Function));
   });
