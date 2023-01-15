@@ -3387,7 +3387,7 @@ __metadata:
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.6
     "@w5s/cspell-config": 1.0.0-alpha.4
-    "@w5s/eslint-config": 1.0.0-alpha.45
+    "@w5s/eslint-config": 1.0.0-alpha.47
     "@w5s/mrm-preset": 1.0.0-alpha.38
     "@w5s/ts-config": 1.0.0-alpha.24
     concurrently: 7.6.0
@@ -3451,14 +3451,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:1.0.0-alpha.45":
-  version: 1.0.0-alpha.45
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.45"
+"@w5s/dev@npm:^1.0.0-alpha.2":
+  version: 1.0.0-alpha.2
+  resolution: "@w5s/dev@npm:1.0.0-alpha.2"
+  checksum: 4093aca922bc1e7b09d41e7991b6cbb3d835a3e07a4c0663faaea44afafa20d6144e38953b41013f9a26393ad8e53e5b2d3b29a567e2c32c373475dae6c08a04
+  languageName: node
+  linkType: hard
+
+"@w5s/eslint-config@npm:1.0.0-alpha.47":
+  version: 1.0.0-alpha.47
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.47"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
-    "@w5s/prettier-config": ^1.0.6
+    "@w5s/dev": ^1.0.0-alpha.2
+    "@w5s/prettier-config": ^1.0.7
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
     eslint-plugin-functional: ^4.2.0
@@ -3482,7 +3490,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 78dd2628b2c7b2a5f1af421f1c0d02f0ad5f1da37afc20c93266270146f136455ecdaa96d6d4bc87137a5eff06a1ffb5f498618c6a0613280624b36f515b9bc9
+  checksum: c72ab7b18760968e4751d0941957a54252dfddd8a5e1c14af4c6bbcd7b2e231d0b55f9c6d44650efb6d93597b9a7edee98810daef6c264c5a685f6fc9de3c30f
   languageName: node
   linkType: hard
 
@@ -3547,7 +3555,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/prettier-config@npm:^1.0.6":
+"@w5s/prettier-config@npm:^1.0.7":
   version: 1.0.7
   resolution: "@w5s/prettier-config@npm:1.0.7"
   peerDependencies:
