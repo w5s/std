@@ -423,14 +423,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/cli@npm:17.4.1":
-  version: 17.4.1
-  resolution: "@commitlint/cli@npm:17.4.1"
+"@commitlint/cli@npm:17.4.2":
+  version: 17.4.2
+  resolution: "@commitlint/cli@npm:17.4.2"
   dependencies:
     "@commitlint/format": ^17.4.0
-    "@commitlint/lint": ^17.4.0
-    "@commitlint/load": ^17.4.1
-    "@commitlint/read": ^17.4.0
+    "@commitlint/lint": ^17.4.2
+    "@commitlint/load": ^17.4.2
+    "@commitlint/read": ^17.4.2
     "@commitlint/types": ^17.4.0
     execa: ^5.0.0
     lodash.isfunction: ^3.0.9
@@ -439,7 +439,7 @@ __metadata:
     yargs: ^17.0.0
   bin:
     commitlint: cli.js
-  checksum: a0f3d26f06fa751be6009f76b76fee83e2394f6b528b38f375b3119be41a39c851a053e9dd93385a5274feff471bd0984e626bb23624d72e231f66125e222fd5
+  checksum: a2d0ecd2c5a770b3d3be1214020ed4298f3d7685f5c065ed2f1565b02b9a1608abd00d114c8b9b17e84741cde0d977bb2c2afc1074176565b6b63e9cde0d2e25
   languageName: node
   linkType: hard
 
@@ -494,7 +494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/lint@npm:^17.4.0":
+"@commitlint/lint@npm:^17.4.2":
   version: 17.4.2
   resolution: "@commitlint/lint@npm:17.4.2"
   dependencies:
@@ -506,7 +506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/load@npm:^17.4.1":
+"@commitlint/load@npm:^17.4.2":
   version: 17.4.2
   resolution: "@commitlint/load@npm:17.4.2"
   dependencies:
@@ -546,7 +546,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@commitlint/read@npm:^17.4.0":
+"@commitlint/read@npm:^17.4.2":
   version: 17.4.2
   resolution: "@commitlint/read@npm:17.4.2"
   dependencies:
@@ -3382,7 +3382,7 @@ __metadata:
   dependencies:
     "@babel/core": 7.20.12
     "@babel/eslint-parser": 7.19.1
-    "@commitlint/cli": 17.4.1
+    "@commitlint/cli": 17.4.2
     "@jest/globals": latest
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.6
