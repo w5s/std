@@ -13,7 +13,7 @@ describe('module public API', () => {
     );
   });
   it.each(currencyData.currencies.map((_) => _.code))('%s() should be a function', (factoryName) => {
-    const factory: typeof Module['EUR'] | undefined = Module[factoryName as 'EUR'];
+    const factory: (typeof Module)['EUR'] | undefined = Module[factoryName as 'EUR'];
     expect(factory).toEqual(expect.any(Function));
   });
 });
