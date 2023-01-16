@@ -1,4 +1,4 @@
-import { createConnection, ConnectionConfig } from 'mysql';
+import { createConnection, type ConnectionConfig } from 'mysql';
 import { SQLStatement } from '../sql.js';
 import type { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';

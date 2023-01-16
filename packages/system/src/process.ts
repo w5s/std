@@ -1,7 +1,7 @@
 import type { Task } from '@w5s/core';
-import { FileError } from './error.js';
+import type { FileError } from './error.js';
 import { errnoTaskSync, Internal } from './internal.js';
-import { FilePath } from './filePath.js';
+import type { FilePath } from './filePath.js';
 
 export namespace Process {
   /**

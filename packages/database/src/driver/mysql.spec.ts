@@ -1,4 +1,4 @@
-import * as mysql from 'mysql';
+import type * as mysql from 'mysql';
 import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';

@@ -5,6 +5,7 @@ describe(FileSize, () => {
   const anyNumber = 123;
   it('should return an integer value', () => {
     expect(FileSize(1)).toEqual(1);
+    expect(FileSize(1.2)).toEqual(1);
   });
   describe(FileSize.bytes, () => {
     it('should return identity', () => {

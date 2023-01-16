@@ -1,6 +1,6 @@
 import { Result, Task } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
-import { HTTP } from './client.js';
+import type { HTTP } from './client.js';
 import { HTTPParser } from './parser.js';
 import { HTTPError } from './error.js';
 

@@ -1,4 +1,4 @@
-import { JSONValue, Option, Tag, TimeDuration } from '@w5s/core';
+import type { Option, TimeDuration, JSONValue, Tag } from '@w5s/core';
 import { HTTP, HTTPParser } from '@w5s/http';
 import { timeout } from './timeout.js';
 
@@ -78,9 +78,8 @@ export namespace Slack {
       method: 'POST',
       parse: HTTPParser.json<Response>('unsafe'),
     });
-    const requestWithTimeout = Option.isSome(client.slackRequestTimeout)
-      ? timeout(request, client.slackRequestTimeout)
-      : request;
+    const requestWithTimeout =
+      client.slackRequestTimeout == null ? request : timeout(request, client.slackRequestTimeout);
     return requestWithTimeout;
   }
 

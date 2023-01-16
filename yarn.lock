@@ -3389,7 +3389,7 @@ __metadata:
     "@w5s/cspell-config": 1.0.0-alpha.4
     "@w5s/eslint-config": 1.0.0-alpha.47
     "@w5s/mrm-preset": 1.0.0-alpha.38
-    "@w5s/ts-config": 1.0.0-alpha.24
+    "@w5s/ts-config": 1.0.0-alpha.26
     concurrently: 7.6.0
     conventional-changelog-gitmoji-config: latest
     cspell: 6.18.1
@@ -3579,15 +3579,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:1.0.0-alpha.24":
-  version: 1.0.0-alpha.24
-  resolution: "@w5s/ts-config@npm:1.0.0-alpha.24"
+"@w5s/ts-config@npm:1.0.0-alpha.26":
+  version: 1.0.0-alpha.26
+  resolution: "@w5s/ts-config@npm:1.0.0-alpha.26"
   peerDependencies:
     typescript: ">=4.7.x"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: f8ea69f17f155d12b252bc51bf5c99ac7d19d4be9e8d58582fa0fb42834586ccbb6dee58e49e323e047702879783b3a802e1356632f6b08971ffcdc2cce2a135
+  checksum: 7bcf67672a3853574652290b74278b18de738f6896ef2b1a4c0db133bac39791ec7f85aeb835d7ca19bf5b927743107592bbe4103c336da6a9bbdf0a186db13e
   languageName: node
   linkType: hard
 

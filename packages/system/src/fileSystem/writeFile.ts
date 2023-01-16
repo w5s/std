@@ -1,8 +1,8 @@
 import type { Task, Option } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
-import { FileError } from '../error.js';
+import type { FileError } from '../error.js';
 import { Internal, errnoExceptionHandler } from '../internal.js';
-import { FilePath } from '../filePath.js';
+import type { FilePath } from '../filePath.js';
 
 /**
  * Asynchronously writes data to a file, replacing the file if it already exists.

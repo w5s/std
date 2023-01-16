@@ -1,5 +1,5 @@
 import { describe, it, expect } from '@jest/globals';
-import { Tag } from './type.js';
+import type { Tag } from './type.js';
 
 describe('type', () => {
   it('Tag<T, { tag1: ... }>', () => {
