@@ -1,4 +1,4 @@
-import { LogHandler } from '../handler.js';
+import type { LogHandler } from '../handler.js';
 import { LogLevel } from '../level.js';
 
 const consoleLevel = LogLevel.match(

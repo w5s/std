@@ -1,7 +1,7 @@
 import type { Task, Option } from '@w5s/core';
-import { FileError } from '../error.js';
+import type { FileError } from '../error.js';
 import { Internal, errnoTask } from '../internal.js';
-import { FilePath } from '../filePath.js';
+import type { FilePath } from '../filePath.js';
 
 /**
  * Reads the contents of the symbolic link referred to by path.

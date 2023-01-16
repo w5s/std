@@ -1,5 +1,5 @@
 import type { JSONValue, Task } from '@w5s/core';
-import { HTTP } from './client.js';
+import type { HTTP } from './client.js';
 import { HTTPError } from './error.js';
 
 /**

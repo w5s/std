@@ -2,7 +2,7 @@ import type { Task, Time, Int } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
 import type { FileError } from '../error.js';
 import { Internal, errnoTask } from '../internal.js';
-import { FilePath } from '../filePath.js';
+import type { FilePath } from '../filePath.js';
 import type { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
 import type { FileSize } from '../fileSize.js';
 

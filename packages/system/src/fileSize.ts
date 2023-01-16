@@ -1,8 +1,8 @@
-import { Int, Tag } from '@w5s/core';
+import type { Int, Tag } from '@w5s/core';
 
 export type FileSize = Tag<Int, { fileSize: true }>;
 export function FileSize(value: number): FileSize {
-  return Int(value) as FileSize;
+  return Math.trunc(value) as FileSize;
 }
 export namespace FileSize {
   const KILOBYTES = 1000;

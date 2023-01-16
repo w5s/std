@@ -1,6 +1,6 @@
 import { Database } from 'sqlite3';
 import { SQLStatement } from '../sql.js';
-import { AbstractDatabase } from '../client.js';
+import type { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';
 
 function sqlite3SQLStatement(statement: SQLStatement) {

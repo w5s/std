@@ -1,7 +1,7 @@
 import type { Task } from '@w5s/core';
 import { Internal, errnoTask } from '../internal.js';
-import { FileError } from '../error.js';
-import { FilePath } from '../filePath.js';
+import type { FileError } from '../error.js';
+import type { FilePath } from '../filePath.js';
 
 export async function emptyDirectoryAsync(path: string): Promise<void> {
   try {

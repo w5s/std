@@ -1,7 +1,7 @@
 import type { DataObject, Time } from '@w5s/core';
 import type { UUID } from '@w5s/uuid';
-import { LogMessage } from './message.js';
-import { LogLevel } from './level.js';
+import type { LogMessage } from './message.js';
+import type { LogLevel } from './level.js';
 
 export interface LogRecord
   extends DataObject<{

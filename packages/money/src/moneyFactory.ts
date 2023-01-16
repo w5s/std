@@ -1,7 +1,7 @@
 import { invariant } from '@w5s/core/lib/invariant.js';
-import { Currency } from './currency.js';
+import type { Currency } from './currency.js';
 import { CurrencyRegistry, currencyRegistry } from './currencyRegistry.js';
-import { Amount, Money } from './money.js';
+import type { Amount, Money } from './money.js';
 
 export function moneyFactory(
   currencyCode: Currency['code'],
@@ -11,5 +11,5 @@ export function moneyFactory(
 ) {
   const currency = (options?.registry ?? currencyRegistry).getByCode(currencyCode);
   invariant(currency != null, `${currencyCode} is not valid currency code`);
-  return (amount: Amount): Money => Money({ currency, amount });
+  return (amount: Amount): Money => ({ _: 'Money', currency, amount });
 }

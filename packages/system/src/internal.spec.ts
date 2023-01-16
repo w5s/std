@@ -2,7 +2,7 @@ import { Option, Result } from '@w5s/core';
 import { describe, it, expect } from '@jest/globals';
 import { FileError } from './error.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './internal.js';
-import { FilePath } from './filePath.js';
+import type { FilePath } from './filePath.js';
 import { anyErrnoException, anyError, anyPath, expectTask } from './_test/config.js';
 
 describe('ErrnoException', () => {

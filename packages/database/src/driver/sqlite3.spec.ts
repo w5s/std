@@ -1,6 +1,6 @@
 import { describe, it, expect, jest } from '@jest/globals';
 import { Ref } from '@w5s/core';
-import { Database } from 'sqlite3';
+import type { Database } from 'sqlite3';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { SQLite3 } from './sqlite3.js';
