@@ -98,7 +98,7 @@
     ]
   },
   "resolutions": {
-    "gitmojis": "3.13.2"
+    "gitmojis": "3.13.4"
   },
   "devDependencies": {
     "@babel/core": "7.20.12",
