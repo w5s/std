@@ -82,15 +82,6 @@
     ],
     "root": true
   },
-  "eslintIgnore": [
-    "lib/",
-    "node_modules/",
-    "coverage/",
-    "build/",
-    ".cache/",
-    ".vscode/**",
-    "public/"
-  ],
   "jest": {
     "preset": "es-jest",
     "projects": [
