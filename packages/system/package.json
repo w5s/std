@@ -44,6 +44,7 @@
     "prepublishOnly": "npm run clean;npm run build",
     "spellcheck": "cspell --no-progress '**'",
     "test": "concurrently \"npm:test:*\" ",
+    "test:src": "jest",
     "tsc": "tsc",
     "validate": "npm run lint && npm run build && npm run test"
   },
