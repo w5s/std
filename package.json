@@ -97,9 +97,6 @@
       "<rootDir>/packages/*"
     ]
   },
-  "resolutions": {
-    "gitmojis": "3.13.4"
-  },
   "devDependencies": {
     "@babel/core": "7.20.12",
     "@babel/eslint-parser": "7.19.1",

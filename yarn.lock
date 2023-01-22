@@ -7214,7 +7214,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gitmojis@npm:3.13.4":
+"gitmojis@npm:^3.13.0":
   version: 3.13.4
   resolution: "gitmojis@npm:3.13.4"
   checksum: f9d8ec955eb63e4a5c5ba7303a110d55c12b8bfb77f08e991f392d3d002c2c818f13b0ce2a087768affbd30add37155587bb12387051035206ff8e30e198e7f5
