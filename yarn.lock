@@ -2996,6 +2996,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/eslint@npm:^8.4.10":
+  version: 8.4.10
+  resolution: "@types/eslint@npm:8.4.10"
+  dependencies:
+    "@types/estree": "*"
+    "@types/json-schema": "*"
+  checksum: 21e009ed9ed9bc8920fdafc6e11ff321c4538b4cc18a56fdd59dc5184ea7bbf363c71638c9bdb59fc1254dddcdd567485136ed68b0ee4750948d4e32cb79c689
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:*":
+  version: 1.0.0
+  resolution: "@types/estree@npm:1.0.0"
+  checksum: 910d97fb7092c6738d30a7430ae4786a38542023c6302b95d46f49420b797f21619cdde11fa92b338366268795884111c2eb10356e4bd2c8ad5b92941e9e6443
+  languageName: node
+  linkType: hard
+
 "@types/form-data@npm:0.0.33":
   version: 0.0.33
   resolution: "@types/form-data@npm:0.0.33"
@@ -3049,7 +3066,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-schema@npm:^7.0.9":
+"@types/json-schema@npm:*, @types/json-schema@npm:^7.0.9":
   version: 7.0.11
   resolution: "@types/json-schema@npm:7.0.11"
   checksum: 527bddfe62db9012fccd7627794bd4c71beb77601861055d87e3ee464f2217c85fca7a4b56ae677478367bbd248dbde13553312b7d4dbc702a2f2bbf60c4018d
@@ -3378,7 +3395,7 @@ __metadata:
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.7
     "@w5s/cspell-config": 1.0.0-alpha.5
-    "@w5s/eslint-config": 1.0.0-alpha.47
+    "@w5s/eslint-config": 1.0.0-alpha.48
     "@w5s/mrm-preset": 1.0.0-alpha.38
     "@w5s/ts-config": 1.0.0-alpha.26
     concurrently: 7.6.0
@@ -3441,22 +3458,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/dev@npm:^1.0.0-alpha.2":
-  version: 1.0.0-alpha.2
-  resolution: "@w5s/dev@npm:1.0.0-alpha.2"
-  checksum: 4093aca922bc1e7b09d41e7991b6cbb3d835a3e07a4c0663faaea44afafa20d6144e38953b41013f9a26393ad8e53e5b2d3b29a567e2c32c373475dae6c08a04
+"@w5s/dev@npm:^1.0.0-alpha.3":
+  version: 1.0.0-alpha.3
+  resolution: "@w5s/dev@npm:1.0.0-alpha.3"
+  dependencies:
+    "@types/eslint": ^8.4.10
+  checksum: cb1b04ad1e1b5badcc92ff3df2076ebb132059b51d4eba3adef570d5b14f7574f3b9a7e6ba77742ef7ad662a93577188c025f8bc3062ca7e4c10210f2b697b9d
   languageName: node
   linkType: hard
 
-"@w5s/eslint-config@npm:1.0.0-alpha.47":
-  version: 1.0.0-alpha.47
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.47"
+"@w5s/eslint-config@npm:1.0.0-alpha.48":
+  version: 1.0.0-alpha.48
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.48"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
-    "@w5s/dev": ^1.0.0-alpha.2
-    "@w5s/prettier-config": ^1.0.7
+    "@w5s/dev": ^1.0.0-alpha.3
+    "@w5s/prettier-config": ^1.0.8
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
     eslint-plugin-functional: ^4.2.0
@@ -3480,7 +3499,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: c72ab7b18760968e4751d0941957a54252dfddd8a5e1c14af4c6bbcd7b2e231d0b55f9c6d44650efb6d93597b9a7edee98810daef6c264c5a685f6fc9de3c30f
+  checksum: bb1ebefa8ddbe6f638ae35cf809d7c4d7a32c4dfa1380fd826b1f1c0f2d806b115d7964675c5ea4d8787a89f2dc8928b16155f36e2159eafe2f4660c4cfa2fc9
   languageName: node
   linkType: hard
 
@@ -3545,15 +3564,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/prettier-config@npm:^1.0.7":
-  version: 1.0.7
-  resolution: "@w5s/prettier-config@npm:1.0.7"
+"@w5s/prettier-config@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "@w5s/prettier-config@npm:1.0.8"
   peerDependencies:
     prettier: 2.x
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 383cfe550768248bcc95e03fe86d4d51209f815911799f3060cbc8e7776ea1b8cf114401ca57d319faddcfa6e276d88c0001e9c9d1628bd088ac7b061e44e0be
+  checksum: ff63778912c928e6c894d43535af6534ec5d24601fb5f740c84ef9618407549e43cd38554a7ddbaa94c7c673e75a9727fde9a9a4698a587fc5ba35765b06161f
   languageName: node
   linkType: hard
 
