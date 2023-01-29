@@ -21,6 +21,7 @@ describe('index', () => {
         'Equal',
         'extend',
         'globalStorage',
+        'GlobalStorage',
         'identity',
         'ignore',
         'Int',
@@ -37,11 +38,12 @@ describe('index', () => {
         'shallowEqual',
         'String',
         'Symbol',
-        'throwError',
         'Task',
         'TaskCanceler',
+        'throwError',
         'Time',
         'TimeDuration',
+        'useRef',
         'warning',
       ].sort()
     );
