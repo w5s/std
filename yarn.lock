@@ -3389,7 +3389,7 @@ __metadata:
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.0.8
     "@w5s/cspell-config": 1.0.0-alpha.6
-    "@w5s/eslint-config": 1.0.0-alpha.48
+    "@w5s/eslint-config": 1.0.0-alpha.49
     "@w5s/mrm-preset": 1.0.0-alpha.40
     "@w5s/ts-config": 1.0.0-alpha.26
     concurrently: 7.6.0
@@ -3452,23 +3452,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/dev@npm:^1.0.0-alpha.3":
-  version: 1.0.0-alpha.3
-  resolution: "@w5s/dev@npm:1.0.0-alpha.3"
+"@w5s/dev@npm:^1.0.0-alpha.4":
+  version: 1.0.0-alpha.4
+  resolution: "@w5s/dev@npm:1.0.0-alpha.4"
   dependencies:
     "@types/eslint": ^8.4.10
-  checksum: cb1b04ad1e1b5badcc92ff3df2076ebb132059b51d4eba3adef570d5b14f7574f3b9a7e6ba77742ef7ad662a93577188c025f8bc3062ca7e4c10210f2b697b9d
+  checksum: f33190f54dcc8d89c2227c0683bd14f3d48d43d35e03ab5ebbffa212be7e3e9f4d13cfab3efc4c2b66b5d5a585544eb255985d27b2d0df82ca4db830e382ee56
   languageName: node
   linkType: hard
 
-"@w5s/eslint-config@npm:1.0.0-alpha.48":
-  version: 1.0.0-alpha.48
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.48"
+"@w5s/eslint-config@npm:1.0.0-alpha.49":
+  version: 1.0.0-alpha.49
+  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.49"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
-    "@w5s/dev": ^1.0.0-alpha.3
+    "@w5s/dev": ^1.0.0-alpha.4
     "@w5s/prettier-config": ^1.0.8
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
@@ -3493,7 +3493,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: bb1ebefa8ddbe6f638ae35cf809d7c4d7a32c4dfa1380fd826b1f1c0f2d806b115d7964675c5ea4d8787a89f2dc8928b16155f36e2159eafe2f4660c4cfa2fc9
+  checksum: 16d1fae5cbb7eabb282d0e5b7ec209a377cfb6de751f143f00f3e091305b249e4b836ae1072ecfa92db81190dda108a3ba963d0b8964c5e1039f51ae2ec39041
   languageName: node
   linkType: hard
 
