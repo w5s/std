@@ -20,8 +20,6 @@ describe('index', () => {
         'Disposable',
         'Equal',
         'extend',
-        'globalStorage',
-        'GlobalStorage',
         'identity',
         'ignore',
         'Int',
@@ -43,7 +41,6 @@ describe('index', () => {
         'throwError',
         'Time',
         'TimeDuration',
-        'useRef',
         'warning',
       ].sort()
     );
