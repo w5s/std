@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import { globalStorage, GlobalStorage, useRef } from './globalStorage.js';
-import { Symbol } from './symbol.js';
+import { Symbol } from '../../core/src/symbol.js';
 
-describe(GlobalStorage, () => {
+describe('GlobalStorage', () => {
   describe('#get', () => {
     it('should return an array of pair', () => {
       const storage = new GlobalStorage();

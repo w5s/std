@@ -1,5 +1,4 @@
-import type { Option } from './option.js';
-import type { Ref } from './ref.js';
+import type { Option, Ref } from '@w5s/core';
 
 // Inline
 const $globalStorage = Symbol.for('@w5s/globalStorage');
