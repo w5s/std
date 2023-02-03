@@ -1,19 +1,19 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# UUID Generator library _(${name})_) -->
-# UUID Generator library _(@w5s/uuid)_
+# UUID Generator library _(@w5s/log)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> UUID generator
+> Logging module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/uuid
+npm install @w5s/log
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -38,10 +38,10 @@ export function main(): void {
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/uuid.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/log.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/uuid
+[package-url]: https://www.npmjs.com/package/@w5s/log
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square

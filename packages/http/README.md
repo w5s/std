@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> HTTP module
+> HTTP Client module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation

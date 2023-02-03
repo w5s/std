@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Playground module
+> Examples
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -23,10 +23,10 @@ This is a private package only for experimentation
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/http.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/playground.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/http
+[package-url]: https://www.npmjs.com/package/@w5s/playground
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square

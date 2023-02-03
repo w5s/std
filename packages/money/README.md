@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> UUID generator
+> Money package management
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation

@@ -19,7 +19,13 @@
       "dependsOn": ["//#format:root"]
     },
     "//#format:root": {},
-    "docs": {},
+    "docs": {
+      "dependsOn": ["//#docs:root"],
+      "cache": false
+    },
+    "//#docs:root": {
+      "outputs": ["**/*.md"]
+    },
     "spellcheck": {
       "dependsOn": ["//#spellcheck:root"]
     },
