@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
+import { Symbol } from '@w5s/core';
 import { globalStorage, GlobalStorage, useRef } from './globalStorage.js';
-import { Symbol } from '../../core/src/symbol.js';
 
 describe('GlobalStorage', () => {
   describe('#get', () => {
