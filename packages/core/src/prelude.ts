@@ -14,9 +14,7 @@ import type { Spread } from './type.js';
  * ```
  * @param _anyValue - any value that should be ignored
  */
-export function ignore(_anyValue: unknown): void {
-  return undefined;
-}
+export function ignore(_anyValue: unknown): void {}
 
 /**
  * Return the unchanged given `value`
