@@ -3470,7 +3470,7 @@ __metadata:
     "@w5s/commitlint-config": 1.0.9
     "@w5s/cspell-config": 1.0.0-alpha.6
     "@w5s/eslint-config": 1.0.0-alpha.49
-    "@w5s/mrm-preset": 1.0.0-alpha.40
+    "@w5s/mrm-preset": 1.0.0-alpha.41
     "@w5s/ts-config": 1.0.0-alpha.26
     concurrently: 7.6.0
     conventional-changelog-gitmoji-config: latest
@@ -3612,16 +3612,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/mrm-preset@npm:1.0.0-alpha.40":
-  version: 1.0.0-alpha.40
-  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.40"
+"@w5s/mrm-preset@npm:1.0.0-alpha.41":
+  version: 1.0.0-alpha.41
+  resolution: "@w5s/mrm-preset@npm:1.0.0-alpha.41"
   dependencies:
     debug: ^4.3.3
     glob: ^8.0.3
     mrm-core: ^7.0.0
     semver-intersect: ^1.4.0
     sync-directory: ^5.0.0
-  checksum: 31304ac7c5269173038adc533a0167f5c1b9e513f645ce4e24a99891adbeab6ec0d84dbf6d103b8e7fa8e43d70635527c99ea971db8d19553568aecc7ba12270
+  checksum: f6309bdd80e2f4ad5d3b30acfdd97f9085948daa501594ef2b8d98b116914cf72cfe430e602da1fb4780034ae1c2c0040766b4407708fcb8fc6fc2f2e1b3169a
   languageName: node
   linkType: hard
 
