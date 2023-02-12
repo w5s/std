@@ -3417,22 +3417,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:1.0.9":
-  version: 1.0.9
-  resolution: "@w5s/commitlint-config@npm:1.0.9"
+"@w5s/commitlint-config@npm:1.0.10":
+  version: 1.0.10
+  resolution: "@w5s/commitlint-config@npm:1.0.10"
   dependencies:
     "@commitlint/types": ^17.0.0
-    "@w5s/conventional-changelog": ^1.0.0-alpha.2
+    "@w5s/conventional-changelog": ^1.0.0-alpha.3
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: c0558332e92f06af61f3acf6e3988191db57eeac4ee61484fa7444d018ab697368cc8309bfcb658e39b8f2db2c235d5ca3570d34d87dbb7b19532905a7eeae98
+  checksum: 5fe0bb1c927296653c025827c5c1eba11bd3300e51141fd3b60ba214a9edf79b8ecea88a023896b60aebaf6814dbd2bd05d9ca70a308c1bb91f3eab9ea9e4634
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:^1.0.0-alpha.2":
+"@w5s/conventional-changelog@npm:^1.0.0-alpha.3":
   version: 1.0.0-alpha.3
   resolution: "@w5s/conventional-changelog@npm:1.0.0-alpha.3"
   dependencies:
@@ -3450,7 +3450,7 @@ __metadata:
     "@commitlint/cli": 17.4.2
     "@jest/globals": latest
     "@types/node": 17.0.45
-    "@w5s/commitlint-config": 1.0.9
+    "@w5s/commitlint-config": 1.0.10
     "@w5s/cspell-config": 1.0.0-alpha.7
     "@w5s/eslint-config": 1.0.0-alpha.51
     "@w5s/mrm-preset": 1.0.0-alpha.41
