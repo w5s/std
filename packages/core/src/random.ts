@@ -4,7 +4,7 @@ import type { Task } from './task.js';
 import type { Tag } from './type.js';
 
 export namespace Random {
-  const floor = (value: number) => Math.floor(value) as Int;
+  const floor = Math.floor as (value: number) => Int;
 
   export type Value = Tag<number, { min: 0; max: 1 }>;
 
