@@ -1,6 +1,7 @@
-import { assertNever, Console, Int, Option, pipe, Task, TimeDuration } from '@w5s/core';
+import { assertNever, Console, Int, Option, Task, TimeDuration } from '@w5s/core';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/uuid';
+import { pipe } from './pipe.js';
 import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
 import { timeout, TimeoutError } from './timeout.js';
