@@ -8,7 +8,6 @@ describe('module public API', () => {
       expect.objectContaining({
         Currency: expect.any(Function),
         Money: expect.any(Function),
-        moneyFactory: expect.any(Function),
       })
     );
   });
