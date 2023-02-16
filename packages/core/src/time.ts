@@ -3,7 +3,6 @@ import type { Option } from './option.js';
 import type { Task } from './task.js';
 import type { Tag } from './type.js';
 
-const none = undefined;
 // Inline private constructor
 const createTask: typeof Task.wrap = (fn) => ({
   taskRun: fn,
@@ -174,7 +173,7 @@ export namespace Time {
   export function parseISOString(str: string): Option<Time> {
     const time = Date.parse(str);
 
-    return Number.isNaN(time) ? none : (time as Time);
+    return Number.isNaN(time) ? undefined : (time as Time);
   }
 
   /**

@@ -1,7 +1,6 @@
 import type { Option } from './option.js';
 import type { Tag } from './type.js';
 
-const none = undefined;
 // eslint-disable-next-line no-restricted-properties, prefer-exponentiation-operator
 const MAX_SAFE_INTEGER = (Math.pow(2, 53) - 1) as Int;
 const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
@@ -109,7 +108,7 @@ export namespace Int {
     /* eslint-disable unicorn/prefer-number-properties */
     const intValue = parseInt(expression, radix) as Int;
 
-    return Number.isNaN(intValue) ? none : Int(intValue);
+    return Number.isNaN(intValue) ? undefined : Int(intValue);
   }
 
   /**

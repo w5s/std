@@ -15,9 +15,8 @@ export namespace Array {
   const copy = <Item>(array: ReadonlyArray<Item>): NativeArray<Item> => array.slice();
   const emptyArray = Object.freeze([]);
   const readonly = <Item>(array: NativeArray<Item>): ReadonlyArray<Item> => array;
-  const none = undefined;
   const isBetween = (value: number, min: number, max: number) => value >= min && value <= max;
-  const indexToOption = (value: number): Option<Int> => (value < 0 ? none : (value as Int));
+  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
   const copySlice = <Item>(
     array: NativeArray<Item>,
     arrayStartIndex: number,
@@ -142,7 +141,7 @@ export namespace Array {
    * @param index - The zero based position
    */
   export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
-    return array[index < 0 ? index + array.length : index] ?? none;
+    return array[index < 0 ? index + array.length : index] ?? undefined;
   }
 
   /**
@@ -194,7 +193,7 @@ export namespace Array {
       }
     }
 
-    return none;
+    return undefined;
   }
 
   /**
@@ -237,7 +236,7 @@ export namespace Array {
       }
     }
 
-    return none;
+    return undefined;
   }
 
   /**
@@ -254,7 +253,7 @@ export namespace Array {
    * @param fromIndex - The position in this array at which to begin searching for searchItem.
    */
   export function includes<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): boolean {
-    return indexOf(array, searchItem, fromIndex) !== none;
+    return indexOf(array, searchItem, fromIndex) !== undefined;
   }
 
   // export function forEach() {}
