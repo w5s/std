@@ -43,4 +43,9 @@ describe('Math', () => {
       expect(Math.truncate(value)).toBe(globalThis.Math.trunc(value));
     });
   });
+  describe(Math.sqrt, () => {
+    it.each(anyNumericValue)('should be an alias to Math.sqrt', (value) => {
+      expect(Math.sqrt(value)).toBe(globalThis.Math.sqrt(value));
+    });
+  });
 });

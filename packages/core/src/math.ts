@@ -106,4 +106,17 @@ export namespace Math {
    */
   export declare function max<V extends number>(...args: V[]): V;
   alias('max');
+
+  /**
+   * Returns the square root of a number.
+   *
+   * @example
+   * ```typescript
+   * Math.sqrt(4);// 2
+   * Math.sqrt(Int(4));// Int(2)
+   * ```
+   * @param value - A set of numeric expressions
+   */
+  export declare function sqrt<V extends number>(value: V): V;
+  alias('sqrt');
 }
