@@ -24,6 +24,20 @@ describe('Math', () => {
       expect(Math.abs(value)).toBe(globalThis.Math.abs(value));
     });
   });
+  describe(Math.min, () => {
+    it.each(anyNumericValue)('should be an alias to Math.min', (left) => {
+      anyNumericValue.forEach((right) => {
+        expect(Math.min(left, right)).toBe(globalThis.Math.min(left, right));
+      });
+    });
+  });
+  describe(Math.max, () => {
+    it.each(anyNumericValue)('should be an alias to Math.max', (left) => {
+      anyNumericValue.forEach((right) => {
+        expect(Math.max(left, right)).toBe(globalThis.Math.max(left, right));
+      });
+    });
+  });
   describe(Math.truncate, () => {
     it.each(anyNumericValue)('should be an alias to Math.trunc', (value) => {
       expect(Math.truncate(value)).toBe(globalThis.Math.trunc(value));

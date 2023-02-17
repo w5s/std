@@ -80,4 +80,30 @@ export namespace Math {
    */
   export declare function truncate(value: number): Int;
   alias('trunc', 'truncate');
+
+  /**
+   * Returns the smaller of a set of supplied numeric expressions.
+   *
+   * @example
+   * ```typescript
+   * Math.min(0.2, 0.5);// 0.2
+   * Math.min(Int(1), Int(2));// Int(1)
+   * ```
+   * @param args - A set of numeric expressions
+   */
+  export declare function min<V extends number>(...args: V[]): V;
+  alias('min');
+
+  /**
+   * Returns the greatest of a set of supplied numeric expressions.
+   *
+   * @example
+   * ```typescript
+   * Math.max(0.2, 0.5);// 0.5
+   * Math.max(Int(1), Int(2));// Int(2)
+   * ```
+   * @param args - A set of numeric expressions
+   */
+  export declare function max<V extends number>(...args: V[]): V;
+  alias('max');
 }
