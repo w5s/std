@@ -9,8 +9,9 @@ describe('index', () => {
         'applicationStore',
         'globalStorage',
         'GlobalStorage',
-        'useRef',
         'property',
+        'useRef',
+        'application',
       ].sort()
     );
   });
