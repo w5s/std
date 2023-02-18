@@ -10,6 +10,7 @@ describe('index', () => {
         'globalStorage',
         'GlobalStorage',
         'useRef',
+        'property',
       ].sort()
     );
   });
