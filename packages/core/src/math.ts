@@ -117,6 +117,6 @@ export namespace Math {
    * ```
    * @param value - A set of numeric expressions
    */
-  export declare function sqrt<V extends number>(value: V): V;
+  export declare function sqrt(value: Int | number): number;
   alias('sqrt');
 }

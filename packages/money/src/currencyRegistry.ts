@@ -14,7 +14,7 @@ export interface CurrencyRegistry {
    * ```
    * @param currency - The currency to register
    */
-  add(currency: Currency): void;
+  readonly add: (currency: Currency) => void;
 
   /**
    * Return the currency by its `code`
@@ -26,7 +26,7 @@ export interface CurrencyRegistry {
    * ```
    * @param currencyCode - The currency to register
    */
-  getByCode(currencyCode: Currency['code']): Option<Currency>;
+  readonly getByCode: (currencyCode: Currency['code']) => Option<Currency>;
 }
 
 export function CurrencyRegistry(application: Ref<ApplicationState>): CurrencyRegistry {
@@ -49,6 +49,5 @@ export function CurrencyRegistry(application: Ref<ApplicationState>): CurrencyRe
 }
 
 export namespace CurrencyRegistry {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   export const { add, getByCode } = CurrencyRegistry(app);
 }
