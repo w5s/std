@@ -2922,6 +2922,7 @@ __metadata:
   resolution: "@w5s/money@workspace:packages/money"
   dependencies:
     "@jest/globals": 29.4.2
+    "@w5s/app": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     currencies.json: 1.0.2
   peerDependencies:

@@ -15,13 +15,13 @@ function buildImports() {
 import type { Int } from '@w5s/core';
 import { Currency } from './currency.js';
 import { moneyFactory } from './moneyFactory.js';
-import { currencyRegistry } from './currencyRegistry.js';
+import { CurrencyRegistry } from './currencyRegistry.js';
 `;
 }
 
 function buildRegistry() {
   return `function registerAll() {
-  const register = (...parameters: Parameters<typeof Currency>) => currencyRegistry.add(Currency(parameters[0]));
+  const register = (...parameters: Parameters<typeof Currency>) => CurrencyRegistry.add(Currency(parameters[0]));
 ${currencyData.currencies
   .map(
     (currency) =>

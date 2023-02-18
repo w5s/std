@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from '@jest/globals';
-import { Int } from '@w5s/core';
+import { Int, Ref } from '@w5s/core';
 import { Currency } from './currency.js';
 import { CurrencyRegistry } from './currencyRegistry.js';
 import { Money } from './money.js';
@@ -8,7 +8,7 @@ import { moneyFactory } from './moneyFactory.js';
 describe(moneyFactory, () => {
   let registry: CurrencyRegistry;
   beforeEach(() => {
-    registry = new CurrencyRegistry();
+    registry = CurrencyRegistry(Ref({}));
   });
 
   it('should register a new currency', () => {
