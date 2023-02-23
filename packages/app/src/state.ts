@@ -5,6 +5,6 @@ import type { ApplicationId, ApplicationState } from './data.js';
 const emptyObject = Object.freeze({});
 
 /**
- * Application store for data
+ * Application state
  */
-export const applicationStore = useRef<Record<ApplicationId, ApplicationState>>('application', emptyObject);
+export const applicationState = useRef<Record<ApplicationId, ApplicationState>>('application', emptyObject);
