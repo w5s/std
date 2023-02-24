@@ -11,12 +11,21 @@ export type ApplicationId = string;
 /**
  * Application state generic type
  */
-export type ApplicationState = AnyObject;
+export interface ApplicationState {
+  /**
+   * Current application configuration
+   */
+  readonly configuration: AnyObject;
+  /**
+   * Current application state
+   */
+  readonly state: AnyObject;
+}
 
 /**
  * Application instance type
  */
-export interface Application<Configuration = EmptyObject> extends Ref<ApplicationState> {
+export interface Application<Configuration = EmptyObject> extends Ref<ApplicationState['state']> {
   /**
    * Application id
    */
@@ -27,8 +36,3 @@ export interface Application<Configuration = EmptyObject> extends Ref<Applicatio
    */
   readonly initialConfiguration: Configuration;
 }
-
-/**
- * Configuration state generic type
- */
-export type ConfigurationState = AnyObject;
