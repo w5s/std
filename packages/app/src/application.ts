@@ -40,7 +40,7 @@ export interface Application<Configuration = EmptyObject> extends Ref<Applicatio
  *
  * @example
  * ```ts
- * const app = application({
+ * const app = Application({
  *   id: 'my-app'
  * });
  * app.current = {
@@ -80,4 +80,55 @@ export namespace Application {
      */
     target?: Ref<Record<string, ApplicationState>>;
   };
+
+  /**
+   * Return the configuration value
+   *
+   * @example
+   * ```ts
+   * const app = Application({
+   *   id: 'my-app',
+   *   myVar: 1
+   * });
+   * Application.get(app, 'myVar');// 1
+   * ```
+   * @param app - The application
+   * @param key - Configuration key
+   */
+  export function get<Configuration, Key extends keyof Configuration>(
+    app: Application<Configuration>,
+    key: Key
+  ): Configuration[Key] {
+    // @ts-ignore Wrong typing
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return app.current.configuration[key];
+  }
+
+  /**
+   * Return the configuration value
+   *
+   * @example
+   * ```ts
+   * const app = Application({
+   *   id: 'my-app',
+   *   myVar: 1
+   * });
+   * Application.configure(app, {
+   *   myVar: 2
+   * });
+   * Application.get(app, 'myVar');// 2
+   * ```
+   * @param app - The application
+   * @param patch - Configuration key
+   */
+  export function configure<C>(app: Application<C>, patch: Partial<C>): void {
+    const { current } = app;
+    app.current = {
+      ...current,
+      configuration: {
+        ...current.configuration,
+        ...patch,
+      },
+    };
+  }
 }

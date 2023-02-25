@@ -6,8 +6,8 @@ import { globalStorage } from './globalStorage.js';
 describe('Application', () => {
   const generateId = () => Math.round(Math.random() * 2 ** 32).toString(36);
   const generateAppId = () => `test-app-${generateId()}`;
-  const targetRef = Ref({});
-  const app = Application({ id: 'test-app', target: targetRef });
+  const _target = Ref({});
+  const _app = Application({ id: 'test-app', target: _target });
 
   it('should setup globalStorage', () => {
     const id = `test-app-${generateId()}`;
@@ -51,15 +51,15 @@ describe('Application', () => {
     });
   });
   it('should store state in applicationStore', () => {
-    app.current = {
-      ...app.current,
+    _app.current = {
+      ..._app.current,
       foo: true,
     };
-    expect(app.current).toEqual({
+    expect(_app.current).toEqual({
       configuration: {},
       foo: true,
     });
-    expect(targetRef.current).toEqual({
+    expect(_target.current).toEqual({
       'test-app': {
         configuration: {},
         foo: true,
@@ -73,6 +73,37 @@ describe('Application', () => {
     expect(appWithConfiguration.initialConfiguration).toEqual({
       foo: 1,
       bar: 2,
+    });
+  });
+
+  describe('.get()', () => {
+    it('should return configuration', () => {
+      const target = Ref({});
+      const id = generateAppId();
+      const app = Application({ id, target, foo: 1 });
+      const value = Application.get(app, 'foo');
+      expect(value).toBe(1);
+    });
+  });
+  describe('.configure()', () => {
+    it('should set configuration', () => {
+      const target = Ref({});
+      const id = generateAppId();
+      const app = Application({ id, target, foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' });
+      app.current = {
+        ...app.current,
+        state: true,
+      };
+      Application.configure(app, { foo: 'foo_value_ext', bar: 'bar_value_ext' });
+
+      expect(app.current).toEqual({
+        configuration: {
+          bar: 'bar_value_ext',
+          baz: 'baz_value',
+          foo: 'foo_value_ext',
+        },
+        state: true,
+      });
     });
   });
 });
