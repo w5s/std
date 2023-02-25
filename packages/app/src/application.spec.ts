@@ -18,7 +18,6 @@ describe('application', () => {
           `application/${id}`,
           {
             configuration: { foo: 'bar' },
-            state: {},
           },
         ],
       ])
@@ -31,7 +30,6 @@ describe('application', () => {
     expect(target.current).toEqual({
       [id]: {
         configuration: { foo: 'bar' },
-        state: {},
       },
     });
   });
@@ -44,7 +42,12 @@ describe('application', () => {
         foo: 1,
         bar: 2,
       },
-      current: {},
+      current: {
+        configuration: {
+          foo: 1,
+          bar: 2,
+        },
+      },
     });
   });
   it('should store state in applicationStore', () => {
@@ -53,14 +56,13 @@ describe('application', () => {
       foo: true,
     };
     expect(app.current).toEqual({
+      configuration: {},
       foo: true,
     });
     expect(targetRef.current).toEqual({
       'test-app': {
         configuration: {},
-        state: {
-          foo: true,
-        },
+        foo: true,
       },
     });
   });
