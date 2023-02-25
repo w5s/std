@@ -1,6 +1,6 @@
 import { property, type Application } from '@w5s/app';
 import type { Option, Record } from '@w5s/core';
-import { app } from './app.js';
+import { application } from './application.js';
 import type { Currency } from './currency.js';
 
 export interface CurrencyRegistry {
@@ -29,8 +29,8 @@ export interface CurrencyRegistry {
   readonly getByCode: (currencyCode: Currency['code']) => Option<Currency>;
 }
 
-export function CurrencyRegistry(application: Application): CurrencyRegistry {
-  const codeIndex = property<Record<string, Currency>>(application, 'currency', Object.freeze({}));
+export function CurrencyRegistry(_application: Application): CurrencyRegistry {
+  const codeIndex = property<Record<string, Currency>>(_application, 'currency', Object.freeze({}));
 
   function add(currency: Currency): void {
     codeIndex.current = {
@@ -49,5 +49,5 @@ export function CurrencyRegistry(application: Application): CurrencyRegistry {
 }
 
 export namespace CurrencyRegistry {
-  export const { add, getByCode } = CurrencyRegistry(app);
+  export const { add, getByCode } = CurrencyRegistry(application);
 }

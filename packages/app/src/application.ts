@@ -1,7 +1,39 @@
-import type { Ref } from '@w5s/core';
+import type { Ref, Record, Tag } from '@w5s/core';
 import { useRef } from './globalStorage.js';
-import type { Application, ApplicationId, ApplicationState } from './data.js';
 import { property } from './property.js';
+
+type AnyObject = Record<string | symbol, unknown>;
+type EmptyObject = Record<string | symbol, never>;
+
+/**
+ * Application id type
+ */
+export type ApplicationId = Tag<string, { applicationId: true }>;
+
+/**
+ * Application state generic type
+ */
+export interface ApplicationState extends AnyObject {
+  /**
+   * Current application configuration
+   */
+  readonly configuration: AnyObject;
+}
+
+/**
+ * Application instance type
+ */
+export interface Application<Configuration = EmptyObject> extends Ref<ApplicationState> {
+  /**
+   * Application id
+   */
+  readonly id: ApplicationId;
+
+  /**
+   * Application initial configuration
+   */
+  readonly initialConfiguration: Configuration;
+}
 
 /**
  * Returns an app instance with a state ref that will be stored in `applicationStore.current[id]`
@@ -19,9 +51,9 @@ import { property } from './property.js';
  * ```
  * @param properties
  */
-export function application<Configuration extends ApplicationState['configuration']>(
-  properties: application.Option & Configuration
-): Application<Omit<Configuration, keyof application.Option>> {
+export function Application<Configuration extends AnyObject>(
+  properties: Application.Option & Configuration
+): Application<Omit<Configuration, keyof Application.Option>> {
   const { id, target, ...initialConfiguration } = properties;
   const initialState: ApplicationState = Object.freeze({
     configuration: initialConfiguration,
@@ -35,7 +67,8 @@ export function application<Configuration extends ApplicationState['configuratio
     }
   );
 }
-export namespace application {
+
+export namespace Application {
   export type Option = {
     /**
      * Application id
