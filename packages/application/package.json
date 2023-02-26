@@ -1,5 +1,5 @@
 {
-  "name": "@w5s/app",
+  "name": "@w5s/application",
   "version": "1.0.0-alpha.0",
   "description": "App management",
   "keywords": [
@@ -7,14 +7,14 @@
     "functional",
     "app"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/app#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/application#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/app"
+    "directory": "packages/application"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

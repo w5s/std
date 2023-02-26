@@ -1,6 +1,6 @@
 import type { Record, TaskCanceler } from '@w5s/core';
 import type { DatabaseDriverMap } from '@w5s/database';
-import { property } from '@w5s/app';
+import { property } from '@w5s/application';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
 import { application } from './application.js';

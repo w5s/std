@@ -2708,9 +2708,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/app@^1.0.0-alpha.0, @w5s/app@workspace:packages/app":
+"@w5s/application@^1.0.0-alpha.0, @w5s/application@workspace:packages/application":
   version: 0.0.0-use.local
-  resolution: "@w5s/app@workspace:packages/app"
+  resolution: "@w5s/application@workspace:packages/application"
   dependencies:
     "@jest/globals": 29.4.3
     "@w5s/core": ^1.0.0-alpha.0
@@ -2810,7 +2810,7 @@ __metadata:
     "@jest/globals": 29.4.3
     "@types/mysql": ^2.15.7
     "@types/sqlite3": ^3.1.5
-    "@w5s/app": ^1.0.0-alpha.0
+    "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     mysql: ^2.17.1
     sqlite3: ^5.1.0
@@ -2878,7 +2878,7 @@ __metadata:
   resolution: "@w5s/log@workspace:packages/log"
   dependencies:
     "@jest/globals": 29.4.3
-    "@w5s/app": ^1.0.0-alpha.0
+    "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     "@w5s/uuid": ^1.0.0-alpha.0
   peerDependencies:
@@ -2891,7 +2891,7 @@ __metadata:
   resolution: "@w5s/money@workspace:packages/money"
   dependencies:
     "@jest/globals": 29.4.3
-    "@w5s/app": ^1.0.0-alpha.0
+    "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     currencies.json: 1.0.2
   peerDependencies:
@@ -2917,7 +2917,7 @@ __metadata:
   resolution: "@w5s/playground@workspace:packages/playground"
   dependencies:
     "@jest/globals": 29.4.3
-    "@w5s/app": ^1.0.0-alpha.0
+    "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     "@w5s/http": ^1.0.0-alpha.0
     "@w5s/uuid": ^1.0.0-alpha.0

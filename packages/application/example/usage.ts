@@ -1,4 +1,4 @@
-import { globalStorage, useRef } from '@w5s/app';
+import { globalStorage, useRef } from '@w5s/application';
 
 export function main(): void {
   const counterRef = useRef('counter', 1);

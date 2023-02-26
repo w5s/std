@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
-import { Application } from '@w5s/app';
 import { Ref } from '@w5s/core';
+import { Application } from '@w5s/application';
 import { Currency } from './currency.js';
 import { CurrencyRegistry } from './currencyRegistry.js';
 

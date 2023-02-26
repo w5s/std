@@ -1,4 +1,4 @@
-import { Application } from '@w5s/app';
+import { Application } from '@w5s/application';
 
 /**
  * Money Application reference

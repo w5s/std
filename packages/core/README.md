@@ -52,7 +52,7 @@ npm install @w5s/core
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result, Console, Task, ignore } from '@w5s/core';
+import { Result, Console, Task } from '@w5s/core';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);
@@ -94,8 +94,11 @@ void Task.unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
 <!-- AUTO-GENERATED-CONTENT:END -->
 [license-url]: ../../LICENSE
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
+[issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[sources-url]: ${repository.url}) -->
+[sources-url]: git@github.com:w5s/std.git
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[homepage-url]: ${homepage}) -->
+[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme
 <!-- AUTO-GENERATED-CONTENT:END -->

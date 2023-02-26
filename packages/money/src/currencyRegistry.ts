@@ -1,5 +1,5 @@
-import { property, type Application } from '@w5s/app';
 import type { Option, Record } from '@w5s/core';
+import { property, type Application } from '@w5s/application';
 import { application } from './application.js';
 import type { Currency } from './currency.js';
 
