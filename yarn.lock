@@ -2878,6 +2878,7 @@ __metadata:
   resolution: "@w5s/log@workspace:packages/log"
   dependencies:
     "@jest/globals": 29.4.3
+    "@w5s/app": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     "@w5s/uuid": ^1.0.0-alpha.0
   peerDependencies:
