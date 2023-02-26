@@ -1,14 +1,12 @@
-import type { TaskCanceler } from '@w5s/core';
+import type { Record, TaskCanceler } from '@w5s/core';
 import type { DatabaseDriverMap } from '@w5s/database';
+import { property } from '@w5s/app';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
+import { application } from './application.js';
 
 export namespace DatabaseDriver {
-  const driverMap: Record<string, any> = {};
-
-  function getRegistry() {
-    return driverMap;
-  }
+  const registry = property<Record<string, any>>(application, 'registry', {});
 
   function notFound(name: string): never {
     throw new ReferenceError(`${name} driver not found`);
@@ -16,11 +14,14 @@ export namespace DatabaseDriver {
 
   export function get<Name extends keyof DatabaseDriverMap>(name: Name): ModuleOf<Name> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return getRegistry()[name] ?? notFound(name);
+    return registry.current[name] ?? notFound(name);
   }
 
   export function set<Name extends keyof DatabaseDriverMap>(name: Name, module: ModuleOf<Name>): void {
-    getRegistry()[name] = module;
+    registry.current = {
+      ...registry.current,
+      [name]: module,
+    };
   }
 
   export function Make<Name extends string, Client>(
