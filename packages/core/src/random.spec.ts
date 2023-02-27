@@ -7,7 +7,9 @@ import { Task } from './task.js';
 describe('Random', () => {
   const generatorOf = (value: number) => Random.Generator(() => Random.Value(value));
   const mockDefaultGenerator = (value: number) =>
-    jest.spyOn(Random.defaultGenerator, 'taskRun').mockImplementation((resolve) => resolve(Random.Value(value)));
+    jest
+      .spyOn(Random.defaultGeneratorRef.current, 'taskRun')
+      .mockImplementation((resolve) => resolve(Random.Value(value)));
 
   describe(Random.Value, () => {
     it('should return new random value', () => {
@@ -27,12 +29,21 @@ describe('Random', () => {
       expect(Random.Value.hasInstance(invalidValue)).toBe(false);
     });
   });
-
-  describe('defaultGenerator', () => {
+  describe('unsafeGenerator', () => {
     it('should use Math.random', async () => {
       const nextRandom = 0.123;
       jest.spyOn(Math, 'random').mockReturnValue(nextRandom);
-      expect(Task.unsafeRun(Random.defaultGenerator)).toEqual(Result.Ok(nextRandom));
+      expect(Task.unsafeRun(Random.unsafeGenerator)).toEqual(Result.Ok(nextRandom));
+    });
+  });
+  describe('cryptoGenerator', () => {
+    it('should use crypto', async () => {
+      expect(Task.unsafeRun(Random.cryptoGenerator)).toEqual(Result.Ok(expect.any(Number)));
+    });
+  });
+  describe('defaultGenerator', () => {
+    it('should be unsafeGenerator', async () => {
+      expect(Random.defaultGeneratorRef).toEqual({ current: Random.cryptoGenerator });
     });
   });
   describe('.number', () => {

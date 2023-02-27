@@ -2,6 +2,8 @@ import { invariant } from './invariant.js';
 import type { Int } from './integer.js';
 import type { Task } from './task.js';
 import type { Tag } from './type.js';
+import type { Option } from './option.js';
+import type { Ref } from './ref.js';
 
 export namespace Random {
   const floor = Math.floor as (value: number) => Int;
@@ -58,9 +60,37 @@ export namespace Random {
   }
 
   /**
-   * Default generator, using `Math.random`
+   * Unsafe generator, using `Math.random`
    */
-  export const defaultGenerator = Generator(() => Math.random() as Random.Value);
+  export const unsafeGenerator = Generator(() => Math.random() as Random.Value);
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const cryptoModule: Option<Pick<Crypto, 'getRandomValues'>> =
+    typeof window === 'undefined' // eslint-disable-next-line unicorn/prefer-module
+      ? typeof require === 'undefined'
+        ? undefined
+        : // eslint-disable-next-line global-require, @typescript-eslint/no-require-imports, unicorn/prefer-module
+          require('node:crypto')
+      : window.crypto;
+
+  const cryptoBuffer = new Uint32Array(1);
+  const cryptoDenominator = 2 ** 32;
+
+  /**
+   * Unsafe generator, using `Math.random`
+   */
+  export const cryptoGenerator = Generator(() => {
+    invariant(cryptoModule != null, `Crypto implementation not found`);
+    cryptoModule.getRandomValues(cryptoBuffer);
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return (cryptoBuffer[0]! / cryptoDenominator) as Random.Value;
+  });
+
+  /**
+   * Default generator
+   */
+  export const defaultGeneratorRef: Ref<Generator> = { current: cryptoGenerator };
 
   /**
    * Return a Task that will generate floating numbers between [`min`, `max`].
@@ -74,7 +104,11 @@ export namespace Random {
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
    */
-  export function number(min: number, max: number, generator: Generator = defaultGenerator): Task<number, never> {
+  export function number(
+    min: number,
+    max: number,
+    generator: Generator = defaultGeneratorRef.current
+  ): Task<number, never> {
     return {
       taskRun: (resolveTask, rejectTask, cancelerRef) =>
         generator.taskRun((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef),
@@ -93,7 +127,7 @@ export namespace Random {
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
    */
-  export function int(min: Int, max: Int, generator: Generator = defaultGenerator): Task<Int, never> {
+  export function int(min: Int, max: Int, generator: Generator = defaultGeneratorRef.current): Task<Int, never> {
     return {
       taskRun: (resolveTask, rejectTask, cancelerRef) =>
         number(min, max, generator).taskRun((value) => resolveTask(floor(value)), rejectTask, cancelerRef),
@@ -111,7 +145,7 @@ export namespace Random {
    * ```
    * @param trueWeight - the probability to obtain true
    */
-  export function boolean(trueWeight = 0.5, generator: Generator = defaultGenerator): Task<boolean, never> {
+  export function boolean(trueWeight = 0.5, generator: Generator = defaultGeneratorRef.current): Task<boolean, never> {
     return {
       taskRun: (resolveTask, rejectTask, cancelerRef) =>
         generator.taskRun((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef),
