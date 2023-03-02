@@ -13,6 +13,8 @@ import type { Option } from './option.js';
  * @param condition - the predicate result
  * @param message - an optional message for Error
  */
+export function invariant(condition: false, message?: Option<string>): never;
+export function invariant(condition: boolean, message?: Option<string>): asserts condition;
 export function invariant(condition: boolean, message?: Option<string>): asserts condition {
   if (!condition) {
     const error = new Error(message == null ? '' : message);
