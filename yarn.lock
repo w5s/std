@@ -2948,22 +2948,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:1.0.10":
-  version: 1.0.10
-  resolution: "@w5s/commitlint-config@npm:1.0.10"
+"@w5s/commitlint-config@npm:1.0.13":
+  version: 1.0.13
+  resolution: "@w5s/commitlint-config@npm:1.0.13"
   dependencies:
     "@commitlint/types": ^17.0.0
-    "@w5s/conventional-changelog": ^1.0.0-alpha.3
+    "@w5s/conventional-changelog": ^1.0.0-alpha.6
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 5fe0bb1c927296653c025827c5c1eba11bd3300e51141fd3b60ba214a9edf79b8ecea88a023896b60aebaf6814dbd2bd05d9ca70a308c1bb91f3eab9ea9e4634
+  checksum: 73b7a9acc662f8ee0239025a9581b0134025cb6bc3551b4bf4c3b3b2071feeb845ee369661b057d09a3dd3f82b42124907348ab4012dc0571da8a6840a200ba9
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:1.0.0-alpha.3, @w5s/conventional-changelog@npm:^1.0.0-alpha.3":
+"@w5s/conventional-changelog@npm:1.0.0-alpha.3":
   version: 1.0.0-alpha.3
   resolution: "@w5s/conventional-changelog@npm:1.0.0-alpha.3"
   dependencies:
@@ -2974,6 +2974,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@w5s/conventional-changelog@npm:^1.0.0-alpha.6":
+  version: 1.0.0-alpha.6
+  resolution: "@w5s/conventional-changelog@npm:1.0.0-alpha.6"
+  dependencies:
+    "@commitlint/types": ^17.0.0
+    emoji-regex: ^10.2.1
+    gitmojis: ^3.13.4
+  checksum: bbb55fb4a02836ec8d0fef9728955f574b7fc3dc33f1f20fbf34260254652ef489b3be892dbceba5403136522975ccc88ca55cdf7d5c645df3c7f1cbc197a9a2
+  languageName: node
+  linkType: hard
+
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
@@ -2981,7 +2992,7 @@ __metadata:
     "@commitlint/cli": 17.4.4
     "@jest/globals": latest
     "@types/node": 17.0.45
-    "@w5s/commitlint-config": 1.0.10
+    "@w5s/commitlint-config": 1.0.13
     "@w5s/conventional-changelog": 1.0.0-alpha.3
     "@w5s/cspell-config": 1.0.0-alpha.9
     "@w5s/eslint-config": 1.0.0-alpha.52
