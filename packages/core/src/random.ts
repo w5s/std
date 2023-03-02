@@ -66,12 +66,14 @@ export namespace Random {
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const cryptoModule: Option<Pick<Crypto, 'getRandomValues'>> =
-    typeof window === 'undefined' // eslint-disable-next-line unicorn/prefer-module
-      ? typeof require === 'undefined'
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    globalThis.crypto === undefined
+      ? // eslint-disable-next-line unicorn/prefer-module
+        typeof require === 'undefined'
         ? undefined
-        : // eslint-disable-next-line global-require, @typescript-eslint/no-require-imports, unicorn/prefer-module
-          require('node:crypto')
-      : window.crypto;
+        : // eslint-disable-next-line global-require, @typescript-eslint/no-require-imports, unicorn/prefer-module, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-var-requires
+          require('node:crypto').webcrypto
+      : globalThis.crypto;
 
   const cryptoBuffer = new Uint32Array(1);
   const cryptoDenominator = 2 ** 32;
