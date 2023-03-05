@@ -36,7 +36,7 @@
   ],
   "scripts": {
     "build": "concurrently \"npm:build:*\" \":\"",
-    "build:tsc": "node scripts/buildCurrencies.js && tsc -b tsconfig.build.json",
+    "build:tsc": "tsc -b tsconfig.build.json",
     "clean": "concurrently \"npm:clean:*\" \":\"",
     "clean:tsc": "rm -rf lib",
     "docs": "node '../../markdown.mjs'",
@@ -48,8 +48,8 @@
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepublishOnly": "npm run clean;npm run build",
     "spellcheck": "cspell --no-progress '**'",
-    "test": "concurrently \"npm:test:*\" ",
-    "test:src": "jest",
+    "test": "concurrently \"npm:test:*\" \":\"",
+    "test:src": "vitest run",
     "tsc": "tsc",
     "validate": "npm run lint && npm run build && npm run test"
   },
@@ -58,8 +58,9 @@
     "@w5s/core": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@jest/globals": "29.4.3",
-    "currencies.json": "1.0.2"
+    "currencies.json": "1.0.2",
+    "vite": "latest",
+    "vitest": "latest"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

@@ -1,5 +1,5 @@
 import { Option, Task } from '@w5s/core';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { FilePath } from './filePath.js';
 
 describe('FilePath', () => {

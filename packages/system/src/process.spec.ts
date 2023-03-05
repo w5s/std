@@ -1,5 +1,5 @@
 import { Result } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { errnoExceptionHandler, Internal } from './internal.js';
 import { FilePath } from './filePath.js';
 import { Process } from './process.js';
@@ -8,7 +8,7 @@ import { anyErrnoException, expectTask } from './_test/config.js';
 describe('Process', () => {
   describe('.exit', () => {
     it('should call process.exit', () => {
-      const processExit = jest.spyOn(Internal.Process, 'exit').mockImplementation(
+      const processExit = vi.spyOn(Internal.Process, 'exit').mockImplementation(
         () =>
           // do nothing
           undefined as never
@@ -19,7 +19,7 @@ describe('Process', () => {
     });
   });
   describe('.getCurrentDirectory', () => {
-    const mocked = jest.spyOn(Internal.Process, 'cwd');
+    const mocked = vi.spyOn(Internal.Process, 'cwd');
     it('should call process.cwd', () => {
       mocked.mockImplementation(() => FilePath('/my/dir'));
       const task = Process.getCurrentDirectory();
@@ -28,7 +28,7 @@ describe('Process', () => {
     });
   });
   describe('.setCurrentDirectory', () => {
-    const mocked = jest.spyOn(Internal.Process, 'chdir');
+    const mocked = vi.spyOn(Internal.Process, 'chdir');
     it('should call process.chdir', () => {
       mocked.mockImplementation(() => undefined);
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));

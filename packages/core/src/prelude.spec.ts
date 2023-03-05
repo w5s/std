@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { assertType } from './type.js';
 import { assign, extend, identity, constant, throwError, ignore } from './prelude.js';
 

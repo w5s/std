@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { assertType } from './type.js';
 import { Result } from './result.js';
 import { Option } from './option.js';
@@ -166,7 +166,7 @@ describe('Result', () => {
       });
       it('should return Result.Error(onError(error)) when error is thrown', () => {
         const thrownError = new Error('custom');
-        const onError = jest.fn((_error: unknown) => new TestError());
+        const onError = vi.fn((_error: unknown) => new TestError());
         expect(
           Result.tryCall(() => {
             throw thrownError;
@@ -186,7 +186,7 @@ describe('Result', () => {
       });
       it('should return Result.Error(onError(error)) when promise is rejected', async () => {
         const thrownError = new Error('custom');
-        const onError = jest.fn(async (_error: unknown) => new TestError());
+        const onError = vi.fn(async (_error: unknown) => new TestError());
         await expect(Result.tryCall((): Promise<string> => Promise.reject(thrownError), onError)).resolves.toEqual(
           Result.Error(new TestError())
         );

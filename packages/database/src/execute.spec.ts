@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Result, Task } from '@w5s/core';
 import { executeQuery } from './execute.js';
 import { DatabaseError } from './error.js';
@@ -11,8 +11,8 @@ describe('executeQuery', () => {
   const createClient = () =>
     ({
       databaseType: 'mock',
-      mockExecuteQuery: jest.fn(() => Promise.reject<unknown>(new Error('NotImplemented'))),
-      mockQueryToStatement: jest.fn(SQLQuery.toSQLStatement),
+      mockExecuteQuery: vi.fn(() => Promise.reject<unknown>(new Error('NotImplemented'))),
+      mockQueryToStatement: vi.fn(SQLQuery.toSQLStatement),
     } as const);
 
   it('should forward query execution to environment', async () => {

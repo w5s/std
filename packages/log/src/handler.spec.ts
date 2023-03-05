@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/core';
 import { UUID } from '@w5s/uuid';
 import { LogHandler } from './handler.js';
@@ -9,7 +9,7 @@ import { generateTime } from './__stub__.js';
 describe('LogHandler', () => {
   describe('.filter', () => {
     it('should filter input', async () => {
-      const handler = jest.fn(() => Task.resolve());
+      const handler = vi.fn(() => Task.resolve());
       const filtered = LogHandler.filter(handler, (record) => record.category === 'foo');
       const defaultProps = LogRecord({
         id: UUID.empty(),

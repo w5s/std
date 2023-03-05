@@ -1,5 +1,5 @@
 import { Result } from '@w5s/core';
-import { describe, it } from '@jest/globals';
+import { describe, it } from 'vitest';
 import { emptyDirectory } from './emptyDirectory.js';
 import { expectDir, expectTask, withTmpDirectory } from '../_test/config.js';
 
@@ -14,7 +14,7 @@ describe('emptyDirectory', () => {
       ]);
 
       await expectDir(testDir()).toHaveLength(3);
-      await expectTask(emptyDirectory(testDir())).resolves.toEqual(Result.Ok(undefined));
+      await expectTask(emptyDirectory(testDir())).result.resolves.toEqual(Result.Ok(undefined));
       await expectDir(testDir()).toHaveLength(0);
     })
   );
@@ -24,7 +24,7 @@ describe('emptyDirectory', () => {
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir();
       await expectDir(target).toHaveLength(0);
-      await expectTask(emptyDirectory(target)).resolves.toEqual(Result.Ok(undefined));
+      await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
       await expectDir(target).toHaveLength(0);
     })
   );
@@ -33,7 +33,7 @@ describe('emptyDirectory', () => {
     'should create directory when does not exist',
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir('does-not-exist');
-      await expectTask(emptyDirectory(target)).resolves.toEqual(Result.Ok(undefined));
+      await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
       await expectDir(target).toHaveLength(0);
     })
   );

@@ -1,16 +1,16 @@
 import { Result, Task } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi, type MockedObject } from 'vitest';
 import type { HTTP } from './client.js';
 import { HTTPParser } from './parser.js';
 import { HTTPError } from './error.js';
 
-const mockResponse = (): jest.MockedObject<HTTP.Response> =>
+const mockResponse = (): MockedObject<HTTP.Response> =>
   ({
-    arrayBuffer: jest.fn(),
-    formData: jest.fn(),
-    text: jest.fn(),
-    blob: jest.fn(),
-    json: jest.fn(),
+    arrayBuffer: vi.fn(),
+    formData: vi.fn(),
+    text: vi.fn(),
+    blob: vi.fn(),
+    json: vi.fn(),
   } as any);
 
 const expectToRejectFetchResponseError = async (

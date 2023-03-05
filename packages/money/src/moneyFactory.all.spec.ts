@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import currencyData from 'currencies.json';
 import * as MoneyFactory from './moneyFactory.all.js';
 

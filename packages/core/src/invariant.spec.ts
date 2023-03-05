@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { assertType } from './type.js';
 import { invariant, warning, assertNever } from './invariant.js';
 
@@ -38,21 +38,21 @@ describe('invariant', () => {
 });
 describe('warning', () => {
   it('should not call warning.print when condition is true', () => {
-    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
+    const printSpy = vi.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(true, 'message');
     expect(printSpy).not.toHaveBeenCalled();
   });
   it('should call warning.print when condition is false', () => {
-    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
+    const printSpy = vi.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(false, 'message');
     expect(printSpy).toHaveBeenCalledWith('Warning: message');
   });
   it('should call warning.print with an empty string when message is not defined', () => {
-    const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
+    const printSpy = vi.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
     });
     warning(false, undefined);

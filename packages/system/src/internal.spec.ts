@@ -1,5 +1,5 @@
 import { Option, Result } from '@w5s/core';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { FileError } from './error.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './internal.js';
 import type { FilePath } from './filePath.js';
@@ -49,7 +49,7 @@ describe('errnoTask', () => {
     const original = async () => true;
     const transformed = errnoTask(original);
 
-    await expectTask(transformed()).resolves.toEqual(Result.Ok(true));
+    await expectTask(transformed()).result.resolves.toEqual(Result.Ok(true));
   });
   it('should transform thrown error with errnoExceptionHandler', async () => {
     const original = async () => {
@@ -57,7 +57,7 @@ describe('errnoTask', () => {
     };
     const transformed = errnoTask(original);
 
-    await expectTask(transformed()).resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
+    await expectTask(transformed()).result.resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
   });
 });
 describe('errnoTaskSync', () => {

@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Int } from './integer.js';
 import { Random } from './random.js';
 import { Result } from './result.js';
@@ -7,7 +7,7 @@ import { Task } from './task.js';
 describe('Random', () => {
   const generatorOf = (value: number) => Random.Generator(() => Random.Value(value));
   const mockDefaultGenerator = (value: number) =>
-    jest
+    vi
       .spyOn(Random.defaultGeneratorRef.current, 'taskRun')
       .mockImplementation((resolve) => resolve(Random.Value(value)));
 
@@ -32,7 +32,7 @@ describe('Random', () => {
   describe('unsafeGenerator', () => {
     it('should use Math.random', async () => {
       const nextRandom = 0.123;
-      jest.spyOn(Math, 'random').mockReturnValue(nextRandom);
+      vi.spyOn(Math, 'random').mockReturnValue(nextRandom);
       expect(Task.unsafeRun(Random.unsafeGenerator)).toEqual(Result.Ok(nextRandom));
     });
   });

@@ -1,6 +1,4 @@
-/* eslint-disable jest/no-export */
-
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi, type MockedFunction } from 'vitest';
 import { assertType } from './type.js';
 import { AggregateError } from './aggregateError.js';
 import { throwError } from './prelude.js';
@@ -52,15 +50,15 @@ namespace ExpectTask {
   export function run<Value, Error>(
     task: Task<Value, Error>
   ): {
-    resolve: jest.MockedFunction<(value: Value) => void>;
-    reject: jest.MockedFunction<(error: Error) => void>;
-    initialCanceler: jest.MockedFunction<() => void>;
-    cancelerRef: Ref<jest.MockedFunction<() => void>>;
+    resolve: MockedFunction<(value: Value) => void>;
+    reject: MockedFunction<(error: Error) => void>;
+    initialCanceler: MockedFunction<() => void>;
+    cancelerRef: Ref<MockedFunction<() => void>>;
     finished: Promise<void>;
   } {
-    const resolveTask = jest.fn<(value: Value) => void>();
-    const rejectTask = jest.fn<(error: Error) => void>();
-    const initialCanceler = jest.fn();
+    const resolveTask = vi.fn<(value: Value) => void>();
+    const rejectTask = vi.fn<(error: Error) => void>();
+    const initialCanceler = vi.fn();
     const cancelerRef = Ref(initialCanceler);
     return {
       resolve: resolveTask,
@@ -195,7 +193,7 @@ describe('Task', () => {
     });
     it('should reject(onError(error)) when error is thrown', async () => {
       const thrownError = new Error('custom');
-      const onError = jest.fn((_error: unknown) => new TestError());
+      const onError = vi.fn((_error: unknown) => new TestError());
       const task = Task.tryCall(() => {
         throw thrownError;
       }, onError);
@@ -218,7 +216,7 @@ describe('Task', () => {
     });
     it('should return Result.Error(onError(error)) when promise is rejected (async handler)', async () => {
       const thrownError = new Error('custom');
-      const onError = jest.fn(async (innerError: unknown) => new TestError(innerError));
+      const onError = vi.fn(async (innerError: unknown) => new TestError(innerError));
       const task = Task.tryCall(() => Promise.reject(thrownError), onError);
 
       await ExpectTask.toReject(task, new TestError(thrownError));
@@ -226,7 +224,7 @@ describe('Task', () => {
     });
     it('should return Result.Error(onError(error)) when promise is rejected (sync handler)', async () => {
       const thrownError = new Error('custom');
-      const onError = jest.fn((innerError: unknown) => new TestError(innerError));
+      const onError = vi.fn((innerError: unknown) => new TestError(innerError));
       const task = Task.tryCall(() => Promise.reject(thrownError), onError);
       await ExpectTask.toReject(task, new TestError(thrownError));
       expect(onError).toHaveBeenCalledWith(thrownError);
@@ -252,24 +250,24 @@ describe('Task', () => {
     describe('sync', () => {
       it('should construct a success sync task', () => {
         const task = Task(({ ok }) => ok('foo'));
-        const resolve = jest.fn();
-        const reject = jest.fn();
+        const resolve = vi.fn();
+        const reject = vi.fn();
         task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('foo');
       });
       it('should construct a void task', () => {
         const task = Task(({ ok }) => ok());
-        const resolve = jest.fn();
-        const reject = jest.fn();
+        const resolve = vi.fn();
+        const reject = vi.fn();
         task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith(undefined);
       });
       it('should construct a failure sync task', async () => {
         const task = Task<never, 'err'>(({ error }) => error('err'));
-        const resolve = jest.fn();
-        const reject = jest.fn();
+        const resolve = vi.fn();
+        const reject = vi.fn();
         task.taskRun(resolve, reject, anyCancelerRef);
         expect(reject).toHaveBeenCalledTimes(1);
         expect(reject).toHaveBeenCalledWith('err');
@@ -289,8 +287,8 @@ describe('Task', () => {
     describe('async', () => {
       it('should construct an success async task', async () => {
         const task = Task(async ({ ok }) => ok('value'));
-        const resolve = jest.fn();
-        const reject = jest.fn();
+        const resolve = vi.fn();
+        const reject = vi.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
         await task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
@@ -298,8 +296,8 @@ describe('Task', () => {
       });
       it('should construct a void task', async () => {
         const task = Task(async ({ ok }) => ok());
-        const resolve = jest.fn();
-        const reject = jest.fn();
+        const resolve = vi.fn();
+        const reject = vi.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
         await task.taskRun(resolve, reject, anyCancelerRef);
         expect(resolve).toHaveBeenCalledTimes(1);
@@ -370,7 +368,7 @@ describe('Task', () => {
     it('should cancel other tasks', async () => {
       const taskCount = 4;
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
-        const canceler = jest.fn();
+        const canceler = vi.fn();
         return {
           task:
             taskIndex === 0
@@ -389,7 +387,7 @@ describe('Task', () => {
     it('should cancel every tasks when canceled', async () => {
       const taskCount = 4;
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
-        const canceler = jest.fn();
+        const canceler = vi.fn();
         return {
           task: generateTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
           canceler,
@@ -444,7 +442,7 @@ describe('Task', () => {
     it('should cancel other tasks', async () => {
       const taskCount = 4;
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
-        const canceler = jest.fn();
+        const canceler = vi.fn();
         return {
           task:
             taskIndex === 0
@@ -464,7 +462,7 @@ describe('Task', () => {
     it('should cancel every tasks when canceled', async () => {
       const taskCount = 4;
       const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
-        const canceler = jest.fn();
+        const canceler = vi.fn();
         return {
           task: generateTask({ delayMs: 2, value: `value${taskIndex}`, canceler }),
           canceler,
@@ -550,7 +548,7 @@ describe('Task', () => {
     it('should forward canceler', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.map(task, (_) => _);
-      jest.spyOn(task, 'taskRun');
+      vi.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
       expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       await runReport.finished;
@@ -585,7 +583,7 @@ describe('Task', () => {
     it('should forward canceler', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const mapTask = Task.mapError(task, (_) => _);
-      jest.spyOn(task, 'taskRun');
+      vi.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
       expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       await runReport.finished;
@@ -618,8 +616,8 @@ describe('Task', () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.andThen(task, (_) => afterTask);
-      jest.spyOn(task, 'taskRun');
-      jest.spyOn(afterTask, 'taskRun');
+      vi.spyOn(task, 'taskRun');
+      vi.spyOn(afterTask, 'taskRun');
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
       expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
@@ -640,13 +638,13 @@ describe('Task', () => {
       });
       it('should call callback and run task', async () => {
         const taskCallback = Task(({ ok }) => ok(anyOtherObject));
-        const taskCallbackSpy = jest.spyOn(taskCallback, 'taskRun');
+        const taskCallbackSpy = vi.spyOn(taskCallback, 'taskRun');
         await ExpectTask.run(Task.andRun(task, () => taskCallback)).finished;
 
         expect(taskCallbackSpy).toHaveBeenCalled();
       });
       it('should call callback with task value', async () => {
-        const callback = jest.fn(() => andTask);
+        const callback = vi.fn(() => andTask);
         await ExpectTask.run(Task.andRun(task, callback)).finished;
 
         expect(callback).toHaveBeenCalledWith(anyObject);
@@ -681,8 +679,8 @@ describe('Task', () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, error: anyError });
       const afterTask = generateTask<typeof anyObject, typeof anyError>({ delayMs: 0, value: anyObject });
       const thenTask = Task.orElse(task, (_) => afterTask);
-      jest.spyOn(task, 'taskRun');
-      jest.spyOn(afterTask, 'taskRun');
+      vi.spyOn(task, 'taskRun');
+      vi.spyOn(afterTask, 'taskRun');
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
 
@@ -701,7 +699,7 @@ describe('TaskCanceler', () => {
   });
   describe('.cancel', () => {
     it('should call current only once', () => {
-      const cancel = jest.fn();
+      const cancel = vi.fn();
       const canceler = { current: cancel };
       TaskCanceler.cancel(canceler);
       TaskCanceler.cancel(canceler);

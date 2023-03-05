@@ -1,5 +1,5 @@
 import { Int, Result, Time } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { readFileStatus, readSymbolicLinkStatus } from './readFileStatus.js';
 import { FilePath } from '../filePath.js';
 import { expectTask, generateStats } from '../_test/config.js';
@@ -10,10 +10,10 @@ import { FileSize } from '../fileSize.js';
 describe('readFileStatus', () => {
   it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
-    const statMocked = jest.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
+    const statMocked = vi.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readFileStatus(...args);
-    await expectTask(task).resolves.toEqual(
+    await expectTask(task).result.resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time(stats.atimeMs),
@@ -42,10 +42,10 @@ describe('readFileStatus', () => {
 describe('readSymbolicLinkStatus', () => {
   it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
-    const lstatMocked = jest.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
+    const lstatMocked = vi.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readSymbolicLinkStatus(...args);
-    await expectTask(task).resolves.toEqual(
+    await expectTask(task).result.resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time(stats.atimeMs),

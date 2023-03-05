@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { Time } from '@w5s/core';
 import { UUID } from '@w5s/uuid';
 import { LogRecord } from './record.js';

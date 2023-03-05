@@ -1,4 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EUR() > should be a valid money factory > currency 1`] = `
+{
+  "_": "Currency",
+  "code": "EUR",
+  "name": "Euro",
+  "namePlural": "euros",
+  "precision": 2,
+  "rounding": 0,
+  "symbol": "€",
+  "symbolNative": "€",
+}
+`;
 
 exports[`EUR() should be a valid money factory: currency 1`] = `
 {
@@ -10,6 +23,19 @@ exports[`EUR() should be a valid money factory: currency 1`] = `
   "rounding": 0,
   "symbol": "€",
   "symbolNative": "€",
+}
+`;
+
+exports[`USD() > should be a valid money factory > currency 1`] = `
+{
+  "_": "Currency",
+  "code": "USD",
+  "name": "US Dollar",
+  "namePlural": "US dollars",
+  "precision": 2,
+  "rounding": 0,
+  "symbol": "$",
+  "symbolNative": "$",
 }
 `;
 

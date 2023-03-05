@@ -1,5 +1,5 @@
 import type * as mysql from 'mysql';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi, type Mocked } from 'vitest';
 import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
@@ -7,17 +7,17 @@ import { MySQL } from './mysql.js';
 
 describe('MySQL', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;
-  const mockConnection = (connectionProperties?: any): jest.Mocked<mysql.Connection> => {
-    const connection: jest.Mocked<mysql.Connection> = {
-      query: jest.fn<mysql.Connection['query']>(
+  const mockConnection = (connectionProperties?: any): Mocked<mysql.Connection> => {
+    const connection: Mocked<mysql.Connection> = {
+      query: vi.fn<mysql.Connection['query']>(
         // @ts-ignore mock partial signature
         (_sql, _params, callback?) => callback(null, [])
       ),
-      connect: jest.fn(),
-      end: jest.fn(),
+      connect: vi.fn(),
+      end: vi.fn(),
       ...connectionProperties,
     };
-    jest.spyOn(MySQL, 'createConnection').mockImplementation(
+    vi.spyOn(MySQL, 'createConnection').mockImplementation(
       // @ts-ignore All methods are not required
       () => connection
     );
@@ -52,7 +52,7 @@ describe('MySQL', () => {
       expect(MySQL.createConnection).toHaveBeenLastCalledWith(client);
     });
     it('should send query to connection', async () => {
-      const query = jest.fn<mysql.QueryFunction>(
+      const query = vi.fn<mysql.QueryFunction>(
         // @ts-ignore mock partial signature
         (_sql, _params, callback) => callback(null, 2)
       );
@@ -67,7 +67,7 @@ describe('MySQL', () => {
     });
 
     it('should close connection', async () => {
-      const end = jest.fn();
+      const end = vi.fn();
       mockConnection({
         end,
       });
@@ -78,8 +78,8 @@ describe('MySQL', () => {
     });
 
     it('should close connection when callback error', async () => {
-      const end = jest.fn<mysql.Connection['end']>();
-      const query = jest.fn<mysql.Connection['query']>(
+      const end = vi.fn<mysql.Connection['end']>();
+      const query = vi.fn<mysql.Connection['query']>(
         // @ts-ignore mock partial signature
         (_queryObject, callback) => callback(new Error('mock error'), null)
       );

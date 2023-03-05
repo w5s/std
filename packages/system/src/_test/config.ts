@@ -2,7 +2,7 @@ import { Task } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { expect } from '@jest/globals';
+import { expect } from 'vitest';
 import type { FilePath } from '../filePath.js';
 import type { ErrnoException } from '../internal.js';
 // import * as url from 'node:url';
@@ -100,12 +100,6 @@ export const generateStats = (): fs.Stats => {
 export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
   get result() {
     return expect(Task.unsafeRun(t));
-  },
-  get resolves() {
-    return this.result.resolves;
-  },
-  get rejects() {
-    return this.result.rejects;
   },
 });
 

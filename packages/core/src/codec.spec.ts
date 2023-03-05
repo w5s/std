@@ -1,4 +1,4 @@
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, lazy, option, dateISO, array, object } from './codec.js';
 import { Option } from './option.js';

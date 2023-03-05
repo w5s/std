@@ -1,5 +1,5 @@
 import { Ref, Result, Task, TimeDuration } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { timeout, TimeoutError } from './timeout.js';
 
 describe('timeout', () => {
@@ -17,9 +17,9 @@ describe('timeout', () => {
     expect(Task.unsafeRun(rejected)).toEqual(Result.Error(anyError));
   });
   it('should cancel task and setTimeout if task is canceled', async () => {
-    const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
+    const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
-    const canceler = jest.fn();
+    const canceler = vi.fn();
     const canceled = Task.wrap((_resolve, _reject, cancelerRef) => {
       cancelerRef.current = canceler;
     });
@@ -35,7 +35,7 @@ describe('timeout', () => {
     expect(clearTimeoutSpy).toHaveBeenCalled();
   });
   it('should cancel task if timeout is triggered', async () => {
-    const canceler = jest.fn();
+    const canceler = vi.fn();
     const willCancel = Task.wrap((_resolve, _reject, cancelerRef) => {
       cancelerRef.current = canceler;
     });
@@ -51,7 +51,7 @@ describe('timeout', () => {
     expect(canceler).toHaveBeenCalled();
   });
   it('should cancel timeout if task is resolved', async () => {
-    const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
+    const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
     const resolved = timeout(Task.resolve(anyValue), anyDelay);
     await Task.unsafeRun(resolved);

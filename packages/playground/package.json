@@ -29,8 +29,8 @@
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepublishOnly": "npm run clean;npm run build",
     "spellcheck": "cspell --no-progress '**'",
-    "test": "concurrently \"npm:test:*\" ",
-    "test:src": "jest",
+    "test": "concurrently \"npm:test:*\" \":\"",
+    "test:src": "vitest run",
     "tsc": "tsc",
     "validate": "npm run build && npm run test"
   },
@@ -41,7 +41,8 @@
     "@w5s/uuid": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@jest/globals": "29.4.3"
+    "vite": "latest",
+    "vitest": "latest"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0"

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/core';
 import { LogLevel } from '../level.js';
 import { LogMessage } from '../message.js';
@@ -9,11 +9,11 @@ import { ConsoleHandler } from './console.js';
 
 describe('.ConsoleHandler', () => {
   const noop = (): void => undefined;
-  jest.spyOn(console, 'debug').mockImplementation(noop);
-  jest.spyOn(console, 'trace').mockImplementation(noop);
-  jest.spyOn(console, 'info').mockImplementation(noop);
-  jest.spyOn(console, 'warn').mockImplementation(noop);
-  jest.spyOn(console, 'error').mockImplementation(noop);
+  vi.spyOn(console, 'debug').mockImplementation(noop);
+  vi.spyOn(console, 'trace').mockImplementation(noop);
+  vi.spyOn(console, 'info').mockImplementation(noop);
+  vi.spyOn(console, 'warn').mockImplementation(noop);
+  vi.spyOn(console, 'error').mockImplementation(noop);
 
   it('should send to console.debug when level=LogLevel.Debug', async () => {
     await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Debug, message: ['test'] })));

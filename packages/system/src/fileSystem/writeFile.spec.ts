@@ -1,5 +1,5 @@
 import { Result, TaskCanceler } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
@@ -7,10 +7,10 @@ import { Internal } from '../internal.js';
 
 describe('writeFile', () => {
   it('should call fs.promises.writeFile', async () => {
-    const writeFileMocked = jest.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
+    const writeFileMocked = vi.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
-    await expectTask(task).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).result.resolves.toEqual(Result.Ok(undefined));
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',
@@ -19,7 +19,7 @@ describe('writeFile', () => {
   });
   it('should be cancelable', async () => {
     let fileContent = '';
-    jest.spyOn(Internal.FS, 'writeFile').mockImplementation(async (_file, content: any, options: any) => {
+    vi.spyOn(Internal.FS, 'writeFile').mockImplementation(async (_file, content: any, options: any) => {
       for (const contentChar of content) {
         // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         if (options.signal.aborted) {

@@ -1,12 +1,12 @@
 import { Result, Task, TaskCanceler } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
 
 describe('HTTP.request', () => {
   const anyURL = 'https://localhost';
   const anyHttpError = HTTPError.ParserError('AnyError');
-  const anyParser = jest.fn(() => Task.resolve('MockParsed'));
+  const anyParser = vi.fn(() => Task.resolve('MockParsed'));
   const anyResponse: Response = {} as any;
   const anyFetch = async () => anyResponse;
   const defer = <V>(): {
@@ -27,8 +27,8 @@ describe('HTTP.request', () => {
   };
 
   it('should call global fetch and send to parser', async () => {
-    const globalFetch = jest.fn(async () => anyResponse);
-    const parse = jest.fn(() => Task.resolve('TestReturn'));
+    const globalFetch = vi.fn(async () => anyResponse);
+    const parse = vi.fn(() => Task.resolve('TestReturn'));
     const url = 'http://localhost#test';
     const task = HTTP.request({
       url,
@@ -54,7 +54,7 @@ describe('HTTP.request', () => {
   });
   it('should convert fetch error to NetworkError', async () => {
     const fetchError = new Error('FetchError');
-    const globalFetch = jest.fn(async () => {
+    const globalFetch = vi.fn(async () => {
       throw fetchError;
     });
     const task = HTTP.request({
@@ -66,7 +66,7 @@ describe('HTTP.request', () => {
     expect(result).toEqual(Result.Error(HTTPError.NetworkError({ cause: fetchError })));
   });
   it('should convert reject parse errors', async () => {
-    const failParser = jest.fn(() => Task.reject(anyHttpError));
+    const failParser = vi.fn(() => Task.reject(anyHttpError));
 
     const task = HTTP.request({
       url: anyURL,
@@ -85,7 +85,7 @@ describe('HTTP.request', () => {
         }, ms);
       });
 
-    const globalFetch = jest.fn<typeof fetch>(async (_, { signal } = {}) => {
+    const globalFetch = vi.fn<typeof fetch>(async (_, { signal } = {}) => {
       if (signal != null) {
         signal.addEventListener('abort', () => {
           finished.resolve(undefined);
@@ -100,15 +100,15 @@ describe('HTTP.request', () => {
         });
       }
     });
-    const parse = jest.fn(() => Task.reject(HTTPError.ParserError({ message: 'NeverParsedError' })));
+    const parse = vi.fn(() => Task.reject(HTTPError.ParserError({ message: 'NeverParsedError' })));
 
     const task = HTTP.request({
       url: anyURL,
       parse,
       fetch: globalFetch,
     });
-    const resolve = jest.fn();
-    const reject = jest.fn();
+    const resolve = vi.fn();
+    const reject = vi.fn();
     const cancelerRef: TaskCanceler = { current: undefined };
     task.taskRun(resolve, reject, cancelerRef);
     TaskCanceler.cancel(cancelerRef);

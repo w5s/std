@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Console } from './console.js';
 import { Task } from './task.js';
 
@@ -14,7 +14,7 @@ describe('Console', () => {
     [Console.error, 'error'],
   ] as [typeof Console.log, 'log' | 'warn' | 'info' | 'error'][])('%p', (task, consoleProperty) => {
     it(`should call console.${consoleProperty}`, async () => {
-      jest.spyOn(console, consoleProperty).mockImplementation(doNothing);
+      vi.spyOn(console, consoleProperty).mockImplementation(doNothing);
       await Task.unsafeRun(task('a', 'b'));
       expect(console[consoleProperty]).toHaveBeenLastCalledWith('a', 'b');
     });

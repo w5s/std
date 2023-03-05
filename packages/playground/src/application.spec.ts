@@ -1,4 +1,4 @@
-import { describe, expect, it, jest } from '@jest/globals';
+import { describe, expect, it, vi } from 'vitest';
 import { Task } from '@w5s/core';
 import { Application } from './application.js';
 
@@ -107,7 +107,7 @@ describe('Application', () => {
     };
 
     it('should run start task once', async () => {
-      const run = jest.fn();
+      const run = vi.fn();
       const app = Application({
         applicationId: appId(),
         applicationStart: () =>

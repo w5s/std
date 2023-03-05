@@ -1,16 +1,16 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi, type Mocked } from 'vitest';
 import { Ref } from '@w5s/core';
 import type { Database } from 'sqlite3';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { SQLite3 } from './sqlite3.js';
 
-const mockDatabase = (): jest.Mocked<Database> => {
-  const database: jest.Mocked<Database> = {
-    all: jest.fn<Database['all']>((_sql, _values, callback?) => callback(null, null)),
-    close: jest.fn(),
+const mockDatabase = (): Mocked<Database> => {
+  const database: Mocked<Database> = {
+    all: vi.fn<Database['all']>((_sql, _values, callback?) => callback(null, null)),
+    close: vi.fn(),
   } as any;
-  jest.spyOn(SQLite3, 'createDatabase').mockImplementation(
+  vi.spyOn(SQLite3, 'createDatabase').mockImplementation(
     // @ts-ignore All methods are not required
     () => database
   );

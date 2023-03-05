@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
@@ -16,12 +16,12 @@ describe('Mock', () => {
   });
   describe('.execute', () => {
     it('should use mockExecuteQuery function', async () => {
-      const mockExecuteQuery = jest.fn(() => Promise.resolve('returnValue'));
+      const mockExecuteQuery = vi.fn(() => Promise.resolve('returnValue'));
       const mockClient = {
         databaseType: 'mock' as const,
         mockExecuteQuery,
       };
-      const cancelerRef = Ref(jest.fn());
+      const cancelerRef = Ref(vi.fn());
       await expect(Mock.execute(mockClient, anyStatement, cancelerRef)).resolves.toEqual('returnValue');
       expect(mockExecuteQuery).toHaveBeenCalledWith(anyStatement);
     });

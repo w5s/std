@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, expect, it } from 'vitest';
 import { Ref } from '@w5s/core';
 import { Application } from '@w5s/application';
 import { Currency } from './currency.js';

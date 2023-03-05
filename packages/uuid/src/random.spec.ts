@@ -1,5 +1,5 @@
 import { Result, Task } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { UUID } from './data.js';
 import { randomUUID } from './random.js';
 
@@ -13,7 +13,7 @@ describe('randomUUID', () => {
   });
   it('should use ref', async () => {
     const uuidMock = UUID.empty();
-    const randomUUIDMock = jest.spyOn(randomUUID, 'current');
+    const randomUUIDMock = vi.spyOn(randomUUID, 'current');
     randomUUIDMock.mockReturnValue(uuidMock);
     const uuidResult = await Task.unsafeRun(randomUUID);
 

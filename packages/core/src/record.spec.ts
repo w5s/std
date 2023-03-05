@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { Option } from './option.js';
 import { Record } from './record.js';
 
@@ -121,7 +121,7 @@ describe('Dict', () => {
 
   describe('.forEach', () => {
     it('should return an array of keys', () => {
-      const fn = jest.fn();
+      const fn = vi.fn();
       const record = { anyKey: 'anyValue', anyOtherKey: 'anyOtherValue' };
       Record.forEach(record, fn);
       expect(fn.mock.calls).toEqual([

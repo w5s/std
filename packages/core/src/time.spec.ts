@@ -1,4 +1,4 @@
-import { describe, it, expect, jest, beforeEach } from '@jest/globals';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option } from './option.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
@@ -6,14 +6,14 @@ import { Task } from './task.js';
 import { TimeDuration, Time } from './time.js';
 
 describe('Time', () => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
   const anyDuration = TimeDuration.seconds(12);
-  const setTimeoutSpy = jest.spyOn(globalThis, 'setTimeout');
-  const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
-  const dateNowSpy = jest.spyOn(Date, 'now');
+  const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+  const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
+  const dateNowSpy = vi.spyOn(Date, 'now');
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('()', () => {
@@ -79,7 +79,7 @@ describe('Time', () => {
       const promise = Task.unsafeRun(task);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), anyDuration);
-      jest.runAllTimers();
+      vi.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));
     });
     it.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
@@ -87,7 +87,7 @@ describe('Time', () => {
       const task = Time.delay(TimeDuration(delay));
       const promise = Task.unsafeRun(task);
       expect(setTimeoutSpy).not.toHaveBeenCalled();
-      jest.runAllTimers();
+      vi.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));
     });
     it('should be cancelable', () => {
@@ -95,8 +95,8 @@ describe('Time', () => {
       const task = Time.delay(duration);
 
       const cancelerRef = Ref(() => {});
-      const resolve = jest.fn();
-      const reject = jest.fn();
+      const resolve = vi.fn();
+      const reject = vi.fn();
 
       // Run task
       task.taskRun(resolve, reject, cancelerRef);
@@ -106,7 +106,7 @@ describe('Time', () => {
       // Trigger cancellation
       Ref.read(cancelerRef)();
 
-      jest.runAllTimers();
+      vi.runAllTimers();
 
       expect(resolve).not.toHaveBeenCalled();
       expect(reject).not.toHaveBeenCalled();

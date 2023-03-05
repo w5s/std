@@ -1,5 +1,5 @@
 import { Option } from '@w5s/core';
-import { describe, it, expect } from '@jest/globals';
+import { describe, it, expect } from 'vitest';
 import { FileError } from './error.js';
 import type { FilePath } from './filePath.js';
 

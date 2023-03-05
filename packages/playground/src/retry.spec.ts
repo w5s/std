@@ -1,5 +1,5 @@
 import { TimeDuration, Int, Option, Task, Result, Random } from '@w5s/core';
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
 describe('RetryState', () => {
@@ -145,7 +145,7 @@ describe('RetryPolicy', () => {
       expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
     });
     it('should call callback(delay, state) when Option.Some', () => {
-      const thenFn = jest.fn(() => Option.Some(TimeDuration(6)));
+      const thenFn = vi.fn(() => Option.Some(TimeDuration(6)));
       const mappedPolicy = RetryPolicy.andThen(RetryPolicy.wait(anyDuration), thenFn);
       expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.Some(6));
       expect(thenFn).toHaveBeenCalledWith(anyDuration, anyState);
@@ -229,7 +229,7 @@ describe('RetryPolicy', () => {
       expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
     });
     it('should call callback(delay, state) when Option.Some', () => {
-      const filterFn = jest.fn(() => false);
+      const filterFn = vi.fn(() => false);
       const mappedPolicy = RetryPolicy.filter(RetryPolicy.wait(anyDuration), filterFn);
       expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
       expect(filterFn).toHaveBeenCalledWith(anyDuration, anyState);

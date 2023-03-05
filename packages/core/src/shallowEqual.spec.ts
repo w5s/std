@@ -1,4 +1,4 @@
-import { describe, it, expect, jest } from '@jest/globals';
+import { describe, it, expect, vi } from 'vitest';
 import { shallowEqual } from './shallowEqual.js';
 
 describe('shallowEqual', () => {
@@ -56,7 +56,7 @@ describe('shallowEqual', () => {
     const object1: TestObject = { a: [1, 2], b: objectCommon };
     const object2: TestObject = { a: [3, 4], b: objectCommon };
 
-    const spy = jest.fn(() => true);
+    const spy = vi.fn(() => true);
     shallowEqual(object1, object2, spy);
 
     expect(spy.mock.calls).toEqual([
