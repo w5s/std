@@ -4,46 +4,46 @@ import { Math } from './math.js';
 describe('Math', () => {
   const anyNumericValue = [-0.6, -0.5, -0.4, 0, 0.4, 0.5, 0.6];
 
-  describe(Math.floor, () => {
+  describe('.floor', () => {
     it.each(anyNumericValue)('should be an alias to Math.floor', (value) => {
       expect(Math.floor(value)).toBe(globalThis.Math.floor(value));
     });
   });
-  describe(Math.ceil, () => {
+  describe('.ceil', () => {
     it.each(anyNumericValue)('should be an alias to Math.ceil', (value) => {
       expect(Math.ceil(value)).toBe(globalThis.Math.ceil(value));
     });
   });
-  describe(Math.round, () => {
+  describe('.round', () => {
     it.each(anyNumericValue)('should be an alias to Math.round', (value) => {
       expect(Math.round(value)).toBe(globalThis.Math.round(value));
     });
   });
-  describe(Math.abs, () => {
+  describe('.abs', () => {
     it.each(anyNumericValue)('should be an alias to Math.abs', (value) => {
       expect(Math.abs(value)).toBe(globalThis.Math.abs(value));
     });
   });
-  describe(Math.min, () => {
+  describe('.min', () => {
     it.each(anyNumericValue)('should be an alias to Math.min', (left) => {
       anyNumericValue.forEach((right) => {
         expect(Math.min(left, right)).toBe(globalThis.Math.min(left, right));
       });
     });
   });
-  describe(Math.max, () => {
+  describe('.max', () => {
     it.each(anyNumericValue)('should be an alias to Math.max', (left) => {
       anyNumericValue.forEach((right) => {
         expect(Math.max(left, right)).toBe(globalThis.Math.max(left, right));
       });
     });
   });
-  describe(Math.truncate, () => {
+  describe('.truncate', () => {
     it.each(anyNumericValue)('should be an alias to Math.trunc', (value) => {
       expect(Math.truncate(value)).toBe(globalThis.Math.trunc(value));
     });
   });
-  describe(Math.sqrt, () => {
+  describe('.sqrt', () => {
     it.each(anyNumericValue)('should be an alias to Math.sqrt', (value) => {
       expect(Math.sqrt(value)).toBe(globalThis.Math.sqrt(value));
     });

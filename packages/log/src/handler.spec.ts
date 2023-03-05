@@ -7,7 +7,7 @@ import { LogRecord } from './record.js';
 import { generateTime } from './__stub__.js';
 
 describe('LogHandler', () => {
-  describe(LogHandler.filter, () => {
+  describe('.filter', () => {
     it('should filter input', async () => {
       const handler = jest.fn(() => Task.resolve());
       const filtered = LogHandler.filter(handler, (record) => record.category === 'foo');

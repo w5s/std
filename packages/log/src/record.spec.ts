@@ -5,7 +5,7 @@ import { LogRecord } from './record.js';
 import { LogLevel } from './level.js';
 import { LogMessage } from './message.js';
 
-describe(LogRecord, () => {
+describe('LogRecord', () => {
   describe('()', () => {
     it('should return a new message', () => {
       expect(

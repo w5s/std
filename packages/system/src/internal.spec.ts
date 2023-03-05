@@ -6,7 +6,7 @@ import type { FilePath } from './filePath.js';
 import { anyErrnoException, anyError, anyPath, expectTask } from './_test/config.js';
 
 describe('ErrnoException', () => {
-  describe(ErrnoException.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return true for ErrnoException', () => {
       expect(ErrnoException.hasInstance(anyErrnoException)).toBe(true);
       expect(ErrnoException.hasInstance(anyError)).toBe(true);
@@ -18,7 +18,7 @@ describe('ErrnoException', () => {
     });
   });
 });
-describe(errnoExceptionHandler, () => {
+describe('errnoExceptionHandler', () => {
   it('should convert anything to "OtherError"', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
       FileError({
@@ -44,7 +44,7 @@ describe(errnoExceptionHandler, () => {
     );
   });
 });
-describe(errnoTask, () => {
+describe('errnoTask', () => {
   it('should transform return value', async () => {
     const original = async () => true;
     const transformed = errnoTask(original);
@@ -60,7 +60,7 @@ describe(errnoTask, () => {
     await expectTask(transformed()).resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
   });
 });
-describe(errnoTaskSync, () => {
+describe('errnoTaskSync', () => {
   it('should transform return value', () => {
     const original = () => true;
     const transformed = errnoTaskSync(original);

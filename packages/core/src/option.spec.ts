@@ -13,7 +13,7 @@ describe('Option', () => {
       expect(Option.isNone(data.foo)).toBe(true);
     });
   });
-  describe(Option.Some, () => {
+  describe('Some', () => {
     it('should be an identity function', () => {
       expect(Option.Some('blah')).toBe('blah');
     });
@@ -33,7 +33,7 @@ describe('Option', () => {
     });
   });
 
-  describe(Option.isNone, () => {
+  describe('.isNone', () => {
     it('should return false for any value', () => {
       expect(Option.isNone({})).toBe(false);
     });
@@ -51,7 +51,7 @@ describe('Option', () => {
       }
     });
   });
-  describe(Option.isSome, () => {
+  describe('.isSome', () => {
     it('should return true for any value', () => {
       expect(Option.isSome({})).toBe(true);
     });
@@ -69,14 +69,14 @@ describe('Option', () => {
       }
     });
   });
-  describe(Option.from, () => {
+  describe('.from', () => {
     it('should return non null value', () => {
       expect(Option.from(null)).toBe(Option.None);
       expect(Option.from(undefined)).toBe(Option.None);
       expect(Option.from('foo')).toBe('foo');
     });
   });
-  describe(Option.map, () => {
+  describe('.map', () => {
     it('should return true for Some() object', () => {
       expect(Option.map(Option.Some('foo'), (value) => `${value}_suffix`)).toEqual(Option.Some('foo_suffix'));
     });
@@ -85,7 +85,7 @@ describe('Option', () => {
       expect(Option.map(null, (value) => `${value}_suffix`)).toEqual(Option.None);
     });
   });
-  describe(Option.getOrElse, () => {
+  describe('.getOrElse', () => {
     it('should return defaultValue for Result.Error', () => {
       expect(Option.getOrElse(Option.None, () => 'any_default_value')).toEqual('any_default_value');
     });
@@ -93,7 +93,7 @@ describe('Option', () => {
       expect(Option.getOrElse(Option.Some('foo'), () => 'any_default_value')).toBe('foo');
     });
   });
-  describe(Option.getOrThrow, () => {
+  describe('.getOrThrow', () => {
     it('should return undefined for undefined,null', () => {
       expect(() => {
         Option.getOrThrow(undefined);
@@ -110,7 +110,7 @@ describe('Option', () => {
       assertType<typeof foo, string>(true);
     });
   });
-  describe(Option.andThen, () => {
+  describe('.andThen', () => {
     const square = (num: number): Option<number> => Option.Some(num * num);
     it('should return always Option.None when Option.None', () => {
       expect(Option.andThen(Option.None, square)).toBe(Option.None);
@@ -119,7 +119,7 @@ describe('Option', () => {
       expect(Option.andThen(Option.Some(4), square)).toBe(Option.Some(16));
     });
   });
-  describe(Option.orElse, () => {
+  describe('.orElse', () => {
     it('should return callback result when Option.None', () => {
       expect(Option.orElse(Option.None, () => Option.Some('foo'))).toEqual(Option.Some('foo'));
     });
@@ -127,7 +127,7 @@ describe('Option', () => {
       expect(Option.orElse(Option.Some('foo'), () => Option.Some('bar'))).toEqual(Option.Some('foo'));
     });
   });
-  describe(Option.match, () => {
+  describe('.match', () => {
     it('should call matchers.None when None', () => {
       expect(
         Option.match(Option.None, {

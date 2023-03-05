@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { Equal } from './equal.js';
 
-describe(Equal, () => {
+describe('Equal', () => {
   const equals = (left: number, right: number) => left === right;
   const NumberEqual = Equal<number>({ equals });
   describe('.equals', () => {

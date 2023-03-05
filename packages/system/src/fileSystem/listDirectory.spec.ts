@@ -5,7 +5,7 @@ import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 
-describe(listDirectory, () => {
+describe('listDirectory', () => {
   it('should call fs.promises.readdir', async () => {
     const readdirMocked = jest
       .spyOn(Internal.FS, 'readdir')

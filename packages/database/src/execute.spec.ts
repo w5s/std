@@ -6,7 +6,7 @@ import { sql } from './sql.js';
 import { SQLQuery } from './query.js';
 import './driver/all.js';
 
-describe(executeQuery, () => {
+describe('executeQuery', () => {
   const anyQuery = sql`SELECT id from table`;
   const createClient = () =>
     ({

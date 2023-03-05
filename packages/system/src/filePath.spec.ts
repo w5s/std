@@ -5,14 +5,14 @@ import { FilePath } from './filePath.js';
 describe('FilePath', () => {
   const absolutePath = (...parts: string[]) => (FilePath.separator + parts.join(FilePath.separator)) as FilePath;
   const relativePath = (...parts: string[]) => parts.join(FilePath.separator) as FilePath;
-  describe(FilePath.dirname, () => {
+  describe('.dirname', () => {
     it('should return the dirname of parameter', () => {
       const path = absolutePath('one', 'two', 'three');
       expect(FilePath.dirname(path)).toBe(`${FilePath.separator}one${FilePath.separator}two`);
     });
   });
 
-  describe(FilePath.concat, () => {
+  describe('.concat', () => {
     it('should return joined path using separator', () => {
       const first = absolutePath('hello', 'world');
       const second = relativePath('..', 'earth');
@@ -20,7 +20,7 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.resolve, () => {
+  describe('.resolve', () => {
     it('return a resolved path', async () => {
       expect(
         Task.unsafeRunOk(
@@ -47,7 +47,7 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.parse, () => {
+  describe('.parse', () => {
     it('should parse empty path', () => {
       const path = relativePath('');
       expect(FilePath.parse(path)).toStrictEqual({
@@ -60,7 +60,7 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.format, () => {
+  describe('.format', () => {
     it('should format empty path object', () => {
       expect(
         FilePath.format({
@@ -74,7 +74,7 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.relative, () => {
+  describe('.relative', () => {
     it('should return a relative path', () => {
       const from = absolutePath('home', 'hello', 'world');
       const to = absolutePath('home', 'earth');
@@ -82,14 +82,14 @@ describe('FilePath', () => {
     });
   });
 
-  describe(FilePath.normalize, () => {
+  describe('.normalize', () => {
     it('return a normalized path', () => {
       const path = relativePath('hello', 'world', '..', 'earth');
       expect(FilePath.normalize(path)).toBe(relativePath('hello', 'earth'));
     });
   });
 
-  describe(FilePath.basename, () => {
+  describe('.basename', () => {
     it('return the base name of file path', () => {
       const path = absolutePath('hello', 'world', 'file.txt');
 
@@ -97,14 +97,14 @@ describe('FilePath', () => {
       expect(FilePath.basename(path, `.txt`)).toBe(`file`);
     });
   });
-  describe(FilePath.extname, () => {
+  describe('.extname', () => {
     it('return the base name of file path', () => {
       const path = relativePath('world', 'file.log.txt');
       expect(FilePath.extname(path)).toBe(`.txt`);
     });
   });
 
-  describe(FilePath.isAbsolute, () => {
+  describe('.isAbsolute', () => {
     it('return absolute path', () => {
       const absolute = absolutePath('world', 'file.log.txt');
       expect(FilePath.isAbsolute(absolute)).toBe(true);
@@ -112,7 +112,7 @@ describe('FilePath', () => {
       expect(FilePath.isAbsolute(relative)).toBe(false);
     });
   });
-  describe(FilePath.isRelative, () => {
+  describe('.isRelative', () => {
     it('return absolute path', () => {
       const absolute = absolutePath('world', 'file.log.txt');
       expect(FilePath.isRelative(absolute)).toBe(false);
@@ -120,7 +120,7 @@ describe('FilePath', () => {
       expect(FilePath.isRelative(relative)).toBe(true);
     });
   });
-  describe(FilePath.isParentOf, () => {
+  describe('.isParentOf', () => {
     it.each([
       [{ parent: '', child: '' }, false],
       [{ parent: '/first/second', child: '/first' }, false],

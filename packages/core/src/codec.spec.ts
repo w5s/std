@@ -17,8 +17,8 @@ const underscoreString = Codec<string>({
         ),
   schema: () => ({ type: 'string', format: 'custom_underscore' }),
 });
-describe(Codec, () => {
-  describe(Codec.encode, () => {
+describe('Codec', () => {
+  describe('.encode()', () => {
     it('should call codecEncode', () => {
       const codec = {
         codecEncode: (_: string) => `test_${_}`,
@@ -26,7 +26,7 @@ describe(Codec, () => {
       expect(Codec.encode(codec, 'value')).toEqual('test_value');
     });
   });
-  describe(Codec.decode, () => {
+  describe('.decode()', () => {
     it('should call codecEncode', () => {
       const codec = {
         codecDecode: (_: unknown) => Result.Ok(`test_${_}`),
@@ -114,7 +114,7 @@ describe('string', () => {
     });
   });
 });
-describe(lazy, () => {
+describe('lazy', () => {
   const subject = lazy;
   const getCodec = () =>
     Codec<string>({
@@ -142,7 +142,7 @@ describe(lazy, () => {
     });
   });
 });
-describe(option, () => {
+describe('option', () => {
   const subject = option;
 
   describe('.codecSchema', () => {
@@ -173,7 +173,7 @@ describe(option, () => {
     });
   });
 });
-describe(array, () => {
+describe('array', () => {
   const subject = array;
   describe('.codecSchema', () => {
     it('should return correct schema', () => {
@@ -210,7 +210,7 @@ describe(array, () => {
     });
   });
 });
-describe(object, () => {
+describe('object', () => {
   const subject = object;
   describe('.codecSchema', () => {
     it('should return correct schema', () => {

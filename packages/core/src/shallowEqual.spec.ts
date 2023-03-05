@@ -1,7 +1,7 @@
 import { describe, it, expect, jest } from '@jest/globals';
 import { shallowEqual } from './shallowEqual.js';
 
-describe(shallowEqual, () => {
+describe('shallowEqual', () => {
   // test cases copied from https://github.com/facebook/fbjs/blob/82247de1c33e6f02a199778203643eaee16ea4dc/src/core/__tests__/shallowEqual-test.js
   it('returns false if either argument is null', () => {
     expect(shallowEqual(null, {})).toEqual(false);

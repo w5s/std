@@ -3,7 +3,7 @@ import { JSON } from './json.js';
 import { Result } from './result.js';
 
 describe('JSON', () => {
-  describe(JSON.parse, () => {
+  describe('.parse()', () => {
     it('should return a Result.Ok for valid JSON', () => {
       expect(JSON.parse('{ "a": true }')).toEqual(Result.Ok({ a: true }));
     });
@@ -11,7 +11,7 @@ describe('JSON', () => {
       expect(JSON.parse('{ "a": }')).toEqual(Result.Error(expect.any(SyntaxError)));
     });
   });
-  describe(JSON.stringify, () => {
+  describe('.stringify()', () => {
     it('should return a Result.Ok for valid value', () => {
       expect(JSON.stringify({ a: true })).toEqual(Result.Ok('{"a":true}'));
     });

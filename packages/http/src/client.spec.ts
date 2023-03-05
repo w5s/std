@@ -3,7 +3,7 @@ import { describe, it, expect, jest } from '@jest/globals';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
 
-describe(HTTP.request, () => {
+describe('HTTP.request', () => {
   const anyURL = 'https://localhost';
   const anyHttpError = HTTPError.ParserError('AnyError');
   const anyParser = jest.fn(() => Task.resolve('MockParsed'));
@@ -118,7 +118,7 @@ describe(HTTP.request, () => {
     expect(reject).not.toHaveBeenCalled();
   });
 });
-describe(HTTP.Headers, () => {
+describe('HTTP.Headers', () => {
   it('should return immutable copy of headers', () => {
     const init = {
       foo: 'bar',

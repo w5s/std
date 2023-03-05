@@ -6,7 +6,7 @@ import { Process } from './process.js';
 import { anyErrnoException, expectTask } from './_test/config.js';
 
 describe('Process', () => {
-  describe(Process.exit, () => {
+  describe('.exit', () => {
     it('should call process.exit', () => {
       const processExit = jest.spyOn(Internal.Process, 'exit').mockImplementation(
         () =>
@@ -18,7 +18,7 @@ describe('Process', () => {
       expect(processExit).toHaveBeenCalledWith(0);
     });
   });
-  describe(Process.getCurrentDirectory, () => {
+  describe('.getCurrentDirectory', () => {
     const mocked = jest.spyOn(Internal.Process, 'cwd');
     it('should call process.cwd', () => {
       mocked.mockImplementation(() => FilePath('/my/dir'));
@@ -27,7 +27,7 @@ describe('Process', () => {
       expect(mocked).toHaveBeenCalled();
     });
   });
-  describe(Process.setCurrentDirectory, () => {
+  describe('.setCurrentDirectory', () => {
     const mocked = jest.spyOn(Internal.Process, 'chdir');
     it('should call process.chdir', () => {
       mocked.mockImplementation(() => undefined);

@@ -2,7 +2,7 @@ import { describe, expect, it, jest } from '@jest/globals';
 import { Task } from '@w5s/core';
 import { Application } from './application.js';
 
-describe(Application, () => {
+describe('Application', () => {
   // eslint-disable-next-line no-plusplus
   const appId = () => `app-${appId.current++}`;
   appId.current = 0;
@@ -59,7 +59,7 @@ describe(Application, () => {
     });
   });
 
-  describe(Application.get, () => {
+  describe('.get', () => {
     const applicationDefault = {
       foo: true,
       bar: 1,
@@ -101,7 +101,7 @@ describe(Application, () => {
         expect(Application.get(app, 'bar')).toBe(1);
       }));
   });
-  describe(Application.start, () => {
+  describe('.start', () => {
     const applicationDefault = {
       foo: false,
     };

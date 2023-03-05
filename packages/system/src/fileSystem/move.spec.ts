@@ -5,7 +5,7 @@ import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
 import { move } from './move.js';
 
-describe(move, () => {
+describe('move', () => {
   it(
     'should reject if source directory does not exist',
     withTmpDirectory(async ({ filePath }) => {

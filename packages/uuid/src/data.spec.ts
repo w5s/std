@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { UUID } from './data.js';
 
-describe(UUID, () => {
+describe('UUID', () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669';
 
   it('should return a new representation', () => {
@@ -14,12 +14,12 @@ describe(UUID, () => {
       UUID(value)
     ).toThrow();
   });
-  describe(UUID.empty, () => {
+  describe('.empty', () => {
     it('should return a 0 based UUID', () => {
       expect(UUID.empty()).toBe('00000000-0000-0000-0000-000000000000');
     });
   });
-  describe(UUID.hasInstance, () => {
+  describe('.hasInstance', () => {
     it.each([undefined, null, [], '', 'non uuid'])(`should return false for invalid UUID`, (value) => {
       expect(UUID.hasInstance(value)).toBe(false);
     });

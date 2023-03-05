@@ -3,7 +3,7 @@ import { Int } from '@w5s/core/lib/integer.js';
 import { Hash } from './hash.js';
 
 describe(`Hash`, () => {
-  describe(Hash.from, () => {
+  describe('.from', () => {
     // compliant with https://github.com/immutable-js/immutable-js/blob/master/__tests__/hash.ts
 
     it('for true', () => {
@@ -57,7 +57,7 @@ describe(`Hash`, () => {
     //   expect(Hash.from(funA)).not.toBe(Hash.from(funB));
     // });
   });
-  describe(Hash.combine, () => {
+  describe('.combine', () => {
     it('should combine two hashes', () => {
       expect(Hash.combine(Int(0), Int(1))).toBe(-566_789_702);
       expect(Hash.combine(Int(0), Int(-1))).toBe(-566_789_704);

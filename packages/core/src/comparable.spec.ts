@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { Comparable } from './comparable.js';
 
-describe(Comparable, () => {
+describe('Comparable', () => {
   const anyCompare = (_left: unknown, _right: unknown) => 0;
   const numberCompare = (left: number, right: number) => left - right;
   const NumWithCompare = Comparable<number>({ compare: numberCompare });

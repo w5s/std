@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { objectId } from './objectId.js';
 
-describe(objectId, () => {
+describe('objectId', () => {
   it('should return an immutable value', () => {
     const anyObject = {};
     const id = objectId(anyObject);

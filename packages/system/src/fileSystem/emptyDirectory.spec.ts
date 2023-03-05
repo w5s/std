@@ -3,7 +3,7 @@ import { describe, it } from '@jest/globals';
 import { emptyDirectory } from './emptyDirectory.js';
 import { expectDir, expectTask, withTmpDirectory } from '../_test/config.js';
 
-describe(emptyDirectory, () => {
+describe('emptyDirectory', () => {
   it(
     'should delete all of the items when not empty',
     withTmpDirectory(async ({ filePath: testDir, createDir, createFile }) => {

@@ -8,7 +8,7 @@ describe('Dict', () => {
   function toArray<V>(iterator: IterableIterator<V>): Array<V> {
     return Array.from(iterator);
   }
-  describe(Record.from, () => {
+  describe('.from', () => {
     it('should return a dictionary from entries', () => {
       expect(
         Record([
@@ -22,7 +22,7 @@ describe('Dict', () => {
     });
   });
 
-  describe(Record.keys, () => {
+  describe('.keys', () => {
     it('should return an array of keys', () => {
       expect(
         toArray(
@@ -44,7 +44,7 @@ describe('Dict', () => {
       ).toEqual(['anyOtherKey', anySymbolKey]);
     });
   });
-  describe(Record.values, () => {
+  describe('.values', () => {
     it('should return an array of keys', () => {
       expect(
         toArray(
@@ -56,7 +56,7 @@ describe('Dict', () => {
       ).toEqual(['anyValue', 'anyOtherValue']);
     });
   });
-  describe(Record.entries, () => {
+  describe('.entries', () => {
     it('should return an array of [key, value]', () => {
       expect(
         toArray(
@@ -71,7 +71,7 @@ describe('Dict', () => {
       ]);
     });
   });
-  describe(Record.has, () => {
+  describe('.has', () => {
     it('should return false if key does not exist', () => {
       const record: Record<string, string> = { anyKey: 'anyValue' };
       expect(Record.has(record, 'anyOtherKey')).toBe(false);
@@ -81,7 +81,7 @@ describe('Dict', () => {
       expect(Record.has(record, 'anyKey')).toBe(true);
     });
   });
-  describe(Record.get, () => {
+  describe('.get', () => {
     it('should return undefined if key does not exist', () => {
       const record: Record<string, string> = { anyKey: 'anyValue' };
       expect(Record.get(record, 'anyOtherKey')).toBe(Option.None);
@@ -91,7 +91,7 @@ describe('Dict', () => {
       expect(Record.get(record, 'anyKey')).toBe('anyValue');
     });
   });
-  describe(Record.set, () => {
+  describe('.set', () => {
     it('should set value for key', () => {
       const record: Record<string, string> = { anyKey: 'anyValue' };
       expect(Record.set(record, 'anyOtherKey', 'anyOtherValue')).toEqual({
@@ -104,7 +104,7 @@ describe('Dict', () => {
       expect(Record.set(record, 'anyKey', 'anyValue')).toStrictEqual(record);
     });
   });
-  describe(Record.delete, () => {
+  describe('.delete', () => {
     it('should return identity for empty dictionary', () => {
       const record: Record<string, string> = {};
       expect(Record.delete(record, 'anyKey')).toBe(record);
@@ -119,7 +119,7 @@ describe('Dict', () => {
     });
   });
 
-  describe(Record.forEach, () => {
+  describe('.forEach', () => {
     it('should return an array of keys', () => {
       const fn = jest.fn();
       const record = { anyKey: 'anyValue', anyOtherKey: 'anyOtherValue' };
@@ -130,7 +130,7 @@ describe('Dict', () => {
       ]);
     });
   });
-  describe(Record.size, () => {
+  describe('.size', () => {
     it('should return 0 for empty', () => {
       expect(Record.size(Record.empty())).toEqual(0);
     });

@@ -4,7 +4,7 @@ import { Currency } from './currency.js';
 import { describeComparable } from './describeComparable.js';
 import { Money } from './money.js';
 
-describe(Money, () => {
+describe('Money', () => {
   const anyCurrency = Currency({
     name: 'Any',
     code: 'ANY',

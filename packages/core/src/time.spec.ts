@@ -5,7 +5,7 @@ import { Result } from './result.js';
 import { Task } from './task.js';
 import { TimeDuration, Time } from './time.js';
 
-describe(Time, () => {
+describe('Time', () => {
   jest.useFakeTimers();
   const anyDuration = TimeDuration.seconds(12);
   const setTimeoutSpy = jest.spyOn(globalThis, 'setTimeout');
@@ -25,7 +25,7 @@ describe(Time, () => {
       expect(Time(1)).toBe(1);
     });
   });
-  describe(Time.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return true for valid values', () => {
       expect(Time.hasInstance(Time(1))).toBe(true);
     });
@@ -37,17 +37,17 @@ describe(Time, () => {
       expect(Time.hasInstance(Number.NaN)).toBe(false);
     });
   });
-  describe(Time.add, () => {
+  describe('.add', () => {
     it('should return difference between two times', () => {
       expect(Time.add(Time(1), TimeDuration(3))).toBe(4);
     });
   });
-  describe(Time.diff, () => {
+  describe('.diff', () => {
     it('should return difference between two times', () => {
       expect(Time.diff(Time(1), Time(3))).toBe(-2);
     });
   });
-  describe(Time.parseISOString, () => {
+  describe('.parseISOString', () => {
     it('should return None for invalid representations', () => {
       expect(Time.parseISOString('abc')).toBe(Option.None);
       expect(Time.parseISOString('')).toBe(Option.None);
@@ -57,7 +57,7 @@ describe(Time, () => {
       expect(Time.parseISOString('2021-05-27T12:55:11.480Z')).toBe(1_622_120_111_480);
     });
   });
-  describe(Time.toISOString, () => {
+  describe('.toISOString', () => {
     it('should return a valid string ISO representation', () => {
       expect(Time.toISOString(Time(0))).toBe('1970-01-01T00:00:00.000Z');
       expect(Time.toISOString(Time(1_622_120_111_480))).toBe('2021-05-27T12:55:11.480Z');
@@ -70,7 +70,7 @@ describe(Time, () => {
       expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
     });
   });
-  describe(Time.delay, () => {
+  describe('.delay', () => {
     it('should return a task that resolves after duration', async () => {
       const now = Date.now();
       const task = Time.delay(anyDuration);
@@ -115,7 +115,7 @@ describe(Time, () => {
     });
   });
 });
-describe(TimeDuration, () => {
+describe('TimeDuration', () => {
   describe('()', () => {
     it('should throw invariant error', () => {
       expect(() => TimeDuration(Number.NaN)).toThrow('NaN is not a valid duration value');
@@ -128,7 +128,7 @@ describe(TimeDuration, () => {
       expect(TimeDuration(input)).toBe(expected);
     });
   });
-  describe(TimeDuration.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return true for valid values', () => {
       expect(TimeDuration.hasInstance(1)).toBe(true);
       expect(TimeDuration.hasInstance(-1)).toBe(true);
@@ -140,27 +140,27 @@ describe(TimeDuration, () => {
       expect(TimeDuration.hasInstance(Number.NaN)).toBe(false);
     });
   });
-  describe(TimeDuration.milliseconds, () => {
+  describe('.milliseconds', () => {
     it('should return an int value', () => {
       expect(TimeDuration.milliseconds(1)).toBe(1);
     });
   });
-  describe(TimeDuration.seconds, () => {
+  describe('.seconds', () => {
     it('should return an int value', () => {
       expect(TimeDuration.seconds(1)).toBe(1000);
     });
   });
-  describe(TimeDuration.minutes, () => {
+  describe('.minutes', () => {
     it('should return an int value', () => {
       expect(TimeDuration.minutes(1)).toBe(1000 * 60);
     });
   });
-  describe(TimeDuration.hours, () => {
+  describe('.hours', () => {
     it('should return an int value', () => {
       expect(TimeDuration.hours(1)).toBe(1000 * 60 * 60);
     });
   });
-  describe(TimeDuration.days, () => {
+  describe('.days', () => {
     it('should return an int value', () => {
       expect(TimeDuration.days(1)).toBe(1000 * 60 * 60 * 24);
     });

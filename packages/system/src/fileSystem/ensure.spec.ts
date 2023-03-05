@@ -5,7 +5,7 @@ import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
 
-describe(ensureDirectory, () => {
+describe('ensureDirectory', () => {
   it(
     'should work for existing directory',
     withTmpDirectory(async ({ filePath }) => {
@@ -47,7 +47,7 @@ describe(ensureDirectory, () => {
   );
 });
 
-describe(ensureFile, () => {
+describe('ensureFile', () => {
   it(
     'should work for existing file',
     withTmpDirectory(async ({ filePath }) => {
@@ -88,7 +88,7 @@ describe(ensureFile, () => {
   );
 });
 
-describe(ensureSymbolicLink, () => {
+describe('ensureSymbolicLink', () => {
   it(
     'should work for existing link',
     withTmpDirectory(async ({ filePath }) => {

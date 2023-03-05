@@ -2,22 +2,22 @@ import { describe, it, expect } from '@jest/globals';
 import { assertType } from './type.js';
 import { assign, extend, identity, constant, throwError, ignore } from './prelude.js';
 
-describe(identity, () => {
+describe('identity', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
     expect(identity(value)).toBe(value);
   });
 });
-describe(ignore, () => {
+describe('ignore', () => {
   it.each([1, undefined, {}])('should return undefined', (value) => {
     expect(ignore(value)).toBe(undefined);
   });
 });
-describe(constant, () => {
+describe('constant', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
     expect(constant(value)('abc')).toBe(value);
   });
 });
-describe(throwError, () => {
+describe('throwError', () => {
   it('should return the same unchanged value', () => {
     const error = new Error('TestError');
     expect(() => {
@@ -25,7 +25,7 @@ describe(throwError, () => {
     }).toThrow(error);
   });
 });
-describe(assign, () => {
+describe('assign', () => {
   it('should return identity when null or undefined or empty object is passed', () => {
     const anyObject = { foo: true };
     expect(assign(anyObject, undefined)).toBe(anyObject);
@@ -45,7 +45,7 @@ describe(assign, () => {
     assign(object, { notAllowed: false });
   });
 });
-describe(extend, () => {
+describe('extend', () => {
   it('should return identity when null or undefined is passed', () => {
     const anyObject = { foo: true };
     expect(extend(anyObject, undefined)).toBe(anyObject);

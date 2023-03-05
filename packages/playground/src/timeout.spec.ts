@@ -2,7 +2,7 @@ import { Ref, Result, Task, TimeDuration } from '@w5s/core';
 import { describe, it, expect, jest } from '@jest/globals';
 import { timeout, TimeoutError } from './timeout.js';
 
-describe(timeout, () => {
+describe('timeout', () => {
   const anyDelay = TimeDuration.milliseconds(4);
   const anyValue = 'any_value';
   const anyError = 'any_error';

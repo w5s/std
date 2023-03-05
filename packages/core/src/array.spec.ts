@@ -26,7 +26,7 @@ describe('Array', () => {
     }, []);
   };
 
-  describe(generate, () => {
+  describe('helper generate()', () => {
     it('should generate data for test cases', () => {
       expect(
         generate({
@@ -101,7 +101,7 @@ describe('Array', () => {
       ]);
     });
   });
-  describe(Array.empty, () => {
+  describe('.empty()', () => {
     it('should return an array with no element', () => {
       expect(Array.empty()).toEqual([]);
     });
@@ -110,7 +110,7 @@ describe('Array', () => {
       expect(Array.empty()).toBe(empty);
     });
   });
-  describe(Array.generate, () => {
+  describe('.generate()', () => {
     it('should return an empty iterable when 0', () => {
       expect(Array.generate(0, () => 'a')).toEqual([]);
     });
@@ -118,7 +118,7 @@ describe('Array', () => {
       expect(Array.generate(3, (_) => _)).toEqual([0, 1, 2]);
     });
   });
-  describe(Array.of, () => {
+  describe('.of()', () => {
     it('should return empty array when no argument', () => {
       expect(Array.of()).toEqual([]);
     });
@@ -126,7 +126,7 @@ describe('Array', () => {
       expect(Array.of(1, 2, 3)).toEqual([1, 2, 3]);
     });
   });
-  describe(Array.at, () => {
+  describe('.at()', () => {
     it('should return Option.None when index is not defined', () => {
       expect(Array.at([1], 1)).toBe(Option.None);
     });
@@ -137,7 +137,7 @@ describe('Array', () => {
       expect(Array.at([1, 2], -1)).toBe(2);
     });
   });
-  describe(Array.size, () => {
+  describe('.size()', () => {
     it('should return 0 for empty array', () => {
       expect(Array.size([])).toBe(0);
     });
@@ -145,7 +145,7 @@ describe('Array', () => {
       expect(Array.size([1, 2, 3])).toBe(3);
     });
   });
-  describe(Array.hasInstance, () => {
+  describe('.hasInstance()', () => {
     it('should return true for Array', () => {
       expect(Array.hasInstance(Array.empty())).toEqual(true);
     });
@@ -154,7 +154,7 @@ describe('Array', () => {
       expect(Array.hasInstance({ length: 0 })).toBe(false);
     });
   });
-  describe(Array.isEmpty, () => {
+  describe('.isEmpty()', () => {
     it('should return true when array is empty', () => {
       expect(Array.isEmpty([])).toEqual(true);
     });
@@ -162,7 +162,7 @@ describe('Array', () => {
       expect(Array.isEmpty([1])).toBe(false);
     });
   });
-  describe(Array.map, () => {
+  describe('.map()', () => {
     it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.map(emptyArray, (_) => _ * 2)).toBe(emptyArray);
@@ -178,7 +178,7 @@ describe('Array', () => {
       expect(Array.map(array, double)).toEqual(array.map(double));
     });
   });
-  describe(Array.flatMap, () => {
+  describe('.flatMap()', () => {
     it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.flatMap(emptyArray, (_) => [_ * 2, _ * 3])).toBe(emptyArray);
@@ -198,7 +198,7 @@ describe('Array', () => {
       expect(Array.flatMap(array, mapFn)).toEqual([2, 3, 4, 6, 6, 9]);
     });
   });
-  describe(Array.reduce, () => {
+  describe('.reduce()', () => {
     it('should map each value to callback', () => {
       const array = ['foo', 'bar', 'baz'];
       const concat = (_: string, value: string) => `${_}:${value}`;
@@ -208,7 +208,7 @@ describe('Array', () => {
       expect(array.reduce).toHaveBeenLastCalledWith(concat, '$');
     });
   });
-  describe(Array.reduceRight, () => {
+  describe('.reduceRight()', () => {
     it('should map each value to callback', () => {
       const array = ['foo', 'bar', 'baz'];
       const concat = (_: string, value: string) => `${_}:${value}`;
@@ -218,7 +218,7 @@ describe('Array', () => {
       expect(array.reduceRight).toHaveBeenLastCalledWith(concat, '$');
     });
   });
-  describe(Array.find, () => {
+  describe('.find()', () => {
     it('should map each value to callback', () => {
       const array = ['a', 'b', 'c'];
       jest.spyOn(array, 'find' as any);
@@ -227,7 +227,7 @@ describe('Array', () => {
       expect(Array.find(array, (_) => _ === 'non_existent')).toEqual(Option.None);
     });
   });
-  describe(Array.findIndex, () => {
+  describe('.findIndex()', () => {
     it('should map each value to callback', () => {
       const array = ['a', 'b', 'c'];
 
@@ -235,7 +235,7 @@ describe('Array', () => {
       expect(Array.findIndex(array, (_) => _ === 'non_existent')).toEqual(Option.None);
     });
   });
-  describe(Array.indexOf, () => {
+  describe('.indexOf()', () => {
     it('should return index of element', () => {
       const array = ['a', '', 'a', '', 'a'];
       expect(Array.indexOf(array, 'a', 1)).toEqual(2);
@@ -250,7 +250,7 @@ describe('Array', () => {
       expect(Array.indexOf(array, 'non_existent', 1)).toEqual(Option.None);
     });
   });
-  describe(Array.lastIndexOf, () => {
+  describe('.lastIndexOf()', () => {
     it('should map each value to callback', () => {
       const array = ['a', '', 'a', '', 'a'];
 
@@ -266,7 +266,7 @@ describe('Array', () => {
       expect(Array.lastIndexOf(array, 'non_existent', 1)).toEqual(Option.None);
     });
   });
-  describe(Array.includes, () => {
+  describe('.includes()', () => {
     it('should map each value to callback', () => {
       const array = ['a', '', 'a', '', 'a'];
 
@@ -279,7 +279,7 @@ describe('Array', () => {
       expect(Array.includes(array, Number.NaN)).toEqual(true);
     });
   });
-  describe(Array.filter, () => {
+  describe('.filter()', () => {
     it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.filter(emptyArray, () => true)).toBe(emptyArray);
@@ -299,7 +299,7 @@ describe('Array', () => {
       expect(Array.filter(array, minOne)).toEqual([2, 3].filter(minOne));
     });
   });
-  describe(Array.some, () => {
+  describe('.some()', () => {
     it('should map each value to callback', () => {
       const array = [1, 2, 3];
       jest.spyOn(array, 'some' as any);
@@ -310,7 +310,7 @@ describe('Array', () => {
       expect(Array.some([], eq3)).toEqual(false);
     });
   });
-  describe(Array.every, () => {
+  describe('.every()', () => {
     it('should map each value to callback', () => {
       const array = [1, 2, 3];
       jest.spyOn(array, 'every' as any);
@@ -321,7 +321,7 @@ describe('Array', () => {
       expect(Array.every([], isNumber)).toEqual(true);
     });
   });
-  describe(Array.concat, () => {
+  describe('.concat()', () => {
     it('should return unchanged if no extension is passed', () => {
       const array = [1, 2, 3];
       expect(Array.concat(array)).toBe(array);
@@ -334,7 +334,7 @@ describe('Array', () => {
       expect(Array.concat(array, [])).toBe(array);
     });
   });
-  describe(Array.reverse, () => {
+  describe('.reverse()', () => {
     it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.reverse(emptyArray)).toBe(emptyArray);
@@ -348,7 +348,7 @@ describe('Array', () => {
       expect(Array.reverse(array)).toEqual(array.slice().reverse());
     });
   });
-  describe(Array.sort, () => {
+  describe('.sort()', () => {
     it('should return unchanged if empty', () => {
       const emptyArray = Array.empty();
       expect(Array.sort(emptyArray, (left, right) => left - right)).toBe(emptyArray);
@@ -359,7 +359,7 @@ describe('Array', () => {
       expect(Array.sort(array, (left, right) => left - right)).toEqual([2, 4, 6, 11]);
     });
   });
-  describe(Array.slice, () => {
+  describe('.slice()', () => {
     const anyArray = [11, 4, 6, 2];
 
     it('should return unchanged when empty', () => {
@@ -389,7 +389,7 @@ describe('Array', () => {
       expect(Array.slice(anyArray, start, end)).toEqual(anyArray.slice(start ?? undefined, end ?? undefined));
     });
   });
-  describe(Array.deleteAt, () => {
+  describe('.deleteAt()', () => {
     it('should return unchanged when empty', () => {
       const empty = Array.empty();
       expect(Array.deleteAt(empty, 1)).toBe(empty);
@@ -411,7 +411,7 @@ describe('Array', () => {
       expect(Array.deleteAt(array, 2)).toEqual([1, 2, 4, 5]);
     });
   });
-  describe(Array.insertAt, () => {
+  describe('.insertAt()', () => {
     it('should return a new array', () => {
       const array = Array.empty<string>();
       expect(Array.insertAt(array, 0, '$')).toEqual(['$']);
@@ -432,7 +432,7 @@ describe('Array', () => {
       expect(Array.insertAt(array, 3, '$')).toEqual(['a', 'b', 'c', '$']);
     });
   });
-  describe(Array.updateAt, () => {
+  describe('.updateAt()', () => {
     it('should return unchanged when index < 0', () => {
       const array = ['a', 'b', 'c'];
       expect(Array.updateAt(array, -1, '$')).toBe(array);

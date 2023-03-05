@@ -2,7 +2,7 @@ import { describe, it, expect } from '@jest/globals';
 import { Int } from './integer.js';
 import { Option } from './option.js';
 
-describe(Int, () => {
+describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
   const maxValue = Number.MAX_SAFE_INTEGER;
   describe('.min', () => {
@@ -34,7 +34,7 @@ describe(Int, () => {
     });
   });
 
-  describe(Int.parse, () => {
+  describe('.parse()', () => {
     it('should return a valid parsed integer when radix is omitted', () => {
       expect(Int.parse('0xff')).toBe(Option.Some(255));
     });
@@ -56,7 +56,7 @@ describe(Int, () => {
     });
   });
 
-  describe(Int.stringify, () => {
+  describe('.stringify()', () => {
     it('should return a valid string representation', () => {
       expect(Int.stringify(Int(123), 10)).toBe('123');
     });

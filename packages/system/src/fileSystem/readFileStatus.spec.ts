@@ -7,7 +7,7 @@ import { Internal } from '../internal.js';
 import { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
 import { FileSize } from '../fileSize.js';
 
-describe(readFileStatus, () => {
+describe('readFileStatus', () => {
   it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
     const statMocked = jest.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
@@ -39,7 +39,7 @@ describe(readFileStatus, () => {
     expect(statMocked).toHaveBeenCalledWith(...args);
   });
 });
-describe(readSymbolicLinkStatus, () => {
+describe('readSymbolicLinkStatus', () => {
   it('should convert fs.Stat to FileStatus', async () => {
     const stats = generateStats();
     const lstatMocked = jest.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));

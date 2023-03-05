@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { sql, SQLStatement } from './sql.js';
 
-describe(SQLStatement, () => {
+describe('SQLStatement', () => {
   it('should empty statement', () => {
     expect(SQLStatement({})).toEqual({
       _: 'SQLStatement',
@@ -34,7 +34,7 @@ describe(SQLStatement, () => {
     });
   });
 
-  describe(SQLStatement.concat, () => {
+  describe('.concat', () => {
     it('should concat two values', () => {
       expect(
         SQLStatement.concat(
@@ -59,7 +59,7 @@ describe(SQLStatement, () => {
     });
   });
 
-  describe(SQLStatement.format, () => {
+  describe('.format', () => {
     it('should return a formatted string', () =>
       expect(
         SQLStatement.format(sql`SELECT ${'foo'}`, {
@@ -69,7 +69,7 @@ describe(SQLStatement, () => {
       ).toEqual('_:SELECT $1=foo_:'));
   });
 
-  describe(sql, () => {
+  describe('sql', () => {
     it('should return empty string', () => {
       expect(sql``).toEqual(
         SQLStatement({
@@ -101,7 +101,7 @@ describe(SQLStatement, () => {
       );
     });
 
-    describe(sql.raw, () => {
+    describe('.raw', () => {
       it('should return statement', () => {
         expect(sql.raw('foo')).toEqual(
           SQLStatement({

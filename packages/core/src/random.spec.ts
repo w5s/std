@@ -11,7 +11,7 @@ describe('Random', () => {
       .spyOn(Random.defaultGeneratorRef.current, 'taskRun')
       .mockImplementation((resolve) => resolve(Random.Value(value)));
 
-  describe(Random.Value, () => {
+  describe('Value', () => {
     it('should return new random value', () => {
       expect(Random.Value(0)).toBe(0);
       expect(Random.Value(1)).toBe(1);
@@ -20,7 +20,7 @@ describe('Random', () => {
       expect(() => Random.Value(invalidValue)).toThrow(`Random value should be between 0 and 1. Got ${invalidValue}`);
     });
   });
-  describe(Random.Value.hasInstance, () => {
+  describe('hasInstance', () => {
     it('should return new random value', () => {
       expect(Random.Value.hasInstance(0)).toBe(true);
       expect(Random.Value.hasInstance(1)).toBe(true);

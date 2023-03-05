@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { Iterable } from './iterable.js';
 
-describe(Iterable, () => {
+describe('Iterable', () => {
   function iteratorOf<T>(...values: T[]): Iterable<T> {
     return values;
   }
@@ -16,7 +16,7 @@ describe(Iterable, () => {
     };
   }
 
-  describe(Iterable.of, () => {
+  describe('.of()', () => {
     it('should return an empty iterable when 0', () => {
       expectIterable(Iterable.of()).toHaveValues([]);
     });
@@ -25,7 +25,7 @@ describe(Iterable, () => {
     });
   });
 
-  describe(Iterable.generate, () => {
+  describe('.generate()', () => {
     it('should return an empty iterable when 0', () => {
       expectIterable(Iterable.generate(0, () => 'a')).toHaveValues([]);
     });
@@ -37,7 +37,7 @@ describe(Iterable, () => {
     });
   });
 
-  describe(Iterable.filter, () => {
+  describe('.filter', () => {
     it('should return a filtered iterator', () => {
       const source = iteratorOf(1, 3, 2);
       expectIterable(Iterable.filter(source, (value) => value >= 2)).toHaveValues([3, 2]);
@@ -48,14 +48,14 @@ describe(Iterable, () => {
     });
   });
 
-  describe(Iterable.map, () => {
+  describe('.map', () => {
     it('should return a mapped iterator', () => {
       const source = iteratorOf(1, 3, 2);
       expectIterable(Iterable.map(source, (value) => value * 2)).toHaveValues([2, 6, 4]);
     });
   });
 
-  describe(Iterable.reduce, () => {
+  describe('.reduce', () => {
     it('should return reduce for each value using initialValue', () => {
       const source = iteratorOf(1, 3, 2);
 
@@ -63,13 +63,13 @@ describe(Iterable, () => {
     });
   });
 
-  describe(Iterable.empty, () => {
+  describe('.empty', () => {
     it('should return empty', () => {
       expectIterable(Iterable.empty()).toHaveValues([]);
     });
   });
 
-  describe(Iterable.range, () => {
+  describe('.range', () => {
     it('should return a range of number', () => {
       expectIterable(Iterable.range(1, 4)).toHaveValues([1, 2, 3]);
     });
@@ -82,7 +82,7 @@ describe(Iterable, () => {
     });
   });
 
-  describe(Iterable.zip, () => {
+  describe('.zip', () => {
     it('should return have size of left when size(left) < size(right)', () => {
       const source = iteratorOf(1);
 
@@ -103,7 +103,7 @@ describe(Iterable, () => {
       ]);
     });
   });
-  describe(Iterable.hasInstance, () => {
+  describe('.hasInstance', () => {
     it.each([
       [{ [Symbol.iterator]: () => {} }, true],
       [{ [Symbol.iterator]: 'not_a_function' }, false],

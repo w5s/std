@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { LogMessage } from './message.js';
 
-describe(LogMessage, () => {
+describe('LogMessage', () => {
   describe('()', () => {
     it('should create a new instance', () => {
       expect(LogMessage(['foo'])).toEqual(['foo']);
@@ -15,7 +15,7 @@ describe(LogMessage, () => {
     });
   });
 
-  describe(LogMessage.data, () => {
+  describe('.data', () => {
     it('should return an empty object if empty array', () => {
       expect(LogMessage.data(LogMessage([]))).toEqual({});
     });

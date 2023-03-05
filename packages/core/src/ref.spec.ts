@@ -2,12 +2,12 @@ import { describe, it, expect } from '@jest/globals';
 import { Ref } from './ref.js';
 import { assertType } from './type.js';
 
-describe(Ref, () => {
+describe('Ref', () => {
   const anyValue = 123;
   it('should return the current value', () => {
     expect(Ref(anyValue)).toEqual({ [Ref.current]: anyValue });
   });
-  describe(Ref.hasInstance, () => {
+  describe('.hasInstance', () => {
     it.each([
       [Ref(anyValue), true],
       [
@@ -32,20 +32,20 @@ describe(Ref, () => {
       }
     });
   });
-  describe(Ref.read, () => {
+  describe('.read', () => {
     it('should return current value', () => {
       const ref = Ref(123);
       expect(Ref.read(ref)).toEqual(123);
     });
   });
-  describe(Ref.write, () => {
+  describe('.write', () => {
     it('should set current value', () => {
       const ref = Ref(123);
       Ref.write(ref, 456);
       expect(ref).toEqual({ [Ref.current]: 456 });
     });
   });
-  describe(Ref.modify, () => {
+  describe('.modify', () => {
     it('should set current value using map function', () => {
       const ref = Ref(123);
       Ref.modify(ref, (_) => _ * 2);

@@ -3,7 +3,7 @@ import { Disposable, AsyncDisposable } from './disposable.js';
 import { Symbol } from './symbol.js';
 
 describe('Disposable', () => {
-  describe(Disposable.hasInstance, () => {
+  describe('.hasInstance()', () => {
     it.each([
       [{ [Symbol.dispose]: () => {} }, true],
       [{ [Symbol.dispose]: 'not_a_function' }, false],
@@ -19,7 +19,7 @@ describe('Disposable', () => {
   });
 });
 describe('AsyncDisposable', () => {
-  describe(AsyncDisposable.hasInstance, () => {
+  describe('.hasInstance()', () => {
     it.each([
       [{ [Symbol.dispose]: () => {} }, false],
       [{ [Symbol.asyncDispose]: () => {} }, true],

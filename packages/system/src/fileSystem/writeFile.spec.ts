@@ -5,7 +5,7 @@ import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 
-describe(writeFile, () => {
+describe('writeFile', () => {
   it('should call fs.promises.writeFile', async () => {
     const writeFileMocked = jest.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;

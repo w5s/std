@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { HTTPError } from './error.js';
 
-describe(HTTPError.InvalidURL, () => {
+describe('HTTPError.InvalidURL', () => {
   it('should constructor new error', () => {
     expect(HTTPError.InvalidURL({ message: 'test', input: 'abc' })).toEqual(
       expect.objectContaining({
@@ -13,7 +13,7 @@ describe(HTTPError.InvalidURL, () => {
     );
   });
 });
-describe(HTTPError.NetworkError, () => {
+describe('HTTPError.NetworkError', () => {
   it('should constructor new error', () => {
     expect(HTTPError.NetworkError({ message: 'test' })).toEqual(
       expect.objectContaining({
@@ -24,7 +24,7 @@ describe(HTTPError.NetworkError, () => {
     );
   });
 });
-describe(HTTPError.ParserError, () => {
+describe('HTTPError.ParserError', () => {
   it('should constructor new error', () => {
     expect(HTTPError.ParserError({ message: 'test' })).toEqual(
       expect.objectContaining({

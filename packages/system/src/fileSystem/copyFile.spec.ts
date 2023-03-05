@@ -5,7 +5,7 @@ import { FilePath } from '../filePath.js';
 import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 
-describe(copyFile, () => {
+describe('copyFile', () => {
   it('should call fs.promises.rename', async () => {
     const copyFileMocked = jest.spyOn(Internal.FS, 'copyFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), FilePath('newPath')] as const;

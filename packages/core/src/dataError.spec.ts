@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { DataError } from './dataError.js';
 
-describe(DataError, () => {
+describe('DataError', () => {
   const anyString = 'AnyString';
   describe('()', () => {
     it('should return instance of Error', () => {
@@ -64,7 +64,7 @@ describe(DataError, () => {
       expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
     });
   });
-  describe(DataError.MakeGeneric, () => {
+  describe('.MakeGeneric()', () => {
     const TestError = DataError.MakeGeneric('TestError', (create) => (email: string) => create({ email }));
     it('should create a new constructor', () => {
       expect(TestError('foo@bar.com')).toEqual(
@@ -79,7 +79,7 @@ describe(DataError, () => {
         expect(TestError.errorName).toBe('TestError');
       });
     });
-    describe(TestError.hasInstance, () => {
+    describe('.hasInstance()', () => {
       it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(TestError.hasInstance(value)).toBe(false);
       });
@@ -88,7 +88,7 @@ describe(DataError, () => {
       });
     });
   });
-  describe(DataError.Make, () => {
+  describe('.Make()', () => {
     type TestError = DataError<{ name: 'TestError'; email: string }>;
     const TestError = DataError.Make<TestError>('TestError');
     it('should create a new constructor', () => {
@@ -109,7 +109,7 @@ describe(DataError, () => {
         expect(TestError.errorName).toBe('TestError');
       });
     });
-    describe(TestError.hasInstance, () => {
+    describe('.hasInstance()', () => {
       it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(TestError.hasInstance(value)).toBe(false);
       });

@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@jest/globals';
 import { LogLevel } from './level.js';
 
-describe(LogLevel, () => {
+describe('LogLevel', () => {
   describe('()', () => {
     it('should return a new object', () => {
       expect(LogLevel('Test', 3)).toEqual({
@@ -16,7 +16,7 @@ describe(LogLevel, () => {
       expect(LogLevel[name]).toMatchSnapshot(name);
     });
   });
-  describe(LogLevel.value, () => {
+  describe('.value', () => {
     it.each([
       [LogLevel.Critical, 50],
       [LogLevel.Error, 40],
@@ -28,7 +28,7 @@ describe(LogLevel, () => {
     });
   });
 
-  describe(LogLevel.compare, () => {
+  describe('.compare', () => {
     it('should return 1 if superior', () => {
       expect(LogLevel.compare(LogLevel.Error, LogLevel.Warning)).toBe(1);
     });
@@ -42,7 +42,7 @@ describe(LogLevel, () => {
     });
   });
 
-  describe(LogLevel.match, () => {
+  describe('.match', () => {
     it('should return undefined if empty cases', () => {
       expect(LogLevel.match([])(LogLevel.Critical)).toBe(undefined);
     });

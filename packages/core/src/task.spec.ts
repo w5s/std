@@ -108,7 +108,7 @@ describe('Task', () => {
     ['async', 'async'],
   ] as Array<['sync' | 'async', 'sync' | 'async']>;
 
-  describe(Task.unsafeRun, () => {
+  describe('.unsafeRun', () => {
     it('should run throwing task', () => {
       const task = Task(() => {
         throw anyError;
@@ -135,7 +135,7 @@ describe('Task', () => {
       await expect(Task.unsafeRun(task)).rejects.toEqual(new Error('TestError'));
     });
   });
-  describe(Task.unsafeRunOk, () => {
+  describe('.unsafeRunOk', () => {
     it('should run throwing task', () => {
       const task = generateTask({ throwError: anyError });
 
@@ -156,7 +156,7 @@ describe('Task', () => {
       await expect(Task.unsafeRunOk(task)).rejects.toEqual(new Error('TestError'));
     });
   });
-  describe(Task.resolve, () => {
+  describe('.resolve', () => {
     it('should construct a sync task', async () => {
       const task = Task.resolve(anyObject);
       await ExpectTask.toResolve(task, anyObject);
@@ -167,7 +167,7 @@ describe('Task', () => {
       await ExpectTask.toResolve(task, undefined);
     });
   });
-  describe(Task.reject, () => {
+  describe('.reject', () => {
     it('should construct a sync task', async () => {
       const task = Task.reject(anyError);
       await ExpectTask.toReject(task, anyError);
@@ -178,7 +178,7 @@ describe('Task', () => {
       await ExpectTask.toReject(task, undefined);
     });
   });
-  describe(Task.tryCall, () => {
+  describe('.tryCall', () => {
     class TestError extends Error {
       override name = 'TestError';
 
@@ -232,7 +232,7 @@ describe('Task', () => {
       expect(onError).toHaveBeenCalledWith(thrownError);
     });
   });
-  describe(Task.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return false for any object', () => {
       expect(Task.hasInstance(true)).toEqual(false);
       expect(Task.hasInstance(null)).toEqual(false);
@@ -248,7 +248,7 @@ describe('Task', () => {
     });
   });
 
-  describe(Task, () => {
+  describe('()', () => {
     describe('sync', () => {
       it('should construct a success sync task', () => {
         const task = Task(({ ok }) => ok('foo'));
@@ -352,7 +352,7 @@ describe('Task', () => {
       });
     });
   });
-  describe(Task.all, () => {
+  describe('.all', () => {
     it('should return empty array if empty', async () => {
       const allTask = Task.all([]);
       await ExpectTask.toResolve(allTask, []);
@@ -426,7 +426,7 @@ describe('Task', () => {
       await ExpectTask.toResolve(allTask, ['value1', 'value2', 'value3']);
     });
   });
-  describe(Task.any, () => {
+  describe('.any', () => {
     it('should return empty array if empty', async () => {
       const allTask = Task.any([]);
       await ExpectTask.toReject(allTask, AggregateError({ errors: [] }));
@@ -503,7 +503,7 @@ describe('Task', () => {
       await ExpectTask.toResolve(anyTask, 'value2');
     });
   });
-  describe(Task.allSettled, () => {
+  describe('.allSettled', () => {
     it('should return empty array if empty', async () => {
       const allTask = Task.allSettled([]);
       await ExpectTask.toResolve(allTask, []);
@@ -523,7 +523,7 @@ describe('Task', () => {
       ]);
     });
   });
-  describe(Task.map, () => {
+  describe('.map', () => {
     it('should keep unchanged when failure', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ error: anyError });
       const mapTask = Task.map(task, (_) => ({ ..._, bar: true }));
@@ -557,7 +557,7 @@ describe('Task', () => {
     });
   });
 
-  describe(Task.mapError, () => {
+  describe('.mapError', () => {
     it('should keep unchanged when success', async () => {
       const task = generateTask<typeof anyObject, typeof anyError>({ value: anyObject });
       const mapTask = Task.mapError(task, (_) => ({ ..._, bar: true }));
@@ -592,7 +592,7 @@ describe('Task', () => {
     });
   });
 
-  describe(Task.andThen, () => {
+  describe('.andThen', () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
       const stringify = (num: number) =>
         generateTask<string, 'TestError'>({ delayMs: after === 'async' ? 0 : undefined, value: String(num) });
@@ -627,7 +627,7 @@ describe('Task', () => {
     });
   });
 
-  describe(Task.andRun, () => {
+  describe('.andRun', () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
       const task = generateTask({ delayMs: before === 'async' ? 0 : undefined, value: anyObject });
       const andTask = generateTask({ delayMs: after === 'async' ? 0 : undefined, value: anyOtherObject });
@@ -654,7 +654,7 @@ describe('Task', () => {
     });
   });
 
-  describe(Task.orElse, () => {
+  describe('.orElse', () => {
     describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
       const handleError = (message: string) =>
         generateTask<string, string>({ delayMs: after === 'async' ? 0 : undefined, value: `${message}_handled` });
@@ -692,14 +692,14 @@ describe('Task', () => {
   });
 });
 describe('TaskCanceler', () => {
-  describe(TaskCanceler.clear, () => {
+  describe('.clear', () => {
     it('should unset current value', () => {
       const canceler = { current: () => {} };
       TaskCanceler.clear(canceler);
       expect(canceler.current).toBe(Option.None);
     });
   });
-  describe(TaskCanceler.cancel, () => {
+  describe('.cancel', () => {
     it('should call current only once', () => {
       const cancel = jest.fn();
       const canceler = { current: cancel };

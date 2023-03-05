@@ -3,7 +3,7 @@ import { describe, it, expect, jest } from '@jest/globals';
 import { assertType } from './type.js';
 import { invariant, warning, assertNever } from './invariant.js';
 
-describe(invariant, () => {
+describe('invariant', () => {
   const getThrownError = (fn: () => void) => {
     try {
       fn();
@@ -36,7 +36,7 @@ describe(invariant, () => {
     assertType<typeof value, boolean>(true);
   });
 });
-describe(warning, () => {
+describe('warning', () => {
   it('should not call warning.print when condition is true', () => {
     const printSpy = jest.spyOn(warning, 'current').mockImplementationOnce(() => {
       // do nothing
@@ -59,7 +59,7 @@ describe(warning, () => {
     expect(printSpy).toHaveBeenCalledWith('Warning: ');
   });
 });
-describe(assertNever, () => {
+describe('assertNever', () => {
   const anyValue = undefined;
   const neverValue: never = undefined as never;
 

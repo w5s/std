@@ -5,7 +5,7 @@ import { CurrencyRegistry } from './currencyRegistry.js';
 import { Money } from './money.js';
 import { moneyFactory } from './moneyFactory.js';
 
-describe(moneyFactory, () => {
+describe('moneyFactory', () => {
   let registry: CurrencyRegistry;
   beforeEach(() => {
     registry = CurrencyRegistry(Ref({}));

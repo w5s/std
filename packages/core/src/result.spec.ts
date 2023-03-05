@@ -8,7 +8,7 @@ describe('Result', () => {
   const anyError = 'anyError' as const;
   const anyResult = Result.Error(anyError) as Result<typeof anyValue, typeof anyError>;
 
-  describe(Result.Ok, () => {
+  describe('.Ok', () => {
     it('should return a new object', () => {
       expect(Result.Ok(anyValue)).toEqual({ _: 'Ok', value: anyValue });
     });
@@ -18,7 +18,7 @@ describe('Result', () => {
       assertType<typeof result, Result<void, never>>(true);
     });
   });
-  describe(Result.Error, () => {
+  describe('.Error', () => {
     it('should return a new object', () => {
       expect(Result.Error(anyValue)).toEqual({ _: 'Error', error: anyValue });
     });
@@ -29,7 +29,7 @@ describe('Result', () => {
     });
   });
 
-  describe(Result.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return true for Ok() or Error() object', () => {
       expect(Result.hasInstance(Result.Ok(anyValue))).toEqual(true);
       expect(Result.hasInstance(Result.Error(anyValue))).toEqual(true);
@@ -40,7 +40,7 @@ describe('Result', () => {
     });
   });
 
-  describe(Result.isOk, () => {
+  describe('.isOk', () => {
     it('should return true for Ok() object', () => {
       expect(Result.isOk(Result.Ok(anyValue))).toEqual(true);
     });
@@ -48,7 +48,7 @@ describe('Result', () => {
       expect(Result.isOk(Result.Error(anyValue))).toEqual(false);
     });
   });
-  describe(Result.isOk, () => {
+  describe('.isError', () => {
     it('should return true for Result.Ok() object', () => {
       expect(Result.isError(Result.Ok(anyValue))).toEqual(false);
     });
@@ -56,7 +56,7 @@ describe('Result', () => {
       expect(Result.isError(Result.Error(anyError))).toEqual(true);
     });
   });
-  describe(Result.map, () => {
+  describe('.map', () => {
     it('should return true for Result.Ok() object', () => {
       expect(Result.map(Result.Ok('anyValue'), (value) => `${value}_suffix`)).toEqual(Result.Ok('anyValue_suffix'));
     });
@@ -64,7 +64,7 @@ describe('Result', () => {
       expect(Result.map(Result.Error('anyError'), (value) => `${value}_suffix`)).toEqual(Result.Error('anyError'));
     });
   });
-  describe(Result.mapError, () => {
+  describe('.mapError', () => {
     it('should return true for Result.Ok() object', () => {
       expect(Result.mapError(Result.Ok('anyValue'), (error) => `${error}_suffix`)).toEqual(Result.Ok(anyValue));
     });
@@ -74,7 +74,7 @@ describe('Result', () => {
       );
     });
   });
-  describe(Result.value, () => {
+  describe('.value', () => {
     it('should return undefined for Result.Error', () => {
       const value = Result.value(Result.Error(anyError));
       expect(value).toBe(Option.None);
@@ -89,7 +89,7 @@ describe('Result', () => {
       assertType<typeof optValue, typeof anyValue | Option.None>(true);
     });
   });
-  describe(Result.error, () => {
+  describe('.error', () => {
     it('should return undefined for Result.Ok', () => {
       const error = Result.error(Result.Ok(anyValue));
       expect(error).toBe(Option.None);
@@ -104,7 +104,7 @@ describe('Result', () => {
       assertType<typeof optError, typeof anyError | Option.None>(true);
     });
   });
-  describe(Result.getOrElse, () => {
+  describe('.getOrElse', () => {
     it('should return defaultValue for Result.Error', () => {
       const returnValue = Result.getOrElse(Result.Error(anyError) as Result<typeof anyValue, typeof anyError>, () => 1);
       expect(returnValue).toEqual(1);
@@ -114,7 +114,7 @@ describe('Result', () => {
       expect(Result.getOrElse(Result.Ok(anyValue), () => 1)).toBe(anyValue);
     });
   });
-  describe(Result.getOrThrow, () => {
+  describe('.getOrThrow', () => {
     it('should return undefined for Result.Error', () => {
       expect(() => {
         Result.getOrThrow(Result.Error(anyError));
@@ -126,7 +126,7 @@ describe('Result', () => {
       assertType<typeof returnValue, typeof anyValue>(true);
     });
   });
-  describe(Result.andThen, () => {
+  describe('.andThen', () => {
     const square = (num: number): Result<number, 'TestError'> => Result.Ok(num * num);
     it('should return unchanged result when Result.Error', () => {
       expect(Result.andThen(Result.Error('TestError'), square)).toEqual(Result.Error('TestError'));
@@ -135,7 +135,7 @@ describe('Result', () => {
       expect(Result.andThen(Result.Ok(4), square)).toEqual(Result.Ok(16));
     });
   });
-  describe(Result.orElse, () => {
+  describe('.orElse', () => {
     const handleError = (message: string): Result<string, 'TestError'> => Result.Ok(`${message}_handled`);
 
     it('should return unchanged result when Result.Ok', () => {
@@ -146,7 +146,7 @@ describe('Result', () => {
     });
   });
 
-  describe(Result.tryCall, () => {
+  describe('.tryCall', () => {
     class TestError extends Error {
       constructor() {
         super();
@@ -194,7 +194,7 @@ describe('Result', () => {
       });
     });
   });
-  describe(Result.match, () => {
+  describe('.match', () => {
     it('should call matchers.Ok when Ok', () => {
       expect(
         Result.match(Result.Ok('ok'), {

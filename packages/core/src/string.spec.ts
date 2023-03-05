@@ -3,7 +3,7 @@ import { Option } from './option.js';
 import { String } from './string.js';
 
 describe('String', () => {
-  describe(String.at, () => {
+  describe('.at', () => {
     it('should return Option.None when index is not defined', () => {
       expect(String.at('a', 1)).toBe(Option.None);
     });
@@ -14,17 +14,17 @@ describe('String', () => {
       expect(String.at('abc', -1)).toBe('c');
     });
   });
-  describe(String.concat, () => {
+  describe('.concat', () => {
     it('should join all parts', () => {
       expect(String.concat(['a', 'b', 'c'])).toEqual('abc');
     });
   });
-  describe(String.join, () => {
+  describe('.join', () => {
     it('should join all parts', () => {
       expect(String.join('|', ['a', 'b', 'c'])).toEqual('a|b|c');
     });
   });
-  describe(String.hasInstance, () => {
+  describe('.hasInstance', () => {
     it('should return true for string', () => {
       expect(String.hasInstance('abc')).toEqual(true);
     });
@@ -33,7 +33,7 @@ describe('String', () => {
       expect(String.hasInstance({ length: 0 })).toBe(false);
     });
   });
-  describe(String.isEmpty, () => {
+  describe('.isEmpty', () => {
     it('should return true when array is empty', () => {
       expect(String.isEmpty('')).toEqual(true);
     });
@@ -41,7 +41,7 @@ describe('String', () => {
       expect(String.isEmpty('abc')).toBe(false);
     });
   });
-  describe(String.size, () => {
+  describe('.size', () => {
     it('should return 0 for empty string', () => {
       expect(String.size('')).toBe(0);
     });
