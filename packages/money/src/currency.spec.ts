@@ -69,7 +69,7 @@ describe('Currency', () => {
     );
   });
 
-  describeComparable(Currency, {
+  describeComparable({ describe, expect, it })(Currency, {
     base: () => Currency({ ...anyProperties, code: 'B' }),
     inferior: () => Currency({ ...anyProperties, code: 'A' }),
     superior: () => Currency({ ...anyProperties, code: 'C' }),

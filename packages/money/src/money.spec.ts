@@ -33,7 +33,7 @@ describe('Money', () => {
     });
   });
 
-  describeComparable(Money, {
+  describeComparable({ describe, expect, it })(Money, {
     base: () => EUR(anyAmount),
     inferior: () => [EUR(anyAmount - 1), Money({ currency: anyCurrency, amount: anyAmount })],
     superior: () => [EUR(anyAmount + 1), USD(anyAmount)],
