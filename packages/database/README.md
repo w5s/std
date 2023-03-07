@@ -45,7 +45,7 @@ export async function main(): Promise<void> {
   };
 
   const response = getUserById(client, 123);
-  console.log(await Task.unsafeRun(response));
+  console.log(await unsafeRun(response));
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->

@@ -1,4 +1,4 @@
-import { Result, TaskCanceler } from '@w5s/core';
+import { Result, Canceler } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
@@ -29,7 +29,7 @@ describe('writeFile', () => {
       }
     });
     let index = 0;
-    const cancelerRef: TaskCanceler = { current: undefined };
+    const cancelerRef: Canceler = { current: undefined };
     const content: Iterable<string> = {
       [Symbol.iterator]: () => ({
         next: () => {
@@ -37,7 +37,7 @@ describe('writeFile', () => {
           index += 1;
           let value = currentIndex.toString(16);
           if (currentIndex > 9) {
-            TaskCanceler.cancel(cancelerRef);
+            Canceler.cancel(cancelerRef);
             value = 'X';
           }
           if (currentIndex >= 16) {

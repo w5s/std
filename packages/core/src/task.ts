@@ -1,46 +1,8 @@
 import type { Option } from './option.js';
 import type { Result } from './result.js';
-import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
-
-/**
- * Interface used to cancel running task
- */
-export interface TaskCanceler extends Ref<Option<() => void>> {}
-export namespace TaskCanceler {
-  /**
-   * Clear the current value of canceler
-   *
-   * @example
-   * ```ts
-   * const canceler: TaskCanceler = { current: () => {} };
-   * TaskCanceler.clear(canceler);// canceler.current === undefined
-   * ```
-   * @param canceler
-   */
-  export function clear(canceler: TaskCanceler) {
-    canceler.current = undefined;
-  }
-
-  /**
-   * Trigger cancelation once
-   *
-   * @example
-   * ```ts
-   * const canceler: TaskCanceler = { current: () => { console.log('cancel'); } };
-   * TaskCanceler.cancel(canceler);// console.log('cancel');
-   * TaskCanceler.cancel(canceler);// do nothing
-   * ```
-   * @param canceler
-   */
-  export function cancel(canceler: TaskCanceler) {
-    if (canceler.current != null) {
-      canceler.current();
-    }
-    clear(canceler);
-  }
-}
+import { Canceler } from './run.js';
 
 /**
  * Base type for Task
@@ -61,7 +23,7 @@ export interface Task<Value, Error> {
     /**
      * Reference to cancel function
      */
-    canceler: TaskCanceler
+    canceler: Canceler
   ) => void;
 }
 
@@ -101,7 +63,7 @@ export function Task<Value, Error = never>(
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return Task.wrap((resolveTask, rejectTask, cancelerRef) => {
-    TaskCanceler.clear(cancelerRef);
+    Canceler.clear(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: resultOk,
       error: resultError,
@@ -151,7 +113,7 @@ export namespace Task {
       /**
        * Canceler reference
        */
-      canceler: TaskCanceler
+      canceler: Canceler
     ) => void
   ): Task<Value, Error> {
     return {
@@ -163,7 +125,7 @@ export namespace Task {
 
   type TaskEntry<Value, Error> = Readonly<{
     task: Task<Value, Error>;
-    cancelerRef: TaskCanceler;
+    cancelerRef: Canceler;
   }>;
 
   class TaskAggregateState<Value, Error> {
@@ -190,7 +152,7 @@ export namespace Task {
     }
 
     cancelAll() {
-      this.tasks.forEach((task) => TaskCanceler.cancel(task.cancelerRef));
+      this.tasks.forEach((task) => Canceler.cancel(task.cancelerRef));
     }
 
     runAll(
@@ -226,13 +188,13 @@ export namespace Task {
    *   Task.resolve(1),
    *   Task.resolve(2),
    * ]);
-   * const successResult = Task.unsafeRun(success);// Result.Ok([1, 2])
+   * const successResult = unsafeRun(success);// Result.Ok([1, 2])
    *
    * const failure = Task.all([
    *   Task.resolve(1),
    *   Task.reject('error'),
    * ]);
-   * const failureResult = Task.unsafeRun(failure);// Result.Error('error')
+   * const failureResult = unsafeRun(failure);// Result.Error('error')
    * ```
    * @param tasks - tasks to be run in parallel
    */
@@ -263,7 +225,7 @@ export namespace Task {
               state.finish();
               taskReject(error);
               // cancel all but the current task
-              TaskCanceler.clear(entry.cancelerRef);
+              Canceler.clear(entry.cancelerRef);
               state.cancelAll();
             }
           }
@@ -281,13 +243,13 @@ export namespace Task {
    *   Task.reject(1),
    *   Task.resolve(2),
    * ]);
-   * const successResult = Task.unsafeRun(success);// Result.Ok(2)
+   * const successResult = unsafeRun(success);// Result.Ok(2)
    *
    * const failure = Task.any([
    *   Task.reject('error1'),
    *   Task.reject('error2'),
    * ]);
-   * const failureResult = Task.unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
+   * const failureResult = unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
    * ```
    * @param tasks - tasks to be run in parallel
    */
@@ -313,7 +275,7 @@ export namespace Task {
               state.finish();
               taskResolve(value);
               // cancel all but the current task
-              TaskCanceler.clear(entry.cancelerRef);
+              Canceler.clear(entry.cancelerRef);
               state.cancelAll();
             }
           },
@@ -337,7 +299,7 @@ export namespace Task {
    *   Task.reject(1),
    *   Task.resolve(2),
    * ]);
-   * const taskResults = Task.unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
+   * const taskResults = unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
    * ```
    * @param tasks - tasks to be run in parallel
    */
@@ -398,7 +360,7 @@ export namespace Task {
    * @example
    * ```typescript
    * const task = Task.resolve(1);
-   * const result = Task.unsafeRun(task);// Result.Ok(1)
+   * const result = unsafeRun(task);// Result.Ok(1)
    * ```
    * @category Constructor
    * @param value - the success value
@@ -416,7 +378,7 @@ export namespace Task {
    * @example
    * ```typescript
    * const task = Task.reject(1);
-   * const result = Task.unsafeRun(task);// Result.Error(1)
+   * const result = unsafeRun(task);// Result.Error(1)
    * ```
    * @category Constructor
    * @param errorValue - the error value
@@ -566,63 +528,6 @@ export namespace Task {
       task.taskRun(resolveTask, (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef), cancelerRef)
     );
   }
-
-  /**
-   * Run `task` and return the result or a promise of the result
-   *
-   * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
-   * @example
-   * ```typescript
-   * const getMessage = Task.resolve('Hello World!');
-   * const messageResult = Task.unsafeRun(getMessage);// Result.Ok('Hello World!')
-   * ```
-   * @param task - the task to be run
-   */
-  export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Result<Value, Error>> {
-    const cancelerRef: TaskCanceler = { current: undefined };
-    let returnValue: Result<Value, Error> | undefined;
-    let resolveHandler = (result: Result<Value, Error>) => {
-      returnValue = result;
-    };
-    let rejectHandler = (_error: unknown) => {};
-    const runValue: void | Promise<void> = task.taskRun(
-      (value) => resolveHandler(resultOk(value)),
-      (error) => resolveHandler(resultError(error)),
-      cancelerRef
-    );
-    // Try to catch promise errors
-    if (isPromise(runValue)) {
-      // eslint-disable-next-line promise/prefer-await-to-then
-      runValue.catch((error) => rejectHandler(error));
-    }
-    if (returnValue === undefined) {
-      // eslint-disable-next-line promise/param-names
-      return new Promise<Result<Value, Error>>((resolvePromise, rejectPromise) => {
-        resolveHandler = resolvePromise;
-        rejectHandler = rejectPromise;
-      });
-    }
-
-    return returnValue;
-  }
-
-  /**
-   * Run `task` that never fails and return the value or a promise of the value
-   *
-   * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
-   * @example
-   * ```typescript
-   * const getMessage = Task.resolve('Hello World!');
-   * const messageResult = Task.unsafeRunOk(getMessage);// 'Hello World!'
-   * ```
-   * @param task - the task to be run
-   */
-  export function unsafeRunOk<Value>(task: Task<Value, unknown>): Awaitable<Value> {
-    const promiseOrValue = unsafeRun(task);
-    // @ts-ignore - we assume PromiseLike.then returns a Promise
-    // eslint-disable-next-line promise/prefer-await-to-then
-    return isPromise(promiseOrValue) ? promiseOrValue.then(unsafeResultValue) : unsafeResultValue(promiseOrValue);
-  }
 }
 
 // inline private constructors
@@ -636,13 +541,6 @@ function resultError<E>(error: E): Result<never, E>;
 function resultError(error?: unknown): Result<never, unknown> {
   return { _: 'Error', error };
 }
-function unsafeResultValue<V, E>(result: Result<V, E>) {
-  if (result._ === 'Ok') {
-    return result.value;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-throw-literal
-  throw result.error;
-}
 
 // utils
 function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
@@ -650,7 +548,4 @@ function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
 }
 function isPromiseLike<V>(anyValue: unknown): anyValue is PromiseLike<V> {
   return isObject(anyValue) && typeof anyValue['then'] === 'function';
-}
-function isPromise<V>(anyValue: unknown): anyValue is Promise<V> {
-  return isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
 }

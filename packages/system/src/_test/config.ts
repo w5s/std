@@ -1,4 +1,4 @@
-import { Task } from '@w5s/core';
+import { Task, unsafeRun } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -99,7 +99,7 @@ export const generateStats = (): fs.Stats => {
 
 export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
   get result() {
-    return expect(Task.unsafeRun(t));
+    return expect(unsafeRun(t));
   },
 });
 

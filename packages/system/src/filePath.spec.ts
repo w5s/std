@@ -1,4 +1,4 @@
-import { Option, Task } from '@w5s/core';
+import { Option, unsafeRunOk } from '@w5s/core';
 import { describe, it, expect } from 'vitest';
 import { FilePath } from './filePath.js';
 
@@ -23,21 +23,21 @@ describe('FilePath', () => {
   describe('.resolve', () => {
     it('return a resolved path', async () => {
       expect(
-        Task.unsafeRunOk(
+        unsafeRunOk(
           FilePath.resolve(
             [absolutePath(''), relativePath('bar', 'baz'), relativePath('..', 'baz2')],
             relativePath('foo')
           )
         )
       ).toBe(absolutePath('bar', 'baz2', 'foo'));
-      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz')))).toBe(
+      expect(unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz')))).toBe(
         absolutePath('foo', 'bar', 'baz')
       );
-      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', '')))).toBe(
+      expect(unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', '')))).toBe(
         absolutePath('tmp', 'file')
       );
       expect(
-        Task.unsafeRunOk(
+        unsafeRunOk(
           FilePath.resolve(
             [relativePath('wwwroot'), relativePath('static_files', 'png')],
             relativePath('..', 'gif', 'image.gif')

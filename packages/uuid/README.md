@@ -34,7 +34,7 @@ function createUser(name: string) {
 
 export function main(): void {
   const userTask = createUser('John Doe');
-  console.log(Task.unsafeRun(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
+  console.log(unsafeRun(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->

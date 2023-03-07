@@ -4,7 +4,7 @@ import { AggregateError } from './aggregateError.js';
 import { throwError } from './prelude.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
-import { Task, TaskCanceler } from './task.js';
+import { Task } from './task.js';
 import { Option } from './option.js';
 
 const anyObject = Object.freeze({ foo: true });
@@ -24,24 +24,24 @@ const generateTask = <V = never, E = never>(
     delayMs?: number;
   } & ({ value: V } | { error: E } | { throwError: unknown })
 ) => {
-  const { canceler = () => {} } = options;
-  const isAsync = options.delayMs != null && options.delayMs >= 0;
+  const { canceler = () => {}, delayMs } = options;
+  const isAsync = delayMs != null && delayMs >= 0;
 
   return isAsync === true
-    ? Task<V, E>(async ({ ok: resultOk, error: resultError, setCanceler }) => {
+    ? Task<V, E>(async ({ ok, error, setCanceler }) => {
         setCanceler(canceler);
-        await waitMs(options.delayMs ?? 0);
+        await waitMs(delayMs ?? 0);
         return 'value' in options
-          ? resultOk(options.value)
+          ? ok(options.value)
           : 'error' in options
-          ? resultError(options.error)
+          ? error(options.error)
           : throwError(options.throwError);
       })
-    : Task<V, E>(({ ok: resultOk, error: resultError }) =>
+    : Task<V, E>(({ ok, error }) =>
         'value' in options
-          ? resultOk(options.value)
+          ? ok(options.value)
           : 'error' in options
-          ? resultError(options.error)
+          ? error(options.error)
           : throwError(options.throwError)
       );
 };
@@ -56,9 +56,9 @@ namespace ExpectTask {
     cancelerRef: Ref<MockedFunction<() => void>>;
     finished: Promise<void>;
   } {
-    const resolveTask = vi.fn<(value: Value) => void>();
-    const rejectTask = vi.fn<(error: Error) => void>();
-    const initialCanceler = vi.fn();
+    const resolveTask = vi.fn((_value: Value): void => {});
+    const rejectTask = vi.fn((_error: Error): void => {});
+    const initialCanceler = vi.fn(() => {});
     const cancelerRef = Ref(initialCanceler);
     return {
       resolve: resolveTask,
@@ -106,54 +106,6 @@ describe('Task', () => {
     ['async', 'async'],
   ] as Array<['sync' | 'async', 'sync' | 'async']>;
 
-  describe('.unsafeRun', () => {
-    it('should run throwing task', () => {
-      const task = Task(() => {
-        throw anyError;
-      });
-      expect(() => Task.unsafeRun(task)).toThrow(anyError);
-    });
-    it('should return the result of task.taskRun() for sync', () => {
-      expect(Task.unsafeRun(Task(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
-    });
-    it('should return the result of task.taskRun() for async', async () => {
-      await expect(
-        Task.unsafeRun(
-          Task(
-            ({ ok }) =>
-              new Promise<Result<typeof anyObject, never>>((resolve) => {
-                setTimeout(() => resolve(ok(anyObject)), 0);
-              })
-          )
-        )
-      ).resolves.toEqual(Result.Ok(anyObject));
-    });
-    it('should run rejected task', async () => {
-      const task = Task(() => Promise.reject(new Error('TestError')));
-      await expect(Task.unsafeRun(task)).rejects.toEqual(new Error('TestError'));
-    });
-  });
-  describe('.unsafeRunOk', () => {
-    it('should run throwing task', () => {
-      const task = generateTask({ throwError: anyError });
-
-      expect(() => Task.unsafeRunOk(task)).toThrow(anyError);
-    });
-    it('should return the result of task.taskRun() for sync', () => {
-      const task = generateTask({ value: anyObject });
-
-      expect(Task.unsafeRunOk(task)).toEqual(anyObject);
-    });
-    it('should return the result of task.taskRun() for async', async () => {
-      const task = generateTask({ value: anyObject, delayMs: 1 });
-
-      await expect(Task.unsafeRunOk(task)).resolves.toEqual(anyObject);
-    });
-    it('should run rejected task', async () => {
-      const task = Task(() => Promise.reject(new Error('TestError')));
-      await expect(Task.unsafeRunOk(task)).rejects.toEqual(new Error('TestError'));
-    });
-  });
   describe('.resolve', () => {
     it('should construct a sync task', async () => {
       const task = Task.resolve(anyObject);
@@ -686,24 +638,6 @@ describe('Task', () => {
 
       expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
       expect(afterTask.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), runReport.cancelerRef);
-    });
-  });
-});
-describe('TaskCanceler', () => {
-  describe('.clear', () => {
-    it('should unset current value', () => {
-      const canceler = { current: () => {} };
-      TaskCanceler.clear(canceler);
-      expect(canceler.current).toBe(Option.None);
-    });
-  });
-  describe('.cancel', () => {
-    it('should call current only once', () => {
-      const cancel = vi.fn();
-      const canceler = { current: cancel };
-      TaskCanceler.cancel(canceler);
-      TaskCanceler.cancel(canceler);
-      expect(cancel).toHaveBeenCalledTimes(1);
     });
   });
 });

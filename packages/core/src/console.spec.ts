@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { describe, it, expect, vi } from 'vitest';
 import { Console } from './console.js';
-import { Task } from './task.js';
+import { unsafeRun } from './run.js';
 
 describe('Console', () => {
   const doNothing = () => undefined;
@@ -15,7 +15,7 @@ describe('Console', () => {
   ] as [typeof Console.log, 'log' | 'warn' | 'info' | 'error'][])('%p', (task, consoleProperty) => {
     it(`should call console.${consoleProperty}`, async () => {
       vi.spyOn(console, consoleProperty).mockImplementation(doNothing);
-      await Task.unsafeRun(task('a', 'b'));
+      await unsafeRun(task('a', 'b'));
       expect(console[consoleProperty]).toHaveBeenLastCalledWith('a', 'b');
     });
   });

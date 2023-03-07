@@ -9,7 +9,7 @@ import type { FilePath } from '../filePath.js';
  * @example
  * ```ts
  * const task = copyFile(FilePath('/path/to/source'), FilePath('/path/to/destination'));
- * await Task.unsafeRun(task); // Will copy the file
+ * await unsafeRun(task); // Will copy the file
  * ```
  * @param source - The source path.
  * @param destination - The destination path.

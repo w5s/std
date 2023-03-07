@@ -34,7 +34,7 @@ export function program(): Task<void, never> {
   return handledTask;
 }
 
-Task.unsafeRun(program());
+unsafeRun(program());
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

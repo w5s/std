@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option } from './option.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
-import { Task } from './task.js';
+import { unsafeRun } from './run.js';
 import { TimeDuration, Time } from './time.js';
 
 describe('Time', () => {
@@ -67,7 +67,7 @@ describe('Time', () => {
     it('should return Date.now()', async () => {
       const nowMs = 123;
       dateNowSpy.mockReturnValue(nowMs);
-      expect(Task.unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
+      expect(unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
     });
   });
   describe('.delay', () => {
@@ -76,7 +76,7 @@ describe('Time', () => {
       const task = Time.delay(anyDuration);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(0);
 
-      const promise = Task.unsafeRun(task);
+      const promise = unsafeRun(task);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), anyDuration);
       vi.runAllTimers();
@@ -85,7 +85,7 @@ describe('Time', () => {
     it.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
       const now = Date.now();
       const task = Time.delay(TimeDuration(delay));
-      const promise = Task.unsafeRun(task);
+      const promise = unsafeRun(task);
       expect(setTimeoutSpy).not.toHaveBeenCalled();
       vi.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));

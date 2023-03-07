@@ -1,4 +1,4 @@
-import { Result, Task, TaskCanceler } from '@w5s/core';
+import { Result, Task, Canceler, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
@@ -36,7 +36,7 @@ describe('HTTP.request', () => {
       parse,
       fetch: globalFetch,
     });
-    const result = await Task.unsafeRun(task);
+    const result = await unsafeRun(task);
     expect(globalFetch).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
     expect(parse).toHaveBeenLastCalledWith(anyResponse);
     expect(result).toEqual(Result.Ok('TestReturn'));
@@ -47,7 +47,7 @@ describe('HTTP.request', () => {
       parse: anyParser,
       fetch: anyFetch,
     });
-    const result = await Task.unsafeRun(task);
+    const result = await unsafeRun(task);
     expect(result).toEqual(
       Result.Error(HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
     );
@@ -62,7 +62,7 @@ describe('HTTP.request', () => {
       parse: anyParser,
       fetch: globalFetch,
     });
-    const result = await Task.unsafeRun(task);
+    const result = await unsafeRun(task);
     expect(result).toEqual(Result.Error(HTTPError.NetworkError({ cause: fetchError })));
   });
   it('should convert reject parse errors', async () => {
@@ -73,7 +73,7 @@ describe('HTTP.request', () => {
       parse: failParser,
       fetch: anyFetch,
     });
-    const result = await Task.unsafeRun(task);
+    const result = await unsafeRun(task);
     expect(result).toEqual(Result.Error(anyHttpError));
   });
   it('should be cancelable', async () => {
@@ -109,9 +109,9 @@ describe('HTTP.request', () => {
     });
     const resolve = vi.fn();
     const reject = vi.fn();
-    const cancelerRef: TaskCanceler = { current: undefined };
+    const cancelerRef: Canceler = { current: undefined };
     task.taskRun(resolve, reject, cancelerRef);
-    TaskCanceler.cancel(cancelerRef);
+    Canceler.cancel(cancelerRef);
 
     await finished.promise;
     expect(resolve).not.toHaveBeenCalled();

@@ -9,7 +9,7 @@ import type { FilePath } from '../filePath.js';
  * @example
  * ```ts
  * const task = readSymbolicLink(FilePath('/path/to/symlink'));
- * await Task.unsafeRun(task); // Result.Ok(FilePath('...'))
+ * await unsafeRun(task); // Result.Ok(FilePath('...'))
  * ```
  * @param path - The path to the file.
  * @param options - The options to use.

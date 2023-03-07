@@ -10,7 +10,7 @@ export namespace Process {
    * @example
    * ```ts
    * const exitTask = Process.exit(0);
-   * Task.unsafeRun(exitTask);// Will exit program with code 0
+   * unsafeRun(exitTask);// Will exit program with code 0
    * ```
    * @param code - the exit code
    */
@@ -24,7 +24,7 @@ export namespace Process {
    * @example
    * ```ts
    * const task = Process.getCurrentDirectory();
-   * Task.unsafeRun(task);// Result.Ok(FilePath('current/working/directory'))
+   * unsafeRun(task);// Result.Ok(FilePath('current/working/directory'))
    * ```
    */
   export function getCurrentDirectory(): Task<FilePath, never> {
@@ -37,7 +37,7 @@ export namespace Process {
    * @example
    * ```ts
    * const task = Process.setCurrentDirectory(FilePath('other/directory'));
-   * Task.unsafeRun(task);// Result.Ok(undefined)
+   * unsafeRun(task);// Result.Ok(undefined)
    * ```
    * @param directory - the directory to set as the current working directory
    */

@@ -27,7 +27,7 @@ export async function moveAsync(source: FilePath, destination: FilePath, options
  * @example
  * ```ts
  * const moveTask = move(FilePath('source'), FilePath('destination'));
- * Task.unsafeRun(moveTask);
+ * unsafeRun(moveTask);
  * ```
  * @param source - The source path
  * @param destination - The destination path

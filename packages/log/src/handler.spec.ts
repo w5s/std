@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Task } from '@w5s/core';
+import { Task, unsafeRunOk } from '@w5s/core';
 import { UUID } from '@w5s/uuid';
 import { LogHandler } from './handler.js';
 import { LogLevel } from './level.js';
@@ -19,7 +19,7 @@ describe('LogHandler', () => {
         message: [],
         data: {},
       });
-      await Task.unsafeRunOk(
+      await unsafeRunOk(
         filtered(
           LogRecord({
             ...defaultProps,
@@ -28,7 +28,7 @@ describe('LogHandler', () => {
         )
       );
       expect(handler).not.toHaveBeenCalled();
-      await Task.unsafeRunOk(
+      await unsafeRunOk(
         filtered(
           LogRecord({
             ...defaultProps,

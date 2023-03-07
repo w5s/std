@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Task } from '@w5s/core';
+import { Task, unsafeRunOk } from '@w5s/core';
 import { Application } from './application.js';
 
 describe('Application', () => {
@@ -42,7 +42,7 @@ describe('Application', () => {
         applicationDefault,
       });
       const task = app.applicationDidChange(applicationDefault, applicationDefault);
-      expect(Task.unsafeRunOk(task)).toEqual(undefined);
+      expect(unsafeRunOk(task)).toEqual(undefined);
     });
     it('should have default applicationStart', () => {
       const applicationId = appId();
@@ -119,8 +119,8 @@ describe('Application', () => {
         applicationDefault,
       });
       Application.set(app, 'foo', true);
-      const startFirst = Task.unsafeRunOk(Application.start(app));
-      const startSecond = Task.unsafeRunOk(Application.start(app));
+      const startFirst = unsafeRunOk(Application.start(app));
+      const startSecond = unsafeRunOk(Application.start(app));
 
       await expect(startFirst).resolves.toBe(undefined);
       expect(run).toHaveBeenCalledTimes(1);

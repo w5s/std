@@ -1,4 +1,4 @@
-import { Task, Ref, Option } from '@w5s/core';
+import { Task, Ref, Option, unsafeRun } from '@w5s/core';
 
 type AnyConfiguration = Record<string, unknown>;
 const resolveVoid = Task.resolve();
@@ -163,8 +163,7 @@ export namespace Application {
         { instance, configuration: previous }: ApplicationState,
         { configuration: next }: ApplicationState
       ) {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        Task.unsafeRun(instance.applicationDidChange(previous, next));
+        void unsafeRun(instance.applicationDidChange(previous, next));
       }
     }
 
@@ -269,7 +268,7 @@ export namespace Application {
    * @example
    * const app: Application<State> = ...;
    * const task = Application.start(app);
-   * await Task.unsafeRun(task);
+   * await unsafeRun(task);
    * ```
    * @param app - the application object
    */

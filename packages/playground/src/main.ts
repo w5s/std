@@ -1,4 +1,4 @@
-import { assertNever, Console, Int, Option, Task, TimeDuration } from '@w5s/core';
+import { assertNever, Console, Int, Option, Task, TimeDuration, unsafeRun } from '@w5s/core';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/uuid';
 import { pipe } from './pipe.js';
@@ -42,5 +42,5 @@ function main() {
 
   return task;
 }
-// eslint-disable-next-line @typescript-eslint/no-floating-promises
-Task.unsafeRun(main());
+
+void unsafeRun(main());

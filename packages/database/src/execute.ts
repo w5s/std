@@ -10,7 +10,7 @@ import type { DatabaseError } from './error.js';
  * @example
  * ```typescript
  * const query = executeQuery(client, SQLQuery.CreateTable({ tableName: 'test_table' }))
- * const result = await Task.unsafeRun(query);
+ * const result = await unsafeRun(query);
  * if (Result.isOk(result)) {
  *   console.log(result.value)
  * } else {

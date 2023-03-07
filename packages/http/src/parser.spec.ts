@@ -1,4 +1,4 @@
-import { Result, Task } from '@w5s/core';
+import { Result, Task, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi, type MockedObject } from 'vitest';
 import type { HTTP } from './client.js';
 import { HTTPParser } from './parser.js';
@@ -22,7 +22,7 @@ const expectToRejectFetchResponseError = async (
   response[mockProperty].mockRejectedValue(thrownError);
   const task = fn(response);
 
-  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPError.ParserError({ cause: thrownError })));
+  await expect(unsafeRun(task)).resolves.toEqual(Result.Error(HTTPError.ParserError({ cause: thrownError })));
 };
 const expectToResolveValue = async (
   fn: (response: HTTP.Response) => Task<unknown, unknown>,
@@ -32,7 +32,7 @@ const expectToResolveValue = async (
   const returnValue = {} as any;
   response[mockProperty].mockResolvedValue(returnValue);
   const task = fn(response);
-  await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));
+  await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));
 };
 describe('HTTPParser', () => {
   describe('arrayBuffer', () => {

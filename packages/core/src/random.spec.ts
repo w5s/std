@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { Int } from './integer.js';
 import { Random } from './random.js';
 import { Result } from './result.js';
-import { Task } from './task.js';
+import { unsafeRun } from './run.js';
 
 describe('Random', () => {
   const generatorOf = (value: number) => Random.Generator(() => Random.Value(value));
@@ -33,12 +33,12 @@ describe('Random', () => {
     it('should use Math.random', async () => {
       const nextRandom = 0.123;
       vi.spyOn(Math, 'random').mockReturnValue(nextRandom);
-      expect(Task.unsafeRun(Random.unsafeGenerator)).toEqual(Result.Ok(nextRandom));
+      expect(unsafeRun(Random.unsafeGenerator)).toEqual(Result.Ok(nextRandom));
     });
   });
   describe('cryptoGenerator', () => {
     it('should use crypto', async () => {
-      expect(Task.unsafeRun(Random.cryptoGenerator)).toEqual(Result.Ok(expect.any(Number)));
+      expect(unsafeRun(Random.cryptoGenerator)).toEqual(Result.Ok(expect.any(Number)));
     });
   });
   describe('defaultGenerator', () => {
@@ -54,19 +54,19 @@ describe('Random', () => {
     ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
       const gen = generatorOf(genValue);
       const genNum = Random.number(min, max, gen);
-      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
+      expect(Result.value(await unsafeRun(genNum))).toBe(expected);
     });
     it('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Task.unsafeRun(Random.number(-2, 2))).toEqual(Result.Ok(-1.508));
+      expect(unsafeRun(Random.number(-2, 2))).toEqual(Result.Ok(-1.508));
     });
   });
   describe('.int', () => {
     it('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Task.unsafeRun(Random.int(Int(-10), Int(10)))).toEqual(Result.Ok(-8));
+      expect(unsafeRun(Random.int(Int(-10), Int(10)))).toEqual(Result.Ok(-8));
     });
     it.each([
       [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
@@ -76,14 +76,14 @@ describe('Random', () => {
     ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
       const gen = generatorOf(genValue);
       const genNum = Random.int(min, max, gen);
-      expect(Result.value(await Task.unsafeRun(genNum))).toBe(expected);
+      expect(Result.value(await unsafeRun(genNum))).toBe(expected);
     });
   });
   describe('.boolean', () => {
     it('should use defaultGenerator', async () => {
       const nextRandom = 0.123;
       mockDefaultGenerator(nextRandom);
-      expect(Task.unsafeRun(Random.boolean())).toEqual(Result.Ok(false));
+      expect(unsafeRun(Random.boolean())).toEqual(Result.Ok(false));
     });
     it.each([
       [{ genValue: 0, trueWeight: 0.5 }, false],
@@ -94,7 +94,7 @@ describe('Random', () => {
     ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
       const gen = generatorOf(genValue);
       const genBool = Random.boolean(trueWeight, gen);
-      expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
+      expect(unsafeRun(genBool)).toEqual(Result.Ok(expected));
     });
   });
 });

@@ -1,4 +1,4 @@
-import { TimeDuration, Int, Option, Task, Result, Random } from '@w5s/core';
+import { TimeDuration, Int, Option, Task, Result, Random, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
@@ -41,7 +41,7 @@ describe('RetryPolicy', () => {
   });
   const anyDuration = TimeDuration(123);
   const unsafeRunOk = <V>(task: Task<V, never>): V | Promise<V> => {
-    const promiseOrValue = Task.unsafeRun(task);
+    const promiseOrValue = unsafeRun(task);
     // @ts-ignore - we know this is a promise
     // eslint-disable-next-line promise/prefer-await-to-then
     return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.value) : Result.value(promiseOrValue);
@@ -51,7 +51,7 @@ describe('RetryPolicy', () => {
     const values = [];
     const unsafeState = (task: Task<Option<RetryState>, never>): Option<RetryState> =>
       // @ts-ignore - we suppose it sync
-      Result.value(Task.unsafeRun(task));
+      Result.value(unsafeRun(task));
     for (let index = 0; index < limit; index += 1) {
       if (Option.isNone(currentState)) {
         break;

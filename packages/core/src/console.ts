@@ -18,7 +18,7 @@ export namespace Console {
    *
    * @example
    * ```typescript
-   * Task.unsafeRun(Console.debug('Hello', 'World !'));// > Hello World !
+   * unsafeRun(Console.debug('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -31,7 +31,7 @@ export namespace Console {
    *
    * @example
    * ```typescript
-   * Task.unsafeRun(Console.log('Hello', 'World !'));// > Hello World !
+   * unsafeRun(Console.log('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -44,7 +44,7 @@ export namespace Console {
    *
    * @example
    * ```typescript
-   * Task.unsafeRun(Console.info('Hello', 'World !'));// > Hello World !
+   * unsafeRun(Console.info('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -57,7 +57,7 @@ export namespace Console {
    *
    * @example
    * ```typescript
-   * Task.unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
+   * unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -70,7 +70,7 @@ export namespace Console {
    *
    * @example
    * ```typescript
-   * Task.unsafeRun(Console.error('Hello', 'World !'));// > Hello World !
+   * unsafeRun(Console.error('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */

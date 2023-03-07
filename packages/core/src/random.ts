@@ -50,7 +50,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const dummyGenerator = Random.Generator(() => Random.Value(1));
-   * Task.unsafeRun(dummyGenerator); // 1
+   * unsafeRun(dummyGenerator); // 1
    * ```
    * @category Constructor
    * @param getNextValue - an impure function that returns a new value
@@ -101,7 +101,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.number(-10, 10);
-   * Task.unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
+   * unsafeRun(next);// Result.Ok(F); where F is a floating number between -10 and 10
    * ```
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
@@ -124,7 +124,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.int(-10, 10);
-   * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
+   * unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
    * ```
    * @param min - the minimum inclusive bound for generated value
    * @param max - the maximum inclusive bound for generated value
@@ -143,7 +143,7 @@ export namespace Random {
    * @example
    * ```typescript
    * const next = Random.boolean(0.7);
-   * Task.unsafeRun(next);// Result.Ok(true|false);
+   * unsafeRun(next);// Result.Ok(true|false);
    * ```
    * @param trueWeight - the probability to obtain true
    */

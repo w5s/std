@@ -12,6 +12,7 @@ describe('index', () => {
         'assertType',
         'assign',
         'AsyncDisposable',
+        'Canceler',
         'Comparable',
         'Console',
         'constant',
@@ -36,10 +37,11 @@ describe('index', () => {
         'String',
         'Symbol',
         'Task',
-        'TaskCanceler',
         'throwError',
         'Time',
         'TimeDuration',
+        'unsafeRun',
+        'unsafeRunOk',
         'warning',
       ].sort()
     );
