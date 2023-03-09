@@ -1738,7 +1738,7 @@ __metadata:
     "@w5s/commitlint-config": 1.0.14
     "@w5s/conventional-changelog": 1.0.0-alpha.6
     "@w5s/cspell-config": 1.0.0
-    "@w5s/eslint-config": 1.0.0-alpha.55
+    "@w5s/eslint-config": 1.0.0
     "@w5s/ts-config": 1.0.0
     concurrently: 7.6.0
     cspell: 6.28.0
@@ -1798,24 +1798,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/dev@npm:^1.0.0-alpha.9":
-  version: 1.0.0-alpha.9
-  resolution: "@w5s/dev@npm:1.0.0-alpha.9"
+"@w5s/dev@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@w5s/dev@npm:1.0.0"
   dependencies:
     "@types/eslint": ^8.4.10
-  checksum: 814d6132646c5dd9b2500832bbaf726929c6222d57db8fd812a1fdec3c88890727bb5ac68be7a7044df47b20c89517cbcf8a715078161c323cf982729e40ddd0
+  checksum: 52c42ce495f48b51963ab25c476194ec6a1d5fe581d8dcb6b7771a54bee8617a3310f6a5887c5f136ea0b9f2d3ff39f2f0f34aa9de2079dfc5927288b60b4661
   languageName: node
   linkType: hard
 
-"@w5s/eslint-config@npm:1.0.0-alpha.55":
-  version: 1.0.0-alpha.55
-  resolution: "@w5s/eslint-config@npm:1.0.0-alpha.55"
+"@w5s/eslint-config@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@w5s/eslint-config@npm:1.0.0"
   dependencies:
     "@rushstack/eslint-patch": ^1.1.0
     "@typescript-eslint/eslint-plugin": ^5.0.0
     "@typescript-eslint/parser": ^5.0.0
-    "@w5s/dev": ^1.0.0-alpha.9
-    "@w5s/prettier-config": ^1.0.13
+    "@w5s/dev": ^1.0.0
+    "@w5s/prettier-config": ^1.0.14
     eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.0.0
     eslint-plugin-import: ^2.25.0
@@ -1837,7 +1837,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 6d8869d3719b5b13af7228833d227e9e93d09f0ac7ea2ccba893992545bb16ea78d52b4fa830eae04ba18402ea073b4eb9f1aeadd7e99242c62497102f171cb0
+  checksum: 32004353741a9aacb7e6f53d760f3d431f137352ae97045e3ffc53618ce95d87d2d3c0bc9ae946df9c76bc4213470bba8ea38459e80b3e7881993c04d7eb6134
   languageName: node
   linkType: hard
 
@@ -1896,15 +1896,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/prettier-config@npm:^1.0.13":
-  version: 1.0.13
-  resolution: "@w5s/prettier-config@npm:1.0.13"
+"@w5s/prettier-config@npm:^1.0.14":
+  version: 1.0.14
+  resolution: "@w5s/prettier-config@npm:1.0.14"
   peerDependencies:
     prettier: 2.x
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 21dcbd174cbc807422aa0bf4d9bbf9cf89397154116284ad2b5b6418e4f5386a7b79e46eef3f94da8cbf3a312452d9fbceb05a5969a14a1ac419eda778e8519c
+  checksum: 18b1ba303d5637d74e71e8a201f4de91a2857238666cdebbd4e8319f23f48b9a1c7397808cfb36a395c03ccf78f08a46499302e619ce4653cf624d8dfa40ee5c
   languageName: node
   linkType: hard
 
