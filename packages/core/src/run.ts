@@ -63,8 +63,10 @@ export namespace Canceler {
  * ```
  * @param task - the task to be run
  */
-export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Result<Value, Error>> {
-  const cancelerRef: Canceler = { current: undefined };
+export function unsafeRun<Value, Error>(
+  task: Task<Value, Error>,
+  cancelerRef: Canceler = Canceler()
+): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
   let resolveHandler = (result: Result<Value, Error>) => {
     returnValue = result;
@@ -102,8 +104,8 @@ export function unsafeRun<Value, Error>(task: Task<Value, Error>): Awaitable<Res
  * ```
  * @param task - the task to be run
  */
-export function unsafeRunOk<Value>(task: Task<Value, unknown>): Awaitable<Value> {
-  const promiseOrValue = unsafeRun(task);
+export function unsafeRunOk<Value>(task: Task<Value, unknown>, cancelerRef?: Canceler): Awaitable<Value> {
+  const promiseOrValue = unsafeRun(task, cancelerRef);
   // @ts-ignore - we assume PromiseLike.then returns a Promise
   // eslint-disable-next-line promise/prefer-await-to-then
   return isPromise(promiseOrValue) ? promiseOrValue.then(unsafeResultValue) : unsafeResultValue(promiseOrValue);

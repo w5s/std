@@ -93,6 +93,12 @@ describe('unsafeRun', () => {
     const task = Task(() => Promise.reject(new Error('TestError')));
     await expect(unsafeRun(task)).rejects.toEqual(new Error('TestError'));
   });
+  it('should handle canceler', () => {
+    const canceler = Canceler();
+    const task = { taskRun: vi.fn() };
+    void unsafeRun(task, canceler);
+    expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler);
+  });
 });
 describe('unsafeRunOk', () => {
   it('should run throwing task', () => {
@@ -113,5 +119,11 @@ describe('unsafeRunOk', () => {
   it('should run rejected task', async () => {
     const task = Task(() => Promise.reject(new Error('TestError')));
     await expect(unsafeRunOk(task)).rejects.toEqual(new Error('TestError'));
+  });
+  it('should handle canceler', () => {
+    const canceler = Canceler();
+    const task = { taskRun: vi.fn() };
+    void unsafeRunOk(task, canceler);
+    expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler);
   });
 });
