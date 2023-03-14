@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { ArgumentError, Result } from '@w5s/core';
+import { describeComparable } from '@w5s/core/lib/testing.js';
 import { Currency } from './currency.js';
-import { describeComparable } from './describeComparable.js';
 import { Money } from './money.js';
 
 describe('Money', () => {
