@@ -52,7 +52,7 @@ npm install @w5s/core
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result, Console, Task } from '@w5s/core';
+import { Result, Console, unsafeRun } from '@w5s/core';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);

@@ -23,7 +23,7 @@ npm install @w5s/http
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
-import { Console, Task, assertNever } from '@w5s/core';
+import { Console, Task, assertNever, unsafeRun } from '@w5s/core';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
