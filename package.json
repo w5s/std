@@ -101,7 +101,7 @@
     "markdown-magic-subpackage-list": "1.1.2",
     "prettier": "2.8.4",
     "turbo": "1.8.3",
-    "typedoc": "0.23.26",
+    "typedoc": "0.23.27",
     "typescript": "4.9.5",
     "vite": "latest",
     "vitest": "latest"
