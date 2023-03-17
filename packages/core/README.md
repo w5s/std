@@ -42,7 +42,7 @@ npm install @w5s/core
 | `setTimeout(fn, ms)`                       | `Task.andThen(Time.delay(ms), fn)`                       | `setTimeout` is impure, create a task that will run after `Time.delay`.                                                                                                                                                                 |
 | `Date.now`                       | `Time.now`                       | `Date.now` is impure, use `Time.now` that is a `Task`.                                                                                                                                                                 |
 | `console.debug`                  | `Console.debug`                  | `console.debug` is impure, use `Console.debug` that is a `Task`.                                                                                                                                                       |
-| `Math.random`                    | `Random.number`                  | `Math.random` is impure, use `Random.number` that is a `Task`.                                                                                                                                                                 |
+| `Math.random`                    | `randomNumber`                  | `Math.random` is impure, use `randomNumber` that is a `Task`.                                                                                                                                                                 |
 | `UUID`, ...                      | `Task`                      | More impure function, wrap them in a `Task()`                                                                                                                                                                      |
 | N/A                            | `Int`                            | A tagged type that narrows `number` to only the safe integer values                                                                                                                                                         |
 | `[].map`, `[].filter`, ...       | `Array.map`, `Array.filter`, ...  | Array module contains all immutable operations on arrays.                                                                                                                                                         |
@@ -94,11 +94,8 @@ void unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
 <!-- AUTO-GENERATED-CONTENT:END -->
 [license-url]: ../../LICENSE
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
-[issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[sources-url]: ${repository.url}) -->
-[sources-url]: git@github.com:w5s/std.git
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[homepage-url]: ${homepage}) -->
-[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme
 <!-- AUTO-GENERATED-CONTENT:END -->

@@ -29,7 +29,6 @@ describe('index', () => {
         'JSON',
         'Math',
         'Option',
-        'Random',
         'Record',
         'Ref',
         'Result',
