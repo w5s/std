@@ -10,6 +10,6 @@
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money package management
 * [@w5s/playground](packages/playground) - Examples
+* [@w5s/random](packages/random) - Random module (UUID, number)
 * [@w5s/system](packages/system) - System module for w5s
-* [@w5s/uuid](packages/uuid) - UUID generator
 <!-- AUTO-GENERATED-CONTENT:END -->

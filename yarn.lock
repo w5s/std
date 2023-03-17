@@ -1920,7 +1920,7 @@ __metadata:
   dependencies:
     "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
-    "@w5s/uuid": ^1.0.0-alpha.0
+    "@w5s/random": ^1.0.0-alpha.0
     vite: latest
     vitest: latest
   peerDependencies:
@@ -1949,7 +1949,7 @@ __metadata:
     "@w5s/application": ^1.0.0-alpha.0
     "@w5s/core": ^1.0.0-alpha.0
     "@w5s/http": ^1.0.0-alpha.0
-    "@w5s/uuid": ^1.0.0-alpha.0
+    "@w5s/random": ^1.0.0-alpha.0
     vite: latest
     vitest: latest
   peerDependencies:
@@ -1968,6 +1968,18 @@ __metadata:
   checksum: 18b1ba303d5637d74e71e8a201f4de91a2857238666cdebbd4e8319f23f48b9a1c7397808cfb36a395c03ccf78f08a46499302e619ce4653cf624d8dfa40ee5c
   languageName: node
   linkType: hard
+
+"@w5s/random@^1.0.0-alpha.0, @w5s/random@workspace:packages/random":
+  version: 0.0.0-use.local
+  resolution: "@w5s/random@workspace:packages/random"
+  dependencies:
+    "@w5s/core": ^1.0.0-alpha.0
+    vite: latest
+    vitest: latest
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0
+  languageName: unknown
+  linkType: soft
 
 "@w5s/system@workspace:packages/system":
   version: 0.0.0-use.local
@@ -1993,18 +2005,6 @@ __metadata:
   checksum: 8ebb536264c5e1d99b902caad0a14b621e4b7c6da7cab5d05c9d08acb19f47f798b94a3069e5fb59eef0c8a445b15cb839970ddd47ebc2ee221de0bec5b01a3b
   languageName: node
   linkType: hard
-
-"@w5s/uuid@^1.0.0-alpha.0, @w5s/uuid@workspace:packages/uuid":
-  version: 0.0.0-use.local
-  resolution: "@w5s/uuid@workspace:packages/uuid"
-  dependencies:
-    "@w5s/core": ^1.0.0-alpha.0
-    vite: latest
-    vitest: latest
-  peerDependencies:
-    typescript: ^3.8.0 || ^4.0.0
-  languageName: unknown
-  linkType: soft
 
 "@yarnpkg/lockfile@npm:^1.1.0":
   version: 1.1.0

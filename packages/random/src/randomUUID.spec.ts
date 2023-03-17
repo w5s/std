@@ -1,7 +1,7 @@
 import { Result, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
-import { UUID } from './data.js';
-import { randomUUID } from './random.js';
+import { UUID } from './uuid.js';
+import { randomUUID } from './randomUUID.js';
 
 describe('randomUUID', () => {
   it('should return a valid UUID', async () => {

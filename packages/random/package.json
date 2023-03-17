@@ -1,21 +1,22 @@
 {
-  "name": "@w5s/uuid",
+  "name": "@w5s/random",
   "version": "1.0.0-alpha.0",
-  "description": "UUID generator",
+  "description": "Random module (UUID, number)",
   "keywords": [
     "fp",
     "functional",
     "task",
+    "random",
     "uuid"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/uuid#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/random#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/uuid"
+    "directory": "packages/random"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

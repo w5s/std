@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { UUID } from './data.js';
+import { UUID } from './uuid.js';
 
 describe('UUID', () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669';

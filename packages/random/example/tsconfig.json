@@ -5,7 +5,7 @@
     "noEmit": true,
     "paths": {
       "@w5s/core": ["./core"],
-      "@w5s/uuid": ["./uuid"]
+      "@w5s/random": ["./random"]
     }
   },
   "include": ["."]

@@ -1,5 +1,6 @@
-import { type Ref, type Task, type Option, invariant } from '@w5s/core';
-import type { UUID } from './data.js';
+import type { Ref, Task, Option } from '@w5s/core';
+import { invariant } from '@w5s/core/lib/invariant.js';
+import type { UUID } from './uuid.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const cryptoModule: Option<Pick<Crypto, 'randomUUID'>> =

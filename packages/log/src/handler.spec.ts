@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Task, unsafeRunOk } from '@w5s/core';
-import { UUID } from '@w5s/uuid';
+import { UUID } from '@w5s/random';
 import { LogHandler } from './handler.js';
 import { LogLevel } from './level.js';
 import { LogRecord } from './record.js';

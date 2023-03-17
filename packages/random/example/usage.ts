@@ -1,4 +1,4 @@
-import { randomUUID } from '@w5s/uuid';
+import { randomUUID } from '@w5s/random';
 import { Task, unsafeRun } from '@w5s/core';
 
 function createUser(name: string) {
