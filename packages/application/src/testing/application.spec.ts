@@ -22,9 +22,8 @@ describe('ApplicationTest', () => {
     });
   });
   it('should return a reference to store', () => {
-    const store = Ref({});
     const id = 'test-app';
-    const app = ApplicationTest({ id, store, foo: 1, bar: 2 });
+    const app = ApplicationTest({ id, foo: 1, bar: 2 });
     expect(app.store.current).toEqual({
       'test-app': {
         configuration: {
@@ -33,5 +32,12 @@ describe('ApplicationTest', () => {
         },
       },
     });
+  });
+
+  it('should generate a random app id if omitted', () => {
+    const store = Ref({});
+    const app = ApplicationTest({ store });
+    expect(app.id).toMatch(/^app-/);
+    expect(app.id).not.toBe(ApplicationTest({ store }).id);
   });
 });

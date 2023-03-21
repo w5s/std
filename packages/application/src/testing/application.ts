@@ -1,6 +1,8 @@
 import type { Ref, Record } from '@w5s/core';
 import { Application, type ApplicationState } from '../application.js';
 
+const generateAppId = () => `app-${Math.round(Math.random() * 2 ** 32).toString(36)}`;
+
 export interface ApplicationTest<Configuration = Record<string | symbol, never>> extends Application<Configuration> {
   /**
    * Ref to store
@@ -14,7 +16,7 @@ export interface ApplicationTest<Configuration = Record<string | symbol, never>>
  * @example
  * ```ts
  * const app = ApplicationTest({
- *   // id: 'some-id',
+ *   // id: 'some-custom-id',
  *   // initialConfiguration: {}
  * });
  * console.log(app.current);// {}
@@ -25,7 +27,7 @@ export interface ApplicationTest<Configuration = Record<string | symbol, never>>
 export function ApplicationTest<Configuration extends Record<string | symbol, unknown>>(
   properties: ApplicationTest.Option & Configuration
 ): ApplicationTest<Omit<Configuration, keyof ApplicationTest.Option>> {
-  const { id = 'app', store = { current: {} }, ...otherProperties } = properties;
+  const { id = generateAppId(), store = { current: {} }, ...otherProperties } = properties;
 
   return Object.assign(
     Application<Configuration>(
