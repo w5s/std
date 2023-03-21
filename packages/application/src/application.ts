@@ -54,18 +54,15 @@ export interface Application<Configuration = EmptyObject> extends Ref<Applicatio
 export function Application<Configuration extends AnyObject>(
   properties: Application.Option & Configuration
 ): Application<Omit<Configuration, keyof Application.Option>> {
-  const { id, target, ...initialConfiguration } = properties;
+  const { id, store, ...initialConfiguration } = properties;
   const initialState: ApplicationState = Object.freeze({
     configuration: initialConfiguration,
   });
 
-  return Object.assign(
-    target == null ? useRef(`application/${id}`, initialState) : property(target, id, initialState),
-    {
-      id: id as ApplicationId,
-      initialConfiguration,
-    }
-  );
+  return Object.assign(store == null ? useRef(`application/${id}`, initialState) : property(store, id, initialState), {
+    id: id as ApplicationId,
+    initialConfiguration,
+  });
 }
 
 export namespace Application {
@@ -78,7 +75,7 @@ export namespace Application {
     /**
      * Target store where application will be registered
      */
-    target?: Ref<Record<string, ApplicationState>>;
+    store?: Ref<Record<string, ApplicationState>>;
   };
 
   /**

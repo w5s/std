@@ -7,7 +7,7 @@ describe('Application', () => {
   const generateId = () => Math.round(Math.random() * 2 ** 32).toString(36);
   const generateAppId = () => `test-app-${generateId()}`;
   const _target = Ref({});
-  const _app = Application({ id: 'test-app', target: _target });
+  const _app = Application({ id: 'test-app', store: _target });
 
   it('should setup globalStorage', () => {
     const id = `test-app-${generateId()}`;
@@ -26,7 +26,7 @@ describe('Application', () => {
   it('should setup target if provided', () => {
     const id = generateAppId();
     const target = Ref({});
-    Application({ id, foo: 'bar', target });
+    Application({ id, foo: 'bar', store: target });
     expect(target.current).toEqual({
       [id]: {
         configuration: { foo: 'bar' },
@@ -36,7 +36,7 @@ describe('Application', () => {
   it('should return a Ref to state', () => {
     const target = Ref({});
     const id = generateAppId();
-    expect(Application({ id, target, foo: 1, bar: 2 })).toEqual({
+    expect(Application({ id, store: target, foo: 1, bar: 2 })).toEqual({
       id,
       initialConfiguration: {
         foo: 1,
@@ -69,7 +69,7 @@ describe('Application', () => {
   it('should return unchanged initialConfiguration', () => {
     const target = Ref({});
     const id = generateAppId();
-    const appWithConfiguration = Application({ id, target, foo: 1, bar: 2 });
+    const appWithConfiguration = Application({ id, store: target, foo: 1, bar: 2 });
     expect(appWithConfiguration.initialConfiguration).toEqual({
       foo: 1,
       bar: 2,
@@ -80,7 +80,7 @@ describe('Application', () => {
     it('should return configuration', () => {
       const target = Ref({});
       const id = generateAppId();
-      const app = Application({ id, target, foo: 1 });
+      const app = Application({ id, store: target, foo: 1 });
       const value = Application.get(app, 'foo');
       expect(value).toBe(1);
     });
@@ -89,7 +89,7 @@ describe('Application', () => {
     it('should set configuration', () => {
       const target = Ref({});
       const id = generateAppId();
-      const app = Application({ id, target, foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' });
+      const app = Application({ id, store: target, foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' });
       app.current = {
         ...app.current,
         state: true,
