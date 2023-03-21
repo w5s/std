@@ -90,7 +90,7 @@
     "@w5s/commitlint-config": "1.0.15",
     "@w5s/conventional-changelog": "1.0.0-alpha.6",
     "@w5s/cspell-config": "1.0.3",
-    "@w5s/eslint-config": "1.0.1",
+    "@w5s/eslint-config": "1.0.3",
     "@w5s/ts-config": "1.0.1",
     "concurrently": "7.6.0",
     "cspell": "6.30.2",
