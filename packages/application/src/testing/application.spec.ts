@@ -12,10 +12,12 @@ describe('ApplicationTest', () => {
         foo: 1,
         bar: 2,
       },
-      current: {
-        configuration: {
-          foo: 1,
-          bar: 2,
+      state: {
+        current: {
+          configuration: {
+            foo: 1,
+            bar: 2,
+          },
         },
       },
       store,

@@ -23,7 +23,7 @@ export interface ApplicationState extends AnyObject {
 /**
  * Application instance type
  */
-export interface Application<Configuration = EmptyObject> extends Ref<ApplicationState> {
+export interface Application<Configuration = EmptyObject> {
   /**
    * Application id
    */
@@ -33,6 +33,11 @@ export interface Application<Configuration = EmptyObject> extends Ref<Applicatio
    * Application initial configuration
    */
   readonly initialConfiguration: Configuration;
+
+  /**
+   * Reference to current application state
+   */
+  readonly state: Ref<ApplicationState>;
 }
 
 /**
@@ -59,10 +64,11 @@ export function Application<Configuration extends AnyObject>(
     configuration: initialConfiguration,
   });
 
-  return Object.assign(store == null ? useRef(`application/${id}`, initialState) : property(store, id, initialState), {
+  return {
     id: id as ApplicationId,
     initialConfiguration,
-  });
+    state: store == null ? useRef(`application/${id}`, initialState) : property(store, id, initialState),
+  };
 }
 
 export namespace Application {
@@ -98,7 +104,7 @@ export namespace Application {
   ): Configuration[Key] {
     // @ts-ignore Wrong typing
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return app.current.configuration[key];
+    return app.state.current.configuration[key];
   }
 
   /**
@@ -119,8 +125,9 @@ export namespace Application {
    * @param patch - Configuration key
    */
   export function configure<C>(app: Application<C>, patch: Partial<C>): void {
-    const { current } = app;
-    app.current = {
+    const { state } = app;
+    const { current } = state;
+    state.current = {
       ...current,
       configuration: {
         ...current.configuration,

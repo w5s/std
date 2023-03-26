@@ -42,20 +42,22 @@ describe('Application', () => {
         foo: 1,
         bar: 2,
       },
-      current: {
-        configuration: {
-          foo: 1,
-          bar: 2,
+      state: {
+        current: {
+          configuration: {
+            foo: 1,
+            bar: 2,
+          },
         },
       },
     });
   });
   it('should store state in applicationStore', () => {
-    _app.current = {
-      ..._app.current,
+    _app.state.current = {
+      ..._app.state.current,
       foo: true,
     };
-    expect(_app.current).toEqual({
+    expect(_app.state.current).toEqual({
       configuration: {},
       foo: true,
     });
@@ -90,13 +92,13 @@ describe('Application', () => {
       const target = Ref({});
       const id = generateAppId();
       const app = Application({ id, store: target, foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' });
-      app.current = {
-        ...app.current,
+      app.state.current = {
+        ...app.state.current,
         state: true,
       };
       Application.configure(app, { foo: 'foo_value_ext', bar: 'bar_value_ext' });
 
-      expect(app.current).toEqual({
+      expect(app.state.current).toEqual({
         configuration: {
           bar: 'bar_value_ext',
           baz: 'baz_value',
