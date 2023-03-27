@@ -1,9 +1,8 @@
-import type { Ref, Record, Tag } from '@w5s/core';
+import type { Ref, Record, Tag, EmptyObject } from '@w5s/core';
 import { useRef } from './globalStorage.js';
 import { property } from './property.js';
 
 type AnyObject = Record<string | symbol, unknown>;
-type EmptyObject = Record<string | symbol, never>;
 
 /**
  * Application id type
@@ -32,7 +31,7 @@ export interface Application<Configuration = EmptyObject> {
   /**
    * Application initial configuration
    */
-  readonly initialConfiguration: Configuration;
+  readonly configuration: Configuration;
 
   /**
    * Reference to current application state
@@ -47,6 +46,9 @@ export interface Application<Configuration = EmptyObject> {
  * ```ts
  * const app = Application({
  *   id: 'my-app'
+ *   configuration: {
+ *     foo: 1,
+ *   }
  * });
  * app.current = {
  *   ...app.current,
@@ -56,27 +58,37 @@ export interface Application<Configuration = EmptyObject> {
  * ```
  * @param properties
  */
-export function Application<Configuration extends AnyObject>(
-  properties: Application.Option & Configuration
-): Application<Omit<Configuration, keyof Application.Option>> {
-  const { id, store, ...initialConfiguration } = properties;
+export function Application<Configuration extends AnyObject = EmptyObject>(
+  properties: Application.Options<Configuration>
+): Application<Configuration> {
+  const {
+    id,
+    store,
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    configuration = {} as Configuration,
+  } = properties;
   const initialState: ApplicationState = Object.freeze({
-    configuration: initialConfiguration,
+    configuration,
   });
 
   return {
     id: id as ApplicationId,
-    initialConfiguration,
+    configuration,
     state: store == null ? useRef(`application/${id}`, initialState) : property(store, id, initialState),
   };
 }
 
 export namespace Application {
-  export type Option = {
+  export type Options<Configuration extends AnyObject> = {
     /**
      * Application id
      */
     id: string;
+
+    /**
+     * Application initial configuration
+     */
+    configuration?: Configuration;
 
     /**
      * Target store where application will be registered

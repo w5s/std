@@ -7,11 +7,11 @@ describe('Application', () => {
   const generateId = () => Math.round(Math.random() * 2 ** 32).toString(36);
   const generateAppId = () => `test-app-${generateId()}`;
   const _target = Ref({});
-  const _app = Application({ id: 'test-app', store: _target });
+  const _app = Application({ id: 'test-app', configuration: {}, store: _target });
 
   it('should setup globalStorage', () => {
     const id = `test-app-${generateId()}`;
-    Application({ id, foo: 'bar' });
+    Application({ id, configuration: { foo: 'bar' } });
     expect(globalStorage).toEqual(
       new Map([
         [
@@ -26,7 +26,7 @@ describe('Application', () => {
   it('should setup target if provided', () => {
     const id = generateAppId();
     const target = Ref({});
-    Application({ id, foo: 'bar', store: target });
+    Application({ id, configuration: { foo: 'bar' }, store: target });
     expect(target.current).toEqual({
       [id]: {
         configuration: { foo: 'bar' },
@@ -36,9 +36,9 @@ describe('Application', () => {
   it('should return a Ref to state', () => {
     const target = Ref({});
     const id = generateAppId();
-    expect(Application({ id, store: target, foo: 1, bar: 2 })).toEqual({
+    expect(Application({ id, store: target, configuration: { foo: 1, bar: 2 } })).toEqual({
       id,
-      initialConfiguration: {
+      configuration: {
         foo: 1,
         bar: 2,
       },
@@ -68,11 +68,11 @@ describe('Application', () => {
       },
     });
   });
-  it('should return unchanged initialConfiguration', () => {
+  it('should return unchanged configuration', () => {
     const target = Ref({});
     const id = generateAppId();
-    const appWithConfiguration = Application({ id, store: target, foo: 1, bar: 2 });
-    expect(appWithConfiguration.initialConfiguration).toEqual({
+    const appWithConfiguration = Application({ id, store: target, configuration: { foo: 1, bar: 2 } });
+    expect(appWithConfiguration.configuration).toEqual({
       foo: 1,
       bar: 2,
     });
@@ -82,7 +82,7 @@ describe('Application', () => {
     it('should return configuration', () => {
       const target = Ref({});
       const id = generateAppId();
-      const app = Application({ id, store: target, foo: 1 });
+      const app = Application({ id, store: target, configuration: { foo: 1 } });
       const value = Application.get(app, 'foo');
       expect(value).toBe(1);
     });
@@ -91,7 +91,11 @@ describe('Application', () => {
     it('should set configuration', () => {
       const target = Ref({});
       const id = generateAppId();
-      const app = Application({ id, store: target, foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' });
+      const app = Application({
+        id,
+        store: target,
+        configuration: { foo: 'foo_value', bar: 'bar_value', baz: 'baz_value' },
+      });
       app.state.current = {
         ...app.state.current,
         state: true,

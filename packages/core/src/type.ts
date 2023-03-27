@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-types */
 
 /**
+ * An empty object
+ */
+export type EmptyObject = Record<string | symbol, never>;
+
+/**
  * A type that can be either `undefined`, `null`, or `T`
  */
 export type Nullable<T = never> = null | undefined | T;

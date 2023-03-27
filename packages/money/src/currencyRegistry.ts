@@ -29,8 +29,8 @@ export interface CurrencyRegistry {
   readonly getByCode: (currencyCode: Currency['code']) => Option<Currency>;
 }
 
-export function CurrencyRegistry(_application: Application): CurrencyRegistry {
-  const codeIndex = property<Record<string, Currency>>(_application, 'currency', Object.freeze({}));
+export function CurrencyRegistry(app: Application): CurrencyRegistry {
+  const codeIndex = property<Record<string, Currency>>(app.state, 'currency', Object.freeze({}));
 
   function add(currency: Currency): void {
     codeIndex.current = {

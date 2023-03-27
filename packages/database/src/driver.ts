@@ -6,7 +6,7 @@ import { DatabaseError } from './error.js';
 import { application } from './application.js';
 
 export namespace DatabaseDriver {
-  const registry = property<Record<string, any>>(application, 'registry', {});
+  const registry = property<Record<string, any>>(application.state, 'registry', {});
 
   function notFound(name: string): never {
     throw new ReferenceError(`${name} driver not found`);

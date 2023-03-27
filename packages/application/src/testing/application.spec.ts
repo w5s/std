@@ -6,9 +6,9 @@ describe('ApplicationTest', () => {
   it('should return new application', () => {
     const store = Ref({});
     const id = 'test-app';
-    expect(ApplicationTest({ id, store, foo: 1, bar: 2 })).toEqual({
+    expect(ApplicationTest({ id, store, configuration: { foo: 1, bar: 2 } })).toEqual({
       id,
-      initialConfiguration: {
+      configuration: {
         foo: 1,
         bar: 2,
       },
@@ -25,7 +25,7 @@ describe('ApplicationTest', () => {
   });
   it('should return a reference to store', () => {
     const id = 'test-app';
-    const app = ApplicationTest({ id, foo: 1, bar: 2 });
+    const app = ApplicationTest({ id, configuration: { foo: 1, bar: 2 } });
     expect(app.store.current).toEqual({
       'test-app': {
         configuration: {

@@ -1,9 +1,9 @@
-import type { Ref, Record } from '@w5s/core';
+import type { Ref, Record, EmptyObject } from '@w5s/core';
 import { Application, type ApplicationState } from '../application.js';
 
 const generateAppId = () => `app-${Math.round(Math.random() * 2 ** 32).toString(36)}`;
 
-export interface ApplicationTest<Configuration = Record<string | symbol, never>> extends Application<Configuration> {
+export interface ApplicationTest<Configuration = EmptyObject> extends Application<Configuration> {
   /**
    * Ref to store
    */
@@ -17,37 +17,23 @@ export interface ApplicationTest<Configuration = Record<string | symbol, never>>
  * ```ts
  * const app = ApplicationTest({
  *   // id: 'some-custom-id',
- *   // initialConfiguration: {}
+ *   // configuration: {}
  * });
  * console.log(app.current);// {}
  * console.log(app.store);// { ['some-id']:  }
  * ```
  * @param properties
  */
-export function ApplicationTest<Configuration extends Record<string | symbol, unknown>>(
-  properties: ApplicationTest.Option & Configuration
-): ApplicationTest<Omit<Configuration, keyof ApplicationTest.Option>> {
-  const { id = generateAppId(), store = { current: {} }, ...otherProperties } = properties;
+export function ApplicationTest<Configuration extends Record<string | symbol, unknown> = EmptyObject>(
+  properties?: ApplicationTest.Options<Configuration>
+): ApplicationTest<Configuration> {
+  const { id = generateAppId(), store = { current: {} }, configuration } = properties ?? {};
 
-  return Object.assign(
-    Application<Configuration>(
-      // @ts-ignore
-      { id, store, ...otherProperties }
-    ),
-    { store }
-  );
+  return Object.assign(Application<Configuration>({ id, store, configuration }), { store });
 }
 
 export namespace ApplicationTest {
-  export type Option = {
-    /**
-     * Application id
-     */
-    id?: string;
-
-    /**
-     * Target store where application will be registered
-     */
-    store?: Ref<Record<string, ApplicationState>>;
-  };
+  export type Options<Configuration extends Record<string | symbol, unknown>> = Partial<
+    Application.Options<Configuration>
+  >;
 }

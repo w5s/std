@@ -1,16 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { Ref } from '@w5s/core';
-import { Application } from '@w5s/application';
+import { ApplicationTest } from '@w5s/application/lib/testing.js';
 import { Currency } from './currency.js';
 import { CurrencyRegistry } from './currencyRegistry.js';
 
 describe('CurrencyRegistry', () => {
-  const target = Ref({});
   const anyCurrency = Currency({ name: 'TEST', code: 'TEST', symbol: 'T' });
 
   describe('.getByCode() / .add()', () => {
     it('should store data', () => {
-      const app = Application({ id: 'test', target });
+      const app = ApplicationTest();
       const registry = CurrencyRegistry(app);
 
       expect(registry.getByCode(anyCurrency.code)).toBe(undefined);
