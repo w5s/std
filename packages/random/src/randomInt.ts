@@ -12,12 +12,9 @@ import { randomNumber } from './randomNumber.js';
  * ```
  * @param min - the minimum inclusive bound for generated value
  * @param max - the maximum inclusive bound for generated value
+ * @param generator - a custom optional random number generator
  */
-export function randomInt(
-  min: Int,
-  max: Int,
-  generator: RandomGenerator = RandomGenerator.defaultRef.current
-): Task<Int, never> {
+export function randomInt(min: Int, max: Int, generator?: RandomGenerator): Task<Int, never> {
   return {
     taskRun: (resolveTask, rejectTask, cancelerRef) =>
       randomNumber(min, max, generator).taskRun(

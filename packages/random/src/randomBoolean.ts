@@ -10,13 +10,15 @@ import { RandomGenerator } from './randomGenerator.js';
  * unsafeRun(next);// Result.Ok(true|false);
  * ```
  * @param trueWeight - the probability to obtain true
+ * @param generator - a custom optional random number generator
  */
-export function randomBoolean(
-  trueWeight = 0.5,
-  generator: RandomGenerator = RandomGenerator.defaultRef.current
-): Task<boolean, never> {
+export function randomBoolean(trueWeight = 0.5, generator?: RandomGenerator): Task<boolean, never> {
   return {
     taskRun: (resolveTask, rejectTask, cancelerRef) =>
-      generator.taskRun((value) => resolveTask(value > trueWeight), rejectTask, cancelerRef),
+      (generator ?? RandomGenerator.defaultRef.current).taskRun(
+        (value) => resolveTask(value > trueWeight),
+        rejectTask,
+        cancelerRef
+      ),
   };
 }

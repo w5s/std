@@ -11,14 +11,15 @@ import { RandomGenerator } from './randomGenerator.js';
  * ```
  * @param min - the minimum inclusive bound for generated value
  * @param max - the maximum inclusive bound for generated value
+ * @param generator - a custom optional random number generator
  */
-export function randomNumber(
-  min: number,
-  max: number,
-  generator: RandomGenerator = RandomGenerator.defaultRef.current
-): Task<number, never> {
+export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
   return {
     taskRun: (resolveTask, rejectTask, cancelerRef) =>
-      generator.taskRun((value) => resolveTask(min + (max - min) * value), rejectTask, cancelerRef),
+      (generator ?? RandomGenerator.defaultRef.current).taskRun(
+        (value) => resolveTask(min + (max - min) * value),
+        rejectTask,
+        cancelerRef
+      ),
   };
 }
