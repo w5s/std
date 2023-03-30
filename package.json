@@ -102,7 +102,7 @@
     "prettier": "2.8.7",
     "turbo": "1.8.8",
     "typedoc": "0.23.28",
-    "typescript": "5.0.2",
+    "typescript": "5.0.3",
     "vite": "latest",
     "vitest": "latest"
   },
