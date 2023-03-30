@@ -1,6 +1,8 @@
 import { invariant } from '@w5s/core/lib/invariant.js';
 import type { Option, Ref, Task } from '@w5s/core';
+import { property } from '@w5s/application';
 import type { RandomValue } from './randomValue.js';
+import { application } from './application.js';
 
 export interface RandomGenerator extends Task<RandomValue, never> {}
 
@@ -48,9 +50,13 @@ export namespace RandomGenerator {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     return (cryptoBuffer[0]! / cryptoDenominator) as RandomValue;
   });
-
-  /**
-   * Default generator
-   */
-  export const defaultRef: Ref<RandomGenerator> = { current: crypto };
 }
+
+/**
+ * Default generator
+ */
+export const defaultRandomGenerator: Ref<RandomGenerator> = property(
+  application.state,
+  'randomGenerator',
+  RandomGenerator.crypto
+);

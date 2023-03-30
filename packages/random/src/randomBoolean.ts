@@ -1,5 +1,5 @@
 import type { Task } from '@w5s/core';
-import { RandomGenerator } from './randomGenerator.js';
+import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 /**
  * Return a Task that will generate booleans.
@@ -15,7 +15,7 @@ import { RandomGenerator } from './randomGenerator.js';
 export function randomBoolean(trueWeight = 0.5, generator?: RandomGenerator): Task<boolean, never> {
   return {
     taskRun: (resolveTask, rejectTask, cancelerRef) =>
-      (generator ?? RandomGenerator.defaultRef.current).taskRun(
+      (generator ?? defaultRandomGenerator.current).taskRun(
         (value) => resolveTask(value > trueWeight),
         rejectTask,
         cancelerRef

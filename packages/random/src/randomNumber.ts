@@ -1,5 +1,5 @@
 import type { Task } from '@w5s/core';
-import { RandomGenerator } from './randomGenerator.js';
+import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 /**
  * Return a Task that will generate floating numbers between [`min`, `max`].
@@ -16,7 +16,7 @@ import { RandomGenerator } from './randomGenerator.js';
 export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
   return {
     taskRun: (resolveTask, rejectTask, cancelerRef) =>
-      (generator ?? RandomGenerator.defaultRef.current).taskRun(
+      (generator ?? defaultRandomGenerator.current).taskRun(
         (value) => resolveTask(min + (max - min) * value),
         rejectTask,
         cancelerRef

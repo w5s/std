@@ -1,6 +1,6 @@
 import { Int, Result, unsafeRun } from '@w5s/core';
 import { describe, expect, it, vi } from 'vitest';
-import { RandomGenerator } from './randomGenerator.js';
+import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 import { randomInt } from './randomInt.js';
 import { RandomValue } from './randomValue.js';
 
@@ -9,7 +9,7 @@ describe('randomInt', () => {
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
-    vi.spyOn(RandomGenerator.defaultRef.current, 'taskRun').mockImplementation((resolve) =>
+    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation((resolve) =>
       resolve(RandomValue(nextRandom))
     );
     expect(unsafeRun(randomInt(Int(-10), Int(10)))).toEqual(Result.Ok(-8));

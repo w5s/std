@@ -1,6 +1,6 @@
 import { Result, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
-import { RandomGenerator } from './randomGenerator.js';
+import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 describe('RandomGenerator', () => {
   describe('.unsafe', () => {
@@ -15,9 +15,9 @@ describe('RandomGenerator', () => {
       expect(unsafeRun(RandomGenerator.crypto)).toEqual(Result.Ok(expect.any(Number)));
     });
   });
-  describe('defaultRef', () => {
-    it('should be unsafeGenerator', async () => {
-      expect(RandomGenerator.defaultRef).toEqual({ current: RandomGenerator.crypto });
-    });
+});
+describe('defaultRandomGenerator', () => {
+  it('should be unsafeGenerator', async () => {
+    expect(defaultRandomGenerator).toEqual({ current: RandomGenerator.crypto });
   });
 });
