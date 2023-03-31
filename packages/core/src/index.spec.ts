@@ -27,6 +27,7 @@ describe('index', () => {
         'invariant',
         'Iterable',
         'JSON',
+        'lazy',
         'Math',
         'Option',
         'Record',

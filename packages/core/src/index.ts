@@ -10,6 +10,7 @@ export * from './equal.js';
 export * from './integer.js';
 export * from './invariant.js';
 export * from './iterable.js';
+export * from './lazy.js';
 export * from './json.js';
 export * from './math.js';
 export * from './option.js';
