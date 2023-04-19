@@ -1924,7 +1924,7 @@ __metadata:
     "@w5s/conventional-changelog": 1.0.4
     "@w5s/cspell-config": 1.0.5
     "@w5s/eslint-config": 1.0.4
-    "@w5s/ts-config": 1.0.1
+    "@w5s/ts-config": 1.0.2
     concurrently: 8.0.1
     cspell: 6.31.1
     eslint: 8.38.0
@@ -2119,15 +2119,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@w5s/ts-config@npm:1.0.1"
+"@w5s/ts-config@npm:1.0.2":
+  version: 1.0.2
+  resolution: "@w5s/ts-config@npm:1.0.2"
   peerDependencies:
     typescript: ">=5.x"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 15ae8f0471c9c3ca96f6b37098e84285be55ecfc578427430e6cf146161be00f9d30370ad5ff297264b50e307f3da1b72c61d45277258254de27b00957d5f3e4
+  checksum: 164f5c8a84f9654e0fad2bb6134fc0c8c6a8334425e60cda318a4c6730bc1bff9c548cf234e5be01ca7686048a5273886f0cac89849ce815b6158041c91a0732
   languageName: node
   linkType: hard
 
