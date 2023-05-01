@@ -106,7 +106,7 @@
     "vite": "latest",
     "vitest": "latest"
   },
-  "packageManager": "yarn@3.5.0",
+  "packageManager": "yarn@3.5.1",
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=6.0.0",
