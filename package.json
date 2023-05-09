@@ -89,7 +89,7 @@
     "@types/node": "17.0.45",
     "@w5s/commitlint-config": "1.0.21",
     "@w5s/conventional-changelog": "1.0.7",
-    "@w5s/cspell-config": "1.0.6",
+    "@w5s/cspell-config": "1.0.7",
     "@w5s/eslint-config": "1.0.5",
     "@w5s/ts-config": "1.0.2",
     "concurrently": "8.0.1",
