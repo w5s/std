@@ -101,6 +101,7 @@ describe('Time', () => {
       // Run task
       task.taskRun(resolve, reject, cancelerRef);
       // Memorize the last setTimeout call
+      // eslint-disable-next-line unicorn/prefer-at
       const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 
       // Trigger cancellation
