@@ -1,7 +1,7 @@
 {
   "name": "@w5s/database",
   "version": "1.0.0-alpha.0",
-  "description": "Database client library",
+  "description": "Database client module",
   "keywords": [
     "fp",
     "functional",

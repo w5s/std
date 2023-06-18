@@ -1,7 +1,7 @@
 {
   "name": "@w5s/application",
   "version": "1.0.0-alpha.0",
-  "description": "App management",
+  "description": "Application management",
   "keywords": [
     "fp",
     "functional",

@@ -1,7 +1,7 @@
 {
   "name": "@w5s/http",
   "version": "1.0.0-alpha.0",
-  "description": "HTTP Client module",
+  "description": "HTTP client module",
   "keywords": [
     "fp",
     "functional",

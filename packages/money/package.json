@@ -2,7 +2,7 @@
   "name": "@w5s/money",
   "version": "1.0.0-alpha.0",
   "private": true,
-  "description": "Money package management",
+  "description": "Money module",
   "keywords": [
     "fp",
     "functional",

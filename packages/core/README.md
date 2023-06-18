@@ -6,7 +6,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Standard library
+> Core modules
 <!-- AUTO-GENERATED-CONTENT:END -->
 ## About the project
 
@@ -94,8 +94,11 @@ void unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
 <!-- AUTO-GENERATED-CONTENT:END -->
 [license-url]: ../../LICENSE
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
+[issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[sources-url]: ${repository.url}) -->
+[sources-url]: git@github.com:w5s/std.git
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[homepage-url]: ${homepage}) -->
+[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme
 <!-- AUTO-GENERATED-CONTENT:END -->

@@ -2,7 +2,7 @@
   "name": "@w5s/system",
   "version": "1.0.0-alpha.0",
   "private": true,
-  "description": "System module for w5s",
+  "description": "System module",
   "keywords": [
     "fp",
     "functional",
