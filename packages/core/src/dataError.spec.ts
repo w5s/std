@@ -58,9 +58,9 @@ describe('DataError', () => {
         cause: new Error('CauseMessage'),
       });
       const lines = (error.stack ?? '').split('\n');
-      // eslint-disable-next-line jest/no-standalone-expect
+
       expect(lines[0]).toEqual('CustomError: CustomMessage');
-      // eslint-disable-next-line jest/no-standalone-expect
+
       expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
     });
   });
