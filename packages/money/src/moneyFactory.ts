@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/core/lib/invariant.js';
+import { invariant } from '@w5s/core/dist/invariant.js';
 import type { Currency } from './currency.js';
 import { CurrencyRegistry } from './currencyRegistry.js';
 import type { Amount, Money } from './money.js';

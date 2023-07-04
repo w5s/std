@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Int } from '@w5s/core';
-import { describeComparable } from '@w5s/core/lib/testing.js';
+import { describeComparable } from '@w5s/core/dist/testing.js';
 import { Currency } from './currency.js';
 
 describe('Currency', () => {

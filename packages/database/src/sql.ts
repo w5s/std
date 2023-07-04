@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable unicorn/no-for-loop */
-import { DataObject } from '@w5s/core/lib/dataObject.js';
+import { DataObject } from '@w5s/core/dist/dataObject.js';
 
 const emptyStrings = Object.freeze(['']);
 const emptyArray = Object.freeze([]);

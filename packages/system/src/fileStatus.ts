@@ -1,5 +1,5 @@
 import type { Int, Tag, Time } from '@w5s/core';
-import { DataObject } from '@w5s/core/lib/dataObject.js';
+import { DataObject } from '@w5s/core/dist/dataObject.js';
 import type { FileSize } from './fileSize.js';
 
 /**

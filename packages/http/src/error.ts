@@ -1,4 +1,4 @@
-import { DataError } from '@w5s/core/lib/dataError.js';
+import { DataError } from '@w5s/core/dist/dataError.js';
 
 /**
  * Union type of http client errors

@@ -1,6 +1,6 @@
 import type { Option, TimeDuration, Int, Result } from '@w5s/core';
-import { Task } from '@w5s/core/lib/task.js';
-import { Time } from '@w5s/core/lib/time.js';
+import { Task } from '@w5s/core/dist/task.js';
+import { Time } from '@w5s/core/dist/time.js';
 
 const defaultRandom: Task<number, never> = { taskRun: (resolve) => resolve(Math.random()) };
 const timeDelay = Time.delay;

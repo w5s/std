@@ -1,5 +1,5 @@
-import { DataObject } from '@w5s/core/lib/dataObject.js';
-import { assertNever } from '@w5s/core/lib/invariant.js';
+import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { assertNever } from '@w5s/core/dist/invariant.js';
 import { sql, SQLStatement } from './sql.js';
 import { SQLDataType } from './dataType.js';
 

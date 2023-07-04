@@ -1,6 +1,6 @@
 import type { Int } from '@w5s/core';
-import { DataObject } from '@w5s/core/lib/dataObject.js';
-import { Comparable } from '@w5s/core/lib/comparable.js';
+import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Comparable } from '@w5s/core/dist/comparable.js';
 
 export interface Currency
   extends DataObject<{

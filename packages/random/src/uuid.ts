@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/core/lib/invariant.js';
+import { invariant } from '@w5s/core/dist/invariant.js';
 import type { Tag } from '@w5s/core';
 
 /**

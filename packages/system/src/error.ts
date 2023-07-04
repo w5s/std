@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { DataError } from '@w5s/core/lib/dataError.js';
+import { DataError } from '@w5s/core/dist/dataError.js';
 import type { FilePath } from './filePath.js';
 
 export const FileErrorType = {

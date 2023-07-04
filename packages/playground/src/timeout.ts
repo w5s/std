@@ -1,4 +1,4 @@
-import { DataError } from '@w5s/core/lib/dataError.js';
+import { DataError } from '@w5s/core/dist/dataError.js';
 import type { Task, TimeDuration } from '@w5s/core';
 
 const defaultCanceler = () => {};

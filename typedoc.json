@@ -8,7 +8,7 @@
   "exclude": [
     "**/build/**/*",
     "**/example/**/*",
-    "**/lib/**/*",
+    "**/dist/**/*",
     "**/node_modules/**",
     "**/__tests__/*.(ts|tsx)",
     "**/*.(spec|test).(ts|tsx)"

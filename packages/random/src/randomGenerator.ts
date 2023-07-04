@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/core/lib/invariant.js';
+import { invariant } from '@w5s/core/dist/invariant.js';
 import type { Option, Ref, Task } from '@w5s/core';
 import { property } from '@w5s/application';
 import type { RandomValue } from './randomValue.js';
