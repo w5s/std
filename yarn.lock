@@ -1707,7 +1707,7 @@ __metadata:
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.1.0
     "@w5s/conventional-changelog": 1.1.0
-    "@w5s/cspell-config": 1.1.0
+    "@w5s/cspell-config": 1.1.1
     "@w5s/eslint-config": 1.1.1
     "@w5s/ts-config": 1.0.4
     concurrently: 8.2.0
@@ -1737,9 +1737,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/cspell-config@npm:1.1.0":
-  version: 1.1.0
-  resolution: "@w5s/cspell-config@npm:1.1.0"
+"@w5s/cspell-config@npm:1.1.1":
+  version: 1.1.1
+  resolution: "@w5s/cspell-config@npm:1.1.1"
   dependencies:
     "@cspell/cspell-bundled-dicts": ^6.0.0
   peerDependencies:
@@ -1747,7 +1747,7 @@ __metadata:
   peerDependenciesMeta:
     cspell:
       optional: true
-  checksum: 4eb1fe9776deaf683c670ab55ac948196ac116aff034af556b655c4ec3dac95dbf7cdeb23733aa9b11619250ce429abc6e1a9c207dd816dcb412e9f9e545e9db
+  checksum: 9d4bf1fc1f03f7db4db6eb892e3fed718e1b0a2006b917469a680b8d2c76c544a79819cc157bdeb2bd8cf5f8f4c70b1f954248ce9efe9a5f7b7dbddcefcff3ba
   languageName: node
   linkType: hard
 
