@@ -19,7 +19,7 @@ export type DataObject<
      * The type unique identifier
      */
     [DataObject.type]: string;
-  }
+  },
 > = Readonly<Properties>;
 
 export namespace DataObject {
@@ -102,7 +102,7 @@ export namespace DataObject {
    */
   export function MakeGeneric<
     Name extends string,
-    Constructor extends (...args: any[]) => DataObject<{ [DataObject.type]: Name }>
+    Constructor extends (...args: any[]) => DataObject<{ [DataObject.type]: Name }>,
   >(
     typeName: Name,
     getConstructor: (
