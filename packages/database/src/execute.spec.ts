@@ -13,7 +13,7 @@ describe('executeQuery', () => {
       databaseType: 'mock',
       mockExecuteQuery: vi.fn(() => Promise.reject<unknown>(new Error('NotImplemented'))),
       mockQueryToStatement: vi.fn(SQLQuery.toSQLStatement),
-    } as const);
+    }) as const;
 
   it('should forward query execution to environment', async () => {
     const client = createClient();

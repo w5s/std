@@ -11,7 +11,7 @@ const mockResponse = (): MockedObject<HTTP.Response> =>
     text: vi.fn(),
     blob: vi.fn(),
     json: vi.fn(),
-  } as any);
+  }) as any;
 
 const expectToRejectFetchResponseError = async (
   fn: (response: HTTP.Response) => Task<unknown, unknown>,
