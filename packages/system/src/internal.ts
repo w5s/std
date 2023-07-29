@@ -1,9 +1,9 @@
 /* eslint-disable jsdoc/require-example */
 
-import type { Task } from '@w5s/core';
 import * as nodeFS from 'node:fs';
 import * as nodePath from 'node:path';
 import * as nodeProcess from 'node:process';
+import type { Task } from '@w5s/core';
 import { FileError } from './error.js';
 import type { FilePath } from './filePath.js';
 

@@ -1,5 +1,5 @@
-import type { Task, Option } from '@w5s/core';
 import type * as nodeFS from 'node:fs';
+import type { Task, Option } from '@w5s/core';
 import type { FileError } from '../error.js';
 import { Internal, errnoExceptionHandler } from '../internal.js';
 import type { FilePath } from '../filePath.js';
