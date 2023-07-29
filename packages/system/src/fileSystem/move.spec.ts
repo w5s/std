@@ -1,5 +1,5 @@
-import { Result } from '@w5s/core';
 import * as nodeFS from 'node:fs';
+import { Result } from '@w5s/core';
 import { describe, it } from 'vitest';
 import { FileError } from '../error.js';
 import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';

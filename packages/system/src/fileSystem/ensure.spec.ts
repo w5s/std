@@ -1,5 +1,5 @@
-import { Result } from '@w5s/core';
 import * as fs from 'node:fs/promises';
+import { Result } from '@w5s/core';
 import { describe, it } from 'vitest';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../error.js';

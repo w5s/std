@@ -1,6 +1,6 @@
-import { Task, unsafeRun } from '@w5s/core';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
+import { Task, unsafeRun } from '@w5s/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { expect } from 'vitest';
 import type { FilePath } from '../filePath.js';
