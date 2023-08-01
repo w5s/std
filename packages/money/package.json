@@ -45,6 +45,7 @@
     "prebuild:tsc": "node scripts/buildCurrencies.js",
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepublishOnly": "npm run clean;npm run build",
+    "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
     "test": "concurrently \"npm:test:*\" \":\"",
     "test:src": "vitest run",
@@ -71,5 +72,11 @@
   },
   "typedoc": {
     "entryPoint": "./src/index.ts"
-  }
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "10 kB"
+    }
+  ]
 }

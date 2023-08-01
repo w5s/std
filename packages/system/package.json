@@ -42,6 +42,7 @@
     "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepublishOnly": "npm run clean;npm run build",
+    "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
     "test": "concurrently \"npm:test:*\" \":\"",
     "test:src": "vitest run",
@@ -65,5 +66,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "typedocMain": "./src/index.ts"
+  "typedocMain": "./src/index.ts",
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "10 kB"
+    }
+  ]
 }
