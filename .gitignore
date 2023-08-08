@@ -3,6 +3,7 @@
 # END ### ESLint ###
 # BEGIN ### Typescript ###
 lib/
+dist/
 *.tsbuildinfo
 typings/
 # END ### Typescript ###
