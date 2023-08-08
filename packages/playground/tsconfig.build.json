@@ -3,7 +3,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
-    "outDir": "lib"
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["**/*.spec.ts", "**/*.test.ts", "**/__mocks__/**"]
