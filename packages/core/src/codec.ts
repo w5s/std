@@ -3,6 +3,7 @@ import type { Array } from './array.js';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { JSONValue } from './json.js';
+import type { Int } from './integer.js';
 
 const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', value });
 const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', error });
@@ -311,6 +312,21 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
       ) as JSONValue,
   });
 }
+
+/**
+ * Integer codec
+ *
+ * @example
+ * ```typescript
+ * const encoded = Codec.encode(int, 1); // 1
+ * const decoded = Codec.decode(int, 1); // Result.Ok(Int(1))
+ * ```
+ */
+export const int: Codec<Int> = Codec({
+  encode: identity,
+  decode: (input) => (Number.isSafeInteger(input) ? Ok(input as Int) : Err(typeError(input, 'integer'))),
+  schema: () => ({ type: 'integer' }),
+});
 
 /**
  * Date codec. Values are encoded as ISO string
