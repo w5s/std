@@ -39,6 +39,9 @@
     },
     "develop": {
       "cache": false
+    },
+    "size-limit": {
+      "dependsOn": ["^build"]
     }
   },
   "globalDependencies": ["tsconfig.settings.json"]

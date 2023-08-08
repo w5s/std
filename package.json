@@ -25,11 +25,11 @@
     "prepare:packages": "turbo run prepare",
     "release": "[ -n \"${CI:-}\" ] && lerna publish --yes || lerna publish",
     "rescue": "git clean -fdx;yarn install",
-    "size-limit": "npx lerna run size-limit",
+    "size-limit": "turbo run size-limit",
     "spellcheck": "turbo run spellcheck",
     "spellcheck:root": "cspell --no-progress '**' --exclude='packages/*/**'",
     "test": "turbo run test",
-    "validate": "turbo run build lint test"
+    "validate": "turbo run build lint test size-limit"
   },
   "commitlint": {
     "extends": [
