@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, type MockedFunction } from 'vitest';
 import { assertType } from './type.js';
 import { AggregateError } from './aggregateError.js';
-import { throwError } from './prelude.js';
+import { throwError } from './throwError.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
 import { Task } from './task.js';

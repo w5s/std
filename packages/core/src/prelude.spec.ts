@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { assertType } from './type.js';
-import { assign, extend, identity, constant, throwError, ignore } from './prelude.js';
+import { assign, extend, identity, constant, ignore } from './prelude.js';
 
 describe('identity', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
@@ -15,14 +15,6 @@ describe('ignore', () => {
 describe('constant', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
     expect(constant(value)('abc')).toBe(value);
-  });
-});
-describe('throwError', () => {
-  it('should return the same unchanged value', () => {
-    const error = new Error('TestError');
-    expect(() => {
-      throwError(error);
-    }).toThrow(error);
   });
 });
 describe('assign', () => {

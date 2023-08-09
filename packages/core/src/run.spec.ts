@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { throwError } from './prelude.js';
+import { throwError } from './throwError.js';
 import { Result } from './result.js';
 import { Canceler, unsafeRun, unsafeRunOk } from './run.js';
 import { Task } from './task.js';

@@ -43,20 +43,6 @@ export function constant<T>(value: T): (anyValue?: unknown) => T {
 }
 
 /**
- * Throw the given `error`. Often used as expression
- *
- * @example
- * ```typescript
- * const unknownValue: unknown = 123;
- * const stringValue = typeof unknownValue === 'string' ? unknownValue : throwError(new Error('not a string'));
- * ```
- * @param error - the error to throw
- */
-export function throwError(error: unknown): never {
-  throw error;
-}
-
-/**
  * Type safe and immutable equivalent of `{ ...source, ...properties }`.
  * The return type is the same as `source` :
  * - `properties` cannot contain new property
