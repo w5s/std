@@ -1,15 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { assertType } from './type.js';
-import { assign, extend, identity, constant, ignore } from './prelude.js';
+import { assign, extend, identity, constant } from './prelude.js';
 
 describe('identity', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
     expect(identity(value)).toBe(value);
-  });
-});
-describe('ignore', () => {
-  it.each([1, undefined, {}])('should return undefined', (value) => {
-    expect(ignore(value)).toBe(undefined);
   });
 });
 describe('constant', () => {

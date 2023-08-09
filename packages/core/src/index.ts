@@ -7,6 +7,7 @@ export * from './dataError.js';
 export * from './dataObject.js';
 export * from './disposable.js';
 export * from './equal.js';
+export * from './ignore.js';
 export * from './integer.js';
 export * from './invariant.js';
 export * from './iterable.js';
