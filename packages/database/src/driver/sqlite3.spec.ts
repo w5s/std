@@ -7,6 +7,7 @@ import { SQLite3 } from './sqlite3.js';
 
 const mockDatabase = (): Mocked<Database> => {
   const database: Mocked<Database> = {
+    // @ts-ignore All methods are not required
     all: vi.fn<Database['all']>((_sql, _values, callback?) => callback(null, null)),
     close: vi.fn(),
   } as any;

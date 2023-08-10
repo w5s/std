@@ -64,9 +64,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "typedoc": {
-    "entryPoint": "./src/index.ts"
-  },
   "size-limit": [
     {
       "path": "dist/index.js",
