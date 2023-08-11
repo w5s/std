@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { constant } from './prelude.js';
+import { identity } from './identity.js';
 
-describe('constant', () => {
+describe('identity', () => {
   it.each([1, undefined, {}])('should return the same unchanged value', (value) => {
-    expect(constant(value)('abc')).toBe(value);
+    expect(identity(value)).toBe(value);
   });
 });

@@ -10,6 +10,7 @@ export * from './disposable.js';
 export * from './equal.js';
 export * from './extend.js';
 export * from './ignore.js';
+export * from './identity.js';
 export * from './integer.js';
 export * from './invariant.js';
 export * from './iterable.js';
