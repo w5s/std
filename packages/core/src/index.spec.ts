@@ -15,7 +15,6 @@ describe('index', () => {
         'Canceler',
         'Comparable',
         'Console',
-        'constant',
         'DataError',
         'DataObject',
         'Disposable',
