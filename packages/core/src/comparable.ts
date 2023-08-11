@@ -10,7 +10,7 @@ export interface Comparable<T> extends Equal<T> {
    * const sorted = [3, 1, 1].sort(NumberCompare.compare);
    * ```
    */
-  readonly compare: (left: T, right: T) => number;
+  compare(left: T, right: T): number;
   /**
    * "Less than or equal to" operator
    *
@@ -22,7 +22,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['<='](0, -1); // false
    * ```
    */
-  readonly '<=': (left: T, right: T) => boolean;
+  '<='(left: T, right: T): boolean;
   /**
    * "Less than" operator
    *
@@ -34,7 +34,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['<'](0, -1); // false
    * ```
    */
-  readonly '<': (left: T, right: T) => boolean;
+  '<'(left: T, right: T): boolean;
   /**
    * "Greater than or equal to" operator
    *
@@ -46,7 +46,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['>='](0, -1); // true
    * ```
    */
-  readonly '>=': (left: T, right: T) => boolean;
+  '>='(left: T, right: T): boolean;
   /**
    * "Greater than" operator
    *
@@ -58,7 +58,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['>'](0, -1); // true
    * ```
    */
-  readonly '>': (left: T, right: T) => boolean;
+  '>'(left: T, right: T): boolean;
 }
 
 /**

@@ -9,7 +9,7 @@ export interface Equal<T> {
    * NumberEqual[Equal.equals](0, 0); // false
    * ```
    */
-  readonly equals: (left: T, right: T) => boolean;
+  equals(left: T, right: T): boolean;
   /**
    * "Not equal to" operator
    *
@@ -20,7 +20,7 @@ export interface Equal<T> {
    * NumberEqual['!='](0, 0); // false
    * ```
    */
-  readonly '!=': (left: T, right: T) => boolean;
+  '!='(left: T, right: T): boolean;
   /**
    * "Equal to" operator
    *
@@ -31,7 +31,7 @@ export interface Equal<T> {
    * NumberEqual['=='](0, 1); // false
    * ```
    */
-  readonly '==': (left: T, right: T) => boolean;
+  '=='(left: T, right: T): boolean;
 }
 
 /**
