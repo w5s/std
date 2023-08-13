@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { assertType } from './type.js';
+import { assertType } from './testing.js';
 import { extend } from './extend.js';
 
 describe('extend', () => {

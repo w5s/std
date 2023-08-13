@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, it, expect, vi } from 'vitest';
-import { assertType } from './type.js';
+import { assertType } from './testing.js';
 import { invariant, warning, assertNever } from './invariant.js';
 
 describe('invariant', () => {

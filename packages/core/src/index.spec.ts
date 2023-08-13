@@ -9,7 +9,6 @@ describe('index', () => {
         'ArgumentError',
         'Array',
         'assertNever',
-        'assertType',
         'assign',
         'AsyncDisposable',
         'Canceler',
