@@ -65,28 +65,28 @@ describe('Int', () => {
     });
   });
 
-  describe('()', () => {
+  describe.each([Int, Int.of])('()', (create) => {
     it('should return identity for 0', () => {
-      expect(Int(0)).toBe(0);
+      expect(create(0)).toBe(0);
     });
     it('should return rounded for floats', () => {
-      expect(Int(1.1)).toBe(1);
+      expect(create(1.1)).toBe(1);
     });
     it('should return rounded for negative floats', () => {
-      expect(Int(-1.1)).toBe(-1);
+      expect(create(-1.1)).toBe(-1);
     });
     it('should return identity for min value', () => {
-      expect(Int(minValue)).toBe(minValue);
+      expect(create(minValue)).toBe(minValue);
     });
     it('should return identity for max value', () => {
-      expect(Int(maxValue)).toBe(maxValue);
+      expect(create(maxValue)).toBe(maxValue);
     });
 
     it('should return max value for max value + 1', () => {
-      expect(Int(maxValue + 1)).toBe(maxValue);
+      expect(create(maxValue + 1)).toBe(maxValue);
     });
     it('should return min value for min value - 1', () => {
-      expect(Int(minValue - 1)).toBe(minValue);
+      expect(create(minValue - 1)).toBe(minValue);
     });
   });
   describe('type', () => {

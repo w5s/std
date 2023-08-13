@@ -19,13 +19,7 @@ export type Int = Tag<number, { integral: true }>;
  * @param value - an initial numeric value
  */
 export function Int(value: number): Int {
-  return value < MIN_SAFE_INTEGER
-    ? MIN_SAFE_INTEGER
-    : value > MAX_SAFE_INTEGER
-    ? MAX_SAFE_INTEGER
-    : value < 0
-    ? (Math.ceil(value) as Int)
-    : (Math.floor(value) as Int);
+  return Int.of(value);
 }
 export namespace Int {
   type Radix36 =
@@ -74,6 +68,24 @@ export namespace Int {
    * Alias to `Number.MIN_SAFE_INTEGER` (-(2**53-1))
    */
   export const min = MIN_SAFE_INTEGER;
+
+  /**
+   * @example
+   * ```typescript
+   * const intValue = Int(0.5);// 0
+   * ```
+   * @category Constructor
+   * @param value - an initial numeric value
+   */
+  export function of(value: number): Int {
+    return value < MIN_SAFE_INTEGER
+      ? MIN_SAFE_INTEGER
+      : value > MAX_SAFE_INTEGER
+      ? MAX_SAFE_INTEGER
+      : value < 0
+      ? (Math.ceil(value) as Int)
+      : (Math.floor(value) as Int);
+  }
 
   /**
    * Returns `true` if anyValue is a safe integer
