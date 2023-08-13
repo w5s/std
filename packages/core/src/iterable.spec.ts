@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Iterable } from './iterable.js';
+import { Symbol } from './symbol.js';
 
 describe('Iterable', () => {
   function iteratorOf<T>(...values: T[]): Iterable<T> {
@@ -16,6 +17,12 @@ describe('Iterable', () => {
     };
   }
 
+  describe('.create()', () => {
+    it('should return a new Iterable from function', () => {
+      const fn = () => ({ next: () => ({ done: true, value: undefined }) });
+      expect(Iterable.create(fn)).toEqual({ [Symbol.iterator]: fn });
+    });
+  });
   describe('.of()', () => {
     it('should return an empty iterable when 0', () => {
       expectIterable(Iterable.of()).toHaveValues([]);
