@@ -1,8 +1,24 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
+const NativeString = globalThis.String;
+
 export namespace String {
   const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
+
+  /**
+   * Returns a string created by using the specified code point.
+   *
+   * @example
+   * ```typescript
+   * String.fromCodePoint(65, 9731) == "A☃"
+   * ```
+   * @category Constructor
+   * @param code - an array of string codes
+   */
+  export function fromCodePoint(...code: number[]): string {
+    return NativeString.fromCodePoint(...code);
+  }
 
   /**
    * Return the character at the `index` position

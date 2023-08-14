@@ -3,6 +3,12 @@ import { Option } from './option.js';
 import { String } from './string.js';
 
 describe('String', () => {
+  describe('.fromCodePoint', () => {
+    it('should return true only when present', () => {
+      expect(String.fromCodePoint(65, 65)).toEqual('AA');
+      expect(String.fromCodePoint(9731, 9731)).toEqual('☃☃');
+    });
+  });
   describe('.at', () => {
     it('should return Option.None when index is not defined', () => {
       expect(String.at('a', 1)).toBe(Option.None);
