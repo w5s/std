@@ -164,9 +164,9 @@ export namespace Array {
    *
    * @example
    * ```typescript
-   * Array.indexOf(['a', '', 'a'], 'a'); // 0
-   * Array.indexOf(['a', '', 'a',  '', 'a'], 'a', 1); // 2
-   * Array.indexOf(['a', 'b'], 'absent'); // -1
+   * Array.indexOf(['a', '', 'a'], 'a'); // Option.Some(0)
+   * Array.indexOf(['a', '', 'a',  '', 'a'], 'a', 1); // Option.Some(2)
+   * Array.indexOf(['a', 'b'], 'absent'); // Option.Some(
    * ```
    * @param array - The array object
    * @param searchItem - The item to locate in the array.
@@ -201,9 +201,9 @@ export namespace Array {
    *
    * @example
    * ```typescript
-   * Array.lastIndexOf(['a', 'b', 'a'], 'a') // 2
-   * Array.lastIndexOf(['a', 'b', 'a', 'b', 'a'], 'a', 4); // 2
-   * Array.lastIndexOf(['a', 'b'], 'absent') // -1
+   * Array.lastIndexOf(['a', 'b', 'a'], 'a') // Option.Some(2)
+   * Array.lastIndexOf(['a', 'b', 'a', 'b', 'a'], 'a', 4); // Option.Some(2)
+   * Array.lastIndexOf(['a', 'b'], 'absent') // Option.None
    * ```
    * @param array - The array object
    * @param searchItem - The item to locate in the array.
