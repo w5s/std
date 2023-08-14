@@ -28,9 +28,7 @@ export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
  * @param milliseconds - Number of milliseconds
  */
 export function TimeDuration(milliseconds: number): TimeDuration {
-  invariant(TimeDuration.hasInstance(milliseconds), `${milliseconds} is not a valid duration value`);
-
-  return milliseconds;
+  return TimeDuration.of(milliseconds);
 }
 
 export namespace TimeDuration {
@@ -38,6 +36,23 @@ export namespace TimeDuration {
   const MINUTES = SECONDS * 60;
   const HOURS = MINUTES * 60;
   const DAYS = HOURS * 24;
+
+  /**
+   * Return a duration from a number
+   *
+   * @example
+   * ```typescript
+   * const duration = TimeDuration.of(0);// typeof duration === 'number'
+   * ```
+   * @category Constructor
+   * @param milliseconds - Number of milliseconds
+   */
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  export function of(milliseconds: number) {
+    invariant(hasInstance(milliseconds), `${milliseconds} is not a valid duration value`);
+
+    return milliseconds;
+  }
 
   /**
    * Return `true` if `anyValue` is a valid `TimeDuration` value
