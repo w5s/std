@@ -2,6 +2,8 @@ import type { Int } from './integer.js';
 import type { Option } from './option.js';
 
 export namespace String {
+  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
+
   /**
    * Return the character at the `index` position
    *
@@ -94,5 +96,22 @@ export namespace String {
    */
   export function size(string: string): Int {
     return string.length as Int;
+  }
+
+  /**
+   * Returns the index of the first occurrence of `searchString` in a string.
+   *
+   * @example
+   * ```typescript
+   * String.indexOf('aa', 'a'); // Option.Some(0)
+   * String.indexOf('aaa', 'a', 1); // Option.Some(1)
+   * String.indexOf('ab', 'absent'); // Option.None
+   * ```
+   * @param string - The string
+   * @param searchString - The string to search
+   * @param fromIndex - The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
+   */
+  export function indexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
+    return string.length > 0 ? indexToOption(string.indexOf(searchString, fromIndex)) : undefined;
   }
 }

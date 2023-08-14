@@ -49,4 +49,18 @@ describe('String', () => {
       expect(String.size('abc')).toBe(3);
     });
   });
+  describe('.indexOf', () => {
+    it('should return index of element', () => {
+      const string = 'aaa';
+      expect(String.indexOf(string, 'a')).toEqual(0);
+    });
+    it('should return index of element with startIndex', () => {
+      const string = 'aaa';
+      expect(String.indexOf(string, 'a', 1)).toEqual(1);
+    });
+    it('should return Option.None when not found', () => {
+      const string = 'abc';
+      expect(String.indexOf(string, 'non_existent', 1)).toEqual(Option.None);
+    });
+  });
 });
