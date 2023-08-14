@@ -156,11 +156,25 @@ export type Time = Tag<number, { time: 'ms' }>;
  * @param milliseconds - the value in milliseconds
  */
 export function Time(milliseconds: number): Time {
-  invariant(Time.hasInstance(milliseconds), `${milliseconds} is not a valid time value`);
-
-  return milliseconds;
+  return Time.of(milliseconds);
 }
 export namespace Time {
+  /**
+   * Create a new Time value
+   *
+   * @example
+   * ```typescript
+   * const time = Time.of(0);
+   * ```
+   * @category Constructor
+   * @param milliseconds - the value in milliseconds
+   */
+  export function of(milliseconds: number): Time {
+    invariant(hasInstance(milliseconds), `${milliseconds} is not a valid time value`);
+
+    return milliseconds;
+  }
+
   /**
    * Return `true` if `anyValue` is a valid `Time` value
    *

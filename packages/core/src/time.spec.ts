@@ -16,13 +16,13 @@ describe('Time', () => {
     vi.clearAllMocks();
   });
 
-  describe('()', () => {
+  describe.each([Time, Time.of])('()', (create) => {
     it('should throw invariant error', () => {
-      expect(() => Time(-1)).toThrow('-1 is not a valid time value');
-      expect(() => Time(Number.NaN)).toThrow('NaN is not a valid time value');
+      expect(() => create(-1)).toThrow('-1 is not a valid time value');
+      expect(() => create(Number.NaN)).toThrow('NaN is not a valid time value');
     });
     it('should return unchanged value when positive', () => {
-      expect(Time(1)).toBe(1);
+      expect(create(1)).toBe(1);
     });
   });
   describe('.hasInstance', () => {
