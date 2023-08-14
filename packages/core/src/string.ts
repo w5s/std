@@ -114,4 +114,21 @@ export namespace String {
   export function indexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
     return string.length > 0 ? indexToOption(string.indexOf(searchString, fromIndex)) : undefined;
   }
+
+  /**
+   * Returns the index of the last occurrence of `searchString` in a string.
+   *
+   * @example
+   * ```typescript
+   * String.lastIndexOf('aa', 'a'); // Option.Some(1)
+   * String.lastIndexOf('aaa', 'a', 1); // Option.Some(1)
+   * String.lastIndexOf('ab', 'absent'); // Option.None
+   * ```
+   * @param string - The string
+   * @param searchString - The string to search
+   * @param fromIndex - The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
+   */
+  export function lastIndexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
+    return string.length > 0 ? indexToOption(string.lastIndexOf(searchString, fromIndex)) : undefined;
+  }
 }
