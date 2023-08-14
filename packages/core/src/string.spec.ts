@@ -30,6 +30,12 @@ describe('String', () => {
       expect(String.join('|', ['a', 'b', 'c'])).toEqual('a|b|c');
     });
   });
+  describe('.split', () => {
+    it('should split all parts', () => {
+      expect(String.split('a|b|c', '|')).toEqual(['a', 'b', 'c']);
+      expect(String.split('a|b|c', '|', 2)).toEqual(['a', 'b']);
+    });
+  });
   describe('.hasInstance', () => {
     it('should return true for string', () => {
       expect(String.hasInstance('abc')).toEqual(true);

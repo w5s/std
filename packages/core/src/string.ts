@@ -1,5 +1,6 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
+import type { Array } from './array.js';
 
 const NativeString = globalThis.String;
 
@@ -50,7 +51,7 @@ export namespace String {
    * @category Guard
    * @param parts - a tested value
    */
-  export function concat(parts: string[]): string {
+  export function concat(parts: Array<string>): string {
     return parts.join('');
   }
 
@@ -95,7 +96,7 @@ export namespace String {
    * @param separator - the separator
    * @param parts - a tested value
    */
-  export function join(separator: string, parts: string[]): string {
+  export function join(separator: string, parts: Array<string>): string {
     return parts.join(separator);
   }
 
@@ -161,5 +162,29 @@ export namespace String {
    */
   export function includes(string: string, searchString: string): boolean {
     return string.includes(searchString);
+  }
+
+  /**
+   * Split a string into substrings using the specified separator and return them as an array.
+   *
+   * @example
+   * ```typescript
+   * String.split('a|b|c', '|'); // ['a', 'b', 'c']
+   * String.split('a|b|c', '|', 2); // ['a', 'b']
+   * ```
+   * @param string - The string
+   * @param separator - A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned.
+   * @param limit - A value used to limit the number of elements returned in the array.
+   */
+  export function split(
+    string: string,
+    separator: string | RegExp | { [Symbol.split](string: string, limit?: number): string[] },
+    limit?: number
+  ): Array<string> {
+    return string.split(
+      // @ts-ignore Typing is correct
+      separator,
+      limit
+    );
   }
 }
