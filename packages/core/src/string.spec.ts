@@ -77,4 +77,15 @@ describe('String', () => {
       expect(String.lastIndexOf(string, 'non_existent', 1)).toEqual(Option.None);
     });
   });
+  describe('.includes', () => {
+    it('should return true only when present', () => {
+      const string = 'abc';
+
+      expect(String.includes(string, '')).toEqual(true);
+      expect(String.includes(string, 'ab')).toEqual(true);
+      expect(String.includes(string, 'abc')).toEqual(true);
+      expect(String.includes(string, 'abcd')).toEqual(false);
+      expect(String.includes(string, 'absent')).toEqual(false);
+    });
+  });
 });

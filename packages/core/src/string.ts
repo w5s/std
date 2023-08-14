@@ -131,4 +131,19 @@ export namespace String {
   export function lastIndexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
     return string.length > 0 ? indexToOption(string.lastIndexOf(searchString, fromIndex)) : undefined;
   }
+
+  /**
+   * Returns the index of the last occurrence of `searchString` in a string.
+   *
+   * @example
+   * ```typescript
+   * String.includes('abc', 'ab'); // true
+   * String.includes('abc', 'absent'); // false
+   * ```
+   * @param string - The string
+   * @param searchString - The string to search
+   */
+  export function includes(string: string, searchString: string): boolean {
+    return string.includes(searchString);
+  }
 }
