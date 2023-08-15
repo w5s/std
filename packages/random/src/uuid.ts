@@ -19,9 +19,7 @@ const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{
  * @param value - the string representation
  */
 export function UUID(value: `${string}-${string}-${string}-${string}`): UUID {
-  invariant(UUID.hasInstance(value), `${value} is not a valid UUID`);
-
-  return value;
+  return UUID.of(value);
 }
 export namespace UUID {
   /**
@@ -34,6 +32,22 @@ export namespace UUID {
    */
   export function empty(): UUID {
     return '00000000-0000-0000-0000-000000000000' as UUID;
+  }
+
+  /**
+   * UUID constructor
+   *
+   * @example
+   * ```typescript
+   * const uuid = UUID.of('1c19548b-7cac-4222-b722-dc38f2870669');
+   * ```
+   * @category Constructor
+   * @param value - the string representation
+   */
+  export function of(value: `${string}-${string}-${string}-${string}`): UUID {
+    invariant(hasInstance(value), `${value} is not a valid UUID`);
+
+    return value;
   }
 
   /**

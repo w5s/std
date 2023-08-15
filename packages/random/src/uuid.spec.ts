@@ -4,15 +4,17 @@ import { UUID } from './uuid.js';
 describe('UUID', () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669';
 
-  it('should return a new representation', () => {
-    const uuid = UUID(anyValidUUID);
-    expect(uuid).toEqual(anyValidUUID);
-  });
-  it.each([undefined, null, [], '', 'non uuid'])('should throw TypeError when invalid value is passed', (value) => {
-    expect(() =>
-      // @ts-expect-error test it anyway
-      UUID(value)
-    ).toThrow();
+  describe.each([UUID, UUID.of])('()', (create) => {
+    it('should return a new representation', () => {
+      const uuid = create(anyValidUUID);
+      expect(uuid).toEqual(anyValidUUID);
+    });
+    it.each([undefined, null, [], '', 'non uuid'])('should throw TypeError when invalid value is passed', (value) => {
+      expect(() =>
+        // @ts-expect-error test it anyway
+        create(value)
+      ).toThrow();
+    });
   });
   describe('.empty', () => {
     it('should return a 0 based UUID', () => {
