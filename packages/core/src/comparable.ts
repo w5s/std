@@ -9,6 +9,7 @@ export interface Comparable<T> extends Equal<T> {
    * const NumberCompare: Comparable<number>;
    * const sorted = [3, 1, 1].sort(NumberCompare.compare);
    * ```
+   * @category Comparator
    */
   compare(left: T, right: T): number;
   /**
@@ -21,6 +22,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['<='](0, 1); // true
    * NumberCompare['<='](0, -1); // false
    * ```
+   * @category Comparator
    */
   '<='(left: T, right: T): boolean;
   /**
@@ -33,6 +35,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['<'](0, 1); // true
    * NumberCompare['<'](0, -1); // false
    * ```
+   * @category Comparator
    */
   '<'(left: T, right: T): boolean;
   /**
@@ -45,6 +48,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['>='](0, 1); // false
    * NumberCompare['>='](0, -1); // true
    * ```
+   * @category Comparator
    */
   '>='(left: T, right: T): boolean;
   /**
@@ -57,6 +61,7 @@ export interface Comparable<T> extends Equal<T> {
    * NumberCompare['>'](0, 1); // false
    * NumberCompare['>'](0, -1); // true
    * ```
+   * @category Comparator
    */
   '>'(left: T, right: T): boolean;
 }

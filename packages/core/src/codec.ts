@@ -26,14 +26,20 @@ export const DecodeError = DataError.Make<DecodeError>('DecodeError');
 export interface Codec<T> {
   /**
    * Returns the decoded `input`, `Result.Ok` or `Result.Error()`
+   *
+   * @category Codec
    */
   readonly codecDecode: (input: unknown) => Result<T, DecodeError>;
   /**
    * Returns the encoded `input`
+   *
+   * @category Codec
    */
   readonly codecEncode: (input: T) => unknown;
   /**
    * Returns the JSONSchema corresponding to the decoded type
+   *
+   * @category Codec
    */
   readonly codecSchema: () => JSONValue;
 }

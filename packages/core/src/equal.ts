@@ -8,6 +8,7 @@ export interface Equal<T> {
    * NumberEqual[Equal.equals](0, 1); // true
    * NumberEqual[Equal.equals](0, 0); // false
    * ```
+   * @category Comparator
    */
   equals(left: T, right: T): boolean;
   /**
@@ -19,6 +20,7 @@ export interface Equal<T> {
    * NumberEqual['!='](0, 1); // true
    * NumberEqual['!='](0, 0); // false
    * ```
+   * @category Comparator
    */
   '!='(left: T, right: T): boolean;
   /**
@@ -30,6 +32,7 @@ export interface Equal<T> {
    * NumberEqual['=='](0, 0); // true
    * NumberEqual['=='](0, 1); // false
    * ```
+   * @category Comparator
    */
   '=='(left: T, right: T): boolean;
 }
