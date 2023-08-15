@@ -11,7 +11,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  compare(left: T, right: T): number;
+  compare(this: void, left: T, right: T): number;
   /**
    * "Less than or equal to" operator
    *
@@ -24,7 +24,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  '<='(left: T, right: T): boolean;
+  '<='(this: void, left: T, right: T): boolean;
   /**
    * "Less than" operator
    *
@@ -37,7 +37,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  '<'(left: T, right: T): boolean;
+  '<'(this: void, left: T, right: T): boolean;
   /**
    * "Greater than or equal to" operator
    *
@@ -50,7 +50,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  '>='(left: T, right: T): boolean;
+  '>='(this: void, left: T, right: T): boolean;
   /**
    * "Greater than" operator
    *
@@ -63,7 +63,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  '>'(left: T, right: T): boolean;
+  '>'(this: void, left: T, right: T): boolean;
 }
 
 /**

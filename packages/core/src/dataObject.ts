@@ -35,7 +35,7 @@ export namespace DataObject {
      * @category Constructor
      * @param properties - The properties for initialization
      */
-    create(properties: Parameters<Model>): Model;
+    create(this: void, properties: Parameters<Model>): Model;
     /**
      * The factory type constant
      */
@@ -52,7 +52,7 @@ export namespace DataObject {
      * @category Guard
      * @param anyValue - the value to be tested
      */
-    hasInstance(anyValue: unknown): anyValue is Model;
+    hasInstance(this: void, anyValue: unknown): anyValue is Model;
   }
   /**
    * The type property discriminator

@@ -10,7 +10,7 @@ export interface Equal<T> {
    * ```
    * @category Comparator
    */
-  equals(left: T, right: T): boolean;
+  equals(this: void, left: T, right: T): boolean;
   /**
    * "Not equal to" operator
    *
@@ -22,7 +22,7 @@ export interface Equal<T> {
    * ```
    * @category Comparator
    */
-  '!='(left: T, right: T): boolean;
+  '!='(this: void, left: T, right: T): boolean;
   /**
    * "Equal to" operator
    *
@@ -34,7 +34,7 @@ export interface Equal<T> {
    * ```
    * @category Comparator
    */
-  '=='(left: T, right: T): boolean;
+  '=='(this: void, left: T, right: T): boolean;
 }
 
 /**
