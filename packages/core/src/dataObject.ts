@@ -32,9 +32,10 @@ export namespace DataObject {
     /**
      * Construct a new model
      *
+     * @category Constructor
      * @param properties - The properties for initialization
      */
-    readonly create: (properties: Parameters<Model>) => Model;
+    create(properties: Parameters<Model>): Model;
     /**
      * The factory type constant
      */
@@ -48,9 +49,10 @@ export namespace DataObject {
      * if(MyRecord.hasInstance(anyValue)) {
      *   console.log(anyValue.anyProperty);// type is correctly refined here
      * }
+     * @category Guard
      * @param anyValue - the value to be tested
      */
-    readonly hasInstance: (anyValue: unknown) => anyValue is Model;
+    hasInstance(anyValue: unknown): anyValue is Model;
   }
   /**
    * The type property discriminator
