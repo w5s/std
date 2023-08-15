@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from './result.js';
-import { Codec, boolean, number, string, DecodeError, lazy, option, dateISO, array, object, int } from './codec.js';
+import { Codec, boolean, number, string, DecodeError, option, dateISO, array, object, int } from './codec.js';
 import { Option } from './option.js';
 import { Int } from './integer.js';
 
@@ -143,7 +143,7 @@ describe('int', () => {
   });
 });
 describe('lazy', () => {
-  const subject = lazy;
+  const subject = Codec.lazy;
   const getCodec = () =>
     Codec<string>({
       encode: (_) => `__${_}`,

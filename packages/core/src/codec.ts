@@ -70,6 +70,33 @@ export namespace Codec {
   export type TypeOf<V> = V extends Codec<infer Type> ? Type : never;
 
   /**
+   * Returns a lazy evaluated codec. Useful for recursive structures.
+   *
+   * @example
+   * ```typescript
+   * interface Node {
+   *   value: unknown,
+   *   children: Node[]
+   * }
+   * const Node = object<Node>({
+   *   content: string,
+   *   responses: Codec.lazy(() => array(Node))
+   * })
+   * ```
+   * @param getCodec - the accessor to the codec
+   */
+  export function lazy<T>(getCodec: () => Codec<T>): Codec<T> {
+    let ref: Option<Codec<T>>;
+    // eslint-disable-next-line no-return-assign
+    const resolve = () => ref ?? (ref = getCodec());
+    return Codec({
+      decode: (input) => Codec.decode(resolve(), input),
+      encode: (input) => Codec.encode(resolve(), input),
+      schema: () => Codec.schema(resolve()),
+    });
+  }
+
+  /**
    * Returns the encoded `input`
    *
    * @example
@@ -166,33 +193,6 @@ export const number = primitive('number');
  * ```
  */
 export const string = primitive('string');
-
-/**
- * Returns a lazy evaluated codec. Useful for recursive structures.
- *
- * @example
- * ```typescript
- * interface Node {
- *   value: unknown,
- *   children: Node[]
- * }
- * const Node = object<Node>({
- *   content: string,
- *   responses: lazy(() => array(Node))
- * })
- * ```
- * @param getCodec - the accessor to the codec
- */
-export function lazy<T>(getCodec: () => Codec<T>): Codec<T> {
-  let ref: Option<Codec<T>>;
-  // eslint-disable-next-line no-return-assign
-  const resolve = () => ref ?? (ref = getCodec());
-  return Codec({
-    decode: (input) => Codec.decode(resolve(), input),
-    encode: (input) => Codec.encode(resolve(), input),
-    schema: () => Codec.schema(resolve()),
-  });
-}
 
 /**
  * Returns a codec for `Option<V>`.
