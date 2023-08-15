@@ -80,7 +80,7 @@ export namespace TimeDuration {
    * @param amount - Number of milliseconds
    */
   export function milliseconds(amount: number) {
-    return TimeDuration(amount);
+    return of(amount);
   }
 
   /**
@@ -94,7 +94,7 @@ export namespace TimeDuration {
    * @param amount - Number of seconds
    */
   export function seconds(amount: number) {
-    return TimeDuration(amount * SECONDS);
+    return of(amount * SECONDS);
   }
 
   /**
@@ -108,7 +108,7 @@ export namespace TimeDuration {
    * @param amount - Number of minutes
    */
   export function minutes(amount: number) {
-    return TimeDuration(amount * MINUTES);
+    return of(amount * MINUTES);
   }
 
   /**
@@ -122,7 +122,7 @@ export namespace TimeDuration {
    * @param amount - Number of hours
    */
   export function hours(amount: number) {
-    return TimeDuration(amount * HOURS);
+    return of(amount * HOURS);
   }
 
   /**
@@ -136,7 +136,7 @@ export namespace TimeDuration {
    * @param amount - Number of days
    */
   export function days(amount: number) {
-    return TimeDuration(amount * DAYS);
+    return of(amount * DAYS);
   }
 }
 
@@ -232,7 +232,7 @@ export namespace Time {
    * @param duration - A duration value
    */
   export function add(time: Time, duration: TimeDuration): Time {
-    return Time((time as number) + (duration as number));
+    return of((time as number) + (duration as number));
   }
 
   /**
@@ -248,7 +248,7 @@ export namespace Time {
    * @param right - A time value
    */
   export function diff(left: Time, right: Time): TimeDuration {
-    return TimeDuration(left - right);
+    return TimeDuration.of(left - right);
   }
 
   /**
