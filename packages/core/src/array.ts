@@ -11,6 +11,19 @@ type NativeArray<T> = globalThis.Array<T>;
 type UnsafeArray = any;
 
 export type Array<Item> = ReadonlyArray<Item>;
+
+/**
+ * A collection of functions to manipulate readonly arrays.
+ *
+ * @example
+ * ```typescript
+ * import { Array } from '@w5s/core';
+ *
+ * const array = Array.of(2, 1, 3);
+ * const reversed = Array.reversed(array);// [3, 1, 2]
+ * const sorted = Array.sort(array, (left, right) => left === right ? 0 : left < right ? -1 : 1);// [1, 2, 3]
+ * ```
+ */
 export namespace Array {
   const copy = <Item>(array: ReadonlyArray<Item>): NativeArray<Item> => array.slice();
   const emptyArray = Object.freeze([]);
