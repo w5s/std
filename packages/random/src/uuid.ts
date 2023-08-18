@@ -1,4 +1,5 @@
 import { invariant } from '@w5s/core/dist/invariant.js';
+import { DecodeError, Codec } from '@w5s/core/dist/codec.js';
 import type { Tag } from '@w5s/core';
 
 /**
@@ -66,4 +67,19 @@ export namespace UUID {
   export function hasInstance(anyValue: unknown): anyValue is UUID {
     return typeof anyValue === 'string' && uuidRegexp.test(anyValue);
   }
+
+  export const { codecEncode, codecDecode, codecSchema } = Codec({
+    encode: String,
+    decode(value) {
+      return hasInstance(value)
+        ? { _: 'Ok', value }
+        : { _: 'Error', error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }) };
+    },
+    schema() {
+      return {
+        type: 'string',
+        format: 'uuid',
+      };
+    },
+  });
 }

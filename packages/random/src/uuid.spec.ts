@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { Codec } from '@w5s/core/dist/codec.js';
+import { Result } from '@w5s/core';
 import { UUID } from './uuid.js';
 
 describe('UUID', () => {
@@ -27,6 +29,25 @@ describe('UUID', () => {
     });
     it(`should return true for valid UUID`, () => {
       expect(UUID.hasInstance(anyValidUUID)).toBe(true);
+    });
+  });
+  describe('codecEncode', () => {
+    it('should encode value', () => {
+      expect(Codec.encode(UUID, UUID(anyValidUUID))).toEqual(anyValidUUID);
+    });
+  });
+  describe('codecDecode', () => {
+    it('should encode value', () => {
+      const decoded = Codec.decode(UUID, anyValidUUID);
+      expect(decoded).toEqual(Result.Ok(anyValidUUID));
+    });
+  });
+  describe('codecSchema', () => {
+    it('should return value', () => {
+      expect(Codec.schema(UUID)).toEqual({
+        type: 'string',
+        format: 'uuid',
+      });
     });
   });
 });
