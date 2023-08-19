@@ -64,6 +64,17 @@ describe('Canceler', () => {
       Canceler.cancel(canceler);
       expect(fn).toHaveBeenCalledOnce();
     });
+
+    it('should handle gracefully exceptions', () => {
+      const fn = vi.fn(() => {
+        throw new Error('SomeError');
+      });
+      const canceler = Canceler(fn);
+      expect(() => {
+        Canceler.cancel(canceler);
+      }).toThrow();
+      expect(canceler.current).toBe(undefined);
+    });
   });
 });
 

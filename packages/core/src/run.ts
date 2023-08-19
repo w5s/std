@@ -45,10 +45,11 @@ export namespace Canceler {
    * @param canceler
    */
   export function cancel(canceler: Canceler) {
-    if (canceler.current != null) {
-      canceler.current();
+    const { current } = canceler;
+    if (current != null) {
+      clear(canceler);
+      current();
     }
-    clear(canceler);
   }
 }
 
