@@ -27,21 +27,46 @@ export interface Codec<T> {
   /**
    * Returns the decoded `input`, `Result.Ok` or `Result.Error()`
    *
+   * @example
+   * ```typescript
+   * interface SomeObject {
+   *   foo: string
+   * }
+   * const someCodec: Codec<SomeObject> = ...;
+   * const input: unknown = ...;
+   * const decoded = Codec.decode(someCodec, input);
+   * ```
    * @category Codec
+   * @param input - The value to decode
    */
-  readonly codecDecode: (input: unknown) => Result<T, DecodeError>;
+  codecDecode(this: void, input: unknown): Result<T, DecodeError>;
   /**
    * Returns the encoded `input`
    *
+   * @example
+   * ```typescript
+   * interface SomeObject {
+   *   foo: string
+   * }
+   * const someCodec: Codec<SomeObject> = ...;
+   * const someObject: SomeObject = { foo: "bar" }
+   * const encoded = Codec.decode(someCodec, someObject);
+   * ```
    * @category Codec
+   * @param input - The value to encode
    */
-  readonly codecEncode: (input: T) => unknown;
+  codecEncode(this: void, input: T): unknown;
   /**
    * Returns the JSONSchema corresponding to the decoded type
    *
+   * @example
+   * ```typescript
+   * const someCodec: Codec<unknown> = ...;
+   * const jsonSchema = Codec.schema(someCodec);
+   * ```
    * @category Codec
    */
-  readonly codecSchema: () => JSONValue;
+  codecSchema(this: void): JSONValue;
 }
 
 /**
