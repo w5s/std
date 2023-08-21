@@ -28,6 +28,7 @@ describe('index', () => {
         'JSON',
         'lazy',
         'Math',
+        'Number',
         'Option',
         'Record',
         'Ref',
