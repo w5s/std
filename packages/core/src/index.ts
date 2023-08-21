@@ -2,6 +2,7 @@ export * from './aggregateError.js';
 export * from './argumentError.js';
 export * from './array.js';
 export * from './assign.js';
+export * from './boolean.js';
 export * from './comparable.js';
 export * from './console.js';
 export * from './dataError.js';

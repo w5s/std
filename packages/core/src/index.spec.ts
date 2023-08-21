@@ -11,6 +11,7 @@ describe('index', () => {
         'assertNever',
         'assign',
         'AsyncDisposable',
+        'Boolean',
         'Canceler',
         'Comparable',
         'Console',
