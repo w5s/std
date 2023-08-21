@@ -4,9 +4,10 @@ export interface Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberEqual: Equal<number>;
-   * NumberEqual[Equal.equals](0, 1); // true
-   * NumberEqual[Equal.equals](0, 0); // false
+   * type T = // ...
+   * const TEqual: Equal<T>;
+   * TEqual.equals(value, value); // true
+   * TEqual.equals(value, otherValue); // false
    * ```
    * @category Comparator
    */
@@ -16,9 +17,9 @@ export interface Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberEqual: Equal<number>;
-   * NumberEqual['!='](0, 1); // true
-   * NumberEqual['!='](0, 0); // false
+   * const TEqual: Equal<T>;
+   * TEqual['!='](value, otherValue); // true
+   * TEqual['!='](value, value); // false
    * ```
    * @category Comparator
    */
@@ -28,9 +29,10 @@ export interface Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberEqual: Equal<number>;
-   * NumberEqual['=='](0, 0); // true
-   * NumberEqual['=='](0, 1); // false
+   * type T = // ...
+   * const TEqual: Equal<T>;
+   * TEqual['=='](value, value); // true
+   * TEqual['=='](value, otherValue); // false
    * ```
    * @category Comparator
    */
@@ -42,13 +44,13 @@ export interface Equal<T> {
  *
  * @example
  * ```ts
- * const NumberEqual = Equal<number>({
- *   '==': (left, right) => left === right,
+ * type T;
+ * const TEqual = Equal<T>({
+ *   '==': (left, right) => { /* ... *\/ },
  * });
- * NumberEqual['=='](0, 0); // true;
- * NumberEqual['=='](0, 1); // false;
- * NumberEqual['!='](0, 0); // false;
- * NumberEqual['!='](0, 1); // true;
+ * const value: T;
+ *
+ * TEqual['=='](value, value); // true;
  * ```
  * @category Functor
  */
