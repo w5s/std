@@ -72,7 +72,7 @@ export function Task<Value, Error = never>(
       },
     });
     const handleResult = (result: Result<Value, Error>) => {
-      if (result._ === 'Ok') {
+      if (result.ok) {
         resolveTask(result.value);
       } else {
         rejectTask(result.error);

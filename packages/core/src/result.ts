@@ -121,15 +121,8 @@ export namespace Result {
   export function hasInstance(anyValue: unknown): anyValue is Result<unknown, unknown> {
     return (
       typeof anyValue === 'object' &&
-      anyValue !== null &&
-      (isOk(
-        // @ts-ignore compare type property
-        anyValue
-      ) ||
-        isError(
-          // @ts-ignore compare type property
-          anyValue
-        ))
+      anyValue !== null && // @ts-ignore compare type property
+      (anyValue._ === Ok.typeName || anyValue._ === Error.typeName)
     );
   }
 
@@ -148,7 +141,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
-    return anyValue._ === Ok.typeName;
+    return anyValue.ok;
   }
 
   /**
@@ -166,7 +159,7 @@ export namespace Result {
    * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {
-    return anyValue._ === Error.typeName;
+    return !isOk(anyValue);
   }
 
   /**

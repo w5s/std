@@ -7,7 +7,7 @@ import type { Int } from './integer.js';
 
 const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', ok: true, value });
 const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', ok: false, error });
-const isOk = <V>(result: Result<V, unknown>): result is Result.Ok<V> => result._ === 'Ok';
+const isOk = <V>(result: Result<V, unknown>): result is Result.Ok<V> => result.ok;
 const identity = <V>(_: V) => _;
 const emptySchema = () => ({});
 
