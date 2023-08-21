@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Number } from './number.js';
-import { assertType } from './testing.js';
+import { assertType, describeComparable } from './testing.js';
 
 describe('Number', () => {
   describe('.hasInstance', () => {
@@ -20,5 +20,11 @@ describe('Number', () => {
         assertType<typeof someValue, string>(true);
       }
     });
+  });
+
+  describeComparable({ describe, it, expect })(Number, {
+    inferior: () => -1,
+    base: () => 0,
+    superior: () => 1,
   });
 });
