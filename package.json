@@ -95,7 +95,7 @@
     "@w5s/eslint-config": "1.4.0",
     "@w5s/ts-config": "1.0.5",
     "concurrently": "8.2.0",
-    "cspell": "7.0.0",
+    "cspell": "7.0.1",
     "eslint": "8.47.0",
     "lerna": "7.1.5",
     "markdown-magic": "2.6.1",
