@@ -1,5 +1,17 @@
 import type { Result } from './result.js';
 
+const NativeJSON = globalThis.JSON;
+const Ok = <V>(value: V): Result<V, never> => ({
+  _: 'Ok',
+  ok: true,
+  value,
+});
+const Err = <E>(error: E): Result<never, E> => ({
+  _: 'Error',
+  ok: false,
+  error,
+});
+
 export type JSONValue =
   | null
   | boolean
@@ -11,16 +23,6 @@ export type JSONValue =
     };
 
 export namespace JSON {
-  const NativeJSON = globalThis.JSON;
-  const resultOk = <V>(value: V): Result<V, never> => ({
-    _: 'Ok',
-    value,
-  });
-  const resultError = <E>(error: E): Result<never, E> => ({
-    _: 'Error',
-    error,
-  });
-
   /**
    * Parse using `JSON.parse()` and return a `Result`.
    *
@@ -36,9 +38,9 @@ export namespace JSON {
    */
   export function parse(anyString: string): Result<JSONValue, SyntaxError> {
     try {
-      return resultOk(NativeJSON.parse(anyString));
+      return Ok(NativeJSON.parse(anyString));
     } catch (error: unknown) {
-      return resultError(error as SyntaxError);
+      return Err(error as SyntaxError);
     }
   }
 
@@ -61,9 +63,9 @@ export namespace JSON {
    */
   export function stringify(anyValue: unknown): Result<string, TypeError> {
     try {
-      return resultOk(NativeJSON.stringify(anyValue));
+      return Ok(NativeJSON.stringify(anyValue));
     } catch (error: unknown) {
-      return resultError(error as TypeError);
+      return Err(error as TypeError);
     }
   }
 }

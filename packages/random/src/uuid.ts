@@ -72,8 +72,12 @@ export namespace UUID {
     encode: String,
     decode(value) {
       return hasInstance(value)
-        ? { _: 'Ok', value }
-        : { _: 'Error', error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }) };
+        ? { _: 'Ok', ok: true, value }
+        : {
+            _: 'Error',
+            ok: false,
+            error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }),
+          };
     },
     schema() {
       return {

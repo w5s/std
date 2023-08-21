@@ -74,8 +74,8 @@ export function unsafeRun<Value, Error>(
   };
   let rejectHandler = (_error: unknown) => {};
   const runValue: void | Promise<void> = task.taskRun(
-    (value) => resolveHandler({ _: 'Ok', value }),
-    (error) => resolveHandler({ _: 'Error', error }),
+    (value) => resolveHandler({ _: 'Ok', ok: true, value }),
+    (error) => resolveHandler({ _: 'Error', ok: false, error }),
     cancelerRef
   );
   // Try to catch promise errors

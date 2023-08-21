@@ -5,8 +5,8 @@ import type { Result } from './result.js';
 import type { JSONValue } from './json.js';
 import type { Int } from './integer.js';
 
-const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', value });
-const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', error });
+const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', ok: true, value });
+const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', ok: false, error });
 const isOk = <V>(result: Result<V, unknown>): result is Result.Ok<V> => result._ === 'Ok';
 const identity = <V>(_: V) => _;
 const emptySchema = () => ({});

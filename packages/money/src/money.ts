@@ -25,6 +25,7 @@ const createOperator =
     Currency['=='](left.currency, right.currency)
       ? {
           _: 'Ok',
+          ok: true,
           value: Money({
             currency: left.currency,
             amount: combineFn(left.amount, right.amount),
@@ -32,6 +33,7 @@ const createOperator =
         }
       : {
           _: 'Error',
+          ok: false,
           error: ArgumentError({
             message: `Incompatible currencies ${left.currency.code} and ${right.currency.code}`,
           }),

@@ -309,7 +309,7 @@ function andThenResult<Value, ValueTo, Error>(
   task: Task<Value, Error>,
   thenResultFn: (result: Result<Value, Error>) => Task<ValueTo, Error>
 ) {
-  const thenTask = Task.andThen(task, (value) => thenResultFn({ _: 'Ok', value }));
-  const elseTask = Task.orElse(thenTask, (error) => thenResultFn({ _: 'Error', error }));
+  const thenTask = Task.andThen(task, (value) => thenResultFn({ _: 'Ok', ok: true, value }));
+  const elseTask = Task.orElse(thenTask, (error) => thenResultFn({ _: 'Error', ok: false, error }));
   return elseTask;
 }

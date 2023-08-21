@@ -41,6 +41,10 @@ export namespace Result {
     extends DataObject<{
       [DataObject.type]: 'Ok';
       /**
+       * `true` only for Ok objects
+       */
+      ok: true;
+      /**
        * The success value
        */
       value: V;
@@ -62,6 +66,7 @@ export namespace Result {
   export function Ok(resultValue?: unknown): Result<unknown, never> {
     return {
       _: Ok.typeName,
+      ok: true,
       value: resultValue,
     };
   }
@@ -70,6 +75,10 @@ export namespace Result {
   export interface Error<E>
     extends DataObject<{
       [DataObject.type]: 'Error';
+      /**
+       * `false` only for Error objects
+       */
+      ok: false;
       /**
        * The error value
        */
@@ -92,6 +101,7 @@ export namespace Result {
   export function Error(resultError?: unknown): Result<never, unknown> {
     return {
       _: Error.typeName,
+      ok: false,
       error: resultError,
     };
   }

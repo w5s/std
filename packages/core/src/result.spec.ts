@@ -10,21 +10,21 @@ describe('Result', () => {
 
   describe('.Ok', () => {
     it('should return a new object', () => {
-      expect(Result.Ok(anyValue)).toEqual({ _: 'Ok', value: anyValue });
+      expect(Result.Ok(anyValue)).toEqual({ _: 'Ok', ok: true, value: anyValue });
     });
     it('should return void result when value is omitted', () => {
       const result = Result.Ok();
-      expect(result).toEqual({ _: 'Ok', value: undefined });
+      expect(result).toEqual({ _: 'Ok', ok: true, value: undefined });
       assertType<typeof result, Result<void, never>>(true);
     });
   });
   describe('.Error', () => {
     it('should return a new object', () => {
-      expect(Result.Error(anyValue)).toEqual({ _: 'Error', error: anyValue });
+      expect(Result.Error(anyValue)).toEqual({ _: 'Error', ok: false, error: anyValue });
     });
     it('should return void result when value is omitted', () => {
       const result = Result.Error();
-      expect(result).toEqual({ _: 'Error', value: undefined });
+      expect(result).toEqual({ _: 'Error', ok: false, error: undefined });
       assertType<typeof result, Result<never, void>>(true);
     });
   });

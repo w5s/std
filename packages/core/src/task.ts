@@ -534,12 +534,12 @@ export namespace Task {
 function resultOk(): Result<void, never>;
 function resultOk<V>(value: V): Result<V, never>;
 function resultOk(value?: unknown): Result<unknown, never> {
-  return { _: 'Ok', value };
+  return { _: 'Ok', ok: true, value };
 }
 function resultError(): Result<never, void>;
 function resultError<E>(error: E): Result<never, E>;
 function resultError(error?: unknown): Result<never, unknown> {
-  return { _: 'Error', error };
+  return { _: 'Error', ok: false, error };
 }
 
 // utils
