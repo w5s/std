@@ -7,6 +7,17 @@ const NumberComparable = Comparable<number>({
 });
 
 /**
+ * A collection of functions to manipulate `number`
+ *
+ * @example
+ * ```typescript
+ * import { Number } from '@w5s/core';
+ *
+ * if (Number.hasInstance(unknownValue)) {
+ *   // typeof unknownValue === 'number'
+ *   Number['=='](unknownValue, unknownValue + 1);// false
+ * }
+ * ```
  * @namespace
  */
 export const Number = {

@@ -1,4 +1,14 @@
 /**
+ * A collection of functions to manipulate `boolean`
+ *
+ * @example
+ * ```typescript
+ * import { Boolean } from '@w5s/core';
+ *
+ * if (Boolean.hasInstance(unknownValue)) {
+ *   // typeof unknownValue === 'boolean'
+ * }
+ * ```
  * @namespace
  */
 export const Boolean = {
