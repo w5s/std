@@ -3,10 +3,14 @@ import type { Option } from './option.js';
 import type { Array } from './array.js';
 
 const NativeString = globalThis.String;
+const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
 
-export namespace String {
-  const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
-
+/**
+ * A collection of functions to manipulate `string`
+ *
+ * @namespace
+ */
+export const String = {
   /**
    * Returns a string created by using the specified code point.
    *
@@ -17,9 +21,9 @@ export namespace String {
    * @category Constructor
    * @param code - an array of string codes
    */
-  export function fromCodePoint(...code: number[]): string {
+  fromCodePoint(...code: number[]): string {
     return NativeString.fromCodePoint(...code);
-  }
+  },
 
   /**
    * Return the character at the `index` position
@@ -35,11 +39,11 @@ export namespace String {
    * @param string - The string
    * @param index - The zero based position
    */
-  export function at(string: string, index: number): Option<string> {
+  at(string: string, index: number): Option<string> {
     const stringIndex = index < 0 ? index + string.length : index;
 
     return string[stringIndex] ?? undefined;
-  }
+  },
 
   /**
    * Joins the given array of strings.
@@ -51,9 +55,9 @@ export namespace String {
    * @category Guard
    * @param parts - a tested value
    */
-  export function concat(parts: Array<string>): string {
+  concat(parts: Array<string>): string {
     return parts.join('');
-  }
+  },
 
   /**
    * Return true if `anyValue` is a `string`
@@ -66,9 +70,9 @@ export namespace String {
    * @category Guard
    * @param anyValue - a tested value
    */
-  export function hasInstance(anyValue: unknown): anyValue is string {
+  hasInstance(anyValue: unknown): anyValue is string {
     return typeof anyValue === 'string';
-  }
+  },
 
   /**
    * Return true if the size of the array is 0
@@ -81,9 +85,9 @@ export namespace String {
    * @category Guard
    * @param string - The string
    */
-  export function isEmpty(string: string): boolean {
+  isEmpty(string: string): boolean {
     return string.length === 0;
-  }
+  },
 
   /**
    * Joins the given array of strings.
@@ -96,9 +100,9 @@ export namespace String {
    * @param separator - the separator
    * @param parts - a tested value
    */
-  export function join(separator: string, parts: Array<string>): string {
+  join(separator: string, parts: Array<string>): string {
     return parts.join(separator);
-  }
+  },
 
   /**
    * Return the length of the string
@@ -111,9 +115,9 @@ export namespace String {
    * @category Accessor
    * @param string - The string
    */
-  export function size(string: string): Int {
+  size(string: string): Int {
     return string.length as Int;
-  }
+  },
 
   /**
    * Returns the index of the first occurrence of `searchString` in a string.
@@ -128,9 +132,9 @@ export namespace String {
    * @param searchString - The string to search
    * @param fromIndex - The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */
-  export function indexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
+  indexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
     return string.length > 0 ? indexToOption(string.indexOf(searchString, fromIndex)) : undefined;
-  }
+  },
 
   /**
    * Returns the index of the last occurrence of `searchString` in a string.
@@ -145,9 +149,9 @@ export namespace String {
    * @param searchString - The string to search
    * @param fromIndex - The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
    */
-  export function lastIndexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
+  lastIndexOf(string: string, searchString: string, fromIndex?: number): Option<Int> {
     return string.length > 0 ? indexToOption(string.lastIndexOf(searchString, fromIndex)) : undefined;
-  }
+  },
 
   /**
    * Returns the index of the last occurrence of `searchString` in a string.
@@ -160,9 +164,9 @@ export namespace String {
    * @param string - The string
    * @param searchString - The string to search
    */
-  export function includes(string: string, searchString: string): boolean {
+  includes(string: string, searchString: string): boolean {
     return string.includes(searchString);
-  }
+  },
 
   /**
    * Split a string into substrings using the specified separator and return them as an array.
@@ -176,7 +180,7 @@ export namespace String {
    * @param separator - A string that identifies character or characters to use in separating the string. If omitted, a single-element array containing the entire string is returned.
    * @param limit - A value used to limit the number of elements returned in the array.
    */
-  export function split(
+  split(
     string: string,
     separator: string | RegExp | { [Symbol.split](string: string, limit?: number): string[] },
     limit?: number
@@ -186,5 +190,5 @@ export namespace String {
       separator,
       limit
     );
-  }
-}
+  },
+};
