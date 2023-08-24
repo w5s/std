@@ -1,9 +1,16 @@
 import type { Int } from './integer.js';
 import type { Option } from './option.js';
 import type { Array } from './array.js';
+import { Comparable } from './comparable.js';
 
 const NativeString = globalThis.String;
 const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
+
+const StringComparable = Comparable<string>({
+  compare(left, right) {
+    return left === right ? 0 : left < right ? -1 : 1;
+  },
+});
 
 /**
  * A collection of functions to manipulate `string`
@@ -11,6 +18,8 @@ const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (
  * @namespace
  */
 export const String = {
+  ...StringComparable,
+
   /**
    * Returns a string created by using the specified code point.
    *

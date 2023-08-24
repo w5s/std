@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Option } from './option.js';
 import { String } from './string.js';
+import { describeComparable } from './testing.js';
 
 describe('String', () => {
   describe('.fromCodePoint', () => {
@@ -99,5 +100,10 @@ describe('String', () => {
       expect(String.includes(string, 'abcd')).toEqual(false);
       expect(String.includes(string, 'absent')).toEqual(false);
     });
+  });
+  describeComparable({ describe, it, expect })(String, {
+    inferior: () => 'a',
+    base: () => 'b',
+    superior: () => 'c',
   });
 });
