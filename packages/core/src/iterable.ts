@@ -1,20 +1,18 @@
 import type { Int } from './integer.js';
 
 /**
- * Iterable constructor
+ * A collection of functions to manipulate Iterable
  *
  * @example
  * ```typescript
- * const iterable = Iterable(() => ({
+ * import { Iterable } from '@w5s/core';
+ *
+ * const iterable = Iterable.create(() => ({
  *   next() { ... }
  * }))
  * ```
- * @category Constructor
- * @param iteratorFn - function that creates a new iterator
+ * @namespace
  */
-export function Iterable<Value>(iteratorFn: () => Iterator<Value>): Iterable<Value> {
-  return Iterable.create(iteratorFn);
-}
 export namespace Iterable {
   const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
   const resultValue = <V>(value: V) => ({ value, done: false });
