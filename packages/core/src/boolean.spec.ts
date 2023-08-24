@@ -21,4 +21,10 @@ describe('Boolean', () => {
       }
     });
   });
+
+  // describeComparable({ describe, it, expect })(Boolean, {
+  //   inferior: () => false,
+  //   base: () => false,
+  //   superior: () => true,
+  // });
 });

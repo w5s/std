@@ -1,3 +1,11 @@
+import { Comparable } from './comparable.js';
+
+const BooleanComparable = Comparable<boolean>({
+  compare(left, right) {
+    return left === right ? 0 : left < right ? -1 : 1;
+  },
+});
+
 /**
  * A collection of functions to manipulate `boolean`
  *
@@ -12,6 +20,8 @@
  * @namespace
  */
 export const Boolean = {
+  ...BooleanComparable,
+
   /**
    * Return true if `anyValue` is a `boolean`
    *
