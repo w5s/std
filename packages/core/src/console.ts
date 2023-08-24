@@ -1,6 +1,11 @@
 /* eslint-disable no-console */
 import type { Task } from './task.js';
 
+/**
+ * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)
+ *
+ * @namespace
+ */
 export namespace Console {
   const createLogTask = (
     method: 'debug' | 'log' | 'info' | 'warn' | 'error',

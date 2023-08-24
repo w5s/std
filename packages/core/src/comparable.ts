@@ -1,5 +1,8 @@
 import type { Equal } from './equal.js';
 
+/**
+ * Module interface for values that have total order
+ */
 export interface Comparable<T> extends Equal<T> {
   /**
    * Return a number that represents comparison

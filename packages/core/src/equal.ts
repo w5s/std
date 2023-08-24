@@ -1,3 +1,6 @@
+/**
+ * Module interface for values that have equivalence relation
+ */
 export interface Equal<T> {
   /**
    * Alias to '=='

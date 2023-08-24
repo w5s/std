@@ -1,5 +1,11 @@
 import type { Int } from './integer.js';
 
+/**
+ * A collection of functions for mathematics and constants
+ *
+ * @example
+ * @namespace
+ */
 export namespace Math {
   const NativeMath = globalThis.Math;
   const alias = (name: keyof typeof NativeMath, nameAlias?: string) => {
