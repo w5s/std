@@ -8,7 +8,16 @@ describe('describeEqual', () => {
   });
 
   describeEqual({ describe, it, expect })(NumberEqual, {
-    base: () => 1,
-    different: () => [2, -1, 0],
+    equivalent: () => [
+      [-1, -1],
+      [0, 0],
+      [1, 1],
+      [1.1, 1.1],
+    ],
+    different: () => [
+      [1, -1],
+      [0.1, 0],
+      [Number.NaN, Number.NaN],
+    ],
   });
 });

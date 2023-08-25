@@ -45,11 +45,10 @@ export function describeComparable({ describe, it, expect }: TestingLibrary) {
       });
     });
 
-    const equalValues = inferiorData();
+    const equalData = inferiorData();
     describeEqual({ describe, it, expect })(subject, {
-      base: () => equalValues.inferiorBase,
-      equivalent: () => inferiorData().inferiorBase,
-      different: (_baseValue) => equalValues.inferiorValues,
+      equivalent: equivalentDefault,
+      different: () => equalData.inferiorValues.map((equalValue) => [equalValue, equalData.inferiorBase]),
     });
 
     describe('<', () => {
