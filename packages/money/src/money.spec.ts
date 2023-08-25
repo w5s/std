@@ -16,7 +16,7 @@ describe('Money', () => {
     symbol: '€',
   });
   const currencyDollar = Currency({
-    name: 'Euro',
+    name: 'Dollar',
     code: 'USD',
     symbol: '$',
   });
@@ -34,9 +34,14 @@ describe('Money', () => {
   });
 
   describeComparable({ describe, expect, it })(Money, {
-    base: () => EUR(anyAmount),
-    inferior: (base) => [EUR(base.amount - 1), Money({ currency: anyCurrency, amount: base.amount })],
-    superior: (base) => [EUR(base.amount + 1), USD(base.amount)],
+    ordered: () => [
+      // Money({ currency: anyCurrency, amount: anyAmount }),
+      EUR(anyAmount - 1),
+      EUR(anyAmount),
+      EUR(anyAmount + 1),
+      USD(anyAmount),
+    ],
+    equivalent: () => [[EUR(anyAmount), EUR(anyAmount)]],
   });
 
   describe('+', () => {

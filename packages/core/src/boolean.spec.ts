@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Boolean } from './boolean.js';
-import { assertType } from './testing.js';
+import { assertType, describeComparable } from './testing.js';
 
 describe('Boolean', () => {
   describe('.hasInstance', () => {
@@ -22,9 +22,11 @@ describe('Boolean', () => {
     });
   });
 
-  // describeComparable({ describe, it, expect })(Boolean, {
-  //   inferior: () => false,
-  //   base: () => false,
-  //   superior: () => true,
-  // });
+  describeComparable({ describe, it, expect })(Boolean, {
+    ordered: () => [false, true],
+    equivalent: () => [
+      [true, true],
+      [false, false],
+    ],
+  });
 });

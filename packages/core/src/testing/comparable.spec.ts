@@ -8,8 +8,11 @@ describe('describeComparable', () => {
   });
 
   describeComparable({ describe, it, expect })(NumberEqual, {
-    base: () => 1,
-    inferior: (base) => [base - 1, base / 2],
-    superior: (base) => [base + 1, base * 2],
+    ordered: () => [-1, 0, 1],
+    equivalent: () => [
+      [0, 0],
+      [1, 1],
+      [1.1, 1.1],
+    ],
   });
 });

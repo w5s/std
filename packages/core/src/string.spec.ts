@@ -102,8 +102,10 @@ describe('String', () => {
     });
   });
   describeComparable({ describe, it, expect })(String, {
-    inferior: () => 'a',
-    base: () => 'b',
-    superior: () => 'c',
+    ordered: () => ['a', 'b', 'c'],
+    equivalent: () => [
+      ['', ''],
+      ['ab', 'ab'],
+    ],
   });
 });

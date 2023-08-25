@@ -23,8 +23,11 @@ describe('Number', () => {
   });
 
   describeComparable({ describe, it, expect })(Number, {
-    inferior: () => -1,
-    base: () => 0,
-    superior: () => 1,
+    ordered: () => [-1, 0, 1],
+    equivalent: () => [
+      [0, 0],
+      [1, 1],
+      [1.1, 1.1],
+    ],
   });
 });

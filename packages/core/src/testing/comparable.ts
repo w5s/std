@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Comparable } from '../comparable.js';
 import { describeEqual } from './equal.js';
 import type { TestingLibrary } from './type.js';
@@ -6,83 +7,101 @@ export function describeComparable({ describe, it, expect }: TestingLibrary) {
   return <T>(
     subject: Comparable<T>,
     properties: {
-      base: () => T;
-      inferior: (base: T) => T | T[];
-      superior: (base: T) => T | T[];
+      ordered: () => T[];
+      equivalent: () => [T, T][];
     }
   ) => {
-    const { base, inferior, superior } = properties;
-    const toArray = (arrayOrValue: T | T[]) => (Array.isArray(arrayOrValue) ? arrayOrValue : [arrayOrValue]);
+    const { equivalent: equivalentDefault, ordered } = properties;
+    const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
+    const inferiorData = () => {
+      const values = ordered();
+      return {
+        // eslint-disable-next-line unicorn/prefer-at
+        inferiorBase: values[values.length - 1]!,
+        inferiorValues: values.slice(1, -1),
+      };
+    };
+    const superiorData = () => {
+      const values = ordered();
+      return {
+        superiorBase: values[0]!,
+        superiorValues: values.slice(1),
+      };
+    };
 
     describe('.compare', () => {
-      const baseValue = base();
-      it.each(toArray(superior(baseValue)))('should return -1 when left < right', (superiorValue) => {
-        expect(subject.compare(baseValue, superiorValue)).toBeLessThan(0);
+      const { superiorBase, superiorValues } = superiorData();
+      it.each(superiorValues)('should return -1 when left < right', (superiorValue) => {
+        expect(subject.compare(superiorBase, superiorValue)).toBeLessThan(0);
       });
-      it('should return 0 when left == right', () => {
-        expect(subject.compare(baseValue, base())).toBe(0);
+      it.each(equivalent())('should return 0 when left == right', ({ left, right }) => {
+        // const [left, right] = args;
+        // expect(args).toEqual([]);
+        expect(subject.compare(left, right)).toBe(0);
       });
-      it.each(toArray(inferior(baseValue)))('should return 1 when left > right', (inferiorValue) => {
-        expect(subject.compare(baseValue, inferiorValue)).toBeGreaterThan(0);
+      const { inferiorBase, inferiorValues } = inferiorData();
+      it.each(inferiorValues)('should return 1 when left > right', (inferiorValue) => {
+        expect(subject.compare(inferiorBase, inferiorValue)).toBeGreaterThan(0);
       });
     });
 
+    const equalValues = inferiorData();
     describeEqual({ describe, it, expect })(subject, {
-      base,
-      equivalent: base,
-      different: (baseValue) => toArray(inferior(baseValue)).concat(toArray(superior(baseValue))),
+      base: () => equalValues.inferiorBase,
+      equivalent: () => inferiorData().inferiorBase,
+      different: (_baseValue) => equalValues.inferiorValues,
     });
 
     describe('<', () => {
-      const baseValue = base();
-
-      it.each(toArray(superior(baseValue)))('should return true when left < right', (superiorValue) => {
-        expect(subject['<'](baseValue, superiorValue)).toBe(true);
+      const { superiorBase, superiorValues } = superiorData();
+      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
+        expect(subject['<'](superiorBase, superiorValue)).toBe(true);
       });
-      it('should return false when left == right', () => {
-        expect(subject['<'](baseValue, base())).toBe(false);
+      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+        expect(subject['<'](left, right)).toBe(false);
       });
-      it.each(toArray(inferior(baseValue)))('should return false when left > right', (inferiorValue) => {
-        expect(subject['<'](baseValue, inferiorValue)).toBe(false);
+      const { inferiorBase, inferiorValues } = inferiorData();
+      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
+        expect(subject['<'](inferiorBase, inferiorValue)).toBe(false);
       });
     });
     describe('<=', () => {
-      const baseValue = base();
-
-      it.each(toArray(superior(baseValue)))('should return true when left < right', (superiorValue) => {
-        expect(subject['<='](baseValue, superiorValue)).toBe(true);
+      const { superiorBase, superiorValues } = superiorData();
+      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
+        expect(subject['<='](superiorBase, superiorValue)).toBe(true);
       });
-      it('should return true when left == right', () => {
-        expect(subject['<='](baseValue, base())).toBe(true);
+      it.each(equivalent())('should return true when left == right', ({ left, right }) => {
+        expect(subject['<='](left, right)).toBe(true);
       });
-      it.each(toArray(inferior(baseValue)))('should return false when left > right', (inferiorValue) => {
-        expect(subject['<='](baseValue, inferiorValue)).toBe(false);
+      const { inferiorBase, inferiorValues } = inferiorData();
+      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
+        expect(subject['<='](inferiorBase, inferiorValue)).toBe(false);
       });
     });
     describe('>', () => {
-      const baseValue = base();
-
-      it.each(toArray(superior(baseValue)))('should return false when left < right', (superiorValue) => {
-        expect(subject['>'](baseValue, superiorValue)).toBe(false);
+      const { superiorBase, superiorValues } = superiorData();
+      it.each(superiorValues)('should return false when left < right', (superiorValue) => {
+        expect(subject['>'](superiorBase, superiorValue)).toBe(false);
       });
-      it('should return false when left == right', () => {
-        expect(subject['>'](baseValue, base())).toBe(false);
+      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(false);
       });
-      it.each(toArray(inferior(baseValue)))('should return true when left > right', (inferiorValue) => {
-        expect(subject['>'](baseValue, inferiorValue)).toBe(true);
+      const { inferiorBase, inferiorValues } = inferiorData();
+      it.each(inferiorValues)('should return true when left > right', (inferiorValue) => {
+        expect(subject['>'](inferiorBase, inferiorValue)).toBe(true);
       });
     });
     describe('>=', () => {
-      const baseValue = base();
-
-      it.each(toArray(superior(baseValue)))('should return true when left < right', (superiorValue) => {
-        expect(subject['>'](baseValue, superiorValue)).toBe(false);
+      const { superiorBase, superiorValues } = superiorData();
+      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
+        expect(subject['>'](superiorBase, superiorValue)).toBe(false);
       });
-      it('should return false when left == right', () => {
-        expect(subject['>'](baseValue, base())).toBe(false);
+      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(false);
       });
-      it.each(toArray(inferior(baseValue)))('should return false when left > right', (inferiorValue) => {
-        expect(subject['>'](baseValue, inferiorValue)).toBe(true);
+      const { inferiorBase, inferiorValues } = inferiorData();
+      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
+        expect(subject['>'](inferiorBase, inferiorValue)).toBe(true);
       });
     });
   };

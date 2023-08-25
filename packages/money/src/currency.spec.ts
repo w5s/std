@@ -70,8 +70,14 @@ describe('Currency', () => {
   });
 
   describeComparable({ describe, expect, it })(Currency, {
-    base: () => Currency({ ...anyProperties, code: 'B' }),
-    inferior: (base) => Currency({ ...base, code: 'A' }),
-    superior: (base) => Currency({ ...base, code: 'C' }),
+    ordered: () => [
+      Currency({ ...anyProperties, code: 'A' }),
+      Currency({ ...anyProperties, code: 'B' }),
+      Currency({ ...anyProperties, code: 'C' }),
+    ],
+    equivalent: () => [
+      [Currency({ ...anyProperties, code: 'A' }), Currency({ ...anyProperties, code: 'A' })],
+      [Currency({ ...anyProperties, code: 'B' }), Currency({ ...anyProperties, code: 'B' })],
+    ],
   });
 });
