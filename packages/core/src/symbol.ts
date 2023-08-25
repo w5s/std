@@ -21,7 +21,7 @@ declare global {
 }
 const GlobalSymbol = globalThis.Symbol;
 
-export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype'> = {
+export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'metadata'> = {
   iterator: GlobalSymbol.iterator,
   asyncIterator: GlobalSymbol.asyncIterator,
   hasInstance: GlobalSymbol.hasInstance,
