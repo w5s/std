@@ -1896,18 +1896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:1.2.0":
-  version: 1.2.0
-  resolution: "@w5s/conventional-changelog@npm:1.2.0"
-  dependencies:
-    "@commitlint/types": ^17.0.0
-    emoji-regex: ^10.2.1
-    gitmojis: ^3.13.4
-  checksum: 42fbdb2511dd66e9d4749ffe0dc2d1d14b9ba499113e1d1a75af23157618498aa9f4d16032145e5ff3affff5c3d1e9fbd28740c1ac2f92bbac7ab823801518b9
-  languageName: node
-  linkType: hard
-
-"@w5s/conventional-changelog@npm:^1.2.1":
+"@w5s/conventional-changelog@npm:1.2.1, @w5s/conventional-changelog@npm:^1.2.1":
   version: 1.2.1
   resolution: "@w5s/conventional-changelog@npm:1.2.1"
   dependencies:
@@ -1925,7 +1914,7 @@ __metadata:
     "@size-limit/preset-small-lib": 8.2.6
     "@types/node": 17.0.45
     "@w5s/commitlint-config": 1.2.1
-    "@w5s/conventional-changelog": 1.2.0
+    "@w5s/conventional-changelog": 1.2.1
     "@w5s/cspell-config": 1.1.4
     "@w5s/eslint-config": 1.4.1
     "@w5s/ts-config": 1.0.6
