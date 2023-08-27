@@ -6,15 +6,15 @@ import { UUID } from './uuid.js';
 describe('UUID', () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669';
 
-  describe.each([UUID, UUID.of])('()', (create) => {
+  describe('of()', () => {
     it('should return a new representation', () => {
-      const uuid = create(anyValidUUID);
+      const uuid = UUID.of(anyValidUUID);
       expect(uuid).toEqual(anyValidUUID);
     });
     it.each([undefined, null, [], '', 'non uuid'])('should throw TypeError when invalid value is passed', (value) => {
       expect(() =>
         // @ts-expect-error test it anyway
-        create(value)
+        UUID.of(value)
       ).toThrow();
     });
   });
@@ -33,7 +33,7 @@ describe('UUID', () => {
   });
   describe('codecEncode', () => {
     it('should encode value', () => {
-      expect(Codec.encode(UUID, UUID(anyValidUUID))).toEqual(anyValidUUID);
+      expect(Codec.encode(UUID, UUID.of(anyValidUUID))).toEqual(anyValidUUID);
     });
   });
   describe('codecDecode', () => {

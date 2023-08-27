@@ -8,21 +8,34 @@ import type { Tag } from '@w5s/core';
 export type UUID = Tag<string, { UUID: true }>;
 
 const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
+const isUUID = (anyValue: unknown): anyValue is UUID => typeof anyValue === 'string' && uuidRegexp.test(anyValue);
+const UUIDCodec = Codec<UUID>({
+  encode: String,
+  decode(value) {
+    return isUUID(value)
+      ? { _: 'Ok', ok: true, value }
+      : {
+          _: 'Error',
+          ok: false,
+          error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }),
+        };
+  },
+  schema() {
+    return {
+      type: 'string',
+      format: 'uuid',
+    };
+  },
+});
 
 /**
- * UUID constructor
+ * A collection of functions to manipulate UUID
  *
- * @example
- * ```typescript
- * const uuid = UUID('1c19548b-7cac-4222-b722-dc38f2870669');
- * ```
- * @category Constructor
- * @param value - the string representation
+ * @namespace
  */
-export function UUID(value: `${string}-${string}-${string}-${string}`): UUID {
-  return UUID.of(value);
-}
-export namespace UUID {
+export const UUID = {
+  ...UUIDCodec,
+
   /**
    * Returns an `UUID` with only `0`
    *
@@ -32,9 +45,9 @@ export namespace UUID {
    * ```
    * @category Constructor
    */
-  export function empty(): UUID {
+  empty(): UUID {
     return '00000000-0000-0000-0000-000000000000' as UUID;
-  }
+  },
 
   /**
    * UUID constructor
@@ -46,11 +59,10 @@ export namespace UUID {
    * @category Constructor
    * @param value - the string representation
    */
-  export function of(value: `${string}-${string}-${string}-${string}`): UUID {
-    invariant(hasInstance(value), `${value} is not a valid UUID`);
-
+  of(value: `${string}-${string}-${string}-${string}`): UUID {
+    invariant(isUUID(value), `${value} is not a valid UUID`);
     return value;
-  }
+  },
 
   /**
    * Returns `true` if `anyValue` is a valid `UUID`
@@ -64,26 +76,7 @@ export namespace UUID {
    * @category Guard
    * @param anyValue - the value to tested
    */
-  export function hasInstance(anyValue: unknown): anyValue is UUID {
-    return typeof anyValue === 'string' && uuidRegexp.test(anyValue);
-  }
-
-  export const { codecEncode, codecDecode, codecSchema } = Codec({
-    encode: String,
-    decode(value) {
-      return hasInstance(value)
-        ? { _: 'Ok', ok: true, value }
-        : {
-            _: 'Error',
-            ok: false,
-            error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }),
-          };
-    },
-    schema() {
-      return {
-        type: 'string',
-        format: 'uuid',
-      };
-    },
-  });
-}
+  hasInstance(anyValue: unknown): anyValue is UUID {
+    return isUUID(anyValue);
+  },
+};
