@@ -9,8 +9,9 @@ export interface Comparable<T> extends Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Comparable<number>;
-   * const sorted = [3, 1, 1].sort(NumberCompare.compare);
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const sorted = [3, 1, 1].sort(TCompare.compare);
    * ```
    * @category Comparator
    */
@@ -20,10 +21,13 @@ export interface Comparable<T> extends Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['<='](0, 0); // true
-   * NumberCompare['<='](0, 1); // true
-   * NumberCompare['<='](0, -1); // false
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const greaterT: T;
+   * TCompare['<='](smallerT, smallerT); // true
+   * TCompare['<='](smallerT, greaterT); // true
+   * TCompare['<='](greaterT, smallerT); // false
    * ```
    * @category Comparator
    */
@@ -33,10 +37,13 @@ export interface Comparable<T> extends Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['<'](0, 0); // false
-   * NumberCompare['<'](0, 1); // true
-   * NumberCompare['<'](0, -1); // false
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const greaterT: T;
+   * TCompare['<'](smallerT, smallerT); // false
+   * TCompare['<'](smallerT, greaterT); // true
+   * TCompare['<'](greaterT, smallerT); // false
    * ```
    * @category Comparator
    */
@@ -46,10 +53,13 @@ export interface Comparable<T> extends Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['>='](0, 0); // true
-   * NumberCompare['>='](0, 1); // false
-   * NumberCompare['>='](0, -1); // true
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const greaterT: T;
+   * TCompare['>='](smallerT, smallerT); // true
+   * TCompare['>='](smallerT, greaterT); // false
+   * TCompare['>='](greaterT, smallerT); // true
    * ```
    * @category Comparator
    */
@@ -59,10 +69,13 @@ export interface Comparable<T> extends Equal<T> {
    *
    * @example
    * ```ts
-   * const NumberCompare: Comparable<number>;
-   * NumberCompare['>'](0, 0); // false
-   * NumberCompare['>'](0, 1); // false
-   * NumberCompare['>'](0, -1); // true
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const greaterT: T;
+   * TCompare['>'](smallerT, smallerT); // false
+   * TCompare['>'](smallerT, greaterT); // false
+   * TCompare['>'](greaterT, smallerT); // true
    * ```
    * @category Comparator
    */
@@ -75,8 +88,8 @@ export interface Comparable<T> extends Equal<T> {
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
-   * const biggerT: T;
-   * TCompare.min(smallerT, biggerT); // smallerT
+   * const greaterT: T;
+   * TCompare.min(smallerT, greaterT); // smallerT
    * ```
    * @category Comparator
    */
@@ -89,8 +102,8 @@ export interface Comparable<T> extends Equal<T> {
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
-   * const biggerT: T;
-   * TCompare.max(smallerT, biggerT); // biggerT
+   * const greaterT: T;
+   * TCompare.max(smallerT, greaterT); // greaterT
    * ```
    * @category Comparator
    */
