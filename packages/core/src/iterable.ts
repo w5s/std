@@ -1,5 +1,14 @@
 import type { Int } from './integer.js';
 
+const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
+const resultValue = <V>(value: V) => ({ value, done: false });
+const fromFunction = <Value>(iteratorFn: () => Iterator<Value>): Iterable<Value> => ({
+  [Symbol.iterator]: iteratorFn,
+});
+const getIterator = <Value>(iterable: Iterable<Value>) => iterable[Symbol.iterator]();
+const emptyIterator = { next: () => resultDone };
+const emptyIterable = fromFunction<never>(() => emptyIterator);
+
 /**
  * A collection of functions to manipulate Iterable
  *
@@ -13,12 +22,7 @@ import type { Int } from './integer.js';
  * ```
  * @namespace
  */
-export namespace Iterable {
-  const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
-  const resultValue = <V>(value: V) => ({ value, done: false });
-  const emptyIterator = { next: () => resultDone };
-  const emptyIterable = create<never>(() => emptyIterator);
-
+export const Iterable = {
   /**
    * Iterable constructor
    *
@@ -31,11 +35,9 @@ export namespace Iterable {
    * @category Constructor
    * @param iteratorFn - function that creates a new iterator
    */
-  export function create<Value>(iteratorFn: () => Iterator<Value>): Iterable<Value> {
-    return {
-      [Symbol.iterator]: iteratorFn,
-    };
-  }
+  create<Value>(iteratorFn: () => Iterator<Value>): Iterable<Value> {
+    return fromFunction(iteratorFn);
+  },
 
   /**
    * Return a new iterator from iterable
@@ -48,9 +50,9 @@ export namespace Iterable {
    * @category Accessor
    * @param iterable - an object that have `[Symbol.iterator]`
    */
-  export function iterator<Value>(iterable: Iterable<Value>) {
+  iterator<Value>(iterable: Iterable<Value>) {
     return iterable[Symbol.iterator]();
-  }
+  },
 
   /**
    * Returns an iterable that have no value
@@ -61,9 +63,9 @@ export namespace Iterable {
    * ```
    * @category Constructor
    */
-  export function empty() {
+  empty() {
     return emptyIterable;
-  }
+  },
 
   /**
    * Create an iterable of given `values`
@@ -75,9 +77,9 @@ export namespace Iterable {
    * @category Constructor
    * @param values - The values of the iterable
    */
-  export function of<Value>(...values: Value[]): Iterable<Value> {
-    return create(values[Symbol.iterator].bind(values));
-  }
+  of<Value>(...values: Value[]): Iterable<Value> {
+    return fromFunction(values[Symbol.iterator].bind(values));
+  },
 
   /**
    * Generate an iterable of `length` using `mapFn(index)` on each element
@@ -91,10 +93,10 @@ export namespace Iterable {
    * @param length - The number of elements
    * @param mapFn - The mapping function
    */
-  export function generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
+  generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
     return length === 0
       ? emptyIterable
-      : create<Value>(() => {
+      : fromFunction<Value>(() => {
           let currentIndex = 0;
 
           return {
@@ -110,7 +112,7 @@ export namespace Iterable {
             },
           };
         });
-  }
+  },
 
   /**
    * Returns `true` if `anyValue` is a valid {@link Iterable}
@@ -124,13 +126,13 @@ export namespace Iterable {
    * @category Guard
    * @param anyValue - the value to tested
    */
-  export function hasInstance(anyValue: unknown): anyValue is Iterable<unknown> {
+  hasInstance(anyValue: unknown): anyValue is Iterable<unknown> {
     return (
       anyValue !== null &&
       typeof anyValue === 'object' &&
       typeof (anyValue as unknown as Record<string | symbol, unknown>)[Symbol.iterator] === 'function'
     );
-  }
+  },
 
   /**
    * Create an iterable from `start` to `end` (excluded)
@@ -144,10 +146,10 @@ export namespace Iterable {
    * @param end - exclusive maximum value
    * @param step - optional step between iteration
    */
-  export function range(start: number, end: number, step?: number): Iterable<number> {
+  range(start: number, end: number, step?: number): Iterable<number> {
     const incrementValue = Math.abs(step ?? 1);
 
-    return create<number>(
+    return fromFunction<number>(
       start < end
         ? () => {
             let currentValue = start;
@@ -182,7 +184,7 @@ export namespace Iterable {
             };
           }
     );
-  }
+  },
 
   /**
    * Return a new Iterable which applies `mapFn` to each values
@@ -195,12 +197,9 @@ export namespace Iterable {
    * @param source - the iterable source
    * @param mapFn - a function that returns a new value
    */
-  export function map<ValueFrom, ValueTo>(
-    source: Iterable<ValueFrom>,
-    mapFn: (value: ValueFrom) => ValueTo
-  ): Iterable<ValueTo> {
-    return create(() => {
-      const sourceIterator = iterator(source);
+  map<ValueFrom, ValueTo>(source: Iterable<ValueFrom>, mapFn: (value: ValueFrom) => ValueTo): Iterable<ValueTo> {
+    return fromFunction(() => {
+      const sourceIterator = getIterator(source);
 
       return {
         next() {
@@ -210,7 +209,7 @@ export namespace Iterable {
         },
       };
     });
-  }
+  },
 
   /**
    * Return a new iterator that filters values using `predicate`
@@ -223,9 +222,9 @@ export namespace Iterable {
    * @param source - the iterator to be filtered
    * @param predicate - a function that returns a boolean
    */
-  export function filter<Value>(source: Iterable<Value>, predicate: (value: Value) => boolean): Iterable<Value> {
-    return create(() => {
-      const sourceIterator = iterator(source);
+  filter<Value>(source: Iterable<Value>, predicate: (value: Value) => boolean): Iterable<Value> {
+    return fromFunction(() => {
+      const sourceIterator = getIterator(source);
 
       return {
         next() {
@@ -238,7 +237,7 @@ export namespace Iterable {
         },
       };
     });
-  }
+  },
 
   /**
    * Reduce an `initialValue` to the `reducer` function
@@ -252,12 +251,12 @@ export namespace Iterable {
    * @param reducer - the reducer function
    * @param initialValue - the initial value passed to the reducer
    */
-  export function reduce<Value, Return>(
+  reduce<Value, Return>(
     source: Iterable<Value>,
     reducer: (accumulator: Return, value: Value) => Return,
     initialValue: Return
   ): Return {
-    const sourceIterator = iterator(source);
+    const sourceIterator = getIterator(source);
     let result: IteratorResult<Value>;
     let currentValue = initialValue;
 
@@ -271,7 +270,7 @@ export namespace Iterable {
     }
 
     return currentValue;
-  }
+  },
 
   /**
    * Combine two iterables into an iterable of couple of their values.
@@ -286,10 +285,10 @@ export namespace Iterable {
    * @param left - Left iterable
    * @param right - Right iterable
    */
-  export function zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
-    return create<[L, R]>(() => {
-      const leftIterator = iterator(left);
-      const rightIterator = iterator(right);
+  zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
+    return fromFunction<[L, R]>(() => {
+      const leftIterator = getIterator(left);
+      const rightIterator = getIterator(right);
 
       return {
         next() {
@@ -302,5 +301,5 @@ export namespace Iterable {
         },
       };
     });
-  }
-}
+  },
+};
