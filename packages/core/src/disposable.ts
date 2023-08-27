@@ -1,12 +1,19 @@
 import { Symbol } from './symbol.js';
 
+/**
+ * An interface for an object with resources that can be released synchronously
+ */
 export interface Disposable {
   /**
    * Disposes of resources within this object.
    */
   [Symbol.dispose](): void;
 }
-export namespace Disposable {
+
+/**
+ * @namespace
+ */
+export const Disposable = {
   /**
    * Returns `true` if `anyValue` is a valid {@link Disposable}
    *
@@ -18,18 +25,25 @@ export namespace Disposable {
    * @category Guard
    * @param anyValue - the value to tested
    */
-  export function hasInstance(anyValue: unknown): anyValue is Disposable {
+  hasInstance(anyValue: unknown): anyValue is Disposable {
     return isObject(anyValue) && typeof anyValue[Symbol.dispose] === 'function';
-  }
-}
+  },
+};
 
+/**
+ * An interface for an object with resources that can be released asynchronously
+ */
 export interface AsyncDisposable {
   /**
    * Disposes of resources within this object.
    */
   [Symbol.asyncDispose](): Promise<void>;
 }
-export namespace AsyncDisposable {
+
+/**
+ * @namespace
+ */
+export const AsyncDisposable = {
   /**
    * Returns `true` if `anyValue` is a valid {@link AsyncDisposable}
    *
@@ -41,10 +55,10 @@ export namespace AsyncDisposable {
    * @category Guard
    * @param anyValue - the value to tested
    */
-  export function hasInstance(anyValue: unknown): anyValue is AsyncDisposable {
+  hasInstance(anyValue: unknown): anyValue is AsyncDisposable {
     return isObject(anyValue) && typeof anyValue[Symbol.asyncDispose] === 'function';
-  }
-}
+  },
+};
 
 // utils
 function isObject(anyValue: unknown): anyValue is Record<string | symbol, unknown> {
