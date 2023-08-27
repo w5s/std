@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { Option } from './option.js';
 import { Record } from './record.js';
 
-describe('Dict', () => {
+describe('Record', () => {
   const anySymbolKey = Symbol('anySymbolKey');
 
   function toArray<V>(iterator: IterableIterator<V>): Array<V> {
@@ -11,7 +11,7 @@ describe('Dict', () => {
   describe('.from', () => {
     it('should return a dictionary from entries', () => {
       expect(
-        Record([
+        Record.from([
           ['anyKey', 'anyValue'],
           ['anyOtherKey', 'anyOtherValue'],
         ])

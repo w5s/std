@@ -19,19 +19,11 @@ export type Record<Key extends AnyKey, Value> = {
 };
 
 /**
- * Record constructor. Alias of `from`
+ * A collection of functions to manipulate Record
  *
- * @example
- * ```typescript
- * const record = Record({ a: 1, b: 2 })
- * const recordEntries = Record([['a', 1], ['b', 2]])
- * ```
- * @category Constructor
+ * @namespace
  */
-export function Record<Key extends AnyKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
-  return Record.from(iterable);
-}
-export namespace Record {
+export const Record = {
   /**
    * Return a new {@link Record} from an iterable of [key, value]
    *
@@ -41,7 +33,7 @@ export namespace Record {
    * ```
    * @category Constructor
    */
-  export function from<Key extends AnyKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
+  from<Key extends AnyKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
     const returnValue = {} as unknown as {
       [P in Key]: Value;
     };
@@ -50,7 +42,7 @@ export namespace Record {
     }
 
     return returnValue;
-  }
+  },
 
   /**
    * Return an empty {@link Record}
@@ -61,9 +53,9 @@ export namespace Record {
    * ```
    * @category Constructor
    */
-  export function empty<Key extends AnyKey, Value = any>(): Record<Key, Value> {
+  empty<Key extends AnyKey, Value = any>(): Record<Key, Value> {
     return emptyRecord;
-  }
+  },
 
   /**
    * Return true if `record` contains `key`
@@ -77,9 +69,9 @@ export namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  export function has<Key extends AnyKey>(record: Record<Key, any>, key: Key): boolean {
+  has<Key extends AnyKey>(record: Record<Key, any>, key: Key): boolean {
     return hasOwn(record, key);
-  }
+  },
 
   /**
    * Return an iterator over all keys
@@ -91,9 +83,9 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function keys<Key extends AnyKey>(record: Record<Key, any>): IterableIterator<Key> {
+  keys<Key extends AnyKey>(record: Record<Key, any>): IterableIterator<Key> {
     return ownKeys(record).values();
-  }
+  },
 
   /**
    * Return an iterator over all [key, value]
@@ -105,11 +97,11 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function* entries<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<[Key, Value]> {
+  *entries<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<[Key, Value]> {
     for (const key of ownKeys(record)) {
       yield [key, record[key]!];
     }
-  }
+  },
 
   /**
    * Return an iterator over all values
@@ -121,11 +113,11 @@ export namespace Record {
    * ```
    * @param record - the record
    */
-  export function* values<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<Value> {
+  *values<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<Value> {
     for (const key of ownKeys(record)) {
       yield record[key]!;
     }
-  }
+  },
 
   /**
    * Return an Option of value for the given `key`
@@ -140,9 +132,9 @@ export namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  export function get<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
+  get<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
     return hasOwn(record, key) ? record[key] : undefined;
-  }
+  },
 
   /**
    * Return a new record including the new `[key, value]`
@@ -156,18 +148,14 @@ export namespace Record {
    * @param key - the entry key
    * @param value - the entry value
    */
-  export function set<Key extends AnyKey, Value>(
-    record: Record<Key, Value>,
-    key: Key,
-    value: Value
-  ): Record<Key, Value> {
+  set<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key, value: Value): Record<Key, Value> {
     return record[key] === value
       ? record
       : {
           ...record,
           [key]: value,
         };
-  }
+  },
 
   /**
    * Call `fn(value, key, record)` on each entries in the record
@@ -183,14 +171,14 @@ export namespace Record {
    * @param record - the record
    * @param fn - callback called on each entry
    */
-  export function forEach<Key extends AnyKey, Value, D extends Record<Key, Value>>(
+  forEach<Key extends AnyKey, Value, D extends Record<Key, Value>>(
     record: D,
     fn: (value: Value, key: Key, record: D) => unknown
   ): void {
     for (const key of ownKeys(record)) {
       fn(record[key]!, key, record);
     }
-  }
+  },
 
   /**
    * Return the number of entries in the record
@@ -203,12 +191,10 @@ export namespace Record {
    * @category Accessor
    * @param record - the record
    */
-  export function size<D extends Record<AnyKey, any>>(record: D): Int {
+  size<D extends Record<AnyKey, any>>(record: D): Int {
     return Object.keys(record).length as Int;
-  }
-}
+  },
 
-export declare namespace Record {
   /**
    * Return a new record without the `key`
    *
@@ -220,21 +206,14 @@ export declare namespace Record {
    * @param record - the record
    * @param key - the entry key
    */
-  function _delete<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Record<Key, Value>;
-  export { _delete as delete };
-}
+  delete<Key extends AnyKey, Value>(record: Record<Key, Value>, key: Key): Record<Key, Value> {
+    if (hasOwn(record, key)) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [key]: _, ...newRecord } = record;
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-(Record as any).delete = function _delete<Key extends AnyKey, Value>(
-  record: Record<Key, Value>,
-  key: Key
-): Record<Key, Value> {
-  if (hasOwn(record, key)) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { [key]: _, ...newRecord } = record;
+      return newRecord as Record<Key, Value>;
+    }
 
-    return newRecord as Record<Key, Value>;
-  }
-
-  return record;
+    return record;
+  },
 };
