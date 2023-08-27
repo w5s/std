@@ -135,6 +135,11 @@ export const TimeDuration = {
  */
 export type Time = Tag<number, { time: 'ms' }>;
 
+/**
+ * A collection of functions to manipulate time (i.e timestamp)
+ *
+ * @namespace
+ */
 export const Time = {
   /**
    * Create a new Time value
