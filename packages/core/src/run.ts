@@ -10,15 +10,11 @@ import type { Awaitable } from './type.js';
 export interface Canceler extends Ref<Option<() => void>> {}
 
 /**
- * Return a new canceler
+ * A collection of functions to manipulate Canceler
  *
- * @example
- * @constructor
+ * @namespace
  */
-export function Canceler(initialValue?: Option<() => void>): Canceler {
-  return { current: initialValue };
-}
-export namespace Canceler {
+export const Canceler = {
   /**
    * Clear the current value of canceler
    *
@@ -29,9 +25,9 @@ export namespace Canceler {
    * ```
    * @param canceler
    */
-  export function clear(canceler: Canceler) {
+  clear(canceler: Canceler) {
     canceler.current = undefined;
-  }
+  },
 
   /**
    * Trigger cancelation once
@@ -44,14 +40,14 @@ export namespace Canceler {
    * ```
    * @param canceler
    */
-  export function cancel(canceler: Canceler) {
+  cancel(canceler: Canceler) {
     const { current } = canceler;
     if (current != null) {
-      clear(canceler);
+      Canceler.clear(canceler);
       current();
     }
-  }
-}
+  },
+};
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -66,7 +62,7 @@ export namespace Canceler {
  */
 export function unsafeRun<Value, Error>(
   task: Task<Value, Error>,
-  cancelerRef: Canceler = Canceler()
+  cancelerRef: Canceler = { current: undefined }
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
   let resolveHandler = (result: Result<Value, Error>) => {

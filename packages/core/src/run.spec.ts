@@ -3,6 +3,7 @@ import { throwError } from './throwError.js';
 import { Result } from './result.js';
 import { Canceler, unsafeRun, unsafeRunOk } from './run.js';
 import { Task } from './task.js';
+import { Ref } from './ref.js';
 
 const anyError = new Error('TestError');
 const anyObject = Object.freeze({ foo: true });
@@ -41,18 +42,9 @@ const generateTask = <V = never, E = never>(
 };
 
 describe('Canceler', () => {
-  describe('()', () => {
-    it('should return a new Canceler', () => {
-      expect(Canceler()).toEqual({ current: undefined });
-    });
-    it('should initialize using initialValue', () => {
-      const fn = vi.fn();
-      expect(Canceler(fn)).toEqual({ current: fn });
-    });
-  });
   describe('.clear', () => {
     it('', () => {
-      const canceler = Canceler(() => {});
+      const canceler = Ref(() => {});
       Canceler.clear(canceler);
       expect(canceler).toEqual({ current: undefined });
     });
@@ -60,7 +52,7 @@ describe('Canceler', () => {
   describe('.cancel', () => {
     it('should run the canceler function', () => {
       const fn = vi.fn();
-      const canceler = Canceler(fn);
+      const canceler = Ref(fn);
       Canceler.cancel(canceler);
       expect(fn).toHaveBeenCalledOnce();
     });
@@ -69,7 +61,7 @@ describe('Canceler', () => {
       const fn = vi.fn(() => {
         throw new Error('SomeError');
       });
-      const canceler = Canceler(fn);
+      const canceler = Ref(fn);
       expect(() => {
         Canceler.cancel(canceler);
       }).toThrow();
@@ -105,7 +97,7 @@ describe('unsafeRun', () => {
     await expect(unsafeRun(task)).rejects.toEqual(new Error('TestError'));
   });
   it('should handle canceler', () => {
-    const canceler = Canceler();
+    const canceler = Ref(undefined);
     const task = { taskRun: vi.fn() };
     void unsafeRun(task, canceler);
     expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler);
@@ -132,7 +124,7 @@ describe('unsafeRunOk', () => {
     await expect(unsafeRunOk(task)).rejects.toEqual(new Error('TestError'));
   });
   it('should handle canceler', () => {
-    const canceler = Canceler();
+    const canceler = Ref(undefined);
     const task = { taskRun: vi.fn() };
     void unsafeRunOk(task, canceler);
     expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler);
