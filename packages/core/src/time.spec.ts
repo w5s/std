@@ -16,18 +16,18 @@ describe('Time', () => {
     vi.clearAllMocks();
   });
 
-  describe.each([Time, Time.of])('()', (create) => {
+  describe('.of()', () => {
     it('should throw invariant error', () => {
-      expect(() => create(-1)).toThrow('-1 is not a valid time value');
-      expect(() => create(Number.NaN)).toThrow('NaN is not a valid time value');
+      expect(() => Time.of(-1)).toThrow('-1 is not a valid time value');
+      expect(() => Time.of(Number.NaN)).toThrow('NaN is not a valid time value');
     });
     it('should return unchanged value when positive', () => {
-      expect(create(1)).toBe(1);
+      expect(Time.of(1)).toBe(1);
     });
   });
   describe('.hasInstance', () => {
     it('should return true for valid values', () => {
-      expect(Time.hasInstance(Time(1))).toBe(true);
+      expect(Time.hasInstance(Time.of(1))).toBe(true);
     });
     it('should return false for invalid values', () => {
       expect(Time.hasInstance(null)).toBe(false);
@@ -39,12 +39,12 @@ describe('Time', () => {
   });
   describe('.add', () => {
     it('should return difference between two times', () => {
-      expect(Time.add(Time(1), TimeDuration(3))).toBe(4);
+      expect(Time.add(Time.of(1), TimeDuration.of(3))).toBe(4);
     });
   });
   describe('.diff', () => {
     it('should return difference between two times', () => {
-      expect(Time.diff(Time(1), Time(3))).toBe(-2);
+      expect(Time.diff(Time.of(1), Time.of(3))).toBe(-2);
     });
   });
   describe('.parseISOString', () => {
@@ -59,8 +59,8 @@ describe('Time', () => {
   });
   describe('.toISOString', () => {
     it('should return a valid string ISO representation', () => {
-      expect(Time.toISOString(Time(0))).toBe('1970-01-01T00:00:00.000Z');
-      expect(Time.toISOString(Time(1_622_120_111_480))).toBe('2021-05-27T12:55:11.480Z');
+      expect(Time.toISOString(Time.of(0))).toBe('1970-01-01T00:00:00.000Z');
+      expect(Time.toISOString(Time.of(1_622_120_111_480))).toBe('2021-05-27T12:55:11.480Z');
     });
   });
   describe('now', () => {
@@ -84,7 +84,7 @@ describe('Time', () => {
     });
     it.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
       const now = Date.now();
-      const task = Time.delay(TimeDuration(delay));
+      const task = Time.delay(TimeDuration.of(delay));
       const promise = unsafeRun(task);
       expect(setTimeoutSpy).not.toHaveBeenCalled();
       vi.runAllTimers();
@@ -117,16 +117,16 @@ describe('Time', () => {
   });
 });
 describe('TimeDuration', () => {
-  describe.each([TimeDuration, TimeDuration.of])('()', (create) => {
+  describe('()', () => {
     it('should throw invariant error', () => {
-      expect(() => create(Number.NaN)).toThrow('NaN is not a valid duration value');
+      expect(() => TimeDuration.of(Number.NaN)).toThrow('NaN is not a valid duration value');
     });
     it.each([
       [1, 1],
       [-1, -1],
       [1.1, 1.1],
     ])('should return an int value', (input, expected) => {
-      expect(create(input)).toBe(expected);
+      expect(TimeDuration.of(input)).toBe(expected);
     });
   });
   describe('.hasInstance', () => {

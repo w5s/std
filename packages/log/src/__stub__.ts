@@ -4,7 +4,7 @@ import { LogRecord } from './record.js';
 import { LogLevel } from './level.js';
 import { LogMessage } from './message.js';
 
-export const generateTime = (ms = 0) => Time(ms);
+export const generateTime = (ms = 0) => Time.of(ms);
 
 export const generateLogRecord = ({
   level = LogLevel.Debug,

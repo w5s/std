@@ -3,7 +3,7 @@ import { Task } from '@w5s/core/dist/task.js';
 import { Time } from '@w5s/core/dist/time.js';
 
 const defaultRandom: Task<number, never> = { taskRun: (resolve) => resolve(Math.random()) };
-const timeDelay = Time.delay;
+const timeDelay = Time.delay.bind(Time);
 const resolveTask = <T>(value: T): Task<T, never> => ({ taskRun: (resolve) => resolve(value) });
 const resolveNone = resolveTask(undefined);
 
@@ -62,8 +62,8 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration(2));
-   * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration(delay * 3));// Wait 6 seconds policy
+   * const policy = RetryPolicy.wait(TimeDuration.of(2));
+   * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration.of(delay * 3));// Wait 6 seconds policy
    * ```
    * @param policy - The policy
    * @param thenFn - The map function
@@ -80,8 +80,8 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const maxDelay = TimeDuration(4);
-   * const policy = RetryPolicy.wait(TimeDuration(2));
+   * const maxDelay = TimeDuration.of(4);
+   * const policy = RetryPolicy.wait(TimeDuration.of(2));
    * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
    * ```
    * @param policy - The policy
@@ -99,8 +99,8 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration(1), retryPreviousDelay: Option.None });
+   * const policy = RetryPolicy.wait(TimeDuration.of(1));
+   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.apply(policy, retryState);
    * unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
@@ -124,8 +124,8 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration(1), retryPreviousDelay: Option.None });
+   * const policy = RetryPolicy.wait(TimeDuration.of(1));
+   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.applyAndDelay(policy, retryState);
    * await unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
@@ -145,7 +145,7 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const retryWait1ms = RetryPolicy.wait(TimeDuration(1));
+   * const retryWait1ms = RetryPolicy.wait(TimeDuration.of(1));
    * const retryLimit3 = RetryPolicy.limitRetries(3);
    * const retryWait1msAndLimit3 = RetryPolicy.append(retryWait1ms, retryLimit3);
    * ```
@@ -180,7 +180,7 @@ export namespace RetryPolicy {
    * @category Constructor
    * @example
    * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration(1)); // 1ms, 1ms, 1ms, 1ms, ...
+   * const policy = RetryPolicy.wait(TimeDuration.of(1)); // 1ms, 1ms, 1ms, 1ms, ...
    * ```
    * @param delay - The waiting delay between two attempts
    */
@@ -195,7 +195,7 @@ export namespace RetryPolicy {
    * @category Constructor
    * @example
    * ```typescript
-   * const policy = RetryPolicy.waitExponential(TimeDuration(1)); // 1ms, 2ms, 4ms, 8ms, ...
+   * const policy = RetryPolicy.waitExponential(TimeDuration.of(1)); // 1ms, 2ms, 4ms, 8ms, ...
    * ```
    * @param initialDelay - The initial delay
    */
@@ -212,7 +212,7 @@ export namespace RetryPolicy {
    * @category Constructor
    * @example
    * ```typescript
-   * const policy = RetryPolicy.waitFullJitter(TimeDuration(1)); // 0ms, 1 + rand(0, 1) ms, 2 + rand(0, 2)ms, ...
+   * const policy = RetryPolicy.waitFullJitter(TimeDuration.of(1)); // 0ms, 1 + rand(0, 1) ms, 2 + rand(0, 2)ms, ...
    * ```
    * @param initialDelay - The initial delay
    * @param generator - The random generator
@@ -244,7 +244,7 @@ export namespace RetryPolicy {
    * @example
    * ```typescript
    * const wait1_2_3ms: RetryPolicy; // Wait 1ms, 2ms, 3ms
-   * const policy = RetryPolicy.waitMax(wait1_2_3ms, TimeDuration(2));// Wait 1ms, 2ms, 2ms
+   * const policy = RetryPolicy.waitMax(wait1_2_3ms, TimeDuration.of(2));// Wait 1ms, 2ms, 2ms
    * ```
    * @param policy - The policy to limit
    * @param maxDelay - The maximum delay between two attempts
@@ -266,7 +266,7 @@ interface RetryContinueResult {
  * Acts like the iterator protocol for retry attempts.
  * When `{ done: true }` is returned, the retry operation is complete.
  * When `{ done: false, value: Option.None }` is returned, the retry operation will be done using the default policy delay.
- * When `{ done: false, value: Option.Some(TimeDuration(...)) }` is returned, the retry operation will be done using given delay.
+ * When `{ done: false, value: Option.Some(TimeDuration.of(...)) }` is returned, the retry operation will be done using given delay.
  */
 export type RetryResult = RetryDoneResult | RetryContinueResult;
 

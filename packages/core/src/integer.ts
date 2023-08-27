@@ -6,7 +6,7 @@ const MAX_SAFE_INTEGER = (Math.pow(2, 53) - 1) as Int;
 const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
 
 /**
- * Default Int implementation
+ * Integer value
  */
 export type Int = Tag<number, { integral: true }>;
 
@@ -21,6 +21,12 @@ export type Int = Tag<number, { integral: true }>;
 export function Int(value: number): Int {
   return Int.of(value);
 }
+
+/**
+ * A collection of functions to manipulate integer values
+ *
+ * @namespace
+ */
 export namespace Int {
   type Radix36 =
     | 2

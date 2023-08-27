@@ -16,7 +16,7 @@ describe('readFileStatus', () => {
     await expectTask(task).result.resolves.toEqual(
       Result.Ok(
         FileStatus({
-          accessTime: Time(stats.atimeMs),
+          accessTime: Time.of(stats.atimeMs),
           deviceID: DeviceID(stats.dev),
           fileGroup: GroupID(stats.gid),
           fileID: FileID(stats.ino),
@@ -30,9 +30,9 @@ describe('readFileStatus', () => {
           isSocket: stats.isSocket(),
           isSymbolicLink: stats.isSymbolicLink(),
           linkCount: Int(stats.nlink),
-          modificationTime: Time(stats.mtimeMs),
+          modificationTime: Time.of(stats.mtimeMs),
           specialDeviceID: DeviceID(stats.rdev),
-          statusChangeTime: Time(stats.ctimeMs),
+          statusChangeTime: Time.of(stats.ctimeMs),
         })
       )
     );
@@ -48,7 +48,7 @@ describe('readSymbolicLinkStatus', () => {
     await expectTask(task).result.resolves.toEqual(
       Result.Ok(
         FileStatus({
-          accessTime: Time(stats.atimeMs),
+          accessTime: Time.of(stats.atimeMs),
           deviceID: DeviceID(stats.dev),
           fileGroup: GroupID(stats.gid),
           fileID: FileID(stats.ino),
@@ -62,9 +62,9 @@ describe('readSymbolicLinkStatus', () => {
           isSocket: stats.isSocket(),
           isSymbolicLink: stats.isSymbolicLink(),
           linkCount: Int(stats.nlink),
-          modificationTime: Time(stats.mtimeMs),
+          modificationTime: Time.of(stats.mtimeMs),
           specialDeviceID: DeviceID(stats.rdev),
-          statusChangeTime: Time(stats.ctimeMs),
+          statusChangeTime: Time.of(stats.ctimeMs),
         })
       )
     );

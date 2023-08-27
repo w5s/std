@@ -43,7 +43,7 @@ export interface LogRecord
  *   level: LogLevel.Critical,
  *   data: { foo: true },
  *   message: LogMessage('message'),
- *   created: Time(Date.now()),
+ *   created: Time.of(Date.now()),
  * });
  * ```
  * @param properties - constructor parameters

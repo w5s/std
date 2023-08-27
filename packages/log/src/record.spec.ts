@@ -15,7 +15,7 @@ describe('LogRecord', () => {
           level: LogLevel.Warning,
           message: LogMessage(['foo', 'bar', '']),
           data: {},
-          created: Time(1),
+          created: Time.of(1),
         })
       ).toEqual({
         _: 'LogRecord',
