@@ -1,23 +1,23 @@
 /* eslint-disable no-console */
 import type { Task } from './task.js';
 
+const createLogTask = (
+  method: 'debug' | 'log' | 'info' | 'warn' | 'error',
+  message: [required: unknown, ...optionalParameters: unknown[]]
+): Task<void, never> => ({
+  taskRun: (resolve) => {
+    console[method](...message);
+
+    resolve(undefined);
+  },
+});
+
 /**
  * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)
  *
  * @namespace
  */
-export namespace Console {
-  const createLogTask = (
-    method: 'debug' | 'log' | 'info' | 'warn' | 'error',
-    message: [required: unknown, ...optionalParameters: unknown[]]
-  ): Task<void, never> => ({
-    taskRun: (resolve) => {
-      console[method](...message);
-
-      resolve(undefined);
-    },
-  });
-
+export const Console = {
   /**
    * Display a message in console with `debug` level
    *
@@ -27,9 +27,9 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function debug(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+  debug(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('debug', parameters);
-  }
+  },
 
   /**
    * Display a message in console with `log` level
@@ -40,9 +40,9 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function log(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+  log(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('log', parameters);
-  }
+  },
 
   /**
    * Display a message in console with `info` level
@@ -53,9 +53,9 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function info(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+  info(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('info', parameters);
-  }
+  },
 
   /**
    * Display a message in console with `warn` level
@@ -66,9 +66,9 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function warn(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+  warn(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('warn', parameters);
-  }
+  },
 
   /**
    * Display a message in console with `error` level
@@ -79,7 +79,7 @@ export namespace Console {
    * ```
    * @param parameters - an array of values to be logged
    */
-  export function error(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+  error(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
     return createLogTask('error', parameters);
-  }
-}
+  },
+};
