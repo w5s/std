@@ -4,6 +4,11 @@ import type { Int } from './integer.js';
  * A collection of functions for mathematics and constants
  *
  * @example
+ * ```typescript
+ * import { Math } from '@w5s/core';
+ * Math.abs(-1);// 1
+ * ```
+ *
  * @namespace
  */
 export namespace Math {
