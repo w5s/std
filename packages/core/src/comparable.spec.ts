@@ -86,4 +86,22 @@ describe('Comparable', () => {
       expect(NumWithCompare['>='](left, right)).toBe(expected);
     });
   });
+  describe('min', () => {
+    it.each([
+      [0, 0, 0],
+      [1, 2, 1],
+      [3, 2, 2],
+    ])('should return a minimal value', (left, right, expected) => {
+      expect(NumWithCompare.min(left, right)).toBe(expected);
+    });
+  });
+  describe('max', () => {
+    it.each([
+      [0, 0, 0],
+      [1, 2, 2],
+      [3, 2, 3],
+    ])('should return a maximal value', (left, right, expected) => {
+      expect(NumWithCompare.max(left, right)).toBe(expected);
+    });
+  });
 });

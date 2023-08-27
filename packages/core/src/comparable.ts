@@ -67,6 +67,34 @@ export interface Comparable<T> extends Equal<T> {
    * @category Comparator
    */
   '>'(this: void, left: T, right: T): boolean;
+  /**
+   * "minimum" operator
+   *
+   * @example
+   * ```ts
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const biggerT: T;
+   * TCompare.min(smallerT, biggerT); // smallerT
+   * ```
+   * @category Comparator
+   */
+  min(this: void, left: T, right: T): T;
+  /**
+   * "maximum" operator
+   *
+   * @example
+   * ```ts
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const smallerT: T;
+   * const biggerT: T;
+   * TCompare.max(smallerT, biggerT); // biggerT
+   * ```
+   * @category Comparator
+   */
+  max(this: void, left: T, right: T): T;
 }
 
 /**
@@ -97,5 +125,7 @@ export function Comparable<T>(properties: { compare: (left: T, right: T) => numb
     '<=': (left: T, right: T) => compare(left, right) <= 0,
     '>': (left: T, right: T) => compare(left, right) > 0,
     '>=': (left: T, right: T) => compare(left, right) >= 0,
+    min: (left: T, right: T) => (compare(left, right) <= 0 ? left : right),
+    max: (left: T, right: T) => (compare(left, right) > 0 ? left : right),
   };
 }
