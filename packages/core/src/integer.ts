@@ -68,12 +68,12 @@ export namespace Int {
   /**
    * Alias to `Number.MAX_SAFE_INTEGER` (2**53-1)
    */
-  export const max = MAX_SAFE_INTEGER;
+  export const maxValue = MAX_SAFE_INTEGER;
 
   /**
    * Alias to `Number.MIN_SAFE_INTEGER` (-(2**53-1))
    */
-  export const min = MIN_SAFE_INTEGER;
+  export const minValue = MIN_SAFE_INTEGER;
 
   /**
    * @example

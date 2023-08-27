@@ -7,12 +7,12 @@ describe('Int', () => {
   const maxValue = Number.MAX_SAFE_INTEGER;
   describe('.min', () => {
     it(`should be ${minValue}`, () => {
-      expect(Int.min).toBe(minValue);
+      expect(Int.minValue).toBe(minValue);
     });
   });
   describe('.max', () => {
     it(`should be ${maxValue}`, () => {
-      expect(Int.max).toBe(maxValue);
+      expect(Int.maxValue).toBe(maxValue);
     });
   });
   describe('.hasInstance', () => {
@@ -48,7 +48,7 @@ describe('Int', () => {
       expect(Int.parse('1.1', 10)).toBe(Option.Some(1));
     });
     it('should parse expression bigger than max', () => {
-      expect(Int.parse('99007199254740991', 10)).toBe(Option.Some(Int.max));
+      expect(Int.parse('99007199254740991', 10)).toBe(Option.Some(Int.maxValue));
     });
     it('should parse invalid', () => {
       expect(Int.parse('invalid', 10)).toBe(Option.None);
