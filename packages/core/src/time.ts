@@ -4,7 +4,7 @@ import type { Task } from './task.js';
 import type { Tag } from './type.js';
 
 // Inline private constructor
-const createTask: typeof Task.wrap = (fn) => ({
+const createTask = <V, E>(fn: Task<V, E>['taskRun']): Task<V, E> => ({
   taskRun: fn,
 });
 // Call a function as a microtask

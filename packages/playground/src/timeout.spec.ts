@@ -20,15 +20,19 @@ describe('timeout', () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
     const canceler = vi.fn();
-    const canceled = Task.wrap((_resolve, _reject, cancelerRef) => {
-      cancelerRef.current = canceler;
-    });
+    const run = vi.fn();
+    const canceled = {
+      taskRun: (_resolve, _reject, cancelerRef, _run) => {
+        cancelerRef.current = canceler;
+      },
+    } satisfies Task<any, any>;
     const task = timeout(canceled, anyDelay);
     const cancelerRef = Ref(canceler);
     task.taskRun(
       () => {},
       () => {},
-      cancelerRef
+      cancelerRef,
+      run
     );
     cancelerRef.current();
     expect(canceler).toHaveBeenCalled();
@@ -36,9 +40,11 @@ describe('timeout', () => {
   });
   it('should cancel task if timeout is triggered', async () => {
     const canceler = vi.fn();
-    const willCancel = Task.wrap((_resolve, _reject, cancelerRef) => {
-      cancelerRef.current = canceler;
-    });
+    const willCancel = {
+      taskRun: (_resolve, _reject, cancelerRef, _run) => {
+        cancelerRef.current = canceler;
+      },
+    } satisfies Task<any, any>;
     const task = timeout(willCancel, anyDelay);
     await expect(unsafeRun(task)).resolves.toEqual(
       Result.Error(

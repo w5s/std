@@ -4,8 +4,22 @@ import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
 import { Canceler } from './run.js';
 
+const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
+  taskRun,
+});
+
 /**
- * Base type for Task
+ * A function that runs the task and returns a {@link @w5s/core!Result}
+ */
+export type TaskRunner = <Value, Error>(
+  task: Task<Value, Error>,
+  cancelerRef: Canceler
+) => Awaitable<Result<Value, Error>>;
+
+/**
+ * A Task represents a lazy computation, that will be evaluated later.
+ * The result of the computation is a {@link @w5s/core!Result}
+ * A task is also cancelable and can run other subtasks
  */
 export interface Task<Value, Error> {
   /**
@@ -23,7 +37,11 @@ export interface Task<Value, Error> {
     /**
      * Reference to cancel function
      */
-    canceler: Canceler
+    canceler: Canceler,
+    /**
+     * The runner function (to run sub tasks)
+     */
+    run: TaskRunner
   ) => void;
 }
 
@@ -62,7 +80,7 @@ export function Task<Value, Error = never>(
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return Task.wrap((resolveTask, rejectTask, cancelerRef) => {
+  return createTask((resolveTask, rejectTask, cancelerRef, _run) => {
     Canceler.clear(cancelerRef);
     const resultOrPromise = sideEffect({
       ok: resultOk,
@@ -92,35 +110,6 @@ export namespace Task {
    */
   export type ErrorType<T> = T extends Task<any, infer Error> ? Error : never;
 
-  /**
-   * Base Task constructor
-   * Prefer {@link Task} for convenience
-   *
-   * @example
-   * @protected
-   * @param taskRun - the side effect function
-   */
-  export function wrap<Value, Error>(
-    taskRun: (
-      /**
-       * Resolve callback
-       */
-      resolve: (value: Value) => void,
-      /**
-       * Reject callback
-       */
-      reject: (error: Error) => void,
-      /**
-       * Canceler reference
-       */
-      canceler: Canceler
-    ) => void
-  ): Task<Value, Error> {
-    return {
-      taskRun,
-    };
-  }
-
   const emptyArray = Object.freeze([]);
 
   type TaskEntry<Value, Error> = Readonly<{
@@ -133,14 +122,20 @@ export namespace Task {
 
     readonly taskCount: number;
 
+    readonly taskRun: <V, E>(task: Task<V, E>, cancelerRef: Canceler) => Awaitable<Result<V, E>>;
+
     taskFinished = 0;
 
-    constructor(tasks: Iterable<Task<Value, Error>>) {
+    constructor(
+      tasks: Iterable<Task<Value, Error>>,
+      run: <V, E>(task: Task<V, E>, cancelerRef: Canceler) => Awaitable<Result<V, E>>
+    ) {
       this.tasks = Array.from(tasks).map((task) => ({
         task,
         cancelerRef: { current: undefined },
       }));
       this.taskCount = this.tasks.length;
+      this.taskRun = run;
     }
 
     isFinished() {
@@ -173,7 +168,8 @@ export namespace Task {
               rejectTask(error, entry, taskIndex);
             }
           },
-          entry.cancelerRef
+          entry.cancelerRef,
+          this.taskRun
         );
       });
     }
@@ -203,8 +199,8 @@ export namespace Task {
   ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
-    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
-      const state = new TaskAggregateState(tasks);
+    return createTask((taskResolve, taskReject, taskCancelerRef, run) => {
+      const state = new TaskAggregateState(tasks, run);
       if (state.taskCount === 0) {
         taskResolve(emptyArray);
       } else {
@@ -258,8 +254,8 @@ export namespace Task {
   ): Task<ValueType<T[keyof T]>, AggregateError<{ [K in keyof T]: ErrorType<T[K]> }>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
-    return Task.wrap((taskResolve, taskReject, taskCancelerRef) => {
-      const state = new TaskAggregateState(tasks);
+    return createTask((taskResolve, taskReject, taskCancelerRef, run) => {
+      const state = new TaskAggregateState(tasks, run);
 
       if (state.taskCount === 0) {
         taskReject(AggregateError({ errors: [] }));
@@ -312,8 +308,8 @@ export namespace Task {
   export function allSettled<Value, Error>(
     tasks: Iterable<Task<Value, Error>>
   ): Task<ReadonlyArray<Result<Value, Error>>, never> {
-    return Task.wrap((taskResolve, _taskReject, _taskCancelerRef) => {
-      const state = new TaskAggregateState(tasks);
+    return createTask((taskResolve, _taskReject, _taskCancelerRef, run) => {
+      const state = new TaskAggregateState(tasks, run);
       if (state.taskCount === 0) {
         taskResolve(emptyArray);
       } else {
@@ -368,7 +364,7 @@ export namespace Task {
   export function resolve<Error = never>(): Task<void, Error>;
   export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
   export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
-    return wrap((resolveTask) => resolveTask(value));
+    return createTask((resolveTask) => resolveTask(value));
   }
 
   /**
@@ -386,7 +382,7 @@ export namespace Task {
   export function reject<Value = never>(): Task<Value, void>;
   export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
   export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
-    return wrap((_, rejectTask) => rejectTask(errorValue));
+    return createTask((_, rejectTask) => rejectTask(errorValue));
   }
 
   /**
@@ -433,8 +429,8 @@ export namespace Task {
     task: Task<ValueFrom, Error>,
     fn: (value: ValueFrom) => ValueTo
   ): Task<ValueTo, Error> {
-    return wrap<ValueTo, Error>((resolveTask, rejectTask, cancelerRef) =>
-      task.taskRun((value) => resolveTask(fn(value)), rejectTask, cancelerRef)
+    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
+      task.taskRun((value) => resolveTask(fn(value)), rejectTask, cancelerRef, run)
     );
   }
 
@@ -454,8 +450,8 @@ export namespace Task {
     task: Task<Value, ErrorFrom>,
     fn: (error: ErrorFrom) => ErrorTo
   ): Task<Value, ErrorTo> {
-    return wrap<Value, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task.taskRun(resolveTask, (error) => rejectTask(fn(error)), cancelerRef)
+    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
+      task.taskRun(resolveTask, (error) => rejectTask(fn(error)), cancelerRef, run)
     );
   }
 
@@ -478,8 +474,13 @@ export namespace Task {
     task: Task<ValueFrom, ErrorFrom>,
     fn: (value: ValueFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueTo, ErrorFrom | ErrorTo> {
-    return wrap<ValueTo, ErrorFrom | ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task.taskRun((value) => fn(value).taskRun(resolveTask, rejectTask, cancelerRef), rejectTask, cancelerRef)
+    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
+      task.taskRun(
+        (value) => fn(value).taskRun(resolveTask, rejectTask, cancelerRef, run),
+        rejectTask,
+        cancelerRef,
+        run
+      )
     );
   }
 
@@ -524,8 +525,13 @@ export namespace Task {
     task: Task<ValueFrom, ErrorFrom>,
     fn: (error: ErrorFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueFrom | ValueTo, ErrorTo> {
-    return wrap<ValueFrom | ValueTo, ErrorTo>((resolveTask, rejectTask, cancelerRef) =>
-      task.taskRun(resolveTask, (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef), cancelerRef)
+    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
+      task.taskRun(
+        resolveTask,
+        (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef, run),
+        cancelerRef,
+        run
+      )
     );
   }
 }
