@@ -1,45 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
-import { throwError } from './throwError.js';
 import { Result } from './result.js';
 import { Canceler, unsafeRun, unsafeRunOk } from './run.js';
 import { Task } from './task.js';
 import { Ref } from './ref.js';
+import { taskStub } from './testing.js';
 
 const anyError = new Error('TestError');
 const anyObject = Object.freeze({ foo: true });
-const waitMs = (ms: number) =>
-  ms === 0
-    ? Promise.resolve()
-    : new Promise<void>((resolve) => {
-        setTimeout(() => resolve(), ms);
-      });
-const generateTask = <V = never, E = never>(
-  options: {
-    canceler?: () => void;
-    delayMs?: number;
-  } & ({ value: V } | { error: E } | { throwError: unknown })
-) => {
-  const { canceler = () => {}, delayMs } = options;
-  const isAsync = delayMs != null && delayMs >= 0;
-
-  return isAsync === true
-    ? Task<V, E>(async ({ ok, error, setCanceler }) => {
-        setCanceler(canceler);
-        await waitMs(delayMs ?? 0);
-        return 'value' in options
-          ? ok(options.value)
-          : 'error' in options
-          ? error(options.error)
-          : throwError(options.throwError);
-      })
-    : Task<V, E>(({ ok, error }) =>
-        'value' in options
-          ? ok(options.value)
-          : 'error' in options
-          ? error(options.error)
-          : throwError(options.throwError)
-      );
-};
 
 describe('Canceler', () => {
   describe('.clear', () => {
@@ -105,17 +72,17 @@ describe('unsafeRun', () => {
 });
 describe('unsafeRunOk', () => {
   it('should run throwing task', () => {
-    const task = generateTask({ throwError: anyError });
+    const task = taskStub({ throwError: anyError });
 
     expect(() => unsafeRunOk(task)).toThrow(anyError);
   });
   it('should return the result of task.taskRun() for sync', () => {
-    const task = generateTask({ value: anyObject });
+    const task = taskStub({ value: anyObject });
 
     expect(unsafeRunOk(task)).toEqual(anyObject);
   });
   it('should return the result of task.taskRun() for async', async () => {
-    const task = generateTask({ value: anyObject, delayMs: 1 });
+    const task = taskStub({ value: anyObject, delayMs: 1 });
 
     await expect(unsafeRunOk(task)).resolves.toEqual(anyObject);
   });
