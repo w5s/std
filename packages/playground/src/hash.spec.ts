@@ -59,10 +59,10 @@ describe(`Hash`, () => {
   });
   describe('.combine', () => {
     it('should combine two hashes', () => {
-      expect(Hash.combine(Int(0), Int(1))).toBe(-566_789_702);
-      expect(Hash.combine(Int(0), Int(-1))).toBe(-566_789_704);
-      expect(Hash.combine(Int(0), Int(0))).toBe(-566_789_703);
-      expect(Hash.combine(Int(0x42_10_84_21) /* true */, Int(0x42_10_84_20) /* false */)).toBe(922_592_000);
+      expect(Hash.combine(Int.of(0), Int.of(1))).toBe(-566_789_702);
+      expect(Hash.combine(Int.of(0), Int.of(-1))).toBe(-566_789_704);
+      expect(Hash.combine(Int.of(0), Int.of(0))).toBe(-566_789_703);
+      expect(Hash.combine(Int.of(0x42_10_84_21) /* true */, Int.of(0x42_10_84_20) /* false */)).toBe(922_592_000);
     });
   });
 });

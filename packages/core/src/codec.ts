@@ -350,7 +350,7 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
  * @example
  * ```typescript
  * const encoded = Codec.encode(int, 1); // 1
- * const decoded = Codec.decode(int, 1); // Result.Ok(Int(1))
+ * const decoded = Codec.decode(int, 1); // Result.Ok(Int.of(1))
  * ```
  */
 export const int: Codec<Int> = Codec({

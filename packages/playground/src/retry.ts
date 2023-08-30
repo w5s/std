@@ -30,7 +30,7 @@ export interface RetryState {
  * @example
  * ```typescript
  * const retryState = new RetryState({
- *  retryIndex: Int(0),
+ *  retryIndex: Int.of(0),
  *  retryCumulativeDelay: TimeDuration.seconds(1),
  *  retryPreviousDelay: TimeDuration.seconds(1),
  * });
@@ -100,9 +100,9 @@ export namespace RetryPolicy {
    * @example
    * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration.of(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
+   * const oldState = RetryState({ retryIndex: Int.of(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.apply(policy, retryState);
-   * unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
    * @param policy - The policy to apply
    * @param state - The current state of the retry operation
@@ -125,9 +125,9 @@ export namespace RetryPolicy {
    * @example
    * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration.of(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
+   * const oldState = RetryState({ retryIndex: Int.of(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.applyAndDelay(policy, retryState);
-   * await unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * await unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
    * @param policy - The policy to apply
    * @param state - The current state of the retry operation
@@ -229,7 +229,7 @@ export namespace RetryPolicy {
    *
    * @example
    * ```typescript
-   * const policy = RetryPolicy.retries(Int(3));// Retry 3 times
+   * const policy = RetryPolicy.retries(Int.of(3));// Retry 3 times
    * ```
    * @category Constructor
    * @param count - The number of retries to allow

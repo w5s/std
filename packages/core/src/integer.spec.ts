@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './integer.js';
 import { Option } from './option.js';
+import { describeComparable } from './testing.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -58,44 +59,52 @@ describe('Int', () => {
 
   describe('.stringify()', () => {
     it('should return a valid string representation', () => {
-      expect(Int.stringify(Int(123), 10)).toBe('123');
+      expect(Int.stringify(Int.of(123), 10)).toBe('123');
     });
     it('should return a valid string representation when radix is omitted', () => {
-      expect(Int.stringify(Int(123))).toBe('123');
+      expect(Int.stringify(Int.of(123))).toBe('123');
     });
   });
 
-  describe.each([Int, Int.of])('()', (create) => {
+  describe('of()', () => {
     it('should return identity for 0', () => {
-      expect(create(0)).toBe(0);
+      expect(Int.of(0)).toBe(0);
     });
     it('should return rounded for floats', () => {
-      expect(create(1.1)).toBe(1);
+      expect(Int.of(1.1)).toBe(1);
     });
     it('should return rounded for negative floats', () => {
-      expect(create(-1.1)).toBe(-1);
+      expect(Int.of(-1.1)).toBe(-1);
     });
     it('should return identity for min value', () => {
-      expect(create(minValue)).toBe(minValue);
+      expect(Int.of(minValue)).toBe(minValue);
     });
     it('should return identity for max value', () => {
-      expect(create(maxValue)).toBe(maxValue);
+      expect(Int.of(maxValue)).toBe(maxValue);
     });
 
     it('should return max value for max value + 1', () => {
-      expect(create(maxValue + 1)).toBe(maxValue);
+      expect(Int.of(maxValue + 1)).toBe(maxValue);
     });
     it('should return min value for min value - 1', () => {
-      expect(create(minValue - 1)).toBe(minValue);
+      expect(Int.of(minValue - 1)).toBe(minValue);
     });
   });
   describe('type', () => {
     it('should avoid type mismatch', () => {
-      const square = (value: Int) => Int(value * value);
+      const square = (value: Int) => Int.of(value * value);
       // @ts-expect-error number is not a Int32
       square(0);
 
-      square(Int(0));
+      square(Int.of(0));
     });
+  });
+  describeComparable({ describe, it, expect })(Int, {
+    ordered: () => [Int.of(-1), Int.of(0), Int.of(1)],
+    equivalent: () => [
+      [Int.of(0), Int.of(0)],
+      [Int.of(1), Int.of(1)],
+      [Int.of(-1), Int.of(-1)],
+    ],
   });
 });

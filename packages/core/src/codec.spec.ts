@@ -124,9 +124,9 @@ describe('int', () => {
   });
   describe('.codecEncode', () => {
     it.each([
-      [Int(0), Int(0)],
-      [Int(1), Int(1)],
-      [Int(-1), Int(-1)],
+      [Int.of(0), Int.of(0)],
+      [Int.of(1), Int.of(1)],
+      [Int.of(-1), Int.of(-1)],
     ])('should encode values', (input, expected) => {
       expect(Codec.encode(subject, input)).toEqual(expected);
     });

@@ -98,7 +98,7 @@ export namespace Math {
    * @example
    * ```typescript
    * Math.min(0.2, 0.5);// 0.2
-   * Math.min(Int(1), Int(2));// Int(1)
+   * Math.min(Int.of(1), Int.of(2));// Int.of(1)
    * ```
    * @param args - A set of numeric expressions
    */
@@ -111,7 +111,7 @@ export namespace Math {
    * @example
    * ```typescript
    * Math.max(0.2, 0.5);// 0.5
-   * Math.max(Int(1), Int(2));// Int(2)
+   * Math.max(Int.of(1), Int.of(2));// Int.of(2)
    * ```
    * @param args - A set of numeric expressions
    */
@@ -124,7 +124,7 @@ export namespace Math {
    * @example
    * ```typescript
    * Math.sqrt(4);// 2
-   * Math.sqrt(Int(4));// Int(2)
+   * Math.sqrt(Int.of(4));// Int.of(2)
    * ```
    * @param value - A set of numeric expressions
    */

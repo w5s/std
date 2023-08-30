@@ -1,9 +1,53 @@
 import type { Option } from './option.js';
 import type { Tag } from './type.js';
+import { Comparable } from './comparable.js';
+
+type Radix36 =
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 21
+  | 22
+  | 23
+  | 24
+  | 25
+  | 26
+  | 27
+  | 28
+  | 29
+  | 30
+  | 31
+  | 32
+  | 33
+  | 34
+  | 35
+  | 36;
 
 // eslint-disable-next-line no-restricted-properties, prefer-exponentiation-operator
 const MAX_SAFE_INTEGER = (Math.pow(2, 53) - 1) as Int;
 const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
+
+const IntComparable = Comparable<Int>({
+  compare(left, right) {
+    return left === right ? 0 : left < right ? -1 : 1;
+  },
+});
 
 /**
  * Integer value
@@ -11,79 +55,34 @@ const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
 export type Int = Tag<number, { integral: true }>;
 
 /**
- * @example
- * ```typescript
- * const intValue = Int(0.5);// 0
- * ```
- * @category Constructor
- * @param value - an initial numeric value
- */
-export function Int(value: number): Int {
-  return Int.of(value);
-}
-
-/**
  * A collection of functions to manipulate integer values
  *
  * @namespace
  */
-export namespace Int {
-  type Radix36 =
-    | 2
-    | 3
-    | 4
-    | 5
-    | 6
-    | 7
-    | 8
-    | 9
-    | 10
-    | 11
-    | 12
-    | 13
-    | 14
-    | 15
-    | 16
-    | 17
-    | 18
-    | 19
-    | 20
-    | 21
-    | 22
-    | 23
-    | 24
-    | 25
-    | 26
-    | 27
-    | 28
-    | 29
-    | 30
-    | 31
-    | 32
-    | 33
-    | 34
-    | 35
-    | 36;
+export const Int = {
+  ...IntComparable,
 
   /**
    * Alias to `Number.MAX_SAFE_INTEGER` (2**53-1)
    */
-  export const maxValue = MAX_SAFE_INTEGER;
+  maxValue: MAX_SAFE_INTEGER,
 
   /**
    * Alias to `Number.MIN_SAFE_INTEGER` (-(2**53-1))
    */
-  export const minValue = MIN_SAFE_INTEGER;
+  minValue: MIN_SAFE_INTEGER,
 
   /**
+   * Return a new integer from `value`
+   *
    * @example
    * ```typescript
-   * const intValue = Int(0.5);// 0
+   * const intValue = Int.of(0.5);// 0
    * ```
    * @category Constructor
    * @param value - an initial numeric value
    */
-  export function of(value: number): Int {
+  of(value: number): Int {
     return value < MIN_SAFE_INTEGER
       ? MIN_SAFE_INTEGER
       : value > MAX_SAFE_INTEGER
@@ -91,7 +90,7 @@ export namespace Int {
       : value < 0
       ? (Math.ceil(value) as Int)
       : (Math.floor(value) as Int);
-  }
+  },
 
   /**
    * Returns `true` if anyValue is a safe integer
@@ -106,9 +105,9 @@ export namespace Int {
    * @category Guard
    * @param anyValue - a tested value
    */
-  export function hasInstance(anyValue: unknown): anyValue is Int {
+  hasInstance(anyValue: unknown): anyValue is Int {
     return Number.isSafeInteger(anyValue);
-  }
+  },
 
   /**
    * Parses a string argument and returns an integer of the specified radix (the base in mathematical numeral systems).
@@ -122,25 +121,25 @@ export namespace Int {
    * @param expression - an integer expression
    * @param radix - an optional base (ex: 10, 16)
    */
-  export function parse(expression: string, radix?: Radix36): Option<Int> {
+  parse(expression: string, radix?: Radix36): Option<Int> {
     /* eslint-disable unicorn/prefer-number-properties */
-    const intValue = parseInt(expression, radix) as Int;
+    const intValue = parseInt(expression, radix);
 
-    return Number.isNaN(intValue) ? undefined : Int(intValue);
-  }
+    return Number.isNaN(intValue) ? undefined : Int.of(intValue);
+  },
 
   /**
    * Return string representation of integer
    *
    * @example
    * ```typescript
-   * Int.stringify(Int(1), 10);// '1'
-   * Int.stringify(Int(10), 16);// 'A'
+   * Int.stringify(Int.of(1), 10);// '1'
+   * Int.stringify(Int.of(10), 16);// 'A'
    * ```
    * @param intValue - an integer
    * @param radix - an optional base (ex: 10, 16)
    */
-  export function stringify(intValue: Int, radix?: Radix36): string {
+  stringify(intValue: Int, radix?: Radix36): string {
     return intValue.toString(radix);
-  }
-}
+  },
+};
