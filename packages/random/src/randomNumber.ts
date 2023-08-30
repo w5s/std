@@ -15,11 +15,12 @@ import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
  */
 export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
   return {
-    taskRun: (resolveTask, rejectTask, cancelerRef) =>
+    taskRun: (resolveTask, rejectTask, cancelerRef, run) =>
       (generator ?? defaultRandomGenerator.current).taskRun(
         (value) => resolveTask(min + (max - min) * value),
         rejectTask,
-        cancelerRef
+        cancelerRef,
+        run
       ),
   };
 }

@@ -161,8 +161,13 @@ export namespace HTTP {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
     const responseTask = applyFetch(localFetch, fetchRequest);
     return {
-      taskRun(resolve, reject, cancelerRef) {
-        responseTask.taskRun((value) => parse(value).taskRun(resolve, reject, cancelerRef), reject, cancelerRef);
+      taskRun(resolve, reject, cancelerRef, run) {
+        responseTask.taskRun(
+          (value) => parse(value).taskRun(resolve, reject, cancelerRef, run),
+          reject,
+          cancelerRef,
+          run
+        );
       },
     };
   }
