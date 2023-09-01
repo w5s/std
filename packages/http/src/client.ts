@@ -161,13 +161,11 @@ export namespace HTTP {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
     const responseTask = applyFetch(localFetch, fetchRequest);
     return {
-      taskRun(resolve, reject, cancelerRef, run) {
-        responseTask.taskRun(
-          (value) => parse(value).taskRun(resolve, reject, cancelerRef, run),
-          reject,
-          cancelerRef,
-          run
-        );
+      taskRun(parameters) {
+        responseTask.taskRun({
+          ...parameters,
+          resolve: (value) => parse(value).taskRun(parameters),
+        });
       },
     };
   }
@@ -208,11 +206,11 @@ function applyFetch(
 ): Task<HTTP.Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject, cancelerRef) => {
+    taskRun: async ({ resolve, reject, canceler }) => {
       const { url, ...requestInfo } = request;
 
       const controller = new AbortController();
-      cancelerRef.current = controller.abort.bind(controller);
+      canceler.current = controller.abort.bind(controller);
 
       if (isValidURL(url)) {
         try {

@@ -18,7 +18,7 @@ export interface RandomGenerator extends Task<RandomValue, never> {}
  * @param getNextValue - an impure function that returns a new value
  */
 export function RandomGenerator(getNextValue: () => RandomValue): RandomGenerator {
-  return { taskRun: (resolve) => resolve(getNextValue()) };
+  return { taskRun: ({ resolve }) => resolve(getNextValue()) };
 }
 
 export namespace RandomGenerator {

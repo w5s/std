@@ -48,7 +48,7 @@ export function errnoExceptionHandler(error: unknown): FileError {
 export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
   return (...args: A): Task<Awaited<R>, FileError> => ({
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject) => {
+    taskRun: async ({ resolve, reject }) => {
       try {
         resolve(await fn(...args));
       } catch (error_: unknown) {
@@ -60,7 +60,7 @@ export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>
 
 export function errnoTaskSync<A extends unknown[], R>(fn: (...args: A) => R) {
   return (...args: A): Task<R, FileError> => ({
-    taskRun: (resolve, reject) => {
+    taskRun: ({ resolve, reject }) => {
       try {
         resolve(fn(...args));
       } catch (error_: unknown) {

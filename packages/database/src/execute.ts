@@ -25,10 +25,10 @@ export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQue
 
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject, cancelerRef) => {
+    taskRun: async ({ resolve, reject, canceler }) => {
       try {
         const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
-        const returnValue = await driver.execute(client, sqlStatement, cancelerRef);
+        const returnValue = await driver.execute(client, sqlStatement, canceler);
         resolve(returnValue);
       } catch (error_: unknown) {
         const caughtError = await driver.handleError(error_);

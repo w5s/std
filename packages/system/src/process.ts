@@ -15,7 +15,7 @@ export namespace Process {
    * @param code - the exit code
    */
   export function exit(code: number): Task<never, never> {
-    return { taskRun: (resolve) => resolve(Internal.Process.exit(code)) };
+    return { taskRun: ({ resolve }) => resolve(Internal.Process.exit(code)) };
   }
 
   /**
@@ -28,7 +28,7 @@ export namespace Process {
    * ```
    */
   export function getCurrentDirectory(): Task<FilePath, never> {
-    return { taskRun: (resolve) => resolve(Internal.Process.cwd() as FilePath) };
+    return { taskRun: ({ resolve }) => resolve(Internal.Process.cwd() as FilePath) };
   }
 
   /**

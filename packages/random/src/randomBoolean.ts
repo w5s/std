@@ -14,12 +14,10 @@ import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
  */
 export function randomBoolean(trueWeight = 0.5, generator?: RandomGenerator): Task<boolean, never> {
   return {
-    taskRun: (resolveTask, rejectTask, cancelerRef, run) =>
-      (generator ?? defaultRandomGenerator.current).taskRun(
-        (value) => resolveTask(value > trueWeight),
-        rejectTask,
-        cancelerRef,
-        run
-      ),
+    taskRun: (parameters) =>
+      (generator ?? defaultRandomGenerator.current).taskRun({
+        ...parameters,
+        resolve: (value) => parameters.resolve(value > trueWeight),
+      }),
   };
 }

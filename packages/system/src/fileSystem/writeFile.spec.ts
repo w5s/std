@@ -1,4 +1,4 @@
-import { Result, Canceler } from '@w5s/core';
+import { Result, Canceler, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
@@ -51,11 +51,12 @@ describe('writeFile', () => {
       }),
     };
     const task = writeFile(FilePath('oldPath'), content);
-    task.taskRun(
-      () => {},
-      () => {},
-      cancelerRef
-    );
+    task.taskRun({
+      resolve: () => {},
+      reject: () => {},
+      canceler: cancelerRef,
+      run: unsafeRun,
+    });
     expect(fileContent).toEqual('0123456789');
   });
 });

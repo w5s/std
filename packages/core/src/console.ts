@@ -5,7 +5,7 @@ const createLogTask = (
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',
   message: [required: unknown, ...optionalParameters: unknown[]]
 ): Task<void, never> => ({
-  taskRun: (resolve) => {
+  taskRun: ({ resolve }) => {
     console[method](...message);
 
     resolve(undefined);

@@ -13,8 +13,30 @@ const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<
  */
 export type TaskRunner = <Value, Error>(
   task: Task<Value, Error>,
-  cancelerRef: Canceler
+  canceler: Canceler
 ) => Awaitable<Result<Value, Error>>;
+
+/**
+ * All context passed to task in order to execute
+ */
+export interface TaskParameters<Value, Error> {
+  /**
+   * Resolve callback
+   */
+  readonly resolve: (value: Value) => void;
+  /**
+   * Reject callback
+   */
+  readonly reject: (error: Error) => void;
+  /**
+   * Reference to cancel function
+   */
+  readonly canceler: Canceler;
+  /**
+   * The runner function (to run sub tasks)
+   */
+  readonly run: TaskRunner;
+}
 
 /**
  * A Task represents a lazy computation, that will be evaluated later.
@@ -25,24 +47,7 @@ export interface Task<Value, Error> {
   /**
    * A callback with side effects
    */
-  readonly taskRun: (
-    /**
-     * Resolve callback
-     */
-    resolve: (value: Value) => void,
-    /**
-     * Reject callback
-     */
-    reject: (error: Error) => void,
-    /**
-     * Reference to cancel function
-     */
-    canceler: Canceler,
-    /**
-     * The runner function (to run sub tasks)
-     */
-    run: TaskRunner
-  ) => void;
+  readonly taskRun: (parameters: TaskParameters<Value, Error>) => void;
 }
 
 /**
@@ -76,24 +81,24 @@ export function Task<Value, Error = never>(
     /**
      * Canceler setter
      */
-    setCanceler: (canceler: Option<() => void>) => void;
+    setCanceler: (cancelerFn: Option<() => void>) => void;
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return createTask((resolveTask, rejectTask, cancelerRef, _run) => {
-    Canceler.clear(cancelerRef);
+  return createTask(({ resolve, reject, canceler }) => {
+    Canceler.clear(canceler);
     const resultOrPromise = sideEffect({
       ok: resultOk,
       error: resultError,
-      setCanceler: (canceler) => {
-        cancelerRef.current = canceler;
+      setCanceler: (cancelerFn) => {
+        canceler.current = cancelerFn;
       },
     });
     const handleResult = (result: Result<Value, Error>) => {
       if (result.ok) {
-        resolveTask(result.value);
+        resolve(result.value);
       } else {
-        rejectTask(result.error);
+        reject(result.error);
       }
     };
     // eslint-disable-next-line promise/prefer-await-to-then
@@ -155,22 +160,22 @@ export namespace Task {
       rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void
     ) {
       this.tasks.forEach((entry, taskIndex) => {
-        entry.task.taskRun(
-          (value: Value) => {
+        entry.task.taskRun({
+          resolve: (value: Value) => {
             if (!this.isFinished()) {
               this.taskFinished += 1;
               resolveTask(value, entry, taskIndex);
             }
           },
-          (error: Error) => {
+          reject: (error: Error) => {
             if (!this.isFinished()) {
               this.taskFinished += 1;
               rejectTask(error, entry, taskIndex);
             }
           },
-          entry.cancelerRef,
-          this.taskRun
-        );
+          canceler: entry.cancelerRef,
+          run: this.taskRun,
+        });
       });
     }
   }
@@ -199,13 +204,13 @@ export namespace Task {
   ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
-    return createTask((taskResolve, taskReject, taskCancelerRef, run) => {
+    return createTask(({ resolve, reject, canceler, run }) => {
       const state = new TaskAggregateState(tasks, run);
       if (state.taskCount === 0) {
-        taskResolve(emptyArray);
+        resolve(emptyArray);
       } else {
         // Set global canceler
-        taskCancelerRef.current = state.cancelAll.bind(state);
+        canceler.current = state.cancelAll.bind(state);
 
         // eslint-disable-next-line unicorn/no-new-array
         const values = new Array<Value | undefined>(state.taskCount);
@@ -213,13 +218,13 @@ export namespace Task {
           (value, entry, index) => {
             values[index] = value;
             if (state.isFinished()) {
-              taskResolve(values as ReadonlyArray<Value>);
+              resolve(values as ReadonlyArray<Value>);
             }
           },
           (error: Error, entry) => {
             if (!state.isFinished()) {
               state.finish();
-              taskReject(error);
+              reject(error);
               // cancel all but the current task
               Canceler.clear(entry.cancelerRef);
               state.cancelAll();
@@ -254,14 +259,14 @@ export namespace Task {
   ): Task<ValueType<T[keyof T]>, AggregateError<{ [K in keyof T]: ErrorType<T[K]> }>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
-    return createTask((taskResolve, taskReject, taskCancelerRef, run) => {
+    return createTask(({ resolve, reject, canceler, run }) => {
       const state = new TaskAggregateState(tasks, run);
 
       if (state.taskCount === 0) {
-        taskReject(AggregateError({ errors: [] }));
+        reject(AggregateError({ errors: [] }));
       } else {
         // Set global canceler
-        taskCancelerRef.current = state.cancelAll.bind(state);
+        canceler.current = state.cancelAll.bind(state);
 
         // eslint-disable-next-line unicorn/no-new-array
         const errors = new Array<Error | undefined>(state.taskCount);
@@ -269,7 +274,7 @@ export namespace Task {
           (value, entry) => {
             if (!state.isFinished()) {
               state.finish();
-              taskResolve(value);
+              resolve(value);
               // cancel all but the current task
               Canceler.clear(entry.cancelerRef);
               state.cancelAll();
@@ -278,7 +283,7 @@ export namespace Task {
           (error, entry, index) => {
             errors[index] = error;
             if (state.isFinished()) {
-              taskReject(AggregateError({ errors: errors as Error[] }));
+              reject(AggregateError({ errors: errors as Error[] }));
             }
           }
         );
@@ -308,16 +313,16 @@ export namespace Task {
   export function allSettled<Value, Error>(
     tasks: Iterable<Task<Value, Error>>
   ): Task<ReadonlyArray<Result<Value, Error>>, never> {
-    return createTask((taskResolve, _taskReject, _taskCancelerRef, run) => {
+    return createTask(({ resolve, run }) => {
       const state = new TaskAggregateState(tasks, run);
       if (state.taskCount === 0) {
-        taskResolve(emptyArray);
+        resolve(emptyArray);
       } else {
         // eslint-disable-next-line unicorn/no-new-array
         const results = new Array<Result<Value, Error>>(state.taskCount);
         const finish = () => {
           if (state.isFinished()) {
-            taskResolve(Object.freeze(results));
+            resolve(Object.freeze(results));
           }
         };
         state.runAll(
@@ -364,7 +369,8 @@ export namespace Task {
   export function resolve<Error = never>(): Task<void, Error>;
   export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
   export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
-    return createTask((resolveTask) => resolveTask(value));
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    return createTask(({ resolve }) => resolve(value));
   }
 
   /**
@@ -382,7 +388,8 @@ export namespace Task {
   export function reject<Value = never>(): Task<Value, void>;
   export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
   export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
-    return createTask((_, rejectTask) => rejectTask(errorValue));
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    return createTask(({ reject }) => reject(errorValue));
   }
 
   /**
@@ -429,8 +436,8 @@ export namespace Task {
     task: Task<ValueFrom, Error>,
     fn: (value: ValueFrom) => ValueTo
   ): Task<ValueTo, Error> {
-    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
-      task.taskRun((value) => resolveTask(fn(value)), rejectTask, cancelerRef, run)
+    return createTask((parameters) =>
+      task.taskRun({ ...parameters, resolve: (value) => parameters.resolve(fn(value)) })
     );
   }
 
@@ -450,9 +457,7 @@ export namespace Task {
     task: Task<Value, ErrorFrom>,
     fn: (error: ErrorFrom) => ErrorTo
   ): Task<Value, ErrorTo> {
-    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
-      task.taskRun(resolveTask, (error) => rejectTask(fn(error)), cancelerRef, run)
-    );
+    return createTask((parameters) => task.taskRun({ ...parameters, reject: (error) => parameters.reject(fn(error)) }));
   }
 
   /**
@@ -474,13 +479,8 @@ export namespace Task {
     task: Task<ValueFrom, ErrorFrom>,
     fn: (value: ValueFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueTo, ErrorFrom | ErrorTo> {
-    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
-      task.taskRun(
-        (value) => fn(value).taskRun(resolveTask, rejectTask, cancelerRef, run),
-        rejectTask,
-        cancelerRef,
-        run
-      )
+    return createTask((parameters) =>
+      task.taskRun({ ...parameters, resolve: (value) => fn(value).taskRun(parameters) })
     );
   }
 
@@ -525,13 +525,8 @@ export namespace Task {
     task: Task<ValueFrom, ErrorFrom>,
     fn: (error: ErrorFrom) => Task<ValueTo, ErrorTo>
   ): Task<ValueFrom | ValueTo, ErrorTo> {
-    return createTask((resolveTask, rejectTask, cancelerRef, run) =>
-      task.taskRun(
-        resolveTask,
-        (error) => fn(error).taskRun(resolveTask, rejectTask, cancelerRef, run),
-        cancelerRef,
-        run
-      )
+    return createTask((parameters) =>
+      task.taskRun({ ...parameters, reject: (error) => fn(error).taskRun(parameters) })
     );
   }
 }

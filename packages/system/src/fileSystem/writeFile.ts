@@ -28,9 +28,9 @@ export function writeFile(
 ): Task<void, FileError> {
   return {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async (resolve, reject, cancelerRef) => {
+    taskRun: async ({ resolve, reject, canceler }) => {
       const controller = new AbortController();
-      cancelerRef.current = () => controller.abort();
+      canceler.current = () => controller.abort();
       try {
         resolve(
           await Internal.FS.writeFile(file, data, {

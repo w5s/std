@@ -243,7 +243,7 @@ export const Time = {
    * });
    * ```
    */
-  now: createTask((resolve) => resolve(Date.now() as Time)) satisfies Task<Time, never>,
+  now: createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>,
 
   /**
    * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
@@ -257,14 +257,14 @@ export const Time = {
    * @param duration - delay in milliseconds to wait
    */
   delay(duration: TimeDuration): Task<Time, never> {
-    return createTask((resolve, _reject, cancelerRef) => {
+    return createTask(({ resolve, canceler }) => {
       let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
       if (duration <= 0) {
         callImmediate(() => resolve(Date.now() as Time));
       } else {
         // Set Canceler
-        cancelerRef.current = () => {
+        canceler.current = () => {
           if (timeoutId != null) {
             clearTimeout(timeoutId);
             timeoutId = undefined;

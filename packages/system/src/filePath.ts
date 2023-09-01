@@ -167,7 +167,8 @@ export namespace FilePath {
    * @param to - The destination path
    */
   export function resolve(from: ReadonlyArray<FilePath>, to: FilePath): Task<FilePath, never> {
-    return { taskRun: (resolveTask) => resolveTask(nodePath.resolve(...from, to) as FilePath) };
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    return { taskRun: ({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath) };
   }
 
   /**

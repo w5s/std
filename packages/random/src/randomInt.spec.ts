@@ -9,7 +9,7 @@ describe('randomInt', () => {
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
-    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation((resolve) =>
+    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
       resolve(RandomValue(nextRandom))
     );
     expect(unsafeRun(randomInt(Int.of(-10), Int.of(10)))).toEqual(Result.Ok(-8));

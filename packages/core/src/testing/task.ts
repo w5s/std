@@ -50,7 +50,7 @@ export function taskStub<Value = never, Error = never>(options: TaskStubOptions<
   const { canceler = () => {}, delayMs } = options;
   const isAsync = delayMs != null && delayMs >= 0;
   const base = {
-    taskRun: (resolve, reject, _cancelerRef, _run) => {
+    taskRun: ({ resolve, reject }) => {
       if ('value' in options) {
         resolve(options.value);
       } else if ('error' in options) {
@@ -64,10 +64,10 @@ export function taskStub<Value = never, Error = never>(options: TaskStubOptions<
   return isAsync === true
     ? ({
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        taskRun: async (resolve, reject, cancelerRef, run) => {
-          cancelerRef.current = canceler;
+        taskRun: async (parameters) => {
+          parameters.canceler.current = canceler;
           await waitMs(delayMs ?? 0);
-          return base.taskRun(resolve, reject, cancelerRef, run);
+          return base.taskRun(parameters);
         },
       } satisfies Task<Value, Error>)
     : base;

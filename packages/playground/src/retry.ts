@@ -2,9 +2,9 @@ import type { Option, TimeDuration, Int, Result } from '@w5s/core';
 import { Task } from '@w5s/core/dist/task.js';
 import { Time } from '@w5s/core/dist/time.js';
 
-const defaultRandom: Task<number, never> = { taskRun: (resolve) => resolve(Math.random()) };
+const defaultRandom: Task<number, never> = { taskRun: ({ resolve }) => resolve(Math.random()) };
 const timeDelay = Time.delay.bind(Time);
-const resolveTask = <T>(value: T): Task<T, never> => ({ taskRun: (resolve) => resolve(value) });
+const resolveTask = <T>(value: T): Task<T, never> => ({ taskRun: ({ resolve }) => resolve(value) });
 const resolveNone = resolveTask(undefined);
 
 /**

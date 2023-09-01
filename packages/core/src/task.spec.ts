@@ -36,18 +36,18 @@ namespace ExpectTask {
       cancelerRef,
       run,
       finished: new Promise((resolve, _reject) => {
-        task.taskRun(
-          (value) => {
+        task.taskRun({
+          resolve: (value) => {
             resolveTask(value);
             resolve();
           },
-          (value) => {
+          reject: (value) => {
             rejectTask(value);
             resolve();
           },
-          cancelerRef,
-          run
-        );
+          canceler: cancelerRef,
+          run,
+        });
       }),
     };
   }
@@ -176,7 +176,7 @@ describe('Task', () => {
         const resolve = vi.fn();
         const reject = vi.fn();
 
-        task.taskRun(resolve, reject, anyCancelerRef, anyRunner);
+        task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('foo');
       });
@@ -185,7 +185,7 @@ describe('Task', () => {
         const resolve = vi.fn();
         const reject = vi.fn();
 
-        task.taskRun(resolve, reject, anyCancelerRef, anyRunner);
+        task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith(undefined);
       });
@@ -194,7 +194,7 @@ describe('Task', () => {
         const resolve = vi.fn();
         const reject = vi.fn();
 
-        task.taskRun(resolve, reject, anyCancelerRef, anyRunner);
+        task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(reject).toHaveBeenCalledTimes(1);
         expect(reject).toHaveBeenCalledWith('err');
       });
@@ -202,12 +202,12 @@ describe('Task', () => {
         const task = Task(({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
-        task.taskRun(
-          () => {},
-          () => {},
-          ref,
-          anyRunner
-        );
+        task.taskRun({
+          resolve: () => {},
+          reject: () => {},
+          canceler: ref,
+          run: anyRunner,
+        });
         expect(Ref.read(ref)).toBe(Option.None);
       });
     });
@@ -217,7 +217,7 @@ describe('Task', () => {
         const resolve = vi.fn();
         const reject = vi.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
-        await task.taskRun(resolve, reject, anyCancelerRef, anyRunner);
+        await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('value');
       });
@@ -226,7 +226,7 @@ describe('Task', () => {
         const resolve = vi.fn();
         const reject = vi.fn();
         // eslint-disable-next-line @typescript-eslint/await-thenable
-        await task.taskRun(resolve, reject, anyCancelerRef, anyRunner);
+        await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith(undefined);
       });
@@ -234,12 +234,12 @@ describe('Task', () => {
         const task = Task(async ({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
-        task.taskRun(
-          () => {},
-          () => {},
-          ref,
-          anyRunner
-        );
+        task.taskRun({
+          resolve: () => {},
+          reject: () => {},
+          canceler: ref,
+          run: anyRunner,
+        });
         expect(Ref.read(ref)).toBe(Option.None);
       });
       it('should set default canceler setCanceler(undefined)', () => {
@@ -252,12 +252,12 @@ describe('Task', () => {
         });
         const ref = Ref(() => {});
 
-        task.taskRun(
-          () => {},
-          () => {},
-          ref,
-          anyRunner
-        );
+        task.taskRun({
+          resolve: () => {},
+          reject: () => {},
+          canceler: ref,
+          run: anyRunner,
+        });
         expect(Ref.read(ref)).toBe(Option.None);
       });
 
@@ -270,12 +270,12 @@ describe('Task', () => {
         });
         const ref = Ref(() => {});
 
-        task.taskRun(
-          () => {},
-          () => {},
-          ref,
-          anyRunner
-        );
+        task.taskRun({
+          resolve: () => {},
+          reject: () => {},
+          canceler: ref,
+          run: anyRunner,
+        });
         expect(Ref.read(ref)).toBe(canceler);
       });
     });
@@ -480,12 +480,12 @@ describe('Task', () => {
       const mapTask = Task.map(task, (_) => _);
       vi.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
-      expect(task.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
+      expect(task.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
       await runReport.finished;
     });
   });
@@ -520,12 +520,12 @@ describe('Task', () => {
       const mapTask = Task.mapError(task, (_) => _);
       vi.spyOn(task, 'taskRun');
       const runReport = ExpectTask.run(mapTask);
-      expect(task.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
+      expect(task.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
       await runReport.finished;
     });
   });
@@ -560,18 +560,18 @@ describe('Task', () => {
       vi.spyOn(afterTask, 'taskRun');
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
-      expect(task.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
-      expect(afterTask.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
+      expect(task.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
+      expect(afterTask.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
     });
   });
 
@@ -634,18 +634,18 @@ describe('Task', () => {
       const runReport = ExpectTask.run(thenTask);
       await runReport.finished;
 
-      expect(task.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
-      expect(afterTask.taskRun).toHaveBeenCalledWith(
-        expect.any(Function),
-        expect.any(Function),
-        runReport.cancelerRef,
-        runReport.run
-      );
+      expect(task.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
+      expect(afterTask.taskRun).toHaveBeenCalledWith({
+        resolve: expect.any(Function),
+        reject: expect.any(Function),
+        canceler: runReport.cancelerRef,
+        run: runReport.run,
+      });
     });
   });
 });

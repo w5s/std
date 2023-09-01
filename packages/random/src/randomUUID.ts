@@ -32,7 +32,7 @@ export interface UUIDGenerator {
  * ```
  */
 export const randomUUID: Task<UUID, never> & Ref<UUIDGenerator> = {
-  taskRun: (resolve) => resolve(randomUUID.current() as UUID),
+  taskRun: ({ resolve }) => resolve(randomUUID.current() as UUID),
   current:
     cryptoModule == null
       ? () => invariant(false, 'crypto.randomUUID not found')

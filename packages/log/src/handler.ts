@@ -1,7 +1,7 @@
 import type { Task } from '@w5s/core';
 import type { LogRecord } from './record.js';
 
-const resolveVoid: Task<void, never> = { taskRun: (resolve) => resolve() };
+const resolveVoid: Task<void, never> = { taskRun: ({ resolve }) => resolve() };
 
 export interface LogHandler {
   (logRecord: LogRecord): Task<void, never>;

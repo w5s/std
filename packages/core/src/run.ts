@@ -69,12 +69,12 @@ export function unsafeRun<Value, Error>(
     returnValue = result;
   };
   let rejectHandler = (_error: unknown) => {};
-  const runValue: void | Promise<void> = task.taskRun(
-    (value) => resolveHandler({ _: 'Ok', ok: true, value }),
-    (error) => resolveHandler({ _: 'Error', ok: false, error }),
-    cancelerRef,
-    unsafeRun
-  );
+  const runValue: void | Promise<void> = task.taskRun({
+    resolve: (value) => resolveHandler({ _: 'Ok', ok: true, value }),
+    reject: (error) => resolveHandler({ _: 'Error', ok: false, error }),
+    canceler: cancelerRef,
+    run: unsafeRun,
+  });
   // Try to catch promise errors
   if (isPromise(runValue)) {
     // eslint-disable-next-line promise/prefer-await-to-then

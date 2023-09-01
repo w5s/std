@@ -67,7 +67,12 @@ describe('unsafeRun', () => {
     const canceler = Ref(undefined);
     const task = { taskRun: vi.fn() };
     void unsafeRun(task, canceler);
-    expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler, unsafeRun);
+    expect(task.taskRun).toHaveBeenCalledWith({
+      resolve: expect.any(Function),
+      reject: expect.any(Function),
+      canceler,
+      run: unsafeRun,
+    });
   });
 });
 describe('unsafeRunOk', () => {
@@ -94,6 +99,11 @@ describe('unsafeRunOk', () => {
     const canceler = Ref(undefined);
     const task = { taskRun: vi.fn() };
     void unsafeRunOk(task, canceler);
-    expect(task.taskRun).toHaveBeenCalledWith(expect.any(Function), expect.any(Function), canceler, unsafeRun);
+    expect(task.taskRun).toHaveBeenCalledWith({
+      resolve: expect.any(Function),
+      reject: expect.any(Function),
+      canceler,
+      run: unsafeRun,
+    });
   });
 });

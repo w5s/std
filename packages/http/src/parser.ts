@@ -12,7 +12,7 @@ export namespace HTTPParser {
   function from<V>(fn: (response: HTTP.Response) => Promise<V>): HTTPParser<V> {
     return (response) => ({
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      taskRun: async (resolve, reject) => {
+      taskRun: async ({ resolve, reject }) => {
         try {
           resolve(await fn(response));
         } catch (error: unknown) {

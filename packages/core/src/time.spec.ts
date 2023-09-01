@@ -94,18 +94,19 @@ describe('Time', () => {
       const duration = TimeDuration.seconds(1);
       const task = Time.delay(duration);
 
-      const cancelerRef = Ref(() => {});
+      const canceler = Ref(() => {});
       const resolve = vi.fn();
       const reject = vi.fn();
+      const run = vi.fn();
 
       // Run task
-      task.taskRun(resolve, reject, cancelerRef);
+      task.taskRun({ resolve, reject, canceler, run });
       // Memorize the last setTimeout call
       // eslint-disable-next-line unicorn/prefer-at
       const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 
       // Trigger cancellation
-      Ref.read(cancelerRef)();
+      Ref.read(canceler)();
 
       vi.runAllTimers();
 

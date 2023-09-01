@@ -40,7 +40,7 @@ export function timeout<Value, Error>(
   delay: TimeDuration
 ): Task<Value, TimeoutError | Error> {
   return {
-    taskRun: (resolve, reject, cancelerRef, run) => {
+    taskRun: ({ resolve, reject, canceler, run }) => {
       const taskCancelerRef = { current: defaultCanceler };
       const taskCancel = () => {
         taskCancelerRef.current();
@@ -58,23 +58,23 @@ export function timeout<Value, Error>(
       }, delay);
       const timeoutCancel = () => clearTimeout(timeoutId);
 
-      cancelerRef.current = () => {
+      canceler.current = () => {
         taskCancel();
         timeoutCancel();
       };
 
-      task.taskRun(
-        (value) => {
+      task.taskRun({
+        resolve: (value) => {
           timeoutCancel();
           resolve(value);
         },
-        (error) => {
+        reject: (error) => {
           timeoutCancel();
           reject(error);
         },
-        taskCancelerRef,
-        run
-      );
+        canceler: taskCancelerRef,
+        run,
+      });
     },
   };
 }

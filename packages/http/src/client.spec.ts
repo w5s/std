@@ -109,8 +109,9 @@ describe('HTTP.request', () => {
     });
     const resolve = vi.fn();
     const reject = vi.fn();
+    const run = vi.fn();
     const cancelerRef: Canceler = { current: undefined };
-    task.taskRun(resolve, reject, cancelerRef);
+    task.taskRun({ resolve, reject, canceler: cancelerRef, run });
     Canceler.cancel(cancelerRef);
 
     await finished.promise;
