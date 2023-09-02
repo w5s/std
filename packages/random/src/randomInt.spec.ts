@@ -5,12 +5,12 @@ import { randomInt } from './randomInt.js';
 import { RandomValue } from './randomValue.js';
 
 describe('randomInt', () => {
-  const generatorOf = (value: number) => RandomGenerator(() => RandomValue(value));
+  const generatorOf = (value: number) => RandomGenerator(() => RandomValue.of(value));
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
     vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
-      resolve(RandomValue(nextRandom))
+      resolve(RandomValue.of(nextRandom))
     );
     expect(unsafeRun(randomInt(Int.of(-10), Int.of(10)))).toEqual(Result.Ok(-8));
   });

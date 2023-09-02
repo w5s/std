@@ -6,7 +6,10 @@ const resolveVoid: Task<void, never> = { taskRun: ({ resolve }) => resolve() };
 export interface LogHandler {
   (logRecord: LogRecord): Task<void, never>;
 }
-export namespace LogHandler {
+/**
+ * @namespace
+ */
+export const LogHandler = {
   /**
    * Decorate handler where `predicate` is applied on record input.
    * If `false`, the handler is never called
@@ -19,7 +22,7 @@ export namespace LogHandler {
    * @param handler - the handler function
    * @param predicate - the predicate applied on log record
    */
-  export function filter(handler: LogHandler, predicate: (record: LogRecord) => boolean): LogHandler {
+  filter(handler: LogHandler, predicate: (record: LogRecord) => boolean): LogHandler {
     return (logRecord) => (predicate(logRecord) ? handler(logRecord) : resolveVoid);
-  }
-}
+  },
+};
