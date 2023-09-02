@@ -21,6 +21,11 @@ declare global {
 }
 const GlobalSymbol = globalThis.Symbol;
 
+/**
+ * A collection of well known symbols
+ *
+ * @namespace
+ */
 export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'metadata'> = {
   iterator: GlobalSymbol.iterator,
   asyncIterator: GlobalSymbol.asyncIterator,
