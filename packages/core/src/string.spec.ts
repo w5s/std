@@ -4,6 +4,11 @@ import { String } from './string.js';
 import { describeComparable } from './testing.js';
 
 describe('String', () => {
+  describe('.of', () => {
+    it('should join all parts', () => {
+      expect(String.of('a', 'b', 'c')).toEqual('abc');
+    });
+  });
   describe('.fromCodePoint', () => {
     it('should return true only when present', () => {
       expect(String.fromCodePoint(65, 65)).toEqual('AA');

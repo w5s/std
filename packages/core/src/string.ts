@@ -19,7 +19,19 @@ const StringComparable = Comparable<string>({
  */
 export const String = {
   ...StringComparable,
-
+  /**
+   * Return a new string from all parts passed as arguments
+   *
+   * @example
+   * ```typescript
+   * String.of('a', 'b', 'c') // 'abc'
+   * ```
+   * @category Constructor
+   * @param args - a list of parts
+   */
+  of(...args: Array<string>): string {
+    return args.join('');
+  },
   /**
    * Returns a string created by using the specified code point.
    *
