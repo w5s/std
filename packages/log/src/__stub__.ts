@@ -8,7 +8,7 @@ export const generateTime = (ms = 0) => Time.of(ms);
 
 export const generateLogRecord = ({
   level = LogLevel.Debug,
-  message = LogMessage(['test']),
+  message = LogMessage.of('test'),
   category = '',
 }: Partial<
   Pick<LogRecord, 'message' | 'category'> & {

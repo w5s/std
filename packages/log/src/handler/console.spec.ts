@@ -41,7 +41,7 @@ describe('.ConsoleHandler', () => {
         generateLogRecord({
           category: 'logCategory',
           level: LogLevel.Debug,
-          message: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
+          message: LogMessage.of('message', ['foo', 'bar']),
         })
       )
     );
@@ -53,7 +53,7 @@ describe('.ConsoleHandler', () => {
       ConsoleHandler(
         generateLogRecord({
           level: LogLevel.Debug,
-          message: LogMessage(['message', LogMessage.Ref('foo', 'bar')]),
+          message: LogMessage.of('message', ['foo', 'bar']),
         })
       )
     );
