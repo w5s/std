@@ -13,11 +13,35 @@ export interface LogLevel
     value: number;
   }> {}
 
+function of(name: string, levelValue: number): LogLevel {
+  return { _: 'LogLevel', name, value: levelValue };
+}
+
+const None = of('None', Number.NEGATIVE_INFINITY);
+
+function match<T>(matchers: [LogLevel, T][]): (anyLevel: LogLevel) => Option<T>;
+function match<T>(matchers: [LogLevel, T][], defaultValue: T): (anyLevel: LogLevel) => T;
+function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLevel) => Option<T> {
+  const orderedMatchers = [...matchers];
+  const level = 0;
+  const returnValue = 1;
+  const first: [LogLevel, Option<T>] = [None, defaultValue];
+
+  return orderedMatchers.length === 0
+    ? () => defaultValue
+    : (anyLevel) =>
+        orderedMatchers.reduce(
+          (acc, matcher) =>
+            LogLevel.compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value ? matcher : acc,
+          first
+        )[returnValue];
+}
+
 /**
  * @example
  * @namespace
  */
-export namespace LogLevel {
+export const LogLevel = {
   /**
    * Construct a new `LogLevel`
    *
@@ -29,32 +53,28 @@ export namespace LogLevel {
    * @param name - the level string representation
    * @param value - the level value
    */
-  export function of(name: string, levelValue: number): LogLevel {
-    return { _: 'LogLevel', name, value: levelValue };
-  }
+  of,
 
   /**
    * Critical log level (50)
    */
-  export const Critical = of('Critical', 50);
+  Critical: of('Critical', 50),
   /**
    * Error log level (40)
    */
-  export const Error = of('Error', 40);
+  Error: of('Error', 40),
   /**
    * Warning log level (30)
    */
-  export const Warning = of('Warning', 30);
+  Warning: of('Warning', 30),
   /**
    * Info log level (20)
    */
-  export const Info = of('Info', 20);
+  Info: of('Info', 20),
   /**
    * Debug log level (10)
    */
-  export const Debug = of('Debug', 10);
-
-  const None = of('None', Number.NEGATIVE_INFINITY);
+  Debug: of('Debug', 10),
 
   /**
    * Return the comparison result
@@ -67,11 +87,11 @@ export namespace LogLevel {
    * @param left - the left element
    * @param right - the right element
    */
-  export function compare(left: LogLevel, right: LogLevel): number {
-    const diff = value(left) - value(right);
+  compare(left: LogLevel, right: LogLevel): number {
+    const diff = left.value - right.value;
 
     return diff === 0 ? diff : diff < 0 ? -1 : 1;
-  }
+  },
 
   /**
    * Returns the string representation of a level
@@ -83,9 +103,9 @@ export namespace LogLevel {
    * ```
    * @param level - the log level
    */
-  export function stringify(level: LogLevel): string {
+  stringify(level: LogLevel): string {
     return level.name;
-  }
+  },
 
   /**
    * Returns the numerical representation of a level
@@ -97,9 +117,9 @@ export namespace LogLevel {
    * ```
    * @param level - the log level
    */
-  export function value(level: LogLevel): number {
+  value(level: LogLevel): number {
     return level.value;
-  }
+  },
 
   /**
    * Build a matching function `(anyLevelValue) => value` from a list of tuples `[level1, value1], [level2, value2], ...`
@@ -117,21 +137,5 @@ export namespace LogLevel {
    * ```
    * @param matchers
    */
-  export function match<T>(matchers: [LogLevel, T][]): (anyLevel: LogLevel) => Option<T>;
-  export function match<T>(matchers: [LogLevel, T][], defaultValue: T): (anyLevel: LogLevel) => T;
-  export function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLevel) => Option<T> {
-    const orderedMatchers = [...matchers];
-    const level = 0;
-    const returnValue = 1;
-    const first: [LogLevel, Option<T>] = [None, defaultValue];
-
-    return orderedMatchers.length === 0
-      ? () => defaultValue
-      : (anyLevel) =>
-          orderedMatchers.reduce(
-            (acc, matcher) =>
-              compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value ? matcher : acc,
-            first
-          )[returnValue];
-  }
-}
+  match,
+};
