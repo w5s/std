@@ -40,6 +40,7 @@ export function randomUUID(): Task<UUID, never> {
  * Current implementation for randomUUID
  *
  * @example
+ * @internal
  */
 randomUUID.current = (
   cryptoModule == null
