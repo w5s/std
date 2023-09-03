@@ -14,42 +14,47 @@ export interface LogLevel
   }> {}
 
 /**
- * Construct a new `LogLevel`
- *
  * @example
- * ```ts
- * const level = LogLevel('UberCritical', 60);// { levelName: 'UberCritical', level: 60 }
- * ```
- * @category Constructor
- * @param name - the level string representation
- * @param value - the level value
+ * @namespace
  */
-export function LogLevel(name: string, value: number): LogLevel {
-  return { _: 'LogLevel', name, value };
-}
 export namespace LogLevel {
+  /**
+   * Construct a new `LogLevel`
+   *
+   * @example
+   * ```ts
+   * const level = LogLevel('UberCritical', 60);// { levelName: 'UberCritical', level: 60 }
+   * ```
+   * @category Constructor
+   * @param name - the level string representation
+   * @param value - the level value
+   */
+  export function of(name: string, levelValue: number): LogLevel {
+    return { _: 'LogLevel', name, value: levelValue };
+  }
+
   /**
    * Critical log level (50)
    */
-  export const Critical = LogLevel('Critical', 50);
+  export const Critical = of('Critical', 50);
   /**
    * Error log level (40)
    */
-  export const Error = LogLevel('Error', 40);
+  export const Error = of('Error', 40);
   /**
    * Warning log level (30)
    */
-  export const Warning = LogLevel('Warning', 30);
+  export const Warning = of('Warning', 30);
   /**
    * Info log level (20)
    */
-  export const Info = LogLevel('Info', 20);
+  export const Info = of('Info', 20);
   /**
    * Debug log level (10)
    */
-  export const Debug = LogLevel('Debug', 10);
+  export const Debug = of('Debug', 10);
 
-  const None = LogLevel('None', Number.NEGATIVE_INFINITY);
+  const None = of('None', Number.NEGATIVE_INFINITY);
 
   /**
    * Return the comparison result
