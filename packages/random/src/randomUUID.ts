@@ -1,4 +1,4 @@
-import type { Ref, Task, Option } from '@w5s/core';
+import type { Task, Option } from '@w5s/core';
 import { invariant } from '@w5s/core/dist/invariant.js';
 import type { UUID } from './uuid.js';
 
@@ -25,16 +25,24 @@ export interface UUIDGenerator {
  *
  * @example
  * ```typescript
- * const createUser = (name: string) => Task.map(randomUUID, (uuid) => ({
+ * const createUser = (name: string) => Task.map(randomUUID(), (uuid) => ({
  *   id: uuid,
  *   name,
  * }));
  * ```
  */
-export const randomUUID: Task<UUID, never> & Ref<UUIDGenerator> = {
-  taskRun: ({ resolve }) => resolve(randomUUID.current() as UUID),
-  current:
-    cryptoModule == null
-      ? () => invariant(false, 'crypto.randomUUID not found')
-      : cryptoModule.randomUUID.bind(cryptoModule),
-};
+export function randomUUID(): Task<UUID, never> {
+  return {
+    taskRun: ({ resolve }) => resolve(randomUUID.current()),
+  };
+}
+/**
+ * Current implementation for randomUUID
+ *
+ * @example
+ */
+randomUUID.current = (
+  cryptoModule == null
+    ? () => invariant(false, 'crypto.randomUUID not found')
+    : cryptoModule.randomUUID.bind(cryptoModule)
+) as () => UUID;

@@ -8,7 +8,7 @@ import { timeout, TimeoutError } from './timeout.js';
 
 function main() {
   const client = Slack({ token: 'token' });
-  const task = pipe(randomUUID).to(
+  const task = pipe(randomUUID()).to(
     (_) => Task.andThen(_, (uuid) => Slack.Chat.postMessage(client, { text: uuid })),
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),

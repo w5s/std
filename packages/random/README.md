@@ -26,7 +26,7 @@ import { randomUUID } from '@w5s/random';
 import { Task, unsafeRun } from '@w5s/core';
 
 function createUser(name: string) {
-  return Task.map(randomUUID, (uuid) => ({
+  return Task.map(randomUUID(), (uuid) => ({
     id: uuid,
     name,
   }));
