@@ -13,7 +13,7 @@ describe('LogRecord', () => {
           id: UUID.empty(),
           category: 'category',
           level: LogLevel.Warning,
-          message: LogMessage(['foo', 'bar', '']),
+          message: LogMessage.of('foo', 'bar', ''),
           data: {},
           created: Time.of(1),
         })

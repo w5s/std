@@ -42,7 +42,7 @@ export interface LogRecord
  *   category: 'any category',
  *   level: LogLevel.Critical,
  *   data: { foo: true },
- *   message: LogMessage('message'),
+ *   message: LogMessage.of('message'),
  *   created: Time.of(Date.now()),
  * });
  * ```

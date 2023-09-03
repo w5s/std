@@ -69,7 +69,7 @@ export const LogMessage = {
    *
    * @example
    * ```ts
-   * const message = LogMessage(['foo', LogMessage.Ref('key', 'value'), 'bar']);
+   * const message = LogMessage.of('foo', ['key', 'value'], 'bar');
    * LogMessage.data(message);// { key: 'value' }
    * ```
    * @param message - the message
