@@ -45,15 +45,15 @@ export function warning(condition: boolean, message?: Option<string>): void {
 }
 
 /**
+ * Current warning implementation
  *
  * @internal
+ * @example
  */
-export namespace warning {
-  export const current = (message: Option<string>): void => {
-    // eslint-disable-next-line no-console
-    console.warn(message);
-  };
-}
+warning.current = (message: Option<string>): void => {
+  // eslint-disable-next-line no-console
+  console.warn(message);
+};
 
 /**
  * Raise a compile error when accessing this function and throws a TypeError at runtime
