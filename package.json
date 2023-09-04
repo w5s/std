@@ -104,7 +104,7 @@
     "prettier": "3.0.3",
     "size-limit-preset-node-lib": "0.2.0",
     "turbo": "1.10.13",
-    "typedoc": "0.25.0",
+    "typedoc": "0.25.1",
     "typescript": "5.2.2",
     "vite": "latest",
     "vitest": "latest"
