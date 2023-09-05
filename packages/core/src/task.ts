@@ -4,9 +4,21 @@ import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
 import { Canceler } from './run.js';
 
+// Inline static helpers
 const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
   taskRun,
 });
+const isObject = (anyValue: unknown): anyValue is Record<string, unknown> =>
+  typeof anyValue === 'object' && anyValue !== null;
+const isPromiseLike = <V>(anyValue: unknown): anyValue is PromiseLike<V> =>
+  isObject(anyValue) && typeof anyValue['then'] === 'function';
+
+const Ok: typeof Result.Ok = ((value?: unknown) => ({ _: 'Ok', ok: true, value })) as unknown as typeof Result.Ok;
+const Err: typeof Result.Error = ((error?: unknown): Result<never, unknown> => ({
+  _: 'Error',
+  ok: false,
+  error,
+})) as unknown as typeof Result.Error;
 
 /**
  * A function that runs the task and returns a {@link @w5s/core!Result}
@@ -88,8 +100,8 @@ export function Task<Value, Error = never>(
   return createTask(({ resolve, reject, canceler }) => {
     Canceler.clear(canceler);
     const resultOrPromise = sideEffect({
-      ok: resultOk,
-      error: resultError,
+      ok: Ok,
+      error: Err,
       setCanceler: (cancelerFn) => {
         canceler.current = cancelerFn;
       },
@@ -348,11 +360,11 @@ export namespace Task {
         };
         state.runAll(
           (value, entry, index) => {
-            results[index] = resultOk(value);
+            results[index] = Ok(value);
             finish();
           },
           (error, entry, index) => {
-            results[index] = resultError(error);
+            results[index] = Err(error);
             finish();
           }
         );
@@ -550,24 +562,4 @@ export namespace Task {
       task.taskRun({ ...parameters, reject: (error) => fn(error).taskRun(parameters) })
     );
   }
-}
-
-// inline private constructors
-function resultOk(): Result<void, never>;
-function resultOk<V>(value: V): Result<V, never>;
-function resultOk(value?: unknown): Result<unknown, never> {
-  return { _: 'Ok', ok: true, value };
-}
-function resultError(): Result<never, void>;
-function resultError<E>(error: E): Result<never, E>;
-function resultError(error?: unknown): Result<never, unknown> {
-  return { _: 'Error', ok: false, error };
-}
-
-// utils
-function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
-  return typeof anyValue === 'object' && anyValue !== null;
-}
-function isPromiseLike<V>(anyValue: unknown): anyValue is PromiseLike<V> {
-  return isObject(anyValue) && typeof anyValue['then'] === 'function';
 }
