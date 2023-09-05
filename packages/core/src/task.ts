@@ -119,64 +119,78 @@ export namespace Task {
 
   type TaskEntry<Value, Error> = Readonly<{
     task: Task<Value, Error>;
-    cancelerRef: Canceler;
+    canceler: Canceler;
   }>;
 
-  class TaskAggregateState<Value, Error> {
+  class TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
     readonly tasks: ReadonlyArray<TaskEntry<Value, Error>>;
 
     readonly taskCount: number;
 
-    readonly taskRun: <V, E>(task: Task<V, E>, cancelerRef: Canceler) => Awaitable<Result<V, E>>;
+    readonly taskParameters: TaskParameters<ReturnValue, ReturnError>;
 
-    taskFinished = 0;
+    #taskCompleted = 0;
 
-    constructor(
-      tasks: Iterable<Task<Value, Error>>,
-      run: <V, E>(task: Task<V, E>, cancelerRef: Canceler) => Awaitable<Result<V, E>>
-    ) {
-      this.tasks = Array.from(tasks).map((task) => ({
+    #closed = false;
+
+    constructor(tasks: Array<Task<Value, Error>>, taskParameters: TaskParameters<ReturnValue, ReturnError>) {
+      this.tasks = tasks.map((task) => ({
         task,
-        cancelerRef: { current: undefined },
+        canceler: { current: undefined },
       }));
       this.taskCount = this.tasks.length;
-      this.taskRun = run;
+      this.taskParameters = taskParameters;
     }
 
-    isFinished() {
-      return this.taskFinished === this.taskCount;
+    isComplete() {
+      return this.#taskCompleted === this.taskCount;
     }
 
-    finish() {
-      this.taskFinished = this.taskCount;
+    complete() {
+      this.#taskCompleted = this.taskCount;
     }
 
     cancelAll() {
-      this.tasks.forEach((task) => Canceler.cancel(task.cancelerRef));
+      this.tasks.forEach(({ canceler }) => Canceler.cancel(canceler));
     }
 
     runAll(
       resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
       rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void
     ) {
+      const { run } = this.taskParameters;
       this.tasks.forEach((entry, taskIndex) => {
         entry.task.taskRun({
           resolve: (value: Value) => {
-            if (!this.isFinished()) {
-              this.taskFinished += 1;
+            if (!this.isComplete()) {
+              this.#taskCompleted += 1;
               resolveTask(value, entry, taskIndex);
             }
           },
           reject: (error: Error) => {
-            if (!this.isFinished()) {
-              this.taskFinished += 1;
+            if (!this.isComplete()) {
+              this.#taskCompleted += 1;
               rejectTask(error, entry, taskIndex);
             }
           },
-          canceler: entry.cancelerRef,
-          run: this.taskRun,
+          canceler: entry.canceler,
+          run,
         });
       });
+    }
+
+    resolve(value: ReturnValue) {
+      if (!this.#closed) {
+        this.#closed = true;
+        this.taskParameters.resolve(value);
+      }
+    }
+
+    reject(error: ReturnError) {
+      if (!this.#closed) {
+        this.#closed = true;
+        this.taskParameters.reject(error);
+      }
     }
   }
 
@@ -204,29 +218,31 @@ export namespace Task {
   ): Task<{ [K in keyof T]: ValueType<T[K]> }, ErrorType<T[keyof T]>>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
   export function all<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
-    return createTask(({ resolve, reject, canceler, run }) => {
-      const state = new TaskAggregateState(tasks, run);
-      if (state.taskCount === 0) {
-        resolve(emptyArray);
+    return createTask((parameters) => {
+      const taskArray = Array.from(tasks);
+      if (taskArray.length === 0) {
+        parameters.resolve(emptyArray);
       } else {
+        const state = new TaskAggregateState(taskArray, parameters);
+
         // Set global canceler
-        canceler.current = state.cancelAll.bind(state);
+        parameters.canceler.current = state.cancelAll.bind(state);
 
         // eslint-disable-next-line unicorn/no-new-array
         const values = new Array<Value | undefined>(state.taskCount);
         state.runAll(
           (value, entry, index) => {
             values[index] = value;
-            if (state.isFinished()) {
-              resolve(values as ReadonlyArray<Value>);
+            if (state.isComplete()) {
+              state.resolve(values as ReadonlyArray<Value>);
             }
           },
           (error: Error, entry) => {
-            if (!state.isFinished()) {
-              state.finish();
-              reject(error);
+            if (!state.isComplete()) {
+              state.complete();
+              state.reject(error);
               // cancel all but the current task
-              Canceler.clear(entry.cancelerRef);
+              Canceler.clear(entry.canceler);
               state.cancelAll();
             }
           }
@@ -259,31 +275,33 @@ export namespace Task {
   ): Task<ValueType<T[keyof T]>, AggregateError<{ [K in keyof T]: ErrorType<T[K]> }>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>>;
   export function any<Value, Error>(tasks: Iterable<Task<Value, Error>>): Task<Value, AggregateError<Error[]>> {
-    return createTask(({ resolve, reject, canceler, run }) => {
-      const state = new TaskAggregateState(tasks, run);
+    return createTask((parameters) => {
+      const taskArray = Array.from(tasks);
 
-      if (state.taskCount === 0) {
-        reject(AggregateError({ errors: [] }));
+      if (taskArray.length === 0) {
+        parameters.reject(AggregateError({ errors: [] }));
       } else {
+        const state = new TaskAggregateState(taskArray, parameters);
+
         // Set global canceler
-        canceler.current = state.cancelAll.bind(state);
+        parameters.canceler.current = state.cancelAll.bind(state);
 
         // eslint-disable-next-line unicorn/no-new-array
         const errors = new Array<Error | undefined>(state.taskCount);
         state.runAll(
           (value, entry) => {
-            if (!state.isFinished()) {
-              state.finish();
-              resolve(value);
+            if (!state.isComplete()) {
+              state.complete();
+              state.resolve(value);
               // cancel all but the current task
-              Canceler.clear(entry.cancelerRef);
+              Canceler.clear(entry.canceler);
               state.cancelAll();
             }
           },
           (error, entry, index) => {
             errors[index] = error;
-            if (state.isFinished()) {
-              reject(AggregateError({ errors: errors as Error[] }));
+            if (state.isComplete()) {
+              state.reject(AggregateError({ errors: errors as Error[] }));
             }
           }
         );
@@ -313,16 +331,19 @@ export namespace Task {
   export function allSettled<Value, Error>(
     tasks: Iterable<Task<Value, Error>>
   ): Task<ReadonlyArray<Result<Value, Error>>, never> {
-    return createTask(({ resolve, run }) => {
-      const state = new TaskAggregateState(tasks, run);
-      if (state.taskCount === 0) {
-        resolve(emptyArray);
+    return createTask((parameters) => {
+      const taskArray = Array.from(tasks);
+
+      if (taskArray.length === 0) {
+        parameters.resolve(emptyArray);
       } else {
+        const state = new TaskAggregateState(taskArray, parameters);
+
         // eslint-disable-next-line unicorn/no-new-array
         const results = new Array<Result<Value, Error>>(state.taskCount);
         const finish = () => {
-          if (state.isFinished()) {
-            resolve(Object.freeze(results));
+          if (state.isComplete()) {
+            state.resolve(Object.freeze(results));
           }
         };
         state.runAll(
