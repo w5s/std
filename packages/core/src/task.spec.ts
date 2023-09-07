@@ -242,11 +242,11 @@ describe('Task', () => {
         });
         expect(Ref.read(ref)).toBe(Option.None);
       });
-      it('should set default canceler setCanceler(undefined)', () => {
-        const canceler = () => {};
-        const task = Task(async ({ ok, setCanceler }) => {
-          setCanceler(canceler);
-          setCanceler(Option.None);
+      it('should set forward canceler reference', () => {
+        const cancelerFn = () => {};
+        const task = Task(async ({ ok, canceler }) => {
+          canceler.current = cancelerFn;
+          canceler.current = undefined;
 
           return ok(Option.None);
         });
@@ -262,9 +262,9 @@ describe('Task', () => {
       });
 
       it('should set canceler', () => {
-        const canceler = () => {};
-        const task = Task(async ({ ok, setCanceler }) => {
-          setCanceler(canceler);
+        const cancelerFn = () => {};
+        const task = Task(async ({ ok, canceler }) => {
+          canceler.current = cancelerFn;
 
           return ok();
         });
@@ -276,7 +276,7 @@ describe('Task', () => {
           canceler: ref,
           run: anyRunner,
         });
-        expect(Ref.read(ref)).toBe(canceler);
+        expect(Ref.read(ref)).toBe(cancelerFn);
       });
     });
   });

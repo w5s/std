@@ -97,9 +97,9 @@ export function Task<Value, Error = never>(
       <EE>(errorValue: EE): Result<never, EE>;
     };
     /**
-     * Canceler setter
+     * Canceler
      */
-    setCanceler: (cancelerFn: Option<() => void>) => void;
+    canceler: TaskCanceler;
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -108,17 +108,9 @@ export function Task<Value, Error = never>(
     const resultOrPromise = sideEffect({
       ok: Ok,
       error: Err,
-      setCanceler: (cancelerFn) => {
-        canceler.current = cancelerFn;
-      },
+      canceler,
     });
-    const handleResult = (result: Result<Value, Error>) => {
-      if (result.ok) {
-        resolve(result.value);
-      } else {
-        reject(result.error);
-      }
-    };
+    const handleResult = (result: Result<Value, Error>) => (result.ok ? resolve(result.value) : reject(result.error));
     // eslint-disable-next-line promise/prefer-await-to-then
     return isPromiseLike(resultOrPromise) ? resultOrPromise.then(handleResult) : handleResult(resultOrPromise);
   });
