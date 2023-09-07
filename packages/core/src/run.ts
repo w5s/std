@@ -1,7 +1,5 @@
-import type { Option } from './option.js';
-import type { Ref } from './ref.js';
 import type { Result } from './result.js';
-import type { Task } from './task.js';
+import type { Task, TaskCanceler } from './task.js';
 import type { Awaitable } from './type.js';
 
 // Inline utilities
@@ -18,51 +16,6 @@ const returnOrThrow = <V, E>(result: Result<V, E>): V => {
 };
 
 /**
- * Interface used to cancel running task
- */
-export interface Canceler extends Ref<Option<() => void>> {}
-
-/**
- * A collection of functions to manipulate Canceler
- *
- * @namespace
- */
-export const Canceler = {
-  /**
-   * Clear the current value of canceler
-   *
-   * @example
-   * ```ts
-   * const canceler: Canceler = { current: () => {} };
-   * Canceler.clear(canceler);// canceler.current === undefined
-   * ```
-   * @param canceler
-   */
-  clear(canceler: Canceler) {
-    canceler.current = undefined;
-  },
-
-  /**
-   * Trigger cancelation once
-   *
-   * @example
-   * ```ts
-   * const canceler: Canceler = { current: () => { console.log('cancel'); } };
-   * Canceler.cancel(canceler);// console.log('cancel');
-   * Canceler.cancel(canceler);// do nothing
-   * ```
-   * @param canceler
-   */
-  cancel(canceler: Canceler) {
-    const { current } = canceler;
-    if (current != null) {
-      Canceler.clear(canceler);
-      current();
-    }
-  },
-};
-
-/**
  * Run `task` and return the result or a promise of the result
  *
  * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
@@ -75,7 +28,7 @@ export const Canceler = {
  */
 export function unsafeRun<Value, Error>(
   task: Task<Value, Error>,
-  canceler: Canceler = { current: undefined }
+  canceler: TaskCanceler = { current: undefined }
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
   let resolveHandler = (result: Result<Value, Error>) => {
@@ -115,8 +68,8 @@ export function unsafeRun<Value, Error>(
  * ```
  * @param task - the task to be run
  */
-export function unsafeRunOk<Value>(task: Task<Value, unknown>, cancelerRef?: Canceler): Awaitable<Value> {
-  const promiseOrValue = unsafeRun(task, cancelerRef);
+export function unsafeRunOk<Value>(task: Task<Value, unknown>, canceler?: TaskCanceler): Awaitable<Value> {
+  const promiseOrValue = unsafeRun(task, canceler);
   // @ts-ignore - we assume PromiseLike.then returns a Promise
   // eslint-disable-next-line promise/prefer-await-to-then
   return isPromise(promiseOrValue) ? promiseOrValue.then(returnOrThrow) : returnOrThrow(promiseOrValue);

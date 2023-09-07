@@ -1,41 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import { Result } from './result.js';
-import { Canceler, unsafeRun, unsafeRunOk } from './run.js';
+import { unsafeRun, unsafeRunOk } from './run.js';
 import { Task } from './task.js';
 import { Ref } from './ref.js';
 import { taskStub } from './testing.js';
 
 const anyError = new Error('TestError');
 const anyObject = Object.freeze({ foo: true });
-
-describe('Canceler', () => {
-  describe('.clear', () => {
-    it('', () => {
-      const canceler = Ref(() => {});
-      Canceler.clear(canceler);
-      expect(canceler).toEqual({ current: undefined });
-    });
-  });
-  describe('.cancel', () => {
-    it('should run the canceler function', () => {
-      const fn = vi.fn();
-      const canceler = Ref(fn);
-      Canceler.cancel(canceler);
-      expect(fn).toHaveBeenCalledOnce();
-    });
-
-    it('should handle gracefully exceptions', () => {
-      const fn = vi.fn(() => {
-        throw new Error('SomeError');
-      });
-      const canceler = Ref(fn);
-      expect(() => {
-        Canceler.cancel(canceler);
-      }).toThrow();
-      expect(canceler.current).toBe(undefined);
-    });
-  });
-});
 
 describe('unsafeRun', () => {
   it('should run throwing task', () => {

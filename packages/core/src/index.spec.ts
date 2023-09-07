@@ -12,7 +12,7 @@ describe('index', () => {
         'assign',
         'AsyncDisposable',
         'Boolean',
-        'Canceler',
+        'cancel',
         'Comparable',
         'Console',
         'DataError',

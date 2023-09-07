@@ -1,4 +1,4 @@
-import { Result, Task, Canceler, unsafeRun } from '@w5s/core';
+import { Result, Task, unsafeRun, cancel, type TaskCanceler } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { HTTP } from './client.js';
 import { HTTPError } from './error.js';
@@ -110,9 +110,9 @@ describe('HTTP.request', () => {
     const resolve = vi.fn();
     const reject = vi.fn();
     const run = vi.fn();
-    const cancelerRef: Canceler = { current: undefined };
-    task.taskRun({ resolve, reject, canceler: cancelerRef, run });
-    Canceler.cancel(cancelerRef);
+    const canceler: TaskCanceler = { current: undefined };
+    task.taskRun({ resolve, reject, canceler, run });
+    cancel(canceler);
 
     await finished.promise;
     expect(resolve).not.toHaveBeenCalled();

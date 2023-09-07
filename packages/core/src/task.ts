@@ -1,8 +1,9 @@
 import type { Option } from './option.js';
 import type { Result } from './result.js';
+import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
 import { AggregateError } from './aggregateError.js';
-import { Canceler } from './run.js';
+import { cancel } from './cancel.js';
 
 // Inline static helpers
 const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
@@ -21,11 +22,16 @@ const Err: typeof Result.Error = ((error?: unknown): Result<never, unknown> => (
 })) as unknown as typeof Result.Error;
 
 /**
+ * Interface used to cancel running task
+ */
+export interface TaskCanceler extends Ref<Option<() => void>> {}
+
+/**
  * A function that runs the task and returns a {@link @w5s/core!Result}
  */
 export type TaskRunner = <Value, Error>(
   task: Task<Value, Error>,
-  canceler: Canceler
+  canceler: TaskCanceler
 ) => Awaitable<Result<Value, Error>>;
 
 /**
@@ -43,7 +49,7 @@ export interface TaskParameters<Value, Error> {
   /**
    * Reference to cancel function
    */
-  readonly canceler: Canceler;
+  readonly canceler: TaskCanceler;
   /**
    * The runner function (to run sub tasks)
    */
@@ -98,7 +104,7 @@ export function Task<Value, Error = never>(
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return createTask(({ resolve, reject, canceler }) => {
-    Canceler.clear(canceler);
+    canceler.current = undefined;
     const resultOrPromise = sideEffect({
       ok: Ok,
       error: Err,
@@ -131,7 +137,7 @@ export namespace Task {
 
   type TaskEntry<Value, Error> = Readonly<{
     task: Task<Value, Error>;
-    canceler: Canceler;
+    canceler: TaskCanceler;
   }>;
 
   class TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
@@ -163,7 +169,7 @@ export namespace Task {
     }
 
     cancelAll() {
-      this.tasks.forEach(({ canceler }) => Canceler.cancel(canceler));
+      this.tasks.forEach(({ canceler }) => cancel(canceler));
     }
 
     runAll(
@@ -254,7 +260,7 @@ export namespace Task {
               state.complete();
               state.reject(error);
               // cancel all but the current task
-              Canceler.clear(entry.canceler);
+              entry.canceler.current = undefined;
               state.cancelAll();
             }
           }
@@ -306,7 +312,7 @@ export namespace Task {
               state.complete();
               state.resolve(value);
               // cancel all but the current task
-              Canceler.clear(entry.canceler);
+              entry.canceler.current = undefined;
               state.cancelAll();
             }
           },

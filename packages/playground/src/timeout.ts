@@ -1,5 +1,6 @@
 import { DataError } from '@w5s/core/dist/dataError.js';
-import type { Canceler, Task, TimeDuration } from '@w5s/core';
+import { cancel } from '@w5s/core/dist/cancel.js';
+import type { TaskCanceler, Task, TimeDuration } from '@w5s/core';
 
 /**
  * An error reported when a task times out
@@ -39,13 +40,8 @@ export function timeout<Value, Error>(
 ): Task<Value, TimeoutError | Error> {
   return {
     taskRun: ({ resolve, reject, canceler, run }) => {
-      const taskCancelerRef: Canceler = { current: undefined };
-      const taskCancel = () => {
-        if (taskCancelerRef.current != null) {
-          taskCancelerRef.current();
-          taskCancelerRef.current = undefined;
-        }
-      };
+      const taskCancelerRef: TaskCanceler = { current: undefined };
+      const taskCancel = () => cancel(taskCancelerRef);
 
       const timeoutId = setTimeout(() => {
         taskCancel();
