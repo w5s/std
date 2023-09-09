@@ -100,15 +100,20 @@ export function Task<Value, Error = never>(
      * Canceler
      */
     canceler: TaskCanceler;
+    /**
+     * A task runner that can be used to run subtasks
+     */
+    run: <V, E>(task: Task<V, E>) => Awaitable<Result<V, E>>;
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return createTask(({ resolve, reject, canceler }) => {
+  return createTask(({ resolve, reject, canceler, run }) => {
     canceler.current = undefined;
     const resultOrPromise = sideEffect({
       ok: Ok,
       error: Err,
       canceler,
+      run: (task) => run(task, canceler),
     });
     const handleResult = (result: Result<Value, Error>) => (result.ok ? resolve(result.value) : reject(result.error));
     // eslint-disable-next-line promise/prefer-await-to-then

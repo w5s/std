@@ -170,6 +170,15 @@ describe('Task', () => {
   });
 
   describe('()', () => {
+    it('should forward run', () => {
+      const subtask = taskStub({ value: anyObject });
+      const task = Task(({ run }) => run(subtask));
+      const resolve = vi.fn();
+      const reject = vi.fn();
+      const run = vi.fn(anyRunner);
+      task.taskRun({ resolve, reject, canceler: anyCancelerRef, run });
+      expect(run).toHaveBeenCalledWith(subtask, anyCancelerRef);
+    });
     describe('sync', () => {
       it('should construct a success sync task', () => {
         const task = Task(({ ok }) => ok('foo'));
