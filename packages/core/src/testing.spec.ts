@@ -10,6 +10,7 @@ describe('index', () => {
         'describeComparable',
         'describeEqual',
         'taskStub',
+        'withFile',
       ].sort()
     );
   });
