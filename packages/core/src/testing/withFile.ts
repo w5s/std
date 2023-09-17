@@ -58,7 +58,7 @@ export const withFile = (expectFn: ExpectFunction) => {
       const stat = await lstat(filePath);
       const exists = stat != null;
       if (exists === isNot) {
-        fail(`Expected ${filePath} to exist`);
+        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to exist`);
       }
     },
     async toHaveContent(expectedContent: string) {
@@ -68,19 +68,19 @@ export const withFile = (expectFn: ExpectFunction) => {
     async toBeADirectory() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isDirectory() === isNot) {
-        fail(`Expected ${filePath} to be a directory`);
+        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a directory`);
       }
     },
     async toBeAFile() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isFile() === isNot) {
-        fail(`Expected ${filePath} to be a file`);
+        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a file`);
       }
     },
     async toBeASymbolicLink() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isSymbolicLink() === isNot) {
-        fail(`Expected ${filePath} to be a symbolic link`);
+        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a symbolic link`);
       }
     },
   });
