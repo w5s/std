@@ -103,51 +103,6 @@ export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
   },
 });
 
-export const expectFile = (filePath: string) => ({
-  not: {
-    async toExist() {
-      await expect(fs.promises.stat(filePath)).rejects.toEqual(expect.anything());
-    },
-  },
-  async toHaveContent(expectedContent: string) {
-    const actualContent = await fs.promises.readFile(filePath, 'utf8');
-    expect(actualContent).toEqual(expectedContent);
-  },
-  async toExist() {
-    await expect(fs.promises.stat(filePath)).resolves.toEqual(expect.anything());
-  },
-  async toBeADirectory() {
-    try {
-      const stat = await fs.promises.lstat(filePath);
-      if (!stat.isDirectory()) {
-        throw new Error(`Expected ${filePath} to be a directory`);
-      }
-    } catch {
-      throw new Error(`Expected ${filePath} to exist`);
-    }
-  },
-  async toBeAFile() {
-    try {
-      const stat = await fs.promises.lstat(filePath);
-      if (!stat.isFile()) {
-        throw new Error(`Expected ${filePath} to be a file`);
-      }
-    } catch {
-      throw new Error(`Expected ${filePath} to exist`);
-    }
-  },
-  async toBeASymbolicLink() {
-    try {
-      const stat = await fs.promises.lstat(filePath);
-      if (!stat.isSymbolicLink()) {
-        throw new Error(`Expected ${filePath} to be a symbolic link`);
-      }
-    } catch {
-      throw new Error(`Expected ${filePath} to exist`);
-    }
-  },
-});
-
 export const expectDir = (filePath: string) => ({
   async toHaveLength(length: number) {
     return expect(fs.promises.readdir(filePath)).resolves.toHaveLength(length);

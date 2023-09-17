@@ -1,9 +1,12 @@
 import * as fs from 'node:fs/promises';
 import { Result } from '@w5s/core';
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
+import { withFile } from '@w5s/core/dist/testing.js';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../error.js';
-import { expectFile, expectTask, withTmpDirectory } from '../_test/config.js';
+import { expectTask, withTmpDirectory } from '../_test/config.js';
+
+const expectFile = withFile(expect);
 
 describe('ensureDirectory', () => {
   it(
