@@ -102,9 +102,3 @@ export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
     return expect(unsafeRun(t));
   },
 });
-
-export const expectDir = (filePath: string) => ({
-  async toHaveLength(length: number) {
-    return expect(fs.promises.readdir(filePath)).resolves.toHaveLength(length);
-  },
-});

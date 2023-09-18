@@ -1,9 +1,12 @@
 import { Result } from '@w5s/core';
-import { describe, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
+import { withFile } from '@w5s/core/dist/testing.js';
 import { emptyDirectory } from './emptyDirectory.js';
-import { expectDir, expectTask, withTmpDirectory } from '../_test/config.js';
+import { expectTask, withTmpDirectory } from '../_test/config.js';
 
 describe('emptyDirectory', () => {
+  const expectFile = withFile(expect);
+
   it(
     'should delete all of the items when not empty',
     withTmpDirectory(async ({ filePath: testDir, createDir, createFile }) => {
@@ -13,9 +16,9 @@ describe('emptyDirectory', () => {
         createDir(testDir('some-dir')),
       ]);
 
-      await expectDir(testDir()).toHaveLength(3);
+      await expectFile(testDir()).toHaveDirContent(['some-dir', 'some-file', 'some-file-2']);
       await expectTask(emptyDirectory(testDir())).result.resolves.toEqual(Result.Ok(undefined));
-      await expectDir(testDir()).toHaveLength(0);
+      await expectFile(testDir()).toHaveDirContent([]);
     })
   );
 
@@ -23,9 +26,9 @@ describe('emptyDirectory', () => {
     'should do nothing when empty',
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir();
-      await expectDir(target).toHaveLength(0);
+      await expectFile(target).toHaveDirContent([]);
       await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
-      await expectDir(target).toHaveLength(0);
+      await expectFile(target).toHaveDirContent([]);
     })
   );
 
@@ -34,7 +37,7 @@ describe('emptyDirectory', () => {
     withTmpDirectory(async ({ filePath: testDir }) => {
       const target = testDir('does-not-exist');
       await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
-      await expectDir(target).toHaveLength(0);
+      await expectFile(target).toHaveDirContent([]);
     })
   );
 });

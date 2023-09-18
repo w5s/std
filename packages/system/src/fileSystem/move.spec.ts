@@ -80,7 +80,7 @@ describe('move', () => {
 
       await expectFile(srcFile).not.toExist();
       await expectFile(destFile).toExist();
-      await expectFile(destFile).toHaveContent('src');
+      await expectFile(destFile).toHaveFileContent('src');
     })
   );
 
@@ -101,7 +101,7 @@ describe('move', () => {
       await expectFile(srcFile).not.toExist();
       await expectFile(destDir).toExist();
       await expectFile(destFile).toExist();
-      await expectFile(destFile).toHaveContent('src');
+      await expectFile(destFile).toHaveFileContent('src');
     })
   );
 
@@ -122,7 +122,7 @@ describe('move', () => {
       await expectFile(srcDir).not.toExist();
       await expectFile(destDir).toExist();
       await expectFile(destFile).toExist();
-      await expectFile(destFile).toHaveContent('src');
+      await expectFile(destFile).toHaveFileContent('src');
     })
   );
 
