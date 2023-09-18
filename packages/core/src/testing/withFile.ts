@@ -60,7 +60,7 @@ export interface ExpectFile {
  * @example
  * @param expectFn
  */
-export const withFile = (expectFn: ExpectFunction) => {
+export function withFile(expectFn: ExpectFunction) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { fail } = expectFn;
   const lstat = async (filePath: string) => {
@@ -117,4 +117,4 @@ export const withFile = (expectFn: ExpectFunction) => {
     Object.assign(create(filePath, false), {
       not: create(filePath, true),
     });
-};
+}
