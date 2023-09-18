@@ -1,11 +1,18 @@
 import * as fs from 'node:fs';
 
+export interface ExpectAssertionObject {
+  toEqual(expected: unknown): void;
+  toHaveProperty(property: string | (string | number)[], value: unknown): void;
+}
+
+export type ExpectAssertion = ExpectAssertionObject & {
+  not: ExpectAssertionObject;
+};
+
 export interface ExpectFunction {
-  (value: unknown): {
-    toEqual(expected: unknown): void;
-    not: {
-      toEqual(expected: unknown): void;
-    };
+  (value: unknown): ExpectAssertion & {
+    resolves: ExpectAssertion;
+    rejects: ExpectAssertion;
   };
   fail(message: string): never;
 }
@@ -18,9 +25,9 @@ export interface ExpectFile {
   /**
    * Assert that the file has the content equals to `expectedContent`
    *
-   * @param expectedContent
+   * @param expectedContent - the expected content
    */
-  toHaveContent(expectedContent: string): Promise<void>;
+  toHaveFileContent(expectedContent: string): Promise<void>;
   /**
    * Assert that the file is (not) a directory
    */
@@ -33,6 +40,18 @@ export interface ExpectFile {
    * Assert that the file is (not) a symbolic link
    */
   toBeASymbolicLink(): Promise<void>;
+  /**
+   * Assert that a file (not) containing `expectedContent` entries
+   *
+   * @param expectedContent - the expected entry list
+   */
+  toHaveDirContent(expectedContent: string[]): Promise<void>;
+  /**
+   * Assert that a file (not) containing `expectedLength` entry count
+   *
+   * @param expectedLength - the expected length
+   */
+  toHaveDirLength(expectedLength: number): Promise<void>;
 }
 
 /**
@@ -52,36 +71,46 @@ export const withFile = (expectFn: ExpectFunction) => {
       return undefined;
     }
   };
-  const failDoesNotExist = (filePath: string) => fail(`Expected ${filePath} to exist`);
+  const expectIf = (isNot: boolean, value: string) => {
+    const expectValue = expectFn(value);
+    return isNot ? expectValue.not : expectValue;
+  };
+  const failDoesNotExist = (filePath: string) => fail(`expected ${filePath} to exist`);
   const create = (filePath: string, isNot: boolean): ExpectFile => ({
     async toExist() {
       const stat = await lstat(filePath);
       const exists = stat != null;
       if (exists === isNot) {
-        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to exist`);
+        fail(`expected ${filePath} ${isNot ? 'not ' : ''}to exist`);
       }
     },
-    async toHaveContent(expectedContent: string) {
+    async toHaveFileContent(expectedContent: string) {
       const actualContent = await fs.promises.readFile(filePath, 'utf8');
-      (isNot ? expectFn(actualContent).not : expectFn(actualContent)).toEqual(expectedContent);
+      expectIf(isNot, actualContent).toEqual(expectedContent);
     },
     async toBeADirectory() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isDirectory() === isNot) {
-        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a directory`);
+        fail(`expected ${filePath} ${isNot ? 'not ' : ''}to be a directory`);
       }
     },
     async toBeAFile() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isFile() === isNot) {
-        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a file`);
+        fail(`expected ${filePath} ${isNot ? 'not ' : ''}to be a file`);
       }
     },
     async toBeASymbolicLink() {
       const stat = (await lstat(filePath)) ?? failDoesNotExist(filePath);
       if (stat.isSymbolicLink() === isNot) {
-        fail(`Expected ${filePath} ${isNot ? 'not ' : ''}to be a symbolic link`);
+        fail(`expected ${filePath} ${isNot ? 'not ' : ''}to be a symbolic link`);
       }
+    },
+    async toHaveDirContent(content: string[]) {
+      return expectFn(fs.promises.readdir(filePath)).resolves.toEqual(content);
+    },
+    async toHaveDirLength(length: number) {
+      return expectFn(fs.promises.readdir(filePath)).resolves.toHaveProperty('length', length);
     },
   });
   return (filePath: string) =>
