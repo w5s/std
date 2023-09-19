@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { taskStub } from './task.js';
+import { taskStub } from './taskStub.js';
 import { unsafeRun } from '../run.js';
 import { Result } from '../result.js';
 
