@@ -9,6 +9,7 @@ describe('index', () => {
         'assertType',
         'describeComparable',
         'describeEqual',
+        'fsStub',
         'taskStub',
         'withFile',
       ].sort()
