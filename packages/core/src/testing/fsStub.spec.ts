@@ -19,10 +19,10 @@ describe('fsStub', () => {
 
   describe('path', () => {
     it('should return new path', () => {
-      expect(path().startsWith(`${cwd}/test_`)).toBe(true);
+      expect(path().startsWith(`${cwd}/.cache/test_`)).toBe(true);
     });
     it('should return new path', () => {
-      expect(path('foo', 'bar').startsWith(`${cwd}/test_`)).toBe(true);
+      expect(path('foo', 'bar').startsWith(`${cwd}/.cache/test_`)).toBe(true);
       expect(path('foo', 'bar').endsWith(`/foo/bar`)).toBe(true);
     });
   });
