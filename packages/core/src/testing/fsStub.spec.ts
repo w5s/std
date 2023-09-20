@@ -6,7 +6,7 @@ import { Symbol } from '../symbol.js';
 
 describe('fsStub', () => {
   const rootPath = nodePath.dirname(nodePath.dirname(__dirname));
-  const cwd = nodePath.join(rootPath, '.cache');
+  const cwd = rootPath;
   const fsContext = fsStub({
     cwd,
   });
