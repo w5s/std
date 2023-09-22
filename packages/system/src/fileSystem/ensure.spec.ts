@@ -64,7 +64,8 @@ describe('ensureFile', () => {
     await expectFile(ensured).toBeAFile();
   });
   it('should return error for directory', async () => {
-    const ensured = fs.path();
+    const ensured = fs.path('some-directory');
+    await fs.mkdir(ensured);
 
     await expectTask(ensureFile(ensured)).result.resolves.toEqual(
       Result.Error(
