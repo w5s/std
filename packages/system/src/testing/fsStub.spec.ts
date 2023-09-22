@@ -1,8 +1,8 @@
 import { describe, it, expect, afterAll } from 'vitest';
 import * as nodePath from 'node:path';
 import { fsStub } from './fsStub.js';
-import { withFile } from './withFile.js';
-import { Symbol } from '../symbol.js';
+import { withFile } from '../../../core/src/testing/withFile.js';
+import { Symbol } from '../../../core/src/symbol.js';
 
 describe('fsStub', () => {
   const rootPath = nodePath.dirname(nodePath.dirname(__dirname));

@@ -1,7 +1,7 @@
 import * as nodePath from 'node:path';
 import * as fs from 'node:fs';
-import { Symbol } from '../symbol.js';
-import type { Option } from '../option.js';
+import { Symbol, type Option } from '@w5s/core';
+import type { FilePath } from '../filePath.js';
 
 /**
  * Return a new `FSStubModule`
@@ -20,10 +20,10 @@ export function fsStub(options: FSOptions = {}): FSStubModule {
 
     testPath = () => nodePath.join('.cache', `test_${Math.random().toString(36)}`),
   } = options;
-  const tmpPath = nodePath.join(cwd, testPath());
+  const tmpPath = nodePath.join(cwd, testPath()) as FilePath;
   const dispose = () => fs.promises.rm(tmpPath, { recursive: true, force: true });
-  const path = (...parts: string[]) => nodePath.join(tmpPath, ...parts);
-  const mkdir = (pathString: string) => fs.promises.mkdir(pathString, { recursive: true });
+  const path = (...parts: string[]) => nodePath.join(tmpPath, ...parts) as FilePath;
+  const mkdir = (pathString: string) => fs.promises.mkdir(pathString, { recursive: true }) as Promise<Option<FilePath>>;
   const touch = async (pathString: string) => {
     await mkdir(nodePath.dirname(pathString));
     await fs.promises.writeFile(pathString, '');
@@ -41,19 +41,19 @@ export interface FSStubModule extends AsyncDisposable {
   /**
    * A temporary path
    */
-  tmpPath: string;
+  tmpPath: FilePath;
   /**
    * Return a new path
    *
    * @param parts
    */
-  path(...parts: string[]): string;
+  path(...parts: string[]): FilePath;
   /**
    * Create a directory named `pathString` relative to `rootPath`
    *
    * @param pathString - the path string
    */
-  mkdir(pathString: string): Promise<Option<string>>;
+  mkdir(pathString: string): Promise<Option<FilePath>>;
   /**
    * Create a new `pathString` relative to `rootPath`
    *

@@ -1,7 +1,7 @@
 import * as nodeFS from 'node:fs';
 import { Result } from '@w5s/core';
 import { describe, it, expect } from 'vitest';
-import { withFile } from '@w5s/core/dist/testing.js';
+import { withFile } from '../testing.js';
 import { FileError } from '../error.js';
 import { expectTask, withTmpDirectory } from '../_test/config.js';
 import { move } from './move.js';

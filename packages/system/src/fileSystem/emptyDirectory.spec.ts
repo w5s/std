@@ -1,43 +1,46 @@
-import { Result } from '@w5s/core';
-import { describe, expect, it } from 'vitest';
-import { withFile } from '@w5s/core/dist/testing.js';
+import { Result, Symbol } from '@w5s/core';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { emptyDirectory } from './emptyDirectory.js';
-import { expectTask, withTmpDirectory } from '../_test/config.js';
+import { expectTask } from '../_test/config.js';
+import { fsStub, withFile } from '../testing.js';
 
 describe('emptyDirectory', () => {
   const expectFile = withFile(expect);
 
-  it(
-    'should delete all of the items when not empty',
-    withTmpDirectory(async ({ filePath: testDir, createDir, createFile }) => {
-      await Promise.all([
-        createFile(testDir('some-file')),
-        createFile(testDir('some-file-2')),
-        createDir(testDir('some-dir')),
-      ]);
+  let fs = fsStub();
 
-      await expectFile(testDir()).toHaveDirContent(['some-dir', 'some-file', 'some-file-2']);
-      await expectTask(emptyDirectory(testDir())).result.resolves.toEqual(Result.Ok(undefined));
-      await expectFile(testDir()).toHaveDirContent([]);
-    })
-  );
+  beforeEach(() => {
+    fs = fsStub();
+  });
 
-  it(
-    'should do nothing when empty',
-    withTmpDirectory(async ({ filePath: testDir }) => {
-      const target = testDir();
-      await expectFile(target).toHaveDirContent([]);
-      await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
-      await expectFile(target).toHaveDirContent([]);
-    })
-  );
+  afterEach(async () => {
+    await fs[Symbol.asyncDispose]();
+  });
 
-  it(
-    'should create directory when does not exist',
-    withTmpDirectory(async ({ filePath: testDir }) => {
-      const target = testDir('does-not-exist');
-      await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
-      await expectFile(target).toHaveDirContent([]);
-    })
-  );
+  it('should delete all of the items when not empty', async () => {
+    await Promise.all([
+      fs.touch(fs.path('some-file')),
+      fs.touch(fs.path('some-file-2')),
+      fs.mkdir(fs.path('some-dir')),
+    ]);
+
+    await expectFile(fs.path()).toHaveDirContent(['some-dir', 'some-file', 'some-file-2']);
+    await expectTask(emptyDirectory(fs.path())).result.resolves.toEqual(Result.Ok(undefined));
+    await expectFile(fs.path()).toHaveDirContent([]);
+  });
+
+  it('should do nothing when empty', async () => {
+    const target = fs.path('exist-and-empty');
+    await fs.mkdir(target);
+
+    await expectFile(target).toHaveDirContent([]);
+    await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
+    await expectFile(target).toHaveDirContent([]);
+  });
+
+  it('should create directory when does not exist', async () => {
+    const target = fs.path('does-not-exist');
+    await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
+    await expectFile(target).toHaveDirContent([]);
+  });
 });
