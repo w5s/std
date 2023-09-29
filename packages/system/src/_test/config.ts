@@ -1,4 +1,3 @@
-import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { Task, unsafeRun } from '@w5s/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -6,32 +5,6 @@ import { expect } from 'vitest';
 import type { FilePath } from '../filePath.js';
 import type { ErrnoException } from '../internal.js';
 // import * as url from 'node:url';
-
-// eslint-disable-next-line unicorn/prefer-module
-export const fsTestDir = __dirname; // path.dirname(url.fileURLToPath(import.meta.url));
-export const fsTestFile = (...parts: string[]) => path.join(fsTestDir, ...parts) as FilePath;
-
-export const withTmpDirectory =
-  (
-    block: (context: {
-      filePath: (...parts: string[]) => FilePath;
-      createDir: (path: string) => Promise<string | undefined>;
-      createFile: (path: string) => Promise<void>;
-    }) => Promise<void>
-  ) =>
-  async () => {
-    const filePath = fsTestFile(`test${Math.random().toString(36)}`);
-    try {
-      await fs.promises.mkdir(filePath, { recursive: true });
-      await block({
-        filePath: (...parts) => path.join(filePath, ...parts) as FilePath,
-        createDir: (pathString) => fs.promises.mkdir(pathString, { recursive: true }),
-        createFile: (pathString) => fs.promises.writeFile(pathString, ''),
-      });
-    } finally {
-      await fs.promises.rm(filePath, { recursive: true });
-    }
-  };
 
 export const anyPath = 'anyPath' as FilePath;
 export const anyError = new Error('AnyError');
