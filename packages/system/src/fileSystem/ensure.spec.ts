@@ -1,9 +1,8 @@
-import { Result, Symbol } from '@w5s/core';
+import { Result, Symbol, unsafeRun } from '@w5s/core';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { fsStub, withFile } from '../testing.js';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../error.js';
-import { expectTask } from '../_test/config.js';
 
 const expectFile = withFile(expect);
 let fs = fsStub();
@@ -21,20 +20,23 @@ describe('ensureDirectory', () => {
     const ensured = fs.path('test');
     await fs.mkdir(ensured);
 
-    await expectTask(ensureDirectory(ensured)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureDirectory(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeADirectory();
   });
   it('should work for non existing directory', async () => {
     const ensured = fs.path('test');
 
-    await expectTask(ensureDirectory(ensured)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureDirectory(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeADirectory();
   });
   it('should return error for file', async () => {
     const ensured = fs.path('test');
     await fs.touch(ensured);
 
-    await expectTask(ensureDirectory(ensured)).result.resolves.toEqual(
+    const task = ensureDirectory(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'directory', got 'file'`,
@@ -54,20 +56,23 @@ describe('ensureFile', () => {
     const ensured = fs.path('test');
     await fs.touch(ensured);
 
-    await expectTask(ensureFile(ensured)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureFile(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeAFile();
   });
   it('should work for non-existing files', async () => {
     const ensured = fs.path('test');
 
-    await expectTask(ensureFile(ensured)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureFile(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeAFile();
   });
   it('should return error for directory', async () => {
     const ensured = fs.path('some-directory');
     await fs.mkdir(ensured);
 
-    await expectTask(ensureFile(ensured)).result.resolves.toEqual(
+    const task = ensureFile(ensured);
+    await expect(unsafeRun(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'file', got 'directory'`,
@@ -89,14 +94,16 @@ describe('ensureSymbolicLink', () => {
     await fs.mkdir(source);
     await fs.symlink(source, destination);
 
-    await expectTask(ensureSymbolicLink(source, destination)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureSymbolicLink(source, destination);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destination).toBeASymbolicLink();
   });
   it('should work for non-existing files', async () => {
     const source = fs.path('src');
     const destination = fs.path('link');
 
-    await expectTask(ensureSymbolicLink(source, destination)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = ensureSymbolicLink(source, destination);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destination).toBeASymbolicLink();
   });
   it('should return error for directory, file', async () => {
@@ -104,7 +111,8 @@ describe('ensureSymbolicLink', () => {
     const destination = fs.path('link');
     await fs.mkdir(destination);
 
-    await expectTask(ensureSymbolicLink(source, destination)).result.resolves.toEqual(
+    const task = ensureSymbolicLink(source, destination);
+    await expect(unsafeRun(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'symlink', got 'directory'`,

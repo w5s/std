@@ -1,9 +1,8 @@
 import * as nodeFS from 'node:fs';
-import { Result, Symbol } from '@w5s/core';
+import { Result, Symbol, unsafeRun } from '@w5s/core';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { fsStub, withFile } from '../testing.js';
 import { FileError } from '../error.js';
-import { expectTask } from '../_test/config.js';
 import { move } from './move.js';
 
 const expectFile = withFile(expect);
@@ -23,7 +22,8 @@ describe('move', () => {
     const srcDir = fs.path('src');
     const destDir = fs.path('dest');
 
-    await expectTask(move(srcDir, destDir)).result.resolves.toEqual(Result.Error(FileError({})));
+    const task = move(srcDir, destDir);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Error(FileError({})));
   });
 
   it('should move directory if destination does not exist', async () => {
@@ -31,7 +31,8 @@ describe('move', () => {
     const destDir = fs.path('dest');
     await fs.mkdir(srcDir);
 
-    await expectTask(move(srcDir, destDir)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = move(srcDir, destDir);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destDir).toExist();
   });
 
@@ -40,7 +41,8 @@ describe('move', () => {
     const destDir = fs.path('dest');
     await fs.mkdir(srcDir);
 
-    await expectTask(move(srcDir, destDir, { overwrite: true })).result.resolves.toEqual(Result.Ok(undefined));
+    const task = move(srcDir, destDir, { overwrite: true });
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destDir).toExist();
   });
 
@@ -48,7 +50,8 @@ describe('move', () => {
     const srcFile = fs.path('src', 'test.txt');
     const destFile = fs.path('dest', 'test.txt');
 
-    await expectTask(move(srcFile, destFile)).result.resolves.toEqual(Result.Error(FileError({})));
+    const task = move(srcFile, destFile);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Error(FileError({})));
   });
 
   it('should move file if destination exists', async () => {
@@ -63,7 +66,8 @@ describe('move', () => {
     await Promise.all([nodeFS.promises.writeFile(srcFile, 'src'), nodeFS.promises.writeFile(destFile, 'dest')]);
 
     // move it without override
-    await expectTask(move(srcFile, destFile)).result.resolves.toEqual(
+    const taskFail = move(srcFile, destFile);
+    await expect(unsafeRun(taskFail)).resolves.toEqual(
       Result.Error(
         FileError({
           message: 'Destination already exists',
@@ -72,7 +76,8 @@ describe('move', () => {
     );
 
     // move again with overwrite
-    await expectTask(move(srcFile, destFile, { overwrite: true })).result.resolves.toEqual(Result.Ok(undefined));
+    const task = move(srcFile, destFile, { overwrite: true });
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destFile).toExist();
@@ -89,7 +94,8 @@ describe('move', () => {
     await expectFile(srcDir).toExist();
     await nodeFS.promises.writeFile(srcFile, 'src');
 
-    await expectTask(move(srcDir, destDir)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = move(srcDir, destDir);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destDir).toExist();
@@ -107,7 +113,8 @@ describe('move', () => {
     await fs.mkdir(destDir);
     await Promise.all([nodeFS.promises.writeFile(srcFile, 'src'), nodeFS.promises.writeFile(destFile, 'dest')]);
 
-    await expectTask(move(srcDir, destDir, { overwrite: true })).result.resolves.toEqual(Result.Ok(undefined));
+    const task = move(srcDir, destDir, { overwrite: true });
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcDir).not.toExist();
     await expectFile(destDir).toExist();
@@ -120,7 +127,7 @@ describe('move', () => {
     const destDir = fs.path('src', 'sub');
     await fs.mkdir(destDir);
 
-    await expectTask(move(srcDir, destDir)).result.resolves.toEqual(
+    await expect(unsafeRun(move(srcDir, destDir))).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,

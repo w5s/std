@@ -1,8 +1,7 @@
-import { Result, Canceler, unsafeRun } from '@w5s/core';
+import { Result, cancel, unsafeRun, type TaskCanceler } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
-import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 
 describe('writeFile', () => {
@@ -10,7 +9,7 @@ describe('writeFile', () => {
     const writeFileMocked = vi.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
-    await expectTask(task).result.resolves.toEqual(Result.Ok(undefined));
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',
@@ -29,7 +28,7 @@ describe('writeFile', () => {
       }
     });
     let index = 0;
-    const cancelerRef: Canceler = { current: undefined };
+    const cancelerRef: TaskCanceler = { current: undefined };
     const content: Iterable<string> = {
       [Symbol.iterator]: () => ({
         next: () => {
@@ -37,7 +36,7 @@ describe('writeFile', () => {
           index += 1;
           let value = currentIndex.toString(16);
           if (currentIndex > 9) {
-            Canceler.cancel(cancelerRef);
+            cancel(cancelerRef);
             value = 'X';
           }
           if (currentIndex >= 16) {

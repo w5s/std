@@ -1,8 +1,7 @@
-import { Result } from '@w5s/core';
+import { Result, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { remove } from './remove.js';
 import { FilePath } from '../filePath.js';
-import { expectTask } from '../_test/config.js';
 import { Internal } from '../internal.js';
 
 describe('remove', () => {
@@ -10,7 +9,7 @@ describe('remove', () => {
     const removeMocked = vi.spyOn(Internal.FS, 'rm').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = remove(...args);
-    await expectTask(task).result.resolves.toEqual(Result.Ok(undefined));
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     expect(removeMocked).toHaveBeenCalledWith(...args);
   });
 });

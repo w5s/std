@@ -1,9 +1,9 @@
-import { Result } from '@w5s/core';
+import { Result, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { errnoExceptionHandler, Internal } from './internal.js';
 import { FilePath } from './filePath.js';
 import { Process } from './process.js';
-import { anyErrnoException, expectTask } from './_test/config.js';
+import { anyErrnoException } from './_test/config.js';
 
 describe('Process', () => {
   describe('.exit', () => {
@@ -14,7 +14,7 @@ describe('Process', () => {
           undefined as never
       );
       const exitTask = Process.exit(0);
-      expectTask(exitTask).result.toEqual(Result.Ok(undefined));
+      expect(unsafeRun(exitTask)).toEqual(Result.Ok(undefined));
       expect(processExit).toHaveBeenCalledWith(0);
     });
   });
@@ -23,7 +23,7 @@ describe('Process', () => {
     it('should call process.cwd', () => {
       mocked.mockImplementation(() => FilePath('/my/dir'));
       const task = Process.getCurrentDirectory();
-      expectTask(task).result.toEqual(Result.Ok(FilePath('/my/dir')));
+      expect(unsafeRun(task)).toEqual(Result.Ok(FilePath('/my/dir')));
       expect(mocked).toHaveBeenCalled();
     });
   });
@@ -32,7 +32,7 @@ describe('Process', () => {
     it('should call process.chdir', () => {
       mocked.mockImplementation(() => undefined);
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expectTask(task).result.toEqual(Result.Ok(undefined));
+      expect(unsafeRun(task)).toEqual(Result.Ok(undefined));
       expect(mocked).toHaveBeenCalledWith('/my/dir');
     });
     it('should handle errors', () => {
@@ -40,7 +40,7 @@ describe('Process', () => {
         throw anyErrnoException;
       });
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expectTask(task).result.toEqual(Result.Error(errnoExceptionHandler(anyErrnoException)));
+      expect(unsafeRun(task)).toEqual(Result.Error(errnoExceptionHandler(anyErrnoException)));
     });
   });
 });

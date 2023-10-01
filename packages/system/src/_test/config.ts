@@ -1,7 +1,4 @@
 import * as fs from 'node:fs';
-import { Task, unsafeRun } from '@w5s/core';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { expect } from 'vitest';
 import type { FilePath } from '../filePath.js';
 import type { ErrnoException } from '../internal.js';
 // import * as url from 'node:url';
@@ -69,9 +66,3 @@ export const generateStats = (): fs.Stats => {
     blocks: randomInt(),
   };
 };
-
-export const expectTask = <Value, Error>(t: Task<Value, Error>) => ({
-  get result() {
-    return expect(unsafeRun(t));
-  },
-});

@@ -1,8 +1,8 @@
-import { Int, Result, Time } from '@w5s/core';
+import { Int, Result, Time, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { readFileStatus, readSymbolicLinkStatus } from './readFileStatus.js';
 import { FilePath } from '../filePath.js';
-import { expectTask, generateStats } from '../_test/config.js';
+import { generateStats } from '../_test/config.js';
 import { Internal } from '../internal.js';
 import { DeviceID, FileID, FileStatus, GroupID, UserID } from '../fileStatus.js';
 import { FileSize } from '../fileSize.js';
@@ -13,7 +13,7 @@ describe('readFileStatus', () => {
     const statMocked = vi.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readFileStatus(...args);
-    await expectTask(task).result.resolves.toEqual(
+    await expect(unsafeRun(task)).resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time.of(stats.atimeMs),
@@ -45,7 +45,7 @@ describe('readSymbolicLinkStatus', () => {
     const lstatMocked = vi.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readSymbolicLinkStatus(...args);
-    await expectTask(task).result.resolves.toEqual(
+    await expect(unsafeRun(task)).resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time.of(stats.atimeMs),

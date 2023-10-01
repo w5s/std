@@ -1,7 +1,6 @@
-import { Result, Symbol } from '@w5s/core';
+import { Result, Symbol, unsafeRun } from '@w5s/core';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { emptyDirectory } from './emptyDirectory.js';
-import { expectTask } from '../_test/config.js';
 import { fsStub, withFile } from '../testing.js';
 
 describe('emptyDirectory', () => {
@@ -25,7 +24,8 @@ describe('emptyDirectory', () => {
     ]);
 
     await expectFile(fs.path()).toHaveDirContent(['some-dir', 'some-file', 'some-file-2']);
-    await expectTask(emptyDirectory(fs.path())).result.resolves.toEqual(Result.Ok(undefined));
+    const task = emptyDirectory(fs.path());
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(fs.path()).toHaveDirContent([]);
   });
 
@@ -34,13 +34,15 @@ describe('emptyDirectory', () => {
     await fs.mkdir(target);
 
     await expectFile(target).toHaveDirContent([]);
-    await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = emptyDirectory(target);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(target).toHaveDirContent([]);
   });
 
   it('should create directory when does not exist', async () => {
     const target = fs.path('does-not-exist');
-    await expectTask(emptyDirectory(target)).result.resolves.toEqual(Result.Ok(undefined));
+    const task = emptyDirectory(target);
+    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(target).toHaveDirContent([]);
   });
 });
