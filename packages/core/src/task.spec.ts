@@ -296,10 +296,10 @@ describe('Task', () => {
     });
     it('should reject first error', async () => {
       const allTask = Task.all([
-        taskStub({ delayMs: 0, value: 'value1' }),
-        taskStub({ delayMs: 0, error: 'error1' }),
-        taskStub({ delayMs: 0, value: 'value2' }),
-        taskStub({ delayMs: 0, error: 'error2' }),
+        taskStub({ delayMs: 1, value: 'value1' }),
+        taskStub({ delayMs: 1, error: 'error1' }),
+        taskStub({ delayMs: 1, value: 'value2' }),
+        taskStub({ delayMs: 1, error: 'error2' }),
       ]);
       await ExpectTask.toReject(allTask, 'error1');
     });
@@ -311,7 +311,7 @@ describe('Task', () => {
         return {
           task:
             taskIndex === 0
-              ? taskStub({ delayMs: 0, error: `error${taskIndex}`, canceler })
+              ? taskStub({ delayMs: 1, error: `error${taskIndex}`, canceler })
               : taskStub({ delayMs: 100, value: `value${taskIndex}`, canceler }),
           canceler,
         };
@@ -344,18 +344,18 @@ describe('Task', () => {
     });
     it('should resolve array of values', async () => {
       const allTask = Task.all([
-        taskStub<'value1', 'error1'>({ delayMs: 0, value: 'value1' }),
-        taskStub<'value2', 'error2'>({ delayMs: 0, value: 'value2' }),
-        taskStub<'value3', 'error3'>({ delayMs: 0, value: 'value3' }),
+        taskStub<'value1', 'error1'>({ delayMs: 1, value: 'value1' }),
+        taskStub<'value2', 'error2'>({ delayMs: 1, value: 'value2' }),
+        taskStub<'value3', 'error3'>({ delayMs: 1, value: 'value3' }),
       ]);
       assertType<typeof allTask, Task<['value1', 'value2', 'value3'], 'error1' | 'error2' | 'error3'>>(true);
       await ExpectTask.toResolve(allTask, ['value1', 'value2', 'value3']);
     });
     it('should handle iterable values', async () => {
       const taskArray = [
-        taskStub({ delayMs: 0, value: 'value1' }),
-        taskStub({ delayMs: 0, value: 'value2' }),
-        taskStub({ delayMs: 0, value: 'value3' }),
+        taskStub({ delayMs: 1, value: 'value1' }),
+        taskStub({ delayMs: 1, value: 'value2' }),
+        taskStub({ delayMs: 1, value: 'value3' }),
       ];
       const allTask = Task.all({
         [Symbol.iterator]: () => taskArray[Symbol.iterator](),
@@ -370,10 +370,10 @@ describe('Task', () => {
     });
     it('should resolve first value', async () => {
       const anyTask = Task.any([
-        taskStub({ delayMs: 0, value: 'value1' }),
-        taskStub({ delayMs: 0, error: 'error1' }),
-        taskStub({ delayMs: 0, value: 'value2' }),
-        taskStub({ delayMs: 0, error: 'error2' }),
+        taskStub({ delayMs: 1, value: 'value1' }),
+        taskStub({ delayMs: 1, error: 'error1' }),
+        taskStub({ delayMs: 1, value: 'value2' }),
+        taskStub({ delayMs: 1, error: 'error2' }),
       ]);
       await ExpectTask.toResolve(anyTask, 'value1');
     });
@@ -385,7 +385,7 @@ describe('Task', () => {
         return {
           task:
             taskIndex === 0
-              ? taskStub({ delayMs: 0, value: `value${taskIndex}`, canceler })
+              ? taskStub({ delayMs: 1, value: `value${taskIndex}`, canceler })
               : taskStub({ delayMs: 100, error: `error${taskIndex}`, canceler }),
           canceler,
         };
@@ -419,9 +419,9 @@ describe('Task', () => {
     });
     it('should reject an aggregate of errors', async () => {
       const anyTask = Task.any([
-        taskStub<'value1', 'error1'>({ delayMs: 0, error: 'error1' }),
-        taskStub<'value2', 'error2'>({ delayMs: 0, error: 'error2' }),
-        taskStub<'value3', 'error3'>({ delayMs: 0, error: 'error3' }),
+        taskStub<'value1', 'error1'>({ delayMs: 1, error: 'error1' }),
+        taskStub<'value2', 'error2'>({ delayMs: 1, error: 'error2' }),
+        taskStub<'value3', 'error3'>({ delayMs: 1, error: 'error3' }),
       ]);
       assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
         true

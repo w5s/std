@@ -16,7 +16,7 @@ export type TaskStubOptions<Value, Error> = {
    */
   canceler?: () => void;
   /**
-   * Waiting delay before resolving/rejecting/throwing
+   * Waiting delay in milliseconds before resolving/rejecting/throwing
    */
   delayMs?: number;
 } & (
@@ -44,6 +44,17 @@ export type TaskStubOptions<Value, Error> = {
  * Create a new {@link @w5s/core!Task} from `options`
  *
  * @example
+ * ```ts
+ * const anyTask = taskStub({
+ *   delayMs: 5,
+ *   value: 'Helloworld'
+ * });// will resolve 'Hello world' after 5 milliseconds
+ *
+ * const anyTask = taskStub({
+ *   delayMs: 2,
+ *   throwError: new Error('Not expected')
+ * });// will throw an error after 2 milliseconds
+ * ```
  * @param options
  */
 export function taskStub<Value = never, Error = never>(options: TaskStubOptions<Value, Error>): Task<Value, Error> {
