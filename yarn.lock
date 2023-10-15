@@ -2158,11 +2158,11 @@ __metadata:
   linkType: soft
 
 "@w5s/dev@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@w5s/dev@npm:2.0.0"
+  version: 2.0.1
+  resolution: "@w5s/dev@npm:2.0.1"
   dependencies:
     "@types/eslint": ^8.44.0
-  checksum: 2005c136fc1b6c2315e42ffc0f34a463e4084a2156c1d7fd7987dba66c823b903e2bd613bec1a2bef86a40dc1edb746ec2620e09607d059b8f2d97adb34a1ada
+  checksum: 9f5f8bb14494d787de757e10a3743b995951a68572b8ea480f6d30c687a12d8d343a54b4cd91ba1a319fb9c1fe2a218ad453c49eeab4d7a9723d9908a5456a8f
   languageName: node
   linkType: hard
 
