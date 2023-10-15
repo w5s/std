@@ -18,7 +18,6 @@ export * from './invariant.js';
 export * from './iterable.js';
 export * from './lazy.js';
 export * from './json.js';
-export * from './math.js';
 export * from './number.js';
 export * from './option.js';
 export * from './record.js';
