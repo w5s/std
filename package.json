@@ -103,7 +103,7 @@
     "markdown-magic-subpackage-list": "1.1.2",
     "prettier": "3.0.3",
     "size-limit-preset-node-lib": "0.2.0",
-    "turbo": "1.10.15",
+    "turbo": "1.10.16",
     "typedoc": "0.25.2",
     "typescript": "5.2.2",
     "vite": "latest",
