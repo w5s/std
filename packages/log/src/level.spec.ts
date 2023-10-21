@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { describeComparable } from '@w5s/core/dist/testing.js';
 import { LogLevel } from './level.js';
 
 describe('LogLevel', () => {
@@ -80,5 +81,13 @@ describe('LogLevel', () => {
       );
       expect(matcherFunction(LogLevel.Info)).toBe('defaultValue');
     });
+  });
+
+  describeComparable({ describe, it, expect })(LogLevel, {
+    ordered: () => [LogLevel.of('One', 1), LogLevel.of('Two', 2), LogLevel.of('Three', 3)],
+    equivalent: () => [
+      [LogLevel.of('One', 1), LogLevel.of('One', 1)],
+      [LogLevel.of('One', 1), LogLevel.of('OneOther', 1)],
+    ],
   });
 });

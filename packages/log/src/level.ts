@@ -1,4 +1,13 @@
 import type { DataObject, Option } from '@w5s/core';
+import { Comparable } from '@w5s/core/dist/comparable.js';
+
+const LogLevelComparable = Comparable({
+  compare(left: LogLevel, right: LogLevel): number {
+    const diff = left.value - right.value;
+
+    return diff === 0 ? diff : diff < 0 ? -1 : 1;
+  },
+});
 
 export interface LogLevel
   extends DataObject<{
@@ -42,6 +51,7 @@ function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLe
  * @namespace
  */
 export const LogLevel = {
+  ...LogLevelComparable,
   /**
    * Construct a new `LogLevel`
    *
@@ -75,23 +85,6 @@ export const LogLevel = {
    * Debug log level (10)
    */
   Debug: of('Debug', 10),
-
-  /**
-   * Return the comparison result
-   *
-   * @example
-   * ```ts
-   * const levels = [LogLevel('Lvl2', 2), LogLevel('Lvl1', 1), LogLevel('Lvl3', 3)];
-   * levels.sort(Level.compare);// [LogLevel('Lvl1', 1), LogLevel('Lvl2', 2), LogLevel('Lvl3', 3)]
-   * ```
-   * @param left - the left element
-   * @param right - the right element
-   */
-  compare(left: LogLevel, right: LogLevel): number {
-    const diff = left.value - right.value;
-
-    return diff === 0 ? diff : diff < 0 ? -1 : 1;
-  },
 
   /**
    * Returns the string representation of a level
