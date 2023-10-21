@@ -3,6 +3,23 @@ import type { Comparable } from '../comparable.js';
 import { describeEqual } from './equal.js';
 import type { TestingLibrary } from './type.js';
 
+/**
+ * Create a spec for Comparable behavior
+ *
+ * @example
+ * ```ts
+ * describeComparable({ describe, it, expect })(Number, {
+ *   ordered: () => [-1, 0, 1], // A list of ordered values
+ *   equivalent: () => [
+ *     [0, 0],
+ *     [1, 1],
+ *     [1.1, 1.1],
+ *   ], // A list of [left, right] equals tuples
+ * });
+ *
+ * ```
+ * @param testingLibrary
+ */
 export function describeComparable({ describe, it, expect }: TestingLibrary) {
   return <T>(
     subject: Comparable<T>,
