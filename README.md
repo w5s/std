@@ -7,6 +7,7 @@
 * [@w5s/core](packages/core) - Core modules
 * [@w5s/database](packages/database) - Database client module
 * [@w5s/http](packages/http) - HTTP client module
+* [@w5s/invariant](packages/invariant) - Strict Typescript implementation of invariant
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money module
 * [@w5s/playground](packages/playground) - Examples
