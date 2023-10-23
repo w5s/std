@@ -14,7 +14,6 @@ export * from './extend.js';
 export * from './ignore.js';
 export * from './identity.js';
 export * from './integer.js';
-export * from './invariant.js';
 export * from './lazy.js';
 export * from './json.js';
 export * from './number.js';

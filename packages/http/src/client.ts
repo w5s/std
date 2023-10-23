@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/core/dist/invariant.js';
+import { invariant } from '@w5s/invariant';
 import type { Task, Tag } from '@w5s/core';
 import { HTTPError } from './error.js';
 import type { HTTPParser } from './parser.js';

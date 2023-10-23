@@ -1,5 +1,5 @@
 import type { Task, Option } from '@w5s/core';
-import { invariant } from '@w5s/core/dist/invariant.js';
+import { invariant } from '@w5s/invariant';
 import type { UUID } from './uuid.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

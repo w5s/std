@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/core/dist/invariant.js';
+import { invariant } from '@w5s/invariant';
 import { DecodeError, Codec } from '@w5s/core/dist/codec.js';
 import type { Tag } from '@w5s/core';
 

@@ -2210,6 +2210,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core@workspace:packages/core"
   dependencies:
+    "@w5s/invariant": 1.0.0-alpha.0
     vite: latest
     vitest: latest
   peerDependencies:
@@ -2303,7 +2304,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/invariant@workspace:packages/invariant":
+"@w5s/invariant@1.0.0-alpha.0, @w5s/invariant@workspace:packages/invariant":
   version: 0.0.0-use.local
   resolution: "@w5s/invariant@workspace:packages/invariant"
   dependencies:

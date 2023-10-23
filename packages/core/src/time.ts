@@ -1,4 +1,4 @@
-import { invariant } from './invariant.js';
+import { invariant } from '@w5s/invariant';
 import type { Option } from './option.js';
 import type { Task } from './task.js';
 import type { Tag } from './type.js';

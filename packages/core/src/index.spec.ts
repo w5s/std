@@ -8,7 +8,6 @@ describe('index', () => {
         'AggregateError',
         'ArgumentError',
         'Array',
-        'assertNever',
         'assign',
         'AsyncDisposable',
         'Boolean',
@@ -23,7 +22,6 @@ describe('index', () => {
         'identity',
         'ignore',
         'Int',
-        'invariant',
         'JSON',
         'lazy',
         'Number',
@@ -40,7 +38,6 @@ describe('index', () => {
         'TimeDuration',
         'unsafeRun',
         'unsafeRunOk',
-        'warning',
       ].sort()
     );
   });
