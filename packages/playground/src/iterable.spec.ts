@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { Symbol } from '@w5s/core';
 import { Iterable } from './iterable.js';
-import { Symbol } from './symbol.js';
 
 describe('Iterable', () => {
   function iteratorOf<T>(...values: T[]): Iterable<T> {

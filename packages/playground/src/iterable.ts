@@ -1,4 +1,4 @@
-import type { Int } from './integer.js';
+import type { Int } from '@w5s/core';
 
 const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
 const resultValue = <V>(value: V) => ({ value, done: false });

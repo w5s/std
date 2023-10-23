@@ -24,7 +24,6 @@ describe('index', () => {
         'ignore',
         'Int',
         'invariant',
-        'Iterable',
         'JSON',
         'lazy',
         'Number',
