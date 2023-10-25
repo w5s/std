@@ -4,6 +4,7 @@
   "type": "module",
   "workspaces": {
     "packages": [
+      "apps/*",
       "packages/*"
     ]
   },
@@ -14,11 +15,12 @@
     "configure": "npm run mrm -- configure",
     "coverage": ":",
     "develop": ":",
-    "docs": "node markdown.mjs && turbo run docs && typedoc .",
-    "format": "turbo run format",
-    "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='packages/*/**' --fix",
+    "docs": "yarn workspace @w5s/website run start",
+    "docs__": "node markdown.mjs && turbo run docs && typedoc .",
+    "format": "turbo run format --continue",
+    "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
     "lint": "turbo run lint",
-    "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='packages/*/**'",
+    "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepare:githooks": "[ -n \"${CI:-}\" ] || npx husky install .githooks",
@@ -27,7 +29,7 @@
     "rescue": "git clean -fdx;yarn install",
     "size-limit": "turbo run size-limit",
     "spellcheck": "turbo run spellcheck",
-    "spellcheck:root": "cspell --no-progress '**' --exclude='packages/*/**'",
+    "spellcheck:root": "cspell --no-progress '**' --exclude='apps/*/**' --exclude='packages/*/**'",
     "test": "turbo run test",
     "validate": "turbo run build lint test size-limit"
   },
