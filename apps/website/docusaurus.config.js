@@ -30,8 +30,7 @@ const config = {
   // For GitHub pages deployment, it is often '/<projectName>/'
   // baseUrl: '/',
   get baseUrl() {
-    // return `/${this.projectName}`;
-    return '/';
+    return `/${this.projectName}`;
   },
 
   // GitHub pages deployment config.
