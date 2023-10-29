@@ -4,6 +4,7 @@
   "extends": "@tsconfig/docusaurus/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "strict": true
   }
 }
