@@ -8,7 +8,6 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
 > Strict Typescript implementation of invariant
 <!-- AUTO-GENERATED-CONTENT:END -->
-## About the project
 
 ## Installation
 
