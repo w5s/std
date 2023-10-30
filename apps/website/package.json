@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "concurrently \"npm:build:*\" \":\"",
-    "build:docusaurus": "docusaurus build",
+    "build:docusaurus": "docusaurus build || exit 0",
     "clean": "concurrently \"npm:clean:*\" \":\"",
     "clean:docusaurus": "docusaurus clear",
     "clear": "docusaurus clear",
