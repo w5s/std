@@ -1,6 +1,4 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# File System library _(${name})_) -->
-# File System library _(@w5s/system)_
-<!-- AUTO-GENERATED-CONTENT:END -->
+# W5s File System library _(@w5s/system)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

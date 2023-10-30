@@ -1,6 +1,4 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# Generic Database client _(${name})_) -->
-# Generic Database client _(@w5s/database)_
-<!-- AUTO-GENERATED-CONTENT:END -->
+# W5s Database client _(@w5s/database)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

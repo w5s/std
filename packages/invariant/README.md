@@ -1,6 +1,4 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5s Invariant _(${name})_) -->
 # W5s Invariant _(@w5s/invariant)_
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

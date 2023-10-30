@@ -1,6 +1,4 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# UUID Generator library _(${name})_) -->
-# UUID Generator library _(@w5s/log)_
-<!-- AUTO-GENERATED-CONTENT:END -->
+# W5s Log library _(@w5s/log)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
