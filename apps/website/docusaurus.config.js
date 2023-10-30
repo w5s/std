@@ -1,21 +1,41 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
-const path = require('node:path');
+const nodePath = require('node:path');
 const fs = require('node:fs');
+
+const fileExists = function (/** @type {fs.PathLike} */ path) {
+  try {
+    fs.accessSync(path, fs.constants.F_OK);
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 const packageJSON = require('./package.json');
 
-const projectRoot = path.dirname(path.dirname(path.join(__dirname)));
+const projectRoot = nodePath.dirname(nodePath.dirname(nodePath.join(__dirname)));
 
 const githubHref = packageJSON.repository?.url.replace('git@github.com:', 'https://github.com/');
 const packageList = fs
-  .readdirSync('../../packages')
-  // eslint-disable-next-line import/no-dynamic-require
-  .map((entry) => require(`../../packages/${entry}/package.json`))
-  .filter((_) => !_.private);
+  .readdirSync(`${projectRoot}/packages`)
+  .map((entry) => {
+    const path = `packages/${entry}`;
+    const hasTesting = fileExists(`${projectRoot}/${path}/src/testing.ts`);
+    return {
+      path,
+      // eslint-disable-next-line import/no-dynamic-require
+      package: require(`${projectRoot}/packages/${entry}/package.json`),
+      entry: {
+        index: { path: 'src/index.ts' },
+        ...(hasTesting ? { testing: { path: 'src/testing.ts', label: 'Testing utilities' } } : undefined),
+      },
+    };
+  })
+  .filter((_) => !_.package.private);
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -86,11 +106,11 @@ const config = {
         },
         items: [
           {
-            label: `v${packageList[0].version[0]}`,
+            label: `v${packageList[0].package.version[0]}`,
             position: 'left',
-            items: packageList.map((_packageJSON) => ({
-              label: `v${_packageJSON.version} · ${_packageJSON.name.split('/')[1]}`,
-              href: `https://www.npmjs.com/package/${_packageJSON.name}`,
+            items: packageList.map(({ package: _package }) => ({
+              label: `v${_package.version} · ${_package.name.split('/')[1]}`,
+              href: `https://www.npmjs.com/package/${_package.name}`,
             })),
           },
           {
@@ -174,21 +194,10 @@ const config = {
       'docusaurus-plugin-typedoc-api',
       {
         projectRoot,
-        packages: [
-          // ...packageList.map((pkg) => `packages/${pkg}`),
-          {
-            path: 'packages/invariant',
-            entry: {
-              index: 'src/index.ts',
-            },
-          },
-          {
-            path: 'packages/core',
-            entry: {
-              index: 'src/index.ts',
-            },
-          },
-        ],
+        packages: packageList.map(({ path, entry }) => ({
+          path,
+          entry,
+        })),
         minimal: true,
         readmes: true,
         debug: true,
