@@ -13,17 +13,7 @@
  */
 export function warning(condition: boolean, message?: string | null | undefined): void {
   if (!condition) {
-    warning.current(`Warning: ${message ?? ''}`);
+    // eslint-disable-next-line no-console
+    console.warn(`Warning: ${message ?? ''}`);
   }
 }
-
-/**
- * Current warning implementation
- *
- * @internal
- * @example
- */
-warning.current = (message: string | null | undefined): void => {
-  // eslint-disable-next-line no-console
-  console.warn(message);
-};
