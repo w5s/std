@@ -1,10 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
+import type { CustomFields } from '@site/docusaurus.config';
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -15,9 +16,16 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+          <Link className={clsx('button button--secondary button--lg', styles.getStarted)} to={useBaseUrl('docs/')}>
+            Get started ➔
           </Link>
+
+          <iframe
+            frameBorder="0"
+            scrolling="0"
+            src="https://ghbtns.com/github-btn.html?user=w5s&repo=std&type=star&count=true&size=large"
+            title="GitHub Stars"
+          />
         </div>
       </div>
     </header>
@@ -26,8 +34,10 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const { metaTitle = siteConfig.title, metaDescription = siteConfig.tagline } = (siteConfig.customFields ??
+    {}) as CustomFields;
   return (
-    <Layout title={`Hello from ${siteConfig.title}`} description="Description will go into a meta tag in <head />">
+    <Layout title={metaTitle} description={metaDescription}>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

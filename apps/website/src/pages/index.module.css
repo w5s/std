@@ -21,3 +21,11 @@
   align-items: center;
   justify-content: center;
 }
+
+.buttons > iframe {
+  border: 0;
+  height: 30px;
+  margin-left: 1rem;
+  overflow: hidden;
+  width: 135px;
+}

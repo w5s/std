@@ -10,32 +10,72 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Standardized',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and used to get your website up and running
-        quickly.
+        Standardized code and gestures for high productivity <br />
+        <em>
+          ✓ Industry proven patterns and concepts <br />
+          ✓ Self explanatory names, avoid abbreviations <br />
+          ✓ Smooth tool integration and testability <br />
+        </em>
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Simple',
+    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    description: (
+      <>
+        Functional programming, done simple. <br />
+        <em>
+          ✓ No OOP : Plain Javascript object <br />
+          ✓ Pragmatic FP : pure by default but never obscure <br />
+          ✓ Explicit and deterministic API <br />
+        </em>
+      </>
+    ),
+  },
+  {
+    title: 'Stable',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the{' '}
-        <code>docs</code> directory.
+        Fight framework obsolescence ! <br />
+        <em>
+          ✓ Industry proven patterns and concepts <br />
+          ✓ Loose coupling between packages <br />
+          ✓ Designed for long-term maintainable applications <br />
+        </em>
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Safe',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same
-        header and footer.
+        One ambitious goal : 0 bug in production <br />
+        <em>
+          ✓ Strict and type safe <br />
+          ✓ Battle tested <br />
+          ✓ No external NPM runtime dependencies <br />
+        </em>
+      </>
+    ),
+  },
+  {
+    title: 'Slim',
+    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    description: (
+      <>
+        Because environment matters... <br />
+        <em>
+          ✓ Restricted set of highly composable functions <br />
+          ✓ No unused files and data in NPM package <br />
+          ✓ Sparse small and independent modules <br />
+        </em>
       </>
     ),
   },
@@ -48,7 +88,10 @@ function Feature({ title, Svg, description }: FeatureItem) {
         <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
+        <h3>
+          <span className="text--primary">{title[0]}</span>
+          {title.slice(1)}
+        </h3>
         <p>{description}</p>
       </div>
     </div>
