@@ -21,7 +21,7 @@ const darkTheme = themes.dracula;
 
 const projectRoot = nodePath.dirname(nodePath.dirname(nodePath.join(__dirname)));
 
-const githubHref = packageJSON.repository?.url.replace('git@github.com:', 'https://github.com/');
+const githubHref = packageJSON.repository.url.replace('git@github.com:', 'https://github.com/');
 const packageList = fs
   .readdirSync(`${projectRoot}/packages`)
   .map((entry) => {
