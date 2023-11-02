@@ -12,8 +12,8 @@ describe('randomNumber', () => {
     vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
       resolve(RandomValue.of(nextRandom))
     );
-
-    expect(unsafeRun(randomNumber(-2, 2))).toEqual(Result.Ok(-1.508));
+    const task = randomNumber(-2, 2);
+    expect(unsafeRun(task)).toEqual(Result.Ok(-1.508));
   });
   it.each([
     [{ genValue: 0, min: -2, max: 2 }, -2],

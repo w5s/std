@@ -13,7 +13,8 @@ describe('randomBoolean', () => {
     vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
       resolve(RandomValue.of(nextRandom))
     );
-    expect(unsafeRun(randomBoolean())).toEqual(Result.Ok(false));
+    const task = randomBoolean();
+    expect(unsafeRun(task)).toEqual(Result.Ok(false));
   });
   it.each([
     [{ genValue: 0, trueWeight: 0.5 }, false],
