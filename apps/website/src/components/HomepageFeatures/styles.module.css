@@ -1,4 +1,7 @@
+
 .features {
+  --feature-size: 180px;
+
   display: flex;
   align-items: center;
   padding: 2rem 0;
@@ -6,6 +9,6 @@
 }
 
 .featureSvg {
-  height: 200px;
-  width: 200px;
+  height: var(--feature-size);
+  width: var(--feature-size);
 }

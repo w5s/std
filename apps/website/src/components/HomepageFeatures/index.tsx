@@ -72,8 +72,8 @@ const FeatureList: FeatureItem[] = [
       <>
         Because environment matters... <br />
         <em>
-          ✓ Restricted set of highly composable functions <br />
-          ✓ No unused files and data in NPM package <br />
+          ✓ Lean but highly composable API <br />✓ Strong package size constraint (
+          <a href="https://www.npmjs.com/package/size-limit">size-limit</a>)<br />
           ✓ Sparse small and independent modules <br />
         </em>
       </>
@@ -81,17 +81,21 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
+const renderTitle = (value: string) => (
+  <>
+    <span className="text--primary">{value[0]}</span>
+    {value.slice(1)}
+  </>
+);
+
 function Feature({ title, Svg, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className="text--center">
+      <div className="text--center padding--md">
         <Svg className={styles.featureSvg} role="img" />
       </div>
       <div className="text--center padding-horiz--md">
-        <h3>
-          <span className="text--primary">{title[0]}</span>
-          {title.slice(1)}
-        </h3>
+        <h3>{renderTitle(title)}</h3>
         <p>{description}</p>
       </div>
     </div>
