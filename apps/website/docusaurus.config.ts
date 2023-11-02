@@ -204,21 +204,20 @@ const config: Config = (() => {
     } satisfies Preset.ThemeConfig,
 
     plugins: [
-      // TODO: enable this
-      // [
-      //   'docusaurus-plugin-typedoc-api',
-      //   {
-      //     projectRoot,
-      //     packages: packageList.map(({ path, entry }) => ({
-      //       path,
-      //       entry,
-      //     })),
-      //     minimal: true,
-      //     readmes: true,
-      //     debug: true,
-      //     tsconfigName: 'tsconfig.json',
-      //   },
-      // ],
+      [
+        'docusaurus-plugin-typedoc-api',
+        {
+          projectRoot,
+          packages: packageList.map(({ path, entry }) => ({
+            path,
+            entry,
+          })),
+          minimal: true,
+          readmes: true,
+          debug: true,
+          tsconfigName: 'tsconfig.json',
+        },
+      ],
     ],
   };
 })();

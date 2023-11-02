@@ -33,9 +33,8 @@ export function main(): void {
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## License
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[${license}][license-url] © ${author}) -->
-[MIT][license-url] © Julien Polo <julien.polo@gmail.com>
-<!-- AUTO-GENERATED-CONTENT:END -->
+
+[MIT][license-url] © Julien Polo [julien.polo@gmail.com](mailto:julien.polo@gmail.com)
 
 <!-- VARIABLES -->
 

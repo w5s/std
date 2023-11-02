@@ -75,9 +75,8 @@ void unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## License
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[${license}][license-url] © ${author}) -->
-[MIT][license-url] © Julien Polo <julien.polo@gmail.com>
-<!-- AUTO-GENERATED-CONTENT:END -->
+
+[MIT][license-url] © Julien Polo [julien.polo@gmail.com](mailto:julien.polo@gmail.com)
 
 <!-- VARIABLES -->
 
