@@ -126,23 +126,23 @@ const config: Config = (() => {
               href: `https://www.npmjs.com/package/${_package.name}`,
             })),
           },
+          // {
+          //   to: 'docs',
+          //   activeBasePath: 'docs',
+          //   label: 'Docs',
+          //   position: 'left',
+          // },
           {
-            to: 'docs',
-            activeBasePath: 'docs',
-            label: 'Docs',
+            type: 'docSidebar',
+            sidebarId: 'tutorialSidebar',
             position: 'left',
+            label: 'Docs',
           },
           {
             to: 'api',
             label: 'API',
             position: 'left',
           },
-          // {
-          //   type: 'docSidebar',
-          //   sidebarId: 'tutorialSidebar',
-          //   position: 'left',
-          //   label: 'Tutorial',
-          // },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: githubHref,
