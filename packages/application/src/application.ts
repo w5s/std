@@ -16,7 +16,7 @@ export interface ApplicationState extends AnyObject {
   /**
    * Current application configuration
    */
-  readonly configuration: AnyObject;
+  readonly configuration: object;
 }
 
 /**
@@ -58,7 +58,7 @@ export interface Application<Configuration = EmptyObject> {
  * ```
  * @param properties
  */
-export function Application<Configuration extends AnyObject = EmptyObject>(
+export function Application<Configuration extends object = EmptyObject>(
   properties: Application.Options<Configuration>
 ): Application<Configuration> {
   const {
@@ -79,7 +79,7 @@ export function Application<Configuration extends AnyObject = EmptyObject>(
 }
 
 export namespace Application {
-  export type Options<Configuration extends AnyObject> = {
+  export type Options<Configuration extends object> = {
     /**
      * Application id
      */
