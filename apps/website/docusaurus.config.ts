@@ -126,23 +126,18 @@ const config: Config = (() => {
               href: `https://www.npmjs.com/package/${_package.name}`,
             })),
           },
-          // {
-          //   to: 'docs',
-          //   activeBasePath: 'docs',
-          //   label: 'Docs',
-          //   position: 'left',
-          // },
           {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
             label: 'Docs',
           },
-          {
-            to: 'api',
-            label: 'API',
-            position: 'left',
-          },
+          // TODO: enable this
+          // {
+          //   to: 'api',
+          //   label: 'API',
+          //   position: 'left',
+          // },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: githubHref,
@@ -159,7 +154,7 @@ const config: Config = (() => {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/docs/getting-started/Introduction',
               },
             ],
           },

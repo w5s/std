@@ -16,7 +16,10 @@ function HomepageHeader() {
         <h1 className={clsx('hero__title', styles.heroTitle)}>{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link className={clsx('button button--primary button--lg', styles.getStarted)} to={useBaseUrl('docs/')}>
+          <Link
+            className={clsx('button button--primary button--lg', styles.getStarted)}
+            to={useBaseUrl('docs/category/getting-started/')}
+          >
             Get started ➔
           </Link>
 
