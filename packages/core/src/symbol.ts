@@ -14,9 +14,9 @@ declare global {
     readonly asyncDispose: unique symbol;
 
     /**
-     * Global storage property.
+     * Object storage property.
      */
-    readonly globalStorage: unique symbol;
+    readonly storage: unique symbol;
   }
 }
 const GlobalSymbol = globalThis.Symbol;
@@ -42,5 +42,5 @@ export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'm
   matchAll: GlobalSymbol.matchAll,
   dispose: GlobalSymbol.dispose ?? (GlobalSymbol.for('dispose') as any),
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
-  globalStorage: GlobalSymbol.for('@w5s/globalStorage') as SymbolConstructor['globalStorage'],
+  storage: GlobalSymbol.for('@w5s/storage') as SymbolConstructor['storage'],
 };

@@ -1,7 +1,7 @@
 import type { Option, Ref } from '@w5s/core';
 
 // Inline
-const $globalStorage = Symbol.for('@w5s/globalStorage');
+const $globalStorage = Symbol.for('@w5s/storage');
 
 /**
  * Type for the global Map that holds all application states

@@ -32,9 +32,9 @@ describe('Symbol', () => {
       expect(typeof Symbol.asyncDispose).toBe('symbol');
     });
   });
-  describe('.globalStorage', () => {
+  describe('.storage', () => {
     it('should be a symbol', () => {
-      expect(typeof Symbol.globalStorage).toBe('symbol');
+      expect(typeof Symbol.storage).toBe('symbol');
     });
   });
 });
