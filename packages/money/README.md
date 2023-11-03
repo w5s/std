@@ -47,4 +47,4 @@ export function main(): void {
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
-[license-url]: ../../LICENSE
+[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/money/LICENSE
