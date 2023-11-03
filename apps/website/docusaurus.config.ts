@@ -132,12 +132,11 @@ const config: Config = (() => {
             position: 'left',
             label: 'Docs',
           },
-          // TODO: enable this
-          // {
-          //   to: 'api',
-          //   label: 'API',
-          //   position: 'left',
-          // },
+          {
+            to: 'api',
+            label: 'API',
+            position: 'left',
+          },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: githubHref,
@@ -199,20 +198,23 @@ const config: Config = (() => {
     } satisfies Preset.ThemeConfig,
 
     plugins: [
-      // [
-      //   'docusaurus-plugin-typedoc-api',
-      //   {
-      //     projectRoot,
-      //     packages: packageList.map(({ path, entry }) => ({
-      //       path,
-      //       entry,
-      //     })),
-      //     minimal: true,
-      //     readmes: true,
-      //     // debug: true,
-      //     tsconfigName: 'tsconfig.json',
-      //   },
-      // ],
+      [
+        'docusaurus-plugin-typedoc-api',
+        {
+          projectRoot,
+          packages: packageList
+            .map(({ path, entry }) => ({
+              path,
+              entry,
+            }))
+            // FIXME: there is a bug for core because of >= and methods with special characters
+            .filter(({ path }) => !path.includes('/core')),
+          minimal: true,
+          readmes: true,
+          // debug: true,
+          tsconfigName: 'tsconfig.json',
+        },
+      ],
     ],
   };
 })();
