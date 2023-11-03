@@ -1,3 +1,4 @@
 export * from './application.js';
-export * from './globalStorage.js';
+export * from './useStorage.js';
+export * from './useRef.js';
 export * from './property.js';

@@ -1,5 +1,5 @@
 import type { Ref, Record, Tag, EmptyObject } from '@w5s/core';
-import { useRef } from './globalStorage.js';
+import { useRef } from './useRef.js';
 import { property } from './property.js';
 
 type AnyObject = Record<string | symbol, unknown>;

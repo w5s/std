@@ -6,10 +6,9 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // public exports
-        'globalStorage',
-        'GlobalStorage',
         'property',
         'useRef',
+        'useStorage',
         'Application',
       ].sort()
     );
