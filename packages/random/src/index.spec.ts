@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // List of all public exports
         'defaultRandomGenerator',
+        'defaultUUIDGenerator',
         'randomBoolean',
         'RandomGenerator',
         'randomInt',

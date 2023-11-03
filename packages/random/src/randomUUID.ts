@@ -1,6 +1,8 @@
-import type { Task, Option } from '@w5s/core';
+import type { Task, Option, Ref } from '@w5s/core';
 import { invariant } from '@w5s/invariant';
+import { property } from '@w5s/application';
 import type { UUID } from './uuid.js';
+import { application } from './application.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 const cryptoModule: Option<Pick<Crypto, 'randomUUID'>> =
@@ -21,6 +23,19 @@ export interface UUIDGenerator {
 }
 
 /**
+ * Default UUID generator
+ *
+ * @example
+ */
+export const defaultUUIDGenerator: Ref<UUIDGenerator> = property(
+  application.state,
+  'uuidGenerator',
+  cryptoModule == null
+    ? () => invariant(false, 'crypto.randomUUID not found')
+    : cryptoModule.randomUUID.bind(cryptoModule)
+);
+
+/**
  * A task that returns a new `UUID`
  *
  * @example
@@ -33,17 +48,6 @@ export interface UUIDGenerator {
  */
 export function randomUUID(): Task<UUID, never> {
   return {
-    taskRun: ({ resolve }) => resolve(randomUUID.current()),
+    taskRun: ({ resolve }) => resolve(defaultUUIDGenerator.current() as UUID),
   };
 }
-/**
- * Current implementation for randomUUID
- *
- * @example
- * @internal
- */
-randomUUID.current = (
-  cryptoModule == null
-    ? () => invariant(false, 'crypto.randomUUID not found')
-    : cryptoModule.randomUUID.bind(cryptoModule)
-) as () => UUID;

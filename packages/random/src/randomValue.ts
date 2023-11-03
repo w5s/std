@@ -30,6 +30,7 @@ export const RandomValue = {
    * RandomValue.hasInstance(null); // === false
    * RandomValue.hasInstance(RandomValue.of(0)); // === true
    * ```
+   * @category Guard
    * @param anyValue - an unknown value to be refined
    */
   hasInstance(anyValue: unknown): anyValue is RandomValue {
