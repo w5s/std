@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_w5s_website=self.webpackChunk_w5s_website||[]).push([[9406],{4383:e=>{e.exports=JSON.parse('{"permalink":"/std/fr/blog/tags/hola","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
