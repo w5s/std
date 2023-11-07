@@ -14,10 +14,10 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/logo-svgrepo-com.svg').default,
     description: (
       <>
-        Standardized code and gestures for high productivity <br />
+        Standardized code and conventions for high productivity <br />
         <em>
-          ✓ Industry proven patterns and concepts <br />
-          ✓ Self explanatory names, avoid abbreviations <br />
+          ✓ Inspired by industry-grade technologies (Rust, Elixir, Ocaml) <br />
+          ✓ Self explanatory names, (almost) no abbreviations <br />
           ✓ Smooth tool integration and testability <br />
         </em>
       </>
@@ -31,7 +31,7 @@ const FeatureList: FeatureItem[] = [
         Functional programming, done simple. <br />
         <em>
           ✓ No OOP : Plain Javascript object <br />
-          ✓ Pragmatic FP : pure by default but never obscure <br />
+          ✓ Pragmatic Functional Programming : pure but never obscure <br />
           ✓ Explicit and deterministic API <br />
         </em>
       </>
@@ -44,9 +44,9 @@ const FeatureList: FeatureItem[] = [
       <>
         Fight framework obsolescence ! <br />
         <em>
-          ✓ Industry proven patterns and concepts <br />
           ✓ Loose coupling between packages <br />
           ✓ Designed for long-term maintainable applications <br />
+          ✓ Harmonize practices between frontend and backend <br />
         </em>
       </>
     ),
@@ -72,9 +72,10 @@ const FeatureList: FeatureItem[] = [
       <>
         Because environment matters... <br />
         <em>
-          ✓ Lean but highly composable API <br />✓ Strong package size constraint (
-          <a href="https://www.npmjs.com/package/size-limit">size-limit</a>)<br />
-          ✓ Sparse small and independent modules <br />
+          ✓ Lean yet highly composable API <br />✓ Strong package size constraint with{' '}
+          <a href="https://www.npmjs.com/package/size-limit">size-limit</a>
+          <br />
+          ✓ No constraint to use all `@w5s` packages, pick only the needed ones. <br />
         </em>
       </>
     ),
