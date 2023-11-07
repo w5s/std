@@ -5506,7 +5506,7 @@ __metadata:
     "@mdx-js/react": "npm:3.0.0"
     "@types/node": "npm:20.9.0"
     clsx: "npm:2.0.0"
-    docusaurus-plugin-typedoc-api: "npm:4.0.0"
+    docusaurus-plugin-typedoc-api: "npm:4.0.1"
     prism-react-renderer: "npm:2.1.0"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
@@ -8510,22 +8510,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc-api@npm:4.0.0":
-  version: 4.0.0
-  resolution: "docusaurus-plugin-typedoc-api@npm:4.0.0"
+"docusaurus-plugin-typedoc-api@npm:4.0.1":
+  version: 4.0.1
+  resolution: "docusaurus-plugin-typedoc-api@npm:4.0.1"
   dependencies:
     "@docusaurus/plugin-content-docs": "npm:^3.0.0"
     "@docusaurus/types": "npm:^3.0.0"
     "@docusaurus/utils": "npm:^3.0.0"
     "@vscode/codicons": "npm:^0.0.35"
-    marked: "npm:^9.1.4"
+    marked: "npm:^9.1.5"
     marked-smartypants: "npm:^1.1.3"
     typedoc: "npm:^0.25.3"
   peerDependencies:
     "@docusaurus/core": ^3.0.0
     react: ">=18.0.0"
     typescript: ^5.0.0
-  checksum: 829265ab1b42c338999a4c13c5656ba4236626d23323e008eec36cc713a34e4a1ee99e071a846ef6ccd9a4bbef668bcaa5be8f1ed694b5d865ddfe78fe8c1079
+  checksum: b82fced67ba9ed2cf1e4f8853f69df86a03ddebe7de55004199e80c26efafca1c5dff4adcff7beafb74992676d63a9267aef908d29af04642ad7e7926bdfe400
   languageName: node
   linkType: hard
 
@@ -13113,7 +13113,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:^9.1.4":
+"marked@npm:^9.1.5":
   version: 9.1.5
   resolution: "marked@npm:9.1.5"
   bin:
