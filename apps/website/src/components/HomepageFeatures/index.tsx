@@ -31,7 +31,7 @@ const FeatureList: FeatureItem[] = [
         Functional programming, done simple. <br />
         <em>
           ✓ No OOP : Plain Javascript object <br />
-          ✓ Pragmatic Functional Programming : pure but never obscure <br />
+          ✓ Pragmatic FP : pure but never obscure <br />
           ✓ Explicit and deterministic API <br />
         </em>
       </>
@@ -45,8 +45,8 @@ const FeatureList: FeatureItem[] = [
         Fight framework obsolescence ! <br />
         <em>
           ✓ Loose coupling between packages <br />
-          ✓ Designed for long-term maintainable applications <br />
-          ✓ Harmonize practices between frontend and backend <br />
+          ✓ Designed for maintainable applications <br />
+          ✓ Harmonize frontend/backend practices <br />
         </em>
       </>
     ),
@@ -70,7 +70,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/feather-svgrepo-com.svg').default,
     description: (
       <>
-        Because environment matters... <br />
+        Because CI performances and environment matters <br />
         <em>
           ✓ Lean yet highly composable API <br />✓ Strong package size constraint with{' '}
           <a href="https://www.npmjs.com/package/size-limit">size-limit</a>
