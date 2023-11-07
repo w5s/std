@@ -202,13 +202,10 @@ const config: Config = (() => {
         'docusaurus-plugin-typedoc-api',
         {
           projectRoot,
-          packages: packageList
-            .map(({ path, entry }) => ({
-              path,
-              entry,
-            }))
-            // FIXME: there is a bug for core because of >= and methods with special characters
-            .filter(({ path }) => !path.includes('/core')),
+          packages: packageList.map(({ path, entry }) => ({
+            path,
+            entry,
+          })),
           minimal: true,
           readmes: true,
           // debug: true,
