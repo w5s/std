@@ -23,12 +23,12 @@ function HomepageHeader() {
             Get started ➔
           </Link>
 
-          <iframe
+          {/* <iframe
             frameBorder="0"
             scrolling="0"
             src="https://ghbtns.com/github-btn.html?user=w5s&repo=std&type=star&count=true&size=large"
             title="GitHub Stars"
-          />
+          /> */}
         </div>
       </div>
     </header>
