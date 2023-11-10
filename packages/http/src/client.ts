@@ -1,5 +1,5 @@
 import { invariant } from '@w5s/invariant';
-import type { Task, Tag } from '@w5s/core';
+import type { Task, Tag, Option } from '@w5s/core';
 import { HTTPError } from './error.js';
 import type { HTTPParser } from './parser.js';
 
@@ -15,6 +15,13 @@ export namespace HTTP {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/url
    */
   export type URL = string;
+
+  /**
+   * HTTP credentials
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
+   */
+  export type Credentials = 'include' | 'omit' | 'same-origin';
 
   /**
    * HTTP Method type
@@ -118,25 +125,86 @@ export namespace HTTP {
       ...values,
     } as Headers;
   }
-
   /**
    * HTTP request type
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Request
    */
-  export interface Request
-    extends Readonly<
-      Omit<globalThis.RequestInit, 'headers' | 'clone' | 'method'> & {
-        // https://fetch.spec.whatwg.org/#requests
-        url: HTTP.URL;
-        headers?: HTTP.Headers;
-        cache?: HTTP.Cache;
-        redirect?: HTTP.Redirect;
-        referrerPolicy?: HTTP.ReferrerPolicy;
-        destination?: HTTP.RequestDestination;
-        method?: HTTP.Method;
-      }
-    > {}
+  export interface Request {
+    // https://fetch.spec.whatwg.org/#requests
+    /**
+     * Indicates how the request will interact with the browser's cache to set request's cache.
+     *
+     * @example
+     * ```ts
+     * 'no-store'
+     * ```
+     */
+    readonly cache?: HTTP.Cache;
+    /**
+     * A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL.
+     */
+    readonly credentials?: HTTP.Credentials;
+    readonly destination?: HTTP.RequestDestination;
+    /**
+     * Request URL
+     *
+     * @example
+     * 'https://foo.com'
+     */
+    readonly url: HTTP.URL;
+    /**
+     * Request headers
+     *
+     * @example
+     * ```ts
+     * { "Content-type": "application/json" }
+     * ```
+     */
+    readonly headers?: HTTP.Headers;
+    /**
+     * A cryptographic hash of the resource to be fetched by request. Sets request's integrity.
+     */
+    readonly integrity?: string;
+    /**
+     * Indicates whether request follows redirects, results in an error upon encountering a redirect, or returns the redirect (in an opaque fashion).
+     */
+    readonly redirect?: HTTP.Redirect;
+    /**
+     * Request referrer policy
+     */
+    readonly referrerPolicy?: HTTP.ReferrerPolicy;
+    /**
+     * Request Method
+     *
+     * @example 'GET', 'POST'
+     */
+    readonly method?: HTTP.Method;
+    /**
+     * A boolean to set request's keepalive.
+     */
+    readonly keepalive?: boolean;
+    /**
+     * Indicates whether the request will use CORS, or will be restricted to same-origin URLs. Sets request's mode.
+     */
+    readonly mode?: RequestMode;
+    /**
+     * An optional BodyInit object to set request's body.
+     */
+    readonly body?: Option<BodyInit>;
+    /**
+     * A string whose value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
+     */
+    readonly referrer?: string;
+    /**
+     * An AbortSignal to set request's signal.
+     */
+    // readonly signal?: Option<AbortSignal>;
+    /**
+     * Can only be undefined. Used to disassociate request from any Window.
+     */
+    readonly window?: undefined;
+  }
 
   export interface Response
     extends Readonly<
