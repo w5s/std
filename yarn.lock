@@ -13086,13 +13086,13 @@ __metadata:
   linkType: hard
 
 "marked-smartypants@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "marked-smartypants@npm:1.1.3"
+  version: 1.1.4
+  resolution: "marked-smartypants@npm:1.1.4"
   dependencies:
     smartypants: "npm:^0.2.2"
   peerDependencies:
-    marked: ">=4 <10"
-  checksum: e6e3639edb4f9e4d4abfd9af77ee5f81fdd7894d1ed4cba6fbe54dc709142d7ad28155ba79558ee5def4ff4aff5db5f45c79ef4e940c5707c5eab143c665f10f
+    marked: ">=4 <11"
+  checksum: 484354a0782c754096d5c3afa6791f488d6f17eb9a85ed47ee6b636f0379553d93b904c65dc877b9d540fee21d3ae242af86e35bf4ae1ddeb09ecd794441ed81
   languageName: node
   linkType: hard
 
