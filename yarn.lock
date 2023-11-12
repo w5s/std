@@ -8871,9 +8871,9 @@ __metadata:
   linkType: hard
 
 "es-module-lexer@npm:^1.2.1":
-  version: 1.4.0
-  resolution: "es-module-lexer@npm:1.4.0"
-  checksum: c12d08945b1ffc27df0942b79df6537381f5db792c03ad4a755e89120d60c0692ff8dddad46b99fe52c86cc99e1282664ca76f8c1276da0a0c40d28a9b742314
+  version: 1.4.1
+  resolution: "es-module-lexer@npm:1.4.1"
+  checksum: b7260a138668554d3f0ddcc728cb4b60c2fa463f15545cf155ecbdd5450a1348952d58298a7f48642e900ee579f21d7f5304b6b3c61b3d9fc2d4b2109b5a9dff
   languageName: node
   linkType: hard
 
