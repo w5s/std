@@ -86,10 +86,10 @@ export const Int = {
     return value < MIN_SAFE_INTEGER
       ? MIN_SAFE_INTEGER
       : value > MAX_SAFE_INTEGER
-      ? MAX_SAFE_INTEGER
-      : value < 0
-      ? (Math.ceil(value) as Int)
-      : (Math.floor(value) as Int);
+        ? MAX_SAFE_INTEGER
+        : value < 0
+          ? (Math.ceil(value) as Int)
+          : (Math.floor(value) as Int);
   },
 
   /**

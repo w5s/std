@@ -27,22 +27,22 @@ export function errnoExceptionHandler(error: unknown): FileError {
   return FileError.hasInstance(error)
     ? error
     : ErrnoException.hasInstance(error)
-    ? FileError({
-        fileErrorType: 'OtherError',
-        path: error.path as FilePath,
-        cause: error,
-        syscall: error.syscall,
-        errno: error.errno,
-        code: error.code,
-      })
-    : FileError({
-        fileErrorType: 'OtherError',
-        path: undefined,
-        cause: error,
-        syscall: undefined,
-        errno: undefined,
-        code: undefined,
-      });
+      ? FileError({
+          fileErrorType: 'OtherError',
+          path: error.path as FilePath,
+          cause: error,
+          syscall: error.syscall,
+          errno: error.errno,
+          code: error.code,
+        })
+      : FileError({
+          fileErrorType: 'OtherError',
+          path: undefined,
+          cause: error,
+          syscall: undefined,
+          errno: undefined,
+          code: undefined,
+        });
 }
 
 export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {

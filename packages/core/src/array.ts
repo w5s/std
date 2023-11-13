@@ -235,8 +235,8 @@ export namespace Array {
         fromIndex == null
           ? arrayLength - 1
           : fromIndex < 0
-          ? Math.max(arrayLength + fromIndex, 0)
-          : Math.min(fromIndex, arrayLength - 1);
+            ? Math.max(arrayLength + fromIndex, 0)
+            : Math.min(fromIndex, arrayLength - 1);
       // NaN
       while (index >= 0) {
         const value = array[index];
