@@ -3913,17 +3913,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/is@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "@sindresorhus/is@npm:3.1.2"
-  checksum: d83b11a6f2bd41aaf87255bf1c5e83ee59bd13b46f5632cb94c80d077194c68de1060efaa9e624179bef96f51a016c9e3942deaf162f5c939fa396e0be630754
-  languageName: node
-  linkType: hard
-
 "@sindresorhus/is@npm:^5.2.0":
   version: 5.6.0
   resolution: "@sindresorhus/is@npm:5.6.0"
   checksum: 66727344d0c92edde5760b5fd1f8092b717f2298a162a5f7f29e4953e001479927402d9d387e245fb9dc7d3b37c72e335e93ed5875edfc5203c53be8ecba1b52
+  languageName: node
+  linkType: hard
+
+"@sindresorhus/is@npm:^6.0.0":
+  version: 6.1.0
+  resolution: "@sindresorhus/is@npm:6.1.0"
+  checksum: ad112bc026e45663ff7bf2ddf00627da5ac223b5d8fc95bfbf323b460ff06af762ab722e5ce79ec42b6eb075975a3b13e71e7c09bcb7b5554e0279bcdd569d29
   languageName: node
   linkType: hard
 
@@ -14369,14 +14369,14 @@ __metadata:
   linkType: hard
 
 "node-emoji@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "node-emoji@npm:2.1.0"
+  version: 2.1.1
+  resolution: "node-emoji@npm:2.1.1"
   dependencies:
-    "@sindresorhus/is": "npm:^3.1.2"
+    "@sindresorhus/is": "npm:^6.0.0"
     char-regex: "npm:^1.0.2"
     emojilib: "npm:^2.4.0"
     skin-tone: "npm:^2.0.0"
-  checksum: 98b030c82a2e282aa48cc13741d79ec48efd0ae856a4d1b41e551053bc322573166f9233c742857a7e20ed902b647de9c02a4a92b774f3e6257332ff44de3636
+  checksum: ef4ca4147a7d384c63bcb96b5f291f091b2d008dae3acb25282de4d245633583abdbb3c81f8f6db528aaf52481484cbac8d633c1c7f5ed72c09bc218801aa583
   languageName: node
   linkType: hard
 
