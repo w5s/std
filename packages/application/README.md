@@ -20,9 +20,10 @@ npm install @w5s/application
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { globalStorage, useRef } from '@w5s/application';
+import { useStorage, useRef } from '@w5s/application';
 
 export function main(): void {
+  const globalStorage = useStorage(globalThis);
   const counterRef = useRef('counter', 1);
 
   counterRef.current += 1;

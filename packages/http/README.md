@@ -21,7 +21,7 @@ npm install @w5s/http
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
-import { Console, Task, assertNever, unsafeRun } from '@w5s/core';
+import { Console, Task, unsafeRun } from '@w5s/core';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
@@ -43,7 +43,7 @@ export function program() {
         return Console.error('A parser error occurred');
       }
       default: {
-        return assertNever(error);
+        return Console.error('Unknown');
       }
     }
   });
