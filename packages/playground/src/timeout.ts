@@ -1,6 +1,7 @@
 import { DataError } from '@w5s/core/dist/dataError.js';
 import { cancel } from '@w5s/core/dist/cancel.js';
-import type { TaskCanceler, Task, TimeDuration } from '@w5s/core';
+import type { TaskCanceler, Task } from '@w5s/core';
+import type { TimeDuration } from '@w5s/time';
 
 /**
  * An error reported when a task times out

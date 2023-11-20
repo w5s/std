@@ -1,4 +1,5 @@
-import { Int, Result, Time, unsafeRun } from '@w5s/core';
+import { Int, Result, unsafeRun } from '@w5s/core';
+import { Time } from '@w5s/time';
 import { describe, it, expect, vi } from 'vitest';
 import { readFileStatus, readSymbolicLinkStatus } from './readFileStatus.js';
 import { FilePath } from '../filePath.js';

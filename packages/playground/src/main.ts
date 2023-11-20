@@ -1,5 +1,6 @@
 import { assertNever } from '@w5s/invariant';
-import { Console, Int, Option, Task, TimeDuration, unsafeRun } from '@w5s/core';
+import { Console, Int, Option, Task, unsafeRun } from '@w5s/core';
+import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/random';
 import { pipe } from './pipe.js';

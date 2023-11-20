@@ -1,4 +1,5 @@
-import type { Option, TimeDuration, JSONValue, Tag } from '@w5s/core';
+import type { Option, JSONValue, Tag } from '@w5s/core';
+import type { TimeDuration } from '@w5s/time';
 import { HTTP, HTTPParser } from '@w5s/http';
 import { timeout } from './timeout.js';
 

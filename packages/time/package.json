@@ -1,21 +1,37 @@
 {
-  "name": "@w5s/playground",
+  "name": "@w5s/time",
   "version": "1.0.0-alpha.0",
-  "private": true,
-  "description": "Examples",
-  "homepage": "https://github.com/w5s/std/tree/master/packages/playground#readme",
+  "description": "Time manipulation",
+  "keywords": [
+    "fp",
+    "functional",
+    "time",
+    "standard",
+    "std"
+  ],
+  "homepage": "https://github.com/w5s/std/tree/master/packages/std#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/playground"
+    "directory": "packages/time"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
   "type": "module",
-  "files": [],
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/*": "./dist/*"
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "!**/*.spec.*",
+    "!**/__tests__/**"
+  ],
   "scripts": {
     "build": "concurrently \"npm:build:*\" \":\"",
     "build:tsc": "tsc -b tsconfig.build.json",
@@ -28,27 +44,34 @@
     "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "prepare": "concurrently \"npm:prepare:*\" \":\"",
     "prepublishOnly": "npm run clean;npm run build",
+    "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
     "test": "concurrently \"npm:test:*\" \":\"",
     "test:src": "vitest run",
     "tsc": "tsc",
-    "validate": "npm run build && npm run test"
+    "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@w5s/application": "^1.0.0-alpha.0",
-    "@w5s/core": "^1.0.0-alpha.0",
-    "@w5s/http": "^1.0.0-alpha.0",
-    "@w5s/random": "^1.0.0-alpha.0",
-    "@w5s/time": "^1.0.0-alpha.0"
+    "@w5s/core": "1.0.0-alpha.0",
+    "@w5s/invariant": "1.0.0-alpha.0"
   },
   "devDependencies": {
     "vite": "latest",
     "vitest": "latest"
   },
   "peerDependencies": {
-    "typescript": "^3.8.0 || ^4.0.0 || ^5.0.0"
+    "typescript": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "1 kB"
+    }
+  ]
 }

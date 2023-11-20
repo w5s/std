@@ -27,5 +27,4 @@ export * from './string.js';
 export * from './symbol.js';
 export * from './task.js';
 export * from './throwError.js';
-export * from './time.js';
 export * from './type.js';

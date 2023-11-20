@@ -1,4 +1,5 @@
-import type { DataObject, Time } from '@w5s/core';
+import type { DataObject } from '@w5s/core';
+import type { Time } from '@w5s/time';
 import type { UUID } from '@w5s/random';
 import type { LogMessage } from './message.js';
 import type { LogLevel } from './level.js';

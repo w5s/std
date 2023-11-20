@@ -1,9 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Option } from './option.js';
-import { Ref } from './ref.js';
-import { Result } from './result.js';
-import { unsafeRun } from './run.js';
-import { TimeDuration, Time } from './time.js';
+import { Option, Ref, Result, unsafeRun } from '@w5s/core';
+import { Time } from './time.js';
+import { TimeDuration } from './timeDuration.js';
 
 describe('Time', () => {
   vi.useFakeTimers();
@@ -114,57 +112,6 @@ describe('Time', () => {
       expect(reject).not.toHaveBeenCalled();
       expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(clearTimeoutSpy).toHaveBeenLastCalledWith(setTimeoutResult);
-    });
-  });
-});
-describe('TimeDuration', () => {
-  describe('()', () => {
-    it('should throw invariant error', () => {
-      expect(() => TimeDuration.of(Number.NaN)).toThrow('NaN is not a valid duration value');
-    });
-    it.each([
-      [1, 1],
-      [-1, -1],
-      [1.1, 1.1],
-    ])('should return an int value', (input, expected) => {
-      expect(TimeDuration.of(input)).toBe(expected);
-    });
-  });
-  describe('.hasInstance', () => {
-    it('should return true for valid values', () => {
-      expect(TimeDuration.hasInstance(1)).toBe(true);
-      expect(TimeDuration.hasInstance(-1)).toBe(true);
-    });
-    it('should return false for invalid values', () => {
-      expect(TimeDuration.hasInstance(null)).toBe(false);
-      expect(TimeDuration.hasInstance(undefined)).toBe(false);
-      expect(TimeDuration.hasInstance([])).toBe(false);
-      expect(TimeDuration.hasInstance(Number.NaN)).toBe(false);
-    });
-  });
-  describe('.milliseconds', () => {
-    it('should return an int value', () => {
-      expect(TimeDuration.milliseconds(1)).toBe(1);
-    });
-  });
-  describe('.seconds', () => {
-    it('should return an int value', () => {
-      expect(TimeDuration.seconds(1)).toBe(1000);
-    });
-  });
-  describe('.minutes', () => {
-    it('should return an int value', () => {
-      expect(TimeDuration.minutes(1)).toBe(1000 * 60);
-    });
-  });
-  describe('.hours', () => {
-    it('should return an int value', () => {
-      expect(TimeDuration.hours(1)).toBe(1000 * 60 * 60);
-    });
-  });
-  describe('.days', () => {
-    it('should return an int value', () => {
-      expect(TimeDuration.days(1)).toBe(1000 * 60 * 60 * 24);
     });
   });
 });

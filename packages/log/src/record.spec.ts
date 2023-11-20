@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Time } from '@w5s/core';
+import { Time } from '@w5s/time';
 import { UUID } from '@w5s/random';
 import { LogRecord } from './record.js';
 import { LogLevel } from './level.js';
