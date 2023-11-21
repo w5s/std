@@ -77,6 +77,7 @@ export function taskStub<Value = never, Error = never>(options: TaskStubOptions<
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         taskRun: async (parameters) => {
           parameters.canceler.current = canceler;
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
           await waitMs(delayMs ?? 0);
           return base.taskRun(parameters);
         },

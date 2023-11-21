@@ -1,4 +1,5 @@
-import { TimeDuration, Int, Option, Task, Result, unsafeRun } from '@w5s/core';
+import { Int, Option, Task, Result, unsafeRun } from '@w5s/core';
+import { TimeDuration } from '@w5s/time';
 import { RandomGenerator, RandomValue } from '@w5s/random';
 import { describe, it, expect, vi } from 'vitest';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';

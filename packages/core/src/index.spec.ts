@@ -34,8 +34,6 @@ describe('index', () => {
         'Symbol',
         'Task',
         'throwError',
-        'Time',
-        'TimeDuration',
         'unsafeRun',
         'unsafeRunOk',
       ].sort()
