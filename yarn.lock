@@ -5317,7 +5317,7 @@ __metadata:
     "@types/node": "npm:20.9.1"
     clsx: "npm:2.0.0"
     docusaurus-plugin-typedoc-api: "npm:4.0.1"
-    prism-react-renderer: "npm:2.2.0"
+    prism-react-renderer: "npm:2.3.0"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
     typescript: "npm:5.3.2"
@@ -6988,7 +6988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.0.0":
+"clsx@npm:2.0.0, clsx@npm:^2.0.0":
   version: 2.0.0
   resolution: "clsx@npm:2.0.0"
   checksum: c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
@@ -16083,7 +16083,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prism-react-renderer@npm:2.2.0, prism-react-renderer@npm:^2.1.0":
+"prism-react-renderer@npm:2.3.0":
+  version: 2.3.0
+  resolution: "prism-react-renderer@npm:2.3.0"
+  dependencies:
+    "@types/prismjs": "npm:^1.26.0"
+    clsx: "npm:^2.0.0"
+  peerDependencies:
+    react: ">=16.0.0"
+  checksum: aa8fb176e156ebb1f8ca46d82966d37176f46545e03669ddab7d56479f915b41e95b02accc16af9e2e95c7fcd57ce6222d8eac08977c757d9c49c32c7b0e03ff
+  languageName: node
+  linkType: hard
+
+"prism-react-renderer@npm:^2.1.0":
   version: 2.2.0
   resolution: "prism-react-renderer@npm:2.2.0"
   dependencies:
