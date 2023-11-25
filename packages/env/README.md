@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Random module (UUID, number)
+> Environment variable module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -23,7 +23,7 @@ npm install @w5s/env
 import { Env } from '@w5s/env';
 
 export function main(): void {
-  console.log(Env.get('TOTO'));
+  console.log(Env['BLAH']);
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->

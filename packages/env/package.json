@@ -1,12 +1,14 @@
 {
   "name": "@w5s/env",
   "version": "1.0.0-alpha.0",
-  "description": "Random module (UUID, number)",
+  "description": "Environment variable module",
   "keywords": [
     "fp",
     "functional",
     "env",
-    "variables"
+    "variables",
+    "process",
+    "environment"
   ],
   "homepage": "https://github.com/w5s/std/tree/master/packages/env#readme",
   "bugs": {

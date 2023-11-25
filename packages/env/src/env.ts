@@ -5,7 +5,7 @@ import type { Option } from '@w5s/core';
 const createEnv = (properties: any) => Object.assign(Object.create(null), properties) as Env;
 
 /**
- * A readonly dictionary of environment variables
+ * A dictionary of environment variables
  */
 export interface Env {
   [key: string]: Option<string>;
