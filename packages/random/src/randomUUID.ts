@@ -1,6 +1,6 @@
 import type { Task, Option, Ref } from '@w5s/core';
 import { invariant } from '@w5s/invariant';
-import { property } from '@w5s/application';
+import { useRef } from '@w5s/application';
 import type { UUID } from './uuid.js';
 import { application } from './application.js';
 
@@ -27,7 +27,7 @@ export interface UUIDGenerator {
  *
  * @example
  */
-export const defaultUUIDGenerator: Ref<UUIDGenerator> = property(
+export const defaultUUIDGenerator: Ref<UUIDGenerator> = useRef(
   application.state,
   'uuidGenerator',
   cryptoModule == null

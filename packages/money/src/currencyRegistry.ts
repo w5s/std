@@ -1,5 +1,5 @@
 import type { Option, Record } from '@w5s/core';
-import { property, type Application } from '@w5s/application';
+import { useRef, type Application } from '@w5s/application';
 import { application } from './application.js';
 import type { Currency } from './currency.js';
 
@@ -30,7 +30,7 @@ export interface CurrencyRegistry {
 }
 
 export function CurrencyRegistry(app: Application): CurrencyRegistry {
-  const codeIndex = property<Record<string, Currency>>(app.state, 'currency', Object.freeze({}));
+  const codeIndex = useRef<Record<string, Currency>>(app.state, 'currency', Object.freeze({}));
 
   function add(currency: Currency): void {
     codeIndex.current = {

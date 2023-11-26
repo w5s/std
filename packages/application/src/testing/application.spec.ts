@@ -27,7 +27,7 @@ describe('ApplicationTest', () => {
     const id = 'test-app';
     const app = ApplicationTest({ id, configuration: { foo: 1, bar: 2 } });
     expect(app.store.current).toEqual({
-      'test-app': {
+      'application/test-app': {
         configuration: {
           bar: 2,
           foo: 1,

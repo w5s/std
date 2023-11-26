@@ -1,12 +1,12 @@
 import type { Record, TaskCanceler } from '@w5s/core';
 import type { DatabaseDriverMap } from '@w5s/database';
-import { property } from '@w5s/application';
+import { useRef } from '@w5s/application';
 import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
 import { application } from './application.js';
 
 export namespace DatabaseDriver {
-  const registry = property<Record<string, any>>(application.state, 'registry', {});
+  const registry = useRef<Record<string, any>>(application.state, 'registry', {});
 
   function notFound(name: string): never {
     throw new ReferenceError(`${name} driver not found`);

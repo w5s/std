@@ -1,6 +1,6 @@
 import { invariant } from '@w5s/invariant';
 import type { Option, Ref, Task } from '@w5s/core';
-import { property } from '@w5s/application';
+import { useRef } from '@w5s/application';
 import type { RandomValue } from './randomValue.js';
 import { application } from './application.js';
 
@@ -55,7 +55,7 @@ export namespace RandomGenerator {
 /**
  * Default generator
  */
-export const defaultRandomGenerator: Ref<RandomGenerator> = property(
+export const defaultRandomGenerator: Ref<RandomGenerator> = useRef(
   application.state,
   'randomGenerator',
   RandomGenerator.crypto

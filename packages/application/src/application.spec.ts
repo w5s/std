@@ -29,7 +29,7 @@ describe('Application', () => {
     const target = Ref({});
     Application({ id, configuration: { foo: 'bar' }, store: target });
     expect(target.current).toEqual({
-      [id]: {
+      [`application/${id}`]: {
         configuration: { foo: 'bar' },
       },
     });
@@ -63,7 +63,7 @@ describe('Application', () => {
       foo: true,
     });
     expect(_target.current).toEqual({
-      'test-app': {
+      'application/test-app': {
         configuration: {},
         foo: true,
       },

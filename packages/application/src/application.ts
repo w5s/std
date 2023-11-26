@@ -1,6 +1,6 @@
 import type { Ref, Record, Tag, EmptyObject } from '@w5s/core';
 import { useRef } from './useRef.js';
-import { property } from './property.js';
+import { useStorage } from './useStorage.js';
 
 type AnyObject = Record<string | symbol, unknown>;
 
@@ -74,7 +74,7 @@ export function Application<Configuration extends object = EmptyObject>(
   return {
     id: id as ApplicationId,
     configuration,
-    state: store == null ? useRef(`application/${id}`, initialState) : property(store, id, initialState),
+    state: useRef(store == null ? useStorage(globalThis) : store, `application/${id}`, initialState),
   };
 }
 
