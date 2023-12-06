@@ -88,7 +88,7 @@
     "root": true
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "11.0.0",
+    "@size-limit/preset-small-lib": "11.0.1",
     "@types/node": "17.0.45",
     "@w5s/commitlint-config": "2.0.4",
     "@w5s/conventional-changelog": "2.0.2",
