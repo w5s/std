@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Environment variable module
+> Promise module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -24,15 +24,13 @@ import { Deferred } from '@w5s/promise';
 
 const deferred = new Deferred<number>();
 
-function start() {
-  setTimeout(() => deferred.resolve(Date.now()), 1000);
-}
+// resolve
+deferred.resolve(Date.now());
 
-export async function main(): Promise<void> {
-  start();
+// reject
+deferred.reject(new Error('Something went wrong!'));
 
-  await deferred.promise;
-}
+await deferred.promise;
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

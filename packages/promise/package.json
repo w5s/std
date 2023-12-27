@@ -1,12 +1,12 @@
 {
   "name": "@w5s/promise",
   "version": "1.0.0-alpha.0",
-  "description": "Environment variable module",
+  "description": "Promise module",
   "keywords": [
     "async",
     "promise",
     "promises",
-    "dferred"
+    "deferred"
   ],
   "homepage": "https://github.com/w5s/std/tree/master/packages/promise#readme",
   "bugs": {
