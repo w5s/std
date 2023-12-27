@@ -23,9 +23,7 @@
       "dependsOn": ["//#docs:root"],
       "cache": false
     },
-    "//#docs:root": {
-      "outputs": ["**/*.md"]
-    },
+    "//#docs:root": {},
     "spellcheck": {
       "dependsOn": ["//#spellcheck:root"]
     },

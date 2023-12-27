@@ -1,6 +1,10 @@
 {
   "name": "@w5s/core-src",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:w5s/std.git"
+  },
   "type": "module",
   "workspaces": {
     "packages": [
