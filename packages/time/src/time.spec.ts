@@ -61,11 +61,11 @@ describe('Time', () => {
       expect(Time.toISOString(Time.of(1_622_120_111_480))).toBe('2021-05-27T12:55:11.480Z');
     });
   });
-  describe('now', () => {
+  describe('now()', () => {
     it('should return Date.now()', async () => {
       const nowMs = 123;
       dateNowSpy.mockReturnValue(nowMs);
-      expect(unsafeRun(Time.now)).toEqual(Result.Ok(nowMs));
+      expect(unsafeRun(Time.now())).toEqual(Result.Ok(nowMs));
     });
   });
   describe('.delay', () => {

@@ -10,6 +10,7 @@ const createTask = <V, E>(fn: Task<V, E>['taskRun']): Task<V, E> => ({
 const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
   typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
+const now = createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>;
 
 /**
  * Represent a time typically returned by `Date.now()`
@@ -119,12 +120,14 @@ export const Time = {
    *
    * @example
    * ```typescript
-   * const program = () => Task.andThen(Time.now, (currentTime) => {
+   * const program = () => Task.andThen(Time.now(), (currentTime) => {
    *   // use currentTime
    * });
    * ```
    */
-  now: createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>,
+  now(): Task<Time, never> {
+    return now;
+  },
 
   /**
    * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
