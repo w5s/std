@@ -12,6 +12,7 @@
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money module
 * [@w5s/playground](packages/playground) - Examples
+* [@w5s/promise](packages/promise) - Environment variable module
 * [@w5s/random](packages/random) - Random module (UUID, number)
 * [@w5s/system](packages/system) - System module
 * [@w5s/time](packages/time) - Time manipulation

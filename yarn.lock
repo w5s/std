@@ -5244,6 +5244,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@w5s/promise@workspace:packages/promise":
+  version: 0.0.0-use.local
+  resolution: "@w5s/promise@workspace:packages/promise"
+  dependencies:
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
+
 "@w5s/random@npm:^1.0.0-alpha.0, @w5s/random@workspace:packages/random":
   version: 0.0.0-use.local
   resolution: "@w5s/random@workspace:packages/random"
