@@ -1,11 +1,5 @@
+import { delay } from '@w5s/promise';
 import type { Task } from '../task.js';
-
-const waitMs = (ms: number) =>
-  ms === 0
-    ? Promise.resolve()
-    : new Promise<void>((resolve) => {
-        setTimeout(() => resolve(), ms);
-      });
 
 /**
  * Options to create a TaskStub
@@ -78,7 +72,7 @@ export function taskStub<Value = never, Error = never>(options: TaskStubOptions<
         taskRun: async (parameters) => {
           parameters.canceler.current = canceler;
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-          await waitMs(delayMs ?? 0);
+          await delay(delayMs ?? 0);
           return base.taskRun(parameters);
         },
       } satisfies Task<Value, Error>)

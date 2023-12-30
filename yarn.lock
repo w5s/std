@@ -5064,6 +5064,7 @@ __metadata:
   resolution: "@w5s/core@workspace:packages/core"
   dependencies:
     "@w5s/invariant": "npm:1.0.0-alpha.0"
+    "@w5s/promise": "npm:1.0.0-alpha.0"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5238,7 +5239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/promise@workspace:packages/promise":
+"@w5s/promise@npm:1.0.0-alpha.0, @w5s/promise@workspace:packages/promise":
   version: 0.0.0-use.local
   resolution: "@w5s/promise@workspace:packages/promise"
   dependencies:
