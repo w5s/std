@@ -5052,7 +5052,7 @@ __metadata:
     prettier: "npm:3.1.1"
     size-limit-preset-node-lib: "npm:0.3.0"
     turbo: "npm:1.11.2"
-    typedoc: "npm:0.25.4"
+    typedoc: "npm:0.25.5"
     typescript: "npm:5.3.3"
     vite: "npm:latest"
     vitest: "npm:latest"
@@ -17455,7 +17455,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shiki@npm:^0.14.1":
+"shiki@npm:^0.14.1, shiki@npm:^0.14.7":
   version: 0.14.7
   resolution: "shiki@npm:0.14.7"
   dependencies:
@@ -18860,7 +18860,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.25.4, typedoc@npm:^0.25.3":
+"typedoc@npm:0.25.5":
+  version: 0.25.5
+  resolution: "typedoc@npm:0.25.5"
+  dependencies:
+    lunr: "npm:^2.3.9"
+    marked: "npm:^4.3.0"
+    minimatch: "npm:^9.0.3"
+    shiki: "npm:^0.14.7"
+  peerDependencies:
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x
+  bin:
+    typedoc: bin/typedoc
+  checksum: d4f8de49183f86b3a26e598d008625575d1df5eaa9e997f89e90e65abc9ce7363855cac59e5847faa50247f85a0b8d56012481964a8e56f90685b763b51147b0
+  languageName: node
+  linkType: hard
+
+"typedoc@npm:^0.25.3":
   version: 0.25.4
   resolution: "typedoc@npm:0.25.4"
   dependencies:
