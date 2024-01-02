@@ -1,4 +1,4 @@
-import { defineErrorWith, type CustomError, type CustomErrorParameters } from '@w5s/error';
+import { defineCustomErrorWith, type CustomError, type CustomErrorParameters } from '@w5s/error';
 
 /**
  * An error to aggregate multiple errors
@@ -13,7 +13,7 @@ export interface AggregateError<Errors extends any[]>
  *
  * @category Constructor
  */
-export const AggregateError = defineErrorWith(
+export const AggregateError = defineCustomErrorWith(
   'AggregateError',
   (create) =>
     <T extends any[]>(params: CustomErrorParameters<AggregateError<T>>): AggregateError<T> =>

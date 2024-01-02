@@ -1,7 +1,7 @@
 import { cancel } from '@w5s/core/dist/cancel.js';
 import type { TaskCanceler, Task } from '@w5s/core';
 import type { TimeDuration } from '@w5s/time';
-import { defineError, type CustomError } from '@w5s/error';
+import { defineCustomError, type CustomError } from '@w5s/error';
 
 /**
  * An error reported when a task times out
@@ -20,7 +20,7 @@ export interface TimeoutError
  *
  * @category Constructor
  */
-export const TimeoutError = defineError<TimeoutError>('TimeoutError');
+export const TimeoutError = defineCustomError<TimeoutError>('TimeoutError');
 
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`

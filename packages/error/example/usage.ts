@@ -1,4 +1,4 @@
-import { type CustomError, defineError, Error, TypeError } from '@w5s/error';
+import { type CustomError, defineCustomError, Error, TypeError } from '@w5s/error';
 
 export interface MyError
   extends CustomError<{
@@ -6,7 +6,7 @@ export interface MyError
     foo: string;
     bar: boolean;
   }> {}
-export const MyError = defineError<MyError>('MyError');
+export const MyError = defineCustomError<MyError>('MyError');
 
 const myError = MyError({
   foo: 'this is foo',

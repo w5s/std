@@ -91,7 +91,7 @@ export interface CustomErrorConstructor<Model extends CustomError<{ name: string
    *
    * @example
    * ```typescript
-   * const MyError = defineError('MyError1');
+   * const MyError = defineCustomError('MyError1');
    * const unknownError: unknown;
    * if (MyError.hasInstance(unknownError)) {
    *   // unknownError.name === 'MyError1'
@@ -116,7 +116,7 @@ export type CustomErrorParameters<Model> = Omit<Model, 'name' | 'stack' | 'messa
  * @example
  * ```typescript
  * interface CustomError extends CustomError<{ name: 'CustomError', foo: boolean }> {}
- * const CustomError = defineError<CustomError>('CustomError');
+ * const CustomError = defineCustomError<CustomError>('CustomError');
  *
  * const instance = CustomError({ foo: true, message: 'hey!' }); // CustomError { name: 'CustomError', message: 'hey!', foo: true }
  * CustomError.errorName === 'CustomError' // true
@@ -124,11 +124,11 @@ export type CustomErrorParameters<Model> = Omit<Model, 'name' | 'stack' | 'messa
  * ```
  * @param errorName - the error unique name
  */
-export function defineError<Model extends CustomError<{ name: string }>>(
+export function defineCustomError<Model extends CustomError<{ name: string }>>(
   errorName: Model['name']
 ): ((properties: CustomErrorParameters<Model>) => Model) & CustomErrorConstructor<Model> {
   // @ts-ignore typing is slightly different
-  return defineErrorWith(errorName, (create) => create);
+  return defineCustomErrorWith(errorName, (create) => create);
 }
 
 /**
@@ -137,7 +137,7 @@ export function defineError<Model extends CustomError<{ name: string }>>(
  *
  * @example
  * ```typescript
- * const CustomError = defineErrorWith(
+ * const CustomError = defineCustomErrorWith(
  *   'SomeError',
  *   (create) => // a helper that creates CustomError { name: 'SomeError' }
  *     // the constructor
@@ -151,7 +151,7 @@ export function defineError<Model extends CustomError<{ name: string }>>(
  * @param errorName - the error unique name
  * @param getConstructor - a function that returns an error factory
  */
-export function defineErrorWith<
+export function defineCustomErrorWith<
   Name extends string,
   Constructor extends (...args: any[]) => CustomError<{ name: Name }>,
 >(

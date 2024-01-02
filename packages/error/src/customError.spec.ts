@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { CustomError, defineError, defineErrorWith } from './customError.js';
+import { CustomError, defineCustomError, defineCustomErrorWith } from './customError.js';
 
 describe('CustomError', () => {
   const anyString = 'AnyString';
@@ -65,8 +65,8 @@ describe('CustomError', () => {
     });
   });
 });
-describe('defineErrorWith()', () => {
-  const TestError = defineErrorWith('TestError', (create) => (email: string) => create({ email }));
+describe('defineCustomErrorWith()', () => {
+  const TestError = defineCustomErrorWith('TestError', (create) => (email: string) => create({ email }));
   it('should create a new constructor', () => {
     expect(TestError('foo@bar.com')).toEqual(
       CustomError({
@@ -89,9 +89,9 @@ describe('defineErrorWith()', () => {
     });
   });
 });
-describe('defineError()', () => {
+describe('defineCustomError()', () => {
   interface TestError extends CustomError<{ name: 'TestError'; email: string }> {}
-  const TestError = defineError<TestError>('TestError');
+  const TestError = defineCustomError<TestError>('TestError');
 
   it('should create a new constructor', () => {
     expect(TestError({ email: 'foo@bar.com' })).toEqual(

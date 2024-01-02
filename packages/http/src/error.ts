@@ -1,4 +1,4 @@
-import { defineError, type CustomError } from '@w5s/error';
+import { defineCustomError, type CustomError } from '@w5s/error';
 
 /**
  * Union type of http client errors
@@ -19,7 +19,7 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const InvalidURL = defineError<InvalidURL>('HTTPInvalidURLError');
+  export const InvalidURL = defineCustomError<InvalidURL>('HTTPInvalidURLError');
 
   /**
    * A network error when `fetch` fails
@@ -33,7 +33,7 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const NetworkError = defineError<NetworkError>('HTTPNetworkError');
+  export const NetworkError = defineCustomError<NetworkError>('HTTPNetworkError');
 
   /**
    * A parsing error when the body cannot be parsed
@@ -47,5 +47,5 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const ParserError = defineError<ParserError>('HTTPParserError');
+  export const ParserError = defineCustomError<ParserError>('HTTPParserError');
 }

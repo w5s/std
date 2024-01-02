@@ -6,8 +6,8 @@ describe('index', () => {
     expect(Object.keys(Module)).toMatchInlineSnapshot(`
       [
         "CustomError",
-        "defineError",
-        "defineErrorWith",
+        "defineCustomError",
+        "defineCustomErrorWith",
         "Error",
         "AggregateError",
         "EvalError",

@@ -1,4 +1,4 @@
-import { defineError, type CustomError } from '@w5s/error';
+import { defineCustomError, type CustomError } from '@w5s/error';
 
 /**
  * An error when wrong argument is passed to a function
@@ -12,4 +12,4 @@ export interface ArgumentError
  *
  * @category Constructor
  */
-export const ArgumentError = defineError<ArgumentError>('ArgumentError');
+export const ArgumentError = defineCustomError<ArgumentError>('ArgumentError');

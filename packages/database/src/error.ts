@@ -1,4 +1,4 @@
-import { type CustomError, defineError } from '@w5s/error';
+import { type CustomError, defineCustomError } from '@w5s/error';
 
 /**
  * An error reported when the Database fails to perform an operation
@@ -12,4 +12,4 @@ export interface DatabaseError
  *
  * @category Constructor
  */
-export const DatabaseError = defineError<DatabaseError>('DatabaseError');
+export const DatabaseError = defineCustomError<DatabaseError>('DatabaseError');
