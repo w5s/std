@@ -6,7 +6,7 @@ describe('AggregateError', () => {
     const errors = ['foo'];
     expect(AggregateError({ errors, message: 'my message' })).toEqual(
       expect.objectContaining({
-        _: 'DataError',
+        // _: 'DataError',
         name: 'AggregateError',
         message: 'my message',
         errors,

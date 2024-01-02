@@ -1,10 +1,10 @@
-import { DataError } from '@w5s/core/dist/dataError.js';
+import { type CustomError, defineError } from '@w5s/error';
 
 /**
  * An error reported when the Database fails to perform an operation
  */
 export interface DatabaseError
-  extends DataError<{
+  extends CustomError<{
     name: 'DatabaseError';
   }> {}
 /**
@@ -12,4 +12,4 @@ export interface DatabaseError
  *
  * @category Constructor
  */
-export const DatabaseError = DataError.Make<DatabaseError>('DatabaseError');
+export const DatabaseError = defineError<DatabaseError>('DatabaseError');

@@ -5119,6 +5119,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core@workspace:packages/core"
   dependencies:
+    "@w5s/error": "npm:1.0.0-alpha.0"
     "@w5s/invariant": "npm:1.0.0-alpha.0"
     "@w5s/promise": "npm:1.0.0-alpha.0"
     vite: "npm:latest"
@@ -5150,6 +5151,7 @@ __metadata:
     "@types/sqlite3": "npm:^3.1.5"
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     mysql: "npm:^2.17.1"
     sqlite3: "npm:^5.1.0"
     vite: "npm:latest"
@@ -5181,7 +5183,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/error@workspace:packages/error":
+"@w5s/error@npm:1.0.0-alpha.0, @w5s/error@npm:^1.0.0-alpha.0, @w5s/error@workspace:packages/error":
   version: 0.0.0-use.local
   resolution: "@w5s/error@workspace:packages/error"
   dependencies:
@@ -5231,6 +5233,7 @@ __metadata:
   resolution: "@w5s/http@workspace:packages/http"
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5284,6 +5287,7 @@ __metadata:
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"

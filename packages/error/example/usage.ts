@@ -1,11 +1,16 @@
-import { Deferred } from '@w5s/promise';
+import { type CustomError, defineError, Error, TypeError } from '@w5s/error';
 
-const deferred = new Deferred<number>();
+export interface MyError
+  extends CustomError<{
+    name: 'MyError';
+    foo: string;
+    bar: boolean;
+  }> {}
+export const MyError = defineError<MyError>('MyError');
 
-// resolve
-deferred.resolve(Date.now());
-
-// reject
-deferred.reject(new Error('Something went wrong!'));
-
-await deferred.promise;
+const myError = MyError({
+  foo: 'this is foo',
+  bar: true,
+  cause: TypeError('this is the cause'),
+});
+console.log(myError instanceof Error); // true

@@ -18,7 +18,7 @@ describe('FileError', () => {
         })
       ).toEqual(
         expect.objectContaining({
-          _: 'DataError',
+          // _: 'DataError',
           name: 'FileError',
           fileErrorType: 'OtherError',
           code: 'ENOENT',
@@ -30,7 +30,7 @@ describe('FileError', () => {
     it('should set default default parameters', () => {
       expect(FileError({})).toEqual(
         expect.objectContaining({
-          _: 'DataError',
+          // _: 'DataError',
           name: 'FileError',
           fileErrorType: 'UserError',
           code: Option.None,

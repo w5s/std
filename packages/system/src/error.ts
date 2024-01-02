@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { DataError } from '@w5s/core/dist/dataError.js';
+import { defineErrorWith, type CustomError, type CustomErrorParameters } from '@w5s/error';
 import type { FilePath } from './filePath.js';
 
 export const FileErrorType = {
@@ -14,7 +14,7 @@ export type FileErrorType = (typeof FileErrorType)[keyof typeof FileErrorType];
  * An error when a file system call fails
  */
 export interface FileError
-  extends DataError<{
+  extends CustomError<{
     name: 'FileError';
     fileErrorType: FileErrorType;
     errno: Option<number>;
@@ -27,10 +27,10 @@ export interface FileError
  *
  * @category Constructor
  */
-export const FileError = DataError.MakeGeneric(
+export const FileError = defineErrorWith(
   'FileError',
   (create) =>
-    (parameters: Partial<DataError.Parameters<FileError>>): FileError =>
+    (parameters: Partial<CustomErrorParameters<FileError>>): FileError =>
       create({
         fileErrorType: 'UserError',
         errno: undefined,

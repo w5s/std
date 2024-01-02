@@ -1,4 +1,4 @@
-import { DataError } from '@w5s/core/dist/dataError.js';
+import { defineError, type CustomError } from '@w5s/error';
 
 /**
  * Union type of http client errors
@@ -10,7 +10,7 @@ export namespace HTTPError {
    * An error when url passed is invalid
    */
   export interface InvalidURL
-    extends DataError<{
+    extends CustomError<{
       name: 'HTTPInvalidURLError';
       input: string;
     }> {}
@@ -19,13 +19,13 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const InvalidURL = DataError.Make<InvalidURL>('HTTPInvalidURLError');
+  export const InvalidURL = defineError<InvalidURL>('HTTPInvalidURLError');
 
   /**
    * A network error when `fetch` fails
    */
   export interface NetworkError
-    extends DataError<{
+    extends CustomError<{
       name: 'HTTPNetworkError';
     }> {}
   /**
@@ -33,13 +33,13 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const NetworkError = DataError.Make<NetworkError>('HTTPNetworkError');
+  export const NetworkError = defineError<NetworkError>('HTTPNetworkError');
 
   /**
    * A parsing error when the body cannot be parsed
    */
   export interface ParserError
-    extends DataError<{
+    extends CustomError<{
       name: 'HTTPParserError';
     }> {}
   /**
@@ -47,5 +47,5 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const ParserError = DataError.Make<ParserError>('HTTPParserError');
+  export const ParserError = defineError<ParserError>('HTTPParserError');
 }

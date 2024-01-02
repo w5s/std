@@ -6,7 +6,6 @@ export * from './boolean.js';
 export * from './cancel.js';
 export * from './comparable.js';
 export * from './console.js';
-export * from './dataError.js';
 export * from './dataObject.js';
 export * from './disposable.js';
 export * from './equal.js';

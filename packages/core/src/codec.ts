@@ -1,4 +1,4 @@
-import { DataError } from './dataError.js';
+import { defineError, type CustomError } from '@w5s/error';
 import type { Array } from './array.js';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
@@ -12,7 +12,7 @@ const identity = <V>(_: V) => _;
 const emptySchema = () => ({});
 
 export interface DecodeError
-  extends DataError<{
+  extends CustomError<{
     name: 'DecodeError';
     input: unknown;
   }> {}
@@ -21,7 +21,7 @@ export interface DecodeError
  *
  * @category Constructor
  */
-export const DecodeError = DataError.Make<DecodeError>('DecodeError');
+export const DecodeError = defineError<DecodeError>('DecodeError');
 
 export interface Codec<T> {
   /**

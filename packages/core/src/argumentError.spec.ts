@@ -5,7 +5,7 @@ describe('ArgumentError', () => {
   it('should return instance of Error', () => {
     expect(ArgumentError({ message: 'my message' })).toEqual(
       expect.objectContaining({
-        _: 'DataError',
+        // _: 'DataError',
         name: 'ArgumentError',
         message: 'my message',
       })

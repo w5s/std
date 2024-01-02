@@ -24,7 +24,7 @@ export type DataObject<
 
 export namespace DataObject {
   /**
-   * Extract all parameters to create a new DataError
+   * Extract all parameters to create a new DataObject
    */
   export type Parameters<Model> = Omit<Model, DataObject.type>;
 
