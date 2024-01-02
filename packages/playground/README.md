@@ -1,5 +1,5 @@
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5s Playground Module _(${name})_) -->
-# W5s Playground Module _(@w5s/playground)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S Playground Module _(${name})_) -->
+# W5S Playground Module _(@w5s/playground)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]

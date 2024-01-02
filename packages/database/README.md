@@ -1,4 +1,4 @@
-# W5s Database client _(@w5s/database)_
+# W5S Database client _(@w5s/database)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

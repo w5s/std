@@ -1,4 +1,4 @@
-# W5s HTTP Module _(@w5s/http)_
+# W5S HTTP Module _(@w5s/http)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

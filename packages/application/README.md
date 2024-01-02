@@ -1,4 +1,4 @@
-# W5s Application management _(@w5s/application)_
+# W5S Application management _(@w5s/application)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

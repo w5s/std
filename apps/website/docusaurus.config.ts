@@ -45,7 +45,7 @@ const packageList = fs
   .filter((_) => _.package.private !== true);
 
 const config: Config = (() => {
-  const title = 'W5s Standard Library';
+  const title = 'W5S Standard Library';
   const tagline = 'A collection of type safe, functional style packages for building great applications and libraries';
   const organizationName = 'w5s';
   return {
@@ -112,9 +112,9 @@ const config: Config = (() => {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'W5s std',
+        title: 'W5S std',
         logo: {
-          alt: 'W5s std',
+          alt: 'W5S std',
           src: 'img/logo.svg',
         },
         items: [

@@ -1,4 +1,4 @@
-# W5s File System library _(@w5s/system)_
+# W5S File System library _(@w5s/system)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

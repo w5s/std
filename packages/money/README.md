@@ -1,4 +1,4 @@
-# W5s Money library _(@w5s/money)_
+# W5S Money library _(@w5s/money)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

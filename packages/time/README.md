@@ -1,4 +1,4 @@
-# W5s Invariant _(@w5s/invariant)_
+# W5S Invariant _(@w5s/invariant)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

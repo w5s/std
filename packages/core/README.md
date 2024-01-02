@@ -1,4 +1,4 @@
-# W5s Standard Library _(@w5s/core)_
+# W5S Standard Library _(@w5s/core)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
@@ -91,11 +91,8 @@ void unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
 <!-- AUTO-GENERATED-CONTENT:END -->
 [license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/core/LICENSE
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
-[issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[sources-url]: ${repository.url}) -->
-[sources-url]: git@github.com:w5s/std.git
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[homepage-url]: ${homepage}) -->
-[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme
 <!-- AUTO-GENERATED-CONTENT:END -->

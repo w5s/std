@@ -1,4 +1,4 @@
-# W5s Error module _(@w5s/error)_
+# W5S Error module _(@w5s/error)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

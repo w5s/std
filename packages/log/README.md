@@ -1,4 +1,4 @@
-# W5s Log library _(@w5s/log)_
+# W5S Log library _(@w5s/log)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]

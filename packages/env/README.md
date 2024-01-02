@@ -1,4 +1,4 @@
-# W5s Random value library _(@w5s/random)_
+# W5S Random value library _(@w5s/random)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
