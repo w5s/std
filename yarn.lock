@@ -5383,7 +5383,7 @@ __metadata:
     "@docusaurus/tsconfig": "npm:3.0.1"
     "@mdx-js/react": "npm:3.0.0"
     "@types/node": "npm:20.10.6"
-    clsx: "npm:2.0.0"
+    clsx: "npm:2.0.1"
     docusaurus-plugin-typedoc-api: "npm:4.0.1"
     prism-react-renderer: "npm:2.3.1"
     react: "npm:18.2.0"
@@ -6998,10 +6998,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:2.0.0":
-  version: 2.0.0
-  resolution: "clsx@npm:2.0.0"
-  checksum: c09f43b3144a0b7826b6b11b6a111b2c7440831004eecc02d333533c5e58ef0aa5f2dce071d3b25fbb8c8ea97b45df96c74bcc1d51c8c2027eb981931107b0cd
+"clsx@npm:2.0.1":
+  version: 2.0.1
+  resolution: "clsx@npm:2.0.1"
+  checksum: 05441b1254e6a85f8d1d816a188332564509d2af4acd5de6dfd467cbcca567627408c973a85f50427e5871e22151984a681729aba463ee2e628c0ec51bc466ba
   languageName: node
   linkType: hard
 
