@@ -1,43 +1,175 @@
-function __captureStackTrace(target: Error) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { captureStackTrace } = Error;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (captureStackTrace != null) {
-    captureStackTrace(target, target.constructor);
+function __setDefaultValue<O extends Record<any, any>, K extends keyof O>(object: O, name: K, defaultValue: O[K]) {
+  if (!(name in object)) {
+    object[name] = defaultValue;
   }
 }
 
-function __setProperty<T, K extends keyof T>(obj: T, property: K, value: T[K]) {
-  Object.defineProperty(obj, property, {
-    value,
-    writable: true,
-    enumerable: true,
-    configurable: true,
-  });
+// eslint-disable-next-line @typescript-eslint/ban-types
+function __captureStackTrace(targetObject: object, constructorOpt?: Function | undefined) {
+  if (typeof Error.captureStackTrace === 'function') {
+    Error.captureStackTrace(targetObject, constructorOpt);
+  }
 }
 
-export type CustomErrorParameters<T> = Omit<T, 'name' | 'stack' | 'message' | 'cause'> & {
+/**
+ * A custom error type
+ */
+export type CustomError<Properties extends { name: string }> = Readonly<
+  {
+    // [DataObject.type]: typeof DataError.typeName;
+    /**
+     * Error message
+     */
+    message: string;
+    /**
+     * Optional stack trace (when supported)
+     */
+    stack: string | undefined;
+    /**
+     * Optional `Error` that was thrown
+     */
+    cause: unknown;
+  } & Properties
+>;
+
+/**
+ * Return a new `CustomError`
+ *
+ * @example
+ * ```typescript
+ * const parentError: Error;
+ * const error = CustomError({
+ *   name: 'FooError' as const, // this is required
+ *   message: 'my custom message', // customize message (optional)
+ *   cause: parentError, // Error that caused this error (optional)
+ * })
+ * ```
+ * @category Constructor
+ * @param properties - initial properties
+ */
+export function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
+  properties: Properties
+): CustomError<Properties> {
+  interface MutableError extends Error {
+    [extra: string]: unknown;
+  }
+
+  // eslint-disable-next-line unicorn/error-message,@typescript-eslint/no-unsafe-assignment
+  const returnValue: MutableError = new Error('') as any;
+  // returnValue['_'] = DataError.typeName;
+
+  // Assign properties
+  Object.assign(returnValue, properties);
+  __setDefaultValue(returnValue, 'stack', undefined);
+  __setDefaultValue(returnValue, 'cause', undefined);
+
+  // Capture stack trace
+  __captureStackTrace(returnValue, CustomError);
+
+  return returnValue as CustomError<Properties>;
+}
+
+/**
+ * A type for all properties added by the result of `Make()` or `MakeGeneric()`
+ */
+export interface CustomErrorConstructor<Model extends CustomError<{ name: string }>> {
+  /**
+   * The model name constant. Can be useful for `switch` / `case` statements.
+   *
+   * @example
+   * ```typescript
+   * const error: SomeError;
+   * switch (error.name) {
+   *   case SomeError.errorName: //...
+   * }
+   * ```
+   */
+  readonly errorName: Model['name'];
+  /**
+   * Predicate that returns `true` when `anyValue` is a `Model`
+   * The implementation compares `anyValue.name === Module.errorName`
+   *
+   * @example
+   * ```typescript
+   * const MyError = defineError('MyError1');
+   * const unknownError: unknown;
+   * if (MyError.hasInstance(unknownError)) {
+   *   // unknownError.name === 'MyError1'
+   * }
+   * ```
+   */
+  readonly hasInstance: (anyValue: unknown) => anyValue is Model;
+}
+
+/**
+ * Extract all parameters to create a new DataError
+ */
+export type CustomErrorParameters<Model> = Omit<Model, 'name' | 'stack' | 'message' | 'cause'> & {
   message?: string;
   cause?: unknown;
 };
 
-export class CustomError<Properties> extends globalThis.Error {
-  override name = 'CustomError';
+/**
+ * Return a new `DataError` default factory
+ * See {@link CustomErrorConstructor} for additional properties added to the constructor
+ *
+ * @example
+ * ```typescript
+ * interface CustomError extends CustomError<{ name: 'CustomError', foo: boolean }> {}
+ * const CustomError = defineError<CustomError>('CustomError');
+ *
+ * const instance = CustomError({ foo: true, message: 'hey!' }); // CustomError { name: 'CustomError', message: 'hey!', foo: true }
+ * CustomError.errorName === 'CustomError' // true
+ * CustomError.hasInstance(instance); // true
+ * ```
+ * @param errorName - the error unique name
+ */
+export function defineError<Model extends CustomError<{ name: string }>>(
+  errorName: Model['name']
+): ((properties: CustomErrorParameters<Model>) => Model) & CustomErrorConstructor<Model> {
+  // @ts-ignore typing is slightly different
+  return defineErrorWith(errorName, (create) => create);
+}
 
-  constructor(properties: CustomErrorParameters<Properties>) {
-    super('');
-    __setProperty(this, 'name', this.name);
+/**
+ * Return a new `DataError` factory using `getConstructor()`
+ * See {@link CustomErrorConstructor} for additional properties added to the constructor
+ *
+ * @example
+ * ```typescript
+ * const CustomError = defineErrorWith(
+ *   'SomeError',
+ *   (create) => // a helper that creates CustomError { name: 'SomeError' }
+ *     // the constructor
+ *     (foo: boolean) => create({ foo, message: 'hello!' })
+ * );
+ *
+ * const instance = CustomError(true); // Error{ _: 'DataError', name: 'CustomError', message: 'hello', foo: true }
+ * CustomError.errorName === 'CustomError'/ true
+ * CustomError.hasInstance(instance); // true
+ * ```
+ * @param errorName - the error unique name
+ * @param getConstructor - a function that returns an error factory
+ */
+export function defineErrorWith<
+  Name extends string,
+  Constructor extends (...args: any[]) => CustomError<{ name: Name }>,
+>(
+  errorName: Name,
+  getConstructor: (
+    create: <Properties>(properties: Properties) => CustomError<{ name: Name } & Properties>
+  ) => Constructor
+): Constructor & CustomErrorConstructor<ReturnType<Constructor>> {
+  const create = (properties: any) => CustomError({ name: errorName, ...properties });
+  const properties = {
+    errorName,
+    hasInstance: (anyValue: unknown): boolean =>
+      // @ts-ignore We know what we are doing
+      anyValue?.name === errorName,
+  };
+  const constructor = getConstructor(create);
+  Object.defineProperty(constructor, 'name', { writable: false, value: errorName });
 
-    for (const [property, value] of Object.entries(properties)) {
-      // @ts-ignore Set using descriptor
-      __setProperty(this, property, value);
-    }
-
-    // fix the extended error prototype chain
-    // because typescript __extends implementation can't
-    // see https://github.com/Microsoft/TypeScript-wiki/blob/master/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
-    Object.setPrototypeOf(this, new.target.prototype);
-    // Build stack trace
-    __captureStackTrace(this);
-  }
+  // @ts-ignore We know what we are doing
+  return Object.assign(constructor, properties);
 }

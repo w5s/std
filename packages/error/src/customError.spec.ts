@@ -1,56 +1,122 @@
-/* eslint-disable unicorn/custom-error-definition */
-import { describe, expect, it } from 'vitest';
-import { CustomError } from './customError.js';
+import { describe, it, expect } from 'vitest';
+import { CustomError, defineError, defineErrorWith } from './customError.js';
 
 describe('CustomError', () => {
-  class TestError extends CustomError<TestError> {
-    override name = 'TestError' as const;
-  }
-
-  describe('#constructor()', () => {
-    it('have properties passed to constructor', () => {
-      const error = new CustomError<{ message: string; foo: boolean }>({
-        message: 'my message',
-        foo: true,
-      });
-      expect(error).toMatchObject(
+  const anyString = 'AnyString';
+  describe('()', () => {
+    it('should return instance of Error', () => {
+      expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
+    });
+    // it('should return DataObject.type == "DataError"', () => {
+    //   expect(CustomError({ name: anyString })._).toEqual('DataError');
+    // });
+    it('should return Error with default properties', () => {
+      expect(CustomError({ name: anyString })).toEqual(
         expect.objectContaining({
-          name: 'CustomError',
-          message: 'my message',
+          message: '',
+          cause: undefined,
+        })
+      );
+    });
+    it('should merge custom properties', () => {
+      expect(CustomError({ name: 'MockError', message: 'custom message', foo: true })).toEqual(
+        expect.objectContaining({
+          name: 'MockError',
+          message: 'custom message',
           foo: true,
         })
       );
     });
-  });
-
-  describe('#message', () => {
-    it('have default value', () => {
-      expect(new TestError({})).toMatchObject(
+    it('should keep original message', () => {
+      const cause = new Error('CauseMessage');
+      expect(CustomError({ name: anyString, message: 'OriginalMessage', cause })).toEqual(
         expect.objectContaining({
-          message: '',
-        })
-      );
-    });
-  });
-  describe('#cause', () => {
-    it('forwards to object property', () => {
-      const cause = new Error('because');
-      expect(new CustomError({ cause })).toMatchObject(
-        expect.objectContaining({
+          message: 'OriginalMessage',
           cause,
         })
       );
     });
   });
   describe('#toString()', () => {
-    it('has same string representation as native error', () => {
-      expect(
-        String(
-          new TestError({
-            message: 'my message',
-          })
-        )
-      ).toEqual('TestError: my message');
+    it.each([
+      [CustomError({ name: 'CustomError' }), 'CustomError'],
+      [CustomError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
+      [
+        CustomError({ name: 'CustomError', message: 'CustomMessage', cause: new Error('CauseMessage') }),
+        'CustomError: CustomMessage',
+      ],
+    ])('should return correctly formatted string representation', (error, expected) => {
+      expect(String(error)).toEqual(expected);
+    });
+  });
+  describe('#stack', () => {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    (Error.captureStackTrace == null ? it.skip : it)('should capture stack', () => {
+      const error = CustomError({
+        name: 'CustomError',
+        message: 'CustomMessage',
+        cause: new Error('CauseMessage'),
+      });
+      const lines = (error.stack ?? '').split('\n');
+
+      expect(lines[0]).toEqual('CustomError: CustomMessage');
+
+      expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
+    });
+  });
+});
+describe('defineErrorWith()', () => {
+  const TestError = defineErrorWith('TestError', (create) => (email: string) => create({ email }));
+  it('should create a new constructor', () => {
+    expect(TestError('foo@bar.com')).toEqual(
+      CustomError({
+        name: 'TestError',
+        email: 'foo@bar.com',
+      })
+    );
+  });
+  describe('errorName', () => {
+    it('should set errorName', () => {
+      expect(TestError.errorName).toBe('TestError');
+    });
+  });
+  describe('.hasInstance()', () => {
+    it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      expect(TestError.hasInstance(value)).toBe(false);
+    });
+    it('should return true for instance', () => {
+      expect(TestError.hasInstance(TestError(''))).toBe(true);
+    });
+  });
+});
+describe('defineError()', () => {
+  interface TestError extends CustomError<{ name: 'TestError'; email: string }> {}
+  const TestError = defineError<TestError>('TestError');
+
+  it('should create a new constructor', () => {
+    expect(TestError({ email: 'foo@bar.com' })).toEqual(
+      CustomError({
+        name: 'TestError',
+        email: 'foo@bar.com',
+      })
+    );
+  });
+  describe('name', () => {
+    it('should set name', () => {
+      expect(TestError.name).toBe('TestError');
+    });
+  });
+  describe('errorName', () => {
+    it('should set errorName', () => {
+      expect(TestError.errorName).toBe('TestError');
+    });
+  });
+  describe('.hasInstance()', () => {
+    it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      expect(TestError.hasInstance(value)).toBe(false);
+    });
+    it('should return true for instance', () => {
+      expect(TestError.hasInstance(TestError({ email: '' }))).toBe(true);
     });
   });
 });
