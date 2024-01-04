@@ -1,4 +1,3 @@
-export * from './aggregateError.js';
 export * from './argumentError.js';
 export * from './array.js';
 export * from './assign.js';

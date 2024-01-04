@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, type MockedFunction } from 'vitest';
+import { AggregateError } from '@w5s/error';
 import { assertType, taskStub } from './testing.js';
-import { AggregateError } from './aggregateError.js';
 import { Ref } from './ref.js';
 import { Result } from './result.js';
 import { Task, type TaskRunner } from './task.js';
@@ -366,7 +366,7 @@ describe('Task', () => {
   describe('.any', () => {
     it('should return empty array if empty', async () => {
       const allTask = Task.any([]);
-      await ExpectTask.toReject(allTask, AggregateError({ errors: [] }));
+      await ExpectTask.toReject(allTask, AggregateError([]));
     });
     it('should resolve first value', async () => {
       const anyTask = Task.any([
@@ -426,7 +426,7 @@ describe('Task', () => {
       assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
         true
       );
-      await ExpectTask.toReject(anyTask, AggregateError({ errors: ['error1', 'error2', 'error3'] }));
+      await ExpectTask.toReject(anyTask, AggregateError(['error1', 'error2', 'error3']));
     });
     it('should handle iterable values', async () => {
       const taskArray = [

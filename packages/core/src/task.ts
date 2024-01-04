@@ -1,8 +1,8 @@
+import type { AggregateError } from '@w5s/error';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
-import { AggregateError } from './aggregateError.js';
 import { cancel } from './cancel.js';
 
 // Inline static helpers
@@ -294,7 +294,7 @@ export namespace Task {
       const taskArray = Array.from(tasks);
 
       if (taskArray.length === 0) {
-        parameters.reject(AggregateError({ errors: [] }));
+        parameters.reject(globalThis.AggregateError([]) as AggregateError<Error[]>);
       } else {
         const state = new TaskAggregateState(taskArray, parameters);
 
@@ -316,7 +316,7 @@ export namespace Task {
           (error, entry, index) => {
             errors[index] = error;
             if (state.isComplete()) {
-              state.reject(AggregateError({ errors: errors as Error[] }));
+              state.reject(globalThis.AggregateError(errors) as AggregateError<Error[]>);
             }
           }
         );
