@@ -1,6 +1,7 @@
 export * from './argumentError.js';
 export * from './array.js';
 export * from './assign.js';
+export * from './bigint.js';
 export * from './boolean.js';
 export * from './cancel.js';
 export * from './comparable.js';

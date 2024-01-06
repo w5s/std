@@ -9,6 +9,7 @@ describe('index', () => {
         'Array',
         'assign',
         'AsyncDisposable',
+        'BigInt',
         'Boolean',
         'cancel',
         'Comparable',
