@@ -6,6 +6,11 @@ const NumberComparable = Comparable<number>({
   },
 });
 
+const NumberOperator = {
+  '+': (left: number, right: number) => left + right,
+  '-': (left: number, right: number) => left - right,
+};
+
 /**
  * A collection of functions to manipulate `number`
  *
@@ -22,6 +27,7 @@ const NumberComparable = Comparable<number>({
  */
 export const Number = {
   ...NumberComparable,
+  ...NumberOperator,
 
   /**
    * Return true if `anyValue` is a `number`

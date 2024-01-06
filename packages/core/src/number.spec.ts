@@ -30,4 +30,14 @@ describe('Number', () => {
       [1.1, 1.1],
     ],
   });
+  describe('+', () => {
+    it('adds to numbers', () => {
+      expect(Number['+'](1, 1)).toBe(2);
+    });
+  });
+  describe('-', () => {
+    it('adds to numbers', () => {
+      expect(Number['-'](1, 1)).toBe(0);
+    });
+  });
 });

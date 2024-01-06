@@ -1,6 +1,7 @@
 import type { Option } from './option.js';
 import type { Tag } from './type.js';
 import { Comparable } from './comparable.js';
+import type { Bounded } from './bounded.js';
 
 type Radix36 =
   | 2
@@ -49,6 +50,11 @@ const IntComparable = Comparable<Int>({
   },
 });
 
+const IntBounded: Bounded<Int> = {
+  maxValue: MAX_SAFE_INTEGER,
+  minValue: MIN_SAFE_INTEGER,
+};
+
 /**
  * Integer value
  */
@@ -61,16 +67,7 @@ export type Int = Tag<number, { integral: true }>;
  */
 export const Int = {
   ...IntComparable,
-
-  /**
-   * Alias to `Number.MAX_SAFE_INTEGER` (2**53-1)
-   */
-  maxValue: MAX_SAFE_INTEGER,
-
-  /**
-   * Alias to `Number.MIN_SAFE_INTEGER` (-(2**53-1))
-   */
-  minValue: MIN_SAFE_INTEGER,
+  ...IntBounded,
 
   /**
    * Return a new integer from `value`

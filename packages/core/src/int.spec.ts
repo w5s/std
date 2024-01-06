@@ -6,12 +6,12 @@ import { describeComparable } from './testing.js';
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
   const maxValue = Number.MAX_SAFE_INTEGER;
-  describe('.min', () => {
+  describe('.minValue', () => {
     it(`should be ${minValue}`, () => {
       expect(Int.minValue).toBe(minValue);
     });
   });
-  describe('.max', () => {
+  describe('.maxValue', () => {
     it(`should be ${maxValue}`, () => {
       expect(Int.maxValue).toBe(maxValue);
     });
