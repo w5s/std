@@ -1,6 +1,6 @@
 /* eslint-disable jsdoc/require-yields */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { Int } from './integer.js';
+import type { Int } from './int.js';
 import type { Option } from './option.js';
 
 const hasOwn: typeof Object.hasOwn =

@@ -3,7 +3,7 @@ import type { Array } from './array.js';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { JSONValue } from './json.js';
-import type { Int } from './integer.js';
+import type { Int } from './int.js';
 
 const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', ok: true, value });
 const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', ok: false, error });

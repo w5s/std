@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Int } from './integer.js';
+import { Int } from './int.js';
 import { Option } from './option.js';
 import { describeComparable } from './testing.js';
 

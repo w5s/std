@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, option, dateISO, array, object, int } from './codec.js';
 import { Option } from './option.js';
-import { Int } from './integer.js';
+import { Int } from './int.js';
 
 // Example of codec
 const underscoreString = Codec<string>({

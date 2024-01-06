@@ -1,4 +1,4 @@
-import type { Int } from './integer.js';
+import type { Int } from './int.js';
 import type { Option } from './option.js';
 import type { Array } from './array.js';
 import { Comparable } from './comparable.js';
