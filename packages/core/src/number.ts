@@ -1,3 +1,4 @@
+import type { Bounded } from './bounded.js';
 import { Comparable } from './comparable.js';
 
 const NumberComparable = Comparable<number>({
@@ -5,6 +6,11 @@ const NumberComparable = Comparable<number>({
     return left === right ? 0 : left < right ? -1 : 1;
   },
 });
+
+const NumberBounded: Bounded<number> = {
+  minValue: globalThis.Number.MIN_VALUE,
+  maxValue: globalThis.Number.MAX_VALUE,
+};
 
 const NumberOperator = {
   '+': (left: number, right: number) => left + right,
@@ -28,6 +34,7 @@ const NumberOperator = {
 export const Number = {
   ...NumberComparable,
   ...NumberOperator,
+  ...NumberBounded,
 
   /**
    * Return true if `anyValue` is a `number`

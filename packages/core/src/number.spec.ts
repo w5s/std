@@ -30,6 +30,16 @@ describe('Number', () => {
       [1.1, 1.1],
     ],
   });
+  describe('.minValue', () => {
+    it('should be Number.MIN_VALUE', () => {
+      expect(Number.minValue).toBe(globalThis.Number.MIN_VALUE);
+    });
+  });
+  describe('.maxValue', () => {
+    it('should be Number.MAX_VALUE', () => {
+      expect(Number.maxValue).toBe(globalThis.Number.MAX_VALUE);
+    });
+  });
   describe('+', () => {
     it('adds to numbers', () => {
       expect(Number['+'](1, 1)).toBe(2);
