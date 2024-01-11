@@ -1,5 +1,6 @@
 import type { Bounded } from './bounded.js';
 import { Comparable } from './comparable.js';
+import type { Numeric } from './numeric.js';
 
 const NumberComparable = Comparable<number>({
   compare(left, right) {
@@ -12,9 +13,12 @@ const NumberBounded: Bounded<number> = {
   maxValue: globalThis.Number.MAX_VALUE,
 };
 
-const NumberOperator = {
+const NumberNumeric: Numeric<number> = {
   '+': (left: number, right: number) => left + right,
   '-': (left: number, right: number) => left - right,
+  '*': (left: number, right: number) => left * right,
+  abs: Math.abs,
+  sign: Math.sign,
 };
 
 /**
@@ -33,7 +37,7 @@ const NumberOperator = {
  */
 export const Number = {
   ...NumberComparable,
-  ...NumberOperator,
+  ...NumberNumeric,
   ...NumberBounded,
 
   /**

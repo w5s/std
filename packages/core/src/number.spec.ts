@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Number } from './number.js';
-import { assertType, describeComparable } from './testing.js';
+import { assertType, describeComparable, describeNumeric } from './testing.js';
 
 describe('Number', () => {
   describe('.hasInstance', () => {
@@ -30,6 +30,31 @@ describe('Number', () => {
       [1.1, 1.1],
     ],
   });
+  describeNumeric({ describe, it, expect })(Number, {
+    abs: [
+      { call: [-1], returns: 1 },
+      { call: [0], returns: 0 },
+      { call: [1], returns: 1 },
+    ],
+    sign: [
+      { call: [-6], returns: -1 },
+      { call: [0], returns: 0 },
+      { call: [6], returns: 1 },
+    ],
+    '+': [
+      { call: [1, 1], returns: 2 },
+      { call: [1, -1], returns: 0 },
+    ],
+    '-': [
+      { call: [1, 1], returns: 0 },
+      { call: [1, -1], returns: 2 },
+    ],
+    '*': [
+      { call: [1, 1], returns: 1 },
+      { call: [2, 3], returns: 6 },
+      { call: [3, 2], returns: 6 },
+    ],
+  });
   describe('.minValue', () => {
     it('should be Number.MIN_VALUE', () => {
       expect(Number.minValue).toBe(globalThis.Number.MIN_VALUE);
@@ -38,16 +63,6 @@ describe('Number', () => {
   describe('.maxValue', () => {
     it('should be Number.MAX_VALUE', () => {
       expect(Number.maxValue).toBe(globalThis.Number.MAX_VALUE);
-    });
-  });
-  describe('+', () => {
-    it('adds to numbers', () => {
-      expect(Number['+'](1, 1)).toBe(2);
-    });
-  });
-  describe('-', () => {
-    it('adds to numbers', () => {
-      expect(Number['-'](1, 1)).toBe(0);
     });
   });
 });
