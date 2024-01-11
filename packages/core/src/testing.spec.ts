@@ -9,6 +9,7 @@ describe('index', () => {
         'assertType',
         'describeComparable',
         'describeEqual',
+        'describeNumeric',
         'taskStub',
       ].sort()
     );
