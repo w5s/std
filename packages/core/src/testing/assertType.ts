@@ -12,11 +12,12 @@
  */
 export function assertType<Actual, Expected>(_shouldBeEqual: IsExact<Actual, Expected>): void {}
 
-type IsExact<T, U> = TupleMatches<AnyToBrand<T>, AnyToBrand<U>> extends true
-  ? TupleMatches<DeepMakeRequiredForIsExact<T>, DeepMakeRequiredForIsExact<U>> extends true // catch optional properties
-    ? true
-    : false
-  : false;
+type IsExact<T, U> =
+  TupleMatches<AnyToBrand<T>, AnyToBrand<U>> extends true
+    ? TupleMatches<DeepMakeRequiredForIsExact<T>, DeepMakeRequiredForIsExact<U>> extends true // catch optional properties
+      ? true
+      : false
+    : false;
 type DeepMakeRequiredForIsExact<T> = {
   [P in keyof T]-?: DeepMakeRequiredForIsExact<AnyToBrand<T[P]>>;
 };
