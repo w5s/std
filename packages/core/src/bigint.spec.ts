@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { BigInt } from './bigint.js';
-import { assertType, describeComparable } from './testing.js';
+import { assertType, describeComparable, describeNumeric } from './testing.js';
 
 describe('BigInt', () => {
   describe('.hasInstance', () => {
@@ -28,6 +28,31 @@ describe('BigInt', () => {
       [0n, 0n],
       [1n, 1n],
       [-2n, -2n],
+    ],
+  });
+  describeNumeric({ describe, it, expect })(BigInt, {
+    abs: [
+      { call: [-1n], returns: 1n },
+      { call: [0n], returns: 0n },
+      { call: [1n], returns: 1n },
+    ],
+    sign: [
+      { call: [-6n], returns: -1n },
+      { call: [0n], returns: 0n },
+      { call: [6n], returns: 1n },
+    ],
+    '+': [
+      { call: [1n, 1n], returns: 2n },
+      { call: [1n, -1n], returns: 0n },
+    ],
+    '-': [
+      { call: [1n, 1n], returns: 0n },
+      { call: [1n, -1n], returns: 2n },
+    ],
+    '*': [
+      { call: [1n, 1n], returns: 1n },
+      { call: [2n, 3n], returns: 6n },
+      { call: [3n, 2n], returns: 6n },
     ],
   });
 });
