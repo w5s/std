@@ -1,4 +1,4 @@
-import { ArgumentError } from '@w5s/core/dist/argumentError.js';
+import { ArgumentError } from '@w5s/error/dist/argumentError.js';
 import { DataObject } from '@w5s/core/dist/dataObject.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 import type { Result } from '@w5s/core';

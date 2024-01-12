@@ -1,4 +1,4 @@
-import { defineCustomError, type CustomError } from '@w5s/error';
+import { defineCustomError, type CustomError } from './customError.js';
 
 /**
  * An error when wrong argument is passed to a function

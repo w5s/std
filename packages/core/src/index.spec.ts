@@ -5,7 +5,6 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Std).sort()).toEqual(
       [
-        'ArgumentError',
         'Array',
         'assign',
         'AsyncDisposable',

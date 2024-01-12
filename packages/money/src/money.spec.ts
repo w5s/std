@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { ArgumentError, Result } from '@w5s/core';
+import { Result } from '@w5s/core';
+import { ArgumentError } from '@w5s/error';
 import { describeComparable } from '@w5s/core/dist/testing.js';
 import { Currency } from './currency.js';
 import { Money } from './money.js';

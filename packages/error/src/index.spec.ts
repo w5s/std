@@ -5,6 +5,7 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Module)).toMatchInlineSnapshot(`
       [
+        "ArgumentError",
         "CustomError",
         "defineCustomError",
         "defineCustomErrorWith",
