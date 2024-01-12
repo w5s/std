@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './int.js';
 import { Option } from './option.js';
-import { describeComparable } from './testing.js';
+import { describeComparable, describeNumeric } from './testing.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -105,6 +105,33 @@ describe('Int', () => {
       [Int.of(0), Int.of(0)],
       [Int.of(1), Int.of(1)],
       [Int.of(-1), Int.of(-1)],
+    ],
+  });
+  describeNumeric({ describe, it, expect })(Int, {
+    abs: [
+      { call: [-1], returns: 1 },
+      { call: [0], returns: 0 },
+      { call: [1], returns: 1 },
+    ],
+    sign: [
+      { call: [-6], returns: -1 },
+      { call: [0], returns: 0 },
+      { call: [6], returns: 1 },
+    ],
+    '+': [
+      { call: [1, 1], returns: 2 },
+      { call: [1, -1], returns: 0 },
+      { call: [1, Int.maxValue], returns: Int.maxValue },
+    ],
+    '-': [
+      { call: [1, 1], returns: 0 },
+      { call: [1, -1], returns: 2 },
+      { call: [Int.minValue, 1], returns: Int.minValue },
+    ],
+    '*': [
+      { call: [1, 1], returns: 1 },
+      { call: [2, 3], returns: 6 },
+      { call: [3, 2], returns: 6 },
     ],
   });
 });

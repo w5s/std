@@ -2,6 +2,7 @@ import type { Option } from './option.js';
 import type { Tag } from './type.js';
 import { Comparable } from './comparable.js';
 import type { Bounded } from './bounded.js';
+import type { Numeric } from './numeric.js';
 
 type Radix36 =
   | 2
@@ -43,6 +44,14 @@ type Radix36 =
 // eslint-disable-next-line no-restricted-properties, prefer-exponentiation-operator
 const MAX_SAFE_INTEGER = (Math.pow(2, 53) - 1) as Int;
 const MIN_SAFE_INTEGER = -MAX_SAFE_INTEGER as Int;
+const toSafeInt = (value: number): Int =>
+  value < MIN_SAFE_INTEGER
+    ? MIN_SAFE_INTEGER
+    : value > MAX_SAFE_INTEGER
+      ? MAX_SAFE_INTEGER
+      : value < 0
+        ? (Math.ceil(value) as Int)
+        : (Math.floor(value) as Int);
 
 const IntComparable = Comparable<Int>({
   compare(left, right) {
@@ -53,6 +62,14 @@ const IntComparable = Comparable<Int>({
 const IntBounded: Bounded<Int> = {
   maxValue: MAX_SAFE_INTEGER,
   minValue: MIN_SAFE_INTEGER,
+};
+
+const IntNumeric: Numeric<Int> = {
+  '+': (left, right) => toSafeInt(left + right),
+  '-': (left, right) => toSafeInt(left - right),
+  '*': (left, right) => toSafeInt(left * right),
+  abs: Math.abs as Numeric<Int>['abs'],
+  sign: Math.sign as Numeric<Int>['sign'],
 };
 
 /**
@@ -68,6 +85,7 @@ export type Int = Tag<number, { integral: true }>;
 export const Int = {
   ...IntComparable,
   ...IntBounded,
+  ...IntNumeric,
 
   /**
    * Return a new integer from `value`
@@ -80,13 +98,7 @@ export const Int = {
    * @param value - an initial numeric value
    */
   of(value: number): Int {
-    return value < MIN_SAFE_INTEGER
-      ? MIN_SAFE_INTEGER
-      : value > MAX_SAFE_INTEGER
-        ? MAX_SAFE_INTEGER
-        : value < 0
-          ? (Math.ceil(value) as Int)
-          : (Math.floor(value) as Int);
+    return toSafeInt(value);
   },
 
   /**
@@ -122,7 +134,7 @@ export const Int = {
     /* eslint-disable unicorn/prefer-number-properties */
     const intValue = parseInt(expression, radix);
 
-    return Number.isNaN(intValue) ? undefined : Int.of(intValue);
+    return Number.isNaN(intValue) ? undefined : toSafeInt(intValue);
   },
 
   /**
