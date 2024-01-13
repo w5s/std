@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { describe, it, expect } from 'vitest';
 import * as Std from './index.js';
 
@@ -36,5 +37,12 @@ describe('index', () => {
         'unsafeRunOk',
       ].sort()
     );
+  });
+
+  it('exports types', () => {
+    type Bounded = Std.Bounded<any>;
+    type Numeric = Std.Numeric<any>;
+
+    expect(true).toBe(true);
   });
 });
