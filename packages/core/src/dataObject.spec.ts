@@ -10,9 +10,8 @@ describe('DataObject', () => {
     }
     const Test = DataObject.MakeGeneric(
       'Test',
-      (create) =>
-        (email: string): Test =>
-          create({ email })
+      (_) =>
+        (email: string): Test => ({ _, email })
     );
     it('should create a new constructor', () => {
       expect(Test('foo@bar.com')).toEqual({

@@ -80,7 +80,10 @@ export namespace DataObject {
     typeName: Model[DataObject.type]
   ): ((properties: Parameters<Model>) => Model) & Module<Model> {
     // @ts-ignore typing is slightly different
-    return MakeGeneric(typeName, (create) => create);
+    return MakeGeneric(typeName, (_) => (properties) => ({
+      [DataObject.type]: _,
+      ...properties,
+    }));
   }
 
   /**
@@ -91,9 +94,9 @@ export namespace DataObject {
    * ```typescript
    * const Model = DataObject.MakeGeneric(
    *   'Model',
-   *   (create) => // a helper that creates { _: 'Model' }
+   *   (_) => // 'Model'
    *     // the constructor
-   *     (foo: boolean) => create({ foo })
+   *     (foo: boolean) => ({ _, foo })
    * );
    * const instance = Model(true); // { _: 'Model', foo: true }
    * Model.typeName === 'Model'/ true
@@ -105,28 +108,22 @@ export namespace DataObject {
   export function MakeGeneric<
     Name extends string,
     Constructor extends (...args: any[]) => DataObject<{ [DataObject.type]: Name }>,
-  >(
-    typeName: Name,
-    getConstructor: (
-      create: <Properties>(properties: Properties) => DataObject<{ [DataObject.type]: Name } & Properties>
-    ) => Constructor
-  ): Constructor & Module<ReturnType<Constructor>> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const create = (properties: any) => ({
-      [DataObject.type]: typeName,
-      ...properties,
-    });
+  >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {
     const properties = {
       '==': shallowEqual,
       '!=': (left: any, right: any) => !shallowEqual(left, right),
       typeName,
-      create,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      create: (_properties: any) => ({
+        [DataObject.type]: typeName,
+        ..._properties,
+      }),
       hasInstance: (anyValue: unknown): boolean =>
         // @ts-ignore We know what we are doing
         anyValue == null ? false : anyValue[type] === typeName,
     };
 
     // @ts-ignore We know what we are doing
-    return Object.assign(getConstructor(create), properties);
+    return Object.assign(getConstructor(typeName), properties);
   }
 }

@@ -47,7 +47,7 @@ export interface Currency
 export const Currency = Object.assign(
   DataObject.MakeGeneric(
     'Currency',
-    (create) =>
+    (_) =>
       (parameters: {
         name: Currency['name'];
         namePlural?: Currency['namePlural'];
@@ -56,14 +56,14 @@ export const Currency = Object.assign(
         rounding?: Currency['rounding'];
         symbol: Currency['symbol'];
         symbolNative?: Currency['symbolNative'];
-      }): Currency =>
-        create({
-          rounding: Currency.defaultRounding,
-          precision: Currency.defaultPrecision,
-          namePlural: parameters.name,
-          symbolNative: parameters.symbol,
-          ...parameters,
-        })
+      }): Currency => ({
+        _,
+        rounding: Currency.defaultRounding,
+        precision: Currency.defaultPrecision,
+        namePlural: parameters.name,
+        symbolNative: parameters.symbol,
+        ...parameters,
+      })
   ),
   {
     /**
