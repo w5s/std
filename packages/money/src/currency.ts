@@ -2,6 +2,10 @@ import type { Int } from '@w5s/core';
 import { DataObject } from '@w5s/core/dist/dataObject.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 
+const CurrencyComparable = Comparable<Currency>({
+  compare: (left, right) => (left.code === right.code ? 0 : left.code < right.code ? -1 : 1),
+});
+
 export interface Currency
   extends DataObject<{
     [DataObject.type]: 'Currency';
@@ -71,8 +75,6 @@ export const Currency = Object.assign(
      */
     defaultPrecision: 2 as Int,
 
-    ...Comparable<Currency>({
-      compare: (left, right) => (left.code === right.code ? 0 : left.code < right.code ? -1 : 1),
-    }),
+    ...CurrencyComparable,
   }
 );

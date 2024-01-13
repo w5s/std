@@ -39,13 +39,15 @@ const createOperator =
           }),
         };
 
+const MoneyComparable = Comparable<Money>({
+  compare: (left, right) => {
+    const comparison = Currency.compare(left.currency, right.currency);
+    return comparison === 0 ? (left.amount === right.amount ? 0 : left.amount < right.amount ? -1 : 1) : comparison;
+  },
+});
+
 export const Money = Object.assign(DataObject.Make<Money>('Money'), {
-  ...Comparable<Money>({
-    compare: (left, right) => {
-      const comparison = Currency.compare(left.currency, right.currency);
-      return comparison === 0 ? (left.amount === right.amount ? 0 : left.amount < right.amount ? -1 : 1) : comparison;
-    },
-  }),
+  ...MoneyComparable,
 
   /**
    * Addition operator
