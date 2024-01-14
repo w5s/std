@@ -3,7 +3,7 @@ import { DataObject } from '@w5s/core/dist/dataObject.js';
 import { invariant } from '@w5s/invariant';
 
 const create = (value: bigint, scale: number): BigDecimal => ({ _: 'BigDecimal', value, scale });
-const unsafeParse = (value: string): Option<BigDecimal> => {
+const parse = (value: string): Option<BigDecimal> => {
   let digits: string;
   let scale: number;
 
@@ -52,7 +52,7 @@ export const BigDecimal = Object.assign(
     } =>
       (value: string | bigint, scale?: number): BigDecimal =>
         typeof value === 'string'
-          ? unsafeParse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
+          ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
           : create(value, scale as number)
   ),
   {
