@@ -31,14 +31,25 @@ const parse = (value: string): Option<BigDecimal> => {
   return create(BigInt(digits), scale);
 };
 
+/**
+ * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
+ */
 export interface BigDecimal
   extends DataObject<{
     _: 'BigDecimal';
+    /**
+     * The base denominator
+     */
     value: bigint;
+    /**
+     * The decimal scale N = value / (2 ** scale)
+     */
     scale: number;
   }> {}
 
 /**
+ * A collection of functions to manipulate `BigDecimal`
+ *
  * @namespace
  */
 export const BigDecimal = Object.assign(
@@ -55,7 +66,5 @@ export const BigDecimal = Object.assign(
           ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
           : create(value, scale as number)
   ),
-  {
-    // ...BigDecimalNumeric,
-  }
+  {}
 );
