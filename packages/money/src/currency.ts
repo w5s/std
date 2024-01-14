@@ -1,5 +1,5 @@
 import type { Int } from '@w5s/core';
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 
 const CurrencyComparable = Comparable<Currency>({
@@ -7,8 +7,8 @@ const CurrencyComparable = Comparable<Currency>({
 });
 
 export interface Currency
-  extends DataObject<{
-    [DataObject.type]: 'Currency';
+  extends Struct<{
+    [Struct.type]: 'Currency';
     /**
      * Name
      */
@@ -45,7 +45,7 @@ export interface Currency
     symbolNative: string;
   }> {}
 export const Currency = Object.assign(
-  DataObject.MakeGeneric(
+  Struct.MakeGeneric(
     'Currency',
     (_) =>
       (parameters: {

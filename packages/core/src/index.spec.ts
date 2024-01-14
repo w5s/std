@@ -14,7 +14,7 @@ describe('index', () => {
         'cancel',
         'Comparable',
         'Console',
-        'DataObject',
+        'Struct',
         'Disposable',
         'Equal',
         'extend',

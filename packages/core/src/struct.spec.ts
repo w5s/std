@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { DataObject } from './dataObject.js';
+import { Struct } from './struct.js';
 
-describe('DataObject', () => {
+describe('Struct', () => {
   describe('.MakeGeneric()', () => {
     interface Test {
       _: 'Test';
       email: string;
       optional?: boolean;
     }
-    const Test = DataObject.MakeGeneric(
+    const Test = Struct.MakeGeneric(
       'Test',
       (_) =>
         (email: string): Test => ({ _, email })
@@ -47,16 +47,16 @@ describe('DataObject', () => {
     });
   });
   describe('.Make()', () => {
-    type Test = DataObject<{ _: 'Test'; email: string }>;
-    const Test = DataObject.Make<Test>('Test');
+    type Test = Struct<{ _: 'Test'; email: string }>;
+    const Test = Struct.Make<Test>('Test');
     it('should create a new constructor', () => {
       expect(Test({ email: 'foo@bar.com' })).toEqual({
         _: 'Test',
         email: 'foo@bar.com',
       });
     });
-    describe('[DataObject.type]', () => {
-      it('should set [DataObject.type]:', () => {
+    describe('[Struct.type]', () => {
+      it('should set [Struct.type]:', () => {
         expect(Test.typeName).toBe('Test');
       });
     });

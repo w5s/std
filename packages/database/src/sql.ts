@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable unicorn/no-for-loop */
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 
 const emptyStrings = Object.freeze(['']);
 const emptyArray = Object.freeze([]);
@@ -30,8 +30,8 @@ const append = ({ strings: targetStrings, values: targetValues }: SQLBuffer, { s
 };
 
 export interface SQLStatement
-  extends DataObject<{
-    [DataObject.type]: 'SQLStatement';
+  extends Struct<{
+    [Struct.type]: 'SQLStatement';
     strings: ReadonlyArray<string>;
     values: ReadonlyArray<SQLStatement.Value>;
   }> {}
@@ -52,7 +52,7 @@ export function SQLStatement({
 export namespace SQLStatement {
   export type Value = unknown;
 
-  export const { typeName, hasInstance } = DataObject.Make<SQLStatement>('SQLStatement');
+  export const { typeName, hasInstance } = Struct.Make<SQLStatement>('SQLStatement');
 
   export function concat(...statements: SQLStatement[]): SQLStatement {
     const buffer = create();

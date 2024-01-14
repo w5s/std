@@ -1,12 +1,12 @@
-import type { DataObject } from '@w5s/core';
+import type { Struct } from '@w5s/core';
 import type { Time } from '@w5s/time';
 import type { UUID } from '@w5s/random';
 import type { LogMessage } from './message.js';
 import type { LogLevel } from './level.js';
 
 export interface LogRecord
-  extends DataObject<{
-    [DataObject.type]: 'LogRecord';
+  extends Struct<{
+    [Struct.type]: 'LogRecord';
     /**
      * Event identifier
      */
@@ -49,7 +49,7 @@ export interface LogRecord
  * ```
  * @param properties - constructor parameters
  */
-export function LogRecord(properties: DataObject.Parameters<LogRecord>): LogRecord {
+export function LogRecord(properties: Struct.Parameters<LogRecord>): LogRecord {
   return {
     _: 'LogRecord',
     level: properties.level,

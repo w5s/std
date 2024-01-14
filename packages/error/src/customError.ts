@@ -16,7 +16,7 @@ function __captureStackTrace(targetObject: object, constructorOpt?: Function | u
  */
 export type CustomError<Properties extends { name: string }> = Readonly<
   {
-    // [DataObject.type]: typeof DataError.typeName;
+    // [Struct.type]: typeof DataError.typeName;
     /**
      * Error message
      */

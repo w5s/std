@@ -1,4 +1,4 @@
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 import { assertNever } from '@w5s/invariant';
 import { sql, SQLStatement } from './sql.js';
 import { SQLDataType } from './dataType.js';
@@ -91,66 +91,66 @@ export namespace SQLQuery {
   export interface TableAttributes extends Record<string, ColumnAttributes> {}
 
   export interface AddColumn
-    extends DataObject<{
-      [DataObject.type]: 'SQLAddColumn';
+    extends Struct<{
+      [Struct.type]: 'SQLAddColumn';
       tableName: string;
       columnName: string;
       columnAttributes: ColumnAttributes;
     }> {}
-  export const AddColumn = DataObject.Make<AddColumn>('SQLAddColumn');
+  export const AddColumn = Struct.Make<AddColumn>('SQLAddColumn');
 
   export interface AddConstraint
-    extends DataObject<{
-      [DataObject.type]: 'SQLAddConstraint';
+    extends Struct<{
+      [Struct.type]: 'SQLAddConstraint';
       tableName: string;
       constraintName: string;
     }> {}
-  export const AddConstraint = DataObject.Make<AddConstraint>('SQLAddConstraint');
+  export const AddConstraint = Struct.Make<AddConstraint>('SQLAddConstraint');
 
   export interface CreateSchema
-    extends DataObject<{
-      [DataObject.type]: 'SQLCreateSchema';
+    extends Struct<{
+      [Struct.type]: 'SQLCreateSchema';
       schemaName: string;
     }> {}
-  export const CreateSchema = DataObject.Make<CreateSchema>('SQLCreateSchema');
+  export const CreateSchema = Struct.Make<CreateSchema>('SQLCreateSchema');
 
   export interface CreateTable
-    extends DataObject<{
-      [DataObject.type]: 'SQLCreateTable';
+    extends Struct<{
+      [Struct.type]: 'SQLCreateTable';
       tableName: string;
       tableAttributes: TableAttributes;
     }> {}
-  export const CreateTable = DataObject.Make<CreateTable>('SQLCreateTable');
+  export const CreateTable = Struct.Make<CreateTable>('SQLCreateTable');
 
   export interface DropSchema
-    extends DataObject<{
-      [DataObject.type]: 'SQLDropSchema';
+    extends Struct<{
+      [Struct.type]: 'SQLDropSchema';
       schemaName: string;
     }> {}
-  export const DropSchema = DataObject.Make<DropSchema>('SQLDropSchema');
+  export const DropSchema = Struct.Make<DropSchema>('SQLDropSchema');
 
   export interface DropTable
-    extends DataObject<{
-      [DataObject.type]: 'SQLDropTable';
+    extends Struct<{
+      [Struct.type]: 'SQLDropTable';
       tableName: string;
     }> {}
-  export const DropTable = DataObject.Make<DropTable>('SQLDropTable');
+  export const DropTable = Struct.Make<DropTable>('SQLDropTable');
 
   export interface RemoveConstraint
-    extends DataObject<{
-      [DataObject.type]: 'SQLRemoveConstraint';
+    extends Struct<{
+      [Struct.type]: 'SQLRemoveConstraint';
       tableName: string;
       constraintName: string;
     }> {}
-  export const RemoveConstraint = DataObject.Make<RemoveConstraint>('SQLRemoveConstraint');
+  export const RemoveConstraint = Struct.Make<RemoveConstraint>('SQLRemoveConstraint');
 
   export interface RemoveColumn
-    extends DataObject<{
-      [DataObject.type]: 'SQLRemoveColumn';
+    extends Struct<{
+      [Struct.type]: 'SQLRemoveColumn';
       tableName: string;
       columnName: string;
     }> {}
-  export const RemoveColumn = DataObject.Make<RemoveColumn>('SQLRemoveColumn');
+  export const RemoveColumn = Struct.Make<RemoveColumn>('SQLRemoveColumn');
 
   function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

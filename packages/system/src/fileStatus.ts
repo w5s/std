@@ -1,6 +1,6 @@
 import type { Int, Tag } from '@w5s/core';
 import type { Time } from '@w5s/time';
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 import type { FileSize } from './fileSize.js';
 
 /**
@@ -76,7 +76,7 @@ export function GroupID(value: number): GroupID {
 }
 
 export interface FileStatus
-  extends DataObject<{
+  extends Struct<{
     _: 'FileStatus';
     /**
      * The device identifier
@@ -153,4 +153,4 @@ export interface FileStatus
  *
  * @category Constructor
  */
-export const FileStatus = DataObject.Make<FileStatus>('FileStatus');
+export const FileStatus = Struct.Make<FileStatus>('FileStatus');

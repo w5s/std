@@ -7,7 +7,7 @@ describe('CustomError', () => {
     it('should return instance of Error', () => {
       expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
     });
-    // it('should return DataObject.type == "DataError"', () => {
+    // it('should return Struct.type == "DataError"', () => {
     //   expect(CustomError({ name: anyString })._).toEqual('DataError');
     // });
     it('should return Error with default properties', () => {

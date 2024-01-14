@@ -1,5 +1,5 @@
 import { ArgumentError } from '@w5s/error/dist/argumentError.js';
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 import type { Result } from '@w5s/core';
 import { Currency } from './currency.js';
@@ -7,8 +7,8 @@ import { Currency } from './currency.js';
 export type Amount = number;
 
 export interface Money
-  extends DataObject<{
-    [DataObject.type]: 'Money';
+  extends Struct<{
+    [Struct.type]: 'Money';
     /**
      * Amount of currency
      */
@@ -46,7 +46,7 @@ const MoneyComparable = Comparable<Money>({
   },
 });
 
-export const Money = Object.assign(DataObject.Make<Money>('Money'), {
+export const Money = Object.assign(Struct.Make<Money>('Money'), {
   ...MoneyComparable,
 
   /**

@@ -1,4 +1,4 @@
-import type { DataObject, Option } from '@w5s/core';
+import type { Struct, Option } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 
 const LogLevelComparable = Comparable({
@@ -10,8 +10,8 @@ const LogLevelComparable = Comparable({
 });
 
 export interface LogLevel
-  extends DataObject<{
-    [DataObject.type]: 'LogLevel';
+  extends Struct<{
+    [Struct.type]: 'LogLevel';
     /**
      * The log level string representation
      */

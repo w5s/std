@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { DataObject } from '@w5s/core/dist/dataObject.js';
+import { Struct } from '@w5s/core/dist/struct.js';
 import { invariant } from '@w5s/invariant';
 
 const create = (value: bigint, scale: number): BigDecimal => ({ _: 'BigDecimal', value, scale });
@@ -37,7 +37,7 @@ const scale = (value: BigDecimal, newScale: number): BigDecimal =>
       ? create(value.value / 10n ** BigInt(value.scale - newScale), newScale)
       : value;
 
-const BigDecimalStruct = DataObject.MakeGeneric(
+const BigDecimalStruct = Struct.MakeGeneric(
   'BigDecimal',
   (
     _
@@ -55,7 +55,7 @@ const BigDecimalStruct = DataObject.MakeGeneric(
  * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
  */
 export interface BigDecimal
-  extends DataObject<{
+  extends Struct<{
     _: 'BigDecimal';
     /**
      * The base denominator

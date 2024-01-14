@@ -7,28 +7,28 @@ import { shallowEqual } from './shallowEqual.js';
  * @example
  * ```typescript
  * // Interface have a better appearance in VSCode
- * export interface MyType extends DataObject<{
- *  [DataObject.type]: 'MyType',
+ * export interface MyType extends Struct<{
+ *  [Struct.type]: 'MyType',
  *  foo: boolean;
  * }> {}
  * ```
  */
-export type DataObject<
+export type Struct<
   Properties extends {
     /**
      * The type unique identifier
      */
-    [DataObject.type]: string;
+    [Struct.type]: string;
   },
 > = Readonly<Properties>;
 
-export namespace DataObject {
+export namespace Struct {
   /**
-   * Extract all parameters to create a new DataObject
+   * Extract all parameters to create a new Struct
    */
-  export type Parameters<Model> = Omit<Model, DataObject.type>;
+  export type Parameters<Model> = Omit<Model, Struct.type>;
 
-  export interface Module<Model extends DataObject<{ [DataObject.type]: string }>> extends Equal<Model> {
+  export interface Module<Model extends Struct<{ [Struct.type]: string }>> extends Equal<Model> {
     /**
      * Construct a new model
      *
@@ -39,12 +39,12 @@ export namespace DataObject {
     /**
      * The factory type constant
      */
-    readonly typeName: Model[DataObject.type];
+    readonly typeName: Model[Struct.type];
     /**
      * Return true if `anyValue.type` is the same as factory `typeName`
      *
      * @example
-     * // type MyRecord = { [DataObject.type]: 'MyRecord', anyProperty: string };
+     * // type MyRecord = { [Struct.type]: 'MyRecord', anyProperty: string };
      * const anyValue: unknown;
      * if(MyRecord.hasInstance(anyValue)) {
      *   console.log(anyValue.anyProperty);// type is correctly refined here
@@ -62,13 +62,13 @@ export namespace DataObject {
   export type type = typeof type;
 
   /**
-   * Return a new `DataObject` default factory
+   * Return a new `Struct` default factory
    * See {@link Module} for additional properties added to the constructor
    *
    * @example
    * ```typescript
-   * type Model = DataObject<{ [DataObject.type]: 'Model', foo: boolean }>
-   * const Model = DataObject.Make<Model>('Model');
+   * type Model = Struct<{ [Struct.type]: 'Model', foo: boolean }>
+   * const Model = Struct.Make<Model>('Model');
    *
    * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
    * Model.typeName === 'Model' // true
@@ -76,23 +76,23 @@ export namespace DataObject {
    * ```
    * @param typeName - the type unique name
    */
-  export function Make<Model extends DataObject<{ [DataObject.type]: string }>>(
-    typeName: Model[DataObject.type]
+  export function Make<Model extends Struct<{ [Struct.type]: string }>>(
+    typeName: Model[Struct.type]
   ): ((properties: Parameters<Model>) => Model) & Module<Model> {
     // @ts-ignore typing is slightly different
     return MakeGeneric(typeName, (_) => (properties) => ({
-      [DataObject.type]: _,
+      [Struct.type]: _,
       ...properties,
     }));
   }
 
   /**
-   * Return a new `DataObject` factory using `getConstructor()`
+   * Return a new `Struct` factory using `getConstructor()`
    * See {@link Module} for additional properties added to the constructor
    *
    * @example
    * ```typescript
-   * const Model = DataObject.MakeGeneric(
+   * const Model = Struct.MakeGeneric(
    *   'Model',
    *   (_) => // 'Model'
    *     // the constructor
@@ -107,7 +107,7 @@ export namespace DataObject {
    */
   export function MakeGeneric<
     Name extends string,
-    Constructor extends (...args: any[]) => DataObject<{ [DataObject.type]: Name }>,
+    Constructor extends (...args: any[]) => Struct<{ [Struct.type]: Name }>,
   >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {
     const properties = {
       '==': shallowEqual,
@@ -115,7 +115,7 @@ export namespace DataObject {
       typeName,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       create: (_properties: any) => ({
-        [DataObject.type]: typeName,
+        [Struct.type]: typeName,
         ..._properties,
       }),
       hasInstance: (anyValue: unknown): boolean =>

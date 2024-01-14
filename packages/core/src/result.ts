@@ -1,4 +1,4 @@
-import type { DataObject } from './dataObject.js';
+import type { Struct } from './struct.js';
 import type { Option } from './option.js';
 
 // https://doc.rust-lang.org/std/result/enum.Result.html
@@ -38,8 +38,8 @@ export namespace Result {
   type NonPromise<V> = Exclude<V, Promise<unknown>>;
 
   export interface Ok<V>
-    extends DataObject<{
-      [DataObject.type]: 'Ok';
+    extends Struct<{
+      [Struct.type]: 'Ok';
       /**
        * `true` only for Ok objects
        */
@@ -73,8 +73,8 @@ export namespace Result {
   Ok.typeName = 'Ok' as const;
 
   export interface Error<E>
-    extends DataObject<{
-      [DataObject.type]: 'Error';
+    extends Struct<{
+      [Struct.type]: 'Error';
       /**
        * `false` only for Error objects
        */

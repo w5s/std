@@ -6,7 +6,7 @@ export * from './bounded.js';
 export * from './cancel.js';
 export * from './comparable.js';
 export * from './console.js';
-export * from './dataObject.js';
+export * from './struct.js';
 export * from './disposable.js';
 export * from './equal.js';
 export * from './extend.js';
