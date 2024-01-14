@@ -45,8 +45,9 @@ const MoneyComparable = Comparable<Money>({
     return comparison === 0 ? (left.amount === right.amount ? 0 : left.amount < right.amount ? -1 : 1) : comparison;
   },
 });
+const MoneyStruct = Struct.Make<Money>('Money');
 
-export const Money = Object.assign(Struct.Make<Money>('Money'), {
+export const Money = Object.assign(MoneyStruct, {
   ...MoneyComparable,
 
   /**
