@@ -30,6 +30,26 @@ const parse = (value: string): Option<BigDecimal> => {
 
   return create(BigInt(digits), scale);
 };
+const scale = (value: BigDecimal, newScale: number): BigDecimal =>
+  newScale > value.scale
+    ? create(value.value * 10n ** BigInt(newScale - value.scale), newScale)
+    : newScale < value.scale
+      ? create(value.value / 10n ** BigInt(value.scale - newScale), newScale)
+      : value;
+
+const BigDecimalStruct = DataObject.MakeGeneric(
+  'BigDecimal',
+  (
+    _
+  ): {
+    (stringValue: string): BigDecimal;
+    (value: bigint, scale: number): BigDecimal;
+  } =>
+    (value: string | bigint, scaleValue?: number): BigDecimal =>
+      typeof value === 'string'
+        ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
+        : create(value, scaleValue as number)
+);
 
 /**
  * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
@@ -52,19 +72,19 @@ export interface BigDecimal
  *
  * @namespace
  */
-export const BigDecimal = Object.assign(
-  DataObject.MakeGeneric(
-    'BigDecimal',
-    (
-      _
-    ): {
-      (stringValue: string): BigDecimal;
-      (value: bigint, scale: number): BigDecimal;
-    } =>
-      (value: string | bigint, scale?: number): BigDecimal =>
-        typeof value === 'string'
-          ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
-          : create(value, scale as number)
-  ),
-  {}
-);
+export const BigDecimal = Object.assign(BigDecimalStruct, {
+  /**
+   * Scales a given `BigDecimal` to the specified scale.
+   *
+   * @example
+   * ```ts
+   * const value = BigDecimal('1.02');
+   * BigDecimal.scale(value, 1); //  BigDecimal('1.0')
+   * BigDecimal.scale(value, 3); //  BigDecimal('1.020')
+   * ```
+   *
+   * @param value - The `BigDecimal` to scale.
+   * @param scale - The new scale
+   */
+  scale,
+});
