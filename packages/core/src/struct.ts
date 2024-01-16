@@ -1,6 +1,3 @@
-import type { Equal } from './equal.js';
-import { shallowEqual } from './shallowEqual.js';
-
 /**
  * An Immutable Data Object with a `type` identifier
  *
@@ -28,7 +25,7 @@ export namespace Struct {
    */
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
-  export interface Module<Model extends Struct<{ [Struct.type]: string }>> extends Equal<Model> {
+  export interface Module<Model extends Struct<{ [Struct.type]: string }>> {
     /**
      * Construct a new model
      *
@@ -110,8 +107,6 @@ export namespace Struct {
     Constructor extends (...args: any[]) => Struct<{ [Struct.type]: Name }>,
   >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {
     const properties = {
-      '==': shallowEqual,
-      '!=': (left: any, right: any) => !shallowEqual(left, right),
       typeName,
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       create: (_properties: any) => ({
