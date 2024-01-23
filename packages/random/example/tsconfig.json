@@ -5,8 +5,8 @@
     "noEmit": true,
     "paths": {
       "@w5s/core": ["./core"],
-      "@w5s/random": ["./random"]
-    }
+      "@w5s/random": ["./random"],
+    },
   },
-  "include": ["."]
+  "include": ["."],
 }

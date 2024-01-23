@@ -1,5 +1,5 @@
 /* eslint-disable jsdoc/require-yields */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import type { Int } from './int.js';
 import type { Option } from './option.js';
 
@@ -99,7 +99,7 @@ export const Record = {
    */
   *entries<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<[Key, Value]> {
     for (const key of ownKeys(record)) {
-      yield [key, record[key]!];
+      yield [key, record[key]];
     }
   },
 
@@ -115,7 +115,7 @@ export const Record = {
    */
   *values<Key extends AnyKey, Value>(record: Record<Key, Value>): IterableIterator<Value> {
     for (const key of ownKeys(record)) {
-      yield record[key]!;
+      yield record[key];
     }
   },
 
@@ -176,7 +176,7 @@ export const Record = {
     fn: (value: Value, key: Key, record: D) => unknown
   ): void {
     for (const key of ownKeys(record)) {
-      fn(record[key]!, key, record);
+      fn(record[key], key, record);
     }
   },
 

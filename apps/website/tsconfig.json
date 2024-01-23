@@ -5,6 +5,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "resolveJsonModule": true,
-    "strict": true
-  }
+    "strict": true,
+  },
 }

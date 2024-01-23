@@ -5,8 +5,8 @@
     "noEmit": true,
     "paths": {
       "@w5s/core": ["./core"],
-      "@w5s/money": ["./money"]
-    }
+      "@w5s/money": ["./money"],
+    },
   },
-  "include": ["."]
+  "include": ["."],
 }

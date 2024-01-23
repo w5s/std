@@ -4,8 +4,8 @@
     "baseUrl": "../../",
     "noEmit": true,
     "paths": {
-      "@w5s/error": ["./error"]
-    }
+      "@w5s/error": ["./error"],
+    },
   },
-  "include": ["."]
+  "include": ["."],
 }
