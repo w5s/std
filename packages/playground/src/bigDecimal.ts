@@ -1,8 +1,14 @@
-import type { Option } from '@w5s/core';
+import { type Option } from '@w5s/core';
+import { Comparable } from '@w5s/core/dist/comparable.js';
 import { Struct } from '@w5s/core/dist/struct.js';
 import { invariant } from '@w5s/invariant';
 
-const create = (value: bigint, scale: number): BigDecimal => ({ _: 'BigDecimal', value, scale });
+const bigIntCompare = (left: bigint, right: bigint) => (left === right ? 0 : left < right ? -1 : 1);
+const create = (value: bigint, scale: number): BigDecimal => ({
+  _: 'BigDecimal',
+  value,
+  scale,
+});
 const parse = (value: string): Option<BigDecimal> => {
   let digits: string;
   let scale: number;
@@ -30,12 +36,16 @@ const parse = (value: string): Option<BigDecimal> => {
 
   return create(BigInt(digits), scale);
 };
-const scale = (value: BigDecimal, newScale: number): BigDecimal =>
-  newScale > value.scale
-    ? create(value.value * 10n ** BigInt(newScale - value.scale), newScale)
-    : newScale < value.scale
-      ? create(value.value / 10n ** BigInt(value.scale - newScale), newScale)
+const scaleValue = ({ value, scale }: BigDecimal, newScale: number): bigint =>
+  newScale > scale
+    ? value * 10n ** BigInt(newScale - scale)
+    : newScale < scale
+      ? value / 10n ** BigInt(scale - newScale)
       : value;
+const scale = (value: BigDecimal, newScale: number): BigDecimal => {
+  const newValue = scaleValue(value, newScale);
+  return newValue === value.value ? value : create(newValue, newScale);
+};
 
 const BigDecimalStruct = Struct.MakeGeneric(
   'BigDecimal',
@@ -45,11 +55,21 @@ const BigDecimalStruct = Struct.MakeGeneric(
     (stringValue: string): BigDecimal;
     (value: bigint, scale: number): BigDecimal;
   } =>
-    (value: string | bigint, scaleValue?: number): BigDecimal =>
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    (value: string | bigint, scale?: number): BigDecimal =>
       typeof value === 'string'
         ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
-        : create(value, scaleValue as number)
+        : create(value, scale as number)
 );
+
+const BigDecimalComparable: Comparable<BigDecimal> = Comparable({
+  compare: (left, right) =>
+    left.scale > right.scale
+      ? bigIntCompare(left.value, scaleValue(right, left.scale))
+      : left.scale < right.scale
+        ? bigIntCompare(scaleValue(left, right.scale), right.value)
+        : bigIntCompare(left.value, right.value),
+});
 
 /**
  * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
@@ -73,6 +93,7 @@ export interface BigDecimal
  * @namespace
  */
 export const BigDecimal = Object.assign(BigDecimalStruct, {
+  ...BigDecimalComparable,
   /**
    * Scales a given `BigDecimal` to the specified scale.
    *
