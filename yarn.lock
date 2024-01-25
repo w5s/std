@@ -5043,6 +5043,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@w5s/bigdecimal@workspace:packages/bigdecimal":
+  version: 0.0.0-use.local
+  resolution: "@w5s/bigdecimal@workspace:packages/bigdecimal"
+  dependencies:
+    "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/invariant": "npm:^1.0.0-alpha.0"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
+
 "@w5s/commitlint-config@npm:2.0.7":
   version: 2.0.7
   resolution: "@w5s/commitlint-config@npm:2.0.7"
