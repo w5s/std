@@ -32,92 +32,80 @@ export function describeComparable({ describe, it, expect }: TestingLibrary) {
     const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
     const inferiorData = () => {
       const values = ordered();
-      return {
-        // eslint-disable-next-line unicorn/prefer-at
-        inferiorBase: values[values.length - 1]!,
-        inferiorValues: values.slice(1, -1),
-      };
+      // eslint-disable-next-line unicorn/prefer-at
+      const inferiorBase = values[values.length - 1]!;
+      const inferiorValues = values.slice(1, -1);
+      return inferiorValues.map((inferiorValue) => ({ left: inferiorBase, right: inferiorValue }));
     };
     const superiorData = () => {
       const values = ordered();
-      return {
-        superiorBase: values[0]!,
-        superiorValues: values.slice(1),
-      };
+      const superiorValues = values.slice(1);
+      const superiorBase = values[0]!;
+      return superiorValues.map((superiorValue) => ({ left: superiorBase, right: superiorValue }));
     };
 
     describe('.compare', () => {
-      const { superiorBase, superiorValues } = superiorData();
-      it.each(superiorValues)('should return -1 when left < right', (superiorValue) => {
-        expect(subject.compare(superiorBase, superiorValue)).toBeLessThan(0);
+      it.each(superiorData())('should return -1 when $left < $right', ({ left, right }) => {
+        expect(subject.compare(left, right)).toBeLessThan(0);
       });
-      it.each(equivalent())('should return 0 when left == right', ({ left, right }) => {
+      it.each(equivalent())('should return 0 when $left == $right', ({ left, right }) => {
         // const [left, right] = args;
         // expect(args).toEqual([]);
         expect(subject.compare(left, right)).toBe(0);
       });
-      const { inferiorBase, inferiorValues } = inferiorData();
-      it.each(inferiorValues)('should return 1 when left > right', (inferiorValue) => {
-        expect(subject.compare(inferiorBase, inferiorValue)).toBeGreaterThan(0);
+      it.each(inferiorData())('should return 1 when $left > $right', ({ left, right }) => {
+        expect(subject.compare(left, right)).toBeGreaterThan(0);
       });
     });
 
     const equalData = inferiorData();
     describeEqual({ describe, it, expect })(subject, {
       equivalent: equivalentDefault,
-      different: () => equalData.inferiorValues.map((equalValue) => [equalValue, equalData.inferiorBase]),
+      different: () => equalData.map(({ left, right }) => [left, right]),
     });
 
     describe('<', () => {
-      const { superiorBase, superiorValues } = superiorData();
-      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
-        expect(subject['<'](superiorBase, superiorValue)).toBe(true);
+      it.each(superiorData())('($left, $right) returns true // left < right', ({ left, right }) => {
+        expect(subject['<'](left, right)).toBe(true);
       });
-      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+      it.each(equivalent())('($left, $right) returns false // left == right', ({ left, right }) => {
         expect(subject['<'](left, right)).toBe(false);
       });
-      const { inferiorBase, inferiorValues } = inferiorData();
-      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
-        expect(subject['<'](inferiorBase, inferiorValue)).toBe(false);
+      it.each(inferiorData())('($left, $right) returns false // left > right', ({ left, right }) => {
+        expect(subject['<'](left, right)).toBe(false);
       });
     });
     describe('<=', () => {
-      const { superiorBase, superiorValues } = superiorData();
-      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
-        expect(subject['<='](superiorBase, superiorValue)).toBe(true);
-      });
-      it.each(equivalent())('should return true when left == right', ({ left, right }) => {
+      it.each(superiorData())('($left, $right) returns true // left < right', ({ left, right }) => {
         expect(subject['<='](left, right)).toBe(true);
       });
-      const { inferiorBase, inferiorValues } = inferiorData();
-      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
-        expect(subject['<='](inferiorBase, inferiorValue)).toBe(false);
+      it.each(equivalent())('($left, $right) returns true // left == right', ({ left, right }) => {
+        expect(subject['<='](left, right)).toBe(true);
+      });
+      it.each(inferiorData())('($left, $right) returns false // left > right', ({ left, right }) => {
+        expect(subject['<='](left, right)).toBe(false);
       });
     });
     describe('>', () => {
-      const { superiorBase, superiorValues } = superiorData();
-      it.each(superiorValues)('should return false when left < right', (superiorValue) => {
-        expect(subject['>'](superiorBase, superiorValue)).toBe(false);
-      });
-      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+      it.each(superiorData())('($left, $right) returns false // left < right', ({ left, right }) => {
         expect(subject['>'](left, right)).toBe(false);
       });
-      const { inferiorBase, inferiorValues } = inferiorData();
-      it.each(inferiorValues)('should return true when left > right', (inferiorValue) => {
-        expect(subject['>'](inferiorBase, inferiorValue)).toBe(true);
+      it.each(equivalent())('($left, $right) returns false // left == right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(false);
+      });
+      it.each(inferiorData())('($left, $right) returns true // left > right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(true);
       });
     });
     describe('>=', () => {
-      const { superiorBase, superiorValues } = superiorData();
-      it.each(superiorValues)('should return true when left < right', (superiorValue) => {
-        expect(subject['>'](superiorBase, superiorValue)).toBe(false);
-      });
-      it.each(equivalent())('should return false when left == right', ({ left, right }) => {
+      it.each(superiorData())('($left, $right) return true // left < right', ({ left, right }) => {
         expect(subject['>'](left, right)).toBe(false);
       });
-      const { inferiorBase, inferiorValues } = inferiorData();
-      it.each(inferiorValues)('should return false when left > right', (inferiorValue) => {
-        expect(subject['>'](inferiorBase, inferiorValue)).toBe(true);
+      it.each(equivalent())('($left, $right) return false // left == right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(false);
+      });
+      it.each(inferiorData())('($left, $right) return false // left > right', ({ left, right }) => {
+        expect(subject['>'](left, right)).toBe(true);
       });
     });
   };

@@ -14,30 +14,30 @@ export function describeEqual({ describe, it, expect }: TestingLibrary) {
     const different = () => differentDefault().map(([left, right]) => ({ left, right }));
 
     describe('==', () => {
-      it.each(equivalent())('should return true when left == right', ({ left, right }) => {
+      it.each(equivalent())('($left, $right) returns true // left == right', ({ left, right }) => {
         expect(subject['=='](left, right)).toBe(true);
       });
-      it.each(equivalent())('should return true when right == left', ({ left, right }) => {
+      it.each(equivalent())('($right, $left) returns true // left == right', ({ left, right }) => {
         expect(subject['=='](right, left)).toBe(true);
       });
-      it.each(different())('should return false when left != right', ({ left, right }) => {
+      it.each(different())('($left, $right) returns false // left != right', ({ left, right }) => {
         expect(subject['=='](left, right)).toBe(false);
       });
-      it.each(different())('should return false when right != left', ({ left, right }) => {
+      it.each(different())('($right, $left) returns false // right != left', ({ left, right }) => {
         expect(subject['=='](right, left)).toBe(false);
       });
     });
     describe('!=', () => {
-      it.each(different())('should return false when left != right', ({ left, right }) => {
+      it.each(different())('($left, $right) returns false // left != right', ({ left, right }) => {
         expect(subject['!='](left, right)).toBe(true);
       });
-      it.each(different())('should return false when right != left', ({ left, right }) => {
+      it.each(different())('($left, $right) returns false // right != left', ({ left, right }) => {
         expect(subject['!='](right, left)).toBe(true);
       });
-      it.each(equivalent())('should return true when left == right', ({ left, right }) => {
+      it.each(equivalent())('($left, $right) returns true // left == right', ({ left, right }) => {
         expect(subject['!='](left, right)).toBe(false);
       });
-      it.each(equivalent())('should return true when right == left', ({ left, right }) => {
+      it.each(equivalent())('($left, $right) returns true // right == left', ({ left, right }) => {
         expect(subject['!='](right, left)).toBe(false);
       });
     });
