@@ -5043,7 +5043,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/bigdecimal@workspace:packages/bigdecimal":
+"@w5s/bigdecimal@npm:^1.0.0-alpha.0, @w5s/bigdecimal@workspace:packages/bigdecimal":
   version: 0.0.0-use.local
   resolution: "@w5s/bigdecimal@workspace:packages/bigdecimal"
   dependencies:
@@ -5262,11 +5262,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/money@workspace:packages/money":
+"@w5s/money@npm:^1.0.0-alpha.0, @w5s/money@workspace:packages/money":
   version: 0.0.0-use.local
   resolution: "@w5s/money@workspace:packages/money"
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
+    "@w5s/bigdecimal": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     currencies.json: "npm:1.0.2"
@@ -5285,6 +5286,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"
+    "@w5s/money": "npm:^1.0.0-alpha.0"
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     vite: "npm:latest"

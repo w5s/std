@@ -1,10 +1,11 @@
 import { ArgumentError } from '@w5s/error/dist/argumentError.js';
 import { Struct } from '@w5s/core/dist/struct.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
-import type { Result } from '@w5s/core';
+import { type Result, throwError } from '@w5s/core';
+import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './currency.js';
 
-export type Amount = number;
+export type Amount = BigDecimal;
 
 export interface Money
   extends Struct<{
@@ -42,10 +43,12 @@ const createOperator =
 const MoneyComparable = Comparable<Money>({
   compare: (left, right) => {
     const comparison = Currency.compare(left.currency, right.currency);
-    return comparison === 0 ? (left.amount === right.amount ? 0 : left.amount < right.amount ? -1 : 1) : comparison;
+    return comparison === 0 ? BigDecimal.compare(left.amount, right.amount) : comparison;
   },
 });
 const MoneyStruct = Struct.Make<Money>('Money');
+
+const notImplemented = () => throwError(new Error('NotImplemented'));
 
 export const Money = Object.assign(MoneyStruct, {
   ...MoneyComparable,
@@ -61,7 +64,7 @@ export const Money = Object.assign(MoneyStruct, {
    * @param left - Left operand currency
    * @param right - Right operand currency
    */
-  '+': createOperator((left, right) => left + right),
+  '+': createOperator(notImplemented),
 
   /**
    * Subtract operator
@@ -74,5 +77,5 @@ export const Money = Object.assign(MoneyStruct, {
    * @param left - Left operand currency
    * @param right - Right operand currency
    */
-  '-': createOperator((left, right) => left - right),
+  '-': createOperator(notImplemented),
 });

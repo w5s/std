@@ -49,7 +49,7 @@ function buildFactories() {
  *
  * @example
  * \`\`\`typescript
- * const money = ${currency.code}(1);// Money({ currency: Currency({ code: '${currency.code}' }), amount: 1 })
+ * const money = ${currency.code}(1);// Money({ currency: Currency({ code: '${currency.code}' }), amount: BigDecimal('1') })
  * \`\`\`
  * @param amount - The amount of money
  */

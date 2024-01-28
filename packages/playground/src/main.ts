@@ -3,6 +3,8 @@ import { Console, Int, Option, Task, unsafeRun } from '@w5s/core';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/random';
+import { EUR } from '@w5s/money';
+import { BigDecimal } from '@w5s/bigdecimal';
 import { pipe } from './pipe.js';
 import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
@@ -10,8 +12,9 @@ import { timeout, TimeoutError } from './timeout.js';
 
 function main() {
   const client = Slack({ token: 'token' });
+  const amount = EUR(BigDecimal('1.55'));
   const task = pipe(randomUUID()).to(
-    (_) => Task.andThen(_, (uuid) => Slack.Chat.postMessage(client, { text: uuid })),
+    (_) => Task.andThen(_, (uuid) => Slack.Chat.postMessage(client, { text: uuid + String(amount) })),
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
