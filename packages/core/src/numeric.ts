@@ -19,10 +19,10 @@ export interface Numeric<T> {
   /**
    * Multiply operator
    *
-   * @param base - the left operand
-   * @param factor - the right operand
+   * @param left - the left operand
+   * @param right - the right operand
    */
-  '*'(base: T, factor: T): T;
+  '*'(left: T, right: T): T;
   /**
    * Absolute value
    *
