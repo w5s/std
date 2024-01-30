@@ -1,7 +1,11 @@
 export interface TestingLibrary {
-  describe: (description: string, fn: () => void) => void;
+  describe: {
+    (description: string, fn: () => void): void;
+    todo: (description: string, fn: () => void) => void;
+  };
   it: {
     (description: string, fn: () => void): void;
+    todo: (description: string, fn: () => void) => void;
     each: <T>(values: ReadonlyArray<T>) => (description: string, fn: (value: T) => void) => void;
   };
   expect: <V>(value: V) => {

@@ -44,27 +44,27 @@ export function describeNumeric({ describe, it, expect }: TestingLibrary) {
       '*': Array<{ call: [T, T]; returns: T }>;
     }
   ) => {
-    describe('abs', () => {
+    (properties.abs.length === 0 ? describe.todo : describe)('abs', () => {
       it.each(properties.abs)('satisfies abs($call.0) == $returns', ({ call, returns }) => {
         expect(subject['=='](subject.abs(...call), returns)).toBe(true);
       });
     });
-    describe('sign', () => {
+    (properties.sign.length === 0 ? describe.todo : describe)('sign', () => {
       it.each(properties.sign)('satisfies sign($call.0) == $returns', ({ call, returns }) => {
         expect(subject['=='](subject.sign(...call), returns)).toBe(true);
       });
     });
-    describe('+', () => {
+    (properties['+'].length === 0 ? describe.todo : describe)('+', () => {
       it.each(properties['+'])("satisfies ['+']($call.0, $call.1) == $returns", ({ call, returns }) => {
         expect(subject['=='](subject['+'](...call), returns)).toBe(true);
       });
     });
-    describe('-', () => {
+    (properties['-'].length === 0 ? describe.todo : describe)('-', () => {
       it.each(properties['-'])("satisfies ['-']($call.0, $call.1) == $returns", ({ call, returns }) => {
         expect(subject['=='](subject['-'](...call), returns)).toBe(true);
       });
     });
-    describe('*', () => {
+    (properties['*'].length === 0 ? describe.todo : describe)('*', () => {
       it.each(properties['*'])("satisfies ['*']($call.0, $call.1) == $returns", ({ call, returns }) => {
         expect(subject['=='](subject['*'](...call), returns)).toBe(true);
       });
