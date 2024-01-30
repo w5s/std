@@ -1,7 +1,7 @@
 import { ArgumentError } from '@w5s/error/dist/argumentError.js';
 import { Struct } from '@w5s/core/dist/struct.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
-import { type Result, throwError } from '@w5s/core';
+import { type Result } from '@w5s/core';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './currency.js';
 
@@ -48,8 +48,6 @@ const MoneyComparable = Comparable<Money>({
 });
 const MoneyStruct = Struct.Make<Money>('Money');
 
-const notImplemented = () => throwError(new Error('NotImplemented'));
-
 export const Money = Object.assign(MoneyStruct, {
   ...MoneyComparable,
 
@@ -64,7 +62,7 @@ export const Money = Object.assign(MoneyStruct, {
    * @param left - Left operand currency
    * @param right - Right operand currency
    */
-  '+': createOperator(notImplemented),
+  '+': createOperator(BigDecimal['+']),
 
   /**
    * Subtract operator
@@ -77,5 +75,5 @@ export const Money = Object.assign(MoneyStruct, {
    * @param left - Left operand currency
    * @param right - Right operand currency
    */
-  '-': createOperator(notImplemented),
+  '-': createOperator(BigDecimal['-']),
 });

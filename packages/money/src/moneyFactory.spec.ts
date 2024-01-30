@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Int } from '@w5s/core';
 import { ApplicationTest } from '@w5s/application/dist/testing.js';
+import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './currency.js';
 import { CurrencyRegistry } from './currencyRegistry.js';
 import { Money } from './money.js';
@@ -59,6 +60,6 @@ describe('moneyFactory', () => {
       symbol: '#',
       symbolNative: '#',
     });
-    expect(factory(1)).toEqual(Money({ currency, amount: 1 }));
+    expect(factory(BigDecimal('1'))).toEqual(Money({ currency, amount: BigDecimal('1') }));
   });
 });

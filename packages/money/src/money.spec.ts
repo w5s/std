@@ -50,7 +50,7 @@ describe('Money', () => {
     equivalent: () => [[EUR(_1), EUR(_1)]],
   });
 
-  describe.skip('+', () => {
+  describe('+', () => {
     it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
       [EUR(_1), EUR(_2), Result.Ok(EUR(_3))],
@@ -59,7 +59,7 @@ describe('Money', () => {
       expect(Money['+'](left, right)).toEqual(expected);
     });
   });
-  describe.skip('-', () => {
+  describe('-', () => {
     it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
       [EUR(_2), EUR(_1), Result.Ok(EUR(_1))],
