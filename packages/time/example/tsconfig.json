@@ -4,8 +4,8 @@
     "baseUrl": "../../",
     "noEmit": true,
     "paths": {
-      "@w5s/time": ["./time"],
-    },
+      "@w5s/time": ["./time"]
+    }
   },
-  "include": ["."],
+  "include": ["."]
 }

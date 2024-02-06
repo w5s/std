@@ -5,8 +5,8 @@
     "noEmit": true,
     "paths": {
       "@w5s/core": ["./core"],
-      "@w5s/log": ["./log"],
-    },
+      "@w5s/log": ["./log"]
+    }
   },
-  "include": ["."],
+  "include": ["."]
 }

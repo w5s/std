@@ -4,8 +4,8 @@
     "baseUrl": "../../",
     "noEmit": true,
     "paths": {
-      "@w5s/invariant": ["./invariant"],
-    },
+      "@w5s/invariant": ["./invariant"]
+    }
   },
-  "include": ["."],
+  "include": ["."]
 }
