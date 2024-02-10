@@ -13019,8 +13019,8 @@ __metadata:
   linkType: hard
 
 "mdast-util-mdx-jsx@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "mdast-util-mdx-jsx@npm:3.0.0"
+  version: 3.1.0
+  resolution: "mdast-util-mdx-jsx@npm:3.1.0"
   dependencies:
     "@types/estree-jsx": "npm:^1.0.0"
     "@types/hast": "npm:^3.0.0"
@@ -13035,7 +13035,7 @@ __metadata:
     unist-util-remove-position: "npm:^5.0.0"
     unist-util-stringify-position: "npm:^4.0.0"
     vfile-message: "npm:^4.0.0"
-  checksum: 10c0/c14fc72587acd482086be56bb809a142b4d732833593c9a14c1ebb863e549aafbc9391507b177eac8788b2a9de624b8665a2092c75243bbe80f808728ffa421a
+  checksum: 10c0/1961ecc4cc63bc9c45db09583f1111e990c8fa680c18f1a207e11402336e1981d4480947f24940daf82c24769aab638340a369c3f623657964641d89b25ef980
   languageName: node
   linkType: hard
 
