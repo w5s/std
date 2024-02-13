@@ -5374,7 +5374,7 @@ __metadata:
     "@mdx-js/react": "npm:3.0.0"
     "@types/node": "npm:20.11.17"
     clsx: "npm:2.1.0"
-    docusaurus-plugin-typedoc-api: "npm:4.1.0"
+    docusaurus-plugin-typedoc-api: "npm:4.2.0"
     prism-react-renderer: "npm:2.3.1"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
@@ -8281,9 +8281,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc-api@npm:4.1.0":
-  version: 4.1.0
-  resolution: "docusaurus-plugin-typedoc-api@npm:4.1.0"
+"docusaurus-plugin-typedoc-api@npm:4.2.0":
+  version: 4.2.0
+  resolution: "docusaurus-plugin-typedoc-api@npm:4.2.0"
   dependencies:
     "@docusaurus/plugin-content-docs": "npm:^3.1.0"
     "@docusaurus/types": "npm:^3.1.0"
@@ -8294,9 +8294,10 @@ __metadata:
     typedoc: "npm:^0.25.7"
   peerDependencies:
     "@docusaurus/core": ^3.0.0
+    "@docusaurus/mdx-loader": ^3.0.0
     react: ">=18.0.0"
     typescript: ^5.0.0
-  checksum: 10c0/ab04d11976f15db6011cb25eba6300f6b774c1f3271b4e3b86f6a3f2e1af078197c3425fb2bd95470c87c3704ee72f62dc0b0931fb37247fd6796fb326b3a860
+  checksum: 10c0/627cc69972e88fa3591eb3cfb03fa00efb787328ee4323867626904021dfba5441736616f763054cbaeb69ea53aaf9d87fc14641d3512619b48622f8f4e2da4e
   languageName: node
   linkType: hard
 
