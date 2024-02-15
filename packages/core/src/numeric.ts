@@ -3,22 +3,25 @@
  */
 export interface Numeric<T> {
   /**
-   * Add operator
+   * Addition operator
    *
+   * @category Numeric
    * @param left - the left operand
    * @param right - the right operand
    */
   '+'(left: T, right: T): T;
   /**
-   * Subtract operator
+   * Subtraction operator
    *
+   * @category Numeric
    * @param left - the left operand
    * @param right - the right operand
    */
   '-'(left: T, right: T): T;
   /**
-   * Multiply operator
+   * Multiplication operator
    *
+   * @category Numeric
    * @param left - the left operand
    * @param right - the right operand
    */
@@ -26,12 +29,14 @@ export interface Numeric<T> {
   /**
    * Absolute value
    *
+   * @category Numeric
    * @param value - the numeric value
    */
   abs(value: T): T;
   /**
    * Sign of a number. It should satisfy `Numeric['*'](Numeric.abs(x), Numeric.sign(x)) == x`
    *
+   * @category Numeric
    * @param value - the numeric value
    */
   sign(value: T): T;
