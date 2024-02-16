@@ -73,6 +73,10 @@ export interface Currency
      */
     symbolNative: string;
   }> {}
+
+/**
+ * @namespace
+ */
 export const Currency = Object.assign(CurrencyStruct, {
   /**
    * Default rounding when omitted

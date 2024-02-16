@@ -48,6 +48,9 @@ const MoneyComparable = Comparable<Money>({
 });
 const MoneyStruct = Struct.Make<Money>('Money');
 
+/**
+ * @namespace
+ */
 export const Money = Object.assign(MoneyStruct, {
   ...MoneyComparable,
 
