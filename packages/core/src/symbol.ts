@@ -12,11 +12,6 @@ declare global {
      * Disposes asynchronously of resources within this object.
      */
     readonly asyncDispose: unique symbol;
-
-    /**
-     * Object storage property.
-     */
-    readonly storage: unique symbol;
   }
 }
 const GlobalSymbol = globalThis.Symbol;
@@ -42,5 +37,4 @@ export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'm
   matchAll: GlobalSymbol.matchAll,
   dispose: GlobalSymbol.dispose ?? (GlobalSymbol.for('dispose') as any),
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
-  storage: GlobalSymbol.for('@w5s/storage') as SymbolConstructor['storage'],
 };

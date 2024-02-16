@@ -9,6 +9,7 @@ describe('index', () => {
         'useRef',
         'useStorage',
         'Application',
+        '$storage',
       ].sort()
     );
   });
