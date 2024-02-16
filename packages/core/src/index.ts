@@ -3,7 +3,6 @@ export * from './assign.js';
 export * from './bigint.js';
 export * from './boolean.js';
 export * from './bounded.js';
-export * from './cancel.js';
 export * from './comparable.js';
 export * from './console.js';
 export * from './struct.js';

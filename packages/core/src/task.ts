@@ -3,7 +3,6 @@ import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
 import type { Awaitable } from './type.js';
-import { cancel } from './cancel.js';
 
 // Inline static helpers
 const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
@@ -13,6 +12,13 @@ const isObject = (anyValue: unknown): anyValue is Record<string, unknown> =>
   typeof anyValue === 'object' && anyValue !== null;
 const isPromiseLike = <V>(anyValue: unknown): anyValue is PromiseLike<V> =>
   isObject(anyValue) && typeof anyValue['then'] === 'function';
+const cancel = (cancelerRef: TaskCanceler) => {
+  const { current } = cancelerRef;
+  if (current != null) {
+    cancelerRef.current = undefined;
+    current();
+  }
+};
 
 const Ok: typeof Result.Ok = ((value?: unknown) => ({ _: 'Ok', ok: true, value })) as unknown as typeof Result.Ok;
 const Err: typeof Result.Error = ((error?: unknown): Result<never, unknown> => ({

@@ -1,4 +1,4 @@
-import { Result, cancel, unsafeRun, type TaskCanceler } from '@w5s/core';
+import { Result, unsafeRun, type TaskCanceler } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../filePath.js';
@@ -36,7 +36,10 @@ describe('writeFile', () => {
           index += 1;
           let value = currentIndex.toString(16);
           if (currentIndex > 9) {
-            cancel(cancelerRef);
+            if (cancelerRef.current != null) {
+              cancelerRef.current();
+            }
+
             value = 'X';
           }
           if (currentIndex >= 16) {

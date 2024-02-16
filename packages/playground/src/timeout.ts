@@ -1,4 +1,3 @@
-import { cancel } from '@w5s/core/dist/cancel.js';
 import type { TaskCanceler, Task } from '@w5s/core';
 import type { TimeDuration } from '@w5s/time';
 import { defineCustomError, type CustomError } from '@w5s/error';
@@ -42,7 +41,13 @@ export function timeout<Value, Error>(
   return {
     taskRun: ({ resolve, reject, canceler, run }) => {
       const taskCancelerRef: TaskCanceler = { current: undefined };
-      const taskCancel = () => cancel(taskCancelerRef);
+      const taskCancel = () => {
+        const { current } = taskCancelerRef;
+        if (current != null) {
+          taskCancelerRef.current = undefined;
+          current();
+        }
+      };
 
       const timeoutId = setTimeout(() => {
         taskCancel();

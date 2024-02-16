@@ -11,7 +11,6 @@ describe('index', () => {
         'AsyncDisposable',
         'BigInt',
         'Boolean',
-        'cancel',
         'Comparable',
         'Console',
         'Struct',
