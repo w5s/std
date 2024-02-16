@@ -1,6 +1,6 @@
-import { type Numeric, type Option } from '@w5s/core';
+import type { Numeric, Option, Struct } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/comparable.js';
-import { Struct } from '@w5s/core/dist/struct.js';
+import { Struct as StructValue } from '@w5s/core/dist/struct.js';
 import { invariant } from '@w5s/invariant';
 
 const bigIntSign = (value: bigint) => (value < 0n ? -1n : value > 0n ? 1n : 0n);
@@ -56,7 +56,7 @@ const combine2 = (combineFn: (left: bigint, right: bigint) => bigint) => (left: 
       ? create(combineFn(scaleValue(left, right.scale), right.value), right.scale)
       : create(combineFn(left.value, right.value), left.scale);
 
-const BigDecimalStruct = Struct.MakeGeneric(
+const BigDecimalStruct = StructValue.MakeGeneric(
   'BigDecimal',
   (
     _
