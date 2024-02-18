@@ -21,6 +21,8 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --immutable
+      - name: Build sources
+        run: yarn run build
       - name: Build website
         run: yarn workspace @w5s/website run build
 
