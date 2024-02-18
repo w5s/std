@@ -12341,9 +12341,9 @@ __metadata:
   linkType: hard
 
 "lilconfig@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "lilconfig@npm:3.1.0"
-  checksum: 10c0/cd126834a0e964f4798a0f87245529acc6b3c163ee2dbf6b95b23f024d0a18a361f706ead21052a7f4aefc3a55d6d67217ad3aded30de5b564c19941ec80ea35
+  version: 3.1.1
+  resolution: "lilconfig@npm:3.1.1"
+  checksum: 10c0/311b559794546894e3fe176663427326026c1c644145be9e8041c58e268aa9328799b8dfe7e4dd8c6a4ae305feae95a1c9e007db3569f35b42b6e1bc8274754c
   languageName: node
   linkType: hard
 
