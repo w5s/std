@@ -5,15 +5,13 @@ import { type Result } from '@w5s/core';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './currency.js';
 
-export type Amount = BigDecimal;
-
 export interface Money
   extends Struct<{
     [Struct.type]: 'Money';
     /**
      * Amount of currency
      */
-    amount: Amount;
+    amount: BigDecimal;
     /**
      * Currency unit
      */
@@ -21,7 +19,7 @@ export interface Money
   }> {}
 
 const createOperator =
-  (combineFn: (leftAmount: Amount, rightAmount: Amount) => Amount) =>
+  (combineFn: (leftAmount: Money['amount'], rightAmount: Money['amount']) => Money['amount']) =>
   (left: Money, right: Money): Result<Money, ArgumentError> =>
     Currency['=='](left.currency, right.currency)
       ? {
