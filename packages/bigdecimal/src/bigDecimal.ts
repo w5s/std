@@ -3,6 +3,11 @@ import { Comparable } from '@w5s/core/dist/comparable.js';
 import { Struct as StructValue } from '@w5s/core/dist/struct.js';
 import { invariant } from '@w5s/invariant';
 
+/**
+ * Valid BigDecimal string representation
+ */
+export type BigDecimalString = `${number}`;
+
 const bigIntSign = (value: bigint) => (value < 0n ? -1n : value > 0n ? 1n : 0n);
 const bigIntAbs = (value: bigint) => (value <= 0n ? -value : value);
 const bigIntCompare = (left: bigint, right: bigint) => (left === right ? 0 : left < right ? -1 : 1);
@@ -28,8 +33,6 @@ const parse = (value: string): Option<BigDecimal> => {
   }
 
   if (digits === '') {
-    // TODO: This mimics the BigInt constructor behavior. Should this be `Option.none()`?
-    // return zero;
     return undefined;
   }
 
@@ -61,7 +64,7 @@ const BigDecimalStruct = StructValue.MakeGeneric(
   (
     _
   ): {
-    (stringValue: string): BigDecimal;
+    (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale: number): BigDecimal;
   } =>
     // eslint-disable-next-line @typescript-eslint/no-shadow

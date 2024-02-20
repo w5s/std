@@ -21,6 +21,8 @@ describe('BigDecimal', () => {
       expect(BigDecimal('2.00')).toEqual(BigDecimal(200n, 2));
       expect(BigDecimal('0.0000200')).toEqual(BigDecimal(200n, 7));
       // expect(BigDecimal('')).toEqual(BigDecimal.normalize(BigDecimal(0n, 0)));
+      // @ts-expect-error A is not valid
+      expect(() => BigDecimal('A')).toThrow(new Error('A is not a valid BigDecimal'));
       expect(() => BigDecimal('1E5')).toThrow(new Error('1E5 is not a valid BigDecimal'));
     });
   });
