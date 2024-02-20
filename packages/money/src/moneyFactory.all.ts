@@ -1203,7 +1203,7 @@ registerAll();
  *
  * @example
  * ```typescript
- * const money = USD(1);// Money({ currency: Currency({ code: 'USD' }), amount: BigDecimal('1') })
+ * const money = USD('1.25');// Money({ currency: Currency({ code: 'USD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1213,7 +1213,7 @@ export const USD = moneyFactory('USD');
  *
  * @example
  * ```typescript
- * const money = CAD(1);// Money({ currency: Currency({ code: 'CAD' }), amount: BigDecimal('1') })
+ * const money = CAD('1.25');// Money({ currency: Currency({ code: 'CAD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1223,7 +1223,7 @@ export const CAD = moneyFactory('CAD');
  *
  * @example
  * ```typescript
- * const money = EUR(1);// Money({ currency: Currency({ code: 'EUR' }), amount: BigDecimal('1') })
+ * const money = EUR('1.25');// Money({ currency: Currency({ code: 'EUR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1233,7 +1233,7 @@ export const EUR = moneyFactory('EUR');
  *
  * @example
  * ```typescript
- * const money = AED(1);// Money({ currency: Currency({ code: 'AED' }), amount: BigDecimal('1') })
+ * const money = AED('1.25');// Money({ currency: Currency({ code: 'AED' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1243,7 +1243,7 @@ export const AED = moneyFactory('AED');
  *
  * @example
  * ```typescript
- * const money = AFN(1);// Money({ currency: Currency({ code: 'AFN' }), amount: BigDecimal('1') })
+ * const money = AFN('1.25');// Money({ currency: Currency({ code: 'AFN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1253,7 +1253,7 @@ export const AFN = moneyFactory('AFN');
  *
  * @example
  * ```typescript
- * const money = ALL(1);// Money({ currency: Currency({ code: 'ALL' }), amount: BigDecimal('1') })
+ * const money = ALL('1.25');// Money({ currency: Currency({ code: 'ALL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1263,7 +1263,7 @@ export const ALL = moneyFactory('ALL');
  *
  * @example
  * ```typescript
- * const money = AMD(1);// Money({ currency: Currency({ code: 'AMD' }), amount: BigDecimal('1') })
+ * const money = AMD('1.25');// Money({ currency: Currency({ code: 'AMD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1273,7 +1273,7 @@ export const AMD = moneyFactory('AMD');
  *
  * @example
  * ```typescript
- * const money = ARS(1);// Money({ currency: Currency({ code: 'ARS' }), amount: BigDecimal('1') })
+ * const money = ARS('1.25');// Money({ currency: Currency({ code: 'ARS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1283,7 +1283,7 @@ export const ARS = moneyFactory('ARS');
  *
  * @example
  * ```typescript
- * const money = AUD(1);// Money({ currency: Currency({ code: 'AUD' }), amount: BigDecimal('1') })
+ * const money = AUD('1.25');// Money({ currency: Currency({ code: 'AUD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1293,7 +1293,7 @@ export const AUD = moneyFactory('AUD');
  *
  * @example
  * ```typescript
- * const money = AZN(1);// Money({ currency: Currency({ code: 'AZN' }), amount: BigDecimal('1') })
+ * const money = AZN('1.25');// Money({ currency: Currency({ code: 'AZN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1303,7 +1303,7 @@ export const AZN = moneyFactory('AZN');
  *
  * @example
  * ```typescript
- * const money = BAM(1);// Money({ currency: Currency({ code: 'BAM' }), amount: BigDecimal('1') })
+ * const money = BAM('1.25');// Money({ currency: Currency({ code: 'BAM' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1313,7 +1313,7 @@ export const BAM = moneyFactory('BAM');
  *
  * @example
  * ```typescript
- * const money = BDT(1);// Money({ currency: Currency({ code: 'BDT' }), amount: BigDecimal('1') })
+ * const money = BDT('1.25');// Money({ currency: Currency({ code: 'BDT' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1323,7 +1323,7 @@ export const BDT = moneyFactory('BDT');
  *
  * @example
  * ```typescript
- * const money = BGN(1);// Money({ currency: Currency({ code: 'BGN' }), amount: BigDecimal('1') })
+ * const money = BGN('1.25');// Money({ currency: Currency({ code: 'BGN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1333,7 +1333,7 @@ export const BGN = moneyFactory('BGN');
  *
  * @example
  * ```typescript
- * const money = BHD(1);// Money({ currency: Currency({ code: 'BHD' }), amount: BigDecimal('1') })
+ * const money = BHD('1.25');// Money({ currency: Currency({ code: 'BHD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1343,7 +1343,7 @@ export const BHD = moneyFactory('BHD');
  *
  * @example
  * ```typescript
- * const money = BIF(1);// Money({ currency: Currency({ code: 'BIF' }), amount: BigDecimal('1') })
+ * const money = BIF('1.25');// Money({ currency: Currency({ code: 'BIF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1353,7 +1353,7 @@ export const BIF = moneyFactory('BIF');
  *
  * @example
  * ```typescript
- * const money = BND(1);// Money({ currency: Currency({ code: 'BND' }), amount: BigDecimal('1') })
+ * const money = BND('1.25');// Money({ currency: Currency({ code: 'BND' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1363,7 +1363,7 @@ export const BND = moneyFactory('BND');
  *
  * @example
  * ```typescript
- * const money = BOB(1);// Money({ currency: Currency({ code: 'BOB' }), amount: BigDecimal('1') })
+ * const money = BOB('1.25');// Money({ currency: Currency({ code: 'BOB' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1373,7 +1373,7 @@ export const BOB = moneyFactory('BOB');
  *
  * @example
  * ```typescript
- * const money = BRL(1);// Money({ currency: Currency({ code: 'BRL' }), amount: BigDecimal('1') })
+ * const money = BRL('1.25');// Money({ currency: Currency({ code: 'BRL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1383,7 +1383,7 @@ export const BRL = moneyFactory('BRL');
  *
  * @example
  * ```typescript
- * const money = BWP(1);// Money({ currency: Currency({ code: 'BWP' }), amount: BigDecimal('1') })
+ * const money = BWP('1.25');// Money({ currency: Currency({ code: 'BWP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1393,7 +1393,7 @@ export const BWP = moneyFactory('BWP');
  *
  * @example
  * ```typescript
- * const money = BYN(1);// Money({ currency: Currency({ code: 'BYN' }), amount: BigDecimal('1') })
+ * const money = BYN('1.25');// Money({ currency: Currency({ code: 'BYN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1403,7 +1403,7 @@ export const BYN = moneyFactory('BYN');
  *
  * @example
  * ```typescript
- * const money = BZD(1);// Money({ currency: Currency({ code: 'BZD' }), amount: BigDecimal('1') })
+ * const money = BZD('1.25');// Money({ currency: Currency({ code: 'BZD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1413,7 +1413,7 @@ export const BZD = moneyFactory('BZD');
  *
  * @example
  * ```typescript
- * const money = CDF(1);// Money({ currency: Currency({ code: 'CDF' }), amount: BigDecimal('1') })
+ * const money = CDF('1.25');// Money({ currency: Currency({ code: 'CDF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1423,7 +1423,7 @@ export const CDF = moneyFactory('CDF');
  *
  * @example
  * ```typescript
- * const money = CHF(1);// Money({ currency: Currency({ code: 'CHF' }), amount: BigDecimal('1') })
+ * const money = CHF('1.25');// Money({ currency: Currency({ code: 'CHF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1433,7 +1433,7 @@ export const CHF = moneyFactory('CHF');
  *
  * @example
  * ```typescript
- * const money = CLP(1);// Money({ currency: Currency({ code: 'CLP' }), amount: BigDecimal('1') })
+ * const money = CLP('1.25');// Money({ currency: Currency({ code: 'CLP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1443,7 +1443,7 @@ export const CLP = moneyFactory('CLP');
  *
  * @example
  * ```typescript
- * const money = CNY(1);// Money({ currency: Currency({ code: 'CNY' }), amount: BigDecimal('1') })
+ * const money = CNY('1.25');// Money({ currency: Currency({ code: 'CNY' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1453,7 +1453,7 @@ export const CNY = moneyFactory('CNY');
  *
  * @example
  * ```typescript
- * const money = COP(1);// Money({ currency: Currency({ code: 'COP' }), amount: BigDecimal('1') })
+ * const money = COP('1.25');// Money({ currency: Currency({ code: 'COP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1463,7 +1463,7 @@ export const COP = moneyFactory('COP');
  *
  * @example
  * ```typescript
- * const money = CRC(1);// Money({ currency: Currency({ code: 'CRC' }), amount: BigDecimal('1') })
+ * const money = CRC('1.25');// Money({ currency: Currency({ code: 'CRC' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1473,7 +1473,7 @@ export const CRC = moneyFactory('CRC');
  *
  * @example
  * ```typescript
- * const money = CVE(1);// Money({ currency: Currency({ code: 'CVE' }), amount: BigDecimal('1') })
+ * const money = CVE('1.25');// Money({ currency: Currency({ code: 'CVE' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1483,7 +1483,7 @@ export const CVE = moneyFactory('CVE');
  *
  * @example
  * ```typescript
- * const money = CZK(1);// Money({ currency: Currency({ code: 'CZK' }), amount: BigDecimal('1') })
+ * const money = CZK('1.25');// Money({ currency: Currency({ code: 'CZK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1493,7 +1493,7 @@ export const CZK = moneyFactory('CZK');
  *
  * @example
  * ```typescript
- * const money = DJF(1);// Money({ currency: Currency({ code: 'DJF' }), amount: BigDecimal('1') })
+ * const money = DJF('1.25');// Money({ currency: Currency({ code: 'DJF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1503,7 +1503,7 @@ export const DJF = moneyFactory('DJF');
  *
  * @example
  * ```typescript
- * const money = DKK(1);// Money({ currency: Currency({ code: 'DKK' }), amount: BigDecimal('1') })
+ * const money = DKK('1.25');// Money({ currency: Currency({ code: 'DKK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1513,7 +1513,7 @@ export const DKK = moneyFactory('DKK');
  *
  * @example
  * ```typescript
- * const money = DOP(1);// Money({ currency: Currency({ code: 'DOP' }), amount: BigDecimal('1') })
+ * const money = DOP('1.25');// Money({ currency: Currency({ code: 'DOP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1523,7 +1523,7 @@ export const DOP = moneyFactory('DOP');
  *
  * @example
  * ```typescript
- * const money = DZD(1);// Money({ currency: Currency({ code: 'DZD' }), amount: BigDecimal('1') })
+ * const money = DZD('1.25');// Money({ currency: Currency({ code: 'DZD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1533,7 +1533,7 @@ export const DZD = moneyFactory('DZD');
  *
  * @example
  * ```typescript
- * const money = EEK(1);// Money({ currency: Currency({ code: 'EEK' }), amount: BigDecimal('1') })
+ * const money = EEK('1.25');// Money({ currency: Currency({ code: 'EEK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1543,7 +1543,7 @@ export const EEK = moneyFactory('EEK');
  *
  * @example
  * ```typescript
- * const money = EGP(1);// Money({ currency: Currency({ code: 'EGP' }), amount: BigDecimal('1') })
+ * const money = EGP('1.25');// Money({ currency: Currency({ code: 'EGP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1553,7 +1553,7 @@ export const EGP = moneyFactory('EGP');
  *
  * @example
  * ```typescript
- * const money = ERN(1);// Money({ currency: Currency({ code: 'ERN' }), amount: BigDecimal('1') })
+ * const money = ERN('1.25');// Money({ currency: Currency({ code: 'ERN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1563,7 +1563,7 @@ export const ERN = moneyFactory('ERN');
  *
  * @example
  * ```typescript
- * const money = ETB(1);// Money({ currency: Currency({ code: 'ETB' }), amount: BigDecimal('1') })
+ * const money = ETB('1.25');// Money({ currency: Currency({ code: 'ETB' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1573,7 +1573,7 @@ export const ETB = moneyFactory('ETB');
  *
  * @example
  * ```typescript
- * const money = GBP(1);// Money({ currency: Currency({ code: 'GBP' }), amount: BigDecimal('1') })
+ * const money = GBP('1.25');// Money({ currency: Currency({ code: 'GBP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1583,7 +1583,7 @@ export const GBP = moneyFactory('GBP');
  *
  * @example
  * ```typescript
- * const money = GEL(1);// Money({ currency: Currency({ code: 'GEL' }), amount: BigDecimal('1') })
+ * const money = GEL('1.25');// Money({ currency: Currency({ code: 'GEL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1593,7 +1593,7 @@ export const GEL = moneyFactory('GEL');
  *
  * @example
  * ```typescript
- * const money = GHS(1);// Money({ currency: Currency({ code: 'GHS' }), amount: BigDecimal('1') })
+ * const money = GHS('1.25');// Money({ currency: Currency({ code: 'GHS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1603,7 +1603,7 @@ export const GHS = moneyFactory('GHS');
  *
  * @example
  * ```typescript
- * const money = GNF(1);// Money({ currency: Currency({ code: 'GNF' }), amount: BigDecimal('1') })
+ * const money = GNF('1.25');// Money({ currency: Currency({ code: 'GNF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1613,7 +1613,7 @@ export const GNF = moneyFactory('GNF');
  *
  * @example
  * ```typescript
- * const money = GTQ(1);// Money({ currency: Currency({ code: 'GTQ' }), amount: BigDecimal('1') })
+ * const money = GTQ('1.25');// Money({ currency: Currency({ code: 'GTQ' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1623,7 +1623,7 @@ export const GTQ = moneyFactory('GTQ');
  *
  * @example
  * ```typescript
- * const money = HKD(1);// Money({ currency: Currency({ code: 'HKD' }), amount: BigDecimal('1') })
+ * const money = HKD('1.25');// Money({ currency: Currency({ code: 'HKD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1633,7 +1633,7 @@ export const HKD = moneyFactory('HKD');
  *
  * @example
  * ```typescript
- * const money = HNL(1);// Money({ currency: Currency({ code: 'HNL' }), amount: BigDecimal('1') })
+ * const money = HNL('1.25');// Money({ currency: Currency({ code: 'HNL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1643,7 +1643,7 @@ export const HNL = moneyFactory('HNL');
  *
  * @example
  * ```typescript
- * const money = HRK(1);// Money({ currency: Currency({ code: 'HRK' }), amount: BigDecimal('1') })
+ * const money = HRK('1.25');// Money({ currency: Currency({ code: 'HRK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1653,7 +1653,7 @@ export const HRK = moneyFactory('HRK');
  *
  * @example
  * ```typescript
- * const money = HUF(1);// Money({ currency: Currency({ code: 'HUF' }), amount: BigDecimal('1') })
+ * const money = HUF('1.25');// Money({ currency: Currency({ code: 'HUF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1663,7 +1663,7 @@ export const HUF = moneyFactory('HUF');
  *
  * @example
  * ```typescript
- * const money = IDR(1);// Money({ currency: Currency({ code: 'IDR' }), amount: BigDecimal('1') })
+ * const money = IDR('1.25');// Money({ currency: Currency({ code: 'IDR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1673,7 +1673,7 @@ export const IDR = moneyFactory('IDR');
  *
  * @example
  * ```typescript
- * const money = ILS(1);// Money({ currency: Currency({ code: 'ILS' }), amount: BigDecimal('1') })
+ * const money = ILS('1.25');// Money({ currency: Currency({ code: 'ILS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1683,7 +1683,7 @@ export const ILS = moneyFactory('ILS');
  *
  * @example
  * ```typescript
- * const money = INR(1);// Money({ currency: Currency({ code: 'INR' }), amount: BigDecimal('1') })
+ * const money = INR('1.25');// Money({ currency: Currency({ code: 'INR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1693,7 +1693,7 @@ export const INR = moneyFactory('INR');
  *
  * @example
  * ```typescript
- * const money = IQD(1);// Money({ currency: Currency({ code: 'IQD' }), amount: BigDecimal('1') })
+ * const money = IQD('1.25');// Money({ currency: Currency({ code: 'IQD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1703,7 +1703,7 @@ export const IQD = moneyFactory('IQD');
  *
  * @example
  * ```typescript
- * const money = IRR(1);// Money({ currency: Currency({ code: 'IRR' }), amount: BigDecimal('1') })
+ * const money = IRR('1.25');// Money({ currency: Currency({ code: 'IRR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1713,7 +1713,7 @@ export const IRR = moneyFactory('IRR');
  *
  * @example
  * ```typescript
- * const money = ISK(1);// Money({ currency: Currency({ code: 'ISK' }), amount: BigDecimal('1') })
+ * const money = ISK('1.25');// Money({ currency: Currency({ code: 'ISK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1723,7 +1723,7 @@ export const ISK = moneyFactory('ISK');
  *
  * @example
  * ```typescript
- * const money = JMD(1);// Money({ currency: Currency({ code: 'JMD' }), amount: BigDecimal('1') })
+ * const money = JMD('1.25');// Money({ currency: Currency({ code: 'JMD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1733,7 +1733,7 @@ export const JMD = moneyFactory('JMD');
  *
  * @example
  * ```typescript
- * const money = JOD(1);// Money({ currency: Currency({ code: 'JOD' }), amount: BigDecimal('1') })
+ * const money = JOD('1.25');// Money({ currency: Currency({ code: 'JOD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1743,7 +1743,7 @@ export const JOD = moneyFactory('JOD');
  *
  * @example
  * ```typescript
- * const money = JPY(1);// Money({ currency: Currency({ code: 'JPY' }), amount: BigDecimal('1') })
+ * const money = JPY('1.25');// Money({ currency: Currency({ code: 'JPY' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1753,7 +1753,7 @@ export const JPY = moneyFactory('JPY');
  *
  * @example
  * ```typescript
- * const money = KES(1);// Money({ currency: Currency({ code: 'KES' }), amount: BigDecimal('1') })
+ * const money = KES('1.25');// Money({ currency: Currency({ code: 'KES' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1763,7 +1763,7 @@ export const KES = moneyFactory('KES');
  *
  * @example
  * ```typescript
- * const money = KHR(1);// Money({ currency: Currency({ code: 'KHR' }), amount: BigDecimal('1') })
+ * const money = KHR('1.25');// Money({ currency: Currency({ code: 'KHR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1773,7 +1773,7 @@ export const KHR = moneyFactory('KHR');
  *
  * @example
  * ```typescript
- * const money = KMF(1);// Money({ currency: Currency({ code: 'KMF' }), amount: BigDecimal('1') })
+ * const money = KMF('1.25');// Money({ currency: Currency({ code: 'KMF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1783,7 +1783,7 @@ export const KMF = moneyFactory('KMF');
  *
  * @example
  * ```typescript
- * const money = KRW(1);// Money({ currency: Currency({ code: 'KRW' }), amount: BigDecimal('1') })
+ * const money = KRW('1.25');// Money({ currency: Currency({ code: 'KRW' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1793,7 +1793,7 @@ export const KRW = moneyFactory('KRW');
  *
  * @example
  * ```typescript
- * const money = KWD(1);// Money({ currency: Currency({ code: 'KWD' }), amount: BigDecimal('1') })
+ * const money = KWD('1.25');// Money({ currency: Currency({ code: 'KWD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1803,7 +1803,7 @@ export const KWD = moneyFactory('KWD');
  *
  * @example
  * ```typescript
- * const money = KZT(1);// Money({ currency: Currency({ code: 'KZT' }), amount: BigDecimal('1') })
+ * const money = KZT('1.25');// Money({ currency: Currency({ code: 'KZT' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1813,7 +1813,7 @@ export const KZT = moneyFactory('KZT');
  *
  * @example
  * ```typescript
- * const money = LBP(1);// Money({ currency: Currency({ code: 'LBP' }), amount: BigDecimal('1') })
+ * const money = LBP('1.25');// Money({ currency: Currency({ code: 'LBP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1823,7 +1823,7 @@ export const LBP = moneyFactory('LBP');
  *
  * @example
  * ```typescript
- * const money = LKR(1);// Money({ currency: Currency({ code: 'LKR' }), amount: BigDecimal('1') })
+ * const money = LKR('1.25');// Money({ currency: Currency({ code: 'LKR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1833,7 +1833,7 @@ export const LKR = moneyFactory('LKR');
  *
  * @example
  * ```typescript
- * const money = LTL(1);// Money({ currency: Currency({ code: 'LTL' }), amount: BigDecimal('1') })
+ * const money = LTL('1.25');// Money({ currency: Currency({ code: 'LTL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1843,7 +1843,7 @@ export const LTL = moneyFactory('LTL');
  *
  * @example
  * ```typescript
- * const money = LVL(1);// Money({ currency: Currency({ code: 'LVL' }), amount: BigDecimal('1') })
+ * const money = LVL('1.25');// Money({ currency: Currency({ code: 'LVL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1853,7 +1853,7 @@ export const LVL = moneyFactory('LVL');
  *
  * @example
  * ```typescript
- * const money = LYD(1);// Money({ currency: Currency({ code: 'LYD' }), amount: BigDecimal('1') })
+ * const money = LYD('1.25');// Money({ currency: Currency({ code: 'LYD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1863,7 +1863,7 @@ export const LYD = moneyFactory('LYD');
  *
  * @example
  * ```typescript
- * const money = MAD(1);// Money({ currency: Currency({ code: 'MAD' }), amount: BigDecimal('1') })
+ * const money = MAD('1.25');// Money({ currency: Currency({ code: 'MAD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1873,7 +1873,7 @@ export const MAD = moneyFactory('MAD');
  *
  * @example
  * ```typescript
- * const money = MDL(1);// Money({ currency: Currency({ code: 'MDL' }), amount: BigDecimal('1') })
+ * const money = MDL('1.25');// Money({ currency: Currency({ code: 'MDL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1883,7 +1883,7 @@ export const MDL = moneyFactory('MDL');
  *
  * @example
  * ```typescript
- * const money = MGA(1);// Money({ currency: Currency({ code: 'MGA' }), amount: BigDecimal('1') })
+ * const money = MGA('1.25');// Money({ currency: Currency({ code: 'MGA' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1893,7 +1893,7 @@ export const MGA = moneyFactory('MGA');
  *
  * @example
  * ```typescript
- * const money = MKD(1);// Money({ currency: Currency({ code: 'MKD' }), amount: BigDecimal('1') })
+ * const money = MKD('1.25');// Money({ currency: Currency({ code: 'MKD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1903,7 +1903,7 @@ export const MKD = moneyFactory('MKD');
  *
  * @example
  * ```typescript
- * const money = MMK(1);// Money({ currency: Currency({ code: 'MMK' }), amount: BigDecimal('1') })
+ * const money = MMK('1.25');// Money({ currency: Currency({ code: 'MMK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1913,7 +1913,7 @@ export const MMK = moneyFactory('MMK');
  *
  * @example
  * ```typescript
- * const money = MOP(1);// Money({ currency: Currency({ code: 'MOP' }), amount: BigDecimal('1') })
+ * const money = MOP('1.25');// Money({ currency: Currency({ code: 'MOP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1923,7 +1923,7 @@ export const MOP = moneyFactory('MOP');
  *
  * @example
  * ```typescript
- * const money = MUR(1);// Money({ currency: Currency({ code: 'MUR' }), amount: BigDecimal('1') })
+ * const money = MUR('1.25');// Money({ currency: Currency({ code: 'MUR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1933,7 +1933,7 @@ export const MUR = moneyFactory('MUR');
  *
  * @example
  * ```typescript
- * const money = MXN(1);// Money({ currency: Currency({ code: 'MXN' }), amount: BigDecimal('1') })
+ * const money = MXN('1.25');// Money({ currency: Currency({ code: 'MXN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1943,7 +1943,7 @@ export const MXN = moneyFactory('MXN');
  *
  * @example
  * ```typescript
- * const money = MYR(1);// Money({ currency: Currency({ code: 'MYR' }), amount: BigDecimal('1') })
+ * const money = MYR('1.25');// Money({ currency: Currency({ code: 'MYR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1953,7 +1953,7 @@ export const MYR = moneyFactory('MYR');
  *
  * @example
  * ```typescript
- * const money = MZN(1);// Money({ currency: Currency({ code: 'MZN' }), amount: BigDecimal('1') })
+ * const money = MZN('1.25');// Money({ currency: Currency({ code: 'MZN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1963,7 +1963,7 @@ export const MZN = moneyFactory('MZN');
  *
  * @example
  * ```typescript
- * const money = NAD(1);// Money({ currency: Currency({ code: 'NAD' }), amount: BigDecimal('1') })
+ * const money = NAD('1.25');// Money({ currency: Currency({ code: 'NAD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1973,7 +1973,7 @@ export const NAD = moneyFactory('NAD');
  *
  * @example
  * ```typescript
- * const money = NGN(1);// Money({ currency: Currency({ code: 'NGN' }), amount: BigDecimal('1') })
+ * const money = NGN('1.25');// Money({ currency: Currency({ code: 'NGN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1983,7 +1983,7 @@ export const NGN = moneyFactory('NGN');
  *
  * @example
  * ```typescript
- * const money = NIO(1);// Money({ currency: Currency({ code: 'NIO' }), amount: BigDecimal('1') })
+ * const money = NIO('1.25');// Money({ currency: Currency({ code: 'NIO' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -1993,7 +1993,7 @@ export const NIO = moneyFactory('NIO');
  *
  * @example
  * ```typescript
- * const money = NOK(1);// Money({ currency: Currency({ code: 'NOK' }), amount: BigDecimal('1') })
+ * const money = NOK('1.25');// Money({ currency: Currency({ code: 'NOK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2003,7 +2003,7 @@ export const NOK = moneyFactory('NOK');
  *
  * @example
  * ```typescript
- * const money = NPR(1);// Money({ currency: Currency({ code: 'NPR' }), amount: BigDecimal('1') })
+ * const money = NPR('1.25');// Money({ currency: Currency({ code: 'NPR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2013,7 +2013,7 @@ export const NPR = moneyFactory('NPR');
  *
  * @example
  * ```typescript
- * const money = NZD(1);// Money({ currency: Currency({ code: 'NZD' }), amount: BigDecimal('1') })
+ * const money = NZD('1.25');// Money({ currency: Currency({ code: 'NZD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2023,7 +2023,7 @@ export const NZD = moneyFactory('NZD');
  *
  * @example
  * ```typescript
- * const money = OMR(1);// Money({ currency: Currency({ code: 'OMR' }), amount: BigDecimal('1') })
+ * const money = OMR('1.25');// Money({ currency: Currency({ code: 'OMR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2033,7 +2033,7 @@ export const OMR = moneyFactory('OMR');
  *
  * @example
  * ```typescript
- * const money = PAB(1);// Money({ currency: Currency({ code: 'PAB' }), amount: BigDecimal('1') })
+ * const money = PAB('1.25');// Money({ currency: Currency({ code: 'PAB' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2043,7 +2043,7 @@ export const PAB = moneyFactory('PAB');
  *
  * @example
  * ```typescript
- * const money = PEN(1);// Money({ currency: Currency({ code: 'PEN' }), amount: BigDecimal('1') })
+ * const money = PEN('1.25');// Money({ currency: Currency({ code: 'PEN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2053,7 +2053,7 @@ export const PEN = moneyFactory('PEN');
  *
  * @example
  * ```typescript
- * const money = PHP(1);// Money({ currency: Currency({ code: 'PHP' }), amount: BigDecimal('1') })
+ * const money = PHP('1.25');// Money({ currency: Currency({ code: 'PHP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2063,7 +2063,7 @@ export const PHP = moneyFactory('PHP');
  *
  * @example
  * ```typescript
- * const money = PKR(1);// Money({ currency: Currency({ code: 'PKR' }), amount: BigDecimal('1') })
+ * const money = PKR('1.25');// Money({ currency: Currency({ code: 'PKR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2073,7 +2073,7 @@ export const PKR = moneyFactory('PKR');
  *
  * @example
  * ```typescript
- * const money = PLN(1);// Money({ currency: Currency({ code: 'PLN' }), amount: BigDecimal('1') })
+ * const money = PLN('1.25');// Money({ currency: Currency({ code: 'PLN' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2083,7 +2083,7 @@ export const PLN = moneyFactory('PLN');
  *
  * @example
  * ```typescript
- * const money = PYG(1);// Money({ currency: Currency({ code: 'PYG' }), amount: BigDecimal('1') })
+ * const money = PYG('1.25');// Money({ currency: Currency({ code: 'PYG' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2093,7 +2093,7 @@ export const PYG = moneyFactory('PYG');
  *
  * @example
  * ```typescript
- * const money = QAR(1);// Money({ currency: Currency({ code: 'QAR' }), amount: BigDecimal('1') })
+ * const money = QAR('1.25');// Money({ currency: Currency({ code: 'QAR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2103,7 +2103,7 @@ export const QAR = moneyFactory('QAR');
  *
  * @example
  * ```typescript
- * const money = RON(1);// Money({ currency: Currency({ code: 'RON' }), amount: BigDecimal('1') })
+ * const money = RON('1.25');// Money({ currency: Currency({ code: 'RON' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2113,7 +2113,7 @@ export const RON = moneyFactory('RON');
  *
  * @example
  * ```typescript
- * const money = RSD(1);// Money({ currency: Currency({ code: 'RSD' }), amount: BigDecimal('1') })
+ * const money = RSD('1.25');// Money({ currency: Currency({ code: 'RSD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2123,7 +2123,7 @@ export const RSD = moneyFactory('RSD');
  *
  * @example
  * ```typescript
- * const money = RUB(1);// Money({ currency: Currency({ code: 'RUB' }), amount: BigDecimal('1') })
+ * const money = RUB('1.25');// Money({ currency: Currency({ code: 'RUB' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2133,7 +2133,7 @@ export const RUB = moneyFactory('RUB');
  *
  * @example
  * ```typescript
- * const money = RWF(1);// Money({ currency: Currency({ code: 'RWF' }), amount: BigDecimal('1') })
+ * const money = RWF('1.25');// Money({ currency: Currency({ code: 'RWF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2143,7 +2143,7 @@ export const RWF = moneyFactory('RWF');
  *
  * @example
  * ```typescript
- * const money = SAR(1);// Money({ currency: Currency({ code: 'SAR' }), amount: BigDecimal('1') })
+ * const money = SAR('1.25');// Money({ currency: Currency({ code: 'SAR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2153,7 +2153,7 @@ export const SAR = moneyFactory('SAR');
  *
  * @example
  * ```typescript
- * const money = SDG(1);// Money({ currency: Currency({ code: 'SDG' }), amount: BigDecimal('1') })
+ * const money = SDG('1.25');// Money({ currency: Currency({ code: 'SDG' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2163,7 +2163,7 @@ export const SDG = moneyFactory('SDG');
  *
  * @example
  * ```typescript
- * const money = SEK(1);// Money({ currency: Currency({ code: 'SEK' }), amount: BigDecimal('1') })
+ * const money = SEK('1.25');// Money({ currency: Currency({ code: 'SEK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2173,7 +2173,7 @@ export const SEK = moneyFactory('SEK');
  *
  * @example
  * ```typescript
- * const money = SGD(1);// Money({ currency: Currency({ code: 'SGD' }), amount: BigDecimal('1') })
+ * const money = SGD('1.25');// Money({ currency: Currency({ code: 'SGD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2183,7 +2183,7 @@ export const SGD = moneyFactory('SGD');
  *
  * @example
  * ```typescript
- * const money = SOS(1);// Money({ currency: Currency({ code: 'SOS' }), amount: BigDecimal('1') })
+ * const money = SOS('1.25');// Money({ currency: Currency({ code: 'SOS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2193,7 +2193,7 @@ export const SOS = moneyFactory('SOS');
  *
  * @example
  * ```typescript
- * const money = SYP(1);// Money({ currency: Currency({ code: 'SYP' }), amount: BigDecimal('1') })
+ * const money = SYP('1.25');// Money({ currency: Currency({ code: 'SYP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2203,7 +2203,7 @@ export const SYP = moneyFactory('SYP');
  *
  * @example
  * ```typescript
- * const money = THB(1);// Money({ currency: Currency({ code: 'THB' }), amount: BigDecimal('1') })
+ * const money = THB('1.25');// Money({ currency: Currency({ code: 'THB' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2213,7 +2213,7 @@ export const THB = moneyFactory('THB');
  *
  * @example
  * ```typescript
- * const money = TND(1);// Money({ currency: Currency({ code: 'TND' }), amount: BigDecimal('1') })
+ * const money = TND('1.25');// Money({ currency: Currency({ code: 'TND' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2223,7 +2223,7 @@ export const TND = moneyFactory('TND');
  *
  * @example
  * ```typescript
- * const money = TOP(1);// Money({ currency: Currency({ code: 'TOP' }), amount: BigDecimal('1') })
+ * const money = TOP('1.25');// Money({ currency: Currency({ code: 'TOP' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2233,7 +2233,7 @@ export const TOP = moneyFactory('TOP');
  *
  * @example
  * ```typescript
- * const money = TRY(1);// Money({ currency: Currency({ code: 'TRY' }), amount: BigDecimal('1') })
+ * const money = TRY('1.25');// Money({ currency: Currency({ code: 'TRY' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2243,7 +2243,7 @@ export const TRY = moneyFactory('TRY');
  *
  * @example
  * ```typescript
- * const money = TTD(1);// Money({ currency: Currency({ code: 'TTD' }), amount: BigDecimal('1') })
+ * const money = TTD('1.25');// Money({ currency: Currency({ code: 'TTD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2253,7 +2253,7 @@ export const TTD = moneyFactory('TTD');
  *
  * @example
  * ```typescript
- * const money = TWD(1);// Money({ currency: Currency({ code: 'TWD' }), amount: BigDecimal('1') })
+ * const money = TWD('1.25');// Money({ currency: Currency({ code: 'TWD' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2263,7 +2263,7 @@ export const TWD = moneyFactory('TWD');
  *
  * @example
  * ```typescript
- * const money = TZS(1);// Money({ currency: Currency({ code: 'TZS' }), amount: BigDecimal('1') })
+ * const money = TZS('1.25');// Money({ currency: Currency({ code: 'TZS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2273,7 +2273,7 @@ export const TZS = moneyFactory('TZS');
  *
  * @example
  * ```typescript
- * const money = UAH(1);// Money({ currency: Currency({ code: 'UAH' }), amount: BigDecimal('1') })
+ * const money = UAH('1.25');// Money({ currency: Currency({ code: 'UAH' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2283,7 +2283,7 @@ export const UAH = moneyFactory('UAH');
  *
  * @example
  * ```typescript
- * const money = UGX(1);// Money({ currency: Currency({ code: 'UGX' }), amount: BigDecimal('1') })
+ * const money = UGX('1.25');// Money({ currency: Currency({ code: 'UGX' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2293,7 +2293,7 @@ export const UGX = moneyFactory('UGX');
  *
  * @example
  * ```typescript
- * const money = UYU(1);// Money({ currency: Currency({ code: 'UYU' }), amount: BigDecimal('1') })
+ * const money = UYU('1.25');// Money({ currency: Currency({ code: 'UYU' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2303,7 +2303,7 @@ export const UYU = moneyFactory('UYU');
  *
  * @example
  * ```typescript
- * const money = UZS(1);// Money({ currency: Currency({ code: 'UZS' }), amount: BigDecimal('1') })
+ * const money = UZS('1.25');// Money({ currency: Currency({ code: 'UZS' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2313,7 +2313,7 @@ export const UZS = moneyFactory('UZS');
  *
  * @example
  * ```typescript
- * const money = VEF(1);// Money({ currency: Currency({ code: 'VEF' }), amount: BigDecimal('1') })
+ * const money = VEF('1.25');// Money({ currency: Currency({ code: 'VEF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2323,7 +2323,7 @@ export const VEF = moneyFactory('VEF');
  *
  * @example
  * ```typescript
- * const money = VND(1);// Money({ currency: Currency({ code: 'VND' }), amount: BigDecimal('1') })
+ * const money = VND('1.25');// Money({ currency: Currency({ code: 'VND' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2333,7 +2333,7 @@ export const VND = moneyFactory('VND');
  *
  * @example
  * ```typescript
- * const money = XAF(1);// Money({ currency: Currency({ code: 'XAF' }), amount: BigDecimal('1') })
+ * const money = XAF('1.25');// Money({ currency: Currency({ code: 'XAF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2343,7 +2343,7 @@ export const XAF = moneyFactory('XAF');
  *
  * @example
  * ```typescript
- * const money = XOF(1);// Money({ currency: Currency({ code: 'XOF' }), amount: BigDecimal('1') })
+ * const money = XOF('1.25');// Money({ currency: Currency({ code: 'XOF' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2353,7 +2353,7 @@ export const XOF = moneyFactory('XOF');
  *
  * @example
  * ```typescript
- * const money = YER(1);// Money({ currency: Currency({ code: 'YER' }), amount: BigDecimal('1') })
+ * const money = YER('1.25');// Money({ currency: Currency({ code: 'YER' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2363,7 +2363,7 @@ export const YER = moneyFactory('YER');
  *
  * @example
  * ```typescript
- * const money = ZAR(1);// Money({ currency: Currency({ code: 'ZAR' }), amount: BigDecimal('1') })
+ * const money = ZAR('1.25');// Money({ currency: Currency({ code: 'ZAR' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2373,7 +2373,7 @@ export const ZAR = moneyFactory('ZAR');
  *
  * @example
  * ```typescript
- * const money = ZMK(1);// Money({ currency: Currency({ code: 'ZMK' }), amount: BigDecimal('1') })
+ * const money = ZMK('1.25');// Money({ currency: Currency({ code: 'ZMK' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */
@@ -2383,7 +2383,7 @@ export const ZMK = moneyFactory('ZMK');
  *
  * @example
  * ```typescript
- * const money = ZWL(1);// Money({ currency: Currency({ code: 'ZWL' }), amount: BigDecimal('1') })
+ * const money = ZWL('1.25');// Money({ currency: Currency({ code: 'ZWL' }), amount: BigDecimal('1') })
  * ```
  * @param amount - The amount of money
  */

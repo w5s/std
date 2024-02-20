@@ -9,27 +9,27 @@ import { moneyFactory } from './moneyFactory.js';
 
 describe('moneyFactory', () => {
   let registry: CurrencyRegistry;
+  const TEST = 'TEST';
   beforeEach(() => {
     const app = ApplicationTest();
     registry = CurrencyRegistry(app);
-  });
-
-  it('should register a new currency', () => {
     registry.add(
       Currency({
         name: 'test',
-        code: 'TEST',
+        code: TEST,
         symbol: '#',
       })
     );
+  });
 
-    moneyFactory('TEST', {
+  it('should register a new currency', () => {
+    moneyFactory(TEST, {
       registry,
     });
-    const currency = registry.getByCode('TEST');
+    const currency = registry.getByCode(TEST);
     expect(currency).toEqual(
       Currency({
-        code: 'TEST',
+        code: TEST,
         precision: Int.of(2),
         name: 'test',
         namePlural: 'test',
@@ -39,20 +39,12 @@ describe('moneyFactory', () => {
       })
     );
   });
-  it('should return a new factory', () => {
-    registry.add(
-      Currency({
-        name: 'test',
-        code: 'TEST',
-        symbol: '#',
-      })
-    );
-
-    const factory = moneyFactory('TEST', {
+  it('should return a new factory by BigDecimal', () => {
+    const factory = moneyFactory(TEST, {
       registry,
     });
     const currency = Currency({
-      code: 'TEST',
+      code: TEST,
       precision: Int.of(2),
       name: 'test',
       namePlural: 'test',
@@ -61,5 +53,21 @@ describe('moneyFactory', () => {
       symbolNative: '#',
     });
     expect(factory(BigDecimal('1'))).toEqual(Money({ currency, amount: BigDecimal('1') }));
+  });
+
+  it('should return a new factory by string', () => {
+    const factory = moneyFactory(TEST, {
+      registry,
+    });
+    const currency = Currency({
+      code: TEST,
+      precision: Int.of(2),
+      name: 'test',
+      namePlural: 'test',
+      rounding: Int.of(0),
+      symbol: '#',
+      symbolNative: '#',
+    });
+    expect(factory('1')).toEqual(Money({ currency, amount: BigDecimal('1') }));
   });
 });
