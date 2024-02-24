@@ -73,7 +73,7 @@ export const String = {
    * ```typescript
    * String.concat(['a', 'b', 'c']) // 'abc'
    * ```
-   * @category Type
+   * @category Combinator
    * @param parts - a tested value
    */
   concat(parts: Array<string>): string {
@@ -103,7 +103,7 @@ export const String = {
    * String.isEmpty('');// true
    * String.isEmpty('abc');// false
    * ```
-   * @category Type
+   * @category Predicate
    * @param string - The string
    */
   isEmpty(string: string): boolean {
@@ -117,7 +117,7 @@ export const String = {
    * ```typescript
    * String.join('|', ['a', 'b', 'c']) // 'a|b|c'
    * ```
-   * @category Type
+   * @category Combinator
    * @param separator - the separator
    * @param parts - a tested value
    */
@@ -182,6 +182,7 @@ export const String = {
    * String.includes('abc', 'ab'); // true
    * String.includes('abc', 'absent'); // false
    * ```
+   * @category Predicate
    * @param string - The string
    * @param searchString - The string to search
    */

@@ -10,6 +10,7 @@ export interface Bounded<T> {
    * const anyNumber: number
    * anyNumber > Number.minValue // true
    * ```
+   * @category Bound
    */
   readonly minValue: T;
   /**
@@ -20,7 +21,7 @@ export interface Bounded<T> {
    * const anyNumber: number
    * anyNumber < Number.maxValue // true
    * ```
-   * ```
+   * @category Bound
    */
   readonly maxValue: T;
 }

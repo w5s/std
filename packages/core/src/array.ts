@@ -132,7 +132,7 @@ export namespace Array {
    * Array.isEmpty([]);// true
    * Array.isEmpty(['a', 'b', 'c']);// false
    * ```
-   * @category Type
+   * @category Predicate
    * @param array - The array object
    */
   export function isEmpty(array: ArrayLike<unknown>): boolean {
@@ -261,6 +261,7 @@ export namespace Array {
    * Array.includes(['a', '', 'a',  '', 'a'], 'a', 1); // true
    * Array.includes(['a', 'b'], 'absent'); // false
    * ```
+   * @category Predicate
    * @param array - The array object
    * @param searchItem - The item to search for.
    * @param fromIndex - The position in this array at which to begin searching for searchItem.
@@ -424,6 +425,7 @@ export namespace Array {
    * Array.some([1, 3], isEven); // false
    * Array.some([], (value) => true); // false
    * ```
+   * @category Predicate
    * @param array - The array object
    * @param predicate - The predicate function is called until it returns `true`, or until the end of the array.
    */
@@ -444,6 +446,7 @@ export namespace Array {
    * Array.every([2, 4], isEven); // true
    * Array.every([], (value) => false); // true
    * ```
+   * @category Predicate
    * @param array - The array object
    * @param predicate - The predicate function is called until it returns `false`, or until the end of the array.
    */
