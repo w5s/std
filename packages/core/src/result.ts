@@ -115,7 +115,7 @@ export namespace Result {
    * Result.hasInstance(null); // === false
    * Result.hasInstance(Result.Ok(null)); // === true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   export function hasInstance(anyValue: unknown): anyValue is Result<unknown, unknown> {
@@ -137,7 +137,7 @@ export namespace Result {
    * let x = Error('foo');
    * console.log(Result.isOk(x));// false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Ok<V> {
@@ -155,7 +155,7 @@ export namespace Result {
    * let x = Error('foo');
    * console.log(Result.isError(x));// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   export function isError<V, E>(anyValue: Result<V, E>): anyValue is Error<E> {

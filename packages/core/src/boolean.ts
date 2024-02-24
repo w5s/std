@@ -30,7 +30,7 @@ export const Boolean = {
    * Boolean.hasInstance(false) // true
    * Boolean.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   hasInstance(anyValue: unknown): anyValue is boolean {

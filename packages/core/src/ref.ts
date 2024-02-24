@@ -32,7 +32,7 @@ export namespace Ref {
    * Ref.hasInstance(Ref(123)) // true
    * Ref.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Ref<unknown> {

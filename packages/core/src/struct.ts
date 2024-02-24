@@ -35,6 +35,8 @@ export namespace Struct {
     create(this: void, properties: Parameters<Model>): Model;
     /**
      * The factory type constant
+     *
+     * @category Type
      */
     readonly typeName: Model[Struct.type];
     /**
@@ -46,7 +48,7 @@ export namespace Struct {
      * if(MyRecord.hasInstance(anyValue)) {
      *   console.log(anyValue.anyProperty);// type is correctly refined here
      * }
-     * @category Guard
+     * @category Type
      * @param anyValue - the value to be tested
      */
     hasInstance(this: void, anyValue: unknown): anyValue is Model;

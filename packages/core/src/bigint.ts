@@ -41,7 +41,7 @@ export const BigInt = {
    * BigInt.hasInstance(1) // true
    * BigInt.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   hasInstance(anyValue: unknown): anyValue is bigint {

@@ -111,7 +111,7 @@ export const Int = {
    * Int.hasInstance(1.1);// false
    * Int.hasInstance(Int.max + 1);// false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   hasInstance(anyValue: unknown): anyValue is Int {

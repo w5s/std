@@ -48,7 +48,7 @@ export const Number = {
    * Number.hasInstance(1) // true
    * Number.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   hasInstance(anyValue: unknown): anyValue is number {

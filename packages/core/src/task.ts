@@ -389,7 +389,7 @@ export namespace Task {
    * Task.hasInstance(Task.resolve(...)); // true
    * Task.hasInstance({}); // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Task<unknown, unknown> {

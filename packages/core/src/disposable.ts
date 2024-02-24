@@ -22,7 +22,7 @@ export const Disposable = {
    * Disposable.hasInstance({});// false
    * Disposable.hasInstance({ [Symbol.dispose]: () => {} });// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   hasInstance(anyValue: unknown): anyValue is Disposable {
@@ -52,7 +52,7 @@ export const AsyncDisposable = {
    * AsyncDisposable.hasInstance({});// false
    * AsyncDisposable.hasInstance({ [Symbol.asyncDispose]: () => {} });// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   hasInstance(anyValue: unknown): anyValue is AsyncDisposable {

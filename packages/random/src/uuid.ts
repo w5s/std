@@ -73,7 +73,7 @@ export const UUID = {
    * UUID.hasInstance('');// false
    * UUID.hasInstance('c106a26a-21bb-5538-8bf2-57095d1976c1');// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   hasInstance(anyValue: unknown): anyValue is UUID {

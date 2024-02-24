@@ -52,7 +52,7 @@ export namespace Array {
    * Array.hasInstance(Array.empty()) // true
    * Array.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   export function hasInstance(anyValue: unknown): anyValue is Array<unknown> {
@@ -132,7 +132,7 @@ export namespace Array {
    * Array.isEmpty([]);// true
    * Array.isEmpty(['a', 'b', 'c']);// false
    * ```
-   * @category Guard
+   * @category Type
    * @param array - The array object
    */
   export function isEmpty(array: ArrayLike<unknown>): boolean {

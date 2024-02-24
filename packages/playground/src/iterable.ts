@@ -123,7 +123,7 @@ export const Iterable = {
    * Iterable.hasInstance([]);// true
    * Iterable.hasInstance({ [Symbol.iterable]: () => ({ next: () => ({ done: true }) }) });// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to tested
    */
   hasInstance(anyValue: unknown): anyValue is Iterable<unknown> {

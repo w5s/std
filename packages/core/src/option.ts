@@ -98,7 +98,7 @@ export namespace Option {
    * Option.isNone(Some('foo'));// false
    * Option.isNone('foo');// false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to test
    */
   export function isNone(anyValue: unknown): anyValue is Nullable {
@@ -117,7 +117,7 @@ export namespace Option {
    * Option.isSome(Option.Some('foo'));// true
    * Option.isSome('foo');// true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the value to test
    */
   export function isSome<Value>(anyValue: Value): anyValue is Exclude<Value, Nullable> {

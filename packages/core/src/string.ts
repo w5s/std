@@ -73,7 +73,7 @@ export const String = {
    * ```typescript
    * String.concat(['a', 'b', 'c']) // 'abc'
    * ```
-   * @category Guard
+   * @category Type
    * @param parts - a tested value
    */
   concat(parts: Array<string>): string {
@@ -88,7 +88,7 @@ export const String = {
    * String.hasInstance(Array.empty()) // true
    * String.hasInstance(null)) // false
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - a tested value
    */
   hasInstance(anyValue: unknown): anyValue is string {
@@ -103,7 +103,7 @@ export const String = {
    * String.isEmpty('');// true
    * String.isEmpty('abc');// false
    * ```
-   * @category Guard
+   * @category Type
    * @param string - The string
    */
   isEmpty(string: string): boolean {
@@ -117,7 +117,7 @@ export const String = {
    * ```typescript
    * String.join('|', ['a', 'b', 'c']) // 'a|b|c'
    * ```
-   * @category Guard
+   * @category Type
    * @param separator - the separator
    * @param parts - a tested value
    */

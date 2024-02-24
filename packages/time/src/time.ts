@@ -47,7 +47,7 @@ export const Time = {
    * Time.hasInstance(null); // === false
    * Time.hasInstance(Time.of(0)); // === true
    * ```
-   * @category Guard
+   * @category Type
    * @param anyValue - the tested value
    */
   hasInstance(anyValue: unknown): anyValue is Time {
