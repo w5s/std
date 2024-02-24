@@ -8,13 +8,11 @@ describe('index', () => {
       [
         'Array',
         'assign',
-        'AsyncDisposable',
         'BigInt',
         'Boolean',
         'Comparable',
         'Console',
         'Struct',
-        'Disposable',
         'Equal',
         'extend',
         'identity',

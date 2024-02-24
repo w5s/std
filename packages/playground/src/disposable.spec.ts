@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Disposable, AsyncDisposable } from './disposable.js';
-import { Symbol } from './symbol.js';
+import { Symbol } from '../../core/src/symbol.js';
 
 describe('Disposable', () => {
   describe('.hasInstance()', () => {

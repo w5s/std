@@ -1,4 +1,4 @@
-import { Symbol } from './symbol.js';
+import { Symbol } from '../../core/src/symbol.js';
 
 /**
  * An interface for an object with resources that can be released synchronously
