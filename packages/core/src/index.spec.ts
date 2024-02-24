@@ -27,7 +27,6 @@ describe('index', () => {
         'Record',
         'Ref',
         'Result',
-        'shallowEqual',
         'String',
         'Symbol',
         'Task',

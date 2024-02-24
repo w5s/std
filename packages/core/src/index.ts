@@ -21,7 +21,6 @@ export * from './record.js';
 export * from './ref.js';
 export * from './result.js';
 export * from './run.js';
-export * from './shallowEqual.js';
 export * from './string.js';
 export * from './symbol.js';
 export * from './task.js';
