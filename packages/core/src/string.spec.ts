@@ -106,6 +106,24 @@ describe('String', () => {
       expect(String.includes(string, 'absent')).toEqual(false);
     });
   });
+  describe('.startsWith', () => {
+    it('should return true only when starting', () => {
+      const string = 'abc';
+
+      expect(String.startsWith(string, '')).toEqual(true);
+      expect(String.startsWith(string, 'ab')).toEqual(true);
+      expect(String.startsWith(string, 'bc')).toEqual(false);
+    });
+  });
+  describe('.endsWith', () => {
+    it('should return true only when starting', () => {
+      const string = 'abc';
+
+      expect(String.endsWith(string, '')).toEqual(true);
+      expect(String.endsWith(string, 'ab')).toEqual(false);
+      expect(String.endsWith(string, 'bc')).toEqual(true);
+    });
+  });
   describeComparable({ describe, it, expect })(String, {
     ordered: () => ['a', 'b', 'c'],
     equivalent: () => [

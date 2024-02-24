@@ -191,6 +191,38 @@ export const String = {
   },
 
   /**
+   * Returns true if string starts with searchString
+   *
+   * @example
+   * ```typescript
+   * String.startsWith('abc', 'ab'); // true
+   * String.startsWith('abc', 'bc'); // false
+   * ```
+   * @category Predicate
+   * @param string - The string
+   * @param searchString - The string to search
+   */
+  startsWith(string: string, searchString: string) {
+    return string.startsWith(searchString);
+  },
+
+  /**
+   * Returns true if string ends with searchString
+   *
+   * @example
+   * ```typescript
+   * String.endsWith('abc', 'bc'); // true
+   * String.endsWith('abc', 'ab'); // false
+   * ```
+   * @category Predicate
+   * @param string - The string
+   * @param searchString - The string to search
+   */
+  endsWith(string: string, searchString: string) {
+    return string.endsWith(searchString);
+  },
+
+  /**
    * Split a string into substrings using the specified separator and return them as an array.
    *
    * @example
