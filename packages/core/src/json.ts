@@ -1,3 +1,4 @@
+import type { TypeError, SyntaxError } from '@w5s/error';
 import type { Result } from './result.js';
 
 const NativeJSON = globalThis.JSON;
