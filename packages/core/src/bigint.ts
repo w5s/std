@@ -16,16 +16,14 @@ const BigIntNumeric: Numeric<bigint> = {
 };
 
 /**
- * A collection of functions to manipulate `number`
+ * A collection of functions to manipulate `bigint`
  *
  * @example
  * ```typescript
  * import { BigInt } from '@w5s/core';
  *
- * if (BigInt.hasInstance(unknownValue)) {
- *   // typeof unknownValue === 'number'
- *   BigInt['=='](unknownValue, unknownValue + 1);// false
- * }
+ * const total = [1n, 2n, 3n].reduce(BigInt['+', 0n);// 6n
+ * BigInt['=='](total, 6n);// true
  * ```
  * @namespace
  */

@@ -28,10 +28,8 @@ const NumberNumeric: Numeric<number> = {
  * ```typescript
  * import { Number } from '@w5s/core';
  *
- * if (Number.hasInstance(unknownValue)) {
- *   // typeof unknownValue === 'number'
- *   Number['=='](unknownValue, unknownValue + 1);// false
- * }
+ * const total = [1, 1.5, 2].reduce(Number['+', 0);// 4.5
+ * Number['=='](total, 4.5);// true
  * ```
  * @namespace
  */
