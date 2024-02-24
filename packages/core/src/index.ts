@@ -6,7 +6,6 @@ export * from './bounded.js';
 export * from './comparable.js';
 export * from './console.js';
 export * from './struct.js';
-export * from '../../playground/src/disposable.js';
 export * from './equal.js';
 export * from './extend.js';
 export * from './ignore.js';
