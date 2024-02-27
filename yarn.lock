@@ -5055,22 +5055,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.0.7":
-  version: 2.0.7
-  resolution: "@w5s/commitlint-config@npm:2.0.7"
+"@w5s/commitlint-config@npm:2.0.8":
+  version: 2.0.8
+  resolution: "@w5s/commitlint-config@npm:2.0.8"
   dependencies:
     "@commitlint/types": "npm:^18.0.0"
-    "@w5s/conventional-changelog": "npm:^2.0.5"
+    "@w5s/conventional-changelog": "npm:^2.0.6"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/a2156e933fe912b24fd8da2d454a24c8b7ac76fdce555a71ce31bafa2d63707abc794124546fd79ebe562a434a1fb38cb880f422e4e8f85eceddffa5975a563a
+  checksum: 10c0/9695d77b15fa450850090c54bdb3e1f3d1496da2b77fae32c8b44ea208fc68c50579fca6b876b689599aec156a4fe8f4ba849492871934ef3522b8f2ebeed616
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:2.0.5, @w5s/conventional-changelog@npm:^2.0.5":
+"@w5s/conventional-changelog@npm:2.0.5":
   version: 2.0.5
   resolution: "@w5s/conventional-changelog@npm:2.0.5"
   dependencies:
@@ -5081,13 +5081,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@w5s/conventional-changelog@npm:^2.0.6":
+  version: 2.0.6
+  resolution: "@w5s/conventional-changelog@npm:2.0.6"
+  dependencies:
+    "@commitlint/types": "npm:^18.0.0"
+    emoji-regex: "npm:^10.2.1"
+    gitmojis: "npm:^3.13.4"
+  checksum: 10c0/5dd655fb1879ef3ad2d3fa471f712de66979fb70def88f9a414ddc4a9d305168d4c54a4714af11c7aa966afbb877421e16a074d65becadc18222f813ade89a4a
+  languageName: node
+  linkType: hard
+
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.0.2"
     "@types/node": "npm:17.0.45"
-    "@w5s/commitlint-config": "npm:2.0.7"
+    "@w5s/commitlint-config": "npm:2.0.8"
     "@w5s/conventional-changelog": "npm:2.0.5"
     "@w5s/cspell-config": "npm:2.2.7"
     "@w5s/eslint-config": "npm:2.0.8"
