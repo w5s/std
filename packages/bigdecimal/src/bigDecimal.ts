@@ -149,6 +149,16 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
    */
   scale,
 
+  /**
+   * Returns a normalized `value`
+   *
+   * @example
+   * ```ts
+   * BigDecimal.normalize(BigDecimal('1.020')); //  BigDecimal('1.02')
+   * BigDecimal.normalize(BigDecimal('1.0200')); //  BigDecimal('1.02')
+   * ```
+   * @param value
+   */
   normalize(value: BigDecimal) {
     const digits = String(value.value);
     let trail = 0;
