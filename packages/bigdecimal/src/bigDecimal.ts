@@ -49,6 +49,9 @@ const scaleValue = ({ value, scale }: BigDecimal, newScale: number): bigint =>
       ? value / 10n ** BigInt(scale - newScale)
       : value;
 const scale = (value: BigDecimal, newScale: number): BigDecimal => {
+  if (value.scale === newScale) {
+    return value;
+  }
   const newValue = scaleValue(value, newScale);
   return newValue === value.value ? value : create(newValue, newScale);
 };
@@ -129,4 +132,22 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
    * @param scale - The new scale
    */
   scale,
+
+  normalize(value: BigDecimal) {
+    const digits = String(value.value);
+
+    let trail = 0;
+    for (let i = digits.length - 1; i >= 0; i--) {
+      if (digits[i] === '0') {
+        trail++;
+      } else {
+        break;
+      }
+    }
+
+    if (trail === 0) {
+      return value;
+    }
+    return scale(value, value.scale - trail);
+  },
 });

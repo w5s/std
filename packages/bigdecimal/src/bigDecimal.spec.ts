@@ -40,6 +40,16 @@ describe('BigDecimal', () => {
       expect(BigDecimal.scale(value, 5)).toStrictEqual(BigDecimal('3.00050'));
     });
   });
+  describe('normalize', () => {
+    it('returns a normalized value (i.e. with no trailing 0 scale)', () => {
+      expect(BigDecimal.normalize(BigDecimal('0'))).toEqual(BigDecimal(0n, 0));
+      expect(BigDecimal.normalize(BigDecimal('0.123000'))).toEqual(BigDecimal(123n, 3));
+      expect(BigDecimal.normalize(BigDecimal('123.000'))).toEqual(BigDecimal(123n, 0));
+      expect(BigDecimal.normalize(BigDecimal('-0.000123000'))).toEqual(BigDecimal(-123n, 6));
+      expect(BigDecimal.normalize(BigDecimal('-123.000'))).toEqual(BigDecimal(-123n, 0));
+      expect(BigDecimal.normalize(BigDecimal('12300000'))).toEqual(BigDecimal(123n, -5));
+    });
+  });
   describeComparable({ describe, it, expect })(BigDecimal, {
     ordered: () => [
       BigDecimal('-10.0'),
