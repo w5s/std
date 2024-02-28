@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import type { Numeric, Option, Struct } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/comparable.js';
 import { Struct as StructValue } from '@w5s/core/dist/struct.js';
@@ -70,7 +71,6 @@ const BigDecimalStruct = StructValue.MakeGeneric(
     (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale: number): BigDecimal;
   } =>
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     (value: string | bigint, scale?: number): BigDecimal =>
       typeof value === 'string'
         ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
@@ -118,6 +118,22 @@ export interface BigDecimal
 export const BigDecimal = Object.assign(BigDecimalStruct, {
   ...BigDecimalComparable,
   ...BigDecimalNumeric,
+
+  /**
+   * Returns a new `BigDecimal` from `value` and `scale`
+   *
+   * @example
+   * ```ts
+   * BigDecimal.of(1n, 1); // BigDecimal('0.1')
+   * BigDecimal.of(-234n, 2); // BigDecimal('2.34')
+   * ```
+   * @category Constructor
+   * @param value - The base integer value.
+   * @param scale - The scale.
+   */
+  of(value: bigint, scale: number): BigDecimal {
+    return create(value, scale);
+  },
   /**
    * Scales a given `BigDecimal` to the specified scale.
    *
@@ -135,11 +151,10 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
 
   normalize(value: BigDecimal) {
     const digits = String(value.value);
-
     let trail = 0;
-    for (let i = digits.length - 1; i >= 0; i--) {
+    for (let i = digits.length - 1; i >= 0; i -= 1) {
       if (digits[i] === '0') {
-        trail++;
+        trail += 1;
       } else {
         break;
       }

@@ -26,6 +26,15 @@ describe('BigDecimal', () => {
       expect(() => BigDecimal('1E5')).toThrow(new Error('1E5 is not a valid BigDecimal'));
     });
   });
+  describe('of', () => {
+    it('constructs from parameters', () => {
+      expect(BigDecimal.of(1n, 100)).toEqual({
+        _: 'BigDecimal',
+        value: 1n,
+        scale: 100,
+      });
+    });
+  });
   describe('scale', () => {
     it('returns identity if scale is the same', () => {
       const value = BigDecimal('3.0005');
