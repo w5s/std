@@ -18,7 +18,7 @@ const create = (value: bigint, scale: number): BigDecimal => ({
   scale,
 });
 
-const parse = (value: string): Option<BigDecimal> => {
+function parse(value: string): Option<BigDecimal> {
   let digits: string;
   let scale: number;
 
@@ -42,26 +42,32 @@ const parse = (value: string): Option<BigDecimal> => {
   }
 
   return create(BigInt(digits), scale);
-};
-const scaleValue = ({ value, scale }: BigDecimal, newScale: number): bigint =>
-  newScale > scale
+}
+
+function scaleValue({ value, scale }: BigDecimal, newScale: number): bigint {
+  return newScale > scale
     ? value * 10n ** BigInt(newScale - scale)
     : newScale < scale
       ? value / 10n ** BigInt(scale - newScale)
       : value;
-const scale = (value: BigDecimal, newScale: number): BigDecimal => {
+}
+
+function scale(value: BigDecimal, newScale: number): BigDecimal {
   if (value.scale === newScale) {
     return value;
   }
   const newValue = scaleValue(value, newScale);
   return newValue === value.value ? value : create(newValue, newScale);
-};
-const combine2 = (combineFn: (left: bigint, right: bigint) => bigint) => (left: BigDecimal, right: BigDecimal) =>
-  left.scale > right.scale
-    ? create(combineFn(left.value, scaleValue(right, left.scale)), left.scale)
-    : left.scale < right.scale
-      ? create(combineFn(scaleValue(left, right.scale), right.value), right.scale)
-      : create(combineFn(left.value, right.value), left.scale);
+}
+
+function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
+  return (left: BigDecimal, right: BigDecimal) =>
+    left.scale > right.scale
+      ? create(combineFn(left.value, scaleValue(right, left.scale)), left.scale)
+      : left.scale < right.scale
+        ? create(combineFn(scaleValue(left, right.scale), right.value), right.scale)
+        : create(combineFn(left.value, right.value), left.scale);
+}
 
 const BigDecimalStruct = StructValue.MakeGeneric(
   'BigDecimal',
