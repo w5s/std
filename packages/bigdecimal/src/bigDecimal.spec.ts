@@ -35,6 +35,20 @@ describe('BigDecimal', () => {
       });
     });
   });
+  describe('parse', () => {
+    it('constructs from string', () => {
+      expect(BigDecimal.parse('2')).toEqual(BigDecimal(2n, 0));
+      expect(BigDecimal.parse('-2')).toEqual(BigDecimal(-2n, 0));
+      expect(BigDecimal.parse('0.123')).toEqual(BigDecimal(123n, 3));
+      expect(BigDecimal.parse('200')).toEqual(BigDecimal(200n, 0));
+      expect(BigDecimal.parse('20000000')).toEqual(BigDecimal(20_000_000n, 0));
+      expect(BigDecimal.parse('-20000000')).toEqual(BigDecimal(-20_000_000n, 0));
+      expect(BigDecimal.parse('2.00')).toEqual(BigDecimal(200n, 2));
+      expect(BigDecimal.parse('0.0000200')).toEqual(BigDecimal(200n, 7));
+      expect(BigDecimal.parse('A')).toBe(undefined);
+      expect(BigDecimal.parse('1E5')).toBe(undefined);
+    });
+  });
   describe('scale', () => {
     it('returns identity if scale is the same', () => {
       const value = BigDecimal('3.0005');

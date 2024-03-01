@@ -181,4 +181,15 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
     }
     return scale(value, value.scale - trail);
   },
+  /**
+   * Returns a new BigDecimal from a string
+   *
+   * @example
+   * ```ts
+   * BigDecimal.parse('1.020'); // Option.Some(BigDecimal('1.020'))
+   * BigDecimal.parse('A'); // Option.None
+   * ```
+   * @param expression
+   */
+  parse,
 });
