@@ -9,6 +9,7 @@ import { invariant } from '@w5s/invariant';
  */
 export type BigDecimalString = `${number}`;
 
+const toString = String;
 const bigIntSign = (value: bigint) => (value < 0n ? -1n : value > 0n ? 1n : 0n);
 const bigIntAbs = (value: bigint) => (value <= 0n ? -value : value);
 const bigIntCompare = (left: bigint, right: bigint) => (left === right ? 0 : left < right ? -1 : 1);
@@ -60,6 +61,35 @@ function scale(value: BigDecimal, newScale: number): BigDecimal {
   return newValue === value.value ? value : create(newValue, newScale);
 }
 
+function format(bigDecimal: BigDecimal): string {
+  const { value, scale } = bigDecimal;
+  const valueString = toString(value);
+  const negative = value < 0n;
+  const absolute = negative ? valueString.slice(1) : valueString;
+  const absoluteLength = absolute.length;
+
+  let integralString: string;
+  let decimalString: string;
+
+  if (scale >= absoluteLength) {
+    integralString = '0';
+    decimalString = '0'.repeat(scale - absoluteLength) + absolute;
+  } else {
+    const location = absoluteLength - scale;
+    if (location > absoluteLength) {
+      const zeros = location - absoluteLength;
+      integralString = `${absolute}${'0'.repeat(zeros)}`;
+      decimalString = '';
+    } else {
+      decimalString = absolute.slice(location);
+      integralString = absolute.slice(0, location);
+    }
+  }
+
+  const complete = decimalString === '' ? integralString : `${integralString}.${decimalString}`;
+  return negative ? `-${complete}` : complete;
+}
+
 function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
   return (left: BigDecimal, right: BigDecimal) =>
     left.scale > right.scale
@@ -79,7 +109,7 @@ const BigDecimalStruct = StructValue.MakeGeneric(
   } =>
     (value: string | bigint, scale?: number): BigDecimal =>
       typeof value === 'string'
-        ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
+        ? parse(value) ?? invariant(false, `${toString(value)} is not a valid BigDecimal`)
         : create(value, scale as number)
 );
 
@@ -166,7 +196,7 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
    * @param value
    */
   normalize(value: BigDecimal) {
-    const digits = String(value.value);
+    const digits = toString(value.value);
     let trail = 0;
     for (let i = digits.length - 1; i >= 0; i -= 1) {
       if (digits[i] === '0') {
@@ -192,4 +222,15 @@ export const BigDecimal = Object.assign(BigDecimalStruct, {
    * @param expression
    */
   parse,
+
+  /**
+   * Returns a string representation of a BigDecimal
+   *
+   * @example
+   * ```ts
+   * BigDecimal.format(BigDecimal('1.020')); // '1.020'
+   * ```
+   * @param expression
+   */
+  format,
 });

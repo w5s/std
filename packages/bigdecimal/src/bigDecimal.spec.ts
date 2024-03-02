@@ -36,17 +36,31 @@ describe('BigDecimal', () => {
     });
   });
   describe('parse', () => {
-    it('constructs from string', () => {
-      expect(BigDecimal.parse('2')).toEqual(BigDecimal(2n, 0));
-      expect(BigDecimal.parse('-2')).toEqual(BigDecimal(-2n, 0));
-      expect(BigDecimal.parse('0.123')).toEqual(BigDecimal(123n, 3));
-      expect(BigDecimal.parse('200')).toEqual(BigDecimal(200n, 0));
-      expect(BigDecimal.parse('20000000')).toEqual(BigDecimal(20_000_000n, 0));
-      expect(BigDecimal.parse('-20000000')).toEqual(BigDecimal(-20_000_000n, 0));
-      expect(BigDecimal.parse('2.00')).toEqual(BigDecimal(200n, 2));
-      expect(BigDecimal.parse('0.0000200')).toEqual(BigDecimal(200n, 7));
-      expect(BigDecimal.parse('A')).toBe(undefined);
-      expect(BigDecimal.parse('1E5')).toBe(undefined);
+    it.each([
+      ['2', BigDecimal(2n, 0)],
+      ['-2', BigDecimal(-2n, 0)],
+      ['0.123', BigDecimal(123n, 3)],
+      ['200', BigDecimal(200n, 0)],
+      ['20000000', BigDecimal(20_000_000n, 0)],
+      ['-20000000', BigDecimal(-20_000_000n, 0)],
+      ['2.00', BigDecimal(200n, 2)],
+      ['0.0000200', BigDecimal(200n, 7)],
+      ['A', undefined],
+      ['1E5', undefined],
+    ])('constructs from string', (expression, expected) => {
+      expect(BigDecimal.parse(expression)).toEqual(expected);
+    });
+  });
+  describe('format', () => {
+    it.each([
+      [BigDecimal('2'), '2'],
+      [BigDecimal('-2'), '-2'],
+      [BigDecimal('0.123'), '0.123'],
+      [BigDecimal('-0.123'), '-0.123'],
+      [BigDecimal('200'), '200'],
+      [BigDecimal('2.00'), '2.00'],
+    ])('returns string conversion', (bigDecimal, expected) => {
+      expect(BigDecimal.format(bigDecimal), expected);
     });
   });
   describe('scale', () => {
