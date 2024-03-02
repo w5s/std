@@ -92,11 +92,11 @@ export const LogLevel = {
    * @example
    * ```ts
    * const level = LogLevel('Foo', 1);
-   * LogLevel.stringify(level);// 'Foo'
+   * LogLevel.format(level);// 'Foo'
    * ```
    * @param level - the log level
    */
-  stringify(level: LogLevel): string {
+  format(level: LogLevel): string {
     return level.name;
   },
 

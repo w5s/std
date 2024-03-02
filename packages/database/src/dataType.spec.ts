@@ -7,7 +7,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.CHAR(2)).toEqual({ dataType: 'CHAR', size: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.CHAR(2))).toEqual('CHAR(2)');
+      expect(SQLDataType.format(SQLDataType.CHAR(2))).toEqual('CHAR(2)');
     });
   });
   describe('.VARCHAR', () => {
@@ -15,7 +15,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.VARCHAR(2)).toEqual({ dataType: 'VARCHAR', size: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.VARCHAR(2))).toEqual('VARCHAR(2)');
+      expect(SQLDataType.format(SQLDataType.VARCHAR(2))).toEqual('VARCHAR(2)');
     });
   });
   describe('.NCHAR', () => {
@@ -23,7 +23,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.NCHAR(2)).toEqual({ dataType: 'NCHAR', size: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.NCHAR(2))).toEqual('NCHAR(2)');
+      expect(SQLDataType.format(SQLDataType.NCHAR(2))).toEqual('NCHAR(2)');
     });
   });
   describe('.NVARCHAR', () => {
@@ -31,7 +31,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.NVARCHAR(2)).toEqual({ dataType: 'NVARCHAR', size: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.NVARCHAR(2))).toEqual('NVARCHAR(2)');
+      expect(SQLDataType.format(SQLDataType.NVARCHAR(2))).toEqual('NVARCHAR(2)');
     });
   });
   describe('.CLOB', () => {
@@ -39,7 +39,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.CLOB).toEqual(expect.objectContaining({ dataType: 'CLOB' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.CLOB)).toEqual('CLOB');
+      expect(SQLDataType.format(SQLDataType.CLOB)).toEqual('CLOB');
     });
   });
   describe('.BOOLEAN', () => {
@@ -47,7 +47,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.BOOLEAN).toEqual(expect.objectContaining({ dataType: 'BOOLEAN' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.BOOLEAN)).toEqual('BOOLEAN');
+      expect(SQLDataType.format(SQLDataType.BOOLEAN)).toEqual('BOOLEAN');
     });
   });
   describe('.BINARY', () => {
@@ -55,7 +55,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.BINARY(2)).toEqual({ dataType: 'BINARY', byteLength: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.BINARY(2))).toEqual('BINARY(2)');
+      expect(SQLDataType.format(SQLDataType.BINARY(2))).toEqual('BINARY(2)');
     });
   });
   describe('.VARBINARY', () => {
@@ -63,7 +63,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.VARBINARY(2)).toEqual({ dataType: 'VARBINARY', byteLength: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.VARBINARY(2))).toEqual('VARBINARY(2)');
+      expect(SQLDataType.format(SQLDataType.VARBINARY(2))).toEqual('VARBINARY(2)');
     });
   });
   describe('.BLOB', () => {
@@ -71,7 +71,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.BLOB).toEqual(expect.objectContaining({ dataType: 'BLOB' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.BLOB)).toEqual('BLOB');
+      expect(SQLDataType.format(SQLDataType.BLOB)).toEqual('BLOB');
     });
   });
   describe('.INTEGER', () => {
@@ -79,7 +79,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.INTEGER).toEqual(expect.objectContaining({ dataType: 'INTEGER' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.INTEGER)).toEqual('INTEGER');
+      expect(SQLDataType.format(SQLDataType.INTEGER)).toEqual('INTEGER');
     });
   });
   describe('.SMALLINT', () => {
@@ -87,7 +87,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.SMALLINT).toEqual(expect.objectContaining({ dataType: 'SMALLINT' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.SMALLINT)).toEqual('SMALLINT');
+      expect(SQLDataType.format(SQLDataType.SMALLINT)).toEqual('SMALLINT');
     });
   });
   describe('.BIGINT', () => {
@@ -95,7 +95,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.BIGINT).toEqual(expect.objectContaining({ dataType: 'BIGINT' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.BIGINT)).toEqual('BIGINT');
+      expect(SQLDataType.format(SQLDataType.BIGINT)).toEqual('BIGINT');
     });
   });
   describe('.DECIMAL', () => {
@@ -103,7 +103,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.DECIMAL(2, 10)).toEqual({ dataType: 'DECIMAL', precision: 2, scale: 10 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.DECIMAL(2, 10))).toEqual('DECIMAL(2,10)');
+      expect(SQLDataType.format(SQLDataType.DECIMAL(2, 10))).toEqual('DECIMAL(2,10)');
     });
   });
   describe('.NUMERIC', () => {
@@ -111,7 +111,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.NUMERIC(2, 10)).toEqual({ dataType: 'NUMERIC', precision: 2, scale: 10 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.NUMERIC(2, 10))).toEqual('NUMERIC(2,10)');
+      expect(SQLDataType.format(SQLDataType.NUMERIC(2, 10))).toEqual('NUMERIC(2,10)');
     });
   });
   describe('.FLOAT', () => {
@@ -119,7 +119,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.FLOAT(2)).toEqual({ dataType: 'FLOAT', precision: 2 });
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.FLOAT(2))).toEqual('FLOAT(2)');
+      expect(SQLDataType.format(SQLDataType.FLOAT(2))).toEqual('FLOAT(2)');
     });
   });
   describe('.REAL', () => {
@@ -127,7 +127,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.REAL).toEqual(expect.objectContaining({ dataType: 'REAL' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.REAL)).toEqual('REAL');
+      expect(SQLDataType.format(SQLDataType.REAL)).toEqual('REAL');
     });
   });
   describe('.DOUBLE PRECISION', () => {
@@ -135,7 +135,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.DOUBLE_PRECISION).toEqual(expect.objectContaining({ dataType: 'DOUBLE PRECISION' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.DOUBLE_PRECISION)).toEqual('DOUBLE PRECISION');
+      expect(SQLDataType.format(SQLDataType.DOUBLE_PRECISION)).toEqual('DOUBLE PRECISION');
     });
   });
   describe('.DATE', () => {
@@ -143,7 +143,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.DATE).toEqual(expect.objectContaining({ dataType: 'DATE' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.DATE)).toEqual('DATE');
+      expect(SQLDataType.format(SQLDataType.DATE)).toEqual('DATE');
     });
   });
   describe('.TIME', () => {
@@ -151,7 +151,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.TIME).toEqual(expect.objectContaining({ dataType: 'TIME' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.TIME)).toEqual('TIME');
+      expect(SQLDataType.format(SQLDataType.TIME)).toEqual('TIME');
     });
   });
   describe('.TIMESTAMP', () => {
@@ -159,7 +159,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.TIMESTAMP).toEqual(expect.objectContaining({ dataType: 'TIMESTAMP' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.TIMESTAMP)).toEqual('TIMESTAMP');
+      expect(SQLDataType.format(SQLDataType.TIMESTAMP)).toEqual('TIMESTAMP');
     });
   });
   describe('.INTERVAL', () => {
@@ -167,7 +167,7 @@ describe('SQLDataType', () => {
       expect(SQLDataType.INTERVAL).toEqual(expect.objectContaining({ dataType: 'INTERVAL' }));
     });
     it('should be correctly stringified', () => {
-      expect(SQLDataType.stringify(SQLDataType.INTERVAL)).toEqual('INTERVAL');
+      expect(SQLDataType.format(SQLDataType.INTERVAL)).toEqual('INTERVAL');
     });
   });
 });

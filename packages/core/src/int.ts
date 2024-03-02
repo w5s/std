@@ -142,13 +142,13 @@ export const Int = {
    *
    * @example
    * ```typescript
-   * Int.stringify(Int.of(1), 10);// '1'
-   * Int.stringify(Int.of(10), 16);// 'A'
+   * Int.format(Int.of(1), 10);// '1'
+   * Int.format(Int.of(10), 16);// 'A'
    * ```
    * @param intValue - an integer
    * @param radix - an optional base (ex: 10, 16)
    */
-  stringify(intValue: Int, radix?: Radix36): string {
+  format(intValue: Int, radix?: Radix36): string {
     return intValue.toString(radix);
   },
 };

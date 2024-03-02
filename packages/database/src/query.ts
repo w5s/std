@@ -158,7 +158,7 @@ export namespace SQLQuery {
   }
 
   function stringifyDataType(data: SQLDataType): string {
-    return SQLDataType.stringify(data);
+    return SQLDataType.format(data);
   }
 
   function stringifyColumnAttributes(columnAttributes: ColumnAttributes): string {
