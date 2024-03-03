@@ -74,33 +74,33 @@ describe('Result', () => {
       );
     });
   });
-  describe('.value', () => {
+  describe('.get', () => {
     it('should return undefined for Result.Error', () => {
-      const value = Result.value(Result.Error(anyError));
+      const value = Result.get(Result.Error(anyError));
       expect(value).toBe(Option.None);
       assertType<typeof value, Option.None>(true);
     });
     it('should return value for Result.Ok', () => {
-      const value = Result.value(Result.Ok(anyValue));
+      const value = Result.get(Result.Ok(anyValue));
       expect(value).toBe(anyValue);
       assertType<typeof value, typeof anyValue>(true);
 
-      const optValue = Result.value(anyResult);
+      const optValue = Result.get(anyResult);
       assertType<typeof optValue, typeof anyValue | Option.None>(true);
     });
   });
   describe('.error', () => {
     it('should return undefined for Result.Ok', () => {
-      const error = Result.error(Result.Ok(anyValue));
+      const error = Result.getError(Result.Ok(anyValue));
       expect(error).toBe(Option.None);
       assertType<typeof error, Option.None>(true);
     });
     it('should return error for Result.Ok', () => {
-      const error = Result.error(Result.Error(anyError));
+      const error = Result.getError(Result.Error(anyError));
       expect(error).toBe(anyError);
       assertType<typeof error, typeof anyError>(true);
 
-      const optError = Result.error(anyResult);
+      const optError = Result.getError(anyResult);
       assertType<typeof optError, typeof anyError | Option.None>(true);
     });
   });

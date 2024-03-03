@@ -200,18 +200,18 @@ export namespace Result {
    * @example
    * ```typescript
    * let x = Ok('foo');
-   * Result.value(x);// Option.Some('foo')
+   * Result.get(x);// Option.Some('foo')
    *
    * let x = Error('foo');
-   * Result.value(x);// Option.None
+   * Result.get(x);// Option.None
    * ```
    * @category Accessor
    * @param result - a Result object
    */
-  export function value<V>(result: Ok<V> | Result<V, never>): Option.Some<V>;
-  export function value(result: Error<unknown> | Result<never, unknown>): Option.None;
-  export function value<V>(result: Result<V, unknown>): Option<V>;
-  export function value<V>(result: Result<V, unknown>): Option<V> {
+  export function get<V>(result: Ok<V> | Result<V, never>): Option.Some<V>;
+  export function get(result: Error<unknown> | Result<never, unknown>): Option.None;
+  export function get<V>(result: Result<V, unknown>): Option<V>;
+  export function get<V>(result: Result<V, unknown>): Option<V> {
     return isError(result) ? undefined : result.value;
   }
 
@@ -229,10 +229,10 @@ export namespace Result {
    * @category Accessor
    * @param result - a Result object
    */
-  export function error<E>(result: Error<E> | Result<never, E>): Option.Some<E>;
-  export function error(result: Ok<unknown> | Result<unknown, never>): Option.None;
-  export function error<E>(result: Result<unknown, E>): Option<E>;
-  export function error<E>(result: Result<unknown, E>): Option<E> {
+  export function getError<E>(result: Error<E> | Result<never, E>): Option.Some<E>;
+  export function getError(result: Ok<unknown> | Result<unknown, never>): Option.None;
+  export function getError<E>(result: Result<unknown, E>): Option<E>;
+  export function getError<E>(result: Result<unknown, E>): Option<E> {
     return isError(result) ? result.error : undefined;
   }
 

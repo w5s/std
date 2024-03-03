@@ -46,14 +46,14 @@ describe('RetryPolicy', () => {
     const promiseOrValue = unsafeRun(task);
     // @ts-ignore - we know this is a promise
     // eslint-disable-next-line promise/prefer-await-to-then
-    return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.value) : Result.value(promiseOrValue);
+    return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.get) : Result.get(promiseOrValue);
   };
   const generateDelays = (policy: RetryPolicy, limit: number) => {
     let currentState: Option<RetryState> = defaultRetryState;
     const values = [];
     const unsafeState = (task: Task<Option<RetryState>, never>): Option<RetryState> =>
       // @ts-ignore - we suppose it sync
-      Result.value(unsafeRun(task));
+      Result.get(unsafeRun(task));
     for (let index = 0; index < limit; index += 1) {
       if (Option.isNone(currentState)) {
         break;

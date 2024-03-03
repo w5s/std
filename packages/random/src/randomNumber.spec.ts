@@ -22,6 +22,6 @@ describe('randomNumber', () => {
   ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
     const gen = generatorOf(genValue);
     const genNum = randomNumber(min, max, gen);
-    expect(Result.value(await unsafeRun(genNum))).toBe(expected);
+    expect(Result.get(await unsafeRun(genNum))).toBe(expected);
   });
 });

@@ -1,7 +1,7 @@
 import { ArgumentError } from '@w5s/error/dist/argumentError.js';
 import { Struct } from '@w5s/core/dist/struct.js';
 import { Comparable } from '@w5s/core/dist/comparable.js';
-import { type Result } from '@w5s/core';
+import type { Result } from '@w5s/core';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './currency.js';
 
