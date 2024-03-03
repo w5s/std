@@ -15,7 +15,7 @@ const now = createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies T
 /**
  * Represent a time typically returned by `Date.now()`
  */
-export type Time = Tag<number, { time: 'ms' }>;
+export type Time = number & Tag<'Time'>;
 
 /**
  * A collection of functions to manipulate time (i.e timestamp)

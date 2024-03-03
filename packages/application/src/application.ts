@@ -7,7 +7,7 @@ type AnyObject = Record<string | symbol, unknown>;
 /**
  * Application id type
  */
-export type ApplicationId = Tag<string, { applicationId: true }>;
+export type ApplicationId = string & Tag<'ApplicationId'>;
 
 /**
  * Application state generic type

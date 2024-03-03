@@ -9,7 +9,7 @@ const DAYS = HOURS * 24;
 /**
  * Represent a duration in milliseconds
  */
-export type TimeDuration = Tag<number, { timeDuration: 'ms' }>;
+export type TimeDuration = number & Tag<'TimeDuration'>;
 
 /**
  * A collection of functions to manipulate time duration (i.e amount of milliseconds)

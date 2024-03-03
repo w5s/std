@@ -1,6 +1,6 @@
 import type { Int, Tag } from '@w5s/core';
 
-export type FileSize = Tag<Int, { fileSize: true }>;
+export type FileSize = Int & Tag<'FileSize'>;
 export function FileSize(value: number): FileSize {
   return Math.trunc(value) as FileSize;
 }

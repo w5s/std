@@ -3,7 +3,7 @@ import type { Tag, Option, Task } from '@w5s/core';
 
 export type FileName = string;
 
-export type FilePath = Tag<string, { filePath: true }>;
+export type FilePath = string & Tag<'FilePath'>;
 export function FilePath(value: string): FilePath {
   return value as FilePath;
 }

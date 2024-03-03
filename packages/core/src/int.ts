@@ -75,7 +75,7 @@ const IntNumeric: Numeric<Int> = {
 /**
  * Integer value
  */
-export type Int = Tag<number, { integral: true }>;
+export type Int = number & Tag<'Int'>;
 
 /**
  * A collection of functions to manipulate integer values

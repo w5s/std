@@ -27,7 +27,8 @@ export function Slack({
 }
 
 export namespace Slack {
-  type Id<T> = Tag<string, { slackId: T }>;
+  type Id<T extends string> = string & Tag<T>;
+
   function MakeId<IdType extends Id<any>>() {
     function Id(value: string): IdType {
       return value as unknown as IdType;

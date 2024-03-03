@@ -5,7 +5,7 @@ describe('type', () => {
   it('Tag<T, { tag1: ... }>', () => {
     expect(true).toBe(true);
 
-    type PositiveNumber = Tag<number, { positive: true }>;
+    type PositiveNumber = number & Tag<{ positive: true }>;
     const isPositive = (num: number): num is PositiveNumber => num >= 0;
     const squareRoot = (num: PositiveNumber): PositiveNumber => Math.sqrt(num) as PositiveNumber;
     const value = 0;

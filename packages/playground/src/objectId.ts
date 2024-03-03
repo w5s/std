@@ -33,7 +33,7 @@ function objectIdState(): State {
 /**
  * Type representing a unique object id
  */
-export type ObjectId = Tag<Int, { objectId: true }>;
+export type ObjectId = Int & Tag<'ObjectId'>;
 
 /**
  * Return a unique identifier for an object or function

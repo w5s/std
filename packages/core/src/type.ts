@@ -23,7 +23,7 @@ export type Awaitable<T> = T | PromiseLike<T>;
  *
  * @example
  * ```typescript
- * type PositiveNumber = Tag<number, { positive: true }>;
+ * type PositiveNumber = number & Tag<{ positive: true }>;
  * const isPositive = (n: number): n is PositiveNumber => n >= 0;
  * const squareRoot = (n: PositiveNumber): PositiveNumber => Math.sqrt(n) as PositiveNumber;
  * const value = 0;
@@ -33,7 +33,11 @@ export type Awaitable<T> = T | PromiseLike<T>;
  * }
  * ```
  */
-export type Tag<Base, TagRecord> = Base & { readonly [K in keyof TagRecord & string as `@@${K}`]: TagRecord[K] };
+export type Tag<T extends string | symbol> = {
+  readonly '@@tag': {
+    readonly [K in T]: K;
+  };
+};
 
 /**
  * Typing for `{ ...A, ...B, ...C, ... }`

@@ -6,7 +6,7 @@ import type { FileSize } from './fileSize.js';
 /**
  * Device identifier type
  */
-export type DeviceID = Tag<Int, { deviceID: true }>;
+export type DeviceID = Int & Tag<'DeviceID'>;
 /**
  * DeviceID constructor
  *
@@ -24,7 +24,7 @@ export function DeviceID(value: number): DeviceID {
 /**
  * File identifier type
  */
-export type FileID = Tag<Int, { fileID: true }>;
+export type FileID = Int & Tag<'FileID'>;
 /**
  * FileID constructor
  *
@@ -42,7 +42,7 @@ export function FileID(value: number): FileID {
 /**
  * User identifier type
  */
-export type UserID = Tag<Int, { userID: true }>;
+export type UserID = Int & Tag<'UserID'>;
 /**
  * UserID constructor
  *
@@ -60,7 +60,7 @@ export function UserID(value: number): UserID {
 /**
  * Group identifier type
  */
-export type GroupID = Tag<Int, { groupID: true }>;
+export type GroupID = Int & Tag<'GroupID'>;
 /**
  * UserID constructor
  *

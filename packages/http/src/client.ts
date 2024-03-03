@@ -90,7 +90,7 @@ export namespace HTTP {
   /**
    * HTTP header record type
    */
-  export type Headers = Tag<Readonly<Record<string, string>>, { HTTPHeaders: true }>;
+  export type Headers = Readonly<Record<string, string>> & Tag<'HTTPHeaders'>;
 
   /**
    * HTTP header record constructor

@@ -1,7 +1,7 @@
 import type { Tag } from '@w5s/core';
 import { invariant } from '@w5s/invariant';
 
-export type RandomValue = Tag<number, { min: 0; max: 1 }>;
+export type RandomValue = number & Tag<'RandomValue'>;
 
 /**
  * @namespace
