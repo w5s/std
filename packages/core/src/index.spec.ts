@@ -27,6 +27,7 @@ describe('index', () => {
         'Result',
         'String',
         'Symbol',
+        'Tag',
         'Task',
         'throwError',
         'unsafeRun',

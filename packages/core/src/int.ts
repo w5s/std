@@ -1,5 +1,5 @@
 import type { Option } from './option.js';
-import type { Tag } from './type.js';
+import type { Tag } from './tag.js';
 import { Comparable } from './comparable.js';
 import type { Bounded } from './bounded.js';
 import type { Numeric } from './numeric.js';

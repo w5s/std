@@ -22,6 +22,7 @@ export * from './result.js';
 export * from './run.js';
 export * from './string.js';
 export * from './symbol.js';
+export * from './tag.js';
 export * from './task.js';
 export * from './throwError.js';
 export * from './type.js';
