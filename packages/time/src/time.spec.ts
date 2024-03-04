@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option, Ref, Result, unsafeRun } from '@w5s/core';
+import { describeComparable } from '@w5s/core/dist/testing.js';
 import { Time } from './time.js';
 import { TimeDuration } from './timeDuration.js';
 
@@ -113,5 +114,13 @@ describe('Time', () => {
       expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(clearTimeoutSpy).toHaveBeenLastCalledWith(setTimeoutResult);
     });
+  });
+  describeComparable({ describe, it, expect })(Time, {
+    ordered: () => [Time.of(0), Time.of(1), Time.of(2)],
+    equivalent: () => [
+      [Time.of(0), Time.of(0)],
+      [Time.of(1), Time.of(1)],
+      [Time.of(1.1), Time.of(1.1)],
+    ],
   });
 });

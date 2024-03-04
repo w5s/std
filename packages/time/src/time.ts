@@ -1,5 +1,7 @@
 import { invariant } from '@w5s/invariant';
 import type { Option, Task, Tag } from '@w5s/core';
+import { Comparable } from '@w5s/core/dist/comparable.js';
+import { Number as NumberModule } from '@w5s/core/dist/number.js';
 import { TimeDuration } from './timeDuration.js';
 
 // Inline private constructor
@@ -12,6 +14,10 @@ const callImmediate: typeof globalThis.queueMicrotask =
   typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
 const now = createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>;
 
+const TimeComparable: Comparable<Time> = Comparable({
+  compare: NumberModule.compare as Comparable<Time>['compare'],
+});
+
 /**
  * Represent a time typically returned by `Date.now()`
  */
@@ -23,6 +29,7 @@ export type Time = number & Tag<'Time'>;
  * @namespace
  */
 export const Time = {
+  ...TimeComparable,
   /**
    * Create a new Time value
    *
