@@ -1,10 +1,25 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 import { invariant } from '@w5s/invariant';
-import type { Tag } from '@w5s/core';
+import type { Numeric, Tag } from '@w5s/core';
+import { Comparable } from '@w5s/core/dist/comparable.js';
+import { Number } from '@w5s/core/dist/number.js';
 
 const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
 const DAYS = HOURS * 24;
+
+const TimeDurationComparable: Comparable<TimeDuration> = Comparable({
+  compare: Number.compare as Comparable<TimeDuration>['compare'],
+});
+
+const TimeDurationNumeric: Numeric<TimeDuration> = {
+  '+': Number['+'] as Numeric<TimeDuration>['+'],
+  '-': Number['-'] as Numeric<TimeDuration>['-'],
+  '*': Number['*'] as Numeric<TimeDuration>['*'],
+  abs: Number.abs as Numeric<TimeDuration>['abs'],
+  sign: Number.sign as Numeric<TimeDuration>['sign'],
+};
 
 /**
  * Represent a duration in milliseconds
@@ -17,6 +32,9 @@ export type TimeDuration = number & Tag<'TimeDuration'>;
  * @namespace
  */
 export const TimeDuration = {
+  ...TimeDurationComparable,
+  ...TimeDurationNumeric,
+
   /**
    * Return a duration from a number
    *
@@ -45,7 +63,7 @@ export const TimeDuration = {
    * @param anyValue - the tested value
    */
   hasInstance(anyValue: unknown): anyValue is TimeDuration {
-    return typeof anyValue === 'number' && !Number.isNaN(anyValue);
+    return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
   },
 
   /**
