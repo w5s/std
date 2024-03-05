@@ -22,7 +22,7 @@ const BigIntNumeric: Numeric<bigint> = {
  * ```typescript
  * import { BigInt } from '@w5s/core';
  *
- * const total = [1n, 2n, 3n].reduce(BigInt['+', 0n);// 6n
+ * const total = [1n, 2n, 3n].reduce(BigInt['+'], 0n);// 6n
  * BigInt['=='](total, 6n);// true
  * ```
  * @namespace
