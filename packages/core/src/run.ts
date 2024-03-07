@@ -1,12 +1,8 @@
+import { Awaitable, isPromiseLike } from '@w5s/promise';
 import type { Result } from './result.js';
 import type { Task, TaskCanceler } from './task.js';
-import type { Awaitable } from './type.js';
 
 // Inline utilities
-const isObject = (anyValue: unknown): anyValue is Record<string, unknown> =>
-  typeof anyValue === 'object' && anyValue !== null;
-const isPromise = <V>(anyValue: unknown): anyValue is Promise<V> =>
-  isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
 const returnOrThrow = <V, E>(result: Result<V, E>): V => {
   if (result.ok) {
     return result.value;
@@ -42,9 +38,9 @@ export function unsafeRun<Value, Error>(
     run: unsafeRun,
   });
   // Try to catch promise errors
-  if (isPromise(runValue)) {
-    // eslint-disable-next-line promise/prefer-await-to-then
-    runValue.catch((error) => rejectHandler(error));
+  if (isPromiseLike(runValue)) {
+    // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return
+    runValue.then(undefined, (error) => rejectHandler(error));
   }
   if (returnValue === undefined) {
     // eslint-disable-next-line promise/param-names
@@ -69,8 +65,5 @@ export function unsafeRun<Value, Error>(
  * @param task - the task to be run
  */
 export function unsafeRunOk<Value>(task: Task<Value, unknown>, canceler?: TaskCanceler): Awaitable<Value> {
-  const promiseOrValue = unsafeRun(task, canceler);
-  // @ts-ignore - we assume PromiseLike.then returns a Promise
-  // eslint-disable-next-line promise/prefer-await-to-then
-  return isPromise(promiseOrValue) ? promiseOrValue.then(returnOrThrow) : returnOrThrow(promiseOrValue);
+  return Awaitable.map(unsafeRun(task, canceler), returnOrThrow);
 }

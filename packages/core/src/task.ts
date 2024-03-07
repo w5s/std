@@ -1,8 +1,8 @@
 import type { AggregateError } from '@w5s/error';
+import { Awaitable } from '@w5s/promise';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
-import type { Awaitable } from './type.js';
 
 // Inline static helpers
 const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
@@ -10,8 +10,6 @@ const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<
 });
 const isObject = (anyValue: unknown): anyValue is Record<string, unknown> =>
   typeof anyValue === 'object' && anyValue !== null;
-const isPromiseLike = <V>(anyValue: unknown): anyValue is PromiseLike<V> =>
-  isObject(anyValue) && typeof anyValue['then'] === 'function';
 const cancel = (cancelerRef: TaskCanceler) => {
   const { current } = cancelerRef;
   if (current != null) {
@@ -121,9 +119,7 @@ export function Task<Value, Error = never>(
       canceler,
       run: (task) => run(task, canceler),
     });
-    const handleResult = (result: Result<Value, Error>) => (result.ok ? resolve(result.value) : reject(result.error));
-    // eslint-disable-next-line promise/prefer-await-to-then
-    return isPromiseLike(resultOrPromise) ? resultOrPromise.then(handleResult) : handleResult(resultOrPromise);
+    return Awaitable.map(resultOrPromise, (result) => (result.ok ? resolve(result.value) : reject(result.error)));
   });
 }
 export namespace Task {
