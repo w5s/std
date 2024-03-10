@@ -10583,11 +10583,11 @@ __metadata:
   linkType: hard
 
 "hasown@npm:^2.0.0, hasown@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "hasown@npm:2.0.1"
+  version: 2.0.2
+  resolution: "hasown@npm:2.0.2"
   dependencies:
     function-bind: "npm:^1.1.2"
-  checksum: 10c0/9e27e70e8e4204f4124c8f99950d1ba2b1f5174864fd39ff26da190f9ea6488c1b3927dcc64981c26d1f637a971783c9489d62c829d393ea509e6f1ba20370bb
+  checksum: 10c0/3769d434703b8ac66b209a4cca0737519925bbdb61dd887f93a16372b14694c63ff4e797686d87c90f08168e81082248b9b028bad60d4da9e0d1148766f56eb9
   languageName: node
   linkType: hard
 
@@ -19133,7 +19133,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc@npm:0.25.11, typedoc@npm:^0.25.7":
+"typedoc@npm:0.25.11":
   version: 0.25.11
   resolution: "typedoc@npm:0.25.11"
   dependencies:
@@ -19146,6 +19146,22 @@ __metadata:
   bin:
     typedoc: bin/typedoc
   checksum: 10c0/f27201cf48ad4bf2edbeb45466be82c6b9586411facbd57c6ad76b180b59a2aa52dca21639d0613fafb65730560210115dd2e3c7ec95d2ed5ec1775c4e9d330e
+  languageName: node
+  linkType: hard
+
+"typedoc@npm:^0.25.7":
+  version: 0.25.12
+  resolution: "typedoc@npm:0.25.12"
+  dependencies:
+    lunr: "npm:^2.3.9"
+    marked: "npm:^4.3.0"
+    minimatch: "npm:^9.0.3"
+    shiki: "npm:^0.14.7"
+  peerDependencies:
+    typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x
+  bin:
+    typedoc: bin/typedoc
+  checksum: 10c0/35157a90954ed67243bc1ad430781de381431959c62e24f8a8688c4ebae62c2ee11d404002dfd43a0df3bf96721d94fce928423fe1f91f1ed40c99f29c5276aa
   languageName: node
   linkType: hard
 
