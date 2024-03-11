@@ -9,6 +9,7 @@ describe('index', () => {
         "delay",
         "isPromiseLike",
         "Awaitable",
+        "tryCall",
       ]
     `);
   });
