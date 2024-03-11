@@ -8,7 +8,6 @@ describe('index', () => {
         "Deferred",
         "delay",
         "isPromiseLike",
-        "Awaitable",
         "tryCall",
       ]
     `);

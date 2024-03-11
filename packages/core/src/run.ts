@@ -1,4 +1,4 @@
-import { Awaitable, isPromiseLike } from '@w5s/promise';
+import { type Awaitable, isPromiseLike, tryCall } from '@w5s/promise';
 import type { Result } from './result.js';
 import type { Task, TaskCanceler } from './task.js';
 
@@ -65,5 +65,5 @@ export function unsafeRun<Value, Error>(
  * @param task - the task to be run
  */
 export function unsafeRunOk<Value>(task: Task<Value, unknown>, canceler?: TaskCanceler): Awaitable<Value> {
-  return Awaitable.map(unsafeRun(task, canceler), returnOrThrow);
+  return tryCall(() => unsafeRun(task, canceler), returnOrThrow);
 }

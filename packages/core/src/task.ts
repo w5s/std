@@ -1,5 +1,5 @@
 import type { AggregateError } from '@w5s/error';
-import { Awaitable } from '@w5s/promise';
+import { type Awaitable, tryCall as awaitableTryCall } from '@w5s/promise';
 import type { Option } from './option.js';
 import type { Result } from './result.js';
 import type { Ref } from './ref.js';
@@ -113,13 +113,16 @@ export function Task<Value, Error = never>(
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return createTask(({ resolve, reject, canceler, run }) => {
     canceler.current = undefined;
-    const resultOrPromise = sideEffect({
-      ok: Ok,
-      error: Err,
-      canceler,
-      run: (task) => run(task, canceler),
-    });
-    return Awaitable.map(resultOrPromise, (result) => (result.ok ? resolve(result.value) : reject(result.error)));
+    return awaitableTryCall(
+      () =>
+        sideEffect({
+          ok: Ok,
+          error: Err,
+          canceler,
+          run: (task) => run(task, canceler),
+        }),
+      (result) => (result.ok ? resolve(result.value) : reject(result.error))
+    );
   });
 }
 export namespace Task {
