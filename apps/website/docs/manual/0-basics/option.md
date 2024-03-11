@@ -82,6 +82,10 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 ## Coding Guide
 
+:::tip
+
+### 1. Use idiomatic functions
+
 - Prefer `Option.map` / `Option.andThen` /  `Option.orElse` when mapping an `Option` to an `Option`
 - Prefer ternary operators over `if` / `else`
 
@@ -101,6 +105,18 @@ const myFunc = <V>(option: Option<V>) => {
     return /* ... */
 };
 ```
+:::
+
+:::tip
+
+### 2. Try to eliminate `null` when possible
+
+```ts
+// ✓ GOOD
+const someOptionFunc = () => Option.from(someNullableFunc()); // null -> undefined
+```
+
+:::
 
 ## FAQ
 
