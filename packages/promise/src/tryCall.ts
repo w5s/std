@@ -2,10 +2,15 @@ import type { Awaitable } from './awaitable.js';
 import { isPromiseLike } from './isPromiseLike.js';
 
 /**
- * Returns `self.then(onSuccess, onError)` when a Promise else `onSuccess(self)` or `onError(error)` when error is thrown
+ * Returns `block().then(onSuccess, onError)` when a asynchronous.
+ * Else returns `try { return onSuccess(block()) } catch (error) { onError(error) }` when synchronous
  *
  * @example
  * ```ts
+ * const syncBlock = () => 'sync'
+ * tryCall(syncBlock, (_) => `${_}_foo`);// 'async_foo'
+ * const asyncBlock = () => Promise.resolve('async')
+ * tryCall(asyncBlock, (_) => `${_}_foo`);// Promise.resolve('async_foo')
  * ```
  *
  * @param block - the callback returning an awaitable value
