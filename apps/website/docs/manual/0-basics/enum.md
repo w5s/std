@@ -12,7 +12,7 @@ Enums are useful for defining types that can only take on a limited set of value
 
 An enum can be declared as the following example :
 
-```js
+```ts
 export const MyEnumType = {
     Foo: 'foo',
     Bar: 'bar',

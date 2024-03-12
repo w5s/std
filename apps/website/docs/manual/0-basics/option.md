@@ -12,7 +12,7 @@ An `Option<V>` is either a value of type `V` or nothing. An empty value is repre
 
 An enum can be declared as the following example :
 
-```js
+```ts
 import { Option } from '@w5s/core';
 
 export type OptString = Option<string>;
