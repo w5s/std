@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { defineCustomErrorWith, type CustomError, type CustomErrorParameters } from '@w5s/error';
+import { defineCustomErrorWith, type CustomError, type CustomErrorParametersProperties } from '@w5s/error';
 import type { FilePath } from './filePath.js';
 
 export const FileErrorType = {
@@ -30,7 +30,7 @@ export interface FileError
 export const FileError = defineCustomErrorWith(
   'FileError',
   (create) =>
-    (parameters: Partial<CustomErrorParameters<FileError>>): FileError =>
+    (parameters: Partial<CustomErrorParametersProperties<FileError>>): FileError =>
       create({
         fileErrorType: 'UserError',
         errno: undefined,
