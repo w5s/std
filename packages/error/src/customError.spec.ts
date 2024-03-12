@@ -90,10 +90,29 @@ describe('defineCustomErrorWith()', () => {
   });
 });
 describe('defineCustomError()', () => {
+  interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
+  const TestOptionalError = defineCustomError<TestOptionalError>('TestOptionalError');
+
   interface TestError extends CustomError<{ name: 'TestError'; email: string }> {}
   const TestError = defineCustomError<TestError>('TestError');
 
   it('should create a new constructor', () => {
+    expect(TestOptionalError()).toEqual(
+      CustomError({
+        name: 'TestOptionalError',
+      })
+    );
+    expect(TestOptionalError({})).toEqual(
+      CustomError({
+        name: 'TestOptionalError',
+      })
+    );
+    // @ts-expect-error
+    expect(TestError()).toEqual(
+      CustomError({
+        name: 'TestError',
+      })
+    );
     expect(TestError({ email: 'foo@bar.com' })).toEqual(
       CustomError({
         name: 'TestError',

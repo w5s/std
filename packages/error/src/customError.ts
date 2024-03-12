@@ -101,13 +101,32 @@ export interface CustomErrorConstructor<Model extends CustomError<{ name: string
   readonly hasInstance: (anyValue: unknown) => anyValue is Model;
 }
 
+// TODO: move this to library
+type RequiredKeysOf<T extends object> = Exclude<
+  {
+    [Key in keyof T]: T extends Record<Key, T[Key]> ? Key : never;
+  }[keyof T],
+  undefined
+>;
+
 /**
- * Extract all parameters to create a new DataError
+ * Extract all properties passed to constructor
  */
-export type CustomErrorParameters<Model> = Omit<Model, 'name' | 'stack' | 'message' | 'cause'> & {
+export type CustomErrorParametersProperties<Model extends object> = Omit<
+  Model,
+  'name' | 'stack' | 'message' | 'cause'
+> & {
   message?: string;
   cause?: unknown;
 };
+
+/**
+ * Extract all parameters to create a new CustomError
+ */
+export type CustomErrorParameters<Model extends object> =
+  RequiredKeysOf<Omit<Model, 'name' | 'stack' | 'message' | 'cause'>> extends never
+    ? [properties?: CustomErrorParametersProperties<Model>]
+    : [properties: CustomErrorParametersProperties<Model>];
 
 /**
  * Return a new `DataError` default factory
@@ -126,7 +145,7 @@ export type CustomErrorParameters<Model> = Omit<Model, 'name' | 'stack' | 'messa
  */
 export function defineCustomError<Model extends CustomError<{ name: string }>>(
   errorName: Model['name']
-): ((properties: CustomErrorParameters<Model>) => Model) & CustomErrorConstructor<Model> {
+): ((...properties: CustomErrorParameters<Model>) => Model) & CustomErrorConstructor<Model> {
   // @ts-ignore typing is slightly different
   return defineCustomErrorWith(errorName, (create) => create);
 }
