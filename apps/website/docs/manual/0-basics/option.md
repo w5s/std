@@ -26,8 +26,6 @@ withFallback(Option.Some('foo')); // Option.Some('foo')
 withFallback(Option.None);// Option.None
 ```
 
-
-
 ## Matching on values
 
 ### `Option.isNone` / `Option.isSome` (Recommended)
@@ -84,7 +82,7 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 :::tip
 
-### 1. Use idiomatic functions
+### Use idiomatic functions
 
 - Prefer `Option.map` / `Option.andThen` /  `Option.orElse` when mapping an `Option` to an `Option`
 - Prefer ternary operators over `if` / `else`
@@ -105,11 +103,12 @@ const myFunc = <V>(option: Option<V>) => {
     return /* ... */
 };
 ```
+
 :::
 
 :::tip
 
-### 2. Try to eliminate `null` when possible
+### Try to eliminate `null` when possible
 
 ```ts
 // ✓ GOOD
