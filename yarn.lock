@@ -4720,7 +4720,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.11.25":
+"@types/node@npm:*":
   version: 20.11.25
   resolution: "@types/node@npm:20.11.25"
   dependencies:
@@ -4733,6 +4733,15 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:20.11.26":
+  version: 20.11.26
+  resolution: "@types/node@npm:20.11.26"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 10c0/2df81e4f109588c4c490f2c7d616a06d2b3b9298f217468134b80711af810c9a6017a59beb3e6b1c596eb9b6c5a39d33403b99179acb89006badfbc55f2468bb
   languageName: node
   linkType: hard
 
@@ -5555,7 +5564,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:3.1.1"
     "@docusaurus/tsconfig": "npm:3.1.1"
     "@mdx-js/react": "npm:3.0.1"
-    "@types/node": "npm:20.11.25"
+    "@types/node": "npm:20.11.26"
     clsx: "npm:2.1.0"
     docusaurus-plugin-typedoc-api: "npm:4.2.0"
     prism-react-renderer: "npm:2.3.1"
