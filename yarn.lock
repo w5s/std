@@ -4069,24 +4069,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/esbuild@npm:11.0.3":
-  version: 11.0.3
-  resolution: "@size-limit/esbuild@npm:11.0.3"
+"@size-limit/esbuild@npm:11.1.0":
+  version: 11.1.0
+  resolution: "@size-limit/esbuild@npm:11.1.0"
   dependencies:
     esbuild: "npm:^0.20.1"
     nanoid: "npm:^5.0.6"
   peerDependencies:
-    size-limit: 11.0.3
-  checksum: 10c0/e54094321f8b1e01be80af2d9815260551ad44246ed1c9069542cdc0ff1f656d9c5c504c3c41e62dc33ee8f47934b78ccd6d94ccced80bae360d23721aa0db2c
+    size-limit: 11.1.0
+  checksum: 10c0/eb95584c03b2a1ce03dc03e5925358320193df2dbc6c1c6dffa7b2e72be88025adee8f121ca5fa719947142d6a1605615ce040eefaf31408991209169fadce68
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:11.0.3":
-  version: 11.0.3
-  resolution: "@size-limit/file@npm:11.0.3"
+"@size-limit/file@npm:11.1.0":
+  version: 11.1.0
+  resolution: "@size-limit/file@npm:11.1.0"
   peerDependencies:
-    size-limit: 11.0.3
-  checksum: 10c0/a12c19e4e5ad13c8933b755ce519a1c4f0e66fd1aa28245e46488a2a5500f04fefcc0e3c4a97afb0f45ba4f0769377f4d357e9e0c0e6bbbea7cbb1e2de67e76b
+    size-limit: 11.1.0
+  checksum: 10c0/979bdd3a53866d1154e26b50ee6713cf796c7c80719ef00668f40a601d20b5e635322c561fefb796b4bd40f66a96a5f5c05b14c36463345f168e299751e0a5f4
   languageName: node
   linkType: hard
 
@@ -4099,16 +4099,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/preset-small-lib@npm:11.0.3":
-  version: 11.0.3
-  resolution: "@size-limit/preset-small-lib@npm:11.0.3"
+"@size-limit/preset-small-lib@npm:11.1.0":
+  version: 11.1.0
+  resolution: "@size-limit/preset-small-lib@npm:11.1.0"
   dependencies:
-    "@size-limit/esbuild": "npm:11.0.3"
-    "@size-limit/file": "npm:11.0.3"
-    size-limit: "npm:11.0.3"
+    "@size-limit/esbuild": "npm:11.1.0"
+    "@size-limit/file": "npm:11.1.0"
+    size-limit: "npm:11.1.0"
   peerDependencies:
-    size-limit: 11.0.3
-  checksum: 10c0/a970090f0228f03d2b5b392b39e11d0c51800d15266b63c071baed9b67fb116ff78567f3dda2f4666c6e6cf055a14bca79058eca96d01b096aadf39f16cc0aa6
+    size-limit: 11.1.0
+  checksum: 10c0/0cc70e5bc57ca9a7779f90913f860763504c8c039ec4cf5378d853773f93ab2b83b2e582fae67d6bd653d2d43dc306851e63ae7549c8cdc72f4c9cd003b7c13e
   languageName: node
   linkType: hard
 
@@ -5270,7 +5270,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
-    "@size-limit/preset-small-lib": "npm:11.0.3"
+    "@size-limit/preset-small-lib": "npm:11.1.0"
     "@types/node": "npm:17.0.45"
     "@w5s/commitlint-config": "npm:2.0.8"
     "@w5s/conventional-changelog": "npm:2.0.6"
@@ -12247,7 +12247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.20.0":
+"jiti@npm:^1.20.0, jiti@npm:^1.21.0":
   version: 1.21.0
   resolution: "jiti@npm:1.21.0"
   bin:
@@ -18062,19 +18062,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"size-limit@npm:11.0.3":
-  version: 11.0.3
-  resolution: "size-limit@npm:11.0.3"
+"size-limit@npm:11.1.0":
+  version: 11.1.0
+  resolution: "size-limit@npm:11.1.0"
   dependencies:
     bytes-iec: "npm:^3.1.1"
     chokidar: "npm:^3.6.0"
     globby: "npm:^14.0.1"
+    jiti: "npm:^1.21.0"
     lilconfig: "npm:^3.1.1"
     nanospinner: "npm:^1.1.0"
     picocolors: "npm:^1.0.0"
   bin:
     size-limit: bin.js
-  checksum: 10c0/491a9069d9dff0e278d67291ccbbbcdce43261544ef9ce163396f1a485485ea677495e7c55e47a921370aa01bf75f8e04e0e8f0ef65e7c33a25c20067690baa5
+  checksum: 10c0/80969b20cba02b5bafa2db4725063104c1e4138e77b2698a4e62bf75d2ac80f52001d475e48dd8c5c616a7c98bef424ebed1974ee47e221212897586359c879c
   languageName: node
   linkType: hard
 
