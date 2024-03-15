@@ -6,6 +6,17 @@ sidebar_position: 4
 
 ## Motivation
 
+Extending `globalThis.Error` have multiple drawbacks :
+
+- Matching on errors relies on `instanceof` which have some limitations (ex: `iframe`)
+- Can be verbose even for adding just one property
+
+The `@w5s/error` package helps creating type safe errors :
+
+- Easy declaration using `defineCustomError`
+- Type safe matching on `name`
+- Discourage matching using `instanceof`
+
 ## Usage
 
 ```ts
@@ -96,5 +107,18 @@ try {
 ```
 
 ## Coding Guide
+
+```ts
+// ✓ Export an interface
+// ✓ PascalCase
+// ✓ Suffix 'Error'
+export interface {{SomeError}} extends CustomError<{
+  name: '{{SomeError}}';// <- This is required
+  // Add more properties
+  // ...
+}> {}
+// ✓ Export const with same name as const
+export const {{SomeError}} = defineCustomError<{{SomeError}}>({{SomeError}});
+```
 
 ## FAQ
