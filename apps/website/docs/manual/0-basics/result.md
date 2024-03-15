@@ -48,20 +48,20 @@ Use `Result.map` and/or `Result.andThen` to transform `Ok` value
 ### Using pipeline operator (*Draft proposal*) 
 
 ```ts
-const program = (expression: string) => {
+function program(expression: string) {
   // Convert string to number
   return parseNumber(expression) // Result<number, ParseError>
     // Divide by 2
     |> Result.andThen(#, (_) => divide(10, 2)) // Result<number, ZeroDivisionError | ParseError>
     // Multiple by 3
     |> Result.map(#, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
-};
+}
 ```
 
 ### Using `const`
 
 ```ts
-const program = (expression: string) => {
+function program(expression: string) {
   // Convert string to number
   const parsed = parseNumber(expression); // Result<number, ParseError>
   // Divide by 2
@@ -69,7 +69,7 @@ const program = (expression: string) => {
   // Multiple by 3
   const multipliedBy3 = Result.map(dividedBy2, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
   return multipliedBy3;
-};
+}
 ```
 
 ## Handling error
