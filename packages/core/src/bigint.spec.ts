@@ -22,6 +22,31 @@ describe('BigInt', () => {
     });
   });
 
+  describe('.parse', () => {
+    it.each([
+      ['0b10101', 21n],
+      ['1024', 1024n],
+      ['0x123', 291n],
+    ])('returns bigint values when valid', (value, expected) => {
+      expect(BigInt.parse(value)).toBe(expected);
+    });
+    it.each([
+      //
+      ['ABC', undefined],
+    ])('returns undefined for invalid values', (value, expected) => {
+      expect(BigInt.parse(value)).toBe(expected);
+    });
+  });
+  describe('.format', () => {
+    it.each([
+      [1024n, 2, '10000000000'],
+      [1024n, 10, '1024'],
+      [1024n, 16, '400'],
+    ])('returns string values', (value, radix, expected) => {
+      expect(BigInt.format(value, radix)).toBe(expected);
+    });
+  });
+
   describeComparable({ describe, it, expect })(BigInt, {
     ordered: () => [-1n, 0, 1n],
     equivalent: () => [
