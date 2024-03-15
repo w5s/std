@@ -4,6 +4,7 @@ import { Codec, boolean, number, string, DecodeError, option, dateISO, array, ob
 import { Option } from './option.js';
 import { Int } from './int.js';
 import { assertType } from './testing.js';
+import { Tag } from './tag.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -339,9 +340,13 @@ describe('dateISO', () => {
   });
   interface Group extends Codec.TypeOf<typeof Group> {}
 
+  type PersonId = string & Tag<'PersonId'>;
+  const PersonId = Tag.Make<string, PersonId>();
+
   const Person = object({
+    // id: PersonId,
     name: string,
-    description: string,
+    description: option(string),
     age: int,
     groups: array(Group),
     created: dateISO,
@@ -353,7 +358,7 @@ describe('dateISO', () => {
     Person,
     {
       name: string;
-      description: string;
+      description: Option<string>;
       age: Int;
       groups: ReadonlyArray<Group>;
       created: Date;
