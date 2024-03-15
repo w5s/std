@@ -56,8 +56,8 @@ Offers a good readability with expressiveness, with a small tradeoff on performa
 import { Option } from '@w5s/core';
 
 const optionToString = <V>(option: Option<V>) => Option.match(option, {
-    Some: (v) => `Some(${v})`,
-    None: () => 'None',
+  Some: (v) => `Some(${v})`,
+  None: () => 'None',
 });
 optionToString(Option.Some(1));// 'Some(1)'
 optionToString(Option.None);// 'None'
@@ -97,10 +97,10 @@ const myFunc = <V>(option: Option<V>) => Option.isNone(option) ? /* ... */ : /* 
 
 // ⤫ BAD
 const myFunc = <V>(option: Option<V>) => {
-    if (Option.isNone(option)) {
-        return /* ... */ // Risk of returning a different type on both branches
-    }
-    return /* ... */
+  if (Option.isNone(option)) {
+    return /* ... */ // Risk of returning a different type on both branches
+  }
+  return /* ... */
 };
 ```
 

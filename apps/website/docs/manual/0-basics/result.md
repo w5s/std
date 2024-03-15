@@ -27,7 +27,7 @@ An enum can be declared as the following example :
 
 ```ts
 import { Result } from '@w5s/core';
-import { defineCustomError } from '@w5s/error';
+import { defineCustomError, type CustomError } from '@w5s/error';
 
 export interface ZeroDivisionError
   extends CustomError<{
@@ -36,8 +36,8 @@ export interface ZeroDivisionError
 export const ZeroDivisionError = defineCustomError<ZeroDivisionError>('ZeroDivisionError');
 
 export function divide(value: number, divider: number): Result<number, ZeroDivisionError> {
-    const returnValue = value / divider;
-    return Number.isNaN(returnValue) ? Result.Error(ZeroDivisionError()) : Result.Ok(returnValue);
+  const returnValue = value / divider;
+  return Number.isNaN(returnValue) ? Result.Error(ZeroDivisionError()) : Result.Ok(returnValue);
 }
 ```
 
@@ -49,12 +49,12 @@ Use `Result.map` and/or `Result.andThen` to transform `Ok` value
 
 ```ts
 const program = (expression: string) => {
-    // Convert string to number
-    return parseNumber(expression) // Result<number, ParseError>
-        // Divide by 2
-        |> Result.andThen(#, (_) => divide(10, 2)) // Result<number, ZeroDivisionError | ParseError>
-        // Multiple by 3
-        |> Result.map(#, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
+  // Convert string to number
+  return parseNumber(expression) // Result<number, ParseError>
+    // Divide by 2
+    |> Result.andThen(#, (_) => divide(10, 2)) // Result<number, ZeroDivisionError | ParseError>
+    // Multiple by 3
+    |> Result.map(#, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
 };
 ```
 
@@ -62,13 +62,13 @@ const program = (expression: string) => {
 
 ```ts
 const program = (expression: string) => {
-    // Convert string to number
-    const parsed = parseNumber(expression); // Result<number, ParseError>
-    // Divide by 2
-    const dividedBy2 = divide(parsed, 2); // Result<number, ZeroDivisionError | ParseError>
-    // Multiple by 3
-    const multipliedBy3 = Result.map(dividedBy2, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
-    return multipliedBy3;
+  // Convert string to number
+  const parsed = parseNumber(expression); // Result<number, ParseError>
+  // Divide by 2
+  const dividedBy2 = divide(parsed, 2); // Result<number, ZeroDivisionError | ParseError>
+  // Multiple by 3
+  const multipliedBy3 = Result.map(dividedBy2, (_) => _ * 3); // Result<number, ZeroDivisionError | ParseError>
+  return multipliedBy3;
 };
 ```
 
@@ -78,12 +78,12 @@ Use `Result.mapError` and/or `Result.orElse` to transform `Error` error.
 
 ```ts
 const handleZeroDivisionError = <E>(result: Result<number, E|ZeroDivisionError>) => {
-    return Result.orElse(result, (error) => {
-        switch (error.name): {
-            case ZeroDivisionError.typeName: return Result.Ok(0);
-            default: Result.Error(error);
-        }
-    });// Result<number, E>
+  return Result.orElse(result, (error) => {
+    switch (error.name): {
+      case ZeroDivisionError.typeName: return Result.Ok(0);
+      default: Result.Error(error);
+    }
+  });// Result<number, E>
 };
 ```
 

@@ -14,8 +14,8 @@ An enum can be declared as the following example :
 
 ```ts
 export const MyEnumType = {
-    Foo: 'foo',
-    Bar: 'bar',
+  Foo: 'foo',
+  Bar: 'bar',
 };
 export type MyEnumType = typeof MyEnumType[keyof typeof MyEnumType];
 ```
@@ -26,13 +26,14 @@ export type MyEnumType = typeof MyEnumType[keyof typeof MyEnumType];
 import { assertNever } from '@w5s/invariant';
 
 export function getName(value: MyEnumType) {
-    switch (value) {
-        case MyEnumType.Foo:
-            return 'foo_name';
-        case MyEnumType.Bar:
-            return 'bar_name';
-        default:
-            assertNever(value);
+  switch (value) {
+    case MyEnumType.Foo:
+      return 'foo_name';
+    case MyEnumType.Bar:
+      return 'bar_name';
+    default:
+      assertNever(value);
+  }
 }
 ```
 
@@ -42,9 +43,9 @@ export function getName(value: MyEnumType) {
 // ✓ Export a const
 // ✓ PascalCase
 export const {{EnumType}} = {
-    // ✓ PascalCase
-    {{EnumValueName}}: '{{EnumValue}}',
-    // ...
+  // ✓ PascalCase
+  {{EnumValueName}}: '{{EnumValue}}',
+  // ...
 };
 // ✓ Export a type with the same name as the const
 export type {{EnumType}} = typeof {{EnumType}}[keyof typeof {{EnumType}}];
