@@ -291,7 +291,7 @@ export function array<V>(itemCodec: Codec<V>): Codec<Array<V>> {
  */
 export function object<P>(codecMap: {
   readonly [K in keyof P]: Codec<P[K]>;
-}): Codec<P>;
+}): Codec<Readonly<P>>;
 export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<string, unknown>> {
   const propertyNames = Object.keys(codecMap);
   const propertyNameCount = propertyNames.length;

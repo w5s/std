@@ -3,6 +3,7 @@ import { Result } from './result.js';
 import { Codec, boolean, number, string, DecodeError, option, dateISO, array, object, int } from './codec.js';
 import { Option } from './option.js';
 import { Int } from './int.js';
+import { assertType } from './testing.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -332,3 +333,31 @@ describe('dateISO', () => {
     });
   });
 });
+(() => {
+  const Group = object({
+    name: string,
+  });
+  interface Group extends Codec.TypeOf<typeof Group> {}
+
+  const Person = object({
+    name: string,
+    description: string,
+    age: int,
+    groups: array(Group),
+    created: dateISO,
+    updated: dateISO,
+  });
+  interface Person extends Codec.TypeOf<typeof Person> {}
+
+  assertType<
+    Person,
+    {
+      name: string;
+      description: string;
+      age: Int;
+      groups: ReadonlyArray<Group>;
+      created: Date;
+      updated: Date;
+    }
+  >(true);
+})();
