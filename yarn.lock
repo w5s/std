@@ -5240,22 +5240,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.0.8":
-  version: 2.0.8
-  resolution: "@w5s/commitlint-config@npm:2.0.8"
+"@w5s/commitlint-config@npm:2.0.9":
+  version: 2.0.9
+  resolution: "@w5s/commitlint-config@npm:2.0.9"
   dependencies:
     "@commitlint/types": "npm:^18.0.0"
-    "@w5s/conventional-changelog": "npm:^2.0.6"
+    "@w5s/conventional-changelog": "npm:^2.0.7"
   peerDependencies:
-    "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0
+    "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/9695d77b15fa450850090c54bdb3e1f3d1496da2b77fae32c8b44ea208fc68c50579fca6b876b689599aec156a4fe8f4ba849492871934ef3522b8f2ebeed616
+  checksum: 10c0/ec71f594f98f4ca1876febbc2136f6b5c65dad1dc974676cd62805f615989f2e1d0e0d38f8b9e7a412a638a818f8cbdf88388abbcc1645295bafe5b7abca4dfa
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:2.0.6, @w5s/conventional-changelog@npm:^2.0.6":
+"@w5s/conventional-changelog@npm:2.0.6":
   version: 2.0.6
   resolution: "@w5s/conventional-changelog@npm:2.0.6"
   dependencies:
@@ -5266,13 +5266,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@w5s/conventional-changelog@npm:^2.0.7":
+  version: 2.0.7
+  resolution: "@w5s/conventional-changelog@npm:2.0.7"
+  dependencies:
+    "@commitlint/types": "npm:^18.0.0"
+    emoji-regex: "npm:^10.2.1"
+    gitmojis: "npm:^3.13.4"
+  checksum: 10c0/3e1eb40e29e19796b512c7b674cac6c9d5de0604f53149d45705210fd93e524db2ed818a151b6e4625d8f6a10175afa2f302a38274b15776a5edf8184d5be141
+  languageName: node
+  linkType: hard
+
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.1.0"
     "@types/node": "npm:17.0.45"
-    "@w5s/commitlint-config": "npm:2.0.8"
+    "@w5s/commitlint-config": "npm:2.0.9"
     "@w5s/conventional-changelog": "npm:2.0.6"
     "@w5s/cspell-config": "npm:2.2.8"
     "@w5s/eslint-config": "npm:2.0.9"
