@@ -47,7 +47,7 @@ export function divide(value: number, divider: number): Result<number, ZeroDivis
 
 Use `Result.map` and/or `Result.andThen` to transform `Ok` value
 
-### Using pipeline operator (*Draft proposal*) 
+### Using pipeline operator (*Draft proposal*)
 
 ```ts
 function program(expression: string) {
