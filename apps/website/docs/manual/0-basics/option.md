@@ -4,6 +4,8 @@ sidebar_position: 2
 
 # Option
 
+> Optional values
+
 ## Motivation
 
 An `Option<V>` is either a value of type `V` or nothing. An empty value is represented by `Option.None` and a defined value by `Option.Some(...)`. Internally, `Option.None` is `undefined`.
@@ -82,6 +84,21 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 :::tip
 
+### Always use `Option` type if possible
+
+- Avoid using `null`
+
+  ```ts
+  // ✓ GOOD
+  const someOptionFunc = () => Option.from(someNullableFunc()); // null -> undefined
+  ```
+
+- `Option<V>` is more expressive than `V | undefined` and more readable in the IDE
+
+:::
+
+:::tip
+
 ### Use idiomatic functions
 
 - Prefer `Option.map` / `Option.andThen` /  `Option.orElse` when mapping an `Option` to an `Option`
@@ -102,17 +119,6 @@ const myFunc = <V>(option: Option<V>) => {
   }
   return /* ... */
 };
-```
-
-:::
-
-:::tip
-
-### Try to eliminate `null` when possible
-
-```ts
-// ✓ GOOD
-const someOptionFunc = () => Option.from(someNullableFunc()); // null -> undefined
 ```
 
 :::
@@ -157,4 +163,13 @@ CONS :
 
 - `undefined` does not exist in JSON
 
+</details>
+
+<details>
+<summary>
+Why choose the name `Option` over `Maybe` ?
+</summary>
+
+It is a matter of preference. `Rust` uses `Option`, `Haskell` uses `Maybe`.
+Generally speaking, `W5S` packages naming tends to be often aligned with the `Rust` naming when no ECMA equivalent exists.
 </details>

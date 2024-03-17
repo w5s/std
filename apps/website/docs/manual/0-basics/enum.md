@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Enum
 
+> Enumeration of constant values
+
 ## Motivation
 
 Enums are useful for defining types that can only take on a limited set of values.

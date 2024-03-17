@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # Error
 
+> Error factory creation
+
 ## Motivation
 
 Extending `globalThis.Error` have multiple drawbacks :

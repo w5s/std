@@ -4,6 +4,8 @@ sidebar_position: 3
 
 # Result
 
+> Error handling in a type safe way
+
 ## Motivation
 
 A `Result<Value, Error>` is a type to manipulate and propagate errors in a type safe way (like Rust result or Haskell Either).
@@ -107,4 +109,5 @@ Why choose the name `Result` over `Either` ?
 </summary>
 
 It is a matter of preference. `Ok` / `Error` is more explicit than `Left` / `Right`.
+Generally speaking, `W5S` packages naming tends to be often aligned with the `Rust` naming when no ECMA equivalent exists.
 </details>
