@@ -30,11 +30,12 @@ withFallback(Option.None);// Option.None
 
 ## Matching on values
 
-### `Option.isNone` / `Option.isSome` (Recommended)
+### Method 1:  `Option.isNone` / `Option.isSome` (Recommended)
 
-:::info
+:::note
 
-Offers the best readability with expressiveness, with high performances
+- ✓ Best Expressiveness
+- ✓ Good performances
 
 :::
 
@@ -46,11 +47,12 @@ optionToString(Option.Some(1));// 'Some(1)'
 optionToString(Option.None);// 'None'
 ```
 
-### `Option.match`
+### Method 2: `Option.match`
 
-:::info
+:::note
 
-Offers a good readability with expressiveness, with a small tradeoff on performances (object and function creation)
+- ✓ Good Expressiveness
+- ⚠️ Lower performances
 
 :::
 
@@ -65,12 +67,15 @@ optionToString(Option.Some(1));// 'Some(1)'
 optionToString(Option.None);// 'None'
 ```
 
-### `=== undefined` / `!== undefined` (i.e. inlining isNone / isSome)
+### Method 3: `=== undefined` / `!== undefined` (i.e. inlining isNone / isSome)
 
-:::info
+:::note
 
-At the cost of a mediocre expressiveness, this solution is the best for performances because the Option module does not have to be loaded (it is a type only dependency).
 Not recommended for an application, but only for a third party library.
+
+- ⚠️ Low expressiveness
+- ✓ Highest performances
+- ✓ No module load overhead
 
 :::
 

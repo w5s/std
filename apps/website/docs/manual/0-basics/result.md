@@ -43,6 +43,47 @@ export function divide(value: number, divider: number): Result<number, ZeroDivis
 }
 ```
 
+## Matching values
+
+### Method 1: `Result.isOk` / `Result.isError` (Recommended)
+
+:::note
+
+- ✓ Good performance
+- ✓ Long term maintainable
+
+:::
+
+```ts
+const program = (result: Result<number, 'FooError'>) => {
+  if (Result.isOk(result)) {
+    console.log(result.value);
+  } else {
+    console.error(result.error);
+  }
+}
+```
+
+### Method 2: `if(result.ok)`
+
+:::note
+
+- ✓ Highest performance
+- ✓ No module load overhead
+- ⚠️ Potentially less maintainable on long term
+
+:::
+
+```ts
+const program = (result: Result<number, 'FooError'>) => {
+  if (result.ok) {
+    console.log(result.value);
+  } else {
+    console.error(result.error);
+  }
+}
+```
+
 ## Chaining
 
 Use `Result.map` and/or `Result.andThen` to transform `Ok` value
