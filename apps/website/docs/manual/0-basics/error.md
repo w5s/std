@@ -45,6 +45,25 @@ console.log(SomeError({
 // }
 ```
 
+## Throwing errors
+
+Generally speaking throwing error is discouraged. Throwing error can occur when :
+
+- Program is an impossible state and should be stopped (i.e. panic)
+- An unexpected operation was done that was not caught during compile time
+
+```ts
+import { invariant } from '@w5s/invariant';
+
+function doSomething(input: unknown) {
+  invariant(input == null, 'Input should not be null');
+  // throw InvariantError { message: 'Input should not be null' } 
+  // (when input is null or undefined)
+
+  //... do something with input
+}
+```
+
 ## Matching errors
 
 The recommended way to match on errors created with `defineCustomError` is to use a `switch` / `case` on the error `name`
@@ -87,7 +106,7 @@ function program() {
 
 ```
 
-## Chaining / Specializing errors
+## Caused / Specializing error
 
 `CustomError` can be used to create specific errors with a `cause` property that is useful to keep track of the chain of errors.
 

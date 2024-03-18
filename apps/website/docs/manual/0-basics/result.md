@@ -96,6 +96,7 @@ const handleZeroDivisionError = <E>(result: Result<number, E|ZeroDivisionError>)
 ### Always use `Result` when possible
 
 - Prefer using `Result` over throwing error.
+  - Prefer [`invariant`](./error#throwing-errors) over throwing error.
 - Prefer using `Result` over returning `Option` for a non representable value
 - When throwing error prefer using `import { invariant } from '@w5s/invariant'`
 
