@@ -1,0 +1,65 @@
+---
+sidebar_position: 0
+---
+
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
+
+# Invariant
+
+> Throw descriptive error in development, generic error in production.
+
+<PackageBadgeGroup apiHref="/api/invariant" />
+
+## Motivation
+
+This package provides a simple way to throw error from an assertion and a message.
+It is built to be easily parsable / stripable at compile time.
+
+## Installation
+
+<PackageInstallBlock packageName="@w5s/invariant" />
+
+## Usage
+
+```ts
+import { invariant } from '@w5s/invariant';
+
+function program() {
+  invariant(true, 'This will not throw an error'); 
+  // -> nothing
+  invariant(false, 'This will throw an error'); 
+  // -> throw InvariantError { message: 'Input should not be null' } when input is null or undefined
+
+  //... do something with input
+}
+```
+
+## Coding Guide
+
+:::warning
+
+### Use `invariant` with caution
+
+Generally speaking, throwing errors should be avoided.
+Nevertheless, invariant should be thrown when :
+
+- Program is in an impossible state and should be stopped (i.e. panic)
+- An unexpected operation was done that was not caught during compile time
+
+On the contrary, invariant should never be used to propagate logical errors.
+For logical error, please see [Result](./core/result) section.
+:::
+
+```ts
+invariant(
+  condition, 
+  // ✓ Describe what is wrong
+  // ✓ Add a hint on how to fix it
+  // ✓ Starts with upper case character
+  // ex: '"A" is not a valid integer', 'Unexpected parameter "foo_bar"', ...
+  '{{Invariant message}}'
+);
+```
+
+## FAQ
