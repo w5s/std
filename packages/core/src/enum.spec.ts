@@ -26,8 +26,8 @@ describe('Enum', () => {
       ).toEqual({
         Foo: 'foo',
         Bar: 'bar',
-        enumKeys: ['Foo', 'Bar'],
-        enumValues: ['foo', 'bar'],
+        [Enum.enumKeys]: ['Foo', 'Bar'],
+        [Enum.enumValues]: ['foo', 'bar'],
       });
     });
   });
