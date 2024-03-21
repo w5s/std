@@ -14,6 +14,7 @@ describe('index', () => {
         'Console',
         'Struct',
         'Equal',
+        'Enum',
         'extend',
         'identity',
         'ignore',

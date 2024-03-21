@@ -5,6 +5,7 @@ export * from './boolean.js';
 export * from './bounded.js';
 export * from './comparable.js';
 export * from './console.js';
+export * from './enum.js';
 export * from './struct.js';
 export * from './equal.js';
 export * from './extend.js';
