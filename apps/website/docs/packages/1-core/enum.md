@@ -57,7 +57,7 @@ Enum.values(MyEnum); // ['foo', 'bar']
 
 ## Extending Enum
 
-To read enum keys and values, use `Enum.keys` and `Enum.values` :
+Extending an enum can be done just using the `...` operator
 
 ```ts
 const MyEnumValues = Enum.Make({
