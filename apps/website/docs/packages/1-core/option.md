@@ -104,14 +104,14 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 :::tip
 
-### Use idiomatic functions
+### Use precise and meaningful functions
 
 - Prefer `Option.map` / `Option.andThen` /  `Option.orElse` when mapping an `Option` to an `Option`
 - Prefer ternary operators over `if` / `else`
 
 ```ts
 // ✓ OK
-const myFunc = <V>(option: Option<V>) => Option.map(option, () => /* ... */);
+const myFunc = <V>(option: Option<V>) => Option.map(option, (value) => /* ... */);
 
 // = OK with caution
 const myFunc = <V>(option: Option<V>) => Option.isNone(option) ? /* ... */ : /* ... */;
