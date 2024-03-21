@@ -3,17 +3,27 @@ import { Enum } from './enum.js';
 import { assertType } from './testing.js';
 
 describe('Enum', () => {
+  const MyEnumObject = Enum.Make({
+    Foo: 'foo',
+    Bar: 'bar',
+  });
   const MyEnum = {
-    ...Enum.Make({
-      Foo: 'foo',
-      Bar: 'bar',
-    }),
-    someMethod() {},
+    ...MyEnumObject,
+    label(value: MyEnum): string {
+      switch (value) {
+        case MyEnumObject.Foo: {
+          return 'foo_label';
+        }
+        default: {
+          return 'bar_label';
+        }
+      }
+    },
   };
-  type MyEnum = Enum.ValueOf<typeof MyEnum>;
+  type MyEnum = Enum.ValueOf<typeof MyEnumObject>;
   assertType<MyEnum, 'foo' | 'bar'>(true);
 
-  type MyEnumKeys = Enum.KeyOf<typeof MyEnum>;
+  type MyEnumKeys = Enum.KeyOf<typeof MyEnumObject>;
   assertType<MyEnumKeys, 'Foo' | 'Bar'>(true);
 
   describe('Make', () => {
