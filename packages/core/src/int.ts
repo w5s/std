@@ -72,52 +72,7 @@ const IntNumeric: Numeric<Int> = {
   sign: Math.sign as Numeric<Int>['sign'],
 };
 
-/**
- * Integer value
- */
-export type Int = number & Tag<'Int'>;
-
-/**
- * A collection of functions to manipulate integer values
- *
- * @namespace
- */
-export const Int = {
-  ...IntComparable,
-  ...IntBounded,
-  ...IntNumeric,
-
-  /**
-   * Return a new integer from `value`
-   *
-   * @example
-   * ```typescript
-   * const intValue = Int.of(0.5);// 0
-   * ```
-   * @category Constructor
-   * @param value - an initial numeric value
-   */
-  of(value: number): Int {
-    return toSafeInt(value);
-  },
-
-  /**
-   * Returns `true` if anyValue is a safe integer
-   *
-   * @example
-   * ```typescript
-   * Int.hasInstance(0);// true
-   * Int.hasInstance(-1);// true
-   * Int.hasInstance(1.1);// false
-   * Int.hasInstance(Int.max + 1);// false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is Int {
-    return Number.isSafeInteger(anyValue);
-  },
-
+const IntFormat = {
   /**
    * Parses a string argument and returns an integer of the specified radix (the base in mathematical numeral systems).
    * If the `expression` is not valid, it returns `Option.None`
@@ -150,5 +105,53 @@ export const Int = {
    */
   format(intValue: Int, radix?: Radix36): string {
     return intValue.toString(radix);
+  },
+};
+
+/**
+ * Integer value
+ */
+export type Int = number & Tag<'Int'>;
+
+/**
+ * A collection of functions to manipulate integer values
+ *
+ * @namespace
+ */
+export const Int = {
+  ...IntComparable,
+  ...IntBounded,
+  ...IntNumeric,
+  ...IntFormat,
+
+  /**
+   * Return a new integer from `value`
+   *
+   * @example
+   * ```typescript
+   * const intValue = Int.of(0.5);// 0
+   * ```
+   * @category Constructor
+   * @param value - an initial numeric value
+   */
+  of(value: number): Int {
+    return toSafeInt(value);
+  },
+
+  /**
+   * Returns `true` if anyValue is a safe integer
+   *
+   * @example
+   * ```typescript
+   * Int.hasInstance(0);// true
+   * Int.hasInstance(-1);// true
+   * Int.hasInstance(1.1);// false
+   * Int.hasInstance(Int.max + 1);// false
+   * ```
+   * @category Type
+   * @param anyValue - a tested value
+   */
+  hasInstance(anyValue: unknown): anyValue is Int {
+    return Number.isSafeInteger(anyValue);
   },
 };
