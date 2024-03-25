@@ -81,12 +81,12 @@ export const MyEnum = {
 // Enum.keys(MyEnum) will still return ['Foo', 'Bar'] !
 ```
 
-
 ## Coding Guide
 
 ```ts
 // ✓ Export a const
 // ✓ PascalCase
+// ✓ Singular
 export const {{EnumType}} = Enum.Make({
   // ✓ PascalCase
   {{EnumValueName}}: '{{EnumValue}}',
@@ -95,3 +95,42 @@ export const {{EnumType}} = Enum.Make({
 // ✓ Export a type with the same name as the const
 export type {{EnumType}} = Enum.ValueOf<typeof {{EnumType}}>;
 ```
+
+## FAQ
+
+<details>
+<summary>
+Why not using Typescript `enum` ?
+</summary>
+
+Typescript enums have several drawbacks such as :
+
+- Number based enum are not safe
+
+  ```ts
+  enum Roles {
+    Admin,
+  }
+  declare function hasAccess(role: Roles): void;
+
+  hasAccess(10);// This is valid, but it should not 😣
+  ```
+
+- String based enum are using nominal typing (Typescript is almost full structurally typed)
+
+  ```ts
+  enum Roles {
+    Admin = 'admin',
+  }
+  declare function hasAccess(role: Roles): void;
+
+  hasAccess('admin') // Invalid.
+  hasAccess(Roles.Admin) // Valid.
+  ```
+
+References :
+
+- [https://dev.to/ivanzm123/dont-use-enums-in-typescript-they-are-very-dangerous-57bh]
+
+This library was created to solve these issues.
+</details>
