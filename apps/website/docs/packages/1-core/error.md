@@ -113,7 +113,7 @@ try {
 ```ts
 // ✓ Export an interface
 // ✓ PascalCase
-// ✓ Suffix 'Error'
+// ✓ Name + 'Error'
 export interface {{SomeError}} extends CustomError<{
   name: '{{SomeError}}';// <- This is required
   // Add more properties
