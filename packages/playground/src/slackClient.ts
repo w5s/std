@@ -1,9 +1,13 @@
-import type { Option, JSONValue, Tag } from '@w5s/core';
+import { Option, type JSONValue, Tag } from '@w5s/core';
 import type { TimeDuration } from '@w5s/time';
 import { HTTP, HTTPParser } from '@w5s/http';
 import { timeout } from './timeout.js';
 
 export interface Slack {
+  /**
+   * Slack base URL
+   */
+  readonly slackBaseURL: string;
   /**
    * Slack API token
    */
@@ -14,13 +18,16 @@ export interface Slack {
   readonly slackRequestTimeout: Option<TimeDuration>;
 }
 export function Slack({
+  baseURL: slackBaseURL = 'https://slack.com/api',
   timeout: slackRequestTimeout,
   token: slackToken,
 }: {
+  baseURL?: Slack['slackBaseURL'];
   timeout?: Slack['slackRequestTimeout'];
   token: Slack['slackToken'];
 }): Slack {
   return {
+    slackBaseURL,
     slackToken,
     slackRequestTimeout,
   };
@@ -30,10 +37,7 @@ export namespace Slack {
   type Id<T extends string> = string & Tag<T>;
 
   function MakeId<IdType extends Id<any>>() {
-    function Id(value: string): IdType {
-      return value as unknown as IdType;
-    }
-    return Id;
+    return Tag.Make<string, IdType>({ hasInstance: (anyValue) => typeof anyValue === 'string' });
   }
 
   // export type URL = string;
@@ -73,7 +77,7 @@ export namespace Slack {
     parameters: { [key: string]: unknown }
   ) {
     const request = HTTP.request({
-      url: urlWithQuery(`https://slack.com/api/${method}`, {
+      url: urlWithQuery(`${client.slackBaseURL}/${method}`, {
         token: client.slackToken,
         ...parameters,
       }),

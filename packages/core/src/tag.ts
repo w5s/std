@@ -29,10 +29,14 @@ export const Tag = {
    * @example
    * ```ts
    * type Foo = string & Tag<'Foo'>;
-   * const Foo = Tag.Make<string, Foo>();
+   * const Foo = Tag.Make<string, Foo>({
+   *   hasInstance: (anyValue) => typeof anyValue === 'string',
+   * });
    * ```
    */
-  Make<From, To extends Tag<any>>() {
+  Make<From, To extends From>(parameters: { hasInstance: (anyValue: unknown) => boolean }): Tag.Module<From, To> {
+    const _hasInstance = parameters.hasInstance;
+
     function wrap(value: From): To {
       return value as unknown as To;
     }
@@ -41,9 +45,43 @@ export const Tag = {
       return value as unknown as From;
     }
 
-    return {
+    function hasInstance(value: From): value is To {
+      return _hasInstance(value);
+    }
+
+    return Object.assign((value: From) => wrap(value), {
       wrap,
       unwrap,
-    };
+      hasInstance,
+    });
   },
 };
+export namespace Tag {
+  export interface Module<From, To extends From> {
+    /**
+     * Convert an underlying type to a tagged type
+     * Alias to `wrap(value)`
+     *
+     * @param value
+     */
+    (value: From): To;
+    /**
+     * Convert an underlying type to a tagged type
+     *
+     * @param value
+     */
+    wrap(value: From): To;
+    /**
+     * Convert a tagged value to the underlying type
+     *
+     * @param value
+     */
+    unwrap(value: To): From;
+    /**
+     * Check if `value` is a tagged type and refine type
+     *
+     * @param value
+     */
+    hasInstance(value: From): value is To;
+  }
+}
