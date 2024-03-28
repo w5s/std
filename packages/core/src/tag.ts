@@ -41,7 +41,7 @@ export const Tag = {
 
     function wrap(value: From): To {
       invariant(hasInstance(value), `Invalid value`);
-      return value as unknown as To;
+      return value;
     }
 
     function unwrap(value: To): From {
