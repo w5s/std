@@ -24,15 +24,19 @@ describe('Tag', () => {
     describe('#()', () => {
       it('returns identity', () => {
         expect(PositiveNumber(1)).toBe(1);
-        // @ts-expect-error Throw a type error
-        PositiveNumber('');
+        expect(() => {
+          // @ts-expect-error Throw a type error
+          PositiveNumber('');
+        }).toThrow(new Error('Invalid value'));
       });
     });
     describe('#wrap', () => {
       it('returns identity', () => {
         expect(PositiveNumber.wrap(1)).toBe(1);
-        // @ts-expect-error Throw a type error
-        PositiveNumber.wrap('');
+        expect(() => {
+          // @ts-expect-error Throw a type error
+          PositiveNumber.wrap('');
+        }).toThrow(new Error('Invalid value'));
       });
     });
     describe('#unwrap', () => {
@@ -40,7 +44,7 @@ describe('Tag', () => {
         const value = 1 as PositiveNumber;
         expect(PositiveNumber.unwrap(value)).toBe(1);
         // @ts-expect-error Throw a type error
-        PositiveNumber.unwrap(1);
+        PositiveNumber.unwrap('');
       });
     });
     describe('#hasInstance', () => {

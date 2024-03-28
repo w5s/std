@@ -1,3 +1,5 @@
+import { invariant } from '@w5s/invariant';
+
 /**
  * Enhance `Base` by adding tags. Every tag is prefixed by `@@` as a convention to never be used by runtime code
  *
@@ -38,6 +40,7 @@ export const Tag = {
     const _hasInstance = parameters.hasInstance;
 
     function wrap(value: From): To {
+      invariant(hasInstance(value), `Invalid value`);
       return value as unknown as To;
     }
 
