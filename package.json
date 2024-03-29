@@ -97,7 +97,7 @@
     "@w5s/commitlint-config": "2.0.13",
     "@w5s/conventional-changelog": "2.0.11",
     "@w5s/cspell-config": "2.2.13",
-    "@w5s/eslint-config": "2.0.11",
+    "@w5s/eslint-config": "2.0.14",
     "@w5s/ts-config": "2.0.9",
     "concurrently": "8.2.2",
     "cspell": "8.6.1",
