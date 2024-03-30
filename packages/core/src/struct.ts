@@ -56,7 +56,7 @@ export namespace Struct {
   /**
    * The type property discriminator
    */
-  export const type = '_' as const;
+  export const type = '_';
 
   export type type = typeof type;
 

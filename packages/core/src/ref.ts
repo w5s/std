@@ -22,7 +22,7 @@ export namespace Ref {
   /**
    * Current value symbol
    */
-  export const current = 'current' as const;
+  export const current = 'current';
 
   /**
    * Returns `true` when `anyValue` has a `current` property

@@ -4,8 +4,8 @@ import { Result } from './result.js';
 import { Option } from './option.js';
 
 describe('Result', () => {
-  const anyValue = 'anyValue' as const;
-  const anyError = 'anyError' as const;
+  const anyValue = 'anyValue';
+  const anyError = 'anyError';
   const anyResult = Result.Error(anyError) as Result<typeof anyValue, typeof anyError>;
 
   describe('.Ok', () => {
