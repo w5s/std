@@ -25,7 +25,7 @@ const three = Int['+'](one, two); // 3
 
 :::tip
 
-### Prefer `Int` for type safety expect when performance are critical
+### Prefer `Int` for type safety except when performance are critical
 
 - `Int` functions are designed to perform integer operations in a type safe way and represent explicitly all possible errors (parsing errors, division by zero, etc)
 - `Int` functions will never have better performance than inline regular `number` operation
