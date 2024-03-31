@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Ref } from '@w5s/core';
-import { Application } from './application.js';
+import { Application } from './Application.js';
 import { useStorage } from './useStorage.js';
 
 describe('Application', () => {
