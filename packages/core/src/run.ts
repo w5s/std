@@ -1,6 +1,6 @@
 import { type Awaitable, isPromiseLike, tryCall } from '@w5s/promise';
-import type { Result } from './result.js';
-import type { Task, TaskCanceler } from './task.js';
+import type { Result } from './Result.js';
+import type { Task, TaskCanceler } from './Task.js';
 
 // Inline utilities
 const returnOrThrow = <V, E>(result: Result<V, E>): V => {

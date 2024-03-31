@@ -1,6 +1,6 @@
 import { Result, unsafeRun } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
-import { UUID } from './uuid.js';
+import { UUID } from './UUID.js';
 import { defaultUUIDGenerator, randomUUID } from './randomUUID.js';
 
 describe('defaultUUIDGenerator', () => {

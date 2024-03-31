@@ -1,7 +1,7 @@
 import * as nodePath from 'node:path';
 import * as fs from 'node:fs';
 import { Symbol, type Option } from '@w5s/core';
-import type { FilePath } from '../filePath.js';
+import type { FilePath } from '../FilePath.js';
 
 /**
  * Return a new `FSStubModule`

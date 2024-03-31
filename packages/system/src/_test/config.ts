@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
-import type { FilePath } from '../filePath.js';
-import type { ErrnoException } from '../internal.js';
+import type { FilePath } from '../FilePath.js';
+import type { ErrnoException } from '../Internal.js';
 // import * as url from 'node:url';
 
 export const anyPath = 'anyPath' as FilePath;

@@ -1,5 +1,5 @@
 import { delay } from '@w5s/promise';
-import type { Task } from '../task.js';
+import type { Task } from '../Task.js';
 
 /**
  * Options to create a TaskStub

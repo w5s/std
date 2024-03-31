@@ -1,4 +1,4 @@
-import { Struct } from '@w5s/core/dist/struct.js';
+import { Struct } from '@w5s/core/dist/Struct.js';
 import { assertNever } from '@w5s/invariant';
 import { sql, SQLStatement } from './sql.js';
 import { SQLDataType } from './dataType.js';

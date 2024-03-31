@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LogLevel > Critical > should have correct value > Critical 1`] = `
+{
+  "_": "LogLevel",
+  "name": "Critical",
+  "value": 50,
+}
+`;
+
+exports[`LogLevel > Debug > should have correct value > Debug 1`] = `
+{
+  "_": "LogLevel",
+  "name": "Debug",
+  "value": 10,
+}
+`;
+
+exports[`LogLevel > Error > should have correct value > Error 1`] = `
+{
+  "_": "LogLevel",
+  "name": "Error",
+  "value": 40,
+}
+`;
+
+exports[`LogLevel > Info > should have correct value > Info 1`] = `
+{
+  "_": "LogLevel",
+  "name": "Info",
+  "value": 20,
+}
+`;
+
+exports[`LogLevel > Warning > should have correct value > Warning 1`] = `
+{
+  "_": "LogLevel",
+  "name": "Warning",
+  "value": 30,
+}
+`;

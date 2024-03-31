@@ -1,3 +1,3 @@
-export * from './currency.js';
-export * from './money.js';
+export * from './Currency.js';
+export * from './Money.js';
 export * from './moneyFactory.all.js';

@@ -13,9 +13,9 @@ function getTargetPath() {
 function buildImports() {
   return `/* cSpell:disable */
 import type { Int } from '@w5s/core';
-import { Currency } from './currency.js';
+import { Currency } from './Currency.js';
 import { moneyFactory } from './moneyFactory.js';
-import { CurrencyRegistry } from './currencyRegistry.js';
+import { CurrencyRegistry } from './CurrencyRegistry.js';
 `;
 }
 

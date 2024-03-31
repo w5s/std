@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { taskStub } from './taskStub.js';
 import { unsafeRun } from '../run.js';
-import { Result } from '../result.js';
+import { Result } from '../Result.js';
 
 describe('taskStub', () => {
   it('should resolve value', () => {

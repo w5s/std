@@ -2,9 +2,9 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { Int } from '@w5s/core';
 import { ApplicationTest } from '@w5s/application/dist/testing.js';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { Currency } from './currency.js';
-import { CurrencyRegistry } from './currencyRegistry.js';
-import { Money } from './money.js';
+import { Currency } from './Currency.js';
+import { CurrencyRegistry } from './CurrencyRegistry.js';
+import { Money } from './Money.js';
 import { moneyFactory } from './moneyFactory.js';
 
 describe('moneyFactory', () => {

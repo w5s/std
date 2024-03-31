@@ -1,7 +1,7 @@
 import type { Task, Option, Ref } from '@w5s/core';
 import { invariant } from '@w5s/invariant';
 import { useRef } from '@w5s/application';
-import type { UUID } from './uuid.js';
+import type { UUID } from './UUID.js';
 import { application } from './application.js';
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

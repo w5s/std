@@ -1,1 +1,1 @@
-export * from './bigDecimal.js';
+export * from './BigDecimal.js';

@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Result } from './result.js';
+import { Result } from './Result.js';
 import { unsafeRun, unsafeRunOk } from './run.js';
-import { Task } from './task.js';
-import { Ref } from './ref.js';
+import { Task } from './Task.js';
+import { Ref } from './Ref.js';
 import { taskStub } from './testing.js';
 
 const anyError = new Error('TestError');

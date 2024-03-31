@@ -1,5 +1,5 @@
-export * from './deferred.js';
+export * from './Awaitable.js';
+export * from './Deferred.js';
 export * from './delay.js';
 export * from './isPromiseLike.js';
-export * from './awaitable.js';
 export * from './tryCall.js';

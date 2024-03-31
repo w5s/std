@@ -1,3 +1,3 @@
-export * from './client.js';
-export * from './error.js';
-export * from './parser.js';
+export * from './HTTP.js';
+export * from './HTTPError.js';
+export * from './HTTPParser.js';

@@ -1,3 +1,3 @@
-export * from './argumentError.js';
-export * from './customError.js';
+export * from './ArgumentError.js';
+export * from './CustomError.js';
 export * from './nativeError.js';
