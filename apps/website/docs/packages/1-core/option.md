@@ -89,7 +89,7 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 :::tip
 
-### Always use `Option` type if possible
+### Always use `Option` type when possible
 
 - Avoid using `null`
 
@@ -98,7 +98,7 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
   const someOptionFunc = () => Option.from(someNullableFunc()); // null -> undefined
   ```
 
-- `Option<V>` is more expressive than `V | undefined` and more readable in the IDE
+- `Option<V>` is more expressive than `V | undefined` and more readable, especially when combining with more union type
 
 :::
 
