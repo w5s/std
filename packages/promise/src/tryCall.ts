@@ -1,4 +1,4 @@
-import type { Awaitable } from './awaitable.js';
+import type { Awaitable } from './Awaitable.js';
 import { isPromiseLike } from './isPromiseLike.js';
 
 /**
