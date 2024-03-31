@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { describe, it, expect, vi } from 'vitest';
-import { Console } from './console.js';
+import { Console } from './Console.js';
 import { unsafeRun } from './run.js';
 
 describe('Console', () => {
