@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { Option } from './Option.js';
-import { describeComparable, describeNumeric } from './testing.js';
+import { describeClass, describeComparable, describeNumeric } from './testing.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -16,23 +16,9 @@ describe('Int', () => {
       expect(Int.maxValue).toBe(maxValue);
     });
   });
-  describe('.hasInstance', () => {
-    it(`should return true for O`, () => {
-      expect(Int.hasInstance(0)).toBe(true);
-    });
-    it(`should return false for float`, () => {
-      expect(Int.hasInstance(1.1)).toBe(false);
-    });
-
-    it(`should return true for >= minValue or <= maxValue`, () => {
-      expect(Int.hasInstance(minValue)).toBe(true);
-      expect(Int.hasInstance(maxValue)).toBe(true);
-    });
-    it(`should return false for < minValue or > maxValue`, () => {
-      expect(Int.hasInstance(minValue - 1)).toBe(false);
-
-      expect(Int.hasInstance(maxValue + 1)).toBe(false);
-    });
+  describeClass({ describe, it, expect })(Int, {
+    instances: () => [0, 1, 2, -1, minValue, maxValue],
+    notInstances: () => ['1', 1.1, undefined, minValue - 1, maxValue + 1],
   });
 
   describe('.parse()', () => {

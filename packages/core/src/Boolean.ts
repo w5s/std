@@ -1,3 +1,4 @@
+import type { Class } from './Class.js';
 import { Comparable } from './Comparable.js';
 
 const BooleanComparable = Comparable<boolean>({
@@ -5,6 +6,12 @@ const BooleanComparable = Comparable<boolean>({
     return left === right ? 0 : left < right ? -1 : 1;
   },
 });
+
+const BooleanClass: Class<boolean> = {
+  hasInstance(anyValue: unknown): anyValue is boolean {
+    return typeof anyValue === 'boolean';
+  },
+};
 
 /**
  * A collection of functions to manipulate `boolean`
@@ -20,20 +27,6 @@ const BooleanComparable = Comparable<boolean>({
  * @namespace
  */
 export const Boolean = {
+  ...BooleanClass,
   ...BooleanComparable,
-
-  /**
-   * Return true if `anyValue` is a `boolean`
-   *
-   * @example
-   * ```typescript
-   * Boolean.hasInstance(false) // true
-   * Boolean.hasInstance(null)) // false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is boolean {
-    return typeof anyValue === 'boolean';
-  },
 };

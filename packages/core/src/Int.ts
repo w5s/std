@@ -3,6 +3,7 @@ import type { Tag } from './Tag.js';
 import { Comparable } from './Comparable.js';
 import type { Bounded } from './Bounded.js';
 import type { Numeric } from './Numeric.js';
+import type { Class } from './Class.js';
 
 type Radix36 =
   | 2
@@ -52,6 +53,12 @@ const toSafeInt = (value: number): Int =>
       : value < 0
         ? (Math.ceil(value) as Int)
         : (Math.floor(value) as Int);
+
+const IntClass: Class<Int> = {
+  hasInstance(anyValue: unknown): anyValue is Int {
+    return Number.isSafeInteger(anyValue);
+  },
+};
 
 const IntComparable = Comparable<Int>({
   compare(left, right) {
@@ -119,6 +126,7 @@ export type Int = number & Tag<'Int'>;
  * @namespace
  */
 export const Int = {
+  ...IntClass,
   ...IntComparable,
   ...IntBounded,
   ...IntNumeric,
@@ -136,22 +144,5 @@ export const Int = {
    */
   of(value: number): Int {
     return toSafeInt(value);
-  },
-
-  /**
-   * Returns `true` if anyValue is a safe integer
-   *
-   * @example
-   * ```typescript
-   * Int.hasInstance(0);// true
-   * Int.hasInstance(-1);// true
-   * Int.hasInstance(1.1);// false
-   * Int.hasInstance(Int.max + 1);// false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is Int {
-    return Number.isSafeInteger(anyValue);
   },
 };
