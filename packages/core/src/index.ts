@@ -3,6 +3,7 @@ export * from './assign.js';
 export * from './BigInt.js';
 export * from './Boolean.js';
 export * from './Bounded.js';
+export * from './Class.js';
 export * from './Comparable.js';
 export * from './Console.js';
 export * from './Enum.js';

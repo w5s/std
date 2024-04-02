@@ -36,10 +36,29 @@ describe('Enum', () => {
       ).toEqual({
         Foo: 'foo',
         Bar: 'bar',
+        hasInstance: expect.any(Function),
         [Enum.enumKeys]: ['Foo', 'Bar'],
         [Enum.enumValues]: ['foo', 'bar'],
       });
     });
+    describe('hasInstance', () => {
+      it('returns true when instance', () => {
+        expect(MyEnumObject.hasInstance(MyEnumObject.Foo)).toBe(true);
+        expect(MyEnumObject.hasInstance('anything')).toBe(false);
+      });
+    });
+    // it('implements Codec', () => {
+    //   expect(Codec.encode(MyEnum, MyEnum.Foo)).toEqual('foo');
+    //   expect(Codec.decode(MyEnum, MyEnum.Foo)).toEqual(Result.Ok('foo'));
+    //   expect(Codec.decode(MyEnum, 'not_in_enum')).toEqual(
+    //     Result.Error(
+    //       DecodeError({
+    //         message: '',
+    //         input: 'not_in_enum',
+    //       })
+    //     )
+    //   );
+    // });
   });
   describe('keys', () => {
     it('returns the keys of Enum', () => {

@@ -1,3 +1,5 @@
+import type { Class } from './Class.js';
+
 const enumKeys: unique symbol = Symbol('Enum.enumKeys');
 const enumValues: unique symbol = Symbol('Enum.enumValues');
 
@@ -18,9 +20,19 @@ export const Enum = {
    * @param enumObject
    */
   Make<const T extends Record<string, unknown>>(enumObject: T): Enum<T> {
+    const enumKeysList = Object.freeze(Object.keys(enumObject));
+    const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<T[keyof T]>;
+    const enumValuesSet = new Set(enumValuesList);
+
+    function hasInstance(anyValue: unknown): anyValue is T[keyof T] {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      return enumValuesSet.has(anyValue as any);
+    }
+
     return Object.freeze({
-      [enumKeys]: Object.freeze(Object.keys(enumObject)),
-      [enumValues]: Object.freeze(Object.values(enumObject)) as ReadonlyArray<T[keyof T]>,
+      [enumKeys]: enumKeysList,
+      [enumValues]: enumValuesList,
+      hasInstance,
       ...enumObject,
     });
   },
@@ -72,7 +84,7 @@ export namespace Enum {
   export type ValueOf<T extends Enum> = ArrayValue<T[typeof enumValues]>;
 }
 
-export type Enum<T extends Record<string, unknown> = Record<string, unknown>> = T & {
+export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>> extends Class<T[keyof T]> {
   /**
    * An array of all keys
    */
@@ -81,4 +93,6 @@ export type Enum<T extends Record<string, unknown> = Record<string, unknown>> = 
    * An array of all values
    */
   readonly [enumValues]: ReadonlyArray<T[keyof T]>;
-};
+}
+
+export type Enum<T extends Record<string, unknown> = Record<string, unknown>> = T & Enumerable<T>;
