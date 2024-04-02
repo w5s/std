@@ -1,3 +1,4 @@
+import type { Class } from './Class.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
 import type { Option } from './Option.js';
@@ -54,6 +55,12 @@ const BigIntFormat = {
   },
 };
 
+const BigIntClass: Class<bigint> = {
+  hasInstance(anyValue: unknown): anyValue is bigint {
+    return typeof anyValue === 'bigint';
+  },
+};
+
 /**
  * A collection of functions to manipulate `bigint`
  *
@@ -70,19 +77,5 @@ export const BigInt = {
   ...BigIntComparable,
   ...BigIntNumeric,
   ...BigIntFormat,
-
-  /**
-   * Return true if `anyValue` is a `number`
-   *
-   * @example
-   * ```typescript
-   * BigInt.hasInstance(1) // true
-   * BigInt.hasInstance(null)) // false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is bigint {
-    return typeof anyValue === 'bigint';
-  },
+  ...BigIntClass,
 };

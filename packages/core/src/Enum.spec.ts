@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Enum } from './Enum.js';
-import { assertType } from './testing.js';
+import { assertType, describeClass } from './testing.js';
 
 describe('Enum', () => {
   const MyEnumObject = Enum.Make({
@@ -41,11 +41,9 @@ describe('Enum', () => {
         [Enum.enumValues]: ['foo', 'bar'],
       });
     });
-    describe('hasInstance', () => {
-      it('returns true when instance', () => {
-        expect(MyEnumObject.hasInstance(MyEnumObject.Foo)).toBe(true);
-        expect(MyEnumObject.hasInstance('anything')).toBe(false);
-      });
+    describeClass({ describe, it, expect })(MyEnumObject, {
+      instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
+      notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
     });
     // it('implements Codec', () => {
     //   expect(Codec.encode(MyEnum, MyEnum.Foo)).toEqual('foo');
