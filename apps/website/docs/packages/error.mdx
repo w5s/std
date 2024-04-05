@@ -1,10 +1,14 @@
 ---
 sidebar_position: 4
 ---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
 
 # Error
 
 > Error factory creation
+
+<PackageBadgeGroup packageName="@w5s/error" apiHref="/api/error" />
 
 ## Motivation
 
@@ -18,6 +22,10 @@ The `@w5s/error` package helps creating type safe errors :
 - Easy declaration using `defineCustomError`
 - Type safe matching on `name`
 - Discourage matching using `instanceof`
+
+## Installation
+
+<PackageInstallBlock packageName="@w5s/error" />
 
 ## Usage
 
