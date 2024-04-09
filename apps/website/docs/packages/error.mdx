@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 ---
 import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
 import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
@@ -31,7 +31,6 @@ The `@w5s/error` package helps creating type safe errors :
 
 ```ts
 import { defineCustomError, type CustomError } from '@w5s/error';
-import { Result } from '@w5s/core';
 
 interface SomeError
   extends CustomError<{
@@ -51,6 +50,34 @@ console.log(SomeError({
 //   customProperty: 'custom',
 //   cause: TypeError { message: 'This is the cause' }
 // }
+```
+
+## Throwing errors
+
+:::warning
+
+### Use `throwError` (and `throw`) with caution
+
+In general, **throwing errors is discouraged**, instead [Result](./core/result) should be used.
+
+Nevertheless, errors can be thrown when :
+
+- Program is in an impossible state and should be stopped (i.e. panic)
+- An unexpected operation was done that was not caught during compile time
+
+:::
+
+`throwError` is equivalent to `throw` but as a function, it has the advantages :
+
+- it can be used as an expression (ex: in ternary operator)
+- it can be used as a parameter (ex: as a callback)
+
+```ts
+import { throwError } from '@w5s/error';
+
+function assertNotNullable(value: unknown) {
+  return value ?? throwError(new TypeError('Value must not be nullable'));
+}
 ```
 
 ## Matching errors

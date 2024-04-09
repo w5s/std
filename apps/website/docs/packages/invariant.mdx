@@ -41,15 +41,10 @@ function program() {
 
 ### Use `invariant` with caution
 
-Generally speaking, **throwing errors is discouraged**.
+In general, **throwing errors is discouraged**, instead [Result](./core/result) should be used.
 
-Nevertheless, invariant should be thrown when :
+[See explanation](./error#throwing-errors)
 
-- Program is in an impossible state and should be stopped (i.e. panic)
-- An unexpected operation was done that was not caught during compile time
-
-On the contrary, invariant should never be used to propagate logical errors.
-For logical error, please see [Result](./core/result) section.
 :::
 
 ```ts
