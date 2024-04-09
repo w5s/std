@@ -129,17 +129,17 @@ export type CustomErrorParameters<Model extends object> =
     : [properties: CustomErrorParametersProperties<Model>];
 
 /**
- * Return a new `DataError` default factory
+ * Return a new `CustomError` default factory
  * See {@link CustomErrorConstructor} for additional properties added to the constructor
  *
  * @example
  * ```typescript
- * interface CustomError extends CustomError<{ name: 'CustomError', foo: boolean }> {}
- * const CustomError = defineCustomError<CustomError>('CustomError');
+ * interface MyError extends CustomError<{ name: 'CustomError', foo: boolean }> {}
+ * const MyError = defineCustomError<CustomError>('MyError');
  *
- * const instance = CustomError({ foo: true, message: 'hey!' }); // CustomError { name: 'CustomError', message: 'hey!', foo: true }
- * CustomError.errorName === 'CustomError' // true
- * CustomError.hasInstance(instance); // true
+ * const instance = MyError({ foo: true, message: 'hey!' }); // Error { name: 'MyError', message: 'hey!', foo: true }
+ * MyError.errorName === 'MyError' // true
+ * MyError.hasInstance(instance); // true
  * ```
  * @param errorName - the error unique name
  */
@@ -151,21 +151,21 @@ export function defineCustomError<Model extends CustomError<{ name: string }>>(
 }
 
 /**
- * Return a new `DataError` factory using `getConstructor()`
+ * Return a new `CustomError` factory using `getConstructor()`
  * See {@link CustomErrorConstructor} for additional properties added to the constructor
  *
  * @example
  * ```typescript
- * const CustomError = defineCustomErrorWith(
- *   'SomeError',
- *   (create) => // a helper that creates CustomError { name: 'SomeError' }
+ * const MyError = defineCustomErrorWith(
+ *   'MyError',
+ *   (create) => // a helper that creates MyError { name: 'MyError' }
  *     // the constructor
  *     (foo: boolean) => create({ foo, message: 'hello!' })
  * );
  *
- * const instance = CustomError(true); // Error{ _: 'DataError', name: 'CustomError', message: 'hello', foo: true }
- * CustomError.errorName === 'CustomError'/ true
- * CustomError.hasInstance(instance); // true
+ * const instance = MyError(true); // Error { name: 'MyError', message: 'hello', foo: true }
+ * MyError.errorName === 'MyError'/ true
+ * MyError.hasInstance(instance); // true
  * ```
  * @param errorName - the error unique name
  * @param getConstructor - a function that returns an error factory
