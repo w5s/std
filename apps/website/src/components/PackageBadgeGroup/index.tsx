@@ -67,7 +67,10 @@ export function PackageBadgeGroup(props: PackageBadgeGroupProps) {
   return (
     <>
       {props.apiHref == null ? null : (
-        <Link className={styles.apiLink} to={`${siteConfig.url}${siteConfig.baseUrl}${props.apiHref}`}>
+        <Link
+          className={styles.apiLink}
+          to={`${siteConfig.url}${siteConfig.baseUrl}${props.apiHref}`.replace('//', '/')}
+        >
           API <IconExternalLink />
         </Link>
       )}
