@@ -63,10 +63,11 @@ export interface PackageBadgeGroupProps {
 
 export function PackageBadgeGroup(props: PackageBadgeGroupProps) {
   const docusaurusContext = useDocusaurusContext();
+  const { siteConfig } = docusaurusContext;
   return (
     <>
       {props.apiHref == null ? null : (
-        <Link className={styles.apiLink} to={props.apiHref}>
+        <Link className={styles.apiLink} to={`${siteConfig.url}${siteConfig.baseUrl}${props.apiHref}`}>
           API <IconExternalLink />
         </Link>
       )}
