@@ -26,5 +26,4 @@ export * from './String.js';
 export * from './Symbol.js';
 export * from './Tag.js';
 export * from './Task.js';
-export * from './throwError.js';
 export * from './type.js';

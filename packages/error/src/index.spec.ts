@@ -3,20 +3,21 @@ import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module)).toMatchInlineSnapshot(`
+    expect(Object.keys(Module).sort()).toMatchInlineSnapshot(`
       [
+        "AggregateError",
         "ArgumentError",
         "CustomError",
-        "defineCustomError",
-        "defineCustomErrorWith",
         "Error",
-        "AggregateError",
         "EvalError",
         "RangeError",
         "ReferenceError",
         "SyntaxError",
-        "URIError",
         "TypeError",
+        "URIError",
+        "defineCustomError",
+        "defineCustomErrorWith",
+        "throwError",
       ]
     `);
   });
