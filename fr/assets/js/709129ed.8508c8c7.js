@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_w5s_website=self.webpackChunk_w5s_website||[]).push([[6652],{1099:e=>{e.exports=JSON.parse('{"title":"Core","slug":"/category/core","permalink":"/std/fr/docs/category/core","navigation":{"previous":{"title":"Invariant","permalink":"/std/fr/docs/packages/invariant"},"next":{"title":"Enum","permalink":"/std/fr/docs/packages/core/enum"}}}')}}]);
