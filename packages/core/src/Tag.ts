@@ -1,4 +1,5 @@
 import { invariant } from '@w5s/invariant';
+import { DecodeError, type Codec } from './Codec.js';
 
 /**
  * Enhance `Base` by adding tags. Every tag is prefixed by `@@` as a convention to never be used by runtime code
@@ -36,11 +37,14 @@ export const Tag = {
    * });
    * ```
    */
-  Make<From, To extends From>(parameters: { hasInstance: (anyValue: unknown) => boolean }): Tag.Module<From, To> {
-    const _hasInstance = parameters.hasInstance;
+  Make<From, To extends From>(parameters: {
+    displayName?: string;
+    hasInstance: (anyValue: unknown) => boolean;
+  }): Tag.Module<From, To> {
+    const { displayName, hasInstance: _hasInstance } = parameters;
 
     function wrap(value: From): To {
-      invariant(hasInstance(value), `Invalid value`);
+      invariant(hasInstance(value), `Invalid ${displayName}`);
       return value;
     }
 
@@ -48,19 +52,37 @@ export const Tag = {
       return value as unknown as From;
     }
 
-    function hasInstance(value: From): value is To {
+    function hasInstance(value: unknown): value is To {
       return _hasInstance(value);
     }
 
+    const TagCodec: Codec<To> = {
+      codecEncode: (value) => value,
+      codecDecode: (value) =>
+        hasInstance(value)
+          ? { _: 'Ok', ok: true, value }
+          : {
+              _: 'Error',
+              ok: false,
+              error: DecodeError({
+                message: `Invalid ${displayName}`,
+                input: value,
+              }),
+            },
+      codecSchema: () => ({}),
+    };
+
     return Object.assign((value: From) => wrap(value), {
+      displayName,
       wrap,
       unwrap,
       hasInstance,
+      ...TagCodec,
     });
   },
 };
 export namespace Tag {
-  export interface Module<From, To extends From> {
+  export interface Module<From, To extends From> extends Codec<To> {
     /**
      * Convert an underlying type to a tagged type
      * Alias to `wrap(value)`
@@ -85,6 +107,6 @@ export namespace Tag {
      *
      * @param value
      */
-    hasInstance(value: From): value is To;
+    hasInstance(value: unknown): value is To;
   }
 }

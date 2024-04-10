@@ -1,10 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { Tag } from './Tag.js';
 import { assertType } from './testing.js';
+import { Codec, DecodeError } from './Codec.js';
+import { Result } from './Result.js';
 
 describe('Tag', () => {
   type PositiveNumber = number & Tag<'Positive'>;
   const PositiveNumber = Tag.Make<number, PositiveNumber>({
+    displayName: 'PositiveNumber',
     hasInstance: (value) => typeof value === 'number' && value > 0,
   });
 
@@ -27,7 +30,7 @@ describe('Tag', () => {
         expect(() => {
           // @ts-expect-error Throw a type error
           PositiveNumber('');
-        }).toThrow(new Error('Invalid value'));
+        }).toThrow(new Error('Invalid PositiveNumber'));
       });
     });
     describe('#wrap', () => {
@@ -36,7 +39,7 @@ describe('Tag', () => {
         expect(() => {
           // @ts-expect-error Throw a type error
           PositiveNumber.wrap('');
-        }).toThrow(new Error('Invalid value'));
+        }).toThrow(new Error('Invalid PositiveNumber'));
       });
     });
     describe('#unwrap', () => {
@@ -58,6 +61,27 @@ describe('Tag', () => {
         expect(PositiveNumber.hasInstance(1)).toBe(true);
         expect(PositiveNumber.hasInstance(0)).toBe(false);
         expect(PositiveNumber.hasInstance(-1)).toBe(false);
+      });
+    });
+    describe('#codecEncode', () => {
+      it('returns identity', () => {
+        expect(Codec.encode(PositiveNumber, 1 as PositiveNumber)).toEqual(1);
+      });
+    });
+    describe('#codecDecode', () => {
+      it('returns a decoded value', () => {
+        expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
+        expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
+          Result.Error(DecodeError({ message: 'Invalid PositiveNumber', input: 'invalid' }))
+        );
+        expect(Codec.decode(PositiveNumber, undefined)).toEqual(
+          Result.Error(DecodeError({ message: 'Invalid PositiveNumber', input: undefined }))
+        );
+      });
+    });
+    describe('#codecSchema', () => {
+      it('returns the schema', () => {
+        expect(Codec.schema(PositiveNumber)).toEqual({});
       });
     });
   });

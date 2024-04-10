@@ -342,13 +342,14 @@ describe('dateISO', () => {
 
   type PersonId = string & Tag<'PersonId'>;
   const PersonId = Tag.Make<string, PersonId>({
+    displayName: 'PersonId',
     hasInstance(anyValue) {
       return typeof anyValue === 'string';
     },
   });
 
   const Person = object({
-    // id: PersonId,
+    id: PersonId,
     name: string,
     description: option(string),
     age: int,
@@ -361,6 +362,7 @@ describe('dateISO', () => {
   assertType<
     Person,
     {
+      id: PersonId;
       name: string;
       description: Option<string>;
       age: Int;
