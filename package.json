@@ -110,7 +110,7 @@
     "size-limit-preset-node-lib": "0.3.0",
     "turbo": "1.13.2",
     "typedoc": "0.25.13",
-    "typescript": "5.4.4",
+    "typescript": "5.4.5",
     "vite": "latest",
     "vitest": "latest"
   },
