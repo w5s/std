@@ -7,9 +7,6 @@ describe('CustomError', () => {
     it('should return instance of Error', () => {
       expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
     });
-    // it('should return Struct.type == "DataError"', () => {
-    //   expect(CustomError({ name: anyString })._).toEqual('DataError');
-    // });
     it('should return Error with default properties', () => {
       expect(CustomError({ name: anyString })).toEqual(
         expect.objectContaining({
@@ -107,7 +104,7 @@ describe('defineCustomError()', () => {
         name: 'TestOptionalError',
       })
     );
-    // @ts-expect-error
+    // @ts-expect-error Parameters are required
     expect(TestError()).toEqual(
       CustomError({
         name: 'TestError',
