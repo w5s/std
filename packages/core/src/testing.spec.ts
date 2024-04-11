@@ -7,10 +7,10 @@ describe('index', () => {
       [
         // public exports
         'assertType',
-        'describeClass',
         'describeComparable',
         'describeEqual',
         'describeNumeric',
+        'describeType',
         'taskStub',
       ].sort()
     );

@@ -1,10 +1,11 @@
-import type { Class } from '../Class.js';
+import type { Type } from '../Type.js';
 import type { TestingLibrary } from './type.js';
 
-export function describeClass({ describe, it, expect }: TestingLibrary) {
+export function describeType({ describe, it, expect }: TestingLibrary) {
   return <T>(
-    subject: Class<T>,
+    subject: Type<T>,
     properties: {
+      typeName: string;
       instances: () => T[];
       notInstances: () => unknown[];
     }
@@ -12,6 +13,12 @@ export function describeClass({ describe, it, expect }: TestingLibrary) {
     const { instances: instancesDefault, notInstances: notInstancesDefault } = properties;
     const instances = () => instancesDefault().map((instance) => ({ instance }));
     const notInstances = () => notInstancesDefault().map((instance) => ({ instance }));
+
+    describe('typeName', () => {
+      it('is a constant', () => {
+        expect(subject.typeName).toBe(properties.typeName);
+      });
+    });
 
     describe('hasInstance', () => {
       it.each(instances())('($instance) returns true for instances of type', ({ instance }) => {

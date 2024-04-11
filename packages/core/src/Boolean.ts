@@ -1,4 +1,4 @@
-import type { Class } from './Class.js';
+import type { Type } from './Type.js';
 import { Comparable } from './Comparable.js';
 
 const BooleanComparable = Comparable<boolean>({
@@ -7,7 +7,8 @@ const BooleanComparable = Comparable<boolean>({
   },
 });
 
-const BooleanClass: Class<boolean> = {
+const BooleanType: Type<boolean> = {
+  typeName: 'Boolean',
   hasInstance(anyValue: unknown): anyValue is boolean {
     return typeof anyValue === 'boolean';
   },
@@ -27,6 +28,6 @@ const BooleanClass: Class<boolean> = {
  * @namespace
  */
 export const Boolean = {
-  ...BooleanClass,
+  ...BooleanType,
   ...BooleanComparable,
 };

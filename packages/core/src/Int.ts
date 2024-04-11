@@ -3,7 +3,7 @@ import type { Tag } from './Tag.js';
 import { Comparable } from './Comparable.js';
 import type { Bounded } from './Bounded.js';
 import type { Numeric } from './Numeric.js';
-import type { Class } from './Class.js';
+import type { Type } from './Type.js';
 
 type Radix36 =
   | 2
@@ -54,7 +54,8 @@ const toSafeInt = (value: number): Int =>
         ? (Math.ceil(value) as Int)
         : (Math.floor(value) as Int);
 
-const IntClass: Class<Int> = {
+const IntType: Type<Int> = {
+  typeName: 'Int',
   hasInstance(anyValue: unknown): anyValue is Int {
     return Number.isSafeInteger(anyValue);
   },
@@ -126,7 +127,7 @@ export type Int = number & Tag<'Int'>;
  * @namespace
  */
 export const Int = {
-  ...IntClass,
+  ...IntType,
   ...IntComparable,
   ...IntBounded,
   ...IntNumeric,

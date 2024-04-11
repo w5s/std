@@ -1,4 +1,4 @@
-import type { Class } from './Class.js';
+import type { Type } from './Type.js';
 
 const enumKeys: unique symbol = Symbol('Enum.enumKeys');
 const enumValues: unique symbol = Symbol('Enum.enumValues');
@@ -32,6 +32,7 @@ export const Enum = {
     return Object.freeze({
       [enumKeys]: enumKeysList,
       [enumValues]: enumValuesList,
+      typeName: 'Enum',
       hasInstance,
       ...enumObject,
     });
@@ -84,7 +85,7 @@ export namespace Enum {
   export type ValueOf<T extends Enum> = ArrayValue<T[typeof enumValues]>;
 }
 
-export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>> extends Class<T[keyof T]> {
+export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>> extends Type<T[keyof T]> {
   /**
    * An array of all keys
    */

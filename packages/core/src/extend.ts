@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { Spread } from './type.js';
+import type { Spread } from './typing.js';
 
 /**
  * Type safe and immutable equivalent of `{ ...source, ...extension }`.

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { Option } from './Option.js';
-import { describeClass, describeComparable, describeNumeric } from './testing.js';
+import { describeType, describeComparable, describeNumeric } from './testing.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -16,7 +16,8 @@ describe('Int', () => {
       expect(Int.maxValue).toBe(maxValue);
     });
   });
-  describeClass({ describe, it, expect })(Int, {
+  describeType({ describe, it, expect })(Int, {
+    typeName: 'Int',
     instances: () => [0, 1, 2, -1, minValue, maxValue],
     notInstances: () => ['1', 1.1, undefined, minValue - 1, maxValue + 1],
   });

@@ -1,4 +1,4 @@
-import type { Nullable } from './type.js';
+import type { Nullable } from './typing.js';
 
 // https://doc.rust-lang.org/std/option/enum.Option.html
 

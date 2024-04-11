@@ -1,4 +1,4 @@
-import type { Class } from './Class.js';
+import type { Type } from './Type.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
 import type { Option } from './Option.js';
@@ -55,7 +55,8 @@ const BigIntFormat = {
   },
 };
 
-const BigIntClass: Class<bigint> = {
+const BigIntType: Type<bigint> = {
+  typeName: 'BigInt',
   hasInstance(anyValue: unknown): anyValue is bigint {
     return typeof anyValue === 'bigint';
   },
@@ -77,5 +78,5 @@ export const BigInt = {
   ...BigIntComparable,
   ...BigIntNumeric,
   ...BigIntFormat,
-  ...BigIntClass,
+  ...BigIntType,
 };

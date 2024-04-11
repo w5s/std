@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Enum } from './Enum.js';
-import { assertType, describeClass } from './testing.js';
+import { assertType, describeType } from './testing.js';
 
 describe('Enum', () => {
   const MyEnumObject = Enum.Make({
@@ -36,12 +36,14 @@ describe('Enum', () => {
       ).toEqual({
         Foo: 'foo',
         Bar: 'bar',
+        typeName: expect.any(String),
         hasInstance: expect.any(Function),
         [Enum.enumKeys]: ['Foo', 'Bar'],
         [Enum.enumValues]: ['foo', 'bar'],
       });
     });
-    describeClass({ describe, it, expect })(MyEnumObject, {
+    describeType({ describe, it, expect })(MyEnumObject, {
+      typeName: 'Enum',
       instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
       notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
     });
