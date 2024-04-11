@@ -37,7 +37,7 @@ export namespace Slack {
   type Id<T extends string> = string & Tag<T>;
 
   function MakeId<IdType extends Id<any>>() {
-    return Tag.Make<string, IdType>({ hasInstance: (anyValue) => typeof anyValue === 'string' });
+    return Tag.define<string, IdType>({ hasInstance: (anyValue) => typeof anyValue === 'string' });
   }
 
   // export type URL = string;

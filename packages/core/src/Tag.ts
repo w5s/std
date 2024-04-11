@@ -1,5 +1,6 @@
 import { invariant } from '@w5s/invariant';
 import { DecodeError, type Codec } from './Codec.js';
+import { Type } from './Type.js';
 
 /**
  * Enhance `Base` by adding tags. Every tag is prefixed by `@@` as a convention to never be used by runtime code
@@ -32,19 +33,35 @@ export const Tag = {
    * @example
    * ```ts
    * type Foo = string & Tag<'Foo'>;
-   * const Foo = Tag.Make<string, Foo>({
+   * const Foo = Tag.define<string, Foo>({
    *   hasInstance: (anyValue) => typeof anyValue === 'string',
    * });
    * ```
    */
-  Make<From, To extends From>(parameters: {
-    displayName?: string;
+  define<From, To extends From>(parameters: {
+    typeName: string;
     hasInstance: (anyValue: unknown) => boolean;
   }): Tag.Module<From, To> {
-    const { displayName, hasInstance: _hasInstance } = parameters;
+    const TagType: Type<To> = Type.define(parameters);
+
+    const TagCodec: Codec<To> = {
+      codecEncode: (value) => value,
+      codecDecode: (value) =>
+        TagType.hasInstance(value)
+          ? { _: 'Ok', ok: true, value }
+          : {
+              _: 'Error',
+              ok: false,
+              error: DecodeError({
+                message: `Invalid ${TagType.typeName}`,
+                input: value,
+              }),
+            },
+      codecSchema: () => ({}),
+    };
 
     function wrap(value: From): To {
-      invariant(hasInstance(value), `Invalid ${displayName}`);
+      invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);
       return value;
     }
 
@@ -52,37 +69,18 @@ export const Tag = {
       return value as unknown as From;
     }
 
-    function hasInstance(value: unknown): value is To {
-      return _hasInstance(value);
-    }
-
-    const TagCodec: Codec<To> = {
-      codecEncode: (value) => value,
-      codecDecode: (value) =>
-        hasInstance(value)
-          ? { _: 'Ok', ok: true, value }
-          : {
-              _: 'Error',
-              ok: false,
-              error: DecodeError({
-                message: `Invalid ${displayName}`,
-                input: value,
-              }),
-            },
-      codecSchema: () => ({}),
-    };
-
     return Object.assign((value: From) => wrap(value), {
-      displayName,
       wrap,
       unwrap,
-      hasInstance,
+      ...TagType,
       ...TagCodec,
     });
   },
 };
 export namespace Tag {
-  export interface Module<From, To extends From> extends Codec<To> {
+  export interface Parameters extends Type.Parameters {}
+
+  export interface Module<From, To extends From> extends Type<To>, Codec<To> {
     /**
      * Convert an underlying type to a tagged type
      * Alias to `wrap(value)`
@@ -102,11 +100,5 @@ export namespace Tag {
      * @param value
      */
     unwrap(value: To): From;
-    /**
-     * Check if `value` is a tagged type and refine type
-     *
-     * @param value
-     */
-    hasInstance(value: unknown): value is To;
   }
 }

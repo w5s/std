@@ -341,8 +341,8 @@ describe('dateISO', () => {
   interface Group extends Codec.TypeOf<typeof Group> {}
 
   type PersonId = string & Tag<'PersonId'>;
-  const PersonId = Tag.Make<string, PersonId>({
-    displayName: 'PersonId',
+  const PersonId = Tag.define<string, PersonId>({
+    typeName: 'PersonId',
     hasInstance(anyValue) {
       return typeof anyValue === 'string';
     },

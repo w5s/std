@@ -6,8 +6,8 @@ import { Result } from './Result.js';
 
 describe('Tag', () => {
   type PositiveNumber = number & Tag<'Positive'>;
-  const PositiveNumber = Tag.Make<number, PositiveNumber>({
-    displayName: 'PositiveNumber',
+  const PositiveNumber = Tag.define<number, PositiveNumber>({
+    typeName: 'PositiveNumber',
     hasInstance: (value) => typeof value === 'number' && value > 0,
   });
 
