@@ -7,10 +7,11 @@ export interface Type<T> {
    *
    * @example
    * ```ts
-   * StringType.typeName // 'string'
+   * StringType.typeName // 'String'
    * Int.typeName // 'Int'
    * Person.typeName // 'Person'
    * ```
+   * @category Type
    */
   typeName: string;
   /**
