@@ -3,7 +3,7 @@ import { Enum } from './Enum.js';
 import { assertType, describeType } from './testing.js';
 
 describe('Enum', () => {
-  const MyEnumObject = Enum.Make({
+  const MyEnumObject = Enum.define({
     Foo: 'foo',
     Bar: 'bar',
   });
@@ -29,7 +29,7 @@ describe('Enum', () => {
   describe('Make', () => {
     it('returns a new type', () => {
       expect(
-        Enum.Make({
+        Enum.define({
           Foo: 'foo',
           Bar: 'bar',
         })

@@ -20,7 +20,7 @@ An enum can be declared as the following example :
 ```ts
 import { Enum } from '@w5s/core';
 
-export const MyEnum = Enum.Make({
+export const MyEnum = Enum.define({
   Foo: 'foo',
   Bar: 'bar',
 });
@@ -49,7 +49,7 @@ export function getName(value: MyEnum) {
 To read enum keys and values, use `Enum.keys` and `Enum.values` :
 
 ```ts
-export const MyEnum = Enum.Make({
+export const MyEnum = Enum.define({
   Foo: 'foo',
   Bar: 'bar',
 });
@@ -63,7 +63,7 @@ Enum.values(MyEnum); // ['foo', 'bar']
 Extending an enum can be done just using the `...` operator
 
 ```ts
-const MyEnumValues = Enum.Make({
+const MyEnumValues = Enum.define({
   Foo: 'foo',
   Bar: 'bar',
 });
@@ -90,7 +90,7 @@ export const MyEnum = {
 // ✓ Export a const
 // ✓ PascalCase
 // ✓ Singular
-export const {{EnumType}} = Enum.Make({
+export const {{EnumType}} = Enum.define({
   // ✓ PascalCase
   {{EnumValueName}}: '{{EnumValue}}',
   // ...

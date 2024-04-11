@@ -12,14 +12,14 @@ export const Enum = {
    *
    * @example
    * ```ts
-   * const MyEnum = Enum.Make({
+   * const MyEnum = Enum.define({
    *   Foo: 'foo',
    *   Bar: 'bar',
    * });
    * ```
    * @param enumObject
    */
-  Make<const T extends Record<string, unknown>>(enumObject: T): Enum<T> {
+  define<const T extends Record<string, unknown>>(enumObject: T): Enum<T> {
     const enumKeysList = Object.freeze(Object.keys(enumObject));
     const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<T[keyof T]>;
     const enumValuesSet = new Set(enumValuesList);
@@ -50,7 +50,7 @@ export const Enum = {
    *
    * @example
    * ```ts
-   * const MyEnum = Enum.Make({ Foo: 'foo', Bar: 'bar' });
+   * const MyEnum = Enum.define({ Foo: 'foo', Bar: 'bar' });
    * Enum.keys(MyEnum) // ['Foo', 'Bar']
    * ```
    * @param enumObject
@@ -63,7 +63,7 @@ export const Enum = {
    *
    * @example
    * ```ts
-   * const MyEnum = Enum.Make({ Foo: 'foo', Bar: 'bar' });
+   * const MyEnum = Enum.define({ Foo: 'foo', Bar: 'bar' });
    * Enum.values(MyEnum) // ['foo', 'bar']
    * ```
    * @param enumObject
