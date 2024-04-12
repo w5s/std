@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import type { Numeric, Option, Struct } from '@w5s/core';
+import type { Numeric, Option } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { Struct as StructValue } from '@w5s/core/dist/Struct.js';
+import { Struct } from '@w5s/core/dist/Struct.js';
 import { invariant } from '@w5s/invariant';
 
 /**
@@ -99,7 +99,7 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
         : create(combineFn(left.value, right.value), left.scale);
 }
 
-const BigDecimalStruct = StructValue.MakeGeneric(
+const BigDecimalStruct = Struct.MakeGeneric(
   'BigDecimal',
   (
     _
