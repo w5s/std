@@ -67,7 +67,7 @@ export namespace Struct {
    * @example
    * ```typescript
    * type Model = Struct<{ [Struct.type]: 'Model', foo: boolean }>
-   * const Model = Struct.Make<Model>('Model');
+   * const Model = Struct.define<Model>('Model');
    *
    * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
    * Model.typeName === 'Model' // true
@@ -75,11 +75,11 @@ export namespace Struct {
    * ```
    * @param typeName - the type unique name
    */
-  export function Make<Model extends Struct<{ [Struct.type]: string }>>(
+  export function define<Model extends Struct<{ [Struct.type]: string }>>(
     typeName: Model[Struct.type]
   ): ((properties: Parameters<Model>) => Model) & Module<Model> {
     // @ts-ignore typing is slightly different
-    return MakeGeneric(typeName, (_) => (properties) => ({
+    return defineWith(typeName, (_) => (properties) => ({
       [Struct.type]: _,
       ...properties,
     }));
@@ -91,7 +91,7 @@ export namespace Struct {
    *
    * @example
    * ```typescript
-   * const Model = Struct.MakeGeneric(
+   * const Model = Struct.defineWith(
    *   'Model',
    *   (_) => // 'Model'
    *     // the constructor
@@ -104,7 +104,7 @@ export namespace Struct {
    * @param typeName - the type unique name
    * @param getConstructor - a function that returns an object factory
    */
-  export function MakeGeneric<
+  export function defineWith<
     Name extends string,
     Constructor extends (...args: any[]) => Struct<{ [Struct.type]: Name }>,
   >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {

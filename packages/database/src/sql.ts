@@ -52,7 +52,7 @@ export function SQLStatement({
 export namespace SQLStatement {
   export type Value = unknown;
 
-  export const { typeName, hasInstance } = Struct.Make<SQLStatement>('SQLStatement');
+  export const { typeName, hasInstance } = Struct.define<SQLStatement>('SQLStatement');
 
   export function concat(...statements: SQLStatement[]): SQLStatement {
     const buffer = create();

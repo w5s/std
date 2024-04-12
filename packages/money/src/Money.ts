@@ -44,7 +44,7 @@ const MoneyComparable = Comparable<Money>({
     return comparison === 0 ? BigDecimal.compare(left.amount, right.amount) : comparison;
   },
 });
-const MoneyStruct = Struct.Make<Money>('Money');
+const MoneyStruct = Struct.define<Money>('Money');
 
 /**
  * @namespace

@@ -99,7 +99,7 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
         : create(combineFn(left.value, right.value), left.scale);
 }
 
-const BigDecimalStruct = Struct.MakeGeneric(
+const BigDecimalStruct = Struct.defineWith(
   'BigDecimal',
   (
     _

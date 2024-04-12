@@ -153,4 +153,4 @@ export interface FileStatus
  *
  * @category Constructor
  */
-export const FileStatus = Struct.Make<FileStatus>('FileStatus');
+export const FileStatus = Struct.define<FileStatus>('FileStatus');

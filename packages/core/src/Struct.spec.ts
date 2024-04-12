@@ -8,7 +8,7 @@ describe('Struct', () => {
       email: string;
       optional?: boolean;
     }
-    const Test = Struct.MakeGeneric(
+    const Test = Struct.defineWith(
       'Test',
       (_) =>
         (email: string): Test => ({ _, email })
@@ -40,7 +40,7 @@ describe('Struct', () => {
   });
   describe('.Make()', () => {
     type Test = Struct<{ _: 'Test'; email: string }>;
-    const Test = Struct.Make<Test>('Test');
+    const Test = Struct.define<Test>('Test');
     it('should create a new constructor', () => {
       expect(Test({ email: 'foo@bar.com' })).toEqual({
         _: 'Test',

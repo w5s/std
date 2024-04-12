@@ -14,7 +14,7 @@ const defaultPrecision = 2 as Int;
 const CurrencyComparable = Comparable<Currency>({
   compare: (left, right) => (left.code === right.code ? 0 : left.code < right.code ? -1 : 1),
 });
-const CurrencyStruct = Struct.MakeGeneric(
+const CurrencyStruct = Struct.defineWith(
   'Currency',
   (_) =>
     (parameters: {
