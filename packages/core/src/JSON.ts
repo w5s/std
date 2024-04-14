@@ -21,9 +21,9 @@ export type JSONValue =
   | boolean
   | number
   | string
-  | Array<JSONValue>
+  | ReadonlyArray<JSONValue>
   | {
-      [key: string]: JSONValue;
+      readonly [key: string]: JSONValue;
     };
 
 /**
