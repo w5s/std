@@ -1,6 +1,14 @@
 import type { Bounded } from './Bounded.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
+import type { Type } from './Type.js';
+
+const NumberType: Type<number> = {
+  typeName: 'Number',
+  hasInstance(anyValue: unknown): anyValue is number {
+    return typeof anyValue === 'number';
+  },
+};
 
 const NumberComparable = Comparable<number>({
   compare(left, right) {
@@ -34,22 +42,8 @@ const NumberNumeric: Numeric<number> = {
  * @namespace
  */
 export const Number = {
+  ...NumberType,
   ...NumberComparable,
   ...NumberNumeric,
   ...NumberBounded,
-
-  /**
-   * Return true if `anyValue` is a `number`
-   *
-   * @example
-   * ```typescript
-   * Number.hasInstance(1) // true
-   * Number.hasInstance(null)) // false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is number {
-    return typeof anyValue === 'number';
-  },
 };

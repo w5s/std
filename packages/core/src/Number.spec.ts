@@ -1,8 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { Number } from './Number.js';
-import { assertType, describeComparable, describeNumeric } from './testing.js';
+import { assertType, describeComparable, describeNumeric, describeType } from './testing.js';
 
 describe('Number', () => {
+  describeType({ describe, it, expect })(Number, {
+    typeName: 'Number',
+    instances: () => [0, -1, globalThis.Number.NaN],
+    notInstances: () => ['', null, undefined],
+  });
   describe('.hasInstance', () => {
     it('should return true for number', () => {
       expect(Number.hasInstance(1)).toEqual(true);
