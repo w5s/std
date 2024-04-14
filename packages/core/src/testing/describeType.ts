@@ -24,7 +24,7 @@ export function describeType({ describe, it, expect }: TestingLibrary) {
       it.each(instances())('($instance) returns true for instances of type', ({ instance }) => {
         expect(subject.hasInstance(instance)).toBe(true);
       });
-      it.each(notInstances())('($right, $left) returns false for non instances', ({ instance }) => {
+      it.each(notInstances())('($instance) returns false for non instances', ({ instance }) => {
         expect(subject.hasInstance(instance)).toBe(false);
       });
     });
