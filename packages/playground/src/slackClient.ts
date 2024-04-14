@@ -36,32 +36,32 @@ export function Slack({
 export namespace Slack {
   type Id<T extends string> = string & Tag<T>;
 
-  function MakeId<IdType extends Id<any>>() {
-    return Tag.define<string, IdType>({ hasInstance: (anyValue) => typeof anyValue === 'string' });
+  function MakeId<IdType extends Id<any>>(typeName: string) {
+    return Tag.define<string, IdType>({ typeName, hasInstance: (anyValue) => typeof anyValue === 'string' });
   }
 
   // export type URL = string;
 
-  export type ChannelId = Id<'Channel'>;
-  export const ChannelId = MakeId<ChannelId>();
+  export type ChannelId = Id<'SlackChannelId'>;
+  export const ChannelId = MakeId<ChannelId>('SlackChannelId');
 
-  export type UserId = Id<'User'>;
-  export const UserId = MakeId<ChannelId>();
+  export type UserId = Id<'SlackUserId'>;
+  export const UserId = MakeId<UserId>('SlackUserId');
 
-  export type BotId = Id<'Bot'>;
-  export const BotId = MakeId<BotId>();
+  export type BotId = Id<'SlackBotId'>;
+  export const BotId = MakeId<BotId>('SlackBotId');
 
-  export type FileId = Id<'File'>;
-  export const FileId = MakeId<FileId>();
+  export type FileId = Id<'SlackFileId'>;
+  export const FileId = MakeId<FileId>('SlackFileId');
 
-  export type CommentId = Id<'Comment'>;
-  export const CommentId = MakeId<CommentId>();
+  export type CommentId = Id<'SlackCommentId'>;
+  export const CommentId = MakeId<CommentId>('SlackCommentId');
 
-  export type TeamId = Id<'Team'>;
-  export const TeamId = MakeId<TeamId>();
+  export type TeamId = Id<'TeamId'>;
+  export const TeamId = MakeId<TeamId>('TeamId');
 
-  export type SubTeamId = Id<'SubTeam'>;
-  export const SubTeamId = MakeId<SubTeamId>();
+  export type SubTeamId = Id<'SubTeamId'>;
+  export const SubTeamId = MakeId<SubTeamId>('SubTeamId');
 
   function urlWithQuery(url: string, parameters: { [key: string]: string }) {
     const urlObject = new URL(url);
