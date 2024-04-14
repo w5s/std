@@ -1,9 +1,14 @@
 import { describe, it, expect } from 'vitest';
 import { Option } from './Option.js';
 import { String } from './String.js';
-import { describeComparable } from './testing.js';
+import { describeComparable, describeType } from './testing.js';
 
 describe('String', () => {
+  describeType({ describe, it, expect })(String, {
+    typeName: 'String',
+    instances: () => ['abc'],
+    notInstances: () => [null, undefined, 1, {}],
+  });
   describe('.of', () => {
     it('should join all parts', () => {
       expect(String.of('a', 'b', 'c')).toEqual('abc');
@@ -40,15 +45,6 @@ describe('String', () => {
     it('should split all parts', () => {
       expect(String.split('a|b|c', '|')).toEqual(['a', 'b', 'c']);
       expect(String.split('a|b|c', '|', 2)).toEqual(['a', 'b']);
-    });
-  });
-  describe('.hasInstance', () => {
-    it('should return true for string', () => {
-      expect(String.hasInstance('abc')).toEqual(true);
-    });
-    it('should return false for any other value', () => {
-      expect(String.hasInstance(null)).toBe(false);
-      expect(String.hasInstance({ length: 0 })).toBe(false);
     });
   });
   describe('.isEmpty', () => {

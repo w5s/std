@@ -2,9 +2,17 @@ import type { Int } from './Int.js';
 import type { Option } from './Option.js';
 import type { Array } from './Array.js';
 import { Comparable } from './Comparable.js';
+import type { Type } from './Type.js';
 
 const NativeString = globalThis.String;
 const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
+
+const StringType: Type<string> = {
+  typeName: 'String',
+  hasInstance(anyValue: unknown): anyValue is string {
+    return typeof anyValue === 'string';
+  },
+};
 
 const StringComparable = Comparable<string>({
   compare(left, right) {
@@ -18,6 +26,7 @@ const StringComparable = Comparable<string>({
  * @namespace
  */
 export const String = {
+  ...StringType,
   ...StringComparable,
   /**
    * Return a new string from all parts passed as arguments
@@ -78,21 +87,6 @@ export const String = {
    */
   concat(parts: Array<string>): string {
     return parts.join('');
-  },
-
-  /**
-   * Return true if `anyValue` is a `string`
-   *
-   * @example
-   * ```typescript
-   * String.hasInstance(Array.empty()) // true
-   * String.hasInstance(null)) // false
-   * ```
-   * @category Type
-   * @param anyValue - a tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is string {
-    return typeof anyValue === 'string';
   },
 
   /**
