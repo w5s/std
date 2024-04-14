@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { Enum } from './Enum.js';
 import { assertType, describeType } from './testing.js';
+import { Codec, DecodeError } from './Codec.js';
+import { Result } from './Result.js';
 
 describe('Enum', () => {
   const MyEnumObject = Enum.define({
@@ -26,7 +28,7 @@ describe('Enum', () => {
   type MyEnumKeys = Enum.KeyOf<typeof MyEnumObject>;
   assertType<MyEnumKeys, 'Foo' | 'Bar'>(true);
 
-  describe('Make', () => {
+  describe('define', () => {
     it('returns a new type', () => {
       expect(
         Enum.define({
@@ -38,6 +40,9 @@ describe('Enum', () => {
         Bar: 'bar',
         typeName: expect.any(String),
         hasInstance: expect.any(Function),
+        codecSchema: expect.any(Function),
+        codecDecode: expect.any(Function),
+        codecEncode: expect.any(Function),
         [Enum.enumKeys]: ['Foo', 'Bar'],
         [Enum.enumValues]: ['foo', 'bar'],
       });
@@ -47,18 +52,20 @@ describe('Enum', () => {
       instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
       notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
     });
-    // it('implements Codec', () => {
-    //   expect(Codec.encode(MyEnum, MyEnum.Foo)).toEqual('foo');
-    //   expect(Codec.decode(MyEnum, MyEnum.Foo)).toEqual(Result.Ok('foo'));
-    //   expect(Codec.decode(MyEnum, 'not_in_enum')).toEqual(
-    //     Result.Error(
-    //       DecodeError({
-    //         message: '',
-    //         input: 'not_in_enum',
-    //       })
-    //     )
-    //   );
-    // });
+    describe('Codec', () => {
+      it('encodes values', () => {
+        expect(Codec.encode(MyEnum, MyEnum.Foo)).toEqual('foo');
+      });
+      it('decodes values', () => {
+        expect(Codec.decode(MyEnum, 'foo')).toEqual(Result.Ok(MyEnum.Foo));
+        expect(Codec.decode(MyEnum, 'foo_invalid')).toEqual(
+          Result.Error(DecodeError({ message: 'foo_invalid is not a valid Enum', input: 'foo_invalid' }))
+        );
+      });
+      it('has schema', () => {
+        expect(Codec.schema(MyEnum)).toEqual({ enum: ['foo', 'bar'] });
+      });
+    });
   });
   describe('keys', () => {
     it('returns the keys of Enum', () => {

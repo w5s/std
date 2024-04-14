@@ -1,4 +1,5 @@
-import type { Type } from './Type.js';
+import { DecodeError, type Codec } from './Codec.js';
+import { Type } from './Type.js';
 
 const enumKeys: unique symbol = Symbol('Enum.enumKeys');
 const enumValues: unique symbol = Symbol('Enum.enumValues');
@@ -19,21 +20,46 @@ export const Enum = {
    * ```
    * @param enumObject
    */
-  define<const T extends Record<string, unknown>>(enumObject: T): Enum<T> {
-    const enumKeysList = Object.freeze(Object.keys(enumObject));
-    const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<T[keyof T]>;
-    const enumValuesSet = new Set(enumValuesList);
+  define<const T extends Record<string, string | number | boolean>>(enumObject: T): Enum<T> {
+    type Value = T[keyof T];
 
-    function hasInstance(anyValue: unknown): anyValue is T[keyof T] {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      return enumValuesSet.has(anyValue as any);
-    }
+    const enumKeysList = Object.freeze(Object.keys(enumObject));
+    const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<Value>;
+    const enumValuesSet = new Set<any>(enumValuesList);
+
+    const EnumType = Type.define<Value>({
+      typeName: 'Enum',
+      hasInstance(anyValue) {
+        return enumValuesSet.has(anyValue);
+      },
+    });
+    const EnumCodec: Codec<Value> = {
+      codecDecode: (_) =>
+        EnumType.hasInstance(_)
+          ? {
+              _: 'Ok',
+              ok: true,
+              value: _,
+            }
+          : {
+              _: 'Error',
+              ok: false,
+              error: DecodeError({
+                message: `${String(_)} is not a valid ${EnumType.typeName}`,
+                input: _,
+              }),
+            },
+      codecEncode: (_) => _,
+      codecSchema: () => ({
+        enum: enumValuesList,
+      }),
+    };
 
     return Object.freeze({
       [enumKeys]: enumKeysList,
       [enumValues]: enumValuesList,
-      typeName: 'Enum',
-      hasInstance,
+      ...EnumType,
+      ...EnumCodec,
       ...enumObject,
     });
   },
@@ -85,7 +111,9 @@ export namespace Enum {
   export type ValueOf<T extends Enum> = ArrayValue<T[typeof enumValues]>;
 }
 
-export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>> extends Type<T[keyof T]> {
+export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>>
+  extends Type<T[keyof T]>,
+    Codec<T[keyof T]> {
   /**
    * An array of all keys
    */
