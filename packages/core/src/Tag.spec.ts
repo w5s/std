@@ -23,7 +23,7 @@ describe('Tag', () => {
       squareRoot(value); // tsc: Passed
     }
   });
-  describe('Make', () => {
+  describe('define', () => {
     describe('#()', () => {
       it('returns identity', () => {
         expect(PositiveNumber(1)).toBe(1);
@@ -82,6 +82,16 @@ describe('Tag', () => {
     describe('#codecSchema', () => {
       it('returns the schema', () => {
         expect(Codec.schema(PositiveNumber)).toEqual({});
+      });
+      it('is overridable', () => {
+        const PositiveNumberWithSchema = Tag.define<number, PositiveNumber>({
+          typeName: 'PositiveNumber',
+          hasInstance: (value) => typeof value === 'number' && value > 0,
+          codecSchema: () => ({
+            type: 'number',
+          }),
+        });
+        expect(Codec.schema(PositiveNumberWithSchema)).toEqual({ type: 'number' });
       });
     });
   });

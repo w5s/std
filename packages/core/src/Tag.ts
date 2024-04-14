@@ -41,9 +41,9 @@ export const Tag = {
   define<From, To extends From>(parameters: {
     typeName: string;
     hasInstance: (anyValue: unknown) => boolean;
+    codecSchema?: Codec<To>['codecSchema'];
   }): Tag.Module<From, To> {
     const TagType: Type<To> = Type.define(parameters);
-
     const TagCodec: Codec<To> = {
       codecEncode: (value) => value,
       codecDecode: (value) =>
@@ -57,7 +57,7 @@ export const Tag = {
                 input: value,
               }),
             },
-      codecSchema: () => ({}),
+      codecSchema: parameters.codecSchema ?? (() => ({})),
     };
 
     function wrap(value: From): To {
