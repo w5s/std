@@ -10,8 +10,8 @@ export type UUID = string & Tag<'UUID'>;
 const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
 const isUUID = (anyValue: unknown): anyValue is UUID => typeof anyValue === 'string' && uuidRegexp.test(anyValue);
 const UUIDCodec = Codec<UUID>({
-  encode: String,
-  decode(value) {
+  codecEncode: String,
+  codecDecode(value) {
     return isUUID(value)
       ? { _: 'Ok', ok: true, value }
       : {
@@ -20,7 +20,7 @@ const UUIDCodec = Codec<UUID>({
           error: DecodeError({ message: `${String(value)} is not a valid UUID`, input: value }),
         };
   },
-  schema() {
+  codecSchema() {
     return {
       type: 'string',
       format: 'uuid',

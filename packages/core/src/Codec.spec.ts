@@ -8,8 +8,8 @@ import { Tag } from './Tag.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
-  encode: (_) => `_${_}`,
-  decode: (input) =>
+  codecEncode: (_) => `_${_}`,
+  codecDecode: (input) =>
     typeof input === 'string' && input[0] === '_'
       ? Result.Ok(input.slice(1))
       : Result.Error(
@@ -18,7 +18,7 @@ const underscoreString = Codec<string>({
             input,
           })
         ),
-  schema: () => ({ type: 'string', format: 'custom_underscore' }),
+  codecSchema: () => ({ type: 'string', format: 'custom_underscore' }),
 });
 describe('Codec', () => {
   describe('.encode()', () => {
@@ -148,9 +148,9 @@ describe('lazy', () => {
   const subject = Codec.lazy;
   const getCodec = () =>
     Codec<string>({
-      encode: (_) => `__${_}`,
-      decode: (_) => Result.Ok(String(_).slice(2)),
-      schema: () => ({ type: 'string', format: 'test' }),
+      codecEncode: (_) => `__${_}`,
+      codecDecode: (_) => Result.Ok(String(_).slice(2)),
+      codecSchema: () => ({ type: 'string', format: 'test' }),
     });
 
   describe('.codecSchema', () => {
