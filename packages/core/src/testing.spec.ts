@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // public exports
         'assertType',
+        'describeCodec',
         'describeComparable',
         'describeEqual',
         'describeNumeric',
