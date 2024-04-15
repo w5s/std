@@ -12,5 +12,6 @@ export interface TestingLibrary {
     toBeLessThan: (anyValue: any) => void;
     toBeGreaterThan: (anyValue: any) => void;
     toBe: (anyValue: unknown) => void;
+    toEqual: (anyValue: unknown) => void;
   };
 }
