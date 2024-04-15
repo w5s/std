@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { Option } from './Option.js';
-import { describeType, describeComparable, describeNumeric } from './testing.js';
-import { Codec, DecodeError } from './Codec.js';
+import { describeType, describeComparable, describeNumeric, describeCodec } from './testing.js';
+import { DecodeError } from './Codec.js';
 import { Result } from './Result.js';
 
 describe('Int', () => {
@@ -48,19 +48,18 @@ describe('Int', () => {
       { call: [3, 2], returns: 6 },
     ],
   });
-  describe('Codec', () => {
-    it('decodes values', () => {
-      expect(Codec.decode(Int, 1)).toEqual(Result.Ok(Int(1)));
-      expect(Codec.decode(Int, null)).toEqual(Result.Error(DecodeError({ message: 'Invalid Int', input: null })));
-    });
-    it('encodes values', () => {
-      expect(Codec.encode(Int, Int(1))).toBe(1);
-    });
-    it('has schema', () => {
-      expect(Codec.schema(Int)).toEqual({
-        type: 'integer',
-      });
-    });
+  describeCodec({ describe, it, expect })(Int, {
+    decode: [
+      [1, Result.Ok(Int(1))],
+      [null, Result.Error(DecodeError({ message: 'Invalid Int', input: null }))],
+    ],
+    encode: [
+      [Int(0), 0],
+      [Int(1), 1],
+    ],
+    schema: () => ({
+      type: 'integer',
+    }),
   });
   describe('()', () => {
     it('returns or throw when wrong value', () => {

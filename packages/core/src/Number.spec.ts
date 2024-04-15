@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Number } from './Number.js';
-import { assertType, describeComparable, describeNumeric, describeType } from './testing.js';
+import { describeComparable, describeNumeric, describeType } from './testing.js';
 
 describe('Number', () => {
   describeType({ describe, it, expect })(Number, {
@@ -8,25 +8,6 @@ describe('Number', () => {
     instances: () => [0, -1, globalThis.Number.NaN],
     notInstances: () => ['', null, undefined],
   });
-  describe('.hasInstance', () => {
-    it('should return true for number', () => {
-      expect(Number.hasInstance(1)).toEqual(true);
-    });
-    it('should return false for any other value', () => {
-      expect(Number.hasInstance(null)).toBe(false);
-      expect(Number.hasInstance({ length: 0 })).toBe(false);
-    });
-    it('should refine type', () => {
-      const someValue = 'true' as string | number;
-
-      if (Number.hasInstance(someValue)) {
-        assertType<typeof someValue, number>(true);
-      } else {
-        assertType<typeof someValue, string>(true);
-      }
-    });
-  });
-
   describeComparable({ describe, it, expect })(Number, {
     ordered: () => [-1, 0, 1],
     equivalent: () => [

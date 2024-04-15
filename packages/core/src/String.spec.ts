@@ -9,6 +9,13 @@ describe('String', () => {
     instances: () => ['abc'],
     notInstances: () => [null, undefined, 1, {}],
   });
+  describeComparable({ describe, it, expect })(String, {
+    ordered: () => ['a', 'b', 'c'],
+    equivalent: () => [
+      ['', ''],
+      ['ab', 'ab'],
+    ],
+  });
   describe('.of', () => {
     it('should join all parts', () => {
       expect(String.of('a', 'b', 'c')).toEqual('abc');
@@ -119,12 +126,5 @@ describe('String', () => {
       expect(String.endsWith(string, 'ab')).toEqual(false);
       expect(String.endsWith(string, 'bc')).toEqual(true);
     });
-  });
-  describeComparable({ describe, it, expect })(String, {
-    ordered: () => ['a', 'b', 'c'],
-    equivalent: () => [
-      ['', ''],
-      ['ab', 'ab'],
-    ],
   });
 });

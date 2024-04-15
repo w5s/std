@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Enum } from './Enum.js';
-import { assertType, describeType } from './testing.js';
-import { Codec, DecodeError } from './Codec.js';
+import { assertType, describeCodec, describeType } from './testing.js';
+import { DecodeError } from './Codec.js';
 import { Result } from './Result.js';
 
 describe('Enum', () => {
@@ -52,19 +52,22 @@ describe('Enum', () => {
       instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
       notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
     });
-    describe('Codec', () => {
-      it('encodes values', () => {
-        expect(Codec.encode(MyEnum, MyEnum.Foo)).toEqual('foo');
-      });
-      it('decodes values', () => {
-        expect(Codec.decode(MyEnum, 'foo')).toEqual(Result.Ok(MyEnum.Foo));
-        expect(Codec.decode(MyEnum, 'foo_invalid')).toEqual(
-          Result.Error(DecodeError({ message: 'foo_invalid is not a valid Enum', input: 'foo_invalid' }))
-        );
-      });
-      it('has schema', () => {
-        expect(Codec.schema(MyEnum)).toEqual({ enum: ['foo', 'bar'] });
-      });
+    describeCodec({ describe, it, expect })(MyEnumObject, {
+      decode: [
+        ['foo', Result.Ok(MyEnumObject.Foo)],
+        ['bar', Result.Ok(MyEnumObject.Bar)],
+        [
+          'foo_invalid',
+          Result.Error(DecodeError({ message: 'foo_invalid is not a valid Enum', input: 'foo_invalid' })),
+        ],
+      ],
+      encode: [
+        [MyEnum.Foo, 'foo'],
+        [MyEnum.Bar, 'bar'],
+      ],
+      schema: () => ({
+        enum: ['foo', 'bar'],
+      }),
     });
   });
   describe('keys', () => {

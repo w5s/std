@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Tag } from './Tag.js';
-import { assertType } from './testing.js';
+import { describeType } from './testing.js';
 import { Codec, DecodeError } from './Codec.js';
 import { Result } from './Result.js';
 
@@ -24,6 +24,11 @@ describe('Tag', () => {
     }
   });
   describe('define', () => {
+    describeType({ describe, it, expect })(PositiveNumber, {
+      typeName: 'PositiveNumber',
+      instances: () => [1, 1000],
+      notInstances: () => [0, -1, -1000],
+    });
     describe('#()', () => {
       it('returns identity', () => {
         expect(PositiveNumber(1)).toBe(1);
@@ -48,19 +53,6 @@ describe('Tag', () => {
         expect(PositiveNumber.unwrap(value)).toBe(1);
         // @ts-expect-error Throw a type error
         PositiveNumber.unwrap('');
-      });
-    });
-    describe('#hasInstance', () => {
-      it('forwards from parameters', () => {
-        const value = 1 as number;
-        // Type check
-        if (PositiveNumber.hasInstance(value)) {
-          assertType<typeof value, PositiveNumber>(true);
-        }
-
-        expect(PositiveNumber.hasInstance(1)).toBe(true);
-        expect(PositiveNumber.hasInstance(0)).toBe(false);
-        expect(PositiveNumber.hasInstance(-1)).toBe(false);
       });
     });
     describe('#codecEncode', () => {
