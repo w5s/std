@@ -1,5 +1,5 @@
-import { invariant } from '@w5s/invariant';
-import type { Option, Task, Tag } from '@w5s/core';
+import type { Option, Task } from '@w5s/core';
+import { Tag } from '@w5s/core/dist/Tag.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Number as NumberModule } from '@w5s/core/dist/Number.js';
 import { TimeDuration } from './TimeDuration.js';
@@ -13,6 +13,14 @@ const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
   typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
 const now = createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>;
+
+const TimeType = Tag.define<number, Time>({
+  typeName: 'Time',
+  hasInstance(anyValue: unknown): anyValue is TimeDuration {
+    return typeof anyValue === 'number' && anyValue >= 0 && !Number.isNaN(anyValue);
+  },
+  codecSchema: () => ({ type: 'number' }),
+});
 
 const TimeComparable: Comparable<Time> = Comparable({
   compare: NumberModule.compare as Comparable<Time>['compare'],
@@ -28,7 +36,7 @@ export type Time = number & Tag<'Time'>;
  *
  * @namespace
  */
-export const Time = {
+export const Time = Object.assign(TimeType, {
   ...TimeComparable,
   /**
    * Create a new Time value
@@ -41,24 +49,7 @@ export const Time = {
    * @param milliseconds - the value in milliseconds
    */
   of(milliseconds: number): Time {
-    invariant(Time.hasInstance(milliseconds), `${milliseconds} is not a valid time value`);
-
-    return milliseconds;
-  },
-
-  /**
-   * Return `true` if `anyValue` is a valid `Time` value
-   *
-   * @example
-   * ```typescript
-   * Time.hasInstance(null); // === false
-   * Time.hasInstance(Time.of(0)); // === true
-   * ```
-   * @category Type
-   * @param anyValue - the tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is Time {
-    return typeof anyValue === 'number' && anyValue >= 0 && !Number.isNaN(anyValue);
+    return TimeType.wrap(milliseconds);
   },
 
   /**
@@ -169,4 +160,4 @@ export const Time = {
       }
     });
   },
-};
+});

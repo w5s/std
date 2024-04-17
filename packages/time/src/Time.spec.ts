@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option, Ref, Result, unsafeRun } from '@w5s/core';
-import { describeComparable } from '@w5s/core/dist/testing.js';
+import { describeCodec, describeComparable, describeType } from '@w5s/core/dist/testing.js';
+import { DecodeError } from '@w5s/core/dist/Codec.js';
 import { Time } from './Time.js';
 import { TimeDuration } from './TimeDuration.js';
 
@@ -17,23 +18,11 @@ describe('Time', () => {
 
   describe('.of()', () => {
     it('should throw invariant error', () => {
-      expect(() => Time.of(-1)).toThrow('-1 is not a valid time value');
-      expect(() => Time.of(Number.NaN)).toThrow('NaN is not a valid time value');
+      expect(() => Time.of(-1)).toThrow('Invalid Time');
+      expect(() => Time.of(Number.NaN)).toThrow('Invalid Time');
     });
     it('should return unchanged value when positive', () => {
       expect(Time.of(1)).toBe(1);
-    });
-  });
-  describe('.hasInstance', () => {
-    it('should return true for valid values', () => {
-      expect(Time.hasInstance(Time.of(1))).toBe(true);
-    });
-    it('should return false for invalid values', () => {
-      expect(Time.hasInstance(null)).toBe(false);
-      expect(Time.hasInstance(undefined)).toBe(false);
-      expect(Time.hasInstance([])).toBe(false);
-      expect(Time.hasInstance(-1)).toBe(false);
-      expect(Time.hasInstance(Number.NaN)).toBe(false);
     });
   });
   describe('.add', () => {
@@ -114,6 +103,32 @@ describe('Time', () => {
       expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(clearTimeoutSpy).toHaveBeenLastCalledWith(setTimeoutResult);
     });
+  });
+  describeType({ describe, it, expect })(Time, {
+    typeName: 'Time',
+    instances: () => [Time.of(0), Time.of(1)],
+    notInstances: () => [null, undefined, [], Number.NaN],
+  });
+  describeCodec({ describe, it, expect })(Time, {
+    encode: [
+      [Time(1), 1],
+      [Time(0), 0],
+    ],
+    decode: [
+      [0, Result.Ok(Time(0))],
+      [
+        null,
+        Result.Error(
+          DecodeError({
+            message: 'Invalid Time',
+            input: null,
+          })
+        ),
+      ],
+    ],
+    schema: () => ({
+      type: 'number',
+    }),
   });
   describeComparable({ describe, it, expect })(Time, {
     ordered: () => [Time.of(0), Time.of(1), Time.of(2)],

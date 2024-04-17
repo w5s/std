@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/unbound-method */
-import { invariant } from '@w5s/invariant';
-import type { Numeric, Tag } from '@w5s/core';
+import type { Numeric } from '@w5s/core';
+import { Tag } from '@w5s/core/dist/Tag.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Number } from '@w5s/core/dist/Number.js';
 
@@ -8,6 +8,14 @@ const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
 const DAYS = HOURS * 24;
+
+const TimeDurationType = Tag.define<number, TimeDuration>({
+  typeName: 'TimeDuration',
+  hasInstance(anyValue: unknown): anyValue is TimeDuration {
+    return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
+  },
+  codecSchema: () => ({ type: 'number' }),
+});
 
 const TimeDurationComparable: Comparable<TimeDuration> = Comparable({
   compare: Number.compare as Comparable<TimeDuration>['compare'],
@@ -31,7 +39,7 @@ export type TimeDuration = number & Tag<'TimeDuration'>;
  *
  * @namespace
  */
-export const TimeDuration = {
+export const TimeDuration = Object.assign(TimeDurationType, {
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
 
@@ -46,24 +54,7 @@ export const TimeDuration = {
    * @param milliseconds - Number of milliseconds
    */
   of(milliseconds: number) {
-    invariant(TimeDuration.hasInstance(milliseconds), `${milliseconds} is not a valid duration value`);
-
-    return milliseconds;
-  },
-
-  /**
-   * Return `true` if `anyValue` is a valid `TimeDuration` value
-   *
-   * @example
-   * ```typescript
-   * TimeDuration.hasInstance(null); // === false
-   * TimeDuration.hasInstance(TimeDuration.of(0)); // === true
-   * ```
-   * @category Type
-   * @param anyValue - the tested value
-   */
-  hasInstance(anyValue: unknown): anyValue is TimeDuration {
-    return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
+    return TimeDurationType.wrap(milliseconds);
   },
 
   /**
@@ -135,4 +126,4 @@ export const TimeDuration = {
   days(amount: number) {
     return TimeDuration.of(amount * DAYS);
   },
-};
+});
