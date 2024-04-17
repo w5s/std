@@ -1,4 +1,4 @@
-import { defineCustomError, type CustomError } from './CustomError.js';
+import { CustomError } from './CustomError.js';
 
 /**
  * An error when wrong argument is passed to a function
@@ -12,4 +12,4 @@ export interface ArgumentError
  *
  * @category Constructor
  */
-export const ArgumentError = defineCustomError<ArgumentError>('ArgumentError');
+export const ArgumentError = CustomError.define<ArgumentError>('ArgumentError');

@@ -15,8 +15,6 @@ describe('index', () => {
         "SyntaxError",
         "TypeError",
         "URIError",
-        "defineCustomError",
-        "defineCustomErrorWith",
         "throwError",
       ]
     `);

@@ -37,7 +37,7 @@ interface SomeError
     name: 'SomeError';
     customProperty: string;
   }> {}
-const SomeError = defineCustomError<SomeError>('SomeError');
+const SomeError = CustomError.define<SomeError>('SomeError');
 
 console.log(SomeError({
   message: 'This is a message',
@@ -90,14 +90,14 @@ interface FooError
     name: 'FooError';
     fooProperty: boolean;
   }> {}
-const FooError = defineCustomError<FooError>('FooError');
+const FooError = CustomError.define<FooError>('FooError');
 
 interface BarError
   extends CustomError<{
     name: 'BarError';
     barProperty: number;
   }> {}
-const BarError = defineCustomError<BarError>('BarError');
+const BarError = CustomError.define<BarError>('BarError');
 
 function parse(): Result<string, FooError | BarError> {
   //...
@@ -131,7 +131,7 @@ export interface CauseError
   extends CustomError<{
     name: 'CauseError';
   }> {}
-export const CauseError = defineCustomError<CauseError>('CauseError');
+export const CauseError = CustomError.define<CauseError>('CauseError');
 
 try {
   // ...
@@ -155,7 +155,7 @@ export interface {{SomeError}} extends CustomError<{
   // ...
 }> {}
 // ✓ Export const with same name as const
-export const {{SomeError}} = defineCustomError<{{SomeError}}>({{SomeError}});
+export const {{SomeError}} = CustomError.define<{{SomeError}}>({{SomeError}});
 ```
 
 ## FAQ

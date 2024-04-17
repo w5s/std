@@ -1,4 +1,4 @@
-import { defineCustomError, type CustomError } from '@w5s/error';
+import { CustomError } from '@w5s/error';
 import type { Array } from './Array.js';
 import type { Option } from './Option.js';
 import type { Result } from './Result.js';
@@ -21,7 +21,7 @@ export interface DecodeError
  *
  * @category Constructor
  */
-export const DecodeError = defineCustomError<DecodeError>('DecodeError');
+export const DecodeError = CustomError.define<DecodeError>('DecodeError');
 
 export interface Codec<T> {
   /**
