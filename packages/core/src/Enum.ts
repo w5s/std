@@ -1,4 +1,4 @@
-import { DecodeError, type Codec } from './Codec.js';
+import { type Codec } from './Codec.js';
 import { Type } from './Type.js';
 
 const enumKeys: unique symbol = Symbol('Enum.enumKeys');
@@ -32,34 +32,15 @@ export const Enum = {
       hasInstance(anyValue) {
         return enumValuesSet.has(anyValue);
       },
-    });
-    const EnumCodec: Codec<Value> = {
-      codecDecode: (_) =>
-        EnumType.hasInstance(_)
-          ? {
-              _: 'Ok',
-              ok: true,
-              value: _,
-            }
-          : {
-              _: 'Error',
-              ok: false,
-              error: DecodeError({
-                message: `${String(_)} is not a valid ${EnumType.typeName}`,
-                input: _,
-              }),
-            },
-      codecEncode: (_) => _,
       codecSchema: () => ({
         enum: enumValuesList,
       }),
-    };
+    });
 
     return Object.freeze({
       [enumKeys]: enumKeysList,
       [enumValues]: enumValuesList,
       ...EnumType,
-      ...EnumCodec,
       ...enumObject,
     });
   },

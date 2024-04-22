@@ -56,10 +56,7 @@ describe('Enum', () => {
       decode: [
         ['foo', Result.Ok(MyEnumObject.Foo)],
         ['bar', Result.Ok(MyEnumObject.Bar)],
-        [
-          'foo_invalid',
-          Result.Error(DecodeError({ message: 'foo_invalid is not a valid Enum', input: 'foo_invalid' })),
-        ],
+        ['foo_invalid', Result.Error(DecodeError({ message: 'Invalid Enum', input: 'foo_invalid' }))],
       ],
       encode: [
         [MyEnum.Foo, 'foo'],
