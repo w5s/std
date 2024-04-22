@@ -1,5 +1,5 @@
 import { invariant } from '@w5s/invariant';
-import { DecodeError, type Codec } from './Codec.js';
+import { type Codec } from './Codec.js';
 import { Type } from './Type.js';
 
 /**
@@ -38,27 +38,8 @@ export const Tag = {
    * });
    * ```
    */
-  define<From, To extends From>(parameters: {
-    typeName: string;
-    hasInstance: (anyValue: unknown) => boolean;
-    codecSchema?: Codec<To>['codecSchema'];
-  }): Tag.Module<From, To> {
-    const TagType: Type<To> = Type.define(parameters);
-    const TagCodec: Codec<To> = {
-      codecEncode: (value) => value,
-      codecDecode: (value) =>
-        TagType.hasInstance(value)
-          ? { _: 'Ok', ok: true, value }
-          : {
-              _: 'Error',
-              ok: false,
-              error: DecodeError({
-                message: `Invalid ${TagType.typeName}`,
-                input: value,
-              }),
-            },
-      codecSchema: parameters.codecSchema ?? (() => ({})),
-    };
+  define<From, To extends From>(parameters: Tag.Parameters<To>): Tag.Module<From, To> {
+    const TagType = Type.define<To>(parameters);
 
     function wrap(value: From): To {
       invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);
@@ -73,12 +54,11 @@ export const Tag = {
       wrap,
       unwrap,
       ...TagType,
-      ...TagCodec,
     });
   },
 };
 export namespace Tag {
-  export interface Parameters extends Type.Parameters {}
+  export interface Parameters<T> extends Type.Parameters<T> {}
 
   export interface Module<From, To extends From> extends Type<To>, Codec<To> {
     /**

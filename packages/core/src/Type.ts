@@ -1,3 +1,5 @@
+import { DecodeError, type Codec } from './Codec.js';
+
 /**
  * A type that represents a class module of `T` instances
  */
@@ -51,16 +53,44 @@ export const Type = {
    * ```
    * @param parameters - the type parameters
    */
-  define<T>(parameters: Type.Parameters): Type<T> {
+  define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
+    const hasInstance = parameters.hasInstance as Type<T>['hasInstance'];
+    const {
+      typeName,
+      codecEncode = (value) => value,
+      codecDecode = (value) =>
+        hasInstance(value)
+          ? { _: 'Ok', ok: true, value }
+          : {
+              _: 'Error',
+              ok: false,
+              error: DecodeError({
+                message: `Invalid ${typeName}`,
+                input: value,
+              }),
+            },
+      codecSchema = () => ({}),
+    } = parameters;
     return {
-      typeName: parameters.typeName,
-      hasInstance: parameters.hasInstance as Type<T>['hasInstance'],
+      typeName,
+      hasInstance,
+      codecEncode,
+      codecDecode,
+      codecSchema,
     };
   },
 };
 export namespace Type {
-  export interface Parameters {
+  /**
+   * Type module constructor parameters
+   */
+  export interface Parameters<T> extends Partial<Codec<T>> {
     typeName: string;
     hasInstance: (value: unknown) => boolean;
   }
+
+  /**
+   * Type module interface
+   */
+  export interface Module<T> extends Type<T>, Codec<T> {}
 }
