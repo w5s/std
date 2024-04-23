@@ -1,4 +1,4 @@
-import type { Type } from './Type.js';
+import { Boolean as BooleanType } from './Type/Boolean.js';
 import { Comparable } from './Comparable.js';
 
 const BooleanComparable = Comparable<boolean>({
@@ -6,13 +6,6 @@ const BooleanComparable = Comparable<boolean>({
     return left === right ? 0 : left < right ? -1 : 1;
   },
 });
-
-const BooleanType: Type<boolean> = {
-  typeName: 'Boolean',
-  hasInstance(anyValue: unknown): anyValue is boolean {
-    return typeof anyValue === 'boolean';
-  },
-};
 
 /**
  * A collection of functions to manipulate `boolean`

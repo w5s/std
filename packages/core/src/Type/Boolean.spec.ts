@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { Boolean } from './Boolean.js';
-import { describeType, describeComparable, describeCodec } from './testing.js';
-import { Result } from './Result.js';
-import { DecodeError } from './Codec.js';
+import { describeType, describeCodec } from '../testing.js';
+import { Result } from '../Result.js';
+import { DecodeError } from '../Codec.js';
 
 describe('Boolean', () => {
   describeType({ describe, it, expect })(Boolean, {
@@ -18,15 +18,9 @@ describe('Boolean', () => {
     decode: [
       [true, Result.Ok(true)],
       [false, Result.Ok(false)],
-      ['', Result.Error(DecodeError({ message: 'Invalid Boolean', input: '' }))],
+      [undefined, Result.Error(DecodeError({ message: 'Invalid Boolean', input: undefined }))],
+      [null, Result.Error(DecodeError({ message: 'Invalid Boolean', input: null }))],
     ],
     schema: () => ({ type: 'boolean' }),
-  });
-  describeComparable({ describe, it, expect })(Boolean, {
-    ordered: () => [false, true],
-    equivalent: () => [
-      [true, true],
-      [false, false],
-    ],
   });
 });
