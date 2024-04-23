@@ -1,8 +1,9 @@
 import type { Option } from './Option.js';
-import { Tag } from './Tag.js';
+import { Int as IntType } from './Type/Int.js';
 import { Comparable } from './Comparable.js';
 import type { Bounded } from './Bounded.js';
 import type { Numeric } from './Numeric.js';
+import type { Tag } from './Tag.js';
 
 type Radix36 =
   | 2
@@ -52,16 +53,6 @@ const toSafeInt = (value: number): Int =>
       : value < 0
         ? (Math.ceil(value) as Int)
         : (Math.floor(value) as Int);
-
-const IntTag = Tag.define<number, Int>({
-  typeName: 'Int',
-  hasInstance(anyValue: unknown): anyValue is Int {
-    return Number.isSafeInteger(anyValue);
-  },
-  codecSchema: () => ({
-    type: 'integer',
-  }),
-});
 
 const IntComparable = Comparable<Int>({
   compare(left, right) {
@@ -128,7 +119,7 @@ export type Int = number & Tag<'Int'>;
  *
  * @namespace
  */
-export const Int = Object.assign(IntTag, {
+export const Int = Object.assign(IntType, {
   ...IntComparable,
   ...IntBounded,
   ...IntNumeric,
