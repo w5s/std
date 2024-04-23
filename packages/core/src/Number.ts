@@ -15,9 +15,9 @@ const NumberBounded: Bounded<number> = {
 };
 
 const NumberNumeric: Numeric<number> = {
-  '+': (left: number, right: number) => left + right,
-  '-': (left: number, right: number) => left - right,
-  '*': (left: number, right: number) => left * right,
+  '+': (left, right) => left + right,
+  '-': (left, right) => left - right,
+  '*': (left, right) => left * right,
   abs: Math.abs,
   sign: Math.sign,
 };
