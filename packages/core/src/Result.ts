@@ -1,3 +1,4 @@
+import { isPromise } from '@w5s/async/dist/isPromise.js';
 import type { Struct } from './Struct.js';
 import type { Option } from './Option.js';
 
@@ -386,11 +387,4 @@ export namespace Result {
   ): Return {
     return isOk(result) ? matchers.Ok(result.value) : matchers.Error(result.error);
   }
-}
-
-function isObject(anyValue: unknown): anyValue is Record<string, unknown> {
-  return typeof anyValue === 'object' && anyValue !== null;
-}
-function isPromise(anyValue: unknown): anyValue is Promise<unknown> {
-  return isObject(anyValue) && typeof anyValue['then'] === 'function' && typeof anyValue['catch'] === 'function';
 }
