@@ -1,5 +1,5 @@
 {
-  "name": "@w5s/promise",
+  "name": "@w5s/async",
   "version": "1.0.0-alpha.0",
   "description": "Promise module",
   "keywords": [
@@ -8,14 +8,14 @@
     "promises",
     "deferred"
   ],
-  "homepage": "https://github.com/w5s/std/tree/master/packages/promise#readme",
+  "homepage": "https://github.com/w5s/std/tree/master/packages/async#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/promise"
+    "directory": "packages/async"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

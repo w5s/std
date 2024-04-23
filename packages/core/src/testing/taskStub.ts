@@ -1,4 +1,4 @@
-import { delay } from '@w5s/promise';
+import { delay } from '@w5s/async/dist/delay.js';
 import type { Task } from '../Task.js';
 
 /**

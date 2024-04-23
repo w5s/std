@@ -5103,6 +5103,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@w5s/async@npm:1.0.0-alpha.0, @w5s/async@workspace:packages/async":
+  version: 0.0.0-use.local
+  resolution: "@w5s/async@workspace:packages/async"
+  dependencies:
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
+
 "@w5s/bigdecimal@npm:^1.0.0-alpha.0, @w5s/bigdecimal@workspace:packages/bigdecimal":
   version: 0.0.0-use.local
   resolution: "@w5s/bigdecimal@workspace:packages/bigdecimal"
@@ -5174,9 +5185,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core@workspace:packages/core"
   dependencies:
+    "@w5s/async": "npm:1.0.0-alpha.0"
     "@w5s/error": "npm:1.0.0-alpha.0"
     "@w5s/invariant": "npm:1.0.0-alpha.0"
-    "@w5s/promise": "npm:1.0.0-alpha.0"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5367,17 +5378,6 @@ __metadata:
   checksum: 10c0/dedaad9f7b5013baf3b2394cab1330e644454f47377aaea4b3fe60d21110e20a7fa6212756347207ebe1e91e071dd75bf4095fce142456828939465cbc6159c8
   languageName: node
   linkType: hard
-
-"@w5s/promise@npm:1.0.0-alpha.0, @w5s/promise@workspace:packages/promise":
-  version: 0.0.0-use.local
-  resolution: "@w5s/promise@workspace:packages/promise"
-  dependencies:
-    vite: "npm:latest"
-    vitest: "npm:latest"
-  peerDependencies:
-    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
-  languageName: unknown
-  linkType: soft
 
 "@w5s/random@npm:^1.0.0-alpha.0, @w5s/random@workspace:packages/random":
   version: 0.0.0-use.local

@@ -1,5 +1,6 @@
 import type { AggregateError } from '@w5s/error';
-import { type Awaitable, tryCall as awaitableTryCall } from '@w5s/promise';
+import { tryCall as awaitableTryCall } from '@w5s/async/dist/tryCall.js';
+import type { Awaitable } from '@w5s/async';
 import type { Option } from './Option.js';
 import type { Result } from './Result.js';
 import type { Ref } from './Ref.js';

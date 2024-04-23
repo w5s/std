@@ -11,7 +11,7 @@
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/promise
+npm install @w5s/async
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -20,7 +20,7 @@ npm install @w5s/promise
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Deferred } from '@w5s/promise';
+import { Deferred } from '@w5s/async';
 
 const deferred = new Deferred<number>();
 
@@ -41,10 +41,10 @@ await deferred.promise;
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/promise.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/async.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/promise
+[package-url]: https://www.npmjs.com/package/@w5s/async
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square

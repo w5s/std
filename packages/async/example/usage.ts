@@ -1,4 +1,4 @@
-import { Deferred } from '@w5s/promise';
+import { Deferred } from '@w5s/async';
 
 const deferred = new Deferred<number>();
 
