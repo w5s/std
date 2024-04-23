@@ -2,17 +2,10 @@ import type { Int } from './Int.js';
 import type { Option } from './Option.js';
 import type { Array } from './Array.js';
 import { Comparable } from './Comparable.js';
-import type { Type } from './Type.js';
+import { String as StringType } from './Type/String.js';
 
 const NativeString = globalThis.String;
 const indexToOption = (value: number): Option<Int> => (value < 0 ? undefined : (value as Int));
-
-const StringType: Type<string> = {
-  typeName: 'String',
-  hasInstance(anyValue: unknown): anyValue is string {
-    return typeof anyValue === 'string';
-  },
-};
 
 const StringComparable = Comparable<string>({
   compare(left, right) {
