@@ -1,14 +1,7 @@
 import type { Bounded } from './Bounded.js';
+import { Number as NumberType } from './Type/Number.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
-import type { Type } from './Type.js';
-
-const NumberType: Type<number> = {
-  typeName: 'Number',
-  hasInstance(anyValue: unknown): anyValue is number {
-    return typeof anyValue === 'number';
-  },
-};
 
 const NumberComparable = Comparable<number>({
   compare(left, right) {
