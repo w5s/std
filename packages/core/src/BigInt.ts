@@ -1,4 +1,4 @@
-import type { Type } from './Type.js';
+import { BigInt as BigIntType } from './Type/BigInt.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
 import type { Option } from './Option.js';
@@ -52,13 +52,6 @@ const BigIntFormat = {
    */
   format(self: bigint, radix?: number) {
     return self.toString(radix);
-  },
-};
-
-const BigIntType: Type<bigint> = {
-  typeName: 'BigInt',
-  hasInstance(anyValue: unknown): anyValue is bigint {
-    return typeof anyValue === 'bigint';
   },
 };
 
