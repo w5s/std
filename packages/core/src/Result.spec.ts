@@ -2,30 +2,45 @@ import { describe, it, expect, vi } from 'vitest';
 import { assertType } from './testing.js';
 import { Result } from './Result.js';
 import { Option } from './Option.js';
+import { Ok } from './Result/Ok.js';
+import { Error } from './Result/Error.js';
+import { isOk } from './Result/isOk.js';
+import { isError } from './Result/isError.js';
+import { andThen } from './Result/andThen.js';
+import { get } from './Result/get.js';
+import { getError } from './Result/getError.js';
+import { getOrElse } from './Result/getOrElse.js';
+import { getOrThrow } from './Result/getOrThrow.js';
+import { hasInstance } from './Result/hasInstance.js';
+import { mapError } from './Result/mapError.js';
+import { map } from './Result/map.js';
+import { match } from './Result/match.js';
+import { orElse } from './Result/orElse.js';
+import { tryCall } from './Result/tryCall.js';
 
 describe('Result', () => {
-  const anyValue = 'anyValue';
-  const anyError = 'anyError';
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  const anyValue: string = 'anyValue';
+  // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+  const anyError: string = 'anyError';
   const anyResult = Result.Error(anyError) as Result<typeof anyValue, typeof anyError>;
-
-  describe('.Ok', () => {
-    it('should return a new object', () => {
-      expect(Result.Ok(anyValue)).toEqual({ _: 'Ok', ok: true, value: anyValue });
-    });
-    it('should return void result when value is omitted', () => {
-      const result = Result.Ok();
-      expect(result).toEqual({ _: 'Ok', ok: true, value: undefined });
-      assertType<typeof result, Result<void, never>>(true);
-    });
-  });
-  describe('.Error', () => {
-    it('should return a new object', () => {
-      expect(Result.Error(anyValue)).toEqual({ _: 'Error', ok: false, error: anyValue });
-    });
-    it('should return void result when value is omitted', () => {
-      const result = Result.Error();
-      expect(result).toEqual({ _: 'Error', ok: false, error: undefined });
-      assertType<typeof result, Result<never, void>>(true);
+  it('is an alias to functions', () => {
+    expect(Result).toEqual({
+      Ok,
+      Error,
+      isOk,
+      isError,
+      andThen,
+      get,
+      getError,
+      getOrElse,
+      getOrThrow,
+      hasInstance,
+      map,
+      mapError,
+      match,
+      orElse,
+      tryCall,
     });
   });
 
@@ -40,14 +55,6 @@ describe('Result', () => {
     });
   });
 
-  describe('.isOk', () => {
-    it('should return true for Ok() object', () => {
-      expect(Result.isOk(Result.Ok(anyValue))).toEqual(true);
-    });
-    it('should return false for Error() object', () => {
-      expect(Result.isOk(Result.Error(anyValue))).toEqual(false);
-    });
-  });
   describe('.isError', () => {
     it('should return true for Result.Ok() object', () => {
       expect(Result.isError(Result.Ok(anyValue))).toEqual(false);
@@ -147,7 +154,7 @@ describe('Result', () => {
   });
 
   describe('.tryCall', () => {
-    class TestError extends Error {
+    class TestError extends globalThis.Error {
       constructor() {
         super();
         this.name = 'TestError';
@@ -165,7 +172,7 @@ describe('Result', () => {
         ).toEqual(Result.Ok('return_value'));
       });
       it('should return Result.Error(onError(error)) when error is thrown', () => {
-        const thrownError = new Error('custom');
+        const thrownError = new globalThis.Error('custom');
         const onError = vi.fn((_error: unknown) => new TestError());
         expect(
           Result.tryCall(() => {
@@ -185,7 +192,7 @@ describe('Result', () => {
         ).resolves.toEqual(Result.Ok('return_value'));
       });
       it('should return Result.Error(onError(error)) when promise is rejected', async () => {
-        const thrownError = new Error('custom');
+        const thrownError = new globalThis.Error('custom');
         const onError = vi.fn(async (_error: unknown) => new TestError());
         await expect(Result.tryCall((): Promise<string> => Promise.reject(thrownError), onError)).resolves.toEqual(
           Result.Error(new TestError())
