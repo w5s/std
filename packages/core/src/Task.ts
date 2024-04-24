@@ -4,6 +4,8 @@ import type { Awaitable } from '@w5s/async';
 import type { Option } from './Option.js';
 import type { Result } from './Result.js';
 import type { Ref } from './Ref.js';
+import { Ok } from './Result/Ok.js';
+import { Error } from './Result/Error.js';
 
 // Inline static helpers
 const createTask = <Value, Error>(taskRun: Task<Value, Error>['taskRun']): Task<Value, Error> => ({
@@ -18,13 +20,6 @@ const cancel = (cancelerRef: TaskCanceler) => {
     current();
   }
 };
-
-const Ok: typeof Result.Ok = ((value?: unknown) => ({ _: 'Ok', ok: true, value })) as unknown as typeof Result.Ok;
-const Err: typeof Result.Error = ((error?: unknown): Result<never, unknown> => ({
-  _: 'Error',
-  ok: false,
-  error,
-})) as unknown as typeof Result.Error;
 
 /**
  * Interface used to cancel running task
@@ -118,7 +113,7 @@ export function Task<Value, Error = never>(
       () =>
         sideEffect({
           ok: Ok,
-          error: Err,
+          error: Error,
           canceler,
           run: (task) => run(task, canceler),
         }),
@@ -373,7 +368,7 @@ export namespace Task {
             finish();
           },
           (error, entry, index) => {
-            results[index] = Err(error);
+            results[index] = Error(error);
             finish();
           }
         );

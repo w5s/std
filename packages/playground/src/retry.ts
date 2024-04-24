@@ -1,6 +1,9 @@
 import type { Option, Int, Result } from '@w5s/core';
+import { Error } from '@w5s/core/dist/Result/Error.js';
+import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Task } from '@w5s/core/dist/Task.js';
-import { Time, type TimeDuration } from '@w5s/time';
+import { type TimeDuration } from '@w5s/time';
+import { Time } from '@w5s/time/dist/Time.js';
 
 const defaultRandom: Task<number, never> = { taskRun: ({ resolve }) => resolve(Math.random()) };
 const timeDelay = Time.delay.bind(Time);
@@ -309,7 +312,7 @@ function andThenResult<Value, ValueTo, Error>(
   task: Task<Value, Error>,
   thenResultFn: (result: Result<Value, Error>) => Task<ValueTo, Error>
 ) {
-  const thenTask = Task.andThen(task, (value) => thenResultFn({ _: 'Ok', ok: true, value }));
-  const elseTask = Task.orElse(thenTask, (error) => thenResultFn({ _: 'Error', ok: false, error }));
+  const thenTask = Task.andThen(task, (value) => thenResultFn(Ok(value)));
+  const elseTask = Task.orElse(thenTask, (error) => thenResultFn(Error(error)));
   return elseTask;
 }

@@ -1,17 +1,9 @@
 import type { TypeError, SyntaxError } from '@w5s/error';
 import type { Result } from './Result.js';
+import { Ok } from './Result/Ok.js';
+import { Error } from './Result/Error.js';
 
 const NativeJSON = globalThis.JSON;
-const Ok = <V>(value: V): Result<V, never> => ({
-  _: 'Ok',
-  ok: true,
-  value,
-});
-const Err = <E>(error: E): Result<never, E> => ({
-  _: 'Error',
-  ok: false,
-  error,
-});
 
 /**
  * Any valid JSON value
@@ -60,7 +52,7 @@ export const JSON = {
     try {
       return Ok(NativeJSON.parse(anyString));
     } catch (error: unknown) {
-      return Err(error as SyntaxError);
+      return Error(error as SyntaxError);
     }
   },
 
@@ -85,7 +77,7 @@ export const JSON = {
     try {
       return Ok(NativeJSON.stringify(anyValue));
     } catch (error: unknown) {
-      return Err(error as TypeError);
+      return Error(error as TypeError);
     }
   },
 };

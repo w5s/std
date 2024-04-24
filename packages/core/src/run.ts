@@ -3,6 +3,8 @@ import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from './Result.js';
 import type { Task, TaskCanceler } from './Task.js';
+import { Ok } from './Result/Ok.js';
+import { Error } from './Result/Error.js';
 
 // Inline utilities
 const returnOrThrow = <V, E>(result: Result<V, E>): V => {
@@ -34,8 +36,8 @@ export function unsafeRun<Value, Error>(
   };
   let rejectHandler = (_error: unknown) => {};
   const runValue: void | Promise<void> = task.taskRun({
-    resolve: (value) => resolveHandler({ _: 'Ok', ok: true, value }),
-    reject: (error) => resolveHandler({ _: 'Error', ok: false, error }),
+    resolve: (value) => resolveHandler(Ok(value)),
+    reject: (error) => resolveHandler(Error(error)),
     canceler,
     run: unsafeRun,
   });
