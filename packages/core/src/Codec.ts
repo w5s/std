@@ -4,10 +4,10 @@ import type { Option } from './Option.js';
 import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
 import type { Int } from './Int.js';
+import { Ok } from './Result/Ok.js';
+import { isOk } from './Result/isOk.js';
+import { Error } from './Result/Error.js';
 
-const Ok = <V>(value: V): Result<V, never> => ({ _: 'Ok', ok: true, value });
-const Err = <E>(error: E): Result<never, E> => ({ _: 'Error', ok: false, error });
-const isOk = <V>(result: Result<V, unknown>): result is Result.Ok<V> => result.ok;
 const identity = <V>(_: V) => _;
 const emptySchema = () => ({});
 
@@ -39,7 +39,7 @@ export interface Codec<T> {
    * @category Codec
    * @param input - The value to decode
    */
-  codecDecode(this: void, input: unknown): Result<T, DecodeError>;
+  codecDecode(this: void, input: unknown, context: Codec.Context<T>): Result<T, DecodeError>;
   /**
    * Returns the encoded `input`
    *
@@ -100,6 +100,11 @@ export function Codec<T>(parameters: {
 export namespace Codec {
   export type TypeOf<V> = V extends Codec<infer Type> ? Type : never;
 
+  export interface Context<T> {
+    ok: (value: T) => Result<T, DecodeError>;
+    error: (message: string) => Result<T, DecodeError>;
+  }
+
   /**
    * Returns a lazy evaluated codec. Useful for recursive structures.
    *
@@ -156,7 +161,16 @@ export namespace Codec {
    * @param input - the input to encode
    */
   export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown): Result<T, DecodeError> {
-    return codec.codecDecode(input);
+    return codec.codecDecode(input, {
+      ok: Ok as Codec.Context<T>['ok'],
+      error: (message) =>
+        Error(
+          DecodeError({
+            message,
+            input,
+          })
+        ),
+    });
   }
 
   /**
@@ -187,7 +201,7 @@ function primitive(type: 'boolean' | 'number' | 'string'): Codec<any> {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return Codec({
     codecEncode: identity,
-    codecDecode: (input) => (typeof input === type ? Ok(input) : Err(typeError(input, type))),
+    codecDecode: (input) => (typeof input === type ? Ok(input) : Error(typeError(input, type))),
     codecSchema: () => ({ type }),
   });
 }
@@ -260,7 +274,7 @@ export function array<V>(itemCodec: Codec<V>): Codec<Array<V>> {
     codecEncode: (input) => input.map(itemCodec.codecEncode),
     codecDecode: (input) => {
       if (!globalThis.Array.isArray(input)) {
-        return Err(typeError(input, 'Array'));
+        return Error(typeError(input, 'Array'));
       }
 
       const values = [];
@@ -310,7 +324,7 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
     },
     codecDecode: (input) => {
       if (input == null || typeof input !== 'object') {
-        return Err(typeError(input, 'object'));
+        return Error(typeError(input, 'object'));
       }
 
       const returnValue: Record<string, unknown> = {};
@@ -355,7 +369,7 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
  */
 export const int: Codec<Int> = Codec({
   codecEncode: identity,
-  codecDecode: (input) => (Number.isSafeInteger(input) ? Ok(input as Int) : Err(typeError(input, 'integer'))),
+  codecDecode: (input) => (Number.isSafeInteger(input) ? Ok(input as Int) : Error(typeError(input, 'integer'))),
   codecSchema: () => ({ type: 'integer' }),
 });
 
@@ -376,7 +390,7 @@ export const dateISO: Codec<Date> = Codec({
       return timeInput;
     }
     const time = Date.parse(timeInput.value);
-    return Number.isNaN(time) ? Err(typeError(input, 'Date')) : Ok(new Date(time));
+    return Number.isNaN(time) ? Error(typeError(input, 'Date')) : Ok(new Date(time));
   },
   codecSchema: () => ({ type: 'string', format: 'date-time' }),
 });

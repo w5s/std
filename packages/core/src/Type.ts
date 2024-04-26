@@ -1,4 +1,4 @@
-import { DecodeError, type Codec } from './Codec.js';
+import type { Codec } from './Codec.js';
 
 /**
  * A type that represents a class module of `T` instances
@@ -58,17 +58,7 @@ export const Type = {
     const {
       typeName,
       codecEncode = (value) => value,
-      codecDecode = (value) =>
-        hasInstance(value)
-          ? { _: 'Ok', ok: true, value }
-          : {
-              _: 'Error',
-              ok: false,
-              error: DecodeError({
-                message: `Invalid ${typeName}`,
-                input: value,
-              }),
-            },
+      codecDecode = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(`Invalid ${typeName}`)),
       codecSchema = () => ({}),
     } = parameters;
     return {
