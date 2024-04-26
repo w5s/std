@@ -12,6 +12,16 @@ declare global {
      * Disposes asynchronously of resources within this object.
      */
     readonly asyncDispose: unique symbol;
+
+    /**
+     * Enum keys
+     */
+    readonly enumKeys: unique symbol;
+
+    /**
+     * Enum values
+     */
+    readonly enumValues: unique symbol;
   }
 }
 const GlobalSymbol = globalThis.Symbol;
@@ -37,4 +47,6 @@ export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'm
   matchAll: GlobalSymbol.matchAll,
   dispose: GlobalSymbol.dispose ?? (GlobalSymbol.for('dispose') as any),
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
+  enumKeys: GlobalSymbol.for('@w5s/enumKeys') as SymbolConstructor['enumKeys'],
+  enumValues: GlobalSymbol.for('@w5s/enumValues') as SymbolConstructor['enumValues'],
 };

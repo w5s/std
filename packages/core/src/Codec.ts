@@ -87,7 +87,7 @@ export interface Codec<T> {
  * @category Constructor
  */
 export function Codec<T>(parameters: {
-  codecDecode: (input: unknown) => Result<T, DecodeError>;
+  codecDecode: (input: unknown, context: Codec.Context<T>) => Result<T, DecodeError>;
   codecEncode: (input: T) => unknown;
   codecSchema?: () => JSONValue;
 }): Codec<T> {
