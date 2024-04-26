@@ -1,6 +1,7 @@
 import { invariant } from '@w5s/invariant';
-import { type Codec } from './Codec.js';
-import { Type } from './Type.js';
+import type { Codec } from './Codec.js';
+import type { Type } from './Type.js';
+import { define } from './Type/define.js';
 
 /**
  * Enhance `Base` by adding tags. Every tag is prefixed by `@@` as a convention to never be used by runtime code
@@ -39,7 +40,7 @@ export const Tag = {
    * ```
    */
   define<From, To extends From>(parameters: Tag.Parameters<To>): Tag.Module<From, To> {
-    const TagType = Type.define<To>(parameters);
+    const TagType = define<To>(parameters);
 
     function wrap(value: From): To {
       invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);

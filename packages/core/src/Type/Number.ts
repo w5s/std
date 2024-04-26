@@ -1,6 +1,6 @@
-import { Type } from '../Type.js';
+import { define } from './define.js';
 
-export const Number = Type.define<number>({
+export const Number = define<number>({
   typeName: 'Number',
   hasInstance(anyValue: unknown): anyValue is number {
     return typeof anyValue === 'number';

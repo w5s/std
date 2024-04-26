@@ -1,5 +1,6 @@
-import { type Codec } from './Codec.js';
-import { Type } from './Type.js';
+import type { Codec } from './Codec.js';
+import type { Type } from './Type.js';
+import { define } from './Type/define.js';
 
 const enumKeys: unique symbol = Symbol('Enum.enumKeys');
 const enumValues: unique symbol = Symbol('Enum.enumValues');
@@ -27,7 +28,7 @@ export const Enum = {
     const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<Value>;
     const enumValuesSet = new Set<any>(enumValuesList);
 
-    const EnumType = Type.define<Value>({
+    const EnumType = define<Value>({
       typeName: 'Enum',
       hasInstance(anyValue) {
         return enumValuesSet.has(anyValue);
