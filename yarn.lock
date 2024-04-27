@@ -16600,11 +16600,11 @@ __metadata:
   linkType: hard
 
 "react-json-view-lite@npm:^1.2.0":
-  version: 1.3.0
-  resolution: "react-json-view-lite@npm:1.3.0"
+  version: 1.3.1
+  resolution: "react-json-view-lite@npm:1.3.1"
   peerDependencies:
     react: ^16.13.1 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/0411299a93c53d6f842ab43ebe71c2959d04b5d1d6320f8a2235f945e1de88578905fdeea4f7cc6a8bef030b959cc3474ac2252226b5093497ece797d0fca09d
+  checksum: 10c0/93a7b96e388497ea5d61349ae0f071188370132461eb63c3abff3bb1376fcdf999680368e107c1981f2a4ccadbfe15d2eb0fabe60e5b8fc619a6012dac308246
   languageName: node
   linkType: hard
 
