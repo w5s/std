@@ -1,0 +1,33 @@
+import { invariant } from '@w5s/invariant';
+import type { Tag } from '../Tag.js';
+import { define as defineType } from '../Type/define.js';
+
+/**
+ * Returns a new Tag module
+ *
+ * @example
+ * ```ts
+ * type Foo = string & Tag<'Foo'>;
+ * const Foo = Tag.define<string, Foo>({
+ *   hasInstance: (anyValue) => typeof anyValue === 'string',
+ * });
+ * ```
+ */
+export function define<From, To extends From>(parameters: Tag.Parameters<To>): Tag.Module<From, To> {
+  const TagType = defineType<To>(parameters);
+
+  function wrap(value: From): To {
+    invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);
+    return value;
+  }
+
+  function unwrap(value: To): From {
+    return value as unknown as From;
+  }
+
+  return Object.assign((value: From) => wrap(value), {
+    wrap,
+    unwrap,
+    ...TagType,
+  });
+}

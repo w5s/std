@@ -1,7 +1,6 @@
-import { invariant } from '@w5s/invariant';
 import type { Codec } from './Codec.js';
+import { define } from './Tag/define.js';
 import type { Type } from './Type.js';
-import { define } from './Type/define.js';
 
 /**
  * Enhance `Base` by adding tags. Every tag is prefixed by `@@` as a convention to never be used by runtime code
@@ -28,35 +27,7 @@ export interface Tag<T extends string | symbol> {
  * @namespace
  */
 export const Tag = {
-  /**
-   * Returns a new Tag module
-   *
-   * @example
-   * ```ts
-   * type Foo = string & Tag<'Foo'>;
-   * const Foo = Tag.define<string, Foo>({
-   *   hasInstance: (anyValue) => typeof anyValue === 'string',
-   * });
-   * ```
-   */
-  define<From, To extends From>(parameters: Tag.Parameters<To>): Tag.Module<From, To> {
-    const TagType = define<To>(parameters);
-
-    function wrap(value: From): To {
-      invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);
-      return value;
-    }
-
-    function unwrap(value: To): From {
-      return value as unknown as From;
-    }
-
-    return Object.assign((value: From) => wrap(value), {
-      wrap,
-      unwrap,
-      ...TagType,
-    });
-  },
+  define,
 };
 export namespace Tag {
   export interface Parameters<T> extends Type.Parameters<T> {}
