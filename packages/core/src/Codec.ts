@@ -3,12 +3,11 @@ import type { Array } from './Array.js';
 import type { Option } from './Option.js';
 import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
-import type { Int } from './Int.js';
 import { Ok } from './Result/Ok.js';
 import { isOk } from './Result/isOk.js';
 import { Error } from './Result/Error.js';
+import { String as StringType } from './Type/String.js';
 
-const identity = <V>(_: V) => _;
 const emptySchema = () => ({});
 
 export interface DecodeError
@@ -188,56 +187,8 @@ export namespace Codec {
 }
 
 function typeError(anyValue: unknown, type: string) {
-  return DecodeError({
-    message: `${String(anyValue)} is not a valid ${type}`,
-    input: anyValue,
-  });
+  return `${String(anyValue)} is not a valid ${type}`;
 }
-
-function primitive(type: 'boolean'): Codec<boolean>;
-function primitive(type: 'number'): Codec<number>;
-function primitive(type: 'string'): Codec<string>;
-function primitive(type: 'boolean' | 'number' | 'string'): Codec<any> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return Codec({
-    codecEncode: identity,
-    codecDecode: (input) => (typeof input === type ? Ok(input) : Error(typeError(input, type))),
-    codecSchema: () => ({ type }),
-  });
-}
-
-/**
- * Boolean codec
- *
- * @example
- * ```typescript
- * const encoded = Codec.encode(boolean, true); // true
- * const decoded = Codec.decode(boolean, true); // Result.Ok(true)
- * ```
- */
-export const boolean = primitive('boolean');
-
-/**
- * Number codec
- *
- * @example
- * ```typescript
- * const encoded = Codec.encode(number, 1); // 1
- * const decoded = Codec.decode(number, 1); // Result.Ok(1)
- * ```
- */
-export const number = primitive('number');
-
-/**
- * String codec
- *
- * @example
- * ```typescript
- * const encoded = Codec.encode(string, 'abc'); // 'abc'
- * const decoded = Codec.decode(string, 'abc'); // Result.Ok('abc')
- * ```
- */
-export const string = primitive('string');
 
 /**
  * Returns a codec for `Option<V>`.
@@ -272,9 +223,9 @@ export function option<V>(codec: Codec<V>): Codec<Option<V>> {
 export function array<V>(itemCodec: Codec<V>): Codec<Array<V>> {
   return Codec({
     codecEncode: (input) => input.map(itemCodec.codecEncode),
-    codecDecode: (input) => {
+    codecDecode: (input, { ok, error }) => {
       if (!globalThis.Array.isArray(input)) {
-        return Error(typeError(input, 'Array'));
+        return error(typeError(input, 'Array'));
       }
 
       const values = [];
@@ -286,7 +237,7 @@ export function array<V>(itemCodec: Codec<V>): Codec<Array<V>> {
         }
         values.push(result.value);
       }
-      return Ok(values);
+      return ok(values);
     },
     codecSchema: () => ({ type: 'array', item: Codec.schema(itemCodec) }),
   });
@@ -322,9 +273,9 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
 
       return returnValue;
     },
-    codecDecode: (input) => {
+    codecDecode: (input, { ok, error }) => {
       if (input == null || typeof input !== 'object') {
-        return Error(typeError(input, 'object'));
+        return error(typeError(input, 'object'));
       }
 
       const returnValue: Record<string, unknown> = {};
@@ -338,7 +289,7 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
         }
         returnValue[propertyName] = decodeResult.value;
       }
-      return Ok(returnValue);
+      return ok(returnValue);
     },
     codecSchema: () =>
       propertyNames.reduce(
@@ -359,21 +310,6 @@ export function object(codecMap: Record<string, Codec<unknown>>): Codec<Record<s
 }
 
 /**
- * Integer codec
- *
- * @example
- * ```typescript
- * const encoded = Codec.encode(int, 1); // 1
- * const decoded = Codec.decode(int, 1); // Result.Ok(Int.of(1))
- * ```
- */
-export const int: Codec<Int> = Codec({
-  codecEncode: identity,
-  codecDecode: (input) => (Number.isSafeInteger(input) ? Ok(input as Int) : Error(typeError(input, 'integer'))),
-  codecSchema: () => ({ type: 'integer' }),
-});
-
-/**
  * Date codec. Values are encoded as ISO string
  *
  * @example
@@ -384,13 +320,13 @@ export const int: Codec<Int> = Codec({
  */
 export const dateISO: Codec<Date> = Codec({
   codecEncode: (input) => input.toISOString(),
-  codecDecode: (input) => {
-    const timeInput = Codec.decode(string, input);
+  codecDecode: (input, { ok, error }) => {
+    const timeInput = Codec.decode(StringType, input);
     if (!isOk(timeInput)) {
       return timeInput;
     }
     const time = Date.parse(timeInput.value);
-    return Number.isNaN(time) ? Error(typeError(input, 'Date')) : Ok(new Date(time));
+    return Number.isNaN(time) ? error(typeError(input, 'Date')) : ok(new Date(time));
   },
   codecSchema: () => ({ type: 'string', format: 'date-time' }),
 });

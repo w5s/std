@@ -18,7 +18,7 @@ describe('Boolean', () => {
     decode: [
       [true, Result.Ok(true)],
       [false, Result.Ok(false)],
-      ['', Result.Error(DecodeError({ message: 'Invalid Boolean', input: '' }))],
+      ['foo', Result.Error(DecodeError({ message: 'Cannot decode foo as Boolean', input: '' }))],
     ],
     schema: () => ({ type: 'boolean' }),
   });

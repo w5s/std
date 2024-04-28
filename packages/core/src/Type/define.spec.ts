@@ -36,10 +36,10 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(TestType, 'hello')).toEqual(Result.Ok('hello'));
       expect(Codec.decode(TestType, 1)).toEqual(
-        Result.Error(DecodeError({ message: 'Invalid String', input: 'invalid' }))
+        Result.Error(DecodeError({ message: 'Cannot decode 1 as String', input: 'invalid' }))
       );
       expect(Codec.decode(TestType, undefined)).toEqual(
-        Result.Error(DecodeError({ message: 'Invalid String', input: undefined }))
+        Result.Error(DecodeError({ message: 'Cannot decode undefined as String', input: undefined }))
       );
     });
     it('is overridable by parameters', () => {

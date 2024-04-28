@@ -19,7 +19,7 @@ describe('UUID', () => {
         null,
         Result.Error(
           DecodeError({
-            message: 'Invalid UUID',
+            message: 'Cannot decode null as UUID',
             input: null,
           })
         ),

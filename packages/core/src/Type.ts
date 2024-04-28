@@ -1,5 +1,8 @@
 import type { Codec } from './Codec.js';
 import { define } from './Type/define.js';
+import { String } from './String.js';
+import { Number } from './Number.js';
+import { Boolean } from './Boolean.js';
 
 /**
  * A type that represents a class module of `T` instances
@@ -38,6 +41,9 @@ export interface Type<T> {
  */
 export const Type = {
   define,
+  Boolean,
+  Number,
+  String,
 };
 export namespace Type {
   /**

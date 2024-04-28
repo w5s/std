@@ -18,8 +18,8 @@ describe('String', () => {
     decode: [
       ['', Result.Ok('')],
       ['hello world', Result.Ok('hello world')],
-      [undefined, Result.Error(DecodeError({ message: 'Invalid String', input: undefined }))],
-      [null, Result.Error(DecodeError({ message: 'Invalid String', input: null }))],
+      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as String', input: undefined }))],
+      [null, Result.Error(DecodeError({ message: 'Cannot decode null as String', input: null }))],
     ],
     schema: () => ({ type: 'string' }),
   });

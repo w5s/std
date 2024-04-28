@@ -18,8 +18,8 @@ describe('Number', () => {
     decode: [
       [1, Result.Ok(1)],
       [0, Result.Ok(0)],
-      [undefined, Result.Error(DecodeError({ message: 'Invalid Number', input: undefined }))],
-      [null, Result.Error(DecodeError({ message: 'Invalid Number', input: null }))],
+      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as Number', input: undefined }))],
+      [null, Result.Error(DecodeError({ message: 'Cannot decode null as Number', input: null }))],
     ],
     schema: () => ({ type: 'number' }),
   });

@@ -120,7 +120,7 @@ describe('Time', () => {
         null,
         Result.Error(
           DecodeError({
-            message: 'Invalid Time',
+            message: 'Cannot decode null as Time',
             input: null,
           })
         ),

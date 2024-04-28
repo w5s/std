@@ -18,8 +18,8 @@ describe('Boolean', () => {
     decode: [
       [true, Result.Ok(true)],
       [false, Result.Ok(false)],
-      [undefined, Result.Error(DecodeError({ message: 'Invalid Boolean', input: undefined }))],
-      [null, Result.Error(DecodeError({ message: 'Invalid Boolean', input: null }))],
+      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as Boolean', input: undefined }))],
+      [null, Result.Error(DecodeError({ message: 'Cannot decode null as Boolean', input: null }))],
     ],
     schema: () => ({ type: 'boolean' }),
   });

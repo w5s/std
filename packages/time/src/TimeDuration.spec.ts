@@ -58,7 +58,7 @@ describe('TimeDuration', () => {
         null,
         Result.Error(
           DecodeError({
-            message: 'Invalid TimeDuration',
+            message: 'Cannot decode null as TimeDuration',
             input: null,
           })
         ),

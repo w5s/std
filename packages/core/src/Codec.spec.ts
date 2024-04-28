@@ -1,10 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from './Result.js';
-import { Codec, boolean, number, string, DecodeError, option, dateISO, array, object, int } from './Codec.js';
+import { Codec, DecodeError, option, dateISO, array, object } from './Codec.js';
 import { Option } from './Option.js';
-import { Int } from './Int.js';
 import { assertType } from './testing.js';
 import { Tag } from './Tag.js';
+import { String as StringType } from './Type/String.js';
+import { Int as IntType } from './Type/Int.js';
+import type { Int } from './Int.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -39,111 +41,6 @@ describe('Codec', () => {
   });
 });
 
-describe('boolean', () => {
-  const subject = boolean;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      expect(Codec.schema(subject)).toEqual({ type: 'boolean' });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [true, true],
-      [false, false],
-    ])('should encode values', (input, expected) => {
-      expect(Codec.encode(subject, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid boolean', input: undefined }))],
-      [0, Result.Error(DecodeError({ message: '0 is not a valid boolean', input: 0 }))],
-      [true, Result.Ok(true)],
-      [false, Result.Ok(false)],
-    ])('should decode values', (input, expected) => {
-      expect(Codec.decode(subject, input)).toEqual(expected);
-    });
-  });
-});
-describe('number', () => {
-  const subject = number;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      expect(Codec.schema(subject)).toEqual({ type: 'number' });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [0, 0],
-      [1, 1],
-      [Number.NaN, Number.NaN],
-    ])('should encode values', (input, expected) => {
-      expect(Codec.encode(subject, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid number', input: undefined }))],
-      [0, Result.Ok(0)],
-      [true, Result.Error(DecodeError({ message: 'true is not a valid number', input: true }))],
-    ])('should decode values', (input, expected) => {
-      expect(Codec.decode(subject, input)).toEqual(expected);
-    });
-  });
-});
-describe('string', () => {
-  const subject = string;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      expect(Codec.schema(subject)).toEqual({ type: 'string' });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      ['', ''],
-      ['abc', 'abc'],
-    ])('should decode values', (input, expected) => {
-      expect(Codec.encode(subject, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid string', input: undefined }))],
-      [0, Result.Error(DecodeError({ message: '0 is not a valid string', input: 0 }))],
-      [true, Result.Error(DecodeError({ message: 'true is not a valid string', input: true }))],
-      ['true', Result.Ok('true')],
-    ])('should decode values', (input, expected) => {
-      expect(Codec.decode(subject, input)).toEqual(expected);
-    });
-  });
-});
-describe('int', () => {
-  const subject = int;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      expect(Codec.schema(subject)).toEqual({ type: 'integer' });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [Int.of(0), Int.of(0)],
-      [Int.of(1), Int.of(1)],
-      [Int.of(-1), Int.of(-1)],
-    ])('should encode values', (input, expected) => {
-      expect(Codec.encode(subject, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [undefined, Result.Error(DecodeError({ message: 'undefined is not a valid integer', input: undefined }))],
-      [0.1, Result.Error(DecodeError({ message: '0.1 is not a valid integer', input: 0.1 }))],
-      [true, Result.Error(DecodeError({ message: 'true is not a valid integer', input: true }))],
-      [1, Result.Ok(1)],
-    ])('should decode values', (input, expected) => {
-      expect(Codec.decode(subject, input)).toEqual(expected);
-    });
-  });
-});
 describe('lazy', () => {
   const subject = Codec.lazy;
   const getCodec = () =>
@@ -315,7 +212,7 @@ describe('dateISO', () => {
         undefined,
         Result.Error(
           DecodeError({
-            message: 'undefined is not a valid string',
+            message: 'Cannot decode undefined as String',
             input: undefined,
           })
         ),
@@ -336,7 +233,7 @@ describe('dateISO', () => {
 });
 (() => {
   const Group = object({
-    name: string,
+    name: StringType,
   });
   interface Group extends Codec.TypeOf<typeof Group> {}
 
@@ -350,9 +247,9 @@ describe('dateISO', () => {
 
   const Person = object({
     id: PersonId,
-    name: string,
-    description: option(string),
-    age: int,
+    name: StringType,
+    description: option(StringType),
+    age: IntType,
     groups: array(Group),
     created: dateISO,
     updated: dateISO,
