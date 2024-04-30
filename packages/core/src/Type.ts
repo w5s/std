@@ -6,6 +6,7 @@ import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
 import { Option } from './Type/Option.js';
 import { Int } from './Type/Int.js';
+import { Array } from './Type/Array.js';
 
 /**
  * A type that represents a class module of `T` instances
@@ -44,6 +45,7 @@ export interface Type<T> {
  */
 export const Type = {
   define,
+  Array,
   BigInt,
   Boolean,
   Int,

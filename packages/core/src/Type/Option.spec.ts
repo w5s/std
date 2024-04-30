@@ -3,11 +3,11 @@ import { Option } from './Option.js';
 import { Result } from '../Result.js';
 import { describeCodec, describeType } from '../testing.js';
 import { None } from '../Option/None.js';
-import { Type } from '../Type.js';
+import { define } from './define.js';
 
 describe(Option, () => {
   const subject = Option;
-  const AnyType = Type.define<string>({
+  const AnyType = define<string>({
     typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
     codecEncode: (_) => `_${_}`,

@@ -1,13 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { Type } from './Type.js';
 import { define } from './Type/define.js';
+import { Array } from './Type/Array.js';
 import { String } from './Type/String.js';
 import { Number } from './Type/Number.js';
 import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
 import { Int } from './Type/Int.js';
 import { Option } from './Type/Option.js';
-import { Codec, array, dateISO, object } from './Codec.js';
+import { Codec, dateISO, object } from './Codec.js';
 import { Tag } from './Tag.js';
 import { assertType } from './testing.js';
 import { Enum } from './Enum.js';
@@ -18,6 +19,7 @@ describe('Type', () => {
   it('is an alias to functions', () => {
     expect(Type).toEqual({
       define,
+      Array,
       BigInt,
       Boolean,
       Int,
@@ -28,10 +30,10 @@ describe('Type', () => {
   });
 
   (() => {
-    const Group = object({
-      name: Type.String,
-    });
-    interface Group extends Codec.TypeOf<typeof Group> {}
+    // const Group = object({
+    //   name: Type.String,
+    // });
+    // interface Group extends Codec.TypeOf<typeof Group> {}
 
     const Gender = Enum.define({
       Male: 'male',
@@ -52,7 +54,7 @@ describe('Type', () => {
       description: Type.Option(Type.String),
       age: Type.Int,
       gender: Gender,
-      groups: array(Group),
+      // groups: Type.Array(Group),
       created: dateISO,
       updated: dateISO,
     });

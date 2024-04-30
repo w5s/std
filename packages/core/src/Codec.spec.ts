@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from './Result.js';
-import { Codec, DecodeError, dateISO, array, object } from './Codec.js';
+import { Codec, DecodeError, dateISO, object } from './Codec.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -60,44 +60,6 @@ describe('lazy', () => {
     it('should forward decode', () => {
       const codec = subject(getCodec);
       expect(Codec.decode(codec, '__a')).toEqual(Result.Ok('a'));
-    });
-  });
-});
-
-describe('array', () => {
-  const subject = array;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      const codec = subject(underscoreString);
-      expect(Codec.schema(codec)).toEqual({ type: 'array', item: { type: 'string', format: 'custom_underscore' } });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [
-        ['a', 'b', 'c'],
-        ['_a', '_b', '_c'],
-      ],
-    ])('should encode values', (input, expected) => {
-      const arrayString = subject(underscoreString);
-      expect(Codec.encode(arrayString, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [['_a', '_b', '_c'], Result.Ok(['a', 'b', 'c'])],
-      [
-        ['a', '_b', '_c'],
-        Result.Error(
-          DecodeError({
-            message: 'Invalid underscore string',
-            input: 'a',
-          })
-        ),
-      ],
-    ])('should encode values', (input, expected) => {
-      const arrayString = subject(underscoreString);
-      expect(Codec.decode(arrayString, input)).toEqual(expected);
     });
   });
 });

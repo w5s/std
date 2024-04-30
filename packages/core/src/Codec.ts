@@ -1,5 +1,4 @@
 import { CustomError } from '@w5s/error';
-import type { Array } from './Array.js';
 import type { Option } from './Option.js';
 import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
@@ -188,40 +187,6 @@ export namespace Codec {
 
 function typeError(anyValue: unknown, type: string) {
   return `${String(anyValue)} is not a valid ${type}`;
-}
-
-/**
- * Returns a codec for `Array<V>`.
- *
- * @example
- * ```typescript
- * const codec = array(dateISO);
- * const encoded = Codec.encode(codec, [new Date('1970-01-01T00:00:00.000Z')]);// ['1970-01-01T00:00:00.000Z']
- * const decoded = Codec.decode(codec, ['1970-01-01T00:00:00.000Z']);// Result.Ok([Date('1970-01-01T00:00:00.000Z')])
- * ```
- * @param itemCodec - the codec for each array item
- */
-export function array<V>(itemCodec: Codec<V>): Codec<Array<V>> {
-  return Codec({
-    codecEncode: (input) => input.map(itemCodec.codecEncode),
-    codecDecode: (input, { ok, error }) => {
-      if (!globalThis.Array.isArray(input)) {
-        return error(typeError(input, 'Array'));
-      }
-
-      const values = [];
-      // eslint-disable-next-line unicorn/no-for-loop
-      for (let index = 0; index < input.length; index += 1) {
-        const result = Codec.decode(itemCodec, input[index]);
-        if (!isOk(result)) {
-          return result;
-        }
-        values.push(result.value);
-      }
-      return ok(values);
-    },
-    codecSchema: () => ({ type: 'array', item: Codec.schema(itemCodec) }),
-  });
 }
 
 /**
