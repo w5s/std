@@ -51,6 +51,11 @@ export const Type = {
 };
 export namespace Type {
   /**
+   * Extract the type of object from its module
+   */
+  export type TypeOf<V> = V extends Type<infer T> ? T : never;
+
+  /**
    * Type module constructor parameters
    */
   export interface Parameters<T> extends Partial<Codec<T>> {

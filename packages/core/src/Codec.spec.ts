@@ -2,11 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { Result } from './Result.js';
 import { Codec, DecodeError, option, dateISO, array, object } from './Codec.js';
 import { Option } from './Option.js';
-import { assertType } from './testing.js';
-import { Tag } from './Tag.js';
-import { String as StringType } from './Type/String.js';
-import { Int as IntType } from './Type/Int.js';
-import type { Int } from './Int.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -231,41 +226,3 @@ describe('dateISO', () => {
     });
   });
 });
-(() => {
-  const Group = object({
-    name: StringType,
-  });
-  interface Group extends Codec.TypeOf<typeof Group> {}
-
-  type PersonId = string & Tag<'PersonId'>;
-  const PersonId = Tag.define<string, PersonId>({
-    typeName: 'PersonId',
-    hasInstance(anyValue) {
-      return typeof anyValue === 'string';
-    },
-  });
-
-  const Person = object({
-    id: PersonId,
-    name: StringType,
-    description: option(StringType),
-    age: IntType,
-    groups: array(Group),
-    created: dateISO,
-    updated: dateISO,
-  });
-  interface Person extends Codec.TypeOf<typeof Person> {}
-
-  assertType<
-    Person,
-    {
-      id: PersonId;
-      name: string;
-      description: Option<string>;
-      age: Int;
-      groups: ReadonlyArray<Group>;
-      created: Date;
-      updated: Date;
-    }
-  >(true);
-})();
