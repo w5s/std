@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from './Result.js';
-import { Codec, DecodeError, option, dateISO, array, object } from './Codec.js';
-import { Option } from './Option.js';
+import { Codec, DecodeError, dateISO, array, object } from './Codec.js';
 
 // Example of codec
 const underscoreString = Codec<string>({
@@ -64,37 +63,7 @@ describe('lazy', () => {
     });
   });
 });
-describe('option', () => {
-  const subject = option;
 
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      const optionalString = subject(underscoreString);
-      expect(Codec.schema(optionalString)).toEqual({ type: 'string', format: 'custom_underscore' });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [Option.None, null],
-      ['', '_'],
-      ['abc', '_abc'],
-    ])('should encode values', (input, expected) => {
-      const optionalString = subject(underscoreString);
-      expect(Codec.encode(optionalString, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [undefined, Result.Ok(Option.None)],
-      [null, Result.Ok(Option.None)],
-      ['_', Result.Ok('')],
-      ['_abc', Result.Ok('abc')],
-    ])('should encode values', (input, expected) => {
-      const optionalString = subject(underscoreString);
-      expect(Codec.decode(optionalString, input)).toEqual(expected);
-    });
-  });
-});
 describe('array', () => {
   const subject = array;
   describe('.codecSchema', () => {

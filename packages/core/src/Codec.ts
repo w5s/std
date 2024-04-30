@@ -191,25 +191,6 @@ function typeError(anyValue: unknown, type: string) {
 }
 
 /**
- * Returns a codec for `Option<V>`.
- *
- * @example
- * ```typescript
- * const codec = option(string);
- * const encoded = Codec.encode(codec, undefined);// null
- * const decoded = Codec.decode(codec, null);// undefined
- * ```
- * @param codec - the codec to decorate
- */
-export function option<V>(codec: Codec<V>): Codec<Option<V>> {
-  return Codec({
-    codecEncode: (input) => (input == null ? null : Codec.encode(codec, input)),
-    codecDecode: (input) => (input == null ? Ok(undefined) : Codec.decode(codec, input)),
-    codecSchema: () => Codec.schema(codec),
-  });
-}
-
-/**
  * Returns a codec for `Array<V>`.
  *
  * @example
