@@ -3,6 +3,8 @@ import { define } from './Type/define.js';
 import { String } from './String.js';
 import { Number } from './Number.js';
 import { Boolean } from './Boolean.js';
+import { Int } from './Int.js';
+import { BigInt } from './BigInt.js';
 
 /**
  * A type that represents a class module of `T` instances
@@ -41,7 +43,9 @@ export interface Type<T> {
  */
 export const Type = {
   define,
+  BigInt,
   Boolean,
+  Int,
   Number,
   String,
 };
