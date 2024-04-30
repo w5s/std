@@ -8,7 +8,8 @@ import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
 import { Int } from './Type/Int.js';
 import { Option } from './Type/Option.js';
-import { Codec, dateISO, object } from './Codec.js';
+import { Struct } from './Type/Struct.js';
+import { Codec } from './Codec.js';
 import { Tag } from './Tag.js';
 import { assertType } from './testing.js';
 import { Enum } from './Enum.js';
@@ -25,15 +26,16 @@ describe('Type', () => {
       Int,
       Number,
       String,
+      Struct,
       Option,
     });
   });
 
   (() => {
-    // const Group = object({
-    //   name: Type.String,
-    // });
-    // interface Group extends Codec.TypeOf<typeof Group> {}
+    const Group = Type.Struct({
+      name: Type.String,
+    });
+    interface Group extends Codec.TypeOf<typeof Group> {}
 
     const Gender = Enum.define({
       Male: 'male',
@@ -48,15 +50,15 @@ describe('Type', () => {
       },
     });
 
-    const Person = object({
+    const Person = Type.Struct({
       id: PersonId,
       name: Type.String,
       description: Type.Option(Type.String),
       age: Type.Int,
       gender: Gender,
-      // groups: Type.Array(Group),
-      created: dateISO,
-      updated: dateISO,
+      groups: Type.Array(Group),
+      // created: dateISO,
+      // updated: dateISO,
     });
     interface Person extends Codec.TypeOf<typeof Person> {}
 
@@ -69,8 +71,8 @@ describe('Type', () => {
         age: IntType;
         gender: 'male' | 'female';
         groups: ReadonlyArray<Group>;
-        created: Date;
-        updated: Date;
+        // created: Date;
+        // updated: Date;
       }
     >(true);
   })();

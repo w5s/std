@@ -4,6 +4,7 @@ import { String } from './Type/String.js';
 import { Number } from './Type/Number.js';
 import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
+import { Struct } from './Type/Struct.js';
 import { Option } from './Type/Option.js';
 import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
@@ -50,6 +51,7 @@ export const Type = {
   Boolean,
   Int,
   Number,
+  Struct,
   Option,
   String,
 };

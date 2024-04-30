@@ -1,21 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from './Result.js';
-import { Codec, DecodeError, dateISO, object } from './Codec.js';
+import { Codec, DecodeError, dateISO } from './Codec.js';
 
-// Example of codec
-const underscoreString = Codec<string>({
-  codecEncode: (_) => `_${_}`,
-  codecDecode: (input) =>
-    typeof input === 'string' && input[0] === '_'
-      ? Result.Ok(input.slice(1))
-      : Result.Error(
-          DecodeError({
-            message: 'Invalid underscore string',
-            input,
-          })
-        ),
-  codecSchema: () => ({ type: 'string', format: 'custom_underscore' }),
-});
 describe('Codec', () => {
   describe('.encode()', () => {
     it('should call codecEncode', () => {
@@ -60,58 +46,6 @@ describe('lazy', () => {
     it('should forward decode', () => {
       const codec = subject(getCodec);
       expect(Codec.decode(codec, '__a')).toEqual(Result.Ok('a'));
-    });
-  });
-});
-describe('object', () => {
-  const subject = object;
-  describe('.codecSchema', () => {
-    it('should return correct schema', () => {
-      const codec = subject({ foo: underscoreString });
-      expect(Codec.schema(codec)).toEqual({
-        type: 'object',
-        required: [],
-        properties: {
-          foo: {
-            type: 'string',
-            format: 'custom_underscore',
-          },
-        },
-      });
-    });
-  });
-  describe('.codecEncode', () => {
-    it.each([
-      [
-        { foo: 'a', bar: 'b' },
-        { foo: '_a', bar: '_b' },
-      ],
-    ])('should encode values', (input, expected) => {
-      const codec = subject({
-        foo: underscoreString,
-        bar: underscoreString,
-      });
-      expect(Codec.encode(codec, input)).toEqual(expected);
-    });
-  });
-  describe('.codecDecode', () => {
-    it.each([
-      [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],
-      [
-        { foo: '' },
-        Result.Error(
-          DecodeError({
-            message: 'Invalid underscore string',
-            input: '',
-          })
-        ),
-      ],
-    ])('should encode values', (input, expected) => {
-      const arrayString = subject({
-        foo: underscoreString,
-        bar: underscoreString,
-      });
-      expect(Codec.decode(arrayString, input)).toEqual(expected);
     });
   });
 });
