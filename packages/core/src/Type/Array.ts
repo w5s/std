@@ -2,6 +2,7 @@ import type { Array as ArrayType } from '../Array.js';
 import { Codec } from '../Codec.js';
 import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
+import { define } from './define.js';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
 const { isArray } = globalThis.Array;
@@ -18,7 +19,7 @@ const { isArray } = globalThis.Array;
  * @param Item - the type module for array item
  */
 export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
-  return {
+  return define({
     typeName: `Array<${Item.typeName}>`,
     hasInstance: (anyValue): anyValue is ArrayType<V> =>
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -41,5 +42,5 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
       return ok(values);
     },
     codecSchema: () => ({ type: 'array', item: Codec.schema(Item) }),
-  };
+  });
 }

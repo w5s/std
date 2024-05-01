@@ -3,6 +3,7 @@ import { Codec } from '../Codec.js';
 import type { JSONValue } from '../JSON.js';
 import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
+import { define } from './define.js';
 
 /**
  * Returns a codec for `P`.
@@ -21,7 +22,7 @@ export function Struct<P>(Properties: {
 export function Struct(Properties: Record<string, Type.Module<unknown>>): Type.Module<Record<string, unknown>> {
   const propertyNames = globalThis.Object.keys(Properties);
   const propertyNameCount = propertyNames.length;
-  return {
+  return define({
     typeName: 'Struct',
     hasInstance: (anyValue): anyValue is Record<string, unknown> => {
       if (typeof anyValue === 'object' && anyValue !== null) {
@@ -76,5 +77,5 @@ export function Struct(Properties: Record<string, Type.Module<unknown>>): Type.M
           required: [] as string[],
         }
       ) as JSONValue,
-  };
+  });
 }
