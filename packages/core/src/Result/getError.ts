@@ -8,10 +8,10 @@ import { isError } from './isError.js';
  * @example
  * ```typescript
  * let x = Ok('foo');
- * Result.error(x);// Option.None
+ * Result.getError(x);// Option.None
  *
  * let x = Error('foo');
- * Result.error(x);// Option.Some('foo')
+ * Result.getError(x);// Option.Some('foo')
  * ```
  * @category Accessor
  * @param result - a Result object

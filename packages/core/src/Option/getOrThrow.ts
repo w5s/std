@@ -3,7 +3,7 @@ import type { Nullable } from '../typing.js';
 /**
  * Returns the value if `Some`, throw an error if `None`
  *
- * ⚠ Impure function that may throw an error, its use is generally discouraged.
+ * **⚠ Impure function that may throw an error, its use is generally discouraged.**
  *
  * @example
  * ```typescript

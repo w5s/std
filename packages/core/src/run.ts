@@ -18,7 +18,8 @@ const returnOrThrow = <V, E>(result: Result<V, E>): V => {
 /**
  * Run `task` and return the result or a promise of the result
  *
- * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+ * **⚠ Impure function that may throw an error, its use is generally discouraged.**
+ *
  * @example
  * ```typescript
  * const getMessage = Task.resolve('Hello World!');
@@ -60,7 +61,8 @@ export function unsafeRun<Value, Error>(
 /**
  * Run `task` that never fails and return the value or a promise of the value
  *
- * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+ * **⚠ Impure function that may throw an error, its use is generally discouraged.**
+ *
  * @example
  * ```typescript
  * const getMessage = Task.resolve('Hello World!');

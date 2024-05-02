@@ -4,7 +4,8 @@ import { isOk } from './isOk.js';
 /**
  * Returns the `value` if {@link Result.Ok}, throw `error` if {@link Result.Error}.
  *
- * @deprecated *⚠ Impure function that may throw an error, its use is generally discouraged.*
+ *  **⚠ Impure function that may throw an error, its use is generally discouraged.**
+ *
  * @example
  * ```typescript
  * let x = Ok('foo');
