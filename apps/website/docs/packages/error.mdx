@@ -19,7 +19,7 @@ Extending `globalThis.Error` have multiple drawbacks :
 
 The `@w5s/error` package helps creating type safe errors :
 
-- Easy declaration using `defineCustomError`
+- Easy declaration using `CustomError.define`
 - Type safe matching on `name`
 - Discourage matching using `instanceof`
 
@@ -30,7 +30,7 @@ The `@w5s/error` package helps creating type safe errors :
 ## Usage
 
 ```ts
-import { defineCustomError, type CustomError } from '@w5s/error';
+import { CustomError } from '@w5s/error';
 
 interface SomeError
   extends CustomError<{
@@ -82,7 +82,7 @@ function assertNotNullable(value: unknown) {
 
 ## Matching errors
 
-The recommended way to match on errors created with `defineCustomError` is to use a `switch` / `case` on the error `name`
+The recommended way to match on errors created with `CustomError.define` is to use a `switch` / `case` on the error `name`
 
 ```ts
 interface FooError

@@ -92,7 +92,7 @@ export namespace CustomError {
      *
      * @example
      * ```typescript
-     * const MyError = defineCustomError('MyError1');
+     * const MyError = CustomError.define('MyError1');
      * const unknownError: unknown;
      * if (MyError.hasInstance(unknownError)) {
      *   // unknownError.name === 'MyError1'
