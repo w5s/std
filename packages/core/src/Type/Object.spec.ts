@@ -3,10 +3,10 @@ import { Result } from '../Result.js';
 import { DecodeError } from '../Codec.js';
 import { describeCodec, describeType } from '../testing.js';
 import { define } from './define.js';
-import { Struct } from './Struct.js';
+import { $Object as ObjectType } from './Object.js';
 
-describe(Struct, () => {
-  const subject = Struct;
+describe(ObjectType, () => {
+  const subject = ObjectType;
   const AnyType = define<string>({
     typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
@@ -16,7 +16,7 @@ describe(Struct, () => {
     codecSchema: () => ({ type: 'any', format: 'custom_underscore' }),
   });
   describeType({ describe, it, expect })(subject({ foo: AnyType, bar: AnyType }), {
-    typeName: 'Struct',
+    typeName: 'Object',
     instances: () => [{ foo: 'foo_value', bar: 'bar_value' }],
     notInstances: () => [null, 1, '', {}, { foo: 'foo_value' }, { foo: 1, bar: 2 }],
   });

@@ -8,7 +8,7 @@ import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
 import { Int } from './Type/Int.js';
 import { Option } from './Type/Option.js';
-import { Struct } from './Type/Struct.js';
+import { $Object } from './Type/Object.js';
 import { Codec } from './Codec.js';
 import { Tag } from './Tag.js';
 import { assertType } from './testing.js';
@@ -26,13 +26,13 @@ describe('Type', () => {
       Int,
       Number,
       String,
-      Struct,
+      Object: $Object,
       Option,
     });
   });
 
   (() => {
-    const Group = Type.Struct({
+    const Group = Type.Object({
       name: Type.String,
     });
     interface Group extends Codec.TypeOf<typeof Group> {}
@@ -50,7 +50,7 @@ describe('Type', () => {
       },
     });
 
-    const Person = Type.Struct({
+    const Person = Type.Object({
       id: PersonId,
       name: Type.String,
       description: Type.Option(Type.String),

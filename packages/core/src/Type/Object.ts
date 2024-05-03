@@ -10,20 +10,20 @@ import { define } from './define.js';
  *
  * @example
  * ```typescript
- * const codec = Type.Struct({ created: dateISO });
+ * const codec = Type.Object({ created: dateISO });
  * const encoded = Codec.encode(codec, { created: new Date('1970-01-01T00:00:00.000Z') });// { created: '1970-01-01T00:00:00.000Z' }
  * const decoded = Codec.decode(codec, { created: '1970-01-01T00:00:00.000Z' });// Result.Ok({ created: Date('1970-01-01T00:00:00.000Z') })
  * ```
  * @param Properties - the codec for each array item
  */
-export function Struct<P>(Properties: {
+export function $Object<P>(Properties: {
   readonly [K in keyof P]: Type.Module<P[K]>;
 }): Type.Module<Readonly<P>>;
-export function Struct(Properties: Record<string, Type.Module<unknown>>): Type.Module<Record<string, unknown>> {
+export function $Object(Properties: Record<string, Type.Module<unknown>>): Type.Module<Record<string, unknown>> {
   const propertyNames = globalThis.Object.keys(Properties);
   const propertyNameCount = propertyNames.length;
   return define({
-    typeName: 'Struct',
+    typeName: 'Object',
     hasInstance: (anyValue): anyValue is Record<string, unknown> => {
       if (typeof anyValue === 'object' && anyValue !== null) {
         for (let index = 0; index < propertyNameCount; index += 1) {
