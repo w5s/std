@@ -2381,6 +2381,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/module-type-aliases@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@docusaurus/module-type-aliases@npm:3.3.2"
+  dependencies:
+    "@docusaurus/types": "npm:3.3.2"
+    "@types/history": "npm:^4.7.11"
+    "@types/react": "npm:*"
+    "@types/react-router-config": "npm:*"
+    "@types/react-router-dom": "npm:*"
+    react-helmet-async: "npm:*"
+    react-loadable: "npm:@docusaurus/react-loadable@6.0.0"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10c0/c119b1ed7c9871ce2196498da20d98089065eb8e0a1302b5024225cd5051ccb07f344a6f680da2b9793769727abba510a3106d0ee338b672baf4a48a24ff4e35
+  languageName: node
+  linkType: hard
+
 "@docusaurus/plugin-content-blog@npm:3.2.1":
   version: 3.2.1
   resolution: "@docusaurus/plugin-content-blog@npm:3.2.1"
@@ -2673,10 +2691,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/tsconfig@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@docusaurus/tsconfig@npm:3.2.1"
-  checksum: 10c0/6dc9d908d26b44bc02065437d6bdc29be278b6a6660565e53d0d38c72d8fd4a8ddaf77602652ed7f0fe518498ea85b9949b81c62b7773b96089bafc647b3abfd
+"@docusaurus/tsconfig@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@docusaurus/tsconfig@npm:3.3.2"
+  checksum: 10c0/1e2bafe4d332175bfe2e85e7aa1e746628618a509cc62ddd3bf30c04a29f6c43b94c72cce3b644c09d7254e961802f2e3afee1d9d6f01921bb46deb60fd792ce
   languageName: node
   linkType: hard
 
@@ -2697,6 +2715,26 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
   checksum: 10c0/ea48d186a2f5a130dcc254147568343c884212e2951c8f34fa0aad123fc70d2da010c0ef8a7e223162d5d0e9a91f14fc7902ce25f9e5c2eed954b47d621ebf4f
+  languageName: node
+  linkType: hard
+
+"@docusaurus/types@npm:3.3.2":
+  version: 3.3.2
+  resolution: "@docusaurus/types@npm:3.3.2"
+  dependencies:
+    "@mdx-js/mdx": "npm:^3.0.0"
+    "@types/history": "npm:^4.7.11"
+    "@types/react": "npm:*"
+    commander: "npm:^5.1.0"
+    joi: "npm:^17.9.2"
+    react-helmet-async: "npm:^1.3.0"
+    utility-types: "npm:^3.10.0"
+    webpack: "npm:^5.88.1"
+    webpack-merge: "npm:^5.9.0"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 10c0/195ba6e49927e67796084e5e10e7bae8371a71b52fc433a4f34d099166eb2526510d2ece9d04dc06708262d98556b5df372fb0724e2de55b82cd341943815ffd
   languageName: node
   linkType: hard
 
@@ -5438,9 +5476,9 @@ __metadata:
   resolution: "@w5s/website@workspace:apps/website"
   dependencies:
     "@docusaurus/core": "npm:3.2.1"
-    "@docusaurus/module-type-aliases": "npm:3.2.1"
+    "@docusaurus/module-type-aliases": "npm:3.3.2"
     "@docusaurus/preset-classic": "npm:3.2.1"
-    "@docusaurus/tsconfig": "npm:3.2.1"
+    "@docusaurus/tsconfig": "npm:3.3.2"
     "@mdx-js/react": "npm:3.0.1"
     "@types/node": "npm:20.12.8"
     clsx: "npm:2.1.1"
@@ -16626,6 +16664,17 @@ __metadata:
     react-loadable: "*"
     webpack: ">=4.41.1 || 5.x"
   checksum: 10c0/7b0645f66adec56646f985ba8094c66a1c0a4627d96ad80eea32431d773ef1f79aa47d3247a8f21db3b064a0c6091653c5b5d3483b7046722eb64e55bffe635c
+  languageName: node
+  linkType: hard
+
+"react-loadable@npm:@docusaurus/react-loadable@6.0.0":
+  version: 6.0.0
+  resolution: "@docusaurus/react-loadable@npm:6.0.0"
+  dependencies:
+    "@types/react": "npm:*"
+  peerDependencies:
+    react: "*"
+  checksum: 10c0/6b145d1a8d2e7342ceef58dd154aa990322f72a6cb98955ab8ce8e3f0dc7f0c5d00f9c2e4efa8d356c5effed72a130b5588857332b11faba0398f5429b484b04
   languageName: node
   linkType: hard
 
