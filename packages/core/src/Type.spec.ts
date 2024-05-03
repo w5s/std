@@ -15,11 +15,13 @@ import { assertType } from './testing.js';
 import { Enum } from './Enum.js';
 import type { Int as IntType } from './Int.js';
 import type { Option as OptionType } from './Option.js';
+import { ensure } from './Type/ensure.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
     expect(Type).toEqual({
       define,
+      ensure,
       Array,
       BigInt,
       Boolean,

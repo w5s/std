@@ -22,8 +22,8 @@ describe(define, () => {
       expect(PositiveNumber(1)).toBe(1);
       expect(() => {
         // @ts-expect-error Throw a type error
-        PositiveNumber('');
-      }).toThrow(new Error('Invalid PositiveNumber'));
+        PositiveNumber('any_string');
+      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
     });
   });
   describe('#wrap', () => {
@@ -31,8 +31,8 @@ describe(define, () => {
       expect(PositiveNumber.wrap(1)).toBe(1);
       expect(() => {
         // @ts-expect-error Throw a type error
-        PositiveNumber.wrap('');
-      }).toThrow(new Error('Invalid PositiveNumber'));
+        PositiveNumber.wrap('any_string');
+      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
     });
   });
   describe('#unwrap', () => {

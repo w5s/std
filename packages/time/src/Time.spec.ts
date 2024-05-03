@@ -18,8 +18,8 @@ describe('Time', () => {
 
   describe('.of()', () => {
     it('should throw invariant error', () => {
-      expect(() => Time.of(-1)).toThrow('Invalid Time');
-      expect(() => Time.of(Number.NaN)).toThrow('Invalid Time');
+      expect(() => Time.of(-1)).toThrow('-1 is not a valid Time');
+      expect(() => Time.of(Number.NaN)).toThrow('NaN is not a valid Time');
     });
     it('should return unchanged value when positive', () => {
       expect(Time.of(1)).toBe(1);

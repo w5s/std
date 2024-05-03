@@ -1,6 +1,6 @@
-import { invariant } from '@w5s/invariant';
 import type { Tag } from '../Tag.js';
 import { define as defineType } from '../Type/define.js';
+import { ensure as ensureType } from '../Type/ensure.js';
 
 /**
  * Returns a new Tag module
@@ -17,7 +17,7 @@ export function define<From, To extends From>(parameters: Tag.Parameters<To>): T
   const TagType = defineType<To>(parameters);
 
   function wrap(value: From): To {
-    invariant(TagType.hasInstance(value), `Invalid ${TagType.typeName}`);
+    ensureType(TagType, value);
     return value;
   }
 

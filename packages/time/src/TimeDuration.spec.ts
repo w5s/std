@@ -7,7 +7,7 @@ import { TimeDuration } from './TimeDuration.js';
 describe('TimeDuration', () => {
   describe('()', () => {
     it('should throw invariant error', () => {
-      expect(() => TimeDuration.of(Number.NaN)).toThrow('Invalid TimeDuration');
+      expect(() => TimeDuration.of(Number.NaN)).toThrow('NaN is not a valid TimeDuration');
     });
     it.each([
       [1, 1],

@@ -1,4 +1,3 @@
-import { invariant } from '@w5s/invariant';
 import type { Type } from '../Type.js';
 
 /**
@@ -27,12 +26,9 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
       hasInstance(value) ? ok(value) : error(`Cannot decode ${String(value)} as ${typeName}`),
     codecSchema = () => ({}),
   } = parameters;
-  const ensure = (anyValue: unknown) =>
-    invariant(hasInstance(anyValue), `${String(anyValue)} is not a valid ${typeName}`);
   return {
     typeName,
     hasInstance,
-    ensure,
     codecEncode,
     codecDecode,
     codecSchema,

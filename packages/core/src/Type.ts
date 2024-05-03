@@ -8,6 +8,7 @@ import { $Object } from './Type/Object.js';
 import { Option } from './Type/Option.js';
 import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
+import { ensure } from './Type/ensure.js';
 
 /**
  * A type that represents a class module of `T` instances
@@ -39,19 +40,6 @@ export interface Type<T> {
    * @param anyValue
    */
   hasInstance(anyValue: unknown): anyValue is T;
-  /**
-   * Ensure that `value` is a valid `T`. Throw an error otherwise.
-   *
-   * @example
-   * ```ts
-   * const StringType: Type<string>;
-   * StringType.ensure('foo'); // void
-   * StringType.ensure(42); // throw new Error('42 is not a valid String')
-   * ```
-   * @category Type
-   * @param anyValue
-   */
-  ensure(anyValue: unknown): asserts anyValue is T;
 }
 
 /**
@@ -59,6 +47,7 @@ export interface Type<T> {
  */
 export const Type = {
   define,
+  ensure,
   Array,
   BigInt,
   Boolean,

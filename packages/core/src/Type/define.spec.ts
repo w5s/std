@@ -67,10 +67,4 @@ describe(define, () => {
       });
     });
   });
-  describe('#ensure', () => {
-    it('throws an error only when not of type', () => {
-      expect(() => TestType.ensure('')).not.toThrow();
-      expect(() => TestType.ensure(null)).toThrow(new Error('null is not a valid String'));
-    });
-  });
 });
