@@ -6,9 +6,8 @@ import type { Type } from '../Type.js';
  *
  * @example
  * ```ts
- * const StringType: Type<string>;
- * Type.ensure(StringType, 'foo'); // void
- * Type.ensure(StringType, 42); // throw new Error('42 is not a valid String')
+ * Type.ensure(Type.String, 'foo'); // void
+ * Type.ensure(Type.String, 42); // throw new Error('42 is not a valid String')
  * ```
  * @param Type - the type module
  * @param anyValue - the value to ensure
