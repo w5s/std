@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/await-thenable */
 import { describe, it, expect, vi, type MockedFunction } from 'vitest';
 import { AggregateError } from '@w5s/error';
 import { assertType, taskStub } from './testing.js';
@@ -169,10 +170,10 @@ describe('Task', () => {
     });
   });
 
-  describe('()', () => {
+  describe('create()', () => {
     it('should forward run', () => {
       const subtask = taskStub({ value: anyObject });
-      const task = Task(({ run }) => run(subtask));
+      const task = Task.create(({ run }) => run(subtask));
       const resolve = vi.fn();
       const reject = vi.fn();
       const run = vi.fn(anyRunner);
@@ -181,7 +182,7 @@ describe('Task', () => {
     });
     describe('sync', () => {
       it('should construct a success sync task', () => {
-        const task = Task(({ ok }) => ok('foo'));
+        const task = Task.create(({ ok }) => ok('foo'));
         const resolve = vi.fn();
         const reject = vi.fn();
 
@@ -190,7 +191,7 @@ describe('Task', () => {
         expect(resolve).toHaveBeenCalledWith('foo');
       });
       it('should construct a void task', () => {
-        const task = Task(({ ok }) => ok());
+        const task = Task.create(({ ok }) => ok());
         const resolve = vi.fn();
         const reject = vi.fn();
 
@@ -199,7 +200,7 @@ describe('Task', () => {
         expect(resolve).toHaveBeenCalledWith(undefined);
       });
       it('should construct a failure sync task', async () => {
-        const task = Task<never, 'err'>(({ error }) => error('err'));
+        const task = Task.create<never, 'err'>(({ error }) => error('err'));
         const resolve = vi.fn();
         const reject = vi.fn();
 
@@ -208,7 +209,7 @@ describe('Task', () => {
         expect(reject).toHaveBeenCalledWith('err');
       });
       it('should always set default canceler', () => {
-        const task = Task(({ ok }) => ok(undefined));
+        const task = Task.create(({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
         task.taskRun({
@@ -222,25 +223,25 @@ describe('Task', () => {
     });
     describe('async', () => {
       it('should construct an success async task', async () => {
-        const task = Task(async ({ ok }) => ok('value'));
+        const task = Task.create(async ({ ok }) => ok('value'));
         const resolve = vi.fn();
         const reject = vi.fn();
-        // eslint-disable-next-line @typescript-eslint/await-thenable
+
         await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith('value');
       });
       it('should construct a void task', async () => {
-        const task = Task(async ({ ok }) => ok());
+        const task = Task.create(async ({ ok }) => ok());
         const resolve = vi.fn();
         const reject = vi.fn();
-        // eslint-disable-next-line @typescript-eslint/await-thenable
+
         await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
         expect(resolve).toHaveBeenCalledTimes(1);
         expect(resolve).toHaveBeenCalledWith(undefined);
       });
       it('should set default canceler if omitted', () => {
-        const task = Task(async ({ ok }) => ok(undefined));
+        const task = Task.create(async ({ ok }) => ok(undefined));
         const ref = Ref(() => {});
 
         task.taskRun({
@@ -253,7 +254,7 @@ describe('Task', () => {
       });
       it('should set forward canceler reference', () => {
         const cancelerFn = () => {};
-        const task = Task(async ({ ok, canceler }) => {
+        const task = Task.create(async ({ ok, canceler }) => {
           canceler.current = cancelerFn;
           canceler.current = undefined;
 
@@ -272,7 +273,7 @@ describe('Task', () => {
 
       it('should set canceler', () => {
         const cancelerFn = () => {};
-        const task = Task(async ({ ok, canceler }) => {
+        const task = Task.create(async ({ ok, canceler }) => {
           canceler.current = cancelerFn;
 
           return ok();
@@ -596,7 +597,7 @@ describe('Task', () => {
         );
       });
       it('should call callback and run task', async () => {
-        const taskCallback = Task(({ ok }) => ok(anyOtherObject));
+        const taskCallback = Task.create(({ ok }) => ok(anyOtherObject));
         const taskCallbackSpy = vi.spyOn(taskCallback, 'taskRun');
         await ExpectTask.run(Task.andRun(task, () => taskCallback)).finished;
 

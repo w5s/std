@@ -1,14 +1,19 @@
-import type { Option, Int, Result } from '@w5s/core';
+import type { Option, Int, Result, Task, TaskLike } from '@w5s/core';
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Task } from '@w5s/core/dist/Task.js';
-import { type TimeDuration } from '@w5s/time';
+import { create } from '@w5s/core/dist/Task/create.js';
+import { map as taskMap } from '@w5s/core/dist/Task/map.js';
+import { andThen as taskThen } from '@w5s/core/dist/Task/andThen.js';
+import { orElse as taskElse } from '@w5s/core/dist/Task/orElse.js';
+import { andRun as taskThenRun } from '@w5s/core/dist/Task/andRun.js';
+import { all as taskAll } from '@w5s/core/dist/Task/all.js';
+import { resolve as taskResolve } from '@w5s/core/dist/Task/resolve.js';
+import type { TimeDuration } from '@w5s/time';
 import { Time } from '@w5s/time/dist/Time.js';
 
 const defaultRandom: Task<number, never> = { taskRun: ({ resolve }) => resolve(Math.random()) };
 const timeDelay = Time.delay.bind(Time);
-const resolveTask = <T>(value: T): Task<T, never> => ({ taskRun: ({ resolve }) => resolve(value) });
-const resolveNone = resolveTask(undefined);
+const resolveNone = taskResolve(undefined);
 
 /**
  * A structure that represents the current state of a retry operation.
@@ -75,7 +80,7 @@ export namespace RetryPolicy {
     policy: RetryPolicy,
     thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>
   ): RetryPolicy {
-    return (state) => Task.map(policy(state), (delayMs) => (delayMs == null ? undefined : thenFn(delayMs, state)));
+    return (state) => taskMap(policy(state), (delayMs) => (delayMs == null ? undefined : thenFn(delayMs, state)));
   }
 
   /**
@@ -111,7 +116,7 @@ export namespace RetryPolicy {
    * @param state - The current state of the retry operation
    */
   export function apply(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
-    return Task.map(policy(state), (retryPreviousDelay) =>
+    return taskMap(policy(state), (retryPreviousDelay) =>
       retryPreviousDelay == null
         ? retryPreviousDelay
         : RetryState({
@@ -136,7 +141,7 @@ export namespace RetryPolicy {
    * @param state - The current state of the retry operation
    */
   export function applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
-    return Task.andRun(apply(policy, state), (nextStatus) =>
+    return taskThenRun(apply(policy, state), (nextStatus) =>
       timeDelay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration))
     );
   }
@@ -157,8 +162,8 @@ export namespace RetryPolicy {
    */
   export function append(left: RetryPolicy, right: RetryPolicy): RetryPolicy {
     return (state: RetryState) => {
-      const allTask = Task.all([left(state), right(state)]);
-      return Task.map(allTask, ([leftResult, rightResult]) =>
+      const allTask = taskAll([left(state), right(state)]);
+      return taskMap(allTask, ([leftResult, rightResult]) =>
         leftResult == null || rightResult == null ? undefined : (Math.max(+leftResult, +rightResult) as TimeDuration)
       );
     };
@@ -188,7 +193,7 @@ export namespace RetryPolicy {
    * @param delay - The waiting delay between two attempts
    */
   export function wait(delay: TimeDuration): RetryPolicy {
-    return (_state) => resolveTask(delay);
+    return (_state) => taskResolve(delay);
   }
 
   /**
@@ -203,7 +208,7 @@ export namespace RetryPolicy {
    * @param initialDelay - The initial delay
    */
   export function waitExponential(initialDelay: TimeDuration): RetryPolicy {
-    return ({ retryIndex }) => resolveTask((initialDelay * 2 ** retryIndex) as TimeDuration);
+    return ({ retryIndex }) => taskResolve((initialDelay * 2 ** retryIndex) as TimeDuration);
   }
 
   /**
@@ -223,7 +228,7 @@ export namespace RetryPolicy {
   export function waitExponentialJitter(initialDelay: TimeDuration, generator = defaultRandom): RetryPolicy {
     return ({ retryIndex }) => {
       const temporary = Math.trunc((initialDelay * 2 ** retryIndex) / 2) as Int;
-      return Task.map(generator, (randomValue) => (+temporary + Math.trunc(randomValue * temporary)) as TimeDuration);
+      return taskMap(generator, (randomValue) => (+temporary + Math.trunc(randomValue * temporary)) as TimeDuration);
     };
   }
 
@@ -238,7 +243,7 @@ export namespace RetryPolicy {
    * @param count - The number of retries to allow
    */
   export function retries(count: Int): RetryPolicy {
-    return ({ retryIndex }) => resolveTask(retryIndex >= count ? undefined : (0 as TimeDuration));
+    return ({ retryIndex }) => taskResolve(retryIndex >= count ? undefined : (0 as TimeDuration));
   }
 
   /**
@@ -274,28 +279,25 @@ interface RetryContinueResult {
 export type RetryResult = RetryDoneResult | RetryContinueResult;
 
 export function retrying<Value, Error>(
-  taskOrGetter: Task<Value, Error> | ((state: RetryState) => Task<Value, Error>),
+  taskOrGetter: TaskLike<Value, Error> | ((state: RetryState) => TaskLike<Value, Error>),
   options: retrying.Options<Value, Error>
 ): Task<Value, Error> {
   const { policy, check, initialState = defaultRetryState } = options;
   const go = (state: RetryState): Task<Value, Error> =>
-    andThenResult(
-      typeof taskOrGetter === 'function' ? taskOrGetter(state) : taskOrGetter,
-
-      (result) =>
-        Task.andThen(check(result), (retryResult) =>
-          retryResult.done === true
-            ? Task(() => result)
-            : (() => {
-                const policyTask =
-                  retryResult.value == null ? policy : RetryPolicy.andThen(policy, () => retryResult.value);
-                const applyTask = RetryPolicy.applyAndDelay(policyTask, state);
-                const continueTask = Task.andThen(applyTask, (appliedStatus) =>
-                  appliedStatus == null ? Task(() => result) : go(appliedStatus)
-                );
-                return continueTask;
-              })()
-        )
+    andThenResult(typeof taskOrGetter === 'function' ? taskOrGetter(state) : taskOrGetter, (result) =>
+      taskThen(check(result), (retryResult) =>
+        retryResult.done === true
+          ? create(() => result)
+          : (() => {
+              const policyTask =
+                retryResult.value == null ? policy : RetryPolicy.andThen(policy, () => retryResult.value);
+              const applyTask = RetryPolicy.applyAndDelay(policyTask, state);
+              const continueTask = taskThen(applyTask, (appliedStatus) =>
+                appliedStatus == null ? create(() => result) : go(appliedStatus)
+              );
+              return continueTask;
+            })()
+      )
     );
 
   return go(initialState);
@@ -309,10 +311,10 @@ export namespace retrying {
 }
 
 function andThenResult<Value, ValueTo, Error>(
-  task: Task<Value, Error>,
-  thenResultFn: (result: Result<Value, Error>) => Task<ValueTo, Error>
+  task: TaskLike<Value, Error>,
+  thenResultFn: (result: Result<Value, Error>) => TaskLike<ValueTo, Error>
 ) {
-  const thenTask = Task.andThen(task, (value) => thenResultFn(Ok(value)));
-  const elseTask = Task.orElse(thenTask, (error) => thenResultFn(Error(error)));
+  const thenTask = taskThen(task, (value) => thenResultFn(Ok(value)));
+  const elseTask = taskElse(thenTask, (error) => thenResultFn(Error(error)));
   return elseTask;
 }
