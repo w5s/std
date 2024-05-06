@@ -2,17 +2,14 @@ import type { Option, Task } from '@w5s/core';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Number as NumberModule } from '@w5s/core/dist/Number.js';
+import { wrap } from '@w5s/core/dist/Task/wrap.js';
 import { TimeDuration } from './TimeDuration.js';
 
-// Inline private constructor
-const createTask = <V, E>(fn: Task<V, E>['taskRun']): Task<V, E> => ({
-  taskRun: fn,
-});
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
   typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
-const now = createTask(({ resolve }) => resolve(Date.now() as Time)) satisfies Task<Time, never>;
+const now = wrap<Time, never>(({ resolve }) => resolve(Date.now() as Time));
 
 const TimeType = Tag.define<number, Time>({
   typeName: 'Time',
@@ -139,7 +136,7 @@ export const Time = Object.assign(TimeType, {
    * @param duration - delay in milliseconds to wait
    */
   delay(duration: TimeDuration): Task<Time, never> {
-    return createTask(({ resolve, canceler }) => {
+    return wrap(({ resolve, canceler }) => {
       let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
       if (duration <= 0) {

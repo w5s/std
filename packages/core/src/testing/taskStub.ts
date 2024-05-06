@@ -1,5 +1,6 @@
 import { delay } from '@w5s/async/dist/delay.js';
 import type { Task } from '../Task.js';
+import { wrap } from '../Task/wrap.js';
 
 /**
  * Options to create a TaskStub
@@ -54,27 +55,23 @@ export type TaskStubOptions<Value, Error> = {
 export function taskStub<Value = never, Error = never>(options: TaskStubOptions<Value, Error>): Task<Value, Error> {
   const { canceler = () => {}, delayMs } = options;
   const isAsync = delayMs != null && delayMs >= 0;
-  const base = {
-    taskRun: ({ resolve, reject }) => {
-      if ('value' in options) {
-        resolve(options.value);
-      } else if ('error' in options) {
-        reject(options.error);
-      } else {
-        throw options.throwError;
-      }
-    },
-  } satisfies Task<Value, Error>;
+  const base = wrap<Value, Error>(({ resolve, reject }) => {
+    if ('value' in options) {
+      resolve(options.value);
+    } else if ('error' in options) {
+      reject(options.error);
+    } else {
+      throw options.throwError;
+    }
+  });
 
   return isAsync === true
-    ? ({
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        taskRun: async (parameters) => {
-          parameters.canceler.current = canceler;
-          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-          await delay(delayMs ?? 0);
-          return base.taskRun(parameters);
-        },
-      } satisfies Task<Value, Error>)
+    ? // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      wrap<Value, Error>(async (parameters) => {
+        parameters.canceler.current = canceler;
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        await delay(delayMs ?? 0);
+        return base.taskRun(parameters);
+      })
     : base;
 }

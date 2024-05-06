@@ -1,4 +1,5 @@
 import type { Task } from '@w5s/core';
+import { map } from '@w5s/core/dist/Task/map.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 /**
@@ -14,11 +15,5 @@ import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
  * @param generator - a custom optional random number generator
  */
 export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
-  return {
-    taskRun: (parameters) =>
-      (generator ?? defaultRandomGenerator.current).taskRun({
-        ...parameters,
-        resolve: (value) => parameters.resolve(min + (max - min) * value),
-      }),
-  };
+  return map(generator ?? defaultRandomGenerator.current, (value) => min + (max - min) * value);
 }

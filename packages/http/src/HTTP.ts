@@ -1,5 +1,6 @@
 import { invariant } from '@w5s/invariant';
 import type { Task, Tag, Option } from '@w5s/core';
+import { wrap } from '@w5s/core/dist/Task/wrap.js';
 import { HTTPError } from './HTTPError.js';
 import type { HTTPParser } from './HTTPParser.js';
 
@@ -272,9 +273,9 @@ function applyFetch(
   fetchFn: NativeFetch,
   request: HTTP.Request
 ): Task<HTTP.Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
-  return {
+  return wrap(
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async ({ resolve, reject, canceler }) => {
+    async ({ resolve, reject, canceler }) => {
       const { url, ...requestInfo } = request;
 
       const controller = new AbortController();
@@ -299,6 +300,6 @@ function applyFetch(
           })
         );
       }
-    },
-  };
+    }
+  );
 }

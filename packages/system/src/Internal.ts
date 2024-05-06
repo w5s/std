@@ -4,6 +4,7 @@ import * as nodeFS from 'node:fs';
 import * as nodePath from 'node:path';
 import * as nodeProcess from 'node:process';
 import type { Task } from '@w5s/core';
+import { wrap } from '@w5s/core/dist/Task/wrap.js';
 import { FileError } from './FileError.js';
 import type { FilePath } from './FilePath.js';
 
@@ -46,28 +47,28 @@ export function errnoExceptionHandler(error: unknown): FileError {
 }
 
 export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
-  return (...args: A): Task<Awaited<R>, FileError> => ({
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    taskRun: async ({ resolve, reject }) => {
-      try {
-        resolve(await fn(...args));
-      } catch (error_: unknown) {
-        reject(errnoExceptionHandler(error_));
+  return (...args: A): Task<Awaited<R>, FileError> =>
+    wrap(
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      async ({ resolve, reject }) => {
+        try {
+          resolve(await fn(...args));
+        } catch (error_: unknown) {
+          reject(errnoExceptionHandler(error_));
+        }
       }
-    },
-  });
+    );
 }
 
 export function errnoTaskSync<A extends unknown[], R>(fn: (...args: A) => R) {
-  return (...args: A): Task<R, FileError> => ({
-    taskRun: ({ resolve, reject }) => {
+  return (...args: A): Task<R, FileError> =>
+    wrap(({ resolve, reject }) => {
       try {
         resolve(fn(...args));
       } catch (error_: unknown) {
         reject(errnoExceptionHandler(error_));
       }
-    },
-  });
+    });
 }
 
 function isError(anyValue: unknown): anyValue is Error {

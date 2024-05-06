@@ -1,6 +1,7 @@
 import type { Task, Option, Ref } from '@w5s/core';
 import { invariant } from '@w5s/invariant';
 import { useRef } from '@w5s/application';
+import { wrap } from '@w5s/core/dist/Task/wrap.js';
 import type { UUID } from './UUID.js';
 import { application } from './application.js';
 
@@ -47,7 +48,5 @@ export const defaultUUIDGenerator: Ref<UUIDGenerator> = useRef(
  * ```
  */
 export function randomUUID(): Task<UUID, never> {
-  return {
-    taskRun: ({ resolve }) => resolve(defaultUUIDGenerator.current() as UUID),
-  };
+  return wrap(({ resolve }) => resolve(defaultUUIDGenerator.current() as UUID));
 }

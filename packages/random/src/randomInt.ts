@@ -1,6 +1,9 @@
 import type { Int, Task } from '@w5s/core';
+import { map } from '@w5s/core/dist/Task/map.js';
 import { RandomGenerator } from './randomGenerator.js';
 import { randomNumber } from './randomNumber.js';
+
+const toInt = (value: number) => Math.floor(value) as Int;
 
 /**
  * Return a Task that will generate integers between [`min`, `max`].
@@ -15,11 +18,5 @@ import { randomNumber } from './randomNumber.js';
  * @param generator - a custom optional random number generator
  */
 export function randomInt(min: Int, max: Int, generator?: RandomGenerator): Task<Int, never> {
-  return {
-    taskRun: (parameters) =>
-      randomNumber(min, max, generator).taskRun({
-        ...parameters,
-        resolve: (value) => parameters.resolve(Math.floor(value) as Int),
-      }),
-  };
+  return map(randomNumber(min, max, generator), toInt);
 }

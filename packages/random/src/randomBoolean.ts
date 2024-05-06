@@ -1,4 +1,5 @@
 import type { Task } from '@w5s/core';
+import { map } from '@w5s/core/dist/Task/map.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 /**
@@ -13,11 +14,5 @@ import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
  * @param generator - a custom optional random number generator
  */
 export function randomBoolean(trueWeight = 0.5, generator?: RandomGenerator): Task<boolean, never> {
-  return {
-    taskRun: (parameters) =>
-      (generator ?? defaultRandomGenerator.current).taskRun({
-        ...parameters,
-        resolve: (value) => parameters.resolve(value > trueWeight),
-      }),
-  };
+  return map(generator ?? defaultRandomGenerator.current, (value) => value > trueWeight);
 }

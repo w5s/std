@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 import type { Task } from './Task.js';
+import { wrap } from './Task/wrap.js';
 
 const createLogTask = (
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',
   message: [required: unknown, ...optionalParameters: unknown[]]
-): Task<void, never> => ({
-  taskRun: ({ resolve }) => {
+): Task<void, never> =>
+  wrap(({ resolve }) => {
     console[method](...message);
 
     resolve(undefined);
-  },
-});
+  });
 
 /**
  * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)
