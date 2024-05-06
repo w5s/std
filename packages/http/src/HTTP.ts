@@ -1,6 +1,7 @@
 import { invariant } from '@w5s/invariant';
 import type { Task, Tag, Option } from '@w5s/core';
 import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { andThen } from '@w5s/core/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { HTTPParser } from './HTTPParser.js';
 
@@ -228,15 +229,8 @@ export namespace HTTP {
    */
   export function request<Value>(requestObject: request.Request<Value>): Task<Value, HTTPError> {
     const { parse, fetch: localFetch = getDefaultFetch(), ...fetchRequest } = requestObject;
-    const responseTask = applyFetch(localFetch, fetchRequest);
-    return {
-      taskRun(parameters) {
-        responseTask.taskRun({
-          ...parameters,
-          resolve: (value) => parse(value).taskRun(parameters),
-        });
-      },
-    };
+
+    return andThen(applyFetch(localFetch, fetchRequest), parse);
   }
   export namespace request {
     // eslint-disable-next-line @typescript-eslint/no-shadow
