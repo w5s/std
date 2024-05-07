@@ -5,7 +5,7 @@ import { AggregateError } from '@w5s/error';
 import { assertType, taskStub } from './testing.js';
 import { Ref } from './Ref.js';
 import { Result } from './Result.js';
-import { Task, type TaskRunner } from './Task.js';
+import { Task, type TaskLike, type TaskRunner } from './Task.js';
 import { Option } from './Option.js';
 import { resolve } from './Task/resolve.js';
 import { all } from './Task/all.js';
@@ -28,7 +28,7 @@ const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
 const anyError = new Error('TestError');
 const anyCancelerRef = Ref(() => {});
-const anyRunner = <V, E>(_task: Task<V, E>) => Result.Ok() as Result<any, any>;
+const anyRunner = <V, E>(_task: TaskLike<V, E>) => Result.Ok() as Result<any, any>;
 
 namespace ExpectTask {
   export function run<Value, Error>(
@@ -203,7 +203,7 @@ describe('Task', () => {
 
       expect(Task.hasInstance(unknownValue)).toEqual(true);
       if (Task.hasInstance(unknownValue)) {
-        assertType<typeof unknownValue, Task<unknown, unknown>>(true);
+        assertType<typeof unknownValue, TaskLike<unknown, unknown>>(true);
       }
     });
   });

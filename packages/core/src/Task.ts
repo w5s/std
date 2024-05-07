@@ -28,7 +28,7 @@ export interface TaskCanceler extends Ref<Option<() => void>> {}
  * A function that runs the task and returns a {@link @w5s/core!Result}
  */
 export type TaskRunner = <Value, Error>(
-  task: Task<Value, Error>,
+  task: TaskLike<Value, Error>,
   canceler: TaskCanceler
 ) => Awaitable<Result<Value, Error>>;
 
@@ -69,11 +69,13 @@ export interface TaskLike<Value, Error> {
 /**
  * An implementation of {@link @w5s/core!TaskLike}
  */
-export interface Task<Value, Error> {
+export interface Task<Value, Error> extends TaskLike<Value, Error> {
   /**
-   * A callback with side effects
+   * Shorthand to run the current task
+   *
+   * @param canceler
    */
-  readonly taskRun: (parameters: TaskParameters<Value, Error>) => void;
+  run(canceler?: TaskCanceler): Awaitable<Result<Value, Error>>;
 }
 
 /**
