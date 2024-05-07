@@ -1,4 +1,4 @@
-import { Int, Option, Task, Result, unsafeRun } from '@w5s/core';
+import { Int, Option, Task, Result } from '@w5s/core';
 import { TimeDuration } from '@w5s/time';
 import { RandomGenerator, RandomValue } from '@w5s/random';
 import { describe, it, expect, vi } from 'vitest';
@@ -42,18 +42,12 @@ describe('RetryPolicy', () => {
     retryPreviousDelay: TimeDuration.of(3),
   });
   const anyDuration = TimeDuration.of(123);
-  const unsafeRunOk = <V>(task: Task<V, never>): V | Promise<V> => {
-    const promiseOrValue = unsafeRun(task);
-    // @ts-ignore - we know this is a promise
-    // eslint-disable-next-line promise/prefer-await-to-then
-    return typeof promiseOrValue.then === 'function' ? promiseOrValue.then(Result.get) : Result.get(promiseOrValue);
-  };
   const generateDelays = (policy: RetryPolicy, limit: number) => {
     let currentState: Option<RetryState> = defaultRetryState;
     const values = [];
     const unsafeState = (task: Task<Option<RetryState>, never>): Option<RetryState> =>
       // @ts-ignore - we suppose it sync
-      Result.get(unsafeRun(task));
+      Result.get(Task.unsafeRun(task));
     for (let index = 0; index < limit; index += 1) {
       if (Option.isNone(currentState)) {
         break;
@@ -66,7 +60,7 @@ describe('RetryPolicy', () => {
 
   describe('.wait', () => {
     it('should return a constant delay', () => {
-      expect(unsafeRunOk(RetryPolicy.wait(anyDuration)(anyState))).toEqual(anyDuration);
+      expect(Task.unsafeRunOk(RetryPolicy.wait(anyDuration)(anyState))).toEqual(anyDuration);
     });
   });
 
@@ -95,7 +89,7 @@ describe('RetryPolicy', () => {
 
     it('should return Option.Some(0), if retryIndex < count', () => {
       expect(
-        unsafeRunOk(
+        Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int.of(0),
@@ -104,7 +98,7 @@ describe('RetryPolicy', () => {
         )
       ).toEqual(0);
       expect(
-        unsafeRunOk(
+        Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int.of(1),
@@ -115,7 +109,7 @@ describe('RetryPolicy', () => {
     });
     it('should return Option.None if retryIndex < count', () => {
       expect(
-        unsafeRunOk(
+        Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int.of(2),
@@ -124,7 +118,7 @@ describe('RetryPolicy', () => {
         )
       ).toEqual(Option.None);
       expect(
-        unsafeRunOk(
+        Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int.of(3),
@@ -137,19 +131,19 @@ describe('RetryPolicy', () => {
 
   describe('.never', () => {
     it('should always return None', () => {
-      expect(unsafeRunOk(RetryPolicy.never(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(RetryPolicy.never(anyState))).toEqual(Option.None);
     });
   });
 
   describe('.andThen', () => {
     it('should not call callback when Option.None', () => {
       const mappedPolicy = RetryPolicy.andThen(RetryPolicy.never, () => Option.Some(anyDuration));
-      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
     });
     it('should call callback(delay, state) when Option.Some', () => {
       const thenFn = vi.fn(() => Option.Some(TimeDuration.of(6)));
       const mappedPolicy = RetryPolicy.andThen(RetryPolicy.wait(anyDuration), thenFn);
-      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.Some(6));
+      expect(Task.unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.Some(6));
       expect(thenFn).toHaveBeenCalledWith(anyDuration, anyState);
     });
   });
@@ -157,7 +151,7 @@ describe('RetryPolicy', () => {
   describe('.apply', () => {
     it('should None when policy returns None', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.None);
-      expect(unsafeRunOk(RetryPolicy.apply(policy, anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(RetryPolicy.apply(policy, anyState))).toEqual(Option.None);
     });
     it('should return a new state', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
@@ -166,7 +160,7 @@ describe('RetryPolicy', () => {
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
       });
-      expect(unsafeRunOk(RetryPolicy.apply(policy, state))).toEqual(
+      expect(Task.unsafeRunOk(RetryPolicy.apply(policy, state))).toEqual(
         RetryState({
           retryIndex: Int.of(2),
           retryCumulativeDelay: TimeDuration.of(3),
@@ -179,7 +173,7 @@ describe('RetryPolicy', () => {
   describe('.applyAndDelay', () => {
     it('should None when policy returns None', async () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.None);
-      await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, anyState))).resolves.toEqual(Option.None);
+      await expect(Task.unsafeRunOk(RetryPolicy.applyAndDelay(policy, anyState))).resolves.toEqual(Option.None);
     });
     it('should return a new state', async () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
@@ -188,7 +182,7 @@ describe('RetryPolicy', () => {
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
       });
-      await expect(unsafeRunOk(RetryPolicy.applyAndDelay(policy, state))).resolves.toEqual(
+      await expect(Task.unsafeRunOk(RetryPolicy.applyAndDelay(policy, state))).resolves.toEqual(
         RetryState({
           retryIndex: Int.of(2),
           retryCumulativeDelay: TimeDuration.of(3),
@@ -202,38 +196,38 @@ describe('RetryPolicy', () => {
     it('should return None if left returns None', () => {
       const left = RetryPolicy.never;
       const right = RetryPolicy.wait(anyDuration);
-      expect(unsafeRunOk(RetryPolicy.append(left, right)(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(RetryPolicy.append(left, right)(anyState))).toEqual(Option.None);
     });
     it('should return None if right returns None', () => {
       const left = RetryPolicy.wait(anyDuration);
       const right = RetryPolicy.never;
-      expect(unsafeRunOk(RetryPolicy.append(left, right)(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(RetryPolicy.append(left, right)(anyState))).toEqual(Option.None);
     });
     it('should return max of delay', () => {
       const lower = RetryPolicy.wait(TimeDuration.of(1));
       const higher = RetryPolicy.wait(TimeDuration.of(2));
-      expect(unsafeRunOk(RetryPolicy.append(lower, higher)(anyState))).toEqual(TimeDuration.of(2));
-      expect(unsafeRunOk(RetryPolicy.append(higher, lower)(anyState))).toEqual(TimeDuration.of(2));
+      expect(Task.unsafeRunOk(RetryPolicy.append(lower, higher)(anyState))).toEqual(TimeDuration.of(2));
+      expect(Task.unsafeRunOk(RetryPolicy.append(higher, lower)(anyState))).toEqual(TimeDuration.of(2));
     });
   });
   describe('.waitMax', () => {
     it('should always return None', () => {
       const limit = anyDuration;
       const overDelayPolicy = RetryPolicy.wait(TimeDuration.of(+limit + 1));
-      expect(unsafeRunOk(RetryPolicy.waitMax(overDelayPolicy, limit)(anyState))).toEqual(limit);
+      expect(Task.unsafeRunOk(RetryPolicy.waitMax(overDelayPolicy, limit)(anyState))).toEqual(limit);
       const validPolicy = RetryPolicy.wait(TimeDuration.of(limit - 1));
-      expect(unsafeRunOk(RetryPolicy.waitMax(validPolicy, limit)(anyState))).toEqual(limit - 1);
+      expect(Task.unsafeRunOk(RetryPolicy.waitMax(validPolicy, limit)(anyState))).toEqual(limit - 1);
     });
   });
   describe('.filter', () => {
     it('should not call callback when Option.None', () => {
       const mappedPolicy = RetryPolicy.filter(RetryPolicy.never, () => true);
-      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
     });
     it('should call callback(delay, state) when Option.Some', () => {
       const filterFn = vi.fn(() => false);
       const mappedPolicy = RetryPolicy.filter(RetryPolicy.wait(anyDuration), filterFn);
-      expect(unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
+      expect(Task.unsafeRunOk(mappedPolicy(anyState))).toEqual(Option.None);
       expect(filterFn).toHaveBeenCalledWith(anyDuration, anyState);
     });
   });

@@ -1,19 +1,9 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
-import { tryCall } from '@w5s/async/dist/tryCall.js';
-import type { Result } from './Result.js';
-import type { Task, TaskCanceler } from './Task.js';
-import { Ok } from './Result/Ok.js';
-import { Error } from './Result/Error.js';
-
-// Inline utilities
-const returnOrThrow = <V, E>(result: Result<V, E>): V => {
-  if (result.ok) {
-    return result.value;
-  }
-  // eslint-disable-next-line @typescript-eslint/no-throw-literal
-  throw result.error;
-};
+import type { Result } from '../Result.js';
+import type { TaskCanceler, TaskLike } from '../Task.js';
+import { Ok } from '../Result/Ok.js';
+import { Error } from '../Result/Error.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -23,12 +13,12 @@ const returnOrThrow = <V, E>(result: Result<V, E>): V => {
  * @example
  * ```typescript
  * const getMessage = Task.resolve('Hello World!');
- * const messageResult = unsafeRun(getMessage);// Result.Ok('Hello World!')
+ * const messageResult = Task.unsafeRun(getMessage);// Result.Ok('Hello World!')
  * ```
  * @param task - the task to be run
  */
 export function unsafeRun<Value, Error>(
-  task: Task<Value, Error>,
+  task: TaskLike<Value, Error>,
   canceler: TaskCanceler = { current: undefined }
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
@@ -56,20 +46,4 @@ export function unsafeRun<Value, Error>(
   }
 
   return returnValue;
-}
-
-/**
- * Run `task` that never fails and return the value or a promise of the value
- *
- * **⚠ Impure function that may throw an error, its use is generally discouraged.**
- *
- * @example
- * ```typescript
- * const getMessage = Task.resolve('Hello World!');
- * const messageResult = unsafeRunOk(getMessage);// 'Hello World!'
- * ```
- * @param task - the task to be run
- */
-export function unsafeRunOk<Value>(task: Task<Value, unknown>, canceler?: TaskCanceler): Awaitable<Value> {
-  return tryCall(() => unsafeRun(task, canceler), returnOrThrow);
 }

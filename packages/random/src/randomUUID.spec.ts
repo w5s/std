@@ -1,4 +1,4 @@
-import { Result, unsafeRun } from '@w5s/core';
+import { Result, Task } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { UUID } from './UUID.js';
 import { defaultUUIDGenerator, randomUUID } from './randomUUID.js';
@@ -10,7 +10,7 @@ describe('defaultUUIDGenerator', () => {
 });
 describe('randomUUID', () => {
   it('should return a valid UUID', async () => {
-    const uuidResult = Result.getOrThrow(await unsafeRun(randomUUID()));
+    const uuidResult = Result.getOrThrow(await Task.unsafeRun(randomUUID()));
     expect(UUID.hasInstance(uuidResult)).toBe(true);
   });
   it('should use ref', async () => {
@@ -18,7 +18,7 @@ describe('randomUUID', () => {
     const task = randomUUID();
     const randomUUIDMock = vi.spyOn(defaultUUIDGenerator, 'current');
     randomUUIDMock.mockReturnValue(uuidMock);
-    const uuidResult = await unsafeRun(task);
+    const uuidResult = await Task.unsafeRun(task);
 
     expect(randomUUIDMock).toHaveBeenCalledTimes(1);
     expect(uuidResult).toEqual(Result.Ok(uuidMock));

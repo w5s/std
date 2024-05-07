@@ -11,7 +11,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```ts
  * const write = writeFile(FilePath('my/file'), 'my content');
- * unsafeRun(write);
+ * Task.unsafeRun(write);
  * ```
  * @param file - Path to the file to be read.
  * @param data - The buffer that the data will be appended to.

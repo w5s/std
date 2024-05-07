@@ -111,7 +111,7 @@ export namespace RetryPolicy {
    * const policy = RetryPolicy.wait(TimeDuration.of(1));
    * const oldState = RetryState({ retryIndex: Int.of(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.apply(policy, retryState);
-   * unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * Task.unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
    * @param policy - The policy to apply
    * @param state - The current state of the retry operation
@@ -136,7 +136,7 @@ export namespace RetryPolicy {
    * const policy = RetryPolicy.wait(TimeDuration.of(1));
    * const oldState = RetryState({ retryIndex: Int.of(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
    * const newState = RetryPolicy.applyAndDelay(policy, retryState);
-   * await unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * await Task.unsafeRun(newState) // Result.Ok(RetryState({ retryIndex: Int.of(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
    * @param policy - The policy to apply
    * @param state - The current state of the retry operation

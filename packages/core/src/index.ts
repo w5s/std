@@ -22,7 +22,6 @@ export * from './Option.js';
 export * from './Record.js';
 export * from './Ref.js';
 export * from './Result.js';
-export * from './run.js';
 export * from './String.js';
 export * from './Symbol.js';
 export * from './Tag.js';

@@ -32,8 +32,6 @@ describe('index', () => {
         'Tag',
         'Type',
         'Task',
-        'unsafeRun',
-        'unsafeRunOk',
       ].sort()
     );
   });

@@ -15,6 +15,8 @@ import { andRun } from './Task/andRun.js';
 import { orElse } from './Task/orElse.js';
 import { tryCall } from './Task/tryCall.js';
 import { hasInstance } from './Task/hasInstance.js';
+import { unsafeRun } from './Task/unsafeRun.js';
+import { unsafeRunOk } from './Task/unsafeRunOk.js';
 
 /**
  * Interface used to cancel running task
@@ -90,6 +92,8 @@ export const Task = {
   reject,
   resolve,
   tryCall,
+  unsafeRun,
+  unsafeRunOk,
 };
 
 export namespace Task {

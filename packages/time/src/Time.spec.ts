@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Option, Ref, Result, unsafeRun } from '@w5s/core';
+import { Option, Ref, Result, Task } from '@w5s/core';
 import { describeCodec, describeComparable, describeType } from '@w5s/core/dist/testing.js';
 import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
 import { Time } from './Time.js';
@@ -55,7 +55,7 @@ describe('Time', () => {
     it('should return Date.now()', async () => {
       const nowMs = 123;
       dateNowSpy.mockReturnValue(nowMs);
-      expect(unsafeRun(Time.now())).toEqual(Result.Ok(nowMs));
+      expect(Task.unsafeRun(Time.now())).toEqual(Result.Ok(nowMs));
     });
   });
   describe('.delay', () => {
@@ -64,7 +64,7 @@ describe('Time', () => {
       const task = Time.delay(anyDuration);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(0);
 
-      const promise = unsafeRun(task);
+      const promise = Task.unsafeRun(task);
       expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), anyDuration);
       vi.runAllTimers();
@@ -73,7 +73,7 @@ describe('Time', () => {
     it.each([0, -1])('should not setTimeout if delay <= 0', async (delay) => {
       const now = Date.now();
       const task = Time.delay(TimeDuration.of(delay));
-      const promise = unsafeRun(task);
+      const promise = Task.unsafeRun(task);
       expect(setTimeoutSpy).not.toHaveBeenCalled();
       vi.runAllTimers();
       await expect(promise).resolves.toEqual(Result.Ok(now));

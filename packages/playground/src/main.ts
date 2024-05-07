@@ -1,5 +1,5 @@
 import { assertNever } from '@w5s/invariant';
-import { Console, Int, Option, Task, unsafeRun } from '@w5s/core';
+import { Console, Int, Option, Task } from '@w5s/core';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/random';
@@ -53,4 +53,4 @@ function main() {
   return task;
 }
 
-void unsafeRun(main());
+void Task.unsafeRun(main());

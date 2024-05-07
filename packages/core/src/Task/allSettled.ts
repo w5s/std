@@ -15,7 +15,7 @@ import { wrap } from './wrap.js';
  *   Task.reject(1),
  *   Task.resolve(2),
  * ]);
- * const taskResults = unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
+ * const taskResults = Task.unsafeRun(task);// [Result.Error(1), Result.Ok(2)]
  * ```
  * @param tasks - tasks to be run in parallel
  */

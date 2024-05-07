@@ -1,4 +1,4 @@
-import { Result, unsafeRun, type TaskCanceler } from '@w5s/core';
+import { Result, Task, type TaskCanceler } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../FilePath.js';
@@ -9,7 +9,7 @@ describe('writeFile', () => {
     const writeFileMocked = vi.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
-    await expect(unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',
@@ -57,7 +57,7 @@ describe('writeFile', () => {
       resolve: () => {},
       reject: () => {},
       canceler: cancelerRef,
-      run: unsafeRun,
+      run: Task.unsafeRun,
     });
     expect(fileContent).toEqual('0123456789');
   });

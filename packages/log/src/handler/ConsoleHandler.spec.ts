@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import { describe, it, expect, vi } from 'vitest';
-import { unsafeRunOk } from '@w5s/core';
+import { Task } from '@w5s/core';
 import { LogLevel } from '../LogLevel.js';
 import { LogMessage } from '../LogMessage.js';
 import { generateLogRecord } from '../__stub__.js';
@@ -16,27 +16,27 @@ describe('.ConsoleHandler', () => {
   vi.spyOn(console, 'error').mockImplementation(noop);
 
   it('should send to console.debug when level=LogLevel.Debug', async () => {
-    await unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Debug, message: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Debug, message: ['test'] })));
     expect(console.debug).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.info when level=LogLevel.Info', async () => {
-    await unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Info, message: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Info, message: ['test'] })));
     expect(console.info).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.warn when level=LogLevel.Warning', async () => {
-    await unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Warning, message: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Warning, message: ['test'] })));
     expect(console.warn).toHaveBeenLastCalledWith('test');
   });
 
   it('should send to console.warn when level=LogLevel.Error', async () => {
-    await unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Error, message: ['test'] })));
+    await Task.unsafeRunOk(ConsoleHandler(generateLogRecord({ level: LogLevel.Error, message: ['test'] })));
     expect(console.error).toHaveBeenLastCalledWith('test');
   });
 
   it('should format logCategory and message correctly', async () => {
-    await unsafeRunOk(
+    await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({
           category: 'logCategory',
@@ -49,7 +49,7 @@ describe('.ConsoleHandler', () => {
   });
 
   it('should not add logCategory if empty', async () => {
-    await unsafeRunOk(
+    await Task.unsafeRunOk(
       ConsoleHandler(
         generateLogRecord({
           level: LogLevel.Debug,

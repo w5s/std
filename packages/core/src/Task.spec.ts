@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/await-thenable */
 import { describe, it, expect, vi, type MockedFunction } from 'vitest';
 import { AggregateError } from '@w5s/error';
@@ -6,6 +7,21 @@ import { Ref } from './Ref.js';
 import { Result } from './Result.js';
 import { Task, type TaskRunner } from './Task.js';
 import { Option } from './Option.js';
+import { resolve } from './Task/resolve.js';
+import { all } from './Task/all.js';
+import { allSettled } from './Task/allSettled.js';
+import { andRun } from './Task/andRun.js';
+import { andThen } from './Task/andThen.js';
+import { any } from './Task/any.js';
+import { create } from './Task/create.js';
+import { hasInstance } from './Task/hasInstance.js';
+import { map } from './Task/map.js';
+import { mapError } from './Task/mapError.js';
+import { orElse } from './Task/orElse.js';
+import { reject } from './Task/reject.js';
+import { tryCall } from './Task/tryCall.js';
+import { unsafeRun } from './Task/unsafeRun.js';
+import { unsafeRunOk } from './Task/unsafeRunOk.js';
 
 const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
@@ -28,7 +44,7 @@ namespace ExpectTask {
     const rejectTask = vi.fn((_error: Error): void => {});
     const initialCanceler = vi.fn(() => {});
     const cancelerRef = Ref(initialCanceler);
-    // eslint-disable-next-line @typescript-eslint/no-shadow
+
     const run = vi.fn();
     return {
       resolve: resolveTask,
@@ -71,6 +87,26 @@ namespace ExpectTask {
 }
 
 describe('Task', () => {
+  it('is an alias to functions', () => {
+    expect(Task).toEqual({
+      all,
+      allSettled,
+      andRun,
+      andThen,
+      any,
+      create,
+      hasInstance,
+      map,
+      mapError,
+      orElse,
+      reject,
+      resolve,
+      tryCall,
+      unsafeRun,
+      unsafeRunOk,
+    });
+  });
+
   const allSyncCombination = [
     ['sync', 'sync'],
     ['async', 'sync'],

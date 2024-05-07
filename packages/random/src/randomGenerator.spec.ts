@@ -1,4 +1,4 @@
-import { Result, unsafeRun } from '@w5s/core';
+import { Result, Task } from '@w5s/core';
 import { describe, it, expect, vi } from 'vitest';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
@@ -7,12 +7,12 @@ describe('RandomGenerator', () => {
     it('should use Math.random', async () => {
       const nextRandom = 0.123;
       vi.spyOn(Math, 'random').mockReturnValue(nextRandom);
-      expect(unsafeRun(RandomGenerator.unsafe)).toEqual(Result.Ok(nextRandom));
+      expect(Task.unsafeRun(RandomGenerator.unsafe)).toEqual(Result.Ok(nextRandom));
     });
   });
   describe('.crypto', () => {
     it('should use crypto', async () => {
-      expect(unsafeRun(RandomGenerator.crypto)).toEqual(Result.Ok(expect.any(Number)));
+      expect(Task.unsafeRun(RandomGenerator.crypto)).toEqual(Result.Ok(expect.any(Number)));
     });
   });
 });

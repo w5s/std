@@ -10,7 +10,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```ts
  * const task = listDirectory(FilePath('/path/to/directory'));
- * const list = await unsafeRun(task); // Result.Ok([FilePath('file1'), FilePath('file2')])
+ * const list = await Task.unsafeRun(task); // Result.Ok([FilePath('file1'), FilePath('file2')])
  * ```
  * @param filePath - The path to the directory.
  * @param options - The options to use.

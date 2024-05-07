@@ -10,7 +10,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```ts
  * const task = remove(FilePath('/path/to/file.txt'));
- * unsafeRun(task);
+ * Task.unsafeRun(task);
  * ```
  * @param filePath - The path to the file to be removed.
  * @param options - The options to be used when removing the file.

@@ -13,7 +13,7 @@ export interface RandomGenerator extends Task<RandomValue, never> {}
  * @example
  * ```typescript
  * const dummyGenerator = RandomGenerator(() => RandomValue.of(1));
- * unsafeRun(dummyGenerator); // 1
+ * Task.unsafeRun(dummyGenerator); // 1
  * ```
  * @category Constructor
  * @param getNextValue - an impure function that returns a new value

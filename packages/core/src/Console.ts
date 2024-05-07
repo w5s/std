@@ -23,7 +23,7 @@ export const Console = {
    *
    * @example
    * ```typescript
-   * unsafeRun(Console.debug('Hello', 'World !'));// > Hello World !
+   * Task.unsafeRun(Console.debug('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -36,7 +36,7 @@ export const Console = {
    *
    * @example
    * ```typescript
-   * unsafeRun(Console.log('Hello', 'World !'));// > Hello World !
+   * Task.unsafeRun(Console.log('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -49,7 +49,7 @@ export const Console = {
    *
    * @example
    * ```typescript
-   * unsafeRun(Console.info('Hello', 'World !'));// > Hello World !
+   * Task.unsafeRun(Console.info('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -62,7 +62,7 @@ export const Console = {
    *
    * @example
    * ```typescript
-   * unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
+   * Task.unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */
@@ -75,7 +75,7 @@ export const Console = {
    *
    * @example
    * ```typescript
-   * unsafeRun(Console.error('Hello', 'World !'));// > Hello World !
+   * Task.unsafeRun(Console.error('Hello', 'World !'));// > Hello World !
    * ```
    * @param parameters - an array of values to be logged
    */

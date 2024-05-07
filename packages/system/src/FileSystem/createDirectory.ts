@@ -10,7 +10,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```ts
  * const task = createDirectory(FilePath('/path/to/directory'));
- * await unsafeRun(task); // Will create the directory
+ * await Task.unsafeRun(task); // Will create the directory
  * ```
  * @param path - The path to the directory.
  * @param options - The options to use.

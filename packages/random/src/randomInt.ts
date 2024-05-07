@@ -11,7 +11,7 @@ const toInt = (value: number) => Math.floor(value) as Int;
  * @example
  * ```typescript
  * const next = randomInt(-10, 10);
- * unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
+ * Task.unsafeRun(next);// Result.Ok(N); where N is an integer between -10 and 10
  * ```
  * @param min - the minimum inclusive bound for generated value
  * @param max - the maximum inclusive bound for generated value

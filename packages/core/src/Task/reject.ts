@@ -8,7 +8,7 @@ import { wrap } from './wrap.js';
  * @example
  * ```typescript
  * const task = Task.reject(1);
- * const result = unsafeRun(task);// Result.Error(1)
+ * const result = Task.unsafeRun(task);// Result.Error(1)
  * ```
  * @category Constructor
  * @param errorValue - the error value

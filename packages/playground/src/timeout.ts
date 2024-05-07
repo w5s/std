@@ -29,7 +29,7 @@ export const TimeoutError = CustomError.define<TimeoutError>('TimeoutError');
  * ```typescript
  * const longTask = Task.delay(TimeDuration.hours(1));
  * const timeoutTask = timeout(longTask, TimeDuration.milliseconds(4));
- * unsafeRun(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))
+ * Task.unsafeRun(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))
  * // Note that `longTask` will be canceled and will never resolve nor reject
  * ```
  * @param task - task to cancel after delay

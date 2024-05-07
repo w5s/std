@@ -1,4 +1,4 @@
-import { Result, unsafeRun } from '@w5s/core';
+import { Result, Task } from '@w5s/core';
 import { describe, expect, it, vi } from 'vitest';
 import { randomBoolean } from './randomBoolean.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
@@ -14,7 +14,7 @@ describe('randomBoolean', () => {
       resolve(RandomValue.of(nextRandom))
     );
     const task = randomBoolean();
-    expect(unsafeRun(task)).toEqual(Result.Ok(false));
+    expect(Task.unsafeRun(task)).toEqual(Result.Ok(false));
   });
   it.each([
     [{ genValue: 0, trueWeight: 0.5 }, false],
@@ -25,6 +25,6 @@ describe('randomBoolean', () => {
   ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
     const gen = generatorOf(genValue);
     const genBool = randomBoolean(trueWeight, gen);
-    expect(unsafeRun(genBool)).toEqual(Result.Ok(expected));
+    expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
   });
 });

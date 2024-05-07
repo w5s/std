@@ -1,5 +1,5 @@
 import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
-import { Console, Task, unsafeRun } from '@w5s/core';
+import { Console, Task } from '@w5s/core';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
@@ -29,4 +29,4 @@ export function program() {
   return handled;
 }
 
-unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>
+Task.unsafeRun(program()); // Result<{ foo: boolean }, FetchNetworkError|FetchParseError>

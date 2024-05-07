@@ -37,7 +37,7 @@ function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
  * @example
  * ```ts
  * const task = FileSystem.readFileStatus(FilePath('/etc/passwd'));
- * const fileStatus = await unsafeRun(task);// Result.Ok({ isFile: true, ... })
+ * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```
  * @param filePath - The path to the file
  */
@@ -51,7 +51,7 @@ export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> 
  * @example
  * ```ts
  * const task = FileSystem.readSymbolicLinkStatus(FilePath('/etc/passwd'));
- * const fileStatus = await unsafeRun(task);// Result.Ok({ isFile: true, ... })
+ * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```
  * @param filePath - The path to the file
  */

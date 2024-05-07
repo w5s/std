@@ -1,5 +1,5 @@
 import { sql, executeQuery, type Database } from '@w5s/database';
-import { Task, unsafeRun } from '@w5s/core';
+import { Task } from '@w5s/core';
 
 interface User {
   id: number;
@@ -21,5 +21,5 @@ export async function main(): Promise<void> {
   };
 
   const response = getUserById(client, 123);
-  console.log(await unsafeRun(response));
+  console.log(await Task.unsafeRun(response));
 }

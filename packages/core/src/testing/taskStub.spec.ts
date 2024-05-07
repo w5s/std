@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { taskStub } from './taskStub.js';
-import { unsafeRun } from '../run.js';
+import { unsafeRun } from '../Task/unsafeRun.js';
 import { Result } from '../Result.js';
 
 describe('taskStub', () => {

@@ -12,13 +12,13 @@ import { TaskAggregateState } from './TaskAggregateState.js';
  *   Task.reject(1),
  *   Task.resolve(2),
  * ]);
- * const successResult = unsafeRun(success);// Result.Ok(2)
+ * const successResult = Task.unsafeRun(success);// Result.Ok(2)
  *
  * const failure = Task.any([
  *   Task.reject('error1'),
  *   Task.reject('error2'),
  * ]);
- * const failureResult = unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
+ * const failureResult = Task.unsafeRun(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
  * ```
  * @param tasks - tasks to be run in parallel
  */
