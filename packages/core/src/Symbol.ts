@@ -1,37 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 // https://github.com/tc39/proposal-explicit-resource-management
 
-declare global {
-  interface SymbolConstructor {
-    /**
-     * Disposes of resources within this object.
-     */
-    readonly dispose: unique symbol;
-
-    /**
-     * Disposes asynchronously of resources within this object.
-     */
-    readonly asyncDispose: unique symbol;
-
-    /**
-     * Enum keys
-     */
-    readonly enumKeys: unique symbol;
-
-    /**
-     * Enum values
-     */
-    readonly enumValues: unique symbol;
-  }
-}
 const GlobalSymbol = globalThis.Symbol;
+
+export interface SymbolConstructor
+  extends Omit<globalThis.SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'metadata'> {
+  /**
+   * Enum keys
+   */
+  readonly enumKeys: unique symbol;
+
+  /**
+   * Enum values
+   */
+  readonly enumValues: unique symbol;
+}
 
 /**
  * A collection of well known symbols
  *
  * @namespace
  */
-export const Symbol: Omit<SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'metadata'> = {
+export const Symbol: SymbolConstructor = {
   iterator: GlobalSymbol.iterator,
   asyncIterator: GlobalSymbol.asyncIterator,
   hasInstance: GlobalSymbol.hasInstance,
