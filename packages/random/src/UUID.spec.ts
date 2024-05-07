@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { DecodeError } from '@w5s/core/dist/Codec.js';
+import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
 import { Result } from '@w5s/core';
 import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
 import { UUID } from './UUID.js';

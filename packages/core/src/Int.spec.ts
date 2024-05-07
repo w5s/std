@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { Option } from './Option.js';
 import { describeType, describeComparable, describeNumeric, describeCodec } from './testing.js';
-import { DecodeError } from './Codec.js';
+import { DecodeError } from './Codec/DecodeError.js';
 import { Result } from './Result.js';
 
 describe('Int', () => {

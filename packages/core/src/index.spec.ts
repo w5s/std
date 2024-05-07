@@ -10,6 +10,7 @@ describe('index', () => {
         'assign',
         'BigInt',
         'Boolean',
+        'Codec',
         'Comparable',
         'Console',
         'Struct',

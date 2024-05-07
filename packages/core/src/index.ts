@@ -4,6 +4,7 @@ export * from './BigInt.js';
 export * from './Boolean.js';
 export * from './Bounded.js';
 export * from './Type.js';
+export * from './Codec.js';
 export * from './Comparable.js';
 export * from './Console.js';
 export * from './Enum.js';

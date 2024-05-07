@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { DecodeError, type Codec } from '../Codec.js';
+import type { Codec } from '../Codec.js';
+import { DecodeError } from '../Codec/DecodeError.js';
 import { describeCodec } from './describeCodec.js';
 import { Result } from '../Result.js';
 

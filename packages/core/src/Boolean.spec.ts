@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Boolean } from './Boolean.js';
 import { describeType, describeComparable, describeCodec } from './testing.js';
 import { Result } from './Result.js';
-import { DecodeError } from './Codec.js';
+import { DecodeError } from './Codec/DecodeError.js';
 
 describe('Boolean', () => {
   describeType({ describe, it, expect })(Boolean, {

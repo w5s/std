@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option, Ref, Result, unsafeRun } from '@w5s/core';
 import { describeCodec, describeComparable, describeType } from '@w5s/core/dist/testing.js';
-import { DecodeError } from '@w5s/core/dist/Codec.js';
+import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
 import { Time } from './Time.js';
 import { TimeDuration } from './TimeDuration.js';
 

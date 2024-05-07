@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { describeCodec, describeComparable, describeNumeric, describeType } from '@w5s/core/dist/testing.js';
 import { Result } from '@w5s/core';
-import { DecodeError } from '@w5s/core/dist/Codec.js';
+import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
 import { TimeDuration } from './TimeDuration.js';
 
 describe('TimeDuration', () => {
