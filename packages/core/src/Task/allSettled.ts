@@ -4,7 +4,7 @@ import { Error } from '../Result/Error.js';
 import { Ok } from '../Result/Ok.js';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 
 /**
  * Resolves an array of all task results
@@ -28,7 +28,7 @@ export function allSettled<Value, Error>(
 export function allSettled<Value, Error>(
   tasks: Iterable<TaskLike<Value, Error>>
 ): Task<ReadonlyArray<Result<Value, Error>>, never> {
-  return wrap((parameters) => {
+  return from((parameters) => {
     const taskArray = Array.from(tasks);
 
     if (taskArray.length === 0) {

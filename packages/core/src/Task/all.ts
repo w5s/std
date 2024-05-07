@@ -1,7 +1,7 @@
 import { empty } from '../Array/empty.js';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 
 /**
  * Resolves with the array of all task values, or reject with the first error
@@ -27,7 +27,7 @@ export function all<T extends readonly TaskLike<any, any>[]>(
 ): Task<{ [K in keyof T]: Task.ValueOf<T[K]> }, Task.ErrorOf<T[keyof T]>>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
-  return wrap((parameters) => {
+  return from((parameters) => {
     const taskArray = Array.from(tasks);
     if (taskArray.length === 0) {
       parameters.resolve(empty());

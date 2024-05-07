@@ -17,6 +17,7 @@ import { tryCall } from './Task/tryCall.js';
 import { hasInstance } from './Task/hasInstance.js';
 import { unsafeRun } from './Task/unsafeRun.js';
 import { unsafeRunOk } from './Task/unsafeRunOk.js';
+import { from } from './Task/from.js';
 
 /**
  * Interface used to cancel running task
@@ -85,6 +86,7 @@ export const Task = {
   andThen,
   any,
   create,
+  from,
   hasInstance,
   map,
   mapError,

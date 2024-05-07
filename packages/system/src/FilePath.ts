@@ -1,6 +1,6 @@
 import * as nodePath from 'node:path';
 import type { Tag, Option, Task } from '@w5s/core';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
 
 export type FileName = string;
 
@@ -169,7 +169,7 @@ export namespace FilePath {
    */
   export function resolve(from: ReadonlyArray<FilePath>, to: FilePath): Task<FilePath, never> {
     // eslint-disable-next-line @typescript-eslint/no-shadow
-    return wrap(({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath));
+    return taskFrom(({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath));
   }
 
   /**

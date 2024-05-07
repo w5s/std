@@ -22,6 +22,7 @@ import { reject } from './Task/reject.js';
 import { tryCall } from './Task/tryCall.js';
 import { unsafeRun } from './Task/unsafeRun.js';
 import { unsafeRunOk } from './Task/unsafeRunOk.js';
+import { from } from './Task/from.js';
 
 const anyObject = Object.freeze({ foo: true });
 const anyOtherObject = { bar: true };
@@ -95,6 +96,7 @@ describe('Task', () => {
       andThen,
       any,
       create,
+      from,
       hasInstance,
       map,
       mapError,

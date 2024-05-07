@@ -1,6 +1,6 @@
 import type * as nodeFS from 'node:fs';
 import type { Task, Option } from '@w5s/core';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
 import type { FileError } from '../FileError.js';
 import { Internal, errnoExceptionHandler } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';
@@ -27,23 +27,21 @@ export function writeFile(
     | Iterable<string | NodeJS.TypedArray | DataView>,
   options?: writeFile.Options
 ): Task<void, FileError> {
-  return wrap(
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    async ({ resolve, reject, canceler }) => {
-      const controller = new AbortController();
-      canceler.current = () => controller.abort();
-      try {
-        resolve(
-          await Internal.FS.writeFile(file, data, {
-            ...options,
-            signal: controller.signal,
-          })
-        );
-      } catch (error_: unknown) {
-        reject(errnoExceptionHandler(error_));
-      }
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  return taskFrom(async ({ resolve, reject, canceler }) => {
+    const controller = new AbortController();
+    canceler.current = () => controller.abort();
+    try {
+      resolve(
+        await Internal.FS.writeFile(file, data, {
+          ...options,
+          signal: controller.signal,
+        })
+      );
+    } catch (error_: unknown) {
+      reject(errnoExceptionHandler(error_));
     }
-  );
+  });
 }
 export namespace writeFile {
   export type Options = {

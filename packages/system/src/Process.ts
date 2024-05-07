@@ -1,5 +1,5 @@
 import type { Task } from '@w5s/core';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
 import type { FileError } from './FileError.js';
 import { errnoTaskSync, Internal } from './Internal.js';
 import type { FilePath } from './FilePath.js';
@@ -16,7 +16,7 @@ export namespace Process {
    * @param code - the exit code
    */
   export function exit(code: number): Task<never, never> {
-    return wrap(({ resolve }) => resolve(Internal.Process.exit(code)));
+    return taskFrom(({ resolve }) => resolve(Internal.Process.exit(code)));
   }
 
   /**
@@ -29,7 +29,7 @@ export namespace Process {
    * ```
    */
   export function getCurrentDirectory(): Task<FilePath, never> {
-    return wrap(({ resolve }) => resolve(Internal.Process.cwd() as FilePath));
+    return taskFrom(({ resolve }) => resolve(Internal.Process.cwd() as FilePath));
   }
 
   /**

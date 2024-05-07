@@ -1,5 +1,5 @@
 import type { Task } from '../Task.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 
 /**
  * Constructor that always returns a failed `Task` that rejects `error`.
@@ -17,5 +17,5 @@ export function reject<Value = never>(): Task<Value, void>;
 export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
 export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
   // eslint-disable-next-line @typescript-eslint/no-shadow
-  return wrap(({ reject }) => reject(errorValue));
+  return from(({ reject }) => reject(errorValue));
 }

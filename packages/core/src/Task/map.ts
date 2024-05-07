@@ -1,5 +1,5 @@
 import type { Task, TaskLike } from '../Task.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 
 /**
  * Maps a `Task<Value, Error>` to `Task<NewValue, Error>` by applying a function to a success value, leaving a failure untouched.
@@ -17,5 +17,5 @@ export function map<ValueFrom, ValueTo, Error>(
   task: TaskLike<ValueFrom, Error>,
   fn: (value: ValueFrom) => ValueTo
 ): Task<ValueTo, Error> {
-  return wrap((parameters) => task.taskRun({ ...parameters, resolve: (value) => parameters.resolve(fn(value)) }));
+  return from((parameters) => task.taskRun({ ...parameters, resolve: (value) => parameters.resolve(fn(value)) }));
 }

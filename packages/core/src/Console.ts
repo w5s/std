@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
 import type { Task } from './Task.js';
-import { wrap } from './Task/wrap.js';
+import { from } from './Task/from.js';
 
 const createLogTask = (
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',
   message: [required: unknown, ...optionalParameters: unknown[]]
 ): Task<void, never> =>
-  wrap(({ resolve }) => {
+  from(({ resolve }) => {
     console[method](...message);
 
     resolve(undefined);

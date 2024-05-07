@@ -1,6 +1,6 @@
 import { delay } from '@w5s/async/dist/delay.js';
 import type { Task } from '../Task.js';
-import { wrap } from '../Task/wrap.js';
+import { from } from '../Task/from.js';
 
 /**
  * Options to create a TaskStub
@@ -55,7 +55,7 @@ export type TaskStubOptions<Value, Error> = {
 export function taskStub<Value = never, Error = never>(options: TaskStubOptions<Value, Error>): Task<Value, Error> {
   const { canceler = () => {}, delayMs } = options;
   const isAsync = delayMs != null && delayMs >= 0;
-  const base = wrap<Value, Error>(({ resolve, reject }) => {
+  const base = from<Value, Error>(({ resolve, reject }) => {
     if ('value' in options) {
       resolve(options.value);
     } else if ('error' in options) {
@@ -67,7 +67,7 @@ export function taskStub<Value = never, Error = never>(options: TaskStubOptions<
 
   return isAsync === true
     ? // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      wrap<Value, Error>(async (parameters) => {
+      from<Value, Error>(async (parameters) => {
         parameters.canceler.current = canceler;
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         await delay(delayMs ?? 0);

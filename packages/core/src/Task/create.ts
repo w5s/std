@@ -2,7 +2,7 @@ import { type Awaitable } from '@w5s/async';
 import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '../Result.js';
 import type { Task, TaskCanceler, TaskLike } from '../Task.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 import { Ok } from '../Result/Ok.js';
 import { Error } from '../Result/Error.js';
 
@@ -45,7 +45,7 @@ export function create<Value, Error = never>(
   }) => Awaitable<Result<Value, Error>>
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return wrap(({ resolve, reject, canceler, run }) => {
+  return from(({ resolve, reject, canceler, run }) => {
     canceler.current = undefined;
     return tryCall(
       () =>

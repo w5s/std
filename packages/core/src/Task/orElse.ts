@@ -1,5 +1,5 @@
 import type { Task, TaskLike } from '../Task.js';
-import { wrap } from './wrap.js';
+import { from } from './from.js';
 
 /**
  * Calls `fn` if the task is failed, otherwise returns the successful task untouched.
@@ -20,5 +20,5 @@ export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => TaskLike<ValueTo, ErrorTo>
 ): Task<ValueFrom | ValueTo, ErrorTo> {
-  return wrap((parameters) => task.taskRun({ ...parameters, reject: (error) => fn(error).taskRun(parameters) }));
+  return from((parameters) => task.taskRun({ ...parameters, reject: (error) => fn(error).taskRun(parameters) }));
 }
