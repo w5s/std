@@ -7,7 +7,6 @@ describe('index', () => {
     expect(Object.keys(Std).sort()).toEqual(
       [
         'Array',
-        'assign',
         'BigInt',
         'Boolean',
         'Codec',
@@ -16,7 +15,6 @@ describe('index', () => {
         'Struct',
         'Equal',
         'Enum',
-        'extend',
         'identity',
         'ignore',
         'Int',
