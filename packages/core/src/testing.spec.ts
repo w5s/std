@@ -13,6 +13,7 @@ describe('index', () => {
         'describeNumeric',
         'describeType',
         'taskStub',
+        'withTask',
       ].sort()
     );
   });
