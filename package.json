@@ -101,7 +101,7 @@
     "@w5s/ts-config": "2.0.10",
     "concurrently": "8.2.2",
     "cspell": "8.8.0",
-    "eslint": "8.57.0",
+    "eslint": "9.2.0",
     "lerna": "8.1.2",
     "markdown-magic": "2.6.1",
     "markdown-magic-package-json": "2.0.2",
