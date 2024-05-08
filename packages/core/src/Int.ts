@@ -4,43 +4,7 @@ import { Comparable } from './Comparable.js';
 import type { Bounded } from './Bounded.js';
 import type { Numeric } from './Numeric.js';
 import type { Tag } from './Tag.js';
-
-type Radix36 =
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9
-  | 10
-  | 11
-  | 12
-  | 13
-  | 14
-  | 15
-  | 16
-  | 17
-  | 18
-  | 19
-  | 20
-  | 21
-  | 22
-  | 23
-  | 24
-  | 25
-  | 26
-  | 27
-  | 28
-  | 29
-  | 30
-  | 31
-  | 32
-  | 33
-  | 34
-  | 35
-  | 36;
+import type { Radix36 } from './typing.js';
 
 // eslint-disable-next-line no-restricted-properties, prefer-exponentiation-operator
 const MAX_SAFE_INTEGER = (Math.pow(2, 53) - 1) as Int;

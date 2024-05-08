@@ -2,6 +2,8 @@ import type { Bounded } from './Bounded.js';
 import { Number as NumberType } from './Type/Number.js';
 import { Comparable } from './Comparable.js';
 import type { Numeric } from './Numeric.js';
+import { parse } from './Number/parse.js';
+import { format } from './Number/format.js';
 
 const NumberComparable = Comparable<number>({
   compare(left, right) {
@@ -39,4 +41,6 @@ export const Number = {
   ...NumberComparable,
   ...NumberNumeric,
   ...NumberBounded,
+  parse,
+  format,
 };
