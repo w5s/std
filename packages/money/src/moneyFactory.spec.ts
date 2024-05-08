@@ -30,10 +30,10 @@ describe('moneyFactory', () => {
     expect(currency).toEqual(
       Currency({
         code: TEST,
-        precision: Int.of(2),
+        precision: Int(2),
         name: 'test',
         namePlural: 'test',
-        rounding: Int.of(0),
+        rounding: Int(0),
         symbol: '#',
         symbolNative: '#',
       })
@@ -45,10 +45,10 @@ describe('moneyFactory', () => {
     });
     const currency = Currency({
       code: TEST,
-      precision: Int.of(2),
+      precision: Int(2),
       name: 'test',
       namePlural: 'test',
-      rounding: Int.of(0),
+      rounding: Int(0),
       symbol: '#',
       symbolNative: '#',
     });
@@ -61,10 +61,10 @@ describe('moneyFactory', () => {
     });
     const currency = Currency({
       code: TEST,
-      precision: Int.of(2),
+      precision: Int(2),
       name: 'test',
       namePlural: 'test',
-      rounding: Int.of(0),
+      rounding: Int(0),
       symbol: '#',
       symbolNative: '#',
     });

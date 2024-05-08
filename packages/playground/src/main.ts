@@ -24,7 +24,7 @@ function main() {
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
       retrying(_, {
-        policy: RetryPolicy.retries(Int.of(3)),
+        policy: RetryPolicy.retries(Int(3)),
         check: (_result) => Task.resolve({ done: false, value: Option.None }),
       }),
     (_) =>

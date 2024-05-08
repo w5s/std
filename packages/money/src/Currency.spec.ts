@@ -7,9 +7,9 @@ describe('Currency', () => {
   const anyProperties = {
     name: 'Name',
     namePlural: 'Name plural',
-    precision: Int.of(2),
+    precision: Int(2),
     code: 'EUR',
-    rounding: Int.of(0),
+    rounding: Int(0),
     symbol: '$',
     symbolNative: '$',
   };
@@ -30,7 +30,7 @@ describe('Currency', () => {
     expect(Currency(parameters)).toEqual(
       Currency({
         ...parameters,
-        rounding: Int.of(0),
+        rounding: Int(0),
       })
     );
   });
@@ -40,7 +40,7 @@ describe('Currency', () => {
     expect(Currency(parameters)).toEqual(
       Currency({
         ...parameters,
-        precision: Int.of(2),
+        precision: Int(2),
       })
     );
   });

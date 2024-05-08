@@ -8,7 +8,7 @@ describe('RetryState', () => {
   it('should return a new state', () => {
     expect(
       RetryState({
-        retryIndex: Int.of(1),
+        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
       })
@@ -37,7 +37,7 @@ describe('defaultRetryState', () => {
 });
 describe('RetryPolicy', () => {
   const anyState = RetryState({
-    retryIndex: Int.of(1),
+    retryIndex: Int(1),
     retryCumulativeDelay: TimeDuration.of(2),
     retryPreviousDelay: TimeDuration.of(3),
   });
@@ -85,14 +85,14 @@ describe('RetryPolicy', () => {
   });
 
   describe('.retries', () => {
-    const policy = RetryPolicy.retries(Int.of(2));
+    const policy = RetryPolicy.retries(Int(2));
 
     it('should return Option.Some(0), if retryIndex < count', () => {
       expect(
         Task.unsafeRunOk(
           policy(
             RetryState({
-              retryIndex: Int.of(0),
+              retryIndex: Int(0),
             })
           )
         )
@@ -101,7 +101,7 @@ describe('RetryPolicy', () => {
         Task.unsafeRunOk(
           policy(
             RetryState({
-              retryIndex: Int.of(1),
+              retryIndex: Int(1),
             })
           )
         )
@@ -112,7 +112,7 @@ describe('RetryPolicy', () => {
         Task.unsafeRunOk(
           policy(
             RetryState({
-              retryIndex: Int.of(2),
+              retryIndex: Int(2),
             })
           )
         )
@@ -121,7 +121,7 @@ describe('RetryPolicy', () => {
         Task.unsafeRunOk(
           policy(
             RetryState({
-              retryIndex: Int.of(3),
+              retryIndex: Int(3),
             })
           )
         )
@@ -156,13 +156,13 @@ describe('RetryPolicy', () => {
     it('should return a new state', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
       const state = RetryState({
-        retryIndex: Int.of(1),
+        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
       });
       expect(Task.unsafeRunOk(RetryPolicy.apply(policy, state))).toEqual(
         RetryState({
-          retryIndex: Int.of(2),
+          retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
           retryPreviousDelay: TimeDuration.of(1),
         })
@@ -178,13 +178,13 @@ describe('RetryPolicy', () => {
     it('should return a new state', async () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
       const state = RetryState({
-        retryIndex: Int.of(1),
+        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
       });
       await expect(Task.unsafeRunOk(RetryPolicy.applyAndDelay(policy, state))).resolves.toEqual(
         RetryState({
-          retryIndex: Int.of(2),
+          retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
           retryPreviousDelay: TimeDuration.of(1),
         })
