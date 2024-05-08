@@ -1,14 +1,19 @@
-import type { Int as IntType } from '../Int.js';
+import type { Tag } from '../Tag.js';
 import { define } from '../Tag/define.js';
+
+/**
+ * Integer value
+ */
+export type Int = number & Tag<'Int'>;
 
 /**
  * Int Type and Codec definition
  *
  * @namespace
  */
-export const Int = define<number, IntType>({
+export const Int = define<number, Int>({
   typeName: 'Int',
-  hasInstance(anyValue: unknown): anyValue is IntType {
+  hasInstance(anyValue: unknown): anyValue is Int {
     return Number.isSafeInteger(anyValue);
   },
   codecSchema: () => ({
