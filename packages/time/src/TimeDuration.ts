@@ -1,21 +1,13 @@
 /* eslint-disable @typescript-eslint/unbound-method */
 import type { Numeric } from '@w5s/core';
-import { Tag } from '@w5s/core/dist/Tag.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Number } from '@w5s/core/dist/Number.js';
+import { TimeDuration as TimeDurationType } from './Type/TimeDuration.js';
 
 const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
 const DAYS = HOURS * 24;
-
-const TimeDurationType = Tag.define<number, TimeDuration>({
-  typeName: 'TimeDuration',
-  hasInstance(anyValue: unknown): anyValue is TimeDuration {
-    return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
-  },
-  codecSchema: () => ({ type: 'number' }),
-});
 
 const TimeDurationComparable: Comparable<TimeDuration> = Comparable({
   compare: Number.compare as Comparable<TimeDuration>['compare'],
@@ -32,7 +24,7 @@ const TimeDurationNumeric: Numeric<TimeDuration> = {
 /**
  * Represent a duration in milliseconds
  */
-export type TimeDuration = number & Tag<'TimeDuration'>;
+export type TimeDuration = TimeDurationType;
 
 /**
  * A collection of functions to manipulate time duration (i.e amount of milliseconds)

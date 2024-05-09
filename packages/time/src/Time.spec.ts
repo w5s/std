@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Option, Ref, Result, Task } from '@w5s/core';
-import { describeCodec, describeComparable, describeType } from '@w5s/core/dist/testing.js';
-import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
+import { describeComparable } from '@w5s/core/dist/testing.js';
 import { Time } from './Time.js';
 import { TimeDuration } from './TimeDuration.js';
 
@@ -103,32 +102,6 @@ describe('Time', () => {
       expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
       expect(clearTimeoutSpy).toHaveBeenLastCalledWith(setTimeoutResult);
     });
-  });
-  describeType({ describe, it, expect })(Time, {
-    typeName: 'Time',
-    instances: () => [Time.of(0), Time.of(1)],
-    notInstances: () => [null, undefined, [], Number.NaN],
-  });
-  describeCodec({ describe, it, expect })(Time, {
-    encode: [
-      [Time(1), 1],
-      [Time(0), 0],
-    ],
-    decode: [
-      [0, Result.Ok(Time(0))],
-      [
-        null,
-        Result.Error(
-          DecodeError({
-            message: 'Cannot decode null as Time',
-            input: null,
-          })
-        ),
-      ],
-    ],
-    schema: () => ({
-      type: 'number',
-    }),
   });
   describeComparable({ describe, it, expect })(Time, {
     ordered: () => [Time.of(0), Time.of(1), Time.of(2)],

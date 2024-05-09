@@ -1,23 +1,15 @@
 import type { Option, Task } from '@w5s/core';
-import { Tag } from '@w5s/core/dist/Tag.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Number as NumberModule } from '@w5s/core/dist/Number.js';
 import { from } from '@w5s/core/dist/Task/from.js';
 import { TimeDuration } from './TimeDuration.js';
+import { Time as TimeType } from './Type/Time.js';
 
 // Call a function as a microtask
 const callImmediate: typeof globalThis.queueMicrotask =
   // eslint-disable-next-line promise/prefer-await-to-then
   typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
 const now = from<Time, never>(({ resolve }) => resolve(Date.now() as Time));
-
-const TimeType = Tag.define<number, Time>({
-  typeName: 'Time',
-  hasInstance(anyValue: unknown): anyValue is TimeDuration {
-    return typeof anyValue === 'number' && anyValue >= 0 && !Number.isNaN(anyValue);
-  },
-  codecSchema: () => ({ type: 'number' }),
-});
 
 const TimeComparable: Comparable<Time> = Comparable({
   compare: NumberModule.compare as Comparable<Time>['compare'],
@@ -26,7 +18,7 @@ const TimeComparable: Comparable<Time> = Comparable({
 /**
  * Represent a time typically returned by `Date.now()`
  */
-export type Time = number & Tag<'Time'>;
+export type Time = TimeType;
 
 /**
  * A collection of functions to manipulate time (i.e timestamp)
