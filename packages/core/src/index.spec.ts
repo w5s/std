@@ -12,6 +12,7 @@ describe('index', () => {
         'Codec',
         'Comparable',
         'Console',
+        'DecodeError',
         'Struct',
         'Equal',
         'Enum',

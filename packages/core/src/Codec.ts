@@ -1,6 +1,6 @@
 import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
-import type { DecodeError } from './Codec/DecodeError.js';
+import { DecodeError } from './Codec/DecodeError.js';
 import { decode } from './Codec/decode.js';
 import { encode } from './Codec/encode.js';
 import { lazy } from './Codec/lazy.js';
@@ -69,3 +69,5 @@ export namespace Codec {
     error: (message: string) => Result<T, DecodeError>;
   }
 }
+
+export { DecodeError } from './Codec/DecodeError.js';
