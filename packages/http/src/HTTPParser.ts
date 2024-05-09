@@ -1,5 +1,5 @@
 import type { JSONValue, Task } from '@w5s/core';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
 import type { HTTP } from './HTTP.js';
 import { HTTPError } from './HTTPError.js';
 
@@ -13,7 +13,7 @@ export namespace HTTPParser {
   function from<V>(fn: (response: HTTP.Response) => Promise<V>): HTTPParser<V> {
     return (response) =>
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      wrap(async ({ resolve, reject }) => {
+      taskFrom(async ({ resolve, reject }) => {
         try {
           resolve(await fn(response));
         } catch (error: unknown) {

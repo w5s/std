@@ -1,7 +1,7 @@
 import type { TaskCanceler, Task } from '@w5s/core';
 import type { TimeDuration } from '@w5s/time';
 import { CustomError } from '@w5s/error';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from } from '@w5s/core/dist/Task/from.js';
 
 /**
  * An error reported when a task times out
@@ -39,7 +39,7 @@ export function timeout<Value, Error>(
   task: Task<Value, Error>,
   delay: TimeDuration
 ): Task<Value, TimeoutError | Error> {
-  return wrap(({ resolve, reject, canceler, run }) => {
+  return from(({ resolve, reject, canceler, run }) => {
     const taskCancelerRef: TaskCanceler = { current: undefined };
     const taskCancel = () => {
       const { current } = taskCancelerRef;

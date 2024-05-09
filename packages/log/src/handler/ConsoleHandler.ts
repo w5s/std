@@ -1,3 +1,4 @@
+import { from } from '@w5s/core/dist/Task/from.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevel } from '../LogLevel.js';
 
@@ -18,11 +19,12 @@ const consoleLevel = LogLevel.match(
  * ```
  * @param logRecord
  */
-export const ConsoleHandler: LogHandler = (logRecord) => ({
-  taskRun({ resolve }) {
-    const prefix = logRecord.category.length > 0 ? [`[${logRecord.category}]`] : [];
-    const suffix = logRecord.message.map((part) => (typeof part === 'string' ? part : part[1]));
-    consoleLevel(logRecord.level)(console)(...prefix, ...suffix);
-    resolve();
-  },
-});
+export const ConsoleHandler: LogHandler = (logRecord) =>
+  from({
+    taskRun({ resolve }) {
+      const prefix = logRecord.category.length > 0 ? [`[${logRecord.category}]`] : [];
+      const suffix = logRecord.message.map((part) => (typeof part === 'string' ? part : part[1]));
+      consoleLevel(logRecord.level)(console)(...prefix, ...suffix);
+      resolve();
+    },
+  });

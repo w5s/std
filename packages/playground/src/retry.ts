@@ -10,9 +10,9 @@ import { all as taskAll } from '@w5s/core/dist/Task/all.js';
 import { resolve as taskResolve } from '@w5s/core/dist/Task/resolve.js';
 import type { TimeDuration } from '@w5s/time';
 import { Time } from '@w5s/time/dist/Time.js';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from } from '@w5s/core/dist/Task/from.js';
 
-const defaultRandom = wrap<number, never>(({ resolve }) => resolve(Math.random()));
+const defaultRandom = from<number, never>(({ resolve }) => resolve(Math.random()));
 const timeDelay = Time.delay.bind(Time);
 const resolveNone = taskResolve(undefined);
 

@@ -1,7 +1,7 @@
 import { invariant } from '@w5s/invariant';
 import type { Option, Ref, Task } from '@w5s/core';
 import { useRef } from '@w5s/application';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from } from '@w5s/core/dist/Task/from.js';
 import type { RandomValue } from './randomValue.js';
 import { application } from './application.js';
 
@@ -19,7 +19,7 @@ export interface RandomGenerator extends Task<RandomValue, never> {}
  * @param getNextValue - an impure function that returns a new value
  */
 export function RandomGenerator(getNextValue: () => RandomValue): RandomGenerator {
-  return wrap(({ resolve }) => resolve(getNextValue()));
+  return from(({ resolve }) => resolve(getNextValue()));
 }
 
 export namespace RandomGenerator {

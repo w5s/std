@@ -1,6 +1,6 @@
 import { invariant } from '@w5s/invariant';
 import type { Task, Tag, Option } from '@w5s/core';
-import { wrap } from '@w5s/core/dist/Task/wrap.js';
+import { from } from '@w5s/core/dist/Task/from.js';
 import { andThen } from '@w5s/core/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { HTTPParser } from './HTTPParser.js';
@@ -267,33 +267,31 @@ function applyFetch(
   fetchFn: NativeFetch,
   request: HTTP.Request
 ): Task<HTTP.Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
-  return wrap(
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    async ({ resolve, reject, canceler }) => {
-      const { url, ...requestInfo } = request;
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  return from(async ({ resolve, reject, canceler }) => {
+    const { url, ...requestInfo } = request;
 
-      const controller = new AbortController();
-      canceler.current = controller.abort.bind(controller);
+    const controller = new AbortController();
+    canceler.current = controller.abort.bind(controller);
 
-      if (isValidURL(url)) {
-        try {
-          const response = await fetchFn(url, {
-            signal: controller.signal,
-            ...requestInfo,
-          });
+    if (isValidURL(url)) {
+      try {
+        const response = await fetchFn(url, {
+          signal: controller.signal,
+          ...requestInfo,
+        });
 
-          resolve(response);
-        } catch (networkError: unknown) {
-          reject(HTTPError.NetworkError({ cause: networkError }));
-        }
-      } else {
-        reject(
-          HTTPError.InvalidURL({
-            message: 'Invalid URL',
-            input: url,
-          })
-        );
+        resolve(response);
+      } catch (networkError: unknown) {
+        reject(HTTPError.NetworkError({ cause: networkError }));
       }
+    } else {
+      reject(
+        HTTPError.InvalidURL({
+          message: 'Invalid URL',
+          input: url,
+        })
+      );
     }
-  );
+  });
 }
