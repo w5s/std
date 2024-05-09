@@ -1,28 +1,9 @@
-import type { Bounded } from './Bounded.js';
 import { Number as NumberType } from './Type/Number.js';
-import { Comparable } from './Comparable.js';
-import type { Numeric } from './Numeric.js';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
-
-const NumberComparable = Comparable<number>({
-  compare(left, right) {
-    return left === right ? 0 : left < right ? -1 : 1;
-  },
-});
-
-const NumberBounded: Bounded<number> = {
-  minValue: globalThis.Number.MIN_VALUE,
-  maxValue: globalThis.Number.MAX_VALUE,
-};
-
-const NumberNumeric: Numeric<number> = {
-  '+': (left, right) => left + right,
-  '-': (left, right) => left - right,
-  '*': (left, right) => left * right,
-  abs: Math.abs,
-  sign: Math.sign,
-};
+import { NumberBounded } from './Number/NumberBounded.js';
+import { NumberComparable } from './Number/NumberComparable.js';
+import { NumberNumeric } from './Number/NumberNumeric.js';
 
 /**
  * A collection of functions to manipulate `number`
