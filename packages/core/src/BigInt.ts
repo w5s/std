@@ -1,59 +1,8 @@
 import { BigInt as BigIntType } from './Type/BigInt.js';
-import { Comparable } from './Comparable.js';
-import type { Numeric } from './Numeric.js';
-import type { Option } from './Option.js';
-
-const BigIntComparable = Comparable<bigint>({
-  compare(left, right) {
-    return left === right ? 0 : left < right ? -1 : 1;
-  },
-});
-
-const BigIntNumeric: Numeric<bigint> = {
-  '+': (left, right) => left + right,
-  '-': (left, right) => left - right,
-  '*': (left, right) => left * right,
-  abs: (value) => (value < 0n ? -value : value),
-  sign: (value) => (value < 0n ? -1n : value > 0n ? 1n : 0n),
-};
-
-const BigIntFormat = {
-  /**
-   * Parse the expression and returns a bigint
-   *
-   * @example
-   * ```ts
-   * BigInt.parse('0b10101');// Option.Some(21n)
-   * BigInt.parse('1024');// Option.Some(1024n)
-   * BigInt.parse('0x123');// Option.Some(291n)
-   * BigInt.parse('0x123');// Option.Some(291n)
-   * BigInt.parse('invalid');// Option.None
-   * ```
-   * @param expression - the expression to parse
-   */
-  parse(expression: string): Option<bigint> {
-    try {
-      return globalThis.BigInt(expression);
-    } catch {
-      return undefined;
-    }
-  },
-
-  /**
-   * Return string representation of bigint using `radix`
-   *
-   * @example
-   * ```typescript
-   * BigInt.format(1024n, 10);// '1024'
-   * BigInt.format(1024n, 16);// '400'
-   * ```
-   * @param self - an integer
-   * @param radix - an optional base (ex: 10, 16)
-   */
-  format(self: bigint, radix?: number) {
-    return self.toString(radix);
-  },
-};
+import { parse } from './BigInt/parse.js';
+import { format } from './BigInt/format.js';
+import { BigIntComparable } from './BigInt/BigIntComparable.js';
+import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 
 /**
  * A collection of functions to manipulate `bigint`
@@ -70,6 +19,7 @@ const BigIntFormat = {
 export const BigInt = {
   ...BigIntComparable,
   ...BigIntNumeric,
-  ...BigIntFormat,
   ...BigIntType,
+  parse,
+  format,
 };
