@@ -1,7 +1,6 @@
 import { Comparable } from '../Comparable.js';
+import { compare } from './compare.js';
 
 export const BigIntComparable = Comparable<bigint>({
-  compare(left, right) {
-    return left === right ? 0 : left < right ? -1 : 1;
-  },
+  compare,
 });
