@@ -1,3 +1,5 @@
+import type { Type } from './Type.js';
+
 /**
  * An Immutable Data Object with a `type` identifier
  *
@@ -25,7 +27,7 @@ export namespace Struct {
    */
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
-  export interface Module<Model extends Struct<{ [Struct.type]: string }>> {
+  export interface Module<Model extends Struct<{ [Struct.type]: string }>> extends Type<Model> {
     /**
      * Construct a new model
      *
@@ -39,19 +41,6 @@ export namespace Struct {
      * @category Type
      */
     readonly typeName: Model[Struct.type];
-    /**
-     * Return true if `anyValue.type` is the same as factory `typeName`
-     *
-     * @example
-     * // type MyRecord = { [Struct.type]: 'MyRecord', anyProperty: string };
-     * const anyValue: unknown;
-     * if(MyRecord.hasInstance(anyValue)) {
-     *   console.log(anyValue.anyProperty);// type is correctly refined here
-     * }
-     * @category Type
-     * @param anyValue - the value to be tested
-     */
-    hasInstance(this: void, anyValue: unknown): anyValue is Model;
   }
   /**
    * The type property discriminator
