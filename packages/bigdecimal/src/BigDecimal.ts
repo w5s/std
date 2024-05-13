@@ -5,7 +5,7 @@ import { of } from './BigDecimal/of.js';
 import { scale } from './BigDecimal/scale.js';
 import { normalize } from './BigDecimal/normalize.js';
 import { BigDecimalNumeric } from './BigDecimal/BigDecimalNumeric.js';
-import { BigDecimal as BigDecimalType } from './Type/BigDecimal.js';
+import { BigDecimal as BigDecimalType } from './BigDecimal/BigDecimal.js';
 
 /**
  * Valid BigDecimal string representation

@@ -1,4 +1,4 @@
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 
 /**
  * Returns a string representation of a BigDecimal

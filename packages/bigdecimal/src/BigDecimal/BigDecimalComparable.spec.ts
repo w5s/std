@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { describeComparable } from '@w5s/core/dist/testing.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
-import { BigDecimal } from '../Type/BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 describeComparable({ describe, it, expect })(BigDecimalComparable, {
   ordered: () => [

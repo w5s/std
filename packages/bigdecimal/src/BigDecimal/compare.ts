@@ -1,5 +1,5 @@
 import { compare as bigIntCompare } from '@w5s/core/dist/BigInt/compare.js';
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 import { scaleValue } from './scaleValue.js';
 
 export function compare(left: BigDecimal, right: BigDecimal): number {

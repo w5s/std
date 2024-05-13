@@ -1,4 +1,4 @@
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 
 /**
  * Returns a new `BigDecimal` from `value` and `scale`

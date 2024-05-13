@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { scale } from './scale.js';
-import { BigDecimal } from '../Type/BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 describe(scale, () => {
   it('returns identity if scale is the same', () => {

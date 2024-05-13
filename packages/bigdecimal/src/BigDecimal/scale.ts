@@ -1,4 +1,4 @@
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 import { scaleValue } from './scaleValue.js';
 import { of } from './of.js';
 

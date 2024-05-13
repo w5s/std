@@ -1,6 +1,6 @@
 import type { Numeric } from '@w5s/core';
 import { BigIntNumeric } from '@w5s/core/dist/BigInt/BigIntNumeric.js';
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 import { scaleValue } from './scaleValue.js';
 

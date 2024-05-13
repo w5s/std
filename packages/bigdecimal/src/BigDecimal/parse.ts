@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import type { BigDecimal } from '../BigDecimal.js';
+import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 
 /**

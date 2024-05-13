@@ -1,7 +1,7 @@
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { invariant } from '@w5s/invariant';
-import { of } from '../BigDecimal/of.js';
-import { parse } from '../BigDecimal/parse.js';
+import { of } from './of.js';
+import { parse } from './parse.js';
 import type { BigDecimalString } from '../BigDecimal.js';
 
 /**

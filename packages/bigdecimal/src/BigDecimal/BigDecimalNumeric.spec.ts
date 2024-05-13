@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { describeNumeric } from '@w5s/core/dist/testing.js';
 import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
-import { BigDecimal } from '../Type/BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 describe('BigDecimalNumeric', () => {
   describeNumeric({ describe, it, expect })(

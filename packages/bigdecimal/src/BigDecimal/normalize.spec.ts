@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { normalize } from './normalize.js';
-import { BigDecimal } from '../Type/BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 describe(normalize, () => {
   it('returns a normalized value (i.e. with no trailing 0 scale)', () => {

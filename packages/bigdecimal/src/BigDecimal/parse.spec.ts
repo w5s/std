@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { parse } from './parse.js';
-import { BigDecimal } from '../Type/BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 describe(parse, () => {
   it.each([
