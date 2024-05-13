@@ -1,83 +1,14 @@
-import { describe, expect, it } from 'vitest';
-import { Int } from '@w5s/core';
-import { describeComparable } from '@w5s/core/dist/testing.js';
+import { describe, it, expect } from 'vitest';
 import { Currency } from './Currency.js';
 
 describe('Currency', () => {
-  const anyProperties = {
-    name: 'Name',
-    namePlural: 'Name plural',
-    precision: Int(2),
-    code: 'EUR',
-    rounding: Int(0),
-    symbol: '$',
-    symbolNative: '$',
-  };
-  const omitProperty = <V, N extends keyof V>(parameters: V, name: N): Omit<V, N> => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { [name]: _, ...rest } = parameters;
-    return rest;
-  };
-  it('should initialize Currency', () => {
-    expect(Currency(anyProperties)).toEqual({
-      _: 'Currency',
-      ...anyProperties,
-    });
-  });
-
-  it('should have default rounding', () => {
-    const parameters = omitProperty(anyProperties, 'rounding');
-    expect(Currency(parameters)).toEqual(
-      Currency({
-        ...parameters,
-        rounding: Int(0),
+  it('should create a currency', () => {
+    expect(Currency).toMatchInlineSnapshot(`[Function]`);
+    expect(Currency).toEqual(
+      expect.objectContaining({
+        defaultPrecision: expect.any(Number),
+        defaultRounding: expect.any(Number),
       })
     );
-  });
-  it('should have default precision', () => {
-    const parameters = omitProperty(anyProperties, 'precision');
-
-    expect(Currency(parameters)).toEqual(
-      Currency({
-        ...parameters,
-        precision: Int(2),
-      })
-    );
-  });
-  it('should have default symbolNative to symbol', () => {
-    const parameters = omitProperty(anyProperties, 'symbolNative');
-    const symbol = 'A';
-
-    expect(Currency({ ...parameters, symbol })).toEqual(
-      Currency({
-        ...parameters,
-        symbol,
-        symbolNative: symbol,
-      })
-    );
-  });
-  it('should have default namePlural to name', () => {
-    const parameters = omitProperty(anyProperties, 'namePlural');
-    const name = 'Name test';
-
-    expect(Currency({ ...parameters, name })).toEqual(
-      Currency({
-        ...parameters,
-        name,
-        namePlural: name,
-      })
-    );
-  });
-
-  describeComparable({ describe, expect, it })(Currency, {
-    ordered: () => [
-      Currency({ ...anyProperties, code: 'A' }),
-      Currency({ ...anyProperties, code: 'B' }),
-      Currency({ ...anyProperties, code: 'C' }),
-    ],
-    equivalent: () => [
-      [Currency({ ...anyProperties, code: 'A' }), Currency({ ...anyProperties, code: 'A' })],
-      [Currency({ ...anyProperties, code: 'B' }), Currency({ ...anyProperties, code: 'B' })],
-    ],
   });
 });

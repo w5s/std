@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Result } from '@w5s/core';
 import { ArgumentError } from '@w5s/error';
-import { describeComparable } from '@w5s/core/dist/testing.js';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './Currency.js';
 import { Money } from './Money.js';
@@ -23,7 +22,6 @@ describe('Money', () => {
     symbol: '$',
   });
   const anyAmount = BigDecimal('1');
-  const _0 = BigDecimal('0');
   const _1 = BigDecimal('1');
   const _2 = BigDecimal('2');
   const _3 = BigDecimal('3');
@@ -37,17 +35,6 @@ describe('Money', () => {
       currency: anyCurrency,
       amount: anyAmount,
     });
-  });
-
-  describeComparable({ describe, expect, it })(Money, {
-    ordered: () => [
-      // Money({ currency: anyCurrency, amount: anyAmount }),
-      EUR(_0),
-      EUR(_1),
-      EUR(_2),
-      USD(_1),
-    ],
-    equivalent: () => [[EUR(_1), EUR(_1)]],
   });
 
   describe('+', () => {

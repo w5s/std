@@ -1,7 +1,7 @@
 import type { Option, Record } from '@w5s/core';
 import { useRef, type Application } from '@w5s/application';
 import { application } from './application.js';
-import type { Currency } from './Currency.js';
+import type { Currency } from './Currency/Currency.js';
 
 export interface CurrencyRegistry {
   /**
