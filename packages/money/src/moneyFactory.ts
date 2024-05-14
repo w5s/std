@@ -1,8 +1,9 @@
 import { invariant } from '@w5s/invariant';
-import { BigDecimal, type BigDecimalString } from '@w5s/bigdecimal';
+import { BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimal.js';
+import type { BigDecimalString } from '@w5s/bigdecimal';
 import type { Currency } from './Currency/Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
-import type { Money } from './Money/Money.js';
+import { Money } from './Money/Money.js';
 
 export function moneyFactory(
   currencyCode: Currency['code'],
