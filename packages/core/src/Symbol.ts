@@ -14,6 +14,11 @@ export interface SymbolConstructor
    * Enum values
    */
   readonly enumValues: unique symbol;
+
+  /**
+   * NodeJS inspect symbol
+   */
+  readonly nodeInspect: unique symbol;
 }
 
 /**
@@ -39,4 +44,5 @@ export const Symbol: SymbolConstructor = {
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
   enumKeys: GlobalSymbol.for('@w5s/enumKeys') as SymbolConstructor['enumKeys'],
   enumValues: GlobalSymbol.for('@w5s/enumValues') as SymbolConstructor['enumValues'],
+  nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom') as SymbolConstructor['nodeInspect'],
 };
