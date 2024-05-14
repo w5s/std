@@ -1,4 +1,4 @@
-import { BigDecimal } from '@w5s/bigdecimal';
+import { BigDecimal, type BigDecimalString } from '@w5s/bigdecimal';
 import { describe, it, expect } from 'vitest';
 import { Result } from '@w5s/core';
 import { ArgumentError } from '@w5s/error';
@@ -17,19 +17,16 @@ describe('MoneyNumeric', () => {
     code: 'USD',
     symbol: '$',
   });
-  const anyAmount = BigDecimal('1');
-  const _1 = BigDecimal('1');
-  const _2 = BigDecimal('2');
-  const _3 = BigDecimal('3');
-  const money = (currency = currencyEuro, amount = anyAmount) => Money({ currency, amount });
-  const EUR = (amount = anyAmount) => money(currencyEuro, amount);
-  const USD = (amount = anyAmount) => money(currencyDollar, amount);
+  const anyAmount = '1';
+  const money = (currency: Currency, amount: BigDecimalString) => Money({ currency, amount: BigDecimal(amount) });
+  const EUR = (amount: BigDecimalString) => money(currencyEuro, amount);
+  const USD = (amount: BigDecimalString) => money(currencyDollar, amount);
 
   describe('+', () => {
     it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
-      [EUR(_1), EUR(_2), Result.Ok(EUR(_3))],
-      [EUR(_2), EUR(_1), Result.Ok(EUR(_3))],
+      [EUR('1'), EUR('2'), Result.Ok(EUR('3'))],
+      [EUR('2'), EUR('1'), Result.Ok(EUR('3'))],
     ])('should return correct result', (left, right, expected) => {
       expect(MoneyNumeric['+'](left, right)).toEqual(expected);
     });
@@ -37,10 +34,18 @@ describe('MoneyNumeric', () => {
   describe('-', () => {
     it.each([
       [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
-      [EUR(_2), EUR(_1), Result.Ok(EUR(_1))],
-      [EUR(_1), EUR(_2), Result.Ok(EUR(BigDecimal('-1')))],
+      [EUR('2'), EUR('1'), Result.Ok(EUR('1'))],
+      [EUR('1'), EUR('2'), Result.Ok(EUR('-1'))],
     ])('should return correct result', (left, right, expected) => {
       expect(MoneyNumeric['-'](left, right)).toEqual(expected);
+    });
+  });
+  describe('*', () => {
+    it.each([
+      [EUR('2'), BigDecimal('2'), EUR('4')],
+      [EUR('1.2'), BigDecimal('2.2'), EUR('2.64')],
+    ])('should return correct result', (base, multiplier, expected) => {
+      expect(MoneyNumeric['*'](base, multiplier)).toEqual(expected);
     });
   });
 });

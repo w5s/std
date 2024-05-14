@@ -3,6 +3,7 @@ import { ArgumentError } from '@w5s/error/dist/ArgumentError.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { BigDecimalNumeric } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNumeric.js';
+import type { BigDecimal } from '@w5s/bigdecimal';
 import { compare as currencyCompare } from '../Currency/compare.js';
 import { Money } from './Money.js';
 
@@ -48,4 +49,20 @@ export const MoneyNumeric = {
    * @param right - Right operand money
    */
   '-': createOperator(BigDecimalNumeric['-']),
+
+  /**
+   * Multiply operator
+   *
+   * @example
+   * ```typescript
+   * Money['*'](EUR(2), BigDecimal('2'));// EUR("4")
+   * ```
+   * @param money - money object
+   * @param multiplier - multiplication factor
+   */
+  '*': (money: Money, multiplier: BigDecimal) =>
+    Money({
+      currency: money.currency,
+      amount: BigDecimalNumeric['*'](money.amount, multiplier),
+    }),
 };
