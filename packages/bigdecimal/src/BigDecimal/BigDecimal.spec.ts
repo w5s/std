@@ -8,6 +8,11 @@ describe('()', () => {
       value: 1n,
       scale: 100,
     });
+    expect(BigDecimal(1n)).toEqual({
+      _: 'BigDecimal',
+      value: 1n,
+      scale: 0,
+    });
   });
   it('constructs from string', () => {
     expect(BigDecimal('2')).toEqual(BigDecimal(2n, 0));

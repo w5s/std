@@ -31,7 +31,7 @@ describe('BigDecimalNumeric', () => {
       ],
       '*': [
         { call: [BigDecimal('0'), BigDecimal('0')], returns: BigDecimal('0') },
-        // { call: [BigDecimal('2.2'), BigDecimal('0.5')], returns: BigDecimal('1.1') },
+        { call: [BigDecimal('2.2'), BigDecimal('0.5')], returns: BigDecimal('1.1') },
       ],
     }
   );

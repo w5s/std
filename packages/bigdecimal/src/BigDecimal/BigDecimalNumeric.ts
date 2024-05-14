@@ -19,7 +19,7 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
 export const BigDecimalNumeric: Numeric<BigDecimal> = {
   '+': combine2((l, r) => l + r),
   '-': combine2((l, r) => l - r),
-  '*': combine2((l, r) => l * r),
+  '*': (l, r) => of(l.value * r.value, l.scale + r.scale),
   abs: (value) => of(bigIntAbs(value.value), value.scale),
   sign: (value) => of(bigIntSign(value.value), 0),
 };

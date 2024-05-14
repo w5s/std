@@ -26,10 +26,10 @@ export const BigDecimal = Struct.defineWith(
     _
   ): {
     (stringValue: BigDecimalString): BigDecimal;
-    (value: bigint, scale: number): BigDecimal;
+    (value: bigint, scale?: number): BigDecimal;
   } =>
     (value: string | bigint, scale?: number): BigDecimal =>
       typeof value === 'string'
         ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
-        : of(value, scale as number)
+        : of(value, scale ?? 0)
 );
