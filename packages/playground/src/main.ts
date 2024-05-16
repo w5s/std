@@ -9,24 +9,30 @@ import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
 import { timeout, TimeoutError } from './timeout.js';
 
-function main() {
+function sendMessage(text: string) {
   const client = Slack({ token: 'token' });
-  const amount = EUR('1.55');
-  const task = pipe(randomUUID()).to(
-    (_) =>
-      Task.andThen(_, (uuid) =>
-        Slack.Chat.postMessage(client, {
-          channel: Slack.ChannelId('my-channel'),
-          text: uuid + String(amount),
-        })
-      ),
+
+  return pipe(
+    Slack.Chat.postMessage(client, {
+      channel: Slack.ChannelId('my-channel'),
+      text,
+    })
+  ).to(
     (_) => timeout(_, TimeDuration.minutes(1)),
-    (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
       retrying(_, {
         policy: RetryPolicy.retries(Int(3)),
         check: (_result) => Task.resolve({ done: false, value: Option.None }),
-      }),
+      })
+  );
+}
+
+function main() {
+  const amount = EUR('1.55');
+
+  const task = pipe(randomUUID()).to(
+    (_) => Task.andThen(_, (uuid) => sendMessage(uuid + String(amount))),
+    (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
       Task.orElse(_, (error) => {
         switch (error.name) {
@@ -54,3 +60,5 @@ function main() {
 }
 
 void Task.unsafeRun(main());
+// alternate syntax
+void main().run();
