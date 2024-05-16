@@ -17,7 +17,7 @@ describe(parse, () => {
     expect(parse('1.1', 10)).toBe(Option.Some(1));
   });
   it('should parse expression bigger than max', () => {
-    expect(parse('99007199254740991', 10)).toBe(Option.Some(IntBounded.maxValue));
+    expect(parse(String(IntBounded.maxValue + 1), 10)).toBe(Option.None);
   });
   it('should parse invalid', () => {
     expect(parse('invalid', 10)).toBe(Option.None);

@@ -4,6 +4,7 @@ import { format } from './Number/format.js';
 import { NumberBounded } from './Number/NumberBounded.js';
 import { NumberComparable } from './Number/NumberComparable.js';
 import { NumberNumeric } from './Number/NumberNumeric.js';
+import { NumberSigned } from './Number/NumberSigned.js';
 
 /**
  * A collection of functions to manipulate `number`
@@ -21,6 +22,7 @@ export const Number = {
   ...NumberType,
   ...NumberComparable,
   ...NumberNumeric,
+  ...NumberSigned,
   ...NumberBounded,
   parse,
   format,

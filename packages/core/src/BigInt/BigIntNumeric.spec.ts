@@ -10,16 +10,6 @@ describe('BigIntNumeric', () => {
       ...BigIntNumeric,
     },
     {
-      abs: [
-        { call: [-1n], returns: 1n },
-        { call: [0n], returns: 0n },
-        { call: [1n], returns: 1n },
-      ],
-      sign: [
-        { call: [-6n], returns: -1n },
-        { call: [0n], returns: 0n },
-        { call: [6n], returns: 1n },
-      ],
       '+': [
         { call: [1n, 1n], returns: 2n },
         { call: [1n, -1n], returns: 0n },

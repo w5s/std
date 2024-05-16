@@ -3,8 +3,9 @@ import { IntBounded } from './Int/IntBounded.js';
 import { IntComparable } from './Int/IntComparable.js';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
-import { from } from './Int/from.js';
+import { fromNumber } from './Int/fromNumber.js';
 import { IntNumeric } from './Int/IntNumeric.js';
+import { IntSigned } from './Int/IntSigned.js';
 
 /**
  * Integer value
@@ -22,7 +23,8 @@ export const Int = Object.assign(IntType, {
   ...IntComparable,
   ...IntBounded,
   ...IntNumeric,
+  ...IntSigned,
   format,
   parse,
-  from,
+  fromNumber,
 });

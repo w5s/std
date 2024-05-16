@@ -6,6 +6,7 @@ import { scale } from './BigDecimal/scale.js';
 import { normalize } from './BigDecimal/normalize.js';
 import { BigDecimalNumeric } from './BigDecimal/BigDecimalNumeric.js';
 import { BigDecimal as BigDecimalType } from './BigDecimal/BigDecimal.js';
+import { BigDecimalSigned } from './BigDecimal/BigDecimalSigned.js';
 
 /**
  * Valid BigDecimal string representation
@@ -22,6 +23,7 @@ export type BigDecimal = BigDecimalType;
 export const BigDecimal = Object.assign(BigDecimalType, {
   ...BigDecimalComparable,
   ...BigDecimalNumeric,
+  ...BigDecimalSigned,
   normalize,
   of,
   scale,

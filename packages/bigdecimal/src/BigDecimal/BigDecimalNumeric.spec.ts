@@ -11,16 +11,6 @@ describe('BigDecimalNumeric', () => {
       ...BigDecimalNumeric,
     },
     {
-      sign: [
-        { call: [BigDecimal('0')], returns: BigDecimal('0') },
-        { call: [BigDecimal('1.2')], returns: BigDecimal('1') },
-        { call: [BigDecimal('-1.2')], returns: BigDecimal('-1') },
-      ],
-      abs: [
-        { call: [BigDecimal('0')], returns: BigDecimal('0') },
-        { call: [BigDecimal('1.2')], returns: BigDecimal('1.2') },
-        { call: [BigDecimal('-1.2')], returns: BigDecimal('1.2') },
-      ],
       '+': [
         { call: [BigDecimal('0'), BigDecimal('0')], returns: BigDecimal('0') },
         { call: [BigDecimal('1.01'), BigDecimal('2.2')], returns: BigDecimal('3.21') },

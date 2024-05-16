@@ -13,12 +13,15 @@ const TimeDurationComparable: Comparable<TimeDuration> = Comparable({
   compare: Number.compare as Comparable<TimeDuration>['compare'],
 });
 
+const TimeDurationSigned: Numeric.Signed<TimeDuration> = {
+  abs: Number.abs as Numeric.Signed<TimeDuration>['abs'],
+  sign: Number.sign as Numeric.Signed<TimeDuration>['sign'],
+};
+
 const TimeDurationNumeric: Numeric<TimeDuration> = {
   '+': Number['+'] as Numeric<TimeDuration>['+'],
   '-': Number['-'] as Numeric<TimeDuration>['-'],
   '*': Number['*'] as Numeric<TimeDuration>['*'],
-  abs: Number.abs as Numeric<TimeDuration>['abs'],
-  sign: Number.sign as Numeric<TimeDuration>['sign'],
 };
 
 /**
@@ -34,6 +37,7 @@ export type TimeDuration = TimeDurationType;
 export const TimeDuration = Object.assign(TimeDurationType, {
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
+  ...TimeDurationSigned,
 
   /**
    * Return a duration from a number

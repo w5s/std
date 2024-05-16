@@ -11,6 +11,7 @@ describe('index', () => {
         'describeComparable',
         'describeEqual',
         'describeNumeric',
+        'describeSigned',
         'describeType',
         'taskStub',
         'withTask',
