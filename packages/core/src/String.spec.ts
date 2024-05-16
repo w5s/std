@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { String } from './String.js';
-import { describeType } from './testing.js';
 import { of } from './String/of.js';
 import { at } from './String/at.js';
 import { isEmpty } from './String/isEmpty.js';
@@ -14,9 +13,13 @@ import { join } from './String/join.js';
 import { fromCodePoint } from './String/fromCodePoint.js';
 import { indexOf } from './String/indexOf.js';
 import { lastIndexOf } from './String/lastIndexOf.js';
+import { StringComparable } from './String/StringComparable.js';
+import { Type } from './Type.js';
 
 describe('String', () => {
   it('is an alias to functions', () => {
+    expect(String).toEqual(expect.objectContaining(StringComparable));
+    expect(String).toEqual(expect.objectContaining(Type.String));
     expect(String).toEqual(
       expect.objectContaining({
         at,
@@ -34,10 +37,5 @@ describe('String', () => {
         startsWith,
       })
     );
-  });
-  describeType({ describe, it, expect })(String, {
-    typeName: 'String',
-    instances: () => ['abc'],
-    notInstances: () => [null, undefined, 1, {}],
   });
 });

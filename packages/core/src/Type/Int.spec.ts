@@ -13,6 +13,7 @@ describe('Int', () => {
   describeCodec({ describe, it, expect })(Int, {
     decode: [
       [1, Result.Ok(Int(1))],
+      [1.1, Result.Error(DecodeError({ message: 'Cannot decode 1.1 as Int', input: null }))],
       [null, Result.Error(DecodeError({ message: 'Cannot decode null as Int', input: null }))],
     ],
     encode: [
