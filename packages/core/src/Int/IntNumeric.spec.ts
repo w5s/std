@@ -1,30 +1,25 @@
 import { describe, it, expect } from 'vitest';
-import { describeNumeric } from '../testing.js';
+import { describeCheckedAdd, describeCheckedMultiply, describeCheckedSubtract } from '../testing.js';
 import { IntNumeric } from './IntNumeric.js';
-// import { IntBounded } from './IntBounded.js';
-import { IntComparable } from './IntComparable.js';
+import { Option } from '../Option.js';
+import { Int } from '../Int.js';
+import { IntBounded } from './IntBounded.js';
 
 describe('IntNumeric', () => {
-  // const { minValue, maxValue } = IntBounded;
-
-  describeNumeric({ describe, it, expect })(
-    { ...IntComparable, ...IntNumeric },
-    {
-      '+': [
-        { call: [1, 1], returns: 2 },
-        { call: [1, -1], returns: 0 },
-        // { call: [1, maxValue], returns: maxValue },
-      ],
-      '-': [
-        { call: [1, 1], returns: 0 },
-        { call: [1, -1], returns: 2 },
-        // { call: [minValue, 1], returns: minValue },
-      ],
-      '*': [
-        { call: [1, 1], returns: 1 },
-        { call: [2, 3], returns: 6 },
-        { call: [3, 2], returns: 6 },
-      ],
-    }
-  );
+  describeCheckedAdd({ describe, it, expect })(IntNumeric, [
+    { call: [Int(1), Int(1)], returns: Option.Some(Int(2)) },
+    { call: [Int(1), Int(-1)], returns: Option.Some(Int(0)) },
+    { call: [Int(1), IntBounded.maxValue], returns: Option.None },
+  ]);
+  describeCheckedSubtract({ describe, it, expect })(IntNumeric, [
+    { call: [Int(1), Int(1)], returns: Option.Some(Int(0)) },
+    { call: [Int(1), Int(-1)], returns: Option.Some(Int(2)) },
+    { call: [IntBounded.minValue, Int(1)], returns: Option.None },
+  ]);
+  describeCheckedMultiply({ describe, it, expect })(IntNumeric, [
+    { call: [Int(1), Int(1)], returns: Option.Some(Int(1)) },
+    { call: [Int(2), Int(3)], returns: Option.Some(Int(6)) },
+    { call: [Int(3), Int(2)], returns: Option.Some(Int(6)) },
+    { call: [IntBounded.minValue, Int(2)], returns: Option.None },
+  ]);
 });

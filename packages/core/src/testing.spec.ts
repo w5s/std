@@ -7,6 +7,9 @@ describe('index', () => {
       [
         // public exports
         'assertType',
+        'describeCheckedAdd',
+        'describeCheckedSubtract',
+        'describeCheckedMultiply',
         'describeCodec',
         'describeComparable',
         'describeEqual',

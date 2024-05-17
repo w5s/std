@@ -1,4 +1,7 @@
 export * from './testing/assertType.js';
+export * from './testing/describeCheckedAdd.js';
+export * from './testing/describeCheckedSubtract.js';
+export * from './testing/describeCheckedMultiply.js';
 export * from './testing/describeCodec.js';
 export * from './testing/describeComparable.js';
 export * from './testing/describeEqual.js';

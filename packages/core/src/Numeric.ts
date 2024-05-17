@@ -24,10 +24,7 @@ export namespace Numeric {
     sign(value: T): T;
   }
 
-  /**
-   * A trait that represents a checked addition operator than can return optional result
-   */
-  export interface CheckedAdd<T> {
+  export interface CheckedAdd<Left, Right = Left, Return = Left> {
     /**
      * Addition operator that returns `None` instead of wrapping around on overflow.
      *
@@ -41,9 +38,9 @@ export namespace Numeric {
      * @param left - the left operand
      * @param right - the right operand
      */
-    '+?'(left: T, right: T): Option<T>;
+    '+?'(left: Left, right: Right): Option<Return>;
   }
-  export interface CheckedSubtract<T> {
+  export interface CheckedSubtract<Left, Right = Left, Return = Left> {
     /**
      * Subtraction operator that returns `None` instead of wrapping around on overflow.
      *
@@ -57,7 +54,24 @@ export namespace Numeric {
      * @param left - the left operand
      * @param right - the right operand
      */
-    '-?'(left: T, right: T): Option<T>;
+    '-?'(left: Left, right: Right): Option<Return>;
+  }
+
+  export interface CheckedMultiply<Left, Right = Left, Return = Left> {
+    /**
+     * Multiplication operator that returns `None` instead of wrapping around on overflow.
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric<T> = ...;
+     * const result = Numeric['*?'](left, right);// represents (left * right)
+     * ```
+     * @category Numeric
+     * @param left - the left operand
+     * @param right - the right operand
+     */
+    '*?'(left: Left, right: Right): Option<Return>;
   }
 }
 
