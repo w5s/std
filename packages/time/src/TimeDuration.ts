@@ -1,28 +1,13 @@
-/* eslint-disable @typescript-eslint/unbound-method */
-import type { Numeric } from '@w5s/core';
-import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { Number } from '@w5s/core/dist/Number.js';
-import { TimeDuration as TimeDurationType } from './Type/TimeDuration.js';
+import { TimeDuration as TimeDurationType } from './TimeDuration/TimeDuration.js';
+import { TimeDurationSigned } from './TimeDuration/TimeDurationSigned.js';
+import { TimeDurationComparable } from './TimeDuration/TimeDurationComparable.js';
+import { of } from './TimeDuration/of.js';
+import { TimeDurationNumeric } from './TimeDuration/TimeDurationNumeric.js';
 
 const SECONDS = 1000;
 const MINUTES = SECONDS * 60;
 const HOURS = MINUTES * 60;
 const DAYS = HOURS * 24;
-
-const TimeDurationComparable: Comparable<TimeDuration> = Comparable({
-  compare: Number.compare as Comparable<TimeDuration>['compare'],
-});
-
-const TimeDurationSigned: Numeric.Signed<TimeDuration> = {
-  abs: Number.abs as Numeric.Signed<TimeDuration>['abs'],
-  sign: Number.sign as Numeric.Signed<TimeDuration>['sign'],
-};
-
-const TimeDurationNumeric: Numeric<TimeDuration> = {
-  '+': Number['+'] as Numeric<TimeDuration>['+'],
-  '-': Number['-'] as Numeric<TimeDuration>['-'],
-  '*': Number['*'] as Numeric<TimeDuration>['*'],
-};
 
 /**
  * Represent a duration in milliseconds
@@ -38,20 +23,7 @@ export const TimeDuration = Object.assign(TimeDurationType, {
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
   ...TimeDurationSigned,
-
-  /**
-   * Return a duration from a number
-   *
-   * @example
-   * ```typescript
-   * const duration = TimeDuration.of(0);// typeof duration === 'number'
-   * ```
-   * @category Constructor
-   * @param milliseconds - Number of milliseconds
-   */
-  of(milliseconds: number) {
-    return TimeDurationType.wrap(milliseconds);
-  },
+  of,
 
   /**
    * Return a duration of `amount` milliseconds

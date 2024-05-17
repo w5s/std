@@ -1,19 +1,10 @@
-import type { Option, Task } from '@w5s/core';
-import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { Number as NumberModule } from '@w5s/core/dist/Number.js';
-import { from } from '@w5s/core/dist/Task/from.js';
+import type { Option } from '@w5s/core';
 import { TimeDuration } from './TimeDuration.js';
-import { Time as TimeType } from './Type/Time.js';
-
-// Call a function as a microtask
-const callImmediate: typeof globalThis.queueMicrotask =
-  // eslint-disable-next-line promise/prefer-await-to-then
-  typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
-const now = from<Time, never>(({ resolve }) => resolve(Date.now() as Time));
-
-const TimeComparable: Comparable<Time> = Comparable({
-  compare: NumberModule.compare as Comparable<Time>['compare'],
-});
+import { Time as TimeType } from './Time/Time.js';
+import { of } from './Time/of.js';
+import { now } from './Time/now.js';
+import { delay } from './Time/delay.js';
+import { TimeComparable } from './Time/TimeComparable.js';
 
 /**
  * Represent a time typically returned by `Date.now()`
@@ -27,20 +18,9 @@ export type Time = TimeType;
  */
 export const Time = Object.assign(TimeType, {
   ...TimeComparable,
-  /**
-   * Create a new Time value
-   *
-   * @example
-   * ```typescript
-   * const time = Time.of(0);
-   * ```
-   * @category Constructor
-   * @param milliseconds - the value in milliseconds
-   */
-  of(milliseconds: number): Time {
-    return TimeType.wrap(milliseconds);
-  },
-
+  of,
+  now,
+  delay,
   /**
    * Parse an ISO 8601 string. If invalid, returns `Option.None`
    *
@@ -100,53 +80,5 @@ export const Time = Object.assign(TimeType, {
    */
   diff(left: Time, right: Time): TimeDuration {
     return TimeDuration.of(left - right);
-  },
-
-  /**
-   * A task that resolves the current time in milliseconds.
-   *
-   * @example
-   * ```typescript
-   * const program = () => Task.andThen(Time.now(), (currentTime) => {
-   *   // use currentTime
-   * });
-   * ```
-   */
-  now(): Task<Time, never> {
-    return now;
-  },
-
-  /**
-   * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
-   *
-   * @example
-   * ```typescript
-   * const wait2s = Time.delay(TimeDuration.seconds(2));
-   * const logTime = Task.andThen(wait2s, (time) => Console.debug(time));
-   * Task.unsafeRun(logTime);// wait 2 seconds then console.debug(Date.now())
-   * ```
-   * @param duration - delay in milliseconds to wait
-   */
-  delay(duration: TimeDuration): Task<Time, never> {
-    return from(({ resolve, canceler }) => {
-      let timeoutId: ReturnType<typeof setTimeout> | undefined;
-
-      if (duration <= 0) {
-        callImmediate(() => resolve(Date.now() as Time));
-      } else {
-        // Set Canceler
-        canceler.current = () => {
-          if (timeoutId != null) {
-            clearTimeout(timeoutId);
-            timeoutId = undefined;
-          }
-        };
-        // Run timeout
-        timeoutId = setTimeout(() => {
-          timeoutId = undefined;
-          resolve(Date.now() as Time);
-        }, duration);
-      }
-    });
   },
 });
