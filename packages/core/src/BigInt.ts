@@ -3,6 +3,7 @@ import { parse } from './BigInt/parse.js';
 import { format } from './BigInt/format.js';
 import { BigIntComparable } from './BigInt/BigIntComparable.js';
 import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
+import { BigIntSigned } from './BigInt/BigIntSigned.js';
 
 /**
  * A collection of functions to manipulate `bigint`
@@ -19,6 +20,7 @@ import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 export const BigInt = {
   ...BigIntComparable,
   ...BigIntNumeric,
+  ...BigIntSigned,
   ...BigIntType,
   parse,
   format,
