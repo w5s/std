@@ -1,9 +1,10 @@
-import type { Option } from '@w5s/core';
 import { TimeDuration } from './TimeDuration.js';
 import { Time as TimeType } from './Time/Time.js';
 import { of } from './Time/of.js';
 import { now } from './Time/now.js';
 import { delay } from './Time/delay.js';
+import { parse } from './Time/parse.js';
+import { format } from './Time/format.js';
 import { TimeComparable } from './Time/TimeComparable.js';
 
 /**
@@ -21,34 +22,8 @@ export const Time = Object.assign(TimeType, {
   of,
   now,
   delay,
-  /**
-   * Parse an ISO 8601 string. If invalid, returns `Option.None`
-   *
-   * @example
-   * ```typescript
-   * Time.parseISOString('1970-01-01T00:00:00.000Z');// 0
-   * ```
-   * @param str - an expression
-   */
-  parseISOString(str: string): Option<Time> {
-    const time = Date.parse(str);
-
-    return Number.isNaN(time) ? undefined : (time as Time);
-  },
-
-  /**
-   * Return an ISO 8601 string representation
-   *
-   * @example
-   * ```typescript
-   * const time = Time.of(0);
-   * Time.toISOString(time);// '1970-01-01T00:00:00.000Z'
-   * ```
-   * @param time - A time value
-   */
-  toISOString(time: Time): string {
-    return new Date(time).toISOString();
-  },
+  parse,
+  format,
 
   /**
    * Adds `duration` to `time`
