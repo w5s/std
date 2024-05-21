@@ -6,6 +6,7 @@ import { delay } from './Time/delay.js';
 import { parse } from './Time/parse.js';
 import { format } from './Time/format.js';
 import { TimeComparable } from './Time/TimeComparable.js';
+import { TimeBounded } from './Time/TimeBounded.js';
 
 /**
  * Represent a time typically returned by `Date.now()`
@@ -19,6 +20,7 @@ export type Time = TimeType;
  */
 export const Time = Object.assign(TimeType, {
   ...TimeComparable,
+  ...TimeBounded,
   of,
   now,
   delay,

@@ -6,10 +6,12 @@ import { delay } from './Time/delay.js';
 import { now } from './Time/now.js';
 import { parse } from './Time/parse.js';
 import { format } from './Time/format.js';
+import { TimeBounded } from './Time/TimeBounded.js';
 
 describe('Time', () => {
   it('is an alias to functions', () => {
     expect(Time).toEqual(expect.objectContaining(TimeComparable));
+    expect(Time).toEqual(expect.objectContaining(TimeBounded));
     expect(Time).toEqual(
       expect.objectContaining({
         delay,

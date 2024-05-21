@@ -2,11 +2,12 @@ import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
 import { describe, it, expect } from 'vitest';
 import { DecodeError, Result } from '@w5s/core';
 import { Time } from './Time.js';
+import { TimeBounded } from './TimeBounded.js';
 
 describe('Time', () => {
   describeType({ describe, it, expect })(Time, {
     typeName: 'Time',
-    instances: () => [Time(0), Time(1)],
+    instances: () => [TimeBounded.minValue, Time(-1), Time(0), Time(1), TimeBounded.maxValue],
     notInstances: () => [null, undefined, [], Number.NaN],
   });
   describeCodec({ describe, it, expect })(Time, {

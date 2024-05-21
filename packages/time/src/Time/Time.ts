@@ -8,7 +8,7 @@ export type Time = number & Tag<'Time'>;
 export const Time = Tag.define<number, Time>({
   typeName: 'Time',
   hasInstance(anyValue) {
-    return typeof anyValue === 'number' && anyValue >= 0 && !Number.isNaN(anyValue);
+    return typeof anyValue === 'number' && !Number.isNaN(anyValue) && anyValue >= -8.64e15 && anyValue <= 8.64e15;
   },
   codecSchema: () => ({ type: 'number' }),
 });
