@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { describeCodec } from '@w5s/core/dist/testing.js';
+import { DecodeError, Result } from '@w5s/core';
 import { BigDecimal } from './BigDecimal.js';
 
 describe('()', () => {
@@ -27,5 +29,19 @@ describe('()', () => {
     // @ts-expect-error A is not valid
     expect(() => BigDecimal('A')).toThrow(new Error('A is not a valid BigDecimal'));
     expect(() => BigDecimal('1E5')).toThrow(new Error('1E5 is not a valid BigDecimal'));
+  });
+  describeCodec({ describe, it, expect })(BigDecimal, {
+    encode: [
+      [BigDecimal('0'), '0m'],
+      [BigDecimal('1.1'), '1.1m'],
+    ],
+    decode: [
+      ['1.0m', Result.Ok(BigDecimal('1.0'))],
+      ['-2.1m', Result.Ok(BigDecimal('-2.1'))],
+      ['2.1', Result.Error(DecodeError({ message: 'Cannot decode 2.1 as BigDecimal', input: '2.1' }))],
+      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as BigDecimal', input: undefined }))],
+      [null, Result.Error(DecodeError({ message: 'Cannot decode null as BigDecimal', input: null }))],
+    ],
+    schema: () => ({ type: 'string', format: 'bigdecimal' }),
   });
 });
