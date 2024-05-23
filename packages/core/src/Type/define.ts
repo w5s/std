@@ -22,8 +22,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
   const {
     typeName,
     codecEncode = (value) => value,
-    codecDecode = (value, { ok, error }) =>
-      hasInstance(value) ? ok(value) : error(`Cannot decode ${String(value)} as ${typeName}`),
+    codecDecode = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     codecSchema = () => ({}),
   } = parameters;
   return {

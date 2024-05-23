@@ -65,8 +65,18 @@ export namespace Codec {
   export type TypeOf<V> = V extends Codec<infer Type> ? Type : never;
 
   export interface Context<T> {
+    /**
+     * Helper that returns a new Ok result
+     *
+     * @param value
+     */
     ok: (value: T) => Result<T, DecodeError>;
-    error: (message: string) => Result<T, DecodeError>;
+    /**
+     * Helper that returns a new Error result
+     *
+     * @param message
+     */
+    error: (input: unknown, asType?: string) => Result<T, DecodeError>;
   }
 }
 

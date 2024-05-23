@@ -13,7 +13,7 @@ describe(Array, () => {
     hasInstance: (_) => typeof _ === 'string',
     codecEncode: (_) => `_${_}`,
     codecDecode: (input, { ok, error }) =>
-      typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error('Invalid underscore string'),
+      typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
     codecSchema: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
@@ -29,7 +29,7 @@ describe(Array, () => {
         ['a', '_b', '_c'],
         Result.Error(
           DecodeError({
-            message: 'Invalid underscore string',
+            message: 'Cannot decode a as UnderscoreString',
             input: 'a',
           })
         ),

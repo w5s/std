@@ -27,7 +27,7 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
     codecEncode: (input) => input.map(Item.codecEncode),
     codecDecode: (input, { ok, error }) => {
       if (!isArray(input)) {
-        return error(`Cannot decode ${String(input)} as Array`);
+        return error(input, 'Array');
       }
 
       const values = [];

@@ -49,7 +49,7 @@ export function $Object(Properties: Record<string, Type.Module<unknown>>): Type.
     },
     codecDecode: (input, { ok, error }) => {
       if (input == null || typeof input !== 'object') {
-        return error(`Cannot decode ${String(input)} as object`);
+        return error(input, 'object');
       }
 
       const returnValue: Record<string, unknown> = {};

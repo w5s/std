@@ -12,7 +12,7 @@ describe(ObjectType, () => {
     hasInstance: (_) => typeof _ === 'string',
     codecEncode: (_) => `_${_}`,
     codecDecode: (input, { ok, error }) =>
-      typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error('Invalid underscore string'),
+      typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
     codecSchema: () => ({ type: 'any', format: 'custom_underscore' }),
   });
   describeType({ describe, it, expect })(subject({ foo: AnyType, bar: AnyType }), {
@@ -24,11 +24,11 @@ describe(ObjectType, () => {
     decode: [
       [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],
       [
-        { foo: '' },
+        { foo: 'a' },
         Result.Error(
           DecodeError({
-            message: 'Invalid underscore string',
-            input: '',
+            message: 'Cannot decode a as UnderscoreString',
+            input: 'a',
           })
         ),
       ],

@@ -19,11 +19,11 @@ import { DecodeError } from './DecodeError.js';
 export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown): Result<T, DecodeError> {
   return codec.codecDecode(input, {
     ok: Ok as Codec.Context<T>['ok'],
-    error: (message) =>
+    error: (inputError, asType) =>
       Error(
         DecodeError({
-          message,
-          input,
+          message: `Cannot decode ${String(inputError)}${asType == null ? '' : ` as ${asType}`}`,
+          input: inputError,
         })
       ),
   });
