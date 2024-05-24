@@ -9,6 +9,7 @@ import { ensure as ensureType } from '../Type/ensure.js';
  * ```ts
  * type Foo = string & Tag<'Foo'>;
  * const Foo = Tag.define<string, Foo>({
+ *   typeName: 'Foo',
  *   hasInstance: (anyValue) => typeof anyValue === 'string',
  * });
  * ```
