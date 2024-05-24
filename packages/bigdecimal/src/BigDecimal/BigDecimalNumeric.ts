@@ -12,7 +12,12 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
         : of(combineFn(left.value, right.value), left.scale);
 }
 
-export const BigDecimalNumeric: Numeric<BigDecimal> = {
+interface BigDecimalNumeric
+  extends Numeric.Add<BigDecimal>,
+    Numeric.Subtract<BigDecimal>,
+    Numeric.Multiply<BigDecimal> {}
+
+export const BigDecimalNumeric: BigDecimalNumeric = {
   '+': combine2((l, r) => l + r),
   '-': combine2((l, r) => l - r),
   '*': (l, r) => of(l.value * r.value, l.scale + r.scale),

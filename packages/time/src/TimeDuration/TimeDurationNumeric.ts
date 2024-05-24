@@ -2,8 +2,12 @@ import type { Numeric } from '@w5s/core';
 import { NumberNumeric } from '@w5s/core/dist/Number/NumberNumeric.js';
 import type { TimeDuration } from './TimeDuration.js';
 
-export const TimeDurationNumeric: Numeric<TimeDuration> = {
-  '+': NumberNumeric['+'] as Numeric<TimeDuration>['+'],
-  '-': NumberNumeric['-'] as Numeric<TimeDuration>['-'],
-  '*': NumberNumeric['*'] as Numeric<TimeDuration>['*'],
+interface TimeDurationNumeric
+  extends Numeric.Add<TimeDuration>,
+    Numeric.Subtract<TimeDuration>,
+    Numeric.Multiply<TimeDuration> {}
+export const TimeDurationNumeric: TimeDurationNumeric = {
+  '+': NumberNumeric['+'] as TimeDurationNumeric['+'],
+  '-': NumberNumeric['-'] as TimeDurationNumeric['-'],
+  '*': NumberNumeric['*'] as TimeDurationNumeric['*'],
 };

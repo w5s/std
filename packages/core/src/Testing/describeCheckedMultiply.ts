@@ -21,7 +21,7 @@ export function describeCheckedMultiply({ describe, it, expect }: TestingLibrary
     cases: Array<{ call: [L, R]; returns: Option<Ret> }>
   ) => {
     (cases.length === 0 ? describe.todo : describe)('*?', () => {
-      it.each(cases)("satisfies ['+?']($call.0, $call.1) == $returns", ({ call, returns }) => {
+      it.each(cases)("satisfies ['*?']($call.0, $call.1) == $returns", ({ call, returns }) => {
         const returnValue = subject['*?'](...call);
         expect(returnValue).toEqual(returns);
       });

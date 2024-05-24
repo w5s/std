@@ -1,6 +1,8 @@
 import type { Numeric } from '../Numeric.js';
 
-export const BigIntNumeric: Numeric<bigint> = {
+interface BigIntNumeric extends Numeric.Add<bigint>, Numeric.Multiply<bigint>, Numeric.Subtract<bigint> {}
+
+export const BigIntNumeric: BigIntNumeric = {
   '+': (left, right) => left + right,
   '-': (left, right) => left - right,
   '*': (left, right) => left * right,

@@ -8,15 +8,15 @@ export namespace Numeric {
      * @example
      * ```ts
      * type T = ...;
-     * const TNumeric: Numeric<T> = ...;
-     * const result = Numeric.abs(value);// absolute value of (value)
+     * const TSigned: Numeric.Signed<T> = ...;
+     * const result = TSigned.abs(value);// absolute value of (value)
      * ```
      * @category Numeric
      * @param value - the numeric value
      */
     abs(value: T): T;
     /**
-     * Sign of a number. It should satisfy `Numeric['*'](Numeric.abs(x), Numeric.sign(x)) == x`
+     * Sign of a number. It should satisfy `TSigned['*'](TSigned.abs(x), TSigned.sign(x)) == x`
      *
      * @category Numeric
      * @param value - the numeric value
@@ -64,7 +64,7 @@ export namespace Numeric {
      * @example
      * ```ts
      * type T = ...;
-     * const TNumeric: Numeric<T> = ...;
+     * const TNumeric: Numeric.CheckedMultiply<T> = ...;
      * const result = Numeric['*?'](left, right);// represents (left * right)
      * ```
      * @category Numeric
@@ -73,52 +73,55 @@ export namespace Numeric {
      */
     '*?'(left: Left, right: Right): Option<Return>;
   }
-}
 
-/**
- * Basic numeric module
- */
-export interface Numeric<T> {
-  /**
-   * Addition operator
-   *
-   * @example
-   * ```ts
-   * type T = ...;
-   * const TNumeric: Numeric<T> = ...;
-   * const result = TNumeric['+'](left, right);// represents (left + right)
-   * ```
-   * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
-   */
-  '+'(left: T, right: T): T;
-  /**
-   * Subtraction operator
-   *
-   * @example
-   * ```ts
-   * type T = ...;
-   * const TNumeric: Numeric<T> = ...;
-   * const result = Numeric['-'](left, right);// represents (left - right)
-   * ```
-   * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
-   */
-  '-'(left: T, right: T): T;
-  /**
-   * Multiplication operator
-   *
-   * @example
-   * ```ts
-   * type T = ...;
-   * const TNumeric: Numeric<T> = ...;
-   * const result = Numeric['*'](left, right);// represents (left * right)
-   * ```
-   * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
-   */
-  '*'(left: T, right: T): T;
+  export interface Add<Left, Right = Left, Return = Left> {
+    /**
+     * Addition operator
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric.Add<T> = ...;
+     * const result = TNumeric['+'](left, right);// represents (left + right)
+     * ```
+     * @category Numeric
+     * @param left - the left operand
+     * @param right - the right operand
+     */
+    '+'(left: Left, right: Right): Return;
+  }
+
+  export interface Subtract<Left, Right = Left, Return = Left> {
+    /**
+     * Subtraction operator
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric.Subtract<T> = ...;
+     * const result = Numeric['-'](left, right);// represents (left - right)
+     * ```
+     * @category Numeric
+     * @param left - the left operand
+     * @param right - the right operand
+     */
+    '-'(left: Left, right: Right): Return;
+  }
+
+  export interface Multiply<Left, Right = Left, Return = Left> {
+    /**
+     * Multiplication operator
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric.Multiply<T> = ...;
+     * const result = Numeric['*'](left, right);// represents (left * right)
+     * ```
+     * @category Numeric
+     * @param left - the left operand
+     * @param right - the right operand
+     */
+    '*'(left: Left, right: Right): Return;
+  }
 }
