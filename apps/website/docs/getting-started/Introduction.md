@@ -27,7 +27,7 @@ Pros:
 
 - Complete and Standardized API
 - Strict typing
-- If you love FP, you will feel at home (Monads, Monoids, Semi-group)
+- If you love FP, you will feel at home (monad, monoid, semi-group)
 
 Cons:
 

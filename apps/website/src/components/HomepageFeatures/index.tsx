@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Standardized',
-    Svg: require('@site/static/img/logo-svgrepo-com.svg').default,
+    Svg: require('@site/static/img/stripes.svg').default,
     description: (
       <>
         Standardized code and conventions for high productivity <br />
@@ -25,7 +25,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Simple',
-    Svg: require('@site/static/img/circle-svgrepo-com.svg').default,
+    Svg: require('@site/static/img/circle.svg').default,
     description: (
       <>
         Functional programming, done simple. <br />
@@ -39,7 +39,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Stable',
-    Svg: require('@site/static/img/infinity-svgrepo-com.svg').default,
+    Svg: require('@site/static/img/infinity.svg').default,
     description: (
       <>
         Fight framework obsolescence ! <br />
@@ -53,7 +53,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Safe',
-    Svg: require('@site/static/img/jewel-svgrepo-com.svg').default,
+    Svg: require('@site/static/img/jewel.svg').default,
     description: (
       <>
         One ambitious goal : 0 bug in production <br />
@@ -67,7 +67,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Slim',
-    Svg: require('@site/static/img/feather-svgrepo-com.svg').default,
+    Svg: require('@site/static/img/feather.svg').default,
     description: (
       <>
         Because CI performances and environment matters <br />

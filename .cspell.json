@@ -9,6 +9,9 @@
     "NVARCHAR",
     "SMALLINT",
     "VARBINARY",
-    "VARCHAR"
+    "VARCHAR",
+    "bigdecimal",
+    "Infima",
+    "monoid"
   ]
 }

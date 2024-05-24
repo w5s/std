@@ -147,7 +147,7 @@ PROS :
 CONS :
 
 - Creates a third "nullable" representation after `null` and `undefined`
-- Every access to a propery or array would have to be converted from `undefined` or `null` to `None|Some()`
+- Every access to a property or array would have to be converted from `undefined` or `null` to `None|Some()`
 
 **SOLUTION 2 : `null` as `None` :**
 
@@ -158,7 +158,7 @@ PROS :
 CONS :
 
 - `typeof null == 'object'``
-- Every access to a propery or array would have to be converted from `undefined` to `null`
+- Every access to a property or array would have to be converted from `undefined` to `null`
 
 **SOLUTION 3 : `undefined` as `None` :**
 
