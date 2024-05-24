@@ -5369,7 +5369,7 @@ __metadata:
     "@w5s/commitlint-config": "npm:2.0.15"
     "@w5s/conventional-changelog": "npm:2.0.13"
     "@w5s/cspell-config": "npm:2.2.16"
-    "@w5s/eslint-config": "npm:2.0.18"
+    "@w5s/eslint-config": "npm:2.0.19"
     "@w5s/ts-config": "npm:2.0.10"
     concurrently: "npm:8.2.2"
     cspell: "npm:8.8.3"
@@ -5467,9 +5467,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/eslint-config@npm:2.0.18":
-  version: 2.0.18
-  resolution: "@w5s/eslint-config@npm:2.0.18"
+"@w5s/eslint-config@npm:2.0.19":
+  version: 2.0.19
+  resolution: "@w5s/eslint-config@npm:2.0.19"
   dependencies:
     "@rushstack/eslint-patch": "npm:^1.1.0"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.0"
@@ -5497,7 +5497,7 @@ __metadata:
       optional: true
     typescript:
       optional: true
-  checksum: 10c0/4d734b49820086f46ed909a1667d461fb43150eaccb4487c6c354b1b096d7acc7e03446335ba306339aed7384bf2a5ceae33b68c5f2145fd40e10d1f0d6e9ac4
+  checksum: 10c0/1489f8b2ca87cfadc40e0066cee7f8c872e45f360da153cdcac3728b0b7058d8aa9783f87ddd3639253b5596da36a4b068ee873bf4e775e041f6eda69597529f
   languageName: node
   linkType: hard
 
