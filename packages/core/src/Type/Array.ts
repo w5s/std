@@ -1,5 +1,6 @@
 import type { Array as ArrayType } from '../Array.js';
-import { Codec } from '../Codec.js';
+import { decode as codecDecode } from '../Codec/decode.js';
+import { schema as codecSchema } from '../Codec/schema.js';
 import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
 import { define } from './define.js';
@@ -33,7 +34,7 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
       const values = [];
       // eslint-disable-next-line unicorn/no-for-loop
       for (let index = 0; index < input.length; index += 1) {
-        const result = Codec.decode(Item, input[index]);
+        const result = codecDecode(Item, input[index]);
         if (!isOk(result)) {
           return result;
         }
@@ -41,6 +42,6 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
       }
       return ok(values);
     },
-    codecSchema: () => ({ type: 'array', item: Codec.schema(Item) }),
+    codecSchema: () => ({ type: 'array', item: codecSchema(Item) }),
   });
 }

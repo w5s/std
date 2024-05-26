@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Codec } from '../Codec.js';
+import { encode as codecEncode } from '../Codec/encode.js';
+import { decode as codecDecode } from '../Codec/decode.js';
+import { schema as codecSchema } from '../Codec/schema.js';
 import type { JSONValue } from '../JSON.js';
 import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
@@ -42,7 +44,7 @@ export function $Object(Properties: Record<string, Type.Module<unknown>>): Type.
       for (let index = 0; index < propertyNameCount; index += 1) {
         const propertyName = propertyNames[index]!;
 
-        returnValue[propertyName] = Codec.encode(Properties[propertyName]!, input[propertyName]);
+        returnValue[propertyName] = codecEncode(Properties[propertyName]!, input[propertyName]);
       }
 
       return returnValue;
@@ -55,7 +57,7 @@ export function $Object(Properties: Record<string, Type.Module<unknown>>): Type.
       const returnValue: Record<string, unknown> = {};
       for (let index = 0; index < propertyNameCount; index += 1) {
         const propertyName = propertyNames[index]!;
-        const decodeResult = Codec.decode(Properties[propertyName]!, (input as Record<string, unknown>)[propertyName]);
+        const decodeResult = codecDecode(Properties[propertyName]!, (input as Record<string, unknown>)[propertyName]);
         if (!isOk(decodeResult)) {
           return decodeResult;
         }
@@ -66,7 +68,7 @@ export function $Object(Properties: Record<string, Type.Module<unknown>>): Type.
     codecSchema: () =>
       propertyNames.reduce(
         (acc, propertyName) => {
-          acc.properties[propertyName] = Codec.schema(Properties[propertyName]!);
+          acc.properties[propertyName] = codecSchema(Properties[propertyName]!);
 
           return acc;
         },
