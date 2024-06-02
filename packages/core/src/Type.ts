@@ -10,6 +10,10 @@ import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
 import { ensure } from './Type/ensure.js';
 
+export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
+
+export type InspectOptions = Record<string, unknown>;
+
 /**
  * A type that represents a class module of `T` instances
  */
@@ -40,6 +44,17 @@ export interface Type<T> {
    * @param anyValue
    */
   hasInstance(anyValue: unknown): anyValue is T;
+  /**
+   * When defined, returns a custom string representation
+   *
+   * @example
+   * ```ts
+   * ```
+   *
+   * @category Type
+   * @param anyValue
+   */
+  inspect?: (anyValue: T, depth: number, options: InspectOptions, inspect: InspectFunction) => string;
 }
 
 /**
@@ -69,6 +84,7 @@ export namespace Type {
   export interface Parameters<T> extends Partial<Codec<T>> {
     typeName: string;
     hasInstance: (value: unknown) => boolean;
+    inspect?: Type<T>['inspect'];
   }
 
   /**

@@ -21,6 +21,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
   const hasInstance = parameters.hasInstance as Type<T>['hasInstance'];
   const {
     typeName,
+    inspect,
     codecEncode = (value) => value,
     codecDecode = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     codecSchema = () => ({}),
@@ -28,6 +29,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
   return {
     typeName,
     hasInstance,
+    inspect,
     codecEncode,
     codecDecode,
     codecSchema,

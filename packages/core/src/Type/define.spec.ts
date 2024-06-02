@@ -5,9 +5,11 @@ import { DecodeError } from '../Codec/DecodeError.js';
 import { Result } from '../Result.js';
 
 describe(define, () => {
+  const inspect = (value: string) => `String(${value})`;
   const TestType = define<string>({
     typeName: 'String',
     hasInstance: (anyValue) => typeof anyValue === 'string',
+    inspect,
   });
 
   describe('#typeName', () => {
@@ -19,6 +21,11 @@ describe(define, () => {
     it('returns predicate function', () => {
       expect(TestType.hasInstance('')).toBe(true);
       expect(TestType.hasInstance(null)).toBe(false);
+    });
+  });
+  describe('#inspect', () => {
+    it('forwards from parameters', () => {
+      expect(TestType.inspect).toBe(TestType.inspect);
     });
   });
   describe('#codecEncode', () => {
