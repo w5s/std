@@ -19,22 +19,28 @@ describe('Struct', () => {
         email: 'foo@bar.com',
       });
     });
-    describe('typeName', () => {
+    describe('#typeName', () => {
       it('should set typeName', () => {
         expect(Test.typeName).toBe('Test');
       });
     });
-    describe('.create()', () => {
+    describe('#create()', () => {
       it('should return false for instance', () => {
         expect(Test.create({ email: 'foo@bar.com' })).toEqual({ _: 'Test', email: 'foo@bar.com' });
       });
     });
-    describe('.hasInstance()', () => {
+    describe('#hasInstance', () => {
       it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
         expect(Test.hasInstance(value)).toBe(false);
       });
       it('should return false for instance', () => {
         expect(Test.hasInstance(Test(''))).toBe(true);
+      });
+    });
+    describe('#from', () => {
+      it('returns Option.None when hasInstance(value) is false', () => {
+        expect(Test.from(Test.create({ email: 'foo@bar.com' }))).toEqual(Test.create({ email: 'foo@bar.com' }));
+        expect(Test.from(1)).toBe(undefined);
       });
     });
   });

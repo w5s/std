@@ -97,19 +97,22 @@ export namespace Struct {
     Name extends string,
     Constructor extends (...args: any[]) => Struct<{ [Struct.type]: Name }>,
   >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {
-    const properties = {
-      typeName,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      create: (_properties: any) => ({
-        [Struct.type]: typeName,
-        ..._properties,
-      }),
-      hasInstance: (anyValue: unknown): boolean =>
-        // @ts-ignore We know what we are doing
-        anyValue == null ? false : anyValue[type] === typeName,
-    };
+    const hasInstance = (anyValue: unknown): boolean =>
+      // @ts-ignore We know what we are doing
+      anyValue == null ? false : anyValue[type] === typeName;
+    const from = (value: unknown) => (hasInstance(value) ? value : undefined);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    const create = (_properties: any) => ({
+      [Struct.type]: typeName,
+      ..._properties,
+    });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(getConstructor(typeName), properties);
+    return Object.assign(getConstructor(typeName), {
+      typeName,
+      hasInstance,
+      from,
+      create,
+    });
   }
 }
