@@ -5,10 +5,11 @@ import { Number } from './Type/Number.js';
 import { Boolean } from './Type/Boolean.js';
 import { BigInt } from './Type/BigInt.js';
 import { $Object } from './Type/Object.js';
-import { Option } from './Type/Option.js';
+import { Option as $Option } from './Type/Option.js';
 import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
 import { ensure } from './Type/ensure.js';
+import type { Option } from './Option.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -45,6 +46,19 @@ export interface Type<T> {
    */
   hasInstance(anyValue: unknown): anyValue is T;
   /**
+   * Try to convert anyValue to enum value or else returns `Option.None`
+   *
+   * @example
+   * ```ts
+   * const StringType: Type<string>;
+   * StringType.from('foo'); // Option.Some('foo')
+   * StringType.from(12); // Option.None
+   * ```
+   * @category Constructor
+   * @param anyValue
+   */
+  from(anyValue: unknown): Option<T>;
+  /**
    * When defined, returns a custom string representation
    *
    * @example
@@ -69,7 +83,7 @@ export const Type = {
   Int,
   Number,
   Object: $Object,
-  Option,
+  Option: $Option,
   String,
 };
 export namespace Type {
@@ -84,6 +98,7 @@ export namespace Type {
   export interface Parameters<T> extends Partial<Codec<T>> {
     typeName: string;
     hasInstance: (value: unknown) => boolean;
+    from?: Type<T>['from'];
     inspect?: Type<T>['inspect'];
   }
 

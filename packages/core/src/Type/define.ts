@@ -25,6 +25,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     codecEncode = (value) => value,
     codecDecode = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     codecSchema = () => ({}),
+    from = (value) => (hasInstance(value) ? value : undefined),
   } = parameters;
   return {
     typeName,
@@ -33,5 +34,6 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     codecEncode,
     codecDecode,
     codecSchema,
+    from,
   };
 }

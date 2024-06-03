@@ -1,3 +1,4 @@
+import type { Option } from '../Option.js';
 import type { Type } from '../Type.js';
 import type { TestingLibrary } from './type.js';
 
@@ -8,11 +9,19 @@ export function describeType({ describe, it, expect }: TestingLibrary) {
       typeName: string;
       instances: () => T[];
       notInstances: () => unknown[];
+      from?: () => [unknown, Option<T>][];
     }
   ) => {
-    const { instances: instancesDefault, notInstances: notInstancesDefault } = properties;
+    const { instances: instancesDefault, notInstances: notInstancesDefault, from } = properties;
     const instances = () => instancesDefault().map((instance) => ({ instance }));
     const notInstances = () => notInstancesDefault().map((instance) => ({ instance }));
+    const fromData =
+      from == null
+        ? [
+            ...instancesDefault().map((_) => ({ value: _, expected: _ })),
+            ...notInstancesDefault().map((_) => ({ value: _, expected: undefined })),
+          ]
+        : from().map(([value, expected]) => ({ value, expected }));
 
     describe('typeName', () => {
       it('is a constant', () => {
@@ -26,6 +35,12 @@ export function describeType({ describe, it, expect }: TestingLibrary) {
       });
       it.each(notInstances())('($instance) returns false for non instances', ({ instance }) => {
         expect(subject.hasInstance(instance)).toBe(false);
+      });
+    });
+
+    (fromData.length === 0 ? describe.todo : describe)('from', () => {
+      it.each(fromData)('($value) returns $expected', ({ value, expected }) => {
+        expect(subject.from(value)).toEqual(expected);
       });
     });
   };

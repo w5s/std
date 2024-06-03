@@ -3,6 +3,7 @@ import { define } from './define.js';
 import { Codec } from '../Codec.js';
 import { DecodeError } from '../Codec/DecodeError.js';
 import { Result } from '../Result.js';
+import { Option } from '../Option.js';
 
 describe(define, () => {
   const inspect = (value: string) => `String(${value})`;
@@ -26,6 +27,20 @@ describe(define, () => {
   describe('#inspect', () => {
     it('forwards from parameters', () => {
       expect(TestType.inspect).toBe(TestType.inspect);
+    });
+  });
+  describe('#from', () => {
+    it('forwards from parameters', () => {
+      const from = () => Option.None;
+      const SomeType = define<string>({
+        ...TestType,
+        from,
+      });
+      expect(SomeType.from).toBe(from);
+    });
+    it('returns Option.None when hasInstance(value) is false', () => {
+      expect(TestType.from('foo')).toBe('foo');
+      expect(TestType.from(1)).toBe(undefined);
     });
   });
   describe('#codecEncode', () => {
