@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeCodec } from '@w5s/core/dist/testing.js';
+import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
 import { DecodeError, Result } from '@w5s/core';
 import { BigDecimal } from './BigDecimal.js';
 
@@ -29,6 +29,11 @@ describe('()', () => {
     // @ts-expect-error A is not valid
     expect(() => BigDecimal('A')).toThrow(new Error('A is not a valid BigDecimal'));
     expect(() => BigDecimal('1E5')).toThrow(new Error('1E5 is not a valid BigDecimal'));
+  });
+  describeType({ describe, it, expect })(BigDecimal, {
+    typeName: 'BigDecimal',
+    instances: () => [BigDecimal('0'), BigDecimal('-2')],
+    notInstances: () => [null, undefined, '-2', 2],
   });
   describeCodec({ describe, it, expect })(BigDecimal, {
     encode: [
