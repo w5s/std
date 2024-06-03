@@ -27,11 +27,11 @@ export namespace Enum {
   /**
    * Return enum keys of T
    */
-  export type KeyOf<T extends Enum> = ArrayValue<T[typeof Symbol.enumKeys]>;
+  export type KeyOf<T extends Enum<Record<string, any>>> = ArrayValue<T[typeof Symbol.enumKeys]>;
   /**
    * Return enum values of T
    */
-  export type ValueOf<T extends Enum> = ArrayValue<T[typeof Symbol.enumValues]>;
+  export type ValueOf<T extends Enum<Record<string, any>>> = ArrayValue<T[typeof Symbol.enumValues]>;
 }
 
 export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>>
@@ -47,4 +47,4 @@ export interface Enumerable<T extends Record<string, unknown> = Record<string, u
   readonly [Symbol.enumValues]: ReadonlyArray<T[keyof T]>;
 }
 
-export type Enum<T extends Record<string, unknown> = Record<string, unknown>> = T & Enumerable<T>;
+export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enumerable<T>;
