@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import * as Module from './Testing.js';
+import * as Module from './testing.js';
 
 describe('index', () => {
   it('exports', () => {
