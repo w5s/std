@@ -14,9 +14,12 @@ import type { Option } from '../Option.js';
  * @param expression - the expression to parse
  */
 export function parse(expression: string): Option<bigint> {
-  try {
-    return globalThis.BigInt(expression);
-  } catch {
-    return undefined;
+  if (expression !== '' && !/^\s+$/.test(expression)) {
+    try {
+      return globalThis.BigInt(expression);
+    } catch {
+      /* empty */
+    }
   }
+  return undefined;
 }

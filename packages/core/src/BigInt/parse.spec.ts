@@ -6,13 +6,15 @@ describe(parse, () => {
     ['0b10101', 21n],
     ['1024', 1024n],
     ['0x123', 291n],
-  ])('returns bigint values when valid', (value, expected) => {
+  ])('(%s) == %s value when valid', (value, expected) => {
     expect(parse(value)).toBe(expected);
   });
   it.each([
     //
+    ['', undefined],
+    [' ', undefined],
     ['ABC', undefined],
-  ])('returns undefined for invalid values', (value, expected) => {
+  ])('(%s) returns %s for invalid values', (value, expected) => {
     expect(parse(value)).toBe(expected);
   });
 });
