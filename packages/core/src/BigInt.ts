@@ -4,6 +4,7 @@ import { format } from './BigInt/format.js';
 import { BigIntComparable } from './BigInt/BigIntComparable.js';
 import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 import { BigIntSigned } from './BigInt/BigIntSigned.js';
+import { fromInt } from './BigInt/fromInt.js';
 
 /**
  * A collection of functions to manipulate `bigint`
@@ -24,4 +25,5 @@ export const BigInt = {
   ...BigIntType,
   parse,
   format,
+  fromInt,
 };
