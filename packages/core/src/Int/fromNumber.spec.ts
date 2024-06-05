@@ -28,4 +28,7 @@ describe(fromNumber, () => {
   it('should return min value for min value - 1', () => {
     expect(fromNumber(minValue - 1)).toBe(Option.None);
   });
+  it('should return min value for min value - 1', () => {
+    expect(fromNumber(Number.NaN)).toBe(Option.None);
+  });
 });
