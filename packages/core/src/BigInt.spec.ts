@@ -7,6 +7,7 @@ import { Type } from './Type.js';
 import { BigIntSigned } from './BigInt/BigIntSigned.js';
 import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 import { fromInt } from './BigInt/fromInt.js';
+import { fromNumber } from './BigInt/fromNumber.js';
 
 describe('BigInt', () => {
   it('is an alias to functions', () => {
@@ -19,6 +20,7 @@ describe('BigInt', () => {
         parse,
         format,
         fromInt,
+        fromNumber,
       })
     );
   });
