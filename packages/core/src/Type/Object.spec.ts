@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from '../Result.js';
-import { DecodeError } from '../Codec/DecodeError.js';
+import { DecodeError } from '../DecodeError.js';
 import { describeCodec, describeType } from '../testing.js';
 import { define } from './define.js';
 import { $Object as ObjectType } from './Object.js';

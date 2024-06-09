@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { describeType, describeCodec } from './testing.js';
-import { DecodeError } from './Codec/DecodeError.js';
+import { DecodeError } from './DecodeError.js';
 import { Result } from './Result.js';
 import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { assertType, describeCodec, describeType } from '../testing.js';
 import { define } from './define.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../Codec/DecodeError.js';
+import { DecodeError } from '../DecodeError.js';
 import type { Enum } from '../Enum.js';
 import { Symbol } from '../Symbol.js';
 

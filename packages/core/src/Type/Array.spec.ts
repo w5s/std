@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Array } from './Array.js';
 import { describeCodec, describeType } from '../testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../Codec/DecodeError.js';
+import { DecodeError } from '../DecodeError.js';
 import { define } from './define.js';
 
 describe(Array, () => {

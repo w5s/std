@@ -2,7 +2,7 @@ import type { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
 import { Error } from '../Result/Error.js';
 import { Ok } from '../Result/Ok.js';
-import { DecodeError } from './DecodeError.js';
+import { DecodeError } from '../DecodeError.js';
 
 /**
  * Returns a `Result` containing the decoded `input`

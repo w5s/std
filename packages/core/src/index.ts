@@ -6,6 +6,7 @@ export * from './Type.js';
 export * from './Codec.js';
 export * from './Comparable.js';
 export * from './Console.js';
+export * from './DecodeError.js';
 export * from './Enum.js';
 export * from './Struct.js';
 export * from './Equal.js';
