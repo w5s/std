@@ -13,9 +13,9 @@ import { from } from './from.js';
  * @param task - a Task object
  * @param fn - the error mapper function
  */
-export function mapError<Value, ErrorFrom, ErrorTo>(
-  task: TaskLike<Value, ErrorFrom>,
+export function mapError<ValueFrom, ErrorFrom, ErrorTo>(
+  task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => ErrorTo
-): Task<Value, ErrorTo> {
+): Task<ValueFrom, ErrorTo> {
   return from((parameters) => task.taskRun({ ...parameters, reject: (error) => parameters.reject(fn(error)) }));
 }

@@ -13,9 +13,9 @@ import { from } from './from.js';
  * @param task - a Task object
  * @param fn - the mapper function
  */
-export function map<ValueFrom, ValueTo, Error>(
-  task: TaskLike<ValueFrom, Error>,
+export function map<ValueFrom, ErrorFrom, ValueTo>(
+  task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => ValueTo
-): Task<ValueTo, Error> {
+): Task<ValueTo, ErrorFrom> {
   return from((parameters) => task.taskRun({ ...parameters, resolve: (value) => parameters.resolve(fn(value)) }));
 }
