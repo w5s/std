@@ -16,6 +16,7 @@ import { tryCall } from './Task/tryCall.js';
 import { unsafeRun } from './Task/unsafeRun.js';
 import { unsafeRunOk } from './Task/unsafeRunOk.js';
 import { from } from './Task/from.js';
+import { mapResult } from './Task/mapResult.js';
 
 describe('Task', () => {
   it('is an alias to functions', () => {
@@ -30,6 +31,7 @@ describe('Task', () => {
       hasInstance,
       map,
       mapError,
+      mapResult,
       orElse,
       reject,
       resolve,

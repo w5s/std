@@ -18,6 +18,7 @@ import { hasInstance } from './Task/hasInstance.js';
 import { unsafeRun } from './Task/unsafeRun.js';
 import { unsafeRunOk } from './Task/unsafeRunOk.js';
 import { from } from './Task/from.js';
+import { mapResult } from './Task/mapResult.js';
 
 /**
  * Interface used to cancel running task
@@ -92,6 +93,7 @@ export const Task = {
   hasInstance,
   map,
   mapError,
+  mapResult,
   orElse,
   reject,
   resolve,
