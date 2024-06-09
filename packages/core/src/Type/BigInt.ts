@@ -7,9 +7,7 @@ import { define } from './define.js';
  */
 export const BigInt = define<bigint>({
   typeName: 'BigInt',
-  hasInstance(anyValue: unknown): anyValue is bigint {
-    return typeof anyValue === 'bigint';
-  },
+  hasInstance: (anyValue) => typeof anyValue === 'bigint',
   codecEncode: (input) => `${input.toString(10)}n`,
   codecDecode: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('n')) {

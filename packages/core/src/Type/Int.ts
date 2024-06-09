@@ -13,9 +13,7 @@ export type Int = number & Tag<'Int'>;
  */
 export const Int = define<number, Int>({
   typeName: 'Int',
-  hasInstance(anyValue: unknown): anyValue is Int {
-    return Number.isSafeInteger(anyValue);
-  },
+  hasInstance: (anyValue) => Number.isSafeInteger(anyValue),
   codecSchema: () => ({
     type: 'integer',
   }),
