@@ -1,10 +1,15 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { warning } from './warning.js';
 
 describe('warning', () => {
-  const warnSpy = vi.spyOn(console, 'warn').mockImplementationOnce(() => {
-    // do nothing
+  let warnSpy = vi.spyOn(console, 'warn');
+
+  beforeEach(() => {
+    warnSpy = vi.spyOn(console, 'warn').mockImplementationOnce(() => {
+      // do nothing
+    });
   });
+
   it('should not call warning.print when condition is true', () => {
     warning(true, 'message');
     expect(warnSpy).not.toHaveBeenCalled();
