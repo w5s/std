@@ -11,7 +11,7 @@ export function describeCodec({ describe, it, expect }: TestingLibrary) {
       schema: () => unknown;
     }
   ) => {
-    describe('codecDecode', () => {
+    (properties.decode.length === 0 ? describe.todo : describe)('codecDecode', () => {
       it.each(properties.decode.map(([input, expected]) => ({ input, expected })))(
         '($input) == $expected',
         ({ input, expected }) => {
@@ -19,7 +19,7 @@ export function describeCodec({ describe, it, expect }: TestingLibrary) {
         }
       );
     });
-    describe('codecEncode', () => {
+    (properties.encode.length === 0 ? describe.todo : describe)('codecEncode', () => {
       it.each(properties.encode.map(([input, expected]) => ({ input, expected })))(
         '($input) == $expected',
         ({ input, expected }) => {
