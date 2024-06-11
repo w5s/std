@@ -100,6 +100,21 @@ export namespace CustomError {
      * ```
      */
     readonly hasInstance: (anyValue: unknown) => anyValue is Model;
+    /**
+     * Return a new `CustomError`
+     *
+     * @example
+     * ```typescript
+     * const MyError = CustomError.define('MyError1');
+     * const error = MyError.create({
+     *   message: 'my custom message', // customize message (optional)
+     *   cause: parentError, // Error that caused this error (optional)
+     * })
+     * ```
+     * @category Constructor
+     * @param properties - initial properties
+     */
+    readonly create: (...properties: Parameters<Model>) => Model;
   }
 
   /**
@@ -146,6 +161,7 @@ export namespace CustomError {
   ): Constructor & Module<ReturnType<Constructor>> {
     const create = (properties: any) => CustomError({ name: errorName, ...properties });
     const properties = {
+      create,
       errorName,
       hasInstance: (anyValue: unknown): boolean =>
         // @ts-ignore We know what we are doing

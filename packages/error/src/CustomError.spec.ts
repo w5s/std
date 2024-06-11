@@ -117,6 +117,34 @@ describe('CustomError', () => {
         })
       );
     });
+    describe('create', () => {
+      it('returns new instance for optional parameters', () => {
+        expect(TestOptionalError.create()).toEqual(
+          CustomError({
+            name: 'TestOptionalError',
+          })
+        );
+        expect(TestOptionalError.create({})).toEqual(
+          CustomError({
+            name: 'TestOptionalError',
+          })
+        );
+      });
+      it('returns new instance for required parameters', () => {
+        // @ts-expect-error Parameters are required
+        expect(TestError.create()).toEqual(
+          CustomError({
+            name: 'TestError',
+          })
+        );
+        expect(TestError.create({ email: 'foo@bar.com' })).toEqual(
+          CustomError({
+            name: 'TestError',
+            email: 'foo@bar.com',
+          })
+        );
+      });
+    });
     describe('name', () => {
       it('should set name', () => {
         expect(TestError.name).toBe('TestError');
