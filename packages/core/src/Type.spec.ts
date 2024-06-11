@@ -16,10 +16,12 @@ import { Enum } from './Enum.js';
 import type { Int as IntType } from './Int.js';
 import type { Option as OptionType } from './Option.js';
 import { ensure } from './Type/ensure.js';
+import { anyOf } from './Type/anyOf.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
     expect(Type).toEqual({
+      anyOf,
       define,
       ensure,
       Array,
