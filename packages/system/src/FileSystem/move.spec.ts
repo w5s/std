@@ -23,7 +23,17 @@ describe('move', () => {
     const destDir = fs.path('dest');
 
     const task = move(srcDir, destDir);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(FileError({})));
+    await expect(Task.unsafeRun(task)).resolves.toEqual(
+      Result.Error(
+        FileError({
+          fileErrorType: 'UserError',
+          path: undefined,
+          errno: undefined,
+          code: undefined,
+          syscall: undefined,
+        })
+      )
+    );
   });
 
   it('should move directory if destination does not exist', async () => {
@@ -51,7 +61,17 @@ describe('move', () => {
     const destFile = fs.path('dest', 'test.txt');
 
     const task = move(srcFile, destFile);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(FileError({})));
+    await expect(Task.unsafeRun(task)).resolves.toEqual(
+      Result.Error(
+        FileError({
+          fileErrorType: 'UserError',
+          path: undefined,
+          errno: undefined,
+          code: undefined,
+          syscall: undefined,
+        })
+      )
+    );
   });
 
   it('should move file if destination exists', async () => {
@@ -70,7 +90,12 @@ describe('move', () => {
     await expect(Task.unsafeRun(taskFail)).resolves.toEqual(
       Result.Error(
         FileError({
+          fileErrorType: 'UserError',
+          path: undefined,
           message: 'Destination already exists',
+          errno: undefined,
+          code: undefined,
+          syscall: undefined,
         })
       )
     );
@@ -130,7 +155,12 @@ describe('move', () => {
     await expect(Task.unsafeRun(move(srcDir, destDir))).resolves.toEqual(
       Result.Error(
         FileError({
+          fileErrorType: 'UserError',
+          path: undefined,
           message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
+          errno: undefined,
+          code: undefined,
+          syscall: undefined,
         })
       )
     );

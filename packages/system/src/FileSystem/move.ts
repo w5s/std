@@ -50,6 +50,9 @@ function subdirectoryError(source: FilePath, destination: FilePath) {
     fileErrorType: 'UserError',
     path: destination,
     message: `Cannot move '${source}' to a subdirectory of itself, '${destination}'.`,
+    errno: undefined,
+    code: undefined,
+    syscall: undefined,
   });
 }
 
@@ -58,6 +61,9 @@ function alreadyExistError(destination: FilePath) {
     fileErrorType: 'UserError',
     message: 'Destination already exists',
     path: destination,
+    errno: undefined,
+    code: undefined,
+    syscall: undefined,
   });
 }
 

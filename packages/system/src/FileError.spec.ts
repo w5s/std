@@ -18,24 +18,11 @@ describe('FileError', () => {
         })
       ).toEqual(
         expect.objectContaining({
-          // _: 'DataError',
           name: 'FileError',
           fileErrorType: 'OtherError',
           code: 'ENOENT',
           path: anyPath,
           syscall: 'read',
-        })
-      );
-    });
-    it('should set default default parameters', () => {
-      expect(FileError({})).toEqual(
-        expect.objectContaining({
-          // _: 'DataError',
-          name: 'FileError',
-          fileErrorType: 'UserError',
-          code: Option.None,
-          path: Option.None,
-          syscall: Option.None,
         })
       );
     });

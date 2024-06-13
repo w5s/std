@@ -27,16 +27,4 @@ export interface FileError
  *
  * @category Constructor
  */
-export const FileError = CustomError.defineWith(
-  'FileError',
-  (create) =>
-    (parameters: Partial<CustomError.ParametersProperties<FileError>>): FileError =>
-      create({
-        fileErrorType: 'UserError',
-        errno: undefined,
-        code: undefined,
-        path: undefined,
-        syscall: undefined,
-        ...parameters,
-      })
-);
+export const FileError = CustomError.define<FileError>('FileError');
