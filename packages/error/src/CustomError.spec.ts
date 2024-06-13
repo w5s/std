@@ -6,6 +6,7 @@ describe('CustomError', () => {
   describe('()', () => {
     it('should return instance of Error', () => {
       expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
+      expect(CustomError({ name: anyString })).toBeInstanceOf(CustomError);
     });
     it('should return Error with default properties', () => {
       expect(CustomError({ name: anyString })).toEqual(
@@ -34,13 +35,44 @@ describe('CustomError', () => {
       );
     });
   });
+  describe('new ()', () => {
+    it('returns instance of Error', () => {
+      expect(new CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
+      expect(new CustomError({ name: anyString })).toBeInstanceOf(CustomError);
+    });
+  });
+
   describe('#toString()', () => {
     it.each([
       [CustomError({ name: 'CustomError' }), 'CustomError'],
       [CustomError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
       [
         CustomError({ name: 'CustomError', message: 'CustomMessage', cause: new Error('CauseMessage') }),
-        'CustomError: CustomMessage',
+        [
+          // lines
+          'CustomError: CustomMessage',
+          '  └ Error: CauseMessage',
+        ].join('\n'),
+      ],
+      [
+        CustomError({
+          name: 'CustomError1',
+          message: 'Level 1',
+          cause: CustomError({
+            name: 'CustomError2',
+            message: 'Level 2',
+            cause: CustomError({
+              name: 'CustomError3',
+              message: 'Level 3',
+            }),
+          }),
+        }),
+        [
+          // lines
+          'CustomError1: Level 1',
+          '  └ CustomError2: Level 2',
+          '  └ CustomError3: Level 3',
+        ].join('\n'),
       ],
     ])('should return correctly formatted string representation', (error, expected) => {
       expect(String(error)).toEqual(expected);
