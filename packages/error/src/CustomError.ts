@@ -35,7 +35,16 @@ interface CustomErrorConstructor {
    * ```
    * @param errorName - the error unique name
    */
-  define<Model extends CustomError<{ name: string }>>(errorName: Model['name']): CustomError.Module<Model>;
+  define<Model extends CustomError<{ name: string }>>(parameters: {
+    /**
+     * The default error name
+     */
+    errorName: Model['name'];
+    /**
+     * The default error message
+     */
+    errorMessage?: string;
+  }): CustomError.Module<Model>;
 }
 
 /**
@@ -90,6 +99,7 @@ export const CustomError: CustomErrorConstructor = (() => {
 
     // Assign properties
     Object.assign(returnValue, properties);
+    __setDefaultValue(returnValue, 'message', '');
     __setDefaultValue(returnValue, 'stack', undefined);
     __setDefaultValue(returnValue, 'cause', undefined);
 
@@ -99,8 +109,12 @@ export const CustomError: CustomErrorConstructor = (() => {
     return returnValue as CustomError<Properties>;
   }
 
-  function define<Model extends CustomError<{ name: string }>>(errorName: Model['name']): CustomError.Module<Model> {
-    const create = (properties: any) => CustomError({ name: errorName, ...properties });
+  function define<Model extends CustomError<{ name: string }>>(parameters: {
+    errorName: Model['name'];
+    errorMessage?: string;
+  }): CustomError.Module<Model> {
+    const { errorName, errorMessage } = parameters;
+    const create = (properties: any) => CustomError({ name: errorName, message: errorMessage, ...properties });
     const properties = {
       create,
       errorName,
@@ -125,10 +139,6 @@ export const CustomError: CustomErrorConstructor = (() => {
     }),
   }) as CustomErrorConstructor;
 })();
-
-// @ts-ignore Ignore duplicate
-
-// @ts-ignore Ignore duplicate
 
 export namespace CustomError {
   /**

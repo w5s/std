@@ -10,4 +10,7 @@ export interface DecodeError
  *
  * @category Constructor
  */
-export const DecodeError = CustomError.define<DecodeError>('DecodeError');
+export const DecodeError = CustomError.define<DecodeError>({
+  errorName: 'DecodeError',
+  errorMessage: 'Cannot decode input',
+});

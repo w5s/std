@@ -12,4 +12,7 @@ export interface ArgumentError
  *
  * @category Constructor
  */
-export const ArgumentError = CustomError.define<ArgumentError>('ArgumentError');
+export const ArgumentError = CustomError.define<ArgumentError>({
+  errorName: 'ArgumentError',
+  errorMessage: 'Some arguments are invalid or missing',
+});

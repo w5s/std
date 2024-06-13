@@ -27,4 +27,6 @@ export interface FileError
  *
  * @category Constructor
  */
-export const FileError = CustomError.define<FileError>('FileError');
+export const FileError = CustomError.define<FileError>({
+  errorName: 'FileError',
+});

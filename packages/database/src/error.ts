@@ -12,4 +12,4 @@ export interface DatabaseError
  *
  * @category Constructor
  */
-export const DatabaseError = CustomError.define<DatabaseError>('DatabaseError');
+export const DatabaseError = CustomError.define<DatabaseError>({ errorName: 'DatabaseError' });

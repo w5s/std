@@ -38,7 +38,7 @@ export interface ZeroDivisionError
   extends CustomError<{
     name: 'ZeroDivisionError';
   }> {}
-export const ZeroDivisionError = CustomError.define<ZeroDivisionError>('ZeroDivisionError');
+export const ZeroDivisionError = CustomError.define<ZeroDivisionError>({ errorName: 'ZeroDivisionError' });
 
 export function divide(value: number, divider: number): Result<number, ZeroDivisionError> {
   const returnValue = value / divider;

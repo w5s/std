@@ -19,7 +19,10 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const InvalidURL = CustomError.define<InvalidURL>('HTTPInvalidURLError');
+  export const InvalidURL = CustomError.define<InvalidURL>({
+    errorName: 'HTTPInvalidURLError',
+    errorMessage: 'An invalid URL was provided',
+  });
 
   /**
    * A network error when `fetch` fails
@@ -33,7 +36,10 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const NetworkError = CustomError.define<NetworkError>('HTTPNetworkError');
+  export const NetworkError = CustomError.define<NetworkError>({
+    errorName: 'HTTPNetworkError',
+    errorMessage: 'Network error occurred',
+  });
 
   /**
    * A parsing error when the body cannot be parsed
@@ -47,5 +53,8 @@ export namespace HTTPError {
    *
    * @category Constructor
    */
-  export const ParserError = CustomError.define<ParserError>('HTTPParserError');
+  export const ParserError = CustomError.define<ParserError>({
+    errorName: 'HTTPParserError',
+    errorMessage: 'Cannot parse response',
+  });
 }

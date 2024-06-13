@@ -37,7 +37,7 @@ interface SomeError
     name: 'SomeError';
     customProperty: string;
   }> {}
-const SomeError = CustomError.define<SomeError>('SomeError');
+const SomeError = CustomError.define<SomeError>({ errorName: 'SomeError' });
 
 console.log(SomeError({
   message: 'This is a message',
@@ -90,14 +90,14 @@ interface FooError
     name: 'FooError';
     fooProperty: boolean;
   }> {}
-const FooError = CustomError.define<FooError>('FooError');
+const FooError = CustomError.define<FooError>({ errorName: 'FooError' });
 
 interface BarError
   extends CustomError<{
     name: 'BarError';
     barProperty: number;
   }> {}
-const BarError = CustomError.define<BarError>('BarError');
+const BarError = CustomError.define<BarError>({ errorName: 'BarError' });
 
 function parse(): Result<string, FooError | BarError> {
   //...
@@ -131,7 +131,7 @@ export interface CauseError
   extends CustomError<{
     name: 'CauseError';
   }> {}
-export const CauseError = CustomError.define<CauseError>('CauseError');
+export const CauseError = CustomError.define<CauseError>({ errorName: 'CauseError' });
 
 try {
   // ...
@@ -155,7 +155,9 @@ export interface {{SomeError}} extends CustomError<{
   // ...
 }> {}
 // ✓ Export const with same name as const
-export const {{SomeError}} = CustomError.define<{{SomeError}}>({{SomeError}});
+export const {{SomeError}} = CustomError.define<{{SomeError}}>({ 
+  errorName: {{SomeError}}
+});
 ```
 
 ## FAQ

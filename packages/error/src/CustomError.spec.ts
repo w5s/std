@@ -96,31 +96,41 @@ describe('CustomError', () => {
 
   describe('define()', () => {
     interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
-    const TestOptionalError = CustomError.define<TestOptionalError>('TestOptionalError');
+    const TestOptionalError = CustomError.define<TestOptionalError>({
+      errorName: 'TestOptionalError',
+      errorMessage: 'test optional message',
+    });
 
     interface TestError extends CustomError<{ name: 'TestError'; email: string }> {}
-    const TestError = CustomError.define<TestError>('TestError');
+    const TestError = CustomError.define<TestError>({
+      errorName: 'TestError',
+      errorMessage: 'test error message',
+    });
 
     it('should create a new constructor', () => {
       expect(TestOptionalError()).toEqual(
         CustomError({
           name: 'TestOptionalError',
+          message: 'test optional message',
         })
       );
       expect(TestOptionalError({})).toEqual(
         CustomError({
           name: 'TestOptionalError',
+          message: 'test optional message',
         })
       );
       // @ts-expect-error Parameters are required
       expect(TestError()).toEqual(
         CustomError({
           name: 'TestError',
+          message: 'test error message',
         })
       );
       expect(TestError({ email: 'foo@bar.com' })).toEqual(
         CustomError({
           name: 'TestError',
+          message: 'test error message',
           email: 'foo@bar.com',
         })
       );
@@ -130,11 +140,13 @@ describe('CustomError', () => {
         expect(TestOptionalError.create()).toEqual(
           CustomError({
             name: 'TestOptionalError',
+            message: 'test optional message',
           })
         );
         expect(TestOptionalError.create({})).toEqual(
           CustomError({
             name: 'TestOptionalError',
+            message: 'test optional message',
           })
         );
       });
@@ -143,10 +155,12 @@ describe('CustomError', () => {
         expect(TestError.create()).toEqual(
           CustomError({
             name: 'TestError',
+            message: 'test error message',
           })
         );
         expect(TestError.create({ email: 'foo@bar.com' })).toEqual(
           CustomError({
+            message: 'test error message',
             name: 'TestError',
             email: 'foo@bar.com',
           })

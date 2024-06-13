@@ -28,7 +28,7 @@ export interface MyError
     foo: string;
     bar: boolean;
   }> {}
-export const MyError = CustomError.define<MyError>('MyError');
+export const MyError = CustomError.define<MyError>({ errorName: 'MyError' });
 
 const myError = MyError({
   foo: 'this is foo',

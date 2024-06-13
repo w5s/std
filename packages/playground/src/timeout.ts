@@ -20,7 +20,10 @@ export interface TimeoutError
  *
  * @category Constructor
  */
-export const TimeoutError = CustomError.define<TimeoutError>('TimeoutError');
+export const TimeoutError = CustomError.define<TimeoutError>({
+  errorName: 'TimeoutError',
+  errorMessage: 'Operation timed out',
+});
 
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
