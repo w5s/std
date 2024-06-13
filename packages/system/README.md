@@ -21,7 +21,7 @@ npm install @w5s/system
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { FileSystem, FilePath } from '@w5s/system';
-import { Task, Console, unsafeRun } from '@w5s/core';
+import { Task, Console } from '@w5s/core';
 
 export function program(): Task<void, never> {
   const rootDirectory = FilePath('root_dir');
