@@ -94,30 +94,6 @@ describe('CustomError', () => {
     });
   });
 
-  describe('defineWith()', () => {
-    const TestError = CustomError.defineWith('TestError', (create) => (email: string) => create({ email }));
-    it('should create a new constructor', () => {
-      expect(TestError('foo@bar.com')).toEqual(
-        CustomError({
-          name: 'TestError',
-          email: 'foo@bar.com',
-        })
-      );
-    });
-    describe('errorName', () => {
-      it('should set errorName', () => {
-        expect(TestError.errorName).toBe('TestError');
-      });
-    });
-    describe('.hasInstance()', () => {
-      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
-        expect(TestError.hasInstance(value)).toBe(false);
-      });
-      it('should return true for instance', () => {
-        expect(TestError.hasInstance(TestError(''))).toBe(true);
-      });
-    });
-  });
   describe('define()', () => {
     interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
     const TestOptionalError = CustomError.define<TestOptionalError>('TestOptionalError');

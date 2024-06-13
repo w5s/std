@@ -21,33 +21,6 @@ interface CustomErrorConstructor {
   readonly prototype: Error;
 
   /**
-   * Return a new `CustomError` factory using `getConstructor()`
-   * See {@link CustomErrorConstructor} for additional properties added to the constructor
-   *
-   * @example
-   * ```typescript
-   * const MyError = CustomError.defineWith(
-   *   'MyError',
-   *   (create) => // a helper that creates MyError { name: 'MyError' }
-   *     // the constructor
-   *     (foo: boolean) => create({ foo, message: 'hello!' })
-   * );
-   *
-   * const instance = MyError(true); // Error { name: 'MyError', message: 'hello', foo: true }
-   * MyError.errorName === 'MyError'/ true
-   * MyError.hasInstance(instance); // true
-   * ```
-   * @param errorName - the error unique name
-   * @param getConstructor - a function that returns an error factory
-   */
-  defineWith<Name extends string, Constructor extends (...args: any[]) => CustomError<{ name: Name }>>(
-    errorName: Name,
-    getConstructor: (
-      create: <Properties>(properties: Properties) => CustomError<{ name: Name } & Properties>
-    ) => Constructor
-  ): Constructor & CustomError.Module<ReturnType<Constructor>>;
-
-  /**
    * Return a new `CustomError` default factory
    * See {@link CustomError.Module} for additional properties added to the constructor
    *
@@ -62,9 +35,7 @@ interface CustomErrorConstructor {
    * ```
    * @param errorName - the error unique name
    */
-  define<Model extends CustomError<{ name: string }>>(
-    errorName: Model['name']
-  ): ((...properties: CustomError.Parameters<Model>) => Model) & CustomError.Module<Model>;
+  define<Model extends CustomError<{ name: string }>>(errorName: Model['name']): CustomError.Module<Model>;
 }
 
 /**
@@ -128,12 +99,7 @@ export const CustomError: CustomErrorConstructor = (() => {
     return returnValue as CustomError<Properties>;
   }
 
-  function defineWith<Name extends string, Constructor extends (...args: any[]) => CustomError<{ name: Name }>>(
-    errorName: Name,
-    getConstructor: (
-      create: <Properties>(properties: Properties) => CustomError<{ name: Name } & Properties>
-    ) => Constructor
-  ): Constructor & CustomError.Module<ReturnType<Constructor>> {
+  function define<Model extends CustomError<{ name: string }>>(errorName: Model['name']): CustomError.Module<Model> {
     const create = (properties: any) => CustomError({ name: errorName, ...properties });
     const properties = {
       create,
@@ -142,22 +108,13 @@ export const CustomError: CustomErrorConstructor = (() => {
         // @ts-ignore We know what we are doing
         anyValue?.name === errorName,
     };
-    const constructor = getConstructor(create);
-    Object.defineProperty(constructor, 'name', { writable: false, value: errorName });
+    Object.defineProperty(create, 'name', { writable: false, value: errorName });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(constructor, properties);
-  }
-
-  function define<Model extends CustomError<{ name: string }>>(
-    errorName: Model['name']
-  ): ((...properties: CustomError.Parameters<Model>) => Model) & CustomError.Module<Model> {
-    // @ts-ignore typing is slightly different
-    return defineWith(errorName, (create) => create);
+    return Object.assign(create, properties);
   }
 
   return Object.assign(CustomError, {
-    defineWith,
     define,
 
     prototype: Object.assign(Object.create(Error.prototype), {
@@ -178,6 +135,8 @@ export namespace CustomError {
    * A type for all properties added by the result of `Make()` or `MakeGeneric()`
    */
   export interface Module<Model extends CustomError<{ name: string }>> {
+    (...properties: CustomError.Parameters<Model>): Model;
+
     /**
      * The model name constant. Can be useful for `switch` / `case` statements.
      *
