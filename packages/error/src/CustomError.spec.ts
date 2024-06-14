@@ -93,6 +93,18 @@ describe('CustomError', () => {
       expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
     });
   });
+  describe('#cause', () => {
+    it('forwards cause property', () => {
+      const cause = new Error('CauseMessage');
+      const error = CustomError({
+        name: 'CustomError',
+        message: 'CustomMessage',
+        cause: new Error('CauseMessage'),
+      });
+
+      expect(error.cause).toStrictEqual(cause);
+    });
+  });
 
   describe('define()', () => {
     interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
