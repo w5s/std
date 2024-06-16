@@ -55,6 +55,6 @@ export namespace HTTPError {
    */
   export const ParserError = CustomError.define<ParserError>({
     errorName: 'HTTPParserError',
-    errorMessage: 'Cannot parse response',
+    errorMessage: 'Cannot parse response body',
   });
 }
