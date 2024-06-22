@@ -1,4 +1,3 @@
-import { assertNever } from '@w5s/invariant';
 import { Console, Int, Option, Task } from '@w5s/core';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
@@ -36,6 +35,9 @@ function main() {
     (_) =>
       Task.orElse(_, (error) => {
         switch (error.name) {
+          case Slack.Error.errorName: {
+            return Console.error(`SlackError:${error.message}`);
+          }
           case TimeoutError.errorName: {
             return Console.error(`TimeoutError:${error.message}`);
           }
@@ -49,8 +51,8 @@ function main() {
             return Console.error(`ParserError:${error.message}`);
           }
           default: {
-            // return Console.error(`Unknown Error:${error.message}`);
-            return assertNever(error);
+            return Console.error(`Unknown Error:${error.message}`);
+            // return assertNever(error);
           }
         }
       })
@@ -59,6 +61,47 @@ function main() {
   return task;
 }
 
+function main2() {
+  const task = Task.create(async ({ ok, run }) => {
+    const amount = EUR('1.55');
+    const uuid = await run(randomUUID());
+    if (!uuid.ok) {
+      return uuid;
+    }
+    const messageSent = await run(sendMessage(uuid.value + String(amount)));
+    if (!messageSent.ok) {
+      return messageSent;
+    }
+
+    return ok();
+  });
+
+  return Task.orElse(task, (error) => {
+    switch (error.name) {
+      case Slack.Error.errorName: {
+        return Console.error(`SlackError:${error.message}`);
+      }
+      case TimeoutError.errorName: {
+        return Console.error(`TimeoutError:${error.message}`);
+      }
+      case HTTPError.InvalidURL.errorName: {
+        return Console.error(`InvalidURLError:${error.message}`);
+      }
+      case HTTPError.NetworkError.errorName: {
+        return Console.error(`NetworkError:${error.message}`);
+      }
+      case HTTPError.ParserError.errorName: {
+        return Console.error(`ParserError:${error.message}`);
+      }
+      default: {
+        return Console.error(`Unknown Error:${error.message}`);
+        // return assertNever(error);
+      }
+    }
+  });
+}
+
 void Task.unsafeRun(main());
 // alternate syntax
 void main().run();
+void main2().run();
