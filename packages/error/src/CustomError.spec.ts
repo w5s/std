@@ -105,6 +105,16 @@ describe('CustomError', () => {
       expect(error.cause).toStrictEqual(cause);
     });
   });
+  describe('#message', () => {
+    it('forwards cause property', () => {
+      const error = CustomError({
+        name: 'CustomError',
+        message: 'CustomMessage',
+      });
+
+      expect(error.message).toStrictEqual('CustomMessage');
+    });
+  });
 
   describe('define()', () => {
     interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
