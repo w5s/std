@@ -1,5 +1,8 @@
-import type { JSONValue, Task } from '@w5s/core';
+import type { Codec, JSONValue, Task } from '@w5s/core';
 import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
+import { mapResult } from '@w5s/core/dist/Task/mapResult.js';
+import { decode } from '@w5s/core/dist/Codec/decode.js';
+import { mapError } from '@w5s/core/dist/Result/mapError.js';
 import type { HTTP } from './HTTP.js';
 import { HTTPError } from './HTTPError.js';
 
@@ -65,11 +68,19 @@ export namespace HTTPParser {
    * });// Task<MyData, HTTPError>
    * ```
    */
-  export function json<Return extends JSONValue>(_decode: 'unsafe'): HTTPParser<Return> {
-    return from<Return>((response) =>
+  export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
+    const parser = from<Return>((response) =>
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       response.json()
     );
+    return CodecModule === 'unsafe'
+      ? parser
+      : (response) =>
+          mapResult(parser(response), (result) =>
+            result.ok
+              ? mapError(decode(CodecModule, result.value), (error) => HTTPError.ParserError({ cause: error }))
+              : result
+          );
   }
 
   /**

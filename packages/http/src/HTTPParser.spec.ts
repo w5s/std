@@ -1,4 +1,4 @@
-import { Result, Task } from '@w5s/core';
+import { DecodeError, Result, Task, Type } from '@w5s/core';
 import { describe, it, expect, vi, type MockedObject } from 'vitest';
 import { withTask } from '@w5s/core/dist/Testing.js';
 import type { HTTP } from './HTTP.js';
@@ -100,16 +100,27 @@ describe('HTTPParser', () => {
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
 
-    // it('should parse using Codec', async () => {
-    //   const parser = HTTPParser.json(
-    //     Type.Object({
-    //       foo: Type.String,
-    //     })
-    //   );
-    //   const response = mockResponseWith('json', {
-    //     resolve: { foo: true },
-    //   });
-    //   await expectTask(parser(response)).toReject({ foo: true });
-    // });
+    it('should parse using Codec', async () => {
+      const parser = HTTPParser.json(
+        Type.Object({
+          foo: Type.String,
+        })
+      );
+      const data = { foo: true };
+      const response = mockResponseWith('json', {
+        resolve: data,
+      });
+      await expectTask(parser(response)).toReject(
+        HTTPError.ParserError({
+          message: 'Cannot parse response body',
+          cause: DecodeError({ message: '', input: data }),
+        })
+      );
+
+      const responseIncorrect = mockResponseWith('json', {
+        resolve: { foo: '1' },
+      });
+      await expectTask(parser(responseIncorrect)).toResolve({ foo: '1' });
+    });
   });
 });
