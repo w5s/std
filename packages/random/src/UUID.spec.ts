@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { DecodeError } from '@w5s/core/dist/Codec/DecodeError.js';
+import { DecodeError } from '@w5s/core/dist/DecodeError.js';
 import { Result } from '@w5s/core';
 import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
 import { UUID } from './UUID.js';
 
 describe('UUID', () => {
-  const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669';
+  const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669' as UUID;
 
   describeType({ describe, it, expect })(UUID, {
     typeName: 'UUID',
