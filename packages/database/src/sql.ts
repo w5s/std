@@ -19,7 +19,7 @@ const append = ({ strings: targetStrings, values: targetValues }: SQLBuffer, { s
   let stringsBufferIndex = targetStrings.length;
   let valuesBufferIndex = targetValues.length;
   if (strings.length > 0) {
-    targetStrings[stringsBufferIndex - 1] += strings[0];
+    targetStrings[stringsBufferIndex - 1] += strings[0]!;
     for (let stringsIndex = 1; stringsIndex < strings.length; stringsIndex++) {
       targetStrings[stringsBufferIndex++] = strings[stringsIndex]!;
     }
