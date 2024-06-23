@@ -1,4 +1,5 @@
 import type { Int } from '../Int.js';
+import type { RecordKey } from '../Record.js';
 
 /**
  * Return the number of entries in the record
@@ -11,6 +12,6 @@ import type { Int } from '../Int.js';
  * @category Accessor
  * @param record - the record
  */
-export function size<D extends Record<string | symbol, any>>(record: D): Int {
+export function size<D extends Record<RecordKey, any>>(record: D): Int {
   return Object.keys(record).length as Int;
 }

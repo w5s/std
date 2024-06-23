@@ -1,3 +1,5 @@
+import type { RecordKey } from '../Record.js';
+
 const _empty = Object.freeze({}) as Record<any, any>;
 
 /**
@@ -9,6 +11,6 @@ const _empty = Object.freeze({}) as Record<any, any>;
  * ```
  * @category Constructor
  */
-export function empty<Key extends string | symbol, Value = any>(): Record<Key, Value> {
+export function empty<Key extends RecordKey, Value = any>(): Record<Key, Value> {
   return _empty;
 }

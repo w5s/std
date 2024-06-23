@@ -1,4 +1,6 @@
-const ownKeys = <Key extends string | symbol>(record: Record<Key, any>) => Reflect.ownKeys(record) as Key[];
+import type { RecordKey } from '../Record.js';
+
+const ownKeys = <Key extends RecordKey>(record: Record<Key, any>) => Reflect.ownKeys(record) as Key[];
 
 /**
  * Return an iterator over all keys
@@ -10,6 +12,6 @@ const ownKeys = <Key extends string | symbol>(record: Record<Key, any>) => Refle
  * ```
  * @param record - the record
  */
-export function keys<Key extends string | symbol>(record: Record<Key, any>): IterableIterator<Key> {
+export function keys<Key extends RecordKey>(record: Record<Key, any>): IterableIterator<Key> {
   return ownKeys(record).values();
 }

@@ -1,4 +1,5 @@
 import type { Option } from '../Option.js';
+import type { RecordKey } from '../Record.js';
 import { has } from './has.js';
 
 /**
@@ -14,6 +15,6 @@ import { has } from './has.js';
  * @param record - the record
  * @param key - the entry key
  */
-export function get<Key extends string | symbol, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
+export function get<Key extends RecordKey, Value>(record: Record<Key, Value>, key: Key): Option<Value> {
   return has(record, key) ? record[key] : undefined;
 }

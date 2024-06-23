@@ -1,3 +1,5 @@
+import type { RecordKey } from '../Record.js';
+
 /**
  * Return a new record including the new `[key, value]`
  *
@@ -10,7 +12,7 @@
  * @param key - the entry key
  * @param value - the entry value
  */
-export function set<Key extends string | symbol, Value>(
+export function set<Key extends RecordKey, Value>(
   record: Record<Key, Value>,
   key: Key,
   value: Value

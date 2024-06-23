@@ -1,3 +1,4 @@
+import type { RecordKey } from '../Record.js';
 import { keys } from './keys.js';
 
 /**
@@ -14,7 +15,7 @@ import { keys } from './keys.js';
  * @param record - the record
  * @param fn - callback called on each entry
  */
-export function forEach<Key extends string | symbol, Value, D extends Record<Key, Value>>(
+export function forEach<Key extends RecordKey, Value, D extends Record<Key, Value>>(
   record: D,
   fn: (value: Value, key: Key, record: D) => unknown
 ): void {

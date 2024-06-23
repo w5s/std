@@ -1,3 +1,4 @@
+import type { RecordKey } from '../Record.js';
 import { has } from './has.js';
 
 /**
@@ -11,7 +12,7 @@ import { has } from './has.js';
  * @param record - the record
  * @param key - the entry key
  */
-export function $delete<Key extends string | symbol, Value>(record: Record<Key, Value>, key: Key): Record<Key, Value> {
+export function $delete<Key extends RecordKey, Value>(record: Record<Key, Value>, key: Key): Record<Key, Value> {
   if (has(record, key)) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { [key]: _, ...newRecord } = record;

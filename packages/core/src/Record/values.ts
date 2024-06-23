@@ -1,3 +1,4 @@
+import type { RecordKey } from '../Record.js';
 import { keys } from './keys.js';
 
 /**
@@ -10,7 +11,7 @@ import { keys } from './keys.js';
  * ```
  * @param record - the record
  */
-export function* values<Key extends string | symbol, Value>(record: Record<Key, Value>): IterableIterator<Value> {
+export function* values<Key extends RecordKey, Value>(record: Record<Key, Value>): IterableIterator<Value> {
   for (const key of keys(record)) {
     yield record[key];
   }

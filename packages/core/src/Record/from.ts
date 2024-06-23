@@ -1,3 +1,5 @@
+import type { RecordKey } from '../Record.js';
+
 /**
  * Return a new {@link Record} from an iterable of [key, value]
  *
@@ -7,7 +9,7 @@
  * ```
  * @category Constructor
  */
-export function from<Key extends string | symbol, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
+export function from<Key extends RecordKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
   const returnValue = {} as unknown as {
     [P in Key]: Value;
   };
