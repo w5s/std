@@ -49,7 +49,7 @@ Each method has its own balance between conciness/simplicity VS performances, so
 
 Depending on the context, there are different ways to import modules
 
-### `import { SomeThing } from '@w5s/xxx'`
+### Classic : `import { SomeThing } from '@w5s/xxx'`
 > import from package root
 
 **➕ Recommended :**
@@ -61,7 +61,7 @@ Depending on the context, there are different ways to import modules
 
 - When you need a high constraint on the bundle size
 
-### `import { SomeThing } from '@w5s/xxx/dist/SomeThing.js'` 
+### Balanced : `import { SomeThing } from '@w5s/xxx/dist/SomeThing.js'` 
 > import from package namespace module
 
 **➕ Recommended :**
@@ -73,7 +73,7 @@ Depending on the context, there are different ways to import modules
 
 - When you need a high constraint on the bundle size
 
-### `import { someFunction } from '@w5s/xxx/dist/SomeThing/someFunction'`
+### Minimal : `import { someFunction } from '@w5s/xxx/dist/SomeThing/someFunction'`
 > import from package namespace property module 
 
 **➕ Recommended :**
