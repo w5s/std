@@ -4654,7 +4654,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:20.14.9":
+"@types/node@npm:*, @types/node@npm:20.14.9, @types/node@npm:^20.14.9":
   version: 20.14.9
   resolution: "@types/node@npm:20.14.9"
   dependencies:
@@ -4663,17 +4663,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:17.0.45, @types/node@npm:^17.0.21, @types/node@npm:^17.0.5":
-  version: 17.0.45
-  resolution: "@types/node@npm:17.0.45"
-  checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^10.0.3":
   version: 10.17.60
   resolution: "@types/node@npm:10.17.60"
   checksum: 10c0/0742294912a6e79786cdee9ed77cff6ee8ff007b55d8e21170fc3e5994ad3a8101fea741898091876f8dc32b0a5ae3d64537b7176799e92da56346028d2cbcd2
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^17.0.5":
+  version: 17.0.45
+  resolution: "@types/node@npm:17.0.45"
+  checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
   languageName: node
   linkType: hard
 
@@ -5124,7 +5124,7 @@ __metadata:
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.1.4"
-    "@types/node": "npm:17.0.45"
+    "@types/node": "npm:20.14.9"
     "@w5s/commitlint-config": "npm:2.0.17"
     "@w5s/conventional-changelog": "npm:2.0.15"
     "@w5s/cspell-config": "npm:2.3.2"
@@ -5362,7 +5362,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/system@workspace:packages/system"
   dependencies:
-    "@types/node": "npm:^17.0.21"
+    "@types/node": "npm:^20.14.9"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     vite: "npm:latest"

@@ -51,7 +51,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@types/node": "^17.0.21",
+    "@types/node": "^20.14.9",
     "@w5s/core": "^1.0.0-alpha.0",
     "@w5s/time": "^1.0.0-alpha.0"
   },
