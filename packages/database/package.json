@@ -66,6 +66,7 @@
     "sqlite3": "^5.1.0"
   },
   "devDependencies": {
+    "typescript": "5",
     "vite": "latest",
     "vitest": "latest"
   },

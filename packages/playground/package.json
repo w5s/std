@@ -44,6 +44,7 @@
     "@w5s/time": "^1.0.0-alpha.0"
   },
   "devDependencies": {
+    "typescript": "5",
     "vite": "latest",
     "vitest": "latest"
   },

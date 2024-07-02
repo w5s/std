@@ -54,6 +54,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
+    "typescript": "5",
     "vite": "latest",
     "vitest": "latest"
   },
