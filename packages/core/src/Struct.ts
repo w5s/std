@@ -34,6 +34,13 @@ export namespace Struct {
      * @category Constructor
      * @param properties - The properties for initialization
      */
+    (properties: Parameters<Model>): Model;
+    /**
+     * Construct a new model
+     *
+     * @category Constructor
+     * @param properties - The properties for initialization
+     */
     create(this: void, properties: Parameters<Model>): Model;
     /**
      * The factory type constant
@@ -64,39 +71,7 @@ export namespace Struct {
    * ```
    * @param typeName - the type unique name
    */
-  export function define<Model extends Struct<{ [Struct.type]: string }>>(
-    typeName: Model[Struct.type]
-  ): ((properties: Parameters<Model>) => Model) & Module<Model> {
-    // @ts-ignore typing is slightly different
-    return defineWith(typeName, (_) => (properties) => ({
-      [Struct.type]: _,
-      ...properties,
-    }));
-  }
-
-  /**
-   * Return a new `Struct` factory using `getConstructor()`
-   * See {@link Module} for additional properties added to the constructor
-   *
-   * @example
-   * ```typescript
-   * const Model = Struct.defineWith(
-   *   'Model',
-   *   (_) => // 'Model'
-   *     // the constructor
-   *     (foo: boolean) => ({ _, foo })
-   * );
-   * const instance = Model(true); // { _: 'Model', foo: true }
-   * Model.typeName === 'Model'/ true
-   * Model.hasInstance(instance); // true
-   * ```
-   * @param typeName - the type unique name
-   * @param getConstructor - a function that returns an object factory
-   */
-  export function defineWith<
-    Name extends string,
-    Constructor extends (...args: any[]) => Struct<{ [Struct.type]: Name }>,
-  >(typeName: Name, getConstructor: (_: Name) => Constructor): Constructor & Module<ReturnType<Constructor>> {
+  export function define<Model extends Struct<{ [Struct.type]: string }>>(typeName: Model[Struct.type]): Module<Model> {
     const hasInstance = (anyValue: unknown): boolean =>
       // @ts-ignore We know what we are doing
       anyValue == null ? false : anyValue[type] === typeName;
@@ -108,7 +83,7 @@ export namespace Struct {
     });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(getConstructor(typeName), {
+    return Object.assign(create, {
       typeName,
       hasInstance,
       from,

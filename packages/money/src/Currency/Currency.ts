@@ -42,23 +42,24 @@ export interface Currency
     symbolNative: string;
   }> {}
 
-export const Currency = Struct.defineWith(
-  'Currency',
-  (_) =>
-    (parameters: {
-      name: Currency['name'];
-      namePlural?: Currency['namePlural'];
-      code: Currency['code'];
-      precision?: Currency['precision'];
-      rounding?: Currency['rounding'];
-      symbol: Currency['symbol'];
-      symbolNative?: Currency['symbolNative'];
-    }): Currency => ({
-      _,
-      rounding: defaultRounding,
-      precision: defaultPrecision,
-      namePlural: parameters.name,
-      symbolNative: parameters.symbol,
-      ...parameters,
-    })
+const CurrencyStruct = Struct.define<Currency>('Currency');
+
+export const Currency = Object.assign(
+  (parameters: {
+    name: Currency['name'];
+    namePlural?: Currency['namePlural'];
+    code: Currency['code'];
+    precision?: Currency['precision'];
+    rounding?: Currency['rounding'];
+    symbol: Currency['symbol'];
+    symbolNative?: Currency['symbolNative'];
+  }): Currency => ({
+    _: 'Currency',
+    rounding: defaultRounding,
+    precision: defaultPrecision,
+    namePlural: parameters.name,
+    symbolNative: parameters.symbol,
+    ...parameters,
+  }),
+  { ...CurrencyStruct }
 );

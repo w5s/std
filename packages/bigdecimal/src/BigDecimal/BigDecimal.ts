@@ -6,6 +6,8 @@ import { parse } from './parse.js';
 import type { BigDecimalString } from '../BigDecimal.js';
 import { format } from './format.js';
 
+const BigDecimalStruct = Struct.define<BigDecimal>('BigDecimal');
+
 const BigDecimalCodec: Codec<BigDecimal> = {
   codecEncode: (input) => `${format(input)}m`,
   codecDecode: (input, { ok, error }) => {
@@ -40,20 +42,13 @@ export interface BigDecimal
   }> {}
 
 export const BigDecimal = Object.assign(
-  Struct.defineWith(
-    'BigDecimal',
-    (
-      _
-    ): {
-      (stringValue: BigDecimalString): BigDecimal;
-      (value: bigint, scale?: number): BigDecimal;
-    } =>
-      (value: string | bigint, scale?: number): BigDecimal =>
-        typeof value === 'string'
-          ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
-          : of(value, scale ?? 0)
-  ),
-  {
-    ...BigDecimalCodec,
-  }
+  ((value: string | bigint, scale?: number): BigDecimal =>
+    typeof value === 'string'
+      ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
+      : of(value, scale ?? 0)) as {
+    (stringValue: BigDecimalString): BigDecimal;
+    (value: bigint, scale?: number): BigDecimal;
+  },
+  BigDecimalStruct,
+  BigDecimalCodec
 );
