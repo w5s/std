@@ -3930,10 +3930,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/core@npm:1.10.1":
-  version: 1.10.1
-  resolution: "@shikijs/core@npm:1.10.1"
-  checksum: 10c0/586711b6485833323937f1193635e1d7ffc63ac9e664aa3fef16c7583dfdbaf4362bb268712ebaba9113a96f871e6e1f993f1c8eb3f558353880a54e436002a9
+"@shikijs/core@npm:1.10.2":
+  version: 1.10.2
+  resolution: "@shikijs/core@npm:1.10.2"
+  dependencies:
+    "@types/hast": "npm:^3.0.4"
+  checksum: 10c0/c8691e0cf6e796decff260e069cbae3cddf1413c2679d5f9735711412789b15f2ddd1088593d4a37258de7d37a7d9025795242ec3875d3f88c7877a520d78111
   languageName: node
   linkType: hard
 
@@ -4492,7 +4494,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/hast@npm:^3.0.0":
+"@types/hast@npm:^3.0.0, @types/hast@npm:^3.0.4":
   version: 3.0.4
   resolution: "@types/hast@npm:3.0.4"
   dependencies:
@@ -17679,11 +17681,12 @@ __metadata:
   linkType: hard
 
 "shiki@npm:^1.9.1":
-  version: 1.10.1
-  resolution: "shiki@npm:1.10.1"
+  version: 1.10.2
+  resolution: "shiki@npm:1.10.2"
   dependencies:
-    "@shikijs/core": "npm:1.10.1"
-  checksum: 10c0/ba0fbb6ffc1e08b4089c679a84e8c2800a7e6609519ada3892831b691d35e73cface539c486e888fc77aa48a70310ceded990158d2153a963efc2d1b084a4e5f
+    "@shikijs/core": "npm:1.10.2"
+    "@types/hast": "npm:^3.0.4"
+  checksum: 10c0/cf37647a1939f0b8e7becd7d6fcfda987555c49fcf814d2e3f7adba92c496825193fc42ea68ade9e4249ac2bcc23b8c5ba18b0a6567df35fd481c4e907f7fed7
   languageName: node
   linkType: hard
 
