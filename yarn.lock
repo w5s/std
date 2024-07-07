@@ -1816,9 +1816,9 @@ __metadata:
   linkType: hard
 
 "@cspell/dict-aws@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "@cspell/dict-aws@npm:4.0.2"
-  checksum: 10c0/da75d0a96ff26900f37eebda5112c2d5d6a4e36d20d08bb9de0ebc8ae76d4b1d807a748b48c9f22fe37f9a26cecebf484d73424170ad5e11078b874176efb8e2
+  version: 4.0.3
+  resolution: "@cspell/dict-aws@npm:4.0.3"
+  checksum: 10c0/ace49e0734ddbe6d28c0db604677e697ef3ca13c953a6f8f7ff166f95dca222fcc50f7b0a4287f7705d2e48fb49549e880ada1de86e725aa25d98ddf39cc3774
   languageName: node
   linkType: hard
 
@@ -2133,9 +2133,9 @@ __metadata:
   linkType: hard
 
 "@cspell/dict-software-terms@npm:^3.4.9":
-  version: 3.4.9
-  resolution: "@cspell/dict-software-terms@npm:3.4.9"
-  checksum: 10c0/f40ddef1c16d06a88ded2eef7af1caee6d21b946cb592fb242854ee159fbcac53aee4b69393eb1b918bd369749e458b461aa510edae362e2ef951b2829d65096
+  version: 3.4.10
+  resolution: "@cspell/dict-software-terms@npm:3.4.10"
+  checksum: 10c0/1e6f944d09aeecd8407d04eae9d4158f93bcebcf0620bcc5f041b0106b6abd7b72e2df2a592386d1f48bdf465b9681cdaa57d707f185d754caaedb744d4ee218
   languageName: node
   linkType: hard
 
@@ -3930,12 +3930,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/core@npm:1.10.2":
-  version: 1.10.2
-  resolution: "@shikijs/core@npm:1.10.2"
+"@shikijs/core@npm:1.10.3":
+  version: 1.10.3
+  resolution: "@shikijs/core@npm:1.10.3"
   dependencies:
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/c8691e0cf6e796decff260e069cbae3cddf1413c2679d5f9735711412789b15f2ddd1088593d4a37258de7d37a7d9025795242ec3875d3f88c7877a520d78111
+  checksum: 10c0/6792c3a6228fe2085aa39616139087aeaa85748a0f49740576c55f6c41b3f2cad911720f653cdba1e175c5b6a8876eee8982750f70b9de17d2944b7f69a8066d
   languageName: node
   linkType: hard
 
@@ -17681,12 +17681,12 @@ __metadata:
   linkType: hard
 
 "shiki@npm:^1.9.1":
-  version: 1.10.2
-  resolution: "shiki@npm:1.10.2"
+  version: 1.10.3
+  resolution: "shiki@npm:1.10.3"
   dependencies:
-    "@shikijs/core": "npm:1.10.2"
+    "@shikijs/core": "npm:1.10.3"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/cf37647a1939f0b8e7becd7d6fcfda987555c49fcf814d2e3f7adba92c496825193fc42ea68ade9e4249ac2bcc23b8c5ba18b0a6567df35fd481c4e907f7fed7
+  checksum: 10c0/b2f7db15a837c24973d4906cbfc6ad7d2c32931e610470d129b85c372da1561f57370676e23a63d889341450359befdfdacbbab0230fe3c222dc59c5f52e5623
   languageName: node
   linkType: hard
 
