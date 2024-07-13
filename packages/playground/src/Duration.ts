@@ -84,6 +84,8 @@ export interface Duration
     seconds: number;
   }> {}
 
+const DurationStruct = Struct.define<Duration>('Duration');
+
 const DurationCodec: Codec<Duration> = {
   codecEncode: (value) => format(value),
   codecDecode: (input, { ok, error }) => {
@@ -111,7 +113,7 @@ export const Duration = Object.assign(
     seconds: properties?.seconds ?? 0,
   }),
   {
-    ...Struct.define<Duration>('Duration'),
+    ...DurationStruct,
     ...DurationCodec,
   }
 );
