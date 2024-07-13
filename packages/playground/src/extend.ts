@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { Spread } from '../../core/src/typing.js';
+import type { Spread } from '@w5s/core/dist/typing.js';
 
 /**
  * Type safe and immutable equivalent of `{ ...source, ...extension }`.
@@ -17,6 +16,7 @@ import type { Spread } from '../../core/src/typing.js';
  * @param extension - an extension object map
  */
 export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return mergeObject(source, extension);
 }
 
