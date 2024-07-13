@@ -1,19 +1,20 @@
 import type { Option, Int, Result, Task, TaskLike } from '@w5s/core';
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { create } from '@w5s/core/dist/Task/create.js';
 import { map as taskMap } from '@w5s/core/dist/Task/map.js';
 import { andThen as taskThen } from '@w5s/core/dist/Task/andThen.js';
 import { orElse as taskElse } from '@w5s/core/dist/Task/orElse.js';
 import { andRun as taskThenRun } from '@w5s/core/dist/Task/andRun.js';
 import { all as taskAll } from '@w5s/core/dist/Task/all.js';
 import { resolve as taskResolve } from '@w5s/core/dist/Task/resolve.js';
+import { reject as taskReject } from '@w5s/core/dist/Task/reject.js';
 import type { TimeDuration } from '@w5s/time';
-import { Time } from '@w5s/time/dist/Time.js';
+import { delay as timeDelay } from '@w5s/time/dist/Time/delay.js';
 import { from } from '@w5s/core/dist/Task/from.js';
 
+const taskFromResult = <V, E>(result: Result<V, E>) =>
+  result.ok ? taskResolve(result.value) : taskReject(result.error);
 const defaultRandom = from<number, never>(({ resolve }) => resolve(Math.random()));
-const timeDelay = Time.delay.bind(Time);
 const resolveNone = taskResolve(undefined);
 
 /**
@@ -288,13 +289,13 @@ export function retrying<Value, Error>(
     andThenResult(typeof taskOrGetter === 'function' ? taskOrGetter(state) : taskOrGetter, (result) =>
       taskThen(check(result), (retryResult) =>
         retryResult.done === true
-          ? create(() => result)
+          ? taskFromResult(result)
           : (() => {
               const policyTask =
                 retryResult.value == null ? policy : RetryPolicy.andThen(policy, () => retryResult.value);
               const applyTask = RetryPolicy.applyAndDelay(policyTask, state);
               const continueTask = taskThen(applyTask, (appliedStatus) =>
-                appliedStatus == null ? create(() => result) : go(appliedStatus)
+                appliedStatus == null ? taskFromResult(result) : go(appliedStatus)
               );
               return continueTask;
             })()
