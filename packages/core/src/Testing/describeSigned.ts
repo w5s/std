@@ -21,7 +21,8 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param testingLibrary
  */
-export function describeSigned({ describe, it, expect }: TestingLibrary) {
+export function describeSigned(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <T>(
     subject: Numeric.Signed<T> & Equal<T>,
     properties: {

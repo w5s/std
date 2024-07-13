@@ -20,7 +20,8 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param testingLibrary
  */
-export function describeComparable({ describe, it, expect }: TestingLibrary) {
+export function describeComparable(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <T>(
     subject: Comparable<T>,
     properties: {

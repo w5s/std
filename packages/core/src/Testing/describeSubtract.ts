@@ -14,7 +14,8 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param testingLibrary
  */
-export function describeSubtract({ describe, it, expect }: TestingLibrary) {
+export function describeSubtract(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <L, R, Ret>(subject: Numeric.Subtract<L, R, Ret>, cases: Array<{ call: [L, R]; returns: Ret }>) => {
     (cases.length === 0 ? describe.todo : describe)('-', () => {
       it.each(cases)("satisfies ['-']($call.0, $call.1) == $returns", ({ call, returns }) => {

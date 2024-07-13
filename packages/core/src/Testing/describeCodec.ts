@@ -2,7 +2,8 @@ import { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
 import type { TestingLibrary } from './type.js';
 
-export function describeCodec({ describe, it, expect }: TestingLibrary) {
+export function describeCodec(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <T>(
     subject: Codec<T>,
     properties: {

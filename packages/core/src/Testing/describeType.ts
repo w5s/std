@@ -2,7 +2,8 @@ import type { Option } from '../Option.js';
 import type { Type } from '../Type.js';
 import type { TestingLibrary } from './type.js';
 
-export function describeType({ describe, it, expect }: TestingLibrary) {
+export function describeType(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <T>(
     subject: Type<T>,
     properties: {

@@ -15,7 +15,8 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param testingLibrary
  */
-export function describeCheckedAdd({ describe, it, expect }: TestingLibrary) {
+export function describeCheckedAdd(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <L, R, Ret>(subject: Numeric.CheckedAdd<L, R, Ret>, cases: Array<{ call: [L, R]; returns: Option<Ret> }>) => {
     (cases.length === 0 ? describe.todo : describe)('+?', () => {
       it.each(cases)("satisfies ['+?']($call.0, $call.1) == $returns", ({ call, returns }) => {

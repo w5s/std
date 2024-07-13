@@ -15,7 +15,8 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param testingLibrary
  */
-export function describeCheckedSubtract({ describe, it, expect }: TestingLibrary) {
+export function describeCheckedSubtract(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <L, R, Ret>(
     subject: Numeric.CheckedSubtract<L, R, Ret>,
     cases: Array<{ call: [L, R]; returns: Option<Ret> }>

@@ -1,7 +1,8 @@
 import type { Equal } from '../Equal.js';
 import type { TestingLibrary } from './type.js';
 
-export function describeEqual({ describe, it, expect }: TestingLibrary) {
+export function describeEqual(testingLibrary: TestingLibrary) {
+  const { describe, it, expect } = testingLibrary;
   return <T>(
     subject: Equal<T>,
     properties: {
