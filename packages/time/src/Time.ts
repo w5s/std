@@ -1,4 +1,4 @@
-import { TimeDuration } from './TimeDuration.js';
+import { TimeDuration } from './TimeDuration/TimeDuration.js';
 import { Time as TimeType } from './Time/Time.js';
 import { of } from './Time/of.js';
 import { now } from './Time/now.js';
@@ -40,7 +40,7 @@ export const Time = Object.assign(TimeType, {
    * @param duration - A duration value
    */
   add(time: Time, duration: TimeDuration): Time {
-    return Time.of((time as number) + (duration as number));
+    return TimeType((time as number) + (duration as number));
   },
 
   /**
@@ -56,6 +56,6 @@ export const Time = Object.assign(TimeType, {
    * @param right - A time value
    */
   diff(left: Time, right: Time): TimeDuration {
-    return TimeDuration.of(left - right);
+    return TimeDuration(left - right);
   },
 });
