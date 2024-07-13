@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { hasInstance } from './hasInstance.js';
 import { resolve } from './resolve.js';
-import { assertType } from '../testing.js';
+import { assertType } from '../Testing.js';
 import type { TaskLike } from '../Task.js';
 
 describe(hasInstance, () => {

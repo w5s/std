@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeCheckedAdd, describeCheckedMultiply, describeCheckedSubtract } from '../testing.js';
+import { describeCheckedAdd, describeCheckedMultiply, describeCheckedSubtract } from '../Testing.js';
 import { IntNumeric } from './IntNumeric.js';
 import { Option } from '../Option.js';
 import { Int } from '../Int.js';

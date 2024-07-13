@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { assertType } from './testing.js';
+import { assertType } from './Testing.js';
 import { ignore } from './ignore.js';
 
 describe('ignore', () => {

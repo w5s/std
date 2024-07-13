@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeAdd, describeMultiply, describeSubtract } from '../testing.js';
+import { describeAdd, describeMultiply, describeSubtract } from '../Testing.js';
 import { BigIntComparable } from './BigIntComparable.js';
 import { BigIntNumeric } from './BigIntNumeric.js';
 

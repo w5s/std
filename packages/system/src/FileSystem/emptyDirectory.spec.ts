@@ -1,7 +1,7 @@
 import { Result, Symbol, Task } from '@w5s/core';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { emptyDirectory } from './emptyDirectory.js';
-import { fsStub, withFile } from '../testing.js';
+import { fsStub, withFile } from '../Testing.js';
 
 describe('emptyDirectory', () => {
   const expectFile = withFile(expect);

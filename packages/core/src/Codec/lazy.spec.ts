@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { lazy } from './lazy.js';
 import { Codec } from '../Codec.js';
 import { Result } from '../Result.js';
-import { describeCodec } from '../testing.js';
+import { describeCodec } from '../Testing.js';
 
 describe(lazy, () => {
   const subject = lazy;

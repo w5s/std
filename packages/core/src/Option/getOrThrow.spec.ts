@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { getOrThrow } from './getOrThrow.js';
-import { assertType } from '../testing.js';
+import { assertType } from '../Testing.js';
 import { Some } from './Some.js';
 
 describe(getOrThrow, () => {

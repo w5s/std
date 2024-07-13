@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mapError } from './mapError.js';
-import { taskStub, withTask } from '../testing.js';
+import { taskStub, withTask } from '../Testing.js';
 import { runReportTask } from './_stub.spec.js';
 
 describe(mapError, () => {

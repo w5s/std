@@ -1,6 +1,6 @@
 import { Result, Symbol, Task } from '@w5s/core';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { fsStub, withFile } from '../testing.js';
+import { fsStub, withFile } from '../Testing.js';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 import { FileError } from '../FileError.js';
 

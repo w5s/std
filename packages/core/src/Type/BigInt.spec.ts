@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { BigInt } from './BigInt.js';
-import { describeCodec, describeType } from '../testing.js';
+import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
 

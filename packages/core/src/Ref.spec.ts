@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Ref } from './Ref.js';
-import { assertType } from './testing.js';
+import { assertType } from './Testing.js';
 
 describe('Ref', () => {
   const anyValue = 123;

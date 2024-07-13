@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { allSettled } from './allSettled.js';
-import { taskStub, withTask } from '../testing.js';
+import { taskStub, withTask } from '../Testing.js';
 import { Result } from '../Result.js';
 
 describe(allSettled, () => {

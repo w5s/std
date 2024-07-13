@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { all } from './all.js';
-import { assertType, taskStub, withTask } from '../testing.js';
+import { assertType, taskStub, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
 import { runReportTask } from './_stub.spec.js';
 

@@ -11,7 +11,7 @@ import { Option } from './Type/Option.js';
 import { $Object } from './Type/Object.js';
 import { Codec } from './Codec.js';
 import { Tag } from './Tag.js';
-import { assertType } from './testing.js';
+import { assertType } from './Testing.js';
 import { Enum } from './Enum.js';
 import type { Int as IntType } from './Int.js';
 import type { Option as OptionType } from './Option.js';

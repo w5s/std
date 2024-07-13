@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { resolve } from './resolve.js';
-import { assertType, withTask } from '../testing.js';
+import { assertType, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
 
 describe(resolve, () => {

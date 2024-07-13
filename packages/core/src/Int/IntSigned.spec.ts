@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeSigned } from '../testing.js';
+import { describeSigned } from '../Testing.js';
 import { IntSigned } from './IntSigned.js';
 import { IntComparable } from './IntComparable.js';
 

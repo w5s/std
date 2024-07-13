@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { tryCall } from './tryCall.js';
-import { withTask } from '../testing.js';
+import { withTask } from '../Testing.js';
 
 describe(tryCall, () => {
   const expectTask = withTask(expect);

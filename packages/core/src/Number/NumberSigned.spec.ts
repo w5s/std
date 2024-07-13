@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeSigned } from '../testing.js';
+import { describeSigned } from '../Testing.js';
 import { NumberComparable } from './NumberComparable.js';
 import { NumberSigned } from './NumberSigned.js';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { assertType } from '../testing.js';
+import { assertType } from '../Testing.js';
 import { getOrElse } from './getOrElse.js';
 import { Error } from './Error.js';
 import { Result } from '../Result.js';

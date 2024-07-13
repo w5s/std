@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeType } from '../testing.js';
+import { describeType } from '../Testing.js';
 import { Codec } from '../Codec.js';
 import { DecodeError } from '../DecodeError.js';
 import { Result } from '../Result.js';

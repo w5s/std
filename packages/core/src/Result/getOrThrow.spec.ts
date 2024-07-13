@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { getOrThrow } from './getOrThrow.js';
 import { Error } from './Error.js';
 import { Ok } from './Ok.js';
-import { assertType } from '../testing.js';
+import { assertType } from '../Testing.js';
 
 describe('.getOrThrow', () => {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion

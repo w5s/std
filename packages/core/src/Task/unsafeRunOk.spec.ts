@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { unsafeRunOk } from './unsafeRunOk.js';
 import { Task } from '../Task.js';
 import { Ref } from '../Ref.js';
-import { taskStub } from '../testing.js';
+import { taskStub } from '../Testing.js';
 import { unsafeRun } from './unsafeRun.js';
 
 const anyError = new Error('TestError');

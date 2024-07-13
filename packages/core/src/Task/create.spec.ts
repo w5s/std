@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { create } from './create.js';
-import { taskStub } from '../testing.js';
+import { taskStub } from '../Testing.js';
 import { Option } from '../Option.js';
 import { Ref } from '../Ref.js';
 import type { TaskLike } from '../Task.js';

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { allSyncCombination, runReportTask } from './_stub.spec.js';
-import { taskStub, withTask } from '../testing.js';
+import { taskStub, withTask } from '../Testing.js';
 import { andThen } from './andThen.js';
 
 describe(andThen, () => {

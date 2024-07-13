@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { taskStub, withTask } from '../testing.js';
+import { taskStub, withTask } from '../Testing.js';
 import { mapResult } from './mapResult.js';
 import { Result } from '../Result.js';
 

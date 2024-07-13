@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Option } from './Option.js';
 import { Result } from '../Result.js';
-import { describeCodec, describeType } from '../testing.js';
+import { describeCodec, describeType } from '../Testing.js';
 import { None } from '../Option/None.js';
 import { define } from './define.js';
 

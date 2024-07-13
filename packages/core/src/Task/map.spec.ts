@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { taskStub, withTask } from '../testing.js';
+import { taskStub, withTask } from '../Testing.js';
 import { map } from './map.js';
 import { runReportTask } from './_stub.spec.js';
 

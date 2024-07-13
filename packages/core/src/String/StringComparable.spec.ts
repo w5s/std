@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeComparable } from '../testing.js';
+import { describeComparable } from '../Testing.js';
 import { StringComparable } from './StringComparable.js';
 
 describe('StringComparable', () => {

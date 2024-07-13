@@ -3,7 +3,7 @@ import { anyOf } from './anyOf.js';
 import { $Object } from './Object.js';
 import { String } from './String.js';
 import { Number } from './Number.js';
-import { describeCodec, describeType } from '../testing.js';
+import { describeCodec, describeType } from '../Testing.js';
 
 describe(anyOf, () => {
   const AType = $Object(

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeAdd, describeMultiply, describeSubtract } from '../testing.js';
+import { describeAdd, describeMultiply, describeSubtract } from '../Testing.js';
 import { NumberComparable } from './NumberComparable.js';
 import { NumberNumeric } from './NumberNumeric.js';
 
