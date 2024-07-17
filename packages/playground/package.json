@@ -41,6 +41,7 @@
     "@w5s/http": "^1.0.0-alpha.0",
     "@w5s/money": "^1.0.0-alpha.0",
     "@w5s/random": "^1.0.0-alpha.0",
+    "@w5s/task": "^1.0.0-alpha.0",
     "@w5s/time": "^1.0.0-alpha.0"
   },
   "devDependencies": {

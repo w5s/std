@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-throw-literal */
-import type { Task } from '@w5s/core';
+import type { Task } from '@w5s/task';
 import { FileError } from '../FileError.js';
 import { errnoTask, Internal } from '../Internal.js';
 import { FilePath } from '../FilePath.js';

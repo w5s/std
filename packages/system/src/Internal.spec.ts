@@ -1,4 +1,5 @@
-import { Option, Result, Task } from '@w5s/core';
+import { Option, Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, it, expect } from 'vitest';
 import { FileError } from './FileError.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './Internal.js';

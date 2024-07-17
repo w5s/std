@@ -1,6 +1,7 @@
 import * as nodePath from 'node:path';
-import type { Tag, Option, Task } from '@w5s/core';
-import { from as taskFrom } from '@w5s/core/dist/Task/from.js';
+import type { Tag, Option } from '@w5s/core';
+import type { Task } from '@w5s/task';
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 
 export type FileName = string;
 

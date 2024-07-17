@@ -1,4 +1,5 @@
-import { Result, Task } from '@w5s/core';
+import { Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { createDirectory } from './createDirectory.js';
 import { FilePath } from '../FilePath.js';

@@ -1,5 +1,5 @@
-import type { Task } from '@w5s/core';
-import { map } from '@w5s/core/dist/Task/map.js';
+import type { Task } from '@w5s/task';
+import { map } from '@w5s/task/dist/Task/map.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 
 /**

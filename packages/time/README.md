@@ -21,7 +21,7 @@ npm install @w5s/time
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { Time, TimeDuration } from '@w5s/time';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 
 export function nowPlusTwoMinutes() {
   return Task.map(Time.now(), (currentTime) => Time.add(currentTime, TimeDuration.minutes(2)));

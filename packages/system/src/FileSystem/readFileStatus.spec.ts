@@ -1,4 +1,5 @@
-import { Int, Result, Task } from '@w5s/core';
+import { Int, Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { Time } from '@w5s/time';
 import { describe, it, expect, vi } from 'vitest';
 import { readFileStatus, readSymbolicLinkStatus } from './readFileStatus.js';

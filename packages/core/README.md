@@ -50,7 +50,7 @@ npm install @w5s/core
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result, Console, Task } from '@w5s/core';
+import { Result } from '@w5s/core';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);
@@ -63,14 +63,11 @@ function parseNumber(expr: string) {
 
 export function main() {
   const parsed = parseNumber('1.1'); // Result.Ok(1.1)
-  const computed = Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
-
-  // Lazy operation that will display in console the computed result when evaluated
-  return Console.debug(computed);
+  return Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
 }
 
 // runTask is impure and should be put at the edge of the program
-void Task.unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
+void main(); // prints { _: 'Result/Ok', value: 3.1 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

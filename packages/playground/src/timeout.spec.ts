@@ -1,4 +1,5 @@
-import { Ref, Result, Task } from '@w5s/core';
+import { Ref, Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { describe, it, expect, vi } from 'vitest';
 import { timeout, TimeoutError } from './timeout.js';

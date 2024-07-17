@@ -1,4 +1,5 @@
-import { Result, Task, type TaskCanceler } from '@w5s/core';
+import { Result } from '@w5s/core';
+import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { HTTP } from './HTTP.js';
 import { HTTPError } from './HTTPError.js';

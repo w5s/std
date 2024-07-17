@@ -1,5 +1,5 @@
 import { FileSystem, FilePath } from '@w5s/system';
-import { Task, Console } from '@w5s/core';
+import { Task, Console } from '@w5s/task';
 
 export function program(): Task<void, never> {
   const rootDirectory = FilePath('root_dir');

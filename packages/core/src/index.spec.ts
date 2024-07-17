@@ -11,7 +11,6 @@ describe('index', () => {
         'Boolean',
         'Codec',
         'Comparable',
-        'Console',
         'DecodeError',
         'Struct',
         'Equal',
@@ -30,7 +29,6 @@ describe('index', () => {
         'Symbol',
         'Tag',
         'Type',
-        'Task',
       ].sort()
     );
   });

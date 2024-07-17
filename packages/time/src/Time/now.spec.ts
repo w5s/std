@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Result, Task } from '@w5s/core';
+import { Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { now } from './now.js';
 
 describe(now, () => {

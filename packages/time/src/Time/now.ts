@@ -1,5 +1,5 @@
-import type { Task } from '@w5s/core/dist/Task/Task.js';
-import { from } from '@w5s/core/dist/Task/from.js';
+import type { Task } from '@w5s/task/dist/Task/Task.js';
+import { from } from '@w5s/task/dist/Task/from.js';
 import type { Time } from './Time.js';
 
 /**

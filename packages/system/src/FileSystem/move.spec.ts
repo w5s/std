@@ -1,5 +1,6 @@
 import * as nodeFS from 'node:fs';
-import { Result, Symbol, Task } from '@w5s/core';
+import { Result, Symbol } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { fsStub, withFile } from '../Testing.js';
 import { FileError } from '../FileError.js';

@@ -1,4 +1,5 @@
-import { Result, Task } from '@w5s/core';
+import { Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { UUID } from './UUID.js';
 import { defaultUUIDGenerator, randomUUID } from './randomUUID.js';

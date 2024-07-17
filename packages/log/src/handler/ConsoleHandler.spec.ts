@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
 import { describe, it, expect, vi } from 'vitest';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { LogLevel } from '../LogLevel.js';
 import { LogMessage } from '../LogMessage.js';
 import { generateLogRecord } from '../__stub__.js';

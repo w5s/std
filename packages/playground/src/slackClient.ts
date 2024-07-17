@@ -1,11 +1,12 @@
-import type { Option, JSONValue, Task } from '@w5s/core';
+import type { Option, JSONValue } from '@w5s/core';
+import type { Task } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
 import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
 import { CustomError } from '@w5s/error';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
 import { DecodeError } from '@w5s/core/dist/DecodeError.js';
-import { mapResult } from '@w5s/core/dist/Task/mapResult.js';
+import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error as Err } from '@w5s/core/dist/Result/Error.js';
 import { TimeoutError, timeout } from './timeout.js';

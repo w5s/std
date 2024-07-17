@@ -1,5 +1,5 @@
 import { sql, executeQuery, type Database } from '@w5s/database';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 
 interface User {
   id: number;

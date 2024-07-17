@@ -1,7 +1,7 @@
-import type { TaskCanceler, Task } from '@w5s/core';
+import type { TaskCanceler, Task } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
 import { CustomError } from '@w5s/error';
-import { from } from '@w5s/core/dist/Task/from.js';
+import { from } from '@w5s/task/dist/Task/from.js';
 
 /**
  * An error reported when a task times out

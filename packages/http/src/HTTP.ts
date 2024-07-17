@@ -1,7 +1,8 @@
 import { invariant } from '@w5s/invariant';
-import type { Task, Tag, Option } from '@w5s/core';
-import { from } from '@w5s/core/dist/Task/from.js';
-import { andThen } from '@w5s/core/dist/Task/andThen.js';
+import type { Tag, Option } from '@w5s/core';
+import type { Task } from '@w5s/task';
+import { from } from '@w5s/task/dist/Task/from.js';
+import { andThen } from '@w5s/task/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { HTTPParser } from './HTTPParser.js';
 

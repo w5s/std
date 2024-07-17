@@ -1,6 +1,7 @@
-import { DecodeError, Result, Task, Type } from '@w5s/core';
+import { DecodeError, Result, Type } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, it, expect, vi, type MockedObject } from 'vitest';
-import { withTask } from '@w5s/core/dist/testing.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import type { HTTP } from './HTTP.js';
 import { HTTPParser } from './HTTPParser.js';
 import { HTTPError } from './HTTPError.js';

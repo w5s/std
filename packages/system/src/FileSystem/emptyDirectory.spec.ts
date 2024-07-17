@@ -1,4 +1,5 @@
-import { Result, Symbol, Task } from '@w5s/core';
+import { Result, Symbol } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { emptyDirectory } from './emptyDirectory.js';
 import { fsStub, withFile } from '../Testing.js';

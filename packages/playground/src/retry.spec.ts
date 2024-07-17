@@ -1,4 +1,5 @@
-import { Int, Option, Task, Result } from '@w5s/core';
+import { Int, Option, Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { RandomGenerator, RandomValue } from '@w5s/random';
 import { describe, it, expect, vi } from 'vitest';

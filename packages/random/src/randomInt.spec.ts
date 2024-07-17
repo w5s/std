@@ -1,4 +1,5 @@
-import { Int, Result, Task } from '@w5s/core';
+import { Int, Result } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { describe, expect, it, vi } from 'vitest';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 import { randomInt } from './randomInt.js';

@@ -1,5 +1,5 @@
-import type { Task } from '@w5s/core';
-import { from } from '@w5s/core/dist/Task/from.js';
+import type { Task } from '@w5s/task';
+import { from } from '@w5s/task/dist/Task/from.js';
 import { type Database, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
 import { SQLQuery } from './query.js';

@@ -17,5 +17,6 @@
 * [@w5s/playground](packages/playground) - Examples
 * [@w5s/random](packages/random) - Random module (UUID, number)
 * [@w5s/system](packages/system) - System module
+* [@w5s/task](packages/task) - Task modules
 * [@w5s/time](packages/time) - Time manipulation
 <!-- AUTO-GENERATED-CONTENT:END -->

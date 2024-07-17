@@ -1,4 +1,5 @@
-import { Console, Int, Option, Task } from '@w5s/core';
+import { Int, Option } from '@w5s/core';
+import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/random';

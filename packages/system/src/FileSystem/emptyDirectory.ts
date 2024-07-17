@@ -1,4 +1,4 @@
-import type { Task } from '@w5s/core';
+import type { Task } from '@w5s/task';
 import { Internal, errnoTask } from '../Internal.js';
 import type { FileError } from '../FileError.js';
 import type { FilePath } from '../FilePath.js';

@@ -18,8 +18,6 @@ describe('index', () => {
         'describeMultiply',
         'describeSigned',
         'describeType',
-        'taskStub',
-        'withTask',
       ].sort()
     );
   });

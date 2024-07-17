@@ -1,5 +1,5 @@
 import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
-import { Console, Task } from '@w5s/core';
+import { Console, Task } from '@w5s/task';
 
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,

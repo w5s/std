@@ -21,7 +21,7 @@ npm install @w5s/database
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { sql, executeQuery, type Database } from '@w5s/database';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 
 interface User {
   id: number;

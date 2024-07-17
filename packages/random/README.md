@@ -21,7 +21,7 @@ npm install @w5s/random
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { randomUUID } from '@w5s/random';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 
 function createUser(name: string) {
   return Task.map(randomUUID(), (uuid) => ({

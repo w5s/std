@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { UUID } from '@w5s/random';
 import { LogHandler } from './LogHandler.js';
 import { LogLevel } from './LogLevel.js';

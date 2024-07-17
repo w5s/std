@@ -1,7 +1,8 @@
-import type { Task, Option, Ref } from '@w5s/core';
+import type { Option, Ref } from '@w5s/core';
+import type { Task } from '@w5s/task';
 import { invariant } from '@w5s/invariant';
 import { useRef } from '@w5s/application';
-import { from } from '@w5s/core/dist/Task/from.js';
+import { from } from '@w5s/task/dist/Task/from.js';
 import type { UUID } from './UUID.js';
 import { application } from './application.js';
 

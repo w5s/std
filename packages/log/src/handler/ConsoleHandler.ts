@@ -1,4 +1,4 @@
-import { from } from '@w5s/core/dist/Task/from.js';
+import { from } from '@w5s/task/dist/Task/from.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevel } from '../LogLevel.js';
 

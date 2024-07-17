@@ -1,4 +1,5 @@
-import type { Record, TaskCanceler } from '@w5s/core';
+import type { Record } from '@w5s/core';
+import type { TaskCanceler } from '@w5s/task';
 import type { DatabaseDriverMap } from '@w5s/database';
 import { useRef } from '@w5s/application';
 import type { SQLStatement } from './sql.js';

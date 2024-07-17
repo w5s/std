@@ -1,5 +1,5 @@
 import { randomUUID } from '@w5s/random';
-import { Task } from '@w5s/core';
+import { Task } from '@w5s/task';
 
 function createUser(name: string) {
   return Task.map(randomUUID(), (uuid) => ({
