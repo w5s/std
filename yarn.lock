@@ -5131,7 +5131,7 @@ __metadata:
   resolution: "@w5s/application@workspace:packages/application"
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5143,7 +5143,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/async@workspace:packages/async"
   dependencies:
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5157,7 +5157,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/invariant": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5213,7 +5213,7 @@ __metadata:
     size-limit-preset-node-lib: "npm:0.3.0"
     turbo: "npm:2.0.9"
     typedoc: "npm:0.26.5"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   languageName: unknown
@@ -5226,7 +5226,7 @@ __metadata:
     "@w5s/async": "npm:1.0.0-alpha.0"
     "@w5s/error": "npm:1.0.0-alpha.0"
     "@w5s/invariant": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5260,7 +5260,7 @@ __metadata:
     "@w5s/task": "npm:^1.0.0-alpha.0"
     mysql: "npm:^2.17.1"
     sqlite3: "npm:^5.1.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5283,7 +5283,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/invariant": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5295,7 +5295,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/error@workspace:packages/error"
   dependencies:
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5344,7 +5344,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5356,7 +5356,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/invariant@workspace:packages/invariant"
   dependencies:
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5373,7 +5373,7 @@ __metadata:
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5390,7 +5390,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     currencies.json: "npm:1.0.2"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5410,7 +5410,7 @@ __metadata:
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5437,7 +5437,7 @@ __metadata:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5453,7 +5453,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5467,7 +5467,7 @@ __metadata:
   dependencies:
     "@w5s/async": "npm:1.0.0-alpha.0"
     "@w5s/core": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5482,7 +5482,7 @@ __metadata:
     "@w5s/core": "npm:1.0.0-alpha.0"
     "@w5s/invariant": "npm:1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -5517,7 +5517,7 @@ __metadata:
     prism-react-renderer: "npm:2.3.1"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
-    typescript: "npm:5.5.3"
+    typescript: "npm:5.5.4"
   languageName: unknown
   linkType: soft
 
@@ -19181,17 +19181,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.5.3":
-  version: 5.5.3
-  resolution: "typescript@npm:5.5.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/f52c71ccbc7080b034b9d3b72051d563601a4815bf3e39ded188e6ce60813f75dbedf11ad15dd4d32a12996a9ed8c7155b46c93a9b9c9bad1049766fe614bbdd
-  languageName: node
-  linkType: hard
-
-"typescript@npm:>=3 < 6":
+"typescript@npm:5.5.4, typescript@npm:>=3 < 6":
   version: 5.5.4
   resolution: "typescript@npm:5.5.4"
   bin:
@@ -19201,17 +19191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>":
-  version: 5.5.3
-  resolution: "typescript@patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>::version=5.5.3&hash=379a07"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/911c7811d61f57f07df79c4a35f56a0f426a65426a020e5fcd792f66559f399017205f5f10255329ab5a3d8c2d1f1d19530aeceffda70758a521fae1d469432e
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A>=3 < 6#optional!builtin<compat/typescript>":
   version: 5.5.4
   resolution: "typescript@patch:typescript@npm%3A5.5.4#optional!builtin<compat/typescript>::version=5.5.4&hash=379a07"
   bin:
