@@ -58,6 +58,14 @@ export interface ExpectFile {
  * Test expect decorator for file assertions
  *
  * @example
+ * ```ts
+ * const expectFile = withFile(expect);
+ *
+ * test('something', async () => {
+ *   const someFile = 'path/to/some/file';
+ *   await expectFile(someFile).toExist();
+ * });
+ * ```
  * @param expectFn
  */
 export function withFile(expectFn: ExpectFunction) {
