@@ -44,7 +44,7 @@ export interface BigDecimal
 export const BigDecimal = Object.assign(
   ((value: string | bigint, scale?: number): BigDecimal =>
     typeof value === 'string'
-      ? parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`)
+      ? (parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`))
       : of(value, scale ?? 0)) as {
     (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale?: number): BigDecimal;
