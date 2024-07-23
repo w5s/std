@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
+import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { DecodeError, Result } from '@w5s/core';
 import { BigDecimal } from './BigDecimal.js';
 

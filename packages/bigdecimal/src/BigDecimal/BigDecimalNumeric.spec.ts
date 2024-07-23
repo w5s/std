@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/testing.js';
+import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
 import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';

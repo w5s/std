@@ -1,4 +1,4 @@
-import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/testing.js';
+import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
 import { TimeDuration } from './TimeDuration.js';
 import { TimeDurationNumeric } from './TimeDurationNumeric.js';

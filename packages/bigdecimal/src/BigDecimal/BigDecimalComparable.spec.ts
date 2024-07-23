@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeComparable } from '@w5s/core/dist/testing.js';
+import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
 

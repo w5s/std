@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ApplicationTest } from '@w5s/application/dist/testing.js';
+import { ApplicationTest } from '@w5s/application/dist/Testing.js';
 import { Currency } from './Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
 

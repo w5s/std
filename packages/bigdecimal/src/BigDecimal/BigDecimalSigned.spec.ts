@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeSigned } from '@w5s/core/dist/testing.js';
+import { describeSigned } from '@w5s/core/dist/Testing.js';
 import { BigDecimalSigned } from './BigDecimalSigned.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';

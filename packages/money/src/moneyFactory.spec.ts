@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Int } from '@w5s/core';
-import { ApplicationTest } from '@w5s/application/dist/testing.js';
+import { ApplicationTest } from '@w5s/application/dist/Testing.js';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from './Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';

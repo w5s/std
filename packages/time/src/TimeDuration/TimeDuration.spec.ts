@@ -1,4 +1,4 @@
-import { describeCodec, describeType } from '@w5s/core/dist/testing.js';
+import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
 import { Result, DecodeError } from '@w5s/core';
 import { TimeDuration } from '../TimeDuration.js';

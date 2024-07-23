@@ -1,4 +1,4 @@
-import { describeComparable } from '@w5s/core/dist/testing.js';
+import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
 import { Time } from './Time.js';
 import { TimeComparable } from './TimeComparable.js';
