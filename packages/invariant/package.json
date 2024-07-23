@@ -54,7 +54,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
-    "typescript": "5.5.3",
+    "typescript": "5.5.4",
     "vite": "latest",
     "vitest": "latest"
   },
