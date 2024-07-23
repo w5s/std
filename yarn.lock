@@ -5162,7 +5162,7 @@ __metadata:
     "@w5s/conventional-changelog": "npm:2.0.16"
     "@w5s/cspell-config": "npm:2.3.2"
     "@w5s/eslint-config": "npm:2.0.21"
-    "@w5s/ts-config": "npm:2.0.11"
+    "@w5s/ts-config": "npm:2.0.12"
     concurrently: "npm:8.2.2"
     cspell: "npm:8.10.4"
     eslint: "npm:8.57.0"
@@ -5451,15 +5451,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:2.0.11":
-  version: 2.0.11
-  resolution: "@w5s/ts-config@npm:2.0.11"
+"@w5s/ts-config@npm:2.0.12":
+  version: 2.0.12
+  resolution: "@w5s/ts-config@npm:2.0.12"
   peerDependencies:
     typescript: ">=5.x"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/99e494e304ff0d1106769df70145648a114d50d9fdc6079b6c0c27c7436c1e6926682de1e225ad080de2c6daec43c5e08dbce335907f2001e8acfd436f0c1292
+  checksum: 10c0/15a0c7ef670c20e6e35181f572ad3d942385ec4562ada7a711080acd5347c573555fd8a8fe903fb4c5540966d6dbd21b3b1ccd8d0164c4b1b77c7203a4688456
   languageName: node
   linkType: hard
 
