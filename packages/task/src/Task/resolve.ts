@@ -11,9 +11,13 @@ import { from } from './from.js';
  * const result = Task.unsafeRun(task);// Result.Ok(1)
  * ```
  * @category Constructor
- * @param value - the success value
  */
 export function resolve<Error = never>(): Task<void, Error>;
+/**
+ *
+ * @example
+ * @param value - the success value
+ */
 export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
 export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
   // eslint-disable-next-line @typescript-eslint/no-shadow
