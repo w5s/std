@@ -1001,15 +1001,15 @@ __metadata:
   linkType: hard
 
 "@babel/plugin-transform-function-name@npm:^7.25.0":
-  version: 7.25.0
-  resolution: "@babel/plugin-transform-function-name@npm:7.25.0"
+  version: 7.25.1
+  resolution: "@babel/plugin-transform-function-name@npm:7.25.1"
   dependencies:
     "@babel/helper-compilation-targets": "npm:^7.24.8"
     "@babel/helper-plugin-utils": "npm:^7.24.8"
-    "@babel/traverse": "npm:^7.25.0"
+    "@babel/traverse": "npm:^7.25.1"
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: 10c0/0b3e0d0e174ea9f5ddc966d705ec5cb46ee6f28b238fd57d9f2f82617c9eb882b446fd7105a77b969e2015a491f8cec7671a3c861d0d177afa9a4788070a61ca
+  checksum: 10c0/e74912174d5e33d1418b840443c2e226a7b76cc017c1ed20ee30a566e4f1794d4a123be03180da046241576e8b692731807ba1f52608922acf1cb2cb6957593f
   languageName: node
   linkType: hard
 
@@ -1257,13 +1257,13 @@ __metadata:
   linkType: hard
 
 "@babel/plugin-transform-react-constant-elements@npm:^7.21.3":
-  version: 7.24.7
-  resolution: "@babel/plugin-transform-react-constant-elements@npm:7.24.7"
+  version: 7.25.1
+  resolution: "@babel/plugin-transform-react-constant-elements@npm:7.25.1"
   dependencies:
-    "@babel/helper-plugin-utils": "npm:^7.24.7"
+    "@babel/helper-plugin-utils": "npm:^7.24.8"
   peerDependencies:
     "@babel/core": ^7.0.0-0
-  checksum: 10c0/4b7a7314c4492d5ea0d0d705e76065e669f63812fe6f61588168d71a0f3c99f1bcaac22cdd09d71a56d951cf5ea0aec0b4b49717fd51db919b49e14f9a29503a
+  checksum: 10c0/8e9a61e8d74804ad3e4c8051463b2d8c42be5aa1f381f7b0db3ac8696a5cb5faead54036b1e4bcd53f6ab74c0bb3e45e4d9a1a2f50b9a575a8d7965b77d89c28
   languageName: node
   linkType: hard
 
@@ -1647,9 +1647,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.22.8, @babel/traverse@npm:^7.24.7, @babel/traverse@npm:^7.24.8, @babel/traverse@npm:^7.25.0":
-  version: 7.25.0
-  resolution: "@babel/traverse@npm:7.25.0"
+"@babel/traverse@npm:^7.22.8, @babel/traverse@npm:^7.24.7, @babel/traverse@npm:^7.24.8, @babel/traverse@npm:^7.25.0, @babel/traverse@npm:^7.25.1":
+  version: 7.25.1
+  resolution: "@babel/traverse@npm:7.25.1"
   dependencies:
     "@babel/code-frame": "npm:^7.24.7"
     "@babel/generator": "npm:^7.25.0"
@@ -1658,7 +1658,7 @@ __metadata:
     "@babel/types": "npm:^7.25.0"
     debug: "npm:^4.3.1"
     globals: "npm:^11.1.0"
-  checksum: 10c0/a958365fd8527b6572d63c1f50a646dda3d8b8551630588d44ae89f6eaa56b81417f2108006549f757a483b3c69f872f607ff1ed402c6ba08c389b4429ff13db
+  checksum: 10c0/d8ae766da109d026ea6e483b9732256410e0ac249929e366ff11cf64a40a53a64b6a7b6db502a77de81dcace1fcf530d7569ffd0ee6b727ef4eb343e5f68ef74
   languageName: node
   linkType: hard
 
