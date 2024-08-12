@@ -38,7 +38,7 @@ const packageList = fs
       package: require(`${projectRoot}/packages/${entry}/package.json`),
       entry: {
         index: { path: 'src/index.ts' },
-        ...(hasTesting ? { testing: { path: 'src/testing.ts', label: 'Testing utilities' } } : undefined),
+        ...(hasTesting ? { testing: { path: 'src/Testing.ts', label: 'Testing utilities' } } : undefined),
       },
     };
   })
