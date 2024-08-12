@@ -22,7 +22,6 @@ export type SQLDataType =
   | SQLDataType.INTERVAL;
 export namespace SQLDataType {
   type AnyObject = Record<string, unknown>;
-  // eslint-disable-next-line @typescript-eslint/ban-types
   type EmptyObject = {};
   type DataType<T, P extends AnyObject = EmptyObject> = Readonly<
     {

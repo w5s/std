@@ -22,6 +22,7 @@ describe(getError, () => {
     assertType<typeof error, typeof anyError>(true);
 
     const anyResult: Result<'anyValue', 'anyError'> = Ok('anyValue');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const optError = getError(anyResult);
     assertType<typeof optError, typeof anyError | Option.None>(true);
   });
