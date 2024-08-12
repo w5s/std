@@ -1,8 +1,7 @@
 import type { Int, Tag } from '@w5s/core';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type AnyObject = Object;
-// eslint-disable-next-line @typescript-eslint/ban-types
+type AnyObject = object;
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 type AnyFunction = Function;
 type State = {
   currentId: ObjectId;

@@ -30,7 +30,7 @@ describe('executeQuery', () => {
 
   it('should return Result.Error of environment.executeQuery if promise rejected', async () => {
     const client = createClient();
-    client.mockExecuteQuery.mockReturnValue(Promise.reject('MockClientError')); // eslint-disable-line prefer-promise-reject-errors
+    client.mockExecuteQuery.mockRejectedValue('MockClientError');
     await expect(Task.unsafeRun(executeQuery(client, anyQuery))).resolves.toEqual(
       Result.Error(DatabaseError({ cause: 'MockClientError' }))
     );

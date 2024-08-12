@@ -5,7 +5,6 @@ import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
 import { define } from './define.js';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { isArray } = globalThis.Array;
 
 /**
