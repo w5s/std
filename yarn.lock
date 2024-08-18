@@ -4249,12 +4249,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/core@npm:1.13.0":
-  version: 1.13.0
-  resolution: "@shikijs/core@npm:1.13.0"
+"@shikijs/core@npm:1.14.1":
+  version: 1.14.1
+  resolution: "@shikijs/core@npm:1.14.1"
   dependencies:
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/271ce7f3a6589d0dc5f7e8028fd2a471d4545f87f569d9f33f69fa443d3de52d2b0011b57309eeb2e954c7e0bf5134e9c21fcb69fa0ad5b9590be5163869919a
+  checksum: 10c0/a9779634956010788f346f779a8e445d17101cae64e6769a7a4d6d479ccd5d47e6c897fd7a57445cea6b64f1b79f1126ff4f57dbc6ce28c1533f6b74450d752f
   languageName: node
   linkType: hard
 
@@ -8908,9 +8908,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.4":
-  version: 1.5.10
-  resolution: "electron-to-chromium@npm:1.5.10"
-  checksum: 10c0/f28f28be7e0e50e5ea2b6e26750c1ab3456b03aa2a8262f85ac6a1cd2cbc1f6e05e21bae65b08c6031ddf798f785463bf2f6cbca181d31e9deb675c12a999ef4
+  version: 1.5.11
+  resolution: "electron-to-chromium@npm:1.5.11"
+  checksum: 10c0/87b4c0c959009d3fa1120c73eb277c3fced527e4348c798384daf044b15cfb30bbaa5004e772ef016c5b2a70ee06bb8f756fb85fe3986d66c12d9f702c1fc5bc
   languageName: node
   linkType: hard
 
@@ -18065,12 +18065,12 @@ __metadata:
   linkType: hard
 
 "shiki@npm:^1.9.1":
-  version: 1.13.0
-  resolution: "shiki@npm:1.13.0"
+  version: 1.14.1
+  resolution: "shiki@npm:1.14.1"
   dependencies:
-    "@shikijs/core": "npm:1.13.0"
+    "@shikijs/core": "npm:1.14.1"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/0536b255b2522fe89d5ef1be211a30a64ad18c50dc576d6a2afee2398c0d12e9135d9c80c1dfdc25a19e97ce90c3a2b9a2778549b56ccd22ed5ed941274bf918
+  checksum: 10c0/756f45917f281e158eef114b985b9a4cae9f0470f955e2f96f4473a3aed327dc1d653b9bd6280eb28398bd0da6d533caa4fce61b716c1263c5d85df53964ade2
   languageName: node
   linkType: hard
 
