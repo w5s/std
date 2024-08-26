@@ -39,6 +39,7 @@ describe('CustomError', () => {
     it('returns instance of Error', () => {
       expect(new CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
       expect(new CustomError({ name: anyString })).toBeInstanceOf(CustomError);
+      expect(new CustomError({ name: anyString, foo: true })).toEqual(expect.objectContaining({ foo: true }));
     });
   });
 
