@@ -10,6 +10,7 @@ describe('index', () => {
         "CustomError",
         "Error",
         "EvalError",
+        "NotImplementedError",
         "RangeError",
         "ReferenceError",
         "SyntaxError",
