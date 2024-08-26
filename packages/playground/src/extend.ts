@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import type { Spread } from '@w5s/core/dist/typing.js';
+import type { Spread } from './Spread.js';
 
 /**
  * Type safe and immutable equivalent of `{ ...source, ...extension }`.
