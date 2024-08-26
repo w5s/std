@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { AggregateError } from '@w5s/error';
-import { assertType } from '@w5s/core/dist/Testing.js';
+import { assertType } from '@w5s/core-type';
 import { any } from './any.js';
 import { taskStub, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';

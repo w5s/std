@@ -7,6 +7,7 @@
 * [@w5s/async](packages/async) - Promise module
 * [@w5s/bigdecimal](packages/bigdecimal) - BigDecimal module
 * [@w5s/core](packages/core) - Core modules
+* [@w5s/core-type](packages/core-type) - Core type modules
 * [@w5s/database](packages/database) - Database client module
 * [@w5s/env](packages/env) - Environment variable module
 * [@w5s/error](packages/error) - Error module

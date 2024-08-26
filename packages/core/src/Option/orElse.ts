@@ -1,5 +1,5 @@
+import type { Nullable } from '@w5s/core-type';
 import type { Option } from '../Option.js';
-import type { Nullable } from '../typing.js';
 import { from } from './from.js';
 
 /**

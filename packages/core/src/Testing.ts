@@ -1,4 +1,3 @@
-export * from './Testing/assertType.js';
 export * from './Testing/describeCheckedAdd.js';
 export * from './Testing/describeCheckedSubtract.js';
 export * from './Testing/describeCheckedMultiply.js';

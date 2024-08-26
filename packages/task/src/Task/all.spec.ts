@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { assertType } from '@w5s/core/dist/Testing.js';
+import { assertType } from '@w5s/core-type';
 import { all } from './all.js';
 import { taskStub, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';

@@ -70,10 +70,7 @@ export namespace HTTPParser {
    * ```
    */
   export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
-    const parser = from<Return>((response) =>
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      response.json()
-    );
+    const parser = from<Return>((response) => response.json());
     return CodecModule === 'unsafe'
       ? parser
       : (response) =>

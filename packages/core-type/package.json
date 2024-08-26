@@ -1,13 +1,14 @@
 {
-  "name": "@w5s/core",
+  "name": "@w5s/core-type",
   "version": "1.0.0-alpha.0",
-  "description": "Core modules",
+  "description": "Core type modules",
   "keywords": [
     "fp",
     "functional",
-    "task",
     "standard",
-    "std"
+    "std",
+    "core",
+    "types"
   ],
   "homepage": "https://github.com/w5s/std/tree/master/packages/std#readme",
   "bugs": {
@@ -16,26 +17,29 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/core"
+    "directory": "packages/core-type"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
+  "sideEffects": false,
   "type": "module",
   "exports": {
-    ".": "./dist/index.js",
-    "./dist/*": "./dist/*"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
-  "typings": "./dist/index.d.ts",
   "files": [
     "dist/",
     "src/",
+    "!**/*.test-d.ts",
     "!*.d.ts.map",
     "!**/*.spec.*",
     "!**/__tests__/**"
   ],
   "scripts": {
     "build": "concurrently \"npm:build:*\" \":\"",
-    "build:tsc": "tsc -b tsconfig.build.json",
+    "build:tsc": "npx tsup",
     "clean": "concurrently \"npm:clean:*\" \":\"",
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
@@ -47,18 +51,13 @@
     "prepublishOnly": "npm run clean;npm run build",
     "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
-    "test": "concurrently \"npm:test:*\" \":\"",
-    "test:src": "vitest run",
+    "test": "npx concurrently \"npm:test:*\" \":\"",
+    "test:src": "tsc -b tsconfig.test.json",
     "tsc": "tsc",
     "validate": "npm run lint && npm run build && npm run test"
   },
-  "dependencies": {
-    "@w5s/async": "1.0.0-alpha.0",
-    "@w5s/core-type": "1.0.0-alpha.0",
-    "@w5s/error": "1.0.0-alpha.0",
-    "@w5s/invariant": "1.0.0-alpha.0"
-  },
   "devDependencies": {
+    "tsup": "8.2.4",
     "typescript": "5.5.4",
     "vite": "latest",
     "vitest": "latest"
@@ -72,10 +71,20 @@
   "publishConfig": {
     "access": "public"
   },
+  "tsup": {
+    "format": [
+      "esm"
+    ],
+    "clean": true,
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ]
+  },
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "10 kB"
+      "limit": "310 B"
     }
   ]
 }

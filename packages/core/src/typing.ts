@@ -4,34 +4,6 @@
 export type EmptyObject = Record<string | symbol, never>;
 
 /**
- * A type that can be either `undefined`, `null`, or `T`
- */
-export type Nullable<T = never> = null | undefined | T;
-
-/**
- * Flatten the type. Useful for IDE information.
- *
- * @example
- * ```ts
- * type A = { a: boolean };
- * type B = { b: string };
- * type AB = Pretty<A & B>; // { a: boolean; b: string; }
- * ```
- */
-export type Pretty<T> = { [KeyType in keyof T]: T[KeyType] } & {};
-
-/**
- * Return a partial type of `T` for keys in `Keys`
- *
- * @example
- * ```ts
- * type T = { required: boolean; optional1: string; optional2: string; };
- * type OptionalT = PartialKeys<T, 'optional'>; // { required: boolean; optional1?: string; optional2?: string; };
- * ```
- */
-export type PartialKeys<T, Keys extends keyof T> = Pretty<Omit<T, Keys> & Partial<Pick<T, Keys>>>;
-
-/**
  * Typing for `{ ...A, ...B, ...C, ... }`
  *
  * @example
