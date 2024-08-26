@@ -1,5 +1,5 @@
+import type { Nullable } from '@w5s/core-type';
 import { isNone } from './isNone.js';
-import type { Nullable } from '../typing.js';
 
 /**
  * Return `true` if `anyValue` is neither `null` nor `undefined`

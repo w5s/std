@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { assertType } from '@w5s/core-type';
 import { Ok } from './Ok.js';
-import { assertType } from '../Testing.js';
 import type { Result } from '../Result.js';
 
 describe(Ok, () => {

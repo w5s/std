@@ -1,3 +1,4 @@
+import type { Nullable } from '@w5s/core-type';
 import { None } from './Option/None.js';
 import { Some } from './Option/Some.js';
 import { andThen } from './Option/andThen.js';
@@ -9,7 +10,6 @@ import { isSome } from './Option/isSome.js';
 import { map } from './Option/map.js';
 import { match } from './Option/match.js';
 import { orElse } from './Option/orElse.js';
-import type { Nullable } from './typing.js';
 
 // https://doc.rust-lang.org/std/option/enum.Option.html
 

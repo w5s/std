@@ -1,4 +1,4 @@
-import type { Nullable } from '../typing.js';
+import type { Nullable } from '@w5s/core-type';
 
 /**
  * Return `true` if `anyValue` is `null`or `undefined`

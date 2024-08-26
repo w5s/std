@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { assertType } from '@w5s/core-type';
 import { Type } from './Type.js';
 import { define } from './Type/define.js';
 import { Array } from './Type/Array.js';
@@ -11,7 +12,6 @@ import { Option } from './Type/Option.js';
 import { $Object } from './Type/Object.js';
 import { Codec } from './Codec.js';
 import { Tag } from './Tag.js';
-import { assertType } from './Testing.js';
 import { Enum } from './Enum.js';
 import type { Int as IntType } from './Int.js';
 import type { Option as OptionType } from './Option.js';

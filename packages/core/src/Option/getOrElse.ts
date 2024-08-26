@@ -1,4 +1,4 @@
-import type { Nullable } from '../typing.js';
+import type { Nullable } from '@w5s/core-type';
 
 /**
  * Returns the `value` if `Some`, `getDefaultValue()` if `None`.

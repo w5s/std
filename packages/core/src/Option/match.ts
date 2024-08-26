@@ -1,4 +1,4 @@
-import type { Nullable } from '../typing.js';
+import type { Nullable } from '@w5s/core-type';
 
 /**
  * Return `matchers.Some(value)` if `option` is `Some`, otherwise `matchers.None()`
