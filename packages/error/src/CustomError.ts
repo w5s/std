@@ -193,10 +193,8 @@ export namespace CustomError {
   /**
    * Extract all properties passed to constructor
    */
-  export type ParametersProperties<Model extends object> = Omit<Model, 'name' | 'stack' | 'message' | 'cause'> & {
-    message?: string;
-    cause?: unknown;
-  };
+  export type ParametersProperties<Model extends object> = Omit<Model, 'name' | 'stack' | 'message' | 'cause'> &
+    Partial<Pick<CustomError<{ name: string }>, 'message' | 'cause'>>;
 
   /**
    * Extract all parameters to create a new CustomError
