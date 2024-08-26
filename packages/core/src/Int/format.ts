@@ -1,5 +1,5 @@
 import type { Int } from '../Int.js';
-import type { Radix36 } from '../typing.js';
+import type { Radix36 } from '../Number/Radix36.js';
 
 /**
  * Return string representation of integer

@@ -1,4 +1,4 @@
-import type { Radix36 } from '../typing.js';
+import type { Radix36 } from './Radix36.js';
 
 /**
  * Return string representation of number

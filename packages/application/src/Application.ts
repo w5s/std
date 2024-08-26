@@ -1,8 +1,9 @@
-import type { Ref, Record, Tag, EmptyObject } from '@w5s/core';
+import type { Ref, Record, Tag } from '@w5s/core';
 import { useRef } from './useRef.js';
 import { useStorage } from './useStorage.js';
 
 type AnyObject = Record<string | symbol, unknown>;
+type EmptyObject = Record<string | symbol, never>;
 
 /**
  * Application id type

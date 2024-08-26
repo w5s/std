@@ -1,9 +1,4 @@
 /**
- * An empty object
- */
-export type EmptyObject = Record<string | symbol, never>;
-
-/**
  * Number formatting radix
  */
 export type Radix36 =

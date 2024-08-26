@@ -1,5 +1,7 @@
-import type { Ref, Record, EmptyObject } from '@w5s/core';
+import type { Ref, Record } from '@w5s/core';
 import { Application, type ApplicationState } from '../Application.js';
+
+type EmptyObject = Record<string | symbol, never>;
 
 const generateAppId = () => `app-${Math.round(Math.random() * 2 ** 32).toString(36)}`;
 
