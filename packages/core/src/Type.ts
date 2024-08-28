@@ -11,6 +11,7 @@ import { Array } from './Type/Array.js';
 import { ensure } from './Type/ensure.js';
 import type { Option } from './Option.js';
 import { anyOf } from './Type/anyOf.js';
+import { constant } from './Type/constant.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -77,6 +78,7 @@ export interface Type<T> {
  */
 export const Type = {
   anyOf,
+  constant,
   define,
   ensure,
   Array,
