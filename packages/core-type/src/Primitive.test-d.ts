@@ -8,3 +8,8 @@ const symbol: Primitive = Symbol('');
 const undef: Primitive = undefined;
 const nul: Primitive = null;
 const bigint: Primitive = 1n;
+
+// @ts-expect-error
+const array: Primitive = [];
+// @ts-expect-error
+const object: Primitive = {};
