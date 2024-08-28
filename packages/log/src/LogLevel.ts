@@ -1,5 +1,15 @@
-import type { Struct, Option } from '@w5s/core';
+import type { Int, Option, Type } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
+import { $Object as TObject } from '@w5s/core/dist/Type/Object.js';
+import { String as TString } from '@w5s/core/dist/Type/String.js';
+import { Int as TInt } from '@w5s/core/dist/Type/Int.js';
+import { IntBounded } from '@w5s/core/dist/Int/IntBounded.js';
+import { Callable } from '@w5s/core/dist/Callable.js';
+
+const LogLevelType = TObject({
+  name: TString,
+  value: TInt,
+});
 
 const LogLevelComparable = Comparable({
   compare(left: LogLevel, right: LogLevel): number {
@@ -9,24 +19,13 @@ const LogLevelComparable = Comparable({
   },
 });
 
-export interface LogLevel
-  extends Struct<{
-    [Struct.type]: 'LogLevel';
-    /**
-     * The log level string representation
-     */
-    name: string;
-    /**
-     * The log level numeric value
-     */
-    value: number;
-  }> {}
+export interface LogLevel extends Type.TypeOf<typeof LogLevelType> {}
 
-function of(name: string, levelValue: number): LogLevel {
-  return { _: 'LogLevel', name, value: levelValue };
+function of(name: string, levelValue: Int): LogLevel {
+  return { name, value: levelValue };
 }
 
-const None = of('None', Number.NEGATIVE_INFINITY);
+const None = of('None', IntBounded.minValue);
 
 function match<T>(matchers: [LogLevel, T][]): (anyLevel: LogLevel) => Option<T>;
 function match<T>(matchers: [LogLevel, T][], defaultValue: T): (anyLevel: LogLevel) => T;
@@ -50,7 +49,9 @@ function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLe
  * @example
  * @namespace
  */
-export const LogLevel = {
+export const LogLevel = Callable({
+  [Callable.symbol]: of,
+  ...LogLevelType,
   ...LogLevelComparable,
   /**
    * Construct a new `LogLevel`
@@ -68,23 +69,23 @@ export const LogLevel = {
   /**
    * Critical log level (50)
    */
-  Critical: of('Critical', 50),
+  Critical: of('Critical', 50 as Int),
   /**
    * Error log level (40)
    */
-  Error: of('Error', 40),
+  Error: of('Error', 40 as Int),
   /**
    * Warning log level (30)
    */
-  Warning: of('Warning', 30),
+  Warning: of('Warning', 30 as Int),
   /**
    * Info log level (20)
    */
-  Info: of('Info', 20),
+  Info: of('Info', 20 as Int),
   /**
    * Debug log level (10)
    */
-  Debug: of('Debug', 10),
+  Debug: of('Debug', 10 as Int),
 
   /**
    * Returns the string representation of a level
@@ -131,4 +132,4 @@ export const LogLevel = {
    * @param matchers
    */
   match,
-};
+});

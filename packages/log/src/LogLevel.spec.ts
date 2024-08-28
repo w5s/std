@@ -1,11 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { Int } from '@w5s/core';
 import { LogLevel } from './LogLevel.js';
 
 describe('LogLevel', () => {
   describe('.of()', () => {
     it('should return a new object', () => {
-      expect(LogLevel.of('Test', 3)).toEqual({
+      expect(LogLevel.of('Test', Int(3))).toEqual({
         _: 'LogLevel',
         name: 'Test',
         value: 3,
@@ -84,10 +85,10 @@ describe('LogLevel', () => {
   });
 
   describeComparable({ describe, it, expect })(LogLevel, {
-    ordered: () => [LogLevel.of('One', 1), LogLevel.of('Two', 2), LogLevel.of('Three', 3)],
+    ordered: () => [LogLevel.of('One', Int(1)), LogLevel.of('Two', Int(2)), LogLevel.of('Three', Int(3))],
     equivalent: () => [
-      [LogLevel.of('One', 1), LogLevel.of('One', 1)],
-      [LogLevel.of('One', 1), LogLevel.of('OneOther', 1)],
+      [LogLevel.of('One', Int(1)), LogLevel.of('One', Int(1))],
+      [LogLevel.of('One', Int(1)), LogLevel.of('OneOther', Int(1))],
     ],
   });
 });
