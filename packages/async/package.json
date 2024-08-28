@@ -50,6 +50,9 @@
     "tsc": "tsc",
     "validate": "npm run lint && npm run build && npm run test"
   },
+  "dependencies": {
+    "@w5s/core-type": "^1.0.0-alpha.0"
+  },
   "devDependencies": {
     "typescript": "5.5.4",
     "vite": "latest",
