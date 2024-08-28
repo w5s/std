@@ -5,8 +5,10 @@ import { String as TString } from '@w5s/core/dist/Type/String.js';
 import { Int as TInt } from '@w5s/core/dist/Type/Int.js';
 import { IntBounded } from '@w5s/core/dist/Int/IntBounded.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
+import { constant } from '@w5s/core/dist/Type/constant.js';
 
 const LogLevelType = TObject({
+  _: constant('LogLevel'),
   name: TString,
   value: TInt,
 });
@@ -22,7 +24,7 @@ const LogLevelComparable = Comparable({
 export interface LogLevel extends Type.TypeOf<typeof LogLevelType> {}
 
 function of(name: string, levelValue: Int): LogLevel {
-  return { name, value: levelValue };
+  return { _: 'LogLevel', name, value: levelValue };
 }
 
 const None = of('None', IntBounded.minValue);
