@@ -6,5 +6,6 @@
     "skipLibCheck": false,
     "sourceMap": false,
     "types": [] // Ensures no @types/ are unintentionally included
-  }
+  },
+  "include": ["src"]
 }
