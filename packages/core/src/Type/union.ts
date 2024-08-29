@@ -1,5 +1,5 @@
 import type { Type } from '../Type.js';
-import { define } from '../Type/define.js';
+import { define } from './define.js';
 import { schema } from '../Codec/schema.js';
 
 /**
@@ -11,14 +11,20 @@ import { schema } from '../Codec/schema.js';
  * ```
  * @param types
  */
-export function anyOf<Types extends ReadonlyArray<Type.Module<any>>>(
+export function union<Types extends ReadonlyArray<Type.Module<any>>>(
   ...types: Types
 ): Type.Module<Type.TypeOf<Types[number]>> {
   return define({
     typeName: types.map((type) => type.typeName).join('|'),
     hasInstance: (anyValue) => types.some((type) => type.hasInstance(anyValue)),
     codecSchema: () => ({
-      anyOf: types.map(schema),
+      anyOf: types.flatMap((type) => {
+        const typeSchema = schema(type);
+
+        return typeof typeSchema === 'object' && typeSchema !== null && 'anyOf' in typeSchema
+          ? typeSchema['anyOf']
+          : typeSchema;
+      }),
     }),
   });
 }

@@ -10,7 +10,7 @@ import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
 import { ensure } from './Type/ensure.js';
 import type { Option } from './Option.js';
-import { anyOf } from './Type/anyOf.js';
+import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
@@ -77,7 +77,7 @@ export interface Type<T> {
  * @namespace
  */
 export const Type = {
-  anyOf,
+  union,
   constant,
   define,
   ensure,
