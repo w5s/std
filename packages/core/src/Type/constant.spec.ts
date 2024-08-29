@@ -28,4 +28,23 @@ describe(constant, () => {
     encode: [['anyValue' as const, 'anyValue']],
     schema: () => ({ const: 'anyValue' }),
   });
+
+  const anySymbol = Symbol('anySymbol');
+  const codecWithEncodedValue = subject(anySymbol, '$$anySymbol');
+  describeCodec({ describe, it, expect })(codecWithEncodedValue, {
+    decode: [
+      ['$$anySymbol', Result.Ok(anySymbol)],
+      [
+        'otherValue',
+        Result.Error(
+          DecodeError({
+            message: 'Cannot decode otherValue as Symbol(anySymbol)',
+            input: 'otherValue',
+          })
+        ),
+      ],
+    ],
+    encode: [[anySymbol, '$$anySymbol']],
+    schema: () => ({ const: '$$anySymbol' }),
+  });
 });

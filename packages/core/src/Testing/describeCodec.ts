@@ -4,11 +4,11 @@ import type { TestingLibrary } from './type.js';
 
 export function describeCodec(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
-  return <T>(
+  return <T, O extends T>(
     subject: Codec<T>,
     properties: {
       decode: Array<[unknown, Result<unknown, unknown>]>;
-      encode: Array<[T, unknown]>;
+      encode: Array<[O, unknown]>;
       schema: () => unknown;
     }
   ) => {
