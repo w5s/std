@@ -47,4 +47,22 @@ describe(constant, () => {
     encode: [[anySymbol, '$$anySymbol']],
     schema: () => ({ const: '$$anySymbol' }),
   });
+
+  const nullLiteral = subject(undefined, null);
+  describeCodec({ describe, it, expect })(nullLiteral, {
+    decode: [
+      [null, Result.Ok(undefined)],
+      [
+        undefined,
+        Result.Error(
+          DecodeError({
+            message: 'Cannot decode undefined as undefined',
+            input: undefined,
+          })
+        ),
+      ],
+    ],
+    encode: [[undefined, null]],
+    schema: () => ({ type: 'null' }),
+  });
 });

@@ -34,9 +34,14 @@ export function constant<const Value extends Primitive>(
   return define({
     typeName,
     hasInstance: (anyValue): boolean => anyValue === value,
-    codecSchema: () => ({
-      const: resolvedEncodedValue,
-    }),
+    codecSchema:
+      resolvedEncodedValue === null
+        ? () => ({
+            type: 'null',
+          })
+        : () => ({
+            const: resolvedEncodedValue,
+          }),
     codecEncode: () => resolvedEncodedValue,
     codecDecode: (input, { ok, error }) => (input === resolvedEncodedValue ? ok(value) : error(input, typeName)),
   });
