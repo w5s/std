@@ -5,8 +5,8 @@ import { define } from './define.js';
  *
  * @namespace
  */
-export const String = define<string>({
-  typeName: 'String',
+export const string = define<string>({
+  typeName: 'string',
   hasInstance: (anyValue) => typeof anyValue === 'string',
   codecSchema: () => ({ type: 'string' }),
 });

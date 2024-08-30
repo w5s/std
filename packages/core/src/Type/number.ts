@@ -5,8 +5,8 @@ import { define } from './define.js';
  *
  * @namespace
  */
-export const Number = define<number>({
-  typeName: 'Number',
+export const number = define<number>({
+  typeName: 'number',
   hasInstance: (anyValue) => typeof anyValue === 'number',
   codecSchema: () => ({ type: 'number' }),
 });

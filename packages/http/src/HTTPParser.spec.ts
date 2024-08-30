@@ -104,7 +104,7 @@ describe('HTTPParser', () => {
     it('should parse using Codec', async () => {
       const parser = HTTPParser.json(
         Type.Object({
-          foo: Type.String,
+          foo: Type.string,
         })
       );
       const data = { foo: true };

@@ -14,7 +14,7 @@ describe('BigInt', () => {
     expect(BigInt).toEqual(expect.objectContaining(BigIntComparable));
     expect(BigInt).toEqual(expect.objectContaining(BigIntSigned));
     expect(BigInt).toEqual(expect.objectContaining(BigIntNumeric));
-    expect(BigInt).toEqual(expect.objectContaining(Type.BigInt));
+    expect(BigInt).toEqual(expect.objectContaining(Type.bigint));
     expect(BigInt).toEqual(
       expect.objectContaining({
         parse,

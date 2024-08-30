@@ -19,7 +19,7 @@ import { Type } from './Type.js';
 describe('String', () => {
   it('is an alias to functions', () => {
     expect(String).toEqual(expect.objectContaining(StringComparable));
-    expect(String).toEqual(expect.objectContaining(Type.String));
+    expect(String).toEqual(expect.objectContaining(Type.string));
     expect(String).toEqual(
       expect.objectContaining({
         at,

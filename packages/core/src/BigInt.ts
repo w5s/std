@@ -1,4 +1,4 @@
-import { BigInt as BigIntType } from './Type/BigInt.js';
+import { bigint as BigIntType } from './Type/bigint.js';
 import { parse } from './BigInt/parse.js';
 import { format } from './BigInt/format.js';
 import { BigIntComparable } from './BigInt/BigIntComparable.js';

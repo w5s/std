@@ -5,8 +5,8 @@ import { define } from './define.js';
  *
  * @namespace
  */
-export const Boolean = define<boolean>({
-  typeName: 'Boolean',
+export const boolean = define<boolean>({
+  typeName: 'boolean',
   hasInstance: (anyValue) => typeof anyValue === 'boolean',
   codecSchema: () => ({ type: 'boolean' }),
 });

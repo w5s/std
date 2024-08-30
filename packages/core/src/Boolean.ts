@@ -1,5 +1,5 @@
 import { BooleanComparable } from './Boolean/BooleanComparable.js';
-import { Boolean as BooleanType } from './Type/Boolean.js';
+import { boolean as BooleanType } from './Type/boolean.js';
 
 /**
  * A collection of functions to manipulate `boolean`

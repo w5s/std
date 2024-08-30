@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { union } from './union.js';
 import { $Object } from './Object.js';
-import { String } from './String.js';
-import { Number } from './Number.js';
+import { string } from './String.js';
+import { number } from './number.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
@@ -10,17 +10,17 @@ import { DecodeError } from '../DecodeError.js';
 describe(union, () => {
   const AType = $Object(
     {
-      a: String,
+      a: string,
     },
     'AType'
   );
-  const BType = String;
-  const CType = Number;
+  const BType = string;
+  const CType = number;
   const BCType = union(BType, CType);
   const ABCType = union(AType, BCType);
 
   describeType({ describe, it, expect })(ABCType, {
-    typeName: 'AType|String|Number',
+    typeName: 'AType|string|number',
     instances: () => [{ a: 'a_value' }, 1, 'a'],
     notInstances: () => [undefined, null, { a: 1 }],
   });
@@ -36,13 +36,13 @@ describe(union, () => {
       [{ a: 'va' }, Result.Ok({ a: 'va' })],
       [
         { a: 1 },
-        Result.Error(DecodeError({ message: 'Cannot decode [object Object] as AType|String|Number', input: { a: 1 } })),
+        Result.Error(DecodeError({ message: 'Cannot decode [object Object] as AType|string|number', input: { a: 1 } })),
       ],
       [
         undefined,
-        Result.Error(DecodeError({ message: 'Cannot decode undefined as AType|String|Number', input: undefined })),
+        Result.Error(DecodeError({ message: 'Cannot decode undefined as AType|string|number', input: undefined })),
       ],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as AType|String|Number', input: null }))],
+      [null, Result.Error(DecodeError({ message: 'Cannot decode null as AType|string|number', input: null }))],
     ],
     schema: () => ({
       anyOf: [

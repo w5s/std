@@ -5,8 +5,8 @@ import { define } from './define.js';
  *
  * @namespace
  */
-export const BigInt = define<bigint>({
-  typeName: 'BigInt',
+export const bigint = define<bigint>({
+  typeName: 'bigint',
   hasInstance: (anyValue) => typeof anyValue === 'bigint',
   codecEncode: (input) => `${input.toString(10)}n`,
   codecDecode: (input, { ok, error }) => {
@@ -17,7 +17,7 @@ export const BigInt = define<bigint>({
         // do nothing, let it return an error
       }
     }
-    return error(input, 'BigInt');
+    return error(input, 'bigint');
   },
   codecSchema: () => ({ type: 'string', format: 'bigint' }),
 });

@@ -1,9 +1,9 @@
 import type { Codec } from './Codec.js';
 import { define } from './Type/define.js';
-import { String } from './Type/String.js';
-import { Number } from './Type/Number.js';
-import { Boolean } from './Type/Boolean.js';
-import { BigInt } from './Type/BigInt.js';
+import { string } from './Type/string.js';
+import { number } from './Type/number.js';
+import { boolean } from './Type/boolean.js';
+import { bigint } from './Type/bigint.js';
 import { $Object } from './Type/Object.js';
 import { Option as $Option } from './Type/Option.js';
 import { Int } from './Type/Int.js';
@@ -83,13 +83,13 @@ export const Type = {
   define,
   ensure,
   Array,
-  BigInt,
-  Boolean,
+  bigint,
+  boolean,
   Int,
-  Number,
+  number,
   Object: $Object,
   Option: $Option,
-  String,
+  string,
   Tuple,
 };
 export namespace Type {

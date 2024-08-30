@@ -1,4 +1,4 @@
-import { String as StringType } from './Type/String.js';
+import { string as StringType } from './Type/string.js';
 import { of } from './String/of.js';
 import { at } from './String/at.js';
 import { isEmpty } from './String/isEmpty.js';

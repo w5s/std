@@ -3,10 +3,10 @@ import { assertType } from '@w5s/core-type';
 import { Type } from './Type.js';
 import { define } from './Type/define.js';
 import { Array } from './Type/Array.js';
-import { String } from './Type/String.js';
-import { Number } from './Type/Number.js';
-import { Boolean } from './Type/Boolean.js';
-import { BigInt } from './Type/BigInt.js';
+import { string } from './Type/string.js';
+import { number } from './Type/number.js';
+import { boolean } from './Type/boolean.js';
+import { bigint } from './Type/bigint.js';
 import { Int } from './Type/Int.js';
 import { Option } from './Type/Option.js';
 import { $Object } from './Type/Object.js';
@@ -28,11 +28,11 @@ describe('Type', () => {
       define,
       ensure,
       Array,
-      BigInt,
-      Boolean,
+      bigint,
+      boolean,
       Int,
-      Number,
-      String,
+      number,
+      string,
       Object: $Object,
       Option,
       Tuple,
@@ -41,7 +41,7 @@ describe('Type', () => {
 
   (() => {
     const Group = Type.Object({
-      name: Type.String,
+      name: Type.string,
     });
     interface Group extends Codec.TypeOf<typeof Group> {}
 
@@ -60,8 +60,8 @@ describe('Type', () => {
 
     const Person = Type.Object({
       id: PersonId,
-      name: Type.String,
-      description: Type.Option(Type.String),
+      name: Type.string,
+      description: Type.Option(Type.string),
       age: Type.Int,
       gender: Gender,
       groups: Type.Array(Group),

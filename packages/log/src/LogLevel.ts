@@ -1,7 +1,7 @@
 import type { Int, Option, Type } from '@w5s/core';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { $Object as TObject } from '@w5s/core/dist/Type/Object.js';
-import { String as TString } from '@w5s/core/dist/Type/String.js';
+import { string } from '@w5s/core/dist/Type/string.js';
 import { Int as TInt } from '@w5s/core/dist/Type/Int.js';
 import { IntBounded } from '@w5s/core/dist/Int/IntBounded.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
@@ -9,7 +9,7 @@ import { constant } from '@w5s/core/dist/Type/constant.js';
 
 const LogLevelType = TObject({
   _: constant('LogLevel'),
-  name: TString,
+  name: string,
   value: TInt,
 });
 

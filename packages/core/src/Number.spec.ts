@@ -12,7 +12,7 @@ describe('Number', () => {
     expect(Number).toEqual(expect.objectContaining(NumberComparable));
     expect(Number).toEqual(expect.objectContaining(NumberSigned));
     expect(Number).toEqual(expect.objectContaining(NumberBounded));
-    expect(Number).toEqual(expect.objectContaining(Type.Number));
+    expect(Number).toEqual(expect.objectContaining(Type.number));
     expect(Number).toEqual(
       expect.objectContaining({
         parse,

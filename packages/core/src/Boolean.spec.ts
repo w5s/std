@@ -6,6 +6,6 @@ import { Type } from './Type.js';
 describe('Boolean', () => {
   it('is an alias to functions', () => {
     expect(Boolean).toEqual(expect.objectContaining(BooleanComparable));
-    expect(Boolean).toEqual(expect.objectContaining(Type.Boolean));
+    expect(Boolean).toEqual(expect.objectContaining(Type.boolean));
   });
 });
