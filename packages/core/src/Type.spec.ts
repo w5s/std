@@ -19,6 +19,7 @@ import { ensure } from './Type/ensure.js';
 import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
+import { unknown } from './Type/unknown.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
@@ -32,6 +33,7 @@ describe('Type', () => {
       boolean,
       Int,
       number,
+      unknown,
       string,
       Object: $Object,
       Option,

@@ -13,6 +13,7 @@ import type { Option } from './Option.js';
 import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
+import { unknown } from './Type/unknown.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -91,6 +92,7 @@ export const Type = {
   Option: $Option,
   string,
   Tuple,
+  unknown,
 };
 export namespace Type {
   /**
