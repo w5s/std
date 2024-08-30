@@ -9,6 +9,7 @@ describe('index', () => {
         'application',
         'LogLevel',
         'LogMessage',
+        'LogMessageItem',
         'LogRecord',
         'LogHandler',
       ].sort()
