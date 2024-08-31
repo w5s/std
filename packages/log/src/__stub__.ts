@@ -14,12 +14,12 @@ export const generateLogRecord = ({
   Pick<LogRecord, 'message' | 'category'> & {
     level?: LogLevel;
   }
-> = {}): LogRecord =>
-  LogRecord({
-    id: UUID.empty(),
-    category,
-    level,
-    message,
-    data: {},
-    created: generateTime(),
-  });
+> = {}): LogRecord => ({
+  _: 'LogRecord',
+  id: UUID.empty(),
+  category,
+  level,
+  message,
+  // data: {},
+  created: generateTime(),
+});

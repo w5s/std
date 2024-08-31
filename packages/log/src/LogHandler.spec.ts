@@ -4,24 +4,25 @@ import { UUID } from '@w5s/random';
 import { LogHandler } from './LogHandler.js';
 import { LogLevel } from './LogLevel.js';
 import { LogRecord } from './LogRecord.js';
-import { generateTime } from './__stub__.js';
+import { generateLogRecord, generateTime } from './__stub__.js';
 
 describe('LogHandler', () => {
   describe('.filter', () => {
     it('should filter input', async () => {
       const handler = vi.fn(() => Task.resolve());
       const filtered = LogHandler.filter(handler, (record) => record.category === 'foo');
-      const defaultProps = LogRecord({
+      const defaultProps = {
+        _: 'LogRecord',
         id: UUID.empty(),
         category: 'not_foo',
         level: LogLevel.Warning,
         created: generateTime(),
         message: [],
-        data: {},
-      });
+        // data: {},
+      } satisfies LogRecord;
       await Task.unsafeRunOk(
         filtered(
-          LogRecord({
+          generateLogRecord({
             ...defaultProps,
             category: 'not_foo',
           })
@@ -30,7 +31,7 @@ describe('LogHandler', () => {
       expect(handler).not.toHaveBeenCalled();
       await Task.unsafeRunOk(
         filtered(
-          LogRecord({
+          generateLogRecord({
             ...defaultProps,
             category: 'foo',
           })

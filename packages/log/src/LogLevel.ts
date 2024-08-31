@@ -9,7 +9,13 @@ import { constant } from '@w5s/core/dist/Type/constant.js';
 
 const LogLevelType = TObject({
   _: constant('LogLevel'),
+  /**
+   * Log level name
+   */
   name: string,
+  /**
+   * Log level value (number). Often used to filter / sort logs
+   */
   value: TInt,
 });
 

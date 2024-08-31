@@ -14,7 +14,7 @@ describe('LogRecord', () => {
           category: 'category',
           level: LogLevel.Warning,
           message: LogMessage.of('foo', 'bar', ''),
-          data: {},
+          // data: {},
           created: Time.of(1),
         })
       ).toEqual({
@@ -23,7 +23,7 @@ describe('LogRecord', () => {
         category: 'category',
         level: LogLevel.Warning,
         message: ['foobar'],
-        data: {},
+        // data: {},
         created: 1,
       });
     });
