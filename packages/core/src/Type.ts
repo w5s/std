@@ -14,6 +14,7 @@ import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
 import { unknown } from './Type/unknown.js';
+import { UUID } from './Type/UUID.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -93,7 +94,9 @@ export const Type = {
   string,
   Tuple,
   unknown,
+  UUID,
 };
+
 export namespace Type {
   /**
    * Extract the type of object from its module
