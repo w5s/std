@@ -33,5 +33,5 @@ export namespace Callable {
   /**
    * Alias to {@link @w5s/core!Symbol.call}
    */
-  export const symbol: (typeof Symbol)['call'] = Symbol.call;
+  export const symbol: (typeof Symbol)['toFunction'] = Symbol.toFunction;
 }
