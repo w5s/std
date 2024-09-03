@@ -5,6 +5,7 @@ import { DecodeError } from '../DecodeError.js';
 import { Result } from '../Result.js';
 import type { Tag } from '../Tag.js';
 import { define } from './define.js';
+import { Callable } from '../Callable.js';
 
 describe(define, () => {
   type PositiveNumber = number & Tag<'Positive'>;
@@ -24,6 +25,13 @@ describe(define, () => {
       expect(() => {
         // @ts-expect-error Throw a type error
         PositiveNumber('any_string');
+      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
+    });
+    it('should be callable', () => {
+      expect(PositiveNumber[Callable.symbol](1)).toBe(1);
+      expect(() => {
+        // @ts-expect-error Throw a type error
+        PositiveNumber[Callable.symbol]('any_string');
       }).toThrow(new Error('any_string is not a valid PositiveNumber'));
     });
   });

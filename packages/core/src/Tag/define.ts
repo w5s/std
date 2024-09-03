@@ -1,3 +1,4 @@
+import { Callable } from '../Callable.js';
 import type { Tag } from '../Tag.js';
 import { define as defineType } from '../Type/define.js';
 import { ensure as ensureType } from '../Type/ensure.js';
@@ -26,7 +27,8 @@ export function define<From, To extends From>(parameters: Tag.Parameters<To>): T
     return value as unknown as From;
   }
 
-  return Object.assign((value: From) => wrap(value), {
+  return Callable({
+    [Callable.symbol]: (value: From) => wrap(value),
     wrap,
     unwrap,
     ...TagType,
