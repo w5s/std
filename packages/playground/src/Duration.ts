@@ -2,6 +2,7 @@ import type { Codec, Int, Option } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { parse as parseInt } from '@w5s/core/dist/Int/parse.js';
 import { parse as parseNumber } from '@w5s/core/dist/Number/parse.js';
+import { Callable } from '@w5s/core/dist/Callable.js';
 
 const numbers = '\\d+';
 const fractionalNumbers = `${numbers}(?:[\\.,]${numbers})?`;
@@ -101,8 +102,8 @@ const DurationCodec: Codec<Duration> = {
 /**
  * @namespace
  */
-export const Duration = Object.assign(
-  (properties?: Partial<Struct.Parameters<Duration>>): Duration => ({
+export const Duration = Callable({
+  [Callable.symbol]: (properties?: Partial<Struct.Parameters<Duration>>): Duration => ({
     _: 'Duration',
     years: properties?.years ?? (0 as Int),
     months: properties?.months ?? (0 as Int),
@@ -112,8 +113,6 @@ export const Duration = Object.assign(
     minutes: properties?.minutes ?? (0 as Int),
     seconds: properties?.seconds ?? 0,
   }),
-  {
-    ...DurationStruct,
-    ...DurationCodec,
-  }
-);
+  ...DurationStruct,
+  ...DurationCodec,
+});

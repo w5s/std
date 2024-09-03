@@ -1,3 +1,4 @@
+import { Callable } from '@w5s/core/dist/Callable.js';
 import { TimeDuration as TimeDurationType } from './TimeDuration/TimeDuration.js';
 import { TimeDurationSigned } from './TimeDuration/TimeDurationSigned.js';
 import { TimeDurationComparable } from './TimeDuration/TimeDurationComparable.js';
@@ -19,7 +20,8 @@ export type TimeDuration = TimeDurationType;
  *
  * @namespace
  */
-export const TimeDuration = Object.assign(TimeDurationType, {
+export const TimeDuration = Callable({
+  ...TimeDurationType,
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
   ...TimeDurationSigned,
