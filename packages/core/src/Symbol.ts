@@ -18,7 +18,7 @@ export interface SymbolConstructor
   /**
    * Callable callback
    */
-  readonly toFunction: unique symbol;
+  readonly toFunction: '__toFunction__'; // TODO: unique symbol;
 
   /**
    * NodeJS inspect symbol
@@ -47,7 +47,7 @@ export const Symbol: SymbolConstructor = {
   matchAll: GlobalSymbol.matchAll,
   dispose: GlobalSymbol.dispose ?? (GlobalSymbol.for('dispose') as any),
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
-  toFunction: GlobalSymbol.for('w5s.toFunction') as SymbolConstructor['toFunction'],
+  toFunction: '__toFunction__', // GlobalSymbol.for('w5s.toFunction') as SymbolConstructor['toFunction'],
   enumKeys: GlobalSymbol.for('w5s.enumKeys') as SymbolConstructor['enumKeys'],
   enumValues: GlobalSymbol.for('w5s.enumValues') as SymbolConstructor['enumValues'],
   nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom') as SymbolConstructor['nodeInspect'],
