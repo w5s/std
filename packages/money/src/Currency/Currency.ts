@@ -1,5 +1,6 @@
 import { Struct } from '@w5s/core/dist/Struct.js';
 import type { Int } from '@w5s/core';
+import { Callable } from '@w5s/core/dist/Callable.js';
 import { defaultRounding } from './defaultRounding.js';
 import { defaultPrecision } from './defaultPrecision.js';
 
@@ -44,8 +45,8 @@ export interface Currency
 
 const CurrencyStruct = Struct.define<Currency>('Currency');
 
-export const Currency = Object.assign(
-  (parameters: {
+export const Currency = Callable({
+  [Callable.symbol]: (parameters: {
     name: Currency['name'];
     namePlural?: Currency['namePlural'];
     code: Currency['code'];
@@ -61,5 +62,7 @@ export const Currency = Object.assign(
     symbolNative: parameters.symbol,
     ...parameters,
   }),
-  { ...CurrencyStruct }
-);
+  defaultRounding,
+  defaultPrecision,
+  ...CurrencyStruct,
+});
