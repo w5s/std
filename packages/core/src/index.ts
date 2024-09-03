@@ -24,3 +24,4 @@ export * from './Result.js';
 export * from './String.js';
 export * from './Symbol.js';
 export * from './Tag.js';
+export * from './UUID.js';

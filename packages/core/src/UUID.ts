@@ -1,27 +1,18 @@
-import { Tag } from '@w5s/core/dist/Tag.js';
+import { Callable } from './Callable.js';
+import { UUID as UUIDType } from './Type/UUID.js';
 
 /**
  * UUID string type
  */
-export type UUID = `${string}-${string}-${string}-${string}` & Tag<'UUID'>;
-
-const uuidRegexp = /^[\da-f]{8}-[\da-f]{4}-4[\da-f]{3}-[89ab][\da-f]{3}-[\da-f]{12}$/i;
-
-const UUIDType = Tag.define<`${string}-${string}-${string}-${string}`, UUID>({
-  typeName: 'UUID',
-  hasInstance: (anyValue) => typeof anyValue === 'string' && uuidRegexp.test(anyValue),
-  codecSchema: () => ({
-    type: 'string',
-    format: 'uuid',
-  }),
-});
+export type UUID = UUIDType;
 
 /**
  * A collection of functions to manipulate UUID
  *
  * @namespace
  */
-export const UUID = Object.assign(UUIDType, {
+export const UUID = Callable({
+  ...UUIDType,
   /**
    * Returns an `UUID` with only `0`
    *

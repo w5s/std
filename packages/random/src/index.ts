@@ -1,4 +1,3 @@
-export * from './UUID.js';
 export * from './randomGenerator.js';
 export * from './randomValue.js';
 export * from './randomBoolean.js';
