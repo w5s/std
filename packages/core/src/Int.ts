@@ -6,6 +6,7 @@ import { parse } from './Int/parse.js';
 import { fromNumber } from './Int/fromNumber.js';
 import { IntNumeric } from './Int/IntNumeric.js';
 import { IntSigned } from './Int/IntSigned.js';
+import { Callable } from './Callable.js';
 
 /**
  * Integer value
@@ -19,7 +20,8 @@ export type Int = IntType;
  *
  * @namespace
  */
-export const Int = Object.assign(IntType, {
+export const Int = Callable({
+  ...IntType,
   ...IntComparable,
   ...IntBounded,
   ...IntNumeric,
