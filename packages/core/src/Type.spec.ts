@@ -20,7 +20,7 @@ import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
 import { unknown } from './Type/unknown.js';
-import { UUID } from './UUID.js';
+import { UUID } from './Type/UUID.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
