@@ -15,6 +15,7 @@ import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
 import { unknown } from './Type/unknown.js';
 import { UUID } from './Type/UUID.js';
+import { Record } from './Type/Record.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -91,6 +92,7 @@ export const Type = {
   number,
   Object: $Object,
   Option: $Option,
+  Record,
   string,
   Tuple,
   unknown,

@@ -21,6 +21,7 @@ import { constant } from './Type/constant.js';
 import { Tuple } from './Type/Tuple.js';
 import { unknown } from './Type/unknown.js';
 import { UUID } from './Type/UUID.js';
+import { Record } from './Type/Record.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
@@ -36,6 +37,7 @@ describe('Type', () => {
       number,
       unknown,
       string,
+      Record,
       Object: $Object,
       Option,
       Tuple,

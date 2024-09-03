@@ -1,0 +1,44 @@
+import { describe, it, expect } from 'vitest';
+import { Record } from './Record.js';
+import { describeType, describeCodec } from '../Testing.js';
+import { Result } from '../Result.js';
+import { DecodeError } from '../DecodeError.js';
+import { bigint as TBigInt } from './BigInt.js';
+import { string as TString } from './String.js';
+import type { Type } from '../Type.js';
+
+describe(Record, () => {
+  const subject = Record;
+
+  const TestRecord = subject(TString, TBigInt);
+  type TestRecord = Type.TypeOf<typeof TestRecord>;
+
+  describeType({ describe, it, expect })(TestRecord, {
+    typeName: 'Record<string,bigint>',
+    instances: () => [{ foo: 1n, bar: 2n }, { key: 1n, value: 3n }, {}] as TestRecord[],
+    notInstances: () => [null, 1, [1]],
+  });
+  describeCodec({ describe, it, expect })(TestRecord, {
+    decode: [
+      [{}, Result.Ok({})],
+      [{ foo: '1n', bar: '2n' }, Result.Ok({ foo: 1n, bar: 2n })],
+      [
+        ['a', '1'],
+        Result.Error(
+          DecodeError({
+            message: 'Cannot decode a,1 as Record<string,bigint>',
+            input: 'a',
+          })
+        ),
+      ],
+    ],
+    encode: [
+      [{}, {}],
+      [
+        { foo: 1n, bar: 2n },
+        { foo: '1n', bar: '2n' },
+      ],
+    ],
+    schema: () => ({ type: 'object' }),
+  });
+});
