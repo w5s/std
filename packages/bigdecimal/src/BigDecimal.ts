@@ -1,3 +1,4 @@
+import { Callable } from '@w5s/core/dist/Callable.js';
 import { format } from './BigDecimal/format.js';
 import { parse } from './BigDecimal/parse.js';
 import { BigDecimalComparable } from './BigDecimal/BigDecimalComparable.js';
@@ -20,7 +21,8 @@ export type BigDecimal = BigDecimalType;
  *
  * @namespace
  */
-export const BigDecimal = Object.assign(BigDecimalType, {
+export const BigDecimal = Callable({
+  ...BigDecimalType,
   ...BigDecimalComparable,
   ...BigDecimalNumeric,
   ...BigDecimalSigned,

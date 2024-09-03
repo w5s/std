@@ -1,3 +1,4 @@
+import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { invariant } from '@w5s/invariant';
 import type { Codec } from '@w5s/core';
@@ -41,14 +42,14 @@ export interface BigDecimal
     scale: number;
   }> {}
 
-export const BigDecimal = Object.assign(
-  ((value: string | bigint, scale?: number): BigDecimal =>
+export const BigDecimal = Callable({
+  [Callable.symbol]: ((value: string | bigint, scale?: number): BigDecimal =>
     typeof value === 'string'
       ? (parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`))
       : of(value, scale ?? 0)) as {
     (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale?: number): BigDecimal;
   },
-  BigDecimalStruct,
-  BigDecimalCodec
-);
+  ...BigDecimalStruct,
+  ...BigDecimalCodec,
+});
