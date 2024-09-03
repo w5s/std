@@ -5,6 +5,8 @@ import { $Object as TObject } from '@w5s/core/dist/Type/Object.js';
 import { constant } from '@w5s/core/dist/Type/constant.js';
 import { string } from '@w5s/core/dist/Type/string.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
+import { Record } from '@w5s/core/dist/Type/Record.js';
+import { unknown } from '@w5s/core/dist/Type/unknown.js';
 import { LogMessage } from './LogMessage.js';
 import { LogLevel } from './LogLevel.js';
 
@@ -33,7 +35,7 @@ const LogRecordType = TObject({
   /**
    * Additional data
    */
-  // data: Readonly<{ [key: string]: unknown }>,
+  data: Record(string, unknown),
 });
 
 export const LogRecord = Callable({

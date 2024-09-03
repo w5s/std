@@ -20,6 +20,6 @@ export const generateLogRecord = ({
   category,
   level,
   message,
-  // data: {},
+  data: {},
   created: generateTime(),
 });
