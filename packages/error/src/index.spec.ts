@@ -14,6 +14,7 @@ describe('index', () => {
         "RangeError",
         "ReferenceError",
         "SyntaxError",
+        "TimeoutError",
         "TypeError",
         "URIError",
         "throwError",
