@@ -20,17 +20,12 @@ npm install @w5s/async
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Deferred } from '@w5s/async';
+import { delay } from '@w5s/async';
 
-const deferred = new Deferred<number>();
-
-// resolve
-deferred.resolve(Date.now());
-
-// reject
-deferred.reject(new Error('Something went wrong!'));
-
-await deferred.promise;
+export async function main() {
+  await delay(1000); // Wait 1 second
+  console.log('Hello world!');
+}
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
