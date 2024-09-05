@@ -1,29 +1,7 @@
-import type { TaskCanceler, Task } from '@w5s/task';
+import type { TaskCanceler, Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
-import { CustomError } from '@w5s/error';
+import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
-
-/**
- * An error reported when a task times out
- */
-export interface TimeoutError
-  extends CustomError<{
-    name: 'TimeoutError';
-    /**
-     * The delay that was used
-     */
-    delay: TimeDuration;
-  }> {}
-
-/**
- * TimeoutError constructor
- *
- * @category Constructor
- */
-export const TimeoutError = CustomError.define<TimeoutError>({
-  errorName: 'TimeoutError',
-  errorMessage: 'Operation timed out',
-});
 
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
@@ -39,7 +17,7 @@ export const TimeoutError = CustomError.define<TimeoutError>({
  * @param delay - delay in milliseconds
  */
 export function timeout<Value, Error>(
-  task: Task<Value, Error>,
+  task: TaskLike<Value, Error>,
   delay: TimeDuration
 ): Task<Value, TimeoutError | Error> {
   return from(({ resolve, reject, canceler, run }) => {
@@ -57,7 +35,6 @@ export function timeout<Value, Error>(
       reject(
         TimeoutError({
           message: `Task timed out after ${stringifyDelay(delay)}`,
-          delay,
         })
       );
     }, delay);

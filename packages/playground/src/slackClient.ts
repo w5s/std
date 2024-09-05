@@ -9,7 +9,8 @@ import { DecodeError } from '@w5s/core/dist/DecodeError.js';
 import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error as Err } from '@w5s/core/dist/Result/Error.js';
-import { TimeoutError, timeout } from './timeout.js';
+import { timeout } from '@w5s/task-timeout';
+import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 
 export interface Slack {
   /**

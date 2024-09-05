@@ -4,10 +4,11 @@ import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID } from '@w5s/random';
 import { EUR } from '@w5s/money';
+import { timeout } from '@w5s/task-timeout';
+import { TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
 import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
-import { timeout, TimeoutError } from './timeout.js';
 
 function sendMessage(text: string) {
   const client = Slack({ token: 'token' });

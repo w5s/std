@@ -6061,6 +6061,7 @@ __metadata:
     "@w5s/money": "npm:^1.0.0-alpha.0"
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
+    "@w5s/task-timeout": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.5.4"
     vite: "npm:latest"
@@ -6103,6 +6104,21 @@ __metadata:
   dependencies:
     "@types/node": "npm:^20.14.9"
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/task": "npm:^1.0.0-alpha.0"
+    "@w5s/time": "npm:^1.0.0-alpha.0"
+    typescript: "npm:5.5.4"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
+
+"@w5s/task-timeout@npm:^1.0.0-alpha.0, @w5s/task-timeout@workspace:packages/task-timeout":
+  version: 0.0.0-use.local
+  resolution: "@w5s/task-timeout@workspace:packages/task-timeout"
+  dependencies:
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.5.4"
