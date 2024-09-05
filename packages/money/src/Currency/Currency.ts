@@ -46,6 +46,9 @@ export interface Currency
 const CurrencyStruct = Struct.define<Currency>('Currency');
 
 export const Currency = Callable({
+  defaultRounding,
+  defaultPrecision,
+  ...CurrencyStruct,
   [Callable.symbol]: (parameters: {
     name: Currency['name'];
     namePlural?: Currency['namePlural'];
@@ -62,7 +65,4 @@ export const Currency = Callable({
     symbolNative: parameters.symbol,
     ...parameters,
   }),
-  defaultRounding,
-  defaultPrecision,
-  ...CurrencyStruct,
 });

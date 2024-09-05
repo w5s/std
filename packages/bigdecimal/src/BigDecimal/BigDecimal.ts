@@ -43,6 +43,8 @@ export interface BigDecimal
   }> {}
 
 export const BigDecimal = Callable({
+  ...BigDecimalStruct,
+  ...BigDecimalCodec,
   [Callable.symbol]: ((value: string | bigint, scale?: number): BigDecimal =>
     typeof value === 'string'
       ? (parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`))
@@ -50,6 +52,4 @@ export const BigDecimal = Callable({
     (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale?: number): BigDecimal;
   },
-  ...BigDecimalStruct,
-  ...BigDecimalCodec,
 });

@@ -103,6 +103,8 @@ const DurationCodec: Codec<Duration> = {
  * @namespace
  */
 export const Duration = Callable({
+  ...DurationStruct,
+  ...DurationCodec,
   [Callable.symbol]: (properties?: Partial<Struct.Parameters<Duration>>): Duration => ({
     _: 'Duration',
     years: properties?.years ?? (0 as Int),
@@ -113,6 +115,4 @@ export const Duration = Callable({
     minutes: properties?.minutes ?? (0 as Int),
     seconds: properties?.seconds ?? 0,
   }),
-  ...DurationStruct,
-  ...DurationCodec,
 });

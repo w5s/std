@@ -1,3 +1,4 @@
+import { Callable } from './Callable.js';
 import type { Type } from './Type.js';
 
 /**
@@ -27,7 +28,9 @@ export namespace Struct {
    */
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
-  export interface Module<Model extends Struct<{ [Struct.type]: string }>> extends Type<Model> {
+  export interface Module<Model extends Struct<{ [Struct.type]: string }>>
+    extends Type<Model>,
+      Callable<(properties: Parameters<Model>) => Model> {
     /**
      * Construct a new model
      *
@@ -83,7 +86,8 @@ export namespace Struct {
     });
 
     // @ts-ignore We know what we are doing
-    return Object.assign(create, {
+    return Callable({
+      [Callable.symbol]: create,
       typeName,
       hasInstance,
       from,
