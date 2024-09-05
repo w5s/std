@@ -5,7 +5,6 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Module)).toMatchInlineSnapshot(`
       [
-        "Deferred",
         "delay",
         "isPromiseLike",
         "isPromise",
