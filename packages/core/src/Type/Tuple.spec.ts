@@ -3,18 +3,18 @@ import { Tuple } from './Tuple.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
-import { bigint as TBigInt } from './BigInt.js';
-import { string as TString } from './String.js';
+import { bigint } from './bigint.js';
+import { string } from './string.js';
 
 describe(Tuple, () => {
   const subject = Tuple;
 
-  describeType({ describe, it, expect })(subject(TString, TBigInt), {
+  describeType({ describe, it, expect })(subject(string, bigint), {
     typeName: '[string,bigint]',
     instances: () => [['toto', 1n] as const, ['', 2n] as const],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec({ describe, it, expect })(subject(TString, TBigInt), {
+  describeCodec({ describe, it, expect })(subject(string, bigint), {
     decode: [
       [['a', '1n'], Result.Ok(['a', 1n])],
       [
