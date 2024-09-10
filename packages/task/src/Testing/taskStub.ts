@@ -42,7 +42,7 @@ export type TaskStubOptions<Value, Error> = {
  * ```ts
  * const anyTask = taskStub({
  *   delayMs: 5,
- *   value: 'Helloworld'
+ *   value: 'Hello world'
  * });// will resolve 'Hello world' after 5 milliseconds
  *
  * const anyTask = taskStub({
