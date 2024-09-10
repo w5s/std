@@ -4,17 +4,17 @@ import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 import { decode } from '@w5s/core/dist/Codec/decode.js';
 import { mapError } from '@w5s/core/dist/Result/mapError.js';
-import type { HTTP } from './HTTP.js';
 import { HTTPError } from './HTTPError.js';
+import type { Response } from './Response.js';
 
 /**
- * A transformation function taking an {@link HTTP.Response} as input
+ * A transformation function taking an {@link Response} as input
  */
 export interface HTTPParser<Value> {
-  (response: HTTP.Response): Task<Value, HTTPError.ParserError>;
+  (response: Response): Task<Value, HTTPError.ParserError>;
 }
 export namespace HTTPParser {
-  function from<V>(fn: (response: HTTP.Response) => Promise<V>): HTTPParser<V> {
+  function from<V>(fn: (response: Response) => Promise<V>): HTTPParser<V> {
     return (response) =>
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       taskFrom(async ({ resolve, reject }) => {

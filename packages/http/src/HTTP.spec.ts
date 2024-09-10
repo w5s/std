@@ -122,21 +122,3 @@ describe('HTTP.request', () => {
     expect(reject).not.toHaveBeenCalled();
   });
 });
-describe('HTTP.Headers', () => {
-  it('should return immutable copy of headers', () => {
-    const init = {
-      foo: 'bar',
-    };
-    expect(HTTP.Headers(init)).toEqual({
-      foo: 'bar',
-    });
-    expect(HTTP.Headers(init)).not.toBe(init);
-  });
-  it('should work with iterable of tuple', () => {
-    const init = [['foo', 'bar'] as const];
-    expect(HTTP.Headers(init)).toEqual({
-      foo: 'bar',
-    });
-    expect(HTTP.Headers(init)).not.toBe(init);
-  });
-});

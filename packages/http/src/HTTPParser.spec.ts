@@ -2,13 +2,13 @@ import { DecodeError, Result, Type } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { describe, it, expect, vi, type MockedObject } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import type { HTTP } from './HTTP.js';
 import { HTTPParser } from './HTTPParser.js';
 import { HTTPError } from './HTTPError.js';
+import type { Response } from './Response.js';
 
 const expectTask = withTask(expect);
 const mockError = () => new Error('MockError');
-const mockResponse = (): MockedObject<HTTP.Response> =>
+const mockResponse = (): MockedObject<Response> =>
   ({
     arrayBuffer: vi.fn(),
     formData: vi.fn(),
@@ -30,7 +30,7 @@ const mockResponseWith = (
 };
 
 const expectToResolveValue = async (
-  fn: (response: HTTP.Response) => Task<unknown, unknown>,
+  fn: (response: Response) => Task<unknown, unknown>,
   mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json',
   returnValue: any = {}
 ) => {

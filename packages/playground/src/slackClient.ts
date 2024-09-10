@@ -1,7 +1,7 @@
 import type { Option, JSONValue } from '@w5s/core';
 import type { Task } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
-import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
+import { HTTP, HTTPError, HTTPParser, type Method } from '@w5s/http';
 import { CustomError } from '@w5s/error';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
@@ -102,11 +102,7 @@ export namespace Slack {
 
   type ResponseError = DecodeError | HTTPError | TimeoutError | Error;
 
-  function apiCall<R>(
-    client: Slack,
-    method: HTTP.Method,
-    parameters: { [key: string]: unknown }
-  ): Task<R, ResponseError> {
+  function apiCall<R>(client: Slack, method: Method, parameters: { [key: string]: unknown }): Task<R, ResponseError> {
     const request = HTTP.request({
       url: urlWithQuery(`${client.slackBaseURL}/${method}`, {
         token: client.slackToken,

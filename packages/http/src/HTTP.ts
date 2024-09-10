@@ -1,10 +1,19 @@
 import { invariant } from '@w5s/invariant';
-import type { Tag, Option } from '@w5s/core';
+import type { Option } from '@w5s/core';
 import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { andThen } from '@w5s/task/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { HTTPParser } from './HTTPParser.js';
+import type { Method } from './Method.js';
+import type { RequestHeaders } from './RequestHeaders.js';
+import type { Response } from './Response.js';
+import type { RequestCredentials } from './RequestCredentials.js';
+import type { RequestCache } from './RequestCache.js';
+import type { RequestRedirect } from './RequestRedirect.js';
+import type { ReferrerPolicy } from './ReferrerPolicy.js';
+import type { RequestMode } from './RequestMode.js';
+import type { RequestDestination } from './RequestDestination.js';
 
 /**
  * Types
@@ -20,115 +29,6 @@ export namespace HTTP {
   export type URL = string;
 
   /**
-   * HTTP credentials
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/credentials
-   */
-  export type Credentials = 'include' | 'omit' | 'same-origin';
-
-  /**
-   * HTTP Method type
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/method
-   */
-  export type Method = string;
-
-  /**
-   * HTTP redirect type
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/redirect
-   */
-  export type Redirect = 'follow' | 'error' | 'manual';
-
-  /**
-   * HTTP referrer policy type
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/referrerPolicy
-   */
-  export type ReferrerPolicy =
-    | ''
-    | 'no-referrer'
-    | 'no-referrer-when-downgrade'
-    | 'same-origin'
-    | 'origin'
-    | 'strict-origin'
-    | 'origin-when-cross-origin'
-    | 'strict-origin-when-cross-origin'
-    | 'unsafe-url';
-
-  /**
-   * HTTP request destination type
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/destination
-   */
-  export type RequestDestination =
-    | ''
-    | 'audio'
-    | 'audioworklet'
-    | 'document'
-    | 'embed'
-    | 'font'
-    | 'frame'
-    | 'iframe'
-    | 'image'
-    | 'manifest'
-    | 'object'
-    | 'paintworklet'
-    | 'report'
-    | 'script'
-    | 'sharedworker'
-    | 'style'
-    | 'track'
-    | 'video'
-    | 'worker'
-    | 'xslt';
-
-  /**
-   * HTTP cache type
-   *
-   * @see https://developer.mozilla.org/en-US/docs/Web/API/Request/cache
-   */
-  export type Cache = 'default' | 'no-store' | 'reload' | 'no-cache' | 'force-cache' | 'only-if-cached';
-
-  /**
-   * HTTP header record type
-   */
-  export type Headers = Readonly<Record<string, string>> & Tag<'HTTPHeaders'>;
-
-  /**
-   * HTTP header record constructor
-   *
-   * @example
-   * ```typescript
-   * const headersFromIterable = Headers([
-   *  ['key1', 'value1'],
-   *  ['key2', 'value2']
-   * ]);// { key1: 'value1, key2: 'value2' }
-   * const headersFromObject = Headers({
-   *  key1: 'value1',
-   *  key2: 'value2'
-   * });// { key1: 'value1, key2: 'value2' }
-   *```
-   * @category Constructor
-   * @param values - a record or iterable to initialize
-   */
-  export function Headers(values: Iterable<readonly [string, string]> | Record<string, string>): Headers {
-    if (Symbol.iterator in values) {
-      const returnValue: Record<string, string> = {};
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      for (const [key, value] of values as Iterable<readonly [string, string]>) {
-        returnValue[key] = value;
-      }
-
-      return returnValue as Headers;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    return {
-      ...values,
-    } as Headers;
-  }
-  /**
    * HTTP request type
    *
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Request
@@ -143,12 +43,12 @@ export namespace HTTP {
      * 'no-store'
      * ```
      */
-    readonly cache?: HTTP.Cache;
+    readonly cache?: RequestCache;
     /**
      * A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL.
      */
-    readonly credentials?: HTTP.Credentials;
-    readonly destination?: HTTP.RequestDestination;
+    readonly credentials?: RequestCredentials;
+    readonly destination?: RequestDestination;
     /**
      * Request URL
      *
@@ -164,7 +64,7 @@ export namespace HTTP {
      * { "Content-type": "application/json" }
      * ```
      */
-    readonly headers?: HTTP.Headers;
+    readonly headers?: RequestHeaders;
     /**
      * A cryptographic hash of the resource to be fetched by request. Sets request's integrity.
      */
@@ -172,17 +72,17 @@ export namespace HTTP {
     /**
      * Indicates whether request follows redirects, results in an error upon encountering a redirect, or returns the redirect (in an opaque fashion).
      */
-    readonly redirect?: HTTP.Redirect;
+    readonly redirect?: RequestRedirect;
     /**
      * Request referrer policy
      */
-    readonly referrerPolicy?: HTTP.ReferrerPolicy;
+    readonly referrerPolicy?: ReferrerPolicy;
     /**
      * Request Method
      *
      * @example 'GET', 'POST'
      */
-    readonly method?: HTTP.Method;
+    readonly method?: Method;
     /**
      * A boolean to set request's keepalive.
      */
@@ -208,13 +108,6 @@ export namespace HTTP {
      */
     readonly window?: undefined;
   }
-
-  export interface Response
-    extends Readonly<
-      Omit<globalThis.Response, /* 'headers' | */ 'clone'> & {
-        // headers: Readonly<{ [key: string]: string }>;
-      }
-    > {}
 
   /**
    * Return a new {@link @w5s/core!Task} that will send an HTTP request
@@ -267,7 +160,7 @@ function getDefaultFetch() {
 function applyFetch(
   fetchFn: NativeFetch,
   request: HTTP.Request
-): Task<HTTP.Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
+): Task<Response, HTTPError.InvalidURL | HTTPError.NetworkError> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(async ({ resolve, reject, canceler }) => {
     const { url, ...requestInfo } = request;
