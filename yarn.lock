@@ -5813,22 +5813,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.0.25":
-  version: 2.0.25
-  resolution: "@w5s/commitlint-config@npm:2.0.25"
+"@w5s/commitlint-config@npm:2.0.26":
+  version: 2.0.26
+  resolution: "@w5s/commitlint-config@npm:2.0.26"
   dependencies:
     "@commitlint/types": "npm:^18.0.0"
-    "@w5s/conventional-changelog": "npm:^2.0.23"
+    "@w5s/conventional-changelog": "npm:^2.0.24"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/062e85aa63f9577cd5eeb700c1ad6929a3c03ca7ba58bc6ed25290b0f334253f1713fa2ab391117471fd8ee75ee60b789b1de1468162f255a24be532feed2724
+  checksum: 10c0/f49169c514559b0bfef192221a28d8e16fbc373b98beaa19553475e72a546eeb2f9c3959cf4ac5dc8c7dac00c4836ab6e374d8ec5a32c2b0fb1d85b7141558cd
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:2.0.24":
+"@w5s/conventional-changelog@npm:2.0.24, @w5s/conventional-changelog@npm:^2.0.24":
   version: 2.0.24
   resolution: "@w5s/conventional-changelog@npm:2.0.24"
   dependencies:
@@ -5839,24 +5839,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:^2.0.23":
-  version: 2.0.23
-  resolution: "@w5s/conventional-changelog@npm:2.0.23"
-  dependencies:
-    "@commitlint/types": "npm:^18.0.0"
-    emoji-regex: "npm:^10.2.1"
-    gitmojis: "npm:^3.13.4"
-  checksum: 10c0/23de047b54fe85db1f40c2a690f20dfbafd5618d43aa3e9f3d10641391af639df4c9b23a8c0c713db96ec90fc4cbbf5bd9107c2315497d275fbece76441d4d4d
-  languageName: node
-  linkType: hard
-
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.1.5"
     "@types/node": "npm:20.16.5"
-    "@w5s/commitlint-config": "npm:2.0.25"
+    "@w5s/commitlint-config": "npm:2.0.26"
     "@w5s/conventional-changelog": "npm:2.0.24"
     "@w5s/cspell-config": "npm:2.3.10"
     "@w5s/eslint-config": "npm:2.0.30"
