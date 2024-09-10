@@ -4717,24 +4717,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/esbuild@npm:11.1.4":
-  version: 11.1.4
-  resolution: "@size-limit/esbuild@npm:11.1.4"
+"@size-limit/esbuild@npm:11.1.5":
+  version: 11.1.5
+  resolution: "@size-limit/esbuild@npm:11.1.5"
   dependencies:
-    esbuild: "npm:^0.21.3"
+    esbuild: "npm:^0.23.1"
     nanoid: "npm:^5.0.7"
   peerDependencies:
-    size-limit: 11.1.4
-  checksum: 10c0/83ec1842b09645c46e9acb82c9acad2c57815b4966ba66826e94de445575dbfd795578f3ff10abf5d15fae99a3edfde2cd6999a47a3d082bd2d740d1cddd7c91
+    size-limit: 11.1.5
+  checksum: 10c0/608498e5dedeb461b6cce98897b1ed66ffd1b152107a60a400c546a52b24002bd75e99ecdb21e11ff199cfb4b2e743e229c87df1075a9fe096a4c8b0d255d401
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:11.1.4":
-  version: 11.1.4
-  resolution: "@size-limit/file@npm:11.1.4"
+"@size-limit/file@npm:11.1.5":
+  version: 11.1.5
+  resolution: "@size-limit/file@npm:11.1.5"
   peerDependencies:
-    size-limit: 11.1.4
-  checksum: 10c0/df96a30a8731d942fff1d2ab024de18cac401f053d256ad9d09862e614071a691eac19d8b97901165598539a89039c47c75e204b070105810c7f61d0dd502fc7
+    size-limit: 11.1.5
+  checksum: 10c0/ada59e3ccab3676a78c8d4140f6d36a48149458de6dfddf7a4fa62aa51ed27ef6ee2e03b3df2f11c7b382c65cb2b4e7e25c7b973069af00f53a02bc2149486fd
   languageName: node
   linkType: hard
 
@@ -4747,16 +4747,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/preset-small-lib@npm:11.1.4":
-  version: 11.1.4
-  resolution: "@size-limit/preset-small-lib@npm:11.1.4"
+"@size-limit/preset-small-lib@npm:11.1.5":
+  version: 11.1.5
+  resolution: "@size-limit/preset-small-lib@npm:11.1.5"
   dependencies:
-    "@size-limit/esbuild": "npm:11.1.4"
-    "@size-limit/file": "npm:11.1.4"
-    size-limit: "npm:11.1.4"
+    "@size-limit/esbuild": "npm:11.1.5"
+    "@size-limit/file": "npm:11.1.5"
+    size-limit: "npm:11.1.5"
   peerDependencies:
-    size-limit: 11.1.4
-  checksum: 10c0/291aad13f473c815ec368043559994efadfbcc9ae5c7800813ad4436f13c6936ee6c907317124f0d91bca8c17d242e8ff1fb765ef00dceefabbf59c81ee9a02b
+    size-limit: 11.1.5
+  checksum: 10c0/a8c928cdb828f8457caf5acdfba851673021cf9d550141303219e3a5f62f8563bc8c664d3037091deec4bb773150395f15d5ac910e2d326b960d48c7bf46497c
   languageName: node
   linkType: hard
 
@@ -5854,7 +5854,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
-    "@size-limit/preset-small-lib": "npm:11.1.4"
+    "@size-limit/preset-small-lib": "npm:11.1.5"
     "@types/node": "npm:20.16.5"
     "@w5s/commitlint-config": "npm:2.0.25"
     "@w5s/conventional-changelog": "npm:2.0.24"
@@ -9693,7 +9693,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.23.0":
+"esbuild@npm:^0.23.0, esbuild@npm:^0.23.1":
   version: 0.23.1
   resolution: "esbuild@npm:0.23.1"
   dependencies:
@@ -10515,6 +10515,18 @@ __metadata:
   dependencies:
     websocket-driver: "npm:>=0.5.1"
   checksum: 10c0/c6052a0bb322778ce9f89af92890f6f4ce00d5ec92418a35e5f4c6864a4fe736fec0bcebd47eac7c0f0e979b01530746b1c85c83cb04bae789271abf19737420
+  languageName: node
+  linkType: hard
+
+"fdir@npm:^6.3.0":
+  version: 6.3.0
+  resolution: "fdir@npm:6.3.0"
+  peerDependencies:
+    picomatch: ^3 || ^4
+  peerDependenciesMeta:
+    picomatch:
+      optional: true
+  checksum: 10c0/be91cd6ab2edbc6df457a69b79672ee9345996986821918ef01908ce9619b8cbecd9c6c13d4ca5d0aeb548b162050d68c599f45bb3fbff194a91e16f25e646b5
   languageName: node
   linkType: hard
 
@@ -11349,7 +11361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^14.0.0, globby@npm:^14.0.1":
+"globby@npm:^14.0.0":
   version: 14.0.2
   resolution: "globby@npm:14.0.2"
   dependencies:
@@ -12923,7 +12935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jiti@npm:^1.20.0, jiti@npm:^1.21.0":
+"jiti@npm:^1.20.0, jiti@npm:^1.21.6":
   version: 1.21.6
   resolution: "jiti@npm:1.21.6"
   bin:
@@ -13356,7 +13368,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:^3.1.1":
+"lilconfig@npm:^3.1.1, lilconfig@npm:^3.1.2":
   version: 3.1.2
   resolution: "lilconfig@npm:3.1.2"
   checksum: 10c0/f059630b1a9bddaeba83059db00c672b64dc14074e9f232adce32b38ca1b5686ab737eb665c5ba3c32f147f0002b4bee7311ad0386a9b98547b5623e87071fbe
@@ -16510,10 +16522,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"picocolors@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "picocolors@npm:1.1.0"
+  checksum: 10c0/86946f6032148801ef09c051c6fb13b5cf942eaf147e30ea79edb91dd32d700934edebe782a1078ff859fb2b816792e97ef4dab03d7f0b804f6b01a0df35e023
+  languageName: node
+  linkType: hard
+
 "picomatch@npm:^2.0.4, picomatch@npm:^2.2.1, picomatch@npm:^2.2.3, picomatch@npm:^2.3.1":
   version: 2.3.1
   resolution: "picomatch@npm:2.3.1"
   checksum: 10c0/26c02b8d06f03206fc2ab8d16f19960f2ff9e81a658f831ecb656d8f17d9edc799e8364b1f4a7873e89d9702dff96204be0fa26fe4181f6843f040f819dac4be
+  languageName: node
+  linkType: hard
+
+"picomatch@npm:^4.0.2":
+  version: 4.0.2
+  resolution: "picomatch@npm:4.0.2"
+  checksum: 10c0/7c51f3ad2bb42c776f49ebf964c644958158be30d0a510efd5a395e8d49cb5acfed5b82c0c5b365523ce18e6ab85013c9ebe574f60305892ec3fa8eee8304ccc
   languageName: node
   linkType: hard
 
@@ -18849,20 +18875,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"size-limit@npm:11.1.4":
-  version: 11.1.4
-  resolution: "size-limit@npm:11.1.4"
+"size-limit@npm:11.1.5":
+  version: 11.1.5
+  resolution: "size-limit@npm:11.1.5"
   dependencies:
     bytes-iec: "npm:^3.1.1"
     chokidar: "npm:^3.6.0"
-    globby: "npm:^14.0.1"
-    jiti: "npm:^1.21.0"
-    lilconfig: "npm:^3.1.1"
+    jiti: "npm:^1.21.6"
+    lilconfig: "npm:^3.1.2"
     nanospinner: "npm:^1.1.0"
-    picocolors: "npm:^1.0.1"
+    picocolors: "npm:^1.1.0"
+    tinyglobby: "npm:^0.2.6"
   bin:
     size-limit: bin.js
-  checksum: 10c0/1475db1203ae6433f2bb02dfa1e78f8f47a740617f0e30333b4c0ae5298102847945154af7c544fa8d8761bb55815e255ec1a8c0832222c3694c175889a00def
+  checksum: 10c0/4aed5a599908242d6ef26a947704fbea38ba81c5c4d1ee59b446bab239ca9d248fbfd16f724f0d2178485b86514c7022d0cce7169de6753f0e9ba0b79a14f563
   languageName: node
   linkType: hard
 
@@ -19761,6 +19787,16 @@ __metadata:
   version: 2.9.0
   resolution: "tinybench@npm:2.9.0"
   checksum: 10c0/c3500b0f60d2eb8db65250afe750b66d51623057ee88720b7f064894a6cb7eb93360ca824a60a31ab16dab30c7b1f06efe0795b352e37914a9d4bad86386a20c
+  languageName: node
+  linkType: hard
+
+"tinyglobby@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "tinyglobby@npm:0.2.6"
+  dependencies:
+    fdir: "npm:^6.3.0"
+    picomatch: "npm:^4.0.2"
+  checksum: 10c0/d7b5eb4c5b9c341f961c1d3c30624f9a1e22b27b48a79a65b48120245a77c143827f75f5854628fef1a4bd4bc3cfaf06ce76497f3a574e3f933229c5e556e5fe
   languageName: node
   linkType: hard
 
