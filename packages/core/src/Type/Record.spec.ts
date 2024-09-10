@@ -3,14 +3,14 @@ import { Record } from './Record.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
-import { bigint as TBigInt } from './BigInt.js';
-import { string as TString } from './String.js';
+import { bigint } from './bigint.js';
+import { string } from './string.js';
 import type { Type } from '../Type.js';
 
 describe(Record, () => {
   const subject = Record;
 
-  const TestRecord = subject(TString, TBigInt);
+  const TestRecord = subject(string, bigint);
   type TestRecord = Type.TypeOf<typeof TestRecord>;
 
   describeType({ describe, it, expect })(TestRecord, {
