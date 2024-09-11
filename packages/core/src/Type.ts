@@ -16,6 +16,7 @@ import { Tuple } from './Type/Tuple.js';
 import { unknown } from './Type/unknown.js';
 import { UUID } from './Type/UUID.js';
 import { Record } from './Type/Record.js';
+import { URL } from './Type/URL.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -97,6 +98,7 @@ export const Type = {
   Tuple,
   unknown,
   UUID,
+  URL,
 };
 
 export namespace Type {
