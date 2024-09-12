@@ -99,7 +99,7 @@
     "@w5s/cspell-config": "2.3.11",
     "@w5s/eslint-config": "2.0.30",
     "@w5s/ts-config": "2.0.17",
-    "concurrently": "9.0.0",
+    "concurrently": "9.0.1",
     "cspell": "8.14.2",
     "eslint": "8.57.0",
     "lerna": "8.1.8",
