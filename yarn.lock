@@ -2661,7 +2661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-content-docs@npm:^3.4.0":
+"@docusaurus/plugin-content-docs@npm:^3.5.0":
   version: 3.5.2
   resolution: "@docusaurus/plugin-content-docs@npm:3.5.2"
   dependencies:
@@ -2965,7 +2965,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/types@npm:3.5.2, @docusaurus/types@npm:^3.4.0":
+"@docusaurus/types@npm:3.5.2, @docusaurus/types@npm:^3.5.0":
   version: 3.5.2
   resolution: "@docusaurus/types@npm:3.5.2"
   dependencies:
@@ -3078,7 +3078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils@npm:3.5.2, @docusaurus/utils@npm:^3.4.0":
+"@docusaurus/utils@npm:3.5.2, @docusaurus/utils@npm:^3.5.0":
   version: 3.5.2
   resolution: "@docusaurus/utils@npm:3.5.2"
   dependencies:
@@ -6192,7 +6192,7 @@ __metadata:
     "@mdx-js/react": "npm:3.0.1"
     "@types/node": "npm:20.16.5"
     clsx: "npm:2.1.1"
-    docusaurus-plugin-typedoc-api: "npm:4.2.1"
+    docusaurus-plugin-typedoc-api: "npm:4.4.0"
     prism-react-renderer: "npm:2.4.0"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
@@ -9145,23 +9145,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"docusaurus-plugin-typedoc-api@npm:4.2.1":
-  version: 4.2.1
-  resolution: "docusaurus-plugin-typedoc-api@npm:4.2.1"
+"docusaurus-plugin-typedoc-api@npm:4.4.0":
+  version: 4.4.0
+  resolution: "docusaurus-plugin-typedoc-api@npm:4.4.0"
   dependencies:
-    "@docusaurus/plugin-content-docs": "npm:^3.4.0"
-    "@docusaurus/types": "npm:^3.4.0"
-    "@docusaurus/utils": "npm:^3.4.0"
+    "@docusaurus/plugin-content-docs": "npm:^3.5.0"
+    "@docusaurus/types": "npm:^3.5.0"
+    "@docusaurus/utils": "npm:^3.5.0"
     "@vscode/codicons": "npm:^0.0.36"
     marked: "npm:^9.1.6"
     marked-smartypants: "npm:^1.1.5"
     typedoc: "npm:^0.25.7"
   peerDependencies:
-    "@docusaurus/core": ^3.0.0
-    "@docusaurus/mdx-loader": ^3.0.0
+    "@docusaurus/core": ^3.5.0
+    "@docusaurus/mdx-loader": ^3.5.0
     react: ">=18.0.0"
     typescript: ^5.0.0
-  checksum: 10c0/c3cf4f2df11c30c0cd5f1d57df2ce856c2146b3f648f48bd8be00018d583e62b163a8b84abaf2199d4a626d45b21ac21371e86b1a323cfec1eb020a053690790
+  checksum: 10c0/adb9d39c7e124da1d629191e90de8d32909ef84aed7bdf568e37aec8e6f21f57bbb0a7cd32e80db3b04f01b4b84c82a528a1fe9a7349978af042f75eaedff402
   languageName: node
   linkType: hard
 
