@@ -1,9 +1,12 @@
 import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
+import { timeout } from '@w5s/task-timeout';
+import type { TimeDuration } from '@w5s/time';
+import type { Option } from '@w5s/core';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { Request } from './Request.js';
-import type { Client } from './Client.js';
+import { Client } from './Client.js';
 
 /**
  * Return a new {@link @w5s/core!Task} that will send an HTTP request
@@ -17,6 +20,16 @@ import type { Client } from './Client.js';
  * @param requestObject - the request parameters
  */
 export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
+  const task = requestSendImplementation(client, requestObject);
+  const timeoutDuration = requestTimeoutDuration(client, requestObject);
+  return timeoutDuration == null ? task : timeout(task, timeoutDuration);
+}
+
+function requestTimeoutDuration(client: Client, _requestObject: Request): Option<TimeDuration> {
+  return Client.getTimeoutDuration(client);
+}
+
+function requestSendImplementation(client: Client, requestObject: Request): Task<Response, HTTPError> {
   const { fetch: fetchFn } = client;
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(async ({ resolve, reject, canceler }) => {

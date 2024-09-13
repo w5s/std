@@ -2,9 +2,18 @@ import { Result } from '@w5s/core';
 import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { beforeEach } from 'node:test';
+import { TimeDuration } from '@w5s/time';
+import { timeout } from '@w5s/task-timeout';
 import { HTTPError } from './HTTPError.js';
 import { requestSend } from './requestSend.js';
 import { Client } from './Client.js';
+
+vi.mock('@w5s/task-timeout', () => ({
+  timeout: vi.fn((_) => _),
+}));
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 describe(requestSend, () => {
   const anyURL = 'https://localhost';
@@ -28,10 +37,6 @@ describe(requestSend, () => {
   const globalFetchMock = vi.fn<typeof globalThis.fetch>(async () => anyResponse);
   const anyClient = Client({
     fetch: globalFetchMock,
-  });
-
-  beforeEach(() => {
-    globalFetchMock.mockClear();
   });
 
   it('should call global fetch and send to parser', async () => {
@@ -100,5 +105,35 @@ describe(requestSend, () => {
     await finished.promise;
     expect(resolve).not.toHaveBeenCalled();
     expect(reject).not.toHaveBeenCalled();
+  });
+  describe('timeout', () => {
+    it('uses client timeout as "none"', async () => {
+      vi.clearAllMocks();
+      const client = Client({
+        timeout: 'none',
+      });
+      requestSend(client, {
+        url: anyURL,
+      });
+      expect(timeout).not.toHaveBeenCalled();
+    });
+    it('uses client timeout as "default"', async () => {
+      const client = Client({
+        timeout: 'default',
+      });
+      requestSend(client, {
+        url: anyURL,
+      });
+      expect(timeout).toHaveBeenLastCalledWith(expect.any(Object), TimeDuration.seconds(30));
+    });
+    it('uses client timeout as custom value', async () => {
+      const client = Client({
+        timeout: TimeDuration.seconds(123),
+      });
+      requestSend(client, {
+        url: anyURL,
+      });
+      expect(timeout).toHaveBeenLastCalledWith(expect.any(Object), TimeDuration.seconds(123));
+    });
   });
 });

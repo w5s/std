@@ -1,5 +1,7 @@
 import { invariant } from '@w5s/invariant';
-import type { ResponseTimeout } from './ResponseTimeout.js';
+import type { Option } from '@w5s/core';
+import type { TimeDuration } from '@w5s/time';
+import type { RequestTimeout } from './RequestTimeout.js';
 
 export interface Client {
   /**
@@ -9,15 +11,23 @@ export interface Client {
   /**
    * Response timeout setting
    */
-  responseTimeout: ResponseTimeout;
+  timeout: RequestTimeout;
 }
 
 export function Client(parameters: Partial<Client> = {}): Client {
-  const { responseTimeout = 'default', fetch = getDefaultFetch() } = parameters;
+  const { timeout = 'default', fetch = getDefaultFetch() } = parameters;
   return {
     fetch,
-    responseTimeout,
+    timeout,
   };
+}
+export namespace Client {
+  export const defaultTimeoutDuration = (30 * 1000) as TimeDuration; // 30 seconds
+
+  export function getTimeoutDuration(client: Client): Option<TimeDuration> {
+    const { timeout } = client;
+    return timeout === 'none' ? undefined : timeout === 'default' ? defaultTimeoutDuration : timeout;
+  }
 }
 
 function getDefaultFetch() {

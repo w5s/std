@@ -1,9 +1,9 @@
-import { CustomError } from '@w5s/error';
+import { CustomError, type TimeoutError } from '@w5s/error';
 
 /**
  * Union type of http client errors
  */
-export type HTTPError = HTTPError.NetworkError | HTTPError.InvalidURL | HTTPError.ParserError;
+export type HTTPError = HTTPError.NetworkError | HTTPError.InvalidURL | HTTPError.ParserError | TimeoutError;
 
 export namespace HTTPError {
   /**
