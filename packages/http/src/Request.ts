@@ -7,6 +7,7 @@ import type { RequestCache } from './RequestCache.js';
 import type { RequestRedirect } from './RequestRedirect.js';
 import type { ReferrerPolicy } from './ReferrerPolicy.js';
 import type { RequestMode } from './RequestMode.js';
+import type { RequestTimeout } from './RequestTimeout.js';
 
 type URL = string;
 
@@ -89,4 +90,8 @@ export interface Request {
    * Can only be undefined. Used to disassociate request from any Window.
    */
   readonly window?: undefined;
+  /**
+   * Request timeout setting
+   */
+  readonly timeout?: RequestTimeout;
 }

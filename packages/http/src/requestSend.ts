@@ -26,8 +26,13 @@ export function requestSend(client: Client, requestObject: Request): Task<Respon
   return timeoutDuration == null ? task : timeout(task, timeoutDuration);
 }
 
-function requestTimeoutDuration(client: Client, _requestObject: Request): Option<TimeDuration> {
-  return Client.getTimeoutDuration(client);
+function requestTimeoutDuration(client: Client, requestObject: Request): Option<TimeDuration> {
+  const { timeout: requestTimeout = 'default' } = requestObject;
+  return requestTimeout === 'none'
+    ? undefined
+    : requestTimeout === 'default'
+      ? Client.getTimeoutDuration(client)
+      : requestTimeout;
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response, HTTPError> {
