@@ -17,6 +17,7 @@ import { Client } from './Client.js';
  *   url: 'http://someurl.com',
  * });
  * ```
+ * @param client - Client
  * @param requestObject - the request parameters
  */
 export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
