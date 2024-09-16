@@ -1,14 +1,19 @@
-import { HTTP, HTTPError, HTTPParser } from '@w5s/http';
+import { requestSend, HTTPError, HTTPParser, Client } from '@w5s/http';
+import { Type } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 
+const client = Client();
 const getText = (id: number) => ({
   url: `http://localhost/${id}`,
-  parse: HTTPParser.json<{ foo: boolean }>('unsafe'),
+});
+const FooObject = Type.Object({
+  foo: Type.boolean,
 });
 
 export function program() {
-  const task = HTTP.request(getText(123));
-  const log = Task.andThen(task, (response) => Console.debug(response.foo));
+  const responseTask = requestSend(client, getText(123));
+  const parsed = Task.andThen(responseTask, HTTPParser.json(FooObject));
+  const log = Task.andThen(parsed, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
       case HTTPError.InvalidURL.errorName: {

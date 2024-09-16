@@ -1,7 +1,6 @@
 import type { Option, JSONValue } from '@w5s/core';
 import type { Task } from '@w5s/task';
-import type { TimeDuration } from '@w5s/time';
-import { HTTP, HTTPError, HTTPParser, type Method } from '@w5s/http';
+import { Client, HTTPError, HTTPParser, requestSend, type Method } from '@w5s/http';
 import { CustomError } from '@w5s/error';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
@@ -9,8 +8,8 @@ import { DecodeError } from '@w5s/core/dist/DecodeError.js';
 import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error as Err } from '@w5s/core/dist/Result/Error.js';
-import { timeout } from '@w5s/task-timeout';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
+import { andThen } from '@w5s/task/dist/Task/andThen.js';
 
 export interface Slack {
   /**
@@ -22,23 +21,23 @@ export interface Slack {
    */
   readonly slackToken: string;
   /**
-   * HTTP client default request timeout
+   * HTTP client
    */
-  readonly slackRequestTimeout: Option<TimeDuration>;
+  readonly httpClient: Client;
 }
 export function Slack({
   baseURL: slackBaseURL = 'https://slack.com/api',
-  timeout: slackRequestTimeout,
   token: slackToken,
+  httpClient = Client(),
 }: {
   baseURL?: Slack['slackBaseURL'];
-  timeout?: Slack['slackRequestTimeout'];
   token: Slack['slackToken'];
+  httpClient?: Client;
 }): Slack {
   return {
     slackBaseURL,
     slackToken,
-    slackRequestTimeout,
+    httpClient,
   };
 }
 
@@ -103,15 +102,16 @@ export namespace Slack {
   type ResponseError = DecodeError | HTTPError | TimeoutError | Error;
 
   function apiCall<R>(client: Slack, method: Method, parameters: { [key: string]: unknown }): Task<R, ResponseError> {
-    const request = HTTP.request({
+    const { httpClient } = client;
+    const request = requestSend(httpClient, {
       url: urlWithQuery(`${client.slackBaseURL}/${method}`, {
         token: client.slackToken,
         ...parameters,
       }),
       method: 'POST',
-      parse: HTTPParser.json<ResponseBase>('unsafe'),
     });
-    const requestParsed = mapResult<ResponseBase, HTTPError, R, ResponseError>(request, (result) =>
+    const parsed = andThen(request, HTTPParser.json<ResponseBase>('unsafe'));
+    const requestParsed = mapResult<ResponseBase, HTTPError, R, ResponseError>(parsed, (result) =>
       result.ok
         ? result.value.ok === true
           ? Ok(result.value as R)
@@ -120,9 +120,7 @@ export namespace Slack {
             : Err(DecodeError({ message: 'Decode Error!', input: result.value }))
         : result
     );
-    const requestWithTimeout =
-      client.slackRequestTimeout == null ? requestParsed : timeout(requestParsed, client.slackRequestTimeout);
-    return requestWithTimeout;
+    return requestParsed;
   }
 
   export namespace Chat {

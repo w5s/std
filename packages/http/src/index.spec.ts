@@ -5,15 +5,16 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Fetch).sort()).toEqual(
       [
-        'HTTP',
         'HTTPError',
         'HTTPParser',
+        'Client',
         'ReferrerPolicy',
         'RequestCache',
         'RequestCredentials',
         'RequestDestination',
         'RequestHeaders',
         'RequestRedirect',
+        'requestSend',
       ].sort()
     );
   });
