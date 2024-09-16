@@ -3,6 +3,7 @@ import { from } from '@w5s/task/dist/Task/from.js';
 import { timeout } from '@w5s/task-timeout';
 import type { TimeDuration } from '@w5s/time';
 import type { Option } from '@w5s/core';
+import { andThen } from '@w5s/task/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { Request } from './Request.js';
@@ -21,7 +22,8 @@ import { Client } from './Client.js';
  * @param requestObject - the request parameters
  */
 export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
-  const task = requestSendImplementation(client, requestObject);
+  const requestWrapped = client.onRequest(requestObject);
+  const task = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
   const timeoutDuration = requestTimeoutDuration(client, requestObject);
   return timeoutDuration == null ? task : timeout(task, timeoutDuration);
 }

@@ -107,6 +107,22 @@ describe(requestSend, () => {
     expect(resolve).not.toHaveBeenCalled();
     expect(reject).not.toHaveBeenCalled();
   });
+  it('should use client#onRequest', async () => {
+    const clientCustom = Client({
+      onRequest: (request) => Task.resolve({ ...request, url: 'http://localhost#custom' }),
+      fetch: globalFetchMock,
+    });
+    const request = {
+      url: 'http://localhost#test',
+      method: 'GET',
+    };
+    const task = requestSend(clientCustom, request);
+    await Task.unsafeRun(task);
+    expect(globalFetchMock).toHaveBeenLastCalledWith('http://localhost#custom', {
+      method: 'GET',
+      signal: expect.any(Object),
+    });
+  });
   describe('timeout', () => {
     it('uses client timeout as "none"', async () => {
       vi.clearAllMocks();
