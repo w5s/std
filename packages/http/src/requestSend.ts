@@ -24,17 +24,8 @@ import { Client } from './Client.js';
 export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
   const requestWrapped = client.onRequest(requestObject);
   const task = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
-  const timeoutDuration = requestTimeoutDuration(client, requestObject);
+  const timeoutDuration = Client.getRequestTimeoutDuration(client, requestObject);
   return timeoutDuration == null ? task : timeout(task, timeoutDuration);
-}
-
-function requestTimeoutDuration(client: Client, requestObject: Request): Option<TimeDuration> {
-  const { timeout: requestTimeout = 'default' } = requestObject;
-  return requestTimeout === 'none'
-    ? undefined
-    : requestTimeout === 'default'
-      ? Client.getTimeoutDuration(client)
-      : requestTimeout;
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response, HTTPError> {

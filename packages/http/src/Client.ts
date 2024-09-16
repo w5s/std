@@ -37,9 +37,38 @@ export namespace Client {
 
   export const defaultTimeoutDuration = (30 * 1000) as TimeDuration; // 30 seconds
 
+  /**
+   * Returns the timeout duration in milliseconds for client
+   *
+   * @example
+   * ```ts
+   * const client = Client();
+   * const duration = Client.getTimeoutDuration(client);
+   * ```
+   * @param client
+   */
   export function getTimeoutDuration(client: Client): Option<TimeDuration> {
     const { timeout } = client;
     return timeout === 'none' ? undefined : timeout === 'default' ? defaultTimeoutDuration : timeout;
+  }
+
+  /**
+   * Returns the timeout duration in milliseconds for the request and client
+   *
+   * @example
+   * ```ts
+   * const client = Client();
+   * const duration = Client.getRequestTimeoutDuration(client);
+   * ```
+   * @param client
+   */
+  export function getRequestTimeoutDuration(client: Client, requestObject: Request): Option<TimeDuration> {
+    const { timeout: requestTimeout = 'default' } = requestObject;
+    return requestTimeout === 'none'
+      ? undefined
+      : requestTimeout === 'default'
+        ? getTimeoutDuration(client)
+        : requestTimeout;
   }
 }
 
