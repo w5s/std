@@ -1,8 +1,6 @@
 import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { timeout } from '@w5s/task-timeout';
-import type { TimeDuration } from '@w5s/time';
-import type { Option } from '@w5s/core';
 import { andThen } from '@w5s/task/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
