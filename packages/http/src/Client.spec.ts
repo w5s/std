@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { TimeDuration } from '@w5s/time';
 import { Option } from '@w5s/core';
+import { Task } from '@w5s/task';
 import { Client } from './Client.js';
 
 describe(Client, () => {
   it('constructs a client', () => {
     expect(Client()).toEqual({
+      onRequest: Task.resolve,
       fetch: globalThis.fetch,
       timeout: 'default',
     });
