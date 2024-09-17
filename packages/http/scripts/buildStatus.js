@@ -46,7 +46,7 @@ async function generateFiles() {
         ...(status.isDeprecated ? [' *', ' * @deprecated'] : []),
         ' */',
         `export const ${toConstant(status.phrase)} = {`,
-        `  statusCode: ${status.code},`,
+        `  statusCode: ${status.code} as const,`,
         `  statusMessage: \`${status.phrase}\`,`,
         '} satisfies Status;',
       ].join(eol)

@@ -6,7 +6,7 @@ import type { Status } from './Status.js';
  * The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.
  */
 export const Accepted = {
-  statusCode: 202,
+  statusCode: 202 as const,
   statusMessage: `Accepted`,
 } satisfies Status;
 
@@ -16,7 +16,7 @@ export const Accepted = {
  * This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.
  */
 export const BadGateway = {
-  statusCode: 502,
+  statusCode: 502 as const,
   statusMessage: `Bad Gateway`,
 } satisfies Status;
 
@@ -26,7 +26,7 @@ export const BadGateway = {
  * This response means that server could not understand the request due to invalid syntax.
  */
 export const BadRequest = {
-  statusCode: 400,
+  statusCode: 400 as const,
   statusMessage: `Bad Request`,
 } satisfies Status;
 
@@ -36,7 +36,7 @@ export const BadRequest = {
  * This response is sent when a request conflicts with the current state of the server.
  */
 export const Conflict = {
-  statusCode: 409,
+  statusCode: 409 as const,
   statusMessage: `Conflict`,
 } satisfies Status;
 
@@ -46,7 +46,7 @@ export const Conflict = {
  * This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.
  */
 export const Continue = {
-  statusCode: 100,
+  statusCode: 100 as const,
   statusMessage: `Continue`,
 } satisfies Status;
 
@@ -56,7 +56,7 @@ export const Continue = {
  * The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.
  */
 export const Created = {
-  statusCode: 201,
+  statusCode: 201 as const,
   statusMessage: `Created`,
 } satisfies Status;
 
@@ -66,7 +66,7 @@ export const Created = {
  * This response code means the expectation indicated by the Expect request header field can't be met by the server.
  */
 export const ExpectationFailed = {
-  statusCode: 417,
+  statusCode: 417 as const,
   statusMessage: `Expectation Failed`,
 } satisfies Status;
 
@@ -76,7 +76,7 @@ export const ExpectationFailed = {
  * The request failed due to failure of a previous request.
  */
 export const FailedDependency = {
-  statusCode: 424,
+  statusCode: 424 as const,
   statusMessage: `Failed Dependency`,
 } satisfies Status;
 
@@ -86,7 +86,7 @@ export const FailedDependency = {
  * The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client's identity is known to the server.
  */
 export const Forbidden = {
-  statusCode: 403,
+  statusCode: 403 as const,
   statusMessage: `Forbidden`,
 } satisfies Status;
 
@@ -96,7 +96,7 @@ export const Forbidden = {
  * This error response is given when the server is acting as a gateway and cannot get a response in time.
  */
 export const GatewayTimeout = {
-  statusCode: 504,
+  statusCode: 504 as const,
   statusMessage: `Gateway Timeout`,
 } satisfies Status;
 
@@ -106,7 +106,7 @@ export const GatewayTimeout = {
  * This response would be sent when the requested content has been permenantly deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for "limited-time, promotional services". APIs should not feel compelled to indicate resources that have been deleted with this status code.
  */
 export const Gone = {
-  statusCode: 410,
+  statusCode: 410 as const,
   statusMessage: `Gone`,
 } satisfies Status;
 
@@ -116,7 +116,7 @@ export const Gone = {
  * The HTTP version used in the request is not supported by the server.
  */
 export const HTTPVersionNotSupported = {
-  statusCode: 505,
+  statusCode: 505 as const,
   statusMessage: `HTTP Version Not Supported`,
 } satisfies Status;
 
@@ -126,7 +126,7 @@ export const HTTPVersionNotSupported = {
  * Any attempt to brew coffee with a teapot should result in the error code "418 I'm a teapot". The resulting entity body MAY be short and stout.
  */
 export const IMATeapot = {
-  statusCode: 418,
+  statusCode: 418 as const,
   statusMessage: `I'm a teapot`,
 } satisfies Status;
 
@@ -136,7 +136,7 @@ export const IMATeapot = {
  * The 507 (Insufficient Storage) status code means the method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request. This condition is considered to be temporary. If the request which received this status code was the result of a user action, the request MUST NOT be repeated until it is requested by a separate user action.
  */
 export const InsufficientSpaceOnResource = {
-  statusCode: 419,
+  statusCode: 419 as const,
   statusMessage: `Insufficient Space on Resource`,
 } satisfies Status;
 
@@ -146,7 +146,7 @@ export const InsufficientSpaceOnResource = {
  * The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.
  */
 export const InsufficientStorage = {
-  statusCode: 507,
+  statusCode: 507 as const,
   statusMessage: `Insufficient Storage`,
 } satisfies Status;
 
@@ -156,7 +156,7 @@ export const InsufficientStorage = {
  * The server encountered an unexpected condition that prevented it from fulfilling the request.
  */
 export const InternalServerError = {
-  statusCode: 500,
+  statusCode: 500 as const,
   statusMessage: `Internal Server Error`,
 } satisfies Status;
 
@@ -166,7 +166,7 @@ export const InternalServerError = {
  * The server rejected the request because the Content-Length header field is not defined and the server requires it.
  */
 export const LengthRequired = {
-  statusCode: 411,
+  statusCode: 411 as const,
   statusMessage: `Length Required`,
 } satisfies Status;
 
@@ -176,7 +176,7 @@ export const LengthRequired = {
  * The resource that is being accessed is locked.
  */
 export const Locked = {
-  statusCode: 423,
+  statusCode: 423 as const,
   statusMessage: `Locked`,
 } satisfies Status;
 
@@ -188,7 +188,7 @@ export const Locked = {
  * @deprecated
  */
 export const MethodFailure = {
-  statusCode: 420,
+  statusCode: 420 as const,
   statusMessage: `Method Failure`,
 } satisfies Status;
 
@@ -198,7 +198,7 @@ export const MethodFailure = {
  * The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.
  */
 export const MethodNotAllowed = {
-  statusCode: 405,
+  statusCode: 405 as const,
   statusMessage: `Method Not Allowed`,
 } satisfies Status;
 
@@ -208,7 +208,7 @@ export const MethodNotAllowed = {
  * This response code means that URI of requested resource has been changed. Probably, new URI would be given in the response.
  */
 export const MovedPermanently = {
-  statusCode: 301,
+  statusCode: 301 as const,
   statusMessage: `Moved Permanently`,
 } satisfies Status;
 
@@ -218,7 +218,7 @@ export const MovedPermanently = {
  * This response code means that URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.
  */
 export const MovedTemporarily = {
-  statusCode: 302,
+  statusCode: 302 as const,
   statusMessage: `Moved Temporarily`,
 } satisfies Status;
 
@@ -228,7 +228,7 @@ export const MovedTemporarily = {
  * A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.
  */
 export const MultiStatus = {
-  statusCode: 207,
+  statusCode: 207 as const,
   statusMessage: `Multi-Status`,
 } satisfies Status;
 
@@ -238,7 +238,7 @@ export const MultiStatus = {
  * The request has more than one possible responses. User-agent or user should choose one of them. There is no standardized way to choose one of the responses.
  */
 export const MultipleChoices = {
-  statusCode: 300,
+  statusCode: 300 as const,
   statusMessage: `Multiple Choices`,
 } satisfies Status;
 
@@ -248,7 +248,7 @@ export const MultipleChoices = {
  * The 511 status code indicates that the client needs to authenticate to gain network access.
  */
 export const NetworkAuthenticationRequired = {
-  statusCode: 511,
+  statusCode: 511 as const,
   statusMessage: `Network Authentication Required`,
 } satisfies Status;
 
@@ -258,7 +258,7 @@ export const NetworkAuthenticationRequired = {
  * There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.
  */
 export const NoContent = {
-  statusCode: 204,
+  statusCode: 204 as const,
   statusMessage: `No Content`,
 } satisfies Status;
 
@@ -268,7 +268,7 @@ export const NoContent = {
  * This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.
  */
 export const NonAuthoritativeInformation = {
-  statusCode: 203,
+  statusCode: 203 as const,
   statusMessage: `Non Authoritative Information`,
 } satisfies Status;
 
@@ -278,7 +278,7 @@ export const NonAuthoritativeInformation = {
  * This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content following the criteria given by the user agent.
  */
 export const NotAcceptable = {
-  statusCode: 406,
+  statusCode: 406 as const,
   statusMessage: `Not Acceptable`,
 } satisfies Status;
 
@@ -288,7 +288,7 @@ export const NotAcceptable = {
  * The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurence on the web.
  */
 export const NotFound = {
-  statusCode: 404,
+  statusCode: 404 as const,
   statusMessage: `Not Found`,
 } satisfies Status;
 
@@ -298,7 +298,7 @@ export const NotFound = {
  * The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.
  */
 export const NotImplemented = {
-  statusCode: 501,
+  statusCode: 501 as const,
   statusMessage: `Not Implemented`,
 } satisfies Status;
 
@@ -308,7 +308,7 @@ export const NotImplemented = {
  * This is used for caching purposes. It is telling to client that response has not been modified. So, client can continue to use same cached version of response.
  */
 export const NotModified = {
-  statusCode: 304,
+  statusCode: 304 as const,
   statusMessage: `Not Modified`,
 } satisfies Status;
 
@@ -322,7 +322,7 @@ POST: The resource describing the result of the action is transmitted in the mes
 TRACE: The message body contains the request message as received by the server
  */
 export const OK = {
-  statusCode: 200,
+  statusCode: 200 as const,
   statusMessage: `OK`,
 } satisfies Status;
 
@@ -332,7 +332,7 @@ export const OK = {
  * This response code is used because of range header sent by the client to separate download into multiple streams.
  */
 export const PartialContent = {
-  statusCode: 206,
+  statusCode: 206 as const,
   statusMessage: `Partial Content`,
 } satisfies Status;
 
@@ -342,7 +342,7 @@ export const PartialContent = {
  * This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.
  */
 export const PaymentRequired = {
-  statusCode: 402,
+  statusCode: 402 as const,
   statusMessage: `Payment Required`,
 } satisfies Status;
 
@@ -352,7 +352,7 @@ export const PaymentRequired = {
  * This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: if a POST was used in the first request, a POST must be used in the second request.
  */
 export const PermanentRedirect = {
-  statusCode: 308,
+  statusCode: 308 as const,
   statusMessage: `Permanent Redirect`,
 } satisfies Status;
 
@@ -362,7 +362,7 @@ export const PermanentRedirect = {
  * The client has indicated preconditions in its headers which the server does not meet.
  */
 export const PreconditionFailed = {
-  statusCode: 412,
+  statusCode: 412 as const,
   statusMessage: `Precondition Failed`,
 } satisfies Status;
 
@@ -372,7 +372,7 @@ export const PreconditionFailed = {
  * The origin server requires the request to be conditional. Intended to prevent the 'lost update' problem, where a client GETs a resource's state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.
  */
 export const PreconditionRequired = {
-  statusCode: 428,
+  statusCode: 428 as const,
   statusMessage: `Precondition Required`,
 } satisfies Status;
 
@@ -382,7 +382,7 @@ export const PreconditionRequired = {
  * This code indicates that the server has received and is processing the request, but no response is available yet.
  */
 export const Processing = {
-  statusCode: 102,
+  statusCode: 102 as const,
   statusMessage: `Processing`,
 } satisfies Status;
 
@@ -392,7 +392,7 @@ export const Processing = {
  * This code indicates to the client that the server is likely to send a final response with the header fields included in the informational response.
  */
 export const EarlyHints = {
-  statusCode: 103,
+  statusCode: 103 as const,
   statusMessage: `Early Hints`,
 } satisfies Status;
 
@@ -402,7 +402,7 @@ export const EarlyHints = {
  * The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.
  */
 export const UpgradeRequired = {
-  statusCode: 426,
+  statusCode: 426 as const,
   statusMessage: `Upgrade Required`,
 } satisfies Status;
 
@@ -412,7 +412,7 @@ export const UpgradeRequired = {
  * This is similar to 401 but authentication is needed to be done by a proxy.
  */
 export const ProxyAuthenticationRequired = {
-  statusCode: 407,
+  statusCode: 407 as const,
   statusMessage: `Proxy Authentication Required`,
 } satisfies Status;
 
@@ -422,7 +422,7 @@ export const ProxyAuthenticationRequired = {
  * The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.
  */
 export const RequestHeaderFieldsTooLarge = {
-  statusCode: 431,
+  statusCode: 431 as const,
   statusMessage: `Request Header Fields Too Large`,
 } satisfies Status;
 
@@ -432,7 +432,7 @@ export const RequestHeaderFieldsTooLarge = {
  * This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.
  */
 export const RequestTimeout = {
-  statusCode: 408,
+  statusCode: 408 as const,
   statusMessage: `Request Timeout`,
 } satisfies Status;
 
@@ -442,7 +442,7 @@ export const RequestTimeout = {
  * Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.
  */
 export const RequestEntityTooLarge = {
-  statusCode: 413,
+  statusCode: 413 as const,
   statusMessage: `Request Entity Too Large`,
 } satisfies Status;
 
@@ -452,7 +452,7 @@ export const RequestEntityTooLarge = {
  * The URI requested by the client is longer than the server is willing to interpret.
  */
 export const RequestURITooLong = {
-  statusCode: 414,
+  statusCode: 414 as const,
   statusMessage: `Request-URI Too Long`,
 } satisfies Status;
 
@@ -462,7 +462,7 @@ export const RequestURITooLong = {
  * The range specified by the Range header field in the request can't be fulfilled; it's possible that the range is outside the size of the target URI's data.
  */
 export const RequestedRangeNotSatisfiable = {
-  statusCode: 416,
+  statusCode: 416 as const,
   statusMessage: `Requested Range Not Satisfiable`,
 } satisfies Status;
 
@@ -472,7 +472,7 @@ export const RequestedRangeNotSatisfiable = {
  * This response code is sent after accomplishing request to tell user agent reset document view which sent this request.
  */
 export const ResetContent = {
-  statusCode: 205,
+  statusCode: 205 as const,
   statusMessage: `Reset Content`,
 } satisfies Status;
 
@@ -482,7 +482,7 @@ export const ResetContent = {
  * Server sent this response to directing client to get requested resource to another URI with an GET request.
  */
 export const SeeOther = {
-  statusCode: 303,
+  statusCode: 303 as const,
   statusMessage: `See Other`,
 } satisfies Status;
 
@@ -492,7 +492,7 @@ export const SeeOther = {
  * The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.
  */
 export const ServiceUnavailable = {
-  statusCode: 503,
+  statusCode: 503 as const,
   statusMessage: `Service Unavailable`,
 } satisfies Status;
 
@@ -502,7 +502,7 @@ export const ServiceUnavailable = {
  * This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching too.
  */
 export const SwitchingProtocols = {
-  statusCode: 101,
+  statusCode: 101 as const,
   statusMessage: `Switching Protocols`,
 } satisfies Status;
 
@@ -512,7 +512,7 @@ export const SwitchingProtocols = {
  * Server sent this response to directing client to get requested resource to another URI with same method that used prior request. This has the same semantic than the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: if a POST was used in the first request, a POST must be used in the second request.
  */
 export const TemporaryRedirect = {
-  statusCode: 307,
+  statusCode: 307 as const,
   statusMessage: `Temporary Redirect`,
 } satisfies Status;
 
@@ -522,7 +522,7 @@ export const TemporaryRedirect = {
  * The user has sent too many requests in a given amount of time ("rate limiting").
  */
 export const TooManyRequests = {
-  statusCode: 429,
+  statusCode: 429 as const,
   statusMessage: `Too Many Requests`,
 } satisfies Status;
 
@@ -532,7 +532,7 @@ export const TooManyRequests = {
  * Although the HTTP standard specifies "unauthorized", semantically this response means "unauthenticated". That is, the client must authenticate itself to get the requested response.
  */
 export const Unauthorized = {
-  statusCode: 401,
+  statusCode: 401 as const,
   statusMessage: `Unauthorized`,
 } satisfies Status;
 
@@ -542,7 +542,7 @@ export const Unauthorized = {
  * The user-agent requested a resource that cannot legally be provided, such as a web page censored by a government.
  */
 export const UnavailableForLegalReasons = {
-  statusCode: 451,
+  statusCode: 451 as const,
   statusMessage: `Unavailable For Legal Reasons`,
 } satisfies Status;
 
@@ -552,7 +552,7 @@ export const UnavailableForLegalReasons = {
  * The request was well-formed but was unable to be followed due to semantic errors.
  */
 export const UnprocessableEntity = {
-  statusCode: 422,
+  statusCode: 422 as const,
   statusMessage: `Unprocessable Entity`,
 } satisfies Status;
 
@@ -562,7 +562,7 @@ export const UnprocessableEntity = {
  * The media format of the requested data is not supported by the server, so the server is rejecting the request.
  */
 export const UnsupportedMediaType = {
-  statusCode: 415,
+  statusCode: 415 as const,
   statusMessage: `Unsupported Media Type`,
 } satisfies Status;
 
@@ -574,7 +574,7 @@ export const UnsupportedMediaType = {
  * @deprecated
  */
 export const UseProxy = {
-  statusCode: 305,
+  statusCode: 305 as const,
   statusMessage: `Use Proxy`,
 } satisfies Status;
 
@@ -584,6 +584,6 @@ export const UseProxy = {
  * Defined in the specification of HTTP/2 to indicate that a server is not able to produce a response for the combination of scheme and authority that are included in the request URI.
  */
 export const MisdirectedRequest = {
-  statusCode: 421,
+  statusCode: 421 as const,
   statusMessage: `Misdirected Request`,
 } satisfies Status;
