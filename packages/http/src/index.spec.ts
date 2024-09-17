@@ -15,6 +15,7 @@ describe('index', () => {
         'RequestHeaders',
         'RequestRedirect',
         'requestSend',
+        'Status',
       ].sort()
     );
   });
