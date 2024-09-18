@@ -9,7 +9,7 @@ function __setDefaultValue<O extends Record<any, any>, K extends keyof O>(object
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-function __captureStackTrace(targetObject: object, constructorOpt?: Function | undefined) {
+function __captureStackTrace(targetObject: object, constructorOpt?: Function) {
   if (typeof Error.captureStackTrace === 'function') {
     Error.captureStackTrace(targetObject, constructorOpt);
   }

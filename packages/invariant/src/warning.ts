@@ -11,7 +11,7 @@
  * @param condition - the predicate result
  * @param message - an optional message for Error
  */
-export function warning(condition: boolean, message?: string | null | undefined): void {
+export function warning(condition: boolean, message?: string | null): void {
   if (!condition) {
     // eslint-disable-next-line no-console
     console.warn(`Warning: ${message ?? ''}`);
