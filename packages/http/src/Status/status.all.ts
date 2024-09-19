@@ -1,184 +1,130 @@
-import type { Status } from './Status.js';
+import { Status } from './Status.js';
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.3
  *
  * The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.
  */
-export const Accepted = {
-  statusCode: 202 as const,
-  statusMessage: `Accepted`,
-} satisfies Status;
+export const Accepted = Status(202, `Accepted`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.3
  *
  * This error response means that the server, while working as a gateway to get a response needed to handle the request, got an invalid response.
  */
-export const BadGateway = {
-  statusCode: 502 as const,
-  statusMessage: `Bad Gateway`,
-} satisfies Status;
+export const BadGateway = Status(502, `Bad Gateway`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.1
  *
  * This response means that server could not understand the request due to invalid syntax.
  */
-export const BadRequest = {
-  statusCode: 400 as const,
-  statusMessage: `Bad Request`,
-} satisfies Status;
+export const BadRequest = Status(400, `Bad Request`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.8
  *
  * This response is sent when a request conflicts with the current state of the server.
  */
-export const Conflict = {
-  statusCode: 409 as const,
-  statusMessage: `Conflict`,
-} satisfies Status;
+export const Conflict = Status(409, `Conflict`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.2.1
  *
  * This interim response indicates that everything so far is OK and that the client should continue with the request or ignore it if it is already finished.
  */
-export const Continue = {
-  statusCode: 100 as const,
-  statusMessage: `Continue`,
-} satisfies Status;
+export const Continue = Status(100, `Continue`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.2
  *
  * The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.
  */
-export const Created = {
-  statusCode: 201 as const,
-  statusMessage: `Created`,
-} satisfies Status;
+export const Created = Status(201, `Created`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.14
  *
  * This response code means the expectation indicated by the Expect request header field can't be met by the server.
  */
-export const ExpectationFailed = {
-  statusCode: 417 as const,
-  statusMessage: `Expectation Failed`,
-} satisfies Status;
+export const ExpectationFailed = Status(417, `Expectation Failed`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.5
  *
  * The request failed due to failure of a previous request.
  */
-export const FailedDependency = {
-  statusCode: 424 as const,
-  statusMessage: `Failed Dependency`,
-} satisfies Status;
+export const FailedDependency = Status(424, `Failed Dependency`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.3
  *
  * The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client's identity is known to the server.
  */
-export const Forbidden = {
-  statusCode: 403 as const,
-  statusMessage: `Forbidden`,
-} satisfies Status;
+export const Forbidden = Status(403, `Forbidden`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.5
  *
  * This error response is given when the server is acting as a gateway and cannot get a response in time.
  */
-export const GatewayTimeout = {
-  statusCode: 504 as const,
-  statusMessage: `Gateway Timeout`,
-} satisfies Status;
+export const GatewayTimeout = Status(504, `Gateway Timeout`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.9
  *
  * This response would be sent when the requested content has been permanently deleted from server, with no forwarding address. Clients are expected to remove their caches and links to the resource. The HTTP specification intends this status code to be used for "limited-time, promotional services". APIs should not feel compelled to indicate resources that have been deleted with this status code.
  */
-export const Gone = {
-  statusCode: 410 as const,
-  statusMessage: `Gone`,
-} satisfies Status;
+export const Gone = Status(410, `Gone`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.6
  *
  * The HTTP version used in the request is not supported by the server.
  */
-export const HTTPVersionNotSupported = {
-  statusCode: 505 as const,
-  statusMessage: `HTTP Version Not Supported`,
-} satisfies Status;
+export const HTTPVersionNotSupported = Status(505, `HTTP Version Not Supported`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2324#section-2.3.2
  *
  * Any attempt to brew coffee with a teapot should result in the error code "418 I'm a teapot". The resulting entity body MAY be short and stout.
  */
-export const IMATeapot = {
-  statusCode: 418 as const,
-  statusMessage: `I'm a teapot`,
-} satisfies Status;
+export const IMATeapot = Status(418, `I'm a teapot`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.6
  *
  * The 507 (Insufficient Storage) status code means the method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request. This condition is considered to be temporary. If the request which received this status code was the result of a user action, the request MUST NOT be repeated until it is requested by a separate user action.
  */
-export const InsufficientSpaceOnResource = {
-  statusCode: 419 as const,
-  statusMessage: `Insufficient Space on Resource`,
-} satisfies Status;
+export const InsufficientSpaceOnResource = Status(419, `Insufficient Space on Resource`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.6
  *
  * The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.
  */
-export const InsufficientStorage = {
-  statusCode: 507 as const,
-  statusMessage: `Insufficient Storage`,
-} satisfies Status;
+export const InsufficientStorage = Status(507, `Insufficient Storage`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.1
  *
  * The server encountered an unexpected condition that prevented it from fulfilling the request.
  */
-export const InternalServerError = {
-  statusCode: 500 as const,
-  statusMessage: `Internal Server Error`,
-} satisfies Status;
+export const InternalServerError = Status(500, `Internal Server Error`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.10
  *
  * The server rejected the request because the Content-Length header field is not defined and the server requires it.
  */
-export const LengthRequired = {
-  statusCode: 411 as const,
-  statusMessage: `Length Required`,
-} satisfies Status;
+export const LengthRequired = Status(411, `Length Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.4
  *
  * The resource that is being accessed is locked.
  */
-export const Locked = {
-  statusCode: 423 as const,
-  statusMessage: `Locked`,
-} satisfies Status;
+export const Locked = Status(423, `Locked`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/rfcdiff?difftype=--hwdiff&url2=draft-ietf-webdav-protocol-06.txt
@@ -187,130 +133,91 @@ export const Locked = {
  *
  * @deprecated
  */
-export const MethodFailure = {
-  statusCode: 420 as const,
-  statusMessage: `Method Failure`,
-} satisfies Status;
+export const MethodFailure = Status(420, `Method Failure`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.5
  *
  * The request method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.
  */
-export const MethodNotAllowed = {
-  statusCode: 405 as const,
-  statusMessage: `Method Not Allowed`,
-} satisfies Status;
+export const MethodNotAllowed = Status(405, `Method Not Allowed`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.2
  *
  * This response code means that URI of requested resource has been changed. Probably, new URI would be given in the response.
  */
-export const MovedPermanently = {
-  statusCode: 301 as const,
-  statusMessage: `Moved Permanently`,
-} satisfies Status;
+export const MovedPermanently = Status(301, `Moved Permanently`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.3
  *
  * This response code means that URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.
  */
-export const MovedTemporarily = {
-  statusCode: 302 as const,
-  statusMessage: `Moved Temporarily`,
-} satisfies Status;
+export const MovedTemporarily = Status(302, `Moved Temporarily`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.2
  *
  * A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.
  */
-export const MultiStatus = {
-  statusCode: 207 as const,
-  statusMessage: `Multi-Status`,
-} satisfies Status;
+export const MultiStatus = Status(207, `Multi-Status`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.1
  *
  * The request has more than one possible responses. User-agent or user should choose one of them. There is no standardized way to choose one of the responses.
  */
-export const MultipleChoices = {
-  statusCode: 300 as const,
-  statusMessage: `Multiple Choices`,
-} satisfies Status;
+export const MultipleChoices = Status(300, `Multiple Choices`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc6585#section-6
  *
  * The 511 status code indicates that the client needs to authenticate to gain network access.
  */
-export const NetworkAuthenticationRequired = {
-  statusCode: 511 as const,
-  statusMessage: `Network Authentication Required`,
-} satisfies Status;
+export const NetworkAuthenticationRequired = Status(511, `Network Authentication Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.5
  *
  * There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.
  */
-export const NoContent = {
-  statusCode: 204 as const,
-  statusMessage: `No Content`,
-} satisfies Status;
+export const NoContent = Status(204, `No Content`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.4
  *
  * This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.
  */
-export const NonAuthoritativeInformation = {
-  statusCode: 203 as const,
-  statusMessage: `Non Authoritative Information`,
-} satisfies Status;
+export const NonAuthoritativeInformation = Status(203, `Non Authoritative Information`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.6
  *
  * This response is sent when the web server, after performing server-driven content negotiation, doesn't find any content following the criteria given by the user agent.
  */
-export const NotAcceptable = {
-  statusCode: 406 as const,
-  statusMessage: `Not Acceptable`,
-} satisfies Status;
+export const NotAcceptable = Status(406, `Not Acceptable`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.4
  *
  * The server can not find requested resource. In the browser, this means the URL is not recognized. In an API, this can also mean that the endpoint is valid but the resource itself does not exist. Servers may also send this response instead of 403 to hide the existence of a resource from an unauthorized client. This response code is probably the most famous one due to its frequent occurrence on the web.
  */
-export const NotFound = {
-  statusCode: 404 as const,
-  statusMessage: `Not Found`,
-} satisfies Status;
+export const NotFound = Status(404, `Not Found`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.2
  *
  * The request method is not supported by the server and cannot be handled. The only methods that servers are required to support (and therefore that must not return this code) are GET and HEAD.
  */
-export const NotImplemented = {
-  statusCode: 501 as const,
-  statusMessage: `Not Implemented`,
-} satisfies Status;
+export const NotImplemented = Status(501, `Not Implemented`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7232#section-4.1
  *
  * This is used for caching purposes. It is telling to client that response has not been modified. So, client can continue to use same cached version of response.
  */
-export const NotModified = {
-  statusCode: 304 as const,
-  statusMessage: `Not Modified`,
-} satisfies Status;
+export const NotModified = Status(304, `Not Modified`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.1
@@ -321,250 +228,175 @@ HEAD: The entity headers are in the message body.
 POST: The resource describing the result of the action is transmitted in the message body.
 TRACE: The message body contains the request message as received by the server
  */
-export const OK = {
-  statusCode: 200 as const,
-  statusMessage: `OK`,
-} satisfies Status;
+export const OK = Status(200, `OK`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7233#section-4.1
  *
  * This response code is used because of range header sent by the client to separate download into multiple streams.
  */
-export const PartialContent = {
-  statusCode: 206 as const,
-  statusMessage: `Partial Content`,
-} satisfies Status;
+export const PartialContent = Status(206, `Partial Content`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.2
  *
  * This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems however this is not used currently.
  */
-export const PaymentRequired = {
-  statusCode: 402 as const,
-  statusMessage: `Payment Required`,
-} satisfies Status;
+export const PaymentRequired = Status(402, `Payment Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7538#section-3
  *
  * This means that the resource is now permanently located at another URI, specified by the Location: HTTP Response header. This has the same semantics as the 301 Moved Permanently HTTP response code, with the exception that the user agent must not change the HTTP method used: if a POST was used in the first request, a POST must be used in the second request.
  */
-export const PermanentRedirect = {
-  statusCode: 308 as const,
-  statusMessage: `Permanent Redirect`,
-} satisfies Status;
+export const PermanentRedirect = Status(308, `Permanent Redirect`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7232#section-4.2
  *
  * The client has indicated preconditions in its headers which the server does not meet.
  */
-export const PreconditionFailed = {
-  statusCode: 412 as const,
-  statusMessage: `Precondition Failed`,
-} satisfies Status;
+export const PreconditionFailed = Status(412, `Precondition Failed`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc6585#section-3
  *
  * The origin server requires the request to be conditional. Intended to prevent the 'lost update' problem, where a client GETs a resource's state, modifies it, and PUTs it back to the server, when meanwhile a third party has modified the state on the server, leading to a conflict.
  */
-export const PreconditionRequired = {
-  statusCode: 428 as const,
-  statusMessage: `Precondition Required`,
-} satisfies Status;
+export const PreconditionRequired = Status(428, `Precondition Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.1
  *
  * This code indicates that the server has received and is processing the request, but no response is available yet.
  */
-export const Processing = {
-  statusCode: 102 as const,
-  statusMessage: `Processing`,
-} satisfies Status;
+export const Processing = Status(102, `Processing`);
 
 /**
  * Official Documentation @ https://www.rfc-editor.org/rfc/rfc8297#page-3
  *
  * This code indicates to the client that the server is likely to send a final response with the header fields included in the informational response.
  */
-export const EarlyHints = {
-  statusCode: 103 as const,
-  statusMessage: `Early Hints`,
-} satisfies Status;
+export const EarlyHints = Status(103, `Early Hints`);
 
 /**
  * Official Documentation @ https://datatracker.ietf.org/doc/html/rfc7231#section-6.5.15
  *
  * The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.
  */
-export const UpgradeRequired = {
-  statusCode: 426 as const,
-  statusMessage: `Upgrade Required`,
-} satisfies Status;
+export const UpgradeRequired = Status(426, `Upgrade Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7235#section-3.2
  *
  * This is similar to 401 but authentication is needed to be done by a proxy.
  */
-export const ProxyAuthenticationRequired = {
-  statusCode: 407 as const,
-  statusMessage: `Proxy Authentication Required`,
-} satisfies Status;
+export const ProxyAuthenticationRequired = Status(407, `Proxy Authentication Required`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc6585#section-5
  *
  * The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.
  */
-export const RequestHeaderFieldsTooLarge = {
-  statusCode: 431 as const,
-  statusMessage: `Request Header Fields Too Large`,
-} satisfies Status;
+export const RequestHeaderFieldsTooLarge = Status(431, `Request Header Fields Too Large`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.7
  *
  * This response is sent on an idle connection by some servers, even without any previous request by the client. It means that the server would like to shut down this unused connection. This response is used much more since some browsers, like Chrome, Firefox 27+, or IE9, use HTTP pre-connection mechanisms to speed up surfing. Also note that some servers merely shut down the connection without sending this message.
  */
-export const RequestTimeout = {
-  statusCode: 408 as const,
-  statusMessage: `Request Timeout`,
-} satisfies Status;
+export const RequestTimeout = Status(408, `Request Timeout`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.11
  *
  * Request entity is larger than limits defined by server; the server might close the connection or return an Retry-After header field.
  */
-export const RequestEntityTooLarge = {
-  statusCode: 413 as const,
-  statusMessage: `Request Entity Too Large`,
-} satisfies Status;
+export const RequestEntityTooLarge = Status(413, `Request Entity Too Large`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.12
  *
  * The URI requested by the client is longer than the server is willing to interpret.
  */
-export const RequestURITooLong = {
-  statusCode: 414 as const,
-  statusMessage: `Request-URI Too Long`,
-} satisfies Status;
+export const RequestURITooLong = Status(414, `Request-URI Too Long`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7233#section-4.4
  *
  * The range specified by the Range header field in the request can't be fulfilled; it's possible that the range is outside the size of the target URI's data.
  */
-export const RequestedRangeNotSatisfiable = {
-  statusCode: 416 as const,
-  statusMessage: `Requested Range Not Satisfiable`,
-} satisfies Status;
+export const RequestedRangeNotSatisfiable = Status(416, `Requested Range Not Satisfiable`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.6
  *
  * This response code is sent after accomplishing request to tell user agent reset document view which sent this request.
  */
-export const ResetContent = {
-  statusCode: 205 as const,
-  statusMessage: `Reset Content`,
-} satisfies Status;
+export const ResetContent = Status(205, `Reset Content`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.4
  *
  * Server sent this response to directing client to get requested resource to another URI with an GET request.
  */
-export const SeeOther = {
-  statusCode: 303 as const,
-  statusMessage: `See Other`,
-} satisfies Status;
+export const SeeOther = Status(303, `See Other`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.6.4
  *
  * The server is not ready to handle the request. Common causes are a server that is down for maintenance or that is overloaded. Note that together with this response, a user-friendly page explaining the problem should be sent. This responses should be used for temporary conditions and the Retry-After: HTTP header should, if possible, contain the estimated time before the recovery of the service. The webmaster must also take care about the caching-related headers that are sent along with this response, as these temporary condition responses should usually not be cached.
  */
-export const ServiceUnavailable = {
-  statusCode: 503 as const,
-  statusMessage: `Service Unavailable`,
-} satisfies Status;
+export const ServiceUnavailable = Status(503, `Service Unavailable`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.2.2
  *
  * This code is sent in response to an Upgrade request header by the client, and indicates the protocol the server is switching too.
  */
-export const SwitchingProtocols = {
-  statusCode: 101 as const,
-  statusMessage: `Switching Protocols`,
-} satisfies Status;
+export const SwitchingProtocols = Status(101, `Switching Protocols`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.7
  *
  * Server sent this response to directing client to get requested resource to another URI with same method that used prior request. This has the same semantic than the 302 Found HTTP response code, with the exception that the user agent must not change the HTTP method used: if a POST was used in the first request, a POST must be used in the second request.
  */
-export const TemporaryRedirect = {
-  statusCode: 307 as const,
-  statusMessage: `Temporary Redirect`,
-} satisfies Status;
+export const TemporaryRedirect = Status(307, `Temporary Redirect`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc6585#section-4
  *
  * The user has sent too many requests in a given amount of time ("rate limiting").
  */
-export const TooManyRequests = {
-  statusCode: 429 as const,
-  statusMessage: `Too Many Requests`,
-} satisfies Status;
+export const TooManyRequests = Status(429, `Too Many Requests`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7235#section-3.1
  *
  * Although the HTTP standard specifies "unauthorized", semantically this response means "unauthenticated". That is, the client must authenticate itself to get the requested response.
  */
-export const Unauthorized = {
-  statusCode: 401 as const,
-  statusMessage: `Unauthorized`,
-} satisfies Status;
+export const Unauthorized = Status(401, `Unauthorized`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7725
  *
  * The user-agent requested a resource that cannot legally be provided, such as a web page censored by a government.
  */
-export const UnavailableForLegalReasons = {
-  statusCode: 451 as const,
-  statusMessage: `Unavailable For Legal Reasons`,
-} satisfies Status;
+export const UnavailableForLegalReasons = Status(451, `Unavailable For Legal Reasons`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc2518#section-10.3
  *
  * The request was well-formed but was unable to be followed due to semantic errors.
  */
-export const UnprocessableEntity = {
-  statusCode: 422 as const,
-  statusMessage: `Unprocessable Entity`,
-} satisfies Status;
+export const UnprocessableEntity = Status(422, `Unprocessable Entity`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.5.13
  *
  * The media format of the requested data is not supported by the server, so the server is rejecting the request.
  */
-export const UnsupportedMediaType = {
-  statusCode: 415 as const,
-  statusMessage: `Unsupported Media Type`,
-} satisfies Status;
+export const UnsupportedMediaType = Status(415, `Unsupported Media Type`);
 
 /**
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.4.6
@@ -573,17 +405,11 @@ export const UnsupportedMediaType = {
  *
  * @deprecated
  */
-export const UseProxy = {
-  statusCode: 305 as const,
-  statusMessage: `Use Proxy`,
-} satisfies Status;
+export const UseProxy = Status(305, `Use Proxy`);
 
 /**
  * Official Documentation @ https://datatracker.ietf.org/doc/html/rfc7540#section-9.1.2
  *
  * Defined in the specification of HTTP/2 to indicate that a server is not able to produce a response for the combination of scheme and authority that are included in the request URI.
  */
-export const MisdirectedRequest = {
-  statusCode: 421 as const,
-  statusMessage: `Misdirected Request`,
-} satisfies Status;
+export const MisdirectedRequest = Status(421, `Misdirected Request`);

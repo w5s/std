@@ -34,7 +34,8 @@ async function generateFiles() {
   if (!decodedResult.ok) {
     return decodedResult;
   }
-  let statusAllContent = `import type { Status } from './Status.js';${eol}${eol}`;
+  let statusAllContent = `import { Status } from './Status.js';${eol}${eol}`;
+
   statusAllContent += decodedResult.value
     .map((status) =>
       [
@@ -45,10 +46,7 @@ async function generateFiles() {
         ` * ${status.comment.description}`,
         ...(status.isDeprecated ? [' *', ' * @deprecated'] : []),
         ' */',
-        `export const ${toConstant(status.phrase)} = {`,
-        `  statusCode: ${status.code} as const,`,
-        `  statusMessage: \`${status.phrase}\`,`,
-        '} satisfies Status;',
+        `export const ${toConstant(status.phrase)} = Status(${status.code}, \`${status.phrase}\`);`,
       ].join(eol)
     )
     .join(eol + eol);
