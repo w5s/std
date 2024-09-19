@@ -1,15 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { NumberBounded } from './NumberBounded.js';
+import { describeBounded } from '../Testing.js';
 
 describe('NumberBounded', () => {
-  describe('.minValue', () => {
-    it('should be Number.MIN_VALUE', () => {
-      expect(NumberBounded.minValue).toBe(globalThis.Number.MIN_VALUE);
-    });
-  });
-  describe('.maxValue', () => {
-    it('should be Number.MAX_VALUE', () => {
-      expect(NumberBounded.maxValue).toBe(globalThis.Number.MAX_VALUE);
-    });
+  describeBounded({ describe, it, expect })(NumberBounded, {
+    minValue: globalThis.Number.MIN_VALUE,
+    maxValue: globalThis.Number.MAX_VALUE,
   });
 });
