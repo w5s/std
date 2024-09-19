@@ -20,10 +20,12 @@ import { Client } from './Client.js';
  * @param requestObject - the request parameters
  */
 export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
-  const requestWrapped = client.onRequest(requestObject);
-  const task = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
+  const { onRequest } = client;
+  const requestWrapped = onRequest(requestObject);
+  const response = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
   const timeoutDuration = Client.getRequestTimeoutDuration(client, requestObject);
-  return timeoutDuration == null ? task : timeout(task, timeoutDuration);
+  const responseWithTimeout = timeoutDuration == null ? response : timeout(response, timeoutDuration);
+  return responseWithTimeout;
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response, HTTPError> {
@@ -37,10 +39,11 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
 
     if (isValidURL(url)) {
       try {
-        const response = await fetchFn(url, {
+        const originalResponse = await fetchFn(url, {
           signal: controller.signal,
           ...requestInfo,
         });
+        const response = toResponse(originalResponse);
 
         resolve(response);
       } catch (networkError: unknown) {
@@ -56,6 +59,10 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
       );
     }
   });
+}
+
+function toResponse(originalResponse: globalThis.Response): Response {
+  return originalResponse;
 }
 
 function isValidURL(url: string): boolean {
