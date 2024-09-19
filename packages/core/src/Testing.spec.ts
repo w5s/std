@@ -6,16 +6,17 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // public exports
+        'describeAdd',
+        'describeBounded',
         'describeCheckedAdd',
-        'describeCheckedSubtract',
         'describeCheckedMultiply',
+        'describeCheckedSubtract',
         'describeCodec',
         'describeComparable',
         'describeEqual',
-        'describeAdd',
-        'describeSubtract',
         'describeMultiply',
         'describeSigned',
+        'describeSubtract',
         'describeType',
       ].sort()
     );
