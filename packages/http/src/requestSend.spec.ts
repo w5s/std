@@ -1,4 +1,4 @@
-import { Result } from '@w5s/core';
+import { Option, Result } from '@w5s/core';
 import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { beforeEach } from 'node:test';
@@ -149,7 +149,7 @@ describe(requestSend, () => {
       requestSend(client, {
         url: anyURL,
       });
-      expect(timeout).not.toHaveBeenCalled();
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, Option.None);
     });
     it('uses client timeout as "default"', async () => {
       const client = Client({
@@ -178,7 +178,7 @@ describe(requestSend, () => {
         url: anyURL,
         timeout: 'none',
       });
-      expect(timeout).not.toHaveBeenCalled();
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, Option.None);
     });
     it('uses client timeout when request timeout is "default"', async () => {
       const client = Client({

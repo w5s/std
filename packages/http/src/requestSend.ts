@@ -25,9 +25,7 @@ export function requestSend(client: Client, requestObject: Request): Task<Respon
   const { onRequest } = client;
   const requestWrapped = onRequest(requestObject);
   const response = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
-  const timeoutDuration = Client.getRequestTimeoutDuration(client, requestObject);
-  const responseWithTimeout = timeoutDuration == null ? response : timeout(response, timeoutDuration);
-  return responseWithTimeout;
+  return timeout(response, Client.getRequestTimeoutDuration(client, requestObject));
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
