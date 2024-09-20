@@ -33,7 +33,7 @@ interface CustomErrorConstructor {
    * MyError.errorName === 'MyError' // true
    * MyError.hasInstance(instance); // true
    * ```
-   * @param errorName - the error unique name
+   * @param parameters - the parameters for the new error type
    */
   define<Model extends CustomError<{ name: string }>>(parameters: {
     /**
