@@ -37,7 +37,11 @@ interface SomeError
     name: 'SomeError';
     customProperty: string;
   }> {}
-const SomeError = CustomError.define<SomeError>({ errorName: 'SomeError' });
+const SomeError = CustomError.define<SomeError>({ 
+  errorName: 'SomeError',
+  // (Optional) A default message can be set
+  // errorMessage: 'This is a default message',
+});
 
 console.log(SomeError({
   message: 'This is a message',
