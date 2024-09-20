@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref, Result } from '@w5s/core';
+import { Option, Ref, Result } from '@w5s/core';
 import { Task, type TaskLike } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error';
@@ -9,6 +9,11 @@ describe('timeout', () => {
   const anyDelay = TimeDuration.milliseconds(4);
   const anyValue = 'any_value';
   const anyError = 'any_error';
+
+  it('should be identity when timeout duration is Option.None', () => {
+    const task = Task.resolve(anyValue);
+    expect(timeout(task, Option.None)).toBe(task);
+  });
 
   it('should resolve/reject the same value as task', async () => {
     const resolveNow = Task.resolve(anyValue);
