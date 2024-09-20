@@ -6,15 +6,16 @@ import { decode } from '@w5s/core/dist/Codec/decode.js';
 import { mapError } from '@w5s/core/dist/Result/mapError.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
+import type { BodyReader } from './BodyReader.js';
 
 /**
  * A transformation function taking an {@link Response} as input
  */
 export interface HTTPParser<Value> {
-  (response: Response): Task<Value, HTTPError.ParserError>;
+  (response: Response<BodyReader>): Task<Value, HTTPError.ParserError>;
 }
 export namespace HTTPParser {
-  function from<V>(fn: (response: Response) => Promise<V>): HTTPParser<V> {
+  function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): HTTPParser<V> {
     return (response) =>
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       taskFrom(async ({ resolve, reject }) => {
@@ -41,7 +42,7 @@ export namespace HTTPParser {
    * });// Task<ArrayBuffer, HTTPError>
    * ```
    */
-  export const arrayBuffer: HTTPParser<ArrayBuffer> = from((response) => response.arrayBuffer());
+  export const arrayBuffer: HTTPParser<ArrayBuffer> = from((response) => response.body.arrayBuffer());
 
   /**
    * FormData response parser
@@ -54,7 +55,7 @@ export namespace HTTPParser {
    * });// Task<FormData, HTTPError>
    * ```
    */
-  export const formData: HTTPParser<FormData> = from((response) => response.formData());
+  export const formData: HTTPParser<FormData> = from((response) => response.body.formData());
 
   /**
    * FormData response parser
@@ -70,7 +71,7 @@ export namespace HTTPParser {
    * ```
    */
   export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
-    const parser = from<Return>((response) => response.json());
+    const parser = from<Return>((response) => response.body.json());
     return CodecModule === 'unsafe'
       ? parser
       : (response) =>
@@ -92,7 +93,7 @@ export namespace HTTPParser {
    * });// Task<Blob, HTTPError>
    * ```
    */
-  export const blob: HTTPParser<Blob> = from((response) => response.blob());
+  export const blob: HTTPParser<Blob> = from((response) => response.body.blob());
 
   /**
    * Text response parser
@@ -105,5 +106,5 @@ export namespace HTTPParser {
    * });// Task<string, HTTPError>
    * ```
    */
-  export const text: HTTPParser<string> = from((response) => response.text());
+  export const text: HTTPParser<string> = from((response) => response.body.text());
 }

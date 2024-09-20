@@ -7,6 +7,8 @@ import { timeout } from '@w5s/task-timeout';
 import { HTTPError } from './HTTPError.js';
 import { requestSend } from './requestSend.js';
 import { Client } from './Client.js';
+import { Response } from './Response.js';
+import { Status } from './Status.js';
 
 vi.mock('@w5s/task-timeout', () => ({
   timeout: vi.fn((_) => _),
@@ -18,7 +20,7 @@ beforeEach(() => {
 describe(requestSend, () => {
   const anyURL = 'https://localhost';
   const anyTask = expect.any(Object);
-  const anyResponse: Response = {} as any;
+  const anyResponse = new globalThis.Response();
   const defer = <V>(): {
     resolve(value: V | PromiseLike<V>): void;
     reject(error: unknown): void;
@@ -48,7 +50,22 @@ describe(requestSend, () => {
     });
     const result = await Task.unsafeRun(task);
     expect(globalFetchMock).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
-    expect(result).toEqual(Result.Ok(anyResponse));
+    expect(result).toEqual(
+      Result.Ok(
+        Response({
+          status: Status(200, ''),
+          body: {
+            arrayBuffer: expect.any(Function),
+            blob: expect.any(Function),
+            formData: expect.any(Function),
+            json: expect.any(Function),
+            stream: expect.any(Function),
+            text: expect.any(Function),
+          },
+          url: '',
+        })
+      )
+    );
   });
   it('should handle malformed URL', async () => {
     const task = requestSend(anyClient, {

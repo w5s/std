@@ -5,37 +5,39 @@ import { withTask } from '@w5s/task/dist/Testing.js';
 import { HTTPParser } from './HTTPParser.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
+import type { BodyReader } from './BodyReader.js';
 
 const expectTask = withTask(expect);
 const mockError = () => new Error('MockError');
-const mockResponse = (): MockedObject<Response> =>
+const mockResponse = (): Response<MockedObject<BodyReader>> =>
   ({
-    arrayBuffer: vi.fn(),
-    formData: vi.fn(),
-    text: vi.fn(),
-    blob: vi.fn(),
-    json: vi.fn(),
+    body: {
+      arrayBuffer: vi.fn(),
+      formData: vi.fn(),
+      text: vi.fn(),
+      blob: vi.fn(),
+      json: vi.fn(),
+      stream: vi.fn(),
+    },
   }) as any;
-const mockResponseWith = (
-  mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json',
-  parameters: { reject: unknown } | { resolve: unknown }
-) => {
+const mockResponseWith = (mockProperty: keyof BodyReader, parameters: { reject: unknown } | { resolve: unknown }) => {
   const response = mockResponse();
+  const responseBody = response.body;
   if ('reject' in parameters) {
-    response[mockProperty].mockRejectedValue(parameters.reject);
+    responseBody[mockProperty].mockRejectedValue(parameters.reject);
   } else {
-    response[mockProperty].mockResolvedValue(parameters.resolve);
+    responseBody[mockProperty].mockResolvedValue(parameters.resolve);
   }
   return response;
 };
 
 const expectToResolveValue = async (
-  fn: (response: Response) => Task<unknown, unknown>,
-  mockProperty: 'arrayBuffer' | 'formData' | 'text' | 'blob' | 'json',
+  fn: (response: Response<BodyReader>) => Task<unknown, unknown>,
+  mockProperty: keyof BodyReader,
   returnValue: any = {}
 ) => {
   const response = mockResponse();
-  response[mockProperty].mockResolvedValue(returnValue);
+  response.body[mockProperty].mockResolvedValue(returnValue);
   const task = fn(response);
   await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));
 };

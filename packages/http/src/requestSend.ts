@@ -6,6 +6,8 @@ import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { Request } from './Request.js';
 import { Client } from './Client.js';
+import type { BodyReader } from './BodyReader.js';
+import type { Status } from './Status.js';
 
 /**
  * Return a new {@link @w5s/core!Task} that will send an HTTP request
@@ -19,7 +21,7 @@ import { Client } from './Client.js';
  * @param client - Client
  * @param requestObject - the request parameters
  */
-export function requestSend(client: Client, requestObject: Request): Task<Response, HTTPError> {
+export function requestSend(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { onRequest } = client;
   const requestWrapped = onRequest(requestObject);
   const response = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
@@ -28,7 +30,7 @@ export function requestSend(client: Client, requestObject: Request): Task<Respon
   return responseWithTimeout;
 }
 
-function requestSendImplementation(client: Client, requestObject: Request): Task<Response, HTTPError> {
+function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { fetch: fetchFn } = client;
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(async ({ resolve, reject, canceler }) => {
@@ -38,16 +40,20 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
     canceler.current = controller.abort.bind(controller);
 
     if (isValidURL(url)) {
+      let sent = false;
       try {
         const originalResponse = await fetchFn(url, {
           signal: controller.signal,
           ...requestInfo,
         });
-        const response = toResponse(originalResponse);
-
-        resolve(response);
+        sent = true;
+        resolve(toResponse(originalResponse));
       } catch (networkError: unknown) {
-        reject(HTTPError.NetworkError({ cause: networkError }));
+        if (sent) {
+          throw networkError;
+        } else {
+          reject(HTTPError.NetworkError({ cause: networkError }));
+        }
       }
     } else {
       await Promise.resolve();
@@ -61,8 +67,34 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
   });
 }
 
-function toResponse(originalResponse: globalThis.Response): Response {
-  return originalResponse;
+function toResponse(originalResponse: globalThis.Response): Response<BodyReader> {
+  return {
+    headers: originalResponse.headers,
+    ok: originalResponse.ok,
+    status: responseStatus(originalResponse),
+    type: originalResponse.type,
+    url: originalResponse.url,
+    redirected: originalResponse.redirected,
+    body: responseBodyReader(originalResponse),
+  };
+}
+
+function responseStatus(response: globalThis.Response): Status {
+  return {
+    statusCode: response.status,
+    statusMessage: response.statusText,
+  };
+}
+
+function responseBodyReader(response: globalThis.Response): BodyReader {
+  return {
+    arrayBuffer: () => response.arrayBuffer(),
+    blob: () => response.blob(),
+    formData: () => response.formData(),
+    json: () => response.json(),
+    stream: () => response.body ?? undefined,
+    text: () => response.text(),
+  };
 }
 
 function isValidURL(url: string): boolean {
