@@ -8,8 +8,7 @@ import type { RequestRedirect } from './RequestRedirect.js';
 import type { ReferrerPolicy } from './ReferrerPolicy.js';
 import type { RequestMode } from './RequestMode.js';
 import type { RequestTimeout } from './RequestTimeout.js';
-
-type URL = string;
+import type { URL } from './URL.js';
 
 /**
  * HTTP request type
