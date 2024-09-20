@@ -4,6 +4,10 @@ import { from } from './from.js';
 import { unsafeRun } from './unsafeRun.js';
 
 describe(from, () => {
+  it('returns same value when Task', () => {
+    const task = from(({ resolve }) => resolve('anyValue'));
+    expect(from(task)).toBe(task);
+  });
   it('returns a Task from callback', () => {
     const task = from(({ resolve }) => resolve('anyValue'));
     expect(unsafeRun(task)).toEqual(Result.Ok('anyValue'));
