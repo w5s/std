@@ -16,6 +16,8 @@ describe('index', () => {
         'RequestRedirect',
         'requestSend',
         'Status',
+        // 'Response',
+        'ResponseType',
       ].sort()
     );
   });

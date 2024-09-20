@@ -10,3 +10,5 @@ export * from './RequestDestination.js';
 export * from './RequestRedirect.js';
 export * from './requestSend.js';
 export * from './Status.js';
+export * from './Response.js';
+export * from './ResponseType.js';
