@@ -1,18 +1,18 @@
 /**
  * HTTP header record type
  */
-export type RequestHeaders = Readonly<Record<string, string>>;
+export type Headers = Readonly<Record<string, string>>;
 
 /**
  * HTTP header record constructor
  *
  * @example
  * ```typescript
- * const headersFromIterable = RequestHeaders([
+ * const headersFromIterable = Headers([
  *  ['key1', 'value1'],
  *  ['key2', 'value2']
  * ]);// { key1: 'value1, key2: 'value2' }
- * const headersFromObject = RequestHeaders({
+ * const headersFromObject = Headers({
  *  key1: 'value1',
  *  key2: 'value2'
  * });// { key1: 'value1, key2: 'value2' }
@@ -20,7 +20,7 @@ export type RequestHeaders = Readonly<Record<string, string>>;
  * @category Constructor
  * @param values - a record or iterable to initialize
  */
-export function RequestHeaders(values: Iterable<readonly [string, string]> | Record<string, string>): RequestHeaders {
+export function Headers(values: Iterable<readonly [string, string]> | Record<string, string>): Headers {
   if (Symbol.iterator in values) {
     const returnValue: Record<string, string> = {};
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -28,11 +28,11 @@ export function RequestHeaders(values: Iterable<readonly [string, string]> | Rec
       returnValue[key] = value;
     }
 
-    return returnValue as RequestHeaders;
+    return returnValue as Headers;
   }
 
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return {
     ...values,
-  } as RequestHeaders;
+  } as Headers;
 }

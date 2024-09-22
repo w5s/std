@@ -3,7 +3,7 @@ export * from './HTTPParser.js';
 export * from './Method.js';
 export * from './Client.js';
 export * from './ReferrerPolicy.js';
-export * from './RequestHeaders.js';
+export * from './Headers.js';
 export * from './RequestCache.js';
 export * from './RequestCredentials.js';
 export * from './RequestDestination.js';

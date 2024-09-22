@@ -12,7 +12,7 @@ describe('index', () => {
         'RequestCache',
         'RequestCredentials',
         'RequestDestination',
-        'RequestHeaders',
+        'Headers',
         'RequestRedirect',
         'requestSend',
         'Status',

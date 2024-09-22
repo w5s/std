@@ -1,6 +1,6 @@
 import type { Option } from '@w5s/core';
 import type { Method } from './Method.js';
-import type { RequestHeaders } from './RequestHeaders.js';
+import type { Headers } from './Headers.js';
 import type { RequestCredentials } from './RequestCredentials.js';
 import type { RequestDestination } from './RequestDestination.js';
 import type { RequestCache } from './RequestCache.js';
@@ -46,7 +46,7 @@ export interface Request {
    * { "Content-type": "application/json" }
    * ```
    */
-  readonly headers?: RequestHeaders;
+  readonly headers?: Headers;
   /**
    * A cryptographic hash of the resource to be fetched by request. Sets request's integrity.
    */
