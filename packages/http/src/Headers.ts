@@ -1,7 +1,11 @@
+import { Callable } from '@w5s/core/dist/Callable.js';
+import { Headers as HeadersType } from './Headers/Headers.js';
+import { empty } from './Headers/empty.js';
+
 /**
  * HTTP header record type
  */
-export type Headers = Readonly<Record<string, string>>;
+export interface Headers extends HeadersType {}
 
 /**
  * HTTP header record constructor
@@ -20,19 +24,13 @@ export type Headers = Readonly<Record<string, string>>;
  * @category Constructor
  * @param values - a record or iterable to initialize
  */
-export function Headers(values: Iterable<readonly [string, string]> | Record<string, string>): Headers {
-  if (Symbol.iterator in values) {
-    const returnValue: Record<string, string> = {};
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    for (const [key, value] of values as Iterable<readonly [string, string]>) {
-      returnValue[key] = value;
-    }
-
-    return returnValue as Headers;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return {
-    ...values,
-  } as Headers;
-}
+export const Headers = Callable({
+  ...HeadersType,
+  empty,
+  [Callable.symbol]: (values: Iterable<readonly [string, string]> | Record<string, string>): Headers =>
+    Symbol.iterator in values
+      ? Object.fromEntries(values)
+      : {
+          ...values,
+        },
+});

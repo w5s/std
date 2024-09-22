@@ -4,10 +4,11 @@ import type { Status } from './Status.js';
 import type { URL } from './URL.js';
 import type { ResponseType } from './ResponseType.js';
 import type { Headers } from './Headers.js';
+import { empty } from './Headers/empty.js';
 
 export const Response = Callable({
   [Callable.symbol]: <Body>(parameters: Response.Parameters<Body>): Response<Body> => {
-    const { headers = {}, ok = true, status, type = 'default', url, redirected = false, body } = parameters;
+    const { headers = empty(), ok = true, status, type = 'default', url, redirected = false, body } = parameters;
     return {
       headers,
       ok,
