@@ -1,9 +1,10 @@
-import { Option, Result } from '@w5s/core';
+import { Option } from '@w5s/core';
 import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { beforeEach } from 'node:test';
 import { TimeDuration } from '@w5s/time';
 import { timeout } from '@w5s/task-timeout';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { HTTPError } from './HTTPError.js';
 import { requestSend } from './requestSend.js';
 import { Client } from './Client.js';
@@ -16,6 +17,8 @@ vi.mock('@w5s/task-timeout', () => ({
 beforeEach(() => {
   vi.clearAllMocks();
 });
+
+const expectTask = withTask(expect);
 
 describe(requestSend, () => {
   const anyURL = 'https://localhost';
@@ -52,32 +55,27 @@ describe(requestSend, () => {
       url,
       method: 'GET',
     });
-    const result = await Task.unsafeRun(task);
-    expect(globalFetchMock).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
-    expect(result).toEqual(
-      Result.Ok(
-        Response({
-          status: Status(200, ''),
-          body: {
-            arrayBuffer: expect.any(Function),
-            blob: expect.any(Function),
-            formData: expect.any(Function),
-            json: expect.any(Function),
-            stream: expect.any(Function),
-            text: expect.any(Function),
-          },
-          url: '',
-        })
-      )
+    await expectTask(task).toResolve(
+      Response({
+        status: Status(200, ''),
+        body: {
+          arrayBuffer: expect.any(Function),
+          blob: expect.any(Function),
+          formData: expect.any(Function),
+          json: expect.any(Function),
+          stream: expect.any(Function),
+          text: expect.any(Function),
+        },
+        url: '',
+      })
     );
+    expect(globalFetchMock).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
   });
   it('should handle malformed URL', async () => {
     const task = requestSend(anyClient, {
       url: 'http://www.exam ple.com', // invalid url
     });
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
-      Result.Error(HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }))
-    );
+    await expectTask(task).toReject(HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }));
   });
   it('should convert fetch error to NetworkError', async () => {
     const fetchError = new Error('FetchError');
@@ -86,7 +84,7 @@ describe(requestSend, () => {
     const task = requestSend(anyClient, {
       url: anyURL,
     });
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Error(HTTPError.NetworkError({ cause: fetchError })));
+    await expectTask(task).toReject(HTTPError.NetworkError({ cause: fetchError }));
   });
   it('should be cancelable', async () => {
     const finished = defer();
@@ -163,15 +161,13 @@ describe(requestSend, () => {
     });
     globalFetchMock.mockResolvedValue(mockResponse);
     const task = requestSend(clientCustom, anyRequest);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
-      Result.Ok(
-        expect.objectContaining({
-          headers: {
-            foo: 'foo_value',
-            bar: 'bar_value',
-          },
-        })
-      )
+    await expectTask(task).toResolve(
+      expect.objectContaining({
+        headers: {
+          foo: 'foo_value',
+          bar: 'bar_value',
+        },
+      })
     );
   });
   describe('timeout', () => {
