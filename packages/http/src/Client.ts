@@ -6,14 +6,22 @@ import { resolve } from '@w5s/task/dist/Task/resolve.js';
 import type { RequestTimeout } from './RequestTimeout.js';
 import type { Request } from './Request.js';
 import type { HTTPError } from './HTTPError.js';
+import type { Response } from './Response.js';
+import type { BodyReader } from './BodyReader.js';
 
 export interface Client {
   /**
-   * Wrap a request
+   * Wrap a request before sent
    *
    * @param request - the request to wrap
    */
   onRequest: (request: Request) => TaskLike<Request, HTTPError>;
+  /**
+   * Wrap a received response
+   *
+   * @param response - the response to wrap
+   */
+  onResponse: (response: Response<BodyReader>) => TaskLike<Response<BodyReader>, HTTPError>;
   /**
    * Fetch function. Default to `globalThis.fetch`.
    */
@@ -25,9 +33,10 @@ export interface Client {
 }
 
 export function Client(parameters: Client.Options = {}): Client {
-  const { timeout = 'default', fetch = getDefaultFetch(), onRequest = resolve } = parameters;
+  const { timeout = 'default', fetch = getDefaultFetch(), onRequest = resolve, onResponse = resolve } = parameters;
   return {
     onRequest,
+    onResponse,
     fetch,
     timeout,
   };

@@ -9,6 +9,7 @@ describe(Client, () => {
   it('constructs a client', () => {
     expect(Client()).toEqual({
       onRequest: Task.resolve,
+      onResponse: Task.resolve,
       fetch: globalThis.fetch,
       timeout: 'default',
     });

@@ -20,6 +20,10 @@ beforeEach(() => {
 describe(requestSend, () => {
   const anyURL = 'https://localhost';
   const anyTask = expect.any(Object);
+  const anyRequest = {
+    url: 'http://localhost#test',
+    method: 'GET',
+  };
   const anyResponse = new globalThis.Response();
   const defer = <V>(): {
     resolve(value: V | PromiseLike<V>): void;
@@ -139,6 +143,36 @@ describe(requestSend, () => {
       method: 'GET',
       signal: expect.any(Object),
     });
+  });
+  it('should use client#onResponse', async () => {
+    const clientCustom = Client({
+      onResponse: (response) =>
+        Task.resolve({
+          ...response,
+          headers: {
+            ...response.headers,
+            bar: 'bar_value',
+          },
+        }),
+      fetch: globalFetchMock,
+    });
+    const mockResponse = new globalThis.Response(null, {
+      headers: new globalThis.Headers({
+        foo: 'foo_value',
+      }),
+    });
+    globalFetchMock.mockResolvedValue(mockResponse);
+    const task = requestSend(clientCustom, anyRequest);
+    await expect(Task.unsafeRun(task)).resolves.toEqual(
+      Result.Ok(
+        expect.objectContaining({
+          headers: {
+            foo: 'foo_value',
+            bar: 'bar_value',
+          },
+        })
+      )
+    );
   });
   describe('timeout', () => {
     it('uses client timeout as "none"', async () => {

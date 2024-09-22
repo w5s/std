@@ -23,10 +23,11 @@ import type { Headers } from './Headers.js';
  * @param requestObject - the request parameters
  */
 export function requestSend(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
-  const { onRequest } = client;
+  const { onRequest, onResponse } = client;
   const requestWrapped = onRequest(requestObject);
   const response = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
-  return timeout(response, Client.getRequestTimeoutDuration(client, requestObject));
+  const responseTimeout = timeout(response, Client.getRequestTimeoutDuration(client, requestObject));
+  return andThen(responseTimeout, onResponse);
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
