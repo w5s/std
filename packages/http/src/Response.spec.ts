@@ -6,13 +6,12 @@ describe(Response, () => {
   it('returns a new instance', () => {
     expect(
       Response({
-        headers: new Headers(),
         url: 'my/url',
         body: 'some body',
         status: Status.OK,
       })
     ).toEqual({
-      headers: new Headers(),
+      headers: {},
       ok: true,
       url: 'my/url',
       status: Status.OK,

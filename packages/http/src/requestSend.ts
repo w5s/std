@@ -8,6 +8,7 @@ import type { Request } from './Request.js';
 import { Client } from './Client.js';
 import type { BodyReader } from './BodyReader.js';
 import type { Status } from './Status.js';
+import type { Headers } from './Headers.js';
 
 /**
  * Return a new {@link @w5s/core!Task} that will send an HTTP request
@@ -67,7 +68,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
 
 function toResponse(originalResponse: globalThis.Response): Response<BodyReader> {
   return {
-    headers: originalResponse.headers,
+    headers: responseHeaders(originalResponse),
     ok: originalResponse.ok,
     status: responseStatus(originalResponse),
     type: originalResponse.type,
@@ -82,6 +83,16 @@ function responseStatus(response: globalThis.Response): Status {
     statusCode: response.status,
     statusMessage: response.statusText,
   };
+}
+
+function responseHeaders(response: globalThis.Response): Headers {
+  const returnValue: Record<string, string> = {};
+
+  response.headers.forEach((value, key) => {
+    returnValue[key] = value;
+  });
+
+  return returnValue;
 }
 
 function responseBodyReader(response: globalThis.Response): BodyReader {
