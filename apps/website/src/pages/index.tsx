@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import { HomepageFeatures } from '@site/src/components/HomepageFeatures';
 import type { CustomFields } from '@site/docusaurus.config';
 import styles from './index.module.css';
 
@@ -35,6 +35,7 @@ function HomepageHeader() {
   );
 }
 
+// eslint-disable-next-line import/no-default-export
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const { metaTitle = siteConfig.title, metaDescription = siteConfig.tagline } = (siteConfig.customFields ??
