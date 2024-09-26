@@ -75,7 +75,7 @@ export interface Type<T> {
    * @category Type
    * @param anyValue
    */
-  inspect?: (anyValue: T, depth: number, options: InspectOptions, inspect: InspectFunction) => string;
+  inspect: Option<(anyValue: T, depth: number, options: InspectOptions, inspect: InspectFunction) => string>;
 }
 
 /**

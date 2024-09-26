@@ -140,6 +140,7 @@ describe(requestSend, () => {
     expect(globalFetchMock).toHaveBeenLastCalledWith('http://localhost#custom', {
       method: 'GET',
       signal: expect.any(Object),
+      body: null,
     });
   });
   it('should use client#onResponse', async () => {
@@ -226,7 +227,7 @@ describe(requestSend, () => {
       });
       requestSend(client, {
         url: anyURL,
-        timeout: undefined,
+        // timeout,
       });
       expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(234));
     });
