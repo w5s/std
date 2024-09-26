@@ -52,7 +52,6 @@ export function SQLStatement({
 export namespace SQLStatement {
   export type Value = unknown;
 
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   export const { typeName, hasInstance } = Struct.define<SQLStatement>('SQLStatement');
 
   export function concat(...statements: SQLStatement[]): SQLStatement {

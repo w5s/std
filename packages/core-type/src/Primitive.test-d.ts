@@ -9,7 +9,7 @@ const undef: Primitive = undefined;
 const nul: Primitive = null;
 const bigint: Primitive = 1n;
 
-// @ts-expect-error
+// @ts-expect-error Array is not a primitive
 const array: Primitive = [];
-// @ts-expect-error
+// @ts-expect-error Object is not a primitive
 const object: Primitive = {};
