@@ -26,6 +26,7 @@ const mockResponseWith = (mockProperty: keyof BodyReader, parameters: { reject: 
   if ('reject' in parameters) {
     responseBody[mockProperty].mockRejectedValue(parameters.reject);
   } else {
+    // @ts-ignore
     responseBody[mockProperty].mockResolvedValue(parameters.resolve);
   }
   return response;
@@ -37,6 +38,7 @@ const expectToResolveValue = async (
   returnValue: any = {}
 ) => {
   const response = mockResponse();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   response.body[mockProperty].mockResolvedValue(returnValue);
   const task = fn(response);
   await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(returnValue));

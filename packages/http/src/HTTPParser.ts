@@ -71,7 +71,7 @@ export namespace HTTPParser {
    * ```
    */
   export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
-    const parser = from<Return>((response) => response.body.json());
+    const parser = from<Return>((response) => response.body.json() as Promise<Return>);
     return CodecModule === 'unsafe'
       ? parser
       : (response) =>
