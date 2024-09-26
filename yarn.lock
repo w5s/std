@@ -5641,22 +5641,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.1.0":
-  version: 2.1.0
-  resolution: "@w5s/commitlint-config@npm:2.1.0"
+"@w5s/commitlint-config@npm:2.1.1":
+  version: 2.1.1
+  resolution: "@w5s/commitlint-config@npm:2.1.1"
   dependencies:
     "@commitlint/types": "npm:^19.0.0"
-    "@w5s/conventional-changelog": "npm:^2.1.0"
+    "@w5s/conventional-changelog": "npm:^2.1.1"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/16fe5ddaa56b749a1ebb88871e81316760bae6aaf502453252c3392d748a6b7a14e41718223a0b3d4f3be7dbe4fb36321b856a46ff192b39f25fe5e2ffa6e32a
+  checksum: 10c0/c76908d969437ea035298f7210e77c996a72519440aca0dd9992910d160ef59432b5fa1c858d663583df1b9b0a9dda3283dba7471fe728e5a9284e93419ad319
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:2.1.1":
+"@w5s/conventional-changelog@npm:2.1.1, @w5s/conventional-changelog@npm:^2.1.1":
   version: 2.1.1
   resolution: "@w5s/conventional-changelog@npm:2.1.1"
   dependencies:
@@ -5667,24 +5667,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@w5s/conventional-changelog@npm:2.1.0"
-  dependencies:
-    "@commitlint/types": "npm:^19.0.0"
-    emoji-regex: "npm:^10.2.1"
-    gitmojis: "npm:^3.13.4"
-  checksum: 10c0/ebd2fde75e1ad5f42bb0cda86f1037b4e2e757604a3c14a9880e9db12c8a30ae7597276877545f3a67355a849d0fe7c9b8d81321bc22035514cde0b800801e0b
-  languageName: node
-  linkType: hard
-
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.1.5"
     "@types/node": "npm:20.16.9"
-    "@w5s/commitlint-config": "npm:2.1.0"
+    "@w5s/commitlint-config": "npm:2.1.1"
     "@w5s/conventional-changelog": "npm:2.1.1"
     "@w5s/cspell-config": "npm:2.3.13"
     "@w5s/eslint-config": "npm:2.1.1"
