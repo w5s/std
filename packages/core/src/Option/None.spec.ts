@@ -7,7 +7,7 @@ describe('None', () => {
     expect(None).toBe(undefined);
   });
   it('should be compatible with JSON.stringify/parse', () => {
-    const data = JSON.parse(JSON.stringify({ foo: None }));
+    const data = structuredClone({ foo: None });
     expect(data).toEqual({ foo: None });
     expect(isNone(data.foo)).toBe(true);
   });

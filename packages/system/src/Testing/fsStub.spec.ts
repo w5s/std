@@ -1,5 +1,5 @@
 import { describe, it, expect, afterAll } from 'vitest';
-import * as nodePath from 'node:path';
+import nodePath from 'node:path';
 import { Symbol } from '@w5s/core';
 import { fsStub } from './fsStub.js';
 import { withFile } from './withFile.js';
