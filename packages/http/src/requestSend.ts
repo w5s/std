@@ -2,6 +2,7 @@ import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { timeout } from '@w5s/task-timeout';
 import { andThen } from '@w5s/task/dist/Task/andThen.js';
+import type { Int } from '@w5s/core/dist/Type/Int.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { Request } from './Request.js';
@@ -83,7 +84,7 @@ function toResponse(originalResponse: globalThis.Response): Response<BodyReader>
 
 function responseStatus(response: globalThis.Response): Status {
   return {
-    statusCode: response.status,
+    statusCode: response.status as Int,
     statusMessage: response.statusText,
   };
 }

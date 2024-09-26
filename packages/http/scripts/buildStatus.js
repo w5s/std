@@ -34,8 +34,10 @@ async function generateFiles() {
   if (!decodedResult.ok) {
     return decodedResult;
   }
-  let statusAllContent = `import { Status } from './Status.js';${eol}${eol}`;
-
+  let statusAllContent = '';
+  statusAllContent += `import type { Int } from '@w5s/core/dist/Type/Int.js';${eol}`;
+  statusAllContent += `import { Status } from './Status.js';${eol}`;
+  statusAllContent += `${eol}`;
   statusAllContent += decodedResult.value
     .map((status) =>
       [
@@ -46,7 +48,7 @@ async function generateFiles() {
         ` * ${status.comment.description}`,
         ...(status.isDeprecated ? [' *', ' * @deprecated'] : []),
         ' */',
-        `export const ${toConstant(status.phrase)} = Status(${status.code}, \`${status.phrase}\`);`,
+        `export const ${toConstant(status.phrase)} = Status(${status.code} as Int, \`${status.phrase}\`);`,
       ].join(eol)
     )
     .join(eol + eol);
