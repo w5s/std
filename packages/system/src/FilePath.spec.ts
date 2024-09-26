@@ -129,8 +129,8 @@ describe('FilePath', () => {
       [{ parent: '/first', child: '/first/second' }, true],
       [{ parent: 'first', child: 'first/second' }, true],
       [{ parent: '../first', child: '../first/second' }, true],
-      [{ parent: 'c:\\first', child: 'c:\\first' }, false],
-      [{ parent: 'c:\\first', child: 'c:\\first\\second' }, true],
+      [{ parent: String.raw`c:\first`, child: String.raw`c:\first` }, false],
+      [{ parent: String.raw`c:\first`, child: String.raw`c:\first\second` }, true],
     ] as [{ parent: string; child: string }, boolean][])(
       'should return correct value for %s',
       ({ parent, child }, expected) => {

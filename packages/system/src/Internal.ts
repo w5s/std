@@ -1,7 +1,7 @@
 /* eslint-disable jsdoc/require-example */
 
 import * as nodeFS from 'node:fs';
-import * as nodePath from 'node:path';
+import nodePath from 'node:path';
 import * as nodeProcess from 'node:process';
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';

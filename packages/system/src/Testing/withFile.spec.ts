@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { AssertionError } from 'node:assert';
-import { dirname, join } from 'node:path';
+import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { withFile } from './withFile.js';
 
 describe('withFile', () => {
   const expectFile = withFile(expect);
   const __filename = fileURLToPath(import.meta.url);
-  const __dirname = dirname(__filename);
-  const fixtureDir = join(__dirname, '__fixture__');
+  const __dirname = nodePath.dirname(__filename);
+  const fixtureDir = nodePath.join(__dirname, '__fixture__');
 
   describe('#toExist', () => {
     it('should assert file exist', async () => {
@@ -57,7 +57,7 @@ describe('withFile', () => {
   describe('#toHaveFileContent', () => {
     it('should assert', async () => {
       await expect(async () => {
-        await expectFile(join(fixtureDir, 'test1')).toHaveFileContent('');
+        await expectFile(nodePath.join(fixtureDir, 'test1')).toHaveFileContent('');
       }).rejects.toEqual(
         new AssertionError({
           message: `expected 'test1_content\\n' to deeply equal ''`,
@@ -79,7 +79,7 @@ describe('withFile', () => {
   describe('#toHaveDirLength', () => {
     it('should assert', async () => {
       await expect(async () => {
-        await expectFile(join(__dirname, '__fixture__')).toHaveDirLength(1);
+        await expectFile(nodePath.join(__dirname, '__fixture__')).toHaveDirLength(1);
       }).rejects.toEqual(
         new AssertionError({
           message: `expected [ 'test1', 'test2' ] to have property "length" with value 1`,

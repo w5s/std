@@ -4,7 +4,7 @@ import { parse as parseInt } from '@w5s/core/dist/Int/parse.js';
 import { parse as parseNumber } from '@w5s/core/dist/Number/parse.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 
-const numbers = '\\d+';
+const numbers = String.raw`\d+`;
 const fractionalNumbers = `${numbers}(?:[\\.,]${numbers})?`;
 const date = `(${numbers}Y)?(${numbers}M)?(${numbers}W)?(${numbers}D)?`;
 const time = `T(${fractionalNumbers}H)?(${fractionalNumbers}M)?(${fractionalNumbers}S)?`;
