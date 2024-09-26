@@ -34,7 +34,8 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
   const { fetch: fetchFn } = client;
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(async ({ resolve, reject, canceler }) => {
-    const { url, ...requestInfo } = requestObject;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { url, body, window: _window, ...requestInfo } = requestObject;
 
     const controller = new AbortController();
     canceler.current = controller.abort.bind(controller);
@@ -45,6 +46,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
         const originalResponse = await fetchFn(url, {
           signal: controller.signal,
           ...requestInfo,
+          body: body ?? null,
         });
         sent = true;
         resolve(toResponse(originalResponse));

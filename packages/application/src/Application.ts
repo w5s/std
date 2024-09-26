@@ -1,4 +1,4 @@
-import type { Ref, Record, Tag } from '@w5s/core';
+import type { Ref, Record, Tag, Option } from '@w5s/core';
 import { useRef } from './useRef.js';
 import { useStorage } from './useStorage.js';
 
@@ -89,7 +89,7 @@ export namespace Application {
     /**
      * Application initial configuration
      */
-    configuration?: Configuration;
+    configuration?: Option<Configuration>;
 
     /**
      * Target store where application will be registered
