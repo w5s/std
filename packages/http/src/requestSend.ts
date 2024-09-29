@@ -1,15 +1,13 @@
 import type { Task } from '@w5s/task';
-import { from } from '@w5s/task/dist/Task/from.js';
-import { timeout } from '@w5s/task-timeout';
-import { andThen } from '@w5s/task/dist/Task/andThen.js';
-import type { Int } from '@w5s/core/dist/Type/Int.js';
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import { timeout as taskTimeout } from '@w5s/task-timeout';
+import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { Request } from './Request.js';
 import { Client } from './Client.js';
 import type { BodyReader } from './BodyReader.js';
-import type { Status } from './Status.js';
-import type { Headers } from './Headers.js';
+import { from as responseFrom } from './Response/from.js';
 
 /**
  * Return a new {@link @w5s/core!Task} that will send an HTTP request
@@ -26,15 +24,15 @@ import type { Headers } from './Headers.js';
 export function requestSend(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { onRequest, onResponse } = client;
   const requestWrapped = onRequest(requestObject);
-  const response = andThen(requestWrapped, (request) => requestSendImplementation(client, request));
-  const responseTimeout = timeout(response, Client.getRequestTimeoutDuration(client, requestObject));
-  return andThen(responseTimeout, onResponse);
+  const response = taskThen(requestWrapped, (request) => requestSendImplementation(client, request));
+  const responseTimeout = taskTimeout(response, Client.getRequestTimeoutDuration(client, requestObject));
+  return taskThen(responseTimeout, onResponse);
 }
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { fetch: fetchFn } = client;
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return from(async ({ resolve, reject, canceler }) => {
+  return taskFrom(async ({ resolve, reject, canceler }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;
 
@@ -50,7 +48,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
           body: body ?? null,
         });
         sent = true;
-        resolve(toResponse(originalResponse));
+        resolve(responseFrom(originalResponse));
       } catch (networkError: unknown) {
         if (sent) {
           throw networkError;
@@ -68,46 +66,6 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
       );
     }
   });
-}
-
-function toResponse(originalResponse: globalThis.Response): Response<BodyReader> {
-  return {
-    headers: responseHeaders(originalResponse),
-    ok: originalResponse.ok,
-    status: responseStatus(originalResponse),
-    type: originalResponse.type,
-    url: originalResponse.url,
-    redirected: originalResponse.redirected,
-    body: responseBodyReader(originalResponse),
-  };
-}
-
-function responseStatus(response: globalThis.Response): Status {
-  return {
-    statusCode: response.status as Int,
-    statusMessage: response.statusText,
-  };
-}
-
-function responseHeaders(response: globalThis.Response): Headers {
-  const returnValue: Record<string, string> = {};
-
-  response.headers.forEach((value, key) => {
-    returnValue[key] = value;
-  });
-
-  return returnValue;
-}
-
-function responseBodyReader(response: globalThis.Response): BodyReader {
-  return {
-    arrayBuffer: () => response.arrayBuffer(),
-    blob: () => response.blob(),
-    formData: () => response.formData(),
-    json: () => response.json(),
-    stream: () => response.body ?? undefined,
-    text: () => response.text(),
-  };
 }
 
 function isValidURL(url: string): boolean {

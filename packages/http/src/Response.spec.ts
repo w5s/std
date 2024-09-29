@@ -1,8 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { Response } from './Response.js';
 import { Status } from './Status.js';
+import { from } from './Response/from.js';
 
 describe(Response, () => {
+  it('is an alias to functions', () => {
+    expect(Response).toEqual(
+      expect.objectContaining({
+        from,
+      })
+    );
+  });
   it('returns a new instance', () => {
     expect(
       Response({
