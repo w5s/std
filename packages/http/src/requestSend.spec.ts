@@ -1,4 +1,4 @@
-import { Option } from '@w5s/core';
+import { Int, Option } from '@w5s/core';
 import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { beforeEach } from 'node:test';
@@ -57,14 +57,14 @@ describe(requestSend, () => {
     });
     await expectTask(task).toResolve(
       Response({
-        status: Status(200, ''),
+        status: Status(Int(200), ''),
         body: {
-          arrayBuffer: expect.any(Function),
-          blob: expect.any(Function),
-          formData: expect.any(Function),
-          json: expect.any(Function),
-          stream: expect.any(Function),
-          text: expect.any(Function),
+          unsafeArrayBuffer: expect.any(Function),
+          unsafeBlob: expect.any(Function),
+          unsafeFormData: expect.any(Function),
+          unsafeJSON: expect.any(Function),
+          unsafeStream: expect.any(Function),
+          unsafeText: expect.any(Function),
         },
         url: '',
       })

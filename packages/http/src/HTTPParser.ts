@@ -36,26 +36,26 @@ export namespace HTTPParser {
    *
    * @example
    * ```ts
-   * const request = HTTP.request({
+   * const request = requestSend({
    *   url: 'http://localhost',
    *   parse: HTTPParser.arrayBuffer,
    * });// Task<ArrayBuffer, HTTPError>
    * ```
    */
-  export const arrayBuffer: HTTPParser<ArrayBuffer> = from((response) => response.body.arrayBuffer());
+  export const arrayBuffer: HTTPParser<ArrayBuffer> = from((response) => response.body.unsafeArrayBuffer());
 
   /**
    * FormData response parser
    *
    * @example
    * ```ts
-   * const request = HTTP.request({
+   * const request = requestSend({
    *   url: 'http://localhost',
    *   parse: HTTPParser.formData,
    * });// Task<FormData, HTTPError>
    * ```
    */
-  export const formData: HTTPParser<FormData> = from((response) => response.body.formData());
+  export const formData: HTTPParser<FormData> = from((response) => response.body.unsafeFormData());
 
   /**
    * FormData response parser
@@ -64,14 +64,14 @@ export namespace HTTPParser {
    * ```ts
    * type MyData = { foo: string, bar: boolean };
    *
-   * const request = HTTP.request({
+   * const request = requestSend({
    *   url: 'http://localhost',
    *   parse: HTTPParser.json<MyData>('unsafe'),
    * });// Task<MyData, HTTPError>
    * ```
    */
   export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
-    const parser = from<Return>((response) => response.body.json() as Promise<Return>);
+    const parser = from<Return>((response) => response.body.unsafeJSON() as Promise<Return>);
     return CodecModule === 'unsafe'
       ? parser
       : (response) =>
@@ -87,24 +87,24 @@ export namespace HTTPParser {
    *
    * @example
    * ```ts
-   * const request = HTTP.request({
+   * const request = requestSend({
    *   url: 'http://localhost',
    *   parse: HTTPParser.blob,
    * });// Task<Blob, HTTPError>
    * ```
    */
-  export const blob: HTTPParser<Blob> = from((response) => response.body.blob());
+  export const blob: HTTPParser<Blob> = from((response) => response.body.unsafeBlob());
 
   /**
    * Text response parser
    *
    * @example
    * ```ts
-   * const request = HTTP.request({
+   * const request = requestSend({
    *   url: 'http://localhost',
    *   parse: HTTPParser.text,
    * });// Task<string, HTTPError>
    * ```
    */
-  export const text: HTTPParser<string> = from((response) => response.body.text());
+  export const text: HTTPParser<string> = from((response) => response.body.unsafeText());
 }

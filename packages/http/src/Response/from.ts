@@ -41,11 +41,11 @@ function responseHeaders(response: globalThis.Response): Headers {
 
 function responseBodyReader(response: globalThis.Response): BodyReader {
   return {
-    arrayBuffer: () => response.arrayBuffer(),
-    blob: () => response.blob(),
-    formData: () => response.formData(),
-    json: () => response.json(),
-    stream: () => response.body ?? undefined,
-    text: () => response.text(),
+    unsafeArrayBuffer: () => response.arrayBuffer(),
+    unsafeBlob: () => response.blob(),
+    unsafeFormData: () => response.formData(),
+    unsafeJSON: () => response.json(),
+    unsafeStream: () => response.body ?? undefined,
+    unsafeText: () => response.text(),
   };
 }
