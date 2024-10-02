@@ -18,7 +18,7 @@ describe('Time', () => {
         now,
         parse,
         format,
-      })
+      }),
     );
   });
   describe('.add', () => {

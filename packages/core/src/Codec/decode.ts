@@ -24,7 +24,7 @@ export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown):
         DecodeError({
           message: `Cannot decode ${String(inputError)}${asType == null ? '' : ` as ${asType}`}`,
           input: inputError,
-        })
+        }),
       ),
   });
 }

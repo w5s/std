@@ -17,7 +17,7 @@ import { _copySlice } from './_copySlice.js';
  */
 export function flatMap<FromItem, ToItem>(
   array: Array<FromItem>,
-  mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => Array<ToItem>
+  mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => Array<ToItem>,
 ): Array<ToItem> {
   const arrayLength = array.length;
   if (arrayLength === 0) {

@@ -20,7 +20,7 @@ import type { Option } from '@w5s/core';
  */
 export function timeout<Value, Error>(
   task: TaskLike<Value, Error>,
-  delay: Option<TimeDuration>
+  delay: Option<TimeDuration>,
 ): Task<Value, TimeoutError | Error> {
   return delay == null
     ? from(task)
@@ -39,7 +39,7 @@ export function timeout<Value, Error>(
           reject(
             TimeoutError({
               message: `Task timed out after ${stringifyDelay(delay)}`,
-            })
+            }),
           );
         }, delay);
         const timeoutCancel = () => clearTimeout(timeoutId);

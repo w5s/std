@@ -67,7 +67,7 @@ describe(requestSend, () => {
           unsafeText: expect.any(Function),
         },
         url: '',
-      })
+      }),
     );
     expect(globalFetchMock).toHaveBeenLastCalledWith(url, expect.objectContaining({ method: 'GET' }));
   });
@@ -168,7 +168,7 @@ describe(requestSend, () => {
           foo: 'foo_value',
           bar: 'bar_value',
         },
-      })
+      }),
     );
   });
   describe('timeout', () => {

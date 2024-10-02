@@ -70,13 +70,13 @@ const mockResponseWith = (bodyReader: BodyReader): Response<BodyReader> =>
 
 const expectToResolveValue = async <F extends BodyReaderFormat>(
   fn: (response: Response<BodyReader>) => Task<unknown, unknown>,
-  format: F
+  format: F,
 ) => {
   const returnValue = defaultValue(format);
   const response = mockResponseWith(
     mockBodyReader(format, {
       resolve: returnValue,
-    })
+    }),
   );
   const task = fn(response);
   await expectTask(task).toResolve(returnValue);
@@ -91,7 +91,7 @@ describe('HTTPParser', () => {
       const response = mockResponseWith(
         mockBodyReader('arrayBuffer', {
           reject: error,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
@@ -105,7 +105,7 @@ describe('HTTPParser', () => {
       const response = mockResponseWith(
         mockBodyReader('formData', {
           reject: error,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
@@ -120,7 +120,7 @@ describe('HTTPParser', () => {
       const response = mockResponseWith(
         mockBodyReader('text', {
           reject: error,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
@@ -135,7 +135,7 @@ describe('HTTPParser', () => {
       const response = mockResponseWith(
         mockBodyReader('blob', {
           reject: error,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
@@ -148,7 +148,7 @@ describe('HTTPParser', () => {
       const response = mockResponseWith(
         mockBodyReader('json', {
           reject: error,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
     });
@@ -157,25 +157,25 @@ describe('HTTPParser', () => {
       const parser = HTTPParser.json(
         Type.Object({
           foo: Type.string,
-        })
+        }),
       );
       const data = { foo: true };
       const response = mockResponseWith(
         mockBodyReader('json', {
           resolve: data,
-        })
+        }),
       );
       await expectTask(parser(response)).toReject(
         HTTPError.ParserError({
           message: 'Cannot parse response body',
           cause: DecodeError({ message: '', input: data }),
-        })
+        }),
       );
 
       const responseIncorrect = mockResponseWith(
         mockBodyReader('json', {
           resolve: { foo: '1' },
-        })
+        }),
       );
       await expectTask(parser(responseIncorrect)).toResolve({ foo: '1' });
     });

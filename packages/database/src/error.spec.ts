@@ -10,7 +10,7 @@ describe('DatabaseError', () => {
         name: 'DatabaseError',
         message: 'Message',
         cause,
-      })
+      }),
     );
   });
 });

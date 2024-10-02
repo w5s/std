@@ -15,7 +15,7 @@ import type { RecordKey } from '../Record.js';
 export function set<Key extends RecordKey, Value>(
   record: Record<Key, Value>,
   key: Key,
-  value: Value
+  value: Value,
 ): Record<Key, Value> {
   return record[key] === value
     ? record

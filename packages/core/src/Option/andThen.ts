@@ -18,7 +18,7 @@ import { from } from './from.js';
  */
 export function andThen<ValueFrom, ValueTo>(
   option: Nullable<ValueFrom>,
-  fn: (value: ValueFrom) => Nullable<ValueTo>
+  fn: (value: ValueFrom) => Nullable<ValueTo>,
 ): Option<ValueTo> {
   return option == null ? undefined : from(fn(option));
 }

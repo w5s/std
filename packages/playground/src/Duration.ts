@@ -69,7 +69,7 @@ const formatSection = (prefix: string, content: string) => (content.length === 0
 function format(duration: Duration): string {
   return `P${formatPart('Y', duration.years)}${formatPart('M', duration.months)}${formatPart('D', duration.days)}${formatSection(
     'T',
-    `${formatPart('H', duration.hours)}${formatPart('M', duration.minutes)}${formatPart('S', duration.seconds)}`
+    `${formatPart('H', duration.hours)}${formatPart('M', duration.minutes)}${formatPart('S', duration.seconds)}`,
   )}`;
 }
 

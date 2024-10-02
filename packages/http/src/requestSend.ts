@@ -62,7 +62,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
         HTTPError.InvalidURL({
           message: 'Invalid URL',
           input: url,
-        })
+        }),
       );
     }
   });

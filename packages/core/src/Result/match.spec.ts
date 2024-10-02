@@ -9,7 +9,7 @@ describe(match, () => {
       match(Ok('ok'), {
         Ok: (value) => `${value}_value`,
         Error: (error) => `${error}_error`,
-      })
+      }),
     ).toEqual('ok_value');
   });
   it('should call matchers.Error when Error', () => {
@@ -17,7 +17,7 @@ describe(match, () => {
       match(Error('error'), {
         Ok: (value) => `${value}_value`,
         Error: (error) => `${error}_error`,
-      })
+      }),
     ).toEqual('error_error');
   });
 });

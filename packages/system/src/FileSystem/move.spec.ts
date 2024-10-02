@@ -32,8 +32,8 @@ describe('move', () => {
           errno: undefined,
           code: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 
@@ -70,8 +70,8 @@ describe('move', () => {
           errno: undefined,
           code: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 
@@ -97,8 +97,8 @@ describe('move', () => {
           errno: undefined,
           code: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
 
     // move again with overwrite
@@ -162,8 +162,8 @@ describe('move', () => {
           errno: undefined,
           code: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 });

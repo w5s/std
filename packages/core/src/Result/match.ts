@@ -24,7 +24,7 @@ export function match<Value, Error, Return>(
   matchers: {
     Ok: (value: Value) => Return;
     Error: (error: Error) => Return;
-  }
+  },
 ): Return {
   return isOk(result) ? matchers.Ok(result.value) : matchers.Error(result.error);
 }

@@ -17,7 +17,7 @@ import { keys } from './keys.js';
  */
 export function forEach<Key extends RecordKey, Value, D extends Record<Key, Value>>(
   record: D,
-  fn: (value: Value, key: Key, record: D) => unknown
+  fn: (value: Value, key: Key, record: D) => unknown,
 ): void {
   for (const key of keys(record)) {
     fn(record[key], key, record);

@@ -28,7 +28,7 @@ describe(Record, () => {
           DecodeError({
             message: 'Cannot decode a,1 as Record<string,bigint>',
             input: 'a',
-          })
+          }),
         ),
       ],
     ],

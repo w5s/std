@@ -14,7 +14,7 @@ describe('SQLStatement', () => {
       SQLStatement({
         strings: ['foo', 'bar'],
         values: [123],
-      })
+      }),
     ).toEqual({
       _: 'SQLStatement',
       strings: ['foo', 'bar'],
@@ -26,7 +26,7 @@ describe('SQLStatement', () => {
       SQLStatement({
         strings: ['foo'],
         values: [123, 345],
-      })
+      }),
     ).toEqual({
       _: 'SQLStatement',
       strings: ['foo', '', ''],
@@ -48,13 +48,13 @@ describe('SQLStatement', () => {
           SQLStatement({
             strings: [' AND bar=', ' AND baz=', ''],
             values: ['barVal', 'bazVal'],
-          })
-        )
+          }),
+        ),
       ).toEqual(
         SQLStatement({
           strings: ['SELECT * FROM toto WHERE foo=', ' AND bar=', ' AND baz='],
           values: ['fooVal', 'barVal', 'bazVal'],
-        })
+        }),
       );
     });
   });
@@ -65,7 +65,7 @@ describe('SQLStatement', () => {
         SQLStatement.format(sql`SELECT ${'foo'}`, {
           formatString: (str) => `_:${str}`,
           formatValue: (value, index) => `$${index}=${value}`,
-        })
+        }),
       ).toEqual('_:SELECT $1=foo_:'));
   });
 
@@ -74,14 +74,14 @@ describe('SQLStatement', () => {
       expect(sql``).toEqual(
         SQLStatement({
           strings: [''],
-        })
+        }),
       );
     });
     it('should return interpolated string', () => {
       expect(sql`SELECT * FROM foo`).toEqual(
         SQLStatement({
           strings: ['SELECT * FROM foo'],
-        })
+        }),
       );
     });
     it('should add values', () => {
@@ -89,7 +89,7 @@ describe('SQLStatement', () => {
         SQLStatement({
           strings: ['SELECT * FROM foo ', ' ', ''],
           values: ['bar', 'baz'],
-        })
+        }),
       );
     });
     it('should concat nested statements', () => {
@@ -97,7 +97,7 @@ describe('SQLStatement', () => {
         SQLStatement({
           strings: ['SELECT * FROM foo WHERE ', ' ', ''],
           values: ['bar', 'baz'],
-        })
+        }),
       );
     });
 
@@ -107,7 +107,7 @@ describe('SQLStatement', () => {
           SQLStatement({
             strings: ['foo'],
             values: [],
-          })
+          }),
         );
       });
     });

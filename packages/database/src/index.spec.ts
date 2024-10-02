@@ -14,7 +14,7 @@ describe('index', () => {
         'SQLStatement',
         'sql',
         'executeQuery',
-      ].sort()
+      ].sort(),
     );
   });
 });

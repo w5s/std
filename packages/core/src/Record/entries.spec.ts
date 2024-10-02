@@ -8,8 +8,8 @@ describe(entries, () => {
         entries({
           anyKey: 'anyValue',
           anyOtherKey: 'anyOtherValue',
-        })
-      )
+        }),
+      ),
     ).toEqual([
       ['anyKey', 'anyValue'],
       ['anyOtherKey', 'anyOtherValue'],

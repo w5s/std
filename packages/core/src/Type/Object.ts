@@ -22,11 +22,11 @@ export function $Object<P>(
   Properties: {
     readonly [K in keyof P]: Type.Module<P[K]>;
   },
-  typeName?: string
+  typeName?: string,
 ): Type.Module<Readonly<P>>;
 export function $Object(
   Properties: Record<string, Type.Module<unknown>>,
-  typeName?: string
+  typeName?: string,
 ): Type.Module<Record<string, unknown>> {
   const propertyNames = globalThis.Object.keys(Properties);
   const propertyNameCount = propertyNames.length;
@@ -83,7 +83,7 @@ export function $Object(
           // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
           properties: {} as Record<string, unknown>,
           required: [] as string[],
-        }
+        },
       ) as JSONValue,
   });
 }

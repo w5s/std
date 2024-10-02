@@ -18,7 +18,7 @@ describe('Int', () => {
       expect.objectContaining({
         parse,
         format,
-      })
+      }),
     );
   });
   describeType({ describe, it, expect })(Int, {

@@ -20,6 +20,6 @@ describe('BigIntSigned', () => {
         { call: [0n], returns: 0n },
         { call: [6n], returns: 1n },
       ],
-    }
+    },
   );
 });

@@ -26,7 +26,7 @@ export function writeFile(
     | DataView
     | AsyncIterable<string | NodeJS.TypedArray | DataView>
     | Iterable<string | NodeJS.TypedArray | DataView>,
-  options?: writeFile.Options
+  options?: writeFile.Options,
 ): Task<void, FileError> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return taskFrom(async ({ resolve, reject, canceler }) => {
@@ -37,7 +37,7 @@ export function writeFile(
         await Internal.FS.writeFile(file, data, {
           ...options,
           signal: controller.signal,
-        })
+        }),
       );
     } catch (error_: unknown) {
       reject(errnoExceptionHandler(error_));

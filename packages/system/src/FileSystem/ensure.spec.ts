@@ -46,8 +46,8 @@ describe('ensureDirectory', () => {
           code: undefined,
           path: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 });
@@ -82,8 +82,8 @@ describe('ensureFile', () => {
           code: undefined,
           path: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 });
@@ -122,8 +122,8 @@ describe('ensureSymbolicLink', () => {
           code: undefined,
           path: undefined,
           syscall: undefined,
-        })
-      )
+        }),
+      ),
     );
   });
 });

@@ -15,7 +15,7 @@ describe('FileError', () => {
           errno: Option.Some(2),
           path: Option.Some(anyPath),
           syscall: Option.Some('read'),
-        })
+        }),
       ).toEqual(
         expect.objectContaining({
           name: 'FileError',
@@ -23,7 +23,7 @@ describe('FileError', () => {
           code: 'ENOENT',
           path: anyPath,
           syscall: 'read',
-        })
+        }),
       );
     });
   });

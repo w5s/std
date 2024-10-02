@@ -23,7 +23,7 @@ import { from } from './from.js';
  * @param tasks - tasks to be run in parallel
  */
 export function all<T extends readonly TaskLike<any, any>[]>(
-  tasks: [...T]
+  tasks: [...T],
 ): Task<{ [K in keyof T]: Task.ValueOf<T[K]> }, Task.ErrorOf<T[keyof T]>>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
@@ -54,7 +54,7 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
             entry.canceler.current = undefined;
             state.cancelAll();
           }
-        }
+        },
       );
     }
   });

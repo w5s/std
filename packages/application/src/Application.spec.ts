@@ -21,7 +21,7 @@ describe('Application', () => {
             configuration: { foo: 'bar' },
           },
         ],
-      ])
+      ]),
     );
   });
   it('should setup target if provided', () => {

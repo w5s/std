@@ -16,7 +16,7 @@ export type Record<Key extends RecordKey, Value> = {
 
 export function Record<Key extends Type.Module<any>, Value extends Type.Module<any>>(
   Key: Key,
-  Value: Value
+  Value: Value,
 ): Type.Module<Record<Type.TypeOf<Key>, Type.TypeOf<Value>>> {
   const typeName = `Record<${Key.typeName},${Value.typeName}>`;
   return define({

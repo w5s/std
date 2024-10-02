@@ -17,7 +17,7 @@ describe('Number', () => {
       expect.objectContaining({
         parse,
         format,
-      })
+      }),
     );
   });
 });

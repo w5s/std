@@ -12,7 +12,7 @@ describe('Process', () => {
       const processExit = vi.spyOn(Internal.Process, 'exit').mockImplementation(
         () =>
           // do nothing
-          undefined as never
+          undefined as never,
       );
       const exitTask = Process.exit(0);
       expect(Task.unsafeRun(exitTask)).toEqual(Result.Ok(undefined));

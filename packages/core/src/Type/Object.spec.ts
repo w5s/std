@@ -29,7 +29,7 @@ describe(ObjectType, () => {
           DecodeError({
             message: 'Cannot decode a as UnderscoreString',
             input: 'a',
-          })
+          }),
         ),
       ],
     ],

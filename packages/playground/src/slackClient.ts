@@ -118,7 +118,7 @@ export namespace Slack {
           : result.value.ok === false
             ? Err(Error({ message: 'Slack Error!', slackErrorCode: result.value.error }))
             : Err(DecodeError({ message: 'Decode Error!', input: result.value }))
-        : result
+        : result,
     );
     return requestParsed;
   }

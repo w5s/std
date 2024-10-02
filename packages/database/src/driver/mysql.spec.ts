@@ -11,7 +11,7 @@ describe('MySQL', () => {
     const connection: Mocked<mysql.Connection> = {
       query: vi.fn<mysql.Connection['query']>(
         // @ts-ignore mock partial signature
-        (_sql, _params, callback?) => callback(null, [])
+        (_sql, _params, callback?) => callback(null, []),
       ),
       connect: vi.fn(),
       end: vi.fn(),
@@ -19,7 +19,7 @@ describe('MySQL', () => {
     };
     vi.spyOn(MySQL, 'createConnection').mockImplementation(
       // @ts-ignore All methods are not required
-      () => connection
+      () => connection,
     );
 
     return connection;
@@ -54,7 +54,7 @@ describe('MySQL', () => {
     it('should send query to connection', async () => {
       const query = vi.fn<mysql.QueryFunction>(
         // @ts-ignore mock partial signature
-        (_sql, _params, callback) => callback(null, 2)
+        (_sql, _params, callback) => callback(null, 2),
       );
       mockConnection({
         query,
@@ -81,7 +81,7 @@ describe('MySQL', () => {
       const end = vi.fn<mysql.Connection['end']>();
       const query = vi.fn<mysql.Connection['query']>(
         // @ts-ignore mock partial signature
-        (_queryObject, callback) => callback(new Error('mock error'), null)
+        (_queryObject, callback) => callback(new Error('mock error'), null),
       );
       mockConnection({
         end,

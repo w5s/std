@@ -59,7 +59,7 @@ function useRefStorage<V>(hostObject: Storage, key: string, initialValue: V): Re
 export function useRef<V>(
   hostObject: Ref<Record<string | symbol, unknown>> | Storage,
   key: string,
-  initialValue: V
+  initialValue: V,
 ): Ref<V> {
   return 'get' in hostObject ? useRefStorage(hostObject, key, initialValue) : useRefMap(hostObject, key, initialValue);
 }

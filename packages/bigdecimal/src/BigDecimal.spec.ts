@@ -22,7 +22,7 @@ describe('BigDecimal', () => {
         of,
         parse,
         scale,
-      })
+      }),
     );
   });
 });

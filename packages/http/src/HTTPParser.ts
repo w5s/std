@@ -25,7 +25,7 @@ export namespace HTTPParser {
           reject(
             HTTPError.ParserError({
               cause: error,
-            })
+            }),
           );
         }
       });
@@ -78,7 +78,7 @@ export namespace HTTPParser {
           mapResult(parser(response), (result) =>
             result.ok
               ? mapError(decode(CodecModule, result.value), (error) => HTTPError.ParserError({ cause: error }))
-              : result
+              : result,
           );
   }
 

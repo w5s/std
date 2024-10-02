@@ -27,7 +27,7 @@ export function describeComparable(testingLibrary: TestingLibrary) {
     properties: {
       ordered: () => T[];
       equivalent: () => [T, T][];
-    }
+    },
   ) => {
     const { equivalent: equivalentDefault, ordered } = properties;
     const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));

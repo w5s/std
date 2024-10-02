@@ -27,7 +27,7 @@ export interface ApplicationTest<Configuration = EmptyObject> extends Applicatio
  * @param properties
  */
 export function ApplicationTest<Configuration extends Record<string | symbol, unknown> = EmptyObject>(
-  properties?: ApplicationTest.Options<Configuration>
+  properties?: ApplicationTest.Options<Configuration>,
 ): ApplicationTest<Configuration> {
   const { id = generateAppId(), store = { current: {} }, configuration } = properties ?? {};
 

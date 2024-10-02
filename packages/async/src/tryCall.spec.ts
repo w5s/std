@@ -10,8 +10,8 @@ describe('tryCall', () => {
       await expect(
         tryCall(
           () => Promise.resolve(anyValue),
-          (_) => `${_}_bar`
-        )
+          (_) => `${_}_bar`,
+        ),
       ).resolves.toEqual(`${anyValue}_bar`);
     });
     it('returns a promise when rejected', async () => {
@@ -21,8 +21,8 @@ describe('tryCall', () => {
           undefined,
           (_) => {
             throw new Error(`${(_ as Error).message}_ext`);
-          }
-        )
+          },
+        ),
       ).rejects.toEqual(new Error(`MockError_ext`));
     });
     it('forwards error if no onError', async () => {
@@ -34,8 +34,8 @@ describe('tryCall', () => {
       expect(
         tryCall(
           () => anyValue,
-          (_) => `${_}_bar`
-        )
+          (_) => `${_}_bar`,
+        ),
       ).toEqual(`${anyValue}_bar`);
     });
     it('returns a value when no throw', () => {
@@ -47,15 +47,15 @@ describe('tryCall', () => {
           undefined,
           (_) => {
             throw new Error(`${(_ as Error).message}_ext`);
-          }
-        )
+          },
+        ),
       ).toThrow(new Error(`MockError_ext`));
     });
     it('forwards error if no onError', () => {
       expect(() =>
         tryCall(() => {
           throw anyError;
-        }, undefined)
+        }, undefined),
       ).toThrow(anyError);
     });
   });

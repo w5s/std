@@ -16,7 +16,7 @@ describe('UUID', () => {
     it.each([undefined, null, [], '', 'non uuid'])('should throw TypeError when invalid value is passed', (value) => {
       expect(() =>
         // @ts-expect-error test it anyway
-        UUID.of(value)
+        UUID.of(value),
       ).toThrow();
     });
   });

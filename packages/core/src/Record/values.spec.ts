@@ -8,8 +8,8 @@ describe(values, () => {
         values({
           anyKey: 'anyValue',
           anyOtherKey: 'anyOtherValue',
-        })
-      )
+        }),
+      ),
     ).toEqual(['anyValue', 'anyOtherValue']);
   });
 });

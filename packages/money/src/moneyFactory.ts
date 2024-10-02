@@ -9,7 +9,7 @@ export function moneyFactory(
   currencyCode: Currency['code'],
   options?: {
     registry?: CurrencyRegistry;
-  }
+  },
 ) {
   const currency = (options?.registry ?? CurrencyRegistry).getByCode(currencyCode);
   invariant(currency != null, `${currencyCode} is not valid currency code`);

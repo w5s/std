@@ -58,8 +58,8 @@ describe('timeout', () => {
       Result.Error(
         TimeoutError({
           message: `Task timed out after ${anyDelay}ms`,
-        })
-      )
+        }),
+      ),
     );
     expect(cancelerFn).toHaveBeenCalled();
   });

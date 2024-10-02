@@ -8,7 +8,7 @@ describe('index', () => {
         // public exports
         'fsStub',
         'withFile',
-      ].sort()
+      ].sort(),
     );
   });
 });

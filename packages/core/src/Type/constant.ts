@@ -19,15 +19,15 @@ import { define } from './define.js';
  */
 export function constant<const Value extends string | number | boolean | null>(
   value: Value,
-  encodedValue?: JSONPrimitive
+  encodedValue?: JSONPrimitive,
 ): Type.Module<Value>;
 export function constant<const Value extends bigint | symbol | undefined>(
   value: Value,
-  encodedValue: JSONPrimitive
+  encodedValue: JSONPrimitive,
 ): Type.Module<Value>;
 export function constant<const Value extends Primitive>(
   value: Value,
-  encodedValue?: JSONPrimitive
+  encodedValue?: JSONPrimitive,
 ): Type.Module<Value> {
   const typeName = String(value);
   const resolvedEncodedValue = (encodedValue === undefined ? value : encodedValue) as unknown as JSONPrimitive;

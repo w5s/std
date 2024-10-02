@@ -88,7 +88,7 @@ export const CustomError: CustomErrorConstructor = (() => {
 
   function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
     this: any,
-    properties: Properties
+    properties: Properties,
   ): CustomError<Properties> {
     interface MutableError extends Error {
       [extra: string]: unknown;

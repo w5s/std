@@ -16,7 +16,7 @@ import { isOk } from './isOk.js';
  */
 export function andThen<VFrom, EFrom, VTo, ETo>(
   result: Result<VFrom, EFrom>,
-  fn: (value: VFrom) => Result<VTo, ETo>
+  fn: (value: VFrom) => Result<VTo, ETo>,
 ): Result<VTo, EFrom | ETo> {
   return isOk(result) ? fn(result.value) : result;
 }

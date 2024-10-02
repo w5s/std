@@ -18,11 +18,11 @@ import type { Option } from '../Option.js';
  */
 export function find<Item, RefinedItem extends Item>(
   array: Array<Item>,
-  predicate: (value: Item, index: Int, array: Array<Item>) => value is RefinedItem
+  predicate: (value: Item, index: Int, array: Array<Item>) => value is RefinedItem,
 ): Option<RefinedItem>;
 export function find<Item>(
   array: Array<Item>,
-  predicate: (value: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (value: Item, index: Int, array: Array<Item>) => boolean,
 ): Option<Item>;
 export function find<Item>(array: Array<Item>, predicate: (value: Item, index: Int, array: Array<Item>) => boolean) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access

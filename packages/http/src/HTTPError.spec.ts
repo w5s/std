@@ -9,7 +9,7 @@ describe('HTTPError.InvalidURL', () => {
         name: 'HTTPInvalidURLError',
         message: 'test',
         input: 'abc',
-      })
+      }),
     );
   });
 });
@@ -20,7 +20,7 @@ describe('HTTPError.NetworkError', () => {
         // _: 'DataError',
         name: 'HTTPNetworkError',
         message: 'test',
-      })
+      }),
     );
   });
 });
@@ -31,7 +31,7 @@ describe('HTTPError.ParserError', () => {
         // _: 'DataError',
         name: 'HTTPParserError',
         message: 'test',
-      })
+      }),
     );
   });
 });

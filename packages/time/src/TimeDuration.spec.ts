@@ -13,7 +13,7 @@ describe('TimeDuration', () => {
     expect(TimeDuration).toEqual(
       expect.objectContaining({
         of,
-      })
+      }),
     );
   });
   describe('()', () => {

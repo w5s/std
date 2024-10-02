@@ -7,7 +7,7 @@ describe('TimeoutError', () => {
       expect.objectContaining({
         name: 'TimeoutError',
         message: 'my message',
-      })
+      }),
     );
   });
 });

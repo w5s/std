@@ -12,7 +12,7 @@ describe('index', () => {
         'LogMessageItem',
         'LogRecord',
         'LogHandler',
-      ].sort()
+      ].sort(),
     );
   });
 });

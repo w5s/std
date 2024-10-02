@@ -14,12 +14,12 @@ function createOperator(combineFn: (leftAmount: Money['amount'], rightAmount: Mo
           Money({
             currency: left.currency,
             amount: combineFn(left.amount, right.amount),
-          })
+          }),
         )
       : Error(
           ArgumentError({
             message: `Incompatible currencies ${left.currency.code} and ${right.currency.code}`,
-          })
+          }),
         );
 }
 

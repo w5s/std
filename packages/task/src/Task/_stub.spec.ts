@@ -10,7 +10,7 @@ export const allSyncCombination = [
 ] as Array<['sync' | 'async', 'sync' | 'async']>;
 
 export function runReportTask<Value, Error>(
-  task: TaskLike<Value, Error>
+  task: TaskLike<Value, Error>,
 ): {
   resolve: MockedFunction<(value: Value) => void>;
   reject: MockedFunction<(error: Error) => void>;

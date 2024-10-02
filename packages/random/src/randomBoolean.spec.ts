@@ -12,7 +12,7 @@ describe('randomBoolean', () => {
     const nextRandom = 0.123;
 
     vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
-      resolve(RandomValue.of(nextRandom))
+      resolve(RandomValue.of(nextRandom)),
     );
     const task = randomBoolean();
     expect(Task.unsafeRun(task)).toEqual(Result.Ok(false));

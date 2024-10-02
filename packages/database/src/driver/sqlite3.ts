@@ -29,7 +29,7 @@ export const SQLite3 = {
       });
       // eslint-disable-next-line promise/prefer-await-to-then
       return queryResultPromise.finally(() => database.close());
-    }
+    },
   ),
 };
 

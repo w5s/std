@@ -27,23 +27,23 @@ describe('FilePath', () => {
         Task.unsafeRunOk(
           FilePath.resolve(
             [absolutePath(''), relativePath('bar', 'baz'), relativePath('..', 'baz2')],
-            relativePath('foo')
-          )
-        )
+            relativePath('foo'),
+          ),
+        ),
       ).toBe(absolutePath('bar', 'baz2', 'foo'));
       expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz')))).toBe(
-        absolutePath('foo', 'bar', 'baz')
+        absolutePath('foo', 'bar', 'baz'),
       );
       expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', '')))).toBe(
-        absolutePath('tmp', 'file')
+        absolutePath('tmp', 'file'),
       );
       expect(
         Task.unsafeRunOk(
           FilePath.resolve(
             [relativePath('wwwroot'), relativePath('static_files', 'png')],
-            relativePath('..', 'gif', 'image.gif')
-          )
-        )
+            relativePath('..', 'gif', 'image.gif'),
+          ),
+        ),
       ).toBe(relativePath(process.cwd(), 'wwwroot', 'static_files', 'gif', 'image.gif'));
     });
   });
@@ -70,7 +70,7 @@ describe('FilePath', () => {
           dir: Option.None,
           ext: Option.None,
           name: Option.None,
-        })
+        }),
       ).toBe('');
     });
   });
@@ -135,7 +135,7 @@ describe('FilePath', () => {
       'should return correct value for %s',
       ({ parent, child }, expected) => {
         expect(FilePath.isParentOf(FilePath(parent), FilePath(child))).toBe(expected);
-      }
+      },
     );
   });
 });

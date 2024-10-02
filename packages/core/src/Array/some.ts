@@ -17,7 +17,7 @@ import type { Int } from '../Int.js';
  */
 export function some<Item>(
   array: Array<Item>,
-  predicate: (item: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (item: Item, index: Int, array: Array<Item>) => boolean,
 ): boolean {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return (array as any).some(predicate);

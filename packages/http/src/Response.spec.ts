@@ -8,7 +8,7 @@ describe(Response, () => {
     expect(Response).toEqual(
       expect.objectContaining({
         from,
-      })
+      }),
     );
   });
   it('returns a new instance', () => {
@@ -17,7 +17,7 @@ describe(Response, () => {
         url: 'my/url',
         body: 'some body',
         status: Status.OK,
-      })
+      }),
     ).toEqual({
       headers: {},
       ok: true,

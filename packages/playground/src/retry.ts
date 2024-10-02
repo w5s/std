@@ -81,7 +81,7 @@ export namespace RetryPolicy {
    */
   export function andThen(
     policy: RetryPolicy,
-    thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>
+    thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>,
   ): RetryPolicy {
     return (state) => taskMap(policy(state), (delayMs) => (delayMs == null ? undefined : thenFn(delayMs, state)));
   }
@@ -100,7 +100,7 @@ export namespace RetryPolicy {
    */
   export function filter(
     policy: RetryPolicy,
-    predicate: (delay: TimeDuration, state: RetryState) => boolean
+    predicate: (delay: TimeDuration, state: RetryState) => boolean,
   ): RetryPolicy {
     return andThen(policy, (delay, state) => (predicate(delay, state) ? delay : undefined));
   }
@@ -126,7 +126,7 @@ export namespace RetryPolicy {
             retryIndex: (+state.retryIndex + 1) as Int,
             retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
             retryPreviousDelay,
-          })
+          }),
     );
   }
 
@@ -145,7 +145,7 @@ export namespace RetryPolicy {
    */
   export function applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
     return taskThenRun(apply(policy, state), (nextStatus) =>
-      timeDelay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration))
+      timeDelay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration)),
     );
   }
 
@@ -167,7 +167,7 @@ export namespace RetryPolicy {
     return (state: RetryState) => {
       const allTask = taskAll([left(state), right(state)]);
       return taskMap(allTask, ([leftResult, rightResult]) =>
-        leftResult == null || rightResult == null ? undefined : (Math.max(+leftResult, +rightResult) as TimeDuration)
+        leftResult == null || rightResult == null ? undefined : (Math.max(+leftResult, +rightResult) as TimeDuration),
       );
     };
   }
@@ -283,7 +283,7 @@ export type RetryResult = RetryDoneResult | RetryContinueResult;
 
 export function retrying<Value, Error>(
   taskOrGetter: TaskLike<Value, Error> | ((state: RetryState) => TaskLike<Value, Error>),
-  options: retrying.Options<Value, Error>
+  options: retrying.Options<Value, Error>,
 ): Task<Value, Error> {
   const { policy, check, initialState = defaultRetryState } = options;
   const go = (state: RetryState): Task<Value, Error> =>
@@ -296,11 +296,11 @@ export function retrying<Value, Error>(
                 retryResult.value == null ? policy : RetryPolicy.andThen(policy, () => retryResult.value);
               const applyTask = RetryPolicy.applyAndDelay(policyTask, state);
               const continueTask = taskThen(applyTask, (appliedStatus) =>
-                appliedStatus == null ? taskFromResult(result) : go(appliedStatus)
+                appliedStatus == null ? taskFromResult(result) : go(appliedStatus),
               );
               return continueTask;
-            })()
-      )
+            })(),
+      ),
     );
 
   return go(initialState);
@@ -315,7 +315,7 @@ export namespace retrying {
 
 function andThenResult<Value, ValueTo, Error>(
   task: TaskLike<Value, Error>,
-  thenResultFn: (result: Result<Value, Error>) => TaskLike<ValueTo, Error>
+  thenResultFn: (result: Result<Value, Error>) => TaskLike<ValueTo, Error>,
 ) {
   const thenTask = taskThen(task, (value) => thenResultFn(Ok(value)));
   const elseTask = taskElse(thenTask, (error) => thenResultFn(Error(error)));

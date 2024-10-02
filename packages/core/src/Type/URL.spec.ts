@@ -21,7 +21,7 @@ describe('URL', () => {
           DecodeError({
             message: 'Cannot decode  as URL',
             input: null,
-          })
+          }),
         ),
       ],
       [
@@ -30,7 +30,7 @@ describe('URL', () => {
           DecodeError({
             message: 'Cannot decode null as URL',
             input: null,
-          })
+          }),
         ),
       ],
     ],

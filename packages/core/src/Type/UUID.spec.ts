@@ -21,7 +21,7 @@ describe('UUID', () => {
           DecodeError({
             message: 'Cannot decode null as UUID',
             input: null,
-          })
+          }),
         ),
       ],
     ],

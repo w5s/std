@@ -16,7 +16,7 @@ import { isOk } from './isOk.js';
  */
 export function orElse<VFrom, EFrom, VTo, ETo>(
   result: Result<VFrom, EFrom>,
-  fn: (error: EFrom) => Result<VTo, ETo>
+  fn: (error: EFrom) => Result<VTo, ETo>,
 ): Result<VFrom | VTo, ETo> {
   return isOk(result) ? result : fn(result.error);
 }

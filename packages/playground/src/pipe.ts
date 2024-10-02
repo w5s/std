@@ -34,7 +34,7 @@ export function pipe<Value>(value: Value): Pipe<Value> {
       pq?: Function,
       qr?: Function,
       rs?: Function,
-      st?: Function
+      st?: Function,
     ) {
       switch (arguments.length) {
         case 0: {
@@ -118,7 +118,7 @@ interface Pipe<A> {
     cd: (_: C) => D,
     de: (_: D) => E,
     ef: (_: E) => F,
-    fg: (_: F) => G
+    fg: (_: F) => G,
   ): G;
   to<B, C, D, E, F, G, H>(
     ab: (_: A) => B,
@@ -127,7 +127,7 @@ interface Pipe<A> {
     de: (_: D) => E,
     ef: (_: E) => F,
     fg: (_: F) => G,
-    gh: (_: G) => H
+    gh: (_: G) => H,
   ): H;
   to<B, C, D, E, F, G, H, I>(
     ab: (_: A) => B,
@@ -137,7 +137,7 @@ interface Pipe<A> {
     ef: (_: E) => F,
     fg: (_: F) => G,
     gh: (_: G) => H,
-    hi: (_: H) => I
+    hi: (_: H) => I,
   ): I;
   to<B, C, D, E, F, G, H, I, J>(
     ab: (_: A) => B,
@@ -148,7 +148,7 @@ interface Pipe<A> {
     fg: (_: F) => G,
     gh: (_: G) => H,
     hi: (_: H) => I,
-    ij: (_: I) => J
+    ij: (_: I) => J,
   ): J;
   to<B, C, D, E, F, G, H, I, J, K>(
     ab: (_: A) => B,
@@ -160,7 +160,7 @@ interface Pipe<A> {
     gh: (_: G) => H,
     hi: (_: H) => I,
     ij: (_: I) => J,
-    jk: (_: J) => K
+    jk: (_: J) => K,
   ): K;
   to<B, C, D, E, F, G, H, I, J, K, L>(
     ab: (_: A) => B,
@@ -173,7 +173,7 @@ interface Pipe<A> {
     hi: (_: H) => I,
     ij: (_: I) => J,
     jk: (_: J) => K,
-    kl: (_: K) => L
+    kl: (_: K) => L,
   ): L;
   to<B, C, D, E, F, G, H, I, J, K, L, M>(
     ab: (_: A) => B,
@@ -187,7 +187,7 @@ interface Pipe<A> {
     ij: (_: I) => J,
     jk: (_: J) => K,
     kl: (_: K) => L,
-    lm: (_: L) => M
+    lm: (_: L) => M,
   ): M;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N>(
     ab: (_: A) => B,
@@ -202,7 +202,7 @@ interface Pipe<A> {
     jk: (_: J) => K,
     kl: (_: K) => L,
     lm: (_: L) => M,
-    mn: (_: M) => N
+    mn: (_: M) => N,
   ): N;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O>(
     ab: (_: A) => B,
@@ -218,7 +218,7 @@ interface Pipe<A> {
     kl: (_: K) => L,
     lm: (_: L) => M,
     mn: (_: M) => N,
-    no: (_: N) => O
+    no: (_: N) => O,
   ): O;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O, P>(
     ab: (_: A) => B,
@@ -235,7 +235,7 @@ interface Pipe<A> {
     lm: (_: L) => M,
     mn: (_: M) => N,
     no: (_: N) => O,
-    op: (_: O) => P
+    op: (_: O) => P,
   ): P;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q>(
     ab: (_: A) => B,
@@ -253,7 +253,7 @@ interface Pipe<A> {
     mn: (_: M) => N,
     no: (_: N) => O,
     op: (_: O) => P,
-    pq: (_: P) => Q
+    pq: (_: P) => Q,
   ): Q;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(
     ab: (_: A) => B,
@@ -272,7 +272,7 @@ interface Pipe<A> {
     no: (_: N) => O,
     op: (_: O) => P,
     pq: (_: P) => Q,
-    qr: (_: Q) => R
+    qr: (_: Q) => R,
   ): R;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S>(
     ab: (_: A) => B,
@@ -292,7 +292,7 @@ interface Pipe<A> {
     op: (_: O) => P,
     pq: (_: P) => Q,
     qr: (_: Q) => R,
-    rs: (_: R) => S
+    rs: (_: R) => S,
   ): S;
   to<B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T>(
     ab: (_: A) => B,
@@ -313,6 +313,6 @@ interface Pipe<A> {
     pq: (_: P) => Q,
     qr: (_: Q) => R,
     rs: (_: R) => S,
-    st: (_: S) => T
+    st: (_: S) => T,
   ): T;
 }

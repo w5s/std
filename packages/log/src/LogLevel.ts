@@ -49,7 +49,7 @@ function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLe
         orderedMatchers.reduce(
           (acc, matcher) =>
             LogLevel.compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value ? matcher : acc,
-          first
+          first,
         )[returnValue];
 }
 

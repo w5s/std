@@ -22,7 +22,7 @@ describe('TimeDuration', () => {
           DecodeError({
             message: 'Cannot decode null as TimeDuration',
             input: null,
-          })
+          }),
         ),
       ],
     ],

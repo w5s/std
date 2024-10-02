@@ -28,7 +28,7 @@ export interface TaskCanceler extends Ref<Option<() => void>> {}
  */
 export type TaskRunner = <Value, Error>(
   task: TaskLike<Value, Error>,
-  canceler: TaskCanceler
+  canceler: TaskCanceler,
 ) => Awaitable<Result<Value, Error>>;
 
 /**

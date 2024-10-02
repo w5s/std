@@ -18,7 +18,7 @@ import { from } from './from.js';
  */
 export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
-  fn: (value: ValueFrom) => TaskLike<ValueTo, ErrorTo>
+  fn: (value: ValueFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorFrom | ErrorTo> {
   return from((parameters) => task.taskRun({ ...parameters, resolve: (value) => fn(value).taskRun(parameters) }));
 }

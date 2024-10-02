@@ -36,7 +36,7 @@ describe(define, () => {
       define({
         Foo: 'foo',
         Bar: 'bar',
-      })
+      }),
     ).toEqual({
       Foo: 'foo',
       Bar: 'bar',

@@ -13,7 +13,7 @@ export const Mock = DatabaseDriver.Make(
       return client.mockExecuteQuery(sqlStatement);
     }
     throw new Error('NotImplementedError');
-  }
+  },
 );
 
 declare module '@w5s/database' {

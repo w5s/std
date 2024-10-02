@@ -19,7 +19,7 @@ import { map } from './map.js';
  */
 export function andRun<ValueFrom, ErrorFrom, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
-  fn: (value: ValueFrom) => TaskLike<any, ErrorTo>
+  fn: (value: ValueFrom) => TaskLike<any, ErrorTo>,
 ): Task<ValueFrom, ErrorFrom | ErrorTo> {
   return andThen(task, (value) => map(fn(value), () => value));
 }

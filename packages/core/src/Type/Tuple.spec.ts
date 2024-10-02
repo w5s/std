@@ -23,7 +23,7 @@ describe(Tuple, () => {
           DecodeError({
             message: 'Cannot decode a,1 as [string,bigint]',
             input: 'a',
-          })
+          }),
         ),
       ],
     ],

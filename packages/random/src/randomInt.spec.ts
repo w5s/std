@@ -11,7 +11,7 @@ describe('randomInt', () => {
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
     vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
-      resolve(RandomValue.of(nextRandom))
+      resolve(RandomValue.of(nextRandom)),
     );
     const task = randomInt(Int(-10), Int(10));
     expect(Task.unsafeRun(task)).toEqual(Result.Ok(-8));

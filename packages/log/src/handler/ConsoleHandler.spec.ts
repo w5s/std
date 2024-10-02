@@ -42,8 +42,8 @@ describe('.ConsoleHandler', () => {
           category: 'logCategory',
           level: LogLevel.Debug,
           message: LogMessage.of('message', ['foo', 'bar']),
-        })
-      )
+        }),
+      ),
     );
     expect(console.debug).toHaveBeenLastCalledWith('[logCategory]', 'message', 'bar');
   });
@@ -54,8 +54,8 @@ describe('.ConsoleHandler', () => {
         generateLogRecord({
           level: LogLevel.Debug,
           message: LogMessage.of('message', ['foo', 'bar']),
-        })
-      )
+        }),
+      ),
     );
     expect(console.debug).toHaveBeenLastCalledWith('message', 'bar');
   });

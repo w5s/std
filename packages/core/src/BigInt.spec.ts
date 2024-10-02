@@ -21,7 +21,7 @@ describe('BigInt', () => {
         format,
         fromInt,
         fromNumber,
-      })
+      }),
     );
   });
 });

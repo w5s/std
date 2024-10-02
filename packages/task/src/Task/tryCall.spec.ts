@@ -15,7 +15,7 @@ describe(tryCall, () => {
   it('should resolve(block()) when nothing is thrown', async () => {
     const task = tryCall(
       () => 'return_value',
-      () => new TestError()
+      () => new TestError(),
     );
     await expectTask(task).toResolve('return_value');
   });
@@ -31,14 +31,14 @@ describe(tryCall, () => {
   it('should return Result.Ok(block()) when nothing is thrown (async handler)', async () => {
     const task = tryCall(
       async () => 'return_value',
-      async (innerError) => new TestError(innerError)
+      async (innerError) => new TestError(innerError),
     );
     await expectTask(task).toResolve('return_value');
   });
   it('should return Result.Ok(block()) when nothing is thrown (sync handler)', async () => {
     const task = tryCall(
       () => 'return_value',
-      async (innerError) => new TestError(innerError)
+      async (innerError) => new TestError(innerError),
     );
     await expectTask(task).toResolve('return_value');
   });

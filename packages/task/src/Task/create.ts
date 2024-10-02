@@ -42,7 +42,7 @@ export function create<Value, Error = never>(
      * A task runner that can be used to run subtasks
      */
     run: <V, E>(task: TaskLike<V, E>) => Awaitable<Result<V, E>>;
-  }) => Awaitable<Result<Value, Error>>
+  }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(({ resolve, reject, canceler, run }) => {
@@ -55,7 +55,7 @@ export function create<Value, Error = never>(
           canceler,
           run: (task) => run(task, canceler),
         }),
-      (result) => (result.ok ? resolve(result.value) : reject(result.error))
+      (result) => (result.ok ? resolve(result.value) : reject(result.error)),
     );
   });
 }

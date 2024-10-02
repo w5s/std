@@ -16,7 +16,7 @@ import { isNone } from './isNone.js';
  */
 export function map<ValueFrom, ValueTo>(
   option: Nullable<ValueFrom>,
-  fn: (value: ValueFrom) => NonNullable<ValueTo>
+  fn: (value: ValueFrom) => NonNullable<ValueTo>,
 ): Option<ValueTo> {
   return isNone(option) ? undefined : fn(option);
 }

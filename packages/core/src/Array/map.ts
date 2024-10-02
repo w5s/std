@@ -15,7 +15,7 @@ import type { Int } from '../Int.js';
  */
 export function map<FromItem, ToItem>(
   array: Array<FromItem>,
-  mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => ToItem
+  mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => ToItem,
 ): Array<ToItem> {
   if (array.length === 0) {
     return array as Array<never>;

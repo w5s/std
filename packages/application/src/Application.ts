@@ -60,7 +60,7 @@ export interface Application<Configuration = EmptyObject> {
  * @param properties
  */
 export function Application<Configuration extends object = EmptyObject>(
-  properties: Application.Options<Configuration>
+  properties: Application.Options<Configuration>,
 ): Application<Configuration> {
   const {
     id,
@@ -113,7 +113,7 @@ export namespace Application {
    */
   export function get<Configuration, Key extends keyof Configuration>(
     app: Application<Configuration>,
-    key: Key
+    key: Key,
   ): Configuration[Key] {
     // @ts-ignore Wrong typing
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return

@@ -20,7 +20,7 @@ type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
 export function shallowEqual<T = unknown>(
   left: T,
   right: T,
-  equalValueFn?: (left: ValueOf<T>, right: ValueOf<T>, key: KeyOf<T>) => boolean
+  equalValueFn?: (left: ValueOf<T>, right: ValueOf<T>, key: KeyOf<T>) => boolean,
 ): boolean {
   const objectIs = Object.is;
 

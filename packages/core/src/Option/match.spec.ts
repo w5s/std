@@ -9,7 +9,7 @@ describe(match, () => {
       match(None, {
         None: () => 'none',
         Some: (value) => `${value}_some`,
-      })
+      }),
     ).toEqual('none');
   });
   it('should call matchers.Some when Some', () => {
@@ -17,7 +17,7 @@ describe(match, () => {
       match(Some('foo'), {
         None: () => 'none',
         Some: (value) => `${value}_some`,
-      })
+      }),
     ).toEqual('foo_some');
   });
 });

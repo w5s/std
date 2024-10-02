@@ -24,7 +24,7 @@ describe('invariant', () => {
   });
   it('should throw error an error with a correct message', () => {
     expect(getThrownError(() => invariant(false, 'my message'))).toEqual(
-      expect.objectContaining({ message: 'my message' })
+      expect.objectContaining({ message: 'my message' }),
     );
   });
   it('should refine typing', () => {

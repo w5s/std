@@ -10,14 +10,14 @@ export function describeCodec(testingLibrary: TestingLibrary) {
       decode: Array<[unknown, Result<unknown, unknown>]>;
       encode: Array<[unknown, unknown]>;
       schema: () => unknown;
-    }
+    },
   ) => {
     (properties.decode.length === 0 ? describe.todo : describe)('codecDecode', () => {
       it.each(properties.decode.map(([input, expected]) => ({ input, expected })))(
         '($input) == $expected',
         ({ input, expected }) => {
           expect(Codec.decode(subject, input)).toEqual(expected);
-        }
+        },
       );
     });
     (properties.encode.length === 0 ? describe.todo : describe)('codecEncode', () => {
@@ -25,7 +25,7 @@ export function describeCodec(testingLibrary: TestingLibrary) {
         '($input) == $expected',
         ({ input, expected }) => {
           expect(Codec.encode(subject, input)).toEqual(expected);
-        }
+        },
       );
     });
     describe('codecSchema', () => {

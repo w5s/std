@@ -182,7 +182,7 @@ export const Iterable = {
                 return resultDone;
               },
             };
-          }
+          },
     );
   },
 
@@ -254,7 +254,7 @@ export const Iterable = {
   reduce<Value, Return>(
     source: Iterable<Value>,
     reducer: (accumulator: Return, value: Value) => Return,
-    initialValue: Return
+    initialValue: Return,
   ): Return {
     const sourceIterator = getIterator(source);
     let result: IteratorResult<Value>;
