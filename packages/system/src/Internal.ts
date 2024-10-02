@@ -2,7 +2,6 @@
 
 import * as nodeFS from 'node:fs';
 import nodePath from 'node:path';
-import * as nodeProcess from 'node:process';
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import { FileError } from './FileError.js';
@@ -11,7 +10,7 @@ import type { FilePath } from './FilePath.js';
 export const Internal = {
   FS: { ...nodeFS.promises, ...nodeFS.constants },
   Path: nodePath,
-  Process: { ...nodeProcess },
+  Process: { ...process },
 };
 
 export type ErrnoException = NodeJS.ErrnoException;
