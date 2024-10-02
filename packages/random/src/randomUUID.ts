@@ -33,7 +33,7 @@ export const defaultUUIDGenerator: Ref<UUIDGenerator> = useRef(
   'uuidGenerator',
   cryptoModule == null
     ? () => invariant(false, 'crypto.randomUUID not found')
-    : cryptoModule.randomUUID.bind(cryptoModule)
+    : cryptoModule.randomUUID.bind(cryptoModule),
 );
 
 /**

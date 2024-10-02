@@ -8,7 +8,7 @@ describe('index', () => {
         // Public API
         'Time',
         'TimeDuration',
-      ].sort()
+      ].sort(),
     );
   });
 });

@@ -30,7 +30,7 @@ describe(Currency, () => {
       Currency({
         ...parameters,
         rounding: Int(0),
-      })
+      }),
     );
   });
   it('should have default precision', () => {
@@ -40,7 +40,7 @@ describe(Currency, () => {
       Currency({
         ...parameters,
         precision: Int(2),
-      })
+      }),
     );
   });
   it('should have default symbolNative to symbol', () => {
@@ -52,7 +52,7 @@ describe(Currency, () => {
         ...parameters,
         symbol,
         symbolNative: symbol,
-      })
+      }),
     );
   });
   it('should have default namePlural to name', () => {
@@ -64,7 +64,7 @@ describe(Currency, () => {
         ...parameters,
         name,
         namePlural: name,
-      })
+      }),
     );
   });
 });

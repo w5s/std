@@ -7,7 +7,7 @@ describe('index', () => {
       [
         // public exports
         'ApplicationTest',
-      ].sort()
+      ].sort(),
     );
   });
 });

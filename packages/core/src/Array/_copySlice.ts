@@ -3,7 +3,7 @@ export const _copySlice = <Item>(
   arrayStartIndex: number,
   source: ReadonlyArray<Item>,
   sourceFromIndex: number,
-  sourceToIndex: number
+  sourceToIndex: number,
 ) => {
   let arrayIndex = arrayStartIndex;
   for (let sourceIndex = sourceFromIndex; sourceIndex < sourceToIndex; sourceIndex += 1) {

@@ -31,7 +31,7 @@ describe('index', () => {
         'Tag',
         'Type',
         'UUID',
-      ].sort()
+      ].sort(),
     );
   });
 

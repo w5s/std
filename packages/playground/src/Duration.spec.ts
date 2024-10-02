@@ -32,7 +32,7 @@ describe('Duration', () => {
             hours: Int(14),
             minutes: Int(30),
             seconds: 20.42,
-          })
+          }),
         ),
       ],
       // Invalid inputs
@@ -41,7 +41,7 @@ describe('Duration', () => {
           [_, Result.Error(DecodeError({ message: `Cannot decode ${_} as Duration`, input: _ }))] as [
             string,
             Result<Duration, DecodeError>,
-          ]
+          ],
       ),
     ],
     encode: [

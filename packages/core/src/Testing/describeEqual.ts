@@ -8,7 +8,7 @@ export function describeEqual(testingLibrary: TestingLibrary) {
     properties: {
       equivalent: () => [T, T][];
       different: () => [T, T][];
-    }
+    },
   ) => {
     const { equivalent: equivalentDefault, different: differentDefault } = properties;
     const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));

@@ -69,7 +69,7 @@ describe(any, () => {
       taskStub<'value3', 'error3'>({ delayMs: 1, error: 'error3' }),
     ]);
     assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
-      true
+      true,
     );
     await expectTask(anyTask).toReject(AggregateError(['error1', 'error2', 'error3']));
   });

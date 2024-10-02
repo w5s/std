@@ -47,7 +47,7 @@ export class TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
 
   runAll(
     resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
-    rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void
+    rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void,
   ) {
     const { run } = this.taskParameters;
     this.tasks.forEach((entry, taskIndex) => {

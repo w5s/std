@@ -18,7 +18,7 @@ describe('moneyFactory', () => {
         name: 'test',
         code: TEST,
         symbol: '#',
-      })
+      }),
     );
   });
 
@@ -36,7 +36,7 @@ describe('moneyFactory', () => {
         rounding: Int(0),
         symbol: '#',
         symbolNative: '#',
-      })
+      }),
     );
   });
   it('should return a new factory by BigDecimal', () => {

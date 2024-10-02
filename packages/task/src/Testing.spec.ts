@@ -8,7 +8,7 @@ describe('index', () => {
         // public exports
         'taskStub',
         'withTask',
-      ].sort()
+      ].sort(),
     );
   });
 });

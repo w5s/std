@@ -4,7 +4,7 @@ import { from } from './Task/from.js';
 
 const createLogTask = (
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',
-  message: [required: unknown, ...optionalParameters: unknown[]]
+  message: [required: unknown, ...optionalParameters: unknown[]],
 ): Task<void, never> =>
   from(({ resolve }) => {
     console[method](...message);

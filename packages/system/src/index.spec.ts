@@ -17,7 +17,7 @@ describe('index', () => {
         'GroupID',
         'Process',
         'UserID',
-      ].sort()
+      ].sort(),
     );
   });
 });

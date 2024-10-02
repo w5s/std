@@ -18,11 +18,11 @@ import type { Option } from '../Option.js';
  */
 export function findIndex<Item>(
   array: Array<Item>,
-  predicate: (value: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (value: Item, index: Int, array: Array<Item>) => boolean,
 ): Option<Int> {
   const indexNumber = array.findIndex(
     // @ts-ignore number !== Int
-    predicate
+    predicate,
   );
   return indexNumber < 0 ? undefined : (indexNumber as Int);
 }

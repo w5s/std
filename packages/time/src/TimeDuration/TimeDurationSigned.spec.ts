@@ -18,6 +18,6 @@ describe('TimeDurationSigned', () => {
         { call: [TimeDuration(0)], returns: 0 },
         { call: [TimeDuration(6)], returns: 1 },
       ],
-    }
+    },
   );
 });

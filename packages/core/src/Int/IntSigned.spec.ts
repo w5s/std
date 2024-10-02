@@ -17,6 +17,6 @@ describe('IntNumeric', () => {
         { call: [0], returns: 0 },
         { call: [6], returns: 1 },
       ],
-    }
+    },
   );
 });

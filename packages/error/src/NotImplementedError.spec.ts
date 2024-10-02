@@ -7,13 +7,13 @@ describe(NotImplementedError, () => {
       expect.objectContaining({
         name: 'NotImplementedError',
         message: 'Not implemented',
-      })
+      }),
     );
     expect(NotImplementedError({ message: 'my message' })).toEqual(
       expect.objectContaining({
         name: 'NotImplementedError',
         message: 'my message',
-      })
+      }),
     );
   });
 });

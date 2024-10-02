@@ -23,7 +23,7 @@ export function match<Value, Return>(
   matchers: {
     Some: (value: Value) => Return;
     None: () => Return;
-  }
+  },
 ): Return {
   return option == null ? matchers.None() : matchers.Some(option);
 }

@@ -8,7 +8,7 @@ describe(slice, () => {
     ? ElementType
     : never;
   const generate = <T extends { [key: string]: Array<unknown> }>(
-    input: T
+    input: T,
   ): Array<{ [K in keyof T]: ItemType<T[K]> }> => {
     const addProperty = <O, P extends string, V>(element: O, property: P, values: Array<V>) =>
       values.map((value) => ({ ...element, [property]: value }));
@@ -33,7 +33,7 @@ describe(slice, () => {
         generate({
           start: [undefined, 0, 1, -1],
           end: [undefined, -1, 1, 2],
-        })
+        }),
       ).toEqual([
         {
           end: undefined,
@@ -116,7 +116,7 @@ describe(slice, () => {
     generate({
       start: [undefined, 0],
       end: [undefined, anyArray.length, anyArray.length + 1],
-    })
+    }),
   )('return unchanged when slice all parameters are nullish or array bounds', ({ start, end }) => {
     expect(slice(anyArray, start, end)).toBe(anyArray);
   });
@@ -125,7 +125,7 @@ describe(slice, () => {
     generate({
       start: [undefined, 0, 1, -1],
       end: [undefined, -1, 1, anyArray.length - 1, anyArray.length, anyArray.length + 1],
-    })
+    }),
   )('should return same result as array.slice(%p)', ({ start, end }) => {
     expect(slice(anyArray, start, end)).toEqual(anyArray.slice(start ?? undefined, end ?? undefined));
   });

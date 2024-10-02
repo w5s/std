@@ -21,6 +21,6 @@ describe('BigDecimalSigned', () => {
         { call: [BigDecimal('1.2')], returns: BigDecimal('1.2') },
         { call: [BigDecimal('-1.2')], returns: BigDecimal('1.2') },
       ],
-    }
+    },
   );
 });

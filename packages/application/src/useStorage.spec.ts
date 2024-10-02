@@ -13,7 +13,7 @@ describe('useStorage', () => {
     expect(host).toEqual(
       expect.objectContaining({
         [$storage]: storage,
-      })
+      }),
     );
   });
 });

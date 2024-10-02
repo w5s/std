@@ -18,7 +18,7 @@ import { from } from './from.js';
  */
 export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
-  fn: (error: ErrorFrom) => TaskLike<ValueTo, ErrorTo>
+  fn: (error: ErrorFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueFrom | ValueTo, ErrorTo> {
   return from((parameters) => task.taskRun({ ...parameters, reject: (error) => fn(error).taskRun(parameters) }));
 }

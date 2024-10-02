@@ -18,7 +18,7 @@ export const RequestTimeout = union(
   /**
    * Custom timeout value
    */
-  TimeDuration
+  TimeDuration,
 );
 
 export type RequestTimeout = Type.TypeOf<typeof RequestTimeout>;

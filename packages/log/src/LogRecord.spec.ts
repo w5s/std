@@ -16,7 +16,7 @@ describe('LogRecord', () => {
           message: LogMessage.of('foo', 'bar', ''),
           // data: {},
           created: Time.of(1),
-        })
+        }),
       ).toEqual({
         _: 'LogRecord',
         id: UUID.empty(),

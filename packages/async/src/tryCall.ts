@@ -20,7 +20,7 @@ import { isPromiseLike } from './isPromiseLike.js';
 export function tryCall<T, TResult1 = T, TResult2 = never>(
   block: () => Awaitable<T>,
   onSuccess: ((value: T) => TResult1) | undefined,
-  onError?: (error: unknown) => TResult2
+  onError?: (error: unknown) => TResult2,
 ): Awaitable<TResult1 | TResult2> {
   try {
     const valueOrPromise = block();

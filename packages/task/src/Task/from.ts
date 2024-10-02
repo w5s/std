@@ -12,7 +12,7 @@ import { Task } from './Task.js';
  * @param taskLike
  */
 export function from<Value, Error>(
-  taskLike: TaskLike<Value, Error> | TaskLike<Value, Error>['taskRun']
+  taskLike: TaskLike<Value, Error> | TaskLike<Value, Error>['taskRun'],
 ): Task<Value, Error> {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return taskLike instanceof Task

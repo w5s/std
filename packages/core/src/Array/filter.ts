@@ -16,11 +16,11 @@ import { empty } from './empty.js';
  */
 export function filter<Item, RefinedItem extends Item>(
   array: Array<Item>,
-  predicate: (item: Item) => item is RefinedItem
+  predicate: (item: Item) => item is RefinedItem,
 ): Array<RefinedItem>;
 export function filter<Item>(
   array: Array<Item>,
-  predicate: (item: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (item: Item, index: Int, array: Array<Item>) => boolean,
 ): Array<Item>;
 export function filter<Item>(array: Array<Item>, predicate: (item: Item, index: Int, array: Array<Item>) => boolean) {
   const arrayLength = array.length;
@@ -29,7 +29,7 @@ export function filter<Item>(array: Array<Item>, predicate: (item: Item, index: 
   }
   const returnValue = array.filter(
     // @ts-ignore number !== Int
-    predicate
+    predicate,
   );
   const returnValueLength = returnValue.length;
   return returnValueLength === 0 ? empty() : returnValueLength === arrayLength ? array : returnValue;

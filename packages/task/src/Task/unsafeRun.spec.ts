@@ -23,9 +23,9 @@ describe(unsafeRun, () => {
           ({ ok }) =>
             new Promise<Result<typeof anyObject, never>>((resolve) => {
               setTimeout(() => resolve(ok(anyObject)), 0);
-            })
-        )
-      )
+            }),
+        ),
+      ),
     ).resolves.toEqual(Result.Ok(anyObject));
   });
   it('should run rejected task', async () => {

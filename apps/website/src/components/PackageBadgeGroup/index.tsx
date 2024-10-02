@@ -14,7 +14,7 @@ const renderBadge = (
   badgeProps: {
     badgeType: BadgeType;
     badgeStyle?: BadgeStyle;
-  }
+  },
 ) => {
   const defaultBadgeProps = {
     className: styles.badge,
@@ -75,7 +75,7 @@ export function PackageBadgeGroup(props: PackageBadgeGroupProps) {
         </Link>
       )}
       {(['npm-version', 'npm-license', 'bundle-size'] as const).map((badgeType) =>
-        renderBadge(docusaurusContext, props, { badgeType })
+        renderBadge(docusaurusContext, props, { badgeType }),
       )}
     </>
   );

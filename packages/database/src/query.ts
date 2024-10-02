@@ -181,7 +181,7 @@ export namespace SQLQuery {
       case AddColumn.typeName: {
         return alterTable(
           query.tableName,
-          `ADD ${query.columnName} ${stringifyColumnAttributes(query.columnAttributes)}`
+          `ADD ${query.columnName} ${stringifyColumnAttributes(query.columnAttributes)}`,
         );
       }
       case AddConstraint.typeName: {
@@ -192,7 +192,7 @@ export namespace SQLQuery {
       }
       case CreateTable.typeName: {
         return sql`CREATE TABLE ${identifier(query.tableName)} (${sql.raw(
-          stringifyTableAttributes(query.tableAttributes)
+          stringifyTableAttributes(query.tableAttributes),
         )}\n)`;
       }
       case DropSchema.typeName: {

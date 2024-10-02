@@ -17,7 +17,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: 'expected blah to exist',
-        })
+        }),
       );
     });
   });
@@ -28,7 +28,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected ${__dirname} to be a file`,
-        })
+        }),
       );
     });
   });
@@ -39,7 +39,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected ${__filename} to be a directory`,
-        })
+        }),
       );
     });
   });
@@ -50,7 +50,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected ${__filename} to be a symbolic link`,
-        })
+        }),
       );
     });
   });
@@ -61,7 +61,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected 'test1_content\\n' to deeply equal ''`,
-        })
+        }),
       );
     });
   });
@@ -72,7 +72,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected [ 'test1', 'test2' ] to deeply equal []`,
-        })
+        }),
       );
     });
   });
@@ -83,7 +83,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         new AssertionError({
           message: `expected [ 'test1', 'test2' ] to have property "length" with value 1`,
-        })
+        }),
       );
     });
   });

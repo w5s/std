@@ -27,7 +27,7 @@ export namespace DatabaseDriver {
 
   export function Make<Name extends string, Client>(
     adapter: Name,
-    execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler) => Promise<unknown>
+    execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler) => Promise<unknown>,
   ): Module<Name, Client> {
     return {
       adapter,

@@ -9,7 +9,7 @@ const consoleLevel = LogLevel.match(
     [LogLevel.Info, (console: Console) => console.info.bind(console)],
     // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
   ],
-  (console: Console) => console.debug.bind(console)
+  (console: Console) => console.debug.bind(console),
 );
 
 /**

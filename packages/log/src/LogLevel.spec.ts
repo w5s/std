@@ -78,7 +78,7 @@ describe('LogLevel', () => {
           [LogLevel.Error, 'bar'],
           [LogLevel.Critical, 'baz'],
         ],
-        'defaultValue'
+        'defaultValue',
       );
       expect(matcherFunction(LogLevel.Info)).toBe('defaultValue');
     });

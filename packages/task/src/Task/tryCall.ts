@@ -19,7 +19,7 @@ import type { Task } from '../Task.js';
  */
 export function tryCall<Value, Error>(
   sideEffect: () => Awaitable<Value>,
-  onError: (error: unknown) => Awaitable<Error>
+  onError: (error: unknown) => Awaitable<Error>,
 ): Task<Value, Error> {
   return create(async ({ ok, error }) => {
     try {

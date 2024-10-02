@@ -19,7 +19,7 @@ import type { TaskCanceler, TaskLike } from '../Task.js';
  */
 export function unsafeRun<Value, Error>(
   task: TaskLike<Value, Error>,
-  canceler: TaskCanceler = { current: undefined }
+  canceler: TaskCanceler = { current: undefined },
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
   let resolveHandler = (result: Result<Value, Error>) => {

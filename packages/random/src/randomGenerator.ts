@@ -60,5 +60,5 @@ export namespace RandomGenerator {
 export const defaultRandomGenerator: Ref<RandomGenerator> = useRef(
   application.state,
   'randomGenerator',
-  RandomGenerator.crypto
+  RandomGenerator.crypto,
 );

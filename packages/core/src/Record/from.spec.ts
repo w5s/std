@@ -7,7 +7,7 @@ describe(from, () => {
       from([
         ['anyKey', 'anyValue'],
         ['anyOtherKey', 'anyOtherValue'],
-      ])
+      ]),
     ).toEqual({
       anyKey: 'anyValue',
       anyOtherKey: 'anyOtherValue',

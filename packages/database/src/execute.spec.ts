@@ -32,7 +32,7 @@ describe('executeQuery', () => {
     const client = createClient();
     client.mockExecuteQuery.mockRejectedValue('MockClientError');
     await expect(Task.unsafeRun(executeQuery(client, anyQuery))).resolves.toEqual(
-      Result.Error(DatabaseError({ cause: 'MockClientError' }))
+      Result.Error(DatabaseError({ cause: 'MockClientError' })),
     );
   });
 

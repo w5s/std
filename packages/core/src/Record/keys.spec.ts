@@ -10,8 +10,8 @@ describe(keys, () => {
         keys({
           anyKey: 'anyValue',
           anyOtherKey: 'anyOtherValue',
-        })
-      )
+        }),
+      ),
     ).toEqual(['anyKey', 'anyOtherKey']);
   });
   it('should handle symbol keys', () => {
@@ -20,8 +20,8 @@ describe(keys, () => {
         keys({
           [anySymbolKey]: 'anyValue',
           anyOtherKey: 'anyOtherValue',
-        })
-      )
+        }),
+      ),
     ).toEqual(['anyOtherKey', anySymbolKey]);
   });
 });

@@ -17,14 +17,14 @@ function sendMessage(text: string) {
     Slack.Chat.postMessage(client, {
       channel: Slack.ChannelId('my-channel'),
       text,
-    })
+    }),
   ).to(
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) =>
       retrying(_, {
         policy: RetryPolicy.retries(Int(3)),
         check: (_result) => Task.resolve({ done: false, value: Option.None }),
-      })
+      }),
   );
 }
 
@@ -57,7 +57,7 @@ function main() {
             // return assertNever(error);
           }
         }
-      })
+      }),
   );
 
   return task;

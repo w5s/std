@@ -10,7 +10,7 @@ describe('index', () => {
         'useStorage',
         'Application',
         '$storage',
-      ].sort()
+      ].sort(),
     );
   });
 });

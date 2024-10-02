@@ -34,7 +34,7 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
       }
       return ok(
         // @ts-ignore
-        returnValue
+        returnValue,
       );
     },
     codecSchema: () => ({

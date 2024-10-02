@@ -17,8 +17,8 @@ describe(tryCall, () => {
       expect(
         tryCall(
           () => 'return_value',
-          () => new TestError()
-        )
+          () => new TestError(),
+        ),
       ).toEqual(Ok('return_value'));
     });
     it('should return Error(onError(error)) when error is thrown', () => {
@@ -27,7 +27,7 @@ describe(tryCall, () => {
       expect(
         tryCall(() => {
           throw thrownError;
-        }, onError)
+        }, onError),
       ).toEqual(Error(new TestError()));
       expect(onError).toHaveBeenCalledWith(thrownError);
     });
@@ -37,15 +37,15 @@ describe(tryCall, () => {
       await expect(
         tryCall(
           async () => 'return_value',
-          async () => new TestError()
-        )
+          async () => new TestError(),
+        ),
       ).resolves.toEqual(Ok('return_value'));
     });
     it('should return Error(onError(error)) when promise is rejected', async () => {
       const thrownError = new globalThis.Error('custom');
       const onError = vi.fn(async (_error: unknown) => new TestError());
       await expect(tryCall((): Promise<string> => Promise.reject(thrownError), onError)).resolves.toEqual(
-        Error(new TestError())
+        Error(new TestError()),
       );
       expect(onError).toHaveBeenCalledWith(thrownError);
     });

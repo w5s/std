@@ -20,13 +20,13 @@ import { from } from './from.js';
  * @param tasks - tasks to be run in parallel
  */
 export function allSettled<T extends TaskLike<any, any>[]>(
-  tasks: [...T]
+  tasks: [...T],
 ): Task<{ [K in keyof T]: Result<Task.ValueOf<T[K]>, Task.ErrorOf<T[K]>> }, never>;
 export function allSettled<Value, Error>(
-  tasks: Iterable<TaskLike<Value, Error>>
+  tasks: Iterable<TaskLike<Value, Error>>,
 ): Task<ReadonlyArray<Result<Value, Error>>, never>;
 export function allSettled<Value, Error>(
-  tasks: Iterable<TaskLike<Value, Error>>
+  tasks: Iterable<TaskLike<Value, Error>>,
 ): Task<ReadonlyArray<Result<Value, Error>>, never> {
   return from((parameters) => {
     const taskArray = Array.from(tasks);
@@ -51,7 +51,7 @@ export function allSettled<Value, Error>(
         (error, entry, index) => {
           results[index] = Error(error);
           finish();
-        }
+        },
       );
     }
   });

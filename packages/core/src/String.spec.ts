@@ -35,7 +35,7 @@ describe('String', () => {
         size,
         split,
         startsWith,
-      })
+      }),
     );
   });
 });

@@ -15,7 +15,7 @@ describe('Status', () => {
         codecSchema: expect.any(Function),
         codecEncode: expect.any(Function),
         codecDecode: expect.any(Function),
-      })
+      }),
     );
   });
   it('has all status', () => {
@@ -25,7 +25,7 @@ describe('Status', () => {
           statusCode: 202,
           statusMessage: 'Accepted',
         },
-      })
+      }),
     );
   });
 });

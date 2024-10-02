@@ -11,8 +11,8 @@ export async function emptyDirectoryAsync(path: string): Promise<void> {
         Internal.FS.rm(Internal.Path.join(path, item), {
           force: true,
           recursive: true,
-        })
-      )
+        }),
+      ),
     );
   } catch {
     await Internal.FS.mkdir(path, { recursive: true });

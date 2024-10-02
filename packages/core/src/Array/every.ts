@@ -17,15 +17,15 @@ import type { Int } from '../Int.js';
  */
 export function every<Item, RefinedItem extends Item>(
   array: Array<Item>,
-  predicate: (item: Item, index: Int, array: Array<Item>) => item is RefinedItem
+  predicate: (item: Item, index: Int, array: Array<Item>) => item is RefinedItem,
 ): array is Array<RefinedItem>;
 export function every<Item>(
   array: Array<Item>,
-  predicate: (item: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (item: Item, index: Int, array: Array<Item>) => boolean,
 ): boolean;
 export function every<Item>(
   array: Array<Item>,
-  predicate: (item: Item, index: Int, array: Array<Item>) => boolean
+  predicate: (item: Item, index: Int, array: Array<Item>) => boolean,
 ): boolean {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return (array as any).every(predicate);

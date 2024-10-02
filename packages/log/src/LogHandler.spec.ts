@@ -25,8 +25,8 @@ describe('LogHandler', () => {
           generateLogRecord({
             ...defaultProps,
             category: 'not_foo',
-          })
-        )
+          }),
+        ),
       );
       expect(handler).not.toHaveBeenCalled();
       await Task.unsafeRunOk(
@@ -34,8 +34,8 @@ describe('LogHandler', () => {
           generateLogRecord({
             ...defaultProps,
             category: 'foo',
-          })
-        )
+          }),
+        ),
       );
       expect(handler).not.toHaveBeenLastCalledWith({
         id: '',

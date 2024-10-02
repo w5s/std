@@ -34,7 +34,7 @@ ${currencyData.currencies
     ${currency.rounding === 0 ? comment : ''}rounding: ${currency.rounding} as Int,
     symbol: '${currency.symbol}',
     ${currency.symbolNative === currency.symbol ? comment : ''}symbolNative: '${currency.symbolNative}',
-  });`
+  });`,
   )
   .join(EOL)}
 }
@@ -53,7 +53,7 @@ function buildFactories() {
  * \`\`\`
  * @param amount - The amount of money
  */
-export const ${currency.code} = moneyFactory('${currency.code}');`
+export const ${currency.code} = moneyFactory('${currency.code}');`,
     )
     .join(EOL);
 }

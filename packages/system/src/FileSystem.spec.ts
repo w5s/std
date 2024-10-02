@@ -21,7 +21,7 @@ describe('FileSystem', () => {
         'remove',
         'rename',
         'writeFile',
-      ].sort()
+      ].sort(),
     );
   });
 });

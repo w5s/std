@@ -22,13 +22,13 @@ const complete = <V, E>(parameters: TaskParameters<V, E>, result: Result<V, E>) 
  */
 export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
-  mapFn: (result: Result<ValueFrom, ErrorFrom>) => Result<ValueTo, ErrorTo>
+  mapFn: (result: Result<ValueFrom, ErrorFrom>) => Result<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorTo> {
   return from((parameters) =>
     task.taskRun({
       ...parameters,
       reject: (error) => complete(parameters, mapFn(Error(error))),
       resolve: (value) => complete(parameters, mapFn(Ok(value))),
-    })
+    }),
   );
 }

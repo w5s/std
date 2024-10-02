@@ -31,7 +31,7 @@ describe(Array, () => {
           DecodeError({
             message: 'Cannot decode a as UnderscoreString',
             input: 'a',
-          })
+          }),
         ),
       ],
     ],

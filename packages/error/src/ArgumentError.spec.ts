@@ -8,7 +8,7 @@ describe('ArgumentError', () => {
         // _: 'DataError',
         name: 'ArgumentError',
         message: 'my message',
-      })
+      }),
     );
   });
 });

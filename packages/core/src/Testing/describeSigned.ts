@@ -28,7 +28,7 @@ export function describeSigned(testingLibrary: TestingLibrary) {
     properties: {
       abs: Array<{ call: [T]; returns: T }>;
       sign: Array<{ call: [T]; returns: T }>;
-    }
+    },
   ) => {
     (properties.abs.length === 0 ? describe.todo : describe)('abs', () => {
       it.each(properties.abs)('satisfies abs($call.0) == $returns', ({ call, returns }) => {

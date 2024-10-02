@@ -21,7 +21,7 @@ describe(constant, () => {
           DecodeError({
             message: 'Cannot decode otherValue as anyValue',
             input: 'otherValue',
-          })
+          }),
         ),
       ],
     ],
@@ -40,7 +40,7 @@ describe(constant, () => {
           DecodeError({
             message: 'Cannot decode otherValue as Symbol(anySymbol)',
             input: 'otherValue',
-          })
+          }),
         ),
       ],
     ],
@@ -58,7 +58,7 @@ describe(constant, () => {
           DecodeError({
             message: 'Cannot decode undefined as undefined',
             input: undefined,
-          })
+          }),
         ),
       ],
     ],

@@ -18,7 +18,7 @@ describe('index', () => {
         'describeSigned',
         'describeSubtract',
         'describeType',
-      ].sort()
+      ].sort(),
     );
   });
 });

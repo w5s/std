@@ -13,7 +13,7 @@ const mockDatabase = (): Mocked<Database> => {
   } as any;
   vi.spyOn(SQLite3, 'createDatabase').mockImplementation(
     // @ts-ignore All methods are not required
-    () => database
+    () => database,
   );
 
   return database;
@@ -57,12 +57,12 @@ describe('SQLite3', () => {
       const { all, close } = mockDatabase();
       all.mockImplementation(
         // @ts-ignore mock partial signature
-        (_sqlObject, _values, callback) => callback(new Error('MockSQLite3Error'), null)
+        (_sqlObject, _values, callback) => callback(new Error('MockSQLite3Error'), null),
       );
       const cancelerRef = Ref(() => {});
 
       await expect(
-        SQLite3.execute(anyClient, sql`SELECT error FROM unknown_wrong_table;`, cancelerRef)
+        SQLite3.execute(anyClient, sql`SELECT error FROM unknown_wrong_table;`, cancelerRef),
       ).rejects.toThrow();
       expect(close).toHaveBeenCalled();
     });

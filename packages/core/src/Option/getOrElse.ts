@@ -17,7 +17,7 @@ import type { Nullable } from '@w5s/core-type';
  */
 export function getOrElse<Value, DefaultValue>(
   option: Nullable<Value>,
-  getDefaultValue: () => DefaultValue
+  getDefaultValue: () => DefaultValue,
 ): Value | DefaultValue {
   return option == null ? getDefaultValue() : option;
 }

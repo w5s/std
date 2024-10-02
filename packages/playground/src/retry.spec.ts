@@ -12,7 +12,7 @@ describe('RetryState', () => {
         retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
         retryPreviousDelay: TimeDuration.of(3),
-      })
+      }),
     ).toEqual({
       retryIndex: 1,
       retryCumulativeDelay: 2,
@@ -94,18 +94,18 @@ describe('RetryPolicy', () => {
           policy(
             RetryState({
               retryIndex: Int(0),
-            })
-          )
-        )
+            }),
+          ),
+        ),
       ).toEqual(0);
       expect(
         Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int(1),
-            })
-          )
-        )
+            }),
+          ),
+        ),
       ).toEqual(0);
     });
     it('should return Option.None if retryIndex < count', () => {
@@ -114,18 +114,18 @@ describe('RetryPolicy', () => {
           policy(
             RetryState({
               retryIndex: Int(2),
-            })
-          )
-        )
+            }),
+          ),
+        ),
       ).toEqual(Option.None);
       expect(
         Task.unsafeRunOk(
           policy(
             RetryState({
               retryIndex: Int(3),
-            })
-          )
-        )
+            }),
+          ),
+        ),
       ).toEqual(Option.None);
     });
   });
@@ -166,7 +166,7 @@ describe('RetryPolicy', () => {
           retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
           retryPreviousDelay: TimeDuration.of(1),
-        })
+        }),
       );
     });
   });
@@ -188,7 +188,7 @@ describe('RetryPolicy', () => {
           retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
           retryPreviousDelay: TimeDuration.of(1),
-        })
+        }),
       );
     });
   });

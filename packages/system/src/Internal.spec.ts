@@ -29,7 +29,7 @@ describe('errnoExceptionHandler', () => {
         syscall: Option.None,
         errno: Option.None,
         code: Option.None,
-      })
+      }),
     );
   });
   it('should convert any ErrnoException to "OtherError" and forward properties', () => {
@@ -41,7 +41,7 @@ describe('errnoExceptionHandler', () => {
         syscall: anyErrnoException.syscall,
         errno: anyErrnoException.errno,
         code: anyErrnoException.code,
-      })
+      }),
     );
   });
 });

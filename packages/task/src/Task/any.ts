@@ -23,7 +23,7 @@ import { TaskAggregateState } from './TaskAggregateState.js';
  * @param tasks - tasks to be run in parallel
  */
 export function any<T extends TaskLike<any, any>[]>(
-  tasks: [...T]
+  tasks: [...T],
 ): Task<Task.ValueOf<T[keyof T]>, AggregateError<{ [K in keyof T]: Task.ErrorOf<T[K]> }>>;
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>>;
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>> {
@@ -55,7 +55,7 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
           if (state.isComplete()) {
             state.reject(globalThis.AggregateError(errors) as AggregateError<Error[]>);
           }
-        }
+        },
       );
     }
   });

@@ -13,11 +13,11 @@
 export function split(
   string: string,
   separator: string | RegExp | { [Symbol.split](string: string, limit?: number): string[] },
-  limit?: number
+  limit?: number,
 ): Array<string> {
   return string.split(
     // @ts-ignore Typing is correct
     separator,
-    limit
+    limit,
   );
 }

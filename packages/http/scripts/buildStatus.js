@@ -49,7 +49,7 @@ async function generateFiles() {
         ...(status.isDeprecated ? [' *', ' * @deprecated'] : []),
         ' */',
         `export const ${toConstant(status.phrase)} = Status(${status.code} as Int, \`${status.phrase}\`);`,
-      ].join(eol)
+      ].join(eol),
     )
     .join(eol + eol);
   statusAllContent += eol;

@@ -13,7 +13,7 @@ describe('CustomError', () => {
         expect.objectContaining({
           message: '',
           cause: undefined,
-        })
+        }),
       );
     });
     it('should merge custom properties', () => {
@@ -22,7 +22,7 @@ describe('CustomError', () => {
           name: 'MockError',
           message: 'custom message',
           foo: true,
-        })
+        }),
       );
     });
     it('should keep original message', () => {
@@ -31,7 +31,7 @@ describe('CustomError', () => {
         expect.objectContaining({
           message: 'OriginalMessage',
           cause,
-        })
+        }),
       );
     });
   });
@@ -135,27 +135,27 @@ describe('CustomError', () => {
         CustomError({
           name: 'TestOptionalError',
           message: 'test optional message',
-        })
+        }),
       );
       expect(TestOptionalError({})).toEqual(
         CustomError({
           name: 'TestOptionalError',
           message: 'test optional message',
-        })
+        }),
       );
       // @ts-expect-error Parameters are required
       expect(TestError()).toEqual(
         CustomError({
           name: 'TestError',
           message: 'test error message',
-        })
+        }),
       );
       expect(TestError({ email: 'foo@bar.com' })).toEqual(
         CustomError({
           name: 'TestError',
           message: 'test error message',
           email: 'foo@bar.com',
-        })
+        }),
       );
     });
     describe('create', () => {
@@ -164,13 +164,13 @@ describe('CustomError', () => {
           CustomError({
             name: 'TestOptionalError',
             message: 'test optional message',
-          })
+          }),
         );
         expect(TestOptionalError.create({})).toEqual(
           CustomError({
             name: 'TestOptionalError',
             message: 'test optional message',
-          })
+          }),
         );
       });
       it('returns new instance for required parameters', () => {
@@ -179,14 +179,14 @@ describe('CustomError', () => {
           CustomError({
             name: 'TestError',
             message: 'test error message',
-          })
+          }),
         );
         expect(TestError.create({ email: 'foo@bar.com' })).toEqual(
           CustomError({
             message: 'test error message',
             name: 'TestError',
             email: 'foo@bar.com',
-          })
+          }),
         );
       });
     });

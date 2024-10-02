@@ -35,8 +35,8 @@ describe('readFileStatus', () => {
           modificationTime: Time.of(stats.mtimeMs),
           specialDeviceID: DeviceID(stats.rdev),
           statusChangeTime: Time.of(stats.ctimeMs),
-        })
-      )
+        }),
+      ),
     );
     expect(statMocked).toHaveBeenCalledWith(...args);
   });
@@ -67,8 +67,8 @@ describe('readSymbolicLinkStatus', () => {
           modificationTime: Time.of(stats.mtimeMs),
           specialDeviceID: DeviceID(stats.rdev),
           statusChangeTime: Time.of(stats.ctimeMs),
-        })
-      )
+        }),
+      ),
     );
     expect(lstatMocked).toHaveBeenCalledWith(...args);
   });

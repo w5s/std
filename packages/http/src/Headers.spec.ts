@@ -9,7 +9,7 @@ describe(Headers, () => {
     expect(Headers).toEqual(
       expect.objectContaining({
         empty,
-      })
+      }),
     );
   });
   it('should return immutable copy of headers', () => {

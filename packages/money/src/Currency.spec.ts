@@ -8,7 +8,7 @@ describe('Currency', () => {
       expect.objectContaining({
         defaultPrecision: expect.any(Number),
         defaultRounding: expect.any(Number),
-      })
+      }),
     );
   });
 });

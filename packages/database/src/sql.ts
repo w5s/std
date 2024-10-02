@@ -69,7 +69,7 @@ export namespace SQLStatement {
     options: {
       formatString?: (str: string) => string;
       formatValue: (value: Value, index: number) => string;
-    }
+    },
   ): string {
     const { strings, values } = statement;
     const { formatString = (_) => _, formatValue } = options;

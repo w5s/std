@@ -11,7 +11,7 @@ export function describeType(testingLibrary: TestingLibrary) {
       instances: () => T[];
       notInstances: () => unknown[];
       from?: () => [unknown, Option<T>][];
-    }
+    },
   ) => {
     const { instances: instancesDefault, notInstances: notInstancesDefault, from } = properties;
     const instances = () => instancesDefault().map((instance) => ({ instance }));

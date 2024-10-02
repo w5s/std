@@ -14,7 +14,7 @@ describe('writeFile', () => {
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',
-      expect.objectContaining({ encoding: 'utf8' })
+      expect.objectContaining({ encoding: 'utf8' }),
     );
   });
   it('should be cancelable', async () => {

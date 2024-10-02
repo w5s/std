@@ -12,7 +12,7 @@ describe(union, () => {
     {
       a: string,
     },
-    'AType'
+    'AType',
   );
   const BType = string;
   const CType = number;
