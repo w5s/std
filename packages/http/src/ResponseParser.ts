@@ -11,11 +11,11 @@ import type { BodyReader } from './BodyReader.js';
 /**
  * A transformation function taking an {@link Response} as input
  */
-export interface HTTPParser<Value> {
+export interface ResponseParser<Value> {
   (response: Response<BodyReader>): Task<Value, HTTPError.ParserError>;
 }
-export namespace HTTPParser {
-  function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): HTTPParser<V> {
+export namespace ResponseParser {
+  function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponseParser<V> {
     return (response) =>
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       taskFrom(async ({ resolve, reject }) => {
@@ -38,11 +38,11 @@ export namespace HTTPParser {
    * ```ts
    * const request = requestSend({
    *   url: 'http://localhost',
-   *   parse: HTTPParser.arrayBuffer,
-   * });// Task<ArrayBuffer, HTTPError>
+   * });
+   * const body = Task.andThen(request, ResponseParser.arrayBuffer); // Task<ArrayBuffer, HTTPError>
    * ```
    */
-  export const arrayBuffer: HTTPParser<ArrayBuffer> = from((response) => response.body.unsafeArrayBuffer());
+  export const arrayBuffer: ResponseParser<ArrayBuffer> = from((response) => response.body.unsafeArrayBuffer());
 
   /**
    * FormData response parser
@@ -51,11 +51,11 @@ export namespace HTTPParser {
    * ```ts
    * const request = requestSend({
    *   url: 'http://localhost',
-   *   parse: HTTPParser.formData,
-   * });// Task<FormData, HTTPError>
+   * });
+   * const body = Task.andThen(request, ResponseParser.formData); // Task<FormData, HTTPError>
    * ```
    */
-  export const formData: HTTPParser<FormData> = from((response) => response.body.unsafeFormData());
+  export const formData: ResponseParser<FormData> = from((response) => response.body.unsafeFormData());
 
   /**
    * FormData response parser
@@ -66,11 +66,11 @@ export namespace HTTPParser {
    *
    * const request = requestSend({
    *   url: 'http://localhost',
-   *   parse: HTTPParser.json<MyData>('unsafe'),
-   * });// Task<MyData, HTTPError>
+   * });
+   * const body = Task.andThen(request, HTTPParser.json<MyData>('unsafe')); // Task<MyData, HTTPError>
    * ```
    */
-  export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): HTTPParser<Return> {
+  export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): ResponseParser<Return> {
     const parser = from<Return>((response) => response.body.unsafeJSON() as Promise<Return>);
     return CodecModule === 'unsafe'
       ? parser
@@ -89,11 +89,11 @@ export namespace HTTPParser {
    * ```ts
    * const request = requestSend({
    *   url: 'http://localhost',
-   *   parse: HTTPParser.blob,
-   * });// Task<Blob, HTTPError>
+   * });
+   * const body = Task.andThen(request, HTTPParser.blob); // Task<Blob, HTTPError>
    * ```
    */
-  export const blob: HTTPParser<Blob> = from((response) => response.body.unsafeBlob());
+  export const blob: ResponseParser<Blob> = from((response) => response.body.unsafeBlob());
 
   /**
    * Text response parser
@@ -102,9 +102,9 @@ export namespace HTTPParser {
    * ```ts
    * const request = requestSend({
    *   url: 'http://localhost',
-   *   parse: HTTPParser.text,
-   * });// Task<string, HTTPError>
+   * });
+   * const body = Task.andThen(request, HTTPParser.text); // Task<string, HTTPError>
    * ```
    */
-  export const text: HTTPParser<string> = from((response) => response.body.unsafeText());
+  export const text: ResponseParser<string> = from((response) => response.body.unsafeText());
 }

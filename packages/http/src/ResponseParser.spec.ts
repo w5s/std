@@ -2,7 +2,7 @@ import { DecodeError, Option, Type, type JSONValue } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { HTTPParser } from './HTTPParser.js';
+import { ResponseParser } from './ResponseParser.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { BodyReader } from './BodyReader.js';
@@ -81,9 +81,9 @@ const expectToResolveValue = async <F extends BodyReaderFormat>(
   const task = fn(response);
   await expectTask(task).toResolve(returnValue);
 };
-describe('HTTPParser', () => {
+describe('ResponseParser', () => {
   describe('arrayBuffer', () => {
-    const parser = HTTPParser.arrayBuffer;
+    const parser = ResponseParser.arrayBuffer;
 
     it('should parse as ArrayBuffer', async () => expectToResolveValue(parser, 'arrayBuffer'));
     it('should reject FetchResponseError', async () => {
@@ -97,9 +97,9 @@ describe('HTTPParser', () => {
     });
   });
   describe('formData', () => {
-    const parser = HTTPParser.formData;
+    const parser = ResponseParser.formData;
 
-    it('should parse as FormData', async () => expectToResolveValue(HTTPParser.formData, 'formData'));
+    it('should parse as FormData', async () => expectToResolveValue(ResponseParser.formData, 'formData'));
     it('should reject FetchResponseError', async () => {
       const error = mockError();
       const response = mockResponseWith(
@@ -111,9 +111,9 @@ describe('HTTPParser', () => {
     });
   });
   describe('text', () => {
-    const parser = HTTPParser.text;
+    const parser = ResponseParser.text;
 
-    it('should parse as text', async () => expectToResolveValue(HTTPParser.text, 'text'));
+    it('should parse as text', async () => expectToResolveValue(ResponseParser.text, 'text'));
 
     it('should reject FetchResponseError', async () => {
       const error = mockError();
@@ -126,9 +126,9 @@ describe('HTTPParser', () => {
     });
   });
   describe('blob', () => {
-    const parser = HTTPParser.blob;
+    const parser = ResponseParser.blob;
 
-    it('should parse as blob', async () => expectToResolveValue(HTTPParser.blob, 'blob'));
+    it('should parse as blob', async () => expectToResolveValue(ResponseParser.blob, 'blob'));
 
     it('should reject FetchResponseError', async () => {
       const error = mockError();
@@ -141,9 +141,9 @@ describe('HTTPParser', () => {
     });
   });
   describe('json', () => {
-    it('should parse as JSON', async () => expectToResolveValue(HTTPParser.json('unsafe'), 'json'));
+    it('should parse as JSON', async () => expectToResolveValue(ResponseParser.json('unsafe'), 'json'));
     it('should reject FetchResponseError', async () => {
-      const parser = HTTPParser.json('unsafe');
+      const parser = ResponseParser.json('unsafe');
       const error = mockError();
       const response = mockResponseWith(
         mockBodyReader('json', {
@@ -154,7 +154,7 @@ describe('HTTPParser', () => {
     });
 
     it('should parse using Codec', async () => {
-      const parser = HTTPParser.json(
+      const parser = ResponseParser.json(
         Type.Object({
           foo: Type.string,
         }),

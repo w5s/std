@@ -1,7 +1,11 @@
 import type { Option, JSONValue } from '@w5s/core';
 import type { Task } from '@w5s/task';
-import { Client, HTTPError, HTTPParser, requestSend, type Method } from '@w5s/http';
-import { CustomError } from '@w5s/error';
+import type { Method } from '@w5s/http';
+import { Client } from '@w5s/http/dist/Client.js';
+import { requestSend } from '@w5s/http/dist/requestSend.js';
+import { ResponseParser } from '@w5s/http/dist/ResponseParser.js';
+import { HTTPError } from '@w5s/http/dist/HTTPError.js';
+import { CustomError } from '@w5s/error/dist/CustomError.js';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
 import { DecodeError } from '@w5s/core/dist/DecodeError.js';
@@ -110,7 +114,7 @@ export namespace Slack {
       }),
       method: 'POST',
     });
-    const parsed = andThen(request, HTTPParser.json<ResponseBase>('unsafe'));
+    const parsed = andThen(request, ResponseParser.json<ResponseBase>('unsafe'));
     const requestParsed = mapResult<ResponseBase, HTTPError, R, ResponseError>(parsed, (result) =>
       result.ok
         ? result.value.ok === true

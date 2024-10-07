@@ -1,4 +1,4 @@
-import { requestSend, HTTPError, HTTPParser, Client } from '@w5s/http';
+import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
 import { Type } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 
@@ -12,7 +12,7 @@ const FooObject = Type.Object({
 
 export function program() {
   const responseTask = requestSend(client, getText(123));
-  const parsed = Task.andThen(responseTask, HTTPParser.json(FooObject));
+  const parsed = Task.andThen(responseTask, ResponseParser.json(FooObject));
   const log = Task.andThen(parsed, (response) => Console.debug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {

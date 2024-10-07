@@ -1,5 +1,5 @@
 export * from './HTTPError.js';
-export * from './HTTPParser.js';
+export * from './ResponseParser.js';
 export * from './Method.js';
 export * from './Client.js';
 export * from './ReferrerPolicy.js';

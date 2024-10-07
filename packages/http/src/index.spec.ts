@@ -6,7 +6,6 @@ describe('index', () => {
     expect(Object.keys(Fetch).sort()).toEqual(
       [
         'HTTPError',
-        'HTTPParser',
         'Client',
         'ReferrerPolicy',
         'RequestCache',
@@ -17,6 +16,7 @@ describe('index', () => {
         'requestSend',
         'Status',
         'Response',
+        'ResponseParser',
         'ResponseType',
       ].sort(),
     );
