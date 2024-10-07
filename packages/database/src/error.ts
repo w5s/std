@@ -1,4 +1,4 @@
-import { CustomError } from '@w5s/error';
+import { CustomError } from '@w5s/error/dist/CustomError.js';
 
 /**
  * An error reported when the Database fails to perform an operation

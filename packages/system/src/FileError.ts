@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { CustomError } from '@w5s/error';
+import { CustomError } from '@w5s/error/dist/CustomError.js';
 import type { FilePath } from './FilePath.js';
 
 export const FileErrorType = {

@@ -1,4 +1,5 @@
-import { CustomError, type TimeoutError } from '@w5s/error';
+import type { TimeoutError } from '@w5s/error';
+import { CustomError } from '@w5s/error/dist/CustomError.js';
 
 /**
  * Union type of http client errors
