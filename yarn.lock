@@ -6112,6 +6112,7 @@ __metadata:
   dependencies:
     "@types/node": "npm:^20.14.9"
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.6.2"
