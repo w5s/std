@@ -10,7 +10,24 @@ const fakeBodyValueFactory = {
   stream: () => undefined,
   text: () => '',
 };
+const formatToProperty = {
+  arrayBuffer: 'unsafeArrayBuffer',
+  blob: 'unsafeBlob',
+  formData: 'unsafeFormData',
+  json: 'unsafeJSON',
+  stream: 'unsafeStream',
+  text: 'unsafeText',
+} as const;
 
+/**
+ * Returns a new body value
+ *
+ * @example
+ * ```ts
+ * const value = fakeBodyValue('arrayBuffer');// ArrayBuffer
+ * ```
+ * @param format - the format to use to generate
+ */
 export function fakeBodyValue<F extends BodyReaderFormat>(format: F): BodyReaderValue<F> {
   // @ts-ignore
   return fakeBodyValueFactory[format]();
@@ -25,20 +42,25 @@ const defaultBodyReader: BodyReader = {
   unsafeText: async () => fakeBodyValue('text'),
 };
 
+/**
+ * Returns a new BodyReader for testing
+ *
+ * @example
+ * ```ts
+ * const bodyReader = fakeBodyReader('text', {
+ *   resolve: 'My Text',
+ * });
+ * ```
+ * @param format
+ * @param parameters
+ */
 export function fakeBodyReader<F extends BodyReaderFormat>(
   format: F,
   parameters: Resolver<BodyReaderValue<F>>,
 ): BodyReader {
   return {
     ...defaultBodyReader,
-    [{
-      arrayBuffer: 'unsafeArrayBuffer',
-      blob: 'unsafeBlob',
-      formData: 'unsafeFormData',
-      json: 'unsafeJSON',
-      stream: 'unsafeStream',
-      text: 'unsafeText',
-    }[format]]:
+    [formatToProperty[format]]:
       // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       'resolve' in parameters ? () => Promise.resolve(parameters.resolve) : () => Promise.reject(parameters.reject),
   };
