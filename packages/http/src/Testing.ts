@@ -1,1 +1,2 @@
-export * from './Testing/fakeBodyReader.js';
+export * from './Testing/FakeBodyReader.js';
+export * from './Testing/FakeClient.js';

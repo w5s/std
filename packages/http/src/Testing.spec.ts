@@ -6,8 +6,8 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // public exports
-        'fakeBodyValue',
-        'fakeBodyReader',
+        'FakeBodyReader',
+        'FakeClient',
       ].sort(),
     );
   });

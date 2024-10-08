@@ -6,7 +6,7 @@ import { ResponseParser } from './ResponseParser.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { BodyReader, BodyReaderFormat } from './BodyReader.js';
-import { fakeBodyReader, fakeBodyValue } from './Testing/fakeBodyReader.js';
+import { FakeBodyReader } from './Testing.js';
 
 const expectTask = withTask(expect);
 const mockError = () => new Error('MockError');
@@ -20,9 +20,9 @@ const expectToResolveValue = async <F extends BodyReaderFormat>(
   fn: (response: Response<BodyReader>) => Task<unknown, unknown>,
   format: F,
 ) => {
-  const returnValue = fakeBodyValue(format);
+  const returnValue = FakeBodyReader.value(format);
   const response = mockResponseWith(
-    fakeBodyReader(format, {
+    FakeBodyReader(format, {
       resolve: returnValue,
     }),
   );
@@ -37,7 +37,7 @@ describe('ResponseParser', () => {
     it('should reject FetchResponseError', async () => {
       const error = mockError();
       const response = mockResponseWith(
-        fakeBodyReader('arrayBuffer', {
+        FakeBodyReader('arrayBuffer', {
           reject: error,
         }),
       );
@@ -51,7 +51,7 @@ describe('ResponseParser', () => {
     it('should reject FetchResponseError', async () => {
       const error = mockError();
       const response = mockResponseWith(
-        fakeBodyReader('formData', {
+        FakeBodyReader('formData', {
           reject: error,
         }),
       );
@@ -66,7 +66,7 @@ describe('ResponseParser', () => {
     it('should reject FetchResponseError', async () => {
       const error = mockError();
       const response = mockResponseWith(
-        fakeBodyReader('text', {
+        FakeBodyReader('text', {
           reject: error,
         }),
       );
@@ -81,7 +81,7 @@ describe('ResponseParser', () => {
     it('should reject FetchResponseError', async () => {
       const error = mockError();
       const response = mockResponseWith(
-        fakeBodyReader('blob', {
+        FakeBodyReader('blob', {
           reject: error,
         }),
       );
@@ -94,7 +94,7 @@ describe('ResponseParser', () => {
       const parser = ResponseParser.json('unsafe');
       const error = mockError();
       const response = mockResponseWith(
-        fakeBodyReader('json', {
+        FakeBodyReader('json', {
           reject: error,
         }),
       );
@@ -109,7 +109,7 @@ describe('ResponseParser', () => {
       );
       const data = { foo: true };
       const response = mockResponseWith(
-        fakeBodyReader('json', {
+        FakeBodyReader('json', {
           resolve: data,
         }),
       );
@@ -121,7 +121,7 @@ describe('ResponseParser', () => {
       );
 
       const responseIncorrect = mockResponseWith(
-        fakeBodyReader('json', {
+        FakeBodyReader('json', {
           resolve: { foo: '1' },
         }),
       );
