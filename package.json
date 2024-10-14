@@ -100,7 +100,7 @@
     "@w5s/cspell-config": "2.3.14",
     "@w5s/eslint-config": "2.2.2",
     "@w5s/ts-config": "2.2.0",
-    "cspell": "8.15.1",
+    "cspell": "8.15.2",
     "eslint": "8.57.1",
     "lerna": "8.1.8",
     "markdown-magic": "2.6.1",
