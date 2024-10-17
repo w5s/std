@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
@@ -9,21 +9,17 @@ import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
 
 > Throw descriptive error in development, generic error in production.
 
-<PackageBadgeGroup packageName="@w5s/invariant" apiHref="/api/invariant" />
+<PackageBadgeGroup apiHref="/api/error/function/invariant" />
 
 ## Motivation
 
 This package provides a simple way to throw error from an assertion and a message.
 It is built to be easily parsed / minified at compile time.
 
-## Installation
-
-<PackageInstallBlock packageName="@w5s/invariant" />
-
 ## Usage
 
 ```ts
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error';
 
 function program() {
   invariant(true, 'This will not throw an error'); 
