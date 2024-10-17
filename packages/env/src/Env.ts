@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 
 import type { Option } from '@w5s/core';
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 
 const readImportMetaEnv = () => {
   try {

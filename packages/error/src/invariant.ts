@@ -1,3 +1,5 @@
+import { InvariantError } from './InvariantError.js';
+
 /**
  * Assert that `condition` is truthy, else throws `Error { name: 'InvariantError', message }`
  *
@@ -15,10 +17,7 @@ export function invariant(condition: false, message?: string | null): never;
 export function invariant(condition: boolean, message?: string | null): asserts condition;
 export function invariant(condition: boolean, message?: string | null): asserts condition {
   if (!condition) {
-    const error = new Error(message == null ? '' : message);
-    error.name = 'InvariantError';
-    // @ts-ignore framesToPop is not defined
-    error.framesToPop = 1; // Ignore call to invariant() in stacktrace
-    throw error;
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
+    throw InvariantError({ message: message == null ? '' : message });
   }
 }

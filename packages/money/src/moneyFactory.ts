@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 import { BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimal.js';
 import type { BigDecimalString } from '@w5s/bigdecimal';
 import type { Currency } from './Currency/Currency.js';

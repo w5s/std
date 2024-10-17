@@ -1,4 +1,4 @@
-# W5S Invariant _(@w5s/invariant)_
+# W5S Time _(@w5s/time)_
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
@@ -44,7 +44,7 @@ export function nowPlusTwoMinutes() {
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
-[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/invariant/LICENSE
+[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/time/LICENSE
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
 [issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->

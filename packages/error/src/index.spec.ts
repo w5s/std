@@ -10,6 +10,7 @@ describe('index', () => {
         "CustomError",
         "Error",
         "EvalError",
+        "InvariantError",
         "NotImplementedError",
         "RangeError",
         "ReferenceError",
@@ -17,7 +18,10 @@ describe('index', () => {
         "TimeoutError",
         "TypeError",
         "URIError",
+        "assertNever",
+        "invariant",
         "throwError",
+        "warning",
       ]
     `);
   });

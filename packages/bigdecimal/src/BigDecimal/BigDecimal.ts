@@ -1,6 +1,6 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 import type { Codec } from '@w5s/core';
 import { of } from './of.js';
 import { parse } from './parse.js';

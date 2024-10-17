@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 import type { Option } from '@w5s/core';
 import type { TimeDuration } from '@w5s/time';
 import type { TaskLike } from '@w5s/task';

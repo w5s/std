@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 import type { Type } from '../Type.js';
 
 /**

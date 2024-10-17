@@ -30,7 +30,7 @@ export type MyEnum = Enum.ValueOf<typeof MyEnum>;
 ## Matching on values
 
 ```ts
-import { assertNever } from '@w5s/invariant';
+import { assertNever } from '@w5s/error';
 
 export function getName(value: MyEnum) {
   switch (value) {

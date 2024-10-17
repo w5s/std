@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 import type { Option, Ref } from '@w5s/core';
 import type { Task } from '@w5s/task';
 import { useRef } from '@w5s/application';

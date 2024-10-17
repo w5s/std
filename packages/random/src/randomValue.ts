@@ -1,5 +1,5 @@
 import type { Tag } from '@w5s/core';
-import { invariant } from '@w5s/invariant';
+import { invariant } from '@w5s/error/dist/invariant.js';
 
 export type RandomValue = number & Tag<'RandomValue'>;
 
