@@ -18,7 +18,7 @@ describe('LogHandler', () => {
         level: LogLevel.Warning,
         created: generateTime(),
         message: [],
-        // data: {},
+        data: {},
       } satisfies LogRecord;
       await Task.unsafeRunOk(
         filtered(
