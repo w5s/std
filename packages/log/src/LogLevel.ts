@@ -1,33 +1,10 @@
-import type { Int, Option, Type } from '@w5s/core';
-import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { $Object as TObject } from '@w5s/core/dist/Type/Object.js';
-import { string } from '@w5s/core/dist/Type/string.js';
-import { Int as TInt } from '@w5s/core/dist/Type/Int.js';
+import type { Int, Option } from '@w5s/core';
 import { IntBounded } from '@w5s/core/dist/Int/IntBounded.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
-import { constant } from '@w5s/core/dist/Type/constant.js';
+import { LogLevel as LogLevelType } from './LogLevel/LogLevel.js';
+import { LogLevelComparable } from './LogLevel/LogComparable.js';
 
-const LogLevelType = TObject({
-  _: constant('LogLevel'),
-  /**
-   * Log level name
-   */
-  name: string,
-  /**
-   * Log level value (number). Often used to filter / sort logs
-   */
-  value: TInt,
-});
-
-const LogLevelComparable = Comparable({
-  compare(left: LogLevel, right: LogLevel): number {
-    const diff = left.value - right.value;
-
-    return diff === 0 ? diff : diff < 0 ? -1 : 1;
-  },
-});
-
-export interface LogLevel extends Type.TypeOf<typeof LogLevelType> {}
+export interface LogLevel extends LogLevelType {}
 
 function of(name: string, levelValue: Int): LogLevel {
   return { _: 'LogLevel', name, value: levelValue };
@@ -48,7 +25,9 @@ function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel: LogLe
     : (anyLevel) =>
         orderedMatchers.reduce(
           (acc, matcher) =>
-            LogLevel.compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value ? matcher : acc,
+            LogLevelComparable.compare(matcher[level], acc[level]) > 0 && anyLevel.value >= matcher[level].value
+              ? matcher
+              : acc,
           first,
         )[returnValue];
 }
