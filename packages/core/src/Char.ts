@@ -1,6 +1,7 @@
 import { Char as CharType } from './Type/Char.js';
 import { Callable } from './Callable.js';
 import { CharComparable } from './Char/CharComparable.js';
+import { CharBounded } from './Char/CharBounded.js';
 
 /**
  * Character value
@@ -17,4 +18,5 @@ export type Char = CharType;
 export const Char = Callable({
   ...CharType,
   ...CharComparable,
+  ...CharBounded,
 });

@@ -2,11 +2,13 @@ import { describe, it, expect } from 'vitest';
 import { Char } from './Char.js';
 import { Char as CharType } from './Type/Char.js';
 import { CharComparable } from './Char/CharComparable.js';
+import { CharBounded } from './Char/CharBounded.js';
 
 describe(Char, () => {
   it('is an alias to functions', () => {
     expect(Char).toEqual(expect.objectContaining({ ...CharType }));
     expect(Char).toEqual(expect.objectContaining(CharComparable));
+    expect(Char).toEqual(expect.objectContaining(CharBounded));
   });
   describe('()', () => {
     it('returns or throw when wrong value', () => {
