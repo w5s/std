@@ -7,7 +7,7 @@ export const Char = Tag.define<string, Char>({
   hasInstance: (anyValue) => typeof anyValue === 'string' && anyValue.length === 1,
   codecSchema: () => ({
     type: 'string',
-    minlength: 1,
-    maxlength: 1,
+    minLength: 1,
+    maxLength: 1,
   }),
 });

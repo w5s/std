@@ -20,8 +20,8 @@ describe(Char, () => {
     ],
     schema: () => ({
       type: 'string',
-      minlength: 1,
-      maxlength: 1,
+      minLength: 1,
+      maxLength: 1,
     }),
   });
 });
