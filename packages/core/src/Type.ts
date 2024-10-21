@@ -17,6 +17,7 @@ import { unknown } from './Type/unknown.js';
 import { UUID } from './Type/UUID.js';
 import { Record } from './Type/Record.js';
 import { URL } from './Type/URL.js';
+import { Char } from './Type/Char.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -87,6 +88,7 @@ export const Type = {
   define,
   ensure,
   Array,
+  Char,
   bigint,
   boolean,
   Int,

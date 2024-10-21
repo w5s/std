@@ -10,6 +10,7 @@ describe('index', () => {
         'BigInt',
         'Boolean',
         'Callable',
+        'Char',
         'Codec',
         'Comparable',
         'DecodeError',

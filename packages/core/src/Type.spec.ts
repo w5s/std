@@ -23,6 +23,7 @@ import { unknown } from './Type/unknown.js';
 import { UUID } from './Type/UUID.js';
 import { Record } from './Type/Record.js';
 import { URL } from './Type/URL.js';
+import { Char } from './Type/Char.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
@@ -34,6 +35,7 @@ describe('Type', () => {
       Array,
       bigint,
       boolean,
+      Char,
       Int,
       number,
       unknown,

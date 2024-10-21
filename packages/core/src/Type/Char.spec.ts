@@ -1,6 +1,7 @@
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
-import { DecodeError, Result } from '@w5s/core';
+import { Result } from '../Result.js';
+import { DecodeError } from '../DecodeError.js';
+import { describeCodec, describeType } from '../Testing.js';
 import { Char } from './Char.js';
 
 describe(Char, () => {
