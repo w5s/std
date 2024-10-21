@@ -95,7 +95,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "11.1.6",
     "@types/node": "20.16.13",
-    "@w5s/commitlint-config": "2.1.2",
+    "@w5s/commitlint-config": "2.1.3",
     "@w5s/conventional-changelog": "2.1.3",
     "@w5s/cspell-config": "2.3.14",
     "@w5s/eslint-config": "2.2.2",
