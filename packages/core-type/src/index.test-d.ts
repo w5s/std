@@ -1,4 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 // Test import
-import type { AnyFunction, Awaitable, Nullable, PartialKeys, Pretty, Primitive, assertType } from './index.js';
+import type {
+  AnyFunction,
+  assertType,
+  Awaitable,
+  JSONArray,
+  JSONObject,
+  JSONPrimitive,
+  JSONValue,
+  Nullable,
+  PartialKeys,
+  Pretty,
+  Primitive,
+} from './index.js';
