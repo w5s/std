@@ -9,3 +9,4 @@ export * from './Nullable.js';
 export * from './PartialKeys.js';
 export * from './Pretty.js';
 export * from './Primitive.js';
+export * from './ValueOf.js';
