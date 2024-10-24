@@ -13,5 +13,6 @@ import type {
   PartialKeys,
   Pretty,
   Primitive,
+  RequiredKeys,
   ValueOf,
 } from './index.js';
