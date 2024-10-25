@@ -19,5 +19,5 @@ export function indexOf(string: string, searchString: string, fromIndex?: number
     return undefined;
   }
   const index = string.indexOf(searchString, fromIndex);
-  return index < 0 ? undefined : (index as Int);
+  return index === -1 ? undefined : (index as Int);
 }
