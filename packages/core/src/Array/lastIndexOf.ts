@@ -23,7 +23,7 @@ export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromInde
     if (searchItem === searchItem) {
       // not NaN
       const indexNumber = array.lastIndexOf(searchItem, fromIndex);
-      return indexNumber < 0 ? undefined : (indexNumber as Int);
+      return indexNumber === -1 ? undefined : (indexNumber as Int);
     }
     let index =
       fromIndex == null

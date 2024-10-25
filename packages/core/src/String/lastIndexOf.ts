@@ -19,5 +19,5 @@ export function lastIndexOf(string: string, searchString: string, fromIndex?: nu
     return undefined;
   }
   const index = string.lastIndexOf(searchString, fromIndex);
-  return index < 0 ? undefined : (index as Int);
+  return index === -1 ? undefined : (index as Int);
 }

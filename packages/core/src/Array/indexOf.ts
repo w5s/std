@@ -22,7 +22,7 @@ export function indexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: 
     // eslint-disable-next-line no-self-compare
     if (searchItem === searchItem) {
       const indexNumber = array.indexOf(searchItem, fromIndex);
-      return indexNumber < 0 ? undefined : (indexNumber as Int);
+      return indexNumber === -1 ? undefined : (indexNumber as Int);
     }
     // NaN
     let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;

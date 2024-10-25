@@ -24,5 +24,5 @@ export function findIndex<Item>(
     // @ts-ignore number !== Int
     predicate,
   );
-  return indexNumber < 0 ? undefined : (indexNumber as Int);
+  return indexNumber === -1 ? undefined : (indexNumber as Int);
 }
