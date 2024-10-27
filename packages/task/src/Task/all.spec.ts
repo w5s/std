@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
 import { all } from './all.js';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
 import { runReportTask } from './_stub.spec.js';
 
@@ -14,10 +14,10 @@ describe(all, () => {
   });
   it('should reject first error', async () => {
     const allTask = all([
-      taskStub({ delayMs: 1, value: 'value1' }),
-      taskStub({ delayMs: 1, error: 'error1' }),
-      taskStub({ delayMs: 1, value: 'value2' }),
-      taskStub({ delayMs: 1, error: 'error2' }),
+      FakeTask({ delayMs: 1, value: 'value1' }),
+      FakeTask({ delayMs: 1, error: 'error1' }),
+      FakeTask({ delayMs: 1, value: 'value2' }),
+      FakeTask({ delayMs: 1, error: 'error2' }),
     ]);
     await expectTask(allTask).toReject('error1');
   });
@@ -29,8 +29,8 @@ describe(all, () => {
       return {
         task:
           taskIndex === 0
-            ? taskStub({ delayMs: 1, error: `error${taskIndex}`, canceler })
-            : taskStub({ delayMs: 100, value: `value${taskIndex}`, canceler }),
+            ? FakeTask({ delayMs: 1, error: `error${taskIndex}`, canceler })
+            : FakeTask({ delayMs: 100, value: `value${taskIndex}`, canceler }),
         canceler,
       };
     });
@@ -46,7 +46,7 @@ describe(all, () => {
     const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
-        task: taskStub({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
+        task: FakeTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
         canceler,
       };
     });
@@ -62,18 +62,18 @@ describe(all, () => {
   });
   it('should resolve array of values', async () => {
     const allTask = all([
-      taskStub<'value1', 'error1'>({ delayMs: 1, value: 'value1' }),
-      taskStub<'value2', 'error2'>({ delayMs: 1, value: 'value2' }),
-      taskStub<'value3', 'error3'>({ delayMs: 1, value: 'value3' }),
+      FakeTask<'value1', 'error1'>({ delayMs: 1, value: 'value1' }),
+      FakeTask<'value2', 'error2'>({ delayMs: 1, value: 'value2' }),
+      FakeTask<'value3', 'error3'>({ delayMs: 1, value: 'value3' }),
     ]);
     assertType<typeof allTask, Task<['value1', 'value2', 'value3'], 'error1' | 'error2' | 'error3'>>(true);
     await expectTask(allTask).toResolve(['value1', 'value2', 'value3']);
   });
   it('should handle iterable values', async () => {
     const taskArray = [
-      taskStub({ delayMs: 1, value: 'value1' }),
-      taskStub({ delayMs: 1, value: 'value2' }),
-      taskStub({ delayMs: 1, value: 'value3' }),
+      FakeTask({ delayMs: 1, value: 'value1' }),
+      FakeTask({ delayMs: 1, value: 'value2' }),
+      FakeTask({ delayMs: 1, value: 'value3' }),
     ];
     const allTask = all({
       [Symbol.iterator]: () => taskArray[Symbol.iterator](),

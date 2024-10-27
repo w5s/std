@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Option, Result, Ref } from '@w5s/core';
 import { create } from './create.js';
-import { taskStub } from '../Testing.js';
+import { FakeTask } from '../Testing.js';
 import type { TaskLike } from '../Task.js';
 
 describe(create, () => {
@@ -10,7 +10,7 @@ describe(create, () => {
   const anyRunner = <V, E>(_task: TaskLike<V, E>) => Result.Ok() as Result<any, any>;
 
   it('should forward run', () => {
-    const subtask = taskStub({ value: anyValue });
+    const subtask = FakeTask({ value: anyValue });
     const task = create(({ run }) => run(subtask));
     const resolve = vi.fn();
     const reject = vi.fn();

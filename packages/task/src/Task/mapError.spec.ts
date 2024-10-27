@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mapError } from './mapError.js';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import { runReportTask } from './_stub.spec.js';
 
 describe(mapError, () => {
@@ -9,13 +9,13 @@ describe(mapError, () => {
   const expectTask = withTask(expect);
 
   it('keeps unchanged when success', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ value: anyValue });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ value: anyValue });
     const mapTask = mapError(task, (_) => ({ ..._, bar: true }));
 
     await expectTask(mapTask).toResolve(anyValue);
   });
   it('maps error when success', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ error: anyError });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ error: anyError });
     const mapTask = mapError(task, (_) => ({ ..._, bar: true }));
 
     await expectTask(mapTask).toReject({
@@ -24,7 +24,7 @@ describe(mapError, () => {
     });
   });
   it('maps error when async failure', async () => {
-    const task = taskStub({ delayMs: 0, error: anyError });
+    const task = FakeTask({ delayMs: 0, error: anyError });
     const mapTask = mapError(task, (_) => ({ ..._, bar: true }));
 
     await expectTask(mapTask).toReject({
@@ -33,7 +33,7 @@ describe(mapError, () => {
     });
   });
   it('forwards canceler', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = mapError(task, (_) => _);
     vi.spyOn(task, 'taskRun');
     const runReport = runReportTask(mapTask);

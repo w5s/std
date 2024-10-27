@@ -6,7 +6,7 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // public exports
-        'taskStub',
+        'FakeTask',
         'withTask',
       ].sort(),
     );

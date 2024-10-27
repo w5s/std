@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import { map } from './map.js';
 import { runReportTask } from './_stub.spec.js';
 
@@ -9,13 +9,13 @@ describe(map, () => {
   const expectTask = withTask(expect);
 
   it('keeps unchanged when failure', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ error: anyError });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ error: anyError });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
 
     await expectTask(mapTask).toReject(anyError);
   });
   it('maps value when success', async () => {
-    const task = taskStub({ value: anyValue });
+    const task = FakeTask({ value: anyValue });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
     await expectTask(mapTask).toResolve({
       ...anyValue,
@@ -23,7 +23,7 @@ describe(map, () => {
     });
   });
   it('maps value when async success', async () => {
-    const task = taskStub({ delayMs: 0, value: anyValue });
+    const task = FakeTask({ delayMs: 0, value: anyValue });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
     await expectTask(mapTask).toResolve({
       ...anyValue,
@@ -31,7 +31,7 @@ describe(map, () => {
     });
   });
   it('forwards canceler', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = map(task, (_) => _);
     vi.spyOn(task, 'taskRun');
     const runReport = runReportTask(mapTask);

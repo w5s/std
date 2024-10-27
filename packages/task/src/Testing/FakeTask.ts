@@ -5,7 +5,7 @@ import { from } from '../Task/from.js';
 /**
  * Options to create a TaskStub
  */
-export type TaskStubOptions<Value, Error> = {
+export type FakeTaskOptions<Value, Error> = {
   /**
    * Default Canceler function
    */
@@ -40,19 +40,19 @@ export type TaskStubOptions<Value, Error> = {
  *
  * @example
  * ```ts
- * const anyTask = taskStub({
+ * const anyTask = FakeTask({
  *   delayMs: 5,
  *   value: 'Hello world'
  * });// will resolve 'Hello world' after 5 milliseconds
  *
- * const anyTask = taskStub({
+ * const anyTask = FakeTask({
  *   delayMs: 2,
  *   throwError: new Error('Not expected')
  * });// will throw an error after 2 milliseconds
  * ```
  * @param options
  */
-export function taskStub<Value = never, Error = never>(options: TaskStubOptions<Value, Error>): Task<Value, Error> {
+export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<Value, Error>): Task<Value, Error> {
   const { canceler = () => {}, delayMs } = options;
   const isAsync = delayMs != null && delayMs >= 0;
   const base = from<Value, Error>(({ resolve, reject }) => {

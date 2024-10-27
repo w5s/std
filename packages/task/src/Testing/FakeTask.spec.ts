@@ -1,21 +1,21 @@
 import { describe, expect, it } from 'vitest';
 import { Result } from '@w5s/core';
-import { taskStub } from './taskStub.js';
+import { FakeTask } from './FakeTask.js';
 import { unsafeRun } from '../Task/unsafeRun.js';
 
-describe('taskStub', () => {
+describe(FakeTask, () => {
   it('should resolve value', () => {
-    const task = taskStub({ value: 'anyValue' });
+    const task = FakeTask({ value: 'anyValue' });
     const result = unsafeRun(task);
     expect(result).toEqual(Result.Ok('anyValue'));
   });
   it('should reject value', () => {
-    const task = taskStub({ error: 'anyError' });
+    const task = FakeTask({ error: 'anyError' });
     const result = unsafeRun(task);
     expect(result).toEqual(Result.Error('anyError'));
   });
   it('should throw error', () => {
-    const task = taskStub({ throwError: 'MockError' });
+    const task = FakeTask({ throwError: 'MockError' });
     expect(() => unsafeRun(task)).toThrow('MockError');
   });
 });

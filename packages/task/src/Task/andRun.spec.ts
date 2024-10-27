@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { allSyncCombination, runReportTask } from './_stub.spec.js';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import { andRun } from './andRun.js';
 import { create } from './create.js';
 
@@ -10,8 +10,8 @@ describe(andRun, () => {
   const expectTask = withTask(expect);
 
   describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
-    const task = taskStub({ delayMs: before === 'async' ? 0 : undefined, value: anyValue });
-    const andTask = taskStub({ delayMs: after === 'async' ? 0 : undefined, value: anyOtherValue });
+    const task = FakeTask({ delayMs: before === 'async' ? 0 : undefined, value: anyValue });
+    const andTask = FakeTask({ delayMs: after === 'async' ? 0 : undefined, value: anyOtherValue });
 
     it('should return a new task with same value', async () => {
       await expectTask(andRun(task, () => andTask)).toResolve(anyValue);

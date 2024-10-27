@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { allSyncCombination, runReportTask } from './_stub.spec.js';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import { andThen } from './andThen.js';
 
 describe(andThen, () => {
@@ -11,10 +11,10 @@ describe(andThen, () => {
 
   describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
     const stringify = (num: number) =>
-      taskStub<string, 'TestError'>({ delayMs: after === 'async' ? 0 : undefined, value: String(num) });
+      FakeTask<string, 'TestError'>({ delayMs: after === 'async' ? 0 : undefined, value: String(num) });
 
     it('should return unchanged result when failure', async () => {
-      const task = taskStub<number, 'TestError'>({
+      const task = FakeTask<number, 'TestError'>({
         delayMs: before === 'async' ? 0 : undefined,
         error: 'TestError',
       });
@@ -22,15 +22,15 @@ describe(andThen, () => {
       await expectTask(thenTask).toReject('TestError');
     });
     it('should map value when success', async () => {
-      const task = taskStub<number, 'TestError'>({ delayMs: before === 'async' ? 0 : undefined, value: 4 });
+      const task = FakeTask<number, 'TestError'>({ delayMs: before === 'async' ? 0 : undefined, value: 4 });
       const thenTask = andThen(task, stringify);
       await expectTask(thenTask).toResolve('4');
     });
   });
 
   it('should forward canceler', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
-    const afterTask = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
+    const afterTask = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const thenTask = andThen(task, (_) => afterTask);
     vi.spyOn(task, 'taskRun');
     vi.spyOn(afterTask, 'taskRun');

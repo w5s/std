@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { allSyncCombination, runReportTask } from './_stub.spec.js';
-import { taskStub, withTask } from '../Testing.js';
+import { FakeTask, withTask } from '../Testing.js';
 import { orElse } from './orElse.js';
 
 describe(orElse, () => {
@@ -10,10 +10,10 @@ describe(orElse, () => {
 
   describe.each(allSyncCombination)('(%s, () => %s)', (before, after) => {
     const handleError = (message: string) =>
-      taskStub<string, string>({ delayMs: after === 'async' ? 0 : undefined, value: `${message}_handled` });
+      FakeTask<string, string>({ delayMs: after === 'async' ? 0 : undefined, value: `${message}_handled` });
 
     it('should return unchanged result when Result.Ok', async () => {
-      const task = taskStub<string, 'TestError'>({
+      const task = FakeTask<string, 'TestError'>({
         delayMs: before === 'async' ? 0 : undefined,
         value: 'anyValue',
       });
@@ -21,7 +21,7 @@ describe(orElse, () => {
       await expectTask(taskElse).toResolve('anyValue');
     });
     it('should map value when Result.Ok', async () => {
-      const task = taskStub<string, 'TestError'>({
+      const task = FakeTask<string, 'TestError'>({
         delayMs: before === 'async' ? 0 : undefined,
         error: 'TestError',
       });
@@ -31,8 +31,8 @@ describe(orElse, () => {
   });
 
   it('should forward canceler', async () => {
-    const task = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, error: anyError });
-    const afterTask = taskStub<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
+    const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, error: anyError });
+    const afterTask = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const thenTask = orElse(task, (_) => afterTask);
     vi.spyOn(task, 'taskRun');
     vi.spyOn(afterTask, 'taskRun');
