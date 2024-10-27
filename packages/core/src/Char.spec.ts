@@ -3,12 +3,18 @@ import { Char } from './Char.js';
 import { Char as CharType } from './Type/Char.js';
 import { CharComparable } from './Char/CharComparable.js';
 import { CharBounded } from './Char/CharBounded.js';
+import { fromCodePoint } from './Char/fromCodePoint.js';
 
 describe(Char, () => {
   it('is an alias to functions', () => {
     expect(Char).toEqual(expect.objectContaining({ ...CharType }));
     expect(Char).toEqual(expect.objectContaining(CharComparable));
     expect(Char).toEqual(expect.objectContaining(CharBounded));
+    expect(Char).toEqual(
+      expect.objectContaining({
+        fromCodePoint,
+      }),
+    );
   });
   describe('()', () => {
     it('returns or throw when wrong value', () => {

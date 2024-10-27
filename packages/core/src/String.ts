@@ -10,7 +10,6 @@ import { endsWith } from './String/endsWith.js';
 import { concat } from './String/concat.js';
 import { split } from './String/split.js';
 import { join } from './String/join.js';
-import { fromCodePoint } from './String/fromCodePoint.js';
 import { indexOf } from './String/indexOf.js';
 import { lastIndexOf } from './String/lastIndexOf.js';
 
@@ -25,7 +24,6 @@ export const String = {
   at,
   concat,
   endsWith,
-  fromCodePoint,
   includes,
   indexOf,
   isEmpty,
