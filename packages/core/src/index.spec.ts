@@ -19,6 +19,7 @@ describe('index', () => {
         'Enum',
         'identity',
         'ignore',
+        'Indexable',
         'Int',
         'JSON',
         'lazy',

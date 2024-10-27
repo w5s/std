@@ -11,6 +11,7 @@ export * from './Enum.js';
 export * from './Equal.js';
 export * from './identity.js';
 export * from './ignore.js';
+export * from './Indexable.js';
 export * from './Int.js';
 export * from './JSON.js';
 export * from './lazy.js';
