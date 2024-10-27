@@ -7,6 +7,7 @@ import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';
 import { IntBounded } from './Int/IntBounded.js';
 import { IntSigned } from './Int/IntSigned.js';
+import { IntIndexable } from './Int/IntIndexable.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -14,6 +15,7 @@ describe('Int', () => {
   it('is an alias to functions', () => {
     expect(Int).toEqual(expect.objectContaining(IntBounded));
     expect(Int).toEqual(expect.objectContaining(IntSigned));
+    expect(Int).toEqual(expect.objectContaining(IntIndexable));
     expect(Int).toEqual(
       expect.objectContaining({
         parse,
