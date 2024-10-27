@@ -31,12 +31,12 @@ import type { TestingLibrary } from './type.js';
  */
 export function describeIndexable(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
-  return <V>(
-    subject: Indexable<V>,
+  return <V, Index = Int>(
+    subject: Indexable<V, Index>,
     cases: {
-      at: Array<[index: number, expectedValue: V]>;
-      indexOf: Array<[char: V, expectedValue: Int]>;
-      rangeSize: Array<[start: V, end: V, expected: Int]>;
+      at: Array<[index: Index, expectedValue: V]>;
+      indexOf: Array<[char: V, expectedValue: Index]>;
+      rangeSize: Array<[start: V, end: V, expected: Index]>;
       range: Array<[start: V, end: V, expected: Array<V>]>;
     },
   ) => {
@@ -48,7 +48,7 @@ export function describeIndexable(testingLibrary: TestingLibrary) {
     // at
     (at.length === 0 ? describe.todo : describe)('at', () => {
       it.each(at)('satisfies at($index) == $expected', ({ index, expected }) => {
-        const value = subject.at(Int(index));
+        const value = subject.at(index);
         expect(value).toEqual(expected);
       });
     });

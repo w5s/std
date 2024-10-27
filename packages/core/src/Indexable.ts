@@ -4,26 +4,26 @@ import type { Int } from './Int.js';
 /**
  * A type Indexable is a type with values that can be indexed by a number.
  */
-export interface Indexable<T> {
+export interface Indexable<T, Index = Int> {
   /**
    * Returns the value at the index
    *
    * @param index
    */
-  at(index: Int): T;
+  at(index: Index): T;
   /**
    * Returns the integer index of a value
    *
    * @param value
    */
-  indexOf(value: T): Int;
+  indexOf(value: T): Index;
   /**
    * Returns the size of a range
    *
    * @param start - the start of the range
    * @param end - the end of the range
    */
-  rangeSize(start: T, end: T): Int;
+  rangeSize(start: T, end: T): Index;
   /**
    * Returns an Iterable starting from `start` to `end`
    *
