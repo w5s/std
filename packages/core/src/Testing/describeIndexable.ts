@@ -19,6 +19,10 @@ import type { TestingLibrary } from './type.js';
  *   rangeSize: [
  *     ['a', 'a', 1],
  *     ['a', 'b', 2],
+ *   ],
+ *   range: [
+ *     ['a', 'a', ['a']],
+ *     ['a', 'c', ['a', 'b', 'c']],
  *   ]
  * });
  *
@@ -33,11 +37,13 @@ export function describeIndexable(testingLibrary: TestingLibrary) {
       at: Array<[index: number, expectedValue: V]>;
       indexOf: Array<[char: V, expectedValue: Int]>;
       rangeSize: Array<[start: V, end: V, expected: Int]>;
+      range: Array<[start: V, end: V, expected: Array<V>]>;
     },
   ) => {
     const at = cases.at.map(([index, expected]) => ({ index, expected }));
     const indexOf = cases.indexOf.map(([value, expected]) => ({ value, expected }));
     const rangeSize = cases.rangeSize.map(([start, end, expected]) => ({ start, end, expected }));
+    const range = cases.range.map(([start, end, expected]) => ({ start, end, expected }));
 
     // at
     (at.length === 0 ? describe.todo : describe)('at', () => {
@@ -57,6 +63,12 @@ export function describeIndexable(testingLibrary: TestingLibrary) {
       it.each(rangeSize)('satisfies rangeSize($start, $end) == $expected', ({ start, end, expected }) => {
         const size = subject.rangeSize(start, end);
         expect(size).toBe(expected);
+      });
+    });
+    (range.length === 0 ? describe.todo : describe)('range', () => {
+      it.each(range)('satisfies range($start, $end) == $expected', ({ start, end, expected }) => {
+        const array = [...subject.range(start, end)];
+        expect(array).toEqual(expected);
       });
     });
   };
