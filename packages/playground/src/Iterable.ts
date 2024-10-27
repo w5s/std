@@ -135,58 +135,6 @@ export const Iterable = {
   },
 
   /**
-   * Create an iterable from `start` to `end` (excluded)
-   *
-   * @example
-   * ```typescript
-   * Iterable.range(1, 4);// == Iterable.of(1, 2, 3)
-   * Iterable.range(1, 7, 2);// == Iterable.of(1, 3, 5)
-   * ```
-   * @param start - inclusive minimum
-   * @param end - exclusive maximum value
-   * @param step - optional step between iteration
-   */
-  range(start: number, end: number, step?: number): Iterable<number> {
-    const incrementValue = Math.abs(step ?? 1);
-
-    return fromFunction<number>(
-      start < end
-        ? () => {
-            let currentValue = start;
-
-            return {
-              next() {
-                const returnValue = currentValue;
-                if (returnValue < end) {
-                  currentValue += incrementValue;
-
-                  return resultValue(returnValue);
-                }
-
-                return resultDone;
-              },
-            };
-          }
-        : () => {
-            let currentValue = start;
-
-            return {
-              next() {
-                const returnValue = currentValue;
-                if (returnValue > end) {
-                  currentValue -= incrementValue;
-
-                  return resultValue(returnValue);
-                }
-
-                return resultDone;
-              },
-            };
-          },
-    );
-  },
-
-  /**
    * Return a new Iterable which applies `mapFn` to each values
    *
    * @example

@@ -76,19 +76,6 @@ describe('Iterable', () => {
     });
   });
 
-  describe('.range', () => {
-    it('should return a range of number', () => {
-      expectIterable(Iterable.range(1, 4)).toHaveValues([1, 2, 3]);
-    });
-
-    it('should use step', () => {
-      expectIterable(Iterable.range(1, 6, 2)).toHaveValues([1, 3, 5]);
-    });
-    it('should handle reversed range', () => {
-      expectIterable(Iterable.range(6, 1, 2)).toHaveValues([6, 4, 2]);
-    });
-  });
-
   describe('.zip', () => {
     it('should return have size of left when size(left) < size(right)', () => {
       const source = iteratorOf(1);
