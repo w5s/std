@@ -6,6 +6,7 @@ export * from './Testing/describeCheckedSubtract.js';
 export * from './Testing/describeCodec.js';
 export * from './Testing/describeComparable.js';
 export * from './Testing/describeEqual.js';
+export * from './Testing/describeIndexable.js';
 export * from './Testing/describeMultiply.js';
 export * from './Testing/describeSigned.js';
 export * from './Testing/describeSubtract.js';

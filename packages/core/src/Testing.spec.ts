@@ -14,6 +14,7 @@ describe('index', () => {
         'describeCodec',
         'describeComparable',
         'describeEqual',
+        'describeIndexable',
         'describeMultiply',
         'describeSigned',
         'describeSubtract',
