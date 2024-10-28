@@ -2,11 +2,13 @@ import { describe, expect, it } from 'vitest';
 import { Status } from './Status.js';
 import { StatusBounded } from './Status/StatusBounded.js';
 import { StatusComparable } from './Status/StatusComparable.js';
+import { StatusIndexable } from './Status/StatusIndexable.js';
 
 describe('Status', () => {
   it('is an alias to functions', () => {
     expect(Status).toEqual(expect.objectContaining(StatusBounded));
     expect(Status).toEqual(expect.objectContaining(StatusComparable));
+    expect(Status).toEqual(expect.objectContaining(StatusIndexable));
   });
   it('is a constructor', () => {
     expect(Status).toEqual(
