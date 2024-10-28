@@ -4,7 +4,7 @@ import * as StatusAll from './status.all.js';
 import type { Status } from './Status.js';
 
 const indexByCode = lazy(() => {
-  const returnValue = new Map<Status['statusCode'], Status>();
+  const returnValue = new Map<number, Status>();
   for (const status of Object.values(StatusAll)) {
     returnValue.set(status.statusCode, status);
   }

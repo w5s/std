@@ -1,0 +1,48 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ReferrerPolicy > is an enum 1`] = `
+{
+  "Empty": "",
+  "NoReferrer": "no-referrer",
+  "NoReferrerWhenDowngrade": "no-referrer-when-downgrade",
+  "Origin": "origin",
+  "OriginWhenCrossOrigin": "origin-when-cross-origin",
+  "SameOrigin": "same-origin",
+  "StrictOrigin": "strict-origin",
+  "StrictOriginWhenCrossOrigin": "strict-origin-when-cross-origin",
+  "UnsafeURL": "unsafe-url",
+  "at": [Function],
+  "codecDecode": [Function],
+  "codecEncode": [Function],
+  "codecSchema": [Function],
+  "from": [Function],
+  "hasInstance": [Function],
+  "indexOf": [Function],
+  "inspect": undefined,
+  "range": [Function],
+  "rangeSize": [Function],
+  "typeName": "Enum",
+  Symbol(w5s.enumKeys): [
+    "Empty",
+    "NoReferrer",
+    "NoReferrerWhenDowngrade",
+    "SameOrigin",
+    "Origin",
+    "StrictOrigin",
+    "OriginWhenCrossOrigin",
+    "StrictOriginWhenCrossOrigin",
+    "UnsafeURL",
+  ],
+  Symbol(w5s.enumValues): [
+    "",
+    "no-referrer",
+    "no-referrer-when-downgrade",
+    "same-origin",
+    "origin",
+    "strict-origin",
+    "origin-when-cross-origin",
+    "strict-origin-when-cross-origin",
+    "unsafe-url",
+  ],
+}
+`;

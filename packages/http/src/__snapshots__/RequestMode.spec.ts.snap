@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RequestMode > is an enum 1`] = `
+{
+  "CORS": "cors",
+  "Navigate": "navigate",
+  "NoCORS": "no-cors",
+  "SameOrigin": "same-origin",
+  "at": [Function],
+  "codecDecode": [Function],
+  "codecEncode": [Function],
+  "codecSchema": [Function],
+  "from": [Function],
+  "hasInstance": [Function],
+  "indexOf": [Function],
+  "inspect": undefined,
+  "range": [Function],
+  "rangeSize": [Function],
+  "typeName": "Enum",
+  Symbol(w5s.enumKeys): [
+    "SameOrigin",
+    "CORS",
+    "Navigate",
+    "NoCORS",
+  ],
+  Symbol(w5s.enumValues): [
+    "same-origin",
+    "cors",
+    "navigate",
+    "no-cors",
+  ],
+}
+`;
