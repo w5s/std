@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { describeCodec, describeType } from '../Testing.js';
+import { describeCodec, describeIndexable, describeType } from '../Testing.js';
 import { define } from './define.js';
 import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
@@ -11,6 +11,7 @@ describe(define, () => {
   const MyEnumObject = define({
     Foo: 'foo',
     Bar: 'bar',
+    Baz: 'baz',
   });
   const MyEnum = {
     ...MyEnumObject,
@@ -26,28 +27,34 @@ describe(define, () => {
     },
   };
   type MyEnum = Enum.ValueOf<typeof MyEnumObject>;
-  assertType<MyEnum, 'foo' | 'bar'>(true);
+  assertType<MyEnum, 'foo' | 'bar' | 'baz'>(true);
 
   type MyEnumKeys = Enum.KeyOf<typeof MyEnumObject>;
-  assertType<MyEnumKeys, 'Foo' | 'Bar'>(true);
+  assertType<MyEnumKeys, 'Foo' | 'Bar' | 'Baz'>(true);
 
   it('returns a new type', () => {
     expect(
       define({
         Foo: 'foo',
         Bar: 'bar',
+        Baz: 'baz',
       }),
     ).toEqual({
       Foo: 'foo',
       Bar: 'bar',
+      Baz: 'baz',
       typeName: expect.any(String),
       hasInstance: expect.any(Function),
       codecSchema: expect.any(Function),
       codecDecode: expect.any(Function),
       codecEncode: expect.any(Function),
       from: expect.any(Function),
-      [Symbol.enumKeys]: ['Foo', 'Bar'],
-      [Symbol.enumValues]: ['foo', 'bar'],
+      [Symbol.enumKeys]: ['Foo', 'Bar', 'Baz'],
+      [Symbol.enumValues]: ['foo', 'bar', 'baz'],
+      at: expect.any(Function),
+      indexOf: expect.any(Function),
+      range: expect.any(Function),
+      rangeSize: expect.any(Function),
     });
   });
   describeType({ describe, it, expect })(MyEnumObject, {
@@ -69,7 +76,20 @@ describe(define, () => {
       [MyEnum.Bar, 'bar'],
     ],
     schema: () => ({
-      enum: ['foo', 'bar'],
+      enum: ['foo', 'bar', 'baz'],
     }),
+  });
+  describeIndexable({ describe, it, expect })(MyEnumObject, {
+    index: [
+      [0, MyEnumObject.Foo],
+      [1, MyEnumObject.Bar],
+      [2, MyEnumObject.Baz],
+    ],
+    rangeSize: [],
+    range: [
+      [MyEnumObject.Foo, MyEnumObject.Foo, [MyEnumObject.Foo]],
+      [MyEnumObject.Foo, MyEnumObject.Bar, [MyEnumObject.Foo, MyEnumObject.Bar]],
+      [MyEnumObject.Foo, MyEnumObject.Baz, [MyEnumObject.Foo, MyEnumObject.Bar, MyEnumObject.Baz]],
+    ],
   });
 });

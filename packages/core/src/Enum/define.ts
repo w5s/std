@@ -1,4 +1,5 @@
 import type { Enum } from '../Enum.js';
+import { Indexable } from '../Indexable.js';
 import { Symbol } from '../Symbol.js';
 import { define as defineType } from '../Type/define.js';
 
@@ -19,22 +20,27 @@ export function define<const T extends Record<string, string | number | boolean>
 
   const enumKeysList = Object.freeze(Object.keys(enumObject));
   const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<Value>;
-  const enumValuesSet = new Set<any>(enumValuesList);
+  const enumValuesIndex = new Map<unknown, number>(enumValuesList.map((value, index) => [value, index]));
 
   const EnumType = defineType<Value>({
     typeName: 'Enum',
     hasInstance(anyValue) {
-      return enumValuesSet.has(anyValue);
+      return enumValuesIndex.has(anyValue);
     },
     codecSchema: () => ({
       enum: enumValuesList,
     }),
+  });
+  const EnumIndexable = Indexable<Value>({
+    at: (index) => enumValuesList[index],
+    indexOf: (value) => enumValuesIndex.get(value),
   });
 
   return Object.freeze({
     [Symbol.enumKeys]: enumKeysList,
     [Symbol.enumValues]: enumValuesList,
     ...EnumType,
+    ...EnumIndexable,
     ...enumObject,
   });
 }
