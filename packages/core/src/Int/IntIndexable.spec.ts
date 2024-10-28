@@ -5,11 +5,7 @@ import { Int } from '../Int.js';
 
 describe('IntIndexable', () => {
   describeIndexable({ describe, it, expect })(IntIndexable, {
-    at: [
-      [Int(0), Int(0)],
-      [Int(1), Int(1)],
-    ],
-    indexOf: [
+    index: [
       [Int(0), Int(0)],
       [Int(1), Int(1)],
     ],

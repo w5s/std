@@ -4,11 +4,7 @@ import { BigIntIndexable } from './BigIntIndexable.js';
 
 describe('BigIntIndexable', () => {
   describeIndexable({ describe, it, expect })(BigIntIndexable, {
-    at: [
-      [0n, 0n],
-      [1n, 1n],
-    ],
-    indexOf: [
+    index: [
       [0n, 0n],
       [1n, 1n],
     ],

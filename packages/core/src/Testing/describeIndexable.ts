@@ -1,5 +1,4 @@
 import type { Indexable } from '../Indexable.js';
-import { Int } from '../Int.js';
 import type { TestingLibrary } from './type.js';
 
 /**
@@ -8,13 +7,9 @@ import type { TestingLibrary } from './type.js';
  * @example
  * ```ts
  * describeIndexable({ describe, it, expect })(SomeIndexable, {
- *   at: [
+ *   index: [
  *     [0, 'a'],
  *     [1, 'a'],
- *   ],
- *   indexOf: [
- *     ['a', 0],
- *     ['b', 1],
  *   ],
  *   rangeSize: [
  *     ['a', 'a', 1],
@@ -31,17 +26,16 @@ import type { TestingLibrary } from './type.js';
  */
 export function describeIndexable(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
-  return <V, Index = Int>(
+  return <V, Index>(
     subject: Indexable<V, Index>,
     cases: {
-      at: Array<[index: Index, expectedValue: V]>;
-      indexOf: Array<[char: V, expectedValue: Index]>;
+      index: Array<[index: Index, value: V]>;
       rangeSize: Array<[start: V, end: V, expected: Index]>;
       range: Array<[start: V, end: V, expected: Array<V>]>;
     },
   ) => {
-    const at = cases.at.map(([index, expected]) => ({ index, expected }));
-    const indexOf = cases.indexOf.map(([value, expected]) => ({ value, expected }));
+    const at = cases.index.map(([index, expected]) => ({ index, expected }));
+    const indexOf = cases.index.map(([expected, value]) => ({ value, expected }));
     const rangeSize = cases.rangeSize.map(([start, end, expected]) => ({ start, end, expected }));
     const range = cases.range.map(([start, end, expected]) => ({ start, end, expected }));
 

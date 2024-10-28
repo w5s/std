@@ -6,13 +6,9 @@ import { Int } from '../Int.js';
 
 describe('CharIndexable', () => {
   describeIndexable({ describe, it, expect })(CharIndexable, {
-    at: [
+    index: [
       [0, Char('\u0000')],
       [97, Char('a')],
-    ],
-    indexOf: [
-      [Char('\u0000'), Int(0)],
-      [Char('a'), Int(97)],
     ],
     rangeSize: [
       [Char('a'), Char('a'), Int(1)],

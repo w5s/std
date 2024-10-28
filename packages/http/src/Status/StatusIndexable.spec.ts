@@ -7,13 +7,9 @@ import * as StatusAll from './status.all.js';
 
 describe('StatusIndexable', () => {
   describeIndexable({ describe, it, expect })(StatusIndexable, {
-    at: [
+    index: [
       [0, Status(Int(0), '')],
       [200, StatusAll.OK],
-    ],
-    indexOf: [
-      [StatusAll.OK, 200],
-      [Status(Int(0), ''), 0],
     ],
     rangeSize: [],
     range: [],
