@@ -5,7 +5,7 @@ import type { Option } from './Option.js';
 /**
  * A type Indexable is a type with values that can be indexed by a number.
  */
-export interface Indexable<T, Index = number> {
+export interface Indexable<T, Index extends number | bigint = number> {
   /**
    * Returns the value at the index
    *
@@ -66,7 +66,8 @@ export function Indexable<T>(properties: Indexable.Parameters<T, number>): Index
   };
 }
 export namespace Indexable {
-  export interface Parameters<T, Index> extends PartialKeys<Indexable<T, Index>, 'rangeSize' | 'range'> {}
+  export interface Parameters<T, Index extends number | bigint>
+    extends PartialKeys<Indexable<T, Index>, 'rangeSize' | 'range'> {}
 }
 
 export interface Range<T> extends Iterable<T> {}

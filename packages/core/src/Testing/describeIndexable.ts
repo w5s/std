@@ -26,7 +26,7 @@ import type { TestingLibrary } from './type.js';
  */
 export function describeIndexable(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
-  return <V, Index>(
+  return <V, Index extends number | bigint>(
     subject: Indexable<V, Index>,
     cases: {
       index: Array<[index: Index, value: V]>;
