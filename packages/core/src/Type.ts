@@ -18,6 +18,7 @@ import { UUID } from './Type/UUID.js';
 import { Record } from './Type/Record.js';
 import { URL } from './Type/URL.js';
 import { Char } from './Type/Char.js';
+import { RegExp } from './Type/RegExp.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -99,6 +100,7 @@ export const Type = {
   string,
   Tuple,
   unknown,
+  RegExp,
   UUID,
   URL,
 };

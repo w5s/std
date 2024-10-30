@@ -24,6 +24,7 @@ import { UUID } from './Type/UUID.js';
 import { Record } from './Type/Record.js';
 import { URL } from './Type/URL.js';
 import { Char } from './Type/Char.js';
+import { RegExp } from './Type/RegExp.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
@@ -44,6 +45,7 @@ describe('Type', () => {
       Object: $Object,
       Option,
       Tuple,
+      RegExp,
       UUID,
       URL,
     });
