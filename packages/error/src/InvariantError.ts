@@ -15,5 +15,5 @@ export interface InvariantError
  */
 export const InvariantError = CustomError.define<InvariantError>({
   errorName: 'InvariantError',
-  errorMessage: 'Operation timed out',
+  errorMessage: 'An invariant error occurred',
 });
