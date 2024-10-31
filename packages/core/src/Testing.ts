@@ -11,3 +11,4 @@ export * from './Testing/describeMultiply.js';
 export * from './Testing/describeSigned.js';
 export * from './Testing/describeSubtract.js';
 export * from './Testing/describeType.js';
+export * from './Testing/type.js';
