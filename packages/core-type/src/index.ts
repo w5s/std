@@ -10,4 +10,5 @@ export * from './PartialKeys.js';
 export * from './Pretty.js';
 export * from './Primitive.js';
 export * from './RequiredKeys.js';
+export * from './TestingLibrary.js';
 export * from './ValueOf.js';

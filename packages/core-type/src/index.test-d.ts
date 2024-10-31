@@ -14,5 +14,6 @@ import type {
   Pretty,
   Primitive,
   RequiredKeys,
+  TestingLibrary,
   ValueOf,
 } from './index.js';
