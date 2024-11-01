@@ -6,7 +6,7 @@ import type { CustomError } from '../CustomError.js';
  *
  * @example
  * ```ts
- * describeCustomError({ describe, it, expect })(MyCustomError, {
+ * describeError({ describe, it, expect })(MyCustomError, {
  *   defaultProperties: () => ({  })
  *   expectedName: 'MyCustomError',
  *   expectedDefaultMessage: 'My custom error default message',
@@ -14,7 +14,7 @@ import type { CustomError } from '../CustomError.js';
  * ```
  * @param testingLibrary
  */
-export function describeCustomError(testingLibrary: TestingLibrary) {
+export function describeError(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
   return <Model extends CustomError<{ name: string }>>(
     subject: CustomError.Module<Model>,

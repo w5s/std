@@ -1,1 +1,1 @@
-export * from './Testing/describeCustomError.js';
+export * from './Testing/describeError.js';

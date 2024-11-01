@@ -1,14 +1,11 @@
 import { describe, it, expect } from 'vitest';
 import { ArgumentError } from './ArgumentError.js';
+import { describeError } from './Testing.js';
 
 describe('ArgumentError', () => {
-  it('should return instance of Error', () => {
-    expect(ArgumentError({ message: 'my message' })).toEqual(
-      expect.objectContaining({
-        // _: 'DataError',
-        name: 'ArgumentError',
-        message: 'my message',
-      }),
-    );
+  describeError({ describe, it, expect })(ArgumentError, {
+    defaultParameters: () => ({}),
+    expectedName: 'ArgumentError',
+    expectedDefaultMessage: 'Some arguments are invalid or missing',
   });
 });
