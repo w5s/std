@@ -2,9 +2,6 @@
 import type { Codec, Int, Option } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
-import { NotImplementedError, throwError } from '@w5s/error';
-
-// const ipv4Regexp = /^((\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
 
 export type IPv4Address = Int;
 
@@ -19,8 +16,23 @@ export interface IPv4
 const IPv4Type = Struct.define<IPv4>('IPv4');
 
 const IPv4Format = {
-  parse(_expression: string): Option<IPv4> {
-    throwError(NotImplementedError());
+  parse(expression: string): Option<IPv4> {
+    const parts = expression.split('.');
+
+    // Check for exactly 4 parts
+    if (parts.length === 4) {
+      // Parse each part and ensure it’s a valid number between 0 and 255
+      const result = parts.map((part) => {
+        const num = Number.parseInt(part, 10);
+        return num >= 0 && num <= 255 ? num : undefined;
+      });
+
+      // If any part is undefined, the IP is invalid
+      if (!result.includes(undefined)) {
+        return of(...(result as [number, number, number, number]));
+      }
+    }
+    return undefined;
   },
   stringify({ ipv4 }: IPv4): string {
     return `${(ipv4 >>> 24) & 0xff}.${(ipv4 >>> 16) & 0xff}.${(ipv4 >>> 8) & 0xff}.${ipv4 & 0xff}`;
