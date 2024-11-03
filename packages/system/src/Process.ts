@@ -1,7 +1,7 @@
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import type { FileError } from './FileError.js';
-import { errnoTaskSync, Internal } from './Internal.js';
+import { errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';
 
 export namespace Process {
@@ -16,7 +16,7 @@ export namespace Process {
    * @param code - the exit code
    */
   export function exit(code: number): Task<never, never> {
-    return taskFrom(({ resolve }) => resolve(Internal.Process.exit(code)));
+    return taskFrom(({ resolve }) => resolve(process.exit(code)));
   }
 
   /**
@@ -29,7 +29,7 @@ export namespace Process {
    * ```
    */
   export function getCurrentDirectory(): Task<FilePath, never> {
-    return taskFrom(({ resolve }) => resolve(Internal.Process.cwd() as FilePath));
+    return taskFrom(({ resolve }) => resolve(process.cwd() as FilePath));
   }
 
   /**
@@ -44,6 +44,6 @@ export namespace Process {
    */
   export function setCurrentDirectory(directory: FilePath): Task<void, FileError> {
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    return errnoTaskSync(Internal.Process.chdir)(directory);
+    return errnoTaskSync(process.chdir)(directory);
   }
 }

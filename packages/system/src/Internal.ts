@@ -10,7 +10,6 @@ import type { FilePath } from './FilePath.js';
 export const Internal = {
   FS: { ...nodeFS.promises, ...nodeFS.constants },
   Path: nodePath,
-  Process: { ...process },
 };
 
 export type ErrnoException = NodeJS.ErrnoException;
