@@ -57,7 +57,7 @@ export namespace Numeric {
     '-?'(left: Left, right: Right): Option<Return>;
   }
 
-  export interface CheckedMultiply<Left, Right = Left, Return = Left> {
+  export interface CheckedMultiply<Base, Multiplier = Base, Return = Base> {
     /**
      * Multiplication operator that returns `None` instead of wrapping around on overflow.
      *
@@ -68,10 +68,27 @@ export namespace Numeric {
      * const result = Numeric['*?'](left, right);// represents (left * right)
      * ```
      * @category Numeric
+     * @param base - the left operand
+     * @param multiplier - the right operand
+     */
+    '*?'(base: Base, multiplier: Multiplier): Option<Return>;
+  }
+
+  export interface CheckedDivide<Base, Divider = Base, Return = Base> {
+    /**
+     * Division operator
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric.CheckedDivide<T> = ...;
+     * const result = Numeric['/?'](left, right);// represents (left / right)
+     * ```
+     * @category Numeric
      * @param left - the left operand
      * @param right - the right operand
      */
-    '*?'(left: Left, right: Right): Option<Return>;
+    '/?'(left: Base, right: Divider): Option<Return>;
   }
 
   export interface Add<Left, Right = Left, Return = Left> {
@@ -123,5 +140,22 @@ export namespace Numeric {
      * @param right - the right operand
      */
     '*'(left: Left, right: Right): Return;
+  }
+
+  export interface Divide<Base, Divider = Base, Return = Base> {
+    /**
+     * Division operator
+     *
+     * @example
+     * ```ts
+     * type T = ...;
+     * const TNumeric: Numeric.Divide<T> = ...;
+     * const result = Numeric['/'](left, right);// represents (left / right)
+     * ```
+     * @category Numeric
+     * @param base - the base part
+     * @param divider - the divider part
+     */
+    '/'(base: Base, divider: Divider): Return;
   }
 }

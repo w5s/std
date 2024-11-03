@@ -11,6 +11,7 @@ describe('index', () => {
         'describeCheckedAdd',
         'describeCheckedMultiply',
         'describeCheckedSubtract',
+        'describeCheckedDivide',
         'describeCodec',
         'describeComparable',
         'describeEqual',
@@ -18,6 +19,7 @@ describe('index', () => {
         'describeMultiply',
         'describeSigned',
         'describeSubtract',
+        'describeDivide',
         'describeType',
       ].sort(),
     );
