@@ -9,10 +9,6 @@ describe('IntIndexable', () => {
       [Int(0), Int(0)],
       [Int(1), Int(1)],
     ],
-    rangeSize: [
-      [Int(1), Int(3), Int(3)],
-      [Int(1), Int(4), Int(4)],
-    ],
     range: [
       [Int(0), Int(2), [Int(0), Int(1), Int(2)]],
       [Int(1), Int(4), [Int(1), Int(2), Int(3), Int(4)]],

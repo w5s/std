@@ -85,7 +85,6 @@ describe(define, () => {
       [1, MyEnumObject.Bar],
       [2, MyEnumObject.Baz],
     ],
-    rangeSize: [],
     range: [
       [MyEnumObject.Foo, MyEnumObject.Foo, [MyEnumObject.Foo]],
       [MyEnumObject.Foo, MyEnumObject.Bar, [MyEnumObject.Foo, MyEnumObject.Bar]],

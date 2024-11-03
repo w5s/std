@@ -30,13 +30,15 @@ export function describeIndexable(testingLibrary: TestingLibrary) {
     subject: Indexable<V, Index>,
     cases: {
       index: Array<[index: Index, value: V]>;
-      rangeSize: Array<[start: V, end: V, expected: Index]>;
+      rangeSize?: Array<[start: V, end: V, expected: Index]>;
       range: Array<[start: V, end: V, expected: Array<V>]>;
     },
   ) => {
     const at = cases.index.map(([index, expected]) => ({ index, expected }));
     const indexOf = cases.index.map(([expected, value]) => ({ value, expected }));
-    const rangeSize = cases.rangeSize.map(([start, end, expected]) => ({ start, end, expected }));
+    const rangeSize =
+      cases.rangeSize?.map(([start, end, expected]) => ({ start, end, expected })) ??
+      cases.range.map(([start, end, expected]) => ({ start, end, expected: expected.length as Index }));
     const range = cases.range.map(([start, end, expected]) => ({ start, end, expected }));
 
     // at
