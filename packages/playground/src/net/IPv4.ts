@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-import { Comparable, type Codec, type Int, type Option } from '@w5s/core';
+import { Comparable, type Bounded, type Codec, type Int, type Option } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { compare as numberCompare } from '@w5s/core/dist/Number/compare.js';
@@ -73,6 +73,11 @@ const IPv4Comparable = Comparable<IPv4>({
   compare,
 });
 
+const IPv4Bounded: Bounded<IPv4> = {
+  minValue: fromNumber(0),
+  maxValue: fromNumber(0xff_ff_ff_ff),
+};
+
 /**
  * IPv4 Type and Codec definition
  *
@@ -83,6 +88,7 @@ export const IPv4 = Callable({
   ...IPv4Codec,
   ...IPv4Format,
   ...IPv4Comparable,
+  ...IPv4Bounded,
   fromNumber,
   of,
   [Callable.symbol]: fromNumber,
