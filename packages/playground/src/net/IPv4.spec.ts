@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { describeBounded, describeCodec, describeComparable, describeType } from '@w5s/core/dist/Testing.js';
+import {
+  describeBounded,
+  describeCodec,
+  describeComparable,
+  describeIndexable,
+  describeType,
+} from '@w5s/core/dist/Testing.js';
 import { DecodeError, Result } from '@w5s/core';
 import { IPv4 } from './IPv4.js';
 
@@ -61,5 +67,29 @@ describe('IPv4', () => {
   describeBounded({ describe, it, expect })(IPv4, {
     minValue: IPv4.of(0, 0, 0, 0),
     maxValue: IPv4.of(255, 255, 255, 255),
+  });
+  describeIndexable({ describe, it, expect })(IPv4, {
+    index: [
+      [IPv4.minValue.ipv4, IPv4.minValue],
+      [IPv4.maxValue.ipv4, IPv4.maxValue],
+    ],
+    rangeSize: [
+      [IPv4.of(192, 0, 0, 0), IPv4.of(192, 0, 0, 0), 1],
+      [IPv4.of(192, 0, 0, 0), IPv4.of(192, 0, 0, 5), 6],
+    ],
+    range: [
+      [
+        IPv4.of(192, 0, 0, 0),
+        IPv4.of(192, 0, 0, 5),
+        [
+          IPv4.of(192, 0, 0, 0),
+          IPv4.of(192, 0, 0, 1),
+          IPv4.of(192, 0, 0, 2),
+          IPv4.of(192, 0, 0, 3),
+          IPv4.of(192, 0, 0, 4),
+          IPv4.of(192, 0, 0, 5),
+        ],
+      ],
+    ],
   });
 });
