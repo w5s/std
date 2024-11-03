@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describeCodec, describeComparable, describeType } from '@w5s/core/dist/Testing.js';
 import { DecodeError, Result } from '@w5s/core';
 import { IPv4 } from './IPv4.js';
 
@@ -12,6 +12,8 @@ describe('IPv4', () => {
   describe('of', () => {
     it('should return an IPv4 instance', () => {
       expect(IPv4.of(127, 0, 0, 1)).toEqual(IPv4(0x7f_00_00_01));
+      expect(IPv4.of(0, 0, 0, 1)).toEqual(IPv4(0x00_00_00_01));
+      expect(IPv4.of(192, 168, 0, 1)).toEqual(IPv4(0xc0_a8_00_01));
     });
   });
   describe('parse', () => {
@@ -39,5 +41,18 @@ describe('IPv4', () => {
       type: 'string',
       format: 'ipv4',
     }),
+  });
+  describeComparable({ describe, it, expect })(IPv4, {
+    ordered: () => [
+      // lower to higher
+      IPv4.of(0, 0, 0, 1),
+      IPv4.of(127, 0, 0, 1),
+      IPv4.of(192, 168, 0, 1),
+      IPv4.of(192, 168, 0, 254),
+    ],
+    equivalent: () => [
+      [IPv4.of(0, 0, 0, 1), IPv4.of(0, 0, 0, 1)],
+      [IPv4.of(192, 168, 0, 1), IPv4.of(192, 168, 0, 1)],
+    ],
   });
 });

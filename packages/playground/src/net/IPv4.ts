@@ -1,7 +1,8 @@
 /* eslint-disable no-bitwise */
-import type { Codec, Int, Option } from '@w5s/core';
+import { Comparable, type Codec, type Int, type Option } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
+import { compare as numberCompare } from '@w5s/core/dist/Number/compare.js';
 
 export type IPv4Address = Int;
 
@@ -64,6 +65,14 @@ function of(_0: number, _1: number, _2: number, _3: number) {
   return IPv4Type({ ipv4: ((_0 << 24) | (_1 << 16) | (_2 << 8) | _3) as IPv4Address });
 }
 
+function compare(left: IPv4, right: IPv4): number {
+  return numberCompare(left.ipv4 >>> 0, right.ipv4 >>> 0);
+}
+
+const IPv4Comparable = Comparable<IPv4>({
+  compare,
+});
+
 /**
  * IPv4 Type and Codec definition
  *
@@ -73,6 +82,7 @@ export const IPv4 = Callable({
   ...IPv4Type,
   ...IPv4Codec,
   ...IPv4Format,
+  ...IPv4Comparable,
   fromNumber,
   of,
   [Callable.symbol]: fromNumber,
