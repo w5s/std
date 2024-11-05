@@ -26,8 +26,11 @@ interface CustomErrorConstructor {
    *
    * @example
    * ```typescript
-   * interface MyError extends CustomError<{ name: 'CustomError', foo: boolean }> {}
-   * const MyError = CustomError.define<CustomError>('MyError');
+   * interface MyError extends CustomError<{ name: 'MyError', foo: boolean }> {}
+   * const MyError = CustomError.define<CustomError>({
+   *   errorName: 'MyError',
+   *   // errorMessage: 'my message',
+   * });
    *
    * const instance = MyError({ foo: true, message: 'hey!' }); // Error { name: 'MyError', message: 'hey!', foo: true }
    * MyError.errorName === 'MyError' // true
