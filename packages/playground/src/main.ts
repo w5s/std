@@ -2,13 +2,21 @@ import { Int, Option } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
-import { randomUUID } from '@w5s/random';
+import { randomUUID as defaultRandomUUID } from '@w5s/random';
 import { EUR } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
 import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
+import { provide } from './di/provide.js';
+import { InjectionKey } from './di/InjectionKey.js';
+import { use } from './di/use.js';
+
+const RandomUUID = InjectionKey('RandomUUID', defaultRandomUUID);
+const app = {
+  ...provide(RandomUUID, () => defaultRandomUUID),
+};
 
 function sendMessage(text: string) {
   const client = Slack({ token: 'token' });
@@ -30,6 +38,7 @@ function sendMessage(text: string) {
 
 function main() {
   const amount = EUR('1.55');
+  const randomUUID = use(app, RandomUUID);
 
   const task = pipe(randomUUID()).to(
     (_) => Task.andThen(_, (uuid) => sendMessage(uuid + String(amount))),
@@ -64,6 +73,8 @@ function main() {
 }
 
 function main2() {
+  const randomUUID = use(app, RandomUUID);
+
   const task = Task.create(async ({ ok, run }) => {
     const amount = EUR('1.55');
     const uuid = await run(randomUUID());
