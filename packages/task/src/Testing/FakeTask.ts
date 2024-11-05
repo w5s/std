@@ -1,6 +1,20 @@
-import { delay } from '@w5s/async/dist/delay.js';
-import type { Task } from '../Task.js';
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import type { Task, TaskCanceler } from '../Task.js';
 import { from } from '../Task/from.js';
+
+function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
+  return milliseconds === 0
+    ? Promise.resolve(true)
+    : new Promise((resolve) => {
+        const timerId = setTimeout(() => resolve(true), milliseconds);
+        const cancelerCurrent = canceler.current;
+        canceler.current = () => {
+          clearTimeout(timerId);
+          cancelerCurrent?.();
+          resolve(true);
+        };
+      });
+}
 
 /**
  * Options to create a TaskStub
@@ -66,12 +80,12 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
   });
 
   return isAsync === true
-    ? // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      from<Value, Error>(async (parameters) => {
+    ? from<Value, Error>(async (parameters) => {
         parameters.canceler.current = canceler;
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        await delay(delayMs ?? 0);
-        return base.taskRun(parameters);
+        if (await delay(delayMs, parameters.canceler)) {
+          return base.taskRun(parameters);
+        }
+        return undefined;
       })
     : base;
 }
