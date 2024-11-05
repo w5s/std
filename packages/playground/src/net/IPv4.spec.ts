@@ -73,10 +73,6 @@ describe('IPv4', () => {
       [IPv4.minValue.ipv4, IPv4.minValue],
       [IPv4.maxValue.ipv4, IPv4.maxValue],
     ],
-    rangeSize: [
-      [IPv4.of(192, 0, 0, 0), IPv4.of(192, 0, 0, 0), 1],
-      [IPv4.of(192, 0, 0, 0), IPv4.of(192, 0, 0, 5), 6],
-    ],
     range: [
       [
         IPv4.of(192, 0, 0, 0),
