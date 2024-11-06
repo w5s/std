@@ -6,6 +6,7 @@ import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
 import type { Enum } from '../Enum.js';
 import { Symbol } from '../Symbol.js';
+import { Option } from '../Option.js';
 
 describe(define, () => {
   const MyEnumObject = define({
@@ -52,9 +53,11 @@ describe(define, () => {
       [Symbol.enumKeys]: ['Foo', 'Bar', 'Baz'],
       [Symbol.enumValues]: ['foo', 'bar', 'baz'],
       at: expect.any(Function),
+      indexType: 'number',
       indexOf: expect.any(Function),
       range: expect.any(Function),
       rangeSize: expect.any(Function),
+      inspect: Option.None,
     });
   });
   describeType({ describe, it, expect })(MyEnumObject, {

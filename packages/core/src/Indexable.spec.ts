@@ -6,10 +6,12 @@ describe(Indexable, () => {
   const anyIndexOf = vi.fn();
   const anyAt = vi.fn();
   const defaultIndexable = {
+    indexType: 'number' as const,
     indexOf: anyIndexOf,
     at: anyAt,
   };
-  const charIndexable = Indexable<string>({
+  const charIndexable = Indexable<string, number>({
+    indexType: 'number',
     indexOf(value) {
       return value.codePointAt(0) as Int;
     },
@@ -19,7 +21,7 @@ describe(Indexable, () => {
   describe('#at', () => {
     it('should return the result of the at function', () => {
       const at = vi.fn();
-      const rangeIndexable = Indexable<string>({
+      const rangeIndexable = Indexable<string, number>({
         ...defaultIndexable,
         at,
       });
@@ -30,7 +32,7 @@ describe(Indexable, () => {
   describe('#indexOf', () => {
     it('should return the result of the indexOf function', () => {
       const indexOf = vi.fn();
-      const rangeIndexable = Indexable<string>({
+      const rangeIndexable = Indexable<string, number>({
         ...defaultIndexable,
         indexOf,
       });
@@ -41,7 +43,7 @@ describe(Indexable, () => {
   describe('#rangeSize', () => {
     it('is an alias to parameter.rangeSize if passed', () => {
       const rangeSize = vi.fn();
-      const rangeIndexable = Indexable<string>({
+      const rangeIndexable = Indexable<string, number>({
         ...defaultIndexable,
         rangeSize,
       });
@@ -55,7 +57,7 @@ describe(Indexable, () => {
   describe('#range', () => {
     it('is an alias to parameter.range if passed', () => {
       const range = vi.fn();
-      const rangeIndexable = Indexable<string>({
+      const rangeIndexable = Indexable<string, number>({
         ...defaultIndexable,
         range,
       });

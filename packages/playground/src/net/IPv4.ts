@@ -81,6 +81,7 @@ const IPv4Bounded: Bounded<IPv4> = {
 };
 
 const IPv4Indexable = Indexable({
+  indexType: 'number',
   at: (index) => fromNumber(index),
   indexOf: (value) => value.ipv4,
 });

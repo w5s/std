@@ -32,6 +32,7 @@ export function define<const T extends Record<string, string | number | boolean>
     }),
   });
   const EnumIndexable = Indexable<Value>({
+    indexType: 'number',
     at: (index) => enumValuesList[index],
     indexOf: (value) => enumValuesIndex.get(value),
   });

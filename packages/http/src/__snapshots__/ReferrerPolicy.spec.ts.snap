@@ -18,6 +18,7 @@ exports[`ReferrerPolicy > is an enum 1`] = `
   "from": [Function],
   "hasInstance": [Function],
   "indexOf": [Function],
+  "indexType": "number",
   "inspect": undefined,
   "range": [Function],
   "rangeSize": [Function],

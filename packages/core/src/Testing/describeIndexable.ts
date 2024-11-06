@@ -38,7 +38,11 @@ export function describeIndexable(testingLibrary: TestingLibrary) {
     const indexOf = cases.index.map(([expected, value]) => ({ value, expected }));
     const rangeSize =
       cases.rangeSize?.map(([start, end, expected]) => ({ start, end, expected })) ??
-      cases.range.map(([start, end, expected]) => ({ start, end, expected: expected.length as Index }));
+      cases.range.map(([start, end, expected]) => ({
+        start,
+        end,
+        expected: subject.indexType === 'bigint' ? BigInt(expected.length) : (expected.length as Index),
+      }));
     const range = cases.range.map(([start, end, expected]) => ({ start, end, expected }));
 
     // at

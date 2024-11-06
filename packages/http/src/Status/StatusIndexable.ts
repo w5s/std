@@ -12,6 +12,7 @@ const indexByCode = lazy(() => {
 });
 
 export const StatusIndexable = Indexable({
+  indexType: 'number',
   at(code) {
     return (
       indexByCode().get(code) ?? {
