@@ -66,7 +66,7 @@ export interface TaskLike<Value, Error> {
 }
 
 /**
- * An implementation of {@link @w5s/core!TaskLike}
+ * An implementation of {@link @w5s/task!TaskLike}
  */
 export interface Task<Value, Error> extends TaskLike<Value, Error> {
   /**

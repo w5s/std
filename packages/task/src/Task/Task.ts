@@ -4,7 +4,7 @@ import type { TaskCanceler, Task as TaskInterface, TaskParameters } from '../Tas
 import { unsafeRun } from './unsafeRun.js';
 
 /**
- * An implementation of {@link @w5s/core!TaskLike}
+ * An implementation of {@link @w5s/task!TaskLike}
  */
 export class Task<Value, Error> implements TaskInterface<Value, Error> {
   constructor(public readonly taskRun: (parameters: TaskParameters<Value, Error>) => void) {}

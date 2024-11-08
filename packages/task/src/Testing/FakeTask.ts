@@ -50,7 +50,7 @@ export type FakeTaskOptions<Value, Error> = {
 );
 
 /**
- * Create a new {@link @w5s/core!Task} from `options`
+ * Create a new {@link @w5s/task!Task} from `options`
  *
  * @example
  * ```ts

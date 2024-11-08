@@ -10,7 +10,7 @@ import type { BodyReader } from './BodyReader.js';
 import { from as responseFrom } from './Response/from.js';
 
 /**
- * Return a new {@link @w5s/core!Task} that will send an HTTP request
+ * Return a new {@link @w5s/task!Task} that will send an HTTP request
  *
  * @example
  * ```typescript
