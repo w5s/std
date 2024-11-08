@@ -2846,11 +2846,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/module-type-aliases@npm:3.6.0":
-  version: 3.6.0
-  resolution: "@docusaurus/module-type-aliases@npm:3.6.0"
+"@docusaurus/module-type-aliases@npm:3.6.1":
+  version: 3.6.1
+  resolution: "@docusaurus/module-type-aliases@npm:3.6.1"
   dependencies:
-    "@docusaurus/types": "npm:3.6.0"
+    "@docusaurus/types": "npm:3.6.1"
     "@types/history": "npm:^4.7.11"
     "@types/react": "npm:*"
     "@types/react-router-config": "npm:*"
@@ -2860,7 +2860,7 @@ __metadata:
   peerDependencies:
     react: "*"
     react-dom: "*"
-  checksum: 10c0/944eb527a3940657c4660940c0b9a4c5b6e9d6f3ab15241a70793e8315ca2ae280a01ec9b55c44a2c40c6b56a5c10ee4a80fbf78b95c3899e5db0e162b0d28f7
+  checksum: 10c0/006a5414234bb26300e9240de519ba5bf53198869df953f090d9a28ccee99850e1a7384dffccb865ccd513bf1d090a8ab5887fa7583b921df1279b99613aa0b7
   languageName: node
   linkType: hard
 
@@ -3145,10 +3145,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/tsconfig@npm:3.6.0":
-  version: 3.6.0
-  resolution: "@docusaurus/tsconfig@npm:3.6.0"
-  checksum: 10c0/5ff75afa1c9a8bff6a1c4722517a05827bb87a689ad99e5d9ccc5c7eeef0c1fff7d8d71fea1d0b4c3eb6e7b1aeea618c109512dc5443736e8ba4dcdd5456e3c4
+"@docusaurus/tsconfig@npm:3.6.1":
+  version: 3.6.1
+  resolution: "@docusaurus/tsconfig@npm:3.6.1"
+  checksum: 10c0/4f8f283c4e7896b327f3ffcf032f8ef1cfde43c28ab6d4c2ff107f4057e59d90486927429e948a274004d12f742165b88fc80fdc6352a9cf25e48cbca51d7f0f
   languageName: node
   linkType: hard
 
@@ -3172,9 +3172,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/types@npm:3.6.0":
-  version: 3.6.0
-  resolution: "@docusaurus/types@npm:3.6.0"
+"@docusaurus/types@npm:3.6.1":
+  version: 3.6.1
+  resolution: "@docusaurus/types@npm:3.6.1"
   dependencies:
     "@mdx-js/mdx": "npm:^3.0.0"
     "@types/history": "npm:^4.7.11"
@@ -3188,7 +3188,7 @@ __metadata:
   peerDependencies:
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 10c0/1b2efe8d13ae29c6af141f15858cbe8e6a5a4c2243f1e48bc7c2dc53162056da9eb8ca5c5b496d73471bce9768dec0ecd39c99e10a3a87c4ab8edb8f0c5fa1bf
+  checksum: 10c0/d73e118e0fbcbb15fcb908dddaf81c977c5ded53dacce181f7736a234b1b0b930b9dae8847e7951245754b3c5f5b9c0d8002f020a56ad8ba32587f8723209776
   languageName: node
   linkType: hard
 
@@ -6327,9 +6327,9 @@ __metadata:
   resolution: "@w5s/website@workspace:apps/website"
   dependencies:
     "@docusaurus/core": "npm:3.5.2"
-    "@docusaurus/module-type-aliases": "npm:3.6.0"
+    "@docusaurus/module-type-aliases": "npm:3.6.1"
     "@docusaurus/preset-classic": "npm:3.5.2"
-    "@docusaurus/tsconfig": "npm:3.6.0"
+    "@docusaurus/tsconfig": "npm:3.6.1"
     "@mdx-js/react": "npm:3.1.0"
     "@types/node": "npm:20.17.6"
     clsx: "npm:2.1.1"
