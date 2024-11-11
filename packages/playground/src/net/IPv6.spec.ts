@@ -32,9 +32,9 @@ describe('IPv6', () => {
       expect(IPv6.parse('::ffff:7f00:1')).toEqual(
         IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01),
       );
-      // expect(IPv6.parse('::ffff:127.0.0.1')).toEqual(
-      //   IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01),
-      // );
+      expect(IPv6.parse('::ffff:127.0.0.1')).toEqual(
+        IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01),
+      );
       expect(IPv6.parse('')).toEqual(undefined);
     });
   });
@@ -49,7 +49,7 @@ describe('IPv6', () => {
   describeCodec({ describe, it, expect })(IPv6, {
     decode: [
       ['::ffff:7f00:1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
-      // ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
+      ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
       [null, Result.Error(DecodeError({ message: 'Cannot decode null as IPv6', input: null }))],
     ],
     encode: [[IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01), '::ffff:7f00:1']],

@@ -5,6 +5,7 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
 import { compare as bigintCompare } from '@w5s/core/dist/BigInt/compare.js';
+import { IPv4 } from './IPv4.js';
 
 export type IPv6Address = bigint;
 
@@ -24,19 +25,51 @@ const bigIntStringifyAt = (ipv6Value: bigint, index: number): string => {
   const byte = bigIntByteAt(ipv6Value, index);
   return byte === 0 ? '' : byte.toString(16);
 };
+const parseHex = (hexExpr: string): Option<bigint> => {
+  try {
+    return BigInt(`0x${hexExpr === '' ? '0' : hexExpr}`);
+  } catch {
+    return undefined;
+  }
+};
+const parseIPv4 = (ipv4Expr: string): Option<bigint> => {
+  const ipv4 = IPv4.parse(ipv4Expr)?.ipv4;
+  return ipv4 == null ? ipv4 : BigInt(ipv4);
+};
 
 const IPv6Format = {
   parse(expression: string): Option<IPv6> {
     let parts = expression.split(':');
-    if (parts.length >= 3 && parts.length <= 8) {
-      parts = [...Array.from({ length: 8 - parts.length }, () => '0'), ...parts];
+    if (parts.length <= 2) return undefined;
 
-      // Convert each part to a 16-bit integer, then shift and combine
-      const bigintAddress = parts.reduce((acc, part) => (acc << 16n) + BigInt(`0x${part === '' ? '0' : part}`), 0n);
-      return fromBigInt(bigintAddress);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const lastPart = parts.pop()!;
+    const last32Bits = (() => {
+      const ipv4Value = parseIPv4(lastPart);
+      if (ipv4Value != null) return ipv4Value;
+      const previousPart = parts.pop();
+      if (previousPart == null) return undefined;
+      const previousPartParsed = parseHex(previousPart);
+      if (previousPartParsed == null) return undefined;
+      const lastPartParsed = parseHex(lastPart);
+      if (lastPartParsed == null) return undefined;
+      return (previousPartParsed << 16n) + lastPartParsed;
+    })();
+    if (last32Bits == null) return undefined;
+    if (parts.length >= 6) return undefined;
+
+    parts = [...Array.from({ length: 6 - parts.length }, () => '0'), ...parts];
+    let bigintAddress = 0n;
+    // eslint-disable-next-line unicorn/no-for-loop
+    for (let index = 0; index < parts.length; index += 1) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const parsedPart = parseHex(parts[index]!);
+      if (parsedPart == null) return undefined;
+      bigintAddress = (bigintAddress << 16n) + parsedPart;
     }
+    bigintAddress = (bigintAddress << 32n) + last32Bits;
 
-    return undefined;
+    return fromBigInt(bigintAddress);
   },
 
   stringify({ ipv6 }: IPv6): string {
