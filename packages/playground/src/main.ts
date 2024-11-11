@@ -12,6 +12,7 @@ import { Slack } from './slackClient.js';
 import { provide } from './di/provide.js';
 import { InjectionKey } from './di/InjectionKey.js';
 import { use } from './di/use.js';
+import { abortable } from './abortable.js';
 
 const RandomUUID = InjectionKey('RandomUUID', defaultRandomUUID);
 const app = {
@@ -40,7 +41,10 @@ function main() {
   const amount = EUR('1.55');
   const randomUUID = use(app, RandomUUID);
 
+  const controller = new AbortController();
+
   const task = pipe(randomUUID()).to(
+    (_) => abortable(_, controller),
     (_) => Task.andThen(_, (uuid) => sendMessage(uuid + String(amount))),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>

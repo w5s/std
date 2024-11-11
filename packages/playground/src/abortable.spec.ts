@@ -11,7 +11,7 @@ describe(abortable, () => {
       value: 'my value',
     });
     const abortController = new AbortController();
-    const abortTask = abortable(task, abortController.signal);
+    const abortTask = abortable(task, abortController);
 
     const expectation = expectTask(abortTask).toReject(AbortError());
     abortController.abort();

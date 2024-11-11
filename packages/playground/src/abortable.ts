@@ -9,13 +9,17 @@ export const AbortError = CustomError.define<AbortError>({
   errorMessage: 'The operation was aborted',
 });
 
+export interface AbortOptions {
+  signal: AbortSignal;
+}
+
 export function abortable<Value, Error>(
   task: TaskLike<Value, Error>,
-  abortSignal: AbortSignal,
+  options: AbortOptions,
 ): Task<Value, Error | AbortError> {
   return from((parameters) => {
     const { reject, canceler } = parameters;
-    abortSignal.addEventListener('abort', () => {
+    options.signal.addEventListener('abort', () => {
       canceler.current?.();
       reject(AbortError());
     });
