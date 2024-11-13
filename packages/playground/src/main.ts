@@ -14,7 +14,7 @@ import { InjectionKey } from './di/InjectionKey.js';
 import { use } from './di/use.js';
 import { abortable } from './abortable.js';
 
-const RandomUUID = InjectionKey('RandomUUID', defaultRandomUUID);
+const RandomUUID = InjectionKey('RandomUUID', () => defaultRandomUUID);
 const app = {
   ...provide(RandomUUID, () => defaultRandomUUID),
 };

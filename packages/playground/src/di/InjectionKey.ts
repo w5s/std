@@ -1,5 +1,9 @@
 import type { Option } from '@w5s/core';
+import type { InjectionProvider } from './InjectionProvider.js';
 
+/**
+ * An injection key (as a symbol) with an optional default provider
+ */
 export interface InjectionKey<Value> {
   /**
    * Injection symbol key
@@ -8,13 +12,16 @@ export interface InjectionKey<Value> {
   /**
    * Default implementation of the injection key
    */
-  injectDefault: Value;
+  injectDefault: InjectionProvider<Value>;
 }
 export function InjectionKey<Value>(description: string): InjectionKey<Option<Value>>;
-export function InjectionKey<Value>(description: string, defaultValue: Value): InjectionKey<Value>;
-export function InjectionKey<Value>(description: string, defaultValue?: Option<Value>): InjectionKey<any> {
+export function InjectionKey<Value>(description: string, defaultValue: InjectionProvider<Value>): InjectionKey<Value>;
+export function InjectionKey<Value>(
+  description: string,
+  defaultProvider?: Option<InjectionProvider<Value>>,
+): InjectionKey<any> {
   return {
     injectKey: Symbol(description),
-    injectDefault: defaultValue,
+    injectDefault: defaultProvider ?? (() => undefined),
   };
 }
