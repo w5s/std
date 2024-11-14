@@ -5,29 +5,46 @@ import { provide } from './provide.js';
 import type { AppContext } from './AppContext.js';
 
 describe(use, () => {
-  interface SomeService {
-    serviceMethod(): string;
+  interface ServiceA {
+    serviceA: string;
   }
-  const defaultImplementation: SomeService = { serviceMethod: () => 'foo' };
-  const SomeService = InjectionKey<SomeService>('SomeService', () => defaultImplementation);
+  const defaultServiceA: ServiceA = { serviceA: 'defaultA' };
+  const ServiceA = InjectionKey<ServiceA>('ServiceA', () => defaultServiceA);
 
   it('should return default implementation', () => {
     const appContext: AppContext = {};
-    expect(use(appContext, SomeService)).toBe(defaultImplementation);
+    expect(use(appContext, ServiceA)).toBe(defaultServiceA);
   });
   it('should return provider implementation if set', () => {
-    const customImplementation: SomeService = { serviceMethod: () => 'bar' };
+    const customImplementation: ServiceA = { serviceA: 'bar' };
     const appContext: AppContext = {
-      ...provide(SomeService, () => customImplementation),
+      ...provide(ServiceA, () => customImplementation),
     };
-    expect(use(appContext, SomeService)).toBe(customImplementation);
+    expect(use(appContext, ServiceA)).toBe(customImplementation);
   });
   it('should return a cached implementation', () => {
     const appContext: AppContext = {
-      ...provide(SomeService, () => ({ serviceMethod: () => 'bar' })),
+      ...provide(ServiceA, () => ({ serviceA: 'bar' })),
     };
-    const someService = use(appContext, SomeService);
-    const someServiceSecondCall = use(appContext, SomeService);
-    expect(someServiceSecondCall).toBe(someService);
+    const serviceA = use(appContext, ServiceA);
+    const serviceASecondCall = use(appContext, ServiceA);
+    expect(serviceASecondCall).toBe(serviceA);
+  });
+  describe('{...} operator', () => {
+    it('should override value', () => {
+      const appContext: AppContext = {
+        ...provide(ServiceA, () => defaultServiceA),
+      };
+      const serviceA = use(appContext, ServiceA);
+      expect(serviceA).toBe(defaultServiceA);
+
+      const overrideInstance = { serviceA: 'override' };
+      const appContextOverride: AppContext = {
+        ...appContext,
+        ...provide(ServiceA, () => overrideInstance),
+      };
+      const serviceAOverride = use(appContextOverride, ServiceA);
+      expect(serviceAOverride).toBe(overrideInstance);
+    });
   });
 });
