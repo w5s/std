@@ -281,9 +281,9 @@ interface RetryContinueResult {
  */
 export type RetryResult = RetryDoneResult | RetryContinueResult;
 
-export function retrying<Value, Error>(
+export function retry<Value, Error>(
   taskOrGetter: TaskLike<Value, Error> | ((state: RetryState) => TaskLike<Value, Error>),
-  options: retrying.Options<Value, Error>,
+  options: retry.Options<Value, Error>,
 ): Task<Value, Error> {
   const { policy, check, initialState = defaultRetryState } = options;
   const go = (state: RetryState): Task<Value, Error> =>
@@ -305,7 +305,7 @@ export function retrying<Value, Error>(
 
   return go(initialState);
 }
-export namespace retrying {
+export namespace retry {
   export type Options<Value, Error> = {
     policy: RetryPolicy;
     initialState?: RetryState;

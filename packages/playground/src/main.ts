@@ -1,4 +1,4 @@
-import { Int, Option } from '@w5s/core';
+import { Int, Option, Result } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
@@ -7,7 +7,7 @@ import { EUR } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
-import { retrying, RetryPolicy } from './retry.js';
+import { retry, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
 import { ContainerKey, provide, use } from './di/index.js';
 import { abortable } from './abortable.js';
@@ -28,9 +28,9 @@ function sendMessage(text: string) {
   ).to(
     (_) => timeout(_, TimeDuration.minutes(1)),
     (_) =>
-      retrying(_, {
+      retry(_, {
         policy: RetryPolicy.retries(Int(3)),
-        check: (_result) => Task.resolve({ done: false, value: Option.None }),
+        check: (result) => Task.resolve(Result.isError(result) ? { done: false, value: Option.None } : { done: true }),
       }),
   );
 }
