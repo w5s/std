@@ -1,16 +1,16 @@
-import type { AppContext } from './AppContext.js';
-import type { InjectionKey } from './InjectionKey.js';
-import type { InjectionProvider } from './InjectionProvider.js';
+import type { Container } from './Container.js';
+import type { ContainerKey } from './ContainerKey.js';
+import type { ContainerProvider } from './ContainerProvider.js';
 
 /**
  * Return a new provider for a key
  *
  * @example
  * ```ts
- * const ServiceA = InjectionKey<{ doA: () => void }>('ServiceA', { doA: () => {} });
- * const ServiceB = InjectionKey<{ doB: () => void }>('ServiceB', { doB: () => {} });
+ * const ServiceA = ContainerKey<{ doA: () => void }>('ServiceA', { doA: () => {} });
+ * const ServiceB = ContainerKey<{ doB: () => void }>('ServiceB', { doB: () => {} });
  *
- * const app: AppContext = {
+ * const app: Container = {
  *   ...provide(ServiceA, providerA),
  *   ...provide(ServiceB, providerB),
  * };
@@ -18,8 +18,8 @@ import type { InjectionProvider } from './InjectionProvider.js';
  * @param key
  * @param provider
  */
-export function provide<Value>(key: InjectionKey<Value>, provider: InjectionProvider<Value>): AppContext {
+export function provide<Value>(key: ContainerKey<Value>, provider: ContainerProvider<Value>): Container {
   return {
-    [key.injectKey]: provider,
+    [key.containerKey]: provider,
   };
 }

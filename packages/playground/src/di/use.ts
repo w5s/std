@@ -1,12 +1,12 @@
-import type { AppContext } from './AppContext.js';
-import type { InjectionKey } from './InjectionKey.js';
-import type { InjectionProvider } from './InjectionProvider.js';
+import type { Container } from './Container.js';
+import type { ContainerKey } from './ContainerKey.js';
+import type { ContainerProvider } from './ContainerProvider.js';
 
 interface Cacheable {
   [use.cache]: use.Cache;
 }
 
-function cacheFor(appContext: AppContext): use.Cache {
+function cacheFor(appContext: Container): use.Cache {
   const cache = appContext[use.cache] as use.Cache | undefined;
 
   if (cache === undefined || cache.appContext !== appContext) {
@@ -18,18 +18,18 @@ function cacheFor(appContext: AppContext): use.Cache {
   return cache;
 }
 
-function cacheGet<Value>(appContext: AppContext, cache: use.Cache, key: InjectionKey<Value>): Value {
-  const { injectKey } = key;
+function cacheGet<Value>(appContext: Container, cache: use.Cache, key: ContainerKey<Value>): Value {
+  const { containerKey } = key;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const value: Value = cache[injectKey] ?? (cache[injectKey] = getProvider(appContext, key)(appContext));
+  const value: Value = cache[containerKey] ?? (cache[containerKey] = getProvider(appContext, key)(appContext));
   return value;
 }
 
 function getProvider<Value>(
-  appContext: AppContext,
-  { injectKey, injectDefault }: InjectionKey<Value>,
-): InjectionProvider<Value> {
-  return (appContext[injectKey] as InjectionProvider<Value> | undefined) ?? injectDefault;
+  appContext: Container,
+  { containerKey, containerDefaultProvider }: ContainerKey<Value>,
+): ContainerProvider<Value> {
+  return (appContext[containerKey] as ContainerProvider<Value> | undefined) ?? containerDefaultProvider;
 }
 
 /**
@@ -38,7 +38,7 @@ function getProvider<Value>(
  * @example
  * ```ts
  * interface SomeServiceInterface { ... }
- * const SomeService = InjectionKey<SomeServiceInterface>('SomeService');
+ * const SomeService = ContainerKey<SomeServiceInterface>('SomeService');
  * const appContext: AppContext = // ...
  *
  * const someService = use(appContext, SomeService);// typeof someService == SomeServiceInterface
@@ -46,7 +46,7 @@ function getProvider<Value>(
  * @param appContext - the app context container
  * @param key - the injection key
  */
-export function use<Value>(appContext: AppContext, key: InjectionKey<Value>): Value {
+export function use<Value>(appContext: Container, key: ContainerKey<Value>): Value {
   return cacheGet(appContext, cacheFor(appContext), key);
 }
 export namespace use {
@@ -56,7 +56,7 @@ export namespace use {
     /**
      * The app context
      */
-    appContext: AppContext;
+    appContext: Container;
     [key: symbol]: any;
   }
 }

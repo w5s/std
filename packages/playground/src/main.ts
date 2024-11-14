@@ -9,12 +9,10 @@ import { TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
 import { retrying, RetryPolicy } from './retry.js';
 import { Slack } from './slackClient.js';
-import { provide } from './di/provide.js';
-import { InjectionKey } from './di/InjectionKey.js';
-import { use } from './di/use.js';
+import { ContainerKey, provide, use } from './di/index.js';
 import { abortable } from './abortable.js';
 
-const RandomUUID = InjectionKey('RandomUUID', () => defaultRandomUUID);
+const RandomUUID = ContainerKey('RandomUUID', () => defaultRandomUUID);
 const app = {
   ...provide(RandomUUID, () => defaultRandomUUID),
 };
