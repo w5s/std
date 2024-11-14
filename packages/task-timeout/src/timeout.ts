@@ -2,6 +2,7 @@ import type { TaskCanceler, Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
+import { Ref } from '@w5s/core/dist/Ref.js';
 import type { Option } from '@w5s/core';
 
 /**
@@ -25,7 +26,7 @@ export function timeout<Value, Error>(
   return delay == null
     ? from(task)
     : from(({ resolve, reject, canceler, run }) => {
-        const taskCancelerRef: TaskCanceler = { current: undefined };
+        const taskCancelerRef: TaskCanceler = Ref(undefined);
         const taskCancel = () => {
           const { current } = taskCancelerRef;
           if (current != null) {

@@ -6,7 +6,7 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // All keys
-        'InjectionKey',
+        'ContainerKey',
         'provide',
         'use',
       ].sort(),
