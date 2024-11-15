@@ -1,4 +1,5 @@
 export * from './assertNever.js';
+export * from './AbortError.js';
 export * from './ArgumentError.js';
 export * from './CustomError.js';
 export * from './InvariantError.js';

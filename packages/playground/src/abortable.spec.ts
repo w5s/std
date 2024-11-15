@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { FakeTask, withTask } from '@w5s/task/dist/Testing.js';
-import { abortable, AbortError } from './abortable.js';
+import { AbortError } from '@w5s/error';
+import { abortable } from './abortable.js';
 
 describe(abortable, () => {
   const expectTask = withTask(expect);
