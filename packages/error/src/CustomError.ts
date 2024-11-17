@@ -1,19 +1,5 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
-function __setDefaultValue<O extends Record<any, any>, K extends keyof O>(object: O, name: K, defaultValue: O[K]) {
-  if (!(name in object)) {
-    object[name] = defaultValue;
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-function __captureStackTrace(targetObject: object, constructorOpt?: Function) {
-  if (typeof Error.captureStackTrace === 'function') {
-    Error.captureStackTrace(targetObject, constructorOpt);
-  }
-}
 
 interface CustomErrorConstructor {
   new <Properties extends { name: string }>(properties: Properties): CustomError<Properties>;
@@ -88,6 +74,9 @@ export type CustomError<Properties extends { name: string }> = Readonly<
 export const CustomError: CustomErrorConstructor = (() => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const errorToString = Error.prototype.toString;
+  const defaultProperties = { message: '', stack: undefined, cause: undefined };
+  const __assign = Object.assign;
+  const __create = Object.create;
 
   function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
     this: any,
@@ -98,16 +87,16 @@ export const CustomError: CustomErrorConstructor = (() => {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-argument
-    const returnValue: MutableError = new.target ? (this as MutableError) : Object.create(CustomError.prototype);
+    const returnValue: MutableError = new.target ? (this as MutableError) : __create(CustomError.prototype);
 
     // Assign properties
-    Object.assign(returnValue, properties);
-    __setDefaultValue(returnValue, 'message', '');
-    __setDefaultValue(returnValue, 'stack', undefined);
-    __setDefaultValue(returnValue, 'cause', undefined);
+    __assign(returnValue, defaultProperties);
+    __assign(returnValue, properties);
 
     // Capture stack trace
-    __captureStackTrace(returnValue, CustomError);
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(returnValue, CustomError);
+    }
 
     return returnValue as CustomError<Properties>;
   }
@@ -118,23 +107,24 @@ export const CustomError: CustomErrorConstructor = (() => {
   }): CustomError.Module<Model> {
     const { errorName, errorMessage } = parameters;
     const create = (properties: any) => CustomError({ name: errorName, message: errorMessage, ...properties });
-    const properties = {
+    Object.defineProperty(create, 'name', {
+      value: errorName,
+      writable: false,
+    });
+    // @ts-ignore We know what we are doing
+    return __assign(create, {
       create,
       errorName,
       hasInstance: (anyValue: unknown): boolean =>
         // @ts-ignore We know what we are doing
         anyValue?.name === errorName,
-    };
-    Object.defineProperty(create, 'name', { writable: false, value: errorName });
-
-    // @ts-ignore We know what we are doing
-    return Object.assign(create, properties);
+    });
   }
 
-  return Object.assign(CustomError, {
+  return __assign(CustomError, {
     define,
 
-    prototype: Object.assign(Object.create(Error.prototype), {
+    prototype: __assign(__create(Error.prototype), {
       constructor: CustomError,
       toString(this: Error) {
         return errorToString.call(this) + (this.cause == null ? '' : `\n  └ ${String(this.cause)}`);

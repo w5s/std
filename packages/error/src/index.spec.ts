@@ -5,6 +5,7 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Module).sort()).toMatchInlineSnapshot(`
       [
+        "AbortError",
         "AggregateError",
         "ArgumentError",
         "CustomError",
