@@ -6,20 +6,13 @@ import { LogMessage } from './LogMessage.js';
 
 export const generateTime = (ms = 0) => Time.of(ms);
 
-export const generateLogRecord = ({
-  level = LogLevel.Debug,
-  message = LogMessage.of('test'),
-  category = '',
-}: Partial<
-  Pick<LogRecord, 'message' | 'category'> & {
-    level?: LogLevel;
-  }
-> = {}): LogRecord => ({
+export const generateLogRecord = (properties: Partial<LogRecord> = {}): LogRecord => ({
   _: 'LogRecord',
   id: UUID.empty(),
-  category,
-  level,
-  message,
+  category: '',
+  level: LogLevel.Debug,
+  message: LogMessage.of('test'),
   data: {},
   created: generateTime(),
+  ...properties,
 });
