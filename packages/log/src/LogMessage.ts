@@ -1,8 +1,7 @@
 import type { Type } from '@w5s/core';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Array as TArray } from '@w5s/core/dist/Type/Array.js';
-import { constant } from '@w5s/core/dist/Type/constant.js';
-import { Record } from '@w5s/core/dist/Type/Record.js';
+import { TObject } from '@w5s/core/dist/Type/Object.js';
 import { string } from '@w5s/core/dist/Type/string.js';
 import { union } from '@w5s/core/dist/Type/union.js';
 import { create } from './LogMessage/create.js';
@@ -11,16 +10,18 @@ import { of } from './LogMessage/of.js';
 /**
  * @namespace
  */
-export const LogMessageItemRef = Callable({
-  [Callable.symbol]: (value: string): LogMessageItemRef => ({ $ref: value }),
-  ...Record(constant('$ref'), string),
+export const LogMessageRef = Callable({
+  [Callable.symbol]: (name: string): LogMessageRef => ({ $ref: name }),
+  ...TObject({
+    $ref: string,
+  }),
 });
-export type LogMessageItemRef = Type.TypeOf<typeof LogMessageItemRef>;
+export type LogMessageRef = Type.TypeOf<typeof LogMessageRef>;
 
 /**
  * @namespace
  */
-export const LogMessageItem = union(string, LogMessageItemRef);
+export const LogMessageItem = union(string, LogMessageRef);
 
 export type LogMessageItem = Type.TypeOf<typeof LogMessageItem>;
 

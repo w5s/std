@@ -9,7 +9,7 @@ describe('index', () => {
         'application',
         'LogLevel',
         'LogMessage',
-        'LogMessageItemRef',
+        'LogMessageRef',
         'LogMessageItem',
         'LogRecord',
         'LogHandler',
