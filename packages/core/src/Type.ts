@@ -4,8 +4,8 @@ import { string } from './Type/string.js';
 import { number } from './Type/number.js';
 import { boolean } from './Type/boolean.js';
 import { bigint } from './Type/bigint.js';
-import { $Object } from './Type/Object.js';
-import { Option as $Option } from './Type/Option.js';
+import { TObject } from './Type/Object.js';
+import { Option as TOption } from './Type/Option.js';
 import { Int } from './Type/Int.js';
 import { Array } from './Type/Array.js';
 import { ensure } from './Type/ensure.js';
@@ -94,8 +94,8 @@ export const Type = {
   boolean,
   Int,
   number,
-  Object: $Object,
-  Option: $Option,
+  Object: TObject,
+  Option: TOption,
   Record,
   string,
   Tuple,

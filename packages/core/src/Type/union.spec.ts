@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { union } from './union.js';
-import { $Object } from './Object.js';
+import { TObject } from './Object.js';
 import { string } from './string.js';
 import { number } from './number.js';
 import { describeCodec, describeType } from '../Testing.js';
@@ -8,7 +8,7 @@ import { Result } from '../Result.js';
 import { DecodeError } from '../DecodeError.js';
 
 describe(union, () => {
-  const AType = $Object(
+  const AType = TObject(
     {
       a: string,
     },

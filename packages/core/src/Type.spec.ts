@@ -9,12 +9,12 @@ import { boolean } from './Type/boolean.js';
 import { bigint } from './Type/bigint.js';
 import { Int } from './Type/Int.js';
 import { Option } from './Type/Option.js';
-import { $Object } from './Type/Object.js';
+import { TObject } from './Type/Object.js';
 import { Codec } from './Codec.js';
 import { Tag } from './Tag.js';
 import { Enum } from './Enum.js';
-import type { Int as IntType } from './Int.js';
-import type { Option as OptionType } from './Option.js';
+import type { Int as TInt } from './Int.js';
+import type { Option as TOption } from './Option.js';
 import { ensure } from './Type/ensure.js';
 import { union } from './Type/union.js';
 import { constant } from './Type/constant.js';
@@ -42,7 +42,7 @@ describe('Type', () => {
       unknown,
       string,
       Record,
-      Object: $Object,
+      Object: TObject,
       Option,
       Tuple,
       RegExp,
@@ -87,8 +87,8 @@ describe('Type', () => {
       {
         id: PersonId;
         name: string;
-        description: OptionType<string>;
-        age: IntType;
+        description: TOption<string>;
+        age: TInt;
         gender: 'male' | 'female';
         groups: ReadonlyArray<Group>;
         // created: Date;

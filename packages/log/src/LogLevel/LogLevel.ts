@@ -1,4 +1,4 @@
-import { $Object as TObject } from '@w5s/core/dist/Type/Object.js';
+import { TObject } from '@w5s/core/dist/Type/Object.js';
 import { string } from '@w5s/core/dist/Type/string.js';
 import { Int as TInt } from '@w5s/core/dist/Type/Int.js';
 import { constant } from '@w5s/core/dist/Type/constant.js';

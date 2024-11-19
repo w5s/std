@@ -1,7 +1,7 @@
 import type { Type } from '@w5s/core';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Int } from '@w5s/core/dist/Type/Int.js';
-import { $Object } from '@w5s/core/dist/Type/Object.js';
+import { TObject } from '@w5s/core/dist/Type/Object.js';
 import { string } from '@w5s/core/dist/Type/string.js';
 
 /**
@@ -13,7 +13,7 @@ export const Status = Callable({
       statusCode,
       statusMessage,
     }) satisfies Status,
-  ...$Object({
+  ...TObject({
     /**
      * Standard HTTP status code integer
      */

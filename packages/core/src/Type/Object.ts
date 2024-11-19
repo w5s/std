@@ -18,13 +18,13 @@ import { define } from './define.js';
  * ```
  * @param Properties - the codec for each array item
  */
-export function $Object<P>(
+export function TObject<P>(
   Properties: {
     readonly [K in keyof P]: Type.Module<P[K]>;
   },
   typeName?: string,
 ): Type.Module<Readonly<P>>;
-export function $Object(
+export function TObject(
   Properties: Record<string, Type.Module<unknown>>,
   typeName?: string,
 ): Type.Module<Record<string, unknown>> {
