@@ -2,8 +2,9 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { LogLevel as LogLevelType } from './LogLevel/LogLevel.js';
 import { LogLevelComparable } from './LogLevel/LogComparable.js';
 import { of } from './LogLevel/of.js';
-import { LogValue } from './LogLevel/LogValue.js';
+import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { match } from './LogLevel/match.js';
+import { from } from './LogLevel/from.js';
 
 export interface LogLevel extends LogLevelType {}
 
@@ -15,8 +16,9 @@ export const LogLevel = Callable({
   [Callable.symbol]: of,
   ...LogLevelType,
   ...LogLevelComparable,
-  ...LogValue,
+  ...LogLevelValue,
   of,
+  from,
   /**
    * Returns the string representation of a level
    *

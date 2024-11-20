@@ -1,7 +1,7 @@
 import type { Option } from '@w5s/core';
 import type { LogLevel } from '../LogLevel.js';
 import { LogLevelComparable } from './LogComparable.js';
-import { LogValue } from './LogValue.js';
+import { LogLevelValue } from './LogLevelValue.js';
 
 /**
  * Build a matching function `(anyLevelValue) => value` from a list of tuples `[level1, value1], [level2, value2], ...`
@@ -25,7 +25,7 @@ export function match<T>(matchers: [LogLevel, T][], defaultValue?: T): (anyLevel
   const orderedMatchers = [...matchers];
   const level = 0;
   const returnValue = 1;
-  const first: [LogLevel, Option<T>] = [LogValue.None, defaultValue];
+  const first: [LogLevel, Option<T>] = [LogLevelValue.None, defaultValue];
 
   return orderedMatchers.length === 0
     ? () => defaultValue

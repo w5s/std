@@ -3,7 +3,7 @@
 exports[`LogLevel > Critical > should have correct value > Critical 1`] = `
 {
   "_": "LogLevel",
-  "name": "Critical",
+  "name": "critical",
   "value": 50,
 }
 `;
@@ -11,7 +11,7 @@ exports[`LogLevel > Critical > should have correct value > Critical 1`] = `
 exports[`LogLevel > Debug > should have correct value > Debug 1`] = `
 {
   "_": "LogLevel",
-  "name": "Debug",
+  "name": "debug",
   "value": 10,
 }
 `;
@@ -19,7 +19,7 @@ exports[`LogLevel > Debug > should have correct value > Debug 1`] = `
 exports[`LogLevel > Error > should have correct value > Error 1`] = `
 {
   "_": "LogLevel",
-  "name": "Error",
+  "name": "error",
   "value": 40,
 }
 `;
@@ -27,7 +27,7 @@ exports[`LogLevel > Error > should have correct value > Error 1`] = `
 exports[`LogLevel > Info > should have correct value > Info 1`] = `
 {
   "_": "LogLevel",
-  "name": "Info",
+  "name": "info",
   "value": 20,
 }
 `;
@@ -35,7 +35,7 @@ exports[`LogLevel > Info > should have correct value > Info 1`] = `
 exports[`LogLevel > Warning > should have correct value > Warning 1`] = `
 {
   "_": "LogLevel",
-  "name": "Warning",
+  "name": "warning",
   "value": 30,
 }
 `;
