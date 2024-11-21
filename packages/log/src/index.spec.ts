@@ -13,6 +13,7 @@ describe('index', () => {
         'LogMessageItem',
         'LogRecord',
         'LogHandler',
+        'level',
       ].sort(),
     );
   });
