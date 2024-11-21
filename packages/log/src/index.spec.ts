@@ -14,6 +14,11 @@ describe('index', () => {
         'LogRecord',
         'LogHandler',
         'level',
+        'critical',
+        'error',
+        'warning',
+        'info',
+        'debug',
       ].sort(),
     );
   });

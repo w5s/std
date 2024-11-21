@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { level } from './level.js';
+import { critical, debug, error, info, level, warning } from './level.js';
 import { LogLevel } from './LogLevel.js';
 import { LogMessage, LogMessageRef } from './LogMessage.js';
 
@@ -43,5 +43,55 @@ describe(level, () => {
         foo: fooValue,
       },
     });
+  });
+});
+describe(critical, () => {
+  it('returns a parameter factory', () => {
+    expect(critical`test`).toEqual(
+      expect.objectContaining({
+        level: LogLevel.Critical,
+        message: ['test'],
+      }),
+    );
+  });
+});
+describe(error, () => {
+  it('returns a parameter factory', () => {
+    expect(error`test`).toEqual(
+      expect.objectContaining({
+        level: LogLevel.Error,
+        message: ['test'],
+      }),
+    );
+  });
+});
+describe(warning, () => {
+  it('returns a parameter factory', () => {
+    expect(warning`test`).toEqual(
+      expect.objectContaining({
+        level: LogLevel.Warning,
+        message: ['test'],
+      }),
+    );
+  });
+});
+describe(info, () => {
+  it('returns a parameter factory', () => {
+    expect(info`test`).toEqual(
+      expect.objectContaining({
+        level: LogLevel.Info,
+        message: ['test'],
+      }),
+    );
+  });
+});
+describe(debug, () => {
+  it('returns a parameter factory', () => {
+    expect(debug`test`).toEqual(
+      expect.objectContaining({
+        level: LogLevel.Debug,
+        message: ['test'],
+      }),
+    );
   });
 });

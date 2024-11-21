@@ -66,3 +66,48 @@ function levelWithData(logLevel: LogLevel, baseData: LogRecord['data']): LogLeve
 export function level(logLevel: LogLevelValue | LogLevel): LogLevelFactory {
   return levelWithData(typeof logLevel === 'string' ? logLevelFrom(logLevel) : logLevel, {});
 }
+
+/**
+ * `Critical` string template
+ *
+ * @example
+ * critical`My message ${['foo', fooValue]}`
+ * critical.withData({ baz: true })`My message ${['foo', fooValue]}`
+ */
+export const critical = level('critical');
+
+/**
+ * `Error` string template
+ *
+ * @example
+ * error`My message ${['foo', fooValue]}`
+ * error.withData({ baz: true })`My message ${['foo', fooValue]}`
+ */
+export const error = level('error');
+
+/**
+ * `Warning` string template
+ *
+ * @example
+ * warning`My message ${['foo', fooValue]}`
+ * warning.withData({ baz: true })`My message ${['foo', fooValue]}`
+ */
+export const warning = level('warning');
+
+/**
+ * `Info` string template
+ *
+ * @example
+ * info`My message ${['foo', fooValue]}`
+ * info.withData({ baz: true })`My message ${['foo', fooValue]}`
+ */
+export const info = level('info');
+
+/**
+ * `Debug` string template
+ *
+ * @example
+ * debug`My message ${['foo', fooValue]}`
+ * debug.withData({ baz: true })`My message ${['foo', fooValue]}`
+ */
+export const debug = level('debug');
