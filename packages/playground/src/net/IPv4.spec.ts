@@ -88,4 +88,44 @@ describe('IPv4', () => {
       ],
     ],
   });
+  describe('any', () => {
+    it('is a well known ip', () => {
+      expect(IPv4.any).toMatchInlineSnapshot(`
+        {
+          "_": "IPv4",
+          "ipv4": 0,
+        }
+      `);
+    });
+  });
+  describe('localhost', () => {
+    it('is a well known ip', () => {
+      expect(IPv4.localhost).toMatchInlineSnapshot(`
+        {
+          "_": "IPv4",
+          "ipv4": 2130706433,
+        }
+      `);
+    });
+  });
+  describe('loopback', () => {
+    it('is a well known ip', () => {
+      expect(IPv4.loopback).toMatchInlineSnapshot(`
+        {
+          "_": "IPv4",
+          "ipv4": 2130706433,
+        }
+      `);
+    });
+  });
+  describe('broadcast', () => {
+    it('is a well known ip', () => {
+      expect(IPv4.broadcast).toMatchInlineSnapshot(`
+        {
+          "_": "IPv4",
+          "ipv4": -1,
+        }
+      `);
+    });
+  });
 });

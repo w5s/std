@@ -134,6 +134,12 @@ const IPv6Indexable = Indexable<IPv6, bigint>({
   indexOf: (value) => value.ipv6,
 });
 
+const any = of(0, 0, 0, 0, 0, 0, 0, 0);
+
+const loopback = of(0, 0, 0, 0, 0, 0, 0, 0x00_01);
+
+const localhost = loopback;
+
 /**
  * IPv6 Type and Codec definition
  *
@@ -148,5 +154,8 @@ export const IPv6 = Callable({
   ...IPv6Indexable,
   fromBigInt,
   of,
+  any,
+  loopback,
+  localhost,
   [Callable.symbol]: of,
 });

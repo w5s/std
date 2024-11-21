@@ -86,6 +86,14 @@ const IPv4Indexable = Indexable({
   indexOf: (value) => value.ipv4,
 });
 
+const any = of(0, 0, 0, 0);
+
+const loopback = of(127, 0, 0, 1);
+
+const localhost = loopback;
+
+const broadcast = of(255, 255, 255, 255);
+
 /**
  * IPv4 Type and Codec definition
  *
@@ -100,5 +108,9 @@ export const IPv4 = Callable({
   ...IPv4Indexable,
   fromNumber,
   of,
+  any,
+  localhost,
+  loopback,
+  broadcast,
   [Callable.symbol]: fromNumber,
 });

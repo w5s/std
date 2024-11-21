@@ -16,7 +16,7 @@ const FeatureList: FeatureItem[] = [
       <>
         Standardized code and conventions for high productivity <br />
         <em>
-          ✓ Inspired by industry-grade technologies (Rust, Elixir, Ocaml) <br />
+          ✓ Inspired by industry-grade technologies (Rust, Ocaml) <br />
           ✓ Self explanatory names, (almost) no abbreviations <br />
           ✓ Smooth tool integration and testability <br />
         </em>
