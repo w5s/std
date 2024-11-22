@@ -58,7 +58,7 @@
     "@w5s/task": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "typescript": "5.6.3",
+    "typescript": "5.7.2",
     "vite": "latest",
     "vitest": "latest"
   },
