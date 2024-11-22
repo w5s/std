@@ -45,7 +45,7 @@ const packageList = fs
   .filter((_) => _.package.private !== true);
 
 const config: Config = (() => {
-  const title = 'W5S Standard Library';
+  const title = 'W5s Standard Library';
   const tagline = 'A collection of type safe, functional style packages for building great applications and libraries';
   const organizationName = 'w5s';
   return {
@@ -81,7 +81,7 @@ const config: Config = (() => {
     },
 
     customFields: {
-      metaTitle: title,
+      metaTitle: 'Build faster, cleaner and safer apps',
       metaDescription: tagline,
     } satisfies CustomFields,
 
@@ -111,6 +111,7 @@ const config: Config = (() => {
     themeConfig: {
       // Replace with your project's social card
       image: 'img/w5s_social_card.png',
+      metadata: [{ name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' }],
       navbar: {
         title: 'Standard Library',
         logo: {
