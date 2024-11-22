@@ -110,7 +110,7 @@ const config: Config = (() => {
 
     themeConfig: {
       // Replace with your project's social card
-      image: 'img/w5s_social_card.png',
+      image: 'img/w5s_social_cover.png',
       metadata: [{ name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' }],
       navbar: {
         title: 'Standard Library',
