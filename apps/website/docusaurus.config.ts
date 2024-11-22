@@ -112,9 +112,9 @@ const config: Config = (() => {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'W5S std',
+        title: 'Standard Library',
         logo: {
-          alt: 'W5S std',
+          alt: 'W5S standard library',
           src: 'img/logo.svg',
         },
         items: [
