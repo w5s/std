@@ -111,7 +111,11 @@ const config: Config = (() => {
     themeConfig: {
       // Replace with your project's social card
       image: 'img/w5s_social_cover.png',
-      metadata: [{ name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' }],
+      metadata: [
+        { name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' },
+        /* cspell:disable-next-line */
+        { name: 'google-site-verification', content: 'crTDqUN2i_LENrHWPhxylaLVKPZ8EdHYemMbluuGhIA' },
+      ],
       navbar: {
         title: 'Standard Library',
         logo: {
