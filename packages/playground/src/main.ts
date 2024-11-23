@@ -7,7 +7,7 @@ import { EUR } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
-import { retry, RetryPolicy } from './retry.js';
+import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
 import { ContainerKey, provide, use } from './di/index.js';
 import { abortable } from './abortable.js';
