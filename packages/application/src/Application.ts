@@ -1,4 +1,4 @@
-import type { Ref, Record, Tag, Option } from '@w5s/core';
+import type { Ref, Record, Tag } from '@w5s/core';
 import { useRef } from './useRef.js';
 import { useStorage } from './useStorage.js';
 
@@ -32,7 +32,7 @@ export interface Application<Configuration = EmptyObject> {
   /**
    * Application initial configuration
    */
-  readonly configuration: Configuration;
+  readonly initialConfiguration: Configuration;
 
   /**
    * Reference to current application state
@@ -45,58 +45,34 @@ export interface Application<Configuration = EmptyObject> {
  *
  * @example
  * ```ts
- * const app = Application({
- *   id: 'my-app'
- *   configuration: {
- *     foo: 1,
- *   }
+ * const app = Application('my-app', {
+ *   foo: 1,
  * });
- * app.current = {
- *   ...app.current,
+ * app.state.current = {
+ *   ...app.state.current,
  *   myProperty: 'hello world !',
  * };
- *
  * ```
  * @param properties
  */
 export function Application<Configuration extends object = EmptyObject>(
-  properties: Application.Options<Configuration>,
+  id: string,
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  initialConfiguration: Configuration = {} as Configuration,
+  store?: Ref<Record<string, ApplicationState>>,
 ): Application<Configuration> {
-  const {
-    id,
-    store,
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    configuration = {} as Configuration,
-  } = properties;
   const initialState: ApplicationState = Object.freeze({
-    configuration,
+    configuration: initialConfiguration,
   });
 
   return {
     id: id as ApplicationId,
-    configuration,
+    initialConfiguration,
     state: useRef(store == null ? useStorage(globalThis) : store, `application/${id}`, initialState),
   };
 }
 
 export namespace Application {
-  export type Options<Configuration extends object> = {
-    /**
-     * Application id
-     */
-    id: string;
-
-    /**
-     * Application initial configuration
-     */
-    configuration?: Option<Configuration>;
-
-    /**
-     * Target store where application will be registered
-     */
-    store?: Ref<Record<string, ApplicationState>>;
-  };
-
   /**
    * Return the configuration value
    *
@@ -125,8 +101,7 @@ export namespace Application {
    *
    * @example
    * ```ts
-   * const app = Application({
-   *   id: 'my-app',
+   * const app = Application('my-app', {
    *   myVar: 1
    * });
    * Application.configure(app, {

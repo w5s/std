@@ -1,6 +1,6 @@
 import { Application } from '@w5s/application';
 
 /**
- * Money Application reference
+ * Log Application reference
  */
-export const application = Application({ id: '@w5s/log' });
+export const application = Application('@w5s/log');

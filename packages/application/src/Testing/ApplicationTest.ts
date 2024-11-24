@@ -3,8 +3,6 @@ import { Application, type ApplicationState } from '../Application.js';
 
 type EmptyObject = Record<string | symbol, never>;
 
-const generateAppId = () => `app-${Math.round(Math.random() * 2 ** 32).toString(36)}`;
-
 export interface ApplicationTest<Configuration = EmptyObject> extends Application<Configuration> {
   /**
    * Ref to store
@@ -17,25 +15,20 @@ export interface ApplicationTest<Configuration = EmptyObject> extends Applicatio
  *
  * @example
  * ```ts
- * const app = ApplicationTest({
- *   // id: 'some-custom-id',
- *   // configuration: {}
- * });
+ * const app = ApplicationTest(
+ *   // 'some-custom-id',
+ *   // {}
+ * );
  * console.log(app.current);// {}
  * console.log(app.store);// { ['some-id']:  }
  * ```
  * @param properties
  */
 export function ApplicationTest<Configuration extends Record<string | symbol, unknown> = EmptyObject>(
-  properties?: ApplicationTest.Options<Configuration>,
+  id: string,
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  initialConfiguration: Configuration = {} as Configuration,
+  store: Ref<Record<string, ApplicationState>> = { current: {} },
 ): ApplicationTest<Configuration> {
-  const { id = generateAppId(), store = { current: {} }, configuration } = properties ?? {};
-
-  return Object.assign(Application<Configuration>({ id, store, configuration }), { store });
-}
-
-export namespace ApplicationTest {
-  export type Options<Configuration extends Record<string | symbol, unknown>> = Partial<
-    Application.Options<Configuration>
-  >;
+  return Object.assign(Application<Configuration>(id, initialConfiguration, store), { store });
 }
