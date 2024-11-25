@@ -78,8 +78,7 @@ export namespace Application {
    *
    * @example
    * ```ts
-   * const app = Application({
-   *   id: 'my-app',
+   * const app = Application('my-app', {
    *   myVar: 1
    * });
    * Application.get(app, 'myVar');// 1
