@@ -57,7 +57,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.6.3",
     "@docusaurus/tsconfig": "3.6.3",
-    "@types/node": "20.17.7",
+    "@types/node": "20.17.8",
     "typescript": "5.7.2"
   },
   "engines": {
