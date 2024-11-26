@@ -1,24 +1,8 @@
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error } from '@w5s/core/dist/Result/Error.js';
+import type { ExpectFunction } from '@w5s/core-type';
 import type { TaskLike } from '../Task.js';
 import { unsafeRun } from '../Task/unsafeRun.js';
-
-export interface ExpectAssertionObject {
-  toEqual(expected: unknown): void;
-  toHaveProperty(property: string | (string | number)[], value: unknown): void;
-}
-
-export type ExpectAssertion = ExpectAssertionObject & {
-  not: ExpectAssertionObject;
-};
-
-export interface ExpectFunction {
-  (value: unknown): ExpectAssertion & {
-    resolves: ExpectAssertion;
-    rejects: ExpectAssertion;
-  };
-  fail(message: string): never;
-}
 
 export interface ExpectTask {
   toResolve(value: unknown): Promise<void>;
