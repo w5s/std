@@ -1,4 +1,8 @@
 import type { Int } from '@w5s/core';
+import { of } from './Iterable/of.js';
+import { filter } from './Iterable/filter.js';
+import { map } from './Iterable/map.js';
+import { zip } from './Iterable/zip.js';
 
 const resultDone: IteratorResult<any> = Object.freeze({ done: true, value: undefined });
 const resultValue = <V>(value: V) => ({ value, done: false });
@@ -66,20 +70,10 @@ export const Iterable = {
   empty() {
     return emptyIterable;
   },
-
-  /**
-   * Create an iterable of given `values`
-   *
-   * @example
-   * ```typescript
-   * Iterable.of('a', 'b', 'c');// 'a', 'b', 'c'
-   * ```
-   * @category Constructor
-   * @param values - The values of the iterable
-   */
-  of<Value>(...values: Value[]): Iterable<Value> {
-    return fromFunction(values[Symbol.iterator].bind(values));
-  },
+  of,
+  filter,
+  map,
+  zip,
 
   /**
    * Generate an iterable of `length` using `mapFn(index)` on each element
@@ -133,60 +127,6 @@ export const Iterable = {
       typeof (anyValue as unknown as Record<string | symbol, unknown>)[Symbol.iterator] === 'function'
     );
   },
-
-  /**
-   * Return a new Iterable which applies `mapFn` to each values
-   *
-   * @example
-   * ```typescript
-   * const iterable = [1, 2, 3];
-   * Iterable.map(iterator, (value) => value * 2);// == Iterable.of(2, 4, 6)
-   * ```
-   * @param source - the iterable source
-   * @param mapFn - a function that returns a new value
-   */
-  map<ValueFrom, ValueTo>(source: Iterable<ValueFrom>, mapFn: (value: ValueFrom) => ValueTo): Iterable<ValueTo> {
-    return fromFunction(() => {
-      const sourceIterator = getIterator(source);
-
-      return {
-        next() {
-          const result = sourceIterator.next();
-
-          return result.done === true ? result : resultValue(mapFn(result.value));
-        },
-      };
-    });
-  },
-
-  /**
-   * Return a new iterator that filters values using `predicate`
-   *
-   * @example
-   * ```typescript
-   * const iterator = [1, 2, 3];
-   * Iterable.filter(iterator, (value) => value > 1);// == Iterable.of(2, 3)
-   * ```
-   * @param source - the iterator to be filtered
-   * @param predicate - a function that returns a boolean
-   */
-  filter<Value>(source: Iterable<Value>, predicate: (value: Value) => boolean): Iterable<Value> {
-    return fromFunction(() => {
-      const sourceIterator = getIterator(source);
-
-      return {
-        next() {
-          let result: IteratorResult<Value>;
-          do {
-            result = sourceIterator.next();
-          } while (result.done !== true && !predicate(result.value));
-
-          return result;
-        },
-      };
-    });
-  },
-
   /**
    * Reduce an `initialValue` to the `reducer` function
    *
@@ -218,36 +158,5 @@ export const Iterable = {
     }
 
     return currentValue;
-  },
-
-  /**
-   * Combine two iterables into an iterable of couple of their values.
-   * The result has the size of the smallest iterable used.
-   *
-   * @example
-   * ```typescript
-   * const left = [1, 2, 3];
-   * const right = ['a', 'b'];
-   * Iterable.zip(left, right);// == Iterable.of([1, 'a'], [2, 'b'])
-   * ```
-   * @param left - Left iterable
-   * @param right - Right iterable
-   */
-  zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
-    return fromFunction<[L, R]>(() => {
-      const leftIterator = getIterator(left);
-      const rightIterator = getIterator(right);
-
-      return {
-        next() {
-          const leftResult = leftIterator.next();
-          const rightResult = rightIterator.next();
-
-          return leftResult.done === true || rightResult.done === true
-            ? resultDone
-            : resultValue([leftResult.value, rightResult.value] as [L, R]);
-        },
-      };
-    });
   },
 };
