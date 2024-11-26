@@ -15,7 +15,7 @@ export interface ExpectFunction {
     resolves: ExpectAssertion;
     rejects: ExpectAssertion;
   };
-  fail(message: string): never;
+  fail: (message: string) => never;
 }
 
 /**

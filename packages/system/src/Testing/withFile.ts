@@ -1,21 +1,5 @@
+import type { ExpectFunction } from '@w5s/core-type';
 import * as fs from 'node:fs';
-
-export interface ExpectAssertionObject {
-  toEqual(expected: unknown): void;
-  toHaveProperty(property: string | (string | number)[], value: unknown): void;
-}
-
-export type ExpectAssertion = ExpectAssertionObject & {
-  not: ExpectAssertionObject;
-};
-
-export interface ExpectFunction {
-  (value: unknown): ExpectAssertion & {
-    resolves: ExpectAssertion;
-    rejects: ExpectAssertion;
-  };
-  fail(message: string): never;
-}
 
 export interface ExpectFile {
   /**
@@ -61,7 +45,7 @@ export interface ExpectFile {
  * ```ts
  * const expectFile = withFile(expect);
  *
- * test('something', async () => {
+ * it('something', async () => {
  *   const someFile = 'path/to/some/file';
  *   await expectFile(someFile).toExist();
  * });
@@ -69,7 +53,6 @@ export interface ExpectFile {
  * @param expectFn
  */
 export function withFile(expectFn: ExpectFunction) {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { fail } = expectFn;
   const lstat = async (filePath: string) => {
     try {
