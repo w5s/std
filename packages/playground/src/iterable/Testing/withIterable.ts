@@ -29,7 +29,7 @@ export function withIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: Iterable<V>, isNot: boolean): ExpectIterable => ({
     toHaveValues(expected: Array<unknown>) {
       const expectValue = expectFn(Array.from(iterable));
-      (isNot ? expectValue.not : expectValue).toEqual(Array.from(expected));
+      (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     toBeIdemPotent() {
       const expectValue = expectFn(Array.from(iterable));
