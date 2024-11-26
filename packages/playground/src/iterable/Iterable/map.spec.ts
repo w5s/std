@@ -9,4 +9,8 @@ describe(map, () => {
     const source = of(1, 3, 2);
     expectIterable(map(source, (value) => value * 2)).toHaveValues([2, 6, 4]);
   });
+  it('should be idempotent', () => {
+    const source = of(1, 3, 2);
+    expectIterable(map(source, (value) => value * 2)).toBeIdemPotent();
+  });
 });

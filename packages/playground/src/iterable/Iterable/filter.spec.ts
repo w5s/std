@@ -9,7 +9,7 @@ describe(filter, () => {
     const source = of(1, 3, 2);
     expectIterable(filter(source, (value) => value >= 2)).toHaveValues([3, 2]);
   });
-  it.skip('should be idempotent', () => {
+  it('should be idempotent', () => {
     const source = of(1, 3, 2);
     expectIterable(filter(source, (value) => value >= 2)).toBeIdemPotent();
   });
