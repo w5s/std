@@ -1,3 +1,4 @@
+import type { Int } from '@w5s/core';
 import type { Awaitable } from '@w5s/core-type';
 
 /**
@@ -6,7 +7,11 @@ import type { Awaitable } from '@w5s/core-type';
  * @example
  * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
- * AsyncIterable.reduce(iterable, (total, value) => total + value, 0);// 6
+ * AsyncIterable.reduce(
+ *   iterable,
+ *   (total, value) => total + value,
+ *   0,
+ * );// 6
  * ```
  * @param source - the iterator reduced
  * @param reducer - the reducer function
@@ -14,12 +19,14 @@ import type { Awaitable } from '@w5s/core-type';
  */
 export async function reduce<Value, Return>(
   source: AsyncIterable<Value>,
-  reducer: (accumulator: Return, value: Value) => Awaitable<Return>,
+  reducer: (accumulator: Return, currentValue: Value, currentIndex: Int) => Awaitable<Return>,
   initialValue: Return,
 ): Promise<Return> {
-  let currentValue = initialValue;
-  for await (const value of source) {
-    currentValue = await reducer(currentValue, value);
+  let accumulator = initialValue;
+  let currentIndex = 0;
+  for await (const currentValue of source) {
+    accumulator = await reducer(accumulator, currentValue, currentIndex as Int);
+    currentIndex += 1;
   }
-  return currentValue;
+  return accumulator;
 }

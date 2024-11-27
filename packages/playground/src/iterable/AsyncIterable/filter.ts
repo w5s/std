@@ -7,22 +7,25 @@ import type { Awaitable } from '@w5s/core-type';
  * @example
  * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
- * AsyncIterable.filter(iterable, (value) => value > 1);// == AsyncIterable.of(2, 3)
+ * AsyncIterable.filter(
+ *   iterable,
+ *   (currentValue, currentIndex) => currentValue > 1,
+ * );// == AsyncIterable.of(2, 3)
  * ```
  * @param source - the iterable to be filtered
  * @param predicate - a function that returns a boolean
  */
 export function filter<Value>(
   source: AsyncIterable<Value>,
-  predicate: (value: Value, index: Int) => Awaitable<boolean>,
+  predicate: (currentValue: Value, currentIndex: Int) => Awaitable<boolean>,
 ): AsyncIterable<Value> {
   return {
     async *[Symbol.asyncIterator]() {
-      let index = 0;
-      for await (const item of source) {
-        if (await predicate(item, index as Int)) {
-          yield item;
-          index += 1;
+      let currentIndex = 0;
+      for await (const currentValue of source) {
+        if (await predicate(currentValue, currentIndex as Int)) {
+          yield currentValue;
+          currentIndex += 1;
         }
       }
     },

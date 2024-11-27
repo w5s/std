@@ -1,27 +1,30 @@
 import type { Int } from '@w5s/core';
 
 /**
- * Return a new iterator that filters values using `predicate`
+ * Return a new iterable that filters values using `predicate`
  *
  * @example
  * ```typescript
- * const iterator = [1, 2, 3];
- * Iterable.filter(iterator, (value) => value > 1);// == Iterable.of(2, 3)
+ * const iterable = [1, 2, 3];
+ * Iterable.filter(
+ *   iterable,
+ *   (currentValue, currentIndex) => currentValue > 1,
+ * );// == Iterable.of(2, 3)
  * ```
  * @param source - the iterator to be filtered
  * @param predicate - a function that returns a boolean
  */
 export function filter<Value>(
   source: Iterable<Value>,
-  predicate: (value: Value, index: Int) => boolean,
+  predicate: (currentValue: Value, currentIndex: Int) => boolean,
 ): Iterable<Value> {
   return {
     *[Symbol.iterator]() {
-      let index = 0;
-      for (const item of source) {
-        if (predicate(item, index as Int)) {
-          yield item;
-          index += 1;
+      let currentIndex = 0;
+      for (const currentValue of source) {
+        if (predicate(currentValue, currentIndex as Int)) {
+          yield currentValue;
+          currentIndex += 1;
         }
       }
     },
