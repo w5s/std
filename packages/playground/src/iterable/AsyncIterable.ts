@@ -7,6 +7,8 @@ import { reduce } from './AsyncIterable/reduce.js';
 import { generate } from './AsyncIterable/generate.js';
 import { hasInstance } from './AsyncIterable/hasInstance.js';
 import { empty } from './AsyncIterable/empty.js';
+import { every } from './AsyncIterable/every.js';
+import { some } from './AsyncIterable/some.js';
 
 /**
  * @namespace
@@ -14,11 +16,13 @@ import { empty } from './AsyncIterable/empty.js';
 export const AsyncIterable = {
   create,
   empty,
+  every,
   filter,
   generate,
   hasInstance,
   map,
   of,
   reduce,
+  some,
   zip,
 };

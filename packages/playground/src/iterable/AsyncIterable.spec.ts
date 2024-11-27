@@ -9,18 +9,22 @@ import { map } from './AsyncIterable/map.js';
 import { of } from './AsyncIterable/of.js';
 import { reduce } from './AsyncIterable/reduce.js';
 import { zip } from './AsyncIterable/zip.js';
+import { every } from './AsyncIterable/every.js';
+import { some } from './AsyncIterable/some.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
     expect(AsyncIterable).toEqual({
       create,
       empty,
+      every,
       filter,
       generate,
       hasInstance,
       map,
       of,
       reduce,
+      some,
       zip,
     });
   });
