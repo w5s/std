@@ -7,7 +7,7 @@ describe(flatMap, () => {
   const expectIterable = withIterable(expect);
   it('should return a flat mapped iterator', () => {
     const source = of(1, 3, 2);
-    expectIterable(flatMap(source, (value, index) => [`a_${value}_${index}`, `b_${value}_${index}`])).toHaveValues([
+    expectIterable(flatMap(source, (value, index) => of(`a_${value}_${index}`, `b_${value}_${index}`))).toHaveValues([
       'a_1_0',
       'b_1_0',
       'a_3_1',
@@ -18,6 +18,6 @@ describe(flatMap, () => {
   });
   it('should be idempotent', () => {
     const source = of(1, 3, 2);
-    expectIterable(flatMap(source, (value) => [value, value * 2])).toBeIdemPotent();
+    expectIterable(flatMap(source, (value) => of(value, value * 2))).toBeIdemPotent();
   });
 });
