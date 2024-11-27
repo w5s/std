@@ -9,6 +9,7 @@ import { hasInstance } from './Iterable/hasInstance.js';
 import { empty } from './Iterable/empty.js';
 import { some } from './Iterable/some.js';
 import { every } from './Iterable/every.js';
+import { flatMap } from './Iterable/flatMap.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -28,6 +29,7 @@ export const Iterable = {
   empty,
   every,
   filter,
+  flatMap,
   generate,
   hasInstance,
   map,

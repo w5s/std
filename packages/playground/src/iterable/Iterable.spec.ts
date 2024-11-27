@@ -11,6 +11,7 @@ import { reduce } from './Iterable/reduce.js';
 import { zip } from './Iterable/zip.js';
 import { every } from './Iterable/every.js';
 import { some } from './Iterable/some.js';
+import { flatMap } from './Iterable/flatMap.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
@@ -19,6 +20,7 @@ describe('Iterable', () => {
       empty,
       every,
       filter,
+      flatMap,
       generate,
       hasInstance,
       map,
