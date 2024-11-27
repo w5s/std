@@ -11,6 +11,7 @@ import { reduce } from './AsyncIterable/reduce.js';
 import { zip } from './AsyncIterable/zip.js';
 import { every } from './AsyncIterable/every.js';
 import { some } from './AsyncIterable/some.js';
+import { flatMap } from './AsyncIterable/flatMap.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
@@ -19,6 +20,7 @@ describe('AsyncIterable', () => {
       empty,
       every,
       filter,
+      flatMap,
       generate,
       hasInstance,
       map,

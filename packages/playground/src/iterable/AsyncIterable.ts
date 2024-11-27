@@ -9,6 +9,7 @@ import { hasInstance } from './AsyncIterable/hasInstance.js';
 import { empty } from './AsyncIterable/empty.js';
 import { every } from './AsyncIterable/every.js';
 import { some } from './AsyncIterable/some.js';
+import { flatMap } from './AsyncIterable/flatMap.js';
 
 /**
  * @namespace
@@ -18,6 +19,7 @@ export const AsyncIterable = {
   empty,
   every,
   filter,
+  flatMap,
   generate,
   hasInstance,
   map,
