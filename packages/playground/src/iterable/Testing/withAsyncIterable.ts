@@ -1,5 +1,16 @@
 import type { ExpectFunction } from '@w5s/core-type';
 
+const arrayFromAsync: <T>(iterable: AsyncIterable<T>) => Promise<Array<T>> =
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  Array.fromAsync ??
+  (async <T>(iterable: AsyncIterable<T>) => {
+    const returnValue: Array<T> = [];
+    for await (const item of iterable) {
+      returnValue.push(item);
+    }
+    return returnValue;
+  });
+
 export interface ExpectAsyncIterable {
   /**
    * Asserts `[Symbol.iterator]()` emits the same values as `expected`
@@ -28,12 +39,12 @@ export interface ExpectAsyncIterable {
 export function withAsyncIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: AsyncIterable<V>, isNot: boolean): ExpectAsyncIterable => ({
     async toHaveValues(expected: Array<unknown>) {
-      const expectValue = expectFn(Array.fromAsync(iterable)).resolves;
+      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
       (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     async toBeIdemPotent() {
-      const expectValue = expectFn(Array.fromAsync(iterable)).resolves;
-      (isNot ? expectValue.not : expectValue).toEqual(await Array.fromAsync(iterable));
+      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
+      (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
     },
   });
   return <V>(iterable: AsyncIterable<V>) =>
