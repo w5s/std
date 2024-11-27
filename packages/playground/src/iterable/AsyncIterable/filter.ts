@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+import type { Awaitable } from '@w5s/core-type';
 
 /**
  * Return a new iterator that filters values using `predicate`
@@ -13,13 +14,13 @@ import type { Int } from '@w5s/core';
  */
 export function filter<Value>(
   source: AsyncIterable<Value>,
-  predicate: (value: Value, index: Int) => boolean,
+  predicate: (value: Value, index: Int) => Awaitable<boolean>,
 ): AsyncIterable<Value> {
   return {
     async *[Symbol.asyncIterator]() {
       let index = 0;
       for await (const item of source) {
-        if (predicate(item, index as Int)) {
+        if (await predicate(item, index as Int)) {
           yield item;
           index += 1;
         }

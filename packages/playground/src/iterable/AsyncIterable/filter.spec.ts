@@ -8,9 +8,10 @@ describe(filter, () => {
   it('should return a filtered iterator', async () => {
     const source = of(1, 3, 2);
     await expectAsyncIterable(filter(source, (value) => value >= 2)).toHaveValues([3, 2]);
+    await expectAsyncIterable(filter(source, async (value) => value >= 2)).toHaveValues([3, 2]);
   });
   it('should be idempotent', async () => {
     const source = of(1, 3, 2);
-    await expectAsyncIterable(filter(source, (value) => value >= 2)).toBeIdemPotent();
+    await expectAsyncIterable(filter(source, async (value) => value >= 2)).toBeIdemPotent();
   });
 });

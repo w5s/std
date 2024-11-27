@@ -7,5 +7,6 @@ describe(reduce, () => {
     const source = of(1, 3, 2);
 
     await expect(reduce(source, (acc, value) => acc + String(value), '')).resolves.toEqual('132');
+    await expect(reduce(source, async (acc, value) => acc + String(value), '')).resolves.toEqual('132');
   });
 });

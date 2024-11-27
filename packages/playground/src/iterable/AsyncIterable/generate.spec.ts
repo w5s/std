@@ -10,8 +10,10 @@ describe(generate, () => {
   });
   it('should use mapFn(index) to generate values', async () => {
     await expectAsyncIterable(generate(3, (_) => _)).toHaveValues([0, 1, 2]);
+    await expectAsyncIterable(generate(3, async (_) => _)).toHaveValues([0, 1, 2]);
   });
   it('should be idempotent', async () => {
     await expectAsyncIterable(generate(3, (_) => _)).toBeIdemPotent();
+    await expectAsyncIterable(generate(3, async (_) => _)).toBeIdemPotent();
   });
 });

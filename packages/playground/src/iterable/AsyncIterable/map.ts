@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+import type { Awaitable } from '@w5s/core-type';
 
 /**
  * Return a new Iterable which applies `mapFn` to each values
@@ -13,7 +14,7 @@ import type { Int } from '@w5s/core';
  */
 export function map<ValueFrom, ValueTo>(
   source: AsyncIterable<ValueFrom>,
-  mapFn: (value: ValueFrom, index: Int) => ValueTo,
+  mapFn: (value: ValueFrom, index: Int) => Awaitable<ValueTo>,
 ): AsyncIterable<ValueTo> {
   return {
     async *[Symbol.asyncIterator]() {

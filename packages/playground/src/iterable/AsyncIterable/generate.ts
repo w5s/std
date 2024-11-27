@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+import type { Awaitable } from '@w5s/core-type';
 import { empty } from './empty.js';
 
 /**
@@ -13,7 +14,7 @@ import { empty } from './empty.js';
  * @param length - The number of elements
  * @param mapFn - The mapping function
  */
-export function generate<Value>(length: number, mapFn: (index: Int) => Promise<Value>): AsyncIterable<Value> {
+export function generate<Value>(length: number, mapFn: (index: Int) => Awaitable<Value>): AsyncIterable<Value> {
   return length === 0
     ? empty()
     : {

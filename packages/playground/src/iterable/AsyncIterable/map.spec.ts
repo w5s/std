@@ -8,9 +8,11 @@ describe(map, () => {
   it('should return a mapped iterator', async () => {
     const source = of(1, 3, 2);
     await expectAsyncIterable(map(source, (value) => value * 2)).toHaveValues([2, 6, 4]);
+    await expectAsyncIterable(map(source, async (value) => value * 2)).toHaveValues([2, 6, 4]);
   });
   it('should be idempotent', async () => {
     const source = of(1, 3, 2);
     await expectAsyncIterable(map(source, (value) => value * 2)).toBeIdemPotent();
+    await expectAsyncIterable(map(source, async (value) => value * 2)).toBeIdemPotent();
   });
 });

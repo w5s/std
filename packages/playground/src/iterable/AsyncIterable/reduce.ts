@@ -1,3 +1,5 @@
+import type { Awaitable } from '@w5s/core-type';
+
 /**
  * Reduce an `initialValue` to the `reducer` function
  *
@@ -12,12 +14,12 @@
  */
 export async function reduce<Value, Return>(
   source: AsyncIterable<Value>,
-  reducer: (accumulator: Return, value: Value) => Return,
+  reducer: (accumulator: Return, value: Value) => Awaitable<Return>,
   initialValue: Return,
 ): Promise<Return> {
   let currentValue = initialValue;
   for await (const value of source) {
-    currentValue = reducer(currentValue, value);
+    currentValue = await reducer(currentValue, value);
   }
   return currentValue;
 }
