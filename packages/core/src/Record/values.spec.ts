@@ -12,4 +12,11 @@ describe(values, () => {
       ),
     ).toEqual(['anyValue', 'anyOtherValue']);
   });
+  it('is idempotent', () => {
+    const result = values({
+      anyKey: 'anyValue',
+      anyOtherKey: 'anyOtherValue',
+    });
+    expect(Array.from(result)).toEqual(Array.from(result));
+  });
 });

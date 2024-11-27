@@ -11,8 +11,12 @@ import { keys } from './keys.js';
  * ```
  * @param record - the record
  */
-export function* entries<Key extends RecordKey, Value>(record: Record<Key, Value>): IterableIterator<[Key, Value]> {
-  for (const key of keys(record)) {
-    yield [key, record[key]];
-  }
+export function entries<Key extends RecordKey, Value>(record: Record<Key, Value>): Iterable<[Key, Value]> {
+  return {
+    *[Symbol.iterator]() {
+      for (const key of keys(record)) {
+        yield [key, record[key]];
+      }
+    },
+  };
 }

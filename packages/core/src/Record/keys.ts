@@ -12,6 +12,6 @@ const ownKeys = <Key extends RecordKey>(record: Record<Key, any>) => Reflect.own
  * ```
  * @param record - the record
  */
-export function keys<Key extends RecordKey>(record: Record<Key, any>): IterableIterator<Key> {
-  return ownKeys(record).values();
+export function keys<Key extends RecordKey>(record: Record<Key, any>): Iterable<Key> {
+  return ownKeys(record);
 }

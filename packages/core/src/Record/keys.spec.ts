@@ -24,4 +24,11 @@ describe(keys, () => {
       ),
     ).toEqual(['anyOtherKey', anySymbolKey]);
   });
+  it('is idempotent', () => {
+    const result = keys({
+      anyKey: 'anyValue',
+      anyOtherKey: 'anyOtherValue',
+    });
+    expect(Array.from(result)).toEqual(Array.from(result));
+  });
 });
