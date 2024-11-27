@@ -9,18 +9,22 @@ import { map } from './Iterable/map.js';
 import { of } from './Iterable/of.js';
 import { reduce } from './Iterable/reduce.js';
 import { zip } from './Iterable/zip.js';
+import { every } from './Iterable/every.js';
+import { some } from './Iterable/some.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
     expect(Iterable).toEqual({
       create,
       empty,
+      every,
       filter,
       generate,
       hasInstance,
       map,
       of,
       reduce,
+      some,
       zip,
     });
   });

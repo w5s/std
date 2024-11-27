@@ -7,6 +7,8 @@ import { reduce } from './Iterable/reduce.js';
 import { generate } from './Iterable/generate.js';
 import { hasInstance } from './Iterable/hasInstance.js';
 import { empty } from './Iterable/empty.js';
+import { some } from './Iterable/some.js';
+import { every } from './Iterable/every.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -24,11 +26,13 @@ import { empty } from './Iterable/empty.js';
 export const Iterable = {
   create,
   empty,
+  every,
   filter,
   generate,
   hasInstance,
   map,
   of,
   reduce,
+  some,
   zip,
 };
