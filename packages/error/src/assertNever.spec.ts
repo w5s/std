@@ -31,6 +31,7 @@ describe('assertNever', () => {
     }
   };
   const typeTestNonExhaustive = (fruit: 'banana' | 'kiwi'): string => {
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (fruit) {
       case 'banana': {
         return '🍌 Banana';
