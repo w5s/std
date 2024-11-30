@@ -81,6 +81,7 @@ export namespace Hash {
    * @param anyValue - hashed value
    */
   export function from(anyValue: undefined | null | boolean | number | string): Value {
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (typeof anyValue) {
       case 'boolean': {
         return anyValue ? TRUE : FALSE;

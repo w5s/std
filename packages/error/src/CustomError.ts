@@ -39,22 +39,23 @@ interface CustomErrorConstructor {
 /**
  * A custom error type
  */
-export type CustomError<Properties extends { name: string }> = Readonly<
-  {
-    /**
-     * Error message
-     */
-    message: string;
-    /**
-     * Optional stack trace (when supported)
-     */
-    stack: string | undefined;
-    /**
-     * Optional `Error` that was thrown
-     */
-    cause: unknown;
-  } & Properties
->;
+export type CustomError<Properties extends { name: string }> = globalThis.Error &
+  Readonly<
+    {
+      /**
+       * Error message
+       */
+      message: string;
+      /**
+       * Optional stack trace (when supported)
+       */
+      stack: string | undefined;
+      /**
+       * Optional `Error` that was thrown
+       */
+      cause: unknown;
+    } & Properties
+  >;
 
 /**
  * Return a new `CustomError`
@@ -127,6 +128,7 @@ export const CustomError: CustomErrorConstructor = (() => {
     prototype: __assign(__create(Error.prototype), {
       constructor: CustomError,
       toString(this: Error) {
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
         return errorToString.call(this) + (this.cause == null ? '' : `\n  └ ${String(this.cause)}`);
       },
     }),

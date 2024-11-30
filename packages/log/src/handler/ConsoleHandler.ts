@@ -24,6 +24,7 @@ export const ConsoleHandler: LogHandler = (logRecord) =>
     taskRun({ resolve }) {
       const { category, message, level, data } = logRecord;
       const prefix = category.length > 0 ? [`[${category}]`] : [];
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       const suffix = message.map((part) => (typeof part === 'string' ? part : String(data[part.$ref] ?? '')));
       consoleLevel(level)(console)(...prefix, ...suffix);
       resolve();

@@ -1,11 +1,11 @@
-import { Int, Option, Result } from '@w5s/core';
+import { DecodeError, Int, Option, Result } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID as defaultRandomUUID } from '@w5s/random';
-import { EUR } from '@w5s/money';
+import { EUR, Money } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
-import { TimeoutError } from '@w5s/error';
+import { AbortError, assertNever, TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
 import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
@@ -43,7 +43,7 @@ function main() {
 
   const task = pipe(randomUUID()).to(
     (_) => abortable(_, controller),
-    (_) => Task.andThen(_, (uuid) => sendMessage(uuid + String(amount))),
+    (_) => Task.andThen(_, (uuid) => sendMessage(uuid + Money.format(amount))),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
       Task.orElse(_, (error) => {
@@ -63,9 +63,15 @@ function main() {
           case HTTPError.ParserError.errorName: {
             return Console.error(`ParserError:${error.message}`);
           }
+          case DecodeError.errorName: {
+            return Console.error(`Decode Error:${error.message}`);
+          }
+          case AbortError.errorName: {
+            return Console.error(`Abort Error:${error.message}`);
+          }
           default: {
-            return Console.error(`Unknown Error:${error.message}`);
-            // return assertNever(error);
+            // return Console.error(`Unknown Error:${error.message}`);
+            return assertNever(error);
           }
         }
       }),
@@ -83,7 +89,7 @@ function main2() {
     if (!uuid.ok) {
       return uuid;
     }
-    const messageSent = await run(sendMessage(uuid.value + String(amount)));
+    const messageSent = await run(sendMessage(uuid.value + Money.format(amount)));
     if (!messageSent.ok) {
       return messageSent;
     }
@@ -108,9 +114,12 @@ function main2() {
       case HTTPError.ParserError.errorName: {
         return Console.error(`ParserError:${error.message}`);
       }
+      case DecodeError.errorName: {
+        return Console.error(`Decode Error:${error.message}`);
+      }
       default: {
-        return Console.error(`Unknown Error:${error.message}`);
-        // return assertNever(error);
+        // return Console.error(`Unknown Error:${error.message}`);
+        return assertNever(error);
       }
     }
   });
