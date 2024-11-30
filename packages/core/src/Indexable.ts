@@ -61,21 +61,24 @@ export function Indexable<T, Index extends number | bigint = number>(
       }),
     range:
       range ??
-      // eslint-disable-next-line func-names
-      function* (start, end) {
-        const startIndex = indexOf(start);
-        const endIndex = indexOf(end);
-        if (startIndex != null && endIndex != null) {
-          // @ts-ignore
-          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-          for (let index = startIndex; index <= endIndex; index += one) {
-            const value = at(index);
-            if (value != null) {
-              yield value;
+      ((start, end) => ({
+        start,
+        end,
+        *[Symbol.iterator]() {
+          const startIndex = indexOf(start);
+          const endIndex = indexOf(end);
+          if (startIndex != null && endIndex != null) {
+            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+            for (let index = startIndex; index <= endIndex; index += one) {
+              const value = at(index);
+              if (value != null) {
+                yield value;
+              }
             }
           }
-        }
-      },
+        },
+      })),
   };
 }
 export namespace Indexable {
@@ -83,4 +86,13 @@ export namespace Indexable {
     extends PartialKeys<Indexable<T, Index>, 'rangeSize' | 'range'> {}
 }
 
-export interface Range<T> extends Iterable<T> {}
+export interface Range<T> extends Iterable<T> {
+  /**
+   * Start of range
+   */
+  readonly start: T;
+  /**
+   * End of range
+   */
+  readonly end: T;
+}

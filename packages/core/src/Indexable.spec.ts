@@ -67,5 +67,9 @@ describe(Indexable, () => {
     it('has a default implementation', () => {
       expect([...charIndexable.range('a', 'e')]).toEqual(['a', 'b', 'c', 'd', 'e']);
     });
+    it('is idempotent', () => {
+      const range = charIndexable.range('a', 'e');
+      expect([...range]).toEqual([...range]);
+    });
   });
 });
