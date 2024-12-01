@@ -99,7 +99,7 @@
     "@w5s/conventional-changelog": "2.1.4",
     "@w5s/cspell-config": "2.3.16",
     "@w5s/eslint-config": "2.2.4",
-    "@w5s/ts-config": "2.2.1",
+    "@w5s/ts-config": "2.2.2",
     "cspell": "8.16.1",
     "eslint": "8.57.1",
     "lerna": "8.1.9",
