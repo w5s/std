@@ -5769,22 +5769,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.1.3":
-  version: 2.1.3
-  resolution: "@w5s/commitlint-config@npm:2.1.3"
+"@w5s/commitlint-config@npm:2.1.4":
+  version: 2.1.4
+  resolution: "@w5s/commitlint-config@npm:2.1.4"
   dependencies:
     "@commitlint/types": "npm:^19.0.0"
-    "@w5s/conventional-changelog": "npm:^2.1.3"
+    "@w5s/conventional-changelog": "npm:^2.1.4"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/5800059d8becbb2e93a4413a93f7310ad7147fa263dd2ae8a2aebb3e42e556a844d19d72646bb2ad171131755c7cebfd2e195f9d2a44fa54dd54a7d3121d2431
+  checksum: 10c0/7404631973fb76a9ced12e180bcdf4728f17674ed682e41ac3784f67ceb3cba4cdc968ae5fe23f5b3c167eb436aebd56f99dcfbfc206d5fbb5d69ca64eebb9c9
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:2.1.4":
+"@w5s/conventional-changelog@npm:2.1.4, @w5s/conventional-changelog@npm:^2.1.4":
   version: 2.1.4
   resolution: "@w5s/conventional-changelog@npm:2.1.4"
   dependencies:
@@ -5795,24 +5795,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/conventional-changelog@npm:^2.1.3":
-  version: 2.1.3
-  resolution: "@w5s/conventional-changelog@npm:2.1.3"
-  dependencies:
-    "@commitlint/types": "npm:^19.0.0"
-    emoji-regex: "npm:^10.2.1"
-    gitmojis: "npm:^3.13.4"
-  checksum: 10c0/6fa06de817c63ea81c7e902ebf0026c1b4c3a74b1e17db9594ef1eed382778d421bc1ff91a46c26e4d3bef06ee27fa192028cfe6432abead2f209b6c53fe5ee5
-  languageName: node
-  linkType: hard
-
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
     "@size-limit/preset-small-lib": "npm:11.1.6"
     "@types/node": "npm:20.17.9"
-    "@w5s/commitlint-config": "npm:2.1.3"
+    "@w5s/commitlint-config": "npm:2.1.4"
     "@w5s/conventional-changelog": "npm:2.1.4"
     "@w5s/cspell-config": "npm:2.3.15"
     "@w5s/eslint-config": "npm:2.2.4"
