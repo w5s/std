@@ -12,6 +12,7 @@ import { zip } from './Iterable/zip.js';
 import { every } from './Iterable/every.js';
 import { some } from './Iterable/some.js';
 import { flatMap } from './Iterable/flatMap.js';
+import { size } from './Iterable/size.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
@@ -26,6 +27,7 @@ describe('Iterable', () => {
       map,
       of,
       reduce,
+      size,
       some,
       zip,
     });

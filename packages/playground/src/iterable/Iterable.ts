@@ -10,6 +10,7 @@ import { empty } from './Iterable/empty.js';
 import { some } from './Iterable/some.js';
 import { every } from './Iterable/every.js';
 import { flatMap } from './Iterable/flatMap.js';
+import { size } from './Iterable/size.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -35,6 +36,7 @@ export const Iterable = {
   map,
   of,
   reduce,
+  size,
   some,
   zip,
 };
