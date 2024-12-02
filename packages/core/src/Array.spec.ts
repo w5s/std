@@ -21,11 +21,11 @@ import { of } from './Array/of.js';
 import { reduce } from './Array/reduce.js';
 import { reduceRight } from './Array/reduceRight.js';
 import { reverse } from './Array/reverse.js';
+import { setAt } from './Array/setAt.js';
 import { size } from './Array/size.js';
 import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
-import { updateAt } from './Array/updateAt.js';
 import { splice } from './Array/splice.js';
 
 describe('Array', () => {
@@ -52,12 +52,12 @@ describe('Array', () => {
       reduce,
       reduceRight,
       reverse,
+      setAt,
       size,
       slice,
       splice,
       some,
       sort,
-      updateAt,
     });
   });
 });

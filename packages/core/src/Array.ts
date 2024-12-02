@@ -24,7 +24,7 @@ import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
-import { updateAt } from './Array/updateAt.js';
+import { setAt } from './Array/setAt.js';
 
 export type Array<Item> = ReadonlyArray<Item>;
 
@@ -63,10 +63,10 @@ export const Array = {
   reduce,
   reduceRight,
   reverse,
+  setAt,
   size,
   slice,
   splice,
   some,
   sort,
-  updateAt,
 };
