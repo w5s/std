@@ -10,6 +10,7 @@ import { empty } from './AsyncIterable/empty.js';
 import { every } from './AsyncIterable/every.js';
 import { some } from './AsyncIterable/some.js';
 import { flatMap } from './AsyncIterable/flatMap.js';
+import { size } from './AsyncIterable/size.js';
 
 /**
  * @namespace
@@ -25,6 +26,7 @@ export const AsyncIterable = {
   map,
   of,
   reduce,
+  size,
   some,
   zip,
 };

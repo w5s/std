@@ -12,6 +12,7 @@ import { zip } from './AsyncIterable/zip.js';
 import { every } from './AsyncIterable/every.js';
 import { some } from './AsyncIterable/some.js';
 import { flatMap } from './AsyncIterable/flatMap.js';
+import { size } from './AsyncIterable/size.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
@@ -26,6 +27,7 @@ describe('AsyncIterable', () => {
       map,
       of,
       reduce,
+      size,
       some,
       zip,
     });
