@@ -1,5 +1,5 @@
 import type { Array } from '../Array.js';
-import { _copySlice } from './_copySlice.js';
+import { splice } from './splice.js';
 
 /**
  * Add `item` at the `index` in the array
@@ -14,18 +14,5 @@ import { _copySlice } from './_copySlice.js';
  */
 export function insertAt<Item>(array: Array<Item>, index: number, item: Item): Array<Item> {
   const arrayLength = array.length;
-  const arrayIndex = index;
-  if (!(arrayIndex >= 0 && arrayIndex <= arrayLength)) {
-    return array;
-  }
-  const returnValue = new globalThis.Array<Item>(arrayLength + 1);
-
-  // Copy before index
-  _copySlice(returnValue, 0, array, 0, index);
-  // Add at the index
-  returnValue[index] = item;
-  // Copy after index
-  _copySlice(returnValue, index + 1, array, index, arrayLength);
-
-  return returnValue;
+  return index >= 0 && index <= arrayLength ? splice(array, index, 0, item) : array;
 }

@@ -1,6 +1,5 @@
 import type { Array } from '../Array.js';
 import type { Int } from '../Int.js';
-import { _copySlice } from './_copySlice.js';
 
 /**
  * Calls a defined callback function on each item of an array. Each calls should return an array.
@@ -19,22 +18,6 @@ export function flatMap<FromItem, ToItem>(
   array: Array<FromItem>,
   mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => Array<ToItem>,
 ): Array<ToItem> {
-  const arrayLength = array.length;
-  if (arrayLength === 0) {
-    return array as Array<never>;
-  }
-  const returnValue: globalThis.Array<ToItem> = [];
-  let returnValueIndex = 0;
-  let index = 0;
-
-  while (index < arrayLength) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const part = mapFn(array[index]!, index as Int, array);
-    const partLength = part.length;
-    _copySlice(returnValue, returnValueIndex, part, 0, partLength);
-    returnValueIndex += partLength;
-    index += 1;
-  }
-
-  return returnValue;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  return array.length === 0 ? (array as Array<never>) : array.flatMap(mapFn as any);
 }
