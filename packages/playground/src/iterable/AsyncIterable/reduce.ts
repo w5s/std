@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import type { Awaitable } from '@w5s/core-type';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**
  * Reduce an `initialValue` to the `reducer` function
@@ -18,7 +19,7 @@ import type { Awaitable } from '@w5s/core-type';
  * @param initialValue - the initial value passed to the reducer
  */
 export async function reduce<Value, Return>(
-  source: AsyncIterable<Value>,
+  source: AsyncIterableLike<Value>,
   reducer: (accumulator: Return, currentValue: Value, currentIndex: Int) => Awaitable<Return>,
   initialValue: Return,
 ): Promise<Return> {

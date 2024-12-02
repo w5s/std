@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import type { Awaitable } from '@w5s/core-type';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**
  * Return a new iterator that filters values using `predicate`
@@ -16,7 +17,7 @@ import type { Awaitable } from '@w5s/core-type';
  * @param predicate - a function that returns a boolean
  */
 export function filter<Value>(
-  source: AsyncIterable<Value>,
+  source: AsyncIterableLike<Value>,
   predicate: (currentValue: Value, currentIndex: Int) => Awaitable<boolean>,
 ): AsyncIterable<Value> {
   return {

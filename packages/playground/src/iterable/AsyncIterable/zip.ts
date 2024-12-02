@@ -1,3 +1,6 @@
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
+import { from } from './from.js';
+
 /**
  * Combine two iterables into an iterable of couple of their values.
  * The result has the size of the smallest iterable used.
@@ -11,11 +14,13 @@
  * @param left - Left iterable
  * @param right - Right iterable
  */
-export function zip<L, R>(left: AsyncIterable<L>, right: AsyncIterable<R>): AsyncIterable<[L, R]> {
+export function zip<L, R>(left: AsyncIterableLike<L>, right: AsyncIterableLike<R>): AsyncIterable<[L, R]> {
+  const leftIterable = from(left);
+  const rightIterable = from(right);
   return {
     [Symbol.asyncIterator]: () => {
-      const leftIterator = left[Symbol.asyncIterator]();
-      const rightIterator = right[Symbol.asyncIterator]();
+      const leftIterator = leftIterable[Symbol.asyncIterator]();
+      const rightIterator = rightIterable[Symbol.asyncIterator]();
       return {
         async next() {
           const [leftResult, rightResult] = await Promise.all([leftIterator.next(), rightIterator.next()]);

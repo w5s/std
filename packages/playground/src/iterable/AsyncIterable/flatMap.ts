@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**
  * Return a new Iterable which applies `mapFn` and concatenate the result to the previous
@@ -15,7 +16,7 @@ import type { Int } from '@w5s/core';
  * @param mapFn - a function that returns a new value
  */
 export function flatMap<ValueFrom, ValueTo>(
-  source: AsyncIterable<ValueFrom>,
+  source: AsyncIterableLike<ValueFrom>,
   mapFn: (currentValue: ValueFrom, currentIndex: Int) => AsyncIterable<ValueTo>,
 ): AsyncIterable<ValueTo> {
   return {

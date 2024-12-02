@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import type { Awaitable } from '@w5s/core-type';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**
  * Tests whether any element in the async iterable pass the test implemented by the provided function.
@@ -15,7 +16,7 @@ import type { Awaitable } from '@w5s/core-type';
  * @param predicate
  */
 export async function some<Value>(
-  source: AsyncIterable<Value>,
+  source: AsyncIterableLike<Value>,
   predicate: (currentValue: Value, currentIndex: Int) => Awaitable<boolean>,
 ): Promise<boolean> {
   let currentIndex = 0;

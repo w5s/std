@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import { reduce } from './reduce.js';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 const sum = (accumulator: Int) => (accumulator + 1) as Int;
 
@@ -13,6 +14,6 @@ const sum = (accumulator: Int) => (accumulator + 1) as Int;
  * ```
  * @param source
  */
-export function size<Value>(source: AsyncIterable<Value>): Promise<Int> {
+export function size<Value>(source: AsyncIterableLike<Value>): Promise<Int> {
   return reduce(source, sum, 0 as Int);
 }

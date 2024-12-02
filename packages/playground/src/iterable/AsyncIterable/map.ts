@@ -1,5 +1,6 @@
 import type { Int } from '@w5s/core';
 import type { Awaitable } from '@w5s/core-type';
+import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**
  * Return a new Iterable which applies `mapFn` to each values
@@ -16,7 +17,7 @@ import type { Awaitable } from '@w5s/core-type';
  * @param mapFn - a function that returns a new value
  */
 export function map<ValueFrom, ValueTo>(
-  source: AsyncIterable<ValueFrom>,
+  source: AsyncIterableLike<ValueFrom>,
   mapFn: (currentValue: ValueFrom, currentIndex: Int) => Awaitable<ValueTo>,
 ): AsyncIterable<ValueTo> {
   return {
