@@ -26,6 +26,7 @@ import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
 import { updateAt } from './Array/updateAt.js';
+import { splice } from './Array/splice.js';
 
 describe('Array', () => {
   it('is an alias to functions', () => {
@@ -53,6 +54,7 @@ describe('Array', () => {
       reverse,
       size,
       slice,
+      splice,
       some,
       sort,
       updateAt,
