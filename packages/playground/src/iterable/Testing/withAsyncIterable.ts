@@ -40,11 +40,11 @@ export function withAsyncIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: AsyncIterable<V>, isNot: boolean): ExpectAsyncIterable => ({
     async toHaveValues(expected: Array<unknown>) {
       const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
-      (isNot ? expectValue.not : expectValue).toEqual(expected);
+      return (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     async toBeIdemPotent() {
       const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
-      (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
+      return (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
     },
   });
   return <V>(iterable: AsyncIterable<V>) =>
