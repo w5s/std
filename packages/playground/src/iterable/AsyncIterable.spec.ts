@@ -13,6 +13,7 @@ import { every } from './AsyncIterable/every.js';
 import { some } from './AsyncIterable/some.js';
 import { flatMap } from './AsyncIterable/flatMap.js';
 import { size } from './AsyncIterable/size.js';
+import { find } from './AsyncIterable/find.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
@@ -20,6 +21,7 @@ describe('AsyncIterable', () => {
       create,
       empty,
       every,
+      find,
       filter,
       flatMap,
       generate,
