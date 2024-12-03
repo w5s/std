@@ -26,8 +26,8 @@ export function filter<Value>(
       for await (const currentValue of source) {
         if (await predicate(currentValue, currentIndex as Int)) {
           yield currentValue;
-          currentIndex += 1;
         }
+        currentIndex += 1;
       }
     },
   };

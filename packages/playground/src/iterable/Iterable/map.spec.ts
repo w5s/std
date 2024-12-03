@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { map } from './map.js';
 import { withIterable } from '../Testing.js';
 import { of } from './of.js';
@@ -12,5 +12,15 @@ describe(map, () => {
   it('should be idempotent', () => {
     const source = of(1, 3, 2);
     expectIterable(map(source, (value) => value * 2)).toBeIdemPotent();
+  });
+  it('calls callback with parameters', () => {
+    const source = of('a', 'b', 'c');
+    const callback = vi.fn((_) => _);
+    Array.from(map(source, callback)); // Force evaluations
+    expect(callback.mock.calls).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2],
+    ]);
   });
 });

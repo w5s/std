@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { find } from './find.js';
 import { create } from './create.js';
 import { of } from './of.js';
@@ -26,5 +26,15 @@ describe(find, () => {
     });
     await find(source, (x) => x === 5);
     expect(iterationCount).toBe(5);
+  });
+  it('calls callback with parameters', async () => {
+    const source = of('a', 'b', 'c');
+    const callback = vi.fn(() => false);
+    await find(source, callback);
+    expect(callback.mock.calls).toEqual([
+      ['a', 0],
+      ['b', 1],
+      ['c', 2],
+    ]);
   });
 });

@@ -24,8 +24,8 @@ export function filter<Value>(
       for (const currentValue of source) {
         if (predicate(currentValue, currentIndex as Int)) {
           yield currentValue;
-          currentIndex += 1;
         }
+        currentIndex += 1;
       }
     },
   };

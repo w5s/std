@@ -17,7 +17,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  */
 export function flatMap<ValueFrom, ValueTo>(
   source: AsyncIterableLike<ValueFrom>,
-  mapFn: (currentValue: ValueFrom, currentIndex: Int) => AsyncIterable<ValueTo>,
+  mapFn: (currentValue: ValueFrom, currentIndex: Int) => AsyncIterableLike<ValueTo>,
 ): AsyncIterable<ValueTo> {
   return {
     async *[Symbol.asyncIterator]() {
