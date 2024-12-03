@@ -13,6 +13,7 @@ import { every } from './Iterable/every.js';
 import { some } from './Iterable/some.js';
 import { flatMap } from './Iterable/flatMap.js';
 import { size } from './Iterable/size.js';
+import { find } from './Iterable/find.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
@@ -21,6 +22,7 @@ describe('Iterable', () => {
       empty,
       every,
       filter,
+      find,
       flatMap,
       generate,
       hasInstance,

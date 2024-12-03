@@ -11,6 +11,7 @@ import { some } from './Iterable/some.js';
 import { every } from './Iterable/every.js';
 import { flatMap } from './Iterable/flatMap.js';
 import { size } from './Iterable/size.js';
+import { find } from './Iterable/find.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -30,6 +31,7 @@ export const Iterable = {
   empty,
   every,
   filter,
+  find,
   flatMap,
   generate,
   hasInstance,
