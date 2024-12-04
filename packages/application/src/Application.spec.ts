@@ -51,6 +51,8 @@ describe('Application', () => {
           },
         },
       },
+      configure: expect.any(Function),
+      get: expect.any(Function),
     });
   });
   it('should store state in applicationStore', () => {
@@ -79,16 +81,16 @@ describe('Application', () => {
     });
   });
 
-  describe('.get()', () => {
+  describe('#get()', () => {
     it('should return configuration', () => {
       const target = Ref({});
       const id = generateAppId();
       const app = Application(id, { foo: 1 }, target);
-      const value = Application.get(app, 'foo');
+      const value = app.get('foo');
       expect(value).toBe(1);
     });
   });
-  describe('.configure()', () => {
+  describe('#configure()', () => {
     it('should set configuration', () => {
       const target = Ref({});
       const id = generateAppId();
@@ -97,7 +99,7 @@ describe('Application', () => {
         ...app.state.current,
         state: true,
       };
-      Application.configure(app, { foo: 'foo_value_ext', bar: 'bar_value_ext' });
+      app.configure({ foo: 'foo_value_ext', bar: 'bar_value_ext' });
 
       expect(app.state.current).toEqual({
         configuration: {

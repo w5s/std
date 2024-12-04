@@ -21,6 +21,8 @@ describe('ApplicationTest', () => {
         },
       },
       store,
+      configure: expect.any(Function),
+      get: expect.any(Function),
     });
   });
   it('should return a reference to store', () => {
