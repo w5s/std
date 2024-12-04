@@ -19,14 +19,14 @@ const consoleLevel = LogLevel.match(
  * ```
  * @param logRecord
  */
-export const ConsoleHandler: LogHandler = (logRecord) =>
-  from({
-    taskRun({ resolve }) {
+export function Console(): LogHandler {
+  return (logRecord) =>
+    from(({ resolve }) => {
       const { category, message, level, data } = logRecord;
       const prefix = category.length > 0 ? [`[${category}]`] : [];
       // eslint-disable-next-line @typescript-eslint/no-base-to-string
       const suffix = message.map((part) => (typeof part === 'string' ? part : String(data[part.$ref] ?? '')));
       consoleLevel(level)(console)(...prefix, ...suffix);
       resolve();
-    },
-  });
+    });
+}
