@@ -1,14 +1,13 @@
 import { Result, UUID } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
-import { defaultUUIDGenerator, randomUUID } from './randomUUID.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { randomUUID } from './randomUUID.js';
 
-describe('defaultUUIDGenerator', () => {
-  it('is a function', () => {
-    expect(defaultUUIDGenerator.current).toBeTypeOf('function');
-  });
-});
-describe('randomUUID', () => {
+const randomUUIDMock = vi.spyOn(globalThis.crypto, 'randomUUID');
+
+describe(randomUUID, () => {
+  const expectTask = withTask(expect);
   it('should return a valid UUID', async () => {
     const uuidResult = Result.getOrThrow(await Task.unsafeRun(randomUUID()));
     expect(UUID.hasInstance(uuidResult)).toBe(true);
@@ -16,11 +15,8 @@ describe('randomUUID', () => {
   it('should use ref', async () => {
     const uuidMock = UUID.empty();
     const task = randomUUID();
-    const randomUUIDMock = vi.spyOn(defaultUUIDGenerator, 'current');
     randomUUIDMock.mockReturnValue(uuidMock);
-    const uuidResult = await Task.unsafeRun(task);
 
-    expect(randomUUIDMock).toHaveBeenCalledTimes(1);
-    expect(uuidResult).toEqual(Result.Ok(uuidMock));
+    await expectTask(task).toResolve(uuidMock);
   });
 });

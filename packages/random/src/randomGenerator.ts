@@ -4,7 +4,7 @@ import type { Task } from '@w5s/task';
 import { useRef } from '@w5s/application';
 import { from } from '@w5s/task/dist/Task/from.js';
 import type { RandomValue } from './randomValue.js';
-import { application } from './application.js';
+import { RandomApplication } from './Random/RandomApplication.js';
 
 export interface RandomGenerator extends Task<RandomValue, never> {}
 
@@ -58,7 +58,7 @@ export namespace RandomGenerator {
  * Default generator
  */
 export const defaultRandomGenerator: Ref<RandomGenerator> = useRef(
-  application.state,
+  RandomApplication.state,
   'randomGenerator',
   RandomGenerator.crypto,
 );
