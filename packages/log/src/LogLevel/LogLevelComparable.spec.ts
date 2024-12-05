@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { Int } from '@w5s/core';
-import { LogLevelComparable } from './LogComparable.js';
+import { LogLevelComparable } from './LogLevelComparable.js';
 import { of } from './of.js';
 
 describe('LogLevelComparable', () => {

@@ -1,6 +1,6 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { LogLevel as LogLevelType } from './LogLevel/LogLevel.js';
-import { LogLevelComparable } from './LogLevel/LogComparable.js';
+import { LogLevelComparable } from './LogLevel/LogLevelComparable.js';
 import { of } from './LogLevel/of.js';
 import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { match } from './LogLevel/match.js';

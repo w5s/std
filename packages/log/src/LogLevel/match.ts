@@ -1,6 +1,6 @@
 import type { Option } from '@w5s/core';
 import type { LogLevel } from '../LogLevel.js';
-import { LogLevelComparable } from './LogComparable.js';
+import { LogLevelComparable } from './LogLevelComparable.js';
 import { LogLevelValue } from './LogLevelValue.js';
 
 /**
