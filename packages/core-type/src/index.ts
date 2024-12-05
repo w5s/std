@@ -1,6 +1,7 @@
 export * from './AnyFunction.js';
 export * from './assertType.js';
 export * from './Awaitable.js';
+export * from './EmptyObject.js';
 export * from './JSONArray.js';
 export * from './JSONObject.js';
 export * from './JSONPrimitive.js';
