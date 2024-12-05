@@ -3,7 +3,7 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { LogRecord as LogRecordType } from './LogRecord/LogRecord.js';
 
 export const LogRecord = Callable({
-  [Callable.symbol]: (parameters: Struct.Parameters<LogRecord>) => ({
+  [Callable.symbol]: (parameters: Struct.Parameters<LogRecord>): LogRecord => ({
     _: 'LogRecord',
     ...parameters,
   }),
