@@ -1,8 +1,7 @@
-import { IntBounded } from '@w5s/core/dist/Int/IntBounded.js';
 import type { Int } from '@w5s/core';
 import { of } from './of.js';
 
-const None = of('none', IntBounded.minValue);
+const None = of('none', 0 as Int);
 /**
  * Critical log level (50)
  */
