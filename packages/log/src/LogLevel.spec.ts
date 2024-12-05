@@ -2,8 +2,12 @@ import { describe, it, expect } from 'vitest';
 import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { Int } from '@w5s/core';
 import { LogLevel } from './LogLevel.js';
+import { LogLevelBounded } from './LogLevel/LogLevelBounded.js';
 
 describe('LogLevel', () => {
+  it('is an alias to functions', () => {
+    expect(LogLevel).toEqual(expect.objectContaining(LogLevelBounded));
+  });
   describe('.of()', () => {
     it('should return a new object', () => {
       expect(LogLevel.of('Test', Int(3))).toEqual({
