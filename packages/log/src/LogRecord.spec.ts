@@ -11,7 +11,7 @@ describe('LogRecord', () => {
       expect(
         LogRecord({
           id: UUID.empty(),
-          category: 'category',
+          domain: 'myDomain',
           level: LogLevel.Warning,
           message: LogMessage.of('foo', 'bar', ''),
           data: {},
@@ -20,7 +20,7 @@ describe('LogRecord', () => {
       ).toEqual({
         _: 'LogRecord',
         id: UUID.empty(),
-        category: 'category',
+        domain: 'myDomain',
         level: LogLevel.Warning,
         message: ['foobar'],
         data: {},

@@ -16,11 +16,11 @@ export const LogRecord = TObject({
    */
   id: UUID,
   /**
-   * The log category / logger name
+   * The log domain (i.e. category)
    */
-  category: string,
+  domain: string,
   /**
-   * The log category / logger name
+   * The log level
    */
   level: LogLevel,
   /**

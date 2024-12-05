@@ -6,13 +6,13 @@ import { filter } from './filter.js';
 describe(filter, () => {
   it('should filter input', async () => {
     const handler = vi.fn(() => Task.resolve());
-    const filtered = filter(handler, (record) => record.category === 'foo');
+    const filtered = filter(handler, (record) => record.domain === 'foo');
     const defaultProps = fakeLogRecord();
     await Task.unsafeRunOk(
       filtered(
         fakeLogRecord({
           ...defaultProps,
-          category: 'not_foo',
+          domain: 'not_foo',
         }),
       ),
     );
@@ -21,7 +21,7 @@ describe(filter, () => {
       filtered(
         fakeLogRecord({
           ...defaultProps,
-          category: 'foo',
+          domain: 'foo',
         }),
       ),
     );

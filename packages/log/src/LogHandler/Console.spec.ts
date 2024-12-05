@@ -39,7 +39,7 @@ describe(Console, () => {
     await Task.unsafeRunOk(
       Console()(
         fakeLogRecord({
-          category: 'logCategory',
+          domain: 'myDomain',
           level: LogLevel.Debug,
           message: LogMessage.of('message', { $ref: 'foo' }),
           data: {
@@ -48,7 +48,7 @@ describe(Console, () => {
         }),
       ),
     );
-    expect(console.debug).toHaveBeenLastCalledWith('[logCategory]', 'message', 'bar');
+    expect(console.debug).toHaveBeenLastCalledWith('[myDomain]', 'message', 'bar');
   });
 
   it('should not add logCategory if empty', async () => {

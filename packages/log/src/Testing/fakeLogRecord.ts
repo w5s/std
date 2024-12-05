@@ -7,7 +7,7 @@ import { LogMessage } from '../LogMessage.js';
 export const fakeLogRecord = (properties: Partial<LogRecord> = {}): LogRecord => ({
   _: 'LogRecord',
   id: UUID.empty(),
-  category: '',
+  domain: '',
   level: LogLevel.Debug,
   message: LogMessage.of('test'),
   data: {},
