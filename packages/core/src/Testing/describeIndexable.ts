@@ -11,14 +11,15 @@ import type { TestingLibrary } from './type.js';
  *     [0, 'a'],
  *     [1, 'a'],
  *   ],
+ *   range: [
+ *     ['a', 'a', ['a']],
+ *     ['a', 'c', ['a', 'b', 'c']],
+ *   ],
+ *   // Optional test on rangeSize can be added
  *   rangeSize: [
  *     ['a', 'a', 1],
  *     ['a', 'b', 2],
  *   ],
- *   range: [
- *     ['a', 'a', ['a']],
- *     ['a', 'c', ['a', 'b', 'c']],
- *   ]
  * });
  *
  * ```
