@@ -1,5 +1,5 @@
 import { Callable } from './Callable.js';
-import { UUID as UUIDType } from './Type/UUID.js';
+import { UUID as UUIDType, type UUIDString } from './Type/UUID.js';
 
 /**
  * UUID string type
@@ -36,7 +36,7 @@ export const UUID = Callable({
    * @category Constructor
    * @param value - the string representation
    */
-  of(value: `${string}-${string}-${string}-${string}`): UUID {
+  of(value: UUIDString): UUID {
     return UUIDType.wrap(value);
   },
 });
