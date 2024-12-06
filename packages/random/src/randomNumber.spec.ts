@@ -1,11 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { Task } from '@w5s/task';
 import { randomGenerator } from './randomGenerator.js';
 import { randomNumber } from './randomNumber.js';
+import { fakeRandomGenerator } from './Testing.js';
 
 describe('randomNumber', () => {
-  const generatorOf = (value: number) => Task.resolve(value);
   const expectTask = withTask(expect);
 
   it('should use defaultGenerator', async () => {
@@ -19,7 +18,7 @@ describe('randomNumber', () => {
     [{ genValue: 0.5, min: -2, max: 2 }, 0],
     [{ genValue: 1, min: -2, max: 2 }, 2],
   ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
-    const gen = generatorOf(genValue);
+    const gen = fakeRandomGenerator(() => genValue);
     const genNum = randomNumber(min, max, gen);
     await expectTask(genNum).toResolve(expected);
   });
