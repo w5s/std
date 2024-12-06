@@ -10,6 +10,6 @@ describe('#ensure', () => {
 
   it('throws an error only when not of type', () => {
     expect(() => ensure(TestType, '')).not.toThrow();
-    expect(() => ensure(TestType, null)).toThrow(new Error('null is not a valid String'));
+    expect(() => ensure(TestType, null)).toThrow(new TypeError('null is not a valid String'));
   });
 });
