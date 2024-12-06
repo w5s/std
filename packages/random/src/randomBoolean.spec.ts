@@ -1,21 +1,18 @@
-import { Result } from '@w5s/core';
-import { Task } from '@w5s/task';
 import { describe, expect, it, vi } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { randomBoolean } from './randomBoolean.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
-import { RandomValue } from './randomValue.js';
 
 describe('randomBoolean', () => {
-  const generatorOf = (value: number) => RandomGenerator(() => RandomValue.of(value));
+  const generatorOf = (value: number) => RandomGenerator(() => value);
+  const expectTask = withTask(expect);
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
 
-    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
-      resolve(RandomValue.of(nextRandom)),
-    );
+    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) => resolve(nextRandom));
     const task = randomBoolean();
-    expect(Task.unsafeRun(task)).toEqual(Result.Ok(false));
+    await expectTask(task).toResolve(false);
   });
   it.each([
     [{ genValue: 0, trueWeight: 0.5 }, false],
@@ -26,6 +23,6 @@ describe('randomBoolean', () => {
   ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
     const gen = generatorOf(genValue);
     const genBool = randomBoolean(trueWeight, gen);
-    expect(Task.unsafeRun(genBool)).toEqual(Result.Ok(expected));
+    await expectTask(genBool).toResolve(expected);
   });
 });

@@ -12,7 +12,6 @@ describe('index', () => {
         'randomInt',
         'randomNumber',
         'randomUUID',
-        'RandomValue',
       ].sort(),
     );
   });

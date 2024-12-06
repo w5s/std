@@ -1,20 +1,18 @@
-import { Int, Result } from '@w5s/core';
-import { Task } from '@w5s/task';
+import { Int } from '@w5s/core';
 import { describe, expect, it, vi } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
 import { randomInt } from './randomInt.js';
-import { RandomValue } from './randomValue.js';
 
 describe('randomInt', () => {
-  const generatorOf = (value: number) => RandomGenerator(() => RandomValue.of(value));
+  const generatorOf = (value: number) => RandomGenerator(() => value);
+  const expectTask = withTask(expect);
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
-    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) =>
-      resolve(RandomValue.of(nextRandom)),
-    );
+    vi.spyOn(defaultRandomGenerator.current, 'taskRun').mockImplementation(({ resolve }) => resolve(nextRandom));
     const task = randomInt(Int(-10), Int(10));
-    expect(Task.unsafeRun(task)).toEqual(Result.Ok(-8));
+    await expectTask(task).toResolve(-8);
   });
   it.each([
     [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
@@ -24,6 +22,6 @@ describe('randomInt', () => {
   ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
     const gen = generatorOf(genValue);
     const genNum = randomInt(min, max, gen);
-    expect(Result.get(await Task.unsafeRun(genNum))).toBe(expected);
+    await expectTask(genNum).toResolve(expected);
   });
 });

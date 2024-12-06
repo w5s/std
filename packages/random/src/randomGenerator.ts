@@ -3,10 +3,9 @@ import type { Option, Ref } from '@w5s/core';
 import type { Task } from '@w5s/task';
 import { useRef } from '@w5s/application';
 import { from } from '@w5s/task/dist/Task/from.js';
-import type { RandomValue } from './randomValue.js';
 import { RandomApplication } from './Random/RandomApplication.js';
 
-export interface RandomGenerator extends Task<RandomValue, never> {}
+export interface RandomGenerator extends Task<number, never> {}
 
 /**
  * Return a new generator from a callback
@@ -19,7 +18,7 @@ export interface RandomGenerator extends Task<RandomValue, never> {}
  * @category Constructor
  * @param getNextValue - an impure function that returns a new value
  */
-export function RandomGenerator(getNextValue: () => RandomValue): RandomGenerator {
+export function RandomGenerator(getNextValue: () => number): RandomGenerator {
   return from(({ resolve }) => resolve(getNextValue()));
 }
 
@@ -27,7 +26,7 @@ export namespace RandomGenerator {
   /**
    * Unsafe generator, using `Math.random`
    */
-  export const unsafe = RandomGenerator(() => Math.random() as RandomValue);
+  export const unsafe = RandomGenerator(() => Math.random());
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const cryptoModule: Option<Pick<Crypto, 'getRandomValues'>> =
@@ -50,7 +49,7 @@ export namespace RandomGenerator {
     cryptoModule.getRandomValues(cryptoBuffer);
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return (cryptoBuffer[0]! / cryptoDenominator) as RandomValue;
+    return cryptoBuffer[0]! / cryptoDenominator;
   });
 }
 
