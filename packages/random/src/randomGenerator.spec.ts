@@ -1,24 +1,15 @@
-import { Result } from '@w5s/core';
-import { Task } from '@w5s/task';
-import { describe, it, expect, vi } from 'vitest';
-import { RandomGenerator, defaultRandomGenerator } from './randomGenerator.js';
+import { describe, it, expect } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { randomGenerator } from './randomGenerator.js';
+import { RandomApplication } from './Random/RandomApplication.js';
 
-describe('RandomGenerator', () => {
-  describe('.unsafe', () => {
-    it('should use Math.random', async () => {
-      const nextRandom = 0.123;
-      vi.spyOn(Math, 'random').mockReturnValue(nextRandom);
-      expect(Task.unsafeRun(RandomGenerator.unsafe)).toEqual(Result.Ok(nextRandom));
+describe('randomGenerator', () => {
+  const expectTask = withTask(expect);
+  it('should use configuration implementation', async () => {
+    const nextRandom = 0.123;
+    RandomApplication.configure({
+      randomNumberGenerator: () => nextRandom,
     });
-  });
-  describe('.crypto', () => {
-    it('should use crypto', async () => {
-      expect(Task.unsafeRun(RandomGenerator.crypto)).toEqual(Result.Ok(expect.any(Number)));
-    });
-  });
-});
-describe('defaultRandomGenerator', () => {
-  it('should be unsafeGenerator', async () => {
-    expect(defaultRandomGenerator).toEqual({ current: RandomGenerator.crypto });
+    await expectTask(randomGenerator).toResolve(nextRandom);
   });
 });

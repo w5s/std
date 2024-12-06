@@ -1,7 +1,7 @@
 import type { Int } from '@w5s/core';
 import type { Task } from '@w5s/task';
 import { map } from '@w5s/task/dist/Task/map.js';
-import { RandomGenerator } from './randomGenerator.js';
+import type { RandomGenerator } from './randomGenerator.js';
 import { randomNumber } from './randomNumber.js';
 
 const toInt = (value: number) => Math.floor(value) as Int;

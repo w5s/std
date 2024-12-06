@@ -1,7 +1,6 @@
 import { Int, Option, Result } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
-import { RandomGenerator, RandomValue } from '@w5s/random';
 import { describe, it, expect, vi } from 'vitest';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
@@ -80,7 +79,7 @@ describe('RetryPolicy', () => {
       [TimeDuration.of(2), 0.5, [1, 3, 6, 12, 24]],
       [TimeDuration.of(3), 1, [2, 6, 12, 24, 48]],
     ])('should return a custom value evolution with random', (base, rand, expected) => {
-      const generator = RandomGenerator(() => rand as RandomValue);
+      const generator = Task.resolve(rand);
       expect(generateDelays(RetryPolicy.waitExponentialJitter(base, generator), 5)).toEqual(expected);
     });
   });

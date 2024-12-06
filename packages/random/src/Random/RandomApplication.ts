@@ -1,13 +1,29 @@
 import { Application } from '@w5s/application';
-import type { UUIDGenerator } from '../randomUUID.js';
+import type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
+
+interface RandomNumberFunction {
+  /**
+   * Returns a new random number between 0 and 1
+   */
+  (): number;
+}
+
+interface RandomUUIDFunction {
+  /**
+   * Return the next UUID (v4)
+   */
+  (): UUIDString;
+}
 
 export interface RandomConfiguration {
-  readonly uuidGenerator: UUIDGenerator;
+  readonly randomUUIDGenerator: RandomUUIDFunction;
+  readonly randomNumberGenerator: RandomNumberFunction;
 }
 
 /**
  * Random Application
  */
 export const RandomApplication = Application<RandomConfiguration>('@w5s/random', {
-  uuidGenerator: () => crypto.randomUUID(),
+  randomUUIDGenerator: () => crypto.randomUUID(),
+  randomNumberGenerator: () => Math.random(),
 });
