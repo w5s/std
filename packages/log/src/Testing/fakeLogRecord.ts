@@ -1,5 +1,5 @@
 import { Time } from '@w5s/time';
-import { UUID } from '@w5s/core';
+import { UUID } from '@w5s/uuid';
 import { LogRecord } from '../LogRecord.js';
 import { LogLevel } from '../LogLevel.js';
 import { LogMessage } from '../LogMessage.js';

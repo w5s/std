@@ -32,7 +32,6 @@ describe('index', () => {
         'Symbol',
         'Tag',
         'Type',
-        'UUID',
       ].sort(),
     );
   });

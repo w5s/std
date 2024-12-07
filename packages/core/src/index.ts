@@ -26,4 +26,3 @@ export * from './Struct.js';
 export * from './Symbol.js';
 export * from './Tag.js';
 export * from './Type.js';
-export * from './UUID.js';
