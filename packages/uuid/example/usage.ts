@@ -1,9 +1,9 @@
-import { randomNumber } from '@w5s/random';
+import { randomUUID } from '@w5s/uuid';
 import { Task } from '@w5s/task';
 
 function createUser(name: string) {
-  return Task.map(randomNumber(1, 3), (id) => ({
-    id,
+  return Task.map(randomUUID(), (uuid) => ({
+    id: uuid,
     name,
   }));
 }

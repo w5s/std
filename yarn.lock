@@ -6147,9 +6147,9 @@ __metadata:
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
-    "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
+    "@w5s/uuid": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.7.2"
     vite: "npm:latest"
     vitest: "npm:latest"
@@ -6188,6 +6188,7 @@ __metadata:
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/task-timeout": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
+    "@w5s/uuid": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.7.2"
     vite: "npm:latest"
     vitest: "npm:latest"
@@ -6297,6 +6298,22 @@ __metadata:
   checksum: 10c0/0bb00a62f647ed56eec37c870f232247430e3444256a3f31f07267b3194388b3f6b98671159847a8702b829aaea076f43db88b987437a510e197d02cfbb6e684
   languageName: node
   linkType: hard
+
+"@w5s/uuid@npm:^1.0.0-alpha.0, @w5s/uuid@workspace:packages/uuid":
+  version: 0.0.0-use.local
+  resolution: "@w5s/uuid@workspace:packages/uuid"
+  dependencies:
+    "@w5s/application": "npm:^1.0.0-alpha.0"
+    "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
+    "@w5s/task": "npm:^1.0.0-alpha.0"
+    typescript: "npm:5.7.2"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
 
 "@w5s/website@workspace:apps/website":
   version: 0.0.0-use.local

@@ -2,7 +2,7 @@ import { DecodeError, Int, Option, Result } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
-import { randomUUID as defaultRandomUUID } from '@w5s/random';
+import { randomUUID as defaultRandomUUID } from '@w5s/uuid';
 import { EUR, Money } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { AbortError, assertNever, TimeoutError } from '@w5s/error';

@@ -1,6 +1,6 @@
 import type { Task } from '@w5s/task';
 import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { randomUUID } from '@w5s/random/dist/randomUUID.js';
+import { randomUUID } from '@w5s/uuid/dist/randomUUID.js';
 import { now as timeNow } from '@w5s/time/dist/Time/now.js';
 import type { LogLevelParameters } from '../level.js';
 import type { LogRecord } from '../LogRecord.js';

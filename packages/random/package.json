@@ -1,13 +1,12 @@
 {
   "name": "@w5s/random",
   "version": "1.0.0-alpha.0",
-  "description": "Random module (UUID, number)",
+  "description": "Random number module",
   "keywords": [
     "fp",
     "functional",
     "task",
-    "random",
-    "uuid"
+    "random"
   ],
   "homepage": "https://github.com/w5s/std/tree/master/packages/random#readme",
   "bugs": {

@@ -6,10 +6,7 @@ describe('index', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
         // List of all public exports
-        'randomBoolean',
-        'randomGenerator',
-        'randomInt',
-        'randomNumber',
+        'randomUUID',
       ].sort(),
     );
   });
