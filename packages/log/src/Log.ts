@@ -1,4 +1,5 @@
 import { LogApplication } from './Log/LogApplication.js';
+import { send } from './Log/send.js';
 import { sendWith } from './Log/sendWith.js';
 
 /**
@@ -9,4 +10,5 @@ import { sendWith } from './Log/sendWith.js';
 export const Log = {
   ...LogApplication,
   sendWith,
+  send,
 };
