@@ -8,79 +8,75 @@ const cancel = (cancelerRef: TaskCanceler) => {
   }
 };
 
-type TaskEntry<Value, Error> = Readonly<{
+type TaskEntry<Value, Error> = {
   task: TaskLike<Value, Error>;
   canceler: TaskCanceler;
-}>;
+};
 
-export class TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
-  readonly tasks: ReadonlyArray<TaskEntry<Value, Error>>;
-
-  readonly taskCount: number;
-
-  readonly taskParameters: TaskParameters<ReturnValue, ReturnError>;
-
-  #taskCompleted = 0;
-
-  #closed = false;
-
-  constructor(tasks: Array<TaskLike<Value, Error>>, taskParameters: TaskParameters<ReturnValue, ReturnError>) {
-    this.tasks = tasks.map((task) => ({
-      task,
-      canceler: { current: undefined },
-    }));
-    this.taskCount = this.tasks.length;
-    this.taskParameters = taskParameters;
-  }
-
-  isComplete() {
-    return this.#taskCompleted === this.taskCount;
-  }
-
-  complete() {
-    this.#taskCompleted = this.taskCount;
-  }
-
-  cancelAll() {
-    this.tasks.forEach(({ canceler }) => cancel(canceler));
-  }
-
-  runAll(
+interface TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
+  isComplete: () => boolean;
+  complete: () => void;
+  cancelAll: () => void;
+  runAll: (
     resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
     rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void,
-  ) {
-    const { run } = this.taskParameters;
-    this.tasks.forEach((entry, taskIndex) => {
+  ) => void;
+  resolve: (value: ReturnValue) => void;
+  reject: (error: ReturnError) => void;
+}
+
+export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
+  tasks: Array<TaskLike<Value, Error>>,
+  taskParameters: TaskParameters<ReturnValue, ReturnError>,
+): TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
+  const { run, reject, resolve } = taskParameters;
+  const taskEntries = tasks.map((task) => ({ task, canceler: { current: undefined } }));
+  const taskCount = taskEntries.length;
+  let taskCompleted = 0;
+  let closed = false;
+
+  const withClose =
+    <Fn extends (value: any) => any>(fn: Fn) =>
+    (value: any) => {
+      if (!closed) {
+        closed = true;
+        fn(value);
+      }
+    };
+
+  const isComplete = () => taskCompleted === taskCount;
+
+  const complete = () => {
+    taskCompleted = taskCount;
+  };
+
+  const cancelAll = () => {
+    taskEntries.forEach(({ canceler }) => cancel(canceler));
+  };
+
+  const runAll = (
+    resolveTask: (value: Value, entry: TaskEntry<Value, Error>, index: number) => void,
+    rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void,
+  ) => {
+    taskEntries.forEach((entry, index) => {
       entry.task.taskRun({
         resolve: (value: Value) => {
-          if (!this.isComplete()) {
-            this.#taskCompleted += 1;
-            resolveTask(value, entry, taskIndex);
+          if (!isComplete()) {
+            taskCompleted += 1;
+            resolveTask(value, entry, index);
           }
         },
         reject: (error: Error) => {
-          if (!this.isComplete()) {
-            this.#taskCompleted += 1;
-            rejectTask(error, entry, taskIndex);
+          if (!isComplete()) {
+            taskCompleted += 1;
+            rejectTask(error, entry, index);
           }
         },
         canceler: entry.canceler,
         run,
       });
     });
-  }
+  };
 
-  resolve(value: ReturnValue) {
-    if (!this.#closed) {
-      this.#closed = true;
-      this.taskParameters.resolve(value);
-    }
-  }
-
-  reject(error: ReturnError) {
-    if (!this.#closed) {
-      this.#closed = true;
-      this.taskParameters.reject(error);
-    }
-  }
+  return { isComplete, complete, cancelAll, runAll, resolve: withClose(resolve), reject: withClose(reject) };
 }

@@ -34,10 +34,10 @@ export function allSettled<Value, Error>(
     if (taskArray.length === 0) {
       parameters.resolve(empty());
     } else {
-      const state = new TaskAggregateState(taskArray, parameters);
+      const state = TaskAggregateState(taskArray, parameters);
 
       // eslint-disable-next-line unicorn/no-new-array
-      const results = new Array<Result<Value, Error>>(state.taskCount);
+      const results = new Array<Result<Value, Error>>(taskArray.length);
       const finish = () => {
         if (state.isComplete()) {
           state.resolve(Object.freeze(results));

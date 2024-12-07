@@ -33,13 +33,13 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
     if (taskArray.length === 0) {
       parameters.reject(globalThis.AggregateError([]) as AggregateError<Error[]>);
     } else {
-      const state = new TaskAggregateState(taskArray, parameters);
+      const state = TaskAggregateState(taskArray, parameters);
 
       // Set global canceler
-      parameters.canceler.current = state.cancelAll.bind(state);
+      parameters.canceler.current = state.cancelAll;
 
       // eslint-disable-next-line unicorn/no-new-array
-      const errors = new Array<Error | undefined>(state.taskCount);
+      const errors = new Array<Error | undefined>(taskArray.length);
       state.runAll(
         (value, entry) => {
           if (!state.isComplete()) {
