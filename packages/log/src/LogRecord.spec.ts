@@ -4,6 +4,7 @@ import { UUID } from '@w5s/uuid';
 import { LogRecord } from './LogRecord.js';
 import { LogLevel } from './LogLevel.js';
 import { LogMessage } from './LogMessage.js';
+import { messageWithData } from './LogRecord/messageWithData.js';
 
 describe('LogRecord', () => {
   describe('()', () => {
@@ -26,6 +27,15 @@ describe('LogRecord', () => {
         data: {},
         created: 1,
       });
+    });
+  });
+  describe('alias to functions', () => {
+    it('should return a new message', () => {
+      expect(LogRecord).toEqual(
+        expect.objectContaining({
+          messageWithData,
+        }),
+      );
     });
   });
 });

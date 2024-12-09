@@ -2,13 +2,12 @@ import { from } from '@w5s/task/dist/Task/from.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevel } from '../LogLevel.js';
 import type { LogRecord } from '../LogRecord.js';
+import { messageWithData } from '../LogRecord/messageWithData.js';
 
 const defaultFormat = (logRecord: LogRecord) => {
-  const { domain, message, data } = logRecord;
-  const prefix = domain.length > 0 ? [`[${domain}]`] : [];
+  const { domain } = logRecord;
 
-  const suffix = message.map((part) => (typeof part === 'string' ? part : data[part.$ref]));
-  return [...prefix, ...suffix];
+  return [...(domain.length > 0 ? [`[${domain}]`] : []), ...messageWithData(logRecord)];
 };
 
 export interface ConsoleOptions {
