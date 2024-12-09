@@ -3,6 +3,7 @@
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "declarationMap": false,
+    "rootDir": ".",
     "skipLibCheck": false,
     "sourceMap": false,
     "types": [] // Ensures no @types/ are unintentionally included
