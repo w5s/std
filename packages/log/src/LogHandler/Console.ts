@@ -1,32 +1,55 @@
 import { from } from '@w5s/task/dist/Task/from.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevel } from '../LogLevel.js';
+import type { LogRecord } from '../LogRecord.js';
 
-const consoleLevel = LogLevel.match(
-  [
-    [LogLevel.Error, (console: Console) => console.error.bind(console)],
-    [LogLevel.Warning, (console: Console) => console.warn.bind(console)],
-    [LogLevel.Info, (console: Console) => console.info.bind(console)],
-    // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
-  ],
-  (console: Console) => console.debug.bind(console),
-);
+const defaultFormat = (logRecord: LogRecord) => {
+  const { domain, message, data } = logRecord;
+  const prefix = domain.length > 0 ? [`[${domain}]`] : [];
+
+  const suffix = message.map((part) => (typeof part === 'string' ? part : data[part.$ref]));
+  return [...prefix, ...suffix];
+};
+
+export interface ConsoleOptions {
+  /**
+   * Returns an array of arguments passed to the console.{log|warn|...}() function
+   *
+   * @param logRecord
+   */
+  format?: (logRecord: LogRecord) => Array<unknown>;
+  /**
+   * Custom console instance (default: globalThis.console)
+   */
+  console?: Console;
+}
 
 /**
  *
  * @example
  * ```ts
+ * LogHandler.Console();// Default formatter
+ * LogHandler.Console({
+ *   format: ({ domain }) => ([JSON.stringify(logRecord)]),// Pure JSON formatted
+ * })
  * ```
- * @param logRecord
+ * @param options
  */
-export function Console(): LogHandler {
+export function Console(options: ConsoleOptions = {}): LogHandler {
+  const { format = defaultFormat, console = globalThis.console } = options;
+
+  const consoleWrite = LogLevel.match(
+    [
+      [LogLevel.Error, console.error.bind(console)],
+      [LogLevel.Warning, console.warn.bind(console)],
+      [LogLevel.Info, console.info.bind(console)],
+      // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
+    ],
+    console.debug.bind(console),
+  );
   return (logRecord) =>
     from(({ resolve }) => {
-      const { domain, message, level, data } = logRecord;
-      const prefix = domain.length > 0 ? [`[${domain}]`] : [];
-      // eslint-disable-next-line @typescript-eslint/no-base-to-string
-      const suffix = message.map((part) => (typeof part === 'string' ? part : String(data[part.$ref] ?? '')));
-      consoleLevel(level)(console)(...prefix, ...suffix);
+      consoleWrite(logRecord.level)(...format(logRecord));
       resolve();
     });
 }
