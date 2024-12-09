@@ -3,6 +3,8 @@ import { UUID as UUIDType } from '@w5s/core/dist/Type/UUID.js';
 import { UUIDApplication } from './UUID/UUIDApplication.js';
 import { empty } from './UUID/empty.js';
 import { of } from './UUID/of.js';
+import { toUint32Array } from './UUID/toUint32Array.js';
+import { toBigInt } from './UUID/toBigInt.js';
 
 export type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
 
@@ -21,4 +23,6 @@ export const UUID = Callable({
   ...UUIDApplication,
   empty,
   of,
+  toUint32Array,
+  toBigInt,
 });
