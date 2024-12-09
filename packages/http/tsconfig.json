@@ -3,6 +3,6 @@
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "lib": ["DOM", "ESNext", "ScriptHost"],
-    "rootDir": "."
+    "rootDir": "./src"
   }
 }
