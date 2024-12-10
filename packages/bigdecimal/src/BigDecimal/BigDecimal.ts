@@ -1,6 +1,6 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
-import { invariant } from '@w5s/error/dist/invariant.js';
+import { throwError } from '@w5s/error/dist/throwError.js';
 import type { Codec } from '@w5s/core';
 import { of } from './of.js';
 import { parse } from './parse.js';
@@ -47,7 +47,7 @@ export const BigDecimal = Callable({
   ...BigDecimalCodec,
   [Callable.symbol]: ((value: string | bigint, scale?: number): BigDecimal =>
     typeof value === 'string'
-      ? (parse(value) ?? invariant(false, `${String(value)} is not a valid BigDecimal`))
+      ? (parse(value) ?? throwError(new TypeError(`${String(value)} is not a valid BigDecimal`)))
       : of(value, scale ?? 0)) as {
     (stringValue: BigDecimalString): BigDecimal;
     (value: bigint, scale?: number): BigDecimal;
