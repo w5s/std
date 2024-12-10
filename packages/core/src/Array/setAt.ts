@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+import { splice } from './splice.js';
 
 /**
  * Replace `item` at the `index` in the array
@@ -12,8 +13,7 @@ import type { Array } from '../Array.js';
  * @param item - The item to insert
  */
 export function setAt<Item>(array: Array<Item>, index: number, item: Item): Array<Item> {
-  const arrayLength = array.length;
-  return arrayLength === 0 || !(index >= 0 && index <= arrayLength - 1) || array[index] === item
+  return array.length === 0 || index >= array.length || index < -array.length || array[index] === item
     ? array
-    : array.with(index, item);
+    : splice(array, index, 1, item);
 }

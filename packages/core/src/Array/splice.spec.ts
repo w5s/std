@@ -1,7 +1,22 @@
 import { describe, it, expect } from 'vitest';
 import { splice } from './splice.js';
+import { empty } from './empty.js';
 
 describe(splice, () => {
+  it('should return unchanged when empty', () => {
+    const array = [];
+    expect(splice(array, 0, 1)).toBe(empty());
+  });
+  it('handles negative index ', () => {
+    const array = ['a', 'b', 'c'];
+    expect(splice(array, -1, 1, '$')).toEqual(['a', 'b', '$']);
+    expect(splice(array, -array.length - 1, 1, '$')).toEqual(['$', 'b', 'c']);
+  });
+  it('handles start >= array.length', () => {
+    const array = ['a', 'b', 'c'];
+    expect(splice(array, array.length, 1, '$')).toEqual(['a', 'b', 'c', '$']);
+    expect(splice(array, array.length, 1, '$')).toEqual(['a', 'b', 'c', '$']);
+  });
   it('should remove elements correctly', () => {
     const arr = [1, 2, 3, 4, 5];
     const result = splice(arr, 1, 2); // Remove 2 elements starting at index 1

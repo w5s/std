@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+import { empty } from './empty.js';
 
 /**
  * Add `item` at the `index` in the array
@@ -18,5 +19,6 @@ import type { Array } from '../Array.js';
  * @param deleteCount - The number of deleted items
  */
 export function splice<Item>(array: Array<Item>, start: number, deleteCount: number, ...items: Item[]): Array<Item> {
-  return array.toSpliced(start, deleteCount, ...items);
+  const result = array.toSpliced(start, deleteCount, ...items);
+  return result.length === 0 ? empty() : result;
 }
