@@ -16,11 +16,7 @@ describe(Console, () => {
   const fakeNodeJSConsole = () => ({
     _stderr: { write: vi.fn() },
     _stdout: { write: vi.fn() },
-    debug: vi.fn(),
-    info: vi.fn(),
-    log: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
+    ...fakeWebConsole(),
   });
 
   describe('[web]', () => {
@@ -28,27 +24,27 @@ describe(Console, () => {
     const consoleHandler = Console({
       console,
     });
-    const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: ['foo', 'bar'] });
+    const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: LogMessage('foobar') });
 
     it('should send to console.debug when level=LogLevel.Debug', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Debug }));
-      expect(console.debug).toHaveBeenLastCalledWith('foo', 'bar');
+      expect(console.debug).toHaveBeenLastCalledWith('foobar');
     });
     it('should send to console.info when level=LogLevel.Info', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Info }));
-      expect(console.info).toHaveBeenLastCalledWith('foo', 'bar');
+      expect(console.info).toHaveBeenLastCalledWith('foobar');
     });
     it('should send to console.warn when level=LogLevel.Warning', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warning }));
-      expect(console.warn).toHaveBeenLastCalledWith('foo', 'bar');
+      expect(console.warn).toHaveBeenLastCalledWith('foobar');
     });
-    it('should send to console.warn when level=LogLevel.Error', async () => {
+    it('should send to console.error when level=LogLevel.Error', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Error }));
-      expect(console.error).toHaveBeenLastCalledWith('foo', 'bar');
+      expect(console.error).toHaveBeenLastCalledWith('foobar');
     });
-    it('should send to console.warn when level=LogLevel.Critical', async () => {
+    it('should send to console.error when level=LogLevel.Critical', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Critical }));
-      expect(console.error).toHaveBeenLastCalledWith('foo', 'bar');
+      expect(console.error).toHaveBeenLastCalledWith('foobar');
     });
     it('should format logCategory and message correctly', async () => {
       await Task.unsafeRunOk(
@@ -56,28 +52,28 @@ describe(Console, () => {
           fakeLogRecord({
             domain: 'myDomain',
             level: LogLevel.Debug,
-            message: LogMessage.of('message', { $ref: 'foo' }),
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
           }),
         ),
       );
-      expect(console.debug).toHaveBeenLastCalledWith('[myDomain]', 'message', 'bar');
+      expect(console.debug).toHaveBeenLastCalledWith('[myDomain]', 'message=', 'bar', '.');
     });
     it('should not add logCategory if empty', async () => {
       await Task.unsafeRunOk(
         consoleHandler(
           fakeLogRecord({
             level: LogLevel.Debug,
-            message: LogMessage.of('message', { $ref: 'foo' }),
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
           }),
         ),
       );
-      expect(console.debug).toHaveBeenLastCalledWith('message', 'bar');
+      expect(console.debug).toHaveBeenLastCalledWith('message=', 'bar', '.');
     });
   });
   describe('[nodejs]', () => {
@@ -85,27 +81,27 @@ describe(Console, () => {
     const consoleHandler = Console({
       console,
     });
-    const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: ['foo bar'] });
+    const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: LogMessage('foo', 'bar') });
 
     it('should send to console.debug when level=LogLevel.Debug', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Debug }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foo bar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
     });
     it('should send to console.info when level=LogLevel.Info', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Info }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foo bar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
     });
     it('should send to console.warn when level=LogLevel.Warning', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warning }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foo bar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
     });
-    it('should send to console.warn when level=LogLevel.Error', async () => {
+    it('should send to console.error when level=LogLevel.Error', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Error }));
-      expect(console._stderr.write).toHaveBeenLastCalledWith('foo bar\n');
+      expect(console._stderr.write).toHaveBeenLastCalledWith('foobar\n');
     });
-    it('should send to console.warn when level=LogLevel.Critical', async () => {
+    it('should send to console.error when level=LogLevel.Critical', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Critical }));
-      expect(console._stderr.write).toHaveBeenLastCalledWith('foo bar\n');
+      expect(console._stderr.write).toHaveBeenLastCalledWith('foobar\n');
     });
     it('should format logCategory and message correctly', async () => {
       await Task.unsafeRunOk(
@@ -113,28 +109,28 @@ describe(Console, () => {
           fakeLogRecord({
             domain: 'myDomain',
             level: LogLevel.Debug,
-            message: LogMessage.of('message', { $ref: 'foo' }),
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
           }),
         ),
       );
-      expect(console._stdout.write).toHaveBeenLastCalledWith('[myDomain] message bar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('[myDomain] message= bar .\n');
     });
     it('should not add logCategory if empty', async () => {
       await Task.unsafeRunOk(
         consoleHandler(
           fakeLogRecord({
             level: LogLevel.Debug,
-            message: LogMessage.of('message', { $ref: 'foo' }),
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
           }),
         ),
       );
-      expect(console._stdout.write).toHaveBeenLastCalledWith('message bar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('message= bar .\n');
     });
   });
 });
