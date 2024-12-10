@@ -10,7 +10,7 @@ import { pipe } from './pipe.js';
 import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
 import { ContainerKey, provide, use } from './di/index.js';
-import { abortable } from './abortable.js';
+import { abortable } from './task-abortable/index.js';
 
 const RandomUUID = ContainerKey('RandomUUID', () => defaultRandomUUID);
 const app = {
