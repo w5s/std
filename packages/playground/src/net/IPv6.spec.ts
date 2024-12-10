@@ -16,7 +16,7 @@ describe('IPv6', () => {
     notInstances: () => [undefined, 0xff_ff, '::ffff:127.0.0.1'],
   });
 
-  describe('of', () => {
+  describe(IPv6.of, () => {
     it('should return an IPv6 instance', () => {
       expect(IPv6.of(0, 0, 0, 0, 0, 0, 0, 1)).toEqual(
         IPv6(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_01),
@@ -27,7 +27,7 @@ describe('IPv6', () => {
     });
   });
 
-  describe('parse', () => {
+  describe(IPv6.parse, () => {
     it('should return an IPv6 instance', () => {
       expect(IPv6.parse('::ffff:7f00:1')).toEqual(
         IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01),
@@ -39,10 +39,10 @@ describe('IPv6', () => {
     });
   });
 
-  describe('stringify', () => {
+  describe(IPv6.format, () => {
     it('should return an IPv6 address as a string', () => {
       const ip = IPv6.of(0, 0, 0, 0, 0, 0xff_ff, 0x7f_00, 0x00_01);
-      expect(IPv6.stringify(ip)).toEqual('::ffff:7f00:1');
+      expect(IPv6.format(ip)).toEqual('::ffff:7f00:1');
     });
   });
 

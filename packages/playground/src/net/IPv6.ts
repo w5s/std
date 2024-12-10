@@ -72,7 +72,7 @@ const IPv6Format = {
     return fromBigInt(bigintAddress);
   },
 
-  stringify({ ipv6 }: IPv6): string {
+  format({ ipv6 }: IPv6): string {
     // Convert bigint to 8 segments of 16-bit hex values
     return [
       bigIntStringifyAt(ipv6, 0),
@@ -90,7 +90,7 @@ const IPv6Format = {
 };
 
 const IPv6Codec: Codec<IPv6> = {
-  codecEncode: (input) => IPv6Format.stringify(input),
+  codecEncode: (input) => IPv6Format.format(input),
   codecDecode: (input, { ok, error }) => {
     if (typeof input === 'string') {
       const parsed = IPv6Format.parse(input);

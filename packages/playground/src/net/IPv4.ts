@@ -37,13 +37,13 @@ const IPv4Format = {
     }
     return undefined;
   },
-  stringify({ ipv4 }: IPv4): string {
+  format({ ipv4 }: IPv4): string {
     return `${(ipv4 >>> 24) & 0xff}.${(ipv4 >>> 16) & 0xff}.${(ipv4 >>> 8) & 0xff}.${ipv4 & 0xff}`;
   },
 };
 
 const IPv4Codec: Codec<IPv4> = {
-  codecEncode: (input) => IPv4Format.stringify(input),
+  codecEncode: (input) => IPv4Format.format(input),
   codecDecode: (input, { ok, error }) => {
     if (typeof input === 'string') {
       const parsed = IPv4Format.parse(input);

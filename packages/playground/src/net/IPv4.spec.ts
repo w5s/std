@@ -15,7 +15,7 @@ describe('IPv4', () => {
     instances: () => [IPv4(0xff_ff_ff_ff)],
     notInstances: () => [undefined, 0xff_ff_ff_ff, '127.0.0.1'],
   });
-  describe('of', () => {
+  describe(IPv4.of, () => {
     it('should return an IPv4 instance', () => {
       expect(IPv4.of(0, 0, 0, 0)).toEqual(IPv4(0x00_00_00_00));
       expect(IPv4.of(127, 0, 0, 1)).toEqual(IPv4(0x7f_00_00_01));
@@ -24,16 +24,16 @@ describe('IPv4', () => {
       expect(IPv4.of(255, 255, 255, 255)).toEqual(IPv4(0xff_ff_ff_ff));
     });
   });
-  describe('parse', () => {
+  describe(IPv4.parse, () => {
     it('should return an IPv4 instance', () => {
       expect(IPv4.parse('127.0.0.1')).toEqual(IPv4.of(127, 0, 0, 1));
       expect(IPv4.parse('')).toEqual(undefined);
     });
   });
-  describe('stringify', () => {
+  describe(IPv4.format, () => {
     it('should return an IPv4 instance', () => {
       const ip = IPv4.of(127, 0, 0, 1);
-      expect(IPv4.stringify(ip)).toEqual('127.0.0.1');
+      expect(IPv4.format(ip)).toEqual('127.0.0.1');
     });
   });
   describeCodec({ describe, it, expect })(IPv4, {
