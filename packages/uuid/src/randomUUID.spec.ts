@@ -3,10 +3,15 @@ import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { UUID } from '@w5s/core/dist/Type/UUID.js';
+import { randomUUID as randomUUIDNodeJS } from 'node:crypto';
 import { randomUUID } from './randomUUID.js';
 import { empty } from './UUID/empty.js';
 
-const randomUUIDMock = vi.spyOn(globalThis.crypto, 'randomUUID');
+vi.mock('node:crypto', async () => ({
+  randomUUID: vi.fn(),
+}));
+
+const randomUUIDGlobal = vi.spyOn(globalThis.crypto, 'randomUUID');
 
 describe(randomUUID, () => {
   const expectTask = withTask(expect);
@@ -14,10 +19,18 @@ describe(randomUUID, () => {
     const uuidResult = Result.getOrThrow(await Task.unsafeRun(randomUUID()));
     expect(UUID.hasInstance(uuidResult)).toBe(true);
   });
-  it('should use ref', async () => {
+  it.runIf(globalThis.crypto)('should use globalThis.crypto.randomUUID', async () => {
     const uuidMock = empty();
     const task = randomUUID();
-    randomUUIDMock.mockReturnValue(uuidMock);
+    randomUUIDGlobal.mockReturnValue(uuidMock);
+
+    await expectTask(task).toResolve(uuidMock);
+  });
+  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+  it.runIf(!globalThis.crypto)('should use node:crypto.randomUUID', async () => {
+    const uuidMock = empty();
+    const task = randomUUID();
+    (randomUUIDNodeJS as any).mockReturnValue(uuidMock);
 
     await expectTask(task).toResolve(uuidMock);
   });
