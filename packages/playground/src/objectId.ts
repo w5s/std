@@ -1,23 +1,24 @@
-import type { Int, Tag } from '@w5s/core';
+import type { Tag } from '@w5s/core-type';
 
 type AnyObject = object;
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 type AnyFunction = Function;
-type State = {
+type ObjectIdState = {
   currentId: ObjectId;
-  refs: WeakMap<AnyObject | AnyFunction, ObjectId>;
+  refs: WeakMap<symbol | AnyObject | AnyFunction, ObjectId>;
 };
 
-const objectIdStateSymbol = Symbol.for('objectIdState');
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+export const objectIdStateSymbol: unique symbol = Symbol.for('@w5s/object-id.state') as any;
 
-function objectIdState(): State {
+export function useObjectIdState(hostObject: Record<string | symbol, any>): ObjectIdState {
   // State should be avoided on module
   // Only for compatibility with hot reload we set the state on global object
 
-  const globalAny: { [objectIdStateSymbol]?: State } = globalThis as Record<string, any>;
+  const globalAny: { [objectIdStateSymbol]?: ObjectIdState } = hostObject;
   const state = globalAny[objectIdStateSymbol];
   if (state === undefined) {
-    const newState: State = {
+    const newState: ObjectIdState = {
       currentId: 1 as ObjectId,
       refs: new WeakMap<AnyObject, ObjectId>(),
     };
@@ -32,7 +33,7 @@ function objectIdState(): State {
 /**
  * Type representing a unique object id
  */
-export type ObjectId = Int & Tag<'ObjectId'>;
+export type ObjectId = number & Tag<'ObjectId'>;
 
 /**
  * Return a unique identifier for an object or function
@@ -44,12 +45,12 @@ export type ObjectId = Int & Tag<'ObjectId'>;
  * ```
  * @param objectOrFunction - a non literal object
  */
-export function objectId(objectOrFunction: AnyObject | AnyFunction): ObjectId {
-  const state = objectIdState();
+export function objectId(objectOrFunction: symbol | AnyObject | AnyFunction): ObjectId {
+  const state = useObjectIdState(globalThis);
   const id = state.refs.get(objectOrFunction);
   if (id === undefined) {
     const nextId = state.currentId;
-    state.currentId = ((nextId as number) + 1) as ObjectId;
+    state.currentId = (nextId + 1) as ObjectId;
     state.refs.set(objectOrFunction, nextId);
 
     return nextId;
