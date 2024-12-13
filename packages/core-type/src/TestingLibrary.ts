@@ -4,6 +4,7 @@ export interface ExpectAssertionObject {
   toBe: (anyValue: unknown) => void;
   toEqual(expected: unknown): void;
   toHaveProperty(property: string | (string | number)[], value: unknown): void;
+  toThrow(error: unknown): void;
 }
 
 export type ExpectAssertion = ExpectAssertionObject & {
