@@ -55,7 +55,7 @@ describe(requestSend, () => {
       url,
       method: 'GET',
     });
-    await expectTask(task).toResolve(
+    await expectTask(task).toResolveAsync(
       Response({
         status: Status(Int(200), ''),
         body: {
@@ -75,7 +75,9 @@ describe(requestSend, () => {
     const task = requestSend(anyClient, {
       url: 'http://www.exam ple.com', // invalid url
     });
-    await expectTask(task).toReject(HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }));
+    await expectTask(task).toRejectAsync(
+      HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }),
+    );
   });
   it('should convert fetch error to NetworkError', async () => {
     const fetchError = new Error('FetchError');
@@ -84,7 +86,7 @@ describe(requestSend, () => {
     const task = requestSend(anyClient, {
       url: anyURL,
     });
-    await expectTask(task).toReject(HTTPError.NetworkError({ cause: fetchError }));
+    await expectTask(task).toRejectAsync(HTTPError.NetworkError({ cause: fetchError }));
   });
   it('should be cancelable', async () => {
     const finished = defer();
@@ -162,7 +164,7 @@ describe(requestSend, () => {
     });
     globalFetchMock.mockResolvedValue(mockResponse);
     const task = requestSend(clientCustom, anyRequest);
-    await expectTask(task).toResolve(
+    await expectTask(task).toResolveAsync(
       expect.objectContaining({
         headers: {
           foo: 'foo_value',

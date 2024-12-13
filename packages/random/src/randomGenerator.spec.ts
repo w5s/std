@@ -10,6 +10,6 @@ describe('randomGenerator', () => {
     RandomApplication.configure({
       randomNumberGenerator: () => nextRandom,
     });
-    await expectTask(randomGenerator).toResolve(nextRandom);
+    expectTask(randomGenerator).toResolveSync(nextRandom);
   });
 });

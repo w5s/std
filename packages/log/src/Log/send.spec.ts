@@ -24,7 +24,7 @@ describe(send, () => {
   });
   it('creates a new logRecord and forward to handle()', async () => {
     const message = critical`Mock message ${['foo', { foo: true }]} ${['bar', 'bar_value']}`;
-    await expectTask(send(message)).toResolve(undefined);
+    expectTask(send(message)).toResolveSync(undefined);
     expect(handle).toHaveBeenLastCalledWith(
       LogRecord({
         id: expect.any(String),

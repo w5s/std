@@ -27,7 +27,7 @@ const expectToResolveValue = async <F extends BodyReaderFormat>(
     }),
   );
   const task = fn(response);
-  await expectTask(task).toResolve(returnValue);
+  await expectTask(task).toResolveAsync(returnValue);
 };
 describe('ResponseParser', () => {
   describe('arrayBuffer', () => {
@@ -41,7 +41,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
     });
   });
   describe('formData', () => {
@@ -55,7 +55,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
     });
   });
   describe('text', () => {
@@ -70,7 +70,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
     });
   });
   describe('blob', () => {
@@ -85,7 +85,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
     });
   });
   describe('json', () => {
@@ -98,7 +98,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toReject(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
     });
 
     it('should parse using Codec', async () => {
@@ -113,7 +113,7 @@ describe('ResponseParser', () => {
           resolve: data,
         }),
       );
-      await expectTask(parser(response)).toReject(
+      await expectTask(parser(response)).toRejectAsync(
         HTTPError.ParserError({
           message: 'Cannot parse response body',
           cause: DecodeError({ message: '', input: data }),
@@ -125,7 +125,7 @@ describe('ResponseParser', () => {
           resolve: { foo: '1' },
         }),
       );
-      await expectTask(parser(responseIncorrect)).toResolve({ foo: '1' });
+      await expectTask(parser(responseIncorrect)).toResolveAsync({ foo: '1' });
     });
   });
 });

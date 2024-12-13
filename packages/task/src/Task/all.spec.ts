@@ -10,7 +10,7 @@ describe(all, () => {
 
   it('should return empty array if empty', async () => {
     const allTask = all([]);
-    await expectTask(allTask).toResolve([]);
+    expectTask(allTask).toResolveSync([]);
   });
   it('should reject first error', async () => {
     const allTask = all([
@@ -19,7 +19,7 @@ describe(all, () => {
       FakeTask({ delayMs: 1, value: 'value2' }),
       FakeTask({ delayMs: 1, error: 'error2' }),
     ]);
-    await expectTask(allTask).toReject('error1');
+    await expectTask(allTask).toRejectAsync('error1');
   });
 
   it('should cancel other tasks', async () => {
@@ -35,7 +35,7 @@ describe(all, () => {
       };
     });
     const allTask = all(taskData.map((_) => _.task));
-    await expectTask(allTask).toReject('error0');
+    await expectTask(allTask).toRejectAsync('error0');
 
     taskData.forEach(({ canceler }, cancelerIndex) => {
       expect(canceler).toHaveBeenCalledTimes(cancelerIndex === 0 ? 0 : 1);
@@ -67,7 +67,7 @@ describe(all, () => {
       FakeTask<'value3', 'error3'>({ delayMs: 1, value: 'value3' }),
     ]);
     assertType<typeof allTask, Task<['value1', 'value2', 'value3'], 'error1' | 'error2' | 'error3'>>(true);
-    await expectTask(allTask).toResolve(['value1', 'value2', 'value3']);
+    await expectTask(allTask).toResolveAsync(['value1', 'value2', 'value3']);
   });
   it('should handle iterable values', async () => {
     const taskArray = [
@@ -78,6 +78,6 @@ describe(all, () => {
     const allTask = all({
       [Symbol.iterator]: () => taskArray[Symbol.iterator](),
     });
-    await expectTask(allTask).toResolve(['value1', 'value2', 'value3']);
+    await expectTask(allTask).toResolveAsync(['value1', 'value2', 'value3']);
   });
 });

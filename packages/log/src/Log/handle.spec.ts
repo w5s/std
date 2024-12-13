@@ -19,7 +19,7 @@ describe(handle, () => {
 
   it('call all handlers', async () => {
     const anyRecord = fakeLogRecord();
-    await expectTask(handle(anyRecord)).toResolve(undefined);
+    expectTask(handle(anyRecord)).toResolveSync(undefined);
     expect(mockHandler1).toHaveBeenLastCalledWith(anyRecord);
     expect(mockHandler2).toHaveBeenLastCalledWith(anyRecord);
   });
@@ -28,7 +28,7 @@ describe(handle, () => {
     const task = Task.resolve();
     const taskSpy = vi.spyOn(task, 'taskRun');
     mockHandler1.mockImplementationOnce(() => task);
-    await expectTask(handle(anyRecord)).toResolve(undefined);
+    expectTask(handle(anyRecord)).toResolveSync(undefined);
     expect(taskSpy).toHaveBeenCalledTimes(1);
   });
 });

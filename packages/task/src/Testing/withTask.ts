@@ -6,17 +6,59 @@ import { unsafeRun } from '../Task/unsafeRun.js';
 
 export interface ExpectTask {
   /**
-   * Asserts that task resolve value
+   * Asserts that task resolve value asynchronously or synchronously
    *
    * @param value
    */
   toResolve(value: unknown): Promise<void>;
   /**
-   * Asserts that task rejects value
+   * Asserts that task resolve value asynchronously
+   *
+   * @param value
+   */
+  toResolveAsync(value: unknown): Promise<void>;
+  /**
+   * Asserts that task resolve value synchronously
+   *
+   * @param value
+   */
+  toResolveSync(value: unknown): void;
+  /**
+   * Asserts that task rejects value asynchronously or synchronously
+   *
+   * @param value
+   */
+  toReject(value: unknown): Promise<void>;
+  /**
+   * Asserts that task rejects value asynchronously
    *
    * @param error
    */
-  toReject(error: unknown): Promise<void>;
+  toRejectAsync(error: unknown): Promise<void>;
+  /**
+   * Asserts that task rejects value synchronously
+   *
+   * @param error
+   */
+  toRejectSync(error: unknown): void;
+  /**
+   * Asserts that task throws an error asynchronously or synchronously
+   *
+   * @param value
+   */
+  toThrow(value: unknown): Promise<void>;
+  /**
+   * Asserts that task throws an error asynchronously
+   *
+   * @param error
+   */
+  toThrowAsync(error: unknown): Promise<void>;
+  /**
+   * Asserts that task throw an error synchronously
+   *
+   * @param error
+   */
+  toThrowSync(error: unknown): void;
 }
 
 /**
@@ -34,16 +76,57 @@ export interface ExpectTask {
 export function withTask(expectFn: ExpectFunction) {
   const create = <V, E>(task: TaskLike<V, E>, isNot: boolean): ExpectTask => ({
     async toResolve(value: V) {
-      const result = await unsafeRun(task);
-      const expectValue = expectFn(result);
+      const getResult = async () => unsafeRun(task);
+      const expectValue = expectFn(getResult()).resolves;
       // eslint-disable-next-line @typescript-eslint/await-thenable
       await (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
     },
-    async toReject(error: E) {
-      const result = await unsafeRun(task);
+    async toResolveAsync(value: V) {
+      const result = unsafeRun(task);
+      const expectValue = expectFn(result).resolves;
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      await (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
+    },
+    toResolveSync(value: V) {
+      const result = unsafeRun(task);
       const expectValue = expectFn(result);
+
+      (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
+    },
+    async toReject(error: E) {
+      const getResult = async () => unsafeRun(task);
+      const expectValue = expectFn(getResult()).resolves;
       // eslint-disable-next-line @typescript-eslint/await-thenable
       await (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+    },
+    async toRejectAsync(error: E) {
+      const result = unsafeRun(task);
+      const expectValue = expectFn(result).resolves; // The promise should be resolved with a Result.Error()
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      await (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+    },
+    toRejectSync(error: E) {
+      const result = unsafeRun(task);
+      const expectValue = expectFn(result);
+
+      (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+    },
+    async toThrow(error: unknown) {
+      const getResult = async () => unsafeRun(task);
+      const expectValue = expectFn(getResult()).rejects;
+
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      await (isNot ? expectValue.not : expectValue).toEqual(error);
+    },
+    toThrowSync(error: unknown) {
+      const expectValue = expectFn(() => unsafeRun(task));
+      (isNot ? expectValue.not : expectValue).toThrow(error);
+    },
+    async toThrowAsync(error: unknown) {
+      const expectValue = expectFn(unsafeRun(task)).rejects;
+
+      // eslint-disable-next-line @typescript-eslint/await-thenable
+      await (isNot ? expectValue.not : expectValue).toEqual(error);
     },
   });
 
