@@ -23,7 +23,7 @@ describe(randomUUID, () => {
     const task = randomUUID();
     randomUUIDGlobal.mockReturnValue(uuidMock);
 
-    await expectTask(task).toResolve(uuidMock);
+    expectTask(task).toResolveSync(uuidMock);
   });
   // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   it.runIf(!globalThis.crypto)('should use node:crypto.randomUUID', async () => {
@@ -31,6 +31,6 @@ describe(randomUUID, () => {
     const task = randomUUID();
     (randomUUIDNodeJS as any).mockReturnValue(uuidMock);
 
-    await expectTask(task).toResolve(uuidMock);
+    expectTask(task).toResolveSync(uuidMock);
   });
 });

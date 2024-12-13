@@ -8,7 +8,7 @@ describe(allSettled, () => {
 
   it('should return empty array if empty', async () => {
     const allTask = allSettled([]);
-    await expectTask(allTask).toResolve([]);
+    expectTask(allTask).toResolveSync([]);
   });
   it('should resolve array of results', async () => {
     const anyTask = allSettled([
@@ -17,7 +17,7 @@ describe(allSettled, () => {
       FakeTask({ delayMs: 0, value: 'value2' }),
       FakeTask({ delayMs: 0, error: 'error2' }),
     ]);
-    await expectTask(anyTask).toResolve([
+    await expectTask(anyTask).toResolveAsync([
       Result.Ok('value1'),
       Result.Error('error1'),
       Result.Ok('value2'),

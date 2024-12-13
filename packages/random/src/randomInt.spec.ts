@@ -12,7 +12,7 @@ describe('randomInt', () => {
     const nextRandom = 0.123;
     vi.spyOn(randomGenerator, 'taskRun').mockImplementation(({ resolve }) => resolve(nextRandom));
     const task = randomInt(Int(-10), Int(10));
-    await expectTask(task).toResolve(-8);
+    expectTask(task).toResolveSync(-8);
   });
   it.each([
     [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
@@ -22,6 +22,6 @@ describe('randomInt', () => {
   ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
     const gen = fakeRandomGenerator(() => genValue);
     const genNum = randomInt(min, max, gen);
-    await expectTask(genNum).toResolve(expected);
+    expectTask(genNum).toResolveSync(expected);
   });
 });

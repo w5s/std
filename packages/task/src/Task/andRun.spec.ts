@@ -14,7 +14,9 @@ describe(andRun, () => {
     const andTask = FakeTask({ delayMs: after === 'async' ? 0 : undefined, value: anyOtherValue });
 
     it('should return a new task with same value', async () => {
-      await expectTask(andRun(task, () => andTask)).toResolve(anyValue);
+      await (before === 'async' || after === 'async'
+        ? expectTask(andRun(task, () => andTask)).toResolveAsync(anyValue)
+        : expectTask(andRun(task, () => andTask)).toResolveSync(anyValue));
     });
     it('should call callback and run task', async () => {
       const taskCallback = create(({ ok }) => ok(anyOtherValue));

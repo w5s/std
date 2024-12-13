@@ -12,12 +12,12 @@ describe(map, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ error: anyError });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
 
-    await expectTask(mapTask).toReject(anyError);
+    expectTask(mapTask).toRejectSync(anyError);
   });
   it('maps value when success', async () => {
     const task = FakeTask({ value: anyValue });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
-    await expectTask(mapTask).toResolve({
+    expectTask(mapTask).toResolveSync({
       ...anyValue,
       bar: true,
     });
@@ -25,7 +25,7 @@ describe(map, () => {
   it('maps value when async success', async () => {
     const task = FakeTask({ delayMs: 0, value: anyValue });
     const mapTask = map(task, (_) => ({ ..._, bar: true }));
-    await expectTask(mapTask).toResolve({
+    await expectTask(mapTask).toResolveAsync({
       ...anyValue,
       bar: true,
     });

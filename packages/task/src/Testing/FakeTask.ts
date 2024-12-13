@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import type { Option } from '@w5s/core';
 import type { Task, TaskCanceler } from '../Task.js';
 import { from } from '../Task/from.js';
 
@@ -23,11 +24,11 @@ export type FakeTaskOptions<Value, Error> = {
   /**
    * Default Canceler function
    */
-  canceler?: () => void;
+  canceler?: Option<() => void>;
   /**
    * Waiting delay in milliseconds before resolving/rejecting/throwing
    */
-  delayMs?: number;
+  delayMs?: Option<number>;
 } & (
   | {
       /**

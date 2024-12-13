@@ -17,7 +17,7 @@ describe(tryCall, () => {
       () => 'return_value',
       () => new TestError(),
     );
-    await expectTask(task).toResolve('return_value');
+    expectTask(task).toResolveSync('return_value');
   });
   it('should reject(onError(error)) when error is thrown', async () => {
     const thrownError = new Error('custom');
@@ -25,7 +25,7 @@ describe(tryCall, () => {
     const task = tryCall(() => {
       throw thrownError;
     }, onError);
-    await expectTask(task).toReject(new TestError());
+    expectTask(task).toRejectSync(new TestError());
     expect(onError).toHaveBeenCalledWith(thrownError);
   });
   it('should return Result.Ok(block()) when nothing is thrown (async handler)', async () => {
@@ -33,28 +33,28 @@ describe(tryCall, () => {
       async () => 'return_value',
       async (innerError) => new TestError(innerError),
     );
-    await expectTask(task).toResolve('return_value');
+    await expectTask(task).toResolveAsync('return_value');
   });
   it('should return Result.Ok(block()) when nothing is thrown (sync handler)', async () => {
     const task = tryCall(
       () => 'return_value',
       async (innerError) => new TestError(innerError),
     );
-    await expectTask(task).toResolve('return_value');
+    expectTask(task).toResolveSync('return_value');
   });
   it('should return Result.Error(onError(error)) when promise is rejected (async handler)', async () => {
     const thrownError = new Error('custom');
     const onError = vi.fn(async (innerError: unknown) => new TestError(innerError));
     const task = tryCall(() => Promise.reject(thrownError), onError);
 
-    await expectTask(task).toReject(new TestError(thrownError));
+    await expectTask(task).toRejectAsync(new TestError(thrownError));
     expect(onError).toHaveBeenCalledWith(thrownError);
   });
   it('should return Result.Error(onError(error)) when promise is rejected (sync handler)', async () => {
     const thrownError = new Error('custom');
     const onError = vi.fn((innerError: unknown) => new TestError(innerError));
     const task = tryCall(() => Promise.reject(thrownError), onError);
-    await expectTask(task).toReject(new TestError(thrownError));
+    await expectTask(task).toRejectAsync(new TestError(thrownError));
     expect(onError).toHaveBeenCalledWith(thrownError);
   });
 });

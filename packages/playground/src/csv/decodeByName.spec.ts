@@ -10,7 +10,7 @@ describe(decodeByName, () => {
   const expectAsyncIterable = withAsyncIterable(expect);
   it('should decode header', async () => {
     const input = ['column', '1,col', 'umn2\na1,'];
-    await expectTask(decodeByName(input)).toResolve(
+    await expectTask(decodeByName(input)).toResolveAsync(
       expect.objectContaining({
         csvHeader: ['column1', 'column2'],
       }),
@@ -38,6 +38,6 @@ describe(decodeByName, () => {
 
   it('should throw an error for missing header', async () => {
     const input: string[] = [];
-    await expectTask(decodeByName(input)).toReject(CSVError({ message: 'No header found' }));
+    await expectTask(decodeByName(input)).toRejectAsync(CSVError({ message: 'No header found' }));
   });
 });

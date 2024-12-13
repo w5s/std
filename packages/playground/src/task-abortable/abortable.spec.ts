@@ -14,7 +14,7 @@ describe(abortable, () => {
     const abortController = new AbortController();
     const abortTask = abortable(task, abortController);
 
-    const expectation = expectTask(abortTask).toReject(AbortError());
+    const expectation = expectTask(abortTask).toRejectAsync(AbortError());
     abortController.abort();
     await expectation;
   });

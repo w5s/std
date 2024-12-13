@@ -11,7 +11,7 @@ describe(any, () => {
 
   it('should return empty array if empty', async () => {
     const anyTask = any([]);
-    await expectTask(anyTask).toReject(AggregateError([]));
+    expectTask(anyTask).toRejectSync(AggregateError([]));
   });
   it('should resolve first value', async () => {
     const anyTask = any([
@@ -20,7 +20,7 @@ describe(any, () => {
       FakeTask({ delayMs: 1, value: 'value2' }),
       FakeTask({ delayMs: 1, error: 'error2' }),
     ]);
-    await expectTask(anyTask).toResolve('value1');
+    await expectTask(anyTask).toResolveAsync('value1');
   });
 
   it('should cancel other tasks', async () => {
@@ -37,7 +37,7 @@ describe(any, () => {
     });
     const anyTask = any(taskData.map((_) => _.task));
 
-    await expectTask(anyTask).toResolve('value0');
+    await expectTask(anyTask).toResolveAsync('value0');
 
     taskData.forEach(({ canceler }, cancelerIndex) => {
       expect(canceler).toHaveBeenCalledTimes(cancelerIndex === 0 ? 0 : 1);
@@ -71,7 +71,7 @@ describe(any, () => {
     assertType<typeof anyTask, Task<'value1' | 'value2' | 'value3', AggregateError<['error1', 'error2', 'error3']>>>(
       true,
     );
-    await expectTask(anyTask).toReject(AggregateError(['error1', 'error2', 'error3']));
+    await expectTask(anyTask).toRejectAsync(AggregateError(['error1', 'error2', 'error3']));
   });
   it('should handle iterable values', async () => {
     const taskArray = [
@@ -82,6 +82,6 @@ describe(any, () => {
     const anyTask = any({
       [Symbol.iterator]: () => taskArray[Symbol.iterator](),
     });
-    await expectTask(anyTask).toResolve('value2');
+    await expectTask(anyTask).toResolveAsync('value2');
   });
 });

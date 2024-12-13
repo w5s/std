@@ -18,7 +18,9 @@ describe(orElse, () => {
         value: 'anyValue',
       });
       const taskElse = orElse(task, handleError);
-      await expectTask(taskElse).toResolve('anyValue');
+      await (before === 'async'
+        ? expectTask(taskElse).toResolveAsync('anyValue')
+        : expectTask(taskElse).toResolveSync('anyValue'));
     });
     it('should map value when Result.Ok', async () => {
       const task = FakeTask<string, 'TestError'>({
@@ -26,7 +28,10 @@ describe(orElse, () => {
         error: 'TestError',
       });
       const taskElse = orElse(task, handleError);
-      await expectTask(taskElse).toResolve('TestError_handled');
+
+      await (before === 'async' || after === 'async'
+        ? expectTask(taskElse).toResolveAsync('TestError_handled')
+        : expectTask(taskElse).toResolveSync('TestError_handled'));
     });
   });
 

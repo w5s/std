@@ -10,11 +10,11 @@ describe(resolve, () => {
 
   it('constructs a sync task', async () => {
     const task = resolve(anyValue);
-    await expectTask(task).toResolve(anyValue);
+    expectTask(task).toResolveSync(anyValue);
   });
   it('resolves void task', async () => {
     const task = resolve();
     assertType<typeof task, Task<void, never>>(true);
-    await expectTask(task).toResolve(undefined);
+    expectTask(task).toResolveSync(undefined);
   });
 });

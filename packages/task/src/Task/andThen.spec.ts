@@ -19,12 +19,17 @@ describe(andThen, () => {
         error: 'TestError',
       });
       const thenTask = andThen(task, stringify);
-      await expectTask(thenTask).toReject('TestError');
+      await (before === 'async'
+        ? expectTask(thenTask).toRejectAsync('TestError')
+        : expectTask(thenTask).toRejectSync('TestError'));
     });
     it('should map value when success', async () => {
       const task = FakeTask<number, 'TestError'>({ delayMs: before === 'async' ? 0 : undefined, value: 4 });
       const thenTask = andThen(task, stringify);
-      await expectTask(thenTask).toResolve('4');
+
+      await (before === 'async' || after === 'async'
+        ? expectTask(thenTask).toResolveAsync('4')
+        : expectTask(thenTask).toResolveSync('4'));
     });
   });
 

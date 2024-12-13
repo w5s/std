@@ -12,7 +12,7 @@ describe('randomBoolean', () => {
 
     vi.spyOn(randomGenerator, 'taskRun').mockImplementation(({ resolve }) => resolve(nextRandom));
     const task = randomBoolean();
-    await expectTask(task).toResolve(false);
+    expectTask(task).toResolveSync(false);
   });
   it.each([
     [{ genValue: 0, trueWeight: 0.5 }, false],
@@ -23,6 +23,6 @@ describe('randomBoolean', () => {
   ])('should return correct bounded values %s', async ({ genValue, trueWeight }, expected) => {
     const gen = fakeRandomGenerator(() => genValue);
     const genBool = randomBoolean(trueWeight, gen);
-    await expectTask(genBool).toResolve(expected);
+    expectTask(genBool).toResolveSync(expected);
   });
 });
