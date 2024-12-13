@@ -1,5 +1,7 @@
 import type { Awaitable } from '@w5s/async';
-import { create } from './create.js';
+import { tryCall as asyncTryCall } from '@w5s/async/dist/tryCall.js';
+import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
+import { from } from './from.js';
 import type { Task } from '../Task.js';
 
 /**
@@ -21,11 +23,13 @@ export function tryCall<Value, Error>(
   sideEffect: () => Awaitable<Value>,
   onError: (error: unknown) => Awaitable<Error>,
 ): Task<Value, Error> {
-  return create(async ({ ok, error }) => {
-    try {
-      return ok(await sideEffect());
-    } catch (error_: unknown) {
-      return error(await onError(error_));
-    }
-  });
+  return from(
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    ({ resolve, reject }) =>
+      asyncTryCall(sideEffect, resolve, (error) => {
+        const awaitableError = onError(error);
+        // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
+        return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
+      }),
+  );
 }
