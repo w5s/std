@@ -11,8 +11,6 @@ vi.mock('node:crypto', async () => ({
   randomUUID: vi.fn(),
 }));
 
-const randomUUIDGlobal = vi.spyOn(globalThis.crypto, 'randomUUID');
-
 describe(randomUUID, () => {
   const expectTask = withTask(expect);
   it('should return a valid UUID', async () => {
@@ -20,6 +18,7 @@ describe(randomUUID, () => {
     expect(UUID.hasInstance(uuidResult)).toBe(true);
   });
   it.runIf(globalThis.crypto)('should use globalThis.crypto.randomUUID', async () => {
+    const randomUUIDGlobal = vi.spyOn(globalThis.crypto, 'randomUUID');
     const uuidMock = empty();
     const task = randomUUID();
     randomUUIDGlobal.mockReturnValue(uuidMock);
