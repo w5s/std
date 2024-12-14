@@ -4,6 +4,7 @@ import { withTask } from '../Testing.js';
 
 describe(tryCall, () => {
   const expectTask = withTask(expect);
+  const anyValue = 'return_value';
 
   class TestError extends Error {
     override name = 'TestError';
@@ -14,10 +15,17 @@ describe(tryCall, () => {
   }
   it('should resolve(block()) when nothing is thrown', async () => {
     const task = tryCall(
-      () => 'return_value',
+      () => anyValue,
       () => new TestError(),
     );
-    expectTask(task).toResolveSync('return_value');
+    expectTask(task).toResolveSync(anyValue);
+  });
+  it('handles rejection when no handler', async () => {
+    const thrownError = new Error('custom');
+    const task = tryCall(() => {
+      throw thrownError;
+    }, undefined);
+    expectTask(task).toThrowSync(thrownError);
   });
   it('should reject(onError(error)) when error is thrown', async () => {
     const thrownError = new Error('custom');
@@ -30,17 +38,17 @@ describe(tryCall, () => {
   });
   it('should return Result.Ok(block()) when nothing is thrown (async handler)', async () => {
     const task = tryCall(
-      async () => 'return_value',
+      async () => anyValue,
       async (innerError) => new TestError(innerError),
     );
-    await expectTask(task).toResolveAsync('return_value');
+    await expectTask(task).toResolveAsync(anyValue);
   });
   it('should return Result.Ok(block()) when nothing is thrown (sync handler)', async () => {
     const task = tryCall(
-      () => 'return_value',
+      () => anyValue,
       async (innerError) => new TestError(innerError),
     );
-    expectTask(task).toResolveSync('return_value');
+    expectTask(task).toResolveSync(anyValue);
   });
   it('should return Result.Error(onError(error)) when promise is rejected (async handler)', async () => {
     const thrownError = new Error('custom');

@@ -10,26 +10,34 @@ import type { Task } from '../Task.js';
  *
  * @example
  * ```typescript
- * const class FetchError extends Error {}
- * const task = Task.tryCall(
- *  () => fetch('my/url'),
- *  (error) => new FetchError()
- * );
+ * const class ResponseError extends Error {}
+ * const fetch = Task.tryCall(
+ *  () => fetch('my/url'), // Task will resolve Ok(fetch('my/url'))
+ *  (error) => new ResponseError(), // Task will reject Error(new ResponseError())
+ * );// Task<Response, ResponseError>
+ *
+ * const randomNumber = Task.tryCall(async () => Math.random());// Task<number, never>
  * ```
  * @param sideEffect - A function that will be called
  * @param onError - An error handler that transforms `unknown` to a normalized and typed error
  */
-export function tryCall<Value, Error>(
+export function tryCall<Value, Error = never>(
   sideEffect: () => Awaitable<Value>,
-  onError: (error: unknown) => Awaitable<Error>,
+  onError?: (error: unknown) => Awaitable<Error>,
 ): Task<Value, Error> {
   return from(
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     ({ resolve, reject }) =>
-      asyncTryCall(sideEffect, resolve, (error) => {
-        const awaitableError = onError(error);
-        // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
-        return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
-      }),
+      asyncTryCall(
+        sideEffect,
+        resolve,
+        onError == null
+          ? onError
+          : (error) => {
+              const awaitableError = onError(error);
+              // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
+              return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
+            },
+      ),
   );
 }
