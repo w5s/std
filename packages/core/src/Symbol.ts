@@ -11,11 +11,6 @@ export interface SymbolConstructor
   readonly enumKeys: unique symbol;
 
   /**
-   * Enum values
-   */
-  readonly enumValues: unique symbol;
-
-  /**
    * Callable callback
    */
   readonly toFunction: '__toFunction__'; // TODO: unique symbol;
@@ -49,6 +44,5 @@ export const Symbol: SymbolConstructor = {
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
   toFunction: '__toFunction__', // GlobalSymbol.for('w5s.toFunction') as SymbolConstructor['toFunction'],
   enumKeys: GlobalSymbol.for('w5s.enumKeys') as SymbolConstructor['enumKeys'],
-  enumValues: GlobalSymbol.for('w5s.enumValues') as SymbolConstructor['enumValues'],
   nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom') as SymbolConstructor['nodeInspect'],
 };

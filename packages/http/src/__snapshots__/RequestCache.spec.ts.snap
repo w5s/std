@@ -28,13 +28,5 @@ exports[`RequestCache > is an enum 1`] = `
     "ForceCache",
     "OnlyIfCached",
   ],
-  Symbol(w5s.enumValues): [
-    "default",
-    "no-store",
-    "reload",
-    "no-cache",
-    "force-cache",
-    "only-if-cached",
-  ],
 }
 `;

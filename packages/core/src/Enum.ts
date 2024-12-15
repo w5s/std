@@ -14,10 +14,6 @@ export const Enum = {
    * Symbol for the property holding enum keys
    */
   enumKeys: Symbol.enumKeys,
-  /**
-   * Symbol for the property holding enum values
-   */
-  enumValues: Symbol.enumValues,
   define,
   keys,
   values,
@@ -32,7 +28,7 @@ export namespace Enum {
   /**
    * Return enum values of T
    */
-  export type ValueOf<T extends Enum<Record<string, any>>> = ArrayValue<T[typeof Symbol.enumValues]>;
+  export type ValueOf<T extends Enum<Record<string, any>>> = T[KeyOf<T>];
 }
 
 export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>>
@@ -43,10 +39,6 @@ export interface Enumerable<T extends Record<string, unknown> = Record<string, u
    * An array of all keys
    */
   readonly [Symbol.enumKeys]: ReadonlyArray<keyof T>;
-  /**
-   * An array of all values
-   */
-  readonly [Symbol.enumValues]: ReadonlyArray<T[keyof T]>;
 }
 
 export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enumerable<T>;

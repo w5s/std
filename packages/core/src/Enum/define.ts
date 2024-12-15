@@ -39,7 +39,6 @@ export function define<const T extends Record<string, string | number | boolean>
 
   return Object.freeze({
     [Symbol.enumKeys]: enumKeysList,
-    [Symbol.enumValues]: enumValuesList,
     ...EnumType,
     ...EnumIndexable,
     ...enumObject,

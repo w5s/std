@@ -24,11 +24,5 @@ exports[`RequestMode > is an enum 1`] = `
     "Navigate",
     "NoCORS",
   ],
-  Symbol(w5s.enumValues): [
-    "same-origin",
-    "cors",
-    "navigate",
-    "no-cors",
-  ],
 }
 `;

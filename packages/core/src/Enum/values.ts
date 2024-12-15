@@ -1,5 +1,5 @@
 import type { Enum } from '../Enum.js';
-import { Symbol } from '../Symbol.js';
+import { keys } from './keys.js';
 
 /**
  * Returns an array of enum values
@@ -12,5 +12,5 @@ import { Symbol } from '../Symbol.js';
  * @param enumObject
  */
 export function values<T extends Enum>(enumObject: T): ReadonlyArray<Enum.ValueOf<T>> {
-  return enumObject[Symbol.enumValues] as ReadonlyArray<Enum.ValueOf<T>>;
+  return keys(enumObject).map((key) => enumObject[key]) as ReadonlyArray<Enum.ValueOf<T>>;
 }

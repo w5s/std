@@ -22,10 +22,5 @@ exports[`RequestRedirect > is an enum 1`] = `
     "Error",
     "Manual",
   ],
-  Symbol(w5s.enumValues): [
-    "follow",
-    "error",
-    "manual",
-  ],
 }
 `;

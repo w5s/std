@@ -12,7 +12,6 @@ describe('Enum', () => {
       keys,
       values,
       enumKeys: Symbol.enumKeys,
-      enumValues: Symbol.enumValues,
     });
   });
 });
