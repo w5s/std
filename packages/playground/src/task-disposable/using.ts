@@ -3,25 +3,26 @@ import { all as taskAll } from '@w5s/task/dist/Task/all.js';
 import { andRun as taskAndRun } from '@w5s/task/dist/Task/andRun.js';
 import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
 import { map as taskMap } from '@w5s/task/dist/Task/map.js';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-const disposeSymbol: typeof Symbol.dispose = Symbol.dispose ?? Symbol.for('dispose');
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-const asyncDisposeSymbol: typeof Symbol.asyncDispose = Symbol.asyncDispose ?? Symbol.for('asyncDispose');
-
-export function dispose(resource: Disposable | AsyncDisposable): Task<void, never> {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  return taskFrom(({ resolve }) =>
-    // eslint-disable-next-line promise/prefer-await-to-then
-    asyncDisposeSymbol in resource ? resource[asyncDisposeSymbol]().then(resolve) : resolve(resource[disposeSymbol]()),
-  );
-}
+import { dispose } from './dispose.js';
 
 function disposeAll(resources: { disposables: ReadonlyArray<Disposable | AsyncDisposable> }) {
   return taskAll(resources.disposables.map(dispose));
 }
 
+/**
+ * Returns a task
+ *
+ * @example
+ * ```ts
+ * const getResource1 = (): Task<Disposable, never> => { ... }
+ * const getResource2 = (): Task<AsyncDisposable, never> => { ... }
+ * const task = using([getResource1(), getResource2()], ([resource1, resource2]) => {
+ *   // return a Task that will be forwarded to task
+ * }); // resource1 and resource2 will be disposed after this task
+ * ```
+ * @param tasks
+ * @param thenFn
+ */
 export function using<T extends readonly TaskLike<Disposable | AsyncDisposable, any>[], ToValue, ToError>(
   tasks: [...T],
   thenFn: (disposables: { [K in keyof T]: Task.ValueOf<T[K]> }) => TaskLike<ToValue, ToError>,
