@@ -10,7 +10,7 @@ function disposeAll(resources: { disposables: ReadonlyArray<Disposable | AsyncDi
 }
 
 /**
- * Returns a task
+ * Returns a task that will be mapped to `thenFn` arguments and then disposed.
  *
  * @example
  * ```ts
