@@ -22,9 +22,7 @@ export function Error(): Result<never, void>;
 export function Error<E>(resultError: E): Result<never, E>;
 export function Error(resultError?: unknown): Result<never, unknown> {
   return {
-    _: Error.typeName,
     ok: false,
     error: resultError,
   };
 }
-Error.typeName = 'Error' as const;

@@ -1,4 +1,3 @@
-import type { Struct } from './Struct.js';
 import { Ok } from './Result/Ok.js';
 import { Error } from './Result/Error.js';
 import { isOk } from './Result/isOk.js';
@@ -70,29 +69,25 @@ export const Result = {
 };
 
 export namespace Result {
-  export interface Ok<V>
-    extends Struct<{
-      [Struct.type]: 'Ok';
-      /**
-       * `true` only for Ok objects
-       */
-      ok: true;
-      /**
-       * The success value
-       */
-      value: V;
-    }> {}
+  export interface Ok<V> {
+    /**
+     * `true` only for Ok objects
+     */
+    readonly ok: true;
+    /**
+     * The success value
+     */
+    readonly value: V;
+  }
 
-  export interface Error<E>
-    extends Struct<{
-      [Struct.type]: 'Error';
-      /**
-       * `false` only for Error objects
-       */
-      ok: false;
-      /**
-       * The error value
-       */
-      error: E;
-    }> {}
+  export interface Error<E> {
+    /**
+     * `false` only for Error objects
+     */
+    readonly ok: false;
+    /**
+     * The error value
+     */
+    readonly error: E;
+  }
 }

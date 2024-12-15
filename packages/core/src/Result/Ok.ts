@@ -15,9 +15,7 @@ export function Ok(): Result<void, never>;
 export function Ok<V>(resultValue: V): Result<V, never>;
 export function Ok(resultValue?: unknown): Result<unknown, never> {
   return {
-    _: Ok.typeName,
     ok: true,
     value: resultValue,
   };
 }
-Ok.typeName = 'Ok' as const;
