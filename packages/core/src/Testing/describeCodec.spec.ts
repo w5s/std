@@ -9,15 +9,13 @@ describe('describeCodec', () => {
     codecEncode: (value) => value,
     codecDecode: (value) =>
       typeof value === 'string'
-        ? { _: 'Ok', ok: true, value }
-        : {
-            _: 'Error',
-            ok: false,
-            error: DecodeError({
+        ? Result.Ok(value)
+        : Result.Error(
+            DecodeError({
               message: 'test error',
               input: value,
             }),
-          },
+          ),
     codecSchema: () => ({ type: 'string' }),
   };
 
