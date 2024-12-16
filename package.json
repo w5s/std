@@ -106,7 +106,7 @@
     "markdown-magic": "3.3.0",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "1.1.2",
-    "npm-run-all2": "7.0.1",
+    "npm-run-all2": "7.0.2",
     "prettier": "3.4.2",
     "size-limit-preset-node-lib": "0.3.0",
     "turbo": "2.3.3",
