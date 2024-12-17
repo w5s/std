@@ -9,21 +9,24 @@ import { define as defineType } from '../Type/define.js';
  * @example
  * ```ts
  * const MyEnum = Enum.define({
+ *   // typeName: 'MyEnum', // Add this we want a named Enum
  *   Foo: 'foo',
  *   Bar: 'bar',
  * });
  * ```
  * @param enumObject
  */
-export function define<const T extends Record<string, string | number | boolean>>(enumObject: T): Enum<T> {
+export function define<const T extends Record<string, string | number | boolean>>(
+  enumObject: T & { typeName?: string },
+): Enum<T> {
   type Value = T[keyof T];
-
-  const enumKeysList = Object.freeze(Object.keys(enumObject));
-  const enumValuesList = Object.freeze(Object.values(enumObject)) as ReadonlyArray<Value>;
+  const { typeName, ...enumObjectRest } = enumObject;
+  const enumKeysList = Object.freeze(Object.keys(enumObjectRest));
+  const enumValuesList = Object.freeze(Object.values(enumObjectRest)) as ReadonlyArray<Value>;
   const enumValuesIndex = new Map<unknown, number>(enumValuesList.map((value, index) => [value, index]));
 
   const EnumType = defineType<Value>({
-    typeName: 'Enum',
+    typeName: typeName ?? enumValuesList.join('|'),
     hasInstance(anyValue) {
       return enumValuesIndex.has(anyValue);
     },
@@ -37,10 +40,11 @@ export function define<const T extends Record<string, string | number | boolean>
     indexOf: (value) => enumValuesIndex.get(value),
   });
 
+  // @ts-ignore
   return Object.freeze({
     [Symbol.enumKeys]: enumKeysList,
     ...EnumType,
     ...EnumIndexable,
-    ...enumObject,
+    ...enumObjectRest,
   });
 }

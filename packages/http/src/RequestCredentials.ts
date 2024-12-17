@@ -2,6 +2,7 @@ import type { Enum } from '@w5s/core';
 import { define } from '@w5s/core/dist/Enum/define.js';
 
 export const RequestCredentials = define({
+  typeName: 'RequestCredentials',
   Include: 'include',
   Omit: 'omit',
   SameOrigin: 'same-origin',

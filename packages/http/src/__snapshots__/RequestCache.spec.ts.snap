@@ -19,7 +19,7 @@ exports[`RequestCache > is an enum 1`] = `
   "inspect": undefined,
   "range": [Function],
   "rangeSize": [Function],
-  "typeName": "Enum",
+  "typeName": "RequestCache",
   Symbol(w5s.enumKeys): [
     "Default",
     "NoStore",

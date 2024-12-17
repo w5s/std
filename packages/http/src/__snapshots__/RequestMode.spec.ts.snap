@@ -17,7 +17,7 @@ exports[`RequestMode > is an enum 1`] = `
   "inspect": undefined,
   "range": [Function],
   "rangeSize": [Function],
-  "typeName": "Enum",
+  "typeName": "RequestMode",
   Symbol(w5s.enumKeys): [
     "SameOrigin",
     "CORS",

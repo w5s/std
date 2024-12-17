@@ -2,6 +2,7 @@ import type { Enum } from '@w5s/core';
 import { define } from '@w5s/core/dist/Enum/define.js';
 
 export const RequestCache = define({
+  typeName: 'RequestCache',
   Default: 'default',
   NoStore: 'no-store',
   Reload: 'reload',

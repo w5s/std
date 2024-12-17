@@ -16,7 +16,7 @@ exports[`RequestRedirect > is an enum 1`] = `
   "inspect": undefined,
   "range": [Function],
   "rangeSize": [Function],
-  "typeName": "Enum",
+  "typeName": "RequestRedirect",
   Symbol(w5s.enumKeys): [
     "Follow",
     "Error",

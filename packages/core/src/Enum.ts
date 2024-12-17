@@ -41,4 +41,4 @@ export interface Enumerable<T extends Record<string, unknown> = Record<string, u
   readonly [Symbol.enumKeys]: ReadonlyArray<keyof T>;
 }
 
-export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enumerable<T>;
+export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enumerable<Omit<T, 'typeName'>>;

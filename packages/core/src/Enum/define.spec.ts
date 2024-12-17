@@ -10,6 +10,7 @@ import { Option } from '../Option.js';
 
 describe(define, () => {
   const MyEnumObject = define({
+    typeName: 'MyEnumObject',
     Foo: 'foo',
     Bar: 'bar',
     Baz: 'baz',
@@ -60,8 +61,22 @@ describe(define, () => {
       inspect: Option.None,
     });
   });
+  it('generates a default typeName', () => {
+    expect(
+      define({
+        Foo: 'foo',
+        Bar: 'bar',
+        Baz: 'baz',
+      }),
+    ).toEqual(
+      expect.objectContaining({
+        typeName: 'foo|bar|baz',
+      }),
+    );
+  });
+
   describeType({ describe, it, expect })(MyEnumObject, {
-    typeName: 'Enum',
+    typeName: 'MyEnumObject',
     instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
     notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
   });
@@ -71,7 +86,7 @@ describe(define, () => {
       ['bar', Result.Ok(MyEnumObject.Bar)],
       [
         'foo_invalid',
-        Result.Error(DecodeError({ message: 'Cannot decode foo_invalid as Enum', input: 'foo_invalid' })),
+        Result.Error(DecodeError({ message: 'Cannot decode foo_invalid as MyEnumObject', input: 'foo_invalid' })),
       ],
     ],
     encode: [

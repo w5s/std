@@ -22,7 +22,7 @@ exports[`ReferrerPolicy > is an enum 1`] = `
   "inspect": undefined,
   "range": [Function],
   "rangeSize": [Function],
-  "typeName": "Enum",
+  "typeName": "ReferrerPolicy",
   Symbol(w5s.enumKeys): [
     "Empty",
     "NoReferrer",
