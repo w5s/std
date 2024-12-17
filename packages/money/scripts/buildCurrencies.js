@@ -4,15 +4,14 @@ import path from 'node:path';
 import currencyData from 'currencies.json';
 
 const EOL = '\n';
-const comment = '// ';
 
 function getTargetPath() {
   return path.join('src', 'moneyFactory.all.ts');
 }
 
 function buildImports() {
-  return `/* cSpell:disable */
-import type { Int } from '@w5s/core';
+  return `/* eslint-disable prettier/prettier */
+/* cSpell:disable */
 import { Currency } from './Currency.js';
 import { moneyFactory } from './moneyFactory.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
@@ -20,25 +19,29 @@ import { CurrencyRegistry } from './CurrencyRegistry.js';
 }
 
 function buildRegistry() {
-  return `function registerAll() {
-  const register = (...parameters: Parameters<typeof Currency>) => CurrencyRegistry.add(Currency(parameters[0]));
-${currencyData.currencies
-  .map(
-    (currency) =>
-      `
-  register({
-    code: '${currency.code}',
-    ${currency.decimalDigits === 2 ? comment : ''}precision: ${currency.decimalDigits} as Int,
-    name: '${currency.name}',
-    namePlural: '${currency.namePlural}',
-    ${currency.rounding === 0 ? comment : ''}rounding: ${currency.rounding} as Int,
-    symbol: '${currency.symbol}',
-    ${currency.symbolNative === currency.symbol ? comment : ''}symbolNative: '${currency.symbolNative}',
-  });`,
-  )
-  .join(EOL)}
-}
-registerAll();`;
+  return `const register = (
+  code: Currency['code'],
+  precision: number,
+  name: Currency['name'],
+  namePlural: Currency['namePlural'],
+  rounding: number,
+  symbol: Currency['symbol'],
+  symbolNative: Currency['symbolNative'],
+) => {
+  CurrencyRegistry.add(
+    Currency({
+      code,
+      precision: precision as Currency['precision'],
+      name,
+      namePlural,
+      rounding: rounding as Currency['rounding'],
+      symbol,
+      symbolNative,
+    }),
+  );
+  return moneyFactory(code);
+};
+`;
 }
 
 function buildFactories() {
@@ -53,7 +56,7 @@ function buildFactories() {
  * \`\`\`
  * @param amount - The amount of money
  */
-export const ${currency.code} = moneyFactory('${currency.code}');`,
+export const ${currency.code} = register('${currency.code}', ${currency.decimalDigits}, '${currency.name}', '${currency.namePlural}', ${currency.rounding}, '${currency.symbol}', '${currency.symbolNative}');`,
     )
     .join(EOL);
 }

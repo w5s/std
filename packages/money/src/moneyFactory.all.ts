@@ -1,1203 +1,32 @@
+/* eslint-disable prettier/prettier */
 /* cSpell:disable */
-import type { Int } from '@w5s/core';
 import { Currency } from './Currency.js';
 import { moneyFactory } from './moneyFactory.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
 
-function registerAll() {
-  const register = (...parameters: Parameters<typeof Currency>) => CurrencyRegistry.add(Currency(parameters[0]));
+const register = (
+  code: Currency['code'],
+  precision: number,
+  name: Currency['name'],
+  namePlural: Currency['namePlural'],
+  rounding: number,
+  symbol: Currency['symbol'],
+  symbolNative: Currency['symbolNative'],
+) => {
+  CurrencyRegistry.add(
+    Currency({
+      code,
+      precision: precision as Currency['precision'],
+      name,
+      namePlural,
+      rounding: rounding as Currency['rounding'],
+      symbol,
+      symbolNative,
+    }),
+  );
+  return moneyFactory(code);
+};
 
-  register({
-    code: 'USD',
-    // precision: 2 as Int,
-    name: 'US Dollar',
-    namePlural: 'US dollars',
-    // rounding: 0 as Int,
-    symbol: '$',
-    // symbolNative: '$',
-  });
-
-  register({
-    code: 'CAD',
-    // precision: 2 as Int,
-    name: 'Canadian Dollar',
-    namePlural: 'Canadian dollars',
-    // rounding: 0 as Int,
-    symbol: 'CA$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'EUR',
-    // precision: 2 as Int,
-    name: 'Euro',
-    namePlural: 'euros',
-    // rounding: 0 as Int,
-    symbol: '€',
-    // symbolNative: '€',
-  });
-
-  register({
-    code: 'AED',
-    // precision: 2 as Int,
-    name: 'United Arab Emirates Dirham',
-    namePlural: 'UAE dirhams',
-    // rounding: 0 as Int,
-    symbol: 'AED',
-    symbolNative: 'د.إ.‏',
-  });
-
-  register({
-    code: 'AFN',
-    precision: 0 as Int,
-    name: 'Afghan Afghani',
-    namePlural: 'Afghan Afghanis',
-    // rounding: 0 as Int,
-    symbol: 'Af',
-    symbolNative: '؋',
-  });
-
-  register({
-    code: 'ALL',
-    precision: 0 as Int,
-    name: 'Albanian Lek',
-    namePlural: 'Albanian lekë',
-    // rounding: 0 as Int,
-    symbol: 'ALL',
-    symbolNative: 'Lek',
-  });
-
-  register({
-    code: 'AMD',
-    precision: 0 as Int,
-    name: 'Armenian Dram',
-    namePlural: 'Armenian drams',
-    // rounding: 0 as Int,
-    symbol: 'AMD',
-    symbolNative: 'դր.',
-  });
-
-  register({
-    code: 'ARS',
-    // precision: 2 as Int,
-    name: 'Argentine Peso',
-    namePlural: 'Argentine pesos',
-    // rounding: 0 as Int,
-    symbol: 'AR$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'AUD',
-    // precision: 2 as Int,
-    name: 'Australian Dollar',
-    namePlural: 'Australian dollars',
-    // rounding: 0 as Int,
-    symbol: 'AU$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'AZN',
-    // precision: 2 as Int,
-    name: 'Azerbaijani Manat',
-    namePlural: 'Azerbaijani manats',
-    // rounding: 0 as Int,
-    symbol: 'man.',
-    symbolNative: 'ман.',
-  });
-
-  register({
-    code: 'BAM',
-    // precision: 2 as Int,
-    name: 'Bosnia-Herzegovina Convertible Mark',
-    namePlural: 'Bosnia-Herzegovina convertible marks',
-    // rounding: 0 as Int,
-    symbol: 'KM',
-    // symbolNative: 'KM',
-  });
-
-  register({
-    code: 'BDT',
-    // precision: 2 as Int,
-    name: 'Bangladeshi Taka',
-    namePlural: 'Bangladeshi takas',
-    // rounding: 0 as Int,
-    symbol: 'Tk',
-    symbolNative: '৳',
-  });
-
-  register({
-    code: 'BGN',
-    // precision: 2 as Int,
-    name: 'Bulgarian Lev',
-    namePlural: 'Bulgarian leva',
-    // rounding: 0 as Int,
-    symbol: 'BGN',
-    symbolNative: 'лв.',
-  });
-
-  register({
-    code: 'BHD',
-    precision: 3 as Int,
-    name: 'Bahraini Dinar',
-    namePlural: 'Bahraini dinars',
-    // rounding: 0 as Int,
-    symbol: 'BD',
-    symbolNative: 'د.ب.‏',
-  });
-
-  register({
-    code: 'BIF',
-    precision: 0 as Int,
-    name: 'Burundian Franc',
-    namePlural: 'Burundian francs',
-    // rounding: 0 as Int,
-    symbol: 'FBu',
-    // symbolNative: 'FBu',
-  });
-
-  register({
-    code: 'BND',
-    // precision: 2 as Int,
-    name: 'Brunei Dollar',
-    namePlural: 'Brunei dollars',
-    // rounding: 0 as Int,
-    symbol: 'BN$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'BOB',
-    // precision: 2 as Int,
-    name: 'Bolivian Boliviano',
-    namePlural: 'Bolivian bolivianos',
-    // rounding: 0 as Int,
-    symbol: 'Bs',
-    // symbolNative: 'Bs',
-  });
-
-  register({
-    code: 'BRL',
-    // precision: 2 as Int,
-    name: 'Brazilian Real',
-    namePlural: 'Brazilian reals',
-    // rounding: 0 as Int,
-    symbol: 'R$',
-    // symbolNative: 'R$',
-  });
-
-  register({
-    code: 'BWP',
-    // precision: 2 as Int,
-    name: 'Botswanan Pula',
-    namePlural: 'Botswanan pulas',
-    // rounding: 0 as Int,
-    symbol: 'BWP',
-    symbolNative: 'P',
-  });
-
-  register({
-    code: 'BYN',
-    // precision: 2 as Int,
-    name: 'Belarusian Ruble',
-    namePlural: 'Belarusian rubles',
-    // rounding: 0 as Int,
-    symbol: 'Br',
-    symbolNative: 'руб.',
-  });
-
-  register({
-    code: 'BZD',
-    // precision: 2 as Int,
-    name: 'Belize Dollar',
-    namePlural: 'Belize dollars',
-    // rounding: 0 as Int,
-    symbol: 'BZ$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'CDF',
-    // precision: 2 as Int,
-    name: 'Congolese Franc',
-    namePlural: 'Congolese francs',
-    // rounding: 0 as Int,
-    symbol: 'CDF',
-    symbolNative: 'FrCD',
-  });
-
-  register({
-    code: 'CHF',
-    // precision: 2 as Int,
-    name: 'Swiss Franc',
-    namePlural: 'Swiss francs',
-    rounding: 0.05 as Int,
-    symbol: 'CHF',
-    // symbolNative: 'CHF',
-  });
-
-  register({
-    code: 'CLP',
-    precision: 0 as Int,
-    name: 'Chilean Peso',
-    namePlural: 'Chilean pesos',
-    // rounding: 0 as Int,
-    symbol: 'CL$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'CNY',
-    // precision: 2 as Int,
-    name: 'Chinese Yuan',
-    namePlural: 'Chinese yuan',
-    // rounding: 0 as Int,
-    symbol: 'CN¥',
-    // symbolNative: 'CN¥',
-  });
-
-  register({
-    code: 'COP',
-    precision: 0 as Int,
-    name: 'Colombian Peso',
-    namePlural: 'Colombian pesos',
-    // rounding: 0 as Int,
-    symbol: 'CO$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'CRC',
-    precision: 0 as Int,
-    name: 'Costa Rican Colón',
-    namePlural: 'Costa Rican colóns',
-    // rounding: 0 as Int,
-    symbol: '₡',
-    // symbolNative: '₡',
-  });
-
-  register({
-    code: 'CVE',
-    // precision: 2 as Int,
-    name: 'Cape Verdean Escudo',
-    namePlural: 'Cape Verdean escudos',
-    // rounding: 0 as Int,
-    symbol: 'CV$',
-    // symbolNative: 'CV$',
-  });
-
-  register({
-    code: 'CZK',
-    // precision: 2 as Int,
-    name: 'Czech Republic Koruna',
-    namePlural: 'Czech Republic korunas',
-    // rounding: 0 as Int,
-    symbol: 'Kč',
-    // symbolNative: 'Kč',
-  });
-
-  register({
-    code: 'DJF',
-    precision: 0 as Int,
-    name: 'Djiboutian Franc',
-    namePlural: 'Djiboutian francs',
-    // rounding: 0 as Int,
-    symbol: 'Fdj',
-    // symbolNative: 'Fdj',
-  });
-
-  register({
-    code: 'DKK',
-    // precision: 2 as Int,
-    name: 'Danish Krone',
-    namePlural: 'Danish kroner',
-    // rounding: 0 as Int,
-    symbol: 'Dkr',
-    symbolNative: 'kr',
-  });
-
-  register({
-    code: 'DOP',
-    // precision: 2 as Int,
-    name: 'Dominican Peso',
-    namePlural: 'Dominican pesos',
-    // rounding: 0 as Int,
-    symbol: 'RD$',
-    // symbolNative: 'RD$',
-  });
-
-  register({
-    code: 'DZD',
-    // precision: 2 as Int,
-    name: 'Algerian Dinar',
-    namePlural: 'Algerian dinars',
-    // rounding: 0 as Int,
-    symbol: 'DA',
-    symbolNative: 'د.ج.‏',
-  });
-
-  register({
-    code: 'EEK',
-    // precision: 2 as Int,
-    name: 'Estonian Kroon',
-    namePlural: 'Estonian kroons',
-    // rounding: 0 as Int,
-    symbol: 'Ekr',
-    symbolNative: 'kr',
-  });
-
-  register({
-    code: 'EGP',
-    // precision: 2 as Int,
-    name: 'Egyptian Pound',
-    namePlural: 'Egyptian pounds',
-    // rounding: 0 as Int,
-    symbol: 'EGP',
-    symbolNative: 'ج.م.‏',
-  });
-
-  register({
-    code: 'ERN',
-    // precision: 2 as Int,
-    name: 'Eritrean Nakfa',
-    namePlural: 'Eritrean nakfas',
-    // rounding: 0 as Int,
-    symbol: 'Nfk',
-    // symbolNative: 'Nfk',
-  });
-
-  register({
-    code: 'ETB',
-    // precision: 2 as Int,
-    name: 'Ethiopian Birr',
-    namePlural: 'Ethiopian birrs',
-    // rounding: 0 as Int,
-    symbol: 'Br',
-    // symbolNative: 'Br',
-  });
-
-  register({
-    code: 'GBP',
-    // precision: 2 as Int,
-    name: 'British Pound Sterling',
-    namePlural: 'British pounds sterling',
-    // rounding: 0 as Int,
-    symbol: '£',
-    // symbolNative: '£',
-  });
-
-  register({
-    code: 'GEL',
-    // precision: 2 as Int,
-    name: 'Georgian Lari',
-    namePlural: 'Georgian laris',
-    // rounding: 0 as Int,
-    symbol: 'GEL',
-    // symbolNative: 'GEL',
-  });
-
-  register({
-    code: 'GHS',
-    // precision: 2 as Int,
-    name: 'Ghanaian Cedi',
-    namePlural: 'Ghanaian cedis',
-    // rounding: 0 as Int,
-    symbol: 'GH₵',
-    // symbolNative: 'GH₵',
-  });
-
-  register({
-    code: 'GNF',
-    precision: 0 as Int,
-    name: 'Guinean Franc',
-    namePlural: 'Guinean francs',
-    // rounding: 0 as Int,
-    symbol: 'FG',
-    // symbolNative: 'FG',
-  });
-
-  register({
-    code: 'GTQ',
-    // precision: 2 as Int,
-    name: 'Guatemalan Quetzal',
-    namePlural: 'Guatemalan quetzals',
-    // rounding: 0 as Int,
-    symbol: 'GTQ',
-    symbolNative: 'Q',
-  });
-
-  register({
-    code: 'HKD',
-    // precision: 2 as Int,
-    name: 'Hong Kong Dollar',
-    namePlural: 'Hong Kong dollars',
-    // rounding: 0 as Int,
-    symbol: 'HK$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'HNL',
-    // precision: 2 as Int,
-    name: 'Honduran Lempira',
-    namePlural: 'Honduran lempiras',
-    // rounding: 0 as Int,
-    symbol: 'HNL',
-    symbolNative: 'L',
-  });
-
-  register({
-    code: 'HRK',
-    // precision: 2 as Int,
-    name: 'Croatian Kuna',
-    namePlural: 'Croatian kunas',
-    // rounding: 0 as Int,
-    symbol: 'kn',
-    // symbolNative: 'kn',
-  });
-
-  register({
-    code: 'HUF',
-    precision: 0 as Int,
-    name: 'Hungarian Forint',
-    namePlural: 'Hungarian forints',
-    // rounding: 0 as Int,
-    symbol: 'Ft',
-    // symbolNative: 'Ft',
-  });
-
-  register({
-    code: 'IDR',
-    precision: 0 as Int,
-    name: 'Indonesian Rupiah',
-    namePlural: 'Indonesian rupiahs',
-    // rounding: 0 as Int,
-    symbol: 'Rp',
-    // symbolNative: 'Rp',
-  });
-
-  register({
-    code: 'ILS',
-    // precision: 2 as Int,
-    name: 'Israeli New Sheqel',
-    namePlural: 'Israeli new sheqels',
-    // rounding: 0 as Int,
-    symbol: '₪',
-    // symbolNative: '₪',
-  });
-
-  register({
-    code: 'INR',
-    // precision: 2 as Int,
-    name: 'Indian Rupee',
-    namePlural: 'Indian rupees',
-    // rounding: 0 as Int,
-    symbol: 'Rs',
-    symbolNative: 'টকা',
-  });
-
-  register({
-    code: 'IQD',
-    precision: 0 as Int,
-    name: 'Iraqi Dinar',
-    namePlural: 'Iraqi dinars',
-    // rounding: 0 as Int,
-    symbol: 'IQD',
-    symbolNative: 'د.ع.‏',
-  });
-
-  register({
-    code: 'IRR',
-    precision: 0 as Int,
-    name: 'Iranian Rial',
-    namePlural: 'Iranian rials',
-    // rounding: 0 as Int,
-    symbol: 'IRR',
-    symbolNative: '﷼',
-  });
-
-  register({
-    code: 'ISK',
-    precision: 0 as Int,
-    name: 'Icelandic Króna',
-    namePlural: 'Icelandic krónur',
-    // rounding: 0 as Int,
-    symbol: 'Ikr',
-    symbolNative: 'kr',
-  });
-
-  register({
-    code: 'JMD',
-    // precision: 2 as Int,
-    name: 'Jamaican Dollar',
-    namePlural: 'Jamaican dollars',
-    // rounding: 0 as Int,
-    symbol: 'J$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'JOD',
-    precision: 3 as Int,
-    name: 'Jordanian Dinar',
-    namePlural: 'Jordanian dinars',
-    // rounding: 0 as Int,
-    symbol: 'JD',
-    symbolNative: 'د.أ.‏',
-  });
-
-  register({
-    code: 'JPY',
-    precision: 0 as Int,
-    name: 'Japanese Yen',
-    namePlural: 'Japanese yen',
-    // rounding: 0 as Int,
-    symbol: '¥',
-    symbolNative: '￥',
-  });
-
-  register({
-    code: 'KES',
-    // precision: 2 as Int,
-    name: 'Kenyan Shilling',
-    namePlural: 'Kenyan shillings',
-    // rounding: 0 as Int,
-    symbol: 'Ksh',
-    // symbolNative: 'Ksh',
-  });
-
-  register({
-    code: 'KHR',
-    // precision: 2 as Int,
-    name: 'Cambodian Riel',
-    namePlural: 'Cambodian riels',
-    // rounding: 0 as Int,
-    symbol: 'KHR',
-    symbolNative: '៛',
-  });
-
-  register({
-    code: 'KMF',
-    precision: 0 as Int,
-    name: 'Comorian Franc',
-    namePlural: 'Comorian francs',
-    // rounding: 0 as Int,
-    symbol: 'CF',
-    symbolNative: 'FC',
-  });
-
-  register({
-    code: 'KRW',
-    precision: 0 as Int,
-    name: 'South Korean Won',
-    namePlural: 'South Korean won',
-    // rounding: 0 as Int,
-    symbol: '₩',
-    // symbolNative: '₩',
-  });
-
-  register({
-    code: 'KWD',
-    precision: 3 as Int,
-    name: 'Kuwaiti Dinar',
-    namePlural: 'Kuwaiti dinars',
-    // rounding: 0 as Int,
-    symbol: 'KD',
-    symbolNative: 'د.ك.‏',
-  });
-
-  register({
-    code: 'KZT',
-    // precision: 2 as Int,
-    name: 'Kazakhstani Tenge',
-    namePlural: 'Kazakhstani tenges',
-    // rounding: 0 as Int,
-    symbol: 'KZT',
-    symbolNative: 'тңг.',
-  });
-
-  register({
-    code: 'LBP',
-    precision: 0 as Int,
-    name: 'Lebanese Pound',
-    namePlural: 'Lebanese pounds',
-    // rounding: 0 as Int,
-    symbol: 'LB£',
-    symbolNative: 'ل.ل.‏',
-  });
-
-  register({
-    code: 'LKR',
-    // precision: 2 as Int,
-    name: 'Sri Lankan Rupee',
-    namePlural: 'Sri Lankan rupees',
-    // rounding: 0 as Int,
-    symbol: 'SLRs',
-    symbolNative: 'SL Re',
-  });
-
-  register({
-    code: 'LTL',
-    // precision: 2 as Int,
-    name: 'Lithuanian Litas',
-    namePlural: 'Lithuanian litai',
-    // rounding: 0 as Int,
-    symbol: 'Lt',
-    // symbolNative: 'Lt',
-  });
-
-  register({
-    code: 'LVL',
-    // precision: 2 as Int,
-    name: 'Latvian Lats',
-    namePlural: 'Latvian lati',
-    // rounding: 0 as Int,
-    symbol: 'Ls',
-    // symbolNative: 'Ls',
-  });
-
-  register({
-    code: 'LYD',
-    precision: 3 as Int,
-    name: 'Libyan Dinar',
-    namePlural: 'Libyan dinars',
-    // rounding: 0 as Int,
-    symbol: 'LD',
-    symbolNative: 'د.ل.‏',
-  });
-
-  register({
-    code: 'MAD',
-    // precision: 2 as Int,
-    name: 'Moroccan Dirham',
-    namePlural: 'Moroccan dirhams',
-    // rounding: 0 as Int,
-    symbol: 'MAD',
-    symbolNative: 'د.م.‏',
-  });
-
-  register({
-    code: 'MDL',
-    // precision: 2 as Int,
-    name: 'Moldovan Leu',
-    namePlural: 'Moldovan lei',
-    // rounding: 0 as Int,
-    symbol: 'MDL',
-    // symbolNative: 'MDL',
-  });
-
-  register({
-    code: 'MGA',
-    precision: 0 as Int,
-    name: 'Malagasy Ariary',
-    namePlural: 'Malagasy Ariaries',
-    // rounding: 0 as Int,
-    symbol: 'MGA',
-    // symbolNative: 'MGA',
-  });
-
-  register({
-    code: 'MKD',
-    // precision: 2 as Int,
-    name: 'Macedonian Denar',
-    namePlural: 'Macedonian denari',
-    // rounding: 0 as Int,
-    symbol: 'MKD',
-    // symbolNative: 'MKD',
-  });
-
-  register({
-    code: 'MMK',
-    precision: 0 as Int,
-    name: 'Myanma Kyat',
-    namePlural: 'Myanma kyats',
-    // rounding: 0 as Int,
-    symbol: 'MMK',
-    symbolNative: 'K',
-  });
-
-  register({
-    code: 'MOP',
-    // precision: 2 as Int,
-    name: 'Macanese Pataca',
-    namePlural: 'Macanese patacas',
-    // rounding: 0 as Int,
-    symbol: 'MOP$',
-    // symbolNative: 'MOP$',
-  });
-
-  register({
-    code: 'MUR',
-    precision: 0 as Int,
-    name: 'Mauritian Rupee',
-    namePlural: 'Mauritian rupees',
-    // rounding: 0 as Int,
-    symbol: 'MURs',
-    // symbolNative: 'MURs',
-  });
-
-  register({
-    code: 'MXN',
-    // precision: 2 as Int,
-    name: 'Mexican Peso',
-    namePlural: 'Mexican pesos',
-    // rounding: 0 as Int,
-    symbol: 'MX$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'MYR',
-    // precision: 2 as Int,
-    name: 'Malaysian Ringgit',
-    namePlural: 'Malaysian ringgits',
-    // rounding: 0 as Int,
-    symbol: 'RM',
-    // symbolNative: 'RM',
-  });
-
-  register({
-    code: 'MZN',
-    // precision: 2 as Int,
-    name: 'Mozambican Metical',
-    namePlural: 'Mozambican meticals',
-    // rounding: 0 as Int,
-    symbol: 'MTn',
-    // symbolNative: 'MTn',
-  });
-
-  register({
-    code: 'NAD',
-    // precision: 2 as Int,
-    name: 'Namibian Dollar',
-    namePlural: 'Namibian dollars',
-    // rounding: 0 as Int,
-    symbol: 'N$',
-    // symbolNative: 'N$',
-  });
-
-  register({
-    code: 'NGN',
-    // precision: 2 as Int,
-    name: 'Nigerian Naira',
-    namePlural: 'Nigerian nairas',
-    // rounding: 0 as Int,
-    symbol: '₦',
-    // symbolNative: '₦',
-  });
-
-  register({
-    code: 'NIO',
-    // precision: 2 as Int,
-    name: 'Nicaraguan Córdoba',
-    namePlural: 'Nicaraguan córdobas',
-    // rounding: 0 as Int,
-    symbol: 'C$',
-    // symbolNative: 'C$',
-  });
-
-  register({
-    code: 'NOK',
-    // precision: 2 as Int,
-    name: 'Norwegian Krone',
-    namePlural: 'Norwegian kroner',
-    // rounding: 0 as Int,
-    symbol: 'Nkr',
-    symbolNative: 'kr',
-  });
-
-  register({
-    code: 'NPR',
-    // precision: 2 as Int,
-    name: 'Nepalese Rupee',
-    namePlural: 'Nepalese rupees',
-    // rounding: 0 as Int,
-    symbol: 'NPRs',
-    symbolNative: 'नेरू',
-  });
-
-  register({
-    code: 'NZD',
-    // precision: 2 as Int,
-    name: 'New Zealand Dollar',
-    namePlural: 'New Zealand dollars',
-    // rounding: 0 as Int,
-    symbol: 'NZ$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'OMR',
-    precision: 3 as Int,
-    name: 'Omani Rial',
-    namePlural: 'Omani rials',
-    // rounding: 0 as Int,
-    symbol: 'OMR',
-    symbolNative: 'ر.ع.‏',
-  });
-
-  register({
-    code: 'PAB',
-    // precision: 2 as Int,
-    name: 'Panamanian Balboa',
-    namePlural: 'Panamanian balboas',
-    // rounding: 0 as Int,
-    symbol: 'B/.',
-    // symbolNative: 'B/.',
-  });
-
-  register({
-    code: 'PEN',
-    // precision: 2 as Int,
-    name: 'Peruvian Nuevo Sol',
-    namePlural: 'Peruvian nuevos soles',
-    // rounding: 0 as Int,
-    symbol: 'S/.',
-    // symbolNative: 'S/.',
-  });
-
-  register({
-    code: 'PHP',
-    // precision: 2 as Int,
-    name: 'Philippine Peso',
-    namePlural: 'Philippine pesos',
-    // rounding: 0 as Int,
-    symbol: '₱',
-    // symbolNative: '₱',
-  });
-
-  register({
-    code: 'PKR',
-    precision: 0 as Int,
-    name: 'Pakistani Rupee',
-    namePlural: 'Pakistani rupees',
-    // rounding: 0 as Int,
-    symbol: 'PKRs',
-    symbolNative: '₨',
-  });
-
-  register({
-    code: 'PLN',
-    // precision: 2 as Int,
-    name: 'Polish Zloty',
-    namePlural: 'Polish zlotys',
-    // rounding: 0 as Int,
-    symbol: 'zł',
-    // symbolNative: 'zł',
-  });
-
-  register({
-    code: 'PYG',
-    precision: 0 as Int,
-    name: 'Paraguayan Guarani',
-    namePlural: 'Paraguayan guaranis',
-    // rounding: 0 as Int,
-    symbol: '₲',
-    // symbolNative: '₲',
-  });
-
-  register({
-    code: 'QAR',
-    // precision: 2 as Int,
-    name: 'Qatari Rial',
-    namePlural: 'Qatari rials',
-    // rounding: 0 as Int,
-    symbol: 'QR',
-    symbolNative: 'ر.ق.‏',
-  });
-
-  register({
-    code: 'RON',
-    // precision: 2 as Int,
-    name: 'Romanian Leu',
-    namePlural: 'Romanian lei',
-    // rounding: 0 as Int,
-    symbol: 'RON',
-    // symbolNative: 'RON',
-  });
-
-  register({
-    code: 'RSD',
-    precision: 0 as Int,
-    name: 'Serbian Dinar',
-    namePlural: 'Serbian dinars',
-    // rounding: 0 as Int,
-    symbol: 'din.',
-    symbolNative: 'дин.',
-  });
-
-  register({
-    code: 'RUB',
-    // precision: 2 as Int,
-    name: 'Russian Ruble',
-    namePlural: 'Russian rubles',
-    // rounding: 0 as Int,
-    symbol: 'RUB',
-    symbolNative: '₽.',
-  });
-
-  register({
-    code: 'RWF',
-    precision: 0 as Int,
-    name: 'Rwandan Franc',
-    namePlural: 'Rwandan francs',
-    // rounding: 0 as Int,
-    symbol: 'RWF',
-    symbolNative: 'FR',
-  });
-
-  register({
-    code: 'SAR',
-    // precision: 2 as Int,
-    name: 'Saudi Riyal',
-    namePlural: 'Saudi riyals',
-    // rounding: 0 as Int,
-    symbol: 'SR',
-    symbolNative: 'ر.س.‏',
-  });
-
-  register({
-    code: 'SDG',
-    // precision: 2 as Int,
-    name: 'Sudanese Pound',
-    namePlural: 'Sudanese pounds',
-    // rounding: 0 as Int,
-    symbol: 'SDG',
-    // symbolNative: 'SDG',
-  });
-
-  register({
-    code: 'SEK',
-    // precision: 2 as Int,
-    name: 'Swedish Krona',
-    namePlural: 'Swedish kronor',
-    // rounding: 0 as Int,
-    symbol: 'Skr',
-    symbolNative: 'kr',
-  });
-
-  register({
-    code: 'SGD',
-    // precision: 2 as Int,
-    name: 'Singapore Dollar',
-    namePlural: 'Singapore dollars',
-    // rounding: 0 as Int,
-    symbol: 'S$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'SOS',
-    precision: 0 as Int,
-    name: 'Somali Shilling',
-    namePlural: 'Somali shillings',
-    // rounding: 0 as Int,
-    symbol: 'Ssh',
-    // symbolNative: 'Ssh',
-  });
-
-  register({
-    code: 'SYP',
-    precision: 0 as Int,
-    name: 'Syrian Pound',
-    namePlural: 'Syrian pounds',
-    // rounding: 0 as Int,
-    symbol: 'SY£',
-    symbolNative: 'ل.س.‏',
-  });
-
-  register({
-    code: 'THB',
-    // precision: 2 as Int,
-    name: 'Thai Baht',
-    namePlural: 'Thai baht',
-    // rounding: 0 as Int,
-    symbol: '฿',
-    // symbolNative: '฿',
-  });
-
-  register({
-    code: 'TND',
-    precision: 3 as Int,
-    name: 'Tunisian Dinar',
-    namePlural: 'Tunisian dinars',
-    // rounding: 0 as Int,
-    symbol: 'DT',
-    symbolNative: 'د.ت.‏',
-  });
-
-  register({
-    code: 'TOP',
-    // precision: 2 as Int,
-    name: 'Tongan Paʻanga',
-    namePlural: 'Tongan paʻanga',
-    // rounding: 0 as Int,
-    symbol: 'T$',
-    // symbolNative: 'T$',
-  });
-
-  register({
-    code: 'TRY',
-    // precision: 2 as Int,
-    name: 'Turkish Lira',
-    namePlural: 'Turkish Lira',
-    // rounding: 0 as Int,
-    symbol: 'TL',
-    // symbolNative: 'TL',
-  });
-
-  register({
-    code: 'TTD',
-    // precision: 2 as Int,
-    name: 'Trinidad and Tobago Dollar',
-    namePlural: 'Trinidad and Tobago dollars',
-    // rounding: 0 as Int,
-    symbol: 'TT$',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'TWD',
-    // precision: 2 as Int,
-    name: 'New Taiwan Dollar',
-    namePlural: 'New Taiwan dollars',
-    // rounding: 0 as Int,
-    symbol: 'NT$',
-    // symbolNative: 'NT$',
-  });
-
-  register({
-    code: 'TZS',
-    precision: 0 as Int,
-    name: 'Tanzanian Shilling',
-    namePlural: 'Tanzanian shillings',
-    // rounding: 0 as Int,
-    symbol: 'TSh',
-    // symbolNative: 'TSh',
-  });
-
-  register({
-    code: 'UAH',
-    // precision: 2 as Int,
-    name: 'Ukrainian Hryvnia',
-    namePlural: 'Ukrainian hryvnias',
-    // rounding: 0 as Int,
-    symbol: '₴',
-    // symbolNative: '₴',
-  });
-
-  register({
-    code: 'UGX',
-    precision: 0 as Int,
-    name: 'Ugandan Shilling',
-    namePlural: 'Ugandan shillings',
-    // rounding: 0 as Int,
-    symbol: 'USh',
-    // symbolNative: 'USh',
-  });
-
-  register({
-    code: 'UYU',
-    // precision: 2 as Int,
-    name: 'Uruguayan Peso',
-    namePlural: 'Uruguayan pesos',
-    // rounding: 0 as Int,
-    symbol: '$U',
-    symbolNative: '$',
-  });
-
-  register({
-    code: 'UZS',
-    precision: 0 as Int,
-    name: 'Uzbekistan Som',
-    namePlural: 'Uzbekistan som',
-    // rounding: 0 as Int,
-    symbol: 'UZS',
-    // symbolNative: 'UZS',
-  });
-
-  register({
-    code: 'VEF',
-    // precision: 2 as Int,
-    name: 'Venezuelan Bolívar',
-    namePlural: 'Venezuelan bolívars',
-    // rounding: 0 as Int,
-    symbol: 'Bs.F.',
-    // symbolNative: 'Bs.F.',
-  });
-
-  register({
-    code: 'VND',
-    precision: 0 as Int,
-    name: 'Vietnamese Dong',
-    namePlural: 'Vietnamese dong',
-    // rounding: 0 as Int,
-    symbol: '₫',
-    // symbolNative: '₫',
-  });
-
-  register({
-    code: 'XAF',
-    precision: 0 as Int,
-    name: 'CFA Franc BEAC',
-    namePlural: 'CFA francs BEAC',
-    // rounding: 0 as Int,
-    symbol: 'FCFA',
-    // symbolNative: 'FCFA',
-  });
-
-  register({
-    code: 'XOF',
-    precision: 0 as Int,
-    name: 'CFA Franc BCEAO',
-    namePlural: 'CFA francs BCEAO',
-    // rounding: 0 as Int,
-    symbol: 'CFA',
-    // symbolNative: 'CFA',
-  });
-
-  register({
-    code: 'YER',
-    precision: 0 as Int,
-    name: 'Yemeni Rial',
-    namePlural: 'Yemeni rials',
-    // rounding: 0 as Int,
-    symbol: 'YR',
-    symbolNative: 'ر.ي.‏',
-  });
-
-  register({
-    code: 'ZAR',
-    // precision: 2 as Int,
-    name: 'South African Rand',
-    namePlural: 'South African rand',
-    // rounding: 0 as Int,
-    symbol: 'R',
-    // symbolNative: 'R',
-  });
-
-  register({
-    code: 'ZMK',
-    precision: 0 as Int,
-    name: 'Zambian Kwacha',
-    namePlural: 'Zambian kwachas',
-    // rounding: 0 as Int,
-    symbol: 'ZK',
-    // symbolNative: 'ZK',
-  });
-
-  register({
-    code: 'ZWL',
-    precision: 0 as Int,
-    name: 'Zimbabwean Dollar',
-    namePlural: 'Zimbabwean Dollar',
-    // rounding: 0 as Int,
-    symbol: 'ZWL$',
-    // symbolNative: 'ZWL$',
-  });
-}
-registerAll();
 /**
  * US Dollar money factory
  *
@@ -1207,7 +36,7 @@ registerAll();
  * ```
  * @param amount - The amount of money
  */
-export const USD = moneyFactory('USD');
+export const USD = register('USD', 2, 'US Dollar', 'US dollars', 0, '$', '$');
 /**
  * Canadian Dollar money factory
  *
@@ -1217,7 +46,7 @@ export const USD = moneyFactory('USD');
  * ```
  * @param amount - The amount of money
  */
-export const CAD = moneyFactory('CAD');
+export const CAD = register('CAD', 2, 'Canadian Dollar', 'Canadian dollars', 0, 'CA$', '$');
 /**
  * Euro money factory
  *
@@ -1227,7 +56,7 @@ export const CAD = moneyFactory('CAD');
  * ```
  * @param amount - The amount of money
  */
-export const EUR = moneyFactory('EUR');
+export const EUR = register('EUR', 2, 'Euro', 'euros', 0, '€', '€');
 /**
  * United Arab Emirates Dirham money factory
  *
@@ -1237,7 +66,7 @@ export const EUR = moneyFactory('EUR');
  * ```
  * @param amount - The amount of money
  */
-export const AED = moneyFactory('AED');
+export const AED = register('AED', 2, 'United Arab Emirates Dirham', 'UAE dirhams', 0, 'AED', 'د.إ.‏');
 /**
  * Afghan Afghani money factory
  *
@@ -1247,7 +76,7 @@ export const AED = moneyFactory('AED');
  * ```
  * @param amount - The amount of money
  */
-export const AFN = moneyFactory('AFN');
+export const AFN = register('AFN', 0, 'Afghan Afghani', 'Afghan Afghanis', 0, 'Af', '؋');
 /**
  * Albanian Lek money factory
  *
@@ -1257,7 +86,7 @@ export const AFN = moneyFactory('AFN');
  * ```
  * @param amount - The amount of money
  */
-export const ALL = moneyFactory('ALL');
+export const ALL = register('ALL', 0, 'Albanian Lek', 'Albanian lekë', 0, 'ALL', 'Lek');
 /**
  * Armenian Dram money factory
  *
@@ -1267,7 +96,7 @@ export const ALL = moneyFactory('ALL');
  * ```
  * @param amount - The amount of money
  */
-export const AMD = moneyFactory('AMD');
+export const AMD = register('AMD', 0, 'Armenian Dram', 'Armenian drams', 0, 'AMD', 'դր.');
 /**
  * Argentine Peso money factory
  *
@@ -1277,7 +106,7 @@ export const AMD = moneyFactory('AMD');
  * ```
  * @param amount - The amount of money
  */
-export const ARS = moneyFactory('ARS');
+export const ARS = register('ARS', 2, 'Argentine Peso', 'Argentine pesos', 0, 'AR$', '$');
 /**
  * Australian Dollar money factory
  *
@@ -1287,7 +116,7 @@ export const ARS = moneyFactory('ARS');
  * ```
  * @param amount - The amount of money
  */
-export const AUD = moneyFactory('AUD');
+export const AUD = register('AUD', 2, 'Australian Dollar', 'Australian dollars', 0, 'AU$', '$');
 /**
  * Azerbaijani Manat money factory
  *
@@ -1297,7 +126,7 @@ export const AUD = moneyFactory('AUD');
  * ```
  * @param amount - The amount of money
  */
-export const AZN = moneyFactory('AZN');
+export const AZN = register('AZN', 2, 'Azerbaijani Manat', 'Azerbaijani manats', 0, 'man.', 'ман.');
 /**
  * Bosnia-Herzegovina Convertible Mark money factory
  *
@@ -1307,7 +136,7 @@ export const AZN = moneyFactory('AZN');
  * ```
  * @param amount - The amount of money
  */
-export const BAM = moneyFactory('BAM');
+export const BAM = register('BAM', 2, 'Bosnia-Herzegovina Convertible Mark', 'Bosnia-Herzegovina convertible marks', 0, 'KM', 'KM');
 /**
  * Bangladeshi Taka money factory
  *
@@ -1317,7 +146,7 @@ export const BAM = moneyFactory('BAM');
  * ```
  * @param amount - The amount of money
  */
-export const BDT = moneyFactory('BDT');
+export const BDT = register('BDT', 2, 'Bangladeshi Taka', 'Bangladeshi takas', 0, 'Tk', '৳');
 /**
  * Bulgarian Lev money factory
  *
@@ -1327,7 +156,7 @@ export const BDT = moneyFactory('BDT');
  * ```
  * @param amount - The amount of money
  */
-export const BGN = moneyFactory('BGN');
+export const BGN = register('BGN', 2, 'Bulgarian Lev', 'Bulgarian leva', 0, 'BGN', 'лв.');
 /**
  * Bahraini Dinar money factory
  *
@@ -1337,7 +166,7 @@ export const BGN = moneyFactory('BGN');
  * ```
  * @param amount - The amount of money
  */
-export const BHD = moneyFactory('BHD');
+export const BHD = register('BHD', 3, 'Bahraini Dinar', 'Bahraini dinars', 0, 'BD', 'د.ب.‏');
 /**
  * Burundian Franc money factory
  *
@@ -1347,7 +176,7 @@ export const BHD = moneyFactory('BHD');
  * ```
  * @param amount - The amount of money
  */
-export const BIF = moneyFactory('BIF');
+export const BIF = register('BIF', 0, 'Burundian Franc', 'Burundian francs', 0, 'FBu', 'FBu');
 /**
  * Brunei Dollar money factory
  *
@@ -1357,7 +186,7 @@ export const BIF = moneyFactory('BIF');
  * ```
  * @param amount - The amount of money
  */
-export const BND = moneyFactory('BND');
+export const BND = register('BND', 2, 'Brunei Dollar', 'Brunei dollars', 0, 'BN$', '$');
 /**
  * Bolivian Boliviano money factory
  *
@@ -1367,7 +196,7 @@ export const BND = moneyFactory('BND');
  * ```
  * @param amount - The amount of money
  */
-export const BOB = moneyFactory('BOB');
+export const BOB = register('BOB', 2, 'Bolivian Boliviano', 'Bolivian bolivianos', 0, 'Bs', 'Bs');
 /**
  * Brazilian Real money factory
  *
@@ -1377,7 +206,7 @@ export const BOB = moneyFactory('BOB');
  * ```
  * @param amount - The amount of money
  */
-export const BRL = moneyFactory('BRL');
+export const BRL = register('BRL', 2, 'Brazilian Real', 'Brazilian reals', 0, 'R$', 'R$');
 /**
  * Botswanan Pula money factory
  *
@@ -1387,7 +216,7 @@ export const BRL = moneyFactory('BRL');
  * ```
  * @param amount - The amount of money
  */
-export const BWP = moneyFactory('BWP');
+export const BWP = register('BWP', 2, 'Botswanan Pula', 'Botswanan pulas', 0, 'BWP', 'P');
 /**
  * Belarusian Ruble money factory
  *
@@ -1397,7 +226,7 @@ export const BWP = moneyFactory('BWP');
  * ```
  * @param amount - The amount of money
  */
-export const BYN = moneyFactory('BYN');
+export const BYN = register('BYN', 2, 'Belarusian Ruble', 'Belarusian rubles', 0, 'Br', 'руб.');
 /**
  * Belize Dollar money factory
  *
@@ -1407,7 +236,7 @@ export const BYN = moneyFactory('BYN');
  * ```
  * @param amount - The amount of money
  */
-export const BZD = moneyFactory('BZD');
+export const BZD = register('BZD', 2, 'Belize Dollar', 'Belize dollars', 0, 'BZ$', '$');
 /**
  * Congolese Franc money factory
  *
@@ -1417,7 +246,7 @@ export const BZD = moneyFactory('BZD');
  * ```
  * @param amount - The amount of money
  */
-export const CDF = moneyFactory('CDF');
+export const CDF = register('CDF', 2, 'Congolese Franc', 'Congolese francs', 0, 'CDF', 'FrCD');
 /**
  * Swiss Franc money factory
  *
@@ -1427,7 +256,7 @@ export const CDF = moneyFactory('CDF');
  * ```
  * @param amount - The amount of money
  */
-export const CHF = moneyFactory('CHF');
+export const CHF = register('CHF', 2, 'Swiss Franc', 'Swiss francs', 0.05, 'CHF', 'CHF');
 /**
  * Chilean Peso money factory
  *
@@ -1437,7 +266,7 @@ export const CHF = moneyFactory('CHF');
  * ```
  * @param amount - The amount of money
  */
-export const CLP = moneyFactory('CLP');
+export const CLP = register('CLP', 0, 'Chilean Peso', 'Chilean pesos', 0, 'CL$', '$');
 /**
  * Chinese Yuan money factory
  *
@@ -1447,7 +276,7 @@ export const CLP = moneyFactory('CLP');
  * ```
  * @param amount - The amount of money
  */
-export const CNY = moneyFactory('CNY');
+export const CNY = register('CNY', 2, 'Chinese Yuan', 'Chinese yuan', 0, 'CN¥', 'CN¥');
 /**
  * Colombian Peso money factory
  *
@@ -1457,7 +286,7 @@ export const CNY = moneyFactory('CNY');
  * ```
  * @param amount - The amount of money
  */
-export const COP = moneyFactory('COP');
+export const COP = register('COP', 0, 'Colombian Peso', 'Colombian pesos', 0, 'CO$', '$');
 /**
  * Costa Rican Colón money factory
  *
@@ -1467,7 +296,7 @@ export const COP = moneyFactory('COP');
  * ```
  * @param amount - The amount of money
  */
-export const CRC = moneyFactory('CRC');
+export const CRC = register('CRC', 0, 'Costa Rican Colón', 'Costa Rican colóns', 0, '₡', '₡');
 /**
  * Cape Verdean Escudo money factory
  *
@@ -1477,7 +306,7 @@ export const CRC = moneyFactory('CRC');
  * ```
  * @param amount - The amount of money
  */
-export const CVE = moneyFactory('CVE');
+export const CVE = register('CVE', 2, 'Cape Verdean Escudo', 'Cape Verdean escudos', 0, 'CV$', 'CV$');
 /**
  * Czech Republic Koruna money factory
  *
@@ -1487,7 +316,7 @@ export const CVE = moneyFactory('CVE');
  * ```
  * @param amount - The amount of money
  */
-export const CZK = moneyFactory('CZK');
+export const CZK = register('CZK', 2, 'Czech Republic Koruna', 'Czech Republic korunas', 0, 'Kč', 'Kč');
 /**
  * Djiboutian Franc money factory
  *
@@ -1497,7 +326,7 @@ export const CZK = moneyFactory('CZK');
  * ```
  * @param amount - The amount of money
  */
-export const DJF = moneyFactory('DJF');
+export const DJF = register('DJF', 0, 'Djiboutian Franc', 'Djiboutian francs', 0, 'Fdj', 'Fdj');
 /**
  * Danish Krone money factory
  *
@@ -1507,7 +336,7 @@ export const DJF = moneyFactory('DJF');
  * ```
  * @param amount - The amount of money
  */
-export const DKK = moneyFactory('DKK');
+export const DKK = register('DKK', 2, 'Danish Krone', 'Danish kroner', 0, 'Dkr', 'kr');
 /**
  * Dominican Peso money factory
  *
@@ -1517,7 +346,7 @@ export const DKK = moneyFactory('DKK');
  * ```
  * @param amount - The amount of money
  */
-export const DOP = moneyFactory('DOP');
+export const DOP = register('DOP', 2, 'Dominican Peso', 'Dominican pesos', 0, 'RD$', 'RD$');
 /**
  * Algerian Dinar money factory
  *
@@ -1527,7 +356,7 @@ export const DOP = moneyFactory('DOP');
  * ```
  * @param amount - The amount of money
  */
-export const DZD = moneyFactory('DZD');
+export const DZD = register('DZD', 2, 'Algerian Dinar', 'Algerian dinars', 0, 'DA', 'د.ج.‏');
 /**
  * Estonian Kroon money factory
  *
@@ -1537,7 +366,7 @@ export const DZD = moneyFactory('DZD');
  * ```
  * @param amount - The amount of money
  */
-export const EEK = moneyFactory('EEK');
+export const EEK = register('EEK', 2, 'Estonian Kroon', 'Estonian kroons', 0, 'Ekr', 'kr');
 /**
  * Egyptian Pound money factory
  *
@@ -1547,7 +376,7 @@ export const EEK = moneyFactory('EEK');
  * ```
  * @param amount - The amount of money
  */
-export const EGP = moneyFactory('EGP');
+export const EGP = register('EGP', 2, 'Egyptian Pound', 'Egyptian pounds', 0, 'EGP', 'ج.م.‏');
 /**
  * Eritrean Nakfa money factory
  *
@@ -1557,7 +386,7 @@ export const EGP = moneyFactory('EGP');
  * ```
  * @param amount - The amount of money
  */
-export const ERN = moneyFactory('ERN');
+export const ERN = register('ERN', 2, 'Eritrean Nakfa', 'Eritrean nakfas', 0, 'Nfk', 'Nfk');
 /**
  * Ethiopian Birr money factory
  *
@@ -1567,7 +396,7 @@ export const ERN = moneyFactory('ERN');
  * ```
  * @param amount - The amount of money
  */
-export const ETB = moneyFactory('ETB');
+export const ETB = register('ETB', 2, 'Ethiopian Birr', 'Ethiopian birrs', 0, 'Br', 'Br');
 /**
  * British Pound Sterling money factory
  *
@@ -1577,7 +406,7 @@ export const ETB = moneyFactory('ETB');
  * ```
  * @param amount - The amount of money
  */
-export const GBP = moneyFactory('GBP');
+export const GBP = register('GBP', 2, 'British Pound Sterling', 'British pounds sterling', 0, '£', '£');
 /**
  * Georgian Lari money factory
  *
@@ -1587,7 +416,7 @@ export const GBP = moneyFactory('GBP');
  * ```
  * @param amount - The amount of money
  */
-export const GEL = moneyFactory('GEL');
+export const GEL = register('GEL', 2, 'Georgian Lari', 'Georgian laris', 0, 'GEL', 'GEL');
 /**
  * Ghanaian Cedi money factory
  *
@@ -1597,7 +426,7 @@ export const GEL = moneyFactory('GEL');
  * ```
  * @param amount - The amount of money
  */
-export const GHS = moneyFactory('GHS');
+export const GHS = register('GHS', 2, 'Ghanaian Cedi', 'Ghanaian cedis', 0, 'GH₵', 'GH₵');
 /**
  * Guinean Franc money factory
  *
@@ -1607,7 +436,7 @@ export const GHS = moneyFactory('GHS');
  * ```
  * @param amount - The amount of money
  */
-export const GNF = moneyFactory('GNF');
+export const GNF = register('GNF', 0, 'Guinean Franc', 'Guinean francs', 0, 'FG', 'FG');
 /**
  * Guatemalan Quetzal money factory
  *
@@ -1617,7 +446,7 @@ export const GNF = moneyFactory('GNF');
  * ```
  * @param amount - The amount of money
  */
-export const GTQ = moneyFactory('GTQ');
+export const GTQ = register('GTQ', 2, 'Guatemalan Quetzal', 'Guatemalan quetzals', 0, 'GTQ', 'Q');
 /**
  * Hong Kong Dollar money factory
  *
@@ -1627,7 +456,7 @@ export const GTQ = moneyFactory('GTQ');
  * ```
  * @param amount - The amount of money
  */
-export const HKD = moneyFactory('HKD');
+export const HKD = register('HKD', 2, 'Hong Kong Dollar', 'Hong Kong dollars', 0, 'HK$', '$');
 /**
  * Honduran Lempira money factory
  *
@@ -1637,7 +466,7 @@ export const HKD = moneyFactory('HKD');
  * ```
  * @param amount - The amount of money
  */
-export const HNL = moneyFactory('HNL');
+export const HNL = register('HNL', 2, 'Honduran Lempira', 'Honduran lempiras', 0, 'HNL', 'L');
 /**
  * Croatian Kuna money factory
  *
@@ -1647,7 +476,7 @@ export const HNL = moneyFactory('HNL');
  * ```
  * @param amount - The amount of money
  */
-export const HRK = moneyFactory('HRK');
+export const HRK = register('HRK', 2, 'Croatian Kuna', 'Croatian kunas', 0, 'kn', 'kn');
 /**
  * Hungarian Forint money factory
  *
@@ -1657,7 +486,7 @@ export const HRK = moneyFactory('HRK');
  * ```
  * @param amount - The amount of money
  */
-export const HUF = moneyFactory('HUF');
+export const HUF = register('HUF', 0, 'Hungarian Forint', 'Hungarian forints', 0, 'Ft', 'Ft');
 /**
  * Indonesian Rupiah money factory
  *
@@ -1667,7 +496,7 @@ export const HUF = moneyFactory('HUF');
  * ```
  * @param amount - The amount of money
  */
-export const IDR = moneyFactory('IDR');
+export const IDR = register('IDR', 0, 'Indonesian Rupiah', 'Indonesian rupiahs', 0, 'Rp', 'Rp');
 /**
  * Israeli New Sheqel money factory
  *
@@ -1677,7 +506,7 @@ export const IDR = moneyFactory('IDR');
  * ```
  * @param amount - The amount of money
  */
-export const ILS = moneyFactory('ILS');
+export const ILS = register('ILS', 2, 'Israeli New Sheqel', 'Israeli new sheqels', 0, '₪', '₪');
 /**
  * Indian Rupee money factory
  *
@@ -1687,7 +516,7 @@ export const ILS = moneyFactory('ILS');
  * ```
  * @param amount - The amount of money
  */
-export const INR = moneyFactory('INR');
+export const INR = register('INR', 2, 'Indian Rupee', 'Indian rupees', 0, 'Rs', 'টকা');
 /**
  * Iraqi Dinar money factory
  *
@@ -1697,7 +526,7 @@ export const INR = moneyFactory('INR');
  * ```
  * @param amount - The amount of money
  */
-export const IQD = moneyFactory('IQD');
+export const IQD = register('IQD', 0, 'Iraqi Dinar', 'Iraqi dinars', 0, 'IQD', 'د.ع.‏');
 /**
  * Iranian Rial money factory
  *
@@ -1707,7 +536,7 @@ export const IQD = moneyFactory('IQD');
  * ```
  * @param amount - The amount of money
  */
-export const IRR = moneyFactory('IRR');
+export const IRR = register('IRR', 0, 'Iranian Rial', 'Iranian rials', 0, 'IRR', '﷼');
 /**
  * Icelandic Króna money factory
  *
@@ -1717,7 +546,7 @@ export const IRR = moneyFactory('IRR');
  * ```
  * @param amount - The amount of money
  */
-export const ISK = moneyFactory('ISK');
+export const ISK = register('ISK', 0, 'Icelandic Króna', 'Icelandic krónur', 0, 'Ikr', 'kr');
 /**
  * Jamaican Dollar money factory
  *
@@ -1727,7 +556,7 @@ export const ISK = moneyFactory('ISK');
  * ```
  * @param amount - The amount of money
  */
-export const JMD = moneyFactory('JMD');
+export const JMD = register('JMD', 2, 'Jamaican Dollar', 'Jamaican dollars', 0, 'J$', '$');
 /**
  * Jordanian Dinar money factory
  *
@@ -1737,7 +566,7 @@ export const JMD = moneyFactory('JMD');
  * ```
  * @param amount - The amount of money
  */
-export const JOD = moneyFactory('JOD');
+export const JOD = register('JOD', 3, 'Jordanian Dinar', 'Jordanian dinars', 0, 'JD', 'د.أ.‏');
 /**
  * Japanese Yen money factory
  *
@@ -1747,7 +576,7 @@ export const JOD = moneyFactory('JOD');
  * ```
  * @param amount - The amount of money
  */
-export const JPY = moneyFactory('JPY');
+export const JPY = register('JPY', 0, 'Japanese Yen', 'Japanese yen', 0, '¥', '￥');
 /**
  * Kenyan Shilling money factory
  *
@@ -1757,7 +586,7 @@ export const JPY = moneyFactory('JPY');
  * ```
  * @param amount - The amount of money
  */
-export const KES = moneyFactory('KES');
+export const KES = register('KES', 2, 'Kenyan Shilling', 'Kenyan shillings', 0, 'Ksh', 'Ksh');
 /**
  * Cambodian Riel money factory
  *
@@ -1767,7 +596,7 @@ export const KES = moneyFactory('KES');
  * ```
  * @param amount - The amount of money
  */
-export const KHR = moneyFactory('KHR');
+export const KHR = register('KHR', 2, 'Cambodian Riel', 'Cambodian riels', 0, 'KHR', '៛');
 /**
  * Comorian Franc money factory
  *
@@ -1777,7 +606,7 @@ export const KHR = moneyFactory('KHR');
  * ```
  * @param amount - The amount of money
  */
-export const KMF = moneyFactory('KMF');
+export const KMF = register('KMF', 0, 'Comorian Franc', 'Comorian francs', 0, 'CF', 'FC');
 /**
  * South Korean Won money factory
  *
@@ -1787,7 +616,7 @@ export const KMF = moneyFactory('KMF');
  * ```
  * @param amount - The amount of money
  */
-export const KRW = moneyFactory('KRW');
+export const KRW = register('KRW', 0, 'South Korean Won', 'South Korean won', 0, '₩', '₩');
 /**
  * Kuwaiti Dinar money factory
  *
@@ -1797,7 +626,7 @@ export const KRW = moneyFactory('KRW');
  * ```
  * @param amount - The amount of money
  */
-export const KWD = moneyFactory('KWD');
+export const KWD = register('KWD', 3, 'Kuwaiti Dinar', 'Kuwaiti dinars', 0, 'KD', 'د.ك.‏');
 /**
  * Kazakhstani Tenge money factory
  *
@@ -1807,7 +636,7 @@ export const KWD = moneyFactory('KWD');
  * ```
  * @param amount - The amount of money
  */
-export const KZT = moneyFactory('KZT');
+export const KZT = register('KZT', 2, 'Kazakhstani Tenge', 'Kazakhstani tenges', 0, 'KZT', 'тңг.');
 /**
  * Lebanese Pound money factory
  *
@@ -1817,7 +646,7 @@ export const KZT = moneyFactory('KZT');
  * ```
  * @param amount - The amount of money
  */
-export const LBP = moneyFactory('LBP');
+export const LBP = register('LBP', 0, 'Lebanese Pound', 'Lebanese pounds', 0, 'LB£', 'ل.ل.‏');
 /**
  * Sri Lankan Rupee money factory
  *
@@ -1827,7 +656,7 @@ export const LBP = moneyFactory('LBP');
  * ```
  * @param amount - The amount of money
  */
-export const LKR = moneyFactory('LKR');
+export const LKR = register('LKR', 2, 'Sri Lankan Rupee', 'Sri Lankan rupees', 0, 'SLRs', 'SL Re');
 /**
  * Lithuanian Litas money factory
  *
@@ -1837,7 +666,7 @@ export const LKR = moneyFactory('LKR');
  * ```
  * @param amount - The amount of money
  */
-export const LTL = moneyFactory('LTL');
+export const LTL = register('LTL', 2, 'Lithuanian Litas', 'Lithuanian litai', 0, 'Lt', 'Lt');
 /**
  * Latvian Lats money factory
  *
@@ -1847,7 +676,7 @@ export const LTL = moneyFactory('LTL');
  * ```
  * @param amount - The amount of money
  */
-export const LVL = moneyFactory('LVL');
+export const LVL = register('LVL', 2, 'Latvian Lats', 'Latvian lati', 0, 'Ls', 'Ls');
 /**
  * Libyan Dinar money factory
  *
@@ -1857,7 +686,7 @@ export const LVL = moneyFactory('LVL');
  * ```
  * @param amount - The amount of money
  */
-export const LYD = moneyFactory('LYD');
+export const LYD = register('LYD', 3, 'Libyan Dinar', 'Libyan dinars', 0, 'LD', 'د.ل.‏');
 /**
  * Moroccan Dirham money factory
  *
@@ -1867,7 +696,7 @@ export const LYD = moneyFactory('LYD');
  * ```
  * @param amount - The amount of money
  */
-export const MAD = moneyFactory('MAD');
+export const MAD = register('MAD', 2, 'Moroccan Dirham', 'Moroccan dirhams', 0, 'MAD', 'د.م.‏');
 /**
  * Moldovan Leu money factory
  *
@@ -1877,7 +706,7 @@ export const MAD = moneyFactory('MAD');
  * ```
  * @param amount - The amount of money
  */
-export const MDL = moneyFactory('MDL');
+export const MDL = register('MDL', 2, 'Moldovan Leu', 'Moldovan lei', 0, 'MDL', 'MDL');
 /**
  * Malagasy Ariary money factory
  *
@@ -1887,7 +716,7 @@ export const MDL = moneyFactory('MDL');
  * ```
  * @param amount - The amount of money
  */
-export const MGA = moneyFactory('MGA');
+export const MGA = register('MGA', 0, 'Malagasy Ariary', 'Malagasy Ariaries', 0, 'MGA', 'MGA');
 /**
  * Macedonian Denar money factory
  *
@@ -1897,7 +726,7 @@ export const MGA = moneyFactory('MGA');
  * ```
  * @param amount - The amount of money
  */
-export const MKD = moneyFactory('MKD');
+export const MKD = register('MKD', 2, 'Macedonian Denar', 'Macedonian denari', 0, 'MKD', 'MKD');
 /**
  * Myanma Kyat money factory
  *
@@ -1907,7 +736,7 @@ export const MKD = moneyFactory('MKD');
  * ```
  * @param amount - The amount of money
  */
-export const MMK = moneyFactory('MMK');
+export const MMK = register('MMK', 0, 'Myanma Kyat', 'Myanma kyats', 0, 'MMK', 'K');
 /**
  * Macanese Pataca money factory
  *
@@ -1917,7 +746,7 @@ export const MMK = moneyFactory('MMK');
  * ```
  * @param amount - The amount of money
  */
-export const MOP = moneyFactory('MOP');
+export const MOP = register('MOP', 2, 'Macanese Pataca', 'Macanese patacas', 0, 'MOP$', 'MOP$');
 /**
  * Mauritian Rupee money factory
  *
@@ -1927,7 +756,7 @@ export const MOP = moneyFactory('MOP');
  * ```
  * @param amount - The amount of money
  */
-export const MUR = moneyFactory('MUR');
+export const MUR = register('MUR', 0, 'Mauritian Rupee', 'Mauritian rupees', 0, 'MURs', 'MURs');
 /**
  * Mexican Peso money factory
  *
@@ -1937,7 +766,7 @@ export const MUR = moneyFactory('MUR');
  * ```
  * @param amount - The amount of money
  */
-export const MXN = moneyFactory('MXN');
+export const MXN = register('MXN', 2, 'Mexican Peso', 'Mexican pesos', 0, 'MX$', '$');
 /**
  * Malaysian Ringgit money factory
  *
@@ -1947,7 +776,7 @@ export const MXN = moneyFactory('MXN');
  * ```
  * @param amount - The amount of money
  */
-export const MYR = moneyFactory('MYR');
+export const MYR = register('MYR', 2, 'Malaysian Ringgit', 'Malaysian ringgits', 0, 'RM', 'RM');
 /**
  * Mozambican Metical money factory
  *
@@ -1957,7 +786,7 @@ export const MYR = moneyFactory('MYR');
  * ```
  * @param amount - The amount of money
  */
-export const MZN = moneyFactory('MZN');
+export const MZN = register('MZN', 2, 'Mozambican Metical', 'Mozambican meticals', 0, 'MTn', 'MTn');
 /**
  * Namibian Dollar money factory
  *
@@ -1967,7 +796,7 @@ export const MZN = moneyFactory('MZN');
  * ```
  * @param amount - The amount of money
  */
-export const NAD = moneyFactory('NAD');
+export const NAD = register('NAD', 2, 'Namibian Dollar', 'Namibian dollars', 0, 'N$', 'N$');
 /**
  * Nigerian Naira money factory
  *
@@ -1977,7 +806,7 @@ export const NAD = moneyFactory('NAD');
  * ```
  * @param amount - The amount of money
  */
-export const NGN = moneyFactory('NGN');
+export const NGN = register('NGN', 2, 'Nigerian Naira', 'Nigerian nairas', 0, '₦', '₦');
 /**
  * Nicaraguan Córdoba money factory
  *
@@ -1987,7 +816,7 @@ export const NGN = moneyFactory('NGN');
  * ```
  * @param amount - The amount of money
  */
-export const NIO = moneyFactory('NIO');
+export const NIO = register('NIO', 2, 'Nicaraguan Córdoba', 'Nicaraguan córdobas', 0, 'C$', 'C$');
 /**
  * Norwegian Krone money factory
  *
@@ -1997,7 +826,7 @@ export const NIO = moneyFactory('NIO');
  * ```
  * @param amount - The amount of money
  */
-export const NOK = moneyFactory('NOK');
+export const NOK = register('NOK', 2, 'Norwegian Krone', 'Norwegian kroner', 0, 'Nkr', 'kr');
 /**
  * Nepalese Rupee money factory
  *
@@ -2007,7 +836,7 @@ export const NOK = moneyFactory('NOK');
  * ```
  * @param amount - The amount of money
  */
-export const NPR = moneyFactory('NPR');
+export const NPR = register('NPR', 2, 'Nepalese Rupee', 'Nepalese rupees', 0, 'NPRs', 'नेरू');
 /**
  * New Zealand Dollar money factory
  *
@@ -2017,7 +846,7 @@ export const NPR = moneyFactory('NPR');
  * ```
  * @param amount - The amount of money
  */
-export const NZD = moneyFactory('NZD');
+export const NZD = register('NZD', 2, 'New Zealand Dollar', 'New Zealand dollars', 0, 'NZ$', '$');
 /**
  * Omani Rial money factory
  *
@@ -2027,7 +856,7 @@ export const NZD = moneyFactory('NZD');
  * ```
  * @param amount - The amount of money
  */
-export const OMR = moneyFactory('OMR');
+export const OMR = register('OMR', 3, 'Omani Rial', 'Omani rials', 0, 'OMR', 'ر.ع.‏');
 /**
  * Panamanian Balboa money factory
  *
@@ -2037,7 +866,7 @@ export const OMR = moneyFactory('OMR');
  * ```
  * @param amount - The amount of money
  */
-export const PAB = moneyFactory('PAB');
+export const PAB = register('PAB', 2, 'Panamanian Balboa', 'Panamanian balboas', 0, 'B/.', 'B/.');
 /**
  * Peruvian Nuevo Sol money factory
  *
@@ -2047,7 +876,7 @@ export const PAB = moneyFactory('PAB');
  * ```
  * @param amount - The amount of money
  */
-export const PEN = moneyFactory('PEN');
+export const PEN = register('PEN', 2, 'Peruvian Nuevo Sol', 'Peruvian nuevos soles', 0, 'S/.', 'S/.');
 /**
  * Philippine Peso money factory
  *
@@ -2057,7 +886,7 @@ export const PEN = moneyFactory('PEN');
  * ```
  * @param amount - The amount of money
  */
-export const PHP = moneyFactory('PHP');
+export const PHP = register('PHP', 2, 'Philippine Peso', 'Philippine pesos', 0, '₱', '₱');
 /**
  * Pakistani Rupee money factory
  *
@@ -2067,7 +896,7 @@ export const PHP = moneyFactory('PHP');
  * ```
  * @param amount - The amount of money
  */
-export const PKR = moneyFactory('PKR');
+export const PKR = register('PKR', 0, 'Pakistani Rupee', 'Pakistani rupees', 0, 'PKRs', '₨');
 /**
  * Polish Zloty money factory
  *
@@ -2077,7 +906,7 @@ export const PKR = moneyFactory('PKR');
  * ```
  * @param amount - The amount of money
  */
-export const PLN = moneyFactory('PLN');
+export const PLN = register('PLN', 2, 'Polish Zloty', 'Polish zlotys', 0, 'zł', 'zł');
 /**
  * Paraguayan Guarani money factory
  *
@@ -2087,7 +916,7 @@ export const PLN = moneyFactory('PLN');
  * ```
  * @param amount - The amount of money
  */
-export const PYG = moneyFactory('PYG');
+export const PYG = register('PYG', 0, 'Paraguayan Guarani', 'Paraguayan guaranis', 0, '₲', '₲');
 /**
  * Qatari Rial money factory
  *
@@ -2097,7 +926,7 @@ export const PYG = moneyFactory('PYG');
  * ```
  * @param amount - The amount of money
  */
-export const QAR = moneyFactory('QAR');
+export const QAR = register('QAR', 2, 'Qatari Rial', 'Qatari rials', 0, 'QR', 'ر.ق.‏');
 /**
  * Romanian Leu money factory
  *
@@ -2107,7 +936,7 @@ export const QAR = moneyFactory('QAR');
  * ```
  * @param amount - The amount of money
  */
-export const RON = moneyFactory('RON');
+export const RON = register('RON', 2, 'Romanian Leu', 'Romanian lei', 0, 'RON', 'RON');
 /**
  * Serbian Dinar money factory
  *
@@ -2117,7 +946,7 @@ export const RON = moneyFactory('RON');
  * ```
  * @param amount - The amount of money
  */
-export const RSD = moneyFactory('RSD');
+export const RSD = register('RSD', 0, 'Serbian Dinar', 'Serbian dinars', 0, 'din.', 'дин.');
 /**
  * Russian Ruble money factory
  *
@@ -2127,7 +956,7 @@ export const RSD = moneyFactory('RSD');
  * ```
  * @param amount - The amount of money
  */
-export const RUB = moneyFactory('RUB');
+export const RUB = register('RUB', 2, 'Russian Ruble', 'Russian rubles', 0, 'RUB', '₽.');
 /**
  * Rwandan Franc money factory
  *
@@ -2137,7 +966,7 @@ export const RUB = moneyFactory('RUB');
  * ```
  * @param amount - The amount of money
  */
-export const RWF = moneyFactory('RWF');
+export const RWF = register('RWF', 0, 'Rwandan Franc', 'Rwandan francs', 0, 'RWF', 'FR');
 /**
  * Saudi Riyal money factory
  *
@@ -2147,7 +976,7 @@ export const RWF = moneyFactory('RWF');
  * ```
  * @param amount - The amount of money
  */
-export const SAR = moneyFactory('SAR');
+export const SAR = register('SAR', 2, 'Saudi Riyal', 'Saudi riyals', 0, 'SR', 'ر.س.‏');
 /**
  * Sudanese Pound money factory
  *
@@ -2157,7 +986,7 @@ export const SAR = moneyFactory('SAR');
  * ```
  * @param amount - The amount of money
  */
-export const SDG = moneyFactory('SDG');
+export const SDG = register('SDG', 2, 'Sudanese Pound', 'Sudanese pounds', 0, 'SDG', 'SDG');
 /**
  * Swedish Krona money factory
  *
@@ -2167,7 +996,7 @@ export const SDG = moneyFactory('SDG');
  * ```
  * @param amount - The amount of money
  */
-export const SEK = moneyFactory('SEK');
+export const SEK = register('SEK', 2, 'Swedish Krona', 'Swedish kronor', 0, 'Skr', 'kr');
 /**
  * Singapore Dollar money factory
  *
@@ -2177,7 +1006,7 @@ export const SEK = moneyFactory('SEK');
  * ```
  * @param amount - The amount of money
  */
-export const SGD = moneyFactory('SGD');
+export const SGD = register('SGD', 2, 'Singapore Dollar', 'Singapore dollars', 0, 'S$', '$');
 /**
  * Somali Shilling money factory
  *
@@ -2187,7 +1016,7 @@ export const SGD = moneyFactory('SGD');
  * ```
  * @param amount - The amount of money
  */
-export const SOS = moneyFactory('SOS');
+export const SOS = register('SOS', 0, 'Somali Shilling', 'Somali shillings', 0, 'Ssh', 'Ssh');
 /**
  * Syrian Pound money factory
  *
@@ -2197,7 +1026,7 @@ export const SOS = moneyFactory('SOS');
  * ```
  * @param amount - The amount of money
  */
-export const SYP = moneyFactory('SYP');
+export const SYP = register('SYP', 0, 'Syrian Pound', 'Syrian pounds', 0, 'SY£', 'ل.س.‏');
 /**
  * Thai Baht money factory
  *
@@ -2207,7 +1036,7 @@ export const SYP = moneyFactory('SYP');
  * ```
  * @param amount - The amount of money
  */
-export const THB = moneyFactory('THB');
+export const THB = register('THB', 2, 'Thai Baht', 'Thai baht', 0, '฿', '฿');
 /**
  * Tunisian Dinar money factory
  *
@@ -2217,7 +1046,7 @@ export const THB = moneyFactory('THB');
  * ```
  * @param amount - The amount of money
  */
-export const TND = moneyFactory('TND');
+export const TND = register('TND', 3, 'Tunisian Dinar', 'Tunisian dinars', 0, 'DT', 'د.ت.‏');
 /**
  * Tongan Paʻanga money factory
  *
@@ -2227,7 +1056,7 @@ export const TND = moneyFactory('TND');
  * ```
  * @param amount - The amount of money
  */
-export const TOP = moneyFactory('TOP');
+export const TOP = register('TOP', 2, 'Tongan Paʻanga', 'Tongan paʻanga', 0, 'T$', 'T$');
 /**
  * Turkish Lira money factory
  *
@@ -2237,7 +1066,7 @@ export const TOP = moneyFactory('TOP');
  * ```
  * @param amount - The amount of money
  */
-export const TRY = moneyFactory('TRY');
+export const TRY = register('TRY', 2, 'Turkish Lira', 'Turkish Lira', 0, 'TL', 'TL');
 /**
  * Trinidad and Tobago Dollar money factory
  *
@@ -2247,7 +1076,7 @@ export const TRY = moneyFactory('TRY');
  * ```
  * @param amount - The amount of money
  */
-export const TTD = moneyFactory('TTD');
+export const TTD = register('TTD', 2, 'Trinidad and Tobago Dollar', 'Trinidad and Tobago dollars', 0, 'TT$', '$');
 /**
  * New Taiwan Dollar money factory
  *
@@ -2257,7 +1086,7 @@ export const TTD = moneyFactory('TTD');
  * ```
  * @param amount - The amount of money
  */
-export const TWD = moneyFactory('TWD');
+export const TWD = register('TWD', 2, 'New Taiwan Dollar', 'New Taiwan dollars', 0, 'NT$', 'NT$');
 /**
  * Tanzanian Shilling money factory
  *
@@ -2267,7 +1096,7 @@ export const TWD = moneyFactory('TWD');
  * ```
  * @param amount - The amount of money
  */
-export const TZS = moneyFactory('TZS');
+export const TZS = register('TZS', 0, 'Tanzanian Shilling', 'Tanzanian shillings', 0, 'TSh', 'TSh');
 /**
  * Ukrainian Hryvnia money factory
  *
@@ -2277,7 +1106,7 @@ export const TZS = moneyFactory('TZS');
  * ```
  * @param amount - The amount of money
  */
-export const UAH = moneyFactory('UAH');
+export const UAH = register('UAH', 2, 'Ukrainian Hryvnia', 'Ukrainian hryvnias', 0, '₴', '₴');
 /**
  * Ugandan Shilling money factory
  *
@@ -2287,7 +1116,7 @@ export const UAH = moneyFactory('UAH');
  * ```
  * @param amount - The amount of money
  */
-export const UGX = moneyFactory('UGX');
+export const UGX = register('UGX', 0, 'Ugandan Shilling', 'Ugandan shillings', 0, 'USh', 'USh');
 /**
  * Uruguayan Peso money factory
  *
@@ -2297,7 +1126,7 @@ export const UGX = moneyFactory('UGX');
  * ```
  * @param amount - The amount of money
  */
-export const UYU = moneyFactory('UYU');
+export const UYU = register('UYU', 2, 'Uruguayan Peso', 'Uruguayan pesos', 0, '$U', '$');
 /**
  * Uzbekistan Som money factory
  *
@@ -2307,7 +1136,7 @@ export const UYU = moneyFactory('UYU');
  * ```
  * @param amount - The amount of money
  */
-export const UZS = moneyFactory('UZS');
+export const UZS = register('UZS', 0, 'Uzbekistan Som', 'Uzbekistan som', 0, 'UZS', 'UZS');
 /**
  * Venezuelan Bolívar money factory
  *
@@ -2317,7 +1146,7 @@ export const UZS = moneyFactory('UZS');
  * ```
  * @param amount - The amount of money
  */
-export const VEF = moneyFactory('VEF');
+export const VEF = register('VEF', 2, 'Venezuelan Bolívar', 'Venezuelan bolívars', 0, 'Bs.F.', 'Bs.F.');
 /**
  * Vietnamese Dong money factory
  *
@@ -2327,7 +1156,7 @@ export const VEF = moneyFactory('VEF');
  * ```
  * @param amount - The amount of money
  */
-export const VND = moneyFactory('VND');
+export const VND = register('VND', 0, 'Vietnamese Dong', 'Vietnamese dong', 0, '₫', '₫');
 /**
  * CFA Franc BEAC money factory
  *
@@ -2337,7 +1166,7 @@ export const VND = moneyFactory('VND');
  * ```
  * @param amount - The amount of money
  */
-export const XAF = moneyFactory('XAF');
+export const XAF = register('XAF', 0, 'CFA Franc BEAC', 'CFA francs BEAC', 0, 'FCFA', 'FCFA');
 /**
  * CFA Franc BCEAO money factory
  *
@@ -2347,7 +1176,7 @@ export const XAF = moneyFactory('XAF');
  * ```
  * @param amount - The amount of money
  */
-export const XOF = moneyFactory('XOF');
+export const XOF = register('XOF', 0, 'CFA Franc BCEAO', 'CFA francs BCEAO', 0, 'CFA', 'CFA');
 /**
  * Yemeni Rial money factory
  *
@@ -2357,7 +1186,7 @@ export const XOF = moneyFactory('XOF');
  * ```
  * @param amount - The amount of money
  */
-export const YER = moneyFactory('YER');
+export const YER = register('YER', 0, 'Yemeni Rial', 'Yemeni rials', 0, 'YR', 'ر.ي.‏');
 /**
  * South African Rand money factory
  *
@@ -2367,7 +1196,7 @@ export const YER = moneyFactory('YER');
  * ```
  * @param amount - The amount of money
  */
-export const ZAR = moneyFactory('ZAR');
+export const ZAR = register('ZAR', 2, 'South African Rand', 'South African rand', 0, 'R', 'R');
 /**
  * Zambian Kwacha money factory
  *
@@ -2377,7 +1206,7 @@ export const ZAR = moneyFactory('ZAR');
  * ```
  * @param amount - The amount of money
  */
-export const ZMK = moneyFactory('ZMK');
+export const ZMK = register('ZMK', 0, 'Zambian Kwacha', 'Zambian kwachas', 0, 'ZK', 'ZK');
 /**
  * Zimbabwean Dollar money factory
  *
@@ -2387,4 +1216,4 @@ export const ZMK = moneyFactory('ZMK');
  * ```
  * @param amount - The amount of money
  */
-export const ZWL = moneyFactory('ZWL');
+export const ZWL = register('ZWL', 0, 'Zimbabwean Dollar', 'Zimbabwean Dollar', 0, 'ZWL$', 'ZWL$');
