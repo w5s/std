@@ -1,14 +1,23 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-// https://github.com/tc39/proposal-explicit-resource-management
 
 const GlobalSymbol = globalThis.Symbol;
 
-export interface SymbolConstructor
-  extends Omit<globalThis.SymbolConstructor, 'keyFor' | 'for' | 'prototype' | 'metadata'> {
+declare global {
+  interface SymbolForMap {
+    readonly 'w5s.enumKeys': unique symbol;
+    readonly 'w5s.toFunction': unique symbol;
+    readonly 'nodejs.util.inspect.custom': unique symbol;
+  }
+  interface SymbolConstructor {
+    for<K extends keyof SymbolForMap>(key: K): SymbolForMap[K];
+  }
+}
+
+export interface SymbolConstructor extends Omit<globalThis.SymbolConstructor, 'keyFor' | 'prototype' | 'metadata'> {
   /**
    * Enum keys
    */
-  readonly enumKeys: unique symbol;
+  readonly enumKeys: SymbolForMap['w5s.enumKeys'];
 
   /**
    * Callable callback
@@ -18,7 +27,7 @@ export interface SymbolConstructor
   /**
    * NodeJS inspect symbol
    */
-  readonly nodeInspect: unique symbol;
+  readonly nodeInspect: SymbolForMap['nodejs.util.inspect.custom'];
 }
 
 /**
@@ -27,6 +36,7 @@ export interface SymbolConstructor
  * @namespace
  */
 export const Symbol: SymbolConstructor = {
+  for: GlobalSymbol.for,
   iterator: GlobalSymbol.iterator,
   asyncIterator: GlobalSymbol.asyncIterator,
   hasInstance: GlobalSymbol.hasInstance,
@@ -43,6 +53,6 @@ export const Symbol: SymbolConstructor = {
   dispose: GlobalSymbol.dispose ?? (GlobalSymbol.for('dispose') as any),
   asyncDispose: GlobalSymbol.asyncDispose ?? (GlobalSymbol.for('asyncDispose') as any),
   toFunction: '__toFunction__', // GlobalSymbol.for('w5s.toFunction') as SymbolConstructor['toFunction'],
-  enumKeys: GlobalSymbol.for('w5s.enumKeys') as SymbolConstructor['enumKeys'],
-  nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom') as SymbolConstructor['nodeInspect'],
+  enumKeys: GlobalSymbol.for('w5s.enumKeys'),
+  nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom'),
 };
