@@ -1,6 +1,7 @@
-import { Enum } from '@w5s/core/dist/Enum.js';
+import type { Enum } from '@w5s/core';
+import { define } from '@w5s/core/dist/Enum/define.js';
 
-export const RequestDestination = Enum.define({
+export const RequestDestination = define({
   Empty: '',
   Audio: 'audio',
   AudioWorklet: 'audioworklet',

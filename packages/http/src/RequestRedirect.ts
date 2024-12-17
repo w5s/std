@@ -1,6 +1,7 @@
-import { Enum } from '@w5s/core/dist/Enum.js';
+import type { Enum } from '@w5s/core';
+import { define } from '@w5s/core/dist/Enum/define.js';
 
-export const RequestRedirect = Enum.define({
+export const RequestRedirect = define({
   Follow: 'follow',
   Error: 'error',
   Manual: 'manual',

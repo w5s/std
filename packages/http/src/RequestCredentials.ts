@@ -1,6 +1,7 @@
-import { Enum } from '@w5s/core/dist/Enum.js';
+import type { Enum } from '@w5s/core';
+import { define } from '@w5s/core/dist/Enum/define.js';
 
-export const RequestCredentials = Enum.define({
+export const RequestCredentials = define({
   Include: 'include',
   Omit: 'omit',
   SameOrigin: 'same-origin',

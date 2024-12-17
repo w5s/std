@@ -1,6 +1,7 @@
-import { Enum } from '@w5s/core/dist/Enum.js';
+import type { Enum } from '@w5s/core';
+import { define } from '@w5s/core/dist/Enum/define.js';
 
-export const RequestCache = Enum.define({
+export const RequestCache = define({
   Default: 'default',
   NoStore: 'no-store',
   Reload: 'reload',
