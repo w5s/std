@@ -4047,7 +4047,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lerna-lite/publish@npm:^3.10.1":
+"@lerna-lite/publish@npm:3.10.1":
   version: 3.10.1
   resolution: "@lerna-lite/publish@npm:3.10.1"
   dependencies:
@@ -6014,7 +6014,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
   dependencies:
-    "@lerna-lite/publish": "npm:^3.10.1"
+    "@lerna-lite/publish": "npm:3.10.1"
     "@size-limit/preset-small-lib": "npm:11.1.6"
     "@types/node": "npm:20.17.10"
     "@w5s/commitlint-config": "npm:2.1.6"
