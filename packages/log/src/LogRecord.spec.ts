@@ -13,7 +13,7 @@ describe('LogRecord', () => {
         LogRecord({
           id: UUID.empty(),
           domain: 'myDomain',
-          level: LogLevel.Warning,
+          level: LogLevel.Warn,
           message: LogMessage.of('foo', 'bar', ''),
           data: {},
           created: Time.of(1),
@@ -22,7 +22,7 @@ describe('LogRecord', () => {
         _: 'LogRecord',
         id: UUID.empty(),
         domain: 'myDomain',
-        level: LogLevel.Warning,
+        level: LogLevel.Warn,
         message: ['foobar'],
         data: {},
         created: 1,

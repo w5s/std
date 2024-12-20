@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { critical, debug, error, info, level, warning } from './level.js';
+import { critical, debug, error, info, level, warn } from './level.js';
 import { LogLevel } from './LogLevel.js';
 import { LogMessage, LogMessageRef } from './LogMessage.js';
 
@@ -65,11 +65,11 @@ describe(error, () => {
     );
   });
 });
-describe(warning, () => {
+describe(warn, () => {
   it('returns a parameter factory', () => {
-    expect(warning`test`).toEqual(
+    expect(warn`test`).toEqual(
       expect.objectContaining({
-        level: LogLevel.Warning,
+        level: LogLevel.Warn,
         message: ['test'],
       }),
     );

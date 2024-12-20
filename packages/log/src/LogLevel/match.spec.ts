@@ -11,7 +11,7 @@ describe(match, () => {
   });
   it('should return value if level exact value is found', () => {
     const matcherFunction = match([
-      [LogLevelValue.Warning, 'foo'],
+      [LogLevelValue.Warn, 'foo'],
       [LogLevelValue.Error, 'bar'],
       [LogLevelValue.Critical, 'baz'],
     ]);
@@ -19,20 +19,20 @@ describe(match, () => {
   });
   it('should select first superior or equal matcher', () => {
     const matcherFunction = match([
-      [LogLevelValue.Warning, 'foo'],
+      [LogLevelValue.Warn, 'foo'],
       [LogLevelValue.Error, 'bar'],
       [LogLevelValue.Critical, 'baz'],
     ]);
 
     expect(matcherFunction(LogLevelValue.Error)).toBe('bar');
-    expect(matcherFunction(LogLevelValue.Warning)).toBe('foo');
+    expect(matcherFunction(LogLevelValue.Warn)).toBe('foo');
     expect(matcherFunction(LogLevelValue.Info)).toBe(undefined);
   });
 
   it('should return defaultValue if no matcher is fulfilled', () => {
     const matcherFunction = match(
       [
-        [LogLevelValue.Warning, 'foo'],
+        [LogLevelValue.Warn, 'foo'],
         [LogLevelValue.Error, 'bar'],
         [LogLevelValue.Critical, 'baz'],
       ],

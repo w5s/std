@@ -31,9 +31,9 @@ describe('LogLevelValue', () => {
             "name": "none",
             "value": 0,
           },
-          "Warning": {
+          "Warn": {
             "_": "LogLevel",
-            "name": "warning",
+            "name": "warn",
             "value": 30,
           },
         },

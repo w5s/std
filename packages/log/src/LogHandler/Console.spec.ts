@@ -34,8 +34,8 @@ describe(Console, () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Info }));
       expect(console.info).toHaveBeenLastCalledWith('foobar');
     });
-    it('should send to console.warn when level=LogLevel.Warning', async () => {
-      await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warning }));
+    it('should send to console.warn when level=LogLevel.Warn', async () => {
+      await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warn }));
       expect(console.warn).toHaveBeenLastCalledWith('foobar');
     });
     it('should send to console.error when level=LogLevel.Error', async () => {
@@ -92,7 +92,7 @@ describe(Console, () => {
       expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
     });
     it('should send to console.warn when level=LogLevel.Warning', async () => {
-      await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warning }));
+      await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warn }));
       expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
     });
     it('should send to console.error when level=LogLevel.Error', async () => {

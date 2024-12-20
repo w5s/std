@@ -13,7 +13,7 @@ const Error = of('error', 40 as Int);
 /**
  * Warning log level (30)
  */
-const Warning = of('warning', 30 as Int);
+const Warn = of('warn', 30 as Int);
 /**
  * Info log level (20)
  */
@@ -30,7 +30,7 @@ export const LogLevelValue = {
   None,
   Critical,
   Error,
-  Warning,
+  Warn,
   Info,
   Debug,
 };

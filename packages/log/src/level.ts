@@ -89,10 +89,10 @@ export const error = level('error');
  * `Warning` string template
  *
  * @example
- * warning`My message ${['foo', fooValue]}`
- * warning.withData({ baz: true })`My message ${['foo', fooValue]}`
+ * warn`My message ${['foo', fooValue]}`
+ * warn.withData({ baz: true })`My message ${['foo', fooValue]}`
  */
-export const warning = level('warning');
+export const warn = level('warn');
 
 /**
  * `Info` string template

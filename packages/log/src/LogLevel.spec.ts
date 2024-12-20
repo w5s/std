@@ -22,7 +22,7 @@ describe('LogLevel', () => {
     it.each([
       [LogLevel.Critical, 50],
       [LogLevel.Error, 40],
-      [LogLevel.Warning, 30],
+      [LogLevel.Warn, 30],
       [LogLevel.Info, 20],
       [LogLevel.Debug, 10],
     ])(`should return value for %s`, (level, expectedValue) => {

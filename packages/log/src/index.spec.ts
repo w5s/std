@@ -16,7 +16,7 @@ describe('index', () => {
         'level',
         'critical',
         'error',
-        'warning',
+        'warn',
         'info',
         'debug',
       ].sort(),
