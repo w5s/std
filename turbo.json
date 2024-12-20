@@ -3,7 +3,8 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build", "//#build:root"],
-      "outputs": ["lib/**", "dist/**", ".next/**"]
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "//#build:root": {},
     "test": {
@@ -42,6 +43,11 @@
       "dependsOn": ["build"]
     }
   },
-  "globalDependencies": ["tsconfig.settings.json"],
+  "globalDependencies": [
+    ".tool-versions",
+    "tsconfig.settings.json",
+    "**/.env.*local",
+    ".env"
+  ],
   "globalEnv": ["ASDF_*", "CI", "CI_*", "DATABASE_URL", "HOME", "NODE_ENV"]
 }
