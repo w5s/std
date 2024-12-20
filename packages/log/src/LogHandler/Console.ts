@@ -6,10 +6,15 @@ import { LogLevel } from '../LogLevel.js';
 import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
 
-const defaultFormat = (logRecord: LogRecord) => {
+const defaultWebConsoleFormat = (logRecord: LogRecord) => {
   const { domain } = logRecord;
 
   return [...(domain.length > 0 ? [`[${domain}]`] : []), ...messageWithData(logRecord)];
+};
+const defaultStdConsoleFormat = (logRecord: LogRecord) => {
+  const { level, created } = logRecord;
+
+  return [new Date(created).toISOString(), LogLevel.format(level).toUpperCase(), ...defaultWebConsoleFormat(logRecord)];
 };
 
 export interface ConsoleOptions {
@@ -45,27 +50,29 @@ export interface ConsoleOptions {
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const {
     isStderr = (record) => LogLevel['>='](record.level, LogLevel.Error),
-    format = defaultFormat,
+    format: formatOption,
     console = globalThis.console,
   } = options;
   const eol = '\n';
   const stdout = (console as any)._stdout as Option<NodeJS.WriteStream>;
   const stderr = (console as any)._stderr as Option<NodeJS.WriteStream>;
-  const consoleWrite =
-    stderr == null || stdout == null
-      ? LogLevel.match(
-          [
-            [LogLevel.Error, console.error.bind(console)],
-            [LogLevel.Warning, console.warn.bind(console)],
-            [LogLevel.Info, console.info.bind(console)],
-            // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
-          ],
-          console.debug.bind(console),
-        )
-      : (_level: LogLevel, writeToStderr: boolean) =>
-          (...data: any[]) => {
-            (writeToStderr ? stderr : stdout).write(`${data.join(' ')}${eol}`);
-          };
+  const isWebConsole = stderr == null || stdout == null;
+  const format = formatOption ?? (isWebConsole ? defaultWebConsoleFormat : defaultStdConsoleFormat);
+
+  const consoleWrite = isWebConsole
+    ? LogLevel.match(
+        [
+          [LogLevel.Error, console.error.bind(console)],
+          [LogLevel.Warn, console.warn.bind(console)],
+          [LogLevel.Info, console.info.bind(console)],
+          // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
+        ],
+        console.debug.bind(console),
+      )
+    : (_level: LogLevel, writeToStderr: boolean) =>
+        (...data: any[]) => {
+          (writeToStderr ? stderr : stdout).write(`${data.join(' ')}${eol}`);
+        };
   return (logRecord) =>
     taskFrom(({ resolve }) => {
       consoleWrite(logRecord.level, isStderr(logRecord))(...format(logRecord));

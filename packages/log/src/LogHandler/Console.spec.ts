@@ -85,23 +85,23 @@ describe(Console, () => {
 
     it('should send to console.debug when level=LogLevel.Debug', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Debug }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z DEBUG foobar\n');
     });
     it('should send to console.info when level=LogLevel.Info', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Info }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z INFO foobar\n');
     });
     it('should send to console.warn when level=LogLevel.Warning', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warn }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('foobar\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z WARN foobar\n');
     });
     it('should send to console.error when level=LogLevel.Error', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Error }));
-      expect(console._stderr.write).toHaveBeenLastCalledWith('foobar\n');
+      expect(console._stderr.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z ERROR foobar\n');
     });
     it('should send to console.error when level=LogLevel.Critical', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Critical }));
-      expect(console._stderr.write).toHaveBeenLastCalledWith('foobar\n');
+      expect(console._stderr.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z CRITICAL foobar\n');
     });
     it('should format logCategory and message correctly', async () => {
       await Task.unsafeRunOk(
@@ -116,7 +116,9 @@ describe(Console, () => {
           }),
         ),
       );
-      expect(console._stdout.write).toHaveBeenLastCalledWith('[myDomain] message= bar .\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith(
+        '1970-01-01T00:00:00.000Z DEBUG [myDomain] message= bar .\n',
+      );
     });
     it('should not add logCategory if empty', async () => {
       await Task.unsafeRunOk(
@@ -130,7 +132,7 @@ describe(Console, () => {
           }),
         ),
       );
-      expect(console._stdout.write).toHaveBeenLastCalledWith('message= bar .\n');
+      expect(console._stdout.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z DEBUG message= bar .\n');
     });
   });
 });
