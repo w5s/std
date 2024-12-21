@@ -12,6 +12,8 @@ export type CallableFunction<T extends Callable<AnyFunction>> = T[typeof Callabl
 export interface Callable<F extends AnyFunction = AnyFunction> {
   /**
    * Callable property
+   *
+   * @category Callable
    */
   [Callable.symbol]: F;
 }
