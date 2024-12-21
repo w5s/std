@@ -12,11 +12,11 @@ describe('Time', () => {
   });
   describeCodec({ describe, it, expect })(Time, {
     encode: [
-      [Time(1), 1],
-      [Time(0), 0],
+      [Time(1), '1970-01-01T00:00:00.001Z'],
+      [Time(0), '1970-01-01T00:00:00.000Z'],
     ],
     decode: [
-      [0, Result.Ok(Time(0))],
+      ['1970-01-01T00:00:00.000Z', Result.Ok(Time(0))],
       [
         null,
         Result.Error(
@@ -28,7 +28,8 @@ describe('Time', () => {
       ],
     ],
     schema: () => ({
-      type: 'number',
+      type: 'string',
+      format: 'date-time',
     }),
   });
 });
