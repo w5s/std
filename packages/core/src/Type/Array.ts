@@ -21,7 +21,9 @@ const { isArray } = globalThis.Array;
 export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
   return define({
     typeName: `Array<${Item.typeName}>`,
-    hasInstance: (anyValue): anyValue is ArrayType<V> => isArray(anyValue) && anyValue.every(Item.hasInstance),
+    hasInstance: (anyValue): anyValue is ArrayType<V> =>
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      isArray(anyValue) && anyValue.every(Item.hasInstance),
     codecEncode: (input) => input.map(Item.codecEncode),
     codecDecode: (input, { ok, error }) => {
       if (!isArray(input)) {

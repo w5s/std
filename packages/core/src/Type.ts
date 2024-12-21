@@ -53,7 +53,7 @@ export interface Type<T> {
    * @category Type
    * @param anyValue
    */
-  hasInstance: (anyValue: unknown) => anyValue is T;
+  hasInstance(anyValue: unknown): anyValue is T;
   /**
    * Try to convert anyValue to enum value or else returns `Option.None`
    *
@@ -66,7 +66,7 @@ export interface Type<T> {
    * @category Constructor
    * @param anyValue
    */
-  from: (anyValue: unknown) => Option<T>;
+  from(anyValue: unknown): Option<T>;
   /**
    * When defined, returns a custom string representation
    *
