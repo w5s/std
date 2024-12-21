@@ -19,7 +19,7 @@ export type Time = number & Tag<'Time'>;
 export const Time = Tag.define<number, Time>({
   typeName: 'Time',
   hasInstance(anyValue) {
-    return typeof anyValue === 'number' && !Number.isNaN(anyValue) && anyValue >= -8.64e15 && anyValue <= 8.64e15;
+    return typeof anyValue === 'number' && anyValue >= -8.64e15 && anyValue <= 8.64e15;
   },
   ...TimeCodec,
 });
