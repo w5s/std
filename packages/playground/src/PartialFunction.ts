@@ -19,6 +19,19 @@ export class PartialFunction<F extends PartialApplyFunction> implements PartialF
   orElse<FElse extends PartialApplyFunction>(elseFn: PartialFunctionLike<FElse>): PartialFunction<F & FElse> {
     return orElse(this, elseFn);
   }
+
+  andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
+    thenFn: FThen,
+  ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+  andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
+    thenFn: PartialFunctionLike<FThen>,
+  ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+  andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
+    thenFn: PartialFunctionLike<FThen> | FThen,
+  ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>> {
+    // @ts-ignore
+    return andThen(this, thenFn);
+  }
 }
 
 export function partial<F extends PartialApplyFunction>(properties: PartialFunctionLike<F>): PartialFunction<F> {
@@ -83,4 +96,4 @@ export const isEven = partial({
   isDefinedAt: (value) => typeof value === 'number',
   apply: (value: number) => value % 2 === 0,
 });
-export const processEven = andThen(isEven, (_value: number) => 'bool' as const);
+export const processEven = isEven.andThen((_value: number) => 'bool' as const);
