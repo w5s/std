@@ -1,10 +1,6 @@
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-const disposeSymbol: typeof Symbol.dispose = Symbol.dispose ?? Symbol.for('dispose');
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-const asyncDisposeSymbol: typeof Symbol.asyncDispose = Symbol.asyncDispose ?? Symbol.for('asyncDispose');
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 
 /**
  * Dispose the given Disposable or AsyncDisposable
@@ -19,7 +15,9 @@ const asyncDisposeSymbol: typeof Symbol.asyncDispose = Symbol.asyncDispose ?? Sy
 export function dispose(resource: Disposable | AsyncDisposable): Task<void, never> {
   // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return taskFrom(({ resolve }) =>
-    // eslint-disable-next-line promise/prefer-await-to-then
-    asyncDisposeSymbol in resource ? resource[asyncDisposeSymbol]().then(resolve) : resolve(resource[disposeSymbol]()),
+    Symbol.asyncDispose in resource
+      ? // eslint-disable-next-line promise/prefer-await-to-then
+        resource[Symbol.asyncDispose]().then(resolve)
+      : resolve(resource[Symbol.dispose]()),
   );
 }
