@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 
 import type { Option } from '@w5s/core';
-import { invariant } from '@w5s/error/dist/invariant.js';
+import { throwError } from '@w5s/error/dist/throwError.js';
 
 const readImportMetaEnv = () => {
   try {
@@ -19,7 +19,7 @@ const readEnv = (): Env =>
   readProcessEnv() ??
   // ESM
   createProxy(readImportMetaEnv()) ??
-  invariant(false, 'process.env or import.meta.env must be defined');
+  throwError(new ReferenceError('process.env or import.meta.env must be defined'));
 
 /**
  * A dictionary of environment variables
