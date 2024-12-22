@@ -18,7 +18,7 @@ export function describeCheckedDivide(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
   return <L, R, Ret>(subject: Numeric.CheckedDivide<L, R, Ret>, cases: Array<{ call: [L, R]; returns: Ret }>) => {
     (cases.length === 0 ? describe.todo : describe)('*', () => {
-      it.each(cases)("satisfies ['/']($call.0, $call.1) == $returns", ({ call, returns }) => {
+      it.each(cases)("satisfies ['/?']($call.0, $call.1) == $returns", ({ call, returns }) => {
         const returnValue = subject['/?'](...call);
         expect(returnValue).toEqual(returns);
       });
