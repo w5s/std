@@ -1,8 +1,7 @@
 import type { Result } from '@w5s/core';
 import type { Awaitable, EmptyObject } from '@w5s/core-type';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
 
-export interface Initializer<AppContext extends object = EmptyObject> {
+export interface Initializer<AppContext extends object = EmptyObject, AppError = unknown> {
   /**
    * Initializer id
    */
@@ -12,12 +11,12 @@ export interface Initializer<AppContext extends object = EmptyObject> {
    *
    * @param appContext
    */
-  readonly onStart: (appContext: AppContext) => Awaitable<Result<void, never>>;
+  readonly onStart: (appContext: AppContext) => Awaitable<Result<void, AppError>>;
 }
-export function Initializer<AppContext extends object>(
+export function Initializer<AppContext extends object, AppError = never>(
   id: string,
-  onStart: (appContext: AppContext) => Awaitable<Result<void, never>> = () => Ok(),
-): Initializer<AppContext> {
+  onStart: (appContext: AppContext) => Awaitable<Result<void, AppError>>,
+): Initializer<AppContext, AppError> {
   return {
     id: Symbol(id),
     onStart,
