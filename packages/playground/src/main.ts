@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { DecodeError, Int, Option, Result } from '@w5s/core';
 import { Console, Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
@@ -5,12 +6,13 @@ import { HTTPError } from '@w5s/http';
 import { randomUUID as defaultRandomUUID } from '@w5s/uuid';
 import { EUR, Money } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
-import { AbortError, assertNever, TimeoutError } from '@w5s/error';
+import { AbortError, assertNever, SyntaxError, TimeoutError } from '@w5s/error';
 import { pipe } from './pipe.js';
 import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
 import { ContainerKey, provide, use } from './di/index.js';
 import { abortable } from './task-abortable/index.js';
+import { Initializer, startAll } from './initializer/index.js';
 
 const RandomUUID = ContainerKey('RandomUUID', () => defaultRandomUUID);
 const app = {
@@ -123,6 +125,27 @@ function main2() {
       }
     }
   });
+}
+
+export interface AppContext {
+  foo: boolean;
+}
+
+export const init1 = Initializer('init1', async (_: AppContext) => {
+  console.log('init1');
+  return Result.Ok();
+});
+export const init2 = Initializer('init2', async (_: AppContext) => {
+  console.log('init2');
+  return Result.Error(new SyntaxError());
+});
+export function main3() {
+  const appContext: AppContext = { foo: true };
+  return startAll(appContext, [
+    // initializers
+    () => init1,
+    async () => init2,
+  ]);
 }
 
 void Task.unsafeRun(main());
