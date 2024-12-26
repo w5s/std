@@ -2,9 +2,11 @@
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import type { Option } from '@w5s/core';
 import type { LogHandler } from '../LogHandler.js';
-import { LogLevel } from '../LogLevel.js';
+import { asString as logLevelAsString } from '../LogLevel/asString.js';
+import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
 import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
+import type { LogLevel } from '../LogLevel.js';
 
 const defaultWebConsoleFormat = (logRecord: LogRecord) => {
   const { domain } = logRecord;
@@ -14,7 +16,11 @@ const defaultWebConsoleFormat = (logRecord: LogRecord) => {
 const defaultStdConsoleFormat = (logRecord: LogRecord) => {
   const { level, created } = logRecord;
 
-  return [new Date(created).toISOString(), LogLevel.format(level).toUpperCase(), ...defaultWebConsoleFormat(logRecord)];
+  return [
+    new Date(created).toISOString(),
+    logLevelAsString(level).toUpperCase(),
+    ...defaultWebConsoleFormat(logRecord),
+  ];
 };
 
 export interface ConsoleOptions {
@@ -49,7 +55,7 @@ export interface ConsoleOptions {
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const {
-    isStderr = (record) => LogLevel['>='](record.level, LogLevel.Error),
+    isStderr = (record) => record.level.value >= LogLevelValue.Error.value,
     format: formatOption,
     console = globalThis.console,
   } = options;
@@ -58,17 +64,24 @@ export function Console(options: ConsoleOptions = {}): LogHandler {
   const stderr = (console as any)._stderr as Option<NodeJS.WriteStream>;
   const isWebConsole = stderr == null || stdout == null;
   const format = formatOption ?? (isWebConsole ? defaultWebConsoleFormat : defaultStdConsoleFormat);
-
   const consoleWrite = isWebConsole
-    ? LogLevel.match(
-        [
-          [LogLevel.Error, console.error.bind(console)],
-          [LogLevel.Warn, console.warn.bind(console)],
-          [LogLevel.Info, console.info.bind(console)],
-          // [LogLevel.Debug, (console: Console) => console.debug.bind(console)],
-        ],
-        console.debug.bind(console),
-      )
+    ? (level: LogLevel, _writeToStderr: boolean) => {
+        // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+        switch (true) {
+          case level.value >= LogLevelValue.Error.value: {
+            return console.error.bind(console);
+          }
+          case level.value >= LogLevelValue.Warn.value: {
+            return console.warn.bind(console);
+          }
+          case level.value >= LogLevelValue.Info.value: {
+            return console.info.bind(console);
+          }
+          default: {
+            return console.debug.bind(console);
+          }
+        }
+      }
     : (_level: LogLevel, writeToStderr: boolean) =>
         (...data: any[]) => {
           (writeToStderr ? stderr : stdout).write(`${data.join(' ')}${eol}`);
