@@ -1,8 +1,17 @@
 import { describe, it, expect } from 'vitest';
 import { CustomError } from './CustomError.js';
+import { asString } from './CustomError/asString.js';
 
 describe('CustomError', () => {
   const anyString = 'AnyString';
+  it('is an alias to functions', () => {
+    expect({ ...CustomError }).toEqual(
+      expect.objectContaining({
+        define: expect.any(Function),
+        asString,
+      }),
+    );
+  });
   describe('()', () => {
     it('should return instance of Error', () => {
       expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);

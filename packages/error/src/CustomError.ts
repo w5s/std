@@ -1,10 +1,22 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
+import { asString } from './CustomError/asString.js';
+
 interface CustomErrorConstructor {
   new <Properties extends { name: string }>(properties: Properties): CustomError<Properties>;
   <Properties extends { name: string }>(properties: Properties): CustomError<Properties>;
   readonly prototype: Error;
+  /**
+   * Static method to convert an error to a string
+   *
+   * @example
+   * ```ts
+   * CustomError.asString(new Error('my message'));
+   * ```
+   * @param self
+   */
+  asString(self: Error): string;
 
   /**
    * Return a new `CustomError` default factory
@@ -73,8 +85,6 @@ export type CustomError<Properties extends { name: string }> = globalThis.Error 
  * @param properties - initial properties
  */
 export const CustomError: CustomErrorConstructor = (() => {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const errorToString = Error.prototype.toString;
   const defaultProperties = { message: '', stack: undefined, cause: undefined };
   const __assign = Object.assign;
   const __create = Object.create;
@@ -124,12 +134,11 @@ export const CustomError: CustomErrorConstructor = (() => {
 
   return __assign(CustomError, {
     define,
-
+    asString,
     prototype: __assign(__create(Error.prototype), {
       constructor: CustomError,
       toString(this: Error) {
-        // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        return errorToString.call(this) + (this.cause == null ? '' : `\n  └ ${String(this.cause)}`);
+        return asString(this);
       },
     }),
   }) as CustomErrorConstructor;
