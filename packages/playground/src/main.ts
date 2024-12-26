@@ -7,6 +7,7 @@ import { randomUUID as defaultRandomUUID } from '@w5s/uuid';
 import { EUR, Money } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { AbortError, assertNever, SyntaxError, TimeoutError } from '@w5s/error';
+import { Log, debug, error } from '@w5s/log';
 import { pipe } from './pipe.js';
 import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
@@ -45,35 +46,36 @@ function main() {
 
   const task = pipe(randomUUID()).to(
     (_) => abortable(_, controller),
+    (_) => Task.andRun(_, () => Log.send(debug`Start`)),
     (_) => Task.andThen(_, (uuid) => sendMessage(uuid + Money.format(amount))),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
-      Task.orElse(_, (error) => {
-        switch (error.name) {
+      Task.orElse(_, (err) => {
+        switch (err.name) {
           case Slack.Error.errorName: {
-            return Console.error(`SlackError:${error.message}`);
+            return Log.send(error`SlackError:${err.message}`);
           }
           case TimeoutError.errorName: {
-            return Console.error(`TimeoutError:${error.message}`);
+            return Log.send(error`TimeoutError:${err.message}`);
           }
           case HTTPError.InvalidURL.errorName: {
-            return Console.error(`InvalidURLError:${error.message}`);
+            return Log.send(error`InvalidURLError:${err.message}`);
           }
           case HTTPError.NetworkError.errorName: {
-            return Console.error(`NetworkError:${error.message}`);
+            return Log.send(error`NetworkError:${err.message}`);
           }
           case HTTPError.ParserError.errorName: {
-            return Console.error(`ParserError:${error.message}`);
+            return Log.send(error`ParserError:${err.message}`);
           }
           case DecodeError.errorName: {
-            return Console.error(`Decode Error:${error.message}`);
+            return Log.send(error`Decode Error:${err.message}`);
           }
           case AbortError.errorName: {
-            return Console.error(`Abort Error:${error.message}`);
+            return Log.send(error`Abort Error:${err.message}`);
           }
           default: {
             // return Console.error(`Unknown Error:${error.message}`);
-            return assertNever(error);
+            return assertNever(err);
           }
         }
       }),
@@ -99,29 +101,29 @@ function main2() {
     return ok();
   });
 
-  return Task.orElse(task, (error) => {
-    switch (error.name) {
+  return Task.orElse(task, (_error) => {
+    switch (_error.name) {
       case Slack.Error.errorName: {
-        return Console.error(`SlackError:${error.message}`);
+        return Console.error(`SlackError:${_error.message}`);
       }
       case TimeoutError.errorName: {
-        return Console.error(`TimeoutError:${error.message}`);
+        return Console.error(`TimeoutError:${_error.message}`);
       }
       case HTTPError.InvalidURL.errorName: {
-        return Console.error(`InvalidURLError:${error.message}`);
+        return Console.error(`InvalidURLError:${_error.message}`);
       }
       case HTTPError.NetworkError.errorName: {
-        return Console.error(`NetworkError:${error.message}`);
+        return Console.error(`NetworkError:${_error.message}`);
       }
       case HTTPError.ParserError.errorName: {
-        return Console.error(`ParserError:${error.message}`);
+        return Console.error(`ParserError:${_error.message}`);
       }
       case DecodeError.errorName: {
-        return Console.error(`Decode Error:${error.message}`);
+        return Console.error(`Decode Error:${_error.message}`);
       }
       default: {
         // return Console.error(`Unknown Error:${error.message}`);
-        return assertNever(error);
+        return assertNever(_error);
       }
     }
   });
