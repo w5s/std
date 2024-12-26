@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Random module (UUID, number)
+> UUID module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation

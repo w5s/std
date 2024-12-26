@@ -4,7 +4,7 @@
 [![License][license-image]][license-url]
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Random module (UUID, number)
+> Random number module
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
@@ -20,12 +20,12 @@ npm install @w5s/random
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { randomUUID } from '@w5s/random';
+import { randomNumber } from '@w5s/random';
 import { Task } from '@w5s/task';
 
 function createUser(name: string) {
-  return Task.map(randomUUID(), (uuid) => ({
-    id: uuid,
+  return Task.map(randomNumber(1, 3), (id) => ({
+    id,
     name,
   }));
 }
