@@ -1,9 +1,9 @@
-import type { Ref, Record, Tag } from '@w5s/core';
+import type { Ref, Tag } from '@w5s/core';
 import { useRef } from './useRef.js';
 import { useStorage } from './useStorage.js';
 
-type AnyObject = Record<string | symbol, unknown>;
-type EmptyObject = Record<string | symbol, never>;
+type AnyObject = Readonly<Record<string | symbol, unknown>>;
+type EmptyObject = Readonly<Record<string | symbol, never>>;
 
 /**
  * Application id type
@@ -95,7 +95,7 @@ export function Application<Configuration extends object = EmptyObject>(
   id: string,
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   initialConfiguration: Configuration = {} as Configuration,
-  store?: Ref<Record<string, ApplicationState>>,
+  store?: Ref<Readonly<Record<string, ApplicationState>>>,
 ): Application<Configuration> {
   const initialState = Object.freeze({});
   const state = useRef(store == null ? useStorage(globalThis) : store, `application/${id}`, initialState);
