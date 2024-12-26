@@ -4,7 +4,8 @@ import { LogLevelBounded } from './LogLevel/LogLevelBounded.js';
 import { LogLevelComparable } from './LogLevel/LogLevelComparable.js';
 import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { of } from './LogLevel/of.js';
-import { match } from './LogLevel/match.js';
+import { asString } from './LogLevel/asString.js';
+import { asInt } from './LogLevel/asInt.js';
 
 describe('LogLevel', () => {
   it('is an alias to functions', () => {
@@ -14,19 +15,9 @@ describe('LogLevel', () => {
     expect(LogLevel).toEqual(
       expect.objectContaining({
         of,
-        match,
+        asString,
+        asInt,
       }),
     );
-  });
-  describe('.value', () => {
-    it.each([
-      [LogLevel.Critical, 50],
-      [LogLevel.Error, 40],
-      [LogLevel.Warn, 30],
-      [LogLevel.Info, 20],
-      [LogLevel.Debug, 10],
-    ])(`should return value for %s`, (level, expectedValue) => {
-      expect(LogLevel.value(level)).toBe(expectedValue);
-    });
   });
 });

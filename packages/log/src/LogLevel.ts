@@ -6,6 +6,7 @@ import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { of } from './LogLevel/of.js';
 import { from } from './LogLevel/from.js';
 import { asString } from './LogLevel/asString.js';
+import { asInt } from './LogLevel/asInt.js';
 
 export interface LogLevel extends LogLevelType {}
 
@@ -22,17 +23,5 @@ export const LogLevel = Callable({
   of,
   from,
   asString,
-  /**
-   * Returns the numerical representation of a level
-   *
-   * @example
-   * ```ts
-   * const level = LogLevel('Foo', 1);
-   * LogLevel.value(level);// 1
-   * ```
-   * @param level - the log level
-   */
-  value(level: LogLevel): number {
-    return level.value;
-  },
+  asInt,
 });

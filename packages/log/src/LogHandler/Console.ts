@@ -3,6 +3,7 @@ import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import type { Option } from '@w5s/core';
 import type { LogHandler } from '../LogHandler.js';
 import { asString as logLevelAsString } from '../LogLevel/asString.js';
+import { asInt as logLevelAsInt } from '../LogLevel/asInt.js';
 import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
 import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
@@ -55,7 +56,7 @@ export interface ConsoleOptions {
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const {
-    isStderr = (record) => record.level.value >= LogLevelValue.Error.value,
+    isStderr = (record) => logLevelAsInt(record.level) >= logLevelAsInt(LogLevelValue.Error),
     format: formatOption,
     console = globalThis.console,
   } = options;
@@ -68,13 +69,13 @@ export function Console(options: ConsoleOptions = {}): LogHandler {
     ? (level: LogLevel, _writeToStderr: boolean) => {
         // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
         switch (true) {
-          case level.value >= LogLevelValue.Error.value: {
+          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error): {
             return console.error.bind(console);
           }
-          case level.value >= LogLevelValue.Warn.value: {
+          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn): {
             return console.warn.bind(console);
           }
-          case level.value >= LogLevelValue.Info.value: {
+          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Info): {
             return console.info.bind(console);
           }
           default: {
