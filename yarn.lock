@@ -6299,7 +6299,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/log@workspace:packages/log":
+"@w5s/log@npm:^1.0.0-alpha.0, @w5s/log@workspace:packages/log":
   version: 0.0.0-use.local
   resolution: "@w5s/log@workspace:packages/log"
   dependencies:
@@ -6341,6 +6341,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"
+    "@w5s/log": "npm:^1.0.0-alpha.0"
     "@w5s/money": "npm:^1.0.0-alpha.0"
     "@w5s/random": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
