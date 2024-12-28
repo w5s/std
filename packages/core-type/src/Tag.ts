@@ -3,7 +3,7 @@
  *
  * @example
  * ```typescript
- * type PositiveNumber = number & Tag<{ positive: true }>;
+ * type PositiveNumber = number & Tag<'Positive'>;
  * const isPositive = (n: number): n is PositiveNumber => n >= 0;
  * const squareRoot = (n: PositiveNumber): PositiveNumber => Math.sqrt(n) as PositiveNumber;
  * const value = 0;
@@ -13,8 +13,8 @@
  * }
  * ```
  */
-export interface Tag<T extends string | symbol> {
+export type Tag<T extends string | symbol, Value = true> = {
   readonly '@@tag': {
-    readonly [K in T]: K;
+    readonly [K in T]: Value;
   };
-}
+};
