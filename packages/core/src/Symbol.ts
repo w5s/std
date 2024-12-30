@@ -17,6 +17,11 @@ declare global {
 
 export interface SymbolConstructor extends Omit<globalThis.SymbolConstructor, 'keyFor' | 'prototype' | 'metadata'> {
   /**
+   * NodeJS inspect symbol
+   */
+  readonly nodeInspect: SymbolFor['nodejs.util.inspect.custom'];
+
+  /**
    * Enum keys
    */
   readonly enumKeys: SymbolFor['w5s.enumKeys'];
@@ -25,11 +30,6 @@ export interface SymbolConstructor extends Omit<globalThis.SymbolConstructor, 'k
    * Callable callback
    */
   readonly call: '__call__'; // TODO: SymbolFor['w5s.call'];
-
-  /**
-   * NodeJS inspect symbol
-   */
-  readonly nodeInspect: SymbolFor['nodejs.util.inspect.custom'];
 }
 
 /**
