@@ -1,11 +1,9 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
-import { throwError } from '@w5s/error/dist/throwError.js';
 import type { Codec } from '@w5s/core';
-import { of } from './of.js';
 import { parse } from './parse.js';
-import type { BigDecimalString } from '../BigDecimal.js';
 import { format } from './format.js';
+import { call } from './call.js';
 
 const BigDecimalStruct = Struct.define<BigDecimal>('BigDecimal');
 
@@ -45,11 +43,5 @@ export interface BigDecimal
 export const BigDecimal = Callable({
   ...BigDecimalStruct,
   ...BigDecimalCodec,
-  [Callable.symbol]: ((value: string | bigint, scale?: number): BigDecimal =>
-    typeof value === 'string'
-      ? (parse(value) ?? throwError(new TypeError(`${String(value)} is not a valid BigDecimal`)))
-      : of(value, scale ?? 0)) as {
-    (stringValue: BigDecimalString): BigDecimal;
-    (value: bigint, scale?: number): BigDecimal;
-  },
+  [Callable.symbol]: call,
 });

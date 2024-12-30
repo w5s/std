@@ -1,5 +1,5 @@
 import { invariant } from '@w5s/error/dist/invariant.js';
-import { BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimal.js';
+import { call as BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/call.js';
 import type { BigDecimalString } from '@w5s/bigdecimal';
 import type { Currency } from './Currency/Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
