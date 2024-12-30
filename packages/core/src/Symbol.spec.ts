@@ -32,9 +32,9 @@ describe('Symbol', () => {
       expect(typeof Symbol.asyncDispose).toBe('symbol');
     });
   });
-  describe('.toFunction', () => {
+  describe('.call', () => {
     it('should be a symbol', () => {
-      expect(typeof Symbol.toFunction).toBe('string');
+      expect(typeof Symbol.call).toBe('string');
     });
   });
   describe('.nodeInspect', () => {

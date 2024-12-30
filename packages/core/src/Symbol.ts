@@ -7,7 +7,7 @@ const __symbolAlias = <K extends keyof globalThis.SymbolConstructor>(name: K): g
 declare global {
   interface SymbolFor {
     readonly 'w5s.enumKeys': unique symbol;
-    readonly 'w5s.toFunction': unique symbol;
+    // readonly 'w5s.call': unique symbol;
     readonly 'nodejs.util.inspect.custom': unique symbol;
   }
   interface SymbolConstructor {
@@ -24,7 +24,7 @@ export interface SymbolConstructor extends Omit<globalThis.SymbolConstructor, 'k
   /**
    * Callable callback
    */
-  readonly toFunction: '__toFunction__'; // TODO: SymbolFor['w5s.toFunction'];
+  readonly call: '__call__'; // TODO: SymbolFor['w5s.call'];
 
   /**
    * NodeJS inspect symbol
@@ -39,6 +39,7 @@ export interface SymbolConstructor extends Omit<globalThis.SymbolConstructor, 'k
  */
 export const Symbol: SymbolConstructor = {
   for: GlobalSymbol.for,
+  // Global symbols
   iterator: __symbolAlias('iterator'),
   asyncIterator: __symbolAlias('asyncIterator'),
   hasInstance: __symbolAlias('hasInstance'),
@@ -54,7 +55,9 @@ export const Symbol: SymbolConstructor = {
   matchAll: __symbolAlias('matchAll'),
   dispose: __symbolAlias('dispose'),
   asyncDispose: __symbolAlias('asyncDispose'),
-  toFunction: '__toFunction__', // TODO: GlobalSymbol.for('w5s.toFunction'),
-  enumKeys: GlobalSymbol.for('w5s.enumKeys'),
+  // NodeJS symbols
   nodeInspect: GlobalSymbol.for('nodejs.util.inspect.custom'),
+  // W5S symbols
+  call: '__call__', // TODO: GlobalSymbol.for('w5s.call'),
+  enumKeys: GlobalSymbol.for('w5s.enumKeys'),
 };

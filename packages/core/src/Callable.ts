@@ -38,7 +38,7 @@ export function Callable<T extends Callable<AnyFunction>>(properties: T): Callab
 }
 export namespace Callable {
   /**
-   * Alias to {@link @w5s/core!Symbol.toFunction}
+   * Alias to {@link @w5s/core!Symbol.call}
    */
-  export const symbol: (typeof Symbol)['toFunction'] = Symbol.toFunction;
+  export const symbol: (typeof Symbol)['call'] = Symbol.call;
 }
