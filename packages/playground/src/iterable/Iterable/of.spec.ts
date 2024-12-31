@@ -4,10 +4,10 @@ import { withIterable } from '../Testing.js';
 
 describe(of, () => {
   const expectIterable = withIterable(expect);
-  it('should return an empty iterable when 0', () => {
+  it('returns an empty iterable when no parameter', () => {
     expectIterable(of()).toHaveValues([]);
   });
-  it('should use mapFn(index) to generate values', () => {
+  it('returns a iterable of values', () => {
     expectIterable(of(1, 2, 3)).toHaveValues([1, 2, 3]);
   });
 });
