@@ -49,7 +49,7 @@ export interface ConsoleOptions {
  * ```ts
  * LogHandler.Console();// Default formatter
  * LogHandler.Console({
- *   format: ({ domain }) => ([JSON.stringify(logRecord)]),// Pure JSON formatted
+ *   format: (logRecord) => ([JSON.stringify(logRecord)]),// JSON formatted line
  * })
  * ```
  * @param options
