@@ -21,7 +21,7 @@ npm install @w5s/http
 ```ts
 import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
 import { Type } from '@w5s/core';
-import { Console, Task } from '@w5s/task';
+import { Task } from '@w5s/task';
 import { TimeoutError } from '@w5s/error';
 
 const client = Client();
@@ -32,26 +32,29 @@ const FooObject = Type.Object({
   foo: Type.boolean,
 });
 
+declare function logDebug(message: unknown): Task<void, never>;
+declare function logError(message: unknown): Task<void, never>;
+
 export function program() {
   const responseTask = requestSend(client, getText(123));
   const parsed = Task.andThen(responseTask, ResponseParser.json(FooObject));
-  const log = Task.andThen(parsed, (response) => Console.debug(response.foo));
+  const log = Task.andThen(parsed, (response) => logDebug(response.foo));
   const handled = Task.orElse(log, (error) => {
     switch (error.name) {
       case HTTPError.InvalidURL.errorName: {
-        return Console.error(`A wrong url was passed. Got ${error.input}`);
+        return logError(`A wrong url was passed. Got ${error.input}`);
       }
       case HTTPError.NetworkError.errorName: {
-        return Console.error('A network error occurred');
+        return logError('A network error occurred');
       }
       case HTTPError.ParserError.errorName: {
-        return Console.error('A parser error occurred');
+        return logError('A parser error occurred');
       }
       case TimeoutError.errorName: {
-        return Console.error('Operation timed out');
+        return logError('Operation timed out');
       }
       default: {
-        return Console.error('Unknown');
+        return logError('Unknown');
       }
     }
   });
