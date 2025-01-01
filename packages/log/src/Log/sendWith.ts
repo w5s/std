@@ -22,7 +22,7 @@ export interface LogSendFunction {
  *
  * @example
  * ```ts
- * Log.sendWith('example')(warning`My message`); // Task<void, never>
+ * Log.sendWith('example')(warn`My message`); // Task<void, never>
  * ```
  * @param domain
  */
