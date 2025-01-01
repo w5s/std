@@ -1,5 +1,5 @@
 import { Result } from '@w5s/core';
-import { Console, Task } from '@w5s/task';
+import { Task } from '@w5s/task';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);
@@ -10,12 +10,17 @@ function parseNumber(expr: string) {
   return Number.isNaN(parsed) ? Result.Ok(parsed) : Result.Error('NotANumber');
 }
 
+function log(value: unknown) {
+  // This is a lazy operation that will only be evaluated when the Task is run
+  return Task.create(({ ok }) => ok(console.log(value)));
+}
+
 export function main() {
   const parsed = parseNumber('1.1'); // Result.Ok(1.1)
   const computed = Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
 
   // Lazy operation that will display in console the computed result when evaluated
-  return Console.debug(computed);
+  return log(computed);
 }
 
 // runTask is impure and should be put at the edge of the program
