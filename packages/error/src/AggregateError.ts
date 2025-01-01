@@ -3,7 +3,7 @@
  * Alias to native {@link globalThis.AggregateError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { AggregateError } from '@w5s/error';
  *
  * try {

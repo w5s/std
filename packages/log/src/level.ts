@@ -54,7 +54,7 @@ function levelWithData(logLevel: LogLevel, baseData: LogRecord['data']): LogLeve
  * Return a function that creates params to be used with a logger function
  *
  * @example
- * ```ts
+ * ```typescript
  * level(LogLevel.Debug)`debug message`;// { level: LogLevel.Debug, message: LogMessage('debug message'), ... }
  * level('debug')`debug message`; // { level: LogLevel.Debug, message: LogMessage('debug message'), ... }
  * level('debug')`foo=${['foo', 'foo_value']}`; // { ..., message: LogMessage('foo=', LogMessageRef('foo)), data: { foo: 'foo_value' } }

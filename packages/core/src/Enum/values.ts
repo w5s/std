@@ -5,7 +5,7 @@ import { keys } from './keys.js';
  * Returns an array of enum values
  *
  * @example
- * ```ts
+ * ```typescript
  * const MyEnum = Enum.define({ Foo: 'foo', Bar: 'bar' });
  * Enum.values(MyEnum) // ['foo', 'bar']
  * ```

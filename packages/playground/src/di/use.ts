@@ -36,7 +36,7 @@ function getProvider<Value>(
  * Return the container value
  *
  * @example
- * ```ts
+ * ```typescript
  * interface SomeServiceInterface { ... }
  * const SomeService = ContainerKey<SomeServiceInterface>('SomeService');
  * const appContext: AppContext = // ...

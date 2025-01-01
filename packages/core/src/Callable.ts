@@ -21,7 +21,7 @@ export interface Callable<F extends AnyFunction = AnyFunction> {
  * Return a new function from callable interface
  *
  * @example
- * ```ts
+ * ```typescript
  * const myCallable = Callable({
  *   [Callable.symbol]: (arg: number) => arg,
  *   myMethod: () => {},

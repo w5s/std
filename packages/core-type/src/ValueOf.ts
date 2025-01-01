@@ -2,7 +2,7 @@
  * Extract all values from the keys `Keys` of `T`. If `Keys` is omitted, all keys are used.
  *
  * @example
- * ```ts
+ * ```typescript
  * type AllValues = ValueOf<{ Foo: boolean; Bar: 'bar'; Baz: 'baz' }> // 'bar' | 'baz' | boolean
  * type SomeValues = ValueOf<{ Foo: boolean; Bar: 'bar'; Baz: 'baz' }, 'Baz' | 'Bar'> // 'bar' | 'baz'
  * ```

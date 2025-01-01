@@ -2,7 +2,7 @@
  * A function that takes any kind of parameters and returns anything
  *
  * @example
- * ```ts
+ * ```typescript
  * function decorate<F extends AnyFunction>(fn: F): F {
  *   // ...
  * }

@@ -4,7 +4,7 @@ import type { Int } from '../Int.js';
  * Convert an integer to a bigint
  *
  * @example
- * ```ts
+ * ```typescript
  * BigInt.fromNumber(Int(1));// 1n
  * BigInt.fromNumber(Int(-1));// -1n
  * ```

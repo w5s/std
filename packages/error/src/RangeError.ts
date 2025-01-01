@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.RangeError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { RangeError } from '@w5s/error';
  *
  * try {

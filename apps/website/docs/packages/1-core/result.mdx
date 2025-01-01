@@ -30,7 +30,7 @@ On the contrary, `Result` have the following capabilities :
 
 An enum can be declared as the following example :
 
-```ts
+```typescript
 import { Result } from '@w5s/core';
 import { CustomError } from '@w5s/error';
 
@@ -57,7 +57,7 @@ export function divide(value: number, divider: number): Result<number, ZeroDivis
 
 :::
 
-```ts
+```typescript
 const program = (result: Result<number, 'FooError'>) => {
   if (Result.isOk(result)) {
     console.log(result.value);
@@ -77,7 +77,7 @@ const program = (result: Result<number, 'FooError'>) => {
 
 :::
 
-```ts
+```typescript
 const program = (result: Result<number, 'FooError'>) => {
   if (result.ok) {
     console.log(result.value);
@@ -93,7 +93,7 @@ Use `Result.map` and/or `Result.andThen` to transform `Ok` value
 
 ### Using pipeline operator (*Draft proposal*)
 
-```ts
+```typescript
 function program(expression: string) {
   // Convert string to number
   return parseNumber(expression) // Result<number, ParseError>
@@ -106,7 +106,7 @@ function program(expression: string) {
 
 ### Using `const`
 
-```ts
+```typescript
 function program(expression: string) {
   // Convert string to number
   const parsed = parseNumber(expression); // Result<number, ParseError>
@@ -122,7 +122,7 @@ function program(expression: string) {
 
 Use `Result.mapError` and/or `Result.orElse` to transform `Error` error.
 
-```ts
+```typescript
 const handleZeroDivisionError = <E>(result: Result<number, E|ZeroDivisionError>) => {
   return Result.orElse(result, (error) => {
     switch (error.name): {

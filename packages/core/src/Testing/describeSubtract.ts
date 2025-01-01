@@ -5,7 +5,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Numeric.Subtract} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeSubtract({ describe, it, expect })(Number, [
  *   { call: [1, 1], returns: 0 },
  *   // ...

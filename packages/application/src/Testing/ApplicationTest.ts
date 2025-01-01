@@ -14,7 +14,7 @@ export interface ApplicationTest<Configuration = EmptyObject> extends Applicatio
  * Create new application for test
  *
  * @example
- * ```ts
+ * ```typescript
  * const app = ApplicationTest(
  *   // 'some-custom-id',
  *   // {}

@@ -7,7 +7,7 @@ type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
  * Returns `true` when left and right are strictly equal or have same properties
  *
  * @example
- * ```ts
+ * ```typescript
  * shallowEqual(true, true);// true
  * shallowEqual(NaN, NaN);// true
  * shallowEqual({ a: 1 }, { a: 1 });// true

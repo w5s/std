@@ -6,7 +6,7 @@ import { iterable } from './iterable.js';
  * Returns `true` if `anyValue` is a `Seq`
  *
  * @example
- * ```ts
+ * ```typescript
  * Seq.hasInstance([1, 2, 3]); // == false
  * Seq.hasInstance(Seq([1, 2, 3])); // == true
  * ```

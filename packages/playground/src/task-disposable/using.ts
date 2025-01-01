@@ -13,7 +13,7 @@ function disposeAll(resources: { disposables: ReadonlyArray<Disposable | AsyncDi
  * Returns a task that will be mapped to `thenFn` arguments and then disposed.
  *
  * @example
- * ```ts
+ * ```typescript
  * const getResource1 = (): Task<Disposable, never> => { ... }
  * const getResource2 = (): Task<AsyncDisposable, never> => { ... }
  * const task = using([getResource1(), getResource2()], ([resource1, resource2]) => {

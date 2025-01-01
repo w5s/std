@@ -5,7 +5,7 @@ import { scale } from './scale.js';
  * Returns a normalized `value`
  *
  * @example
- * ```ts
+ * ```typescript
  * BigDecimal.normalize(BigDecimal('1.020')); //  BigDecimal('1.02')
  * BigDecimal.normalize(BigDecimal('1.0200')); //  BigDecimal('1.02')
  * ```

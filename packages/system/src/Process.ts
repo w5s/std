@@ -9,7 +9,7 @@ export namespace Process {
    * Exits the process with the specified exit `code`.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const exitTask = Process.exit(0);
    * Task.unsafeRun(exitTask);// Will exit program with code 0
    * ```
@@ -23,7 +23,7 @@ export namespace Process {
    * Returns the current working directory of the process
    *
    * @example
-   * ```ts
+   * ```typescript
    * const task = Process.getCurrentDirectory();
    * Task.unsafeRun(task);// Result.Ok(FilePath('current/working/directory'))
    * ```
@@ -36,7 +36,7 @@ export namespace Process {
    * Sets the current working directory of the process or rejects an error if doing so fails (for instance, if the specified `directory` does not exist).
    *
    * @example
-   * ```ts
+   * ```typescript
    * const task = Process.setCurrentDirectory(FilePath('other/directory'));
    * Task.unsafeRun(task);// Result.Ok(undefined)
    * ```

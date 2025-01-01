@@ -42,7 +42,7 @@ export const RegExp = {
    * Parse a RegExp
    *
    * @example
-   * ```ts
+   * ```typescript
    * RegExp.parse('/^[a-z]+$/i');// Option.Some(/^[a-z]+$/i);
    * ```
    * @param expression

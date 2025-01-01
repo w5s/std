@@ -6,7 +6,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Numeric.CheckedAdd} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeCheckedAdd({ describe, it, expect })(Number, [
  *   { call: [1, 1], returns: 2 },
  *   // ...

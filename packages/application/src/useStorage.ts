@@ -11,7 +11,7 @@ export interface Storage extends Map<string, unknown> {}
  * Get or create a map object storage for `hostObject`
  *
  * @example
- * ```ts
+ * ```typescript
  * const objectStorage = useStorage(someObject);
  * const globalStorage = useStorage(globalThis);
  * ```

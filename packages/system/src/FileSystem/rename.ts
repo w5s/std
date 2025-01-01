@@ -7,7 +7,7 @@ import type { FilePath } from '../FilePath.js';
  * Renames `oldPath` to `newPath`.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = rename(FilePath('/path/to/old'), FilePath('/path/to/new'));
  * await Task.unsafeRun(task); // Will rename the file
  * ```

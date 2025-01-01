@@ -6,7 +6,7 @@ import { schema } from '../Codec/schema.js';
  * Return a union of all types
  *
  * @example
- * ```ts
+ * ```typescript
  * const ABType = Type.anyOf(AType, BType);
  * ```
  * @param types

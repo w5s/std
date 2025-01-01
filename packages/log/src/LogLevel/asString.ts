@@ -4,7 +4,7 @@ import type { LogLevel } from './LogLevel.js';
  * Returns the string representation of a level
  *
  * @example
- * ```ts
+ * ```typescript
  * const level = LogLevel('Foo', 1);
  * LogLevel.asString(level);// 'Foo'
  * ```

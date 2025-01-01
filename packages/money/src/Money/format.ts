@@ -5,7 +5,7 @@ import type { Money } from './Money.js';
  * Returns a formatted representation of money
  *
  * @example
- * ```ts
+ * ```typescript
  * Money.format(EUR('1.10'));// '1.10EUR';
  * ```
  * @param self

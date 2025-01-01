@@ -17,7 +17,7 @@ import { find } from './Iterable/find.js';
  * A collection of functions to manipulate Iterable
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = Iterable.create(() => ({
  *   next() { ... }
  * }));

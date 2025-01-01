@@ -17,7 +17,7 @@ An `Option<V>` is either a value of type `V` or nothing. An empty value is repre
 
 An enum can be declared as the following example :
 
-```ts
+```typescript
 import { Option } from '@w5s/core';
 
 export type OptString = Option<string>;
@@ -42,7 +42,7 @@ withFallback(Option.None);// Option.None
 
 :::
 
-```ts
+```typescript
 import { Option } from '@w5s/core';
 
 const optionToString = <V>(option: Option<V>) => Option.isSome(option) ? `Some(${v})` : 'None');
@@ -59,7 +59,7 @@ optionToString(Option.None);// 'None'
 
 :::
 
-```ts
+```typescript
 import { Option } from '@w5s/core';
 
 const optionToString = <V>(option: Option<V>) => Option.match(option, {
@@ -82,7 +82,7 @@ Not recommended for an application, but only for a third party library.
 
 :::
 
-```ts
+```typescript
 import type { Option } from '@w5s/core';
 
 const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${v})` : 'None';
@@ -96,7 +96,7 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 
 - Avoid using `null`
 
-  ```ts
+  ```typescript
   // ✓ GOOD
   const someOptionFunc = () => Option.from(someNullableFunc()); // null -> undefined
   ```
@@ -112,7 +112,7 @@ const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${
 - Prefer `Option.map` / `Option.andThen` /  `Option.orElse` when mapping an `Option` to an `Option`
 - Prefer ternary operators over `if` / `else`
 
-```ts
+```typescript
 // ✓ OK
 const myFunc = <V>(option: Option<V>) => Option.map(option, (value) => /* ... */);
 

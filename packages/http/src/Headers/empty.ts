@@ -4,7 +4,7 @@ const _empty = Object.freeze({});
  * Returns an empty {@link Headers} object
  *
  * @example
- * ```ts
+ * ```typescript
  * const response = Response({
  *   headers: Headers.empty(),
  * });

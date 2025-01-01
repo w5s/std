@@ -2,7 +2,7 @@
  * A type that can be either `undefined`, `null`, or `T`
  *
  * @example
- * ```ts
+ * ```typescript
  * type NullableNumber = Nullable<number>;
  *
  * function someFunction(value: NullableNumber) {

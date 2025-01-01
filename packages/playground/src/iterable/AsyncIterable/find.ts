@@ -6,7 +6,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * Returns the first element for which the given function returns true, otherwise undefined.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = AsyncIterable.of(
  *   { name: 'amy', id: 1 },
  *   { name: 'bob', id: 2 }

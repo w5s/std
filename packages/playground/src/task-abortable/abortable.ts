@@ -13,7 +13,7 @@ export interface AbortOptions {
  * Return a new task that can be aborted
  *
  * @example
- * ```ts
+ * ```typescript
  * const controller = new AbortController();
  * const someTask: Task<Value, Error> = //...;
  * const someTaskAbortable = abortable(someTask, controller); // Task<Value, Error | AbortError>

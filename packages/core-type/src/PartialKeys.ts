@@ -4,7 +4,7 @@ import type { Pretty } from './Pretty.js';
  * Return a partial type of `T` for keys in `Keys`
  *
  * @example
- * ```ts
+ * ```typescript
  * type T = { required: boolean; optional1: string; optional2: string; };
  * type OptionalT = PartialKeys<T, 'optional'>; // { required: boolean; optional1?: string; optional2?: string; };
  * ```

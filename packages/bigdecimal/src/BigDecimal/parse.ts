@@ -6,7 +6,7 @@ import { of } from './of.js';
  * Returns a new BigDecimal from a string
  *
  * @example
- * ```ts
+ * ```typescript
  * BigDecimal.parse('1.020'); // Option.Some(BigDecimal('1.020'))
  * BigDecimal.parse('A'); // Option.None
  * ```

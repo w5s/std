@@ -11,7 +11,7 @@ const complete = <V, E>(parameters: TaskParameters<V, E>, result: Result<V, E>) 
  * Maps a `Task<ValueFrom, ErrorFrom>` to `Task<ValueTo, ErrorTo>` by applying a function to the result of the task.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = Task.reject('error');
  * const handledTask = Task.mapResult(task, (result) =>
  *    Result.isOk(result) ? result : Result.Ok('handled_value') )

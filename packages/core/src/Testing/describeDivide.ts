@@ -5,7 +5,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Numeric.Divide} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeDivide({ describe, it, expect })(Number, [
  *   { call: [2, 3], returns: 6 },
  *   // ...

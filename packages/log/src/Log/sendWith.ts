@@ -21,7 +21,7 @@ export interface LogSendFunction {
  * Returns a new log sender function
  *
  * @example
- * ```ts
+ * ```typescript
  * Log.sendWith('example')(warn`My message`); // Task<void, never>
  * ```
  * @param domain

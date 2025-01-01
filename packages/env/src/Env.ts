@@ -32,7 +32,7 @@ export interface Env {
  * An object containing the environment variables
  *
  * @example
- * ```ts
+ * ```typescript
  * const NODE_ENV = Env['NODE_ENV'];
  * ```
  */

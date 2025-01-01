@@ -7,7 +7,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for Comparable behavior
  *
  * @example
- * ```ts
+ * ```typescript
  * describeComparable({ describe, it, expect })(Number, {
  *   ordered: () => [-1, 0, 1], // A list of ordered values
  *   equivalent: () => [

@@ -6,7 +6,7 @@ import { isPromiseLike } from './isPromiseLike.js';
  * Else returns `try { return onSuccess(block()) } catch (error) { onError(error) }` when synchronous
  *
  * @example
- * ```ts
+ * ```typescript
  * const syncBlock = () => 'sync'
  * tryCall(syncBlock, (_) => `${_}_foo`);// 'async_foo'
  * const asyncBlock = () => Promise.resolve('async')

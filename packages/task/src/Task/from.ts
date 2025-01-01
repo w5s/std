@@ -5,7 +5,7 @@ import { Task } from './Task.js';
  * Create a Task from a `taskRun` function or a TaskLike
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = Task.from((resolve) => resolve('hello'));// from a callback
  * const task = Task.from({ taskRun: (resolve) => resolve('hello') });// from a TaskLike
  * ```

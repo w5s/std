@@ -19,7 +19,7 @@ export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
  * Ensures that the directory exists. If the directory structure does not exist, it is created.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = ensureDirectory(FilePath('/path/to/directory'));
  * await Task.unsafeRun(task);// Will create a directory
  * ```
@@ -43,7 +43,7 @@ export async function ensureFileAsync(filePath: FilePath): Promise<void> {
  * Ensures that the file exists. If the file that is requested to be created is in directories that do not exist, these directories are created. If the file already exists, it is NOT MODIFIED.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = ensureFile(FilePath('/path/to/file'));
  * await Task.unsafeRun(task);// Will create a file
  * ```
@@ -67,7 +67,7 @@ export async function ensureSymbolicLinkAsync(source: FilePath, destination: Fil
  * Ensures that the symlink exists. If the directory structure does not exist, it is created.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = ensureSymbolicLink(FilePath('/path/to/file'), FilePath('/path/to/link'));
  * await Task.unsafeRun(task);// Will create a symbolic link
  * ```
@@ -93,7 +93,6 @@ async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   if (actualType !== expectedType) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw ensureTypeError(filePath, expectedType, actualType);
   }
 }

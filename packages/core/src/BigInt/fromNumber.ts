@@ -3,7 +3,7 @@ import { fromNumber as intFromNumber } from '../Int/fromNumber.js';
  * Convert a number to a bigint
  *
  * @example
- * ```ts
+ * ```typescript
  * BigInt.fromNumber(1);// Option.Some(1n)
  * BigInt.fromNumber(-1);// Option.Some(-1n)
  * BigInt.fromNumber(1.1);// Option.None

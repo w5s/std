@@ -6,7 +6,7 @@ import type { ContainerProvider } from './ContainerProvider.js';
  * Return a new provider for a key
  *
  * @example
- * ```ts
+ * ```typescript
  * const ServiceA = ContainerKey<{ doA: () => void }>('ServiceA', { doA: () => {} });
  * const ServiceB = ContainerKey<{ doB: () => void }>('ServiceB', { doB: () => {} });
  *

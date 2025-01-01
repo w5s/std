@@ -32,7 +32,7 @@ export interface Type<T> {
    * Type string representation
    *
    * @example
-   * ```ts
+   * ```typescript
    * StringType.typeName // 'String'
    * Int.typeName // 'Int'
    * Person.typeName // 'Person'
@@ -44,7 +44,7 @@ export interface Type<T> {
    * Return `true` if the given value is an instance of the class.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const StringType: Type<string>;
    * StringType.hasInstance('foo'); // true
    * StringType.hasInstance(42); // false
@@ -58,7 +58,7 @@ export interface Type<T> {
    * Try to convert anyValue to enum value or else returns `Option.None`
    *
    * @example
-   * ```ts
+   * ```typescript
    * const StringType: Type<string>;
    * StringType.from('foo'); // Option.Some('foo')
    * StringType.from(12); // Option.None
@@ -71,7 +71,7 @@ export interface Type<T> {
    * When defined, returns a custom string representation
    *
    * @example
-   * ```ts
+   * ```typescript
    * ```
    *
    * @category Type

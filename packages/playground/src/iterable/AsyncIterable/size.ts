@@ -8,7 +8,7 @@ const sum = (accumulator: Int) => (accumulator + 1) as Int;
  * Returns the size of iterable
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
  * size(iterable); // 3
  * ```

@@ -4,7 +4,7 @@ import type { RandomGenerator } from '../randomGenerator.js';
 /**
  *
  * @example
- * ```ts
+ * ```typescript
  * const randomGenerator = fakeRandomGenerator(() => 0.123)
  * ```
  * @param getNextValue - the implementation

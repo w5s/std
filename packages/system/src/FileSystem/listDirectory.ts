@@ -9,7 +9,7 @@ import type { FilePath } from '../FilePath.js';
  * Reads the contents of a directory.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = listDirectory(FilePath('/path/to/directory'));
  * const list = await Task.unsafeRun(task); // Result.Ok([FilePath('file1'), FilePath('file2')])
  * ```

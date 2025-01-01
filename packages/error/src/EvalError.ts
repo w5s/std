@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.EvalError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { EvalError } from '@w5s/error';
  *
  * try {

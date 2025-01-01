@@ -15,7 +15,7 @@ The `Ref` type represents a mutable value that can be shared over the program.
 
 ## Usage
 
-```ts
+```typescript
 import { Ref } from '@w5s/core';
 
 const counter = Ref(0);
@@ -31,7 +31,7 @@ increment();// counter.value === 2
 
 It is possible read and / or write `Ref` value, using `Ref` namespace
 
-```ts
+```typescript
 const counter = Ref(0);
 
 // Use `Ref.modify` when mapping previous value to new value
@@ -58,7 +58,7 @@ const reset = () => Ref.write(counter, 0);
 
 ### Always use immutable values everywhere and use `Ref` for mutations
 
-```ts
+```typescript
 // ✓ GOOD
 interface State {
   readonly name: string,

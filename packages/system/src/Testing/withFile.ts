@@ -42,7 +42,7 @@ export interface ExpectFile {
  * Test expect decorator for file assertions
  *
  * @example
- * ```ts
+ * ```typescript
  * const expectFile = withFile(expect);
  *
  * it('something', async () => {

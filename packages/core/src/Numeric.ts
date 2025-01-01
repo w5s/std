@@ -6,7 +6,7 @@ export namespace Numeric {
      * Absolute value. It should satisfy `Numeric['*'](Numeric.abs(x), Numeric.sign(x)) == x`
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TSigned: Numeric.Signed<T> = ...;
      * const result = TSigned.abs(value);// absolute value of (value)
@@ -29,7 +29,7 @@ export namespace Numeric {
      * Addition operator that returns `None` instead of wrapping around on overflow.
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.CheckedAdd<T> = ...;
      * const result = TNumeric['+?'](left, right);// represents (left + right)
@@ -45,7 +45,7 @@ export namespace Numeric {
      * Subtraction operator that returns `None` instead of wrapping around on overflow.
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.CheckedSubtract<T> = ...;
      * const result = TNumeric['-?'](left, right);// represents (left + right)
@@ -62,7 +62,7 @@ export namespace Numeric {
      * Multiplication operator that returns `None` instead of wrapping around on overflow.
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.CheckedMultiply<T> = ...;
      * const result = Numeric['*?'](left, right);// represents (left * right)
@@ -79,7 +79,7 @@ export namespace Numeric {
      * Division operator
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.CheckedDivide<T> = ...;
      * const result = Numeric['/?'](left, right);// represents (left / right)
@@ -96,7 +96,7 @@ export namespace Numeric {
      * Addition operator
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.Add<T> = ...;
      * const result = TNumeric['+'](left, right);// represents (left + right)
@@ -113,7 +113,7 @@ export namespace Numeric {
      * Subtraction operator
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.Subtract<T> = ...;
      * const result = Numeric['-'](left, right);// represents (left - right)
@@ -130,7 +130,7 @@ export namespace Numeric {
      * Multiplication operator
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.Multiply<T> = ...;
      * const result = Numeric['*'](left, right);// represents (left * right)
@@ -147,7 +147,7 @@ export namespace Numeric {
      * Division operator
      *
      * @example
-     * ```ts
+     * ```typescript
      * type T = ...;
      * const TNumeric: Numeric.Divide<T> = ...;
      * const result = Numeric['/'](left, right);// represents (left / right)

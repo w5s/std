@@ -26,7 +26,7 @@ export async function moveAsync(source: FilePath, destination: FilePath, options
  * Move a `source` file or directory to `destination`
  *
  * @example
- * ```ts
+ * ```typescript
  * const moveTask = move(FilePath('source'), FilePath('destination'));
  * Task.unsafeRun(moveTask);
  * ```

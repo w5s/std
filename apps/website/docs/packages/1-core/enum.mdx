@@ -17,7 +17,7 @@ Enums are useful for defining types that can only take on a limited set of value
 
 An enum can be declared as the following example :
 
-```ts
+```typescript
 import { Enum } from '@w5s/core';
 
 export const MyEnum = Enum.define({
@@ -29,7 +29,7 @@ export type MyEnum = Enum.ValueOf<typeof MyEnum>;
 
 ## Matching on values
 
-```ts
+```typescript
 import { assertNever } from '@w5s/error';
 
 export function getName(value: MyEnum) {
@@ -48,7 +48,7 @@ export function getName(value: MyEnum) {
 
 To read enum keys and values, use `Enum.keys` and `Enum.values` :
 
-```ts
+```typescript
 export const MyEnum = Enum.define({
   Foo: 'foo',
   Bar: 'bar',
@@ -62,7 +62,7 @@ Enum.values(MyEnum); // ['foo', 'bar']
 
 Extending an enum can be done just using the `...` operator
 
-```ts
+```typescript
 const MyEnumValues = Enum.define({
   Foo: 'foo',
   Bar: 'bar',
@@ -86,7 +86,7 @@ export const MyEnum = {
 
 ## Coding Guide
 
-```ts
+```typescript
 // ✓ Export a const
 // ✓ PascalCase
 // ✓ Singular
@@ -110,7 +110,7 @@ Typescript enums have several drawbacks such as :
 
 - Number based enum are not safe
 
-  ```ts
+  ```typescript
   enum Roles {
     Admin,
   }
@@ -121,7 +121,7 @@ Typescript enums have several drawbacks such as :
 
 - String based enum are using nominal typing (Typescript is almost full structurally typed)
 
-  ```ts
+  ```typescript
   enum Roles {
     Admin = 'admin',
   }

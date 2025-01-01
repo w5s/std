@@ -43,7 +43,7 @@ function useRefStorage<V>(hostObject: Storage, key: string, initialValue: V): Re
  * Return a new `Ref` stored at `storage.get(key)` or `ref.value[key]`
  *
  * @example
- * ```ts
+ * ```typescript
  * const globalStorage = useStorage(globalThis);
  * const counterRef = useRef<number>(globalStorage, 'counter', 1);
  * // globalStorage == Map { counter => 1 }

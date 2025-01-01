@@ -6,7 +6,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for Numeric.Signed behavior
  *
  * @example
- * ```ts
+ * ```typescript
  * describeSigned({ describe, it, expect })(Number, {
  *   abs: [
  *     { call: [-1], returns: 1 },

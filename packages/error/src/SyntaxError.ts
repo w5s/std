@@ -6,7 +6,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.SyntaxError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { SyntaxError } from '@w5s/error';
  *
  * try {

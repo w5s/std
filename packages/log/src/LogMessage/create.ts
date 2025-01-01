@@ -4,7 +4,7 @@ import type { LogMessage, LogMessageItem } from '../LogMessage.js';
  * Construct LogMessage
  *
  * @example
- * ```ts
+ * ```typescript
  * const message = LogMessage.create(['foo', { $ref: 'key' }, 'bar']);
  * ```
  * @category Constructor

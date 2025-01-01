@@ -4,7 +4,7 @@ import type { Option } from '../Option.js';
  * Parse the expression and returns a bigint
  *
  * @example
- * ```ts
+ * ```typescript
  * BigInt.parse('0b10101');// Option.Some(21n)
  * BigInt.parse('1024');// Option.Some(1024n)
  * BigInt.parse('0x123');// Option.Some(291n)

@@ -37,7 +37,7 @@ export namespace FilePath {
    * Normalize a string path, reducing '..' and '.' parts. When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const path = FilePath.normalize('foo/./bar/../baz//quux/');// FilePath('foo/baz/quux/')
    * ```
    * @param path - The path to normalize
@@ -51,7 +51,7 @@ export namespace FilePath {
    * Often used to extract the file name from a fully qualified path.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const path = FilePath.basename('/foo/bar.html');// 'bar.html'
    * ```
    * @param path - The path to extract base name from
@@ -65,7 +65,7 @@ export namespace FilePath {
    * Return the directory name of a path. Similar to the Unix dirname command.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const path = FilePath.dirname('/foo/bar.html');// '/foo'
    * ```
    * @param path - The path to extract directory name from
@@ -79,7 +79,7 @@ export namespace FilePath {
    * If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string
    *
    * @example
-   * ```ts
+   * ```typescript
    * const path = FilePath.extname('/foo/bar.html');// '.html'
    * ```
    * @param path - The path to extract extension name from
@@ -92,7 +92,7 @@ export namespace FilePath {
    * Returns a path string from an object - the opposite of `parse()`.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const formatted = FilePath.format({
    *   root: '/',
    *   dir: '/home/user/dir',
@@ -116,7 +116,7 @@ export namespace FilePath {
    * Returns an object from a path string - the opposite of `format()`.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const path = FilePath.parse('/foo/bar.html');// { root: '/', dir: '/foo', base: 'bar.html', ext: '.html', name: 'bar' }
    * ```
    * @param string - The path to parse
@@ -137,7 +137,7 @@ export namespace FilePath {
    * At times we have two absolute paths, and we need to derive the relative path from one to the other. This is actually the reverse transform of {@link resolve}.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const from = FilePath('home/hello/world');
    * const to = FilePath('home/earth');
    * FilePath.relative(from, to);// FilePath('../../earth')
@@ -160,7 +160,7 @@ export namespace FilePath {
    * and trailing slashes are removed unless the path gets resolved to the root directory.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const from = [FilePath('/goodbye'), FilePath('/hello')];
    * const to = FilePath('./world');
    * FilePath.resolve(from, to);// Task.resolve(FilePath('/hello/world'))
@@ -177,7 +177,7 @@ export namespace FilePath {
    * Join all arguments together and normalize the resulting path.
    *
    * @example
-   * ```ts
+   * ```typescript
    * const paths = [FilePath('hello'), FilePath('world')];
    * FilePath.concat(paths);// FilePath('hello/world')
    * ```

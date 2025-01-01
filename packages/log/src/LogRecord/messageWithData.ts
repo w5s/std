@@ -5,7 +5,7 @@ import type { LogRecord } from './LogRecord.js';
  * replacing any data references with their corresponding values in the log record's data object.
  *
  * @example
- * ```ts
+ * ```typescript
  * const record = LogRecord({
  *   message: LogMessage(['foo=', { $ref: 'foo' }]),
  *   data: {

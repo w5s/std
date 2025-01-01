@@ -7,7 +7,7 @@ import type { FilePath } from '../FilePath.js';
  * Asynchronously copies `source` to `destination`. By default, `destination` is overwritten if it already exists.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = copyFile(FilePath('/path/to/source'), FilePath('/path/to/destination'));
  * await Task.unsafeRun(task); // Will copy the file
  * ```

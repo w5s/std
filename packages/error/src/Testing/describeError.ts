@@ -5,7 +5,7 @@ import type { CustomError } from '../CustomError.js';
  * Create a spec for a CustomError
  *
  * @example
- * ```ts
+ * ```typescript
  * describeError({ describe, it, expect })(MyCustomError, {
  *   defaultProperties: () => ({  })
  *   expectedName: 'MyCustomError',

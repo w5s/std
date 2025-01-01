@@ -14,7 +14,7 @@ export namespace FileSize {
    * Returns a file size of `amount` bytes
    *
    * @example
-   * ```ts
+   * ```typescript
    * const size = FileSize.bytes(123);
    * ```
    * @param amount - The amount of bytes
@@ -27,7 +27,7 @@ export namespace FileSize {
    * Returns a file size of `amount` kilobytes
    *
    * @example
-   * ```ts
+   * ```typescript
    * const size = FileSize.kilobytes(123);
    * ```
    * @param amount - The amount of kilobytes
@@ -40,7 +40,7 @@ export namespace FileSize {
    * Returns a file size of `amount` megabytes
    *
    * @example
-   * ```ts
+   * ```typescript
    * const size = FileSize.megabytes(123);
    * ```
    * @param amount - The amount of megabytes
@@ -53,7 +53,7 @@ export namespace FileSize {
    * Returns a file size of `amount` gigabytes
    *
    * @example
-   * ```ts
+   * ```typescript
    * const size = FileSize.gigabytes(123);
    * ```
    * @param amount - The amount of gigabytes
@@ -66,7 +66,7 @@ export namespace FileSize {
    * Returns a file size of `amount` terabytes
    *
    * @example
-   * ```ts
+   * ```typescript
    * const size = FileSize.terabytes(123);
    * ```
    * @param amount - The amount of terabytes

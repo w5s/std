@@ -18,7 +18,7 @@ export interface ExpectAsyncIterable {
  * Return a specialized expect for {@link @w5s/iterable!AsyncIterable}
  *
  * @example
- * ```ts
+ * ```typescript
  * const expectAsyncIterable = withAsyncIterable(expect);
  *
  * const someIterable: AsyncIterable<any> = ...;

@@ -6,7 +6,7 @@ import { iterable as iterableSymbol } from './iterable.js';
  * Return a new sequence from `iterable`
  *
  * @example
- * ```ts
+ * ```typescript
  * Seq.from([1, 2, 3]); // A sequence of 1, 2, 3
  * Seq.from(Iterable.of(1, 2, 3)); // A sequence of 1, 2, 3
  * ```

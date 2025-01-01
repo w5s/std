@@ -2,7 +2,7 @@
  * Flatten the type. Useful for IDE information.
  *
  * @example
- * ```ts
+ * ```typescript
  * type A = { a: boolean };
  * type B = { b: string };
  * type AB = Pretty<A & B>; // { a: boolean; b: string; }

@@ -21,7 +21,7 @@ export interface Request {
    * Indicates how the request will interact with the browser's cache to set request's cache.
    *
    * @example
-   * ```ts
+   * ```typescript
    * 'no-store'
    * ```
    */
@@ -42,7 +42,7 @@ export interface Request {
    * Request headers
    *
    * @example
-   * ```ts
+   * ```typescript
    * { "Content-type": "application/json" }
    * ```
    */

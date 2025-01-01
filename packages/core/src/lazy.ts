@@ -3,7 +3,7 @@
  * Useful for expensive computation
  *
  * @example
- * ```ts
+ * ```typescript
  * const expensiveRead = lazy(() => fs.readDirSync('my/dir'));
  * // fs.readDirSync not called
  * console.log(

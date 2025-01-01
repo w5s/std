@@ -5,7 +5,7 @@ import { Symbol } from '../Symbol.js';
  * Returns an array of enum keys
  *
  * @example
- * ```ts
+ * ```typescript
  * const MyEnum = Enum.define({ Foo: 'foo', Bar: 'bar' });
  * Enum.keys(MyEnum) // ['Foo', 'Bar']
  * ```

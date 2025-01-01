@@ -7,7 +7,7 @@ import type { FilePath } from '../FilePath.js';
  * Reads the contents of the symbolic link referred to by path.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = createSymbolicLink(FilePath('/path/to/symlink'), FilePath('/path/to/base_file'));
  * await Task.unsafeRun(task); // Will create the symlink
  * ```

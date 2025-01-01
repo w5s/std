@@ -4,7 +4,7 @@ import type { BigDecimal } from './BigDecimal.js';
  * Returns a new `BigDecimal` from `value` and `scale`
  *
  * @example
- * ```ts
+ * ```typescript
  * BigDecimal.of(1n, 1); // BigDecimal('0.1')
  * BigDecimal.of(-234n, 2); // BigDecimal('2.34')
  * ```

@@ -41,7 +41,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
    * Return the configuration value
    *
    * @example
-   * ```ts
+   * ```typescript
    * const app = Application('my-app', {
    *   myVar: 1
    * });
@@ -57,7 +57,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
    * Return the configuration value
    *
    * @example
-   * ```ts
+   * ```typescript
    * const app = Application('my-app', {
    *   myVar: 1
    * });
@@ -72,7 +72,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
  * Returns an app instance with a state ref that will be stored in `applicationStore.current[id]`
  *
  * @example
- * ```ts
+ * ```typescript
  * interface MyAppConfiguration {
  *   foo: number
  * }

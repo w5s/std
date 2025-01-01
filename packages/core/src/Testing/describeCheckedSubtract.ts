@@ -6,7 +6,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Numeric.CheckedSubtract} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeCheckedSubtract({ describe, it, expect })(Number, [
  *   { call: [1, 1], returns: 0 },
  *   // ...

@@ -2,7 +2,7 @@
  * Return `true` if `anyValue` is a {@link PromiseLike}
  *
  * @example
- * ```ts
+ * ```typescript
  * isPromiseLike(Promise.resolve());// true
  * isPromiseLike(null);// false
  * ```

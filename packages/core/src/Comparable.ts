@@ -8,7 +8,7 @@ export interface Comparable<T> extends Equal<T> {
    * Return a number that represents comparison
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const sorted = [3, 1, 1].sort(TCompare.compare);
@@ -20,7 +20,7 @@ export interface Comparable<T> extends Equal<T> {
    * "Less than or equal to" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -36,7 +36,7 @@ export interface Comparable<T> extends Equal<T> {
    * "Less than" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -52,7 +52,7 @@ export interface Comparable<T> extends Equal<T> {
    * "Greater than or equal to" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -68,7 +68,7 @@ export interface Comparable<T> extends Equal<T> {
    * "Greater than" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -84,7 +84,7 @@ export interface Comparable<T> extends Equal<T> {
    * "minimum" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -98,7 +98,7 @@ export interface Comparable<T> extends Equal<T> {
    * "maximum" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
    * const smallerT: T;
@@ -114,7 +114,7 @@ export interface Comparable<T> extends Equal<T> {
  * Construct Comparable instance
  *
  * @example
- * ```ts
+ * ```typescript
  * const NumberComparable = Comparable({
  *   compare: (left, right) => left - right,
  * });

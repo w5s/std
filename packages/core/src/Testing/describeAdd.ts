@@ -5,7 +5,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Numeric.Add} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeAdd({ describe, it, expect })(Number, [
  *   { call: [1, 1], returns: 2 },
  *   // ...

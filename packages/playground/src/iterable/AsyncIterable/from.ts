@@ -3,7 +3,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 /**
  *
  * @example
- * ```ts
+ * ```typescript
  * AsyncIterable.from([1, Promise.resolve(2), 3]);// AsyncIterable.of(1, 2, 3)
  * AsyncIterable.from(Iterable.of(1, Promise.resolve(2), 3));// AsyncIterable.of(1, 2, 3)
  * ```

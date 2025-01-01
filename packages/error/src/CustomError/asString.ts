@@ -5,7 +5,7 @@ const errorToString = Error.prototype.toString;
  * Static method to convert an error to a string
  *
  * @example
- * ```ts
+ * ```typescript
  * CustomError.asString(new Error('my message'));
  * ```
  * @param self

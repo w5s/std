@@ -4,7 +4,7 @@ import type { Int } from '@w5s/core';
  * Tests whether any element in the iterable pass the test implemented by the provided function.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = Iterable.of(1, 2, 3);
  * Iterable.some(iterable, (currentValue) => currentValue >= 1); // true
  * Iterable.some(iterable, (currentValue) => currentValue >= 2); // true

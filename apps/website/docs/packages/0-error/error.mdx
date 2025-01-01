@@ -25,7 +25,7 @@ The `@w5s/error` package helps creating type safe errors :
 
 ## Usage
 
-```ts
+```typescript
 import { CustomError } from '@w5s/error';
 
 interface SomeError
@@ -72,7 +72,7 @@ Nevertheless, errors can be thrown when :
 - it can be used as an expression (ex: in ternary operator)
 - it can be used as a parameter (ex: as a callback)
 
-```ts
+```typescript
 import { throwError } from '@w5s/error';
 
 function assertNotNullable(value: unknown) {
@@ -84,7 +84,7 @@ function assertNotNullable(value: unknown) {
 
 The recommended way to match on errors created with `CustomError.define` is to use a `switch` / `case` on the error `name`
 
-```ts
+```typescript
 interface FooError
   extends CustomError<{
     name: 'FooError';
@@ -126,7 +126,7 @@ function program() {
 
 `CustomError` can be used to create specific errors with a `cause` property that is useful to keep track of the chain of errors.
 
-```ts
+```typescript
 export interface CauseError
   extends CustomError<{
     name: 'CauseError';
@@ -145,7 +145,7 @@ try {
 
 ## Coding Guide
 
-```ts
+```typescript
 // ✓ Export an interface
 // ✓ PascalCase
 // ✓ Name + 'Error'

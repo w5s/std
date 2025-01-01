@@ -4,7 +4,7 @@ import type { UUID } from '../UUID.js';
  * Converts a UUID to an array of uint32 values.
  *
  * @example
- * ```ts
+ * ```typescript
  * const uuid: UUID;
  * const parts = UUID.toUint32Array(uuid);
  * ```

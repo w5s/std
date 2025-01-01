@@ -50,7 +50,7 @@ export namespace Client {
    * Returns the timeout duration in milliseconds for client
    *
    * @example
-   * ```ts
+   * ```typescript
    * const client = Client();
    * const duration = Client.getTimeoutDuration(client);
    * ```
@@ -65,7 +65,7 @@ export namespace Client {
    * Returns the timeout duration in milliseconds for the request and client
    *
    * @example
-   * ```ts
+   * ```typescript
    * const client = Client();
    * const duration = Client.getRequestTimeoutDuration(client);
    * ```

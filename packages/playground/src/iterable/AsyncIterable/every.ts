@@ -6,7 +6,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * Tests whether all elements in the async iterable pass the test implemented by the provided function.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
  * await AsyncIterable.every(iterable, (currentValue) => currentValue >= 1); // true
  * await AsyncIterable.every(iterable, (currentValue) => currentValue >= 2); // false

@@ -6,7 +6,7 @@ import { of } from './of.js';
  * Scales a given `BigDecimal` to the specified scale.
  *
  * @example
- * ```ts
+ * ```typescript
  * const value = BigDecimal('1.02');
  * BigDecimal.scale(value, 1); //  BigDecimal('1.0')
  * BigDecimal.scale(value, 3); //  BigDecimal('1.020')

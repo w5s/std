@@ -6,11 +6,11 @@ import { define } from './define.js';
  * A type for constant `value`. An encoded value can be specified as second argument.
  *
  * @example
- * ```ts
+ * ```typescript
  * const constantType = Type.constant('_'); // Encoded and decoded value are '_'
  * ```
  * @example
- * ```ts
+ * ```typescript
  * const someSymbol = Symbol('someSymbol');
  * const someSymbolType = Type.constant(someSymbol, '__someSymbol__'); // Encoded value is '__someSymbol__'
  * ```

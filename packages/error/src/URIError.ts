@@ -6,7 +6,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.URIError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { URIError } from '@w5s/error';
  *
  * try {

@@ -8,7 +8,7 @@ const logLevelMap = Object.fromEntries(
 /**
  *
  * @example
- * ```ts
+ * ```typescript
  * LogLevel.from('critical') // LogLevel.Critical
  * ```
  * @param level

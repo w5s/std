@@ -11,7 +11,7 @@ export interface NotImplementedError
  * NotImplementedError constructor
  *
  * @example
- * ```ts
+ * ```typescript
  * function someFunction() {
  *   throw NotImplementedError();// message can be customized
  * }

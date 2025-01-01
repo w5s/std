@@ -4,7 +4,7 @@ import type { Type } from '../Type.js';
  * Define a new Type module
  *
  * @example
- * ```ts
+ * ```typescript
  * interface NewType {
  *   foo: boolean;
  * }

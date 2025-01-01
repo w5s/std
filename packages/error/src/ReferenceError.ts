@@ -6,7 +6,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.ReferenceError}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { ReferenceError } from '@w5s/error';
  *
  * try {

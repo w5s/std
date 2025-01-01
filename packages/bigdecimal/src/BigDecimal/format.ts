@@ -4,7 +4,7 @@ import type { BigDecimal } from './BigDecimal.js';
  * Returns a string representation of a BigDecimal
  *
  * @example
- * ```ts
+ * ```typescript
  * BigDecimal.format(BigDecimal('1.020')); // '1.020'
  * ```
  * @param bigDecimal

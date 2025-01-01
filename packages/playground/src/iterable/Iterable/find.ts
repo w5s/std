@@ -4,7 +4,7 @@ import type { Option } from '@w5s/core';
  * Returns the first element for which the given function returns true, otherwise undefined.
  *
  * @example
- * ```ts
+ * ```typescript
  * const iterable = Iterable.of(
  *   { name: 'amy', id: 1 },
  *   { name: 'bob', id: 2 }

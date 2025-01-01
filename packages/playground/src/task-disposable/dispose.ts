@@ -6,7 +6,7 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
  * Dispose the given Disposable or AsyncDisposable
  *
  * @example
- * ```ts
+ * ```typescript
  * const resource: Disposable;
  * dispose(resource);// Task that will dispose
  * ```

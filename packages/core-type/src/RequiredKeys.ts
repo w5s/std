@@ -4,7 +4,7 @@ import type { Pretty } from './Pretty.js';
  * Make specified `Keys` properties in `T` required
  *
  * @example
- * ```ts
+ * ```typescript
  * type T = { foo?: boolean, bar?: string }
  * type RequiredT = RequiredKeys<T, 'bar'>; // { foo?: boolean; bar: string };
  * ```

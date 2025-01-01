@@ -8,7 +8,7 @@ import type { FilePath } from '../FilePath.js';
  * Asynchronously creates a directory.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = createDirectory(FilePath('/path/to/directory'));
  * await Task.unsafeRun(task); // Will create the directory
  * ```

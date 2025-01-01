@@ -5,7 +5,7 @@ import { create } from './create.js';
  * Construct LogMessage from arguments
  *
  * @example
- * ```ts
+ * ```typescript
  * const message = LogMessage.of('foo', ['key', 'value'], 'bar');
  * ```
  * @category Constructor

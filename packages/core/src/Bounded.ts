@@ -6,7 +6,7 @@ export interface Bounded<T> {
    * Minimum value for this type
    *
    * @example
-   * ```ts
+   * ```typescript
    * const anyNumber: number
    * anyNumber > Number.minValue // true
    * ```
@@ -17,7 +17,7 @@ export interface Bounded<T> {
    * Maximum value for this type
    *
    * @example
-   * ```ts
+   * ```typescript
    * const anyNumber: number
    * anyNumber < Number.maxValue // true
    * ```

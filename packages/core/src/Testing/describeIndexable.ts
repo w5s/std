@@ -5,7 +5,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Indexable} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeIndexable({ describe, it, expect })(SomeIndexable, {
  *   index: [
  *     [0, 'a'],

@@ -65,7 +65,7 @@ export interface ExpectTask {
  * Return a specialized expect for {@link @w5s/task!Task}
  *
  * @example
- * ```ts
+ * ```typescript
  * const expectTask = withTask(expect);
  *
  * const someTask: Task<any, any> = ...;

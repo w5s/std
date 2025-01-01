@@ -5,7 +5,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * Alias to native {@link globalThis.Error}
  *
  * @example
- * ```ts
+ * ```typescript
  * import { Error } from '@w5s/error';
  *
  * throw new Error('my message', { cause: someError });

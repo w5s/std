@@ -10,7 +10,7 @@ import type { FilePath } from '../FilePath.js';
  * Asynchronously writes data to a file, replacing the file if it already exists.
  *
  * @example
- * ```ts
+ * ```typescript
  * const write = writeFile(FilePath('my/file'), 'my content');
  * Task.unsafeRun(write);
  * ```

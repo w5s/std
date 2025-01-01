@@ -5,7 +5,7 @@ import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
  * Return a task that will run abort on the {@link AbortController}
  *
  * @example
- * ```ts
+ * ```typescript
  * const controller = new AbortController();
  * const abortTask = abort(controller); // Task.unsafeRun(abortTask) will actually run abort
  * ```

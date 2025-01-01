@@ -35,7 +35,7 @@ export namespace ResponseParser {
    * ArrayBuffer response parser
    *
    * @example
-   * ```ts
+   * ```typescript
    * const request = requestSend({
    *   url: 'http://localhost',
    * });
@@ -48,7 +48,7 @@ export namespace ResponseParser {
    * FormData response parser
    *
    * @example
-   * ```ts
+   * ```typescript
    * const request = requestSend({
    *   url: 'http://localhost',
    * });
@@ -61,7 +61,7 @@ export namespace ResponseParser {
    * FormData response parser
    *
    * @example
-   * ```ts
+   * ```typescript
    * type MyData = { foo: string, bar: boolean };
    *
    * const request = requestSend({
@@ -86,7 +86,7 @@ export namespace ResponseParser {
    * Blob response parser
    *
    * @example
-   * ```ts
+   * ```typescript
    * const request = requestSend({
    *   url: 'http://localhost',
    * });
@@ -99,7 +99,7 @@ export namespace ResponseParser {
    * Text response parser
    *
    * @example
-   * ```ts
+   * ```typescript
    * const request = requestSend({
    *   url: 'http://localhost',
    * });

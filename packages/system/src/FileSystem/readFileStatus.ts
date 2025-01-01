@@ -36,7 +36,7 @@ function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
  * Returns a `FileStatus` object for the given `filePath`, if `filePath` refers to a symbolic link it returns the status of the link target.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = FileSystem.readFileStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```
@@ -50,7 +50,7 @@ export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> 
  * Returns a `FileStatus` object for the given `filePath`, if `filePath` refers to a symbolic link it returns the status of the link.
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = FileSystem.readSymbolicLinkStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.unsafeRun(task);// Result.Ok({ isFile: true, ... })
  * ```

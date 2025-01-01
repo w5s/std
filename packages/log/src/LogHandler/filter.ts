@@ -10,7 +10,7 @@ const resolveVoid: Task<void, never> = resolve();
  * If `false`, the handler is never called
  *
  * @example
- * ```ts
+ * ```typescript
  * const handler: LogHandler;
  * const filtered = LogHandler.filter(handler, (record) => record.logCategory === 'foo');
  * ```

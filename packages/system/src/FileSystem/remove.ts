@@ -8,7 +8,7 @@ import type { FilePath } from '../FilePath.js';
  * Removes files and directories (modeled on the standard POSIX `rm` utility).
  *
  * @example
- * ```ts
+ * ```typescript
  * const task = remove(FilePath('/path/to/file.txt'));
  * Task.unsafeRun(task);
  * ```

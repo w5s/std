@@ -46,7 +46,7 @@ export interface ConsoleOptions {
 /**
  *
  * @example
- * ```ts
+ * ```typescript
  * LogHandler.Console();// Default formatter
  * LogHandler.Console({
  *   format: (logRecord) => ([JSON.stringify(logRecord)]),// JSON formatted line

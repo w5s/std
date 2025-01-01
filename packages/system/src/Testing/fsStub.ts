@@ -7,7 +7,7 @@ import type { FilePath } from '../FilePath.js';
  * Return a new `FSStubModule`
  *
  * @example
- * ```ts
+ * ```typescript
  * await using fs = fsStub({
  *   cwd: // ...
  * });

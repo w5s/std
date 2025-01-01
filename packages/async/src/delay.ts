@@ -2,7 +2,7 @@
  * Resolves a promise after waiting `milliseconds`
  *
  * @example
- * ```ts
+ * ```typescript
  * await delay(5);
  * ```
  *

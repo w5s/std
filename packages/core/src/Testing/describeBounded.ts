@@ -5,7 +5,7 @@ import type { TestingLibrary } from './type.js';
  * Create a spec for {@link @w5s/core#Bounded} trait
  *
  * @example
- * ```ts
+ * ```typescript
  * describeBounded({ describe, it, expect })(SomeBounded, {
  *   minValue: // ...
  *   maxValue: // ...

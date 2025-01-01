@@ -7,7 +7,7 @@ import { define as defineType } from '../Type/define.js';
  * Define a new Enum Object
  *
  * @example
- * ```ts
+ * ```typescript
  * const MyEnum = Enum.define({
  *   // typeName: 'MyEnum', // Add this we want a named Enum
  *   Foo: 'foo',

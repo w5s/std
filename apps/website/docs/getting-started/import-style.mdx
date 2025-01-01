@@ -18,7 +18,7 @@ As a replacement, plain Javascript object are used as namespaces with correspond
 
 Example :
 
-```ts title="@w5s/xxx/src/SomeThing.ts"
+```typescript title="@w5s/xxx/src/SomeThing.ts"
 import { SomeThing } from '@w5s/xxx';
 
 export type SomeThing = ...; // <- Export type
@@ -31,7 +31,7 @@ export const SomeThing = { // <- Export namespace
 };
 ```
 
-```ts title="main.ts"
+```typescript title="main.ts"
 import { SomeThing } from '@w5s/xxx';
 
 const someConst: SomeThing; // <- Used as a type

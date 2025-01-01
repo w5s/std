@@ -5,7 +5,7 @@ import type { LogLevel } from '../LogLevel.js';
  * Construct a new `LogLevel`
  *
  * @example
- * ```ts
+ * ```typescript
  * const level = LogLevel('UberCritical', 60);// { levelName: 'UberCritical', level: 60 }
  * ```
  * @category Constructor

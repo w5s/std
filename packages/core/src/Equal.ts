@@ -6,7 +6,7 @@ export interface Equal<T> {
    * Alias to '=='
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T = // ...
    * const TEqual: Equal<T>;
    * TEqual.equals(value, value); // true
@@ -19,7 +19,7 @@ export interface Equal<T> {
    * "Not equal to" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * const TEqual: Equal<T>;
    * TEqual['!='](value, otherValue); // true
    * TEqual['!='](value, value); // false
@@ -31,7 +31,7 @@ export interface Equal<T> {
    * "Equal to" operator
    *
    * @example
-   * ```ts
+   * ```typescript
    * type T = // ...
    * const TEqual: Equal<T>;
    * TEqual['=='](value, value); // true
@@ -46,7 +46,7 @@ export interface Equal<T> {
  * Equal module constructor
  *
  * @example
- * ```ts
+ * ```typescript
  * type T;
  * const TEqual = Equal<T>({
  *   '==': (left, right) => { /* ... *\/ },

@@ -54,7 +54,7 @@ export type FakeTaskOptions<Value, Error> = {
  * Create a new {@link @w5s/task!Task} from `options`
  *
  * @example
- * ```ts
+ * ```typescript
  * const anyTask = FakeTask({
  *   delayMs: 5,
  *   value: 'Hello world'

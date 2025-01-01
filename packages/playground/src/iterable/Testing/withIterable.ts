@@ -17,7 +17,7 @@ export interface ExpectIterable {
  * Return a specialized expect for {@link @w5s/iterable!Iterable}
  *
  * @example
- * ```ts
+ * ```typescript
  * const expectIterable = withIterable(expect);
  *
  * const someIterable: Iterable<any> = ...;

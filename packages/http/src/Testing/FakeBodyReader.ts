@@ -45,7 +45,7 @@ export interface FakeBodyReader<Format extends BodyReaderFormat> extends BodyRea
  * Returns a new BodyReader for testing
  *
  * @example
- * ```ts
+ * ```typescript
  * const bodyReader = FakeBodyReader('text', {
  *   resolve: 'My Text',
  * });
@@ -70,7 +70,7 @@ export namespace FakeBodyReader {
    * Returns a new body value
    *
    * @example
-   * ```ts
+   * ```typescript
    * const value = FakeBodyReader.value('arrayBuffer');// ArrayBuffer
    * ```
    * @param format - the format to use to generate
