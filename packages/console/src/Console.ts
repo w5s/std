@@ -1,16 +1,11 @@
 /* eslint-disable no-console */
-import type { Task } from './Task.js';
-import { from } from './Task/from.js';
+import type { Task } from '@w5s/task';
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 
 const createLogTask = (
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',
   message: [required: unknown, ...optionalParameters: unknown[]],
-): Task<void, never> =>
-  from(({ resolve }) => {
-    console[method](...message);
-
-    resolve(undefined);
-  });
+): Task<void, never> => taskFrom(({ resolve }) => resolve(console[method](...message)));
 
 /**
  * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)

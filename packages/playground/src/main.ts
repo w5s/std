@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { DecodeError, Int, Option, Result } from '@w5s/core';
-import { Console, Task } from '@w5s/task';
+import { Task } from '@w5s/task';
+import { Console } from '@w5s/console';
 import { TimeDuration } from '@w5s/time';
 import { HTTPError } from '@w5s/http';
 import { randomUUID as defaultRandomUUID } from '@w5s/uuid';

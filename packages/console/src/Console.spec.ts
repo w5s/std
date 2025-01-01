@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import { describe, it, expect, vi } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { Console } from './Console.js';
-import { unsafeRun } from './Task/unsafeRun.js';
 
 describe('Console', () => {
   const doNothing = () => undefined;
+  const expectTask = withTask(expect);
 
   describe.each([
     [Console.log, 'log'],
@@ -15,7 +16,7 @@ describe('Console', () => {
   ] as [typeof Console.log, 'log' | 'warn' | 'info' | 'error'][])('%p', (task, consoleProperty) => {
     it(`should call console.${consoleProperty}`, async () => {
       vi.spyOn(console, consoleProperty).mockImplementation(doNothing);
-      await unsafeRun(task('a', 'b'));
+      expectTask(task('a', 'b')).toResolveSync(undefined);
       expect(console[consoleProperty]).toHaveBeenLastCalledWith('a', 'b');
     });
   });
