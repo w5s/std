@@ -17,7 +17,7 @@ npm install @w5s/log
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```ts
+```typescript
 import { LogLevel } from '@w5s/log';
 
 export function main(): void {

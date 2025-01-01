@@ -19,7 +19,7 @@ npm install @w5s/task
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```ts
+```typescript
 import { Result } from '@w5s/core';
 import { Task } from '@w5s/task';
 

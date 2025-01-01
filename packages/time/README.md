@@ -17,7 +17,7 @@ npm install @w5s/time
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```ts
+```typescript
 import { Time, TimeDuration } from '@w5s/time';
 import { Task } from '@w5s/task';
 

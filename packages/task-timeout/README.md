@@ -19,7 +19,7 @@ npm install @w5s/task-timeout
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```ts
+```typescript
 import { Task } from '@w5s/task';
 import { timeout } from '@w5s/task-timeout';
 import { TimeDuration } from '@w5s/time';

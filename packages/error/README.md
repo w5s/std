@@ -17,7 +17,7 @@ npm install @w5s/error
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```ts
+```typescript
 import { CustomError, Error, TypeError } from '@w5s/error';
 
 export interface MyError
