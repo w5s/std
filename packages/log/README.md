@@ -1,11 +1,9 @@
-# W5S Log library _(@w5s/log)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
+# W5S Logging module _(@w5s/log)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Logging module
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 

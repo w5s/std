@@ -1,12 +1,9 @@
-# W5S Task _(@w5s/task-timeout)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
+# W5S Task timeout modules _(@w5s/task-timeout)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Task timeout modules
-<!-- AUTO-GENERATED-CONTENT:END -->
-## About the project
 
 ## Installation
 

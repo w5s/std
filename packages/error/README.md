@@ -1,11 +1,9 @@
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
 # W5S Error module _(@w5s/error)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Error module
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 

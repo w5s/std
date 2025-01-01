@@ -1,23 +1,9 @@
-# W5S Standard Library _(@w5s/core)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
+# W5S Core modules _(@w5s/core)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Core modules
-<!-- AUTO-GENERATED-CONTENT:END -->
-## About the project
-
-`std` is a library for typed functional programming in TypeScript.
-It focuses on strong typing, purity, simplicity and restricted set of functionalities.
-Advanced functional programming patterns, immutability should not be achieved if it degrades significantly type safety and simplicity.
-
-|                               | Balance |                                 |
-|-----------------------------: | :-----: | :-------------------------------|
-| Loose typing                  | □□□□□□■ | Strong typing                   |
-| Impure, Mutable               | □□□□□■□ | Pure, Immutable                 |
-| Simple Functional Programming | □□■□□□□ | Advanced Functional Programming |
-| Lean                          | □□■□□□□ | Complete                        |
 
 ## Installation
 

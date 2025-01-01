@@ -1,11 +1,9 @@
-# W5S Time _(@w5s/time)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
+# W5S Time manipulation _(@w5s/time)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> Time manipulation
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 

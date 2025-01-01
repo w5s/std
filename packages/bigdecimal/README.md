@@ -1,11 +1,9 @@
-# W5S Random value library _(@w5s/random)_
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
+# W5S BigDecimal module _(@w5s/bigdecimal)_
+<!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
-
-<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=> ${description}&unknownTxt= ) -->
-> BigDecimal module
-<!-- AUTO-GENERATED-CONTENT:END -->
 
 ## Installation
 
