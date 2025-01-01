@@ -95,7 +95,7 @@
   "devDependencies": {
     "@lerna-lite/publish": "3.10.1",
     "@size-limit/preset-small-lib": "11.1.6",
-    "@types/node": "20.17.10",
+    "@types/node": "20.17.11",
     "@w5s/commitlint-config": "2.1.6",
     "@w5s/conventional-changelog": "2.1.6",
     "@w5s/cspell-config": "2.3.18",
