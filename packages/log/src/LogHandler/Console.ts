@@ -26,12 +26,6 @@ const defaultStdConsoleFormat = (logRecord: LogRecord) => {
 
 export interface ConsoleOptions {
   /**
-   * Return true when log should be written to stderr
-   *
-   * @param logRecord
-   */
-  isStderr?: (logRecord: LogRecord) => boolean;
-  /**
    * Returns an array of arguments passed to the console.{log|warn|...}() function
    *
    * @param logRecord
@@ -55,38 +49,27 @@ export interface ConsoleOptions {
  * @param options
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
-  const {
-    isStderr = (record) => logLevelAsInt(record.level) >= logLevelAsInt(LogLevelValue.Warn),
-    format: formatOption,
-    console = globalThis.console,
-  } = options;
-  const eol = '\n';
+  const { format: formatOption, console = globalThis.console } = options;
   const stdout = (console as any)._stdout as Option<NodeJS.WriteStream>;
   const stderr = (console as any)._stderr as Option<NodeJS.WriteStream>;
   const isWebConsole = stderr == null || stdout == null;
   const format = formatOption ?? (isWebConsole ? defaultWebConsoleFormat : defaultStdConsoleFormat);
-  const consoleWrite = isWebConsole
-    ? (level: LogLevel, _writeToStderr: boolean) => {
-        // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
-        switch (true) {
-          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error): {
-            return console.error.bind(console);
-          }
-          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn): {
-            return console.warn.bind(console);
-          }
-          case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Info): {
-            return console.info.bind(console);
-          }
-          default: {
-            return console.debug.bind(console);
-          }
-        }
+  const consoleWrite = (level: LogLevel) => {
+    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+    switch (true) {
+      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error): {
+        return console.error.bind(console);
       }
-    : (_level: LogLevel, writeToStderr: boolean) =>
-        (...data: any[]) => {
-          (writeToStderr ? stderr : stdout).write(`${data.join(' ')}${eol}`);
-        };
-  return (logRecord) =>
-    taskFrom(({ resolve }) => resolve(consoleWrite(logRecord.level, isStderr(logRecord))(...format(logRecord))));
+      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn): {
+        return console.warn.bind(console);
+      }
+      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Info): {
+        return console.info.bind(console);
+      }
+      default: {
+        return console.debug.bind(console);
+      }
+    }
+  };
+  return (logRecord) => taskFrom(({ resolve }) => resolve(consoleWrite(logRecord.level)(...format(logRecord))));
 }
