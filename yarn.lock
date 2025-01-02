@@ -5960,7 +5960,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@w5s/console@workspace:packages/console":
+"@w5s/console@npm:^1.0.0-alpha.0, @w5s/console@workspace:packages/console":
   version: 0.0.0-use.local
   resolution: "@w5s/console@workspace:packages/console"
   dependencies:
@@ -6166,6 +6166,7 @@ __metadata:
   resolution: "@w5s/log@workspace:packages/log"
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
+    "@w5s/console": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
