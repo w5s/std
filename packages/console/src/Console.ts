@@ -1,11 +1,5 @@
-/* eslint-disable no-console */
 import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-
-const createLogTask = (
-  method: 'debug' | 'log' | 'info' | 'warn' | 'error',
-  message: [required: unknown, ...optionalParameters: unknown[]],
-): Task<void, never> => taskFrom(({ resolve }) => resolve(console[method](...message)));
+import { write } from './Console/write.js';
 
 /**
  * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)
@@ -23,7 +17,7 @@ export const Console = {
    * @param parameters - an array of values to be logged
    */
   debug(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
-    return createLogTask('debug', parameters);
+    return write('debug', parameters);
   },
 
   /**
@@ -36,7 +30,7 @@ export const Console = {
    * @param parameters - an array of values to be logged
    */
   log(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
-    return createLogTask('log', parameters);
+    return write('log', parameters);
   },
 
   /**
@@ -49,7 +43,7 @@ export const Console = {
    * @param parameters - an array of values to be logged
    */
   info(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
-    return createLogTask('info', parameters);
+    return write('info', parameters);
   },
 
   /**
@@ -62,7 +56,7 @@ export const Console = {
    * @param parameters - an array of values to be logged
    */
   warn(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
-    return createLogTask('warn', parameters);
+    return write('warn', parameters);
   },
 
   /**
@@ -75,6 +69,6 @@ export const Console = {
    * @param parameters - an array of values to be logged
    */
   error(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
-    return createLogTask('error', parameters);
+    return write('error', parameters);
   },
 };
