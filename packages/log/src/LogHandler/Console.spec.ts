@@ -93,7 +93,7 @@ describe(Console, () => {
     });
     it('should send to console.warn when level=LogLevel.Warning', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Warn }));
-      expect(console._stdout.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z WARN foobar\n');
+      expect(console._stderr.write).toHaveBeenLastCalledWith('1970-01-01T00:00:00.000Z WARN foobar\n');
     });
     it('should send to console.error when level=LogLevel.Error', async () => {
       await Task.unsafeRunOk(consoleHandler({ ...defaultRecord, level: LogLevel.Error }));

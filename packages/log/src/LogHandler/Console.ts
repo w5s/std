@@ -56,7 +56,7 @@ export interface ConsoleOptions {
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const {
-    isStderr = (record) => logLevelAsInt(record.level) >= logLevelAsInt(LogLevelValue.Error),
+    isStderr = (record) => logLevelAsInt(record.level) >= logLevelAsInt(LogLevelValue.Warn),
     format: formatOption,
     console = globalThis.console,
   } = options;
