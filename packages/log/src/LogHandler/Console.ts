@@ -88,8 +88,5 @@ export function Console(options: ConsoleOptions = {}): LogHandler {
           (writeToStderr ? stderr : stdout).write(`${data.join(' ')}${eol}`);
         };
   return (logRecord) =>
-    taskFrom(({ resolve }) => {
-      consoleWrite(logRecord.level, isStderr(logRecord))(...format(logRecord));
-      resolve();
-    });
+    taskFrom(({ resolve }) => resolve(consoleWrite(logRecord.level, isStderr(logRecord))(...format(logRecord))));
 }
