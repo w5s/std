@@ -7,11 +7,12 @@ import { Console } from './Console.js';
 
 describe(Console, () => {
   const fakeWebConsole = () => ({
-    debug: vi.fn(),
-    info: vi.fn(),
-    log: vi.fn(),
-    warn: vi.fn(),
-    error: vi.fn(),
+    debug: vi.fn(() => Task.resolve()),
+    info: vi.fn(() => Task.resolve()),
+    log: vi.fn(() => Task.resolve()),
+    warn: vi.fn(() => Task.resolve()),
+    error: vi.fn(() => Task.resolve()),
+    isWeb: vi.fn(() => true),
   });
 
   describe('[web]', () => {

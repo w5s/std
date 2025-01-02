@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { Option } from '@w5s/core';
 import { Console as defaultConsole } from '@w5s/console/dist/Console.js';
 import type { LogHandler } from '../LogHandler.js';
 import { asString as logLevelAsString } from '../LogLevel/asString.js';
@@ -35,7 +33,7 @@ export interface ConsoleOptions {
   /**
    * Custom console instance (default: globalThis.console)
    */
-  console?: Pick<typeof defaultConsole, 'debug' | 'info' | 'warn' | 'error'>;
+  console?: Pick<typeof defaultConsole, 'debug' | 'info' | 'warn' | 'error' | 'isWeb'>;
 }
 
 /**
@@ -51,10 +49,7 @@ export interface ConsoleOptions {
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const { format: formatOption, console = defaultConsole } = options;
-  const stdout = (console as any)._stdout as Option<NodeJS.WriteStream>;
-  const stderr = (console as any)._stderr as Option<NodeJS.WriteStream>;
-  const isWebConsole = stderr == null || stdout == null;
-  const format = formatOption ?? (isWebConsole ? defaultWebConsoleFormat : defaultStdConsoleFormat);
+  const format = formatOption ?? (console.isWeb() ? defaultWebConsoleFormat : defaultStdConsoleFormat);
   const consoleWrite = (level: LogLevel) => {
     // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (true) {
