@@ -55,8 +55,8 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.6.3",
-    "@docusaurus/tsconfig": "3.6.3",
+    "@docusaurus/module-type-aliases": "3.7.0",
+    "@docusaurus/tsconfig": "3.7.0",
     "@types/node": "20.17.11",
     "typescript": "5.7.2"
   },
