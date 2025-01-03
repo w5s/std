@@ -8,7 +8,8 @@ import { randomUUID as defaultRandomUUID } from '@w5s/uuid';
 import { EUR, Money } from '@w5s/money';
 import { timeout } from '@w5s/task-timeout';
 import { AbortError, assertNever, SyntaxError, TimeoutError } from '@w5s/error';
-import { Log, debug, error } from '@w5s/log';
+import { Log as LogModule, debug, error } from '@w5s/log';
+import type { LogSendFunction } from '@w5s/log/dist/Log/sendWith.js';
 import { pipe } from './pipe.js';
 import { retry, RetryPolicy } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
@@ -17,8 +18,10 @@ import { abortable } from './task-abortable/index.js';
 import { Initializer, startAll } from './initializer/index.js';
 
 const RandomUUID = ContainerKey('RandomUUID', () => defaultRandomUUID);
+const Logger = ContainerKey('Logger', (): ((name: string) => LogSendFunction) => LogModule.sendWith);
 const app = {
   ...provide(RandomUUID, () => defaultRandomUUID),
+  ...provide(Logger, () => LogModule.sendWith),
 };
 
 function sendMessage(text: string) {
@@ -42,37 +45,38 @@ function sendMessage(text: string) {
 function main() {
   const amount = EUR('1.55');
   const randomUUID = use(app, RandomUUID);
+  const log = use(app, Logger)('main');
 
   const controller = new AbortController();
 
   const task = pipe(randomUUID()).to(
     (_) => abortable(_, controller),
-    (_) => Task.andRun(_, () => Log.send(debug`Start`)),
+    (_) => Task.andRun(_, () => log(debug`Start`)),
     (_) => Task.andThen(_, (uuid) => sendMessage(uuid + Money.format(amount))),
     (_) => Task.andThen(_, (response) => Console.log('Response:', response)),
     (_) =>
       Task.orElse(_, (err) => {
         switch (err.name) {
           case Slack.Error.errorName: {
-            return Log.send(error`SlackError:${err.message}`);
+            return log(error`SlackError:${err.message}`);
           }
           case TimeoutError.errorName: {
-            return Log.send(error`TimeoutError:${err.message}`);
+            return log(error`TimeoutError:${err.message}`);
           }
           case HTTPError.InvalidURL.errorName: {
-            return Log.send(error`InvalidURLError:${err.message}`);
+            return log(error`InvalidURLError:${err.message}`);
           }
           case HTTPError.NetworkError.errorName: {
-            return Log.send(error`NetworkError:${err.message}`);
+            return log(error`NetworkError:${err.message}`);
           }
           case HTTPError.ParserError.errorName: {
-            return Log.send(error`ParserError:${err.message}`);
+            return log(error`ParserError:${err.message}`);
           }
           case DecodeError.errorName: {
-            return Log.send(error`Decode Error:${err.message}`);
+            return log(error`Decode Error:${err.message}`);
           }
           case AbortError.errorName: {
-            return Log.send(error`Abort Error:${err.message}`);
+            return log(error`Abort Error:${err.message}`);
           }
           default: {
             // return Console.error(`Unknown Error:${error.message}`);
