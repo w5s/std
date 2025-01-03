@@ -1,4 +1,5 @@
 import { Console as defaultConsole } from '@w5s/console/dist/Console.js';
+import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
 import type { LogHandler } from '../LogHandler.js';
 import { asString as logLevelAsString } from '../LogLevel/asString.js';
 import { asInt as logLevelAsInt } from '../LogLevel/asInt.js';
@@ -7,19 +8,14 @@ import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
 import type { LogLevel } from '../LogLevel.js';
 
-const defaultWebConsoleFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord: LogRecord) => {
-  const { domain } = logRecord;
-
-  const parts = [...(domain.length > 0 ? [`[${domain}]`] : []), ...messageWithData(logRecord)];
-  return (parts.length > 0 ? parts : ['']) as [required: unknown, ...optionalParameters: unknown[]];
-};
-const defaultStdConsoleFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord: LogRecord) => {
-  const { level, created } = logRecord;
+const defaultFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord: LogRecord) => {
+  const { domain, level, created } = logRecord;
 
   return [
-    new Date(created).toISOString(),
+    timeAsString(created),
     logLevelAsString(level).toUpperCase(),
-    ...defaultWebConsoleFormat(logRecord),
+    ...(domain.length > 0 ? [`[${domain}]`] : []),
+    ...messageWithData(logRecord),
   ];
 };
 
@@ -31,9 +27,9 @@ export interface ConsoleOptions {
    */
   format?: (logRecord: LogRecord) => [required: unknown, ...optionalParameters: unknown[]];
   /**
-   * Custom console instance (default: globalThis.console)
+   * Custom console instance (default: Console)
    */
-  console?: Pick<typeof defaultConsole, 'debug' | 'info' | 'warn' | 'error' | 'isWeb'>;
+  console?: Pick<typeof defaultConsole, 'debug' | 'info' | 'warn' | 'error'>;
 }
 
 /**
@@ -49,23 +45,14 @@ export interface ConsoleOptions {
  */
 export function Console(options: ConsoleOptions = {}): LogHandler {
   const { format: formatOption, console = defaultConsole } = options;
-  const format = formatOption ?? (console.isWeb() ? defaultWebConsoleFormat : defaultStdConsoleFormat);
-  const consoleWrite = (level: LogLevel) => {
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
-    switch (true) {
-      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error): {
-        return console.error;
-      }
-      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn): {
-        return console.warn;
-      }
-      case logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Info): {
-        return console.info;
-      }
-      default: {
-        return console.debug;
-      }
-    }
-  };
-  return (logRecord) => consoleWrite(logRecord.level)(...format(logRecord));
+  const format = formatOption ?? defaultFormat;
+  const consoleWrite = (level: LogLevel, args: [required: unknown, ...optionalParameters: unknown[]]) =>
+    logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error)
+      ? console.error(...args)
+      : logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn)
+        ? console.warn(...args)
+        : logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Info)
+          ? console.info(...args)
+          : console.debug(...args);
+  return (logRecord) => consoleWrite(logRecord.level, format(logRecord));
 }
