@@ -19,6 +19,7 @@ describe(Console, () => {
     const console = fakeWebConsole();
     const consoleHandler = Console({
       console,
+      colors: false,
     });
     const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: LogMessage('foobar') });
 
