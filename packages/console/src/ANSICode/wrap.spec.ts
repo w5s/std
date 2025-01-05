@@ -1,3 +1,4 @@
+/* cSpell:disable */
 import { describe, it, expect } from 'vitest';
 import { wrap } from './wrap.js';
 
