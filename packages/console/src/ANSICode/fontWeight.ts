@@ -4,11 +4,12 @@ import { wrap } from './wrap.js';
 /**
  * Font weight
  */
-export type FontWeight = 'bold' | 'dim';
+export type FontWeight = 'normal' | 'bold' | 'dim';
 
 const fontWeightMap = new Map(
   (
     [
+      ['normal', 22],
       ['bold', 1],
       ['dim', 2],
     ] as const
