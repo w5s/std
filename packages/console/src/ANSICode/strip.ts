@@ -12,10 +12,10 @@ const ansiRegex = new RegExp(
  *
  * @example Usage
  * ```typescript
- * stripEscapeCode(red("Hello, world!"));// == "Hello, world!"
+ * ANSICode.strip(red("Hello, world!"));// == "Hello, world!"
  * ```
  * @param expression - The text to remove ANSI escape codes from
  */
-export function stripEscapeCode(expression: string): string {
+export function strip(expression: string): string {
   return expression.replaceAll(ansiRegex, '');
 }

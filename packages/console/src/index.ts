@@ -1,2 +1,2 @@
 export * from './Console.js';
-export * from './ANSI.js';
+export * from './ANSICode.js';

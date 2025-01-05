@@ -1,14 +1,14 @@
 import { describe, it, expect } from 'vitest';
-import { ANSI } from './ANSI.js';
-import { stripEscapeCode } from './ANSI/stripEscapeCode.js';
-import { format } from './ANSI/format.js';
+import { ANSICode } from './ANSICode.js';
+import { strip } from './ANSICode/strip.js';
+import { format } from './ANSICode/format.js';
 
 describe('ANSI', () => {
   it('is an alias to functions', () => {
-    expect(ANSI).toEqual(
+    expect(ANSICode).toEqual(
       expect.objectContaining({
         format,
-        stripEscapeCode,
+        strip,
       }),
     );
   });

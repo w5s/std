@@ -3,10 +3,10 @@
  *
  * @example
  * ```typescript
- * format([1, 2], 'm');// '\u001b[1;2m'
+ * ANSICode.format([1, 2], 'm');// '\u001b[1;2m'
  * ```
- * @param args
- * @param code
+ * @param args - a list of arguments
+ * @param code - a code suffix
  */
 export function format(args: number[], code: string): string {
   return `\u001B[${args.join(';')}${code}`;
