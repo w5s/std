@@ -10,16 +10,21 @@ import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
 import type { LogLevel } from '../LogLevel.js';
 
-const formatTime = ansiFontWeight('dim');
+const red = ansiColor('red');
+const yellow = ansiColor('yellow');
+const blue = ansiColor('blue');
+const black = ansiColor('black');
+const dim = ansiFontWeight('dim');
+const formatTime = dim;
 
-const formatLevel = (level: LogLevel) =>
+const formatLevelFor = (level: LogLevel) =>
   logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error)
-    ? ansiColor('red')
+    ? red
     : logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn)
-      ? ansiColor('yellow')
+      ? yellow
       : logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn)
-        ? ansiColor('blue')
-        : ansiColor('black');
+        ? blue
+        : black;
 
 const formatNoColor = (_: string): string => _;
 
@@ -28,7 +33,7 @@ const defaultFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord, 
 
   return [
     (colors ? formatTime : formatNoColor)(timeAsString(created)),
-    (colors ? formatLevel(level) : formatNoColor)(logLevelAsString(level).toUpperCase()),
+    (colors ? formatLevelFor(level) : formatNoColor)(logLevelAsString(level).toUpperCase()),
     ...(domain.length > 0 ? [`[${domain}]`] : []),
     ...messageWithData(logRecord),
   ];
