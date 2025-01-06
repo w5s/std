@@ -4,6 +4,7 @@ import { strip } from './ANSICode/strip.js';
 import { format } from './ANSICode/format.js';
 import { wrap } from './ANSICode/wrap.js';
 import { color } from './ANSICode/color.js';
+import { fontStyle } from './ANSICode/fontStyle.js';
 import { fontWeight } from './ANSICode/fontWeight.js';
 
 describe('ANSICode', () => {
@@ -12,6 +13,7 @@ describe('ANSICode', () => {
       expect.objectContaining({
         color,
         fontWeight,
+        fontStyle,
         format,
         strip,
         wrap,
