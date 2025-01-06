@@ -4,6 +4,7 @@ import { wrap } from './ANSICode/wrap.js';
 import { color } from './ANSICode/color.js';
 import { fontWeight } from './ANSICode/fontWeight.js';
 import { fontStyle } from './ANSICode/fontStyle.js';
+import { style } from './ANSICode/style.js';
 
 /**
  * @namespace
@@ -14,5 +15,6 @@ export const ANSICode = {
   fontStyle,
   format,
   strip,
+  style,
   wrap,
 };

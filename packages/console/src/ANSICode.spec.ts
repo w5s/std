@@ -6,6 +6,7 @@ import { wrap } from './ANSICode/wrap.js';
 import { color } from './ANSICode/color.js';
 import { fontStyle } from './ANSICode/fontStyle.js';
 import { fontWeight } from './ANSICode/fontWeight.js';
+import { style } from './ANSICode/style.js';
 
 describe('ANSICode', () => {
   it('is an alias to functions', () => {
@@ -16,6 +17,7 @@ describe('ANSICode', () => {
         fontStyle,
         format,
         strip,
+        style,
         wrap,
       }),
     );
