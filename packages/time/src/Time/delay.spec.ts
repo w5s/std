@@ -24,14 +24,6 @@ describe('.delay', () => {
     vi.runAllTimers();
     await expect(promise).resolves.toEqual(Result.Ok(Date.now()));
   });
-  it.each([0, -1])('should not setTimeout if delay <= 0', async (delayMs) => {
-    const now = Date.now();
-    const task = delay(TimeDuration(delayMs));
-    const promise = Task.unsafeRun(task);
-    expect(setTimeoutSpy).not.toHaveBeenCalled();
-    vi.runAllTimers();
-    await expect(promise).resolves.toEqual(Result.Ok(now));
-  });
   it('should be cancelable', () => {
     const duration = TimeDuration.seconds(1);
     const task = delay(duration);

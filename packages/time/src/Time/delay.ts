@@ -3,11 +3,6 @@ import { from } from '@w5s/task/dist/Task/from.js';
 import type { TimeDuration } from '../TimeDuration.js';
 import type { Time } from './Time.js';
 
-// Call a function as a microtask
-const callImmediate: typeof globalThis.queueMicrotask =
-  // eslint-disable-next-line promise/prefer-await-to-then
-  typeof queueMicrotask === 'undefined' ? (fn) => Promise.resolve().then(fn) : queueMicrotask;
-
 /**
  * Return a new `Task` that resolves the current time in milliseconds after waiting `duration`.
  *
@@ -20,25 +15,24 @@ const callImmediate: typeof globalThis.queueMicrotask =
  * @param duration - delay in milliseconds to wait
  */
 export function delay(duration: TimeDuration): Task<Time, never> {
-  return from(({ resolve, canceler }) => {
+  return from(async ({ resolve, canceler }) => {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-    if (duration <= 0) {
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      callImmediate(() => resolve(Date.now() as Time));
-    } else {
-      // Set Canceler
-      canceler.current = () => {
-        if (timeoutId != null) {
-          clearTimeout(timeoutId);
-          timeoutId = undefined;
-        }
-      };
-      // Run timeout
+    // Set Canceler
+    canceler.current = () => {
+      if (timeoutId != null) {
+        clearTimeout(timeoutId);
+        timeoutId = undefined;
+      }
+    };
+    // Wait delay
+    await new Promise<void>((_resolve) => {
       timeoutId = setTimeout(() => {
         timeoutId = undefined;
-        resolve(Date.now() as Time);
-      }, duration);
-    }
+        _resolve();
+      }, duration as number);
+    });
+    // Then resolve
+    await resolve(Date.now() as Time);
   });
 }
