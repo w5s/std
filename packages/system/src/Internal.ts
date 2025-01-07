@@ -46,7 +46,6 @@ export function errnoExceptionHandler(error: unknown): FileError {
 
 export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
   return (...args: A): Task<Awaited<R>, FileError> =>
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     taskFrom(async ({ resolve, reject }) => {
       try {
         resolve(await fn(...args));

@@ -44,7 +44,6 @@ export function create<Value, Error = never>(
     run: <V, E>(task: TaskLike<V, E>) => Awaitable<Result<V, E>>;
   }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(({ resolve, reject, canceler, run }) => {
     canceler.current = undefined;
     return tryCall(

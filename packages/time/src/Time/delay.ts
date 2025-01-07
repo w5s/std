@@ -24,6 +24,7 @@ export function delay(duration: TimeDuration): Task<Time, never> {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     if (duration <= 0) {
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       callImmediate(() => resolve(Date.now() as Time));
     } else {
       // Set Canceler

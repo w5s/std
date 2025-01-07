@@ -28,7 +28,6 @@ export function writeFile(
     | Iterable<string | NodeJS.TypedArray | DataView>,
   options?: writeFile.Options,
 ): Task<void, FileError> {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return taskFrom(async ({ resolve, reject, canceler }) => {
     const controller = new AbortController();
     canceler.current = () => controller.abort();

@@ -25,19 +25,17 @@ export function tryCall<Value, Error = never>(
   sideEffect: () => Awaitable<Value>,
   onError?: (error: unknown) => Awaitable<Error>,
 ): Task<Value, Error> {
-  return from(
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    ({ resolve, reject }) =>
-      asyncTryCall(
-        sideEffect,
-        resolve,
-        onError == null
-          ? onError
-          : (error) => {
-              const awaitableError = onError(error);
-              // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
-              return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
-            },
-      ),
+  return from(({ resolve, reject }) =>
+    asyncTryCall(
+      sideEffect,
+      resolve,
+      onError == null
+        ? onError
+        : (error) => {
+            const awaitableError = onError(error);
+            // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
+            return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
+          },
+    ),
   );
 }

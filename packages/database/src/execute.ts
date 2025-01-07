@@ -24,7 +24,6 @@ import type { DatabaseError } from './error.js';
 export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQuery): Task<unknown, DatabaseError> {
   const driver = DatabaseDriver.get(client.databaseType);
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return from(async ({ resolve, reject, canceler }) => {
     try {
       const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);

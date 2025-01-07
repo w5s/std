@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import type { Option } from '@w5s/core';
 import type { Task, TaskCanceler } from '../Task.js';
 import { from } from '../Task/from.js';

@@ -17,7 +17,6 @@ export interface ResponseParser<Value> {
 export namespace ResponseParser {
   function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponseParser<V> {
     return (response) =>
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       taskFrom(async ({ resolve, reject }) => {
         try {
           resolve(await fn(response));

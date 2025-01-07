@@ -31,7 +31,7 @@ export function requestSend(client: Client, requestObject: Request): Task<Respon
 
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { fetch: fetchFn } = client;
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
   return taskFrom(async ({ resolve, reject, canceler }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;

@@ -38,11 +38,11 @@ export interface TaskParameters<Value, Error> {
   /**
    * Resolve callback
    */
-  readonly resolve: (value: Value) => void;
+  readonly resolve: (value: Value) => Awaitable<void>;
   /**
    * Reject callback
    */
-  readonly reject: (error: Error) => void;
+  readonly reject: (error: Error) => Awaitable<void>;
   /**
    * Reference to cancel function
    */
@@ -62,7 +62,7 @@ export interface TaskLike<Value, Error> {
   /**
    * A callback with side effects
    */
-  readonly taskRun: (parameters: TaskParameters<Value, Error>) => void;
+  readonly taskRun: (parameters: TaskParameters<Value, Error>) => Awaitable<void>;
 }
 
 /**

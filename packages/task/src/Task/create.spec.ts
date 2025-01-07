@@ -65,7 +65,6 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      // eslint-disable-next-line @typescript-eslint/await-thenable
       await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
@@ -75,7 +74,6 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      // eslint-disable-next-line @typescript-eslint/await-thenable
       await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);

@@ -17,7 +17,6 @@ export function invariant(condition: false, message?: string | null): never;
 export function invariant(condition: boolean, message?: string | null): asserts condition;
 export function invariant(condition: boolean, message?: string | null): asserts condition {
   if (!condition) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw InvariantError({ message: message == null ? '' : message });
   }
 }

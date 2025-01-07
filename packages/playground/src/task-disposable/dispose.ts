@@ -13,7 +13,6 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
  * @param resource - The Disposable or AsyncDisposable to dispose
  */
 export function dispose(resource: Disposable | AsyncDisposable): Task<void, never> {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   return taskFrom(({ resolve }) =>
     Symbol.asyncDispose in resource
       ? // eslint-disable-next-line promise/prefer-await-to-then
