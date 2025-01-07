@@ -44,5 +44,5 @@ export function style(value: Partial<Style>) {
   if (value.fontWeight != null) {
     format = andThen(format, fontWeight(value.fontWeight));
   }
-  return (str: string): string => format(str);
+  return format;
 }
