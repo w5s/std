@@ -26,7 +26,7 @@ export function unsafeRun<Value, Error>(
     returnValue = result;
   };
   let rejectHandler = (_error: unknown) => {};
-  const runValue: void | Promise<void> = task.taskRun({
+  const runValue: Awaitable<void> = task.taskRun({
     resolve: (value) => resolveHandler(Ok(value)),
     reject: (error) => resolveHandler(Error(error)),
     canceler,
