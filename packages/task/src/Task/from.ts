@@ -6,8 +6,8 @@ import { Task } from './Task.js';
  *
  * @example
  * ```typescript
- * const task = Task.from((resolve) => resolve('hello'));// from a callback
- * const task = Task.from({ taskRun: (resolve) => resolve('hello') });// from a TaskLike
+ * const task = Task.from(({ resolve }) => resolve('hello'));// from a callback
+ * const task = Task.from({ taskRun: ({ resolve }) => resolve('hello') });// from a TaskLike
  * ```
  * @param taskLike
  */
