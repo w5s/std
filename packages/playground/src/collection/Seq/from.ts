@@ -1,6 +1,5 @@
-import type { Seq } from '../Seq.js';
-import { useSeqState } from './useSeqState.js';
-import { iterable as iterableSymbol } from './iterable.js';
+import { Seq } from '../Seq.js';
+import { Seq as SeqImplementation } from '../Seq/Seq.js';
 
 /**
  * Return a new sequence from `iterable`
@@ -13,27 +12,5 @@ import { iterable as iterableSymbol } from './iterable.js';
  * @param iterable
  */
 export function from<T>(iterable: Iterable<T>): Seq<T> {
-  return {
-    [iterableSymbol]: iterable,
-    *[Symbol.iterator]() {
-      const seqState = useSeqState(this[iterableSymbol]);
-      const { resolvedValues, currentIterator } = seqState;
-      yield* resolvedValues;
-
-      if (currentIterator !== undefined) {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-        while (true) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          const { value, done } = currentIterator.next();
-          // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
-          if (done) {
-            seqState.currentIterator = undefined;
-            break;
-          }
-          resolvedValues.push(value);
-          yield value;
-        }
-      }
-    },
-  };
+  return new SeqImplementation(iterable);
 }
