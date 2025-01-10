@@ -12,6 +12,7 @@ export interface CustomFields {
 
 const fileExists = (path: fs.PathLike) => {
   try {
+    // eslint-disable-next-line n/no-sync
     fs.accessSync(path, fs.constants.F_OK);
     return true;
   } catch {
@@ -27,6 +28,7 @@ const darkTheme = themes.dracula;
 const projectRoot = nodePath.dirname(nodePath.dirname(nodePath.join(__dirname)));
 
 const githubHref = packageJSON.repository.url.replace('git@github.com:', 'https://github.com/');
+// eslint-disable-next-line n/no-sync
 const packageList = fs
   .readdirSync(`${projectRoot}/packages`)
   .map((entry) => {
