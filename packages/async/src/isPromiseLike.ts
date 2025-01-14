@@ -4,6 +4,7 @@
  * @example
  * ```typescript
  * isPromiseLike(Promise.resolve());// true
+ * isPromiseLike({ then() {} });// true
  * isPromiseLike(null);// false
  * ```
  * @category Type
