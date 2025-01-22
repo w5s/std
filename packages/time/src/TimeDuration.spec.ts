@@ -4,6 +4,12 @@ import { TimeDurationSigned } from './TimeDuration/TimeDurationSigned.js';
 import { TimeDurationComparable } from './TimeDuration/TimeDurationComparable.js';
 import { of } from './TimeDuration/of.js';
 import { TimeDurationNumeric } from './TimeDuration/TimeDurationNumeric.js';
+import { days } from './TimeDuration/days.js';
+import { weeks } from './TimeDuration/weeks.js';
+import { milliseconds } from './TimeDuration/milliseconds.js';
+import { seconds } from './TimeDuration/seconds.js';
+import { minutes } from './TimeDuration/minutes.js';
+import { hours } from './TimeDuration/hours.js';
 
 describe('TimeDuration', () => {
   it('is an alias to functions', () => {
@@ -13,6 +19,12 @@ describe('TimeDuration', () => {
     expect(TimeDuration).toEqual(
       expect.objectContaining({
         of,
+        weeks,
+        days,
+        hours,
+        minutes,
+        seconds,
+        milliseconds,
       }),
     );
   });

@@ -9,6 +9,7 @@ import { seconds } from './TimeDuration/seconds.js';
 import { minutes } from './TimeDuration/minutes.js';
 import { hours } from './TimeDuration/hours.js';
 import { days } from './TimeDuration/days.js';
+import { weeks } from './TimeDuration/weeks.js';
 
 /**
  * Represent a duration in milliseconds
@@ -31,4 +32,5 @@ export const TimeDuration = Callable({
   minutes,
   hours,
   days,
+  weeks,
 });
