@@ -6,6 +6,7 @@ import { delay } from './Time/delay.js';
 import { now } from './Time/now.js';
 import { parse } from './Time/parse.js';
 import { format } from './Time/format.js';
+import { from } from './Time/from.js';
 import { TimeBounded } from './Time/TimeBounded.js';
 
 describe('Time', () => {
@@ -18,6 +19,7 @@ describe('Time', () => {
         now,
         parse,
         format,
+        from,
       }),
     );
   });

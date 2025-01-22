@@ -6,8 +6,11 @@ import { now } from './Time/now.js';
 import { delay } from './Time/delay.js';
 import { parse } from './Time/parse.js';
 import { format } from './Time/format.js';
+import { from } from './Time/from.js';
 import { TimeComparable } from './Time/TimeComparable.js';
 import { TimeBounded } from './Time/TimeBounded.js';
+
+export type * from './Time/from.js';
 
 /**
  * Represent a time typically returned by `Date.now()`
@@ -28,7 +31,7 @@ export const Time = Callable({
   delay,
   parse,
   format,
-
+  from,
   /**
    * Adds `duration` to `time`
    *
@@ -60,4 +63,5 @@ export const Time = Callable({
   diff(left: Time, right: Time): TimeDuration {
     return TimeDuration(left - right);
   },
+  [Callable.symbol]: from,
 });
