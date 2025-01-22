@@ -32,14 +32,15 @@ describe('TimeDuration', () => {
   });
   describe('()', () => {
     it('should throw invariant error', () => {
-      expect(() => TimeDuration.of(Number.NaN)).toThrow('NaN is not a valid TimeDuration');
+      expect(() => TimeDuration(Number.NaN)).toThrow('NaN is not a valid TimeDuration');
     });
     it.each([
       [1, 1],
       [-1, -1],
       [1.1, 1.1],
+      [{ minutes: 1, seconds: 2, milliseconds: 3 }, 62_003],
     ])('should return an int value', (input, expected) => {
-      expect(TimeDuration.of(input)).toBe(expected);
+      expect(TimeDuration(input)).toBe(expected);
     });
   });
 });

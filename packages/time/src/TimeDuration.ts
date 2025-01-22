@@ -37,4 +37,5 @@ export const TimeDuration = Callable({
   hours,
   days,
   weeks,
+  [Callable.symbol]: from,
 });
