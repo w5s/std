@@ -3,6 +3,7 @@ import { TimeDuration } from './TimeDuration.js';
 import { TimeDurationSigned } from './TimeDuration/TimeDurationSigned.js';
 import { TimeDurationComparable } from './TimeDuration/TimeDurationComparable.js';
 import { of } from './TimeDuration/of.js';
+import { from } from './TimeDuration/from.js';
 import { TimeDurationNumeric } from './TimeDuration/TimeDurationNumeric.js';
 import { days } from './TimeDuration/days.js';
 import { weeks } from './TimeDuration/weeks.js';
@@ -19,6 +20,7 @@ describe('TimeDuration', () => {
     expect(TimeDuration).toEqual(
       expect.objectContaining({
         of,
+        from,
         weeks,
         days,
         hours,
