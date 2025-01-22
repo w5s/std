@@ -10,6 +10,6 @@ import { TimeDuration } from './TimeDuration.js';
  * @category Constructor
  * @param milliseconds - Number of milliseconds
  */
-export function of(milliseconds: number) {
+export function of(milliseconds: number): TimeDuration {
   return TimeDuration.wrap(milliseconds);
 }
