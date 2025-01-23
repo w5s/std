@@ -6,7 +6,7 @@ import {
   describeIndexable,
   describeType,
 } from '@w5s/core/dist/Testing.js';
-import { DecodeError, Result } from '@w5s/core';
+import { CodecError, Result } from '@w5s/core';
 import { IPv6 } from './IPv6.js';
 
 describe('IPv6', () => {
@@ -50,7 +50,7 @@ describe('IPv6', () => {
     decode: [
       ['::ffff:7f00:1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
       ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as IPv6', input: null }))],
+      [null, Result.Error(CodecError({ message: 'Cannot decode null as IPv6', input: null }))],
     ],
     encode: [[IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01), '::ffff:7f00:1']],
     schema: () => ({

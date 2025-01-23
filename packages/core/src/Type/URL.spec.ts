@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from '@w5s/core';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { URL } from './URL.js';
 
@@ -18,7 +18,7 @@ describe('URL', () => {
       [
         '',
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode  as URL',
             input: null,
           }),
@@ -27,7 +27,7 @@ describe('URL', () => {
       [
         null,
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode null as URL',
             input: null,
           }),

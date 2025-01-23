@@ -1,6 +1,6 @@
 import { describeType, describeCodec } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
-import { DecodeError, Int, Result } from '@w5s/core';
+import { CodecError, Int, Result } from '@w5s/core';
 import { Duration } from './Duration.js';
 
 describe('Duration', () => {
@@ -38,9 +38,9 @@ describe('Duration', () => {
       // Invalid inputs
       ...['', 'P', 'PT'].map(
         (_) =>
-          [_, Result.Error(DecodeError({ message: `Cannot decode ${_} as Duration`, input: _ }))] as [
+          [_, Result.Error(CodecError({ message: `Cannot decode ${_} as Duration`, input: _ }))] as [
             string,
-            Result<Duration, DecodeError>,
+            Result<Duration, CodecError>,
           ],
       ),
     ],

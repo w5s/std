@@ -1,4 +1,4 @@
-import { DecodeError, Type } from '@w5s/core';
+import { CodecError, Type } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
@@ -116,7 +116,7 @@ describe('ResponseParser', () => {
       await expectTask(parser(response)).toRejectAsync(
         HTTPError.ParserError({
           message: 'Cannot parse response body',
-          cause: DecodeError({ message: '', input: data }),
+          cause: CodecError({ message: '', input: data }),
         }),
       );
 

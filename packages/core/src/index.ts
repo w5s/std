@@ -6,7 +6,7 @@ export * from './Callable.js';
 export * from './Char.js';
 export * from './Codec.js';
 export * from './Comparable.js';
-export * from './DecodeError.js';
+export * from './CodecError.js';
 export * from './Enum.js';
 export * from './Equal.js';
 export * from './identity.js';

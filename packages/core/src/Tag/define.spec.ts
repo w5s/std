@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { describeType } from '../Testing.js';
 import { Codec } from '../Codec.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { Result } from '../Result.js';
 import type { Tag } from '../Tag.js';
 import { define } from './define.js';
@@ -61,10 +61,10 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
-        Result.Error(DecodeError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid' })),
+        Result.Error(CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid' })),
       );
       expect(Codec.decode(PositiveNumber, undefined)).toEqual(
-        Result.Error(DecodeError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),
+        Result.Error(CodecError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),
       );
     });
   });

@@ -3,7 +3,7 @@ import { assertType } from '@w5s/core-type';
 import { describeCodec, describeIndexable, describeType } from '../Testing.js';
 import { define } from './define.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import type { Enum } from '../Enum.js';
 import { Symbol } from '../Symbol.js';
 import { Option } from '../Option.js';
@@ -86,7 +86,7 @@ describe(define, () => {
       ['bar', Result.Ok(MyEnumObject.Bar)],
       [
         'foo_invalid',
-        Result.Error(DecodeError({ message: 'Cannot decode foo_invalid as MyEnumObject', input: 'foo_invalid' })),
+        Result.Error(CodecError({ message: 'Cannot decode foo_invalid as MyEnumObject', input: 'foo_invalid' })),
       ],
     ],
     encode: [

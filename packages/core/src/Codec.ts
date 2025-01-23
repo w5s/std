@@ -1,6 +1,6 @@
 import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
-import { DecodeError } from './DecodeError.js';
+import { CodecError } from './CodecError.js';
 import { decode } from './Codec/decode.js';
 import { encode } from './Codec/encode.js';
 import { lazy } from './Codec/lazy.js';
@@ -22,7 +22,7 @@ export interface Codec<T> {
    * @category Codec
    * @param input - The value to decode
    */
-  codecDecode(this: void, input: unknown, context: Codec.Context<T>): Result<T, DecodeError>;
+  codecDecode(this: void, input: unknown, context: Codec.Context<T>): Result<T, CodecError>;
   /**
    * Returns the encoded `input`
    *
@@ -70,12 +70,12 @@ export namespace Codec {
      *
      * @param value
      */
-    ok: (value: T) => Result<T, DecodeError>;
+    ok: (value: T) => Result<T, CodecError>;
     /**
      * Helper that returns a new Error result
      *
      * @param message
      */
-    error: (input: unknown, asType?: string) => Result<T, DecodeError>;
+    error: (input: unknown, asType?: string) => Result<T, CodecError>;
   }
 }

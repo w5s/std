@@ -6,7 +6,7 @@ import {
   describeIndexable,
   describeType,
 } from '@w5s/core/dist/Testing.js';
-import { DecodeError, Result } from '@w5s/core';
+import { CodecError, Result } from '@w5s/core';
 import { IPv4 } from './IPv4.js';
 
 describe('IPv4', () => {
@@ -39,7 +39,7 @@ describe('IPv4', () => {
   describeCodec({ describe, it, expect })(IPv4, {
     decode: [
       ['127.0.0.1', Result.Ok(IPv4.of(127, 0, 0, 1))],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as IPv4', input: null }))],
+      [null, Result.Error(CodecError({ message: 'Cannot decode null as IPv4', input: null }))],
     ],
     encode: [
       [IPv4.of(127, 0, 0, 1), '127.0.0.1'],

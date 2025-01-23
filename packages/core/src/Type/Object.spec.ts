@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { define } from './define.js';
 import { TObject } from './Object.js';
@@ -26,7 +26,7 @@ describe(TObject, () => {
       [
         { foo: 'a' },
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode a as UnderscoreString',
             input: 'a',
           }),

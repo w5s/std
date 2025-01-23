@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Tuple } from './Tuple.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { bigint } from './bigint.js';
 import { string } from './string.js';
 
@@ -20,7 +20,7 @@ describe(Tuple, () => {
       [
         ['a', '1'],
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode a,1 as [string,bigint]',
             input: 'a',
           }),

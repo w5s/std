@@ -3,7 +3,7 @@ import { describe, it, expect } from 'vitest';
 import { RegExp } from './RegExp.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 
 describe('RegExp', () => {
   describeType({ describe, it, expect })(RegExp, {
@@ -21,8 +21,8 @@ describe('RegExp', () => {
       ['[a-z][A-Z]', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z][A-Z]/', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z]{2}/gi', Result.Ok(/[a-z]{2}/gi)],
-      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as RegExp', input: null }))],
+      [undefined, Result.Error(CodecError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
+      [null, Result.Error(CodecError({ message: 'Cannot decode null as RegExp', input: null }))],
     ],
     schema: () => ({ type: 'string', format: 'regex' }),
   });

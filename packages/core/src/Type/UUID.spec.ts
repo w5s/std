@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Result } from '@w5s/core';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { UUID } from './UUID.js';
 
@@ -18,7 +18,7 @@ describe('UUID', () => {
       [
         null,
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode null as UUID',
             input: null,
           }),

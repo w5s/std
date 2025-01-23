@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Record } from './Record.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { bigint } from './bigint.js';
 import { string } from './string.js';
 import type { Type } from '../Type.js';
@@ -25,7 +25,7 @@ describe(Record, () => {
       [
         ['a', '1'],
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode a,1 as Record<string,bigint>',
             input: 'a',
           }),

@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { string } from './string.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 
 describe('string', () => {
   describeType({ describe, it, expect })(string, {
@@ -18,8 +18,8 @@ describe('string', () => {
     decode: [
       ['', Result.Ok('')],
       ['hello world', Result.Ok('hello world')],
-      [undefined, Result.Error(DecodeError({ message: 'Cannot decode undefined as string', input: undefined }))],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as string', input: null }))],
+      [undefined, Result.Error(CodecError({ message: 'Cannot decode undefined as string', input: undefined }))],
+      [null, Result.Error(CodecError({ message: 'Cannot decode null as string', input: null }))],
     ],
     schema: () => ({ type: 'string' }),
   });

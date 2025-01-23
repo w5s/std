@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { Codec } from '../Codec.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { describeCodec } from './describeCodec.js';
 import { Result } from '../Result.js';
 
@@ -11,7 +11,7 @@ describe('describeCodec', () => {
       typeof value === 'string'
         ? Result.Ok(value)
         : Result.Error(
-            DecodeError({
+            CodecError({
               message: 'test error',
               input: value,
             }),
@@ -26,7 +26,7 @@ describe('describeCodec', () => {
     ],
     decode: [
       ['a', Result.Ok('a')],
-      [1, Result.Error(DecodeError({ input: 1, message: 'test error' }))],
+      [1, Result.Error(CodecError({ input: 1, message: 'test error' }))],
     ],
     schema: () => ({
       type: 'string',

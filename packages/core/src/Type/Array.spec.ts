@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Array } from './Array.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 import { define } from './define.js';
 
 describe(Array, () => {
@@ -28,7 +28,7 @@ describe(Array, () => {
       [
         ['a', '_b', '_c'],
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode a as UnderscoreString',
             input: 'a',
           }),

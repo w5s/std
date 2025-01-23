@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 
 describe('Int', () => {
   describeType({ describe, it, expect })(Int, {
@@ -13,8 +13,8 @@ describe('Int', () => {
   describeCodec({ describe, it, expect })(Int, {
     decode: [
       [1, Result.Ok(Int(1))],
-      [1.1, Result.Error(DecodeError({ message: 'Cannot decode 1.1 as Int', input: null }))],
-      [null, Result.Error(DecodeError({ message: 'Cannot decode null as Int', input: null }))],
+      [1.1, Result.Error(CodecError({ message: 'Cannot decode 1.1 as Int', input: null }))],
+      [null, Result.Error(CodecError({ message: 'Cannot decode null as Int', input: null }))],
     ],
     encode: [
       [Int(0), 0],

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { DecodeError, Int, Option, Result } from '@w5s/core';
+import { CodecError, Int, Option, Result } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { Console } from '@w5s/console';
 import { TimeDuration } from '@w5s/time';
@@ -72,7 +72,7 @@ function main() {
           case HTTPError.ParserError.errorName: {
             return log(error`ParserError:${err.message}`);
           }
-          case DecodeError.errorName: {
+          case CodecError.errorName: {
             return log(error`Decode Error:${err.message}`);
           }
           case AbortError.errorName: {
@@ -123,7 +123,7 @@ function main2() {
       case HTTPError.ParserError.errorName: {
         return Console.error(`ParserError:${_error.message}`);
       }
-      case DecodeError.errorName: {
+      case CodecError.errorName: {
         return Console.error(`Decode Error:${_error.message}`);
       }
       default: {

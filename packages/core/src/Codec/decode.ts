@@ -2,7 +2,7 @@ import type { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
 import { Error } from '../Result/Error.js';
 import { Ok } from '../Result/Ok.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 
 /**
  * Returns a `Result` containing the decoded `input`
@@ -16,12 +16,12 @@ import { DecodeError } from '../DecodeError.js';
  * @param codec - the decoder module
  * @param input - the input to encode
  */
-export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown): Result<T, DecodeError> {
+export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown): Result<T, CodecError> {
   return codec.codecDecode(input, {
     ok: Ok as Codec.Context<T>['ok'],
     error: (inputError, asType) =>
       Error(
-        DecodeError({
+        CodecError({
           message: `Cannot decode ${String(inputError)}${asType == null ? '' : ` as ${asType}`}`,
           input: inputError,
         }),

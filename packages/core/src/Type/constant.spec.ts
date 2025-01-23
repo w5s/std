@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { constant } from './constant.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
-import { DecodeError } from '../DecodeError.js';
+import { CodecError } from '../CodecError.js';
 
 describe(constant, () => {
   const subject = constant;
@@ -18,7 +18,7 @@ describe(constant, () => {
       [
         'otherValue',
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode otherValue as anyValue',
             input: 'otherValue',
           }),
@@ -37,7 +37,7 @@ describe(constant, () => {
       [
         'otherValue',
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode otherValue as Symbol(anySymbol)',
             input: 'otherValue',
           }),
@@ -55,7 +55,7 @@ describe(constant, () => {
       [
         undefined,
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode undefined as undefined',
             input: undefined,
           }),

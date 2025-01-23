@@ -8,7 +8,7 @@ import { HTTPError } from '@w5s/http/dist/HTTPError.js';
 import { CustomError } from '@w5s/error/dist/CustomError.js';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
-import { DecodeError } from '@w5s/core/dist/DecodeError.js';
+import { CodecError } from '@w5s/core/dist/CodecError.js';
 import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import { Error as Err } from '@w5s/core/dist/Result/Error.js';
@@ -103,7 +103,7 @@ export namespace Slack {
     | { ok: false; error: ErrorCode }
     | { ok: Exclude<JSONValue, boolean> };
 
-  type ResponseError = DecodeError | HTTPError | TimeoutError | Error;
+  type ResponseError = CodecError | HTTPError | TimeoutError | Error;
 
   function apiCall<R>(client: Slack, method: Method, parameters: { [key: string]: unknown }): Task<R, ResponseError> {
     const { httpClient } = client;
@@ -121,7 +121,7 @@ export namespace Slack {
           ? Ok(result.value as R)
           : result.value.ok === false
             ? Err(Error({ message: 'Slack Error!', slackErrorCode: result.value.error }))
-            : Err(DecodeError({ message: 'Decode Error!', input: result.value }))
+            : Err(CodecError({ message: 'Decode Error!', input: result.value }))
         : result,
     );
     return requestParsed;

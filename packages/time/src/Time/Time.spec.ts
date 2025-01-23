@@ -1,6 +1,6 @@
 import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { describe, it, expect } from 'vitest';
-import { DecodeError, Result } from '@w5s/core';
+import { CodecError, Result } from '@w5s/core';
 import { Time } from './Time.js';
 import { TimeBounded } from './TimeBounded.js';
 
@@ -20,7 +20,7 @@ describe('Time', () => {
       [
         null,
         Result.Error(
-          DecodeError({
+          CodecError({
             message: 'Cannot decode null as Time',
             input: null,
           }),
