@@ -7,6 +7,7 @@ import { filter } from './Array/filter.js';
 import { find } from './Array/find.js';
 import { findIndex } from './Array/findIndex.js';
 import { findLast } from './Array/findLast.js';
+import { findLastIndex } from './Array/findLastIndex.js';
 import { flatMap } from './Array/flatMap.js';
 import { generate } from './Array/generate.js';
 import { hasInstance } from './Array/hasInstance.js';
@@ -20,12 +21,12 @@ import { of } from './Array/of.js';
 import { reduce } from './Array/reduce.js';
 import { reduceRight } from './Array/reduceRight.js';
 import { reverse } from './Array/reverse.js';
+import { setAt } from './Array/setAt.js';
 import { size } from './Array/size.js';
 import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
-import { setAt } from './Array/setAt.js';
 
 export type Array<Item> = ReadonlyArray<Item>;
 
@@ -52,6 +53,7 @@ export const Array = {
   find,
   findIndex,
   findLast,
+  findLastIndex,
   flatMap,
   generate,
   hasInstance,
