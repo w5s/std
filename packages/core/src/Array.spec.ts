@@ -27,6 +27,7 @@ import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
+import { findLast } from './Array/findLast.js';
 
 describe('Array', () => {
   it('is an alias to functions', () => {
@@ -39,6 +40,7 @@ describe('Array', () => {
       filter,
       find,
       findIndex,
+      findLast,
       flatMap,
       generate,
       hasInstance,

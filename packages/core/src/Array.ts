@@ -6,6 +6,7 @@ import { every } from './Array/every.js';
 import { filter } from './Array/filter.js';
 import { find } from './Array/find.js';
 import { findIndex } from './Array/findIndex.js';
+import { findLast } from './Array/findLast.js';
 import { flatMap } from './Array/flatMap.js';
 import { generate } from './Array/generate.js';
 import { hasInstance } from './Array/hasInstance.js';
@@ -50,6 +51,7 @@ export const Array = {
   filter,
   find,
   findIndex,
+  findLast,
   flatMap,
   generate,
   hasInstance,
