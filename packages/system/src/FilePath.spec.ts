@@ -1,11 +1,13 @@
 import { Option } from '@w5s/core';
-import { Task } from '@w5s/task';
 import { describe, it, expect } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { FilePath } from './FilePath.js';
 
 describe('FilePath', () => {
   const absolutePath = (...parts: string[]) => (FilePath.separator + parts.join(FilePath.separator)) as FilePath;
   const relativePath = (...parts: string[]) => parts.join(FilePath.separator) as FilePath;
+  const expectTask = withTask(expect);
+
   describe('.dirname', () => {
     it('should return the dirname of parameter', () => {
       const path = absolutePath('one', 'two', 'three');
@@ -23,28 +25,24 @@ describe('FilePath', () => {
 
   describe('.resolve', () => {
     it('return a resolved path', async () => {
-      expect(
-        Task.unsafeRunOk(
-          FilePath.resolve(
-            [absolutePath(''), relativePath('bar', 'baz'), relativePath('..', 'baz2')],
-            relativePath('foo'),
-          ),
+      expectTask(
+        FilePath.resolve(
+          [absolutePath(''), relativePath('bar', 'baz'), relativePath('..', 'baz2')],
+          relativePath('foo'),
         ),
-      ).toBe(absolutePath('bar', 'baz2', 'foo'));
-      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz')))).toBe(
+      ).toResolveSync(absolutePath('bar', 'baz2', 'foo'));
+      expectTask(FilePath.resolve([absolutePath('foo', 'bar')], relativePath('./baz'))).toResolveSync(
         absolutePath('foo', 'bar', 'baz'),
       );
-      expect(Task.unsafeRunOk(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', '')))).toBe(
+      expectTask(FilePath.resolve([absolutePath('foo', 'bar')], absolutePath('tmp', 'file', ''))).toResolveSync(
         absolutePath('tmp', 'file'),
       );
-      expect(
-        Task.unsafeRunOk(
-          FilePath.resolve(
-            [relativePath('wwwroot'), relativePath('static_files', 'png')],
-            relativePath('..', 'gif', 'image.gif'),
-          ),
+      expectTask(
+        FilePath.resolve(
+          [relativePath('wwwroot'), relativePath('static_files', 'png')],
+          relativePath('..', 'gif', 'image.gif'),
         ),
-      ).toBe(relativePath(process.cwd(), 'wwwroot', 'static_files', 'gif', 'image.gif'));
+      ).toResolveSync(relativePath(process.cwd(), 'wwwroot', 'static_files', 'gif', 'image.gif'));
     });
   });
 
