@@ -60,13 +60,13 @@ export interface Type<T> {
    * @example
    * ```typescript
    * const StringType: Type<string>;
-   * StringType.from('foo'); // Option.Some('foo')
-   * StringType.from(12); // Option.None
+   * StringType.asInstance('foo'); // Option.Some('foo')
+   * StringType.asInstance(12); // Option.None
    * ```
    * @category Constructor
    * @param anyValue
    */
-  from(anyValue: unknown): Option<T>;
+  asInstance(anyValue: unknown): Option<T>;
   /**
    * When defined, returns a custom string representation
    *
@@ -117,7 +117,7 @@ export namespace Type {
   export interface Parameters<T> extends Partial<Codec<T>> {
     typeName: string;
     hasInstance: (value: unknown) => boolean;
-    from?: Type<T>['from'];
+    asInstance?: Type<T>['asInstance'];
     inspect?: Type<T>['inspect'];
   }
 

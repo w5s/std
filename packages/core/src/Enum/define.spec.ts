@@ -51,7 +51,7 @@ describe(define, () => {
       codecSchema: expect.any(Function),
       codecDecode: expect.any(Function),
       codecEncode: expect.any(Function),
-      from: expect.any(Function),
+      asInstance: expect.any(Function),
       [Symbol.enumKeys]: ['Foo', 'Bar', 'Baz'],
       at: expect.any(Function),
       indexType: 'number',

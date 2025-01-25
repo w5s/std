@@ -78,7 +78,7 @@ export namespace Struct {
     const hasInstance = (anyValue: unknown): boolean =>
       // @ts-ignore We know what we are doing
       anyValue == null ? false : anyValue[type] === typeName;
-    const from = (value: unknown) => (hasInstance(value) ? value : undefined);
+    const asInstance = (value: unknown) => (hasInstance(value) ? value : undefined);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     const create = (_properties: any) => ({
       [Struct.type]: typeName,
@@ -90,7 +90,7 @@ export namespace Struct {
       [Callable.symbol]: create,
       typeName,
       hasInstance,
-      from,
+      asInstance,
       create,
     });
   }

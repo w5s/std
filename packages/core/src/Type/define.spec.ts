@@ -29,18 +29,18 @@ describe(define, () => {
       expect(TestType.inspect).toBe(TestType.inspect);
     });
   });
-  describe('#from', () => {
+  describe('#asInstance', () => {
     it('forwards from parameters', () => {
-      const from = () => Option.None;
+      const asInstance = () => Option.None;
       const SomeType = define<string>({
         ...TestType,
-        from,
+        asInstance,
       });
-      expect(SomeType.from).toBe(from);
+      expect(SomeType.asInstance).toBe(asInstance);
     });
     it('returns Option.None when hasInstance(value) is false', () => {
-      expect(TestType.from('foo')).toBe('foo');
-      expect(TestType.from(1)).toBe(undefined);
+      expect(TestType.asInstance('foo')).toBe('foo');
+      expect(TestType.asInstance(1)).toBe(undefined);
     });
   });
   describe('#codecEncode', () => {

@@ -6,7 +6,7 @@ describe('describeType', () => {
   const StringType: Type<string> = {
     typeName: 'String',
     hasInstance: (value): value is string => typeof value === 'string',
-    from: (value) => (typeof value === 'string' ? value : undefined),
+    asInstance: (value) => (typeof value === 'string' ? value : undefined),
   };
 
   describeType({ describe, it, expect })(StringType, {
