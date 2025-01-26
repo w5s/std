@@ -14,7 +14,6 @@ import { orElse } from './Task/orElse.js';
 import { tryCall } from './Task/tryCall.js';
 import { hasInstance } from './Task/hasInstance.js';
 import { unsafeRun } from './Task/unsafeRun.js';
-import { unsafeRunOk } from './Task/unsafeRunOk.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 
@@ -97,7 +96,6 @@ export const Task = {
   resolve,
   tryCall,
   unsafeRun,
-  unsafeRunOk,
 };
 
 export namespace Task {

@@ -14,7 +14,6 @@ import { orElse } from './Task/orElse.js';
 import { reject } from './Task/reject.js';
 import { tryCall } from './Task/tryCall.js';
 import { unsafeRun } from './Task/unsafeRun.js';
-import { unsafeRunOk } from './Task/unsafeRunOk.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 
@@ -37,7 +36,6 @@ describe('Task', () => {
       resolve,
       tryCall,
       unsafeRun,
-      unsafeRunOk,
     });
   });
 });
