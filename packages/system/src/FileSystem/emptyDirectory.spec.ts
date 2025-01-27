@@ -26,7 +26,7 @@ describe('emptyDirectory', () => {
 
     await expectFile(fs.path()).toHaveDirContent(['some-dir', 'some-file', 'some-file-2']);
     const task = emptyDirectory(fs.path());
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(fs.path()).toHaveDirContent([]);
   });
 
@@ -36,14 +36,14 @@ describe('emptyDirectory', () => {
 
     await expectFile(target).toHaveDirContent([]);
     const task = emptyDirectory(target);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(target).toHaveDirContent([]);
   });
 
   it('should create directory when does not exist', async () => {
     const target = fs.path('does-not-exist');
     const task = emptyDirectory(target);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(target).toHaveDirContent([]);
   });
 });

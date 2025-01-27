@@ -10,7 +10,7 @@ describe('createDirectory', () => {
     const mkdirMocked = vi.spyOn(Internal.FS, 'mkdir').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = createDirectory(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     expect(mkdirMocked).toHaveBeenCalledWith(...args);
   });
 });

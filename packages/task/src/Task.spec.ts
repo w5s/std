@@ -13,7 +13,7 @@ import { mapError } from './Task/mapError.js';
 import { orElse } from './Task/orElse.js';
 import { reject } from './Task/reject.js';
 import { tryCall } from './Task/tryCall.js';
-import { unsafeRun } from './Task/unsafeRun.js';
+import { run } from './Task/run.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 
@@ -35,7 +35,7 @@ describe('Task', () => {
       reject,
       resolve,
       tryCall,
-      unsafeRun,
+      run,
     });
   });
 });

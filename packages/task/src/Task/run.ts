@@ -8,16 +8,16 @@ import type { TaskCanceler, TaskLike } from '../Task.js';
 /**
  * Run `task` and return the result or a promise of the result
  *
- * **⚠ Impure function that may throw an error, its use is generally discouraged.**
+ * **⚠ Impure function that may throw an error, it should be used on the edge of the program.**
  *
  * @example
  * ```typescript
  * const getMessage = Task.resolve('Hello World!');
- * const messageResult = Task.unsafeRun(getMessage);// Result.Ok('Hello World!')
+ * const messageResult = Task.run(getMessage);// Result.Ok('Hello World!')
  * ```
  * @param task - the task to be run
  */
-export function unsafeRun<Value, Error>(
+export function run<Value, Error>(
   task: TaskLike<Value, Error>,
   canceler: TaskCanceler = { current: undefined },
 ): Awaitable<Result<Value, Error>> {
@@ -30,7 +30,7 @@ export function unsafeRun<Value, Error>(
     resolve: (value) => resolveHandler(Ok(value)),
     reject: (error) => resolveHandler(Error(error)),
     canceler,
-    run: unsafeRun,
+    run,
   });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {

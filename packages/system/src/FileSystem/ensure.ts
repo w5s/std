@@ -21,7 +21,7 @@ export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
  * @example
  * ```typescript
  * const task = ensureDirectory(FilePath('/path/to/directory'));
- * await Task.unsafeRun(task);// Will create a directory
+ * await Task.run(task);// Will create a directory
  * ```
  * @param filePath - The path to ensure
  */
@@ -45,7 +45,7 @@ export async function ensureFileAsync(filePath: FilePath): Promise<void> {
  * @example
  * ```typescript
  * const task = ensureFile(FilePath('/path/to/file'));
- * await Task.unsafeRun(task);// Will create a file
+ * await Task.run(task);// Will create a file
  * ```
  * @param filePath - The path to ensure
  */
@@ -69,7 +69,7 @@ export async function ensureSymbolicLinkAsync(source: FilePath, destination: Fil
  * @example
  * ```typescript
  * const task = ensureSymbolicLink(FilePath('/path/to/file'), FilePath('/path/to/link'));
- * await Task.unsafeRun(task);// Will create a symbolic link
+ * await Task.run(task);// Will create a symbolic link
  * ```
  * @param source - The source path
  * @param destination - The destination path

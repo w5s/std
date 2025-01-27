@@ -12,7 +12,7 @@ describe('listDirectory', () => {
       .mockImplementation(() => Promise.resolve(['file1', 'file2'] as any));
     const args = [FilePath('anyPath'), 'utf8'] as const;
     const task = listDirectory(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(['file1', 'file2']));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(['file1', 'file2']));
     expect(readdirMocked).toHaveBeenCalledWith(...args);
   });
 });

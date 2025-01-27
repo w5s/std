@@ -10,7 +10,7 @@ describe('rename', () => {
     const renameMocked = vi.spyOn(Internal.FS, 'rename').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), FilePath('newPath')] as const;
     const task = rename(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     expect(renameMocked).toHaveBeenCalledWith(...args);
   });
 });

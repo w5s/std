@@ -155,7 +155,7 @@ export function main3() {
   ]);
 }
 
-void Task.unsafeRun(main());
+void Task.run(main());
 // alternate syntax
 void main().run();
 void main2().run();

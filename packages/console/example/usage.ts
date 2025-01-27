@@ -3,5 +3,5 @@ import { Task } from '@w5s/task';
 
 export function main() {
   const task = Console.log('Hello, world!');
-  return Task.unsafeRun(task);
+  return Task.run(task);
 }

@@ -13,7 +13,7 @@ import { andRun } from './Task/andRun.js';
 import { orElse } from './Task/orElse.js';
 import { tryCall } from './Task/tryCall.js';
 import { hasInstance } from './Task/hasInstance.js';
-import { unsafeRun } from './Task/unsafeRun.js';
+import { run } from './Task/run.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 
@@ -95,7 +95,7 @@ export const Task = {
   reject,
   resolve,
   tryCall,
-  unsafeRun,
+  run,
 };
 
 export namespace Task {

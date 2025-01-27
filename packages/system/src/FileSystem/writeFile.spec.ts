@@ -10,7 +10,7 @@ describe('writeFile', () => {
     const writeFileMocked = vi.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',
@@ -58,7 +58,7 @@ describe('writeFile', () => {
       resolve: () => {},
       reject: () => {},
       canceler: cancelerRef,
-      run: Task.unsafeRun,
+      run: Task.run,
     });
     expect(fileContent).toEqual('0123456789');
   });

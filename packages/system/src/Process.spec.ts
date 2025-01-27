@@ -15,7 +15,7 @@ describe('Process', () => {
           undefined as never,
       );
       const exitTask = Process.exit(0);
-      expect(Task.unsafeRun(exitTask)).toEqual(Result.Ok(undefined));
+      expect(Task.run(exitTask)).toEqual(Result.Ok(undefined));
       expect(processExit).toHaveBeenCalledWith(0);
     });
   });
@@ -24,7 +24,7 @@ describe('Process', () => {
     it('should call process.cwd', () => {
       mocked.mockImplementation(() => FilePath('/my/dir'));
       const task = Process.getCurrentDirectory();
-      expect(Task.unsafeRun(task)).toEqual(Result.Ok(FilePath('/my/dir')));
+      expect(Task.run(task)).toEqual(Result.Ok(FilePath('/my/dir')));
       expect(mocked).toHaveBeenCalled();
     });
   });
@@ -33,7 +33,7 @@ describe('Process', () => {
     it('should call process.chdir', () => {
       mocked.mockImplementation(() => undefined);
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expect(Task.unsafeRun(task)).toEqual(Result.Ok(undefined));
+      expect(Task.run(task)).toEqual(Result.Ok(undefined));
       expect(mocked).toHaveBeenCalledWith('/my/dir');
     });
     it('should handle errors', () => {
@@ -41,7 +41,7 @@ describe('Process', () => {
         throw anyErrnoException;
       });
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expect(Task.unsafeRun(task)).toEqual(Result.Error(errnoExceptionHandler(anyErrnoException)));
+      expect(Task.run(task)).toEqual(Result.Error(errnoExceptionHandler(anyErrnoException)));
     });
   });
 });

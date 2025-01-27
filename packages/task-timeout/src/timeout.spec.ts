@@ -5,7 +5,7 @@ import { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error';
 import { timeout } from './timeout.js';
 
-describe('timeout', () => {
+describe(timeout, () => {
   const anyDelay = TimeDuration.milliseconds(4);
   const anyValue = 'any_value';
   const anyError = 'any_error';
@@ -18,11 +18,11 @@ describe('timeout', () => {
   it('should resolve/reject the same value as task', async () => {
     const resolveNow = Task.resolve(anyValue);
     const resolved = timeout(resolveNow, anyDelay);
-    expect(Task.unsafeRun(resolved)).toEqual(Result.Ok(anyValue));
+    expect(Task.run(resolved)).toEqual(Result.Ok(anyValue));
 
     const rejectNow = Task.reject(anyError);
     const rejected = timeout(rejectNow, anyDelay);
-    expect(Task.unsafeRun(rejected)).toEqual(Result.Error(anyError));
+    expect(Task.run(rejected)).toEqual(Result.Error(anyError));
   });
   it('should cancel task and setTimeout if task is canceled', async () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
@@ -54,7 +54,7 @@ describe('timeout', () => {
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(willCancel, anyDelay);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         TimeoutError({
           message: `Task timed out after ${anyDelay}ms`,
@@ -67,12 +67,12 @@ describe('timeout', () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
     const resolved = timeout(Task.resolve(anyValue), anyDelay);
-    await Task.unsafeRun(resolved);
+    await Task.run(resolved);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
 
     clearTimeoutSpy.mockClear();
     const rejected = timeout(Task.reject(anyError), anyDelay);
-    await Task.unsafeRun(rejected);
+    await Task.run(rejected);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
   });
 });

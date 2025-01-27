@@ -22,14 +22,14 @@ describe('ensureDirectory', () => {
     await fs.mkdir(ensured);
 
     const task = ensureDirectory(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeADirectory();
   });
   it('should work for non existing directory', async () => {
     const ensured = fs.path('test');
 
     const task = ensureDirectory(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeADirectory();
   });
   it('should return error for file', async () => {
@@ -37,7 +37,7 @@ describe('ensureDirectory', () => {
     await fs.touch(ensured);
 
     const task = ensureDirectory(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'directory', got 'file'`,
@@ -58,14 +58,14 @@ describe('ensureFile', () => {
     await fs.touch(ensured);
 
     const task = ensureFile(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeAFile();
   });
   it('should work for non-existing files', async () => {
     const ensured = fs.path('test');
 
     const task = ensureFile(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(ensured).toBeAFile();
   });
   it('should return error for directory', async () => {
@@ -73,7 +73,7 @@ describe('ensureFile', () => {
     await fs.mkdir(ensured);
 
     const task = ensureFile(ensured);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'file', got 'directory'`,
@@ -96,7 +96,7 @@ describe('ensureSymbolicLink', () => {
     await fs.symlink(source, destination);
 
     const task = ensureSymbolicLink(source, destination);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destination).toBeASymbolicLink();
   });
   it('should work for non-existing files', async () => {
@@ -104,7 +104,7 @@ describe('ensureSymbolicLink', () => {
     const destination = fs.path('link');
 
     const task = ensureSymbolicLink(source, destination);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destination).toBeASymbolicLink();
   });
   it('should return error for directory, file', async () => {
@@ -113,7 +113,7 @@ describe('ensureSymbolicLink', () => {
     await fs.mkdir(destination);
 
     const task = ensureSymbolicLink(source, destination);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         FileError({
           message: `Ensure path exists, expected 'symlink', got 'directory'`,

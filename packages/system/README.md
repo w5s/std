@@ -33,7 +33,7 @@ export function program(): Task<void, never> {
   return handledTask;
 }
 
-Task.unsafeRun(program());
+Task.run(program());
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

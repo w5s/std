@@ -18,20 +18,20 @@ describe('executeQuery', () => {
 
   it('should forward query execution to environment', async () => {
     const client = createClient();
-    await Task.unsafeRun(executeQuery(client, anyQuery));
+    await Task.run(executeQuery(client, anyQuery));
     expect(client.mockExecuteQuery).toHaveBeenCalledWith(anyQuery);
   });
 
   it('should return Result.Ok of environment.executeQuery if promise resolved', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockResolvedValue('TestReturn');
-    await expect(Task.unsafeRun(executeQuery(client, anyQuery))).resolves.toEqual(Result.Ok('TestReturn'));
+    await expect(Task.run(executeQuery(client, anyQuery))).resolves.toEqual(Result.Ok('TestReturn'));
   });
 
   it('should return Result.Error of environment.executeQuery if promise rejected', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockRejectedValue('MockClientError');
-    await expect(Task.unsafeRun(executeQuery(client, anyQuery))).resolves.toEqual(
+    await expect(Task.run(executeQuery(client, anyQuery))).resolves.toEqual(
       Result.Error(DatabaseError({ cause: 'MockClientError' })),
     );
   });
@@ -39,7 +39,7 @@ describe('executeQuery', () => {
   it('should convert to sql statement', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockResolvedValue(() => []);
-    await Task.unsafeRun(executeQuery(client, SQLQuery.CreateSchema({ schemaName: 'test' })));
+    await Task.run(executeQuery(client, SQLQuery.CreateSchema({ schemaName: 'test' })));
     expect(client.mockExecuteQuery).toHaveBeenLastCalledWith(sql`CREATE SCHEMA test`);
   });
 });

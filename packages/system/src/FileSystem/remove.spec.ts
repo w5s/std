@@ -10,7 +10,7 @@ describe('remove', () => {
     const removeMocked = vi.spyOn(Internal.FS, 'rm').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('anyPath'), { recursive: true }] as const;
     const task = remove(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     expect(removeMocked).toHaveBeenCalledWith(...args);
   });
 });

@@ -8,7 +8,7 @@ import { type RandomGenerator, randomGenerator } from './randomGenerator.js';
  * @example
  * ```typescript
  * const next = randomBoolean(0.7);
- * Task.unsafeRun(next);// Result.Ok(true|false);
+ * Task.run(next);// Result.Ok(true|false);
  * ```
  * @param trueWeight - the probability to obtain true
  * @param generator - a custom optional random number generator

@@ -42,7 +42,7 @@ export function main() {
   return withTimeout;
 }
 
-void Task.unsafeRun(main());
+void Task.run(main());
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

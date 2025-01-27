@@ -15,7 +15,7 @@ describe('readFileStatus', () => {
     const statMocked = vi.spyOn(Internal.FS, 'stat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readFileStatus(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time.of(stats.atimeMs),
@@ -47,7 +47,7 @@ describe('readSymbolicLinkStatus', () => {
     const lstatMocked = vi.spyOn(Internal.FS, 'lstat').mockImplementation(() => Promise.resolve(stats));
     const args = [FilePath('path')] as const;
     const task = readSymbolicLinkStatus(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Ok(
         FileStatus({
           accessTime: Time.of(stats.atimeMs),

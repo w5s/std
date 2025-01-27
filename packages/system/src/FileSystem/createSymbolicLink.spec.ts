@@ -10,7 +10,7 @@ describe('createSymbolicLink', () => {
     const symlinkMocked = vi.spyOn(Internal.FS, 'symlink').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('target'), FilePath('path')] as const;
     const task = createSymbolicLink(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     expect(symlinkMocked).toHaveBeenCalledWith(...args);
   });
 });

@@ -18,9 +18,9 @@ export interface AbortOptions {
  * const someTask: Task<Value, Error> = //...;
  * const someTaskAbortable = abortable(someTask, controller); // Task<Value, Error | AbortError>
  * const abortSomeTask = abort(controller); // Task<void, never> that will abort someTask
- * const promise = Task.unsafeRun(someTaskAbortable); // Starts execution
+ * const promise = Task.run(someTaskAbortable); // Starts execution
  *
- * Task.unsafeRun(abortSomeTask); // This will reject promise with AbortError()
+ * Task.run(abortSomeTask); // This will reject promise with AbortError()
  * ```
  * @param task
  * @param options

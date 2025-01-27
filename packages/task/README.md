@@ -46,7 +46,7 @@ export function main() {
 }
 
 // runTask is impure and should be put at the edge of the program
-void Task.unsafeRun(main()); // prints { _: 'Result/Ok', value: 3.1 }
+void Task.run(main()); // prints { _: 'Result/Ok', value: 3.1 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 

@@ -8,7 +8,7 @@ import { from } from './from.js';
  * @example
  * ```typescript
  * const task = Task.reject(1);
- * const result = Task.unsafeRun(task);// Result.Error(1)
+ * const result = Task.run(task);// Result.Error(1)
  * ```
  * @category Constructor
  */

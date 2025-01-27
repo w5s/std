@@ -1,14 +1,14 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Result } from '@w5s/core';
-import { Task } from '@w5s/task';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { now } from './now.js';
 
 describe(now, () => {
+  const expectTask = withTask(expect);
   const dateNowSpy = vi.spyOn(Date, 'now');
 
   it('should return Date.now()', async () => {
     const nowMs = 123;
     dateNowSpy.mockReturnValue(nowMs);
-    expect(Task.unsafeRun(now())).toEqual(Result.Ok(nowMs));
+    expectTask(now()).toResolveSync(nowMs);
   });
 });

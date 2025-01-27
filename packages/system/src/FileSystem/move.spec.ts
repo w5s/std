@@ -24,7 +24,7 @@ describe('move', () => {
     const destDir = fs.path('dest');
 
     const task = move(srcDir, destDir);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         FileError({
           fileErrorType: 'UserError',
@@ -43,7 +43,7 @@ describe('move', () => {
     await fs.mkdir(srcDir);
 
     const task = move(srcDir, destDir);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destDir).toExist();
   });
 
@@ -53,7 +53,7 @@ describe('move', () => {
     await fs.mkdir(srcDir);
 
     const task = move(srcDir, destDir, { overwrite: true });
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
     await expectFile(destDir).toExist();
   });
 
@@ -62,7 +62,7 @@ describe('move', () => {
     const destFile = fs.path('dest', 'test.txt');
 
     const task = move(srcFile, destFile);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(
+    await expect(Task.run(task)).resolves.toEqual(
       Result.Error(
         FileError({
           fileErrorType: 'UserError',
@@ -88,7 +88,7 @@ describe('move', () => {
 
     // move it without override
     const taskFail = move(srcFile, destFile);
-    await expect(Task.unsafeRun(taskFail)).resolves.toEqual(
+    await expect(Task.run(taskFail)).resolves.toEqual(
       Result.Error(
         FileError({
           fileErrorType: 'UserError',
@@ -103,7 +103,7 @@ describe('move', () => {
 
     // move again with overwrite
     const task = move(srcFile, destFile, { overwrite: true });
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destFile).toExist();
@@ -121,7 +121,7 @@ describe('move', () => {
     await nodeFS.promises.writeFile(srcFile, 'src');
 
     const task = move(srcDir, destDir);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destDir).toExist();
@@ -140,7 +140,7 @@ describe('move', () => {
     await Promise.all([nodeFS.promises.writeFile(srcFile, 'src'), nodeFS.promises.writeFile(destFile, 'dest')]);
 
     const task = move(srcDir, destDir, { overwrite: true });
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(undefined));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
 
     await expectFile(srcDir).not.toExist();
     await expectFile(destDir).toExist();
@@ -153,7 +153,7 @@ describe('move', () => {
     const destDir = fs.path('src', 'sub');
     await fs.mkdir(destDir);
 
-    await expect(Task.unsafeRun(move(srcDir, destDir))).resolves.toEqual(
+    await expect(Task.run(move(srcDir, destDir))).resolves.toEqual(
       Result.Error(
         FileError({
           fileErrorType: 'UserError',

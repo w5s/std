@@ -12,7 +12,7 @@ describe('readSymbolicLink', () => {
       .mockImplementation(() => Promise.resolve(FilePath('path')));
     const args = [FilePath('target'), { encoding: 'utf8' }] as const;
     const task = readSymbolicLink(...args);
-    await expect(Task.unsafeRun(task)).resolves.toEqual(Result.Ok(FilePath('path')));
+    await expect(Task.run(task)).resolves.toEqual(Result.Ok(FilePath('path')));
     expect(readLinkMocked).toHaveBeenCalledWith(...args);
   });
 });

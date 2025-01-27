@@ -14,7 +14,7 @@ vi.mock('node:crypto', async () => ({
 describe(randomUUID, () => {
   const expectTask = withTask(expect);
   it('should return a valid UUID', async () => {
-    const uuidResult = Result.getOrThrow(await Task.unsafeRun(randomUUID()));
+    const uuidResult = Result.getOrThrow(await Task.run(randomUUID()));
     expect(UUID.hasInstance(uuidResult)).toBe(true);
   });
   it.runIf(globalThis.crypto)('should use globalThis.crypto.randomUUID', async () => {

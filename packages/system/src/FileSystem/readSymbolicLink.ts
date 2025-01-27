@@ -10,7 +10,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```typescript
  * const task = readSymbolicLink(FilePath('/path/to/symlink'));
- * await Task.unsafeRun(task); // Result.Ok(FilePath('...'))
+ * await Task.run(task); // Result.Ok(FilePath('...'))
  * ```
  * @param path - The path to the file.
  * @param options - The options to use.

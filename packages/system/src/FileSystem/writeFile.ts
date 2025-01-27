@@ -12,7 +12,7 @@ import type { FilePath } from '../FilePath.js';
  * @example
  * ```typescript
  * const write = writeFile(FilePath('my/file'), 'my content');
- * Task.unsafeRun(write);
+ * Task.run(write);
  * ```
  * @param file - Path to the file to be read.
  * @param data - The buffer that the data will be appended to.

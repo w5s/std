@@ -6,7 +6,7 @@ import { write } from './write.js';
  *
  * @example
  * ```typescript
- * Task.unsafeRun(Console.warn('Hello', 'World !'));// > Hello World !
+ * Task.run(Console.warn('Hello', 'World !'));// > Hello World !
  * ```
  * @param parameters - an array of values to be logged
  */

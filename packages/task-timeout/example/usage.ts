@@ -20,4 +20,4 @@ export function main() {
   return withTimeout;
 }
 
-void Task.unsafeRun(main());
+void Task.run(main());

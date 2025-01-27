@@ -12,13 +12,13 @@ import { from } from './from.js';
  *   Task.resolve(1),
  *   Task.resolve(2),
  * ]);
- * const successResult = Task.unsafeRun(success);// Result.Ok([1, 2])
+ * const successResult = Task.run(success);// Result.Ok([1, 2])
  *
  * const failure = Task.all([
  *   Task.resolve(1),
  *   Task.reject('error'),
  * ]);
- * const failureResult = Task.unsafeRun(failure);// Result.Error('error')
+ * const failureResult = Task.run(failure);// Result.Error('error')
  * ```
  * @param tasks - tasks to be run in parallel
  */

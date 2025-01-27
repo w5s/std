@@ -18,7 +18,7 @@ describe('.delay', () => {
     const task = delay(anyDuration);
     expect(setTimeoutSpy).toHaveBeenCalledTimes(0);
 
-    const promise = Task.unsafeRun(task);
+    const promise = Task.run(task);
     expect(setTimeoutSpy).toHaveBeenCalledTimes(1);
     expect(setTimeoutSpy).toHaveBeenLastCalledWith(expect.any(Function), anyDuration);
     vi.runAllTimers();

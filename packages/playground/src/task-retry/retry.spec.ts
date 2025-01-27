@@ -50,7 +50,7 @@ describe('RetryPolicy', () => {
     const values = [];
     const unsafeState = (task: Task<Option<RetryState>, never>): Option<RetryState> =>
       // @ts-ignore - we suppose it sync
-      Result.get(Task.unsafeRun(task));
+      Result.get(Task.run(task));
     for (let index = 0; index < limit; index += 1) {
       if (Option.isNone(currentState)) {
         break;

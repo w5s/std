@@ -7,7 +7,7 @@ import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
  * @example
  * ```typescript
  * const controller = new AbortController();
- * const abortTask = abort(controller); // Task.unsafeRun(abortTask) will actually run abort
+ * const abortTask = abort(controller); // Task.run(abortTask) will actually run abort
  * ```
  * @param controller
  */
