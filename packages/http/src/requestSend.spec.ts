@@ -138,7 +138,7 @@ describe(requestSend, () => {
       method: 'GET',
     };
     const task = requestSend(clientCustom, request);
-    await Task.run(task);
+    await expectTask(task).toResolveAsync(expect.any(Object));
     expect(globalFetchMock).toHaveBeenLastCalledWith('http://localhost#custom', {
       method: 'GET',
       signal: expect.any(Object),

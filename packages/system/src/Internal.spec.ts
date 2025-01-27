@@ -1,10 +1,12 @@
-import { Option, Result } from '@w5s/core';
-import { Task } from '@w5s/task';
+import { Option } from '@w5s/core';
 import { describe, it, expect } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { FileError } from './FileError.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';
 import { anyErrnoException, anyError, anyPath } from './_test/config.js';
+
+const expectTask = withTask(expect);
 
 describe('ErrnoException', () => {
   describe('.hasInstance', () => {
@@ -51,7 +53,7 @@ describe('errnoTask', () => {
     const transformed = errnoTask(original);
 
     const task = transformed();
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(true));
+    await expectTask(task).toResolveAsync(true);
   });
   it('should transform thrown error with errnoExceptionHandler', async () => {
     const original = async () => {
@@ -60,7 +62,7 @@ describe('errnoTask', () => {
     const transformed = errnoTask(original);
 
     const task = transformed();
-    await expect(Task.run(task)).resolves.toEqual(Result.Error(errnoExceptionHandler(anyError)));
+    await expectTask(task).toRejectAsync(errnoExceptionHandler(anyError));
   });
 });
 describe('errnoTaskSync', () => {
@@ -69,7 +71,7 @@ describe('errnoTaskSync', () => {
     const transformed = errnoTaskSync(original);
 
     const task = transformed();
-    expect(Task.run(task)).toEqual(Result.Ok(true));
+    expectTask(task).toResolveSync(true);
   });
   it('should transform thrown error with errnoExceptionHandler', () => {
     const original = () => {
@@ -78,6 +80,6 @@ describe('errnoTaskSync', () => {
     const transformed = errnoTaskSync(original);
 
     const task = transformed();
-    expect(Task.run(task)).toEqual(Result.Error(errnoExceptionHandler(anyError)));
+    expectTask(task).toRejectSync(errnoExceptionHandler(anyError));
   });
 });

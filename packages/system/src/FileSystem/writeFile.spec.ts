@@ -1,16 +1,18 @@
-import { Result } from '@w5s/core';
 import { Task, type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
 
-describe('writeFile', () => {
+describe(writeFile, () => {
+  const expectTask = withTask(expect);
+
   it('should call fs.promises.writeFile', async () => {
     const writeFileMocked = vi.spyOn(Internal.FS, 'writeFile').mockImplementation(() => Promise.resolve(undefined));
     const args = [FilePath('oldPath'), '', { encoding: 'utf8' }] as const;
     const task = writeFile(...args);
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
     expect(writeFileMocked).toHaveBeenCalledWith(
       FilePath('oldPath'),
       '',

@@ -1,12 +1,13 @@
 import * as nodeFS from 'node:fs';
-import { Result, Symbol } from '@w5s/core';
-import { Task } from '@w5s/task';
+import { Symbol } from '@w5s/core';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { fsStub, withFile } from '../Testing.js';
 import { FileError } from '../FileError.js';
 import { move } from './move.js';
 
 const expectFile = withFile(expect);
+const expectTask = withTask(expect);
 
 describe('move', () => {
   let fs = fsStub();
@@ -24,16 +25,14 @@ describe('move', () => {
     const destDir = fs.path('dest');
 
     const task = move(srcDir, destDir);
-    await expect(Task.run(task)).resolves.toEqual(
-      Result.Error(
-        FileError({
-          fileErrorType: 'UserError',
-          path: undefined,
-          errno: undefined,
-          code: undefined,
-          syscall: undefined,
-        }),
-      ),
+    await expectTask(task).toRejectAsync(
+      FileError({
+        fileErrorType: 'UserError',
+        path: undefined,
+        errno: undefined,
+        code: undefined,
+        syscall: undefined,
+      }),
     );
   });
 
@@ -43,7 +42,7 @@ describe('move', () => {
     await fs.mkdir(srcDir);
 
     const task = move(srcDir, destDir);
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
     await expectFile(destDir).toExist();
   });
 
@@ -53,7 +52,7 @@ describe('move', () => {
     await fs.mkdir(srcDir);
 
     const task = move(srcDir, destDir, { overwrite: true });
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
     await expectFile(destDir).toExist();
   });
 
@@ -62,16 +61,14 @@ describe('move', () => {
     const destFile = fs.path('dest', 'test.txt');
 
     const task = move(srcFile, destFile);
-    await expect(Task.run(task)).resolves.toEqual(
-      Result.Error(
-        FileError({
-          fileErrorType: 'UserError',
-          path: undefined,
-          errno: undefined,
-          code: undefined,
-          syscall: undefined,
-        }),
-      ),
+    await expectTask(task).toRejectAsync(
+      FileError({
+        fileErrorType: 'UserError',
+        path: undefined,
+        errno: undefined,
+        code: undefined,
+        syscall: undefined,
+      }),
     );
   });
 
@@ -88,22 +85,20 @@ describe('move', () => {
 
     // move it without override
     const taskFail = move(srcFile, destFile);
-    await expect(Task.run(taskFail)).resolves.toEqual(
-      Result.Error(
-        FileError({
-          fileErrorType: 'UserError',
-          path: undefined,
-          message: 'Destination already exists',
-          errno: undefined,
-          code: undefined,
-          syscall: undefined,
-        }),
-      ),
+    await expectTask(taskFail).toRejectAsync(
+      FileError({
+        fileErrorType: 'UserError',
+        path: undefined,
+        message: 'Destination already exists',
+        errno: undefined,
+        code: undefined,
+        syscall: undefined,
+      }),
     );
 
     // move again with overwrite
     const task = move(srcFile, destFile, { overwrite: true });
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destFile).toExist();
@@ -121,7 +116,7 @@ describe('move', () => {
     await nodeFS.promises.writeFile(srcFile, 'src');
 
     const task = move(srcDir, destDir);
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
 
     await expectFile(srcFile).not.toExist();
     await expectFile(destDir).toExist();
@@ -140,7 +135,7 @@ describe('move', () => {
     await Promise.all([nodeFS.promises.writeFile(srcFile, 'src'), nodeFS.promises.writeFile(destFile, 'dest')]);
 
     const task = move(srcDir, destDir, { overwrite: true });
-    await expect(Task.run(task)).resolves.toEqual(Result.Ok(undefined));
+    await expectTask(task).toResolveAsync(undefined);
 
     await expectFile(srcDir).not.toExist();
     await expectFile(destDir).toExist();
@@ -153,17 +148,15 @@ describe('move', () => {
     const destDir = fs.path('src', 'sub');
     await fs.mkdir(destDir);
 
-    await expect(Task.run(move(srcDir, destDir))).resolves.toEqual(
-      Result.Error(
-        FileError({
-          fileErrorType: 'UserError',
-          path: undefined,
-          message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
-          errno: undefined,
-          code: undefined,
-          syscall: undefined,
-        }),
-      ),
+    await expectTask(move(srcDir, destDir)).toRejectAsync(
+      FileError({
+        fileErrorType: 'UserError',
+        path: undefined,
+        message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
+        errno: undefined,
+        code: undefined,
+        syscall: undefined,
+      }),
     );
   });
 });

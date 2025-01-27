@@ -1,11 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Option, Ref, Result } from '@w5s/core';
+import { Option, Ref } from '@w5s/core';
 import { Task, type TaskLike } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { timeout } from './timeout.js';
 
 describe(timeout, () => {
+  const expectTask = withTask(expect);
   const anyDelay = TimeDuration.milliseconds(4);
   const anyValue = 'any_value';
   const anyError = 'any_error';
@@ -18,11 +20,11 @@ describe(timeout, () => {
   it('should resolve/reject the same value as task', async () => {
     const resolveNow = Task.resolve(anyValue);
     const resolved = timeout(resolveNow, anyDelay);
-    expect(Task.run(resolved)).toEqual(Result.Ok(anyValue));
+    expectTask(resolved).toResolveSync(anyValue);
 
     const rejectNow = Task.reject(anyError);
     const rejected = timeout(rejectNow, anyDelay);
-    expect(Task.run(rejected)).toEqual(Result.Error(anyError));
+    expectTask(rejected).toRejectSync(anyError);
   });
   it('should cancel task and setTimeout if task is canceled', async () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
@@ -54,12 +56,10 @@ describe(timeout, () => {
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(willCancel, anyDelay);
-    await expect(Task.run(task)).resolves.toEqual(
-      Result.Error(
-        TimeoutError({
-          message: `Task timed out after ${anyDelay}ms`,
-        }),
-      ),
+    await expectTask(task).toRejectAsync(
+      TimeoutError({
+        message: `Task timed out after ${anyDelay}ms`,
+      }),
     );
     expect(cancelerFn).toHaveBeenCalled();
   });
@@ -67,12 +67,12 @@ describe(timeout, () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
     const resolved = timeout(Task.resolve(anyValue), anyDelay);
-    await Task.run(resolved);
+    await expectTask(resolved).toResolve(anyValue);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
 
     clearTimeoutSpy.mockClear();
     const rejected = timeout(Task.reject(anyError), anyDelay);
-    await Task.run(rejected);
+    await expectTask(rejected).toReject(anyError);
     expect(clearTimeoutSpy).toHaveBeenCalledTimes(1);
   });
 });

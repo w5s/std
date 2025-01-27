@@ -1,13 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Result } from '@w5s/core';
-import { Task } from '@w5s/task';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { executeQuery } from './execute.js';
 import { DatabaseError } from './error.js';
 import { sql } from './sql.js';
 import { SQLQuery } from './query.js';
 import './driver/all.js';
 
-describe('executeQuery', () => {
+describe(executeQuery, () => {
+  const expectTask = withTask(expect);
   const anyQuery = sql`SELECT id from table`;
   const createClient = () =>
     ({
@@ -18,28 +18,27 @@ describe('executeQuery', () => {
 
   it('should forward query execution to environment', async () => {
     const client = createClient();
-    await Task.run(executeQuery(client, anyQuery));
+    await expectTask(executeQuery(client, anyQuery)).toRejectAsync(expect.any(Object));
     expect(client.mockExecuteQuery).toHaveBeenCalledWith(anyQuery);
   });
 
   it('should return Result.Ok of environment.executeQuery if promise resolved', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockResolvedValue('TestReturn');
-    await expect(Task.run(executeQuery(client, anyQuery))).resolves.toEqual(Result.Ok('TestReturn'));
+    await expectTask(executeQuery(client, anyQuery)).toResolveAsync('TestReturn');
   });
 
   it('should return Result.Error of environment.executeQuery if promise rejected', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockRejectedValue('MockClientError');
-    await expect(Task.run(executeQuery(client, anyQuery))).resolves.toEqual(
-      Result.Error(DatabaseError({ cause: 'MockClientError' })),
-    );
+    await expectTask(executeQuery(client, anyQuery)).toRejectAsync(DatabaseError({ cause: 'MockClientError' }));
   });
 
   it('should convert to sql statement', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockResolvedValue(() => []);
-    await Task.run(executeQuery(client, SQLQuery.CreateSchema({ schemaName: 'test' })));
+    const task = executeQuery(client, SQLQuery.CreateSchema({ schemaName: 'test' }));
+    await expectTask(task).toResolveAsync(expect.anything());
     expect(client.mockExecuteQuery).toHaveBeenLastCalledWith(sql`CREATE SCHEMA test`);
   });
 });

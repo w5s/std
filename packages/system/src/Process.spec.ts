@@ -1,13 +1,14 @@
-import { Result } from '@w5s/core';
-import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
+import { withTask } from '@w5s/task/dist/Testing.js';
 import { errnoExceptionHandler } from './Internal.js';
 import { FilePath } from './FilePath.js';
 import { Process } from './Process.js';
 import { anyErrnoException } from './_test/config.js';
 
 describe('Process', () => {
-  describe('.exit', () => {
+  const expectTask = withTask(expect);
+
+  describe(Process.exit, () => {
     it('should call process.exit', () => {
       const processExit = vi.spyOn(process, 'exit').mockImplementation(
         () =>
@@ -15,7 +16,7 @@ describe('Process', () => {
           undefined as never,
       );
       const exitTask = Process.exit(0);
-      expect(Task.run(exitTask)).toEqual(Result.Ok(undefined));
+      expectTask(exitTask).toResolveSync(undefined);
       expect(processExit).toHaveBeenCalledWith(0);
     });
   });
@@ -24,7 +25,7 @@ describe('Process', () => {
     it('should call process.cwd', () => {
       mocked.mockImplementation(() => FilePath('/my/dir'));
       const task = Process.getCurrentDirectory();
-      expect(Task.run(task)).toEqual(Result.Ok(FilePath('/my/dir')));
+      expectTask(task).toResolveSync(FilePath('/my/dir'));
       expect(mocked).toHaveBeenCalled();
     });
   });
@@ -33,7 +34,7 @@ describe('Process', () => {
     it('should call process.chdir', () => {
       mocked.mockImplementation(() => undefined);
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expect(Task.run(task)).toEqual(Result.Ok(undefined));
+      expectTask(task).toResolveSync(undefined);
       expect(mocked).toHaveBeenCalledWith('/my/dir');
     });
     it('should handle errors', () => {
@@ -41,7 +42,7 @@ describe('Process', () => {
         throw anyErrnoException;
       });
       const task = Process.setCurrentDirectory(FilePath('/my/dir'));
-      expect(Task.run(task)).toEqual(Result.Error(errnoExceptionHandler(anyErrnoException)));
+      expectTask(task).toRejectSync(errnoExceptionHandler(anyErrnoException));
     });
   });
 });
