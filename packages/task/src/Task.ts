@@ -16,6 +16,7 @@ import { hasInstance } from './Task/hasInstance.js';
 import { run } from './Task/run.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
+import { ignore } from './Task/ignore.js';
 
 /**
  * Interface used to cancel running task
@@ -88,6 +89,7 @@ export const Task = {
   create,
   from,
   hasInstance,
+  ignore,
   map,
   mapError,
   mapResult,
