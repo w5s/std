@@ -108,6 +108,18 @@ export interface Comparable<T> extends Equal<T> {
    * @category Comparator
    */
   max(this: void, left: T, right: T): T;
+  /**
+   * Clamp value between minValue and maxValue
+   *
+   * @example
+   * ```typescript
+   * type T;
+   * const TCompare: Comparable<T>;
+   * TCompare.clamp(value, min, max); // min if value < min, max if value > max, otherwise value itself
+   * ```
+   * @category Comparator
+   */
+  clamp(this: void, value: T, minValue: T, maxValue: T): T;
 }
 
 /**
@@ -129,6 +141,8 @@ export interface Comparable<T> extends Equal<T> {
 export function Comparable<T>(properties: { compare: (left: T, right: T) => number }): Comparable<T> {
   const { compare } = properties;
   const equals = (left: T, right: T) => compare(left, right) === 0;
+  const min = (left: T, right: T) => (compare(left, right) <= 0 ? left : right);
+  const max = (left: T, right: T) => (compare(left, right) > 0 ? left : right);
   return {
     compare,
     equals,
@@ -138,7 +152,8 @@ export function Comparable<T>(properties: { compare: (left: T, right: T) => numb
     '<=': (left: T, right: T) => compare(left, right) <= 0,
     '>': (left: T, right: T) => compare(left, right) > 0,
     '>=': (left: T, right: T) => compare(left, right) >= 0,
-    min: (left: T, right: T) => (compare(left, right) <= 0 ? left : right),
-    max: (left: T, right: T) => (compare(left, right) > 0 ? left : right),
+    min,
+    max,
+    clamp: (value, minValue, maxValue) => min(max(value, minValue), maxValue),
   };
 }

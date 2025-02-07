@@ -104,4 +104,13 @@ describe('Comparable', () => {
       expect(NumWithCompare.max(left, right)).toBe(expected);
     });
   });
+  describe('clamp', () => {
+    it.each([
+      [0, 0, 0, 0],
+      [1, 2, 3, 2],
+      [3, 2, 1, 2],
+    ])('should return a clamped value', (value, min, max, expected) => {
+      expect(NumWithCompare.clamp(value, min, max)).toBe(expected);
+    });
+  });
 });
