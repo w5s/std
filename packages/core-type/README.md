@@ -19,7 +19,7 @@ npm install @w5s/core-type
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import type { Nullable } from '@w5s/core-type';
 
 export function someFunction(_input: Nullable<number>) {}

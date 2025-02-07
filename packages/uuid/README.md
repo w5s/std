@@ -17,7 +17,7 @@ npm install @w5s/uuid
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { randomUUID } from '@w5s/uuid';
 import { Task } from '@w5s/task';
 

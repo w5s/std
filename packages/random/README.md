@@ -17,7 +17,7 @@ npm install @w5s/random
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { randomNumber } from '@w5s/random';
 import { Task } from '@w5s/task';
 

@@ -18,7 +18,7 @@ npm install @w5s/http
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
 import { Type } from '@w5s/core';
 import { Task } from '@w5s/task';

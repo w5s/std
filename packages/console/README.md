@@ -17,7 +17,7 @@ npm install @w5s/console
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { Console } from '@w5s/console';
 import { Task } from '@w5s/task';
 

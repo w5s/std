@@ -17,7 +17,7 @@ npm install @w5s/database
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { sql, executeQuery, type Database } from '@w5s/database';
 import { Task } from '@w5s/task';
 

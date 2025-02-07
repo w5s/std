@@ -35,7 +35,7 @@ npm install @w5s/core
 
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
-```typescript
+```ts
 import { Result } from '@w5s/core';
 
 function parseNumber(expr: string) {
