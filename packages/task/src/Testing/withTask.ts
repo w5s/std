@@ -1,6 +1,6 @@
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
 import type { ExpectFunction } from '@w5s/core-type';
+import { error as Error } from '../Task/error.js';
+import { ok } from '../Task/ok.js';
 import type { TaskLike } from '../Task.js';
 import { run } from '../Task/run.js';
 
@@ -79,54 +79,54 @@ export function withTask(expectFn: ExpectFunction) {
       const getResult = async () => run(task);
       const expectValue = expectFn(getResult()).resolves;
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
+      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
     },
     async toResolveAsync(value: V) {
       const result = run(task);
       const expectValue = expectFn(result).resolves;
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
+      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
     },
     toResolveSync(value: V) {
       const result = run(task);
       const expectValue = expectFn(result);
 
-      (isNot ? expectValue.not : expectValue).toEqual(Ok(value));
+      (isNot ? expectValue.not : expectValue).toEqual(ok(value));
     },
-    async toReject(error: E) {
+    async toReject(error_: E) {
       const getResult = async () => run(task);
       const expectValue = expectFn(getResult()).resolves;
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+      await (isNot ? expectValue.not : expectValue).toEqual(Error(error_));
     },
-    async toRejectAsync(error: E) {
+    async toRejectAsync(error_: E) {
       const result = run(task);
       const expectValue = expectFn(result).resolves; // The promise should be resolved with a Result.Error()
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+      await (isNot ? expectValue.not : expectValue).toEqual(Error(error_));
     },
-    toRejectSync(error: E) {
+    toRejectSync(error_: E) {
       const result = run(task);
       const expectValue = expectFn(result);
 
-      (isNot ? expectValue.not : expectValue).toEqual(Error(error));
+      (isNot ? expectValue.not : expectValue).toEqual(Error(error_));
     },
-    async toThrow(error: unknown) {
+    async toThrow(error_: unknown) {
       const getResult = async () => run(task);
       const expectValue = expectFn(getResult()).rejects;
 
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(error);
+      await (isNot ? expectValue.not : expectValue).toEqual(error_);
     },
-    toThrowSync(error: unknown) {
+    toThrowSync(error_: unknown) {
       const expectValue = expectFn(() => run(task));
-      (isNot ? expectValue.not : expectValue).toThrow(error);
+      (isNot ? expectValue.not : expectValue).toThrow(error_);
     },
-    async toThrowAsync(error: unknown) {
+    async toThrowAsync(error_: unknown) {
       const expectValue = expectFn(run(task)).rejects;
 
       // eslint-disable-next-line @typescript-eslint/await-thenable
-      await (isNot ? expectValue.not : expectValue).toEqual(error);
+      await (isNot ? expectValue.not : expectValue).toEqual(error_);
     },
   });
 

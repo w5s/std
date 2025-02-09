@@ -1,8 +1,8 @@
 import type { Awaitable } from '@w5s/async';
 import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '@w5s/core/dist/Result.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
+import { ok } from './ok.js';
+import { error } from './error.js';
 import type { Task, TaskCanceler, TaskLike } from '../Task.js';
 import { from } from './from.js';
 
@@ -23,17 +23,11 @@ export function create<Value, Error = never>(
     /**
      * Return a new ok object
      */
-    ok: {
-      (): Result<void, never>;
-      <VV>(value: VV): Result<VV, never>;
-    };
+    ok: typeof ok;
     /**
      * Return a new error object
      */
-    error: {
-      (): Result<never, void>;
-      <EE>(errorValue: EE): Result<never, EE>;
-    };
+    error: typeof error;
     /**
      * Canceler
      */
@@ -49,8 +43,8 @@ export function create<Value, Error = never>(
     return tryCall(
       () =>
         sideEffect({
-          ok: Ok,
-          error: Error,
+          ok,
+          error,
           canceler,
           run: (task) => run(task, canceler),
         }),

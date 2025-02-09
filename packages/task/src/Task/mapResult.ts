@@ -1,6 +1,6 @@
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import type { Result } from '@w5s/core';
+import { error } from './error.js';
+import { ok } from './ok.js';
 import type { Task, TaskLike, TaskParameters } from '../Task.js';
 import { from } from './from.js';
 
@@ -27,8 +27,8 @@ export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   return from((parameters) =>
     task.taskRun({
       ...parameters,
-      reject: (error) => complete(parameters, mapFn(Error(error))),
-      resolve: (value) => complete(parameters, mapFn(Ok(value))),
+      reject: (error_) => complete(parameters, mapFn(error(error_))),
+      resolve: (value) => complete(parameters, mapFn(ok(value))),
     }),
   );
 }
