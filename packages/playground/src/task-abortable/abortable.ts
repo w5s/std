@@ -36,9 +36,9 @@ export function abortable<Value, Error>(
     };
     if (signal.aborted) {
       doAbort();
-    } else {
-      signal.addEventListener('abort', doAbort);
-      task.taskRun(parameters);
+      return undefined;
     }
+    signal.addEventListener('abort', doAbort);
+    return task.taskRun(parameters);
   });
 }

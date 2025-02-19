@@ -28,4 +28,14 @@ describe(abortable, () => {
     const abortTask = abortable(task, abortController);
     expectTask(abortTask).toRejectSync(AbortError());
   });
+  it('handles rejected task', async () => {
+    const error = new Error('MockError');
+    const task = FakeTask({
+      delayMs: 1,
+      throwError: new Error('MockError'),
+    });
+    const abortController = new AbortController();
+    const abortTask = abortable(task, abortController);
+    await expectTask(abortTask).toThrowAsync(error);
+  });
 });
