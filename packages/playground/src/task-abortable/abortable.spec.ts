@@ -18,4 +18,14 @@ describe(abortable, () => {
     abortController.abort();
     await expectation;
   });
+  it('handles already aborted', async () => {
+    const task = FakeTask({
+      delayMs: 1,
+      value: 'my value',
+    });
+    const abortController = new AbortController();
+    abortController.abort();
+    const abortTask = abortable(task, abortController);
+    expectTask(abortTask).toRejectSync(AbortError());
+  });
 });

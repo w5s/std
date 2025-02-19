@@ -15,12 +15,10 @@ export interface AbortOptions {
  * @example
  * ```typescript
  * const controller = new AbortController();
- * const someTask: Task<Value, Error> = //...;
- * const someTaskAbortable = abortable(someTask, controller); // Task<Value, Error | AbortError>
- * const abortSomeTask = abort(controller); // Task<void, never> that will abort someTask
+ * const someTaskAbortable = abortable(... as Task<Value, Error>, controller); // Task<Value, Error | AbortError>
  * const promise = Task.run(someTaskAbortable); // Starts execution
  *
- * Task.run(abortSomeTask); // This will reject promise with AbortError()
+ * Task.run(abort(controller)); // This will reject promise with AbortError()
  * ```
  * @param task
  * @param options
@@ -31,10 +29,16 @@ export function abortable<Value, Error>(
 ): Task<Value, Error | AbortError> {
   return from((parameters) => {
     const { reject, canceler } = parameters;
-    options.signal.addEventListener('abort', () => {
+    const { signal } = options;
+    const doAbort = () => {
       canceler.current?.();
       reject(AbortError());
-    });
-    task.taskRun(parameters);
+    };
+    if (signal.aborted) {
+      doAbort();
+    } else {
+      signal.addEventListener('abort', doAbort);
+      task.taskRun(parameters);
+    }
   });
 }
