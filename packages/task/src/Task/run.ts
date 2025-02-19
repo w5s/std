@@ -1,8 +1,8 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
 import type { Result } from '@w5s/core';
+import { error } from './error.js';
+import { ok } from './ok.js';
 import type { TaskCanceler, TaskLike } from '../Task.js';
 
 /**
@@ -27,15 +27,15 @@ export function run<Value, Error>(
   };
   let rejectHandler = (_error: unknown) => {};
   const runValue: Awaitable<void> = task.taskRun({
-    resolve: (value) => resolveHandler(Ok(value)),
-    reject: (error) => resolveHandler(Error(error)),
+    resolve: (value) => resolveHandler(ok(value)),
+    reject: (_error) => resolveHandler(error(_error)),
     canceler,
     run,
   });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
     // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return
-    runValue.then(undefined, (error) => rejectHandler(error));
+    runValue.then(undefined, (_error) => rejectHandler(_error));
   }
   if (returnValue === undefined) {
     // eslint-disable-next-line promise/param-names
