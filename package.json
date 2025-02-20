@@ -97,7 +97,7 @@
     "@size-limit/preset-small-lib": "11.2.0",
     "@types/node": "20.17.19",
     "@w5s/commitlint-config": "2.1.8",
-    "@w5s/conventional-changelog": "2.2.0",
+    "@w5s/conventional-changelog": "2.2.1",
     "@w5s/cspell-config": "2.3.19",
     "@w5s/eslint-config": "2.4.1",
     "@w5s/ts-config": "2.3.1",
