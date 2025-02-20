@@ -6668,18 +6668,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.1.7":
-  version: 2.1.7
-  resolution: "@w5s/commitlint-config@npm:2.1.7"
+"@w5s/commitlint-config@npm:2.1.8":
+  version: 2.1.8
+  resolution: "@w5s/commitlint-config@npm:2.1.8"
   dependencies:
     "@commitlint/types": "npm:^19.0.0"
-    "@w5s/conventional-changelog": "npm:^2.2.0"
+    "@w5s/conventional-changelog": "npm:^2.2.1"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/56274d06b0046d9e17f835d8544ba950e397de43f163aaddbbd26260efd67e845b16164a71aba183d7f136066d69c89bc36ba375e14f7d8300ecf8dce59d503e
+  checksum: 10c0/04f1ee96c34270cf57f217b1a51be0d1cc37162c653fc110d45a3e6ad99b6f6713bfa743497b9e1a5077ca6b48b08969424f97655af983f6ea4574a4d6a54d90
   languageName: node
   linkType: hard
 
@@ -6696,7 +6696,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/conventional-changelog@npm:2.2.0, @w5s/conventional-changelog@npm:^2.2.0":
+"@w5s/conventional-changelog@npm:2.2.0":
   version: 2.2.0
   resolution: "@w5s/conventional-changelog@npm:2.2.0"
   dependencies:
@@ -6707,6 +6707,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@w5s/conventional-changelog@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "@w5s/conventional-changelog@npm:2.2.1"
+  dependencies:
+    "@commitlint/types": "npm:^19.0.0"
+    emoji-regex: "npm:^10.2.1"
+    gitmojis: "npm:^3.13.4"
+  checksum: 10c0/80f37b703a4c8272f3586ff83db69ad704a521fbdbeab4541bca411301e193e3d51d4bc8d1e6bb456e702071885ddf311cd37693225feb3a71326b524bf37f29
+  languageName: node
+  linkType: hard
+
 "@w5s/core-src@workspace:.":
   version: 0.0.0-use.local
   resolution: "@w5s/core-src@workspace:."
@@ -6714,7 +6725,7 @@ __metadata:
     "@lerna-lite/publish": "npm:3.12.1"
     "@size-limit/preset-small-lib": "npm:11.2.0"
     "@types/node": "npm:20.17.19"
-    "@w5s/commitlint-config": "npm:2.1.7"
+    "@w5s/commitlint-config": "npm:2.1.8"
     "@w5s/conventional-changelog": "npm:2.2.0"
     "@w5s/cspell-config": "npm:2.3.19"
     "@w5s/eslint-config": "npm:2.4.0"
