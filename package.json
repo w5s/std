@@ -102,7 +102,7 @@
     "@w5s/eslint-config": "2.4.1",
     "@w5s/ts-config": "2.3.1",
     "cspell": "8.17.5",
-    "eslint": "8.57.1",
+    "eslint": "9.21.0",
     "markdown-magic": "2.6.1",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "1.1.2",
