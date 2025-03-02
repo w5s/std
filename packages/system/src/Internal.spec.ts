@@ -4,7 +4,7 @@ import { withTask } from '@w5s/task/dist/Testing.js';
 import { FileError } from './FileError.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';
-import { anyErrnoException, anyError, anyPath } from './_test/config.js';
+import { anyErrnoException, anyError } from './_test/config.js';
 
 const expectTask = withTask(expect);
 
@@ -26,7 +26,7 @@ describe('errnoExceptionHandler', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
       FileError({
         fileErrorType: 'OtherError',
-        path: anyPath,
+        path: Option.None,
         cause: 'anything',
         syscall: Option.None,
         errno: Option.None,

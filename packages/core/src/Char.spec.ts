@@ -23,7 +23,7 @@ describe(Char, () => {
       expect(Char('a')).toBe('a');
       expect(() => {
         Char('ab');
-      }).toThrow(new Error('ab is not a valid Char'));
+      }).toThrow(new TypeError('ab is not a valid Char'));
     });
   });
 

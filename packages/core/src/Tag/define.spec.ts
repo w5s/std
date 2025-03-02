@@ -25,14 +25,14 @@ describe(define, () => {
       expect(() => {
         // @ts-expect-error Throw a type error
         PositiveNumber('any_string');
-      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
+      }).toThrow(new TypeError('any_string is not a valid PositiveNumber'));
     });
     it('should be callable', () => {
       expect(PositiveNumber[Callable.symbol](1)).toBe(1);
       expect(() => {
         // @ts-expect-error Throw a type error
         PositiveNumber[Callable.symbol]('any_string');
-      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
+      }).toThrow(new TypeError('any_string is not a valid PositiveNumber'));
     });
   });
   describe('#wrap', () => {
@@ -41,7 +41,7 @@ describe(define, () => {
       expect(() => {
         // @ts-expect-error Throw a type error
         PositiveNumber.wrap('any_string');
-      }).toThrow(new Error('any_string is not a valid PositiveNumber'));
+      }).toThrow(new TypeError('any_string is not a valid PositiveNumber'));
     });
   });
   describe('#unwrap', () => {
@@ -61,7 +61,7 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
-        Result.Error(CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid' })),
+        Result.Error(CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid_value' })),
       );
       expect(Codec.decode(PositiveNumber, undefined)).toEqual(
         Result.Error(CodecError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),

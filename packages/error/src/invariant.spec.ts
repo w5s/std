@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { invariant } from './invariant.js';
+import { InvariantError } from './InvariantError.js';
 
 describe('invariant', () => {
   const getThrownError = (fn: () => void) => {
@@ -16,8 +17,7 @@ describe('invariant', () => {
     expect(invariant(true)).toBe(undefined);
   });
   it('should throw error if false as first parameter', () => {
-    // eslint-disable-next-line unicorn/error-message
-    expect(() => invariant(false)).toThrow(new Error(''));
+    expect(() => invariant(false)).toThrow(InvariantError({ message: '' }));
   });
   it('should throw error an error with InvariantError as name', () => {
     expect(getThrownError(() => invariant(false))).toEqual(expect.objectContaining({ name: 'InvariantError' }));

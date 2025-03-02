@@ -13,7 +13,7 @@ describe(call, () => {
     expect(call('0.0000200')).toEqual(call(200n, 7));
     // expect(call('')).toEqual(BigDecimal.normalize(call(0n, 0)));
     // @ts-expect-error A is not valid
-    expect(() => call('A')).toThrow(new Error('A is not a valid BigDecimal'));
-    expect(() => call('1E5')).toThrow(new Error('1E5 is not a valid BigDecimal'));
+    expect(() => call('A')).toThrow(new TypeError('A is not a valid BigDecimal'));
+    expect(() => call('1E5')).toThrow(new TypeError('1E5 is not a valid BigDecimal'));
   });
 });

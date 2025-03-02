@@ -3,7 +3,6 @@ import { Symbol } from '@w5s/core';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { fsStub, withFile } from '../Testing.js';
-import { FileError } from '../FileError.js';
 import { move } from './move.js';
 
 const expectFile = withFile(expect);
@@ -26,12 +25,13 @@ describe('move', () => {
 
     const task = move(srcDir, destDir);
     await expectTask(task).toRejectAsync(
-      FileError({
-        fileErrorType: 'UserError',
-        path: undefined,
-        errno: undefined,
-        code: undefined,
-        syscall: undefined,
+      expect.objectContaining({
+        name: 'FileError',
+        fileErrorType: 'OtherError',
+        path: expect.any(String),
+        errno: -2,
+        code: 'ENOENT',
+        syscall: 'stat',
       }),
     );
   });
@@ -62,12 +62,13 @@ describe('move', () => {
 
     const task = move(srcFile, destFile);
     await expectTask(task).toRejectAsync(
-      FileError({
-        fileErrorType: 'UserError',
-        path: undefined,
-        errno: undefined,
-        code: undefined,
-        syscall: undefined,
+      expect.objectContaining({
+        name: 'FileError',
+        fileErrorType: 'OtherError',
+        path: expect.any(String),
+        errno: -2,
+        code: 'ENOENT',
+        syscall: 'stat',
       }),
     );
   });
@@ -86,9 +87,10 @@ describe('move', () => {
     // move it without override
     const taskFail = move(srcFile, destFile);
     await expectTask(taskFail).toRejectAsync(
-      FileError({
+      expect.objectContaining({
+        name: 'FileError',
         fileErrorType: 'UserError',
-        path: undefined,
+        path: expect.any(String),
         message: 'Destination already exists',
         errno: undefined,
         code: undefined,
@@ -149,9 +151,10 @@ describe('move', () => {
     await fs.mkdir(destDir);
 
     await expectTask(move(srcDir, destDir)).toRejectAsync(
-      FileError({
+      expect.objectContaining({
+        name: 'FileError',
         fileErrorType: 'UserError',
-        path: undefined,
+        path: expect.any(String),
         message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
         errno: undefined,
         code: undefined,

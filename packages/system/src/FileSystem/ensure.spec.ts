@@ -3,7 +3,6 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { fsStub, withFile } from '../Testing.js';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
-import { FileError } from '../FileError.js';
 
 const expectFile = withFile(expect);
 const expectTask = withTask(expect);
@@ -40,12 +39,13 @@ describe(ensureDirectory, () => {
 
     const task = ensureDirectory(ensured);
     await expectTask(task).toRejectAsync(
-      FileError({
+      expect.objectContaining({
+        name: 'FileError',
         message: `Ensure path exists, expected 'directory', got 'file'`,
-        fileErrorType: 'OtherError',
+        fileErrorType: 'UserError',
         errno: undefined,
         code: undefined,
-        path: undefined,
+        path: expect.any(String),
         syscall: undefined,
       }),
     );
@@ -74,12 +74,13 @@ describe(ensureFile, () => {
 
     const task = ensureFile(ensured);
     await expectTask(task).toRejectAsync(
-      FileError({
+      expect.objectContaining({
+        name: 'FileError',
         message: `Ensure path exists, expected 'file', got 'directory'`,
-        fileErrorType: 'OtherError',
+        fileErrorType: 'UserError',
         errno: undefined,
         code: undefined,
-        path: undefined,
+        path: expect.any(String),
         syscall: undefined,
       }),
     );
@@ -112,12 +113,13 @@ describe(ensureSymbolicLink, () => {
 
     const task = ensureSymbolicLink(source, destination);
     await expectTask(task).toRejectAsync(
-      FileError({
+      expect.objectContaining({
+        name: 'FileError',
         message: `Ensure path exists, expected 'symlink', got 'directory'`,
-        fileErrorType: 'OtherError',
+        fileErrorType: 'UserError',
         errno: undefined,
         code: undefined,
-        path: undefined,
+        path: expect.any(String),
         syscall: undefined,
       }),
     );

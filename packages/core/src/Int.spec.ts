@@ -46,7 +46,7 @@ describe('Int', () => {
       expect(Int(1)).toBe(1);
       expect(() => {
         Int(1.1);
-      }).toThrow(new Error('1.1 is not a valid Int'));
+      }).toThrow(new TypeError('1.1 is not a valid Int'));
     });
   });
 

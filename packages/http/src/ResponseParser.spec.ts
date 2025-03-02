@@ -116,7 +116,7 @@ describe('ResponseParser', () => {
       await expectTask(parser(response)).toRejectAsync(
         HTTPError.ParserError({
           message: 'Cannot parse response body',
-          cause: CodecError({ message: '', input: data }),
+          cause: CodecError({ message: 'Cannot decode true as string', input: true }),
         }),
       );
 

@@ -20,7 +20,7 @@ describe('URL', () => {
         Result.Error(
           CodecError({
             message: 'Cannot decode  as URL',
-            input: null,
+            input: '',
           }),
         ),
       ],
