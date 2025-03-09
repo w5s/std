@@ -20,16 +20,10 @@ npm install @w5s/task
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result } from '@w5s/core';
 import { Task } from '@w5s/task';
 
-function parseNumber(expr: string) {
-  const parsed = Number(expr);
-
-  // - Return a immutable Result object
-  // - Avoid throwing error because impure
-  // - Avoid using NaN because the error case is implicit in the typing
-  return Number.isNaN(parsed) ? Result.Ok(parsed) : Result.Error('NotANumber');
+function randomNumber() {
+  return Task.create(({ ok }) => ok(Math.random()));
 }
 
 function log(value: unknown) {
@@ -37,16 +31,18 @@ function log(value: unknown) {
   return Task.create(({ ok }) => ok(console.log(value)));
 }
 
+// This function returns a task that will do nothing until Task.run is called on it
 export function main() {
-  const parsed = parseNumber('1.1'); // Result.Ok(1.1)
-  const computed = Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
-
-  // Lazy operation that will display in console the computed result when evaluated
-  return log(computed);
+  // 1. Generate a random number
+  const randomValueTask = randomNumber();
+  // 2. Compute square value
+  const squareValueTask = Task.map(randomValueTask, (value) => value * value);
+  // 3. Log value in console
+  return Task.andThen(squareValueTask, log);
 }
 
 // runTask is impure and should be put at the edge of the program
-void Task.run(main()); // prints { _: 'Result/Ok', value: 3.1 }
+void Task.run(main()); // prints { _: 'Result/Ok', value: <random number> * <random number> }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
