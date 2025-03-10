@@ -117,9 +117,8 @@ describe(requestSend, () => {
     });
     const resolve = vi.fn();
     const reject = vi.fn();
-    const run = vi.fn();
     const canceler: TaskCanceler = { current: undefined };
-    task.taskRun({ resolve, reject, canceler, run });
+    Task.run(task, canceler);
     if (canceler.current != null) {
       canceler.current();
     }
