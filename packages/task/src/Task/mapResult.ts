@@ -25,8 +25,7 @@ export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   mapFn: (result: Result<ValueFrom, ErrorFrom>) => Result<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorTo> {
   return from((parameters) =>
-    task.taskRun({
-      ...parameters,
+    parameters.execute(task, {
       reject: (error_) => complete(parameters, mapFn(error(error_))),
       resolve: (value) => complete(parameters, mapFn(ok(value))),
     }),

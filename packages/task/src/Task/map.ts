@@ -17,5 +17,5 @@ export function map<ValueFrom, ErrorFrom, ValueTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => ValueTo,
 ): Task<ValueTo, ErrorFrom> {
-  return from((parameters) => task.taskRun({ ...parameters, resolve: (value) => parameters.resolve(fn(value)) }));
+  return from(({ execute, resolve, reject }) => execute(task, { resolve: (value) => resolve(fn(value)), reject }));
 }

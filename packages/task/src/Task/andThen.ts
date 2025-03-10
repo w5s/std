@@ -20,5 +20,10 @@ export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorFrom | ErrorTo> {
-  return from((parameters) => task.taskRun({ ...parameters, resolve: (value) => fn(value).taskRun(parameters) }));
+  return from((parameters) =>
+    parameters.execute(task, {
+      resolve: (value) => parameters.execute(fn(value), parameters),
+      reject: parameters.reject,
+    }),
+  );
 }

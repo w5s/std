@@ -17,5 +17,5 @@ export function mapError<ValueFrom, ErrorFrom, ErrorTo>(
   task: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => ErrorTo,
 ): Task<ValueFrom, ErrorTo> {
-  return from((parameters) => task.taskRun({ ...parameters, reject: (error) => parameters.reject(fn(error)) }));
+  return from(({ execute, reject, resolve }) => execute(task, { reject: (error) => reject(fn(error)), resolve }));
 }
