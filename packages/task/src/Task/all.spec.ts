@@ -1,9 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { Ref } from '@w5s/core';
 import { all } from './all.js';
+import { run as taskRun } from './run.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
-import { runReportTask } from './_stub.spec.js';
 
 describe(all, () => {
   const expectTask = withTask(expect);
@@ -52,13 +53,14 @@ describe(all, () => {
     });
 
     const allTask = all(taskData.map((_) => _.task));
-    const report = runReportTask(allTask);
-    report.cancelerRef.current();
+    const cancelerRef = Ref(() => {});
+    const result = taskRun(allTask, cancelerRef);
+    cancelerRef.current();
 
     taskData.forEach(({ canceler }) => {
       expect(canceler).toHaveBeenCalledTimes(1);
     });
-    await report.finished;
+    await result;
   });
   it('should resolve array of values', async () => {
     const allTask = all([

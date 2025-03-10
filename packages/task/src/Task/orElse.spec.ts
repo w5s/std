@@ -1,7 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
-import { allSyncCombination, runReportTask } from './_stub.spec.js';
+import { Ref } from '@w5s/core';
+import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { orElse } from './orElse.js';
+import { run } from './run.js';
 
 describe(orElse, () => {
   const anyError = Object.freeze({ message: 'error message' });
@@ -41,20 +43,21 @@ describe(orElse, () => {
     const thenTask = orElse(task, (_) => afterTask);
     vi.spyOn(task, 'taskRun');
     vi.spyOn(afterTask, 'taskRun');
-    const runReport = runReportTask(thenTask);
-    await runReport.finished;
+    const canceler = Ref(() => {});
+    const result = run(thenTask, canceler);
+    await result;
 
     expect(task.taskRun).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
-      canceler: runReport.cancelerRef,
-      run: runReport.run,
+      canceler,
+      execute: expect.any(Function),
     });
     expect(afterTask.taskRun).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
-      canceler: runReport.cancelerRef,
-      run: runReport.run,
+      canceler,
+      execute: expect.any(Function),
     });
   });
 });

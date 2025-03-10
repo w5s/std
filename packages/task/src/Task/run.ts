@@ -1,9 +1,10 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
+import { Ref } from '@w5s/core/dist/Ref.js';
 import { error } from './error.js';
 import { ok } from './ok.js';
-import type { TaskCanceler, TaskLike } from '../Task.js';
+import type { TaskCanceler, TaskLike, TaskParameters, TaskParametersOverrides } from '../Task.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -26,12 +27,29 @@ export function run<Value, Error>(
     returnValue = result;
   };
   let rejectHandler = (_error: unknown) => {};
-  const runValue: Awaitable<void> = task.taskRun({
-    resolve: (value) => resolveHandler(ok(value)),
-    reject: (_error) => resolveHandler(error(_error)),
-    canceler,
-    run,
-  });
+  const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskParameters<V, E> => {
+    const self: TaskParameters<V, E> = {
+      resolve: overrides.resolve,
+      reject: overrides.reject,
+      canceler: overrides.canceler ?? Ref(undefined),
+      execute: (subtask, subOverrides) =>
+        subtask.taskRun(
+          createParameters({
+            resolve: subOverrides.resolve,
+            reject: subOverrides.reject,
+            canceler: subOverrides.canceler ?? self.canceler,
+          }),
+        ),
+    };
+    return self;
+  };
+  const runValue: Awaitable<void> = task.taskRun(
+    createParameters({
+      resolve: (_value) => resolveHandler(ok(_value)),
+      reject: (_error) => resolveHandler(error(_error)),
+      canceler,
+    }),
+  );
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
     // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return

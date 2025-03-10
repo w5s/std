@@ -1,8 +1,9 @@
 import { describe, it, expect, vi } from 'vitest';
-import { allSyncCombination, runReportTask } from './_stub.spec.js';
+import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andRun } from './andRun.js';
 import { create } from './create.js';
+import { run } from './run.js';
 
 describe(andRun, () => {
   const anyValue = Object.freeze({ foo: true });
@@ -21,13 +22,13 @@ describe(andRun, () => {
     it('should call callback and run task', async () => {
       const taskCallback = create(({ ok }) => ok(anyOtherValue));
       const taskCallbackSpy = vi.spyOn(taskCallback, 'taskRun');
-      await runReportTask(andRun(task, () => taskCallback)).finished;
+      await run(andRun(task, () => taskCallback));
 
       expect(taskCallbackSpy).toHaveBeenCalled();
     });
     it('should call callback with task value', async () => {
       const callback = vi.fn(() => andTask);
-      await runReportTask(andRun(task, callback)).finished;
+      await run(andRun(task, callback));
 
       expect(callback).toHaveBeenCalledWith(anyValue);
     });

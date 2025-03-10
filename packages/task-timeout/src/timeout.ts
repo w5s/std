@@ -25,7 +25,7 @@ export function timeout<Value, Error>(
 ): Task<Value, TimeoutError | Error> {
   return delay == null
     ? from(task)
-    : from(({ resolve, reject, canceler, run }) => {
+    : from(({ resolve, reject, canceler, execute }) => {
         const taskCancelerRef: TaskCanceler = Ref(undefined);
         const taskCancel = () => {
           const { current } = taskCancelerRef;
@@ -50,7 +50,7 @@ export function timeout<Value, Error>(
           timeoutCancel();
         };
 
-        task.taskRun({
+        return execute(task, {
           resolve: (value) => {
             timeoutCancel();
             resolve(value);
@@ -60,7 +60,6 @@ export function timeout<Value, Error>(
             reject(error);
           },
           canceler: taskCancelerRef,
-          run,
         });
       });
 }

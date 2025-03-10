@@ -5,6 +5,7 @@ import { ok } from './ok.js';
 import { error } from './error.js';
 import type { Task, TaskCanceler, TaskLike } from '../Task.js';
 import { from } from './from.js';
+import { run } from './run.js';
 
 /**
  * Task constructor
@@ -38,7 +39,7 @@ export function create<Value, Error = never>(
     run: <V, E>(task: TaskLike<V, E>) => Awaitable<Result<V, E>>;
   }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
-  return from(({ resolve, reject, canceler, run }) => {
+  return from(({ resolve, reject, canceler }) => {
     canceler.current = undefined;
     return tryCall(
       () =>

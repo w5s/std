@@ -1,10 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { AggregateError } from '@w5s/error';
 import { assertType } from '@w5s/core-type';
+import { Ref } from '@w5s/core';
 import { any } from './any.js';
+import { run as taskRun } from './run.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
-import { runReportTask } from './_stub.spec.js';
 
 describe(any, () => {
   const expectTask = withTask(expect);
@@ -54,13 +55,14 @@ describe(any, () => {
     });
 
     const anyTask = any(taskData.map((_) => _.task));
-    const report = runReportTask(anyTask);
-    report.cancelerRef.current();
+    const cancelerRef = Ref(() => {});
+    const result = taskRun(anyTask, cancelerRef);
+    cancelerRef.current();
 
     taskData.forEach(({ canceler }) => {
       expect(canceler).toHaveBeenCalledTimes(1);
     });
-    await report.finished;
+    await result;
   });
   it('should reject an aggregate of errors', async () => {
     const anyTask = any([

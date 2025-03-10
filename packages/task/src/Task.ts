@@ -1,5 +1,6 @@
 import type { Awaitable } from '@w5s/async';
 import type { Option, Result, Ref } from '@w5s/core';
+import type { PartialKeys } from '@w5s/core-type';
 import { create } from './Task/create.js';
 import { resolve } from './Task/resolve.js';
 import { reject } from './Task/reject.js';
@@ -31,6 +32,9 @@ export type TaskRunner = <Value, Error>(
   canceler: TaskCanceler,
 ) => Awaitable<Result<Value, Error>>;
 
+export interface TaskParametersOverrides<Value, Error>
+  extends PartialKeys<Pick<TaskParameters<Value, Error>, 'resolve' | 'reject' | 'canceler'>, 'canceler'> {}
+
 /**
  * All context passed to task in order to execute
  */
@@ -48,9 +52,9 @@ export interface TaskParameters<Value, Error> {
    */
   readonly canceler: TaskCanceler;
   /**
-   * The runner function (to run sub tasks)
+   * The execute function to run task or subtask injecting parameters
    */
-  readonly run: TaskRunner;
+  readonly execute: <V, E>(task: TaskLike<V, E>, overrides: TaskParametersOverrides<V, E>) => Awaitable<void>;
 }
 
 /**

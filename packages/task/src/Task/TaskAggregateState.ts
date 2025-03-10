@@ -29,7 +29,7 @@ export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
   tasks: Array<TaskLike<Value, Error>>,
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
 ): TaskAggregateState<Value, Error, ReturnValue, ReturnError> {
-  const { run, reject, resolve } = taskParameters;
+  const { reject, resolve, execute } = taskParameters;
   const taskEntries = tasks.map((task) => ({ task, canceler: { current: undefined } }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
@@ -59,7 +59,7 @@ export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
     rejectTask: (error: Error, entry: TaskEntry<Value, Error>, index: number) => void,
   ) => {
     taskEntries.forEach((entry, index) => {
-      entry.task.taskRun({
+      execute(entry.task, {
         resolve: (value: Value) => {
           if (!isComplete()) {
             taskCompleted += 1;
@@ -73,7 +73,6 @@ export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
           }
         },
         canceler: entry.canceler,
-        run,
       });
     });
   };

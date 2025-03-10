@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
+import { Ref } from '@w5s/core';
 import { mapError } from './mapError.js';
 import { FakeTask, withTask } from '../Testing.js';
-import { runReportTask } from './_stub.spec.js';
+import { run } from './run.js';
 
 describe(mapError, () => {
   const anyError = Object.freeze({ message: 'error message' });
@@ -36,13 +37,15 @@ describe(mapError, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = mapError(task, (_) => _);
     vi.spyOn(task, 'taskRun');
-    const runReport = runReportTask(mapTask);
+    const canceler = Ref(() => {});
+    const result = run(mapTask, canceler);
+
     expect(task.taskRun).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
-      canceler: runReport.cancelerRef,
-      run: runReport.run,
+      canceler,
+      execute: expect.any(Function),
     });
-    await runReport.finished;
+    await result;
   });
 });

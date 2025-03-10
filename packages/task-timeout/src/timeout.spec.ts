@@ -30,7 +30,6 @@ describe(timeout, () => {
     const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
     clearTimeoutSpy.mockClear();
     const cancelerFn = vi.fn();
-    const run = vi.fn();
     const canceled = {
       taskRun: ({ canceler }) => {
         canceler.current = cancelerFn;
@@ -38,12 +37,7 @@ describe(timeout, () => {
     } satisfies TaskLike<any, any>;
     const task = timeout(canceled, anyDelay);
     const cancelerRef = Ref(cancelerFn);
-    task.taskRun({
-      resolve: () => {},
-      reject: () => {},
-      canceler: cancelerRef,
-      run,
-    });
+    Task.run(task, cancelerRef);
     cancelerRef.current();
     expect(cancelerFn).toHaveBeenCalled();
     expect(clearTimeoutSpy).toHaveBeenCalled();

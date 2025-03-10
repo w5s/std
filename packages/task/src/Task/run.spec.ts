@@ -40,7 +40,7 @@ describe(run, () => {
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,
-      run,
+      execute: expect.any(Function),
     });
   });
 });

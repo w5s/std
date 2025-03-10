@@ -1,30 +1,22 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Option, Result, Ref } from '@w5s/core';
+import { Option, Ref } from '@w5s/core';
 import { create } from './create.js';
-import { FakeTask } from '../Testing.js';
-import type { TaskLike } from '../Task.js';
+
+vi.mock('./run.js', async () => ({
+  run: vi.fn(),
+}));
 
 describe(create, () => {
-  const anyValue = Object.freeze({ foo: true });
   const anyCancelerRef = Ref(() => {});
-  const anyRunner = <V, E>(_task: TaskLike<V, E>) => Result.Ok() as Result<any, any>;
+  const anyExecute = vi.fn();
 
-  it('should forward run', () => {
-    const subtask = FakeTask({ value: anyValue });
-    const task = create(({ run }) => run(subtask));
-    const resolve = vi.fn();
-    const reject = vi.fn();
-    const run = vi.fn(anyRunner);
-    task.taskRun({ resolve, reject, canceler: anyCancelerRef, run });
-    expect(run).toHaveBeenCalledWith(subtask, anyCancelerRef);
-  });
   describe('sync', () => {
     it('should construct a success sync task', () => {
       const task = create(({ ok }) => ok('foo'));
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
+      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('foo');
     });
@@ -33,7 +25,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
+      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -42,7 +34,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
+      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(reject).toHaveBeenCalledTimes(1);
       expect(reject).toHaveBeenCalledWith('err');
     });
@@ -54,7 +46,7 @@ describe(create, () => {
         resolve: () => {},
         reject: () => {},
         canceler: ref,
-        run: anyRunner,
+        execute: anyExecute,
       });
       expect(Ref.read(ref)).toBe(Option.None);
     });
@@ -65,7 +57,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
+      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
     });
@@ -74,7 +66,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, run: anyRunner });
+      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -86,7 +78,7 @@ describe(create, () => {
         resolve: () => {},
         reject: () => {},
         canceler: ref,
-        run: anyRunner,
+        execute: anyExecute,
       });
       expect(Ref.read(ref)).toBe(Option.None);
     });
@@ -104,7 +96,7 @@ describe(create, () => {
         resolve: () => {},
         reject: () => {},
         canceler: ref,
-        run: anyRunner,
+        execute: anyExecute,
       });
       expect(Ref.read(ref)).toBe(Option.None);
     });
@@ -122,7 +114,7 @@ describe(create, () => {
         resolve: () => {},
         reject: () => {},
         canceler: ref,
-        run: anyRunner,
+        execute: anyExecute,
       });
       expect(Ref.read(ref)).toBe(cancelerFn);
     });
