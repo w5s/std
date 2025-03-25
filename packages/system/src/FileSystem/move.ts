@@ -6,6 +6,7 @@ import { FilePath } from '../FilePath.js';
 export async function moveAsync(source: FilePath, destination: FilePath, options?: move.Options): Promise<void> {
   const sourceStatus = await Internal.FS.stat(source);
   if (sourceStatus.isDirectory() && FilePath.isParentOf(source, destination)) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw subdirectoryError(source, destination);
   }
   const existResult = await existsAsync(destination);
@@ -13,6 +14,7 @@ export async function moveAsync(source: FilePath, destination: FilePath, options
     if (options?.overwrite === true) {
       await Internal.FS.rm(destination, { recursive: true });
     } else {
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw alreadyExistError(destination);
     }
   }
@@ -45,7 +47,7 @@ export namespace move {
 }
 
 function subdirectoryError(source: FilePath, destination: FilePath) {
-  return FileError({
+  return new FileError({
     fileErrorType: 'UserError',
     path: destination,
     message: `Cannot move '${source}' to a subdirectory of itself, '${destination}'.`,
@@ -56,7 +58,7 @@ function subdirectoryError(source: FilePath, destination: FilePath) {
 }
 
 function alreadyExistError(destination: FilePath) {
-  return FileError({
+  return new FileError({
     fileErrorType: 'UserError',
     message: 'Destination already exists',
     path: destination,

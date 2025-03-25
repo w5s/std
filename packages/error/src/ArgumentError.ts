@@ -1,18 +1,10 @@
-import { CustomError } from './CustomError.js';
+import { ErrorClass } from './ErrorClass.js';
 
 /**
+ * ArgumentError constructor.
  * An error when wrong argument is passed to a function
  */
-export interface ArgumentError
-  extends CustomError<{
-    name: 'ArgumentError';
-  }> {}
-/**
- * ArgumentError constructor
- *
- * @category Constructor
- */
-export const ArgumentError = CustomError.define<ArgumentError>({
+export class ArgumentError extends ErrorClass({
   errorName: 'ArgumentError',
   errorMessage: 'Some arguments are invalid or missing',
-});
+}) {}

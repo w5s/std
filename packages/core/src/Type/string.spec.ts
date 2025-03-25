@@ -18,8 +18,8 @@ describe('string', () => {
     decode: [
       ['', Result.Ok('')],
       ['hello world', Result.Ok('hello world')],
-      [undefined, Result.Error(CodecError({ message: 'Cannot decode undefined as string', input: undefined }))],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as string', input: null }))],
+      [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as string', input: undefined }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as string', input: null }))],
     ],
     schema: () => ({ type: 'string' }),
   });

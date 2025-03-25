@@ -1,11 +1,9 @@
-import { CustomError } from './CustomError.js';
+import { ErrorClass } from './ErrorClass.js';
 
 /**
  * Error that occurred during program execution
  */
-export interface RuntimeError extends CustomError<{ name: 'RuntimeError' }> {}
-
-export const RuntimeError = CustomError.define<RuntimeError>({
+export class RuntimeError extends ErrorClass({
   errorName: 'RuntimeError',
   errorMessage: 'An error occurred during program execution',
-});
+}) {}

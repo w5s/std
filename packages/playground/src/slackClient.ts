@@ -5,7 +5,7 @@ import { Client } from '@w5s/http/dist/Client.js';
 import { requestSend } from '@w5s/http/dist/requestSend.js';
 import { ResponseParser } from '@w5s/http/dist/ResponseParser.js';
 import { HTTPError } from '@w5s/http/dist/HTTPError.js';
-import { CustomError } from '@w5s/error/dist/CustomError.js';
+import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
 import { Tag } from '@w5s/core/dist/Tag.js';
 import { Enum } from '@w5s/core/dist/Enum.js';
 import { CodecError } from '@w5s/core/dist/CodecError.js';
@@ -81,8 +81,7 @@ export namespace Slack {
   });
   export type ErrorCode = Enum.ValueOf<typeof ErrorCode>;
 
-  export interface Error extends CustomError<{ name: 'SlackError'; slackErrorCode: ErrorCode }> {}
-  export const Error = CustomError.define<Error>({ errorName: 'SlackError' });
+  export class Error extends ErrorClass({ errorName: 'SlackError' })<{ slackErrorCode: ErrorCode }> {}
 
   function urlWithQuery(url: string, parameters: { [key: string]: string }) {
     const urlObject = new URL(url);
@@ -120,8 +119,8 @@ export namespace Slack {
         ? result.value.ok === true
           ? Ok(result.value as R)
           : result.value.ok === false
-            ? Err(Error({ message: 'Slack Error!', slackErrorCode: result.value.error }))
-            : Err(CodecError({ message: 'Decode Error!', input: result.value }))
+            ? Err(new Error({ message: 'Slack Error!', slackErrorCode: result.value.error }))
+            : Err(new CodecError({ message: 'Decode Error!', input: result.value }))
         : result,
     );
     return requestParsed;

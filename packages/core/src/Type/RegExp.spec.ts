@@ -21,8 +21,8 @@ describe('RegExp', () => {
       ['[a-z][A-Z]', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z][A-Z]/', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z]{2}/gi', Result.Ok(/[a-z]{2}/gi)],
-      [undefined, Result.Error(CodecError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as RegExp', input: null }))],
+      [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as RegExp', input: null }))],
     ],
     schema: () => ({ type: 'string', format: 'regex' }),
   });

@@ -32,12 +32,12 @@ describe(decodeByName, () => {
     await expectAsyncIterable(csvRecords).toHaveValues([
       Result.Ok({ column1: 'a1', column2: 'a2' }),
       Result.Ok({ column1: 'b1', column2: 'b2' }),
-      Result.Error(CSVError({ message: 'Cannot decode line number 2' })),
+      Result.Error(new CSVError({ message: 'Cannot decode line number 2' })),
     ]);
   });
 
   it('should throw an error for missing header', async () => {
     const input: string[] = [];
-    await expectTask(decodeByName(input)).toRejectAsync(CSVError({ message: 'No header found' }));
+    await expectTask(decodeByName(input)).toRejectAsync(new CSVError({ message: 'No header found' }));
   });
 });

@@ -17,7 +17,7 @@ function createOperator(combineFn: (leftAmount: Money['amount'], rightAmount: Mo
           }),
         )
       : Error(
-          ArgumentError({
+          new ArgumentError({
             message: `Incompatible currencies ${left.currency.code} and ${right.currency.code}`,
           }),
         );
@@ -30,7 +30,7 @@ export const MoneyNumeric = {
    * @example
    * ```typescript
    * Money['+'](EUR(1), EUR(2));// Result.Ok(EUR(1))
-   * Money['+'](EUR(1), USD(2));// Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
+   * Money['+'](EUR(1), USD(2));// Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
    * ```
    * @param left - Left operand money
    * @param right - Right operand money
@@ -43,7 +43,7 @@ export const MoneyNumeric = {
    * @example
    * ```typescript
    * Money['-'](EUR(2), EUR(1));// Result.Ok(EUR(1))
-   * Money['-'](EUR(1), USD(2));// Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
+   * Money['-'](EUR(1), USD(2));// Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
    * ```
    * @param left - Left operand money
    * @param right - Right operand money

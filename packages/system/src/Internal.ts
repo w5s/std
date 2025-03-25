@@ -26,7 +26,7 @@ export function errnoExceptionHandler(error: unknown): FileError {
   return FileError.hasInstance(error)
     ? error
     : ErrnoException.hasInstance(error)
-      ? FileError({
+      ? new FileError({
           fileErrorType: 'OtherError',
           path: error.path as FilePath,
           cause: error,
@@ -34,7 +34,7 @@ export function errnoExceptionHandler(error: unknown): FileError {
           errno: error.errno,
           code: error.code,
         })
-      : FileError({
+      : new FileError({
           fileErrorType: 'OtherError',
           path: undefined,
           cause: error,

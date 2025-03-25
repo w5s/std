@@ -7,7 +7,6 @@ describe('CustomError', () => {
   it('is an alias to functions', () => {
     expect({ ...CustomError }).toEqual(
       expect.objectContaining({
-        define: expect.any(Function),
         asString,
       }),
     );
@@ -85,6 +84,7 @@ describe('CustomError', () => {
         ].join('\n'),
       ],
     ])('should return correctly formatted string representation', (error, expected) => {
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       expect(String(error)).toEqual(expected);
     });
   });
@@ -96,7 +96,7 @@ describe('CustomError', () => {
         message: 'CustomMessage',
         cause: new Error('CauseMessage'),
       });
-      const lines = (error.stack ?? '').split('\n');
+      const lines = error.stack.split('\n');
 
       expect(lines[0]).toEqual('CustomError: CustomMessage');
 
@@ -123,99 +123,6 @@ describe('CustomError', () => {
       });
 
       expect(error.message).toStrictEqual('CustomMessage');
-    });
-  });
-
-  describe('define()', () => {
-    interface TestOptionalError extends CustomError<{ name: 'TestOptionalError'; email?: string }> {}
-    const TestOptionalError = CustomError.define<TestOptionalError>({
-      errorName: 'TestOptionalError',
-      errorMessage: 'test optional message',
-    });
-
-    interface TestError extends CustomError<{ name: 'TestError'; email: string }> {}
-    const TestError = CustomError.define<TestError>({
-      errorName: 'TestError',
-      errorMessage: 'test error message',
-    });
-
-    it('should create a new constructor', () => {
-      expect(TestOptionalError()).toEqual(
-        CustomError({
-          name: 'TestOptionalError',
-          message: 'test optional message',
-        }),
-      );
-      expect(TestOptionalError({})).toEqual(
-        CustomError({
-          name: 'TestOptionalError',
-          message: 'test optional message',
-        }),
-      );
-      // @ts-expect-error Parameters are required
-      expect(TestError()).toEqual(
-        CustomError({
-          name: 'TestError',
-          message: 'test error message',
-        }),
-      );
-      expect(TestError({ email: 'foo@bar.com' })).toEqual(
-        CustomError({
-          name: 'TestError',
-          message: 'test error message',
-          email: 'foo@bar.com',
-        }),
-      );
-    });
-    describe('create', () => {
-      it('returns new instance for optional parameters', () => {
-        expect(TestOptionalError.create()).toEqual(
-          CustomError({
-            name: 'TestOptionalError',
-            message: 'test optional message',
-          }),
-        );
-        expect(TestOptionalError.create({})).toEqual(
-          CustomError({
-            name: 'TestOptionalError',
-            message: 'test optional message',
-          }),
-        );
-      });
-      it('returns new instance for required parameters', () => {
-        // @ts-expect-error Parameters are required
-        expect(TestError.create()).toEqual(
-          CustomError({
-            name: 'TestError',
-            message: 'test error message',
-          }),
-        );
-        expect(TestError.create({ email: 'foo@bar.com' })).toEqual(
-          CustomError({
-            message: 'test error message',
-            name: 'TestError',
-            email: 'foo@bar.com',
-          }),
-        );
-      });
-    });
-    describe('name', () => {
-      it('should set name', () => {
-        expect(TestError.name).toBe('TestError');
-      });
-    });
-    describe('errorName', () => {
-      it('should set errorName', () => {
-        expect(TestError.errorName).toBe('TestError');
-      });
-    });
-    describe('.hasInstance()', () => {
-      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
-        expect(TestError.hasInstance(value)).toBe(false);
-      });
-      it('should return true for instance', () => {
-        expect(TestError.hasInstance(TestError({ email: '' }))).toBe(true);
-      });
     });
   });
 });

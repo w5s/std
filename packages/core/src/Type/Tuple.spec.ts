@@ -20,7 +20,7 @@ describe(Tuple, () => {
       [
         ['a', '1'],
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode a,1 as [string,bigint]',
             input: ['a', '1'],
           }),

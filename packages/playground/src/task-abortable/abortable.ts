@@ -32,7 +32,7 @@ export function abortable<Value, Error>(
     const { signal } = options;
     const doAbort = () => {
       canceler.current?.();
-      reject(AbortError());
+      reject(new AbortError());
     };
     if (signal.aborted) {
       doAbort();

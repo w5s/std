@@ -18,7 +18,7 @@ describe(constant, () => {
       [
         'otherValue',
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode otherValue as anyValue',
             input: 'otherValue',
           }),
@@ -37,7 +37,7 @@ describe(constant, () => {
       [
         'otherValue',
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode otherValue as Symbol(anySymbol)',
             input: 'otherValue',
           }),
@@ -55,7 +55,7 @@ describe(constant, () => {
       [
         undefined,
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode undefined as undefined',
             input: undefined,
           }),

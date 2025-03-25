@@ -22,7 +22,7 @@ export namespace ResponseParser {
           resolve(await fn(response));
         } catch (error: unknown) {
           reject(
-            HTTPError.ParserError({
+            new HTTPError.ParserError({
               cause: error,
             }),
           );
@@ -76,7 +76,7 @@ export namespace ResponseParser {
       : (response) =>
           mapResult(parser(response), (result) =>
             result.ok
-              ? mapError(decode(CodecModule, result.value), (error) => HTTPError.ParserError({ cause: error }))
+              ? mapError(decode(CodecModule, result.value), (error) => new HTTPError.ParserError({ cause: error }))
               : result,
           );
   }

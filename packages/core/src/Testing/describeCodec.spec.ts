@@ -11,7 +11,7 @@ describe('describeCodec', () => {
       typeof value === 'string'
         ? Result.Ok(value)
         : Result.Error(
-            CodecError({
+            new CodecError({
               message: 'test error',
               input: value,
             }),
@@ -26,7 +26,7 @@ describe('describeCodec', () => {
     ],
     decode: [
       ['a', Result.Ok('a')],
-      [1, Result.Error(CodecError({ input: 1, message: 'test error' }))],
+      [1, Result.Error(new CodecError({ input: 1, message: 'test error' }))],
     ],
     schema: () => ({
       type: 'string',

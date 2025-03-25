@@ -18,8 +18,8 @@ describe('Number', () => {
     decode: [
       [1, Result.Ok(1)],
       [0, Result.Ok(0)],
-      [undefined, Result.Error(CodecError({ message: 'Cannot decode undefined as number', input: undefined }))],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as number', input: null }))],
+      [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as number', input: undefined }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as number', input: null }))],
     ],
     schema: () => ({ type: 'number' }),
   });
