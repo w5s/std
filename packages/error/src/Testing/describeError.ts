@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { TestingLibrary } from '@w5s/core-type';
-import type { CustomError } from '../CustomError.js';
 
 /**
  * Create a spec for a CustomError
@@ -16,10 +18,10 @@ import type { CustomError } from '../CustomError.js';
  */
 export function describeError(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
-  return <Model extends CustomError<{ name: string }>>(
-    subject: CustomError.Module<Model>,
+  return <Constructor extends abstract new (properties: any) => any>(
+    subject: Constructor,
     spec: {
-      defaultParameters: () => CustomError.ParametersProperties<Model>;
+      defaultParameters: () => Constructor extends abstract new (properties: infer R) => any ? R : never;
       /**
        * Expected error name
        */
@@ -32,23 +34,23 @@ export function describeError(testingLibrary: TestingLibrary) {
   ) => {
     describe('errorName', () => {
       it(`should be ${spec.expectedName}`, () => {
-        expect(subject.errorName).toBe(spec.expectedName);
+        expect((subject as any).errorName).toBe(spec.expectedName);
       });
     });
     describe('#name', () => {
       it(`should be ${spec.expectedName}`, () => {
-        const error = subject.create(spec.defaultParameters());
+        const error = new (subject as any)(spec.defaultParameters());
         expect(error.name).toEqual(spec.expectedName);
       });
     });
     describe('#message', () => {
       it(`uses default errorMessage`, () => {
-        const error = subject.create(spec.defaultParameters());
+        const error = new (subject as any)(spec.defaultParameters());
         expect(error.message).toBe(spec.expectedDefaultMessage);
       });
       it(`can be set in ${spec.expectedName}({ message })`, () => {
         const customTestMessage = 'This is a custom test message';
-        const error = subject.create({ ...spec.defaultParameters(), message: customTestMessage });
+        const error = new (subject as any)({ ...spec.defaultParameters(), message: customTestMessage });
         expect(error.message).toBe(customTestMessage);
       });
     });
