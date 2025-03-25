@@ -1,25 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable unicorn/custom-error-definition */
 
-export type ErrorType<Name, Properties> = Readonly<
-  globalThis.Error & {
-    /**
-     * Error name (used as tag)
-     */
-    readonly name: Name;
-    /**
-     * Error message
-     */
-    readonly message: string;
-    /**
-     * Stack trace
-     */
-    readonly stack: string;
-    /**
-     * Optional `Error` that was thrown
-     */
-    readonly cause: unknown;
+import { CustomError } from './CustomError.js';
+import { isError } from './isError.js';
+
+export type ErrorType<Name extends string, Properties> = CustomError<
+  {
+    name: Name;
   } & Properties
 >;
 
@@ -44,17 +31,13 @@ export type ErrorType<Name, Properties> = Readonly<
  */
 export function ErrorClass<Name extends string>(options: ErrorClassOptions<Name>): ErrorClass<Name> {
   const { errorName, errorMessage } = options;
-  class BaseError extends globalThis.Error {
-    constructor(properties: any) {
-      // @ts-ignore
-      super(properties?.message ?? errorMessage);
-      // @ts-ignore
-      this.name = errorName;
-      Object.assign(this, properties);
-    }
-  }
+  class BaseError extends CustomError<{ name: Name }> {}
   (BaseError as any).errorName = errorName;
-  (BaseError.prototype as any).name = errorName;
+  (BaseError as any).hasInstance = (anyValue: unknown) => isError(anyValue) && anyValue.name === errorName;
+  Object.assign(BaseError.prototype as any, {
+    name: errorName,
+    message: errorMessage,
+  });
   // @ts-ignore
   return BaseError;
 }
@@ -70,7 +53,17 @@ export interface ErrorClassOptions<Name extends string> {
   errorMessage?: string;
 }
 
-export interface ErrorClass<Name> {
+export interface ErrorClass<Name extends string> {
+  /**
+   * Return true if anyValue is an instance of current class
+   *
+   * @param this
+   * @param anyValue - any value to test
+   */
+  hasInstance<Class extends abstract new (...args: any) => any>(
+    this: Class,
+    anyValue: unknown,
+  ): anyValue is InstanceType<Class>;
   /**
    * Error name
    */

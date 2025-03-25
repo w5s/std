@@ -53,13 +53,13 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
         if (sent) {
           throw networkError;
         } else {
-          reject(HTTPError.NetworkError({ cause: networkError }));
+          reject(new HTTPError.NetworkError({ cause: networkError }));
         }
       }
     } else {
       await Promise.resolve();
       reject(
-        HTTPError.InvalidURL({
+        new HTTPError.InvalidURL({
           message: 'Invalid URL',
           input: url,
         }),

@@ -51,7 +51,7 @@ describe(timeout, () => {
     } satisfies TaskLike<any, any>;
     const task = timeout(willCancel, anyDelay);
     await expectTask(task).toRejectAsync(
-      TimeoutError({
+      new TimeoutError({
         message: `Task timed out after ${anyDelay}ms`,
       }),
     );

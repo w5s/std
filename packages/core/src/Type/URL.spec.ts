@@ -18,7 +18,7 @@ describe('URL', () => {
       [
         '',
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode  as URL',
             input: '',
           }),
@@ -27,7 +27,7 @@ describe('URL', () => {
       [
         null,
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode null as URL',
             input: null,
           }),

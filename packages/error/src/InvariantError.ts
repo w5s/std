@@ -1,19 +1,10 @@
-import { CustomError } from './CustomError.js';
-
-/**
- * An error reported when any operation times out
- */
-export interface InvariantError
-  extends CustomError<{
-    name: 'InvariantError';
-  }> {}
+import { ErrorClass } from './ErrorClass.js';
 
 /**
  * InvariantError constructor
  *
- * @category Constructor
  */
-export const InvariantError = CustomError.define<InvariantError>({
+export class InvariantError extends ErrorClass({
   errorName: 'InvariantError',
   errorMessage: 'An invariant error occurred',
-});
+}) {}

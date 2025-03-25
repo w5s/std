@@ -26,7 +26,7 @@ describe(TObject, () => {
       [
         { foo: 'a' },
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode a as UnderscoreString',
             input: 'a',
           }),

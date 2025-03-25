@@ -3,7 +3,7 @@ import { HTTPError } from './HTTPError.js';
 
 describe('HTTPError.InvalidURL', () => {
   it('should constructor new error', () => {
-    expect(HTTPError.InvalidURL({ message: 'test', input: 'abc' })).toEqual(
+    expect(new HTTPError.InvalidURL({ message: 'test', input: 'abc' })).toEqual(
       expect.objectContaining({
         // _: 'DataError',
         name: 'HTTPInvalidURLError',
@@ -15,7 +15,7 @@ describe('HTTPError.InvalidURL', () => {
 });
 describe('HTTPError.NetworkError', () => {
   it('should constructor new error', () => {
-    expect(HTTPError.NetworkError({ message: 'test' })).toEqual(
+    expect(new HTTPError.NetworkError({ message: 'test' })).toEqual(
       expect.objectContaining({
         // _: 'DataError',
         name: 'HTTPNetworkError',
@@ -26,7 +26,7 @@ describe('HTTPError.NetworkError', () => {
 });
 describe('HTTPError.ParserError', () => {
   it('should constructor new error', () => {
-    expect(HTTPError.ParserError({ message: 'test' })).toEqual(
+    expect(new HTTPError.ParserError({ message: 'test' })).toEqual(
       expect.objectContaining({
         // _: 'DataError',
         name: 'HTTPParserError',

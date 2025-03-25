@@ -32,7 +32,7 @@ export namespace DatabaseDriver {
       adapter,
       execute,
       async handleError(cause: unknown) {
-        return DatabaseError({ cause });
+        return new DatabaseError({ cause });
       },
     };
   }

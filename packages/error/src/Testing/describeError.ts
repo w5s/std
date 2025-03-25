@@ -4,7 +4,7 @@
 import type { TestingLibrary } from '@w5s/core-type';
 
 /**
- * Create a spec for a CustomError
+ * Create a spec for tagged Error class
  *
  * @example
  * ```typescript

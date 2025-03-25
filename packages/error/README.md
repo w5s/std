@@ -18,17 +18,14 @@ npm install @w5s/error
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { CustomError, Error, TypeError } from '@w5s/error';
+import { ErrorClass, Error, TypeError } from '@w5s/error';
 
-export interface MyError
-  extends CustomError<{
-    name: 'MyError';
-    foo: string;
-    bar: boolean;
-  }> {}
-export const MyError = CustomError.define<MyError>({ errorName: 'MyError' });
+export class MyError extends ErrorClass({ errorName: 'MyError' })<{
+  foo: string;
+  bar: boolean;
+}> {}
 
-const myError = MyError({
+const myError = new MyError({
   foo: 'this is foo',
   bar: true,
   cause: TypeError('this is the cause'),

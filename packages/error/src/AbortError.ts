@@ -1,16 +1,10 @@
-import { CustomError } from './CustomError.js';
-
-/**
- * An error when a task was aborted
- */
-export interface AbortError extends CustomError<{ name: 'AbortError' }> {}
+import { ErrorClass } from './ErrorClass.js';
 
 /**
  * AbortError constructor
  *
- * @category Constructor
  */
-export const AbortError = CustomError.define<AbortError>({
+export class AbortError extends ErrorClass({
   errorName: 'AbortError',
   errorMessage: 'The operation was aborted',
-});
+}) {}

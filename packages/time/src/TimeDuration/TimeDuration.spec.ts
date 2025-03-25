@@ -19,7 +19,7 @@ describe('TimeDuration', () => {
       [
         null,
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode null as TimeDuration',
             input: null,
           }),

@@ -24,7 +24,11 @@ describe('MoneyNumeric', () => {
 
   describe('+', () => {
     it.each([
-      [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
+      [
+        EUR(anyAmount),
+        USD(anyAmount),
+        Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' })),
+      ],
       [EUR('1'), EUR('2'), Result.Ok(EUR('3'))],
       [EUR('2'), EUR('1'), Result.Ok(EUR('3'))],
     ])('should return correct result', (left, right, expected) => {
@@ -33,7 +37,11 @@ describe('MoneyNumeric', () => {
   });
   describe('-', () => {
     it.each([
-      [EUR(anyAmount), USD(anyAmount), Result.Error(ArgumentError({ message: 'Incompatible currencies EUR and USD' }))],
+      [
+        EUR(anyAmount),
+        USD(anyAmount),
+        Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' })),
+      ],
       [EUR('2'), EUR('1'), Result.Ok(EUR('1'))],
       [EUR('1'), EUR('2'), Result.Ok(EUR('-1'))],
     ])('should return correct result', (left, right, expected) => {
