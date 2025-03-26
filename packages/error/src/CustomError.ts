@@ -87,6 +87,7 @@ export const CustomError: CustomErrorConstructor = (() => {
     returnValue.message = returnValue.message;
     returnValue.name = returnValue.name;
     returnValue.cause = returnValue.cause;
+
     // Assign properties
     __assign(returnValue, properties);
 

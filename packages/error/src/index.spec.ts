@@ -9,6 +9,7 @@ describe('index', () => {
         'AggregateError',
         'ArgumentError',
         'assertNever',
+        'CustomError',
         'Error',
         'ErrorClass',
         'EvalError',
