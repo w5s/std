@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { asString } from './CustomError/asString.js';
+import { isError } from './isError.js';
 
 type CustomErrorRequiredProperties = {
   name: string;
@@ -33,6 +34,10 @@ export type CustomError<Properties extends CustomErrorRequiredProperties = Custo
 
 interface CustomErrorConstructor /* extends ErrorConstructor */ {
   /**
+   * Error name
+   */
+  readonly errorName: string;
+  /**
    * New operator
    */
   new <Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
@@ -51,6 +56,16 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
    * @param self
    */
   asString(self: Error): string;
+  /**
+   * Return true if anyValue is an instance of current class
+   *
+   * @param this
+   * @param anyValue - any value to test
+   */
+  hasInstance<Class extends abstract new (...args: any) => any>(
+    this: Class,
+    anyValue: unknown,
+  ): anyValue is InstanceType<Class>;
 }
 
 /**
@@ -69,6 +84,7 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
  * @param properties - initial properties
  */
 export const CustomError: CustomErrorConstructor = (() => {
+  const errorName = 'CustomError';
   const __assign = Object.assign;
   const __create = Object.create;
 
@@ -100,9 +116,14 @@ export const CustomError: CustomErrorConstructor = (() => {
   }
 
   return __assign(CustomError, {
+    errorName,
+    hasInstance(anyValue: unknown): boolean {
+      return isError(anyValue) && anyValue.name === this.errorName;
+    },
     asString,
     prototype: __assign(__create(Error.prototype), {
       constructor: CustomError,
+      name: errorName,
       message: '',
       cause: undefined,
       toString(this: Error) {

@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable unicorn/custom-error-definition */
 
+import type { Pretty } from '@w5s/core-type';
 import { CustomError } from './CustomError.js';
-import { isError } from './isError.js';
 
 export type ErrorType<Name extends string, Properties> = CustomError<
   {
@@ -31,9 +30,9 @@ export type ErrorType<Name extends string, Properties> = CustomError<
  */
 export function ErrorClass<Name extends string>(options: ErrorClassOptions<Name>): ErrorClass<Name> {
   const { errorName, errorMessage } = options;
-  class BaseError extends CustomError<{ name: Name }> {}
-  (BaseError as any).errorName = errorName;
-  (BaseError as any).hasInstance = (anyValue: unknown) => isError(anyValue) && anyValue.name === errorName;
+  class BaseError extends CustomError<{ name: Name }> {
+    static override errorName = errorName;
+  }
   Object.assign(BaseError.prototype as any, {
     name: errorName,
     message: errorMessage,
@@ -53,17 +52,7 @@ export interface ErrorClassOptions<Name extends string> {
   errorMessage?: string;
 }
 
-export interface ErrorClass<Name extends string> {
-  /**
-   * Return true if anyValue is an instance of current class
-   *
-   * @param this
-   * @param anyValue - any value to test
-   */
-  hasInstance<Class extends abstract new (...args: any) => any>(
-    this: Class,
-    anyValue: unknown,
-  ): anyValue is InstanceType<Class>;
+export interface ErrorClass<Name extends string> extends Pretty<typeof CustomError> {
   /**
    * Error name
    */
