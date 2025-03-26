@@ -100,7 +100,7 @@ describe('CustomError', () => {
 
       expect(lines[0]).toEqual('CustomError: CustomMessage');
 
-      expect(lines[1]).not.toEqual(expect.stringMatching(/\.DataError/));
+      expect(lines[1]).not.toEqual(expect.stringMatching(/\.CustomError/));
     });
   });
   describe('#cause', () => {

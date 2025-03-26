@@ -2,6 +2,7 @@ export * from './AbortError.js';
 export * from './AggregateError.js';
 export * from './ArgumentError.js';
 export * from './assertNever.js';
+export * from './CustomError.js';
 export * from './Error.js';
 export * from './ErrorClass.js';
 export * from './ErrorOptions.js';
