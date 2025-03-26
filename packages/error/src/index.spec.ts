@@ -13,6 +13,7 @@ describe('index', () => {
         'Error',
         'EvalError',
         'invariant',
+        'isError',
         'InvariantError',
         'NotImplementedError',
         'RangeError',
