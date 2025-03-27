@@ -32,13 +32,9 @@ An enum can be declared as the following example :
 
 ```typescript
 import { Result } from '@w5s/core';
-import { CustomError } from '@w5s/error';
+import { ErrorClass } from '@w5s/error';
 
-export interface ZeroDivisionError
-  extends CustomError<{
-    name: 'ZeroDivisionError';
-  }> {}
-export const ZeroDivisionError = CustomError.define<ZeroDivisionError>({ errorName: 'ZeroDivisionError' });
+export class ZeroDivisionError extends ErrorClass({ errorName: 'ZeroDivisionError' })<{}> {}
 
 export function divide(value: number, divider: number): Result<number, ZeroDivisionError> {
   const returnValue = value / divider;
