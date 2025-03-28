@@ -15,20 +15,20 @@ import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
 
 :::warning
 
-Use with caution. [See explanation](./throwing-fatal-errors#disclaimer)
+Use with caution. [See explanation](./stopping-execution#disclaimer)
 
 :::
 
-`throwError` is equivalent to `throw` but as a function, it has the advantages :
+`panic` is equivalent to `throw` statement but as a function, it has the advantages :
 
 - it can be used as an expression (ex: in ternary operator)
 - it can be used as a parameter (ex: as a callback)
 
 ```typescript
-import { throwError } from '@w5s/error';
+import { panic } from '@w5s/error';
 
 function unsafeAsNotNullable(value: unknown) {
-  return value ?? throwError(new TypeError('Value must not be nullable'));
+  return value ?? panic(new TypeError('Value must not be nullable'));
 }
 ```
 
@@ -36,7 +36,7 @@ function unsafeAsNotNullable(value: unknown) {
 
 :::warning
 
-Use with caution. [See explanation](./throwing-fatal-errors#disclaimer)
+Use with caution. [See explanation](./stopping-execution#disclaimer)
 
 :::
 
