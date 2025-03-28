@@ -1,8 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { asString } from './asString.js';
-import { CustomError } from '../CustomError.js';
 
 describe(asString, () => {
+  const CustomError = <P extends { name?: string; message?: string; cause?: unknown }>(properties: P) =>
+    Object.assign(new Error(properties.message), properties);
+
   it.each([
     [CustomError({ name: 'CustomError' }), 'CustomError'],
     [CustomError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],

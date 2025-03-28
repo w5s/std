@@ -18,7 +18,7 @@ describe('UUID', () => {
       [
         null,
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode null as UUID',
             input: null,
           }),

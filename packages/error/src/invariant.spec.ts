@@ -17,7 +17,7 @@ describe('invariant', () => {
     expect(invariant(true)).toBe(undefined);
   });
   it('should throw error if false as first parameter', () => {
-    expect(() => invariant(false)).toThrow(InvariantError({ message: '' }));
+    expect(() => invariant(false)).toThrow(new InvariantError({ message: '' }));
   });
   it('should throw error an error with InvariantError as name', () => {
     expect(getThrownError(() => invariant(false))).toEqual(expect.objectContaining({ name: 'InvariantError' }));

@@ -1,5 +1,6 @@
+/* eslint-disable max-classes-per-file */
 import type { TimeoutError } from '@w5s/error';
-import { CustomError } from '@w5s/error/dist/CustomError.js';
+import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
 
 /**
  * Union type of http client errors
@@ -10,52 +11,24 @@ export namespace HTTPError {
   /**
    * An error when url passed is invalid
    */
-  export interface InvalidURL
-    extends CustomError<{
-      name: 'HTTPInvalidURLError';
-      input: string;
-    }> {}
-  /**
-   * InvalidURL constructor
-   *
-   * @category Constructor
-   */
-  export const InvalidURL = CustomError.define<InvalidURL>({
+  export class InvalidURL extends ErrorClass({
     errorName: 'HTTPInvalidURLError',
     errorMessage: 'An invalid URL was provided',
-  });
+  })<{ input: string }> {}
 
   /**
    * A network error when `fetch` fails
    */
-  export interface NetworkError
-    extends CustomError<{
-      name: 'HTTPNetworkError';
-    }> {}
-  /**
-   * NetworkError constructor
-   *
-   * @category Constructor
-   */
-  export const NetworkError = CustomError.define<NetworkError>({
+  export class NetworkError extends ErrorClass({
     errorName: 'HTTPNetworkError',
     errorMessage: 'Network error occurred',
-  });
+  }) {}
 
   /**
    * A parsing error when the body cannot be parsed
    */
-  export interface ParserError
-    extends CustomError<{
-      name: 'HTTPParserError';
-    }> {}
-  /**
-   * ParserError constructor
-   *
-   * @category Constructor
-   */
-  export const ParserError = CustomError.define<ParserError>({
+  export class ParserError extends ErrorClass({
     errorName: 'HTTPParserError',
     errorMessage: 'Cannot parse response body',
-  });
+  }) {}
 }

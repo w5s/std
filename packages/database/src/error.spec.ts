@@ -1,16 +1,11 @@
 import { describe, it, expect } from 'vitest';
+import { describeError } from '@w5s/error/dist/Testing.js';
 import { DatabaseError } from './error.js';
 
 describe('DatabaseError', () => {
-  it('should construct DatabaseError', () => {
-    const cause = new Error('MockError');
-
-    expect(DatabaseError({ message: 'Message', cause })).toEqual(
-      expect.objectContaining({
-        name: 'DatabaseError',
-        message: 'Message',
-        cause,
-      }),
-    );
+  describeError({ describe, it, expect })(DatabaseError, {
+    defaultParameters: () => ({}),
+    expectedName: 'DatabaseError',
+    expectedDefaultMessage: 'An unknown error occurred with database',
   });
 });

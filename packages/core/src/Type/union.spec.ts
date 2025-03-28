@@ -36,13 +36,15 @@ describe(union, () => {
       [{ a: 'va' }, Result.Ok({ a: 'va' })],
       [
         { a: 1 },
-        Result.Error(CodecError({ message: 'Cannot decode [object Object] as AType|string|number', input: { a: 1 } })),
+        Result.Error(
+          new CodecError({ message: 'Cannot decode [object Object] as AType|string|number', input: { a: 1 } }),
+        ),
       ],
       [
         undefined,
-        Result.Error(CodecError({ message: 'Cannot decode undefined as AType|string|number', input: undefined })),
+        Result.Error(new CodecError({ message: 'Cannot decode undefined as AType|string|number', input: undefined })),
       ],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as AType|string|number', input: null }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as AType|string|number', input: null }))],
     ],
     schema: () => ({
       anyOf: [

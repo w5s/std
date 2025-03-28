@@ -1,7 +1,3 @@
-import { CustomError } from '@w5s/error';
+import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
 
-export interface CSVError
-  extends CustomError<{
-    name: 'CSVError';
-  }> {}
-export const CSVError = CustomError.define<CSVError>({ errorName: 'CSVError' });
+export class CSVError extends ErrorClass({ errorName: 'CSVError' }) {}

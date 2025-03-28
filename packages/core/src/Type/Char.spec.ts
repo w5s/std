@@ -13,7 +13,7 @@ describe(Char, () => {
   describeCodec({ describe, it, expect })(Char, {
     decode: [
       ['a', Result.Ok(Char('a'))],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as Char', input: null }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as Char', input: null }))],
     ],
     encode: [
       [Char('a'), 'a'],

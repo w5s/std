@@ -14,8 +14,8 @@ describe('Headers', () => {
     decode: [
       [{}, Result.Ok({})],
       [{ foo: 'bar' }, Result.Ok({ foo: 'bar' })],
-      [1.1, Result.Error(CodecError({ message: 'Cannot decode 1.1 as Record<string,string>', input: 1.1 }))],
-      [null, Result.Error(CodecError({ message: 'Cannot decode null as Record<string,string>', input: null }))],
+      [1.1, Result.Error(new CodecError({ message: 'Cannot decode 1.1 as Record<string,string>', input: 1.1 }))],
+      [null, Result.Error(new CodecError({ message: 'Cannot decode null as Record<string,string>', input: null }))],
     ],
     encode: [[{ foo: 'bar' }, { foo: 'bar' }]],
     schema: () => ({

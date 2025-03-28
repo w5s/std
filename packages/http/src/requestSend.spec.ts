@@ -76,7 +76,7 @@ describe(requestSend, () => {
       url: 'http://www.exam ple.com', // invalid url
     });
     await expectTask(task).toRejectAsync(
-      HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }),
+      new HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }),
     );
   });
   it('should convert fetch error to NetworkError', async () => {
@@ -86,7 +86,7 @@ describe(requestSend, () => {
     const task = requestSend(anyClient, {
       url: anyURL,
     });
-    await expectTask(task).toRejectAsync(HTTPError.NetworkError({ cause: fetchError }));
+    await expectTask(task).toRejectAsync(new HTTPError.NetworkError({ cause: fetchError }));
   });
   it('should be cancelable', async () => {
     const finished = defer();

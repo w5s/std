@@ -24,7 +24,7 @@ describe('ErrnoException', () => {
 describe('errnoExceptionHandler', () => {
   it('should convert anything to "OtherError"', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
-      FileError({
+      new FileError({
         fileErrorType: 'OtherError',
         path: Option.None,
         cause: 'anything',
@@ -36,7 +36,7 @@ describe('errnoExceptionHandler', () => {
   });
   it('should convert any ErrnoException to "OtherError" and forward properties', () => {
     expect(errnoExceptionHandler(anyErrnoException)).toEqual(
-      FileError({
+      new FileError({
         fileErrorType: 'OtherError',
         path: anyErrnoException.path as FilePath,
         cause: anyErrnoException,

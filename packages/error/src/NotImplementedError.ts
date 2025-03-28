@@ -1,12 +1,5 @@
-import { CustomError } from './CustomError.js';
+import { ErrorClass } from './ErrorClass.js';
 
-/**
- * An error when wrong argument is passed to a function
- */
-export interface NotImplementedError
-  extends CustomError<{
-    name: 'NotImplementedError';
-  }> {}
 /**
  * NotImplementedError constructor
  *
@@ -16,10 +9,8 @@ export interface NotImplementedError
  *   throw NotImplementedError();// message can be customized
  * }
  * ```
- *
- * @category Constructor
  */
-export const NotImplementedError = CustomError.define<NotImplementedError>({
+export class NotImplementedError extends ErrorClass({
   errorName: 'NotImplementedError',
   errorMessage: 'Not implemented',
-});
+}) {}

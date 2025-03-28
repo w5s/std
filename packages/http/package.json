@@ -77,7 +77,7 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "6 kB"
+      "limit": "7 kB"
     }
   ],
   "sideEffect": false

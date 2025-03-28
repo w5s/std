@@ -61,10 +61,12 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
-        Result.Error(CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid_value' })),
+        Result.Error(
+          new CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid_value' }),
+        ),
       );
       expect(Codec.decode(PositiveNumber, undefined)).toEqual(
-        Result.Error(CodecError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),
+        Result.Error(new CodecError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),
       );
     });
   });

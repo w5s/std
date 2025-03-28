@@ -11,6 +11,6 @@ const errorToString = Error.prototype.toString;
  * @param self
  */
 export function asString(self: Error): string {
-  // eslint-disable-next-line @typescript-eslint/no-base-to-string
-  return errorToString.call(self) + (self.cause == null ? '' : `\n  └ ${String(self.cause)}`);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  return errorToString.call(self) + (self.cause == null ? '' : `\n  └ ${asString(self.cause as any)}`);
 }

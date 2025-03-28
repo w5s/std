@@ -38,7 +38,7 @@ export function timeout<Value, Error>(
         const timeoutId = setTimeout(() => {
           taskCancel();
           reject(
-            TimeoutError({
+            new TimeoutError({
               message: `Task timed out after ${stringifyDelay(delay)}`,
             }),
           );

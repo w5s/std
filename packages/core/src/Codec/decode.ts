@@ -21,7 +21,7 @@ export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown):
     ok: Ok as Codec.Context<T>['ok'],
     error: (inputError, asType) =>
       Error(
-        CodecError({
+        new CodecError({
           message: `Cannot decode ${String(inputError)}${asType == null ? '' : ` as ${asType}`}`,
           input: inputError,
         }),

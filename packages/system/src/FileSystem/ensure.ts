@@ -93,12 +93,13 @@ async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   if (actualType !== expectedType) {
+    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw ensureTypeError(filePath, expectedType, actualType);
   }
 }
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {
-  return FileError({
+  return new FileError({
     fileErrorType: 'UserError',
     message: `Ensure path exists, expected '${expectedType}', got '${actualType}'`,
     path: filePath,

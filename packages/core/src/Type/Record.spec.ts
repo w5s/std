@@ -25,7 +25,7 @@ describe(Record, () => {
       [
         ['a', '1'],
         Result.Error(
-          CodecError({
+          new CodecError({
             message: 'Cannot decode a,1 as Record<string,bigint>',
             input: ['a', '1'],
           }),

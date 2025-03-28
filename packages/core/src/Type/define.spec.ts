@@ -59,10 +59,10 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(TestType, 'hello')).toEqual(Result.Ok('hello'));
       expect(Codec.decode(TestType, 1)).toEqual(
-        Result.Error(CodecError({ message: 'Cannot decode 1 as String', input: 1 })),
+        Result.Error(new CodecError({ message: 'Cannot decode 1 as String', input: 1 })),
       );
       expect(Codec.decode(TestType, undefined)).toEqual(
-        Result.Error(CodecError({ message: 'Cannot decode undefined as String', input: undefined })),
+        Result.Error(new CodecError({ message: 'Cannot decode undefined as String', input: undefined })),
       );
     });
     it('is overridable by parameters', () => {

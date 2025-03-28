@@ -41,7 +41,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(new HTTPError.ParserError({ cause: error }));
     });
   });
   describe('formData', () => {
@@ -55,7 +55,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(new HTTPError.ParserError({ cause: error }));
     });
   });
   describe('text', () => {
@@ -70,7 +70,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(new HTTPError.ParserError({ cause: error }));
     });
   });
   describe('blob', () => {
@@ -85,7 +85,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(new HTTPError.ParserError({ cause: error }));
     });
   });
   describe('json', () => {
@@ -98,7 +98,7 @@ describe('ResponseParser', () => {
           reject: error,
         }),
       );
-      await expectTask(parser(response)).toRejectAsync(HTTPError.ParserError({ cause: error }));
+      await expectTask(parser(response)).toRejectAsync(new HTTPError.ParserError({ cause: error }));
     });
 
     it('should parse using Codec', async () => {
@@ -114,9 +114,9 @@ describe('ResponseParser', () => {
         }),
       );
       await expectTask(parser(response)).toRejectAsync(
-        HTTPError.ParserError({
+        new HTTPError.ParserError({
           message: 'Cannot parse response body',
-          cause: CodecError({ message: 'Cannot decode true as string', input: true }),
+          cause: new CodecError({ message: 'Cannot decode true as string', input: true }),
         }),
       );
 

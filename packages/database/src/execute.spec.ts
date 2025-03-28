@@ -31,7 +31,7 @@ describe(executeQuery, () => {
   it('should return Result.Error of environment.executeQuery if promise rejected', async () => {
     const client = createClient();
     client.mockExecuteQuery.mockRejectedValue('MockClientError');
-    await expectTask(executeQuery(client, anyQuery)).toRejectAsync(DatabaseError({ cause: 'MockClientError' }));
+    await expectTask(executeQuery(client, anyQuery)).toRejectAsync(new DatabaseError({ cause: 'MockClientError' }));
   });
 
   it('should convert to sql statement', async () => {

@@ -9,7 +9,7 @@ describe('FileError', () => {
   describe('()', () => {
     it('should construct FileError instance', () => {
       expect(
-        FileError({
+        new FileError({
           fileErrorType: 'OtherError',
           code: 'ENOENT',
           errno: Option.Some(2),

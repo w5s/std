@@ -21,7 +21,7 @@ export function decodeByName(
     const firstLine = await asyncIterableFind(lines, (_, index) => index === 0);
     if (firstLine == null) {
       return error(
-        CSVError({
+        new CSVError({
           message: 'No header found',
         }),
       );
@@ -32,7 +32,7 @@ export function decodeByName(
     const csvRecords: CSVParseResult<CSVNamedRecord>['csvRecords'] = asyncIterableMap(restLines, (line, lineNumber) => {
       const csvRecordTuple = line.split(delimiter);
       if (csvRecordTuple.length < csvHeader.length) {
-        return error(CSVError({ message: `Cannot decode line number ${lineNumber}` }));
+        return error(new CSVError({ message: `Cannot decode line number ${lineNumber}` }));
       }
 
       return ok(

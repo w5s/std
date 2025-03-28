@@ -1,15 +1,9 @@
-import { CustomError } from '@w5s/error/dist/CustomError.js';
+import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
 
 /**
  * An error reported when the Database fails to perform an operation
  */
-export interface DatabaseError
-  extends CustomError<{
-    name: 'DatabaseError';
-  }> {}
-/**
- * DatabaseError constructor
- *
- * @category Constructor
- */
-export const DatabaseError = CustomError.define<DatabaseError>({ errorName: 'DatabaseError' });
+export class DatabaseError extends ErrorClass({
+  errorName: 'DatabaseError',
+  errorMessage: 'An unknown error occurred with database',
+}) {}

@@ -14,7 +14,7 @@ describe(abortable, () => {
     const abortController = new AbortController();
     const abortTask = abortable(task, abortController);
 
-    const expectation = expectTask(abortTask).toRejectAsync(AbortError());
+    const expectation = expectTask(abortTask).toRejectAsync(new AbortError());
     abortController.abort();
     await expectation;
   });
@@ -26,7 +26,7 @@ describe(abortable, () => {
     const abortController = new AbortController();
     abortController.abort();
     const abortTask = abortable(task, abortController);
-    expectTask(abortTask).toRejectSync(AbortError());
+    expectTask(abortTask).toRejectSync(new AbortError());
   });
   it('handles rejected task', async () => {
     const error = new Error('MockError');

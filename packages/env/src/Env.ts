@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 
 import type { Option } from '@w5s/core';
-import { throwError } from '@w5s/error/dist/throwError.js';
+import { panic } from '@w5s/error/dist/panic.js';
 
 const readImportMetaEnv = () => {
   try {
@@ -19,7 +19,7 @@ const readEnv = (): Env =>
   readProcessEnv() ??
   // ESM
   createProxy(readImportMetaEnv()) ??
-  throwError(new ReferenceError('process.env or import.meta.env must be defined'));
+  panic(new ReferenceError('process.env or import.meta.env must be defined'));
 
 /**
  * A dictionary of environment variables
