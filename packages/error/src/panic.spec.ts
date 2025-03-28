@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { throwError } from './throwError.js';
+import { panic } from './panic.js';
 
-describe('throwError', () => {
+describe(panic, () => {
   it('should return the same unchanged value', () => {
     const error = new Error('TestError');
     expect(() => {
-      throwError(error);
+      panic(error);
     }).toThrow(error);
   });
 });

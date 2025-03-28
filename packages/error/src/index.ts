@@ -15,7 +15,7 @@ export * from './RangeError.js';
 export * from './ReferenceError.js';
 export * from './RuntimeError.js';
 export * from './SyntaxError.js';
-export * from './throwError.js';
+export * from './panic.js';
 export * from './TimeoutError.js';
 export * from './TypeError.js';
 export * from './URIError.js';
