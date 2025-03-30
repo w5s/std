@@ -19,10 +19,13 @@ Use with caution. [See explanation](./stopping-execution#disclaimer)
 
 :::
 
-`panic` is equivalent to `throw` statement but as a function, it has the advantages :
+`panic(error)` is equivalent to `throw error` statement. 
+
+But as a function, it has the advantages :
 
 - it can be used as an expression (ex: in ternary operator)
 - it can be used as a parameter (ex: as a callback)
+- it has a better semantic, implying that the program should stop
 
 ```typescript
 import { panic } from '@w5s/error';
