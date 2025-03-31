@@ -1,3 +1,4 @@
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import type { TaskLike } from '../Task.js';
 
 /**
@@ -13,5 +14,5 @@ import type { TaskLike } from '../Task.js';
  */
 export function hasInstance(anyValue: unknown): anyValue is TaskLike<unknown, unknown> {
   // @ts-ignore We know what we are doing here
-  return typeof anyValue === 'object' && anyValue !== null && typeof anyValue.taskRun === 'function';
+  return typeof anyValue === 'object' && anyValue !== null && typeof anyValue[Symbol.run] === 'function';
 }

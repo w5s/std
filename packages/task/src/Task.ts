@@ -1,5 +1,6 @@
 import type { Awaitable } from '@w5s/async';
 import type { Option, Result, Ref } from '@w5s/core';
+import type { Symbol } from '@w5s/core/dist/Symbol.js';
 import type { PartialKeys } from '@w5s/core-type';
 import { create } from './Task/create.js';
 import { resolve } from './Task/resolve.js';
@@ -57,6 +58,8 @@ export interface TaskParameters<Value, Error> {
   readonly execute: <V, E>(task: TaskLike<V, E>, overrides: TaskParametersOverrides<V, E>) => Awaitable<void>;
 }
 
+export type TaskFunction<Value, Error> = (parameters: TaskParameters<Value, Error>) => Awaitable<void>;
+
 /**
  * A Task interface that represents a lazy computation that will be evaluated later.
  * The result of the computation is a {@link @w5s/core!Result}
@@ -66,7 +69,7 @@ export interface TaskLike<Value, Error> {
   /**
    * A callback with side effects
    */
-  readonly taskRun: (parameters: TaskParameters<Value, Error>) => Awaitable<void>;
+  readonly [Symbol.run]: TaskFunction<Value, Error>;
 }
 
 /**

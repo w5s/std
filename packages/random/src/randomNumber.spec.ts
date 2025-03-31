@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { Symbol } from '@w5s/core';
 import { randomGenerator } from './randomGenerator.js';
 import { randomNumber } from './randomNumber.js';
 import { fakeRandomGenerator } from './Testing.js';
@@ -9,7 +10,7 @@ describe('randomNumber', () => {
 
   it('should use defaultGenerator', async () => {
     const nextRandom = 0.123;
-    vi.spyOn(randomGenerator, 'taskRun').mockImplementation(({ resolve }) => resolve(nextRandom));
+    vi.spyOn(randomGenerator, Symbol.run).mockImplementation(({ resolve }) => resolve(nextRandom));
     const task = randomNumber(-2, 2);
     expectTask(task).toResolveSync(-1.508);
   });

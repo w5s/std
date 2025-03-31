@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref } from '@w5s/core';
+import { Ref, Symbol } from '@w5s/core';
 import { FakeTask, withTask } from '../Testing.js';
 import { map } from './map.js';
 import { run } from './run.js';
@@ -34,10 +34,10 @@ describe(map, () => {
   it('forwards canceler', async () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = map(task, (_) => _);
-    vi.spyOn(task, 'taskRun');
+    vi.spyOn(task, Symbol.run);
     const canceler = Ref(() => {});
     const result = run(mapTask, canceler);
-    expect(task.taskRun).toHaveBeenCalledWith({
+    expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,

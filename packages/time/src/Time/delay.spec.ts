@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Ref, Result } from '@w5s/core';
+import { Ref, Result, Symbol } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { TimeDuration } from '../TimeDuration.js';
 import { delay } from './delay.js';
@@ -31,10 +31,10 @@ describe('.delay', () => {
     const canceler = Ref(() => {});
     const resolve = vi.fn();
     const reject = vi.fn();
-    const run = vi.fn();
+    const execute = vi.fn();
 
     // Run task
-    task.taskRun({ resolve, reject, canceler, run });
+    task[Symbol.run]({ resolve, reject, canceler, execute });
     // Memorize the last setTimeout call
     // eslint-disable-next-line unicorn/prefer-at
     const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;

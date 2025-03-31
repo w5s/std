@@ -83,7 +83,7 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
     ? from<Value, Error>(async (parameters) => {
         parameters.canceler.current = canceler;
         if (await delay(delayMs, parameters.canceler)) {
-          return base.taskRun(parameters);
+          return parameters.execute(base, parameters);
         }
         return undefined;
       })

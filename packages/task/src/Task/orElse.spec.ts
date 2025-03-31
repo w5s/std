@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref } from '@w5s/core';
+import { Ref, Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { orElse } from './orElse.js';
@@ -41,19 +41,19 @@ describe(orElse, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, error: anyError });
     const afterTask = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const thenTask = orElse(task, (_) => afterTask);
-    vi.spyOn(task, 'taskRun');
-    vi.spyOn(afterTask, 'taskRun');
+    vi.spyOn(task, Symbol.run);
+    vi.spyOn(afterTask, Symbol.run);
     const canceler = Ref(() => {});
     const result = run(thenTask, canceler);
     await result;
 
-    expect(task.taskRun).toHaveBeenCalledWith({
+    expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,
       execute: expect.any(Function),
     });
-    expect(afterTask.taskRun).toHaveBeenCalledWith({
+    expect(afterTask[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Result, Ref } from '@w5s/core';
+import { Result, Ref, Symbol } from '@w5s/core';
 import { run } from './run.js';
 import { Task } from '../Task.js';
 
@@ -13,10 +13,10 @@ describe(run, () => {
     });
     expect(() => run(task)).toThrow(anyError);
   });
-  it('should return the result of task.taskRun() for sync', () => {
+  it('should return the result of task[Symbol.run]() for sync', () => {
     expect(run(Task.create(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
   });
-  it('should return the result of task.taskRun() for async', async () => {
+  it('should return the result of task[Symbol.run]() for async', async () => {
     await expect(
       run(
         Task.create(
@@ -34,9 +34,9 @@ describe(run, () => {
   });
   it('should handle canceler', () => {
     const canceler = Ref(undefined);
-    const task = { taskRun: vi.fn() };
+    const task = { [Symbol.run]: vi.fn() };
     void run(task, canceler);
-    expect(task.taskRun).toHaveBeenCalledWith({
+    expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,

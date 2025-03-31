@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Option, Ref } from '@w5s/core';
+import { Option, Ref, Symbol } from '@w5s/core';
 import { create } from './create.js';
 
 vi.mock('./run.js', async () => ({
@@ -16,7 +16,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('foo');
     });
@@ -25,7 +25,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -34,7 +34,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(reject).toHaveBeenCalledTimes(1);
       expect(reject).toHaveBeenCalledWith('err');
     });
@@ -42,7 +42,7 @@ describe(create, () => {
       const task = create(({ ok }) => ok(undefined));
       const ref = Ref(() => {});
 
-      task.taskRun({
+      task[Symbol.run]({
         resolve: () => {},
         reject: () => {},
         canceler: ref,
@@ -57,7 +57,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
     });
@@ -66,7 +66,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task.taskRun({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -74,7 +74,7 @@ describe(create, () => {
       const task = create(async ({ ok }) => ok(undefined));
       const ref = Ref(() => {});
 
-      task.taskRun({
+      task[Symbol.run]({
         resolve: () => {},
         reject: () => {},
         canceler: ref,
@@ -92,7 +92,7 @@ describe(create, () => {
       });
       const ref = Ref(() => {});
 
-      task.taskRun({
+      task[Symbol.run]({
         resolve: () => {},
         reject: () => {},
         canceler: ref,
@@ -110,7 +110,7 @@ describe(create, () => {
       });
       const ref = Ref(() => {});
 
-      task.taskRun({
+      task[Symbol.run]({
         resolve: () => {},
         reject: () => {},
         canceler: ref,

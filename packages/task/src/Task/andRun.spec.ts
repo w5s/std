@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
+import { Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andRun } from './andRun.js';
@@ -21,7 +22,7 @@ describe(andRun, () => {
     });
     it('should call callback and run task', async () => {
       const taskCallback = create(({ ok }) => ok(anyOtherValue));
-      const taskCallbackSpy = vi.spyOn(taskCallback, 'taskRun');
+      const taskCallbackSpy = vi.spyOn(taskCallback, Symbol.run);
       await run(andRun(task, () => taskCallback));
 
       expect(taskCallbackSpy).toHaveBeenCalled();

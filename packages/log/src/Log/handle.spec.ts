@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/task';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { Symbol } from '@w5s/core';
 import { handle } from './handle.js';
 import { LogApplication } from './LogApplication.js';
 import { fakeLogRecord } from '../Testing.js';
@@ -26,7 +27,7 @@ describe(handle, () => {
   it('run task', async () => {
     const anyRecord = fakeLogRecord();
     const task = Task.resolve();
-    const taskSpy = vi.spyOn(task, 'taskRun');
+    const taskSpy = vi.spyOn(task, Symbol.run);
     mockHandler1.mockImplementationOnce(() => task);
     expectTask(handle(anyRecord)).toResolveSync(undefined);
     expect(taskSpy).toHaveBeenCalledTimes(1);

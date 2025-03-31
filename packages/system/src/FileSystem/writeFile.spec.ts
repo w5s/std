@@ -1,6 +1,7 @@
-import { Task, type TaskCanceler } from '@w5s/task';
+import { type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { Symbol } from '@w5s/core';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
@@ -56,11 +57,11 @@ describe(writeFile, () => {
       }),
     };
     const task = writeFile(FilePath('oldPath'), content);
-    task.taskRun({
+    task[Symbol.run]({
       resolve: () => {},
       reject: () => {},
       canceler: cancelerRef,
-      run: Task.run,
+      execute: vi.fn(),
     });
     expect(fileContent).toEqual('0123456789');
   });

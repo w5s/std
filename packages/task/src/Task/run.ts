@@ -5,6 +5,7 @@ import { Ref } from '@w5s/core/dist/Ref.js';
 import { error } from './error.js';
 import { ok } from './ok.js';
 import type { TaskCanceler, TaskLike, TaskParameters, TaskParametersOverrides } from '../Task.js';
+import { execute } from './execute.js';
 
 const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskParameters<V, E> => {
   const self: TaskParameters<V, E> = {
@@ -12,7 +13,8 @@ const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskP
     reject: overrides.reject,
     canceler: overrides.canceler ?? Ref(undefined),
     execute: (subtask, subOverrides) =>
-      subtask.taskRun(
+      execute(
+        subtask,
         createParameters({
           resolve: subOverrides.resolve,
           reject: subOverrides.reject,
@@ -45,7 +47,8 @@ export function run<Value, Error>(
   };
   let rejectHandler = (_error: unknown) => {};
 
-  const runValue: Awaitable<void> = task.taskRun(
+  const runValue: Awaitable<void> = execute(
+    task,
     createParameters({
       resolve: (_value) => resolveHandler(ok(_value)),
       reject: (_error) => resolveHandler(error(_error)),

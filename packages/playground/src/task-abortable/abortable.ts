@@ -39,6 +39,6 @@ export function abortable<Value, Error>(
       return undefined;
     }
     signal.addEventListener('abort', doAbort);
-    return task.taskRun(parameters);
+    return parameters.execute(task, parameters);
   });
 }

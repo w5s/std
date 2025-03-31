@@ -42,4 +42,9 @@ describe('Symbol', () => {
       expect(typeof Symbol.nodeInspect).toBe('symbol');
     });
   });
+  describe('.run', () => {
+    it('should be a symbol', () => {
+      expect(typeof Symbol.run).toBe('symbol');
+    });
+  });
 });
