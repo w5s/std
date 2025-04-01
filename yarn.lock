@@ -5766,7 +5766,7 @@ __metadata:
     "@types/node": "npm:20.17.30"
     "@w5s/commitlint-config": "npm:2.1.9"
     "@w5s/conventional-changelog": "npm:2.2.3"
-    "@w5s/cspell-config": "npm:2.3.21"
+    "@w5s/cspell-config": "npm:2.3.22"
     "@w5s/eslint-config": "npm:2.4.3"
     "@w5s/ts-config": "npm:2.3.1"
     cspell: "npm:8.18.1"
@@ -5813,9 +5813,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/cspell-config@npm:2.3.21":
-  version: 2.3.21
-  resolution: "@w5s/cspell-config@npm:2.3.21"
+"@w5s/cspell-config@npm:2.3.22":
+  version: 2.3.22
+  resolution: "@w5s/cspell-config@npm:2.3.22"
   dependencies:
     "@cspell/cspell-bundled-dicts": "npm:^8.0.0"
   peerDependencies:
@@ -5823,7 +5823,7 @@ __metadata:
   peerDependenciesMeta:
     cspell:
       optional: true
-  checksum: 10c0/b9713119e17f88b1e93a573c7cae298e6853a63910d4edc0eebaabadcceb37308f104335dc60eeac5e7b4d9648167bed92a27526c5d162ea37e89b7f18ee3c43
+  checksum: 10c0/6fa99275c9b06844b26fc21c5d7de9e4c27edd5dc1ab3a1036393ff809036443917e92c2cd9ad103f44779b0f644cc7831c7d0bd725e388ebb540ee69dd7c397
   languageName: node
   linkType: hard
 
