@@ -9,7 +9,6 @@ import { getOrThrow } from './Option/getOrThrow.js';
 import { isNone } from './Option/isNone.js';
 import { isSome } from './Option/isSome.js';
 import { map } from './Option/map.js';
-import { match } from './Option/match.js';
 import { orElse } from './Option/orElse.js';
 
 describe('Option', () => {
@@ -24,7 +23,6 @@ describe('Option', () => {
       isNone,
       isSome,
       map,
-      match,
       orElse,
     });
   });
