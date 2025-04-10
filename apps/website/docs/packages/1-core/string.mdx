@@ -31,13 +31,10 @@ import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
 import { String, Option, Int } from '@w5s/core';
 
 const baseName = (path: string): Option<string> => {
-  const positionOption = String.lastIndexOf(expression, '/'); // Option<Int>;
-  const afterLastSlash = Option.match(positionOption, (position) => ({
-    None: () => path, // unchanged when not found
-    Some: (position) => String.slice(path, position + 1), // everything after the last slash
-  });
+  const positionOption = String.lastIndexOf(path, '/'); // Option<Int>;
+  const afterLastSlash = Option.map(positionOption, (position) => String.slice(path, position + 1)); // everything after the last slash
   return afterLastSlash;
-}
+};
 ```
 
 ## Coding Guide

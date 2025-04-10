@@ -5,90 +5,20 @@ import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
 
 # Option
 
-> Optional values
+> Option type and functions as replacement for `null` or `undefined`
 
 <PackageBadgeGroup apiHref="/api/core/namespace/option" />
 
-## Motivation
+## Overview
 
 An `Option<V>` is either a value of type `V` or nothing. An empty value is represented by `Option.None` and a defined value by `Option.Some(...)`. Internally, `Option.None` is `undefined`.
 
-## Usage
-
-An enum can be declared as the following example :
-
 ```typescript
 import { Option } from '@w5s/core';
 
-export type OptString = Option<string>;
-
-const withSuffix = (opt: OptString) => Option.map(opt, (_) => `${_}_suffix`);
-withSuffix(Option.Some('foo')); // Option.Some('foo_suffix')
-withSuffix(Option.None); // Option.None
-
-const withFallback = (opt: OptString) => Option.orElse(opt, () => 'fallback');
-withFallback(Option.Some('foo')); // Option.Some('foo')
-withFallback(Option.None);// Option.None
+//                         ┌─ Type of the optional value
+type ValueOption = Option<Value>
 ```
-
-## Matching on values
-
-### Method 1:  `Option.isNone` / `Option.isSome` (Recommended)
-
-:::note
-
-- ✓ Best Expressiveness
-- ✓ Good performances
-
-:::
-
-```typescript
-import { Option } from '@w5s/core';
-
-const optionToString = <V>(option: Option<V>) => Option.isSome(option) ? `Some(${v})` : 'None');
-optionToString(Option.Some(1));// 'Some(1)'
-optionToString(Option.None);// 'None'
-```
-
-### Method 2: `Option.match`
-
-:::note
-
-- ✓ Good Expressiveness
-- ⚠️ Lower performances
-
-:::
-
-```typescript
-import { Option } from '@w5s/core';
-
-const optionToString = <V>(option: Option<V>) => Option.match(option, {
-  Some: (v) => `Some(${v})`,
-  None: () => 'None',
-});
-optionToString(Option.Some(1));// 'Some(1)'
-optionToString(Option.None);// 'None'
-```
-
-### Method 3: `=== undefined` / `!== undefined` (i.e. inlining isNone / isSome)
-
-:::note
-
-Not recommended for an application, but only for a third party library.
-
-- ⚠️ Low expressiveness
-- ✓ Highest performances
-- ✓ No module load overhead
-
-:::
-
-```typescript
-import type { Option } from '@w5s/core';
-
-const optionToString = <V>(option: Option<V>) => option === undefined ? `Some(${v})` : 'None';
-```
-
-## Coding Guide
 
 :::tip
 
@@ -130,6 +60,73 @@ const myFunc = <V>(option: Option<V>) => {
 ```
 
 :::
+
+## Chaining
+
+Use `Option.map`, `Option.andThen` and `Option.orElse` to transform a given `Option<T>` to `Option<U>`.
+
+Example :
+
+```typescript
+function parseNumber(expression: string): Option<number> {
+  const result = parseInt(expression, 10)
+  // Parse a number from a string
+  return Number.isNaN(result) ? Option.None : Option.Some(result);
+}
+
+function program(expression: string) {
+  // Convert string to number
+  return parseNumber(expression) // Option<number>
+    // Divide by 2 if not None
+    |> Option.map(#, (_) => _ / 2) // Option<number>
+    // Returns None if previous result was 0, let unchanged otherwise
+    |> Option.andThen(#, (_) => _ === 0 ? Option.None : Option.Some(_)); // Option<number>
+    // Format to string if not None
+    |> Option.map(#, (_) => `Divided by 2 : ${_}`); // Option<string>
+    // Handle Option.None
+    |> Option.orElse(#, () => Option.Some(`Expression is not valid`)); // Option<string>
+}
+```
+
+## Matching on values
+
+Use matching to transform `Option` value to any type of value.
+
+### Method 1:  `Option.isNone` / `Option.isSome` (Recommended)
+
+:::note
+
+- ✓ Best Expressiveness
+- ✓ Good performances
+
+:::
+
+```typescript
+import { Option } from '@w5s/core';
+
+const optionToString = <V>(option: Option<V>): string => Option.isSome(option) ? `Some(${v})` : 'None');
+optionToString(Option.Some(1));// 'Some(1)'
+optionToString(Option.None);// 'None'
+```
+
+### Method 2: `=== undefined` / `!== undefined` (i.e. inlining isNone / isSome)
+
+:::note
+
+Not recommended for an application, but only for a third party library.
+
+- ⚠️ Low expressiveness
+- ✓ Highest performances
+- ✓ No module load overhead
+
+:::
+
+```typescript
+import type { Option } from '@w5s/core';
+
+const optionToString = <V>(option: Option<V>): string => option === undefined ? `Some(${v})` : 'None';
+```
+
 
 ## FAQ
 
