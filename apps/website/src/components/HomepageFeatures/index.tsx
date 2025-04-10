@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
+import { Def } from '../Def';
 
 type FeatureItem = {
   title: string;
@@ -30,8 +31,7 @@ const FeatureList: FeatureItem[] = [
       <>
         Functional programming, done simple. <br />
         <em>
-          ✓ No OOP : Plain Javascript object <br />
-          ✓ Pragmatic FP : pure but never obscure <br />
+          ✓ No OOP : Plain Javascript object <br />✓ Pragmatic <Def>FP</Def> : pure but never obscure <br />
           ✓ Explicit and deterministic API <br />
         </em>
       </>
@@ -72,8 +72,10 @@ const FeatureList: FeatureItem[] = [
       <>
         Because CI performances and environment matters <br />
         <em>
-          ✓ Lean yet highly composable API <br />✓ Strong package size constraint with{' '}
-          <a href="https://www.npmjs.com/package/size-limit">size-limit</a>
+          ✓ Lean yet highly composable API <br />✓ Low bundle size enforced by{' '}
+          <a href="https://www.npmjs.com/package/size-limit" target="size-limit">
+            size-limit
+          </a>
           <br />
           ✓ No constraint to use all `@w5s` packages, pick only the needed ones. <br />
         </em>

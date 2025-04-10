@@ -8,5 +8,6 @@ module.exports = {
     // End
     'global-require': 'off',
     'unicorn/prefer-module': 'off',
+    'import/extensions': 'off',
   },
 };
