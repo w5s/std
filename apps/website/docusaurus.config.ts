@@ -47,7 +47,7 @@ const packageList = fs
   .filter((_) => _.package.private !== true);
 
 const config: Config = (() => {
-  const title = 'W5s Standard Library';
+  const title = 'W5S Standard Library';
   const tagline = 'A collection of type safe, functional style packages for building great applications and libraries';
   const organizationName = 'w5s';
   return {
