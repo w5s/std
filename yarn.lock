@@ -1732,16 +1732,16 @@ __metadata:
   linkType: hard
 
 "@cspell/dict-en_us@npm:^4.4.3":
-  version: 4.4.4
-  resolution: "@cspell/dict-en_us@npm:4.4.4"
-  checksum: 10c0/e9868f95d0786ce42aa90b561ce30dcdcba399cf3eedb5914fbd967a954e7435575ee75e64e825e481c2f457f941eb9fc0427b46b07d2d1f370a838e73c491d3
+  version: 4.4.5
+  resolution: "@cspell/dict-en_us@npm:4.4.5"
+  checksum: 10c0/3746bea9d891da3663a6964b7072827edc7a5a2f2a57b69935bb33441d4579c4ccd446eb8c77bc6d33628edc7d79646cb04fb8e53e199936e41f2057832b203b
   languageName: node
   linkType: hard
 
 "@cspell/dict-filetypes@npm:^3.0.11":
-  version: 3.0.11
-  resolution: "@cspell/dict-filetypes@npm:3.0.11"
-  checksum: 10c0/b697776c84b54fc4483824d1675be63ac056547d42da2d4cf567926b6737a4d2cfef1f268b322a5767004d7d13e1b0356f5fcd6f4113029abef8798cf1d470cd
+  version: 3.0.12
+  resolution: "@cspell/dict-filetypes@npm:3.0.12"
+  checksum: 10c0/9674c3e8a7ec52654ba01c691d9817479690efbe796c5b6cc30ba51ce68d6a6f7da68c8be2a385964007328db8d1c65d30d7a876c12382f726faa35fe29c6a74
   languageName: node
   linkType: hard
 
@@ -1977,9 +1977,9 @@ __metadata:
   linkType: hard
 
 "@cspell/dict-software-terms@npm:^5.0.5":
-  version: 5.0.6
-  resolution: "@cspell/dict-software-terms@npm:5.0.6"
-  checksum: 10c0/e5fd0b1db79b7f89810f2da710792179361cfdb4c89c74e3036fc0a6d4fe8f8dfa5f0a79efafc4f55b762e4a4e41ce268bce43ce95068b29fcc0916ff44456a1
+  version: 5.0.7
+  resolution: "@cspell/dict-software-terms@npm:5.0.7"
+  checksum: 10c0/7fa7d4a1f43e0e5ce4c917400b3b88b4d3d98711e34dce1a7cfb4413b5d4ff3acf80b66cf0efa3f91bf8f629f83339f43e0dc9cde50982eecf3a9201399294a6
   languageName: node
   linkType: hard
 
@@ -9761,8 +9761,8 @@ __metadata:
   linkType: hard
 
 "eslint-plugin-prettier@npm:^5.0.0-alpha.0":
-  version: 5.2.6
-  resolution: "eslint-plugin-prettier@npm:5.2.6"
+  version: 5.3.1
+  resolution: "eslint-plugin-prettier@npm:5.3.1"
   dependencies:
     prettier-linter-helpers: "npm:^1.0.0"
     synckit: "npm:^0.11.0"
@@ -9776,7 +9776,7 @@ __metadata:
       optional: true
     eslint-config-prettier:
       optional: true
-  checksum: 10c0/9911740a5edac7933d92671381908671c61ffa32a3cee7aed667ebab89831ee2c0b69eb9530f68dbe172ca9d4b3fa3d47350762dc1eb096a3ce125fa31c0e616
+  checksum: 10c0/ff1fdca046a9cf34d306fa68e09b63c9cdd8be921fdc3c33522323b59dfea7c7a64c81f0f858434b7f1b06b0cac176faaa0be84b755dd41c2f286d6bf757e39b
   languageName: node
   linkType: hard
 
