@@ -1,5 +1,5 @@
 import type { ExpectFunction } from '@w5s/core-type';
-import { arrayFromAsync } from './arrayFromAsync.js';
+import { fromAsync as arrayFromAsync } from '@w5s/core/dist/Array/fromAsync.js';
 
 export interface ExpectAsyncIterable {
   /**

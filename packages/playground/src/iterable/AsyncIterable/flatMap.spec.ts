@@ -1,8 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
+import { Array } from '@w5s/core';
 import { flatMap } from './flatMap.js';
 import { withAsyncIterable } from '../Testing.js';
 import { of } from './of.js';
-import { arrayFromAsync } from '../Testing/arrayFromAsync.js';
 
 describe(flatMap, () => {
   const expectAsyncIterable = withAsyncIterable(expect);
@@ -19,7 +19,7 @@ describe(flatMap, () => {
   it('calls callback with parameters', async () => {
     const source = of('a', 'b', 'c');
     const callback = vi.fn(() => []);
-    await arrayFromAsync(flatMap(source, callback));
+    await Array.fromAsync(flatMap(source, callback));
     expect(callback.mock.calls).toEqual([
       ['a', 0],
       ['b', 1],
