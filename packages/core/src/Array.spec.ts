@@ -29,6 +29,7 @@ import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
 import { findLast } from './Array/findLast.js';
 import { findLastIndex } from './Array/findLastIndex.js';
+import { fromAsync } from './Array/fromAsync.js';
 
 describe('Array', () => {
   it('is an alias to functions', () => {
@@ -44,6 +45,7 @@ describe('Array', () => {
       findLast,
       findLastIndex,
       flatMap,
+      fromAsync,
       generate,
       hasInstance,
       includes,

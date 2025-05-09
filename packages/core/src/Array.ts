@@ -9,6 +9,7 @@ import { findIndex } from './Array/findIndex.js';
 import { findLast } from './Array/findLast.js';
 import { findLastIndex } from './Array/findLastIndex.js';
 import { flatMap } from './Array/flatMap.js';
+import { fromAsync } from './Array/fromAsync.js';
 import { generate } from './Array/generate.js';
 import { hasInstance } from './Array/hasInstance.js';
 import { includes } from './Array/includes.js';
@@ -55,6 +56,7 @@ export const Array = {
   findLast,
   findLastIndex,
   flatMap,
+  fromAsync,
   generate,
   hasInstance,
   includes,
