@@ -11,6 +11,7 @@ import { milliseconds } from './TimeDuration/milliseconds.js';
 import { seconds } from './TimeDuration/seconds.js';
 import { minutes } from './TimeDuration/minutes.js';
 import { hours } from './TimeDuration/hours.js';
+import { toSeconds } from './TimeDuration/toSeconds.js';
 
 describe('TimeDuration', () => {
   it('is an alias to functions', () => {
@@ -27,6 +28,7 @@ describe('TimeDuration', () => {
         minutes,
         seconds,
         milliseconds,
+        toSeconds,
       }),
     );
   });
