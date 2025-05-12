@@ -18,6 +18,7 @@ export * from './lazy.js';
 export * from './Number.js';
 export * from './Numeric.js';
 export * from './Option.js';
+export * from './Range.js';
 export * from './Record.js';
 export * from './Ref.js';
 export * from './Result.js';

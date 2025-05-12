@@ -2,6 +2,7 @@
 import type { PartialKeys } from '@w5s/core-type';
 import type { Int } from './Int.js';
 import type { Option } from './Option.js';
+import type { Range } from './Range.js';
 
 /**
  * A type Indexable is a type with values that can be indexed by a number.
@@ -61,12 +62,12 @@ export function Indexable<T, Index extends number | bigint = number>(
       }),
     range:
       range ??
-      ((start, end) => ({
-        start,
-        end,
+      ((rangeStart, rangeEnd) => ({
+        rangeStart,
+        rangeEnd,
         *[Symbol.iterator]() {
-          const startIndex = indexOf(start);
-          const endIndex = indexOf(end);
+          const startIndex = indexOf(rangeStart);
+          const endIndex = indexOf(rangeEnd);
           if (startIndex != null && endIndex != null) {
             // @ts-ignore
             // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
@@ -84,15 +85,4 @@ export function Indexable<T, Index extends number | bigint = number>(
 export namespace Indexable {
   export interface Parameters<T, Index extends number | bigint>
     extends PartialKeys<Indexable<T, Index>, 'rangeSize' | 'range'> {}
-}
-
-export interface Range<T> extends Iterable<T> {
-  /**
-   * Start of range
-   */
-  readonly start: T;
-  /**
-   * End of range
-   */
-  readonly end: T;
 }
