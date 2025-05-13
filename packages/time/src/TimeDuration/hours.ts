@@ -1,8 +1,6 @@
+import { HOURS } from '../__constants.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { minutes } from './minutes.js';
 import { of } from './of.js';
-
-const HOURS = minutes(60);
 
 /**
  * Return a duration of `amount` hours

@@ -1,8 +1,6 @@
+import { SECONDS } from '../__constants.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { milliseconds } from './milliseconds.js';
 import { of } from './of.js';
-
-const SECONDS = milliseconds(1000);
 
 /**
  * Return a duration of `amount` seconds

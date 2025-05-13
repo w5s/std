@@ -1,3 +1,4 @@
+import { MINUTES } from '../__constants.js';
 import { __truncate } from '../__truncate.js';
 import type { TimeDuration } from './TimeDuration.js';
 
@@ -14,5 +15,5 @@ import type { TimeDuration } from './TimeDuration.js';
  * @returns The time duration in minutes.
  */
 export function toMinutes(self: TimeDuration, truncate = false): number {
-  return __truncate(self / 60_000, truncate);
+  return __truncate(self / MINUTES, truncate);
 }
