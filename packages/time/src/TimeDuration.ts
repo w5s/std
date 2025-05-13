@@ -14,6 +14,7 @@ import { weeks } from './TimeDuration/weeks.js';
 import { toSeconds } from './TimeDuration/toSeconds.js';
 import { toMinutes } from './TimeDuration/toMinutes.js';
 import { toHours } from './TimeDuration/toHours.js';
+import { toDays } from './TimeDuration/toDays.js';
 
 export type { TimeDurationObject as TimeDurationParameters } from './TimeDuration/from.js';
 
@@ -35,6 +36,7 @@ export const TimeDuration = Callable({
   toSeconds,
   toMinutes,
   toHours,
+  toDays,
   of,
   from,
   milliseconds,
