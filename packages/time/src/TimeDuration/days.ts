@@ -1,8 +1,6 @@
+import { DAYS } from '../__constants.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { hours } from './hours.js';
 import { of } from './of.js';
-
-const DAYS = hours(24);
 
 /**
  * Return a duration of `amount` days

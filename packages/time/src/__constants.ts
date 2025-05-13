@@ -18,3 +18,17 @@ export const MINUTES = SECONDS * 60;
  * @internal
  */
 export const HOURS = MINUTES * 60;
+
+/**
+ * Days in milliseconds
+ *
+ * @internal
+ */
+export const DAYS = HOURS * 24;
+
+/**
+ * Weeks in milliseconds
+ *
+ * @internal
+ */
+export const WEEKS = DAYS * 7;

@@ -1,8 +1,6 @@
+import { WEEKS } from '../__constants.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { days } from './days.js';
 import { of } from './of.js';
-
-const WEEKS = days(7);
 
 /**
  * Return a duration of `amount` days
