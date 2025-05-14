@@ -1,0 +1,75 @@
+---
+name: W5S Assistant
+version: 1.0.0
+schema: v1
+models:
+  - name: Ollama qwen2.5-coder:1.5b
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    roles: [autocomplete]
+  # - name: Ollama llama3.1 8b
+  #   provider: ollama
+  #   model: llama3.1:8b
+  #   roles: [chat, edit, apply]
+  - name: Ollama Cogito 8B
+    provider: ollama
+    model: cogito:8b
+    roles: [chat, edit, apply]
+  - name: Ollama Nomic Embed Text
+    provider: ollama
+    model: nomic-embed-text
+    roles: [embed]
+
+rules:
+  - name: Git commits
+    rule: |
+      - Use gitmoji convention
+      - Commit atomically
+      - Use consistent formatting tools (e.g., Prettier, Black) pre-commit if available.
+  - name: Code Style & Guidelines
+    rule: |
+      > Apply this only when writing code
+
+      - Use Clean Code best practices
+      - Use self explanatory code
+      - Use comments in code only for complex algorithms / tricky
+  - name: Tests
+    rule: |
+      ## Tests
+      > Apply this rule only when writing tests
+
+      Enforce Test Driven Development testing style :
+      - avoid testing implementation detail
+      - focus on use cases
+      - follow default recommended guidelines from books
+
+      Tests should be :
+      - complete
+      - concise
+      - readable and concise
+      - atomic (avoid reusing state between tests)
+      - understandable (use meaningful variables, etc)
+
+      ## Tests in TypeScript and Javascript
+
+      Prefer Vitest if available else Jest.
+      By default use default official Vitest style guide for testing
+
+      - All test files must be written in TypeScript.
+      - Test files must end with the .spec.ts extension
+      - Test files must be named according the tested file and is located in the same folder (ex: x.spec.ts refers to x.ts)
+      - Test files must be named according to the tested file and is located in the same folder (ex: x.spec.ts refers to x.ts)
+      - Test files must contain at least one test function, which should have a descriptive name and pass an assertion using the expect() function from Vitest.
+      - Test files must not contain any imports other than the ones listed in the package.json file of the project, except for those that are necessary for running the tests.
+      By following these guidelines, we can ensure that all of our test code is written in a consistent and efficient manner, which will make it easier to maintain and update over time.
+      - Use `it` and not `test` function
+      - When possible, use `describe(myFunction)` instead of string literal `describe('myFunction')`
+
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
