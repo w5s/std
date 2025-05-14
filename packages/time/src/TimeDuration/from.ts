@@ -1,11 +1,6 @@
 import { of } from './of.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { weeks as ofWeeks } from './weeks.js';
-import { days as ofDays } from './days.js';
-import { hours as ofHours } from './hours.js';
-import { minutes as ofMinutes } from './minutes.js';
-import { seconds as ofSeconds } from './seconds.js';
-import { milliseconds as ofMilliseconds } from './milliseconds.js';
+import { DAYS, HOURS, MINUTES, SECONDS, WEEKS } from '../__constants.js';
 
 export interface TimeDurationObject {
   /**
@@ -57,22 +52,22 @@ export function from(source: number | TimeDurationObject): TimeDuration {
   const { weeks, days, hours, minutes, seconds, milliseconds } = source;
   let returnValue = 0;
   if (weeks != null) {
-    returnValue += ofWeeks(weeks);
+    returnValue += weeks * WEEKS;
   }
   if (days != null) {
-    returnValue += ofDays(days);
+    returnValue += days * DAYS;
   }
   if (hours != null) {
-    returnValue += ofHours(hours);
+    returnValue += hours * HOURS;
   }
   if (minutes != null) {
-    returnValue += ofMinutes(minutes);
+    returnValue += minutes * MINUTES;
   }
   if (seconds != null) {
-    returnValue += ofSeconds(seconds);
+    returnValue += seconds * SECONDS;
   }
   if (milliseconds != null) {
-    returnValue += ofMilliseconds(milliseconds);
+    returnValue += milliseconds;
   }
 
   return of(returnValue);
