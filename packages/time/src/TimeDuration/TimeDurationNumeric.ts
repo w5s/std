@@ -5,7 +5,7 @@ import type { TimeDuration } from './TimeDuration.js';
 interface TimeDurationNumeric
   extends Numeric.Add<TimeDuration>,
     Numeric.Subtract<TimeDuration>,
-    Numeric.Multiply<TimeDuration> {}
+    Numeric.Multiply<TimeDuration, number> {}
 export const TimeDurationNumeric: TimeDurationNumeric = {
   '+': NumberNumeric['+'] as TimeDurationNumeric['+'],
   '-': NumberNumeric['-'] as TimeDurationNumeric['-'],
