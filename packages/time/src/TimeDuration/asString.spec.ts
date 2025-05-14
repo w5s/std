@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { asString } from './format.js';
+import { asString } from './asString.js';
 import { from } from './from.js';
 
 describe(asString, () => {
