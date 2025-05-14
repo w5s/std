@@ -15,6 +15,7 @@ import { toSeconds } from './TimeDuration/toSeconds.js';
 import { toMinutes } from './TimeDuration/toMinutes.js';
 import { toHours } from './TimeDuration/toHours.js';
 import { toDays } from './TimeDuration/toDays.js';
+import { toWeeks } from './TimeDuration/toWeeks.js';
 
 describe('TimeDuration', () => {
   it('is an alias to functions', () => {
@@ -35,6 +36,7 @@ describe('TimeDuration', () => {
         toMinutes,
         toHours,
         toDays,
+        toWeeks,
       }),
     );
   });
