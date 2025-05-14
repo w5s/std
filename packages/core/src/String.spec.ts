@@ -14,6 +14,7 @@ import { indexOf } from './String/indexOf.js';
 import { lastIndexOf } from './String/lastIndexOf.js';
 import { StringComparable } from './String/StringComparable.js';
 import { Type } from './Type.js';
+import { padEnd } from './String/padEnd.js';
 
 describe('String', () => {
   it('is an alias to functions', () => {
@@ -30,6 +31,7 @@ describe('String', () => {
         join,
         lastIndexOf,
         of,
+        padEnd,
         size,
         split,
         startsWith,
