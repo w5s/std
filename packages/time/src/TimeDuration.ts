@@ -3,6 +3,7 @@ import { TimeDuration as TimeDurationType } from './TimeDuration/TimeDuration.js
 import { TimeDurationSigned } from './TimeDuration/TimeDurationSigned.js';
 import { TimeDurationComparable } from './TimeDuration/TimeDurationComparable.js';
 import { TimeDurationNumeric } from './TimeDuration/TimeDurationNumeric.js';
+import { asString } from './TimeDuration/asString.js';
 import { of } from './TimeDuration/of.js';
 import { from } from './TimeDuration/from.js';
 import { milliseconds } from './TimeDuration/milliseconds.js';
@@ -34,6 +35,7 @@ export const TimeDuration = Callable({
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
   ...TimeDurationSigned,
+  asString,
   toSeconds,
   toMinutes,
   toHours,
