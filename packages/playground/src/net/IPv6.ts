@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-import type { Bounded, Codec, Int, Option } from '@w5s/core';
+import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
@@ -115,7 +115,7 @@ function of(...parts: [number, number, number, number, number, number, number, n
   return fromBigInt(bigintAddress);
 }
 
-function compare(left: IPv6, right: IPv6): number {
+function compare(left: IPv6, right: IPv6): Ordering {
   return bigintCompare(left.ipv6, right.ipv6);
 }
 

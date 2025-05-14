@@ -1,4 +1,5 @@
 import type { Equal } from './Equal.js';
+import type { Ordering } from './Ordering.js';
 
 /**
  * Module interface for values that have total order
@@ -15,7 +16,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  compare(this: void, left: T, right: T): number;
+  compare(this: void, left: T, right: T): Ordering;
   /**
    * "Less than or equal to" operator
    *
@@ -138,7 +139,7 @@ export interface Comparable<T> extends Equal<T> {
  * @param properties
  * @param properties.compare - the comparison function
  */
-export function Comparable<T>(properties: { compare: (left: T, right: T) => number }): Comparable<T> {
+export function Comparable<T>(properties: { compare: (left: T, right: T) => Ordering }): Comparable<T> {
   const { compare } = properties;
   const equals = (left: T, right: T) => compare(left, right) === 0;
   const min = (left: T, right: T) => (compare(left, right) <= 0 ? left : right);

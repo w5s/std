@@ -1,5 +1,5 @@
 /* eslint-disable no-bitwise */
-import type { Bounded, Codec, Int, Option } from '@w5s/core';
+import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
@@ -67,7 +67,7 @@ function of(_0: number, _1: number, _2: number, _3: number) {
   return IPv4Type({ ipv4: ((_0 << 24) | (_1 << 16) | (_2 << 8) | _3) as IPv4Address });
 }
 
-function compare(left: IPv4, right: IPv4): number {
+function compare(left: IPv4, right: IPv4): Ordering {
   return numberCompare(left.ipv4 >>> 0, right.ipv4 >>> 0);
 }
 
