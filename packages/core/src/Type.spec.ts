@@ -25,6 +25,7 @@ import { Record } from './Type/Record.js';
 import { URL } from './Type/URL.js';
 import { Char } from './Type/Char.js';
 import { RegExp } from './Type/RegExp.js';
+import { Ordering } from './Type/Ordering.js';
 
 describe('Type', () => {
   it('is an alias to functions', () => {
@@ -44,6 +45,7 @@ describe('Type', () => {
       Record,
       Object: TObject,
       Option,
+      Ordering,
       Tuple,
       RegExp,
       UUID,
