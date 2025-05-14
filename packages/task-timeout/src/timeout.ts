@@ -3,6 +3,7 @@ import type { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { Ref } from '@w5s/core/dist/Ref.js';
+import { asString as timeDurationString } from '@w5s/time/dist/TimeDuration/asString.js';
 import type { Option } from '@w5s/core';
 
 /**
@@ -39,7 +40,7 @@ export function timeout<Value, Error>(
           taskCancel();
           reject(
             new TimeoutError({
-              message: `Task timed out after ${stringifyDelay(delay)}`,
+              message: `Task timed out after ${timeDurationString(delay)}`,
             }),
           );
         }, delay);
@@ -62,8 +63,4 @@ export function timeout<Value, Error>(
           canceler: taskCancelerRef,
         });
       });
-}
-
-function stringifyDelay(delay: TimeDuration) {
-  return `${String(delay)}ms`;
 }
