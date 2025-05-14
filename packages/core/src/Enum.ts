@@ -31,7 +31,7 @@ export namespace Enum {
   export type ValueOf<T extends Enum<Record<string, any>>> = T[KeyOf<T>];
 }
 
-export interface Enumerable<T extends Record<string, unknown> = Record<string, unknown>>
+export interface Enumerable<T extends Record<string, any> = Record<string, unknown>>
   extends Type<T[keyof T]>,
     Codec<T[keyof T]>,
     Indexable<T[keyof T], number> {
