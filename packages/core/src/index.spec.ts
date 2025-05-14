@@ -25,6 +25,7 @@ describe('index', () => {
         'lazy',
         'Number',
         'Option',
+        'Ordering',
         'Record',
         'Ref',
         'Result',
