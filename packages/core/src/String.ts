@@ -13,6 +13,7 @@ import { join } from './String/join.js';
 import { indexOf } from './String/indexOf.js';
 import { lastIndexOf } from './String/lastIndexOf.js';
 import { padEnd } from './String/padEnd.js';
+import { padStart } from './String/padStart.js';
 
 /**
  * A collection of functions to manipulate `string`
@@ -32,6 +33,7 @@ export const String = {
   lastIndexOf,
   of,
   padEnd,
+  padStart,
   size,
   split,
   startsWith,
