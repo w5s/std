@@ -1,3 +1,4 @@
+import { reverse } from './Ordering/reverse.js';
 import { Ordering as OrderingType } from './Type/Ordering.js';
 
 /**
@@ -14,4 +15,5 @@ export type Ordering = OrderingType;
  */
 export const Ordering = {
   ...OrderingType,
+  reverse,
 };
