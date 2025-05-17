@@ -12,7 +12,6 @@ import { getOrThrow } from './Result/getOrThrow.js';
 import { hasInstance } from './Result/hasInstance.js';
 import { mapError } from './Result/mapError.js';
 import { map } from './Result/map.js';
-import { match } from './Result/match.js';
 import { orElse } from './Result/orElse.js';
 import { tryCall } from './Result/tryCall.js';
 
@@ -31,7 +30,6 @@ describe('Result', () => {
       hasInstance,
       map,
       mapError,
-      match,
       orElse,
       tryCall,
     });

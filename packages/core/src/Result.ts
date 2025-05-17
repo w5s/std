@@ -10,7 +10,6 @@ import { mapError } from './Result/mapError.js';
 import { getOrThrow } from './Result/getOrThrow.js';
 import { andThen } from './Result/andThen.js';
 import { orElse } from './Result/orElse.js';
-import { match } from './Result/match.js';
 import { hasInstance } from './Result/hasInstance.js';
 import { tryCall } from './Result/tryCall.js';
 
@@ -63,7 +62,6 @@ export const Result = {
   isOk,
   map,
   mapError,
-  match,
   orElse,
   tryCall,
 };
