@@ -4686,13 +4686,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sindresorhus/merge-streams@npm:^2.1.0":
-  version: 2.3.0
-  resolution: "@sindresorhus/merge-streams@npm:2.3.0"
-  checksum: 10c0/69ee906f3125fb2c6bb6ec5cdd84e8827d93b49b3892bce8b62267116cc7e197b5cccf20c160a1d32c26014ecd14470a72a5e3ee37a58f1d6dadc0db1ccf3894
-  languageName: node
-  linkType: hard
-
 "@sindresorhus/merge-streams@npm:^4.0.0":
   version: 4.0.0
   resolution: "@sindresorhus/merge-streams@npm:4.0.0"
@@ -4712,21 +4705,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@size-limit/file@npm:11.2.0":
+"@size-limit/file@npm:11.2.0, @size-limit/file@npm:^11.2.0":
   version: 11.2.0
   resolution: "@size-limit/file@npm:11.2.0"
   peerDependencies:
     size-limit: 11.2.0
   checksum: 10c0/25fb431c2afa9293774842f3abb12ee0aaa988585a2be545f2a4f90ffd5c638a13bada10a0b71e376cefb426bd991793d0e1ffe970b94a4e0bb8b0a8b504f343
-  languageName: node
-  linkType: hard
-
-"@size-limit/file@npm:^10.0.2":
-  version: 10.0.3
-  resolution: "@size-limit/file@npm:10.0.3"
-  peerDependencies:
-    size-limit: 10.0.3
-  checksum: 10c0/a366a86a20baebb561c990cdca34586a7ef32bc752eec0b0f26d7dce72fbc95358b0e7aaf7835c51e5874113cd19787f541f4e74448ca01300a6cbbb47fb8c45
   languageName: node
   linkType: hard
 
@@ -5874,7 +5858,7 @@ __metadata:
     markdown-magic-subpackage-list: "npm:1.1.2"
     npm-run-all2: "npm:8.0.2"
     prettier: "npm:3.5.3"
-    size-limit-preset-node-lib: "npm:0.3.0"
+    size-limit-preset-node-lib: "npm:0.4.0"
     turbo: "npm:2.5.3"
     typedoc: "npm:0.28.4"
     typescript: "npm:5.8.3"
@@ -10341,7 +10325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:^3.0.3, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
+"fast-glob@npm:^3.0.3, fast-glob@npm:^3.2.11, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.0, fast-glob@npm:^3.3.2":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -11207,20 +11191,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^14.0.0":
-  version: 14.1.0
-  resolution: "globby@npm:14.1.0"
-  dependencies:
-    "@sindresorhus/merge-streams": "npm:^2.1.0"
-    fast-glob: "npm:^3.3.3"
-    ignore: "npm:^7.0.3"
-    path-type: "npm:^6.0.0"
-    slash: "npm:^5.1.0"
-    unicorn-magic: "npm:^0.3.0"
-  checksum: 10c0/527a1063c5958255969620c6fa4444a2b2e9278caddd571d46dfbfa307cb15977afb746e84d682ba5b6c94fc081e8997f80ff05dd235441ba1cb16f86153e58e
-  languageName: node
-  linkType: hard
-
 "gopd@npm:^1.0.1, gopd@npm:^1.2.0":
   version: 1.2.0
   resolution: "gopd@npm:1.2.0"
@@ -11918,7 +11888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ignore@npm:^7.0.0, ignore@npm:^7.0.3":
+"ignore@npm:^7.0.0":
   version: 7.0.4
   resolution: "ignore@npm:7.0.4"
   checksum: 10c0/90e1f69ce352b9555caecd9cbfd07abe7626d312a6f90efbbb52c7edca6ea8df065d66303863b30154ab1502afb2da8bc59d5b04e1719a52ef75bbf675c488eb
@@ -13056,13 +13026,6 @@ __metadata:
     sigstore: "npm:^3.0.0"
     ssri: "npm:^12.0.0"
   checksum: 10c0/a7859debd9963980c85829148a1008c1cdd48793fbaf243fb926cc83b055e2a6d112a59fb53443bf5afb52c8668d502ebb4e765a5d29ae232d84e261cd90e228
-  languageName: node
-  linkType: hard
-
-"lilconfig@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "lilconfig@npm:2.1.0"
-  checksum: 10c0/64645641aa8d274c99338e130554abd6a0190533c0d9eb2ce7ebfaf2e05c7d9961f3ffe2bfa39efd3b60c521ba3dd24fa236fe2775fc38501bf82bf49d4678b8
   languageName: node
   linkType: hard
 
@@ -14867,7 +14830,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^5.0.3, nanoid@npm:^5.1.0":
+"nanoid@npm:^5.1.0, nanoid@npm:^5.1.5":
   version: 5.1.5
   resolution: "nanoid@npm:5.1.5"
   bin:
@@ -14876,7 +14839,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanospinner@npm:^1.1.0, nanospinner@npm:^1.2.2":
+"nanospinner@npm:^1.2.2":
   version: 1.2.2
   resolution: "nanospinner@npm:1.2.2"
   dependencies:
@@ -15901,13 +15864,6 @@ __metadata:
   version: 4.0.0
   resolution: "path-type@npm:4.0.0"
   checksum: 10c0/666f6973f332f27581371efaf303fd6c272cc43c2057b37aa99e3643158c7e4b2626549555d88626e99ea9e046f82f32e41bbde5f1508547e9a11b149b52387c
-  languageName: node
-  linkType: hard
-
-"path-type@npm:^6.0.0":
-  version: 6.0.0
-  resolution: "path-type@npm:6.0.0"
-  checksum: 10c0/55baa8b1187d6dc683d5a9cfcc866168d6adff58e5db91126795376d818eee46391e00b2a4d53e44d844c7524a7d96aa68cc68f4f3e500d3d069a39e6535481c
   languageName: node
   linkType: hard
 
@@ -18588,29 +18544,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"size-limit-node-esbuild@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "size-limit-node-esbuild@npm:0.3.0"
+"size-limit-node-esbuild@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "size-limit-node-esbuild@npm:0.4.0"
   dependencies:
-    nanoid: "npm:^5.0.3"
-    size-limit: "npm:^10.0.2"
-    tslib: "npm:^2.6.2"
-  checksum: 10c0/bdf1b1500a85f060c80ebe50f838dc7cd3ad6ecb5161996cbe41dd0bae5400760325e2e2fa85a2fe95b6433d940c202981da444b4ec9007cc675a2ce7e87d5cf
+    nanoid: "npm:^5.1.5"
+    size-limit: "npm:^11.2.0"
+    tslib: "npm:^2.8.1"
+  checksum: 10c0/48d5619db81dc0dc6f999c2c725fece528efd6d127c8c9385ca01dcafce6713e209c09186a9e878b8a0f027de29a9651510b6129ad70d12082517b17c162a138
   languageName: node
   linkType: hard
 
-"size-limit-preset-node-lib@npm:0.3.0":
-  version: 0.3.0
-  resolution: "size-limit-preset-node-lib@npm:0.3.0"
+"size-limit-preset-node-lib@npm:0.4.0":
+  version: 0.4.0
+  resolution: "size-limit-preset-node-lib@npm:0.4.0"
   dependencies:
-    "@size-limit/file": "npm:^10.0.2"
-    size-limit-node-esbuild: "npm:^0.3.0"
-    tslib: "npm:^2.6.2"
-  checksum: 10c0/04da4a2ce84483584818fcf27d2efd143bae2484875628c3023b7f1d528a65d5af1bcd709909ca80336defecbf1735d2c126e27e996e2987034fdd261f9f2a0d
+    "@size-limit/file": "npm:^11.2.0"
+    size-limit-node-esbuild: "npm:^0.4.0"
+    tslib: "npm:^2.8.1"
+  peerDependencies:
+    size-limit: ^11.0.0
+  checksum: 10c0/bce77f07cbe51220284dc9ad8caf9c56e3315a18d7fa1def9efca63e4118965c53d9a9c9c53c26c6860bbfb89ce2f5193b8d82c0461558080f9ce97705c53f18
   languageName: node
   linkType: hard
 
-"size-limit@npm:11.2.0":
+"size-limit@npm:11.2.0, size-limit@npm:^11.2.0":
   version: 11.2.0
   resolution: "size-limit@npm:11.2.0"
   dependencies:
@@ -18624,22 +18582,6 @@ __metadata:
   bin:
     size-limit: bin.js
   checksum: 10c0/c3613e20dfc227074d73098bfdd6fe274aed980bf133ad61a380032425bfa8b7d749c876dea50e9648a64cd57fb768edac9ffc1927100bcadf814255e44236f1
-  languageName: node
-  linkType: hard
-
-"size-limit@npm:^10.0.2":
-  version: 10.0.3
-  resolution: "size-limit@npm:10.0.3"
-  dependencies:
-    bytes-iec: "npm:^3.1.1"
-    chokidar: "npm:^3.5.3"
-    globby: "npm:^14.0.0"
-    lilconfig: "npm:^2.1.0"
-    nanospinner: "npm:^1.1.0"
-    picocolors: "npm:^1.0.0"
-  bin:
-    size-limit: bin.js
-  checksum: 10c0/be801543039dec7bf7b2a69ec7667b1993985e31ef31837e9f3327c123940317e604d5783cca9312c60609024de56ca9fef855919ca85273c5d7a0377d600882
   languageName: node
   linkType: hard
 
@@ -19625,7 +19567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.3, tslib@npm:^2.6.0, tslib@npm:^2.6.2":
+"tslib@npm:^2.0.3, tslib@npm:^2.6.0, tslib@npm:^2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
