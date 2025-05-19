@@ -21,6 +21,7 @@ describe('index', () => {
         'describeSubtract',
         'describeDivide',
         'describeType',
+        'withOrder',
       ].sort(),
     );
   });

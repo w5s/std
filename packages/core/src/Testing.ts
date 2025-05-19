@@ -14,3 +14,4 @@ export * from './Testing/describeSubtract.js';
 export * from './Testing/describeDivide.js';
 export * from './Testing/describeType.js';
 export * from './Testing/type.js';
+export * from './Testing/withOrder.js';
