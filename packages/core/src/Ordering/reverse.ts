@@ -16,5 +16,5 @@ import type { Ordering } from '../Ordering.js';
  * @param ordering - the ordering
  */
 export function reverse(ordering: Ordering): Ordering {
-  return ordering === 0 ? 0 : ordering < 0 ? 1 : -1;
+  return ordering === 0 ? ordering : (-ordering as Ordering);
 }
