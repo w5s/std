@@ -13,7 +13,17 @@ describe(compareBy, () => {
   }
 
   it('returns a function that compares two values through the selectFn', async () => {
-    const compareByName = compareBy(String.compare, (person: Person) => person.name);
+    const compareByName = compareBy((person: Person) => person.name, String.compare);
+
+    expectOrder(compareByName).toSortValues([
+      { name: 'Alice', age: 25 },
+      { name: 'Alice', age: 26 },
+      { name: 'Bob', age: 30 },
+      { name: 'Bob', age: 31 },
+    ]);
+  });
+  it('uses .compare when comparable', async () => {
+    const compareByName = compareBy((person: Person) => person.name, String);
 
     expectOrder(compareByName).toSortValues([
       { name: 'Alice', age: 25 },

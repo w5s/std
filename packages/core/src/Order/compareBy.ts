@@ -1,15 +1,21 @@
+import type { Comparable } from '../Comparable.js';
 import type { Order } from '../Order.js';
 
 /**
  * Return a new {@link @w5s/core!Order} function that will map the parameters using `selectFn`
  *
+ * @category Constructor
  * @example
  * ```typescript
- * const compareByName = compareBy(String.compare, (named: { name: string }) => named.name);
+ * const compareByName = compareBy((named: { name: string }) => named.name, String.compare);
  * ```
- * @param self - A {@link @w5s/core!Order} function.
- * @param selectFn - A function that takes a `From` value and returns a `To` value.
+ * @param selector - A function that takes a `From` value and returns a `To` value.
+ * @param compareTo - A {@link @w5s/core!Order} function.
  */
-export function compareBy<From, To>(self: Order<From>, selectFn: (from: To) => From): Order<To> {
-  return (left, right) => self(selectFn(left), selectFn(right));
+export function compareBy<From, To>(
+  selector: (from: To) => From,
+  compareTo: Order<From> | Comparable<From>,
+): Order<To> {
+  const compareFn = typeof compareTo === 'function' ? compareTo : compareTo.compare;
+  return (left, right) => compareFn(selector(left), selector(right));
 }
