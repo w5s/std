@@ -2,6 +2,27 @@ import { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
 import type { TestingLibrary } from './type.js';
 
+/**
+ * Create a spec for Codec behavior
+ *
+ * @example
+ * ```typescript
+ * describeCodec({ describe, it, expect })(Int, {
+ *   decode: [
+ *     [1, Result.Ok(Int(1))],
+ *     [null, Result.Error(new CodecError({ message: 'Cannot decode null as Int', input: null }))],
+ *   ],
+ *   encode: [
+ *     [Int(0), 0],
+ *     [Int(1), 1],
+ *   ],
+ *   schema: () => ({
+ *     type: 'integer',
+ *   }),
+ * });
+ * ```
+ * @param testingLibrary
+ */
 export function describeCodec(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
   return <T>(
