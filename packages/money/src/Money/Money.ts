@@ -3,13 +3,13 @@ import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import type { Codec } from '@w5s/core';
 import type { Currency } from '../Currency/Currency.js';
-import { format } from './format.js';
 import { parse } from './parse.js';
+import { asString } from './asString.js';
 
 const MoneyStruct = Struct.define<Money>('Money');
 
 const MoneyCodec: Codec<Money> = {
-  codecEncode: (input) => format(input),
+  codecEncode: (input) => asString(input),
   codecDecode: (input, { ok, error }) => {
     if (typeof input === 'string') {
       const parseResult = parse(input);

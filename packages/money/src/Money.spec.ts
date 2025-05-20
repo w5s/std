@@ -8,6 +8,7 @@ describe('Money', () => {
       expect.objectContaining({
         '+': expect.any(Function),
         '-': expect.any(Function),
+        asString: expect.any(Function),
         format: expect.any(Function),
         parse: expect.any(Function),
       }),
