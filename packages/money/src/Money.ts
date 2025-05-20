@@ -3,6 +3,7 @@ import { MoneyComparable } from './Money/MoneyComparable.js';
 import { MoneyNumeric } from './Money/MoneyNumeric.js';
 import { Money as MoneyType } from './Money/Money.js';
 import { format } from './Money/format.js';
+import { parse } from './Money/parse.js';
 
 export type Money = MoneyType;
 
@@ -14,4 +15,5 @@ export const Money = Callable({
   ...MoneyComparable,
   ...MoneyNumeric,
   format,
+  parse,
 });

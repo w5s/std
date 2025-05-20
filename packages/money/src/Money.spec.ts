@@ -9,6 +9,7 @@ describe('Money', () => {
         '+': expect.any(Function),
         '-': expect.any(Function),
         format: expect.any(Function),
+        parse: expect.any(Function),
       }),
     );
   });
