@@ -8,6 +8,7 @@ import { normalize } from './BigDecimal/normalize.js';
 import { BigDecimalComparable } from './BigDecimal/BigDecimalComparable.js';
 import { BigDecimalSigned } from './BigDecimal/BigDecimalSigned.js';
 import { BigDecimalNumeric } from './BigDecimal/BigDecimalNumeric.js';
+import { asString } from './BigDecimal/asString.js';
 
 describe('BigDecimal', () => {
   it('is an alias to functions', () => {
@@ -16,6 +17,7 @@ describe('BigDecimal', () => {
     expect(BigDecimal).toEqual(expect.objectContaining(BigDecimalNumeric));
     expect(BigDecimal).toEqual(
       expect.objectContaining({
+        asString,
         compare: expect.any(Function),
         format,
         normalize,

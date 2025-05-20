@@ -2,13 +2,13 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import type { Codec } from '@w5s/core';
 import { parse } from './parse.js';
-import { format } from './format.js';
+import { asString } from './asString.js';
 import { call } from './call.js';
 
 const BigDecimalStruct = Struct.define<BigDecimal>('BigDecimal');
 
 const BigDecimalCodec: Codec<BigDecimal> = {
-  codecEncode: (input) => `${format(input)}m`,
+  codecEncode: (input) => `${asString(input)}m`,
   codecDecode: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('m')) {
       const parsed = parse(input.slice(0, -1));
