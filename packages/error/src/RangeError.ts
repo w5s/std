@@ -6,6 +6,8 @@ import type { ErrorOptions } from './ErrorOptions.js';
 /**
  * Alias to native {@link globalThis.RangeError}
  *
+ * A RangeError is thrown when trying to pass a value as an argument to a function that does not allow a range that includes the value.
+ *
  * @example
  * ```typescript
  * import { RangeError } from '@w5s/error';

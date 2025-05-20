@@ -1,7 +1,7 @@
 import { ErrorClass } from './ErrorClass.js';
 
 /**
- * Error that occurred during program execution
+ * The RuntimeError object indicates an error that an error occurred during the runtime of a program.
  */
 export class RuntimeError extends ErrorClass({
   errorName: 'RuntimeError',

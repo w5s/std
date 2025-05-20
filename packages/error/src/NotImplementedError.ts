@@ -1,7 +1,7 @@
 import { ErrorClass } from './ErrorClass.js';
 
 /**
- * NotImplementedError constructor
+ * The NotImplementedError object indicates an error that the current function was not implemented
  *
  * @example
  * ```typescript

@@ -5,6 +5,8 @@ import type { ErrorOptions } from './ErrorOptions.js';
 /**
  * Alias to native {@link globalThis.URIError}
  *
+ * The URIError object represents an error when a global URI handling function was used in a wrong way.
+ *
  * @example
  * ```typescript
  * import { URIError } from '@w5s/error';

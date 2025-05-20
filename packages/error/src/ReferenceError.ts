@@ -5,6 +5,8 @@ import type { ErrorOptions } from './ErrorOptions.js';
 /**
  * Alias to native {@link globalThis.ReferenceError}
  *
+ * The ReferenceError object represents an error when a variable that doesn't exist (or hasn't yet been initialized) in the current scope is referenced.
+ *
  * @example
  * ```typescript
  * import { ReferenceError } from '@w5s/error';

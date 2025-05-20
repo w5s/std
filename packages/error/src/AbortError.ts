@@ -1,7 +1,7 @@
 import { ErrorClass } from './ErrorClass.js';
 
 /**
- * AbortError constructor
+ * The AbortError object indicates an error that the operation was aborted.
  *
  */
 export class AbortError extends ErrorClass({

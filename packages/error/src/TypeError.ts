@@ -5,6 +5,8 @@ import type { ErrorOptions } from './ErrorOptions.js';
 /**
  * Alias to native {@link globalThis.TypeError}
  *
+ * The TypeError object represents an error when an operation could not be performed, typically (but not exclusively) when a value is not of the expected type.
+ *
  * @example
  * ```typescript
  * import { TypeError } from '@w5s/error';
