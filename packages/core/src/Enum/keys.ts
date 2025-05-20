@@ -11,6 +11,6 @@ import { Symbol } from '../Symbol.js';
  * ```
  * @param enumObject
  */
-export function keys<T extends Enum>(enumObject: T): ReadonlyArray<Enum.KeyOf<T>> {
+export function keys<T extends Enum<Record<string, any>>>(enumObject: T): ReadonlyArray<Enum.KeyOf<T>> {
   return enumObject[Symbol.enumKeys] as ReadonlyArray<Enum.KeyOf<T>>;
 }
