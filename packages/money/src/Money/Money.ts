@@ -1,6 +1,29 @@
 import type { BigDecimal } from '@w5s/bigdecimal';
 import { Struct } from '@w5s/core/dist/Struct.js';
+import { Callable } from '@w5s/core/dist/Callable.js';
+import type { Codec } from '@w5s/core';
 import type { Currency } from '../Currency/Currency.js';
+import { format } from './format.js';
+import { parse } from './parse.js';
+
+const MoneyStruct = Struct.define<Money>('Money');
+
+const MoneyCodec: Codec<Money> = {
+  codecEncode: (input) => format(input),
+  codecDecode: (input, { ok, error }) => {
+    if (typeof input === 'string') {
+      const parseResult = parse(input);
+      if (parseResult != null) {
+        return ok(parseResult);
+      }
+    }
+    return error(input, 'Money');
+  },
+  codecSchema: () => ({
+    type: 'string',
+    format: 'money',
+  }),
+};
 
 export interface Money
   extends Struct<{
@@ -14,4 +37,4 @@ export interface Money
      */
     currency: Currency;
   }> {}
-export const Money = Struct.define<Money>('Money');
+export const Money = Callable({ ...MoneyStruct, ...MoneyCodec });
