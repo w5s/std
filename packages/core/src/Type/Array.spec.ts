@@ -29,7 +29,7 @@ describe(Array, () => {
         ['a', '_b', '_c'],
         Result.Error(
           new CodecError({
-            message: 'Cannot decode a as UnderscoreString',
+            message: 'Cannot decode "a" as UnderscoreString',
             input: 'a',
           }),
         ),

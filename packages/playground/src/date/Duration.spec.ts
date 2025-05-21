@@ -38,7 +38,7 @@ describe('Duration', () => {
       // Invalid inputs
       ...['', 'P', 'PT'].map(
         (_) =>
-          [_, Result.Error(new CodecError({ message: `Cannot decode ${_} as Duration`, input: _ }))] as [
+          [_, Result.Error(new CodecError({ message: `Cannot decode "${_}" as Duration`, input: _ }))] as [
             string,
             Result<Duration, CodecError>,
           ],

@@ -24,7 +24,7 @@ describe('()', () => {
     decode: [
       ['1.0m', Result.Ok(BigDecimal.create({ value: 10n, scale: 1 }))],
       ['-2.1m', Result.Ok(BigDecimal.create({ value: -21n, scale: 1 }))],
-      ['2.1', Result.Error(new CodecError({ message: 'Cannot decode 2.1 as BigDecimal', input: '2.1' }))],
+      ['2.1', Result.Error(new CodecError({ message: 'Cannot decode "2.1" as BigDecimal', input: '2.1' }))],
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as BigDecimal', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as BigDecimal', input: null }))],
     ],

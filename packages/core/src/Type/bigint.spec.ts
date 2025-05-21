@@ -18,8 +18,8 @@ describe('bigint', () => {
     decode: [
       ['1n', Result.Ok(1n)],
       ['-2n', Result.Ok(-2n)],
-      ['2', Result.Error(new CodecError({ message: 'Cannot decode 2 as bigint', input: '2' }))],
-      ['2.1n', Result.Error(new CodecError({ message: 'Cannot decode 2.1n as bigint', input: '2.1n' }))],
+      ['2', Result.Error(new CodecError({ message: 'Cannot decode "2" as bigint', input: '2' }))],
+      ['2.1n', Result.Error(new CodecError({ message: 'Cannot decode "2.1n" as bigint', input: '2.1n' }))],
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as bigint', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as bigint', input: null }))],
     ],

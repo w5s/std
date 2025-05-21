@@ -26,8 +26,8 @@ describe(Money, () => {
   describeCodec({ describe, it, expect })(Money, {
     decode: [
       ['1.1EUR', Result.Ok(Money({ currency: EUR, amount: BigDecimal('1.1') }))],
-      ['EUR', Result.Error(new CodecError({ message: 'Cannot decode EUR as Money', input: 'EUR' }))],
-      ['BLAH', Result.Error(new CodecError({ message: 'Cannot decode BLAH as Money', input: 'BLAH' }))],
+      ['EUR', Result.Error(new CodecError({ message: 'Cannot decode "EUR" as Money', input: 'EUR' }))],
+      ['BLAH', Result.Error(new CodecError({ message: 'Cannot decode "BLAH" as Money', input: 'BLAH' }))],
       [1, Result.Error(new CodecError({ message: 'Cannot decode 1 as Money', input: 1 }))],
     ],
     encode: [

@@ -86,7 +86,7 @@ describe(define, () => {
       ['bar', Result.Ok(MyEnumObject.Bar)],
       [
         'foo_invalid',
-        Result.Error(new CodecError({ message: 'Cannot decode foo_invalid as MyEnumObject', input: 'foo_invalid' })),
+        Result.Error(new CodecError({ message: 'Cannot decode "foo_invalid" as MyEnumObject', input: 'foo_invalid' })),
       ],
     ],
     encode: [

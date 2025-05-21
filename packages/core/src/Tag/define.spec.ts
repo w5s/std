@@ -16,7 +16,7 @@ describe(define, () => {
 
   describeType({ describe, it, expect })(PositiveNumber, {
     typeName: 'PositiveNumber',
-    instances: () => [1, 1000],
+    instances: () => [1 as PositiveNumber, 1000 as PositiveNumber],
     notInstances: () => [0, -1, -1000],
   });
   describe('#()', () => {
@@ -62,7 +62,7 @@ describe(define, () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
         Result.Error(
-          new CodecError({ message: 'Cannot decode invalid_value as PositiveNumber', input: 'invalid_value' }),
+          new CodecError({ message: 'Cannot decode "invalid_value" as PositiveNumber', input: 'invalid_value' }),
         ),
       );
       expect(Codec.decode(PositiveNumber, undefined)).toEqual(

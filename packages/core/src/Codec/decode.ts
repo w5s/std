@@ -4,6 +4,10 @@ import { Error } from '../Result/Error.js';
 import { Ok } from '../Result/Ok.js';
 import { CodecError } from '../CodecError.js';
 
+function inspect(anyValue: unknown) {
+  return typeof anyValue === 'string' ? `"${anyValue}"` : String(anyValue);
+}
+
 /**
  * Returns a `Result` containing the decoded `input`
  *
@@ -22,7 +26,7 @@ export function decode<T>(codec: Pick<Codec<T>, 'codecDecode'>, input: unknown):
     error: (inputError, asType) =>
       Error(
         new CodecError({
-          message: `Cannot decode ${String(inputError)}${asType == null ? '' : ` as ${asType}`}`,
+          message: `Cannot decode ${inspect(inputError)}${asType == null ? '' : ` as ${asType}`}`,
           input: inputError,
         }),
       ),

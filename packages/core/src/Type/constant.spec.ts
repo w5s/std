@@ -19,7 +19,7 @@ describe(constant, () => {
         'otherValue',
         Result.Error(
           new CodecError({
-            message: 'Cannot decode otherValue as anyValue',
+            message: 'Cannot decode "otherValue" as anyValue',
             input: 'otherValue',
           }),
         ),
@@ -38,7 +38,7 @@ describe(constant, () => {
         'otherValue',
         Result.Error(
           new CodecError({
-            message: 'Cannot decode otherValue as Symbol(anySymbol)',
+            message: 'Cannot decode "otherValue" as Symbol(anySymbol)',
             input: 'otherValue',
           }),
         ),
