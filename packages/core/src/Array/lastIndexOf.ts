@@ -11,18 +11,18 @@ import type { Option } from '../Option.js';
  * Array.lastIndexOf(['a', 'b', 'a', 'b', 'a'], 'a', 4); // Option.Some(2)
  * Array.lastIndexOf(['a', 'b'], 'absent') // Option.None
  * ```
- * @param array - The array object
+ * @param self - The array object
  * @param searchItem - The item to locate in the array.
  * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
  */
-export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
-  const arrayLength = array.length;
+export function lastIndexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
+  const arrayLength = self.length;
 
   if (arrayLength > 0) {
     // eslint-disable-next-line no-self-compare
     if (searchItem === searchItem) {
       // not NaN
-      const indexNumber = array.lastIndexOf(searchItem, fromIndex);
+      const indexNumber = self.lastIndexOf(searchItem, fromIndex);
       return indexNumber === -1 ? undefined : (indexNumber as Int);
     }
     let index =
@@ -33,7 +33,7 @@ export function lastIndexOf<Item>(array: Array<Item>, searchItem: Item, fromInde
           : Math.min(fromIndex, arrayLength - 1);
     // NaN
     while (index >= 0) {
-      const value = array[index];
+      const value = self[index];
       // eslint-disable-next-line no-self-compare
       if (value !== value) {
         return index as Int;

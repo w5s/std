@@ -11,9 +11,9 @@ import { isOk } from './isOk.js';
  * const result = Error('foo');
  * Result.mapError(result, (value) => `${value}_bar`));// Error('foo_bar')
  * ```
- * @param result - a Result object
+ * @param self - a Result object
  * @param fn - the error  mapper function
  */
-export function mapError<V, EFrom, ETo>(result: Result<V, EFrom>, fn: (error: EFrom) => ETo): Result<V, ETo> {
-  return isOk(result) ? result : Error(fn(result.error));
+export function mapError<V, EFrom, ETo>(self: Result<V, EFrom>, fn: (error: EFrom) => ETo): Result<V, ETo> {
+  return isOk(self) ? self : Error(fn(self.error));
 }

@@ -11,12 +11,12 @@ import { isNone } from './isNone.js';
  * const x = Some('foo');
  * Option.map(x, (value) => `${value}_bar`));// Some('foo_bar') == 'foo_bar'
  * ```
- * @param option - an optional value
+ * @param self - an optional value
  * @param fn - the mapper function
  */
 export function map<ValueFrom, ValueTo>(
-  option: Nullable<ValueFrom>,
+  self: Nullable<ValueFrom>,
   fn: (value: ValueFrom) => NonNullable<ValueTo>,
 ): Option<ValueTo> {
-  return isNone(option) ? undefined : fn(option);
+  return isNone(self) ? undefined : fn(self);
 }

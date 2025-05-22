@@ -17,15 +17,15 @@ const complete = <V, E>(parameters: TaskParameters<V, E>, result: Result<V, E>) 
  *    Result.isOk(result) ? result : Result.Ok('handled_value') )
  * ); // Task.resolve('handled_value')
  * ```
- * @param task - A task
+ * @param self - A task
  * @param mapFn - A result mapper function
  */
 export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   mapFn: (result: Result<ValueFrom, ErrorFrom>) => Result<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorTo> {
   return from((parameters) =>
-    parameters.execute(task, {
+    parameters.execute(self, {
       reject: (error_) => complete(parameters, mapFn(error(error_))),
       resolve: (value) => complete(parameters, mapFn(ok(value))),
     }),

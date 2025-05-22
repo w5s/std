@@ -9,8 +9,8 @@ import type { Int } from '../Int.js';
  * String.size('foo bar') // 6
  * ```
  * @category Accessor
- * @param string - The string
+ * @param self - The string
  */
-export function size(string: string): Int {
-  return string.length as Int;
+export function size(self: string): Int {
+  return self.length as Int;
 }

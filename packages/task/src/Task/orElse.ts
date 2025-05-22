@@ -13,15 +13,15 @@ import { from } from './from.js';
  * const failure = Task.reject('PreviousError');
  * Task.orElse(failure, (error) => Task.reject(`${value}_caught`));// Task.reject('PreviousError_caught')
  * ```
- * @param task - a Task object
+ * @param self - a Task object
  * @param fn - the error mapper function
  */
 export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueFrom | ValueTo, ErrorTo> {
   return from((parameters) =>
-    parameters.execute(task, {
+    parameters.execute(self, {
       reject: (error) => parameters.execute(fn(error), parameters),
       resolve: parameters.resolve,
     }),

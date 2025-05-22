@@ -13,15 +13,15 @@ import { from } from './from.js';
  * const failure = Task.reject('PreviousError');
  * Task.andThen(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
  * ```
- * @param task - a Task object
+ * @param self - a Task object
  * @param fn - the value mapper function
  */
 export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueTo, ErrorFrom | ErrorTo> {
   return from((parameters) =>
-    parameters.execute(task, {
+    parameters.execute(self, {
       resolve: (value) => parameters.execute(fn(value), parameters),
       reject: parameters.reject,
     }),

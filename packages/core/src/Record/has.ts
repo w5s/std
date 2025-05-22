@@ -13,9 +13,9 @@ const hasOwn: typeof Object.hasOwn =
  * Record.has(record, 'myProperty'); // true
  * Record.has(record, 'nonExistent'); // false
  * ```
- * @param record - the record
+ * @param self - the record
  * @param key - the entry key
  */
-export function has<Key extends RecordKey>(record: Record<Key, any>, key: Key): boolean {
-  return hasOwn(record, key);
+export function has<Key extends RecordKey>(self: Record<Key, any>, key: Key): boolean {
+  return hasOwn(self, key);
 }

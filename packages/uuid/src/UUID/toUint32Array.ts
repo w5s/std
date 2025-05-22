@@ -8,11 +8,11 @@ import type { UUID } from '../UUID.js';
  * const uuid: UUID;
  * const parts = UUID.toUint32Array(uuid);
  * ```
- * @param source - the UUID to convert
+ * @param self - the UUID to convert
  */
-export function toUint32Array(source: UUID): Uint32Array {
+export function toUint32Array(self: UUID): Uint32Array {
   const returnValue = new Uint32Array(4);
-  const hexString = source.replaceAll('-', '');
+  const hexString = self.replaceAll('-', '');
 
   for (let index = 0; index < 4; index += 1) {
     const hexSegment = hexString.slice(index * 8, (index + 1) * 8);

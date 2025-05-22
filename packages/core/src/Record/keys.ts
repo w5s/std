@@ -10,8 +10,8 @@ const ownKeys = <Key extends RecordKey>(record: Record<Key, any>) => Reflect.own
  * const record = { first: 1, second: 2 };
  * Array.from(Record.keys(record)); // ['first', 'second']
  * ```
- * @param record - the record
+ * @param self - the record
  */
-export function keys<Key extends RecordKey>(record: Record<Key, any>): Iterable<Key> {
-  return ownKeys(record);
+export function keys<Key extends RecordKey>(self: Record<Key, any>): Iterable<Key> {
+  return ownKeys(self);
 }

@@ -14,11 +14,11 @@ import { isError } from './isError.js';
  * Result.get(x);// Option.None
  * ```
  * @category Accessor
- * @param result - a Result object
+ * @param self - a Result object
  */
-export function get<V>(result: Result.Ok<V> | Result<V, never>): Option.Some<V>;
-export function get(result: Result.Error<unknown> | Result<never, unknown>): Option.None;
-export function get<V>(result: Result<V, unknown>): Option<V>;
-export function get<V>(result: Result<V, unknown>): Option<V> {
-  return isError(result) ? undefined : result.value;
+export function get<V>(self: Result.Ok<V> | Result<V, never>): Option.Some<V>;
+export function get(self: Result.Error<unknown> | Result<never, unknown>): Option.None;
+export function get<V>(self: Result<V, unknown>): Option<V>;
+export function get<V>(self: Result<V, unknown>): Option<V> {
+  return isError(self) ? undefined : self.value;
 }

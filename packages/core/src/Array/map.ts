@@ -10,18 +10,18 @@ import type { Int } from '../Int.js';
  * const double = (_: number) => _ * 2;
  * Array.map(array, double); // [2, 4, 6]
  * ```
- * @param array - The array object
+ * @param self - The array object
  * @param mapFn - A function that accepts up to three arguments. The map method calls the function one time for each item in the array.
  */
 export function map<FromItem, ToItem>(
-  array: Array<FromItem>,
+  self: Array<FromItem>,
   mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => ToItem,
 ): Array<ToItem> {
-  if (array.length === 0) {
-    return array as Array<never>;
+  if (self.length === 0) {
+    return self as Array<never>;
   }
   let changed = false;
-  const returnValue = array.map((previousValue, index, thisArray) => {
+  const returnValue = self.map((previousValue, index, thisArray) => {
     const nextValue = mapFn(previousValue, index as Int, thisArray);
     if (!changed && (nextValue as any) !== previousValue) {
       changed = true;
@@ -30,5 +30,5 @@ export function map<FromItem, ToItem>(
   });
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  return changed ? returnValue : (array as unknown as Array<ToItem>);
+  return changed ? returnValue : (self as unknown as Array<ToItem>);
 }

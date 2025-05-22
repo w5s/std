@@ -12,11 +12,11 @@ import type { Option } from '../Option.js';
  * String.at(string, 99) // Option.None
  * ```
  * @category Accessor
- * @param string - The string
+ * @param self - The string
  * @param index - The zero based position
  */
-export function at(string: string, index: number): Option<Char> {
-  const stringIndex = index < 0 ? index + string.length : index;
+export function at(self: string, index: number): Option<Char> {
+  const stringIndex = index < 0 ? index + self.length : index;
 
-  return (string[stringIndex] ?? undefined) as Option<Char>;
+  return (self[stringIndex] ?? undefined) as Option<Char>;
 }

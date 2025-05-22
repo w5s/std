@@ -11,12 +11,12 @@ import { isOk } from './isOk.js';
  * Result.andThen(Result.Ok(4), square); // Result.Ok(16)
  * Result.andThen(Result.Error('TestError'), square); // Result.Error('TestError')
  * ```
- * @param result - a Result object
+ * @param self - a Result object
  * @param fn - a value mapping function
  */
 export function andThen<VFrom, EFrom, VTo, ETo>(
-  result: Result<VFrom, EFrom>,
+  self: Result<VFrom, EFrom>,
   fn: (value: VFrom) => Result<VTo, ETo>,
 ): Result<VTo, EFrom | ETo> {
-  return isOk(result) ? fn(result.value) : result;
+  return isOk(self) ? fn(self.value) : self;
 }

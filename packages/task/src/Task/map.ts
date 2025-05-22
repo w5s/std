@@ -10,12 +10,12 @@ import { from } from './from.js';
  * const task = Task.resolve('foo');
  * Task.map(task, (value) => `${value}_bar`));// Task.resolve('foo_bar')
  * ```
- * @param task - a Task object
+ * @param self - a Task object
  * @param fn - the mapper function
  */
 export function map<ValueFrom, ErrorFrom, ValueTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => ValueTo,
 ): Task<ValueTo, ErrorFrom> {
-  return from(({ execute, resolve, reject }) => execute(task, { resolve: (value) => resolve(fn(value)), reject }));
+  return from(({ execute, resolve, reject }) => execute(self, { resolve: (value) => resolve(fn(value)), reject }));
 }

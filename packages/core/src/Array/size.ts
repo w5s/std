@@ -9,8 +9,8 @@ import type { Int } from '../Int.js';
  * Array.size(['foo', 'bar']) // 2
  * ```
  * @category Accessor
- * @param array - The array object
+ * @param self - The array object
  */
-export function size(array: ArrayLike<unknown>): Int {
-  return array.length as Int;
+export function size(self: ArrayLike<unknown>): Int {
+  return self.length as Int;
 }

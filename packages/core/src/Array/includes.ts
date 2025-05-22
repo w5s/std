@@ -11,10 +11,10 @@ import { indexOf } from './indexOf.js';
  * Array.includes(['a', 'b'], 'absent'); // false
  * ```
  * @category Predicate
- * @param array - The array object
+ * @param self - The array object
  * @param searchItem - The item to search for.
  * @param fromIndex - The position in this array at which to begin searching for searchItem.
  */
-export function includes<Item>(array: Array<Item>, searchItem: Item, fromIndex?: number): boolean {
-  return indexOf(array, searchItem, fromIndex) !== undefined;
+export function includes<Item>(self: Array<Item>, searchItem: Item, fromIndex?: number): boolean {
+  return indexOf(self, searchItem, fromIndex) !== undefined;
 }

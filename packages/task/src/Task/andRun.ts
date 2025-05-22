@@ -14,12 +14,12 @@ import { map } from './map.js';
  * const failure = Task.reject('PreviousError');
  * Task.andRun(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
  * ```
- * @param task - a Task object
+ * @param self - a Task object
  * @param fn - the value mapper function
  */
 export function andRun<ValueFrom, ErrorFrom, ErrorTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => TaskLike<any, ErrorTo>,
 ): Task<ValueFrom, ErrorFrom | ErrorTo> {
-  return andThen(task, (value) => map(fn(value), () => value));
+  return andThen(self, (value) => map(fn(value), () => value));
 }

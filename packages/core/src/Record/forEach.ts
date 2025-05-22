@@ -12,14 +12,14 @@ import { keys } from './keys.js';
  *  // call (2, 'second', record)
  * }); // 2
  * ```
- * @param record - the record
+ * @param self - the record
  * @param fn - callback called on each entry
  */
 export function forEach<Key extends RecordKey, Value, D extends Record<Key, Value>>(
-  record: D,
+  self: D,
   fn: (value: Value, key: Key, record: D) => unknown,
 ): void {
-  for (const key of keys(record)) {
-    fn(record[key], key, record);
+  for (const key of keys(self)) {
+    fn(self[key], key, self);
   }
 }

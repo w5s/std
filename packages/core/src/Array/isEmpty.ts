@@ -7,8 +7,8 @@
  * Array.isEmpty(['a', 'b', 'c']);// false
  * ```
  * @category Predicate
- * @param array - The array object
+ * @param self - The array object
  */
-export function isEmpty(array: ArrayLike<unknown>): boolean {
-  return array.length === 0;
+export function isEmpty(self: ArrayLike<unknown>): boolean {
+  return self.length === 0;
 }

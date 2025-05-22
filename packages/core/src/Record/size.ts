@@ -10,8 +10,8 @@ import type { RecordKey } from '../Record.js';
  * Record.size(record); // 2
  * ```
  * @category Accessor
- * @param record - the record
+ * @param self - the record
  */
-export function size<D extends Record<RecordKey, any>>(record: D): Int {
-  return Object.keys(record).length as Int;
+export function size<D extends Record<RecordKey, any>>(self: D): Int {
+  return Object.keys(self).length as Int;
 }

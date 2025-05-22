@@ -15,11 +15,11 @@ import { isOk } from './isOk.js';
  * Result.getOrThrow(x);// throw 'error'
  * ```
  * @category Accessor
- * @param result - a Result object
+ * @param self - a Result object
  */
-export function getOrThrow<V>(result: Result<V, unknown>): V {
-  if (isOk(result)) {
-    return result.value;
+export function getOrThrow<V>(self: Result<V, unknown>): V {
+  if (isOk(self)) {
+    return self.value;
   }
-  throw result.error;
+  throw self.error;
 }

@@ -12,13 +12,13 @@ import { of } from './of.js';
  * BigDecimal.scale(value, 3); //  BigDecimal('1.020')
  * ```
  *
- * @param value - The `BigDecimal` to scale.
+ * @param self - The `BigDecimal` to scale.
  * @param newScale - The new scale
  */
-export function scale(value: BigDecimal, newScale: number): BigDecimal {
-  if (value.scale === newScale) {
-    return value;
+export function scale(self: BigDecimal, newScale: number): BigDecimal {
+  if (self.scale === newScale) {
+    return self;
   }
-  const newValue = scaleValue(value, newScale);
-  return newValue === value.value ? value : of(newValue, newScale);
+  const newValue = scaleValue(self, newScale);
+  return newValue === self.value ? self : of(newValue, newScale);
 }

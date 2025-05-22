@@ -7,10 +7,10 @@ import type { BigDecimal } from './BigDecimal.js';
  * ```typescript
  * BigDecimal.asString(BigDecimal('1.020')); // '1.020'
  * ```
- * @param bigDecimal
+ * @param self
  */
-export function asString(bigDecimal: BigDecimal): string {
-  const { value, scale } = bigDecimal;
+export function asString(self: BigDecimal): string {
+  const { value, scale } = self;
   const valueString = String(value);
   const negative = value < 0n;
   const absolute = negative ? valueString.slice(1) : valueString;

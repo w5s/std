@@ -35,10 +35,10 @@ const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskP
  * const getMessage = Task.resolve('Hello World!');
  * const messageResult = Task.run(getMessage);// Result.Ok('Hello World!')
  * ```
- * @param task - the task to be run
+ * @param self - the task to be run
  */
 export function run<Value, Error>(
-  task: TaskLike<Value, Error>,
+  self: TaskLike<Value, Error>,
   canceler: TaskCanceler = { current: undefined },
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
@@ -48,7 +48,7 @@ export function run<Value, Error>(
   let rejectHandler = (_error: unknown) => {};
 
   const runValue: Awaitable<void> = execute(
-    task,
+    self,
     createParameters({
       resolve: (_value) => resolveHandler(ok(_value)),
       reject: (_error) => resolveHandler(error(_error)),

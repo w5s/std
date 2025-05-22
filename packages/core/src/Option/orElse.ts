@@ -12,9 +12,9 @@ import { from } from './from.js';
  * Option.orElse(Option.Some('foo'), alt); // Option.Some('foo')
  * Option.orElse(Option.None, alt); // Option.Some('bar')
  * ```
- * @param option - an optional value
+ * @param self - an optional value
  * @param fn - a callback
  */
-export function orElse<ValueFrom>(option: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
-  return option == null ? from(fn()) : option;
+export function orElse<ValueFrom>(self: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
+  return self == null ? from(fn()) : self;
 }

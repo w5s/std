@@ -9,14 +9,14 @@ import { splice } from './splice.js';
  * ```typescript
  * Array.deletedAt([1, 2, 3, 4], 1);// [1, 3, 4]
  * ```
- * @param array - The array object
+ * @param self - The array object
  * @param index - The position of the deleted item in the array
  */
-export function deleteAt<Item>(array: Array<Item>, index: number): Array<Item> {
-  const arrayLength = array.length;
+export function deleteAt<Item>(self: Array<Item>, index: number): Array<Item> {
+  const arrayLength = self.length;
   return arrayLength === 0 || !(index >= 0 && index <= arrayLength - 1)
-    ? array
+    ? self
     : arrayLength - 1 === 0
       ? empty()
-      : splice(array, index, 1);
+      : splice(self, index, 1);
 }

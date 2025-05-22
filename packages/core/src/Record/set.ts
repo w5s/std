@@ -8,19 +8,19 @@ import type { RecordKey } from '../Record.js';
  * const record = { myProperty: 'myValue' };
  * Record.set(record, 'myOtherProperty', 'myOtherValue'); // { myProperty: 'myValue', myOtherProperty: 'myOtherValue' }
  * ```
- * @param record - the record
+ * @param self - the record
  * @param key - the entry key
  * @param value - the entry value
  */
 export function set<Key extends RecordKey, Value>(
-  record: Record<Key, Value>,
+  self: Record<Key, Value>,
   key: Key,
   value: Value,
 ): Record<Key, Value> {
-  return record[key] === value
-    ? record
+  return self[key] === value
+    ? self
     : {
-        ...record,
+        ...self,
         [key]: value,
       };
 }

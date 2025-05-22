@@ -14,11 +14,11 @@ import type { Nullable } from '@w5s/core-type';
  * Option.getOrThrow(x);// throw TypeError('option must not be a null|undefined')
  * ```
  * @category Accessor
- * @param option - an optional value
+ * @param self - an optional value
  */
-export function getOrThrow<Value>(option: Nullable<Value>): Value {
-  if (option != null) {
-    return option;
+export function getOrThrow<Value>(self: Nullable<Value>): Value {
+  if (self != null) {
+    return self;
   }
   throw new TypeError('option must not be a null|undefined');
 }

@@ -14,9 +14,9 @@ const resolveVoid: Task<void, never> = resolve();
  * const handler: LogHandler;
  * const filtered = LogHandler.filter(handler, (record) => record.logCategory === 'foo');
  * ```
- * @param handler - the handler function
+ * @param self - the handler function
  * @param predicate - the predicate applied on log record
  */
-export function filter(handler: LogHandler, predicate: (record: LogRecord) => boolean): LogHandler {
-  return (logRecord) => (predicate(logRecord) ? handler(logRecord) : resolveVoid);
+export function filter(self: LogHandler, predicate: (record: LogRecord) => boolean): LogHandler {
+  return (logRecord) => (predicate(logRecord) ? self(logRecord) : resolveVoid);
 }

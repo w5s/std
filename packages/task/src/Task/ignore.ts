@@ -11,7 +11,8 @@ function ignoreValue(_anyValue: unknown): void {}
  * const task = Task.resolve('foo');
  * Task.ignore(task);// Task.resolve()
  * ```
+ * @param self - the Task object
  */
-export function ignore<Error>(task: Task<unknown, Error>): Task<void, Error> {
-  return map(task, ignoreValue);
+export function ignore<Error>(self: Task<unknown, Error>): Task<void, Error> {
+  return map(self, ignoreValue);
 }

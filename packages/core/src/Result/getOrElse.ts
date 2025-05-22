@@ -13,9 +13,9 @@ import { isOk } from './isOk.js';
  * Result.getOrElse(x, () => 'bar');// 'bar'
  * ```
  * @category Accessor
- * @param result - a Result object
+ * @param self - a Result object
  * @param getDefaultValue - a function that returns default value
  */
-export function getOrElse<V, VDefault>(result: Result<V, unknown>, getDefaultValue: () => VDefault): V | VDefault {
-  return isOk(result) ? result.value : getDefaultValue();
+export function getOrElse<V, VDefault>(self: Result<V, unknown>, getDefaultValue: () => VDefault): V | VDefault {
+  return isOk(self) ? self.value : getDefaultValue();
 }

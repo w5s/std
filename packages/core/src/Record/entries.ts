@@ -9,13 +9,13 @@ import { keys } from './keys.js';
  * const record = { first: 1, second: 2 };
  * Array.from(Record.entries(record)); // [['first', 1], ['second', 2]]
  * ```
- * @param record - the record
+ * @param self - the record
  */
-export function entries<Key extends RecordKey, Value>(record: Record<Key, Value>): Iterable<[Key, Value]> {
+export function entries<Key extends RecordKey, Value>(self: Record<Key, Value>): Iterable<[Key, Value]> {
   return {
     *[Symbol.iterator]() {
-      for (const key of keys(record)) {
-        yield [key, record[key]];
+      for (const key of keys(self)) {
+        yield [key, self[key]];
       }
     },
   };

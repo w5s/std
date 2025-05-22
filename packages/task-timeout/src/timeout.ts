@@ -17,15 +17,15 @@ import type { Option } from '@w5s/core';
  * Task.run(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))
  * // Note that `longTask` will be canceled and will never resolve nor reject
  * ```
- * @param task - task to cancel after delay
+ * @param self - task to cancel after delay
  * @param delay - delay in milliseconds
  */
 export function timeout<Value, Error>(
-  task: TaskLike<Value, Error>,
+  self: TaskLike<Value, Error>,
   delay: Option<TimeDuration>,
 ): Task<Value, TimeoutError | Error> {
   return delay == null
-    ? from(task)
+    ? from(self)
     : from(({ resolve, reject, canceler, execute }) => {
         const taskCancelerRef: TaskCanceler = Ref(undefined);
         const taskCancel = () => {
@@ -51,7 +51,7 @@ export function timeout<Value, Error>(
           timeoutCancel();
         };
 
-        return execute(task, {
+        return execute(self, {
           resolve: (value) => {
             timeoutCancel();
             resolve(value);

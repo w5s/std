@@ -12,12 +12,12 @@ import type { Nullable } from '@w5s/core-type';
  * Option.getOrElse(x, () => 'bar');// 'bar'
  * ```
  * @category Accessor
- * @param option - an optional value
+ * @param self - an optional value
  * @param getDefaultValue - a default value
  */
 export function getOrElse<Value, DefaultValue>(
-  option: Nullable<Value>,
+  self: Nullable<Value>,
   getDefaultValue: () => DefaultValue,
 ): Value | DefaultValue {
-  return option == null ? getDefaultValue() : option;
+  return self == null ? getDefaultValue() : self;
 }

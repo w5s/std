@@ -10,12 +10,12 @@ import { from } from './from.js';
  * const task = Task.reject('error');
  * Task.mapError(task, (value) => `${value}_bar`));// Task.reject('error_bar')
  * ```
- * @param task - a Task object
+ * @param self - a Task object
  * @param fn - the error mapper function
  */
 export function mapError<ValueFrom, ErrorFrom, ErrorTo>(
-  task: TaskLike<ValueFrom, ErrorFrom>,
+  self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => ErrorTo,
 ): Task<ValueFrom, ErrorTo> {
-  return from(({ execute, reject, resolve }) => execute(task, { reject: (error) => reject(fn(error)), resolve }));
+  return from(({ execute, reject, resolve }) => execute(self, { reject: (error) => reject(fn(error)), resolve }));
 }
