@@ -16,6 +16,7 @@ import { StringComparable } from './String/StringComparable.js';
 import { Type } from './Type.js';
 import { padEnd } from './String/padEnd.js';
 import { padStart } from './String/padStart.js';
+import { truncate } from './String/truncate.js';
 
 describe('String', () => {
   it('is an alias to functions', () => {
@@ -37,6 +38,7 @@ describe('String', () => {
         size,
         split,
         startsWith,
+        truncate,
       }),
     );
   });

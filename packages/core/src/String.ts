@@ -14,6 +14,7 @@ import { indexOf } from './String/indexOf.js';
 import { lastIndexOf } from './String/lastIndexOf.js';
 import { padEnd } from './String/padEnd.js';
 import { padStart } from './String/padStart.js';
+import { truncate } from './String/truncate.js';
 
 /**
  * A collection of functions to manipulate `string`
@@ -37,4 +38,5 @@ export const String = {
   size,
   split,
   startsWith,
+  truncate,
 };
