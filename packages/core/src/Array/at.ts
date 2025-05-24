@@ -11,9 +11,9 @@ import type { Option } from '../Option.js';
  * Array.at(array, 99) // Option.None
  * ```
  * @category Accessor
- * @param array - The array object
+ * @param self - The array object
  * @param index - The zero based position
  */
-export function at<Item>(array: ArrayLike<Item>, index: number): Option<Item> {
-  return array[index < 0 ? index + array.length : index] ?? undefined;
+export function at<Item>(self: ArrayLike<Item>, index: number): Option<Item> {
+  return self[index < 0 ? index + self.length : index] ?? undefined;
 }

@@ -8,8 +8,8 @@ import type { LogLevel } from './LogLevel.js';
  * const level = LogLevel('Foo', 1);
  * LogLevel.asString(level);// 'Foo'
  * ```
- * @param level - the log level
+ * @param self - the log level
  */
-export function asString(level: LogLevel): string {
-  return level.name;
+export function asString(self: LogLevel): string {
+  return self.name;
 }
