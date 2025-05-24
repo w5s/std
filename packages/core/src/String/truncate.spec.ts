@@ -22,8 +22,10 @@ describe(truncate, () => {
   });
   it('truncates to 30 characters by default', () => {
     expect(truncate('Hello World')).toBe('Hello World');
+    /* cSpell:disable */
     expect(truncate('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elementum.')).toBe(
       'Lorem ipsum dolor sit amet,...',
     );
+    /* cSpell:enable */
   });
 });
