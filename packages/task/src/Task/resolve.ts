@@ -3,7 +3,7 @@ import { from } from './from.js';
 
 /**
  * Constructor that always returns a successful `Task` that resolves `value`.
- * This is a shorthand for `Task(({ ok }) => ok(value))`
+ * This is a shorthand for `Task.from(({ resolve }) => resolve(value))`
  *
  * @example
  * ```typescript

@@ -19,6 +19,8 @@ import { run } from './Task/run.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 import { ignore } from './Task/ignore.js';
+import { ok } from './Task/ok.js';
+import { error } from './Task/error.js';
 
 /**
  * Interface used to cancel running task
@@ -94,12 +96,14 @@ export const Task = {
   andThen,
   any,
   create,
+  error,
   from,
   hasInstance,
   ignore,
   map,
   mapError,
   mapResult,
+  ok,
   orElse,
   reject,
   resolve,

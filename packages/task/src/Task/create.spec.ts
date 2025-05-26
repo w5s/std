@@ -1,6 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Option, Ref, Symbol } from '@w5s/core';
 import { create } from './create.js';
+import { ok } from './ok.js';
+import { error } from './error.js';
 
 vi.mock('./run.js', async () => ({
   run: vi.fn(),
@@ -12,7 +14,7 @@ describe(create, () => {
 
   describe('sync', () => {
     it('should construct a success sync task', () => {
-      const task = create(({ ok }) => ok('foo'));
+      const task = create(() => ok('foo'));
       const resolve = vi.fn();
       const reject = vi.fn();
 
@@ -21,7 +23,7 @@ describe(create, () => {
       expect(resolve).toHaveBeenCalledWith('foo');
     });
     it('should construct a void task', () => {
-      const task = create(({ ok }) => ok());
+      const task = create(() => ok());
       const resolve = vi.fn();
       const reject = vi.fn();
 
@@ -30,7 +32,7 @@ describe(create, () => {
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
     it('should construct a failure sync task', async () => {
-      const task = create<never, 'err'>(({ error }) => error('err'));
+      const task = create<never, 'err'>(() => error('err'));
       const resolve = vi.fn();
       const reject = vi.fn();
 
@@ -39,7 +41,7 @@ describe(create, () => {
       expect(reject).toHaveBeenCalledWith('err');
     });
     it('should always set default canceler', () => {
-      const task = create(({ ok }) => ok(undefined));
+      const task = create(() => ok(undefined));
       const ref = Ref(() => {});
 
       task[Symbol.run]({
@@ -53,7 +55,7 @@ describe(create, () => {
   });
   describe('async', () => {
     it('should construct an success async task', async () => {
-      const task = create(async ({ ok }) => ok('value'));
+      const task = create(async () => ok('value'));
       const resolve = vi.fn();
       const reject = vi.fn();
 
@@ -62,7 +64,7 @@ describe(create, () => {
       expect(resolve).toHaveBeenCalledWith('value');
     });
     it('should construct a void task', async () => {
-      const task = create(async ({ ok }) => ok());
+      const task = create(async () => ok());
       const resolve = vi.fn();
       const reject = vi.fn();
 
@@ -71,7 +73,7 @@ describe(create, () => {
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
     it('should set default canceler if omitted', () => {
-      const task = create(async ({ ok }) => ok(undefined));
+      const task = create(async () => ok(undefined));
       const ref = Ref(() => {});
 
       task[Symbol.run]({
@@ -84,7 +86,7 @@ describe(create, () => {
     });
     it('should set forward canceler reference', () => {
       const cancelerFn = () => {};
-      const task = create(async ({ ok, canceler }) => {
+      const task = create(async ({ canceler }) => {
         canceler.current = cancelerFn;
         canceler.current = undefined;
 
@@ -103,7 +105,7 @@ describe(create, () => {
 
     it('should set canceler', () => {
       const cancelerFn = () => {};
-      const task = create(async ({ ok, canceler }) => {
+      const task = create(async ({ canceler }) => {
         canceler.current = cancelerFn;
 
         return ok();

@@ -1,12 +1,12 @@
 import { Task } from '@w5s/task';
 
 function randomNumber() {
-  return Task.create(({ ok }) => ok(Math.random()));
+  return Task.create(() => Task.ok(Math.random()));
 }
 
 function log(value: unknown) {
   // This is a lazy operation that will only be evaluated when the Task is run
-  return Task.create(({ ok }) => ok(console.log(value)));
+  return Task.create(() => Task.ok(console.log(value)));
 }
 
 // This function returns a task that will do nothing until Task.run is called on it

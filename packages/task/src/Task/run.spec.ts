@@ -14,15 +14,15 @@ describe(run, () => {
     expect(() => run(task)).toThrow(anyError);
   });
   it('should return the result of task[Symbol.run]() for sync', () => {
-    expect(run(Task.create(({ ok }) => ok(anyObject)))).toEqual(Result.Ok(anyObject));
+    expect(run(Task.create(() => Task.ok(anyObject)))).toEqual(Result.Ok(anyObject));
   });
   it('should return the result of task[Symbol.run]() for async', async () => {
     await expect(
       run(
         Task.create(
-          ({ ok }) =>
+          () =>
             new Promise<Result<typeof anyObject, never>>((resolve) => {
-              setTimeout(() => resolve(ok(anyObject)), 0);
+              setTimeout(() => resolve(Task.ok(anyObject)), 0);
             }),
         ),
       ),

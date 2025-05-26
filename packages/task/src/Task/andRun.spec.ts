@@ -3,8 +3,8 @@ import { Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andRun } from './andRun.js';
-import { create } from './create.js';
 import { run } from './run.js';
+import { from } from './from.js';
 
 describe(andRun, () => {
   const anyValue = Object.freeze({ foo: true });
@@ -21,7 +21,7 @@ describe(andRun, () => {
         : expectTask(andRun(task, () => andTask)).toResolveSync(anyValue));
     });
     it('should call callback and run task', async () => {
-      const taskCallback = create(({ ok }) => ok(anyOtherValue));
+      const taskCallback = from(({ resolve }) => resolve(anyOtherValue));
       const taskCallbackSpy = vi.spyOn(taskCallback, Symbol.run);
       await run(andRun(task, () => taskCallback));
 

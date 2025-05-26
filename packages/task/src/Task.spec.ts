@@ -17,6 +17,8 @@ import { run } from './Task/run.js';
 import { from } from './Task/from.js';
 import { mapResult } from './Task/mapResult.js';
 import { ignore } from './Task/ignore.js';
+import { error } from './Task/error.js';
+import { ok } from './Task/ok.js';
 
 describe('Task', () => {
   it('is an alias to functions', () => {
@@ -28,11 +30,13 @@ describe('Task', () => {
       any,
       create,
       from,
+      error,
       hasInstance,
       ignore,
       map,
       mapError,
       mapResult,
+      ok,
       orElse,
       reject,
       resolve,

@@ -1,8 +1,6 @@
 import type { Awaitable } from '@w5s/async';
 import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '@w5s/core/dist/Result.js';
-import { ok } from './ok.js';
-import { error } from './error.js';
 import type { Task, TaskCanceler, TaskLike } from '../Task.js';
 import { from } from './from.js';
 import { run } from './run.js';
@@ -12,23 +10,15 @@ import { run } from './run.js';
  *
  * @example
  * ```typescript
- * const getTime = Task(({ ok }) => ok(Date.now()));
- * const fetchTask = (url: string) => Task(({ ok, error }) => fetch(url).then(ok, error));
- * const delay = (ms: number) => Task(({ ok }) => new Promise(resolve => { setTimeout(() => resolve(ok()); }), ms));
+ * const getTime = Task(() => Task.ok(Date.now()));
+ * const fetchTask = (url: string) => Task(() => fetch(url).then(Task.ok, Task.error));
+ * const delay = (ms: number) => Task(() => new Promise(resolve => { setTimeout(() => resolve(Task.ok()); }), ms));
  * ```
  * @category Constructor
  * @param sideEffect - the effect function
  */
 export function create<Value, Error = never>(
   sideEffect: (resolver: {
-    /**
-     * Return a new ok object
-     */
-    ok: typeof ok;
-    /**
-     * Return a new error object
-     */
-    error: typeof error;
     /**
      * Canceler
      */
@@ -44,8 +34,6 @@ export function create<Value, Error = never>(
     return tryCall(
       () =>
         sideEffect({
-          ok,
-          error,
           canceler,
           run: (task) => run(task, canceler),
         }),

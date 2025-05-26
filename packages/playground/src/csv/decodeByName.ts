@@ -1,5 +1,7 @@
 import { create as taskCreate } from '@w5s/task/dist/Task/create.js';
 import type { Task } from '@w5s/task';
+import { error } from '@w5s/task/dist/Task/error.js';
+import { ok } from '@w5s/task/dist/Task/ok.js';
 import { defaultCSVDecodeOptions, type CSVDecodeOptions } from './CSVDecodeOptions.js';
 import type { CSVParseResult } from './CSVParseResult.js';
 import type { CSVNamedRecord } from './CSVRecord.js';
@@ -16,7 +18,7 @@ export function decodeByName(
   options: CSVDecodeOptions = defaultCSVDecodeOptions,
 ): Task<CSVParseResult<CSVNamedRecord>, CSVError> {
   const { delimiter, recordDelimiter } = options;
-  return taskCreate(async ({ ok, error }) => {
+  return taskCreate(async () => {
     const lines = readLines(data, { delimiter: recordDelimiter });
     const firstLine = await asyncIterableFind(lines, (_, index) => index === 0);
     if (firstLine == null) {

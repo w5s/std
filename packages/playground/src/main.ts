@@ -90,7 +90,7 @@ function main() {
 function main2() {
   const randomUUID = use(app, RandomUUID);
 
-  const task = Task.create(async ({ ok, run }) => {
+  const task = Task.create(async ({ run }) => {
     const amount = EUR('1.55');
     const uuid = await run(randomUUID());
     if (!uuid.ok) {
@@ -101,7 +101,7 @@ function main2() {
       return messageSent;
     }
 
-    return ok();
+    return Task.ok();
   });
 
   return Task.orElse(task, (_error) => {
