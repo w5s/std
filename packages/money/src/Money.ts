@@ -4,6 +4,7 @@ import { MoneyNumeric } from './Money/MoneyNumeric.js';
 import { Money as MoneyType } from './Money/Money.js';
 import { asString } from './Money/asString.js';
 import { format } from './Money/format.js';
+import { normalize } from './Money/normalize.js';
 import { parse } from './Money/parse.js';
 
 export type Money = MoneyType;
@@ -17,5 +18,6 @@ export const Money = Callable({
   ...MoneyNumeric,
   asString,
   format,
+  normalize,
   parse,
 });

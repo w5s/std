@@ -3,6 +3,7 @@ import { parse as bigDecimalParse } from '@w5s/bigdecimal/dist/BigDecimal/parse.
 import type { Money } from './Money.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
 import '../moneyFactory.all.js'; // Important : load well known currencies
+import { of } from './of.js';
 
 /**
  * Parses a string argument and returns a {@link Money}
@@ -21,7 +22,7 @@ export function parse(expression: string): Option<Money> {
   if (currency != null) {
     const amount = bigDecimalParse(expression.slice(0, -3));
     if (amount != null) {
-      return { _: 'Money', amount, currency };
+      return of(currency, amount);
     }
   }
 
