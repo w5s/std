@@ -9,7 +9,8 @@ import { scale } from './scale.js';
  * BigDecimal.normalize(BigDecimal('1.020')); //  BigDecimal('1.02')
  * BigDecimal.normalize(BigDecimal('1.0200')); //  BigDecimal('1.02')
  * ```
- * @param self
+ * @category Scaling
+ * @param self - The `BigDecimal` object.
  */
 export function normalize(self: BigDecimal) {
   const digits = String(self.value);

@@ -12,7 +12,8 @@ import { of } from './of.js';
  * BigDecimal.scale(value, 3); //  BigDecimal('1.020')
  * ```
  *
- * @param self - The `BigDecimal` to scale.
+ * @category Scaling
+ * @param self - The `BigDecimal` object.
  * @param newScale - The new scale
  */
 export function scale(self: BigDecimal, newScale: number): BigDecimal {
