@@ -1,11 +1,11 @@
 import { invariant } from '@w5s/error/dist/invariant.js';
 import { call as BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/call.js';
 import type { BigDecimalString } from '@w5s/bigdecimal';
-import type { Currency } from './Currency/Currency.js';
-import { CurrencyRegistry } from './CurrencyRegistry.js';
-import { Money } from './Money/Money.js';
+import type { Currency } from '../Currency/Currency.js';
+import { CurrencyRegistry } from '../CurrencyRegistry.js';
+import { Money } from './Money.js';
 
-export function moneyFactory(
+export function factory(
   currencyCode: Currency['code'],
   options?: {
     registry?: CurrencyRegistry;

@@ -13,7 +13,7 @@ function buildImports() {
   return `/* eslint-disable prettier/prettier */
 /* cSpell:disable */
 import { Currency } from './Currency.js';
-import { moneyFactory } from './moneyFactory.js';
+import { factory as moneyFactory } from './Money/factory.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
 `;
 }

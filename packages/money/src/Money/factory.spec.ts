@@ -2,16 +2,16 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { Int } from '@w5s/core';
 import { ApplicationTest } from '@w5s/application/dist/Testing.js';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { Currency } from './Currency.js';
-import { CurrencyRegistry } from './CurrencyRegistry.js';
-import { Money } from './Money.js';
-import { moneyFactory } from './moneyFactory.js';
+import { Currency } from '../Currency.js';
+import { CurrencyRegistry } from '../CurrencyRegistry.js';
+import { Money } from '../Money.js';
+import { factory } from './factory.js';
 
-describe('moneyFactory', () => {
+describe(factory, () => {
   let registry: CurrencyRegistry;
   const TEST = 'TEST';
   beforeEach(() => {
-    const app = ApplicationTest();
+    const app = ApplicationTest('money-test');
     registry = CurrencyRegistry(app);
     registry.add(
       Currency({
@@ -23,7 +23,7 @@ describe('moneyFactory', () => {
   });
 
   it('should register a new currency', () => {
-    moneyFactory(TEST, {
+    factory(TEST, {
       registry,
     });
     const currency = registry.getByCode(TEST);
@@ -40,7 +40,7 @@ describe('moneyFactory', () => {
     );
   });
   it('should return a new factory by BigDecimal', () => {
-    const factory = moneyFactory(TEST, {
+    const testFactory = factory(TEST, {
       registry,
     });
     const currency = Currency({
@@ -52,11 +52,11 @@ describe('moneyFactory', () => {
       symbol: '#',
       symbolNative: '#',
     });
-    expect(factory(BigDecimal('1'))).toEqual(Money({ currency, amount: BigDecimal('1') }));
+    expect(testFactory(BigDecimal('1'))).toEqual(Money({ currency, amount: BigDecimal('1') }));
   });
 
   it('should return a new factory by string', () => {
-    const factory = moneyFactory(TEST, {
+    const testFactory = factory(TEST, {
       registry,
     });
     const currency = Currency({
@@ -68,6 +68,6 @@ describe('moneyFactory', () => {
       symbol: '#',
       symbolNative: '#',
     });
-    expect(factory('1')).toEqual(Money({ currency, amount: BigDecimal('1') }));
+    expect(testFactory('1')).toEqual(Money({ currency, amount: BigDecimal('1') }));
   });
 });
