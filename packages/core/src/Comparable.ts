@@ -1,4 +1,3 @@
-import type { Order } from './Order.js';
 import type { Equal } from './Equal.js';
 import type { Ordering } from './Ordering.js';
 
@@ -9,6 +8,8 @@ export interface Comparable<T> extends Equal<T> {
   /**
    * Return an {@link Ordering} that represents comparison result
    *
+   * @see {@link Order}
+   *
    * @example
    * ```typescript
    * type T;
@@ -17,7 +18,7 @@ export interface Comparable<T> extends Equal<T> {
    * ```
    * @category Comparator
    */
-  compare: Order<T>;
+  compare(this: void, left: T, right: T): Ordering;
   /**
    * "Less than or equal to" operator
    *
