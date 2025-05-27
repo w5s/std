@@ -1,5 +1,6 @@
 import { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
+import { Symbol } from '../Symbol.js';
 import type { TestingLibrary } from './type.js';
 
 /**
@@ -33,7 +34,7 @@ export function describeCodec(testingLibrary: TestingLibrary) {
       schema: () => unknown;
     },
   ) => {
-    (properties.decode.length === 0 ? describe.todo : describe)('codecDecode', () => {
+    (properties.decode.length === 0 ? describe.todo : describe)(Symbol.decode, () => {
       it.each(properties.decode.map(([input, expected]) => ({ input, expected })))(
         '($input) == $expected',
         ({ input, expected }) => {
@@ -41,7 +42,7 @@ export function describeCodec(testingLibrary: TestingLibrary) {
         },
       );
     });
-    (properties.encode.length === 0 ? describe.todo : describe)('codecEncode', () => {
+    (properties.encode.length === 0 ? describe.todo : describe)(Symbol.encode, () => {
       it.each(properties.encode.map(([input, expected]) => ({ input, expected })))(
         '($input) == $expected',
         ({ input, expected }) => {
@@ -49,7 +50,7 @@ export function describeCodec(testingLibrary: TestingLibrary) {
         },
       );
     });
-    describe('codecSchema', () => {
+    describe(Symbol.schema, () => {
       it('should be a valid JSON schema', () => {
         expect(Codec.schema(subject)).toEqual(properties.schema());
       });

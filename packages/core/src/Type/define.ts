@@ -22,18 +22,18 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
   const {
     typeName,
     inspect,
-    codecEncode = (value) => value,
-    codecDecode = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
-    codecSchema = () => ({}),
+    __encode__ = (value) => value,
+    __decode__ = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
+    __schema__ = () => ({}),
     asInstance = (value) => (hasInstance(value) ? value : undefined),
   } = parameters;
   return {
     typeName,
     hasInstance,
     inspect,
-    codecEncode,
-    codecDecode,
-    codecSchema,
+    __encode__,
+    __decode__,
+    __schema__,
     asInstance,
   };
 }

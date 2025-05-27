@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import type { Tag } from '../Tag.js';
 import { define } from '../Tag/define.js';
 
@@ -14,7 +15,7 @@ export type Int = number & Tag<'Int'>;
 export const Int = define<number, Int>({
   typeName: 'Int',
   hasInstance: (anyValue) => Number.isSafeInteger(anyValue),
-  codecSchema: () => ({
+  [Symbol.schema]: () => ({
     type: 'integer',
   }),
 });

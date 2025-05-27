@@ -1,5 +1,6 @@
 import type { Codec, Int, Option } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { parse as parseInt } from '@w5s/core/dist/Int/parse.js';
 import { parse as parseNumber } from '@w5s/core/dist/Number/parse.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
@@ -88,12 +89,12 @@ export interface Duration
 const DurationStruct = Struct.define<Duration>('Duration');
 
 const DurationCodec: Codec<Duration> = {
-  codecEncode: (value) => format(value),
-  codecDecode: (input, { ok, error }) => {
+  [Symbol.encode]: (value) => format(value),
+  [Symbol.decode]: (input, { ok, error }) => {
     const returnValue = typeof input === 'string' ? parse(input) : undefined;
     return returnValue === undefined ? error(input, 'Duration') : ok(returnValue);
   },
-  codecSchema: () => ({
+  [Symbol.schema]: () => ({
     type: 'string',
     format: 'duration',
   }),

@@ -1,3 +1,4 @@
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Tag } from '@w5s/core/dist/Tag.js';
 
 /**
@@ -10,5 +11,5 @@ export const TimeDuration = Tag.define<number, TimeDuration>({
   hasInstance(anyValue: unknown): anyValue is TimeDuration {
     return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
   },
-  codecSchema: () => ({ type: 'number' }),
+  [Symbol.schema]: () => ({ type: 'number' }),
 });

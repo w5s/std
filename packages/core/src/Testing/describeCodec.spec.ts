@@ -3,11 +3,12 @@ import type { Codec } from '../Codec.js';
 import { CodecError } from '../CodecError.js';
 import { describeCodec } from './describeCodec.js';
 import { Result } from '../Result.js';
+import { Symbol } from '../Symbol.js';
 
 describe('describeCodec', () => {
   const StringCodec: Codec<string> = {
-    codecEncode: (value) => value,
-    codecDecode: (value) =>
+    [Symbol.encode]: (value) => value,
+    [Symbol.decode]: (value) =>
       typeof value === 'string'
         ? Result.Ok(value)
         : Result.Error(
@@ -16,7 +17,7 @@ describe('describeCodec', () => {
               input: value,
             }),
           ),
-    codecSchema: () => ({ type: 'string' }),
+    [Symbol.schema]: () => ({ type: 'string' }),
   };
 
   describeCodec({ describe, it, expect })(StringCodec, {

@@ -4,6 +4,7 @@ import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 import { define } from './define.js';
+import { Symbol } from '../Symbol.js';
 
 describe(Array, () => {
   const subject = Array;
@@ -11,10 +12,10 @@ describe(Array, () => {
   const AnyType = define<string>({
     typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
-    codecEncode: (_) => `_${_}`,
-    codecDecode: (input, { ok, error }) =>
+    [Symbol.encode]: (_) => `_${_}`,
+    [Symbol.decode]: (input, { ok, error }) =>
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
-    codecSchema: () => ({ type: 'any', format: 'custom_underscore' }),
+    [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
   describeType({ describe, it, expect })(subject(AnyType), {

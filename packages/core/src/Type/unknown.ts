@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import { define } from './define.js';
 
 /**
@@ -6,9 +7,9 @@ import { define } from './define.js';
 export const unknown = define<unknown>({
   typeName: 'unknown',
   hasInstance: (_value) => true,
-  codecEncode: (input) => input,
-  codecDecode: (input, { ok }) => ok(input),
-  codecSchema: () => ({
+  [Symbol.encode]: (input) => input,
+  [Symbol.decode]: (input, { ok }) => ok(input),
+  [Symbol.schema]: () => ({
     type: 'any',
   }),
 });

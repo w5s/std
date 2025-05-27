@@ -30,7 +30,7 @@ export function define<const T extends Record<string, string | number | boolean>
     hasInstance(anyValue) {
       return enumValuesIndex.has(anyValue);
     },
-    codecSchema: () => ({
+    [Symbol.schema]: () => ({
       enum: enumValuesList,
     }),
   });

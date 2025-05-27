@@ -1,6 +1,7 @@
 /* eslint-disable no-bitwise */
-import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
+import type { Bounded, Int, Codec, Option, Ordering } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
@@ -43,8 +44,8 @@ const IPv4Format = {
 };
 
 const IPv4Codec: Codec<IPv4> = {
-  codecEncode: (input) => IPv4Format.format(input),
-  codecDecode: (input, { ok, error }) => {
+  [Symbol.encode]: (input) => IPv4Format.format(input),
+  [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string') {
       const parsed = IPv4Format.parse(input);
       if (parsed != null) {
@@ -53,7 +54,7 @@ const IPv4Codec: Codec<IPv4> = {
     }
     return error(input, 'IPv4');
   },
-  codecSchema: () => ({
+  [Symbol.schema]: () => ({
     type: 'string',
     format: 'ipv4',
   }),

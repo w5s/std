@@ -3,13 +3,14 @@ import { lazy } from './lazy.js';
 import { Codec } from '../Codec.js';
 import { Result } from '../Result.js';
 import { describeCodec } from '../Testing.js';
+import { Symbol } from '../Symbol.js';
 
 describe(lazy, () => {
   const subject = lazy;
   const getCodec = (): Codec<string> => ({
-    codecEncode: (_) => `__${_}`,
-    codecDecode: (_) => Result.Ok(String(_).slice(2)),
-    codecSchema: () => ({ type: 'string', format: 'test' }),
+    [Symbol.encode]: (_) => `__${_}`,
+    [Symbol.decode]: (_) => Result.Ok(String(_).slice(2)),
+    [Symbol.schema]: () => ({ type: 'string', format: 'test' }),
   });
   describeCodec({ describe, it, expect })(subject(getCodec), {
     encode: [['a', '__a']],

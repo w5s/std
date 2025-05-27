@@ -5,6 +5,7 @@ import { decode } from './Codec/decode.js';
 import { encode } from './Codec/encode.js';
 import { lazy } from './Codec/lazy.js';
 import { schema } from './Codec/schema.js';
+import { Symbol } from './Symbol.js';
 
 export interface Codec<T> {
   /**
@@ -22,7 +23,7 @@ export interface Codec<T> {
    * @category Codec
    * @param input - The value to decode
    */
-  codecDecode(this: void, input: unknown, context: Codec.Context<T>): Result<T, CodecError>;
+  [Symbol.decode](this: void, input: unknown, context: Codec.Context<T>): Result<T, CodecError>;
   /**
    * Returns the encoded `input`
    *
@@ -38,7 +39,7 @@ export interface Codec<T> {
    * @category Codec
    * @param input - The value to encode
    */
-  codecEncode(this: void, input: T): unknown;
+  [Symbol.encode](this: void, input: T): unknown;
   /**
    * Returns the JSONSchema corresponding to the decoded type
    *
@@ -49,7 +50,7 @@ export interface Codec<T> {
    * ```
    * @category Codec
    */
-  codecSchema(this: void): JSONValue;
+  [Symbol.schema](this: void): JSONValue;
 }
 
 /**

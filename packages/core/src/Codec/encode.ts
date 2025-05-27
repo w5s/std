@@ -1,4 +1,5 @@
 import type { Codec } from '../Codec.js';
+import type { Symbol } from '../Symbol.js';
 
 /**
  * Returns the encoded `input`
@@ -12,6 +13,6 @@ import type { Codec } from '../Codec.js';
  * @param codec - the encoder module
  * @param input - the input to encode
  */
-export function encode<T>(codec: Pick<Codec<T>, 'codecEncode'>, input: T): unknown {
-  return codec.codecEncode(input);
+export function encode<T>(codec: Pick<Codec<T>, Symbol.encode>, input: T): unknown {
+  return codec.__encode__(input);
 }

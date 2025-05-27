@@ -2,8 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { Type } from '../Type.js';
 import { define } from './define.js';
-import { encode as codecEncode } from '../Codec/encode.js';
-import { decode as codecDecode } from '../Codec/decode.js';
+import { encode } from '../Codec/encode.js';
+import { decode } from '../Codec/decode.js';
+import { Symbol } from '../Symbol.js';
 
 export type RecordKey = string | symbol;
 
@@ -25,22 +26,22 @@ export function Record<Key extends Type.Module<any>, Value extends Type.Module<a
       typeof anyValue === 'object' && anyValue !== null
         ? Object.entries(anyValue).every(([key, value]) => Value.hasInstance(value) && Key.hasInstance(key))
         : false,
-    codecEncode: (input) => {
+    [Symbol.encode]: (input) => {
       const returnValue: globalThis.Record<string, any> = {};
       for (const [key, value] of Object.entries(input)) {
-        returnValue[String(codecEncode(Key, key))] = codecEncode(Value, value);
+        returnValue[String(encode(Key, key))] = encode(Value, value);
       }
 
       return returnValue;
     },
-    codecDecode: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { ok, error }) => {
       if (typeof input !== 'object' || input === null) {
         return error(input, typeName);
       }
       const returnValue: globalThis.Record<any, Type.TypeOf<Value>> = {};
       for (const [key, value] of Object.entries(input)) {
-        const keyDecoded = codecDecode(Key, key);
-        const valueDecoded = codecDecode(Value, value);
+        const keyDecoded = decode(Key, key);
+        const valueDecoded = decode(Value, value);
         if (!keyDecoded.ok || !valueDecoded.ok) {
           return error(input, typeName);
         }
@@ -50,7 +51,7 @@ export function Record<Key extends Type.Module<any>, Value extends Type.Module<a
 
       return ok(returnValue as Record<Type.TypeOf<Key>, Type.TypeOf<Value>>);
     },
-    codecSchema: () => ({
+    [Symbol.schema]: () => ({
       type: 'object',
     }),
   });

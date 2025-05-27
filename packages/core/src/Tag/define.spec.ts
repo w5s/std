@@ -52,12 +52,12 @@ describe(define, () => {
       PositiveNumber.unwrap('');
     });
   });
-  describe('#codecEncode', () => {
+  describe('#__encode__', () => {
     it('returns identity', () => {
       expect(Codec.encode(PositiveNumber, 1 as PositiveNumber)).toEqual(1);
     });
   });
-  describe('#codecDecode', () => {
+  describe('#__decode__', () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
@@ -70,7 +70,7 @@ describe(define, () => {
       );
     });
   });
-  describe('#codecSchema', () => {
+  describe('#__schema__', () => {
     it('returns the schema', () => {
       expect(Codec.schema(PositiveNumber)).toEqual({});
     });
@@ -78,7 +78,7 @@ describe(define, () => {
       const PositiveNumberWithSchema = define<number, PositiveNumber>({
         typeName: 'PositiveNumber',
         hasInstance: (value) => typeof value === 'number' && value > 0,
-        codecSchema: () => ({
+        __schema__: () => ({
           type: 'number',
         }),
       });

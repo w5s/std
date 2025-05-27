@@ -43,19 +43,19 @@ describe(define, () => {
       expect(TestType.asInstance(1)).toBe(undefined);
     });
   });
-  describe('#codecEncode', () => {
+  describe('#__encode__', () => {
     it('returns identity', () => {
       expect(Codec.encode(TestType, 'foo')).toEqual('foo');
     });
     it('is overridable by parameters', () => {
       const TestWithEncodeType = define<string>({
         ...TestType,
-        codecEncode: (_) => `${_}_bar`,
+        __encode__: (_) => `${_}_bar`,
       });
       expect(Codec.encode(TestWithEncodeType, 'foo')).toEqual('foo_bar');
     });
   });
-  describe('#codecDecode', () => {
+  describe('#__decode__', () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(TestType, 'hello')).toEqual(Result.Ok('hello'));
       expect(Codec.decode(TestType, 1)).toEqual(
@@ -68,19 +68,19 @@ describe(define, () => {
     it('is overridable by parameters', () => {
       const TestWithEncodeType = define<string>({
         ...TestType,
-        codecDecode: (_) => Result.Ok(`${_}_bar`),
+        __decode__: (_) => Result.Ok(`${_}_bar`),
       });
       expect(Codec.decode(TestWithEncodeType, 'foo')).toEqual(Result.Ok('foo_bar'));
     });
   });
-  describe('#codecSchema', () => {
+  describe('#__schema__', () => {
     it('has a default value', () => {
       expect(Codec.schema(TestType)).toEqual({});
     });
     it('is overridable by parameters', () => {
       const TestWithSchemaType = define<string>({
         ...TestType,
-        codecSchema: () => ({
+        __schema__: () => ({
           type: 'string',
         }),
       });

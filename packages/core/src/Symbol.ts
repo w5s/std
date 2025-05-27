@@ -117,6 +117,30 @@ export namespace Symbol {
   export type call = typeof call;
 
   /**
+   * Encode property symbol
+   *
+   * @see {@link @w5s/core!Codec}
+   */
+  export const encode = '__encode__'; // GlobalSymbol.for('w5s.encode') as any;
+  export type encode = typeof encode;
+
+  /**
+   * Decode property symbol
+   *
+   * @see {@link @w5s/core!Codec}
+   */
+  export const decode = '__decode__'; // GlobalSymbol.for('w5s.decode') as any;
+  export type decode = typeof decode;
+
+  /**
+   * Schema property symbol
+   *
+   * @see {@link @w5s/core!Codec}
+   */
+  export const schema = '__schema__'; // GlobalSymbol.for('w5s.schema') as any;
+  export type schema = typeof schema;
+
+  /**
    * Enum keys
    */
   export const enumKeys: unique symbol = GlobalSymbol.for('w5s.enumKeys') as any;

@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import { define } from './define.js';
 
 /**
@@ -8,5 +9,5 @@ import { define } from './define.js';
 export const string = define<string>({
   typeName: 'string',
   hasInstance: (anyValue) => typeof anyValue === 'string',
-  codecSchema: () => ({ type: 'string' }),
+  [Symbol.schema]: () => ({ type: 'string' }),
 });

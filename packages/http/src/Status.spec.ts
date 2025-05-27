@@ -14,9 +14,9 @@ describe('Status', () => {
     expect(Status).toEqual(
       expect.objectContaining({
         hasInstance: expect.any(Function),
-        codecSchema: expect.any(Function),
-        codecEncode: expect.any(Function),
-        codecDecode: expect.any(Function),
+        __schema__: expect.any(Function),
+        __encode__: expect.any(Function),
+        __decode__: expect.any(Function),
       }),
     );
   });

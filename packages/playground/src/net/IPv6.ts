@@ -1,7 +1,9 @@
 /* eslint-disable no-bitwise */
-import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
+import type { Bounded, Int, Option, Ordering } from '@w5s/core';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
+import { Codec } from '@w5s/core/dist/Codec.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
 import { compare as bigintCompare } from '@w5s/core/dist/BigInt/compare.js';
@@ -71,7 +73,6 @@ const IPv6Format = {
 
     return fromBigInt(bigintAddress);
   },
-
   format({ ipv6 }: IPv6): string {
     // Convert bigint to 8 segments of 16-bit hex values
     return [
@@ -90,8 +91,8 @@ const IPv6Format = {
 };
 
 const IPv6Codec: Codec<IPv6> = {
-  codecEncode: (input) => IPv6Format.format(input),
-  codecDecode: (input, { ok, error }) => {
+  [Symbol.encode]: (input) => IPv6Format.format(input),
+  [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string') {
       const parsed = IPv6Format.parse(input);
       if (parsed != null) {
@@ -100,7 +101,7 @@ const IPv6Codec: Codec<IPv6> = {
     }
     return error(input, 'IPv6');
   },
-  codecSchema: () => ({
+  [Symbol.schema]: () => ({
     type: 'string',
     format: 'ipv6',
   }),

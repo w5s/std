@@ -37,6 +37,21 @@ describe('Symbol', () => {
       expect(typeof Symbol.call).toBe('string');
     });
   });
+  describe('.encode', () => {
+    it('should be a symbol', () => {
+      expect(typeof Symbol.encode).toBe('string');
+    });
+  });
+  describe('.decode', () => {
+    it('should be a symbol', () => {
+      expect(typeof Symbol.decode).toBe('string');
+    });
+  });
+  describe('.schema', () => {
+    it('should be a symbol', () => {
+      expect(typeof Symbol.schema).toBe('string');
+    });
+  });
   describe('.nodeInspect', () => {
     it('should be a symbol', () => {
       expect(typeof Symbol.nodeInspect).toBe('symbol');

@@ -10,10 +10,10 @@ describe(TObject, () => {
   const AnyType = define<string>({
     typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
-    codecEncode: (_) => `_${_}`,
-    codecDecode: (input, { ok, error }) =>
+    __encode__: (_) => `_${_}`,
+    __decode__: (input, { ok, error }) =>
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
-    codecSchema: () => ({ type: 'any', format: 'custom_underscore' }),
+    __schema__: () => ({ type: 'any', format: 'custom_underscore' }),
   });
   describeType({ describe, it, expect })(subject({ foo: AnyType, bar: AnyType }, 'FooType'), {
     typeName: 'FooType',

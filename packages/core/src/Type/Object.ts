@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { encode as codecEncode } from '../Codec/encode.js';
-import { decode as codecDecode } from '../Codec/decode.js';
-import { schema as codecSchema } from '../Codec/schema.js';
+import { encode } from '../Codec/encode.js';
+import { decode } from '../Codec/decode.js';
+import { schema } from '../Codec/schema.js';
 import type { JSONValue } from '../JSON.js';
 import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
 import { define } from './define.js';
+import { Symbol } from '../Symbol.js';
 
 /**
  * Returns a new Type for `P`.
@@ -44,18 +45,18 @@ export function TObject(
       }
       return false;
     },
-    codecEncode: (input) => {
+    [Symbol.encode]: (input) => {
       const returnValue: Record<string, unknown> = {};
 
       for (let index = 0; index < propertyNameCount; index += 1) {
         const propertyName = propertyNames[index]!;
 
-        returnValue[propertyName] = codecEncode(Properties[propertyName]!, input[propertyName]);
+        returnValue[propertyName] = encode(Properties[propertyName]!, input[propertyName]);
       }
 
       return returnValue;
     },
-    codecDecode: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { ok, error }) => {
       if (input == null || typeof input !== 'object') {
         return error(input, 'object');
       }
@@ -63,7 +64,7 @@ export function TObject(
       const returnValue: Record<string, unknown> = {};
       for (let index = 0; index < propertyNameCount; index += 1) {
         const propertyName = propertyNames[index]!;
-        const decodeResult = codecDecode(Properties[propertyName]!, (input as Record<string, unknown>)[propertyName]);
+        const decodeResult = decode(Properties[propertyName]!, (input as Record<string, unknown>)[propertyName]);
         if (!isOk(decodeResult)) {
           return decodeResult;
         }
@@ -71,10 +72,10 @@ export function TObject(
       }
       return ok(returnValue);
     },
-    codecSchema: () =>
+    [Symbol.schema]: () =>
       propertyNames.reduce(
         (acc, propertyName) => {
-          acc.properties[propertyName] = codecSchema(Properties[propertyName]!);
+          acc.properties[propertyName] = schema(Properties[propertyName]!);
 
           return acc;
         },

@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import { define } from './define.js';
 
 /**
@@ -8,8 +9,8 @@ import { define } from './define.js';
 export const bigint = define<bigint>({
   typeName: 'bigint',
   hasInstance: (anyValue) => typeof anyValue === 'bigint',
-  codecEncode: (input) => `${input.toString(10)}n`,
-  codecDecode: (input, { ok, error }) => {
+  [Symbol.encode]: (input) => `${input.toString(10)}n`,
+  [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('n')) {
       try {
         return ok(globalThis.BigInt(input.slice(0, -1)));
@@ -19,5 +20,5 @@ export const bigint = define<bigint>({
     }
     return error(input, 'bigint');
   },
-  codecSchema: () => ({ type: 'string', format: 'bigint' }),
+  [Symbol.schema]: () => ({ type: 'string', format: 'bigint' }),
 });

@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import type { Tag } from '../Tag.js';
 import { define } from '../Tag/define.js';
 
@@ -24,7 +25,7 @@ export const URL = define<string, URL>({
     }
     return false;
   },
-  codecSchema: () => ({
+  [Symbol.schema]: () => ({
     type: 'string',
     format: 'url',
   }),

@@ -1,3 +1,4 @@
+import { Symbol } from '../Symbol.js';
 import { define } from './define.js';
 
 /**
@@ -8,5 +9,5 @@ import { define } from './define.js';
 export const boolean = define<boolean>({
   typeName: 'boolean',
   hasInstance: (anyValue) => typeof anyValue === 'boolean',
-  codecSchema: () => ({ type: 'boolean' }),
+  [Symbol.schema]: () => ({ type: 'boolean' }),
 });

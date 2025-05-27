@@ -1,6 +1,7 @@
 import type { JSONPrimitive, Primitive } from '@w5s/core-type';
 import type { Type } from '../Type.js';
 import { define } from './define.js';
+import { Symbol } from '../Symbol.js';
 
 /**
  * A type for constant `value`. An encoded value can be specified as second argument.
@@ -34,7 +35,7 @@ export function constant<const Value extends Primitive>(
   return define({
     typeName,
     hasInstance: (anyValue): boolean => anyValue === value,
-    codecSchema:
+    [Symbol.schema]:
       resolvedEncodedValue === null
         ? () => ({
             type: 'null',
@@ -42,7 +43,7 @@ export function constant<const Value extends Primitive>(
         : () => ({
             const: resolvedEncodedValue,
           }),
-    codecEncode: () => resolvedEncodedValue,
-    codecDecode: (input, { ok, error }) => (input === resolvedEncodedValue ? ok(value) : error(input, typeName)),
+    [Symbol.encode]: () => resolvedEncodedValue,
+    [Symbol.decode]: (input, { ok, error }) => (input === resolvedEncodedValue ? ok(value) : error(input, typeName)),
   });
 }

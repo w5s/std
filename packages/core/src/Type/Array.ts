@@ -1,7 +1,8 @@
 import type { Array as ArrayType } from '../Array.js';
-import { decode as codecDecode } from '../Codec/decode.js';
-import { schema as codecSchema } from '../Codec/schema.js';
+import { decode } from '../Codec/decode.js';
+import { schema } from '../Codec/schema.js';
 import { isOk } from '../Result/isOk.js';
+import { Symbol } from '../Symbol.js';
 import type { Type } from '../Type.js';
 import { define } from './define.js';
 
@@ -24,8 +25,8 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
     hasInstance: (anyValue): anyValue is ArrayType<V> =>
       // eslint-disable-next-line @typescript-eslint/unbound-method
       isArray(anyValue) && anyValue.every(Item.hasInstance),
-    codecEncode: (input) => input.map(Item.codecEncode),
-    codecDecode: (input, { ok, error }) => {
+    [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),
+    [Symbol.decode]: (input, { ok, error }) => {
       if (!isArray(input)) {
         return error(input, 'Array');
       }
@@ -33,7 +34,7 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
       const values = [];
       // eslint-disable-next-line unicorn/no-for-loop
       for (let index = 0; index < input.length; index += 1) {
-        const result = codecDecode(Item, input[index]);
+        const result = decode(Item, input[index]);
         if (!isOk(result)) {
           return result;
         }
@@ -41,6 +42,6 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
       }
       return ok(values);
     },
-    codecSchema: () => ({ type: 'array', item: codecSchema(Item) }),
+    [Symbol.schema]: () => ({ type: 'array', item: schema(Item) }),
   });
 }

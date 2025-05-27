@@ -1,5 +1,6 @@
 import type { Codec } from '../Codec.js';
 import type { Option } from '../Option.js';
+import { Symbol } from '../Symbol.js';
 import { decode } from './decode.js';
 import { encode } from './encode.js';
 import { schema } from './schema.js';
@@ -25,8 +26,8 @@ export function lazy<T>(getCodec: () => Codec<T>): Codec<T> {
   // eslint-disable-next-line no-return-assign
   const resolve = () => ref ?? (ref = getCodec());
   return {
-    codecDecode: (input) => decode(resolve(), input),
-    codecEncode: (input) => encode(resolve(), input),
-    codecSchema: () => schema(resolve()),
+    [Symbol.decode]: (input) => decode(resolve(), input),
+    [Symbol.encode]: (input) => encode(resolve(), input),
+    [Symbol.schema]: () => schema(resolve()),
   };
 }
