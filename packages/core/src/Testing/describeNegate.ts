@@ -30,13 +30,13 @@ export function describeNegate(testingLibrary: TestingLibrary) {
     const values = properties.values();
     const describeIfValue = values.length === 0 ? describe.todo : describe;
     describeIfValue('negate', () => {
-      it.each(values)('satisfies negate($0) == $1', ([base, negated]) => {
+      it.each(values)('satisfies negate($0) == $1', (base, negated) => {
         expect(subject['=='](subject.negate(base), negated)).toBe(true);
       });
-      it.each(values)('satisfies negate(negate($0)) == $0', ([base]) => {
+      it.each(values)('satisfies negate(negate($0)) == $0', (base) => {
         expect(subject['=='](subject.negate(subject.negate(base)), base)).toBe(true);
       });
-      it.each(values)('satisfies negate(negate($1)) == $1', ([_, negated]) => {
+      it.each(values)('satisfies negate(negate($1)) == $1', (_, negated) => {
         expect(subject['=='](subject.negate(subject.negate(negated)), negated)).toBe(true);
       });
     });

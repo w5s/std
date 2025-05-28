@@ -31,17 +31,17 @@ export function describeNot(testingLibrary: TestingLibrary) {
     },
   ) => {
     (properties.values.length === 0 ? describe.todo : describe)('not', () => {
-      it.each(properties.values())('satisfies not($0) == $1', ([left, right]) => {
+      it.each(properties.values())('satisfies not($0) == $1', (left, right) => {
         expect(subject.not(left)).toEqual(right);
       });
     });
     (properties.values.length === 0 ? describe.todo : describe)('not', () => {
-      it.each(properties.values())('satisfies $0 == not($1)', ([left, right]) => {
+      it.each(properties.values())('satisfies $0 == not($1)', (left, right) => {
         expect(subject.not(right)).toEqual(left);
       });
     });
     (properties.values.length === 0 ? describe.todo : describe)('not', () => {
-      it.each(properties.values())('satisfies not(not($0)) == $0', ([left]) => {
+      it.each(properties.values())('satisfies not(not($0)) == $0', (left) => {
         expect(subject.not(subject.not(left))).toEqual(left);
       });
     });
