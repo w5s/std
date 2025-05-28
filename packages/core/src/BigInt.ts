@@ -7,6 +7,7 @@ import { BigIntSigned } from './BigInt/BigIntSigned.js';
 import { fromInt } from './BigInt/fromInt.js';
 import { fromNumber } from './BigInt/fromNumber.js';
 import { BigIntIndexable } from './BigInt/BigIntIndexable.js';
+import { BigIntNegate } from './BigInt/BigIntNegate.js';
 
 /**
  * A collection of functions to manipulate `bigint`
@@ -23,6 +24,7 @@ import { BigIntIndexable } from './BigInt/BigIntIndexable.js';
 export const BigInt = {
   ...BigIntComparable,
   ...BigIntIndexable,
+  ...BigIntNegate,
   ...BigIntNumeric,
   ...BigIntSigned,
   ...BigIntType,

@@ -9,6 +9,7 @@ import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 import { BigIntIndexable } from './BigInt/BigIntIndexable.js';
 import { fromInt } from './BigInt/fromInt.js';
 import { fromNumber } from './BigInt/fromNumber.js';
+import { BigIntNegate } from './BigInt/BigIntNegate.js';
 
 describe('BigInt', () => {
   it('is an alias to functions', () => {
@@ -16,6 +17,7 @@ describe('BigInt', () => {
     expect(BigInt).toEqual(expect.objectContaining(BigIntSigned));
     expect(BigInt).toEqual(expect.objectContaining(BigIntNumeric));
     expect(BigInt).toEqual(expect.objectContaining(BigIntIndexable));
+    expect(BigInt).toEqual(expect.objectContaining(BigIntNegate));
     expect(BigInt).toEqual(expect.objectContaining(Type.bigint));
     expect(BigInt).toEqual(
       expect.objectContaining({
