@@ -8,6 +8,7 @@ import { format } from './Int/format.js';
 import { IntBounded } from './Int/IntBounded.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
+import { IntNegate } from './Int/IntNegate.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -16,6 +17,7 @@ describe('Int', () => {
     expect(Int).toEqual(expect.objectContaining(IntBounded));
     expect(Int).toEqual(expect.objectContaining(IntSigned));
     expect(Int).toEqual(expect.objectContaining(IntIndexable));
+    expect(Int).toEqual(expect.objectContaining(IntNegate));
     expect(Int).toEqual(
       expect.objectContaining({
         parse,

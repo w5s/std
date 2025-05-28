@@ -8,6 +8,7 @@ import { IntNumeric } from './Int/IntNumeric.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { Callable } from './Callable.js';
 import { IntIndexable } from './Int/IntIndexable.js';
+import { IntNegate } from './Int/IntNegate.js';
 
 /**
  * Integer value
@@ -26,6 +27,7 @@ export const Int = Callable({
   ...IntComparable,
   ...IntIndexable,
   ...IntBounded,
+  ...IntNegate,
   ...IntNumeric,
   ...IntSigned,
   format,
