@@ -4,7 +4,7 @@ import { combine } from './Order/combine.js';
 import { compareBy } from './Order/compareBy.js';
 
 /**
- * Return {@link @w5s/core!Ordering} thats represents the comparison result
+ * Return an {@link Ordering} thats represents the comparison result
  *
  * @param left - left side operand
  * @param right - left side operand

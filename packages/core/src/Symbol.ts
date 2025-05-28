@@ -119,7 +119,7 @@ export namespace Symbol {
   /**
    * Encode property symbol
    *
-   * @see {@link @w5s/core!Codec}
+   * @see {@link Codec}
    */
   export const encode = '__encode__'; // GlobalSymbol.for('w5s.encode') as any;
   export type encode = typeof encode;
@@ -127,7 +127,7 @@ export namespace Symbol {
   /**
    * Decode property symbol
    *
-   * @see {@link @w5s/core!Codec}
+   * @see {@link Codec}
    */
   export const decode = '__decode__'; // GlobalSymbol.for('w5s.decode') as any;
   export type decode = typeof decode;
@@ -135,7 +135,7 @@ export namespace Symbol {
   /**
    * Schema property symbol
    *
-   * @see {@link @w5s/core!Codec}
+   * @see {@link Codec}
    */
   export const schema = '__schema__'; // GlobalSymbol.for('w5s.schema') as any;
   export type schema = typeof schema;

@@ -8,7 +8,7 @@ import { fromCodePoint } from './Char/fromCodePoint.js';
 /**
  * Character value
  *
- * Alias of {@link @w5s/core!Type.Char}
+ * Alias of {@link CharType}
  */
 export type Char = CharType;
 

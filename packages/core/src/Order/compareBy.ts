@@ -2,7 +2,7 @@ import type { Comparable } from '../Comparable.js';
 import type { Order } from '../Order.js';
 
 /**
- * Return a new {@link @w5s/core!Order} function that will map the parameters using `selectFn`
+ * Return a new {@link Order} function that will map the parameters using `selectFn`
  *
  * @category Constructor
  * @example
@@ -10,7 +10,7 @@ import type { Order } from '../Order.js';
  * const compareByName = compareBy((named: { name: string }) => named.name, String.compare);
  * ```
  * @param selector - A function that takes a `From` value and returns a `To` value.
- * @param compareTo - A {@link @w5s/core!Order} function.
+ * @param compareTo - An {@link Order} function.
  */
 export function compareBy<From, To>(
   selector: (from: To) => From,
