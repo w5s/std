@@ -15,6 +15,7 @@ export * from './Indexable.js';
 export * from './Int.js';
 export * from './JSON.js';
 export * from './lazy.js';
+export * from './Not.js';
 export * from './Number.js';
 export * from './Numeric.js';
 export * from './Option.js';
