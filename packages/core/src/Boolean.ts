@@ -1,4 +1,5 @@
 import { BooleanComparable } from './Boolean/BooleanComparable.js';
+import { BooleanNot } from './Boolean/BooleanNot.js';
 import { boolean as BooleanType } from './Type/boolean.js';
 
 /**
@@ -17,4 +18,5 @@ import { boolean as BooleanType } from './Type/boolean.js';
 export const Boolean = {
   ...BooleanType,
   ...BooleanComparable,
+  ...BooleanNot,
 };
