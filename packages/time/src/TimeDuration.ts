@@ -17,6 +17,7 @@ import { toMinutes } from './TimeDuration/toMinutes.js';
 import { toHours } from './TimeDuration/toHours.js';
 import { toDays } from './TimeDuration/toDays.js';
 import { toWeeks } from './TimeDuration/toWeeks.js';
+import { TimeDurationNegate } from './TimeDuration/TimeDurationNegate.js';
 
 export type { TimeDurationObject as TimeDurationParameters } from './TimeDuration/from.js';
 
@@ -35,6 +36,7 @@ export const TimeDuration = Callable({
   ...TimeDurationComparable,
   ...TimeDurationNumeric,
   ...TimeDurationSigned,
+  ...TimeDurationNegate,
   asString,
   toSeconds,
   toMinutes,
