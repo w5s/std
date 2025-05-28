@@ -69,12 +69,22 @@ export function Indexable<T, Index extends number | bigint = number>(
           const startIndex = indexOf(rangeStart);
           const endIndex = indexOf(rangeEnd);
           if (startIndex != null && endIndex != null) {
-            // @ts-ignore
-            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-            for (let index = startIndex; index <= endIndex; index += one) {
-              const value = at(index);
-              if (value != null) {
-                yield value;
+            if (startIndex <= endIndex) {
+              // @ts-ignore
+              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+              for (let index = startIndex; index <= endIndex; index += one) {
+                const value = at(index);
+                if (value != null) {
+                  yield value;
+                }
+              }
+            } else {
+              // @ts-ignore
+              for (let index = startIndex; index >= endIndex; index -= one) {
+                const value = at(index);
+                if (value != null) {
+                  yield value;
+                }
               }
             }
           }

@@ -67,6 +67,9 @@ describe(Indexable, () => {
     it('has a default implementation', () => {
       expect([...charIndexable.range('a', 'e')]).toEqual(['a', 'b', 'c', 'd', 'e']);
     });
+    it('handles reversed ranges correctly', () => {
+      expect([...charIndexable.range('e', 'a')]).toEqual(['e', 'd', 'c', 'b', 'a']);
+    });
     it('is idempotent', () => {
       const range = charIndexable.range('a', 'e');
       expect([...range]).toEqual([...range]);
