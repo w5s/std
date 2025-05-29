@@ -23,7 +23,7 @@ function createOperator(combineFn: (leftAmount: Money['amount'], rightAmount: Mo
         );
 }
 
-export const MoneyNumeric = {
+export const MoneyNumeric: {
   /**
    * Addition operator
    *
@@ -36,8 +36,7 @@ export const MoneyNumeric = {
    * @param left - Left operand money
    * @param right - Right operand money
    */
-  '+': createOperator(BigDecimalNumeric['+']),
-
+  '+'(this: void, left: Money, right: Money): Result<Money, ArgumentError>;
   /**
    * Subtract operator
    *
@@ -50,8 +49,7 @@ export const MoneyNumeric = {
    * @param left - Left operand money
    * @param right - Right operand money
    */
-  '-': createOperator(BigDecimalNumeric['-']),
-
+  '-'(this: void, left: Money, right: Money): Result<Money, ArgumentError>;
   /**
    * Multiply operator
    *
@@ -63,7 +61,11 @@ export const MoneyNumeric = {
    * @param money - money object
    * @param multiplier - multiplication factor
    */
-  '*': (money: Money, multiplier: BigDecimal) =>
+  '*'(money: Money, multiplier: BigDecimal): Money;
+} = {
+  '+': createOperator(BigDecimalNumeric['+']),
+  '-': createOperator(BigDecimalNumeric['-']),
+  '*': (money, multiplier) =>
     Money({
       currency: money.currency,
       amount: BigDecimalNumeric['*'](money.amount, multiplier),
