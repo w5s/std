@@ -10,6 +10,7 @@ import { BigDecimalSigned } from './BigDecimal/BigDecimalSigned.js';
 import { BigDecimalNumeric } from './BigDecimal/BigDecimalNumeric.js';
 import { asString } from './BigDecimal/asString.js';
 import { BigDecimalNegate } from './BigDecimal/BigDecimalNegate.js';
+import { BigDecimalZero } from './BigDecimal/BigDecimalZero.js';
 
 describe('BigDecimal', () => {
   it('is an alias to functions', () => {
@@ -17,6 +18,7 @@ describe('BigDecimal', () => {
     expect(BigDecimal).toEqual(expect.objectContaining(BigDecimalSigned));
     expect(BigDecimal).toEqual(expect.objectContaining(BigDecimalNumeric));
     expect(BigDecimal).toEqual(expect.objectContaining(BigDecimalNegate));
+    expect(BigDecimal).toEqual(expect.objectContaining(BigDecimalZero));
     expect(BigDecimal).toEqual(
       expect.objectContaining({
         asString,

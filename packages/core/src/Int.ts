@@ -9,6 +9,7 @@ import { IntSigned } from './Int/IntSigned.js';
 import { Callable } from './Callable.js';
 import { IntIndexable } from './Int/IntIndexable.js';
 import { IntNegate } from './Int/IntNegate.js';
+import { IntZero } from './Int/IntZero.js';
 
 /**
  * Integer value
@@ -30,6 +31,7 @@ export const Int = Callable({
   ...IntNegate,
   ...IntNumeric,
   ...IntSigned,
+  ...IntZero,
   format,
   parse,
   fromNumber,

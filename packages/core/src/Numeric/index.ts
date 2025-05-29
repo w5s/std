@@ -8,3 +8,4 @@ export * from './Multiply.js';
 export * from './Negate.js';
 export * from './Signed.js';
 export * from './Subtract.js';
+export * from './Zero.js';

@@ -6,6 +6,7 @@ import { NumberComparable } from './Number/NumberComparable.js';
 import { NumberNumeric } from './Number/NumberNumeric.js';
 import { NumberSigned } from './Number/NumberSigned.js';
 import { NumberNegate } from './Number/NumberNegate.js';
+import { NumberZero } from './Number/NumberZero.js';
 
 /**
  * A collection of functions to manipulate `number`
@@ -26,6 +27,7 @@ export const Number = {
   ...NumberSigned,
   ...NumberBounded,
   ...NumberNegate,
+  ...NumberZero,
   parse,
   format,
 };

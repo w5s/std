@@ -23,6 +23,7 @@ describe('index', () => {
         'describeSigned',
         'describeSubtract',
         'describeType',
+        'describeZero',
         'withOrder',
       ].sort(),
     );
