@@ -18,7 +18,7 @@ export interface Zero<T> {
    * Number.isZero(1); // false
    * ```
    * @category Numeric
-   * @param self - the BigInt to test
+   * @param self - the value to test
    */
   isZero(this: void, self: T): boolean;
 }
