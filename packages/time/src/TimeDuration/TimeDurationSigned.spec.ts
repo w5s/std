@@ -8,15 +8,12 @@ describe('TimeDurationSigned', () => {
   describeSigned({ describe, it, expect })(
     { ...TimeDurationComparable, ...TimeDurationSigned },
     {
-      abs: [
-        { call: [TimeDuration(-1)], returns: 1 },
-        { call: [TimeDuration(0)], returns: 0 },
-        { call: [TimeDuration(1)], returns: 1 },
-      ],
-      sign: [
-        { call: [TimeDuration(-6)], returns: -1 },
-        { call: [TimeDuration(0)], returns: 0 },
-        { call: [TimeDuration(6)], returns: 1 },
+      values: () => [
+        { value: TimeDuration(-6), type: 'negative', sign: -1, abs: 6 },
+        { value: TimeDuration(-1), type: 'negative', sign: -1, abs: 1 },
+        { value: TimeDuration(0), type: 'zero', sign: 0, abs: 0 },
+        { value: TimeDuration(1), type: 'positive', sign: 1, abs: 1 },
+        { value: TimeDuration(6), type: 'positive', sign: 1, abs: 6 },
       ],
     },
   );

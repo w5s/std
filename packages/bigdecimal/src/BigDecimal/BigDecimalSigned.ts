@@ -4,9 +4,11 @@ import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 
 // eslint-disable-next-line @typescript-eslint/unbound-method
-const { abs: bigIntAbs, sign: bigIntSign } = BigIntSigned;
+const { abs: bigIntAbs, sign: bigIntSign, isNegative: bigIntIsNegative, isPositive: bigIntIsPositive } = BigIntSigned;
 
 export const BigDecimalSigned: Numeric.Signed<BigDecimal> = {
-  abs: (value) => of(bigIntAbs(value.value), value.scale),
-  sign: (value) => of(bigIntSign(value.value), 0),
+  abs: (self) => of(bigIntAbs(self.value), self.scale),
+  sign: (self) => of(bigIntSign(self.value), 0),
+  isNegative: (self) => bigIntIsNegative(self.value),
+  isPositive: (self) => bigIntIsPositive(self.value),
 };

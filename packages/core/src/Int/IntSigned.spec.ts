@@ -7,15 +7,12 @@ describe('IntNumeric', () => {
   describeSigned({ describe, it, expect })(
     { ...IntComparable, ...IntSigned },
     {
-      abs: [
-        { call: [-1], returns: 1 },
-        { call: [0], returns: 0 },
-        { call: [1], returns: 1 },
-      ],
-      sign: [
-        { call: [-6], returns: -1 },
-        { call: [0], returns: 0 },
-        { call: [6], returns: 1 },
+      values: () => [
+        { value: -2, type: 'negative', sign: -1, abs: 2 },
+        { value: -1, type: 'negative', sign: -1, abs: 1 },
+        { value: 0, type: 'zero', sign: 0, abs: 0 },
+        { value: 1, type: 'positive', sign: 1, abs: 1 },
+        { value: 2, type: 'positive', sign: 1, abs: 2 },
       ],
     },
   );

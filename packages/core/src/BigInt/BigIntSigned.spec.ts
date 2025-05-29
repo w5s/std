@@ -10,15 +10,12 @@ describe('BigIntSigned', () => {
       ...BigIntSigned,
     },
     {
-      abs: [
-        { call: [-1n], returns: 1n },
-        { call: [0n], returns: 0n },
-        { call: [1n], returns: 1n },
-      ],
-      sign: [
-        { call: [-6n], returns: -1n },
-        { call: [0n], returns: 0n },
-        { call: [6n], returns: 1n },
+      values: () => [
+        { value: -2n, type: 'negative', sign: -1n, abs: 2n },
+        { value: -1n, type: 'negative', sign: -1n, abs: 1n },
+        { value: 0n, type: 'zero', sign: 0n, abs: 0n },
+        { value: 1n, type: 'positive', sign: 1n, abs: 1n },
+        { value: 2n, type: 'positive', sign: 1n, abs: 2n },
       ],
     },
   );

@@ -8,12 +8,12 @@ import type { TestingLibrary } from './type.js';
  * @example
  * ```typescript
  * describeSigned({ describe, it, expect })(Number, {
- *   abs: [
- *     { call: [-1], returns: 1 },
- *     // ...
- *   ],
- *   sign: [
- *     { call: [-6], returns: -1 },
+ *   values: () => [
+ *     { value: -2, type: 'negative', sign: -1, abs: 2 },
+ *     { value: -1, type: 'negative', sign: -1, abs: 1 },
+ *     { value: 0, type: 'zero', sign: 0, abs: 0 },
+ *     { value: 1, type: 'positive', sign: 1, abs: 1 },
+ *     { value: 2, type: 'positive', sign: 1, abs: 2 },
  *     // ...
  *   ],
  * });
@@ -26,19 +26,50 @@ export function describeSigned(testingLibrary: TestingLibrary) {
   return <T>(
     subject: Numeric.Signed<T> & Equal<T>,
     properties: {
-      abs: Array<{ call: [T]; returns: T }>;
-      sign: Array<{ call: [T]; returns: T }>;
+      values: () => Array<{
+        value: T;
+        /**
+         * Expected type for isNegative / isPositive
+         */
+        type: 'negative' | 'zero' | 'positive';
+        /**
+         * Expected sign value
+         */
+        sign: T;
+        /**
+         * Expected abs value
+         */
+        abs: T;
+      }>;
     },
   ) => {
-    (properties.abs.length === 0 ? describe.todo : describe)('abs', () => {
-      it.each(properties.abs)('satisfies abs($call.0) == $returns', ({ call, returns }) => {
-        expect(subject['=='](subject.abs(...call), returns)).toBe(true);
+    const describeIfValue = properties.values().length === 0 ? describe.todo : describe;
+
+    describeIfValue('abs', () => {
+      it.each(properties.values())('satisfies abs($value) == $abs', ({ abs, value }) => {
+        expect(subject['=='](subject.abs(value), abs)).toBe(true);
       });
     });
-    (properties.sign.length === 0 ? describe.todo : describe)('sign', () => {
-      it.each(properties.sign)('satisfies sign($call.0) == $returns', ({ call, returns }) => {
-        expect(subject['=='](subject.sign(...call), returns)).toBe(true);
+    describeIfValue('sign', () => {
+      it.each(properties.values())('satisfies sign($value) == $sign', ({ sign, value }) => {
+        expect(subject['=='](subject.sign(value), sign)).toBe(true);
       });
+    });
+    describeIfValue('isPositive', () => {
+      it.each(properties.values().map(({ type, value }) => ({ value, expected: type === 'positive' })))(
+        'satisfies isPositive($value) == $expected',
+        ({ expected, value }) => {
+          expect(subject.isPositive(value)).toBe(expected);
+        },
+      );
+    });
+    describeIfValue('isNegative', () => {
+      it.each(properties.values().map(({ type, value }) => ({ value, expected: type === 'negative' })))(
+        'satisfies isNegative($value) == $expected',
+        ({ expected, value }) => {
+          expect(subject.isNegative(value)).toBe(expected);
+        },
+      );
     });
   };
 }

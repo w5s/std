@@ -11,15 +11,12 @@ describe('BigDecimalSigned', () => {
       ...BigDecimalSigned,
     },
     {
-      sign: [
-        { call: [BigDecimal('0')], returns: BigDecimal('0') },
-        { call: [BigDecimal('1.2')], returns: BigDecimal('1') },
-        { call: [BigDecimal('-1.2')], returns: BigDecimal('-1') },
-      ],
-      abs: [
-        { call: [BigDecimal('0')], returns: BigDecimal('0') },
-        { call: [BigDecimal('1.2')], returns: BigDecimal('1.2') },
-        { call: [BigDecimal('-1.2')], returns: BigDecimal('1.2') },
+      values: () => [
+        { value: BigDecimal('-1'), type: 'negative', sign: BigDecimal('-1'), abs: BigDecimal('1') },
+        { value: BigDecimal('-0.5'), type: 'negative', sign: BigDecimal('-1'), abs: BigDecimal('0.5') },
+        { value: BigDecimal('0'), type: 'zero', sign: BigDecimal('0'), abs: BigDecimal('0') },
+        { value: BigDecimal('0.5'), type: 'positive', sign: BigDecimal('1'), abs: BigDecimal('0.5') },
+        { value: BigDecimal('1'), type: 'positive', sign: BigDecimal('1'), abs: BigDecimal('1') },
       ],
     },
   );
