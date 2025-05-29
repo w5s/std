@@ -11,26 +11,26 @@ export interface Signed<T> {
    * @category Numeric
    * @param value - the numeric value
    */
-  abs(value: T): T;
+  abs(this: void, value: T): T;
   /**
    * Returns true if the number is positive and false if the number is zero or negative.
    *
    * @category Numeric
    * @param self - the numeric value
    */
-  isPositive(self: T): boolean;
+  isPositive(this: void, self: T): boolean;
   /**
    * Returns true if the number is negative and false if the number is zero or positive.
    *
    * @category Numeric
    * @param self - the numeric value
    */
-  isNegative(self: T): boolean;
+  isNegative(this: void, self: T): boolean;
   /**
    * Sign of a number. It should satisfy `TSigned['*'](TSigned.abs(x), TSigned.sign(x)) == x`
    *
    * @category Numeric
    * @param value - the numeric value
    */
-  sign(value: T): T;
+  sign(this: void, value: T): T;
 }
