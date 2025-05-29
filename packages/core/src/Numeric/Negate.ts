@@ -8,6 +8,7 @@ export interface Negate<T, Return = T> {
    * Number.negate(Number.negate(5)); // 5
    * ```
    *
+   * @category Numeric
    * @param self - The value to negate.
    */
   negate(self: T): Return;
