@@ -32,6 +32,7 @@ export const MoneyNumeric = {
    * Money['+'](EUR(1), EUR(2));// Result.Ok(EUR(1))
    * Money['+'](EUR(1), USD(2));// Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
    * ```
+   * @category Numeric
    * @param left - Left operand money
    * @param right - Right operand money
    */
@@ -45,6 +46,7 @@ export const MoneyNumeric = {
    * Money['-'](EUR(2), EUR(1));// Result.Ok(EUR(1))
    * Money['-'](EUR(1), USD(2));// Result.Error(new ArgumentError({ message: 'Incompatible currencies EUR and USD' }))
    * ```
+   * @category Numeric
    * @param left - Left operand money
    * @param right - Right operand money
    */
@@ -57,6 +59,7 @@ export const MoneyNumeric = {
    * ```typescript
    * Money['*'](EUR(2), BigDecimal('2'));// EUR("4")
    * ```
+   * @category Numeric
    * @param money - money object
    * @param multiplier - multiplication factor
    */
