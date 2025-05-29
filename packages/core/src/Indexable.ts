@@ -10,17 +10,21 @@ import type { Range } from './Range.js';
 export interface Indexable<T, Index extends number | bigint = number> {
   /**
    * Index type
+   *
+   * @category Indexable
    */
   indexType: Index extends number ? 'number' : Index extends bigint ? 'bigint' : never;
   /**
    * Returns the value at the index
    *
+   * @category Indexable
    * @param index
    */
   at(index: Index): Option<T>;
   /**
    * Returns the integer index of a value
    *
+   * @category Indexable
    * @param value
    */
   indexOf(value: T): Option<Index>;
@@ -28,6 +32,7 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * Returns the size of a range.
    * If `start` or `end` is not in range then returns 0.
    *
+   * @category Indexable
    * @param start - the start of the range
    * @param end - the end of the range
    */
@@ -36,6 +41,7 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * Returns an Iterable starting from `start` to `end`.
    * If `start` or `end` is not in range then returns an empty iterable.
    *
+   * @category Indexable
    * @param start - the start of the range
    * @param end - the end of the range
    */
