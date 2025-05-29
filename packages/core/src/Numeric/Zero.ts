@@ -8,7 +8,7 @@ export interface Zero<T> {
    * ```
    * @category Numeric
    */
-  zero(): T;
+  zero(this: void): T;
   /**
    * Returns true if self is equal to the additive identity.
    *
