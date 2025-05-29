@@ -7,6 +7,7 @@ import { format } from './Money/format.js';
 import { normalize } from './Money/normalize.js';
 import { parse } from './Money/parse.js';
 import { MoneyNegate } from './Money/MoneyNegate.js';
+import { MoneyZero } from './Money/MoneyZero.js';
 
 export type Money = MoneyType;
 
@@ -18,6 +19,7 @@ export const Money = Callable({
   ...MoneyComparable,
   ...MoneyNegate,
   ...MoneyNumeric,
+  ...MoneyZero,
   asString,
   format,
   normalize,
