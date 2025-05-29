@@ -30,7 +30,7 @@ export function describeNot(testingLibrary: TestingLibrary) {
       values: () => Array<[value: T, negation: T]>;
     },
   ) => {
-    (properties.values.length === 0 ? describe.todo : describe)('not', () => {
+    (properties.values().length === 0 ? describe.todo : describe)('not', () => {
       it.each(properties.values())('satisfies not($0) == $1', (left, right) => {
         expect(subject.not(left)).toEqual(right);
       });
