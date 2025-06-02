@@ -64,7 +64,7 @@ export interface Type<T> {
    * StringType.asInstance('foo'); // Option.Some('foo')
    * StringType.asInstance(12); // Option.None
    * ```
-   * @category Constructor
+   * @category Type
    * @param anyValue
    */
   asInstance(anyValue: unknown): Option<T>;
