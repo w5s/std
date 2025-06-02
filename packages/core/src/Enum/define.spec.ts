@@ -52,6 +52,7 @@ describe(define, () => {
       __decode__: expect.any(Function),
       __encode__: expect.any(Function),
       asInstance: expect.any(Function),
+      asString: expect.any(Function),
       [Symbol.enumKeys]: ['Foo', 'Bar', 'Baz'],
       at: expect.any(Function),
       indexType: 'number',

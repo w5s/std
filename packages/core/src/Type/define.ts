@@ -26,6 +26,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     __decode__ = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     __schema__ = () => ({}),
     asInstance = (value) => (hasInstance(value) ? value : undefined),
+    asString = String,
   } = parameters;
   return {
     typeName,
@@ -35,5 +36,6 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     __decode__,
     __schema__,
     asInstance,
+    asString,
   };
 }

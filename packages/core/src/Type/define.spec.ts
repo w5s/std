@@ -29,6 +29,22 @@ describe(define, () => {
       expect(TestType.inspect).toBe(TestType.inspect);
     });
   });
+  describe('#asString', () => {
+    it('has default implementation', () => {
+      const SomeType = define<boolean>({
+        typeName: 'Boolean',
+        hasInstance: (anyValue) => typeof anyValue === 'boolean',
+      });
+      expect(SomeType.asString(true)).toBe('true');
+    });
+    it('forwards from parameters', () => {
+      const SomeType = define<string>({
+        ...TestType,
+        asString: (self) => `prefix:${self}`,
+      });
+      expect(SomeType.asString('toto')).toBe('prefix:toto');
+    });
+  });
   describe('#asInstance', () => {
     it('forwards from parameters', () => {
       const asInstance = () => Option.None;

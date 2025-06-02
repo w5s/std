@@ -1,3 +1,4 @@
+import type { PartialKeys } from '@w5s/core-type';
 import type { Codec } from './Codec.js';
 import { define } from './Type/define.js';
 import { string } from './Type/string.js';
@@ -20,6 +21,7 @@ import { URL } from './Type/URL.js';
 import { Char } from './Type/Char.js';
 import { RegExp } from './Type/RegExp.js';
 import { Ordering } from './Type/Ordering.js';
+import type { AsString } from './AsString.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -116,15 +118,16 @@ export namespace Type {
   /**
    * Type module constructor parameters
    */
-  export interface Parameters<T> extends Partial<Codec<T>> {
+  export interface Parameters<T>
+    extends PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | 'inspect'>,
+      Partial<Codec<T>>,
+      PartialKeys<AsString<T>, 'asString'> {
     typeName: string;
     hasInstance: (value: unknown) => boolean;
-    asInstance?: Type<T>['asInstance'];
-    inspect?: Type<T>['inspect'];
   }
 
   /**
    * Type module interface
    */
-  export interface Module<T> extends Type<T>, Codec<T> {}
+  export interface Module<T> extends Type<T>, Codec<T>, AsString<T> {}
 }

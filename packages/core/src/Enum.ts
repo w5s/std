@@ -1,4 +1,3 @@
-import type { Codec } from './Codec.js';
 import type { Type } from './Type.js';
 import { Symbol } from './Symbol.js';
 import { keys } from './Enum/keys.js';
@@ -32,8 +31,7 @@ export namespace Enum {
 }
 
 export interface Enumerable<T extends Record<string, any> = Record<string, unknown>>
-  extends Type<T[keyof T]>,
-    Codec<T[keyof T]>,
+  extends Type.Module<T[keyof T]>,
     Indexable<T[keyof T], number> {
   /**
    * An array of all keys

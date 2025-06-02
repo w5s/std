@@ -1,6 +1,5 @@
 import type { Tag as CoreTypeTag } from '@w5s/core-type';
 import type { Callable } from './Callable.js';
-import type { Codec } from './Codec.js';
 import { define } from './Tag/define.js';
 import type { Type } from './Type.js';
 
@@ -19,7 +18,7 @@ export const Tag = {
 export namespace Tag {
   export interface Parameters<T> extends Type.Parameters<T> {}
 
-  export interface Module<From, To extends From> extends Type<To>, Codec<To>, Callable<(value: From) => To> {
+  export interface Module<From, To extends From> extends Type.Module<To>, Callable<(value: From) => To> {
     /**
      * Convert an underlying type to a tagged type
      * Alias to `wrap(value)`

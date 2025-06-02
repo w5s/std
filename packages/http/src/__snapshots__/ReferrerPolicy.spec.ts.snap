@@ -15,6 +15,7 @@ exports[`ReferrerPolicy > is an enum 1`] = `
   "__encode__": [Function],
   "__schema__": [Function],
   "asInstance": [Function],
+  "asString": [Function],
   "at": [Function],
   "hasInstance": [Function],
   "indexOf": [Function],
