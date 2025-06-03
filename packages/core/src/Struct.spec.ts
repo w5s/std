@@ -7,7 +7,7 @@ describe('Struct', () => {
     type Test = Struct<{ _: 'Test'; email: string }>;
     const Test = Struct.define<Test>('Test');
     it('should create a new constructor', () => {
-      expect(Test({ email: 'foo@bar.com' })).toEqual({
+      expect(Test({ email: 'foo@bar.com' })).toMatchObject({
         _: 'Test',
         email: 'foo@bar.com',
       });
@@ -19,7 +19,7 @@ describe('Struct', () => {
     });
     describe('.create', () => {
       it('returns a new instance', () => {
-        expect(Test.create({ email: 'foo@bar.com' })).toEqual({
+        expect(Test.create({ email: 'foo@bar.com' })).toMatchObject({
           _: 'Test',
           email: 'foo@bar.com',
         });

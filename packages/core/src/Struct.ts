@@ -1,4 +1,7 @@
+import type { AsString } from './AsString.js';
+import { Struct as StructImpl } from './Struct/Struct.js';
 import { Callable } from './Callable.js';
+import { Symbol } from './Symbol.js';
 import type { Type } from './Type.js';
 
 /**
@@ -60,6 +63,26 @@ export namespace Struct {
   export type type = typeof type;
 
   /**
+   * Return a new Struct from `properties`.
+   * Struct adds debugging / inspecting abilities
+   *
+   * @example
+   * ```typescript
+   * const SomeType = Type.define<{ some: boolean }>({ typeName: 'SomeType' });
+   *
+   * Struct.create(SomeType, { some: true });// Struct { _: 'SomeType', some: true }
+   * ```
+   * @param module
+   * @param properties
+   */
+  export function create<Properties>(
+    module: Type<Properties> & AsString<Properties>,
+    properties: Properties,
+  ): Properties {
+    return StructImpl.create(module, properties);
+  }
+
+  /**
    * Return a new `Struct` default factory
    * See {@link Module} for additional properties added to the constructor
    *
@@ -75,23 +98,28 @@ export namespace Struct {
    * @param typeName - the type unique name
    */
   export function define<Model extends Struct<{ [Struct.type]: string }>>(typeName: Model[Struct.type]): Module<Model> {
-    const hasInstance = (anyValue: unknown): boolean =>
+    const hasInstance = (anyValue: unknown): anyValue is Model =>
       // @ts-ignore We know what we are doing
       anyValue == null ? false : anyValue[type] === typeName;
     const asInstance = (value: unknown) => (hasInstance(value) ? value : undefined);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    const create = (_properties: any) => ({
-      [Struct.type]: typeName,
-      ..._properties,
-    });
+    const module = {
+      typeName,
+      hasInstance,
+      [Symbol.inspect]: undefined,
+      asInstance,
+      asString: String,
+      create: (_properties: any) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        Struct.create(module, {
+          [Struct.type]: typeName,
+          ..._properties,
+        }),
+    };
 
     // @ts-ignore We know what we are doing
     return Callable({
-      [Callable.symbol]: create,
-      typeName,
-      hasInstance,
-      asInstance,
-      create,
+      [Callable.symbol]: module.create,
+      ...module,
     });
   }
 }
