@@ -22,6 +22,7 @@ import { Char } from './Type/Char.js';
 import { RegExp } from './Type/RegExp.js';
 import { Ordering } from './Type/Ordering.js';
 import type { AsString } from './AsString.js';
+import type { Symbol } from './Symbol.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
@@ -80,7 +81,7 @@ export interface Type<T> {
    * @category Type
    * @param anyValue
    */
-  inspect: Option<(anyValue: T, depth: number, options: InspectOptions, inspect: InspectFunction) => string>;
+  [Symbol.inspect]: Option<(anyValue: T, depth: number, options: InspectOptions, inspect: InspectFunction) => string>;
 }
 
 /**
@@ -119,7 +120,7 @@ export namespace Type {
    * Type module constructor parameters
    */
   export interface Parameters<T>
-    extends PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | 'inspect'>,
+    extends PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
       Partial<Codec<T>>,
       PartialKeys<AsString<T>, 'asString'> {
     typeName: string;

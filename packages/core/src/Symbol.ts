@@ -102,12 +102,6 @@ export namespace Symbol {
 
   // NodeJS
 
-  /**
-   * NodeJS inspect symbol used by `util.inspect()`
-   */
-  export const nodeInspect: unique symbol = GlobalSymbol.for('nodejs.util.inspect.custom') as any;
-  export type nodeInspect = typeof nodeInspect;
-
   // W5S symbols
 
   /**
@@ -115,6 +109,14 @@ export namespace Symbol {
    */
   export const call = '__call__'; // GlobalSymbol.for('w5s.call') as any;
   export type call = typeof call;
+
+  /**
+   * Encode property symbol
+   *
+   * @see {@link Type}
+   */
+  export const inspect = '__inspect__'; // GlobalSymbol.for('w5s.inspect') as any;
+  export type inspect = typeof inspect;
 
   /**
    * Encode property symbol
