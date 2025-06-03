@@ -5,12 +5,12 @@ import type { Time } from '@w5s/time';
 import type { FileError } from '../FileError.js';
 import { Internal, errnoTask } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';
-import type { DeviceID, FileID, FileStatus, GroupID, UserID } from '../FileStatus.js';
+import type { DeviceID, FileID, GroupID, UserID } from '../FileStatus.js';
+import { FileStatus } from '../FileStatus.js';
 import type { FileSize } from '../FileSize.js';
 
 function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
-  return {
-    _: 'FileStatus',
+  return FileStatus.create({
     accessTime: stats.atimeMs as Time,
     deviceID: stats.dev as DeviceID,
     fileGroup: stats.gid as GroupID,
@@ -29,7 +29,7 @@ function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
     specialDeviceID: stats.rdev as DeviceID,
     statusChangeTime: stats.ctimeMs as Time,
     // fileMode: FileMode(stats.mode),
-  };
+  });
 }
 
 /**

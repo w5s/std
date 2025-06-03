@@ -16,7 +16,7 @@ describe(Money, () => {
   const EUR = CurrencyRegistry.getByCode('EUR')!;
 
   it('should initialize Money', () => {
-    expect(Money({ currency: anyCurrency, amount: anyAmount })).toEqual({
+    expect(Money({ currency: anyCurrency, amount: anyAmount })).toMatchObject({
       _: 'Money',
       currency: anyCurrency,
       amount: anyAmount,

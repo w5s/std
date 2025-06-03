@@ -39,12 +39,11 @@ function call({
   strings?: ReadonlyArray<string>;
   values?: ReadonlyArray<SQLStatement.Value>;
 }): SQLStatement {
-  return {
-    _: 'SQLStatement',
+  return SQLStatementType.create({
     strings:
       strings.length <= values.length ? strings.concat(Array(values.length + 1 - strings.length).fill('')) : strings,
     values,
-  };
+  });
 }
 
 function concat(...statements: SQLStatement[]): SQLStatement {

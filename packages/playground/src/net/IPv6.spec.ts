@@ -96,32 +96,26 @@ describe('IPv6', () => {
   });
   describe('any', () => {
     it('is a well known ip', () => {
-      expect(IPv6.any).toMatchInlineSnapshot(`
-        {
-          "_": "IPv6",
-          "ipv6": 0n,
-        }
-      `);
+      expect(IPv6.any).toMatchObject({
+        _: 'IPv6',
+        ipv6: 0n,
+      });
     });
   });
   describe('localhost', () => {
     it('is a well known ip', () => {
-      expect(IPv6.localhost).toMatchInlineSnapshot(`
-        {
-          "_": "IPv6",
-          "ipv6": 1n,
-        }
-      `);
+      expect(IPv6.localhost).toMatchObject({
+        _: 'IPv6',
+        ipv6: 1n,
+      });
     });
   });
   describe('loopback', () => {
     it('is a well known ip', () => {
-      expect(IPv6.loopback).toMatchInlineSnapshot(`
-        {
-          "_": "IPv6",
-          "ipv6": 1n,
-        }
-      `);
+      expect(IPv6.loopback).toMatchObject({
+        _: 'IPv6',
+        ipv6: 1n,
+      });
     });
   });
 });

@@ -3,7 +3,7 @@ import { sql, SQLStatement } from './sql.js';
 
 describe('SQLStatement', () => {
   it('should empty statement', () => {
-    expect(SQLStatement({})).toEqual({
+    expect(SQLStatement({})).toMatchObject({
       _: 'SQLStatement',
       strings: [''],
       values: [],
@@ -15,7 +15,7 @@ describe('SQLStatement', () => {
         strings: ['foo', 'bar'],
         values: [123],
       }),
-    ).toEqual({
+    ).toMatchObject({
       _: 'SQLStatement',
       strings: ['foo', 'bar'],
       values: [123],
@@ -27,7 +27,7 @@ describe('SQLStatement', () => {
         strings: ['foo'],
         values: [123, 345],
       }),
-    ).toEqual({
+    ).toMatchObject({
       _: 'SQLStatement',
       strings: ['foo', '', ''],
       values: [123, 345],

@@ -5,7 +5,7 @@ import { BigDecimal } from './BigDecimal.js';
 
 describe('()', () => {
   it('constructs from parameters', () => {
-    expect(BigDecimal(1n, 100)).toEqual({
+    expect(BigDecimal(1n, 100)).toMatchObject({
       _: 'BigDecimal',
       value: 1n,
       scale: 100,

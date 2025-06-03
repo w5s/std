@@ -1,4 +1,4 @@
-import type { BigDecimal } from './BigDecimal.js';
+import { BigDecimal } from './BigDecimal.js';
 
 /**
  * Returns a new `BigDecimal` from `value` and `scale`
@@ -13,9 +13,8 @@ import type { BigDecimal } from './BigDecimal.js';
  * @param scale - The scale.
  */
 export function of(value: bigint, scale: number): BigDecimal {
-  return {
-    _: 'BigDecimal',
+  return BigDecimal.create({
     value,
     scale,
-  };
+  });
 }
