@@ -97,7 +97,7 @@ export namespace SQLQuery {
       columnName: string;
       columnAttributes: ColumnAttributes;
     }> {}
-  export const AddColumn = Struct.define<AddColumn>('SQLAddColumn');
+  export const AddColumn = Struct.define<AddColumn>({ typeName: 'SQLAddColumn' });
 
   export interface AddConstraint
     extends Struct<{
@@ -105,14 +105,14 @@ export namespace SQLQuery {
       tableName: string;
       constraintName: string;
     }> {}
-  export const AddConstraint = Struct.define<AddConstraint>('SQLAddConstraint');
+  export const AddConstraint = Struct.define<AddConstraint>({ typeName: 'SQLAddConstraint' });
 
   export interface CreateSchema
     extends Struct<{
       [Struct.type]: 'SQLCreateSchema';
       schemaName: string;
     }> {}
-  export const CreateSchema = Struct.define<CreateSchema>('SQLCreateSchema');
+  export const CreateSchema = Struct.define<CreateSchema>({ typeName: 'SQLCreateSchema' });
 
   export interface CreateTable
     extends Struct<{
@@ -120,21 +120,21 @@ export namespace SQLQuery {
       tableName: string;
       tableAttributes: TableAttributes;
     }> {}
-  export const CreateTable = Struct.define<CreateTable>('SQLCreateTable');
+  export const CreateTable = Struct.define<CreateTable>({ typeName: 'SQLCreateTable' });
 
   export interface DropSchema
     extends Struct<{
       [Struct.type]: 'SQLDropSchema';
       schemaName: string;
     }> {}
-  export const DropSchema = Struct.define<DropSchema>('SQLDropSchema');
+  export const DropSchema = Struct.define<DropSchema>({ typeName: 'SQLDropSchema' });
 
   export interface DropTable
     extends Struct<{
       [Struct.type]: 'SQLDropTable';
       tableName: string;
     }> {}
-  export const DropTable = Struct.define<DropTable>('SQLDropTable');
+  export const DropTable = Struct.define<DropTable>({ typeName: 'SQLDropTable' });
 
   export interface RemoveConstraint
     extends Struct<{
@@ -142,7 +142,7 @@ export namespace SQLQuery {
       tableName: string;
       constraintName: string;
     }> {}
-  export const RemoveConstraint = Struct.define<RemoveConstraint>('SQLRemoveConstraint');
+  export const RemoveConstraint = Struct.define<RemoveConstraint>({ typeName: 'SQLRemoveConstraint' });
 
   export interface RemoveColumn
     extends Struct<{
@@ -150,7 +150,7 @@ export namespace SQLQuery {
       tableName: string;
       columnName: string;
     }> {}
-  export const RemoveColumn = Struct.define<RemoveColumn>('SQLRemoveColumn');
+  export const RemoveColumn = Struct.define<RemoveColumn>({ typeName: 'SQLRemoveColumn' });
 
   function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

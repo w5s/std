@@ -1,7 +1,8 @@
+import type { PartialKeys } from '@w5s/core-type';
 import type { AsString } from './AsString.js';
 import { Struct as StructImpl } from './Struct/Struct.js';
 import { Callable } from './Callable.js';
-import { Symbol } from './Symbol.js';
+import { define as defineType } from './Type/define.js';
 import type { Type } from './Type.js';
 
 /**
@@ -32,7 +33,7 @@ export namespace Struct {
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
   export interface Module<Model extends Struct<{ [Struct.type]: string }>>
-    extends Type<Model>,
+    extends Type.Module<Model>,
       Callable<(properties: Parameters<Model>) => Model> {
     /**
      * Construct a new model
@@ -82,6 +83,11 @@ export namespace Struct {
     return StructImpl.create(module, properties);
   }
 
+  export interface DefineParameters<Model extends Struct<{ [Struct.type]: string }>>
+    extends PartialKeys<Type.Parameters<Model>, 'hasInstance'> {
+    typeName: Model[Struct.type];
+  }
+
   /**
    * Return a new `Struct` default factory
    * See {@link Module} for additional properties added to the constructor
@@ -89,7 +95,7 @@ export namespace Struct {
    * @example
    * ```typescript
    * type Model = Struct<{ [Struct.type]: 'Model', foo: boolean }>
-   * const Model = Struct.define<Model>('Model');
+   * const Model = Struct.define<Model>({ typeName: 'Model' });
    *
    * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
    * Model.typeName === 'Model' // true
@@ -97,22 +103,23 @@ export namespace Struct {
    * ```
    * @param typeName - the type unique name
    */
-  export function define<Model extends Struct<{ [Struct.type]: string }>>(typeName: Model[Struct.type]): Module<Model> {
-    const hasInstance = (anyValue: unknown): anyValue is Model =>
-      // @ts-ignore We know what we are doing
-      anyValue == null ? false : anyValue[type] === typeName;
-    const asInstance = (value: unknown) => (hasInstance(value) ? value : undefined);
+  export function define<Model extends Struct<{ [Struct.type]: string }>>(
+    parameters: DefineParameters<Model>,
+  ): Module<Model> {
+    const { typeName } = parameters;
     const module = {
-      typeName,
-      hasInstance,
-      [Symbol.inspect]: undefined,
-      asInstance,
-      asString: String,
-      create: (_properties: any) =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-        Struct.create(module, {
-          [Struct.type]: typeName,
-          ..._properties,
+      ...defineType({
+        hasInstance: (anyValue: unknown): anyValue is Model =>
+          // @ts-ignore We know what we are doing
+          anyValue == null ? false : anyValue[type] === typeName,
+        ...parameters,
+        typeName,
+      }),
+      create: (properties: any) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        create(module, {
+          [type]: typeName,
+          ...properties,
         }),
     };
 

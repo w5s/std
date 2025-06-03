@@ -18,7 +18,7 @@ describe(Currency, () => {
     return rest;
   };
   it('should initialize Currency', () => {
-    expect(Currency(anyProperties)).toEqual({
+    expect(Currency(anyProperties)).toMatchObject({
       _: 'Currency',
       ...anyProperties,
     });

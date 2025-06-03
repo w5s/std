@@ -43,7 +43,7 @@ export interface Currency
     symbolNative: string;
   }> {}
 
-const CurrencyStruct = Struct.define<Currency>('Currency');
+const CurrencyStruct = Struct.define<Currency>({ typeName: 'Currency' });
 
 export const Currency = Callable({
   defaultRounding,
@@ -57,12 +57,12 @@ export const Currency = Callable({
     rounding?: Currency['rounding'];
     symbol: Currency['symbol'];
     symbolNative?: Currency['symbolNative'];
-  }): Currency => ({
-    _: 'Currency',
-    rounding: defaultRounding,
-    precision: defaultPrecision,
-    namePlural: parameters.name,
-    symbolNative: parameters.symbol,
-    ...parameters,
-  }),
+  }): Currency =>
+    CurrencyStruct.create({
+      rounding: defaultRounding,
+      precision: defaultPrecision,
+      namePlural: parameters.name,
+      symbolNative: parameters.symbol,
+      ...parameters,
+    }),
 });

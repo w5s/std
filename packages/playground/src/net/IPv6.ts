@@ -19,7 +19,7 @@ export interface IPv6
     [Struct.type]: 'IPv6';
     ipv6: IPv6Address;
   }> {}
-const IPv6Type = Struct.define<IPv6>('IPv6');
+const IPv6Type = Struct.define<IPv6>({ typeName: 'IPv6' });
 
 const bigIntByteAt = (ipv6Value: bigint, index: number) =>
   Number((ipv6Value >> BigInt((7 - index) * 16)) & 0xff_ffn) as Int;

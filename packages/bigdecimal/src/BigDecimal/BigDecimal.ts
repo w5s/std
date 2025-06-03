@@ -6,7 +6,7 @@ import { parse } from './parse.js';
 import { asString } from './asString.js';
 import { call } from './call.js';
 
-const BigDecimalStruct = Struct.define<BigDecimal>('BigDecimal');
+const BigDecimalStruct = Struct.define<BigDecimal>({ typeName: 'BigDecimal' });
 
 const BigDecimalCodec: Codec<BigDecimal> = {
   [Symbol.encode]: (input) => `${asString(input)}m`,

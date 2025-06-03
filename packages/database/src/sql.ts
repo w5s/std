@@ -30,7 +30,7 @@ const append = ({ strings: targetStrings, values: targetValues }: SQLBuffer, { s
   }
 };
 
-const SQLStatementType = Struct.define<SQLStatement>('SQLStatement');
+const SQLStatementType = Struct.define<SQLStatement>({ typeName: 'SQLStatement' });
 
 function call({
   strings = emptyStrings,

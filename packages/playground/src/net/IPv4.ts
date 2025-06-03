@@ -17,7 +17,7 @@ export interface IPv4
     [Struct.type]: 'IPv4';
     ipv4: IPv4Address;
   }> {}
-const IPv4Type = Struct.define<IPv4>('IPv4');
+const IPv4Type = Struct.define<IPv4>({ typeName: 'IPv4' });
 
 const IPv4Format = {
   parse(expression: string): Option<IPv4> {

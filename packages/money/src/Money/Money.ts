@@ -7,7 +7,7 @@ import type { Currency } from '../Currency/Currency.js';
 import { parse } from './parse.js';
 import { asString } from './asString.js';
 
-const MoneyStruct = Struct.define<Money>('Money');
+const MoneyStruct = Struct.define<Money>({ typeName: 'Money' });
 
 const MoneyCodec: Codec<Money> = {
   [Symbol.encode]: (input) => asString(input),

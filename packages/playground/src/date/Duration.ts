@@ -52,8 +52,8 @@ function parse(expression: string): Option<Duration> {
     return undefined;
   }
 
-  return {
-    _: 'Duration',
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  return DurationStruct.create({
     years,
     months,
     weeks,
@@ -61,7 +61,7 @@ function parse(expression: string): Option<Duration> {
     hours,
     minutes,
     seconds,
-  };
+  });
 }
 
 const formatPart = (prefix: string, part: number) => (part === 0 ? '' : `${part}${prefix}`);
@@ -86,7 +86,7 @@ export interface Duration
     seconds: number;
   }> {}
 
-const DurationStruct = Struct.define<Duration>('Duration');
+const DurationStruct = Struct.define<Duration>({ typeName: 'Duration' });
 
 const DurationCodec: Codec<Duration> = {
   [Symbol.encode]: (value) => format(value),
@@ -106,14 +106,14 @@ const DurationCodec: Codec<Duration> = {
 export const Duration = Callable({
   ...DurationStruct,
   ...DurationCodec,
-  [Callable.symbol]: (properties?: Partial<Struct.Parameters<Duration>>): Duration => ({
-    _: 'Duration',
-    years: properties?.years ?? (0 as Int),
-    months: properties?.months ?? (0 as Int),
-    weeks: properties?.weeks ?? (0 as Int),
-    days: properties?.days ?? (0 as Int),
-    hours: properties?.hours ?? (0 as Int),
-    minutes: properties?.minutes ?? (0 as Int),
-    seconds: properties?.seconds ?? 0,
-  }),
+  [Callable.symbol]: (properties?: Partial<Struct.Parameters<Duration>>): Duration =>
+    Duration.create({
+      years: properties?.years ?? (0 as Int),
+      months: properties?.months ?? (0 as Int),
+      weeks: properties?.weeks ?? (0 as Int),
+      days: properties?.days ?? (0 as Int),
+      hours: properties?.hours ?? (0 as Int),
+      minutes: properties?.minutes ?? (0 as Int),
+      seconds: properties?.seconds ?? 0,
+    }),
 });
