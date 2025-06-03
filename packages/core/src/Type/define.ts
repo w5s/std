@@ -26,7 +26,8 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     __decode__ = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     __schema__ = () => ({}),
     asInstance = (value) => (hasInstance(value) ? value : undefined),
-    asString = String,
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+    asString = (self) => (typeof self === 'object' ? `[object ${typeName}]` : `${self}`),
   } = parameters;
   return {
     typeName,

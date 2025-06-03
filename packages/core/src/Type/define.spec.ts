@@ -10,7 +10,7 @@ describe(define, () => {
   const TestType = define<string>({
     typeName: 'String',
     hasInstance: (anyValue) => typeof anyValue === 'string',
-    inspect,
+    __inspect__: inspect,
   });
 
   describe('#typeName', () => {
@@ -24,9 +24,9 @@ describe(define, () => {
       expect(TestType.hasInstance(null)).toBe(false);
     });
   });
-  describe('#inspect', () => {
+  describe('#__inspect__', () => {
     it('forwards from parameters', () => {
-      expect(TestType.inspect).toBe(TestType.inspect);
+      expect(TestType.__inspect__).toBe(TestType.__inspect__);
     });
   });
   describe('#asString', () => {
@@ -36,6 +36,13 @@ describe(define, () => {
         hasInstance: (anyValue) => typeof anyValue === 'boolean',
       });
       expect(SomeType.asString(true)).toBe('true');
+    });
+    it('has default implementation for objects', () => {
+      const SomeType = define<{}>({
+        typeName: 'Foo',
+        hasInstance: (anyValue) => typeof anyValue === 'object',
+      });
+      expect(SomeType.asString({})).toBe('[object Foo]');
     });
     it('forwards from parameters', () => {
       const SomeType = define<string>({
