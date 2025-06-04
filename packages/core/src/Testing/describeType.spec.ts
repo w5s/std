@@ -7,6 +7,7 @@ describe('describeType', () => {
     typeName: 'String',
     hasInstance: (value): value is string => typeof value === 'string',
     asInstance: (value) => (typeof value === 'string' ? value : undefined),
+    __inspect__: undefined,
   };
 
   describeType({ describe, it, expect })(StringType, {
