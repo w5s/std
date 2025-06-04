@@ -1,4 +1,5 @@
 import type { Bounded } from '../Bounded.js';
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
 
 /**
@@ -6,26 +7,30 @@ import type { TestingLibrary } from './type.js';
  *
  * @example
  * ```typescript
- * describeBounded({ describe, it, expect })(SomeBounded, {
+ * describeBounded(SomeBounded, {
  *   minValue: // ...
  *   maxValue: // ...
  * });
  *
  * ```
- * @param testingLibrary
+ * @param subject - the subject to test
+ * @param snapshot - the snapshot to compare against
+ * @param testingLibrary - the testing library to use
  */
-export function describeBounded(testingLibrary: TestingLibrary) {
+export function describeBounded<V>(
+  subject: Bounded<V>,
+  snapshot: Bounded<V>,
+  testingLibrary: TestingLibrary = defaultTestingLibrary(),
+) {
   const { describe, it, expect } = testingLibrary;
-  return <V>(subject: Bounded<V>, snapshot: Bounded<V>) => {
-    describe('minValue', () => {
-      it('is a specific value', () => {
-        expect(subject.minValue).toEqual(snapshot.minValue);
-      });
+  describe('minValue', () => {
+    it('is a specific value', () => {
+      expect(subject.minValue).toEqual(snapshot.minValue);
     });
-    describe('maxValue', () => {
-      it('is a specific value', () => {
-        expect(subject.maxValue).toEqual(snapshot.maxValue);
-      });
+  });
+  describe('maxValue', () => {
+    it('is a specific value', () => {
+      expect(subject.maxValue).toEqual(snapshot.maxValue);
     });
-  };
+  });
 }

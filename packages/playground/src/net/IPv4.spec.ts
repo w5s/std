@@ -64,7 +64,7 @@ describe('IPv4', () => {
       [IPv4.of(192, 168, 0, 1), IPv4.of(192, 168, 0, 1)],
     ],
   });
-  describeBounded({ describe, it, expect })(IPv4, {
+  describeBounded(IPv4, {
     minValue: IPv4.of(0, 0, 0, 0),
     maxValue: IPv4.of(255, 255, 255, 255),
   });

@@ -69,7 +69,7 @@ describe('IPv6', () => {
     equivalent: () => [[IPv6.of(0xff_ff, 0xff_ff, 0, 0, 0, 0, 0, 1), IPv6.of(0xff_ff, 0xff_ff, 0, 0, 0, 0, 0, 1)]],
   });
 
-  describeBounded({ describe, it, expect })(IPv6, {
+  describeBounded(IPv6, {
     minValue: IPv6.of(0, 0, 0, 0, 0, 0, 0, 0),
     maxValue: IPv6.of(0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff),
   });
