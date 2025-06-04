@@ -1,4 +1,5 @@
 export * from './Testing/describeAdd.js';
+export * from './Testing/describeAsString.js';
 export * from './Testing/describeBounded.js';
 export * from './Testing/describeCheckedAdd.js';
 export * from './Testing/describeCheckedMultiply.js';

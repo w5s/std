@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // public exports
         'describeAdd',
+        'describeAsString',
         'describeBounded',
         'describeCheckedAdd',
         'describeCheckedMultiply',

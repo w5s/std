@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { Int } from './Int.js';
-import { describeType, describeCodec } from './Testing.js';
+import { describeType, describeCodec, describeAsString } from './Testing.js';
 import { CodecError } from './CodecError.js';
 import { Result } from './Result.js';
 import { parse } from './Int/parse.js';
@@ -44,6 +44,12 @@ describe('Int', () => {
     schema: () => ({
       type: 'integer',
     }),
+  });
+  describeAsString(Int, {
+    test: () => [
+      [Int(1), '1'],
+      [Int(2), '2'],
+    ],
   });
   describe('()', () => {
     it('returns or throw when wrong value', () => {
