@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { union } from './union.js';
 import { TObject } from './Object.js';
 import { string } from './string.js';
@@ -19,12 +19,12 @@ describe(union, () => {
   const BCType = union(BType, CType);
   const ABCType = union(AType, BCType);
 
-  describeType({ describe, it, expect })(ABCType, {
+  describeType(ABCType, {
     typeName: 'AType|string|number',
     instances: () => [{ a: 'a_value' }, 1, 'a'],
     notInstances: () => [undefined, null, { a: 1 }],
   });
-  describeCodec({ describe, it, expect })(ABCType, {
+  describeCodec(ABCType, {
     encode: [
       [1, 1],
       ['a', 'a'],

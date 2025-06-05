@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe } from 'vitest';
 import { describeSigned } from '@w5s/core/dist/Testing.js';
 import { BigDecimalSigned } from './BigDecimalSigned.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
 
 describe('BigDecimalSigned', () => {
-  describeSigned({ describe, it, expect })(
+  describeSigned(
     {
       ...BigDecimalComparable,
       ...BigDecimalSigned,

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Record } from './Record.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
@@ -13,12 +13,12 @@ describe(Record, () => {
   const TestRecord = subject(string, bigint);
   type TestRecord = Type.TypeOf<typeof TestRecord>;
 
-  describeType({ describe, it, expect })(TestRecord, {
+  describeType(TestRecord, {
     typeName: 'Record<string,bigint>',
     instances: () => [{ foo: 1n, bar: 2n }, { key: 1n, value: 3n }, {}] as TestRecord[],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec({ describe, it, expect })(TestRecord, {
+  describeCodec(TestRecord, {
     decode: [
       [{}, Result.Ok({})],
       [{ foo: '1n', bar: '2n' }, Result.Ok({ foo: 1n, bar: 2n })],

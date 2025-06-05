@@ -1,11 +1,11 @@
 import { describeSigned } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { TimeDurationSigned } from './TimeDurationSigned.js';
 import { TimeDuration } from './TimeDuration.js';
 import { TimeDurationComparable } from './TimeDurationComparable.js';
 
 describe('TimeDurationSigned', () => {
-  describeSigned({ describe, it, expect })(
+  describeSigned(
     { ...TimeDurationComparable, ...TimeDurationSigned },
     {
       values: () => [

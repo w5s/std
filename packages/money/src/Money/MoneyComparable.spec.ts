@@ -1,5 +1,5 @@
 import { describeComparable } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { MoneyComparable } from './MoneyComparable.js';
 import { Money } from './Money.js';
@@ -22,7 +22,7 @@ describe('MoneyComparable', () => {
   const EUR = (amount: BigDecimal) => Money({ currency: currencyEuro, amount });
   const USD = (amount: BigDecimal) => Money({ currency: currencyDollar, amount });
 
-  describeComparable({ describe, expect, it })(MoneyComparable, {
+  describeComparable(MoneyComparable, {
     ordered: () => [
       // Money({ currency: anyCurrency, amount: anyAmount }),
       EUR(_0),

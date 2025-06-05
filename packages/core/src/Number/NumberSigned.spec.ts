@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeSigned } from '../Testing.js';
 import { NumberComparable } from './NumberComparable.js';
 import { NumberSigned } from './NumberSigned.js';
 
 describe('NumberSigned', () => {
-  describeSigned({ describe, it, expect })(
+  describeSigned(
     { ...NumberComparable, ...NumberSigned },
     {
       values: () => [

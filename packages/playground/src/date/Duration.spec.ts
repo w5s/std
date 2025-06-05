@@ -1,10 +1,10 @@
 import { describeType, describeCodec } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { CodecError, Int, Result } from '@w5s/core';
 import { Duration } from './Duration.js';
 
 describe('Duration', () => {
-  describeType({ describe, it, expect })(Duration, {
+  describeType(Duration, {
     typeName: 'Duration',
     instances: () => [
       Duration({
@@ -19,7 +19,7 @@ describe('Duration', () => {
     ],
     notInstances: () => ['1', 1.1, undefined, {}],
   });
-  describeCodec({ describe, it, expect })(Duration, {
+  describeCodec(Duration, {
     decode: [
       [
         'P2Y4M3W6DT14H30M20.42S',

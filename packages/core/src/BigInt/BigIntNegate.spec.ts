@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { BigIntNegate } from './BigIntNegate.js';
 import { describeNegate } from '../Testing.js';
 import { BigIntComparable } from './BigIntComparable.js';
 
 describe('BigIntNegate', () => {
-  describeNegate({ describe, it, expect })(
+  describeNegate(
     { ...BigIntNegate, ...BigIntComparable },
     {
       values: () => [

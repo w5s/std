@@ -15,7 +15,7 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param subject - The subject to test
  * @param cases - Array of objects containing test cases
- * @param testingLibrary - Optional testing library to use. Defaults to the default
+ * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeMultiply<L, R, Ret>(
   subject: Numeric.Multiply<L, R, Ret>,

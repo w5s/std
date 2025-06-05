@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { constant } from './constant.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
@@ -7,12 +7,12 @@ import { CodecError } from '../CodecError.js';
 describe(constant, () => {
   const subject = constant;
 
-  describeType({ describe, it, expect })(subject('anyValue'), {
+  describeType(subject('anyValue'), {
     typeName: 'anyValue',
     instances: () => ['anyValue' as const],
     notInstances: () => [null, 1, [1], ''],
   });
-  describeCodec({ describe, it, expect })(subject('anyValue'), {
+  describeCodec(subject('anyValue'), {
     decode: [
       ['anyValue', Result.Ok('anyValue')],
       [
@@ -31,7 +31,7 @@ describe(constant, () => {
 
   const anySymbol = Symbol('anySymbol');
   const codecWithEncodedValue = subject(anySymbol, '$$anySymbol');
-  describeCodec({ describe, it, expect })(codecWithEncodedValue, {
+  describeCodec(codecWithEncodedValue, {
     decode: [
       ['$$anySymbol', Result.Ok(anySymbol)],
       [
@@ -49,7 +49,7 @@ describe(constant, () => {
   });
 
   const nullLiteral = subject(undefined, null);
-  describeCodec({ describe, it, expect })(nullLiteral, {
+  describeCodec(nullLiteral, {
     decode: [
       [null, Result.Ok(undefined)],
       [

@@ -1,15 +1,15 @@
 import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Result, CodecError } from '@w5s/core';
 import { TimeDuration } from './TimeDuration.js';
 
 describe('TimeDuration', () => {
-  describeType({ describe, it, expect })(TimeDuration, {
+  describeType(TimeDuration, {
     typeName: 'TimeDuration',
     instances: () => [-1 as TimeDuration, 0 as TimeDuration, 1 as TimeDuration],
     notInstances: () => [null, undefined, [], Number.NaN],
   });
-  describeCodec({ describe, it, expect })(TimeDuration, {
+  describeCodec(TimeDuration, {
     encode: [
       [TimeDuration(1), 1],
       [TimeDuration(0), 0],

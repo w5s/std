@@ -14,7 +14,7 @@ describe(define, () => {
     hasInstance: (value) => typeof value === 'number' && value > 0,
   });
 
-  describeType({ describe, it, expect })(PositiveNumber, {
+  describeType(PositiveNumber, {
     typeName: 'PositiveNumber',
     instances: () => [1 as PositiveNumber, 1000 as PositiveNumber],
     notInstances: () => [0, -1, -1000],

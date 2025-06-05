@@ -16,7 +16,7 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param subject - The subject to test
  * @param properties - Object containing test properties
- * @param testingLibrary - Optional testing library to use. Defaults to the default
+ * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeAsString<T>(
   subject: AsString<T>,

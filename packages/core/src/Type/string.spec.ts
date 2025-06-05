@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { string } from './string.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('string', () => {
-  describeType({ describe, it, expect })(string, {
+  describeType(string, {
     typeName: 'string',
     instances: () => ['', 'hello world'],
     notInstances: () => [0, null, undefined],
   });
-  describeCodec({ describe, it, expect })(string, {
+  describeCodec(string, {
     encode: [
       ['', ''],
       ['true', 'true'],

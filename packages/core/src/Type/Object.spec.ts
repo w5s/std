@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
@@ -15,12 +15,12 @@ describe(TObject, () => {
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
     __schema__: () => ({ type: 'any', format: 'custom_underscore' }),
   });
-  describeType({ describe, it, expect })(subject({ foo: AnyType, bar: AnyType }, 'FooType'), {
+  describeType(subject({ foo: AnyType, bar: AnyType }, 'FooType'), {
     typeName: 'FooType',
     instances: () => [{ foo: 'foo_value', bar: 'bar_value' }],
     notInstances: () => [null, 1, '', {}, { foo: 'foo_value' }, { foo: 1, bar: 2 }],
   });
-  describeCodec({ describe, it, expect })(subject({ foo: AnyType, bar: AnyType }), {
+  describeCodec(subject({ foo: AnyType, bar: AnyType }), {
     decode: [
       [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],
       [

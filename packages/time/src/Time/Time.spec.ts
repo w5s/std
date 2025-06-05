@@ -1,16 +1,16 @@
 import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { CodecError, Result } from '@w5s/core';
 import { Time } from './Time.js';
 import { TimeBounded } from './TimeBounded.js';
 
 describe('Time', () => {
-  describeType({ describe, it, expect })(Time, {
+  describeType(Time, {
     typeName: 'Time',
     instances: () => [TimeBounded.minValue, Time(-1), Time(0), Time(1), TimeBounded.maxValue],
     notInstances: () => [null, undefined, [], Number.NaN],
   });
-  describeCodec({ describe, it, expect })(Time, {
+  describeCodec(Time, {
     encode: [
       [Time(1), '1970-01-01T00:00:00.001Z'],
       [Time(0), '1970-01-01T00:00:00.000Z'],

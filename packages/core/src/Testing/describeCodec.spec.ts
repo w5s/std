@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import type { Codec } from '../Codec.js';
 import { CodecError } from '../CodecError.js';
 import { describeCodec } from './describeCodec.js';
@@ -20,7 +20,7 @@ describe('describeCodec', () => {
     [Symbol.schema]: () => ({ type: 'string' }),
   };
 
-  describeCodec({ describe, it, expect })(StringCodec, {
+  describeCodec(StringCodec, {
     encode: [
       ['a', 'a'],
       ['', ''],

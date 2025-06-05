@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeIndexable } from '../Testing.js';
 import { BigIntIndexable } from './BigIntIndexable.js';
 
 describe('BigIntIndexable', () => {
-  describeIndexable({ describe, it, expect })(BigIntIndexable, {
+  describeIndexable(BigIntIndexable, {
     index: [
       [0n, 0n],
       [1n, 1n],

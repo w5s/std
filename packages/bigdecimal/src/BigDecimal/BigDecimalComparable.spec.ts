@@ -1,9 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
 
-describeComparable({ describe, it, expect })(BigDecimalComparable, {
+describeComparable(BigDecimalComparable, {
   ordered: () => [
     BigDecimal('-10.0'),
     BigDecimal('-0.11'),

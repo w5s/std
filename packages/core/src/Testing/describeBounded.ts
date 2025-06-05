@@ -15,7 +15,7 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param subject - the subject to test
  * @param snapshot - the snapshot to compare against
- * @param testingLibrary - the testing library to use
+ * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeBounded<V>(
   subject: Bounded<V>,

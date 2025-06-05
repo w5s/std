@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { boolean } from './boolean.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('boolean', () => {
-  describeType({ describe, it, expect })(boolean, {
+  describeType(boolean, {
     typeName: 'boolean',
     instances: () => [true, false],
     notInstances: () => ['', null, undefined],
   });
-  describeCodec({ describe, it, expect })(boolean, {
+  describeCodec(boolean, {
     encode: [
       [true, true],
       [false, false],

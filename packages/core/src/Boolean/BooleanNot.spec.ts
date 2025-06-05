@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeNot } from '../Testing.js';
 import { BooleanNot } from './BooleanNot.js';
 
 describe('BooleanNot', () => {
-  describeNot({ describe, it, expect })(BooleanNot, {
+  describeNot(BooleanNot, {
     values: () => [
       // values
       [false, true],

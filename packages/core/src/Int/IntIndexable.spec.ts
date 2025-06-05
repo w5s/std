@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeIndexable } from '../Testing.js';
 import { IntIndexable } from './IntIndexable.js';
 import { Int } from '../Int.js';
 
 describe('IntIndexable', () => {
-  describeIndexable({ describe, it, expect })(IntIndexable, {
+  describeIndexable(IntIndexable, {
     index: [
       [Int(0), Int(0)],
       [Int(1), Int(1)],

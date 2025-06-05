@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Result } from '@w5s/core';
 import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
@@ -7,12 +7,12 @@ import { URL } from './URL.js';
 describe('URL', () => {
   const anyValidURL = 'http://localhost:3000/my/path?get=1' as URL;
 
-  describeType({ describe, it, expect })(URL, {
+  describeType(URL, {
     typeName: 'URL',
     instances: () => [anyValidURL],
     notInstances: () => [null, ''],
   });
-  describeCodec({ describe, it, expect })(URL, {
+  describeCodec(URL, {
     decode: [
       [anyValidURL, Result.Ok(anyValidURL)],
       [

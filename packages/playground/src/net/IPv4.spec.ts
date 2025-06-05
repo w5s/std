@@ -10,7 +10,7 @@ import { CodecError, Result } from '@w5s/core';
 import { IPv4 } from './IPv4.js';
 
 describe('IPv4', () => {
-  describeType({ describe, it, expect })(IPv4, {
+  describeType(IPv4, {
     typeName: 'IPv4',
     instances: () => [IPv4(0xff_ff_ff_ff)],
     notInstances: () => [undefined, 0xff_ff_ff_ff, '127.0.0.1'],
@@ -36,7 +36,7 @@ describe('IPv4', () => {
       expect(IPv4.format(ip)).toEqual('127.0.0.1');
     });
   });
-  describeCodec({ describe, it, expect })(IPv4, {
+  describeCodec(IPv4, {
     decode: [
       ['127.0.0.1', Result.Ok(IPv4.of(127, 0, 0, 1))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as IPv4', input: null }))],
@@ -50,7 +50,7 @@ describe('IPv4', () => {
       format: 'ipv4',
     }),
   });
-  describeComparable({ describe, it, expect })(IPv4, {
+  describeComparable(IPv4, {
     ordered: () => [
       // lower to higher
       IPv4.of(0, 0, 0, 0),
@@ -68,7 +68,7 @@ describe('IPv4', () => {
     minValue: IPv4.of(0, 0, 0, 0),
     maxValue: IPv4.of(255, 255, 255, 255),
   });
-  describeIndexable({ describe, it, expect })(IPv4, {
+  describeIndexable(IPv4, {
     index: [
       [IPv4.minValue.ipv4, IPv4.minValue],
       [IPv4.maxValue.ipv4, IPv4.maxValue],

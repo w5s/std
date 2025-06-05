@@ -76,12 +76,12 @@ describe(define, () => {
     );
   });
 
-  describeType({ describe, it, expect })(MyEnumObject, {
+  describeType(MyEnumObject, {
     typeName: 'MyEnumObject',
     instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
     notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
   });
-  describeCodec({ describe, it, expect })(MyEnumObject, {
+  describeCodec(MyEnumObject, {
     decode: [
       ['foo', Result.Ok(MyEnumObject.Foo)],
       ['bar', Result.Ok(MyEnumObject.Bar)],
@@ -98,7 +98,7 @@ describe(define, () => {
       enum: ['foo', 'bar', 'baz'],
     }),
   });
-  describeIndexable({ describe, it, expect })(MyEnumObject, {
+  describeIndexable(MyEnumObject, {
     index: [
       [0, MyEnumObject.Foo],
       [1, MyEnumObject.Bar],

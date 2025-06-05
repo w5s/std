@@ -14,7 +14,7 @@ import type { TestingLibrary } from '@w5s/core-type';
  *   expectedDefaultMessage: 'My custom error default message',
  * });
  * ```
- * @param testingLibrary
+ * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeError(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;

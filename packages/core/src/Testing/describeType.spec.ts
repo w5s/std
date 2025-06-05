@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import type { Type } from '../Type.js';
 import { describeType } from './describeType.js';
 
@@ -10,7 +10,7 @@ describe('describeType', () => {
     __inspect__: undefined,
   };
 
-  describeType({ describe, it, expect })(StringType, {
+  describeType(StringType, {
     typeName: 'String',
     instances: () => ['', 'a', 'hello world !'],
     // eslint-disable-next-line no-new-wrappers

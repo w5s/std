@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Array } from './Array.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
@@ -18,12 +18,12 @@ describe(Array, () => {
     [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
-  describeType({ describe, it, expect })(subject(AnyType), {
+  describeType(subject(AnyType), {
     typeName: 'Array<AnyType>',
     instances: () => [[], ['']],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec({ describe, it, expect })(subject(AnyType), {
+  describeCodec(subject(AnyType), {
     decode: [
       [['_a', '_b', '_c'], Result.Ok(['a', 'b', 'c'])],
       [

@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeNegate } from '@w5s/core/dist/Testing.js';
 import { BigDecimalNegate } from './BigDecimalNegate.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
 
 describe('BigDecimalNegate', () => {
-  describeNegate({ describe, it, expect })(
+  describeNegate(
     { ...BigDecimalNegate, ...BigDecimalComparable },
     {
       values: () => [

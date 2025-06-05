@@ -1,11 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { IntNegate } from './IntNegate.js';
 import { Int } from '../Int.js';
 import { describeNegate } from '../Testing.js';
 import { IntComparable } from './IntComparable.js';
 
 describe('IntNegate', () => {
-  describeNegate({ describe, it, expect })(
+  describeNegate(
     { ...IntNegate, ...IntComparable },
     {
       values: () => [

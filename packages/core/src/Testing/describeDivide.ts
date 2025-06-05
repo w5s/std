@@ -7,15 +7,14 @@ import type { TestingLibrary } from './type.js';
  *
  * @example
  * ```typescript
- * describeDivide({ describe, it, expect })(Number, [
+ * describeDivide(Number, [
  *   { call: [2, 3], returns: 6 },
  *   // ...
  * ]);
- *
  * ```
  * @param subject - The subject to test
  * @param cases - Array of objects containing test cases
- * @param testingLibrary - Optional testing library to use. Defaults to the default
+ * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeDivide<L, R, Ret>(
   subject: Numeric.Divide<L, R, Ret>,

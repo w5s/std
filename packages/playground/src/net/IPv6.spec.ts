@@ -10,7 +10,7 @@ import { CodecError, Result } from '@w5s/core';
 import { IPv6 } from './IPv6.js';
 
 describe('IPv6', () => {
-  describeType({ describe, it, expect })(IPv6, {
+  describeType(IPv6, {
     typeName: 'IPv6',
     instances: () => [IPv6(0xff_ff, 0xff_ff, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x7f_00, 0x00_01)],
     notInstances: () => [undefined, 0xff_ff, '::ffff:127.0.0.1'],
@@ -46,7 +46,7 @@ describe('IPv6', () => {
     });
   });
 
-  describeCodec({ describe, it, expect })(IPv6, {
+  describeCodec(IPv6, {
     decode: [
       ['::ffff:7f00:1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
       ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
@@ -59,7 +59,7 @@ describe('IPv6', () => {
     }),
   });
 
-  describeComparable({ describe, it, expect })(IPv6, {
+  describeComparable(IPv6, {
     ordered: () => [
       IPv6.of(0, 0, 0, 0, 0, 0, 0, 0),
       IPv6.of(0, 0, 0, 0, 0, 0, 0, 1),
@@ -74,7 +74,7 @@ describe('IPv6', () => {
     maxValue: IPv6.of(0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff, 0xff_ff),
   });
 
-  describeIndexable({ describe, it, expect })(IPv6, {
+  describeIndexable(IPv6, {
     index: [
       [IPv6.minValue.ipv6, IPv6.minValue],
       [IPv6.maxValue.ipv6, IPv6.maxValue],

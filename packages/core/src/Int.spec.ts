@@ -27,12 +27,12 @@ describe('Int', () => {
       }),
     );
   });
-  describeType({ describe, it, expect })(Int, {
+  describeType(Int, {
     typeName: 'Int',
     instances: () => [0 as Int, 1 as Int, 2 as Int, -1 as Int, minValue as Int, maxValue as Int],
     notInstances: () => ['1', 1.1, undefined, minValue - 1, maxValue + 1],
   });
-  describeCodec({ describe, it, expect })(Int, {
+  describeCodec(Int, {
     decode: [
       [1, Result.Ok(Int(1))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as Int', input: null }))],

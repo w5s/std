@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Equal } from '../Equal.js';
 import { describeEqual } from './describeEqual.js';
 
@@ -7,7 +7,7 @@ describe('describeEqual', () => {
     equals: (left, right) => left === right,
   });
 
-  describeEqual({ describe, it, expect })(NumberEqual, {
+  describeEqual(NumberEqual, {
     equivalent: () => [
       [-1, -1],
       [0, 0],

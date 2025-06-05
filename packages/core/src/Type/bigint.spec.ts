@@ -1,16 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { bigint } from './bigint.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('bigint', () => {
-  describeType({ describe, it, expect })(bigint, {
+  describeType(bigint, {
     typeName: 'bigint',
     instances: () => [1n, 0n],
     notInstances: () => ['anything', null, undefined, bigint.hasInstance],
   });
-  describeCodec({ describe, it, expect })(bigint, {
+  describeCodec(bigint, {
     encode: [
       [0n, '0n'],
       [1n, '1n'],

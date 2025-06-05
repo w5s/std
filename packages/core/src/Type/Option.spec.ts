@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe } from 'vitest';
 import { Option } from './Option.js';
 import { Result } from '../Result.js';
 import { describeCodec, describeType } from '../Testing.js';
@@ -17,12 +17,12 @@ describe(Option, () => {
     [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
-  describeType({ describe, it, expect })(subject(AnyType), {
+  describeType(subject(AnyType), {
     typeName: 'Option<AnyType>',
     instances: () => [undefined, ''],
     notInstances: () => [null, 1],
   });
-  describeCodec({ describe, it, expect })(subject(AnyType), {
+  describeCodec(subject(AnyType), {
     decode: [
       [undefined, Result.Ok(None)],
       [null, Result.Ok(None)],

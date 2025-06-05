@@ -1,5 +1,5 @@
 import { describeComparable } from '@w5s/core/dist/Testing.js';
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { Int } from '@w5s/core';
 import { Currency } from './Currency.js';
 import { CurrencyComparable } from './CurrencyComparable.js';
@@ -14,7 +14,7 @@ describe('CurrencyComparable', () => {
     symbol: '$',
     symbolNative: '$',
   };
-  describeComparable({ describe, expect, it })(CurrencyComparable, {
+  describeComparable(CurrencyComparable, {
     ordered: () => [
       Currency({ ...anyProperties, code: 'A' }),
       Currency({ ...anyProperties, code: 'B' }),

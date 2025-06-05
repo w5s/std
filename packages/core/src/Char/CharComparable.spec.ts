@@ -1,9 +1,9 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeComparable } from '../Testing.js';
 import { CharComparable } from './CharComparable.js';
 
 describe('CharComparable', () => {
-  describeComparable({ describe, it, expect })(CharComparable, {
+  describeComparable(CharComparable, {
     ordered: () => ['a', 'b', 'c'],
     equivalent: () => [
       ['a', 'a'],

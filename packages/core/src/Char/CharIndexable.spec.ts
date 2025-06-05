@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeIndexable } from '../Testing.js';
 import { CharIndexable } from './CharIndexable.js';
 import { Char } from '../Char.js';
 
 describe('CharIndexable', () => {
-  describeIndexable({ describe, it, expect })(CharIndexable, {
+  describeIndexable(CharIndexable, {
     index: [
       [0, Char('\u0000')],
       [97, Char('a')],

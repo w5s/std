@@ -6,12 +6,12 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('RegExp', () => {
-  describeType({ describe, it, expect })(RegExp, {
+  describeType(RegExp, {
     typeName: 'RegExp',
     instances: () => [/abc/],
     notInstances: () => ['anything', null, undefined],
   });
-  describeCodec({ describe, it, expect })(RegExp, {
+  describeCodec(RegExp, {
     encode: [
       [new globalThis.RegExp(''), '/(?:)/'],
       [/[a-z][A-Z]/, '/[a-z][A-Z]/'],

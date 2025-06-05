@@ -1,15 +1,15 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { unknown } from './unknown.js';
 import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 
 describe('unknown', () => {
-  describeType({ describe, it, expect })(unknown, {
+  describeType(unknown, {
     typeName: 'unknown',
     instances: () => [0, null, undefined, 'hello world', {}, []],
     notInstances: () => [],
   });
-  describeCodec({ describe, it, expect })(unknown, {
+  describeCodec(unknown, {
     encode: [
       ['', ''],
       [true, true],

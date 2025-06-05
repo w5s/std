@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe } from 'vitest';
 import { lazy } from './lazy.js';
 import { Codec } from '../Codec.js';
 import { Result } from '../Result.js';
@@ -12,7 +12,7 @@ describe(lazy, () => {
     [Symbol.decode]: (_) => Result.Ok(String(_).slice(2)),
     [Symbol.schema]: () => ({ type: 'string', format: 'test' }),
   });
-  describeCodec({ describe, it, expect })(subject(getCodec), {
+  describeCodec(subject(getCodec), {
     encode: [['a', '__a']],
     decode: [['__a', Result.Ok('a')]],
     schema: () => ({ type: 'string', format: 'test' }),
