@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 import { describeAdd, describeMultiply, describeSubtract } from '../Testing.js';
 import { BigIntComparable } from './BigIntComparable.js';
 import { BigIntNumeric } from './BigIntNumeric.js';
 
 describe('BigIntNumeric', () => {
-  describeAdd({ describe, it, expect })(
+  describeAdd(
     {
       ...BigIntComparable,
       ...BigIntNumeric,
@@ -14,7 +14,7 @@ describe('BigIntNumeric', () => {
       { call: [1n, -1n], returns: 0n },
     ],
   );
-  describeSubtract({ describe, it, expect })(
+  describeSubtract(
     {
       ...BigIntComparable,
       ...BigIntNumeric,
@@ -24,7 +24,7 @@ describe('BigIntNumeric', () => {
       { call: [1n, -1n], returns: 2n },
     ],
   );
-  describeMultiply({ describe, it, expect })(
+  describeMultiply(
     {
       ...BigIntComparable,
       ...BigIntNumeric,

@@ -1,5 +1,6 @@
 import type { Numeric } from '../Numeric.js';
 import { Option } from '../Option.js';
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
 
 /**
@@ -7,25 +8,25 @@ import type { TestingLibrary } from './type.js';
  *
  * @example
  * ```typescript
- * describeCheckedMultiply({ describe, it, expect })(Number, [
+ * describeCheckedMultiply(Number, [
  *   { call: [2, 3], returns: 6 },
  *   // ...
  * ]);
- *
  * ```
- * @param testingLibrary
+ * @param subject - The subject to test
+ * @param cases - Array of objects containing test cases
+ * @param testingLibrary - Optional testing library to use. Defaults to the default
  */
-export function describeCheckedMultiply(testingLibrary: TestingLibrary) {
+export function describeCheckedMultiply<L, R, Ret>(
+  subject: Numeric.CheckedMultiply<L, R, Ret>,
+  cases: Array<{ call: [L, R]; returns: Option<Ret> }>,
+  testingLibrary: TestingLibrary = defaultTestingLibrary(),
+) {
   const { describe, it, expect } = testingLibrary;
-  return <L, R, Ret>(
-    subject: Numeric.CheckedMultiply<L, R, Ret>,
-    cases: Array<{ call: [L, R]; returns: Option<Ret> }>,
-  ) => {
-    (cases.length === 0 ? describe.todo : describe)('*?', () => {
-      it.each(cases)("satisfies ['*?']($call.0, $call.1) == $returns", ({ call, returns }) => {
-        const returnValue = subject['*?'](...call);
-        expect(returnValue).toEqual(returns);
-      });
+  (cases.length === 0 ? describe.todo : describe)('*?', () => {
+    it.each(cases)("satisfies ['*?']($call.0, $call.1) == $returns", ({ call, returns }) => {
+      const returnValue = subject['*?'](...call);
+      expect(returnValue).toEqual(returns);
     });
-  };
+  });
 }

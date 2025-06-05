@@ -1,11 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { describe } from 'vitest';
 import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
 import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
 
 describe('BigDecimalNumeric', () => {
-  describeAdd({ describe, it, expect })(
+  describeAdd(
     {
       ...BigDecimalComparable,
       ...BigDecimalNumeric,
@@ -15,7 +15,7 @@ describe('BigDecimalNumeric', () => {
       { call: [BigDecimal('1.01'), BigDecimal('2.2')], returns: BigDecimal('3.21') },
     ],
   );
-  describeSubtract({ describe, it, expect })(
+  describeSubtract(
     {
       ...BigDecimalComparable,
       ...BigDecimalNumeric,
@@ -25,7 +25,7 @@ describe('BigDecimalNumeric', () => {
       { call: [BigDecimal('2.5'), BigDecimal('0.01')], returns: BigDecimal('2.49') },
     ],
   );
-  describeMultiply({ describe, it, expect })(
+  describeMultiply(
     {
       ...BigDecimalComparable,
       ...BigDecimalNumeric,

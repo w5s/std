@@ -1,4 +1,5 @@
 import type { Numeric } from '../Numeric.js';
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
 
 /**
@@ -6,22 +7,26 @@ import type { TestingLibrary } from './type.js';
  *
  * @example
  * ```typescript
- * describeAdd({ describe, it, expect })(Number, [
+ * describeAdd(Number, [
  *   { call: [1, 1], returns: 2 },
  *   // ...
  * ]);
  *
  * ```
- * @param testingLibrary
+ * @param subject - The subject to test
+ * @param cases - Array of objects containing test cases
+ * @param testingLibrary - Optional testing library to use. Defaults to the default
  */
-export function describeAdd(testingLibrary: TestingLibrary) {
+export function describeAdd<L, R, Ret>(
+  subject: Numeric.Add<L, R, Ret>,
+  cases: Array<{ call: [L, R]; returns: Ret }>,
+  testingLibrary: TestingLibrary = defaultTestingLibrary(),
+) {
   const { describe, it, expect } = testingLibrary;
-  return <L, R, Ret>(subject: Numeric.Add<L, R, Ret>, cases: Array<{ call: [L, R]; returns: Ret }>) => {
-    (cases.length === 0 ? describe.todo : describe)('+', () => {
-      it.each(cases)("satisfies ['+']($call.0, $call.1) == $returns", ({ call, returns }) => {
-        const returnValue = subject['+'](...call);
-        expect(returnValue).toEqual(returns);
-      });
+  (cases.length === 0 ? describe.todo : describe)('+', () => {
+    it.each(cases)("satisfies ['+']($call.0, $call.1) == $returns", ({ call, returns }) => {
+      const returnValue = subject['+'](...call);
+      expect(returnValue).toEqual(returns);
     });
-  };
+  });
 }
