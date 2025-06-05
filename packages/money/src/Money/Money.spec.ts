@@ -23,7 +23,7 @@ describe(Money, () => {
     });
   });
 
-  describeCodec(Money, {
+  describeCodec(Money, () => ({
     decode: [
       ['1.1EUR', Result.Ok(Money({ currency: EUR, amount: BigDecimal('1.1') }))],
       ['EUR', Result.Error(new CodecError({ message: 'Cannot decode "EUR" as Money', input: 'EUR' }))],
@@ -34,9 +34,9 @@ describe(Money, () => {
       [Money({ currency: anyCurrency, amount: BigDecimal('0') }), '0ANY'],
       [Money({ currency: anyCurrency, amount: BigDecimal('-1.1') }), '-1.1ANY'],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'money',
-    }),
-  });
+    },
+  }));
 });

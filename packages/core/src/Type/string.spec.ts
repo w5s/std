@@ -10,7 +10,7 @@ describe('string', () => {
     instances: () => ['', 'hello world'],
     notInstances: () => [0, null, undefined],
   });
-  describeCodec(string, {
+  describeCodec(string, () => ({
     encode: [
       ['', ''],
       ['true', 'true'],
@@ -21,6 +21,6 @@ describe('string', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as string', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as string', input: null }))],
     ],
-    schema: () => ({ type: 'string' }),
-  });
+    schema: { type: 'string' },
+  }));
 });

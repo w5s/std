@@ -11,7 +11,7 @@ describe('RegExp', () => {
     instances: () => [/abc/],
     notInstances: () => ['anything', null, undefined],
   });
-  describeCodec(RegExp, {
+  describeCodec(RegExp, () => ({
     encode: [
       [new globalThis.RegExp(''), '/(?:)/'],
       [/[a-z][A-Z]/, '/[a-z][A-Z]/'],
@@ -24,8 +24,8 @@ describe('RegExp', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as RegExp', input: null }))],
     ],
-    schema: () => ({ type: 'string', format: 'regex' }),
-  });
+    schema: { type: 'string', format: 'regex' },
+  }));
   describe(RegExp.parse, () => {
     it('should parse a regexp string', () => {
       expect(RegExp.parse('/[a-z][A-Z]/')).toEqual(/[a-z][A-Z]/);

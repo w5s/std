@@ -9,7 +9,7 @@ describe('TimeDuration', () => {
     instances: () => [-1 as TimeDuration, 0 as TimeDuration, 1 as TimeDuration],
     notInstances: () => [null, undefined, [], Number.NaN],
   });
-  describeCodec(TimeDuration, {
+  describeCodec(TimeDuration, () => ({
     encode: [
       [TimeDuration(1), 1],
       [TimeDuration(0), 0],
@@ -26,8 +26,8 @@ describe('TimeDuration', () => {
         ),
       ],
     ],
-    schema: () => ({
+    schema: {
       type: 'number',
-    }),
-  });
+    },
+  }));
 });

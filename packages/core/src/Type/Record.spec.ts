@@ -18,7 +18,7 @@ describe(Record, () => {
     instances: () => [{ foo: 1n, bar: 2n }, { key: 1n, value: 3n }, {}] as TestRecord[],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec(TestRecord, {
+  describeCodec(TestRecord, () => ({
     decode: [
       [{}, Result.Ok({})],
       [{ foo: '1n', bar: '2n' }, Result.Ok({ foo: 1n, bar: 2n })],
@@ -39,6 +39,6 @@ describe(Record, () => {
         { foo: '1n', bar: '2n' },
       ],
     ],
-    schema: () => ({ type: 'object' }),
-  });
+    schema: { type: 'object' },
+  }));
 });

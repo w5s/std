@@ -10,7 +10,7 @@ describe(Char, () => {
     instances: () => [Char('a'), Char('b')],
     notInstances: () => [null, undefined, 'ab', 2],
   });
-  describeCodec(Char, {
+  describeCodec(Char, () => ({
     decode: [
       ['a', Result.Ok(Char('a'))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as Char', input: null }))],
@@ -19,10 +19,10 @@ describe(Char, () => {
       [Char('a'), 'a'],
       [Char('A'), 'A'],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
       minLength: 1,
       maxLength: 1,
-    }),
-  });
+    },
+  }));
 });

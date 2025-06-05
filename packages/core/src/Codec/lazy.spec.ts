@@ -12,9 +12,9 @@ describe(lazy, () => {
     [Symbol.decode]: (_) => Result.Ok(String(_).slice(2)),
     [Symbol.schema]: () => ({ type: 'string', format: 'test' }),
   });
-  describeCodec(subject(getCodec), {
+  describeCodec(subject(getCodec), () => ({
     encode: [['a', '__a']],
     decode: [['__a', Result.Ok('a')]],
-    schema: () => ({ type: 'string', format: 'test' }),
-  });
+    schema: { type: 'string', format: 'test' },
+  }));
 });

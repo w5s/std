@@ -10,7 +10,7 @@ describe('bigint', () => {
     instances: () => [1n, 0n],
     notInstances: () => ['anything', null, undefined, bigint.hasInstance],
   });
-  describeCodec(bigint, {
+  describeCodec(bigint, () => ({
     encode: [
       [0n, '0n'],
       [1n, '1n'],
@@ -23,6 +23,6 @@ describe('bigint', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as bigint', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as bigint', input: null }))],
     ],
-    schema: () => ({ type: 'string', format: 'bigint' }),
-  });
+    schema: { type: 'string', format: 'bigint' },
+  }));
 });

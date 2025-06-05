@@ -12,7 +12,7 @@ describe('UUID', () => {
     instances: () => [anyValidUUID],
     notInstances: () => [null, anyValidUUID.slice(1)],
   });
-  describeCodec(UUID, {
+  describeCodec(UUID, () => ({
     decode: [
       [anyValidUUID, Result.Ok(anyValidUUID)],
       [
@@ -26,9 +26,9 @@ describe('UUID', () => {
       ],
     ],
     encode: [[anyValidUUID, anyValidUUID]],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'uuid',
-    }),
-  });
+    },
+  }));
 });

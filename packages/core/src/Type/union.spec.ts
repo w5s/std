@@ -24,7 +24,7 @@ describe(union, () => {
     instances: () => [{ a: 'a_value' }, 1, 'a'],
     notInstances: () => [undefined, null, { a: 1 }],
   });
-  describeCodec(ABCType, {
+  describeCodec(ABCType, () => ({
     encode: [
       [1, 1],
       ['a', 'a'],
@@ -46,7 +46,7 @@ describe(union, () => {
       ],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as AType|string|number', input: null }))],
     ],
-    schema: () => ({
+    schema: {
       anyOf: [
         {
           properties: {
@@ -64,6 +64,6 @@ describe(union, () => {
           type: 'number',
         },
       ],
-    }),
-  });
+    },
+  }));
 });

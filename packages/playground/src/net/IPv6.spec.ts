@@ -46,18 +46,18 @@ describe('IPv6', () => {
     });
   });
 
-  describeCodec(IPv6, {
+  describeCodec(IPv6, () => ({
     decode: [
       ['::ffff:7f00:1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
       ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as IPv6', input: null }))],
     ],
     encode: [[IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xff_ff, 0x7f_00, 0x00_01), '::ffff:7f00:1']],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'ipv6',
-    }),
-  });
+    },
+  }));
 
   describeComparable(IPv6, {
     ordered: () => [

@@ -12,7 +12,7 @@ describe(constant, () => {
     instances: () => ['anyValue' as const],
     notInstances: () => [null, 1, [1], ''],
   });
-  describeCodec(subject('anyValue'), {
+  describeCodec(subject('anyValue'), () => ({
     decode: [
       ['anyValue', Result.Ok('anyValue')],
       [
@@ -26,12 +26,12 @@ describe(constant, () => {
       ],
     ],
     encode: [['anyValue' as const, 'anyValue']],
-    schema: () => ({ const: 'anyValue' }),
-  });
+    schema: { const: 'anyValue' },
+  }));
 
   const anySymbol = Symbol('anySymbol');
   const codecWithEncodedValue = subject(anySymbol, '$$anySymbol');
-  describeCodec(codecWithEncodedValue, {
+  describeCodec(codecWithEncodedValue, () => ({
     decode: [
       ['$$anySymbol', Result.Ok(anySymbol)],
       [
@@ -45,11 +45,11 @@ describe(constant, () => {
       ],
     ],
     encode: [[anySymbol, '$$anySymbol']],
-    schema: () => ({ const: '$$anySymbol' }),
-  });
+    schema: { const: '$$anySymbol' },
+  }));
 
   const nullLiteral = subject(undefined, null);
-  describeCodec(nullLiteral, {
+  describeCodec(nullLiteral, () => ({
     decode: [
       [null, Result.Ok(undefined)],
       [
@@ -63,6 +63,6 @@ describe(constant, () => {
       ],
     ],
     encode: [[undefined, null]],
-    schema: () => ({ type: 'null' }),
-  });
+    schema: { type: 'null' },
+  }));
 });

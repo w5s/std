@@ -10,7 +10,7 @@ describe('Int', () => {
     instances: () => [0, 1, 2, -1, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER],
     notInstances: () => ['1', 1.1, undefined, Number.MIN_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER + 1],
   });
-  describeCodec(Int, {
+  describeCodec(Int, () => ({
     decode: [
       [1, Result.Ok(Int(1))],
       [1.1, Result.Error(new CodecError({ message: 'Cannot decode 1.1 as Int', input: 1.1 }))],
@@ -20,8 +20,8 @@ describe('Int', () => {
       [Int(0), 0],
       [Int(1), 1],
     ],
-    schema: () => ({
+    schema: {
       type: 'integer',
-    }),
-  });
+    },
+  }));
 });

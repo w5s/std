@@ -10,7 +10,7 @@ describe('Time', () => {
     instances: () => [TimeBounded.minValue, Time(-1), Time(0), Time(1), TimeBounded.maxValue],
     notInstances: () => [null, undefined, [], Number.NaN],
   });
-  describeCodec(Time, {
+  describeCodec(Time, () => ({
     encode: [
       [Time(1), '1970-01-01T00:00:00.001Z'],
       [Time(0), '1970-01-01T00:00:00.000Z'],
@@ -27,9 +27,9 @@ describe('Time', () => {
         ),
       ],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'date-time',
-    }),
-  });
+    },
+  }));
 });

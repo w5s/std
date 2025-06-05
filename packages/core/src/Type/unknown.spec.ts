@@ -9,7 +9,7 @@ describe('unknown', () => {
     instances: () => [0, null, undefined, 'hello world', {}, []],
     notInstances: () => [],
   });
-  describeCodec(unknown, {
+  describeCodec(unknown, () => ({
     encode: [
       ['', ''],
       [true, true],
@@ -21,6 +21,6 @@ describe('unknown', () => {
       [undefined, Result.Ok(undefined)],
       [null, Result.Ok(null)],
     ],
-    schema: () => ({ type: 'any' }),
-  });
+    schema: { type: 'any' },
+  }));
 });

@@ -20,7 +20,7 @@ describe(TObject, () => {
     instances: () => [{ foo: 'foo_value', bar: 'bar_value' }],
     notInstances: () => [null, 1, '', {}, { foo: 'foo_value' }, { foo: 1, bar: 2 }],
   });
-  describeCodec(subject({ foo: AnyType, bar: AnyType }), {
+  describeCodec(subject({ foo: AnyType, bar: AnyType }), () => ({
     decode: [
       [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],
       [
@@ -39,7 +39,7 @@ describe(TObject, () => {
         { foo: '_a', bar: '_b' },
       ],
     ],
-    schema: () => ({
+    schema: {
       type: 'object',
       required: [],
       properties: {
@@ -52,6 +52,6 @@ describe(TObject, () => {
           format: 'custom_underscore',
         },
       },
-    }),
-  });
+    },
+  }));
 });

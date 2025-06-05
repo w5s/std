@@ -10,7 +10,7 @@ describe('Number', () => {
     instances: () => [1, 1],
     notInstances: () => ['', null, undefined],
   });
-  describeCodec(number, {
+  describeCodec(number, () => ({
     encode: [
       [1, 1],
       [0, 0],
@@ -21,6 +21,6 @@ describe('Number', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as number', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as number', input: null }))],
     ],
-    schema: () => ({ type: 'number' }),
-  });
+    schema: { type: 'number' },
+  }));
 });

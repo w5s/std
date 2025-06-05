@@ -23,7 +23,7 @@ describe(Array, () => {
     instances: () => [[], ['']],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec(subject(AnyType), {
+  describeCodec(subject(AnyType), () => ({
     decode: [
       [['_a', '_b', '_c'], Result.Ok(['a', 'b', 'c'])],
       [
@@ -42,6 +42,6 @@ describe(Array, () => {
         ['_a', '_b', '_c'],
       ],
     ],
-    schema: () => ({ type: 'array', item: { type: 'any', format: 'custom_underscore' } }),
-  });
+    schema: { type: 'array', item: { type: 'any', format: 'custom_underscore' } },
+  }));
 });

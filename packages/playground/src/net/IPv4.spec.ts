@@ -36,7 +36,7 @@ describe('IPv4', () => {
       expect(IPv4.format(ip)).toEqual('127.0.0.1');
     });
   });
-  describeCodec(IPv4, {
+  describeCodec(IPv4, () => ({
     decode: [
       ['127.0.0.1', Result.Ok(IPv4.of(127, 0, 0, 1))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as IPv4', input: null }))],
@@ -45,11 +45,11 @@ describe('IPv4', () => {
       [IPv4.of(127, 0, 0, 1), '127.0.0.1'],
       [IPv4.of(192, 168, 0, 1), '192.168.0.1'],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'ipv4',
-    }),
-  });
+    },
+  }));
   describeComparable(IPv4, {
     ordered: () => [
       // lower to higher

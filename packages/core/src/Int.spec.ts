@@ -32,7 +32,7 @@ describe('Int', () => {
     instances: () => [0 as Int, 1 as Int, 2 as Int, -1 as Int, minValue as Int, maxValue as Int],
     notInstances: () => ['1', 1.1, undefined, minValue - 1, maxValue + 1],
   });
-  describeCodec(Int, {
+  describeCodec(Int, () => ({
     decode: [
       [1, Result.Ok(Int(1))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as Int', input: null }))],
@@ -41,16 +41,14 @@ describe('Int', () => {
       [Int(0), 0],
       [Int(1), 1],
     ],
-    schema: () => ({
+    schema: {
       type: 'integer',
-    }),
-  });
-  describeAsString(Int, {
-    test: () => [
-      [Int(1), '1'],
-      [Int(2), '2'],
-    ],
-  });
+    },
+  }));
+  describeAsString(Int, () => [
+    [Int(1), '1'],
+    [Int(2), '2'],
+  ]);
   describe('()', () => {
     it('returns or throw when wrong value', () => {
       expect(Int(1)).toBe(1);

@@ -22,7 +22,7 @@ describe(Option, () => {
     instances: () => [undefined, ''],
     notInstances: () => [null, 1],
   });
-  describeCodec(subject(AnyType), {
+  describeCodec(subject(AnyType), () => ({
     decode: [
       [undefined, Result.Ok(None)],
       [null, Result.Ok(None)],
@@ -34,6 +34,6 @@ describe(Option, () => {
       ['', '_'],
       ['abc', '_abc'],
     ],
-    schema: () => ({ type: 'any', format: 'custom_underscore' }),
-  });
+    schema: { type: 'any', format: 'custom_underscore' },
+  }));
 });

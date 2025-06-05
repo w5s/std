@@ -7,27 +7,23 @@ import type { TestingLibrary } from './type.js';
  *
  * @example
  * ```typescript
- * describeAsString(Int, {
- *   test: () => [
- *     [Int(1), '1'],
- *     [Int(2), '2'],
- *   ],
- * });
+ * describeAsString(Int, (subject) => [
+ *   [subject(1), '1'],
+ *   [subject(2), '2'],
+ * ]);
  * ```
  * @param subject - The subject to test
  * @param properties - Object containing test properties
  * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
-export function describeAsString<T>(
-  subject: AsString<T>,
-  properties: {
-    test: () => Array<[instance: T, expectedString: string]>;
-  },
+export function describeAsString<S extends AsString<any>>(
+  subject: S,
+  properties: (subject: S) => Array<[instance: S extends AsString<infer T> ? T : never, expectedString: string]>,
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
   const { describe, it, expect } = testingLibrary;
   describe('asString', () => {
-    it.each(properties.test())('satisfies asString($0) == $1', (instance, string) => {
+    it.each(properties(subject))('satisfies asString($0) == $1', (instance, string) => {
       expect(subject.asString(instance)).toEqual(string);
     });
   });

@@ -20,7 +20,7 @@ describe('describeCodec', () => {
     [Symbol.schema]: () => ({ type: 'string' }),
   };
 
-  describeCodec(StringCodec, {
+  describeCodec(StringCodec, () => ({
     encode: [
       ['a', 'a'],
       ['', ''],
@@ -29,8 +29,8 @@ describe('describeCodec', () => {
       ['a', Result.Ok('a')],
       [1, Result.Error(new CodecError({ input: 1, message: 'test error' }))],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
-    }),
-  });
+    },
+  }));
 });

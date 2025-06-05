@@ -19,7 +19,7 @@ describe('Duration', () => {
     ],
     notInstances: () => ['1', 1.1, undefined, {}],
   });
-  describeCodec(Duration, {
+  describeCodec(Duration, () => ({
     decode: [
       [
         'P2Y4M3W6DT14H30M20.42S',
@@ -52,9 +52,9 @@ describe('Duration', () => {
       [Duration({ years: Int(1), months: Int(2), days: Int(3) }), 'P1Y2M3D'],
       [Duration({ hours: Int(4), minutes: Int(5), seconds: 6.2 }), 'PT4H5M6.2S'],
     ],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'duration',
-    }),
-  });
+    },
+  }));
 });

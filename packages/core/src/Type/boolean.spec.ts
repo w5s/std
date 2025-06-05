@@ -10,7 +10,7 @@ describe('boolean', () => {
     instances: () => [true, false],
     notInstances: () => ['', null, undefined],
   });
-  describeCodec(boolean, {
+  describeCodec(boolean, () => ({
     encode: [
       [true, true],
       [false, false],
@@ -21,6 +21,6 @@ describe('boolean', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as boolean', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as boolean', input: null }))],
     ],
-    schema: () => ({ type: 'boolean' }),
-  });
+    schema: { type: 'boolean' },
+  }));
 });

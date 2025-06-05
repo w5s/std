@@ -14,7 +14,7 @@ describe(Tuple, () => {
     instances: () => [['toto', 1n] as const, ['', 2n] as const],
     notInstances: () => [null, 1, [1]],
   });
-  describeCodec(subject(string, bigint), {
+  describeCodec(subject(string, bigint), () => ({
     decode: [
       [['a', '1n'], Result.Ok(['a', 1n])],
       [
@@ -33,6 +33,6 @@ describe(Tuple, () => {
         ['a', '1n'],
       ],
     ],
-    schema: () => ({ type: 'array', items: [{ type: 'string' }, { type: 'string', format: 'bigint' }] }),
-  });
+    schema: { type: 'array', items: [{ type: 'string' }, { type: 'string', format: 'bigint' }] },
+  }));
 });

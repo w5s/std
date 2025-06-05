@@ -81,7 +81,7 @@ describe(define, () => {
     instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
     notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
   });
-  describeCodec(MyEnumObject, {
+  describeCodec(MyEnumObject, () => ({
     decode: [
       ['foo', Result.Ok(MyEnumObject.Foo)],
       ['bar', Result.Ok(MyEnumObject.Bar)],
@@ -94,10 +94,10 @@ describe(define, () => {
       [MyEnum.Foo, 'foo'],
       [MyEnum.Bar, 'bar'],
     ],
-    schema: () => ({
+    schema: {
       enum: ['foo', 'bar', 'baz'],
-    }),
-  });
+    },
+  }));
   describeIndexable(MyEnumObject, {
     index: [
       [0, MyEnumObject.Foo],

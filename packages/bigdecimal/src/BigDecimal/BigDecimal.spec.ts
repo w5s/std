@@ -16,7 +16,7 @@ describe('()', () => {
     instances: () => [BigDecimal.create({ value: 0n, scale: 0 }), BigDecimal.create({ value: -2n, scale: 0 })],
     notInstances: () => [null, undefined, '-2', 2],
   });
-  describeCodec(BigDecimal, {
+  describeCodec(BigDecimal, () => ({
     encode: [
       [BigDecimal.create({ value: 0n, scale: 0 }), '0m'],
       [BigDecimal.create({ value: 11n, scale: 1 }), '1.1m'],
@@ -28,6 +28,6 @@ describe('()', () => {
       [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as BigDecimal', input: undefined }))],
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as BigDecimal', input: null }))],
     ],
-    schema: () => ({ type: 'string', format: 'bigdecimal' }),
-  });
+    schema: { type: 'string', format: 'bigdecimal' },
+  }));
 });

@@ -12,7 +12,7 @@ describe('URL', () => {
     instances: () => [anyValidURL],
     notInstances: () => [null, ''],
   });
-  describeCodec(URL, {
+  describeCodec(URL, () => ({
     decode: [
       [anyValidURL, Result.Ok(anyValidURL)],
       [
@@ -35,9 +35,9 @@ describe('URL', () => {
       ],
     ],
     encode: [[anyValidURL, anyValidURL]],
-    schema: () => ({
+    schema: {
       type: 'string',
       format: 'url',
-    }),
-  });
+    },
+  }));
 });

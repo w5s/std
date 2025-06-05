@@ -10,7 +10,7 @@ describe('Headers', () => {
     instances: () => [{}, { 'Content-Type': 'application/json' } as Headers],
     notInstances: () => ['1', 1.1, undefined, { foo: 1 }],
   });
-  describeCodec(Headers, {
+  describeCodec(Headers, () => ({
     decode: [
       [{}, Result.Ok({})],
       [{ foo: 'bar' }, Result.Ok({ foo: 'bar' })],
@@ -18,8 +18,8 @@ describe('Headers', () => {
       [null, Result.Error(new CodecError({ message: 'Cannot decode null as Record<string,string>', input: null }))],
     ],
     encode: [[{ foo: 'bar' }, { foo: 'bar' }]],
-    schema: () => ({
+    schema: {
       type: 'object',
-    }),
-  });
+    },
+  }));
 });
