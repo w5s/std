@@ -1,15 +1,14 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
-import type { Codec } from '@w5s/core';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { parse } from './parse.js';
 import { BigDecimalAsString } from './BigDecimalAsString.js';
 import { call } from './call.js';
 
-const BigDecimalStruct = Struct.define<BigDecimal>({ typeName: 'BigDecimal' });
-
-const BigDecimalCodec: Codec<BigDecimal> = {
-  [Symbol.encode]: (input) => `${BigDecimalAsString.asString(input)}m`,
+const bigDecimalEncode = (self: BigDecimal) => `${BigDecimalAsString.asString(self)}m`;
+const BigDecimalStruct = Struct.define<BigDecimal>({
+  typeName: 'BigDecimal',
+  [Symbol.encode]: (input) => bigDecimalEncode(input),
   [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('m')) {
       const parsed = parse(input.slice(0, -1));
@@ -23,7 +22,9 @@ const BigDecimalCodec: Codec<BigDecimal> = {
     type: 'string',
     format: 'bigdecimal',
   }),
-};
+  [Symbol.inspect]: (self) => bigDecimalEncode(self),
+  ...BigDecimalAsString,
+});
 
 /**
  * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
@@ -43,6 +44,5 @@ export interface BigDecimal
 
 export const BigDecimal = Callable({
   ...BigDecimalStruct,
-  ...BigDecimalCodec,
   [Callable.symbol]: call,
 });
