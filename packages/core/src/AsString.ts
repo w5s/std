@@ -9,5 +9,5 @@ export interface AsString<T> {
    * @category String
    * @param self - the object to convert to string
    */
-  asString(self: T): string;
+  asString(this: void, self: T): string;
 }
