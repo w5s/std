@@ -14,11 +14,11 @@ describe(define, () => {
     hasInstance: (value) => typeof value === 'number' && value > 0,
   });
 
-  describeType(PositiveNumber, {
+  describeType(PositiveNumber, () => ({
     typeName: 'PositiveNumber',
-    instances: () => [1 as PositiveNumber, 1000 as PositiveNumber],
-    notInstances: () => [0, -1, -1000],
-  });
+    instances: [1 as PositiveNumber, 1000 as PositiveNumber],
+    notInstances: [0, -1, -1000],
+  }));
   describe('#()', () => {
     it('returns identity', () => {
       expect(PositiveNumber(1)).toBe(1);

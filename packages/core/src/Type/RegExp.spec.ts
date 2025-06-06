@@ -6,11 +6,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('RegExp', () => {
-  describeType(RegExp, {
+  describeType(RegExp, () => ({
     typeName: 'RegExp',
-    instances: () => [/abc/],
-    notInstances: () => ['anything', null, undefined],
-  });
+    instances: [/abc/],
+    notInstances: ['anything', null, undefined],
+  }));
   describeCodec(RegExp, () => ({
     encode: [
       [new globalThis.RegExp(''), '/(?:)/'],

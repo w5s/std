@@ -11,11 +11,11 @@ describe('()', () => {
       scale: 100,
     });
   });
-  describeType(BigDecimal, {
+  describeType(BigDecimal, () => ({
     typeName: 'BigDecimal',
-    instances: () => [BigDecimal.create({ value: 0n, scale: 0 }), BigDecimal.create({ value: -2n, scale: 0 })],
-    notInstances: () => [null, undefined, '-2', 2],
-  });
+    instances: [BigDecimal.create({ value: 0n, scale: 0 }), BigDecimal.create({ value: -2n, scale: 0 })],
+    notInstances: [null, undefined, '-2', 2],
+  }));
   describeCodec(BigDecimal, () => ({
     encode: [
       [BigDecimal.create({ value: 0n, scale: 0 }), '0m'],

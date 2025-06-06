@@ -15,11 +15,11 @@ describe(TObject, () => {
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
     __schema__: () => ({ type: 'any', format: 'custom_underscore' }),
   });
-  describeType(subject({ foo: AnyType, bar: AnyType }, 'FooType'), {
+  describeType(subject({ foo: AnyType, bar: AnyType }, 'FooType'), () => ({
     typeName: 'FooType',
-    instances: () => [{ foo: 'foo_value', bar: 'bar_value' }],
-    notInstances: () => [null, 1, '', {}, { foo: 'foo_value' }, { foo: 1, bar: 2 }],
-  });
+    instances: [{ foo: 'foo_value', bar: 'bar_value' }],
+    notInstances: [null, 1, '', {}, { foo: 'foo_value' }, { foo: 1, bar: 2 }],
+  }));
   describeCodec(subject({ foo: AnyType, bar: AnyType }), () => ({
     decode: [
       [{ foo: '_a', bar: '_b' }, Result.Ok({ foo: 'a', bar: 'b' })],

@@ -4,11 +4,11 @@ import { Result, CodecError } from '@w5s/core';
 import { TimeDuration } from './TimeDuration.js';
 
 describe('TimeDuration', () => {
-  describeType(TimeDuration, {
+  describeType(TimeDuration, () => ({
     typeName: 'TimeDuration',
-    instances: () => [-1 as TimeDuration, 0 as TimeDuration, 1 as TimeDuration],
-    notInstances: () => [null, undefined, [], Number.NaN],
-  });
+    instances: [-1 as TimeDuration, 0 as TimeDuration, 1 as TimeDuration],
+    notInstances: [null, undefined, [], Number.NaN],
+  }));
   describeCodec(TimeDuration, () => ({
     encode: [
       [TimeDuration(1), 1],

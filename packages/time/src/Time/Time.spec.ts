@@ -5,11 +5,11 @@ import { Time } from './Time.js';
 import { TimeBounded } from './TimeBounded.js';
 
 describe('Time', () => {
-  describeType(Time, {
+  describeType(Time, () => ({
     typeName: 'Time',
-    instances: () => [TimeBounded.minValue, Time(-1), Time(0), Time(1), TimeBounded.maxValue],
-    notInstances: () => [null, undefined, [], Number.NaN],
-  });
+    instances: [TimeBounded.minValue, Time(-1), Time(0), Time(1), TimeBounded.maxValue],
+    notInstances: [null, undefined, [], Number.NaN],
+  }));
   describeCodec(Time, () => ({
     encode: [
       [Time(1), '1970-01-01T00:00:00.001Z'],

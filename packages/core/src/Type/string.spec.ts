@@ -5,11 +5,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('string', () => {
-  describeType(string, {
+  describeType(string, () => ({
     typeName: 'string',
-    instances: () => ['', 'hello world'],
-    notInstances: () => [0, null, undefined],
-  });
+    instances: ['', 'hello world'],
+    notInstances: [0, null, undefined],
+  }));
   describeCodec(string, () => ({
     encode: [
       ['', ''],

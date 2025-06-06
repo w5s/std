@@ -7,11 +7,11 @@ import { UUID } from './UUID.js';
 describe('UUID', () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669' as UUID;
 
-  describeType(UUID, {
+  describeType(UUID, () => ({
     typeName: 'UUID',
-    instances: () => [anyValidUUID],
-    notInstances: () => [null, anyValidUUID.slice(1)],
-  });
+    instances: [anyValidUUID],
+    notInstances: [null, anyValidUUID.slice(1)],
+  }));
   describeCodec(UUID, () => ({
     decode: [
       [anyValidUUID, Result.Ok(anyValidUUID)],

@@ -27,11 +27,11 @@ describe('Int', () => {
       }),
     );
   });
-  describeType(Int, {
+  describeType(Int, () => ({
     typeName: 'Int',
-    instances: () => [0 as Int, 1 as Int, 2 as Int, -1 as Int, minValue as Int, maxValue as Int],
-    notInstances: () => ['1', 1.1, undefined, minValue - 1, maxValue + 1],
-  });
+    instances: [0 as Int, 1 as Int, 2 as Int, -1 as Int, minValue as Int, maxValue as Int],
+    notInstances: ['1', 1.1, undefined, minValue - 1, maxValue + 1],
+  }));
   describeCodec(Int, () => ({
     decode: [
       [1, Result.Ok(Int(1))],

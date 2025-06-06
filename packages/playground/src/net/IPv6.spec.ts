@@ -10,11 +10,11 @@ import { CodecError, Result } from '@w5s/core';
 import { IPv6 } from './IPv6.js';
 
 describe('IPv6', () => {
-  describeType(IPv6, {
+  describeType(IPv6, () => ({
     typeName: 'IPv6',
-    instances: () => [IPv6(0xff_ff, 0xff_ff, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x7f_00, 0x00_01)],
-    notInstances: () => [undefined, 0xff_ff, '::ffff:127.0.0.1'],
-  });
+    instances: [IPv6(0xff_ff, 0xff_ff, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x7f_00, 0x00_01)],
+    notInstances: [undefined, 0xff_ff, '::ffff:127.0.0.1'],
+  }));
 
   describe(IPv6.of, () => {
     it('should return an IPv6 instance', () => {

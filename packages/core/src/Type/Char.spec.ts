@@ -5,11 +5,11 @@ import { describeCodec, describeType } from '../Testing.js';
 import { Char } from './Char.js';
 
 describe(Char, () => {
-  describeType(Char, {
+  describeType(Char, () => ({
     typeName: 'Char',
-    instances: () => [Char('a'), Char('b')],
-    notInstances: () => [null, undefined, 'ab', 2],
-  });
+    instances: [Char('a'), Char('b')],
+    notInstances: [null, undefined, 'ab', 2],
+  }));
   describeCodec(Char, () => ({
     decode: [
       ['a', Result.Ok(Char('a'))],

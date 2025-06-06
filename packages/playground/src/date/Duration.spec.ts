@@ -4,9 +4,9 @@ import { CodecError, Int, Result } from '@w5s/core';
 import { Duration } from './Duration.js';
 
 describe('Duration', () => {
-  describeType(Duration, {
+  describeType(Duration, () => ({
     typeName: 'Duration',
-    instances: () => [
+    instances: [
       Duration({
         years: Int(1),
         months: Int(2),
@@ -17,8 +17,8 @@ describe('Duration', () => {
         seconds: 7,
       }),
     ],
-    notInstances: () => ['1', 1.1, undefined, {}],
-  });
+    notInstances: ['1', 1.1, undefined, {}],
+  }));
   describeCodec(Duration, () => ({
     decode: [
       [

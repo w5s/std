@@ -76,11 +76,11 @@ describe(define, () => {
     );
   });
 
-  describeType(MyEnumObject, {
+  describeType(MyEnumObject, () => ({
     typeName: 'MyEnumObject',
-    instances: () => [MyEnumObject.Foo, MyEnumObject.Bar],
-    notInstances: () => ['anything', null, undefined, MyEnumObject.hasInstance],
-  });
+    instances: [MyEnumObject.Foo, MyEnumObject.Bar],
+    notInstances: ['anything', null, undefined, MyEnumObject.hasInstance],
+  }));
   describeCodec(MyEnumObject, () => ({
     decode: [
       ['foo', Result.Ok(MyEnumObject.Foo)],

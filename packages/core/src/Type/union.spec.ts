@@ -19,11 +19,11 @@ describe(union, () => {
   const BCType = union(BType, CType);
   const ABCType = union(AType, BCType);
 
-  describeType(ABCType, {
+  describeType(ABCType, () => ({
     typeName: 'AType|string|number',
-    instances: () => [{ a: 'a_value' }, 1, 'a'],
-    notInstances: () => [undefined, null, { a: 1 }],
-  });
+    instances: [{ a: 'a_value' }, 1, 'a'],
+    notInstances: [undefined, null, { a: 1 }],
+  }));
   describeCodec(ABCType, () => ({
     encode: [
       [1, 1],

@@ -10,11 +10,11 @@ import { CodecError, Result } from '@w5s/core';
 import { IPv4 } from './IPv4.js';
 
 describe('IPv4', () => {
-  describeType(IPv4, {
+  describeType(IPv4, () => ({
     typeName: 'IPv4',
-    instances: () => [IPv4(0xff_ff_ff_ff)],
-    notInstances: () => [undefined, 0xff_ff_ff_ff, '127.0.0.1'],
-  });
+    instances: [IPv4(0xff_ff_ff_ff)],
+    notInstances: [undefined, 0xff_ff_ff_ff, '127.0.0.1'],
+  }));
   describe(IPv4.of, () => {
     it('should return an IPv4 instance', () => {
       expect(IPv4.of(0, 0, 0, 0)).toEqual(IPv4(0x00_00_00_00));

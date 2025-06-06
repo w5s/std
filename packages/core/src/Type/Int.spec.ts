@@ -5,11 +5,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('Int', () => {
-  describeType(Int, {
+  describeType(Int, () => ({
     typeName: 'Int',
-    instances: () => [0, 1, 2, -1, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER],
-    notInstances: () => ['1', 1.1, undefined, Number.MIN_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER + 1],
-  });
+    instances: [Int(0), Int(1), Int(2), Int(-1), Int(Number.MIN_SAFE_INTEGER), Int(Number.MAX_SAFE_INTEGER)],
+    notInstances: ['1', 1.1, undefined, Number.MIN_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER + 1],
+  }));
   describeCodec(Int, () => ({
     decode: [
       [1, Result.Ok(Int(1))],

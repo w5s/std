@@ -5,11 +5,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('boolean', () => {
-  describeType(boolean, {
+  describeType(boolean, () => ({
     typeName: 'boolean',
-    instances: () => [true, false],
-    notInstances: () => ['', null, undefined],
-  });
+    instances: [true, false],
+    notInstances: ['', null, undefined],
+  }));
   describeCodec(boolean, () => ({
     encode: [
       [true, true],

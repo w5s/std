@@ -13,11 +13,11 @@ describe(Record, () => {
   const TestRecord = subject(string, bigint);
   type TestRecord = Type.TypeOf<typeof TestRecord>;
 
-  describeType(TestRecord, {
+  describeType(TestRecord, () => ({
     typeName: 'Record<string,bigint>',
-    instances: () => [{ foo: 1n, bar: 2n }, { key: 1n, value: 3n }, {}] as TestRecord[],
-    notInstances: () => [null, 1, [1]],
-  });
+    instances: [{ foo: 1n, bar: 2n }, { key: 1n, value: 3n }, {}] as TestRecord[],
+    notInstances: [null, 1, [1]],
+  }));
   describeCodec(TestRecord, () => ({
     decode: [
       [{}, Result.Ok({})],

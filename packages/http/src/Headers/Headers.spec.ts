@@ -5,11 +5,11 @@ import { Result, CodecError } from '@w5s/core';
 import { Headers } from './Headers.js';
 
 describe('Headers', () => {
-  describeType(Headers, {
+  describeType(Headers, () => ({
     typeName: 'Headers',
-    instances: () => [{}, { 'Content-Type': 'application/json' } as Headers],
-    notInstances: () => ['1', 1.1, undefined, { foo: 1 }],
-  });
+    instances: [{}, { 'Content-Type': 'application/json' } as Headers],
+    notInstances: ['1', 1.1, undefined, { foo: 1 }],
+  }));
   describeCodec(Headers, () => ({
     decode: [
       [{}, Result.Ok({})],

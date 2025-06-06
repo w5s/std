@@ -17,11 +17,11 @@ describe(Option, () => {
     [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
-  describeType(subject(AnyType), {
+  describeType(subject(AnyType), () => ({
     typeName: 'Option<AnyType>',
-    instances: () => [undefined, ''],
-    notInstances: () => [null, 1],
-  });
+    instances: [undefined, ''],
+    notInstances: [null, 1],
+  }));
   describeCodec(subject(AnyType), () => ({
     decode: [
       [undefined, Result.Ok(None)],

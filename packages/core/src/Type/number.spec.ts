@@ -5,11 +5,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('Number', () => {
-  describeType(number, {
+  describeType(number, () => ({
     typeName: 'number',
-    instances: () => [1, 1],
-    notInstances: () => ['', null, undefined],
-  });
+    instances: [1, 1],
+    notInstances: ['', null, undefined],
+  }));
   describeCodec(number, () => ({
     encode: [
       [1, 1],

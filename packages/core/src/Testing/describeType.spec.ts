@@ -10,10 +10,10 @@ describe('describeType', () => {
     __inspect__: undefined,
   };
 
-  describeType(StringType, {
+  describeType(StringType, () => ({
     typeName: 'String',
-    instances: () => ['', 'a', 'hello world !'],
+    instances: ['', 'a', 'hello world !'],
     // eslint-disable-next-line no-new-wrappers
-    notInstances: () => [null, undefined, 1, {}, new String('')],
-  });
+    notInstances: [null, undefined, 1, {}, new String('')],
+  }));
 });

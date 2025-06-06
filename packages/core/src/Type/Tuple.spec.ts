@@ -9,11 +9,11 @@ import { string } from './string.js';
 describe(Tuple, () => {
   const subject = Tuple;
 
-  describeType(subject(string, bigint), {
+  describeType(subject(string, bigint), () => ({
     typeName: '[string,bigint]',
-    instances: () => [['toto', 1n] as const, ['', 2n] as const],
-    notInstances: () => [null, 1, [1]],
-  });
+    instances: [['toto', 1n] as const, ['', 2n] as const],
+    notInstances: [null, 1, [1]],
+  }));
   describeCodec(subject(string, bigint), () => ({
     decode: [
       [['a', '1n'], Result.Ok(['a', 1n])],

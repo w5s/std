@@ -18,11 +18,11 @@ describe(Array, () => {
     [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
   });
 
-  describeType(subject(AnyType), {
+  describeType(subject(AnyType), () => ({
     typeName: 'Array<AnyType>',
-    instances: () => [[], ['']],
-    notInstances: () => [null, 1, [1]],
-  });
+    instances: [[], ['']],
+    notInstances: [null, 1, [1]],
+  }));
   describeCodec(subject(AnyType), () => ({
     decode: [
       [['_a', '_b', '_c'], Result.Ok(['a', 'b', 'c'])],

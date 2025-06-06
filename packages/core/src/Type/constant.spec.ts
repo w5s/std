@@ -7,11 +7,11 @@ import { CodecError } from '../CodecError.js';
 describe(constant, () => {
   const subject = constant;
 
-  describeType(subject('anyValue'), {
+  describeType(subject('anyValue'), () => ({
     typeName: 'anyValue',
-    instances: () => ['anyValue' as const],
-    notInstances: () => [null, 1, [1], ''],
-  });
+    instances: ['anyValue' as const],
+    notInstances: [null, 1, [1], ''],
+  }));
   describeCodec(subject('anyValue'), () => ({
     decode: [
       ['anyValue', Result.Ok('anyValue')],

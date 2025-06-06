@@ -4,11 +4,11 @@ import { describeType, describeCodec } from '../Testing.js';
 import { Result } from '../Result.js';
 
 describe('unknown', () => {
-  describeType(unknown, {
+  describeType(unknown, () => ({
     typeName: 'unknown',
-    instances: () => [0, null, undefined, 'hello world', {}, []],
-    notInstances: () => [],
-  });
+    instances: [0, null, undefined, 'hello world', {}, []],
+    notInstances: [],
+  }));
   describeCodec(unknown, () => ({
     encode: [
       ['', ''],

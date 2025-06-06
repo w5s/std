@@ -7,11 +7,11 @@ import { URL } from './URL.js';
 describe('URL', () => {
   const anyValidURL = 'http://localhost:3000/my/path?get=1' as URL;
 
-  describeType(URL, {
+  describeType(URL, () => ({
     typeName: 'URL',
-    instances: () => [anyValidURL],
-    notInstances: () => [null, ''],
-  });
+    instances: [anyValidURL],
+    notInstances: [null, ''],
+  }));
   describeCodec(URL, () => ({
     decode: [
       [anyValidURL, Result.Ok(anyValidURL)],

@@ -5,11 +5,11 @@ import { Result } from '../Result.js';
 import { CodecError } from '../CodecError.js';
 
 describe('bigint', () => {
-  describeType(bigint, {
+  describeType(bigint, () => ({
     typeName: 'bigint',
-    instances: () => [1n, 0n],
-    notInstances: () => ['anything', null, undefined, bigint.hasInstance],
-  });
+    instances: [1n, 0n],
+    notInstances: ['anything', null, undefined, bigint.hasInstance],
+  }));
   describeCodec(bigint, () => ({
     encode: [
       [0n, '0n'],
