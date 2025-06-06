@@ -23,7 +23,12 @@ describe(Struct, () => {
         ...defaultProperties,
       });
       const instance = Struct.create(Foo, { foo: true });
-      expect(inspect(instance)).toBe('Struct [Foo] { foo: true }');
+      expect(inspect(instance)).toBe('Struct { foo: true }');
+    });
+    it('always have _ tag first', () => {
+      const Foo = Type.define<{ _: string; foo: boolean }>(defaultProperties);
+      const instance = Struct.create(Foo, { foo: true, _: 'Toto' });
+      expect(inspect(instance)).toBe(`Struct { _: 'Toto', foo: true }`);
     });
     it('returns a custom representation when specified', () => {
       const FooInspect = Type.define<{ foo: boolean }>({

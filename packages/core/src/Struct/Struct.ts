@@ -1,5 +1,9 @@
 import type { AsString } from '../AsString.js';
+import { compare } from '../String/compare.js';
 import type { InspectFunction, InspectOptions, Type } from '../Type.js';
+
+const defaultSort = (left: string | symbol, right: string | symbol) =>
+  left === right ? 0 : left === '_' ? -1 : right === '_' ? 1 : compare(String(left), String(right));
 
 export class Struct {
   static create<T>(mod: Type<T> & AsString<T>, properties: T): Struct & T {
@@ -13,13 +17,6 @@ export class Struct {
   }
 
   /**
-   * String tag
-   */
-  get [Symbol.toStringTag]() {
-    return this.#module.typeName;
-  }
-
-  /**
    * Return an inspect representation
    *
    * @example
@@ -29,7 +26,7 @@ export class Struct {
    */
   [Symbol.for('nodejs.util.inspect.custom')](depth: number, inspectOptions: InspectOptions, inspect: InspectFunction) {
     return this.#module.__inspect__ == null
-      ? inspect(this, { ...inspectOptions, customInspect: false })
+      ? inspect(this, { ...inspectOptions, customInspect: false, sorted: defaultSort })
       : this.#module.__inspect__(this, depth, inspectOptions, inspect);
   }
 
