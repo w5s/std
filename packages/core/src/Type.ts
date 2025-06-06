@@ -72,12 +72,23 @@ export interface Type<T> {
    */
   asInstance(anyValue: unknown): Option<T>;
   /**
-   * When defined, returns a custom string representation
+   * When defined, returns a custom string representation.
+   * To be useful, it should be bound to a prototype (ex: {@link Struct})
    *
    * @example
    * ```typescript
-   * ```
+   * import { inspect } from 'node:util';
    *
+   * interface Foo {
+   *   foo: boolean;
+   * }
+   * const Foo = Struct.define<Foo>({
+   *   typeName: 'Foo',
+   *   __inspect__: (self) => `Foo { ${String(self.foo)} }`,
+   * });
+   * const myStruct = Struct.create(Foo, { foo: true });// 'Foo { true }'
+   * inspect(myStruct);// 'Foo { true }'
+   * ```
    * @category Type
    * @param anyValue
    */
@@ -122,8 +133,7 @@ export namespace Type {
   export interface Parameters<T>
     extends PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
       Partial<Codec<T>>,
-      PartialKeys<AsString<T>, 'asString'> {
-    typeName: string;
+      Partial<AsString<T>> {
     hasInstance: (value: unknown) => boolean;
   }
 
