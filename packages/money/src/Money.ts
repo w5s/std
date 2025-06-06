@@ -2,7 +2,7 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { MoneyComparable } from './Money/MoneyComparable.js';
 import { MoneyNumeric } from './Money/MoneyNumeric.js';
 import { Money as MoneyType } from './Money/Money.js';
-import { asString } from './Money/asString.js';
+import { MoneyAsString } from './Money/MoneyAsString.js';
 import { format } from './Money/format.js';
 import { normalize } from './Money/normalize.js';
 import { parse } from './Money/parse.js';
@@ -22,7 +22,7 @@ export const Money = Callable({
   ...MoneyNumeric,
   ...MoneySigned,
   ...MoneyZero,
-  asString,
+  ...MoneyAsString,
   format,
   normalize,
   parse,

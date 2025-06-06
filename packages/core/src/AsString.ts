@@ -6,7 +6,7 @@ export interface AsString<T> {
    * ```typescript
    * Number.asString(123); // '123'
    * ```
-   * @category String
+   * @category Formatting
    * @param self - the object to convert to string
    */
   asString(this: void, self: T): string;

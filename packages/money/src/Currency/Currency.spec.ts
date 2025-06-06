@@ -17,6 +17,7 @@ describe(Currency, () => {
     const { [name]: _, ...rest } = parameters;
     return rest;
   };
+
   it('should initialize Currency', () => {
     expect(Currency(anyProperties)).toMatchObject({
       _: 'Currency',

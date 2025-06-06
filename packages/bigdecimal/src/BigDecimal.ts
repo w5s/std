@@ -3,7 +3,7 @@ import { format } from './BigDecimal/format.js';
 import { parse } from './BigDecimal/parse.js';
 import { BigDecimalComparable } from './BigDecimal/BigDecimalComparable.js';
 import { of } from './BigDecimal/of.js';
-import { asString } from './BigDecimal/asString.js';
+import { BigDecimalAsString } from './BigDecimal/BigDecimalAsString.js';
 import { scale } from './BigDecimal/scale.js';
 import { normalize } from './BigDecimal/normalize.js';
 import { BigDecimalNumeric } from './BigDecimal/BigDecimalNumeric.js';
@@ -31,7 +31,7 @@ export const BigDecimal = Callable({
   ...BigDecimalNumeric,
   ...BigDecimalSigned,
   ...BigDecimalZero,
-  asString,
+  ...BigDecimalAsString,
   normalize,
   of,
   scale,

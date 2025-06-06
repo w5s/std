@@ -3,9 +3,10 @@ import type { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { Ref } from '@w5s/core/dist/Ref.js';
-import { asString as timeDurationString } from '@w5s/time/dist/TimeDuration/asString.js';
+import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
 import type { Option } from '@w5s/core';
 
+const timeDurationString = TimeDurationAsString.asString;
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
  * If timeout is omitted, the task is returned unchanged

@@ -1,4 +1,4 @@
-import { asString } from './asString.js';
+import { BigDecimalAsString } from './BigDecimalAsString.js';
 import type { BigDecimal } from './BigDecimal.js';
 
 /**
@@ -11,5 +11,5 @@ import type { BigDecimal } from './BigDecimal.js';
  * @param self
  */
 export function format(self: BigDecimal): string {
-  return asString(self);
+  return BigDecimalAsString.asString(self);
 }

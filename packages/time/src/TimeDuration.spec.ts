@@ -16,7 +16,7 @@ import { toMinutes } from './TimeDuration/toMinutes.js';
 import { toHours } from './TimeDuration/toHours.js';
 import { toDays } from './TimeDuration/toDays.js';
 import { toWeeks } from './TimeDuration/toWeeks.js';
-import { asString } from './TimeDuration/asString.js';
+import { TimeDurationAsString } from './TimeDuration/TimeDurationAsString.js';
 import { TimeDurationNegate } from './TimeDuration/TimeDurationNegate.js';
 
 describe('TimeDuration', () => {
@@ -25,9 +25,9 @@ describe('TimeDuration', () => {
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationComparable));
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationNumeric));
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationNegate));
+    expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationAsString));
     expect(TimeDuration).toEqual(
       expect.objectContaining({
-        asString,
         of,
         from,
         weeks,

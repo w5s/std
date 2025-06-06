@@ -1,5 +1,5 @@
 import type { Money } from './Money.js';
-import { asString } from './asString.js';
+import { MoneyAsString } from './MoneyAsString.js';
 
 /**
  * Returns a formatted representation of money
@@ -11,5 +11,5 @@ import { asString } from './asString.js';
  * @param self
  */
 export function format(self: Money): string {
-  return asString(self);
+  return MoneyAsString.asString(self);
 }

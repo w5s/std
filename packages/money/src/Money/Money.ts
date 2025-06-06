@@ -1,30 +1,9 @@
 import type { BigDecimal } from '@w5s/bigdecimal';
 import { Struct } from '@w5s/core/dist/Struct.js';
-import { Callable } from '@w5s/core/dist/Callable.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
-import type { Codec } from '@w5s/core';
 import type { Currency } from '../Currency/Currency.js';
 import { parse } from './parse.js';
-import { asString } from './asString.js';
-
-const MoneyStruct = Struct.define<Money>({ typeName: 'Money' });
-
-const MoneyCodec: Codec<Money> = {
-  [Symbol.encode]: (input) => asString(input),
-  [Symbol.decode]: (input, { ok, error }) => {
-    if (typeof input === 'string') {
-      const parseResult = parse(input);
-      if (parseResult != null) {
-        return ok(parseResult);
-      }
-    }
-    return error(input, 'Money');
-  },
-  [Symbol.schema]: () => ({
-    type: 'string',
-    format: 'money',
-  }),
-};
+import { MoneyAsString } from './MoneyAsString.js';
 
 export interface Money
   extends Struct<{
@@ -38,4 +17,20 @@ export interface Money
      */
     currency: Currency;
   }> {}
-export const Money = Callable({ ...MoneyStruct, ...MoneyCodec });
+export const Money = Struct.define<Money>({
+  typeName: 'Money',
+  [Symbol.encode]: (input) => MoneyAsString.asString(input),
+  [Symbol.decode]: (input, { ok, error }) => {
+    if (typeof input === 'string') {
+      const parseResult = parse(input);
+      if (parseResult != null) {
+        return ok(parseResult);
+      }
+    }
+    return error(input, 'Money');
+  },
+  [Symbol.schema]: () => ({
+    type: 'string',
+    format: 'money',
+  }),
+});
