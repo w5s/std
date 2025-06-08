@@ -43,9 +43,7 @@ describe('Struct', () => {
     describe('#__inspect__', () => {
       it('has default implementation', () => {
         const TestDefault = Struct.define<Test>({ ...defaultProperties });
-        expect(inspect(TestDefault.create({ email: 'foo@bar.com' }))).toBe(
-          `Struct { _: 'Test', email: 'foo@bar.com' }`,
-        );
+        expect(inspect(TestDefault.create({ email: 'foo@bar.com' }))).toBe(`{ _: 'Test', email: 'foo@bar.com' }`);
       });
       it('forwards from parameters', () => {
         const TestCustom = Struct.define<Test>({

@@ -26,7 +26,7 @@ export class Struct {
    */
   [Symbol.for('nodejs.util.inspect.custom')](depth: number, inspectOptions: InspectOptions, inspect: InspectFunction) {
     return this.#module.__inspect__ == null
-      ? inspect(this, { ...inspectOptions, customInspect: false, sorted: defaultSort })
+      ? inspect({ ...this }, { ...inspectOptions, sorted: defaultSort })
       : this.#module.__inspect__(this, depth, inspectOptions, inspect);
   }
 
