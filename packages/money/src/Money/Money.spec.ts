@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { describeCodec } from '@w5s/core/dist/Testing.js';
+import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { CodecError, Result } from '@w5s/core';
 import { Money } from './Money.js';
 import { Currency } from '../Currency/Currency.js';
@@ -22,6 +22,18 @@ describe(Money, () => {
       amount: anyAmount,
     });
   });
+  describeType(Money, () => ({
+    typeName: 'Money',
+    instances: [
+      Money.create({ amount: BigDecimal('1.1'), currency: anyCurrency }),
+      { _: 'Money' as const, amount: BigDecimal('1.1'), currency: anyCurrency },
+    ],
+    notInstances: [],
+    inspect: [
+      [Money({ amount: BigDecimal('1.1'), currency: anyCurrency }), '1.1ANY'],
+      [Money({ amount: BigDecimal('1.1'), currency: EUR }), '1.1EUR'],
+    ],
+  }));
 
   describeCodec(Money, () => ({
     decode: [

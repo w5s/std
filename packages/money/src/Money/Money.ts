@@ -33,4 +33,6 @@ export const Money = Struct.define<Money>({
     type: 'string',
     format: 'money',
   }),
+  [Symbol.inspect]: MoneyAsString.asString,
+  ...MoneyAsString,
 });
