@@ -1,9 +1,10 @@
 import { Struct } from '@w5s/core/dist/Struct.js';
-import type { Int } from '@w5s/core';
+import { Symbol, type Int } from '@w5s/core';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import type { PartialKeys } from '@w5s/core-type';
 import { defaultRounding } from './defaultRounding.js';
 import { defaultPrecision } from './defaultPrecision.js';
+import { CurrencyAsString } from './CurrencyAsString.js';
 
 export interface Currency
   extends Struct<{
@@ -46,6 +47,8 @@ export interface Currency
 
 const CurrencyStruct = Struct.define<Currency>({
   typeName: 'Currency',
+  [Symbol.inspect]: CurrencyAsString.asString,
+  ...CurrencyAsString,
 });
 
 export const Currency = Callable({

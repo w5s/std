@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Int } from '@w5s/core';
+import { describeType } from '@w5s/core/dist/Testing.js';
 import { Currency } from './Currency.js';
 
 describe(Currency, () => {
@@ -17,6 +18,16 @@ describe(Currency, () => {
     const { [name]: _, ...rest } = parameters;
     return rest;
   };
+
+  describeType(Currency, () => ({
+    typeName: 'Currency',
+    instances: [Currency.create(anyProperties), { _: 'Currency' as const, ...anyProperties }],
+    notInstances: [],
+    inspect: [
+      [Currency.create({ ...anyProperties, code: 'EUR' }), 'EUR'],
+      [Currency.create({ ...anyProperties, code: 'USD' }), 'USD'],
+    ],
+  }));
 
   it('should initialize Currency', () => {
     expect(Currency(anyProperties)).toMatchObject({
