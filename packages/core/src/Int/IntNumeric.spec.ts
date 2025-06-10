@@ -1,5 +1,10 @@
 import { describe } from 'vitest';
-import { describeCheckedAdd, describeCheckedMultiply, describeCheckedSubtract } from '../Testing.js';
+import {
+  describeCheckedAdd,
+  describeCheckedMultiply,
+  describeCheckedPower,
+  describeCheckedSubtract,
+} from '../Testing.js';
 import { IntNumeric } from './IntNumeric.js';
 import { Option } from '../Option.js';
 import { Int } from '../Int.js';
@@ -20,6 +25,12 @@ describe('IntNumeric', () => {
     { call: [Int(1), Int(1)], returns: Option.Some(Int(1)) },
     { call: [Int(2), Int(3)], returns: Option.Some(Int(6)) },
     { call: [Int(3), Int(2)], returns: Option.Some(Int(6)) },
+    { call: [IntBounded.minValue, Int(2)], returns: Option.None },
+  ]);
+  describeCheckedPower(IntNumeric, [
+    { call: [Int(1), Int(1)], returns: Option.Some(Int(1)) },
+    { call: [Int(2), Int(3)], returns: Option.Some(Int(8)) },
+    { call: [Int(2), Int(-2)], returns: Option.None },
     { call: [IntBounded.minValue, Int(2)], returns: Option.None },
   ]);
 });
