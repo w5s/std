@@ -68,7 +68,7 @@ export function describeType<S extends Type<any>>(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, global-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, unicorn/prefer-module
     const { inspect } = require('node:util');
 
-    it.each(inspectDefault)('($value) returns $expected', (instance, expected) => {
+    it.each(inspectDefault)('($0) returns $1', (instance, expected) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       expect(inspect(instance)).toEqual(expected);
     });
