@@ -8,7 +8,7 @@ export interface CheckedSubtract<Left, Right = Left, Return = Left> {
    * ```typescript
    * type T = ...;
    * const TNumeric: Numeric.CheckedSubtract<T> = ...;
-   * const result = TNumeric['-?'](left, right);// represents (left + right)
+   * const result = TNumeric['-?'](left, right);// represents (left - right)
    * ```
    * @category Numeric
    * @param left - the left operand

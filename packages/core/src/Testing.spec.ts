@@ -11,6 +11,7 @@ describe('Testing', () => {
         'describeBounded',
         'describeCheckedAdd',
         'describeCheckedMultiply',
+        'describeCheckedPower',
         'describeCheckedSubtract',
         'describeCheckedDivide',
         'describeCodec',
