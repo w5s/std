@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`EUR() > should be a valid money factory > currency 1`] = `
-Struct {
+{
   "_": "Currency",
   "code": "EUR",
   "name": "Euro",
@@ -14,7 +14,7 @@ Struct {
 `;
 
 exports[`USD() > should be a valid money factory > currency 1`] = `
-Struct {
+{
   "_": "Currency",
   "code": "USD",
   "name": "US Dollar",
