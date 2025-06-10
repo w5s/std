@@ -8,7 +8,7 @@ import { call } from './call.js';
 const bigDecimalEncode = (self: BigDecimal) => `${BigDecimalAsString.asString(self)}m`;
 const BigDecimalStruct = Struct.define<BigDecimal>({
   typeName: 'BigDecimal',
-  [Symbol.encode]: (input) => bigDecimalEncode(input),
+  [Symbol.encode]: bigDecimalEncode,
   [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('m')) {
       const parsed = parse(input.slice(0, -1));
@@ -22,7 +22,7 @@ const BigDecimalStruct = Struct.define<BigDecimal>({
     type: 'string',
     format: 'bigdecimal',
   }),
-  [Symbol.inspect]: (self) => bigDecimalEncode(self),
+  [Symbol.inspect]: bigDecimalEncode,
   ...BigDecimalAsString,
 });
 
