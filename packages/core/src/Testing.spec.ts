@@ -21,6 +21,7 @@ describe('Testing', () => {
         'describeMultiply',
         'describeNegate',
         'describeNot',
+        'describePower',
         'describeSigned',
         'describeSubtract',
         'describeType',
