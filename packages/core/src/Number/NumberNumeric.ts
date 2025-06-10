@@ -8,12 +8,17 @@ interface NumberNumeric
     Numeric.Power<number>,
     Numeric.CheckedDivide<number> {}
 
-const filterFinite = (value: number): Option<number> => (Number.isFinite(value) ? value : undefined);
+const checked =
+  (fn: (left: number, right: number) => number) =>
+  (left: number, right: number): Option<number> => {
+    const result = fn(left, right);
+    return Number.isNaN(result) || Number.isFinite(result) ? result : undefined;
+  };
 
 export const NumberNumeric: NumberNumeric = {
   '+': (left, right) => left + right,
   '-': (left, right) => left - right,
   '*': (left, right) => left * right,
   '**': (left, right) => left ** right,
-  '/?': (left, right) => filterFinite(left / right),
+  '/?': checked((left, right) => left / right),
 };
