@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describeAsString, describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { CodecError, Result } from '@w5s/core';
 import { Money } from './Money.js';
 import { Currency } from '../Currency/Currency.js';
@@ -51,4 +51,8 @@ describe(Money, () => {
       format: 'money',
     },
   }));
+  describeAsString(Money, () => [
+    [Money({ currency: anyCurrency, amount: BigDecimal('0') }), '0ANY'],
+    [Money({ currency: anyCurrency, amount: BigDecimal('-1.1') }), '-1.1ANY'],
+  ]);
 });

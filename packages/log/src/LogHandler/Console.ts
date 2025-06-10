@@ -3,7 +3,7 @@ import { fontWeight as ansiFontWeight } from '@w5s/console/dist/ANSICode/fontWei
 import { color as ansiColor } from '@w5s/console/dist/ANSICode/color.js';
 import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
 import type { LogHandler } from '../LogHandler.js';
-import { LogAsString } from '../LogLevel/LogAsString.js';
+import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
 import { asInt as logLevelAsInt } from '../LogLevel/asInt.js';
 import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
 import type { LogRecord } from '../LogRecord.js';
@@ -33,7 +33,7 @@ const defaultFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord, 
 
   return [
     (colors ? formatTime : formatNoColor)(timeAsString(created)),
-    (colors ? formatLevelFor(level) : formatNoColor)(LogAsString.asString(level).toUpperCase()),
+    (colors ? formatLevelFor(level) : formatNoColor)(LogLevelAsString.asString(level).toUpperCase()),
     ...(domain.length > 0 ? [`[${domain}]`] : []),
     ...messageWithData(logRecord),
   ];

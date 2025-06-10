@@ -1,7 +1,7 @@
 import type { AsString } from '@w5s/core';
 import type { LogLevel } from './LogLevel.js';
 
-export const LogAsString: AsString<LogLevel> = {
+export const LogLevelAsString: AsString<LogLevel> = {
   /**
    * Returns the string representation of a level
    *

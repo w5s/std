@@ -45,6 +45,7 @@ describe(Struct, () => {
         ...defaultProperties,
       });
       const instance = Struct.create(Foo, { foo: true });
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       expect(instance.toString()).toBe('[object Foo]');
     });
     it('returns a custom representation when specified', () => {
@@ -53,6 +54,7 @@ describe(Struct, () => {
         asString: (self) => `foo#${self.foo}`,
       });
       const instance = Struct.create(FooInspect, { foo: true });
+      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       expect(instance.toString()).toBe('foo#true');
     });
   });
