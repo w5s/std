@@ -23,10 +23,10 @@ export function describeSubtract<L, R, Ret>(
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
   const { describe, it, expect } = testingLibrary;
-  (cases.length === 0 ? describe.todo : describe)('-', () => {
-    it.each(cases)("satisfies ['-']($call.0, $call.1) == $returns", ({ call, returns }) => {
-      const returnValue = subject['-'](...call);
-      expect(returnValue).toEqual(returns);
+  const op = '-';
+  (cases.length === 0 ? describe.todo : describe)(op, () => {
+    it.each(cases)(`satisfies ['${op}']($call.0, $call.1) == $returns`, ({ call, returns }) => {
+      expect(subject[op](...call)).toEqual(returns);
     });
   });
 }
