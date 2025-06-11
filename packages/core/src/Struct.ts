@@ -23,6 +23,8 @@ export type Struct<
      * The type unique identifier
      */
     [Struct.type]: string;
+  } = {
+    [Struct.type]: string;
   },
 > = Readonly<Properties>;
 
@@ -32,7 +34,7 @@ export namespace Struct {
    */
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
-  export interface Module<Model extends Struct<{ [Struct.type]: string }>>
+  export interface Module<Model extends Struct>
     extends Type.Module<Model>,
       Callable<(properties: Parameters<Model>) => Model> {
     /**
