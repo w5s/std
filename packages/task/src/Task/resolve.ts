@@ -2,7 +2,18 @@ import type { Task } from '../Task.js';
 import { from } from './from.js';
 
 /**
- * Constructor that always returns a successful `Task` that resolves `value`.
+ * Constructor that always returns a successful `Task` that resolves `void`.
+ *
+ * @example
+ * ```typescript
+ * const task = Task.resolve();
+ * const result = Task.run(task);// Result.Ok()
+ * ```
+ * @category Constructor
+ */
+export function resolve<Error = never>(): Task<void, Error>;
+/**
+ * Returns a successful task that always resolves `value`.
  * This is a shorthand for `Task.from(({ resolve }) => resolve(value))`
  *
  * @example
@@ -11,11 +22,6 @@ import { from } from './from.js';
  * const result = Task.run(task);// Result.Ok(1)
  * ```
  * @category Constructor
- */
-export function resolve<Error = never>(): Task<void, Error>;
-/**
- *
- * @example
  * @param value - the success value
  */
 export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
