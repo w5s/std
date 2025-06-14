@@ -6100,7 +6100,7 @@ __metadata:
     "@w5s/bigdecimal": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
-    currencies.json: "npm:1.0.2"
+    currencies.json: "npm:1.1.0"
     typescript: "npm:5.8.3"
     vite: "npm:latest"
     vitest: "npm:latest"
@@ -8663,10 +8663,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"currencies.json@npm:1.0.2":
-  version: 1.0.2
-  resolution: "currencies.json@npm:1.0.2"
-  checksum: 10c0/39708424243bde3505241f982cc9f6fb03a98905d950fbb8307829aaf216db5612891dca60b65c05e11d38009bc97293b1200047f9f20f60dc90889dbb7c9a36
+"currencies.json@npm:1.1.0":
+  version: 1.1.0
+  resolution: "currencies.json@npm:1.1.0"
+  checksum: 10c0/4cf46d809e9bf6e9fef8b2bce4f20f08fa886bbff5099a0f04cc59396312cdd62863444699e53563edf70dc4edde70654e054a56b3ae2cf914b22e6998f947a3
   languageName: node
   linkType: hard
 
