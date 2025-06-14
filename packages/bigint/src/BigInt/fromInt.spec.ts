@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { Int } from '@w5s/core';
 import { fromInt } from './fromInt.js';
-import { Int } from '../Int.js';
 
 describe(fromInt, () => {
   it.each([

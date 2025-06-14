@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
+import { describeNegate } from '@w5s/core/dist/Testing.js';
 import { BigIntNegate } from './BigIntNegate.js';
-import { describeNegate } from '../Testing.js';
 import { BigIntComparable } from './BigIntComparable.js';
 
 describe('BigIntNegate', () => {

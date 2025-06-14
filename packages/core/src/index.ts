@@ -1,6 +1,5 @@
 export * from './Array.js';
 export * from './AsString.js';
-export * from './BigInt.js';
 export * from './Boolean.js';
 export * from './Bounded.js';
 export * from './Callable.js';

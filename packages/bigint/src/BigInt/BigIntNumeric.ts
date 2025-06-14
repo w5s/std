@@ -1,4 +1,4 @@
-import type { Numeric } from '../Numeric.js';
+import type { Numeric } from '@w5s/core/dist/Numeric.js';
 
 interface BigIntNumeric extends Numeric.Add<bigint>, Numeric.Multiply<bigint>, Numeric.Subtract<bigint> {}
 

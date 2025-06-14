@@ -7,7 +7,6 @@ describe('index', () => {
     expect(Object.keys(Std).sort()).toEqual(
       [
         'Array',
-        'BigInt',
         'Boolean',
         'Callable',
         'Char',
@@ -41,7 +40,7 @@ describe('index', () => {
 
   it('exports types', () => {
     type Bounded = Std.Bounded<any>;
-    type Numeric = Std.Numeric<any>;
+    type Numeric = Std.Numeric.Add<any>;
 
     expect(true).toBe(true);
   });

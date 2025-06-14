@@ -1,4 +1,4 @@
-import type { Numeric } from '../Numeric.js';
+import type { Numeric } from '@w5s/core/dist/Numeric.js';
 
 export const BigIntSigned: Numeric.Signed<bigint> = {
   abs: (value) => (value < 0n ? -value : value),

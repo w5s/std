@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeIndexable } from '../Testing.js';
+import { describeIndexable } from '@w5s/core/dist/Testing.js';
 import { BigIntIndexable } from './BigIntIndexable.js';
 
 describe('BigIntIndexable', () => {

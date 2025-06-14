@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
+import { Type } from '@w5s/core';
 import { BigInt } from './BigInt.js';
 import { parse } from './BigInt/parse.js';
 import { format } from './BigInt/format.js';
 import { BigIntComparable } from './BigInt/BigIntComparable.js';
-import { Type } from './Type.js';
 import { BigIntSigned } from './BigInt/BigIntSigned.js';
 import { BigIntNumeric } from './BigInt/BigIntNumeric.js';
 import { BigIntIndexable } from './BigInt/BigIntIndexable.js';

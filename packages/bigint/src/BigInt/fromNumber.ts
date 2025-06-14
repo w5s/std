@@ -1,4 +1,5 @@
-import { fromNumber as intFromNumber } from '../Int/fromNumber.js';
+import type { Option } from '@w5s/core';
+import { fromNumber as intFromNumber } from '@w5s/core/dist/Int/fromNumber.js';
 /**
  * Convert a number to a bigint
  *
@@ -12,7 +13,7 @@ import { fromNumber as intFromNumber } from '../Int/fromNumber.js';
  * ```
  * @param value - the number to convert
  */
-export function fromNumber(value: number) {
+export function fromNumber(value: number): Option<bigint> {
   const intValue = intFromNumber(value);
   return intValue === undefined ? undefined : BigInt(intValue);
 }

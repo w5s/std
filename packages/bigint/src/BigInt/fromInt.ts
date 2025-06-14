@@ -1,12 +1,12 @@
-import type { Int } from '../Int.js';
+import type { Int } from '@w5s/core/dist/Int.js';
 
 /**
  * Convert an integer to a bigint
  *
  * @example
  * ```typescript
- * BigInt.fromNumber(Int(1));// 1n
- * BigInt.fromNumber(Int(-1));// -1n
+ * BigInt.fromInt(Int(1));// 1n
+ * BigInt.fromInt(Int(-1));// -1n
  * ```
  * @param value - the number to convert
  */

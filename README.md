@@ -6,6 +6,7 @@
 * [@w5s/application](packages/application) - Application management
 * [@w5s/async](packages/async) - Promise module
 * [@w5s/bigdecimal](packages/bigdecimal) - BigDecimal module
+* [@w5s/bigint](packages/bigint) - BigInt manipulation
 * [@w5s/console](packages/console) - Console module
 * [@w5s/core](packages/core) - Core modules
 * [@w5s/core-type](packages/core-type) - Core type modules
