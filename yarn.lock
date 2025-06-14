@@ -4669,16 +4669,16 @@ __metadata:
   linkType: hard
 
 "@simple-libs/child-process-utils@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@simple-libs/child-process-utils@npm:1.0.0"
+  version: 1.0.1
+  resolution: "@simple-libs/child-process-utils@npm:1.0.1"
   dependencies:
-    "@simple-libs/stream-utils": "npm:^1.0.0"
+    "@simple-libs/stream-utils": "npm:^1.1.0"
     "@types/node": "npm:^22.0.0"
-  checksum: 10c0/9a5d57ab21fef9a565877889a973a8ea859b9e696e2cc82c9195b884bb34eb06a93375d92a573d74da9dec8b04d0abb1acac026e82af9027badf02f0640e2d86
+  checksum: 10c0/3c875a4c0b36dba8948628a77ec9671a946123f664e5632f2a4897b8fc8235a78108ba1412e40f2b1682b4646b9f2a984f0b3dfff144ae76e708bb1b5d25d8ef
   languageName: node
   linkType: hard
 
-"@simple-libs/stream-utils@npm:^1.0.0, @simple-libs/stream-utils@npm:^1.1.0":
+"@simple-libs/stream-utils@npm:^1.1.0":
   version: 1.1.0
   resolution: "@simple-libs/stream-utils@npm:1.1.0"
   dependencies:
