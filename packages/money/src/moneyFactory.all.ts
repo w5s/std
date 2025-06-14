@@ -516,7 +516,7 @@ export const ILS = register('ILS', 2, 'Israeli New Sheqel', 'Israeli new sheqels
  * ```
  * @param amount - The amount of money
  */
-export const INR = register('INR', 2, 'Indian Rupee', 'Indian rupees', 0, 'Rs', 'টকা');
+export const INR = register('INR', 2, 'Indian Rupee', 'Indian rupees', 0, '₹', 'টকা');
 /**
  * Iraqi Dinar money factory
  *
