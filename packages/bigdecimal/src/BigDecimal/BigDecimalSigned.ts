@@ -1,9 +1,8 @@
 import type { Numeric } from '@w5s/core';
-import { BigIntSigned } from '@w5s/core/dist/BigInt/BigIntSigned.js';
+import { BigIntSigned } from '@w5s/bigint/dist/BigInt/BigIntSigned.js';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 
-// eslint-disable-next-line @typescript-eslint/unbound-method
 const { abs: bigIntAbs, sign: bigIntSign, isNegative: bigIntIsNegative, isPositive: bigIntIsPositive } = BigIntSigned;
 
 export const BigDecimalSigned: Numeric.Signed<BigDecimal> = {

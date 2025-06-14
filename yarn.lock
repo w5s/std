@@ -5847,6 +5847,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/bigdecimal@workspace:packages/bigdecimal"
   dependencies:
+    "@w5s/bigint": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.8.3"
@@ -5857,7 +5858,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/bigint@workspace:packages/bigint":
+"@w5s/bigint@npm:^1.0.0-alpha.0, @w5s/bigint@workspace:packages/bigint":
   version: 0.0.0-use.local
   resolution: "@w5s/bigint@workspace:packages/bigint"
   dependencies:
@@ -6128,6 +6129,7 @@ __metadata:
   resolution: "@w5s/playground@workspace:packages/playground"
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
+    "@w5s/bigint": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"
