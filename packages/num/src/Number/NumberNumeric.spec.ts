@@ -6,7 +6,7 @@ import {
   describeCheckedDivide,
   describePower,
   describeRemainder,
-} from '../Testing.js';
+} from '@w5s/core/dist/Testing.js';
 import { NumberComparable } from './NumberComparable.js';
 import { NumberNumeric } from './NumberNumeric.js';
 

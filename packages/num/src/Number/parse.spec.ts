@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { Option } from '@w5s/core';
 import { parse } from './parse.js';
-import { Option } from '../Option.js';
 
 describe(parse, () => {
   it('should return a valid float', () => {

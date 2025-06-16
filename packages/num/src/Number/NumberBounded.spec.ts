@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
+import { describeBounded } from '@w5s/core/dist/Testing.js';
 import { NumberBounded } from './NumberBounded.js';
-import { describeBounded } from '../Testing.js';
 
 describe('NumberBounded', () => {
   describeBounded(NumberBounded, {

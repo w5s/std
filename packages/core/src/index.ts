@@ -16,7 +16,6 @@ export * from './Int.js';
 export * from './JSON.js';
 export * from './lazy.js';
 export type * from './Not.js';
-export * from './Number.js';
 export type * from './Numeric.js';
 export * from './Option.js';
 export * from './Order.js';

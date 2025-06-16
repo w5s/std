@@ -1,4 +1,4 @@
-import { number as NumberType } from './Type/number.js';
+import { number as NumberType } from '@w5s/core/dist/Type/number.js';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberBounded } from './Number/NumberBounded.js';

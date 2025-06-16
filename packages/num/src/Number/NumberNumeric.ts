@@ -1,5 +1,4 @@
-import type { Numeric } from '../Numeric.js';
-import type { Option } from '../Option.js';
+import type { Numeric, Option } from '@w5s/core';
 
 interface NumberNumeric
   extends Numeric.Add<number>,

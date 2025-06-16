@@ -1,4 +1,4 @@
-import type { Numeric } from '../Numeric.js';
+import type { Numeric } from '@w5s/core';
 
 export const NumberZero: Numeric.Zero<number> = {
   zero: () => 0,

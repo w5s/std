@@ -1,4 +1,4 @@
-import type { Option } from '../Option.js';
+import type { Option } from '@w5s/core';
 
 /**
  * Parses a string argument and returns an number

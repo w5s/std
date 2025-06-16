@@ -1,4 +1,4 @@
-import type { Bounded } from '../Bounded.js';
+import type { Bounded } from '@w5s/core';
 
 export const NumberBounded: Bounded<number> = {
   minValue: globalThis.Number.MIN_VALUE,

@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
+import { Type } from '@w5s/core/dist/Type.js';
 import { Number } from './Number.js';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberComparable } from './Number/NumberComparable.js';
-import { Type } from './Type.js';
 import { NumberSigned } from './Number/NumberSigned.js';
 import { NumberBounded } from './Number/NumberBounded.js';
 import { NumberNegate } from './Number/NumberNegate.js';

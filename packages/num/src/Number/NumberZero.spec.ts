@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeZero } from '../Testing.js';
+import { describeZero } from '@w5s/core/dist/Testing.js';
 import { NumberZero } from './NumberZero.js';
 
 describe('NumberZero', () => {

@@ -1,4 +1,4 @@
-import type { Numeric } from '../Numeric.js';
+import type { Numeric } from '@w5s/core';
 
 export const NumberSigned: Numeric.Signed<number> = {
   abs: Math.abs,

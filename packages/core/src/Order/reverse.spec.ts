@@ -1,9 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { reverse } from './reverse.js';
-import { NumberComparable } from '../Number/NumberComparable.js';
 import { withOrder } from '../Testing.js';
+import { Comparable } from '../Comparable.js';
 
 describe(reverse, () => {
+  const NumberComparable = Comparable<number>({
+    compare: (l, r) => (l === r ? 0 : l < r ? -1 : 1),
+  });
+
   const expectOrder = withOrder(expect);
 
   it('inverts less and greater', () => {
