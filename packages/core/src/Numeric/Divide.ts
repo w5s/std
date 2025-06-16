@@ -1,4 +1,4 @@
-export interface Divide<Base, Divider = Base, Return = Base> {
+export interface Divide<Base, Divider = Base, Output = Base> {
   /**
    * Division operator
    *
@@ -12,5 +12,5 @@ export interface Divide<Base, Divider = Base, Return = Base> {
    * @param base - the base part
    * @param divider - the divider part
    */
-  '/'(base: Base, divider: Divider): Return;
+  '/'(base: Base, divider: Divider): Output;
 }

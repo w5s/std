@@ -1,4 +1,4 @@
-export interface Remainder<Base, Divider = Base, Return = Base> {
+export interface Remainder<Base, Divider = Base, Output = Base> {
   /**
    * Remainder operator
    *
@@ -12,5 +12,5 @@ export interface Remainder<Base, Divider = Base, Return = Base> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  '%'(left: Base, right: Divider): Return;
+  '%'(left: Base, right: Divider): Output;
 }

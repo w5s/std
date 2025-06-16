@@ -1,4 +1,4 @@
-export interface Negate<T, Return = T> {
+export interface Negate<Self, Output = Self> {
   /**
    * Negates the given value.
    *
@@ -11,5 +11,5 @@ export interface Negate<T, Return = T> {
    * @category Numeric
    * @param self - The value to negate.
    */
-  negate(self: T): Return;
+  negate(self: Self): Output;
 }

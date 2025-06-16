@@ -1,6 +1,6 @@
 import type { Option } from '../Option.js';
 
-export interface CheckedDivide<Base, Divider = Base, Return = Base> {
+export interface CheckedDivide<Base, Divider = Base, Output = Base> {
   /**
    * Division operator
    *
@@ -14,5 +14,5 @@ export interface CheckedDivide<Base, Divider = Base, Return = Base> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  '/?'(left: Base, right: Divider): Option<Return>;
+  '/?'(left: Base, right: Divider): Option<Output>;
 }

@@ -1,6 +1,6 @@
 import type { Option } from '../Option.js';
 
-export interface CheckedPower<Left, Right = Left, Return = Left> {
+export interface CheckedPower<Left, Right = Left, Output = Left> {
   /**
    * Power operator that returns `None` instead of wrapping around on overflow.
    *
@@ -14,5 +14,5 @@ export interface CheckedPower<Left, Right = Left, Return = Left> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  '**?'(left: Left, right: Right): Option<Return>;
+  '**?'(left: Left, right: Right): Option<Output>;
 }

@@ -1,4 +1,4 @@
-export interface Subtract<Left, Right = Left, Return = Left> {
+export interface Subtract<Left, Right = Left, Output = Left> {
   /**
    * Subtraction operator
    *
@@ -12,5 +12,5 @@ export interface Subtract<Left, Right = Left, Return = Left> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  '-'(left: Left, right: Right): Return;
+  '-'(left: Left, right: Right): Output;
 }

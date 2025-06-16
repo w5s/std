@@ -1,4 +1,4 @@
-export interface Add<Left, Right = Left, Return = Left> {
+export interface Add<Left, Right = Left, Output = Left> {
   /**
    * Addition operator
    *
@@ -12,5 +12,5 @@ export interface Add<Left, Right = Left, Return = Left> {
    * @param left - the left operand
    * @param right - the right operand
    */
-  '+'(left: Left, right: Right): Return;
+  '+'(left: Left, right: Right): Output;
 }
