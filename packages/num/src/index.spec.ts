@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // Public API
         'BigInt',
+        'Int',
       ].sort(),
     );
   });
