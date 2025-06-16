@@ -1,11 +1,12 @@
 {
-  "name": "@w5s/bigint",
+  "name": "@w5s/num",
   "version": "1.0.0-alpha.0",
-  "description": "BigInt manipulation",
+  "description": "Number, BigInt, Int modules",
   "keywords": [
     "fp",
     "functional",
     "bigint",
+    "number",
     "standard",
     "std"
   ],
@@ -16,7 +17,7 @@
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/bigint"
+    "directory": "packages/num"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",

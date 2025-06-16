@@ -6,7 +6,7 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { Codec } from '@w5s/core/dist/Codec.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
-import { compare as bigintCompare } from '@w5s/bigint/dist/BigInt/compare.js';
+import { compare as bigintCompare } from '@w5s/num/dist/BigInt/compare.js';
 import { IPv4 } from './IPv4.js';
 
 export type IPv6Address = bigint;

@@ -1,5 +1,5 @@
 import type { Numeric } from '@w5s/core';
-import { BigIntSigned } from '@w5s/bigint/dist/BigInt/BigIntSigned.js';
+import { BigIntSigned } from '@w5s/num/dist/BigInt/BigIntSigned.js';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 

@@ -6,7 +6,6 @@
 * [@w5s/application](packages/application) - Application management
 * [@w5s/async](packages/async) - Promise module
 * [@w5s/bigdecimal](packages/bigdecimal) - BigDecimal module
-* [@w5s/bigint](packages/bigint) - BigInt manipulation
 * [@w5s/console](packages/console) - Console module
 * [@w5s/core](packages/core) - Core modules
 * [@w5s/core-type](packages/core-type) - Core type modules
@@ -16,6 +15,7 @@
 * [@w5s/http](packages/http) - HTTP client module
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money module
+* [@w5s/num](packages/num) - Number, BigInt, Int modules
 * [@w5s/playground](packages/playground) - Examples
 * [@w5s/random](packages/random) - Random number module
 * [@w5s/system](packages/system) - System module

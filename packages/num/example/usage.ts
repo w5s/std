@@ -1,5 +1,5 @@
 import { Option } from '@w5s/core';
-import { BigInt } from '@w5s/bigint';
+import { BigInt } from '@w5s/num';
 
 export function main() {
   const expressions = ['1n', '2n', 'foo'];

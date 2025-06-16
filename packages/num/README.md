@@ -1,5 +1,5 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
-# W5S BigInt manipulation _(@w5s/bigint)_
+# W5S Number, BigInt, Int modules _(@w5s/num)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
@@ -9,7 +9,7 @@
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/bigint
+npm install @w5s/num
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -19,7 +19,7 @@ npm install @w5s/bigint
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { Option } from '@w5s/core';
-import { BigInt } from '@w5s/bigint';
+import { BigInt } from '@w5s/num';
 
 export function main() {
   const expressions = ['1n', '2n', 'foo'];
@@ -46,10 +46,10 @@ export function main() {
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/bigint.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/num.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/bigint
+[package-url]: https://www.npmjs.com/package/@w5s/num
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square

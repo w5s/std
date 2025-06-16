@@ -1,5 +1,5 @@
 {
-  "name": "@w5s/core-src",
+  "name": "@w5s/std-src",
   "private": true,
   "repository": {
     "type": "git",

@@ -36,12 +36,12 @@
   },
   "dependencies": {
     "@w5s/application": "^1.0.0-alpha.0",
-    "@w5s/bigint": "^1.0.0-alpha.0",
     "@w5s/core": "^1.0.0-alpha.0",
     "@w5s/error": "^1.0.0-alpha.0",
     "@w5s/http": "^1.0.0-alpha.0",
     "@w5s/log": "^1.0.0-alpha.0",
     "@w5s/money": "^1.0.0-alpha.0",
+    "@w5s/num": "^1.0.0-alpha.0",
     "@w5s/random": "^1.0.0-alpha.0",
     "@w5s/task": "^1.0.0-alpha.0",
     "@w5s/task-timeout": "^1.0.0-alpha.0",
