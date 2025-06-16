@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { fromNumber as intFromNumber } from '@w5s/core/dist/Int/fromNumber.js';
+import { fromNumber as intFromNumber } from '../Int/fromNumber.js';
 /**
  * Convert a number to a bigint
  *

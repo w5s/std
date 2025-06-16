@@ -1,7 +1,6 @@
-import type { Numeric } from '../Numeric.js';
-import type { Option } from '../Option.js';
-import { Int } from '../Type/Int.js';
+import type { Numeric, Option } from '@w5s/core';
 import { fromNumber } from './fromNumber.js';
+import type { Int } from '../Int.js';
 
 interface IntNumeric
   extends Numeric.CheckedAdd<Int>,

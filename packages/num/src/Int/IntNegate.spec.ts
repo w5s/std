@@ -1,7 +1,7 @@
 import { describe } from 'vitest';
+import { describeNegate } from '@w5s/core/dist/Testing.js';
 import { IntNegate } from './IntNegate.js';
 import { Int } from '../Int.js';
-import { describeNegate } from '../Testing.js';
 import { IntComparable } from './IntComparable.js';
 
 describe('IntNegate', () => {

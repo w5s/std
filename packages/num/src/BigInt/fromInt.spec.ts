@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Int } from '@w5s/core';
+import { Int } from '../Int.js';
 import { fromInt } from './fromInt.js';
 
 describe(fromInt, () => {

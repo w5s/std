@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
+import { Option } from '@w5s/core';
 import { fromNumber } from './fromNumber.js';
 import { IntBounded } from './IntBounded.js';
-import { Option } from '../Option.js';
 
 describe(fromNumber, () => {
   const { minValue, maxValue } = IntBounded;

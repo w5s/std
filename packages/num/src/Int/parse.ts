@@ -1,6 +1,6 @@
+import type { Option } from '@w5s/core/dist/Option.js';
+import type { Radix36 } from '@w5s/core/dist/Number/Radix36.js';
 import type { Int } from '../Int.js';
-import type { Option } from '../Option.js';
-import type { Radix36 } from '../Number/Radix36.js';
 import { fromNumber } from './fromNumber.js';
 
 /**

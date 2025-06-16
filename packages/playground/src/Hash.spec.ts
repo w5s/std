@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Int } from '@w5s/core/dist/Int.js';
+import { Int } from '@w5s/core';
 import { Hash } from './Hash.js';
 
 describe(`Hash`, () => {

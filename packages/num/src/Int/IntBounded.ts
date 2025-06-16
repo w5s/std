@@ -1,4 +1,4 @@
-import type { Bounded } from '../Bounded.js';
+import type { Bounded } from '@w5s/core';
 import type { Int } from '../Int.js';
 
 export const IntBounded: Bounded<Int> = {

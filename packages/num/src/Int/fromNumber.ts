@@ -1,5 +1,5 @@
+import type { Option } from '@w5s/core';
 import type { Int } from '../Int.js';
-import type { Option } from '../Option.js';
 import { IntBounded } from './IntBounded.js';
 
 const MIN_SAFE_INTEGER = IntBounded.minValue;

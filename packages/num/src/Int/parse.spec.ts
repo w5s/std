@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { Option } from '@w5s/core';
 import { parse } from './parse.js';
-import { Option } from '../Option.js';
 import { IntBounded } from './IntBounded.js';
 
 describe(parse, () => {

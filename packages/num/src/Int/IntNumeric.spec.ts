@@ -4,9 +4,9 @@ import {
   describeCheckedMultiply,
   describeCheckedPower,
   describeCheckedSubtract,
-} from '../Testing.js';
+} from '@w5s/core/dist/Testing.js';
+import { Option } from '@w5s/core';
 import { IntNumeric } from './IntNumeric.js';
-import { Option } from '../Option.js';
 import { Int } from '../Int.js';
 import { IntBounded } from './IntBounded.js';
 

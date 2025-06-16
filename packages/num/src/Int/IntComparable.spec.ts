@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
-import { describeComparable } from '../Testing.js';
-import { Int } from '../Type/Int.js';
+import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { Int } from '../Int.js';
 import { IntComparable } from './IntComparable.js';
 
 describe('IntComparable', () => {
