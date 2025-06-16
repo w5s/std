@@ -6036,6 +6036,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
+    "@w5s/num": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/task-timeout": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
@@ -6054,6 +6055,7 @@ __metadata:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/console": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/num": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     "@w5s/uuid": "npm:^1.0.0-alpha.0"
@@ -6082,7 +6084,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/num@npm:^1.0.0-alpha.0, @w5s/num@workspace:packages/num":
+"@w5s/num@npm:1.0.0-alpha.0, @w5s/num@npm:^1.0.0-alpha.0, @w5s/num@workspace:packages/num":
   version: 0.0.0-use.local
   resolution: "@w5s/num@workspace:packages/num"
   dependencies:
@@ -6228,6 +6230,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:1.0.0-alpha.0"
     "@w5s/error": "npm:1.0.0-alpha.0"
+    "@w5s/num": "npm:1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.8.3"
     vite: "npm:latest"

@@ -1,5 +1,5 @@
 import type { Numeric } from '@w5s/core';
-import { NumberNumeric } from '@w5s/core/dist/Number/NumberNumeric.js';
+import { NumberNumeric } from '@w5s/num/dist/Number/NumberNumeric.js';
 import type { TimeDuration } from './TimeDuration.js';
 
 interface TimeDurationNumeric

@@ -1,4 +1,4 @@
-import { compare as compareNumber } from '@w5s/core/dist/Number/compare.js';
+import { compare as compareNumber } from '@w5s/num/dist/Number/compare.js';
 import type { Ordering } from '@w5s/core';
 import type { Status } from './Status.js';
 

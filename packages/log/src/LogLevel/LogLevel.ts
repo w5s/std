@@ -1,7 +1,7 @@
 import type { Codec, Int } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { parse as parseInt } from '@w5s/core/dist/Int/parse.js';
+import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
 import { LogLevelAsString } from './LogLevelAsString.js';
 
 export interface LogLevel

@@ -5,7 +5,7 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
-import { compare as numberCompare } from '@w5s/core/dist/Number/compare.js';
+import { compare as numberCompare } from '@w5s/num/dist/Number/compare.js';
 
 export type IPv4Address = Int;
 
