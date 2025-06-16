@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { combine } from './combine.js';
 import { String } from '../String.js';
 import { withOrder } from '../Testing.js';
+import type { Ordering } from '../Ordering.js';
 
 describe(combine, () => {
   const numberCompare = (a: number, b: number): Ordering => (a === b ? 0 : a < b ? -1 : 1);
