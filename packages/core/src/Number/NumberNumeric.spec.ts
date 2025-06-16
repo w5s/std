@@ -1,5 +1,12 @@
 import { describe } from 'vitest';
-import { describeAdd, describeMultiply, describeSubtract, describeCheckedDivide, describePower } from '../Testing.js';
+import {
+  describeAdd,
+  describeMultiply,
+  describeSubtract,
+  describeCheckedDivide,
+  describePower,
+  describeRemainder,
+} from '../Testing.js';
 import { NumberComparable } from './NumberComparable.js';
 import { NumberNumeric } from './NumberNumeric.js';
 
@@ -17,6 +24,11 @@ describe('NumberNumeric', () => {
     { call: [1, 1], returns: 1 },
     { call: [2, 3], returns: 6 },
     { call: [3, 2], returns: 6 },
+  ]);
+  describeRemainder(subject, [
+    { call: [6, 3], returns: 0 },
+    { call: [7, 3], returns: 1 },
+    { call: [-7, 3], returns: -1 },
   ]);
   describeCheckedDivide(subject, [
     { call: [1, 1], returns: 1 },

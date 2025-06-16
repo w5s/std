@@ -15,6 +15,7 @@ export * from './Testing/describeMultiply.js';
 export * from './Testing/describeNegate.js';
 export * from './Testing/describeNot.js';
 export * from './Testing/describePower.js';
+export * from './Testing/describeRemainder.js';
 export * from './Testing/describeSigned.js';
 export * from './Testing/describeSubtract.js';
 export * from './Testing/describeType.js';

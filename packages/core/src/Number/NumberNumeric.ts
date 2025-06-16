@@ -4,6 +4,7 @@ import type { Option } from '../Option.js';
 interface NumberNumeric
   extends Numeric.Add<number>,
     Numeric.Multiply<number>,
+    Numeric.Remainder<number>,
     Numeric.Subtract<number>,
     Numeric.Power<number>,
     Numeric.CheckedDivide<number> {}
@@ -20,5 +21,6 @@ export const NumberNumeric: NumberNumeric = {
   '-': (left, right) => left - right,
   '*': (left, right) => left * right,
   '**': (left, right) => left ** right,
+  '%': (left, right) => left % right,
   '/?': checked((left, right) => left / right),
 };
