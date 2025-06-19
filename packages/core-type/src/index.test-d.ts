@@ -14,6 +14,7 @@ import type {
   Minute,
   Month,
   Nullable,
+  ObjectLike,
   PartialKeys,
   Pretty,
   Primitive,

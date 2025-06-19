@@ -11,6 +11,7 @@ export * from './JSONValue.js';
 export * from './Minute.js';
 export * from './Month.js';
 export * from './Nullable.js';
+export * from './ObjectLike.js';
 export * from './PartialKeys.js';
 export * from './Pretty.js';
 export * from './Primitive.js';
