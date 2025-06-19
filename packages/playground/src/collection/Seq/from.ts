@@ -1,5 +1,5 @@
 import { Seq } from '../Seq.js';
-import { Seq as SeqImplementation } from '../Seq/Seq.js';
+import { Seq as SeqImplementation } from './Seq.js';
 
 /**
  * Return a new sequence from `iterable`
