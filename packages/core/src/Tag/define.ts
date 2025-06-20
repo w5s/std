@@ -28,9 +28,9 @@ export function define<From, To extends From>(parameters: Tag.Parameters<To>): T
   }
 
   return Callable({
-    [Callable.symbol]: (value: From) => wrap(value),
     wrap,
     unwrap,
     ...TagType,
+    [Callable.symbol]: (value: From) => wrap(value),
   });
 }
