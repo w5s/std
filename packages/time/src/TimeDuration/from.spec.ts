@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { from } from './from.js';
-import { milliseconds } from './milliseconds.js';
+import { of } from './of.js';
 
 describe(from, () => {
   it('should convert number to TimeDuration', () => {
     expect(from(1000)).toEqual(1000);
   });
   it('should convert TimeDuration to itself', () => {
-    expect(from(milliseconds(1000))).toEqual(1000);
+    expect(from(of(1000))).toEqual(1000);
   });
   it('should convert object with milliseconds to TimeDuration', () => {
     expect(from({ milliseconds: 1000 })).toEqual(1000);

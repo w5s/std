@@ -10,7 +10,7 @@ describe('.delay', () => {
   });
 
   vi.useFakeTimers();
-  const anyDuration = TimeDuration.seconds(12);
+  const anyDuration = TimeDuration({ seconds: 12 });
   const setTimeoutSpy = vi.spyOn(globalThis, 'setTimeout');
   const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout');
 
@@ -25,7 +25,7 @@ describe('.delay', () => {
     await expect(promise).resolves.toEqual(Result.Ok(Date.now()));
   });
   it('should be cancelable', () => {
-    const duration = TimeDuration.seconds(1);
+    const duration = TimeDuration({ seconds: 1 });
     const task = delay(duration);
 
     const canceler = Ref(() => {});

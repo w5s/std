@@ -8,7 +8,7 @@ import { timeout } from './timeout.js';
 
 describe(timeout, () => {
   const expectTask = withTask(expect);
-  const anyDelay = TimeDuration.milliseconds(4);
+  const anyDelay = TimeDuration(4);
   const anyValue = 'any_value';
   const anyError = 'any_error';
 

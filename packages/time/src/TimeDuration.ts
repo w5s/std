@@ -6,12 +6,6 @@ import { TimeDurationNumeric } from './TimeDuration/TimeDurationNumeric.js';
 import { TimeDurationAsString } from './TimeDuration/TimeDurationAsString.js';
 import { of } from './TimeDuration/of.js';
 import { from } from './TimeDuration/from.js';
-import { milliseconds } from './TimeDuration/milliseconds.js';
-import { seconds } from './TimeDuration/seconds.js';
-import { minutes } from './TimeDuration/minutes.js';
-import { hours } from './TimeDuration/hours.js';
-import { days } from './TimeDuration/days.js';
-import { weeks } from './TimeDuration/weeks.js';
 import { toSeconds } from './TimeDuration/toSeconds.js';
 import { toMinutes } from './TimeDuration/toMinutes.js';
 import { toHours } from './TimeDuration/toHours.js';
@@ -47,11 +41,5 @@ export const TimeDuration = Callable({
   toWeeks,
   of,
   from,
-  milliseconds,
-  seconds,
-  minutes,
-  hours,
-  days,
-  weeks,
   [Callable.symbol]: from,
 });

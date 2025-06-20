@@ -5,6 +5,7 @@ import { Task } from '@w5s/task';
 import { Client } from './Client.js';
 
 describe(Client, () => {
+  const anyDuration = TimeDuration({ seconds: 123 });
   const anyURL = 'https://localhost';
   it('constructs a client', () => {
     expect(Client()).toEqual({
@@ -19,7 +20,7 @@ describe(Client, () => {
       const client = Client({
         timeout: 'default',
       });
-      expect(Client.getTimeoutDuration(client)).toBe(TimeDuration.seconds(30));
+      expect(Client.getTimeoutDuration(client)).toBe(TimeDuration({ seconds: 30 }));
     });
     it('returns Option.None when "none"', () => {
       const client = Client({
@@ -29,21 +30,21 @@ describe(Client, () => {
     });
     it('returns client.timeout when duration', () => {
       const client = Client({
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       });
-      expect(Client.getTimeoutDuration(client)).toBe(TimeDuration.seconds(123));
+      expect(Client.getTimeoutDuration(client)).toBe(anyDuration);
     });
   });
   describe(Client.getRequestTimeoutDuration, () => {
     it('returns client timeout when "default"', () => {
       const client = Client({
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       });
       const request = {
         url: anyURL,
         timeout: 'default' as const,
       };
-      expect(Client.getRequestTimeoutDuration(client, request)).toBe(TimeDuration.seconds(123));
+      expect(Client.getRequestTimeoutDuration(client, request)).toBe(anyDuration);
     });
     it('returns Option.None when "none"', () => {
       const client = Client({
@@ -61,9 +62,9 @@ describe(Client, () => {
       });
       const request = {
         url: anyURL,
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       };
-      expect(Client.getRequestTimeoutDuration(client, request)).toBe(TimeDuration.seconds(123));
+      expect(Client.getRequestTimeoutDuration(client, request)).toBe(anyDuration);
     });
   });
 });

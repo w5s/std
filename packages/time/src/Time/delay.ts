@@ -8,7 +8,7 @@ import type { Time } from './Time.js';
  *
  * @example
  * ```typescript
- * const wait2s = Time.delay(TimeDuration.seconds(2));
+ * const wait2s = Time.delay(TimeDuration({ seconds: 2 }));
  * const logTime = Task.andThen(wait2s, (time) => Console.debug(time));
  * Task.run(logTime);// wait 2 seconds then console.debug(Date.now())
  * ```

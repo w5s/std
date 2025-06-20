@@ -42,8 +42,8 @@ export interface RetryState {
  * ```typescript
  * const retryState = new RetryState({
  *  retryIndex: Int(0),
- *  retryCumulativeDelay: TimeDuration.seconds(1),
- *  retryPreviousDelay: TimeDuration.seconds(1),
+ *  retryCumulativeDelay: TimeDuration({ seconds: 1 }),
+ *  retryPreviousDelay: TimeDuration({ seconds: 1 }),
  * });
  * ```
  * @param parameters - The parameters to create the RetryState

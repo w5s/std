@@ -21,6 +21,7 @@ beforeEach(() => {
 const expectTask = withTask(expect);
 
 describe(requestSend, () => {
+  const anyDuration = TimeDuration({ seconds: 123 });
   const anyURL = 'https://localhost';
   const anyTask = expect.any(Object);
   const anyRequest = {
@@ -190,16 +191,16 @@ describe(requestSend, () => {
       requestSend(client, {
         url: anyURL,
       });
-      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(30));
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration({ seconds: 30 }));
     });
     it('uses client timeout as custom value', async () => {
       const client = Client({
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       });
       requestSend(client, {
         url: anyURL,
       });
-      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(123));
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });
     it('uses request timeout as "none"', async () => {
       vi.clearAllMocks();
@@ -214,23 +215,23 @@ describe(requestSend, () => {
     });
     it('uses client timeout when request timeout is "default"', async () => {
       const client = Client({
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       });
       requestSend(client, {
         url: anyURL,
         timeout: 'default',
       });
-      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(123));
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });
     it('uses client timeout when request timeout is undefined', async () => {
       const client = Client({
-        timeout: TimeDuration.seconds(234),
+        timeout: anyDuration,
       });
       requestSend(client, {
         url: anyURL,
         // timeout,
       });
-      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(234));
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });
     it('uses request timeout when a number', async () => {
       const client = Client({
@@ -238,9 +239,9 @@ describe(requestSend, () => {
       });
       requestSend(client, {
         url: anyURL,
-        timeout: TimeDuration.seconds(123),
+        timeout: anyDuration,
       });
-      expect(timeout).toHaveBeenLastCalledWith(anyTask, TimeDuration.seconds(123));
+      expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });
   });
 });

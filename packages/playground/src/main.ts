@@ -31,7 +31,7 @@ function sendMessage(text: string) {
       text,
     }),
   ).to(
-    (_) => timeout(_, TimeDuration.minutes(1)),
+    (_) => timeout(_, TimeDuration({ minutes: 1 })),
     (_) =>
       retry(_, {
         policy: RetryPolicy.retries(Int(3)),
