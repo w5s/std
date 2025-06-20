@@ -1,11 +1,15 @@
-import type { Tag } from '@w5s/core-type';
+import type { ObjectLike, Tag } from '@w5s/core-type';
 
-type AnyObject = object;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-type AnyFunction = Function;
+/**
+ * Type representing values that can have an {@link ObjectId}
+ *
+ * Alias of {@link ObjectLike}
+ */
+export type ObjectIdParameter = ObjectLike;
+
 type ObjectIdState = {
   currentId: ObjectId;
-  refs: WeakMap<symbol | AnyObject | AnyFunction, ObjectId>;
+  refs: WeakMap<ObjectIdParameter, ObjectId>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -20,7 +24,7 @@ export function useObjectIdState(hostObject: Record<string | symbol, any>): Obje
   if (state === undefined) {
     const newState: ObjectIdState = {
       currentId: 1 as ObjectId,
-      refs: new WeakMap<AnyObject, ObjectId>(),
+      refs: new WeakMap<ObjectIdParameter, ObjectId>(),
     };
     globalAny[objectIdStateSymbol] = newState;
 
@@ -29,6 +33,8 @@ export function useObjectIdState(hostObject: Record<string | symbol, any>): Obje
 
   return state;
 }
+
+const objectIdState = useObjectIdState(globalThis);
 
 /**
  * Type representing a unique object id
@@ -43,15 +49,14 @@ export type ObjectId = number & Tag<'ObjectId'>;
  * const object = {};
  * objectId(object);// an integer
  * ```
- * @param objectOrFunction - a non literal object
+ * @param objectLike - a non literal object
  */
-export function objectId(objectOrFunction: symbol | AnyObject | AnyFunction): ObjectId {
-  const state = useObjectIdState(globalThis);
-  const id = state.refs.get(objectOrFunction);
+export function objectId(objectLike: ObjectIdParameter): ObjectId {
+  const id = objectIdState.refs.get(objectLike);
   if (id === undefined) {
-    const nextId = state.currentId;
-    state.currentId = (nextId + 1) as ObjectId;
-    state.refs.set(objectOrFunction, nextId);
+    const nextId = objectIdState.currentId;
+    objectIdState.currentId = (nextId + 1) as ObjectId;
+    objectIdState.refs.set(objectLike, nextId);
 
     return nextId;
   }
