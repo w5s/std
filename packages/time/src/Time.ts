@@ -9,6 +9,7 @@ import { format } from './Time/format.js';
 import { from } from './Time/from.js';
 import { TimeComparable } from './Time/TimeComparable.js';
 import { TimeBounded } from './Time/TimeBounded.js';
+import { TimeNumeric } from './Time/TimeNumeric.js';
 
 export type * from './Time/from.js';
 
@@ -26,27 +27,13 @@ export const Time = Callable({
   ...TimeType,
   ...TimeComparable,
   ...TimeBounded,
+  ...TimeNumeric,
   of,
   now,
   delay,
   parse,
   format,
   from,
-  /**
-   * Adds `duration` to `time`
-   *
-   * @example
-   * ```typescript
-   * const now = Time.of(0);
-   * const duration = TimeDuration.of(10);
-   * Time.add(now, duration);// now + 10ms
-   * ```
-   * @param time - A time value
-   * @param duration - A duration value
-   */
-  add(time: Time, duration: TimeDuration): Time {
-    return TimeType((time as number) + (duration as number));
-  },
 
   /**
    * Return the difference between 2 time values
