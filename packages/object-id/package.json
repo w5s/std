@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "build": "npx run-p \"build:*\"",
-    "build:tsc": "tsc -b tsconfig.build.json",
+    "build:tsc": "npx tsup",
     "clean": "npx run-p \"clean:*\"",
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
@@ -70,8 +70,18 @@
   "size-limit": [
     {
       "path": "dist/index.js",
-      "limit": "5 kB"
+      "limit": "1 kB"
     }
   ],
-  "sideEffect": false
+  "sideEffect": false,
+  "tsup": {
+    "format": [
+      "esm"
+    ],
+    "clean": true,
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ]
+  }
 }
