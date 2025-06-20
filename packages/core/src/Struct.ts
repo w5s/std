@@ -4,6 +4,7 @@ import { Struct as StructImpl } from './Struct/Struct.js';
 import { Callable } from './Callable.js';
 import { define as defineType } from './Type/define.js';
 import type { Type } from './Type.js';
+import type { Symbol } from './Symbol.js';
 
 /**
  * An Immutable Data Object with a `type` identifier
@@ -65,6 +66,8 @@ export namespace Struct {
 
   export type type = typeof type;
 
+  export type ModuleParameter<T> = Pick<Type<T>, Symbol.inspect> & AsString<T>;
+
   /**
    * Return a new Struct from `properties`.
    * Struct adds debugging / inspecting abilities
@@ -78,10 +81,7 @@ export namespace Struct {
    * @param module
    * @param properties
    */
-  export function create<Properties>(
-    module: Type<Properties> & AsString<Properties>,
-    properties: Properties,
-  ): Properties {
+  export function create<Properties>(module: ModuleParameter<Properties>, properties: Properties): Properties {
     return StructImpl.create(module, properties);
   }
 

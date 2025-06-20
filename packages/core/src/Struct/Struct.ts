@@ -1,6 +1,6 @@
-import type { AsString } from '../AsString.js';
 import { compare } from '../String/compare.js';
-import type { InspectFunction, InspectOptions, Type } from '../Type.js';
+import type { Struct as TStruct } from '../Struct.js';
+import type { InspectFunction, InspectOptions } from '../Type.js';
 
 const {
   // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -8,7 +8,7 @@ const {
   String: toString,
 } = globalThis;
 const defaultSort = (left: string | symbol, right: string | symbol) =>
-  left === right ? 0 : left === '_' ? -1 : right === '_' ? 1 : compare(toString(left), String(right));
+  left === right ? 0 : left === '_' ? -1 : right === '_' ? 1 : compare(toString(left), toString(right));
 
 /**
  * @internal
@@ -17,13 +17,13 @@ const defaultSort = (left: string | symbol, right: string | symbol) =>
 export const Struct = class Object {
   // Important : we name Object so it is shown as anonymous object in snapshot.
 
-  static create<T>(mod: Type<T> & AsString<T>, properties: T): T {
+  static create<T>(mod: TStruct.ModuleParameter<T>, properties: T): T {
     return assign(new Struct(mod), properties);
   }
 
-  #module: Type<unknown> & AsString<unknown>;
+  #module: TStruct.ModuleParameter<unknown>;
 
-  protected constructor(mod: Type<any> & AsString<any>) {
+  protected constructor(mod: TStruct.ModuleParameter<any>) {
     this.#module = mod;
   }
 
@@ -35,7 +35,11 @@ export const Struct = class Object {
    * @param inspectOptions
    * @param inspect
    */
-  [Symbol.for('nodejs.util.inspect.custom')](depth: number, inspectOptions: InspectOptions, inspect: InspectFunction) {
+  [globalThis.Symbol.for('nodejs.util.inspect.custom')](
+    depth: number,
+    inspectOptions: InspectOptions,
+    inspect: InspectFunction,
+  ) {
     return this.#module.__inspect__ == null
       ? inspect({ ...this }, { ...inspectOptions, sorted: defaultSort })
       : this.#module.__inspect__(this, depth, inspectOptions, inspect);
