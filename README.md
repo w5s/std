@@ -16,6 +16,7 @@
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money module
 * [@w5s/num](packages/num) - Number, BigInt, Int modules
+* [@w5s/object-id](packages/object-id) - Unique identifier of object-like values (object, symbol, function)
 * [@w5s/playground](packages/playground) - Examples
 * [@w5s/random](packages/random) - Random number module
 * [@w5s/system](packages/system) - System module

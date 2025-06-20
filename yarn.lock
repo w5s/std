@@ -6107,6 +6107,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@w5s/object-id@workspace:packages/object-id":
+  version: 0.0.0-use.local
+  resolution: "@w5s/object-id@workspace:packages/object-id"
+  dependencies:
+    "@w5s/core-type": "npm:^1.0.0-alpha.0"
+    typescript: "npm:5.8.3"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^3.8.0 || ^4.0.0 || ^5.0.0
+  languageName: unknown
+  linkType: soft
+
 "@w5s/playground@workspace:packages/playground":
   version: 0.0.0-use.local
   resolution: "@w5s/playground@workspace:packages/playground"
