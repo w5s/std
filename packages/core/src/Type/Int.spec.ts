@@ -8,7 +8,7 @@ describe('Int', () => {
   describeType(Int, () => ({
     typeName: 'Int',
     instances: [Int(0), Int(1), Int(2), Int(-1), Int(Number.MIN_SAFE_INTEGER), Int(Number.MAX_SAFE_INTEGER)],
-    notInstances: ['1', 1.1, undefined, Number.MIN_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER + 1],
+    notInstances: ['1', 1.1, undefined, Number.MIN_SAFE_INTEGER - 1, Number.MAX_SAFE_INTEGER + 1, Number.NaN, Infinity],
   }));
   describeCodec(Int, () => ({
     decode: [
