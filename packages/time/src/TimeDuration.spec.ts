@@ -18,6 +18,7 @@ import { toDays } from './TimeDuration/toDays.js';
 import { toWeeks } from './TimeDuration/toWeeks.js';
 import { TimeDurationAsString } from './TimeDuration/TimeDurationAsString.js';
 import { TimeDurationNegate } from './TimeDuration/TimeDurationNegate.js';
+import { TimeDurationZero } from './TimeDuration/TimeDurationZero.js';
 
 describe('TimeDuration', () => {
   it('is an alias to functions', () => {
@@ -26,6 +27,7 @@ describe('TimeDuration', () => {
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationNumeric));
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationNegate));
     expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationAsString));
+    expect(TimeDuration).toEqual(expect.objectContaining(TimeDurationZero));
     expect(TimeDuration).toEqual(
       expect.objectContaining({
         of,
