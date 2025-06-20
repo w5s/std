@@ -2,6 +2,7 @@ import type { Ordering } from './Ordering.js';
 import { reverse } from './Order/reverse.js';
 import { combine } from './Order/combine.js';
 import { compareBy } from './Order/compareBy.js';
+import { primitive } from './Order/primitive.js';
 
 /**
  * Return an {@link Ordering} thats represents the comparison result
@@ -17,5 +18,6 @@ export type Order<T> = (left: T, right: T) => Ordering;
 export const Order = {
   compareBy,
   combine,
+  primitive,
   reverse,
 };

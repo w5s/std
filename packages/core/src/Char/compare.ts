@@ -1,6 +1,5 @@
 import type { Char } from '../Char.js';
-import type { Ordering } from '../Ordering.js';
+import type { Order } from '../Order.js';
+import { primitive } from '../Order/primitive.js';
 
-export function compare(left: Char, right: Char): Ordering {
-  return left === right ? 0 : left < right ? -1 : 1;
-}
+export const compare: Order<Char> = primitive;

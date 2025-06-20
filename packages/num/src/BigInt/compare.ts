@@ -1,5 +1,4 @@
-import type { Ordering } from '@w5s/core/dist/Ordering.js';
+import { primitive } from '@w5s/core/dist/Order/primitive.js';
+import type { Order } from '@w5s/core';
 
-export function compare(left: bigint, right: bigint): Ordering {
-  return left === right ? 0 : left < right ? -1 : 1;
-}
+export const compare: Order<bigint> = primitive;

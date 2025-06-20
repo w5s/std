@@ -1,5 +1,4 @@
-import type { Ordering } from '../Ordering.js';
+import type { Order } from '../Order.js';
+import { primitive } from '../Order/primitive.js';
 
-export function compare(left: string, right: string): Ordering {
-  return left === right ? 0 : left < right ? -1 : 1;
-}
+export const compare: Order<string> = primitive;
