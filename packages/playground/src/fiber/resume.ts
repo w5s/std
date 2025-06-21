@@ -7,7 +7,7 @@ import { Scheduler } from './Scheduler.js';
  *
  * @example
  * ```typescript
- * const fiber = run(function * () { ... });
+ * const fiber = run(function* () { ... });
  *
  * suspend(fiber);// This will suspend execution
  * setTimeout(() => resume(fiber), 1000);// This will resume execution after 1 second

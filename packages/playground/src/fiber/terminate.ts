@@ -7,7 +7,7 @@ import { Scheduler } from './Scheduler.js';
  *
  * @example
  * ```typescript
- * const fiber = run(function * () { ... });
+ * const fiber = run(function* () { ... });
  *
  * terminate(fiber);// This will stop execution
  * ```
