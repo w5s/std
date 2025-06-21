@@ -1,4 +1,3 @@
-import type { Time } from '@w5s/time';
 import type { Option } from '@w5s/core';
 import { FiberId } from '../FiberId.js';
 import type { SchedulerFiberState } from './SchedulerFiberState.js';
@@ -18,41 +17,31 @@ export class Scheduler {
       callback,
       running: false,
       generator: undefined,
-      startTime: undefined,
       deferred,
     });
     return { id, promise: deferred.promise };
   }
 
   resume(id: FiberId): void {
-    if (
-      this.modifyState(id, (state) =>
-        state.running
-          ? state
-          : {
-              ...state,
-              startTime: state.startTime ?? this.now(),
-              running: true,
-            },
-      )
-    ) {
-      this.scheduleNext();
-    }
+    this.modifyState(id, (state) =>
+      state.running
+        ? state
+        : {
+            ...state,
+            running: true,
+          },
+    );
   }
 
   suspend(id: FiberId): void {
-    if (
-      this.modifyState(id, (state) =>
-        state.running
-          ? {
-              ...state,
-              running: false,
-            }
-          : state,
-      )
-    ) {
-      this.scheduleNext();
-    }
+    this.modifyState(id, (state) =>
+      state.running
+        ? {
+            ...state,
+            running: false,
+          }
+        : state,
+    );
   }
 
   terminate(id: FiberId): boolean {
@@ -73,14 +62,17 @@ export class Scheduler {
       const fiberStateNew = mapFn(fiberState);
       if (fiberStateNew !== fiberState) {
         this.#fiber.set(id, fiberStateNew);
+        this.onStateChange(fiberState, fiberStateNew);
         return true;
       }
     }
     return false;
   }
 
-  protected now() {
-    return Date.now() as Time;
+  protected onStateChange(previous: SchedulerFiberState, next: SchedulerFiberState): void {
+    if (previous.running !== next.running) {
+      this.scheduleNext();
+    }
   }
 
   protected nextId(): FiberId {
