@@ -10,10 +10,11 @@ describe(terminate, () => {
       return name;
     };
     const terminated = Promise.withResolvers();
+    let terminatedResult;
 
     const fiberA = run(function* fibA() {
       yield trace('a1');
-      terminate(fiberA);
+      terminatedResult = terminate(fiberA);
       // Use a long enough timer to make sure expect can be called
       setTimeout(() => {
         terminated.resolve(undefined);
@@ -25,6 +26,8 @@ describe(terminate, () => {
     });
 
     await terminated.promise;
+    expect(terminatedResult).toBe(true);
+    expect(terminate(fiberA)).toBe(false);
     expect(stack).toEqual(['a1', 'a2']);
   });
 });

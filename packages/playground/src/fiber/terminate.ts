@@ -13,6 +13,6 @@ import { Scheduler } from './Scheduler.js';
  * ```
  * @param fiber - The fiber to terminate
  */
-export function terminate(fiber: FiberIdLike): void {
-  Scheduler.terminate(__toFiberId(fiber));
+export function terminate(fiber: FiberIdLike): boolean {
+  return Scheduler.terminate(__toFiberId(fiber));
 }

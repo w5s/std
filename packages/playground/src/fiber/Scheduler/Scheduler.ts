@@ -25,48 +25,58 @@ export class Scheduler {
   }
 
   resume(id: FiberId): void {
-    this.modifyState(id, (state) =>
-      state.running
-        ? state
-        : {
-            ...state,
-            startTime: state.startTime ?? this.now(),
-            running: true,
-          },
-    );
-    this.scheduleNext();
+    if (
+      this.modifyState(id, (state) =>
+        state.running
+          ? state
+          : {
+              ...state,
+              startTime: state.startTime ?? this.now(),
+              running: true,
+            },
+      )
+    ) {
+      this.scheduleNext();
+    }
   }
 
   suspend(id: FiberId): void {
-    this.modifyState(id, (state) =>
-      state.running
-        ? {
-            ...state,
-            running: false,
-          }
-        : state,
-    );
-    this.scheduleNext();
-  }
-
-  terminate(id: FiberId): void {
-    if (this.#fiber.delete(id)) {
+    if (
+      this.modifyState(id, (state) =>
+        state.running
+          ? {
+              ...state,
+              running: false,
+            }
+          : state,
+      )
+    ) {
       this.scheduleNext();
     }
+  }
+
+  terminate(id: FiberId): boolean {
+    if (this.#fiber.delete(id)) {
+      this.scheduleNext();
+      return true;
+    }
+    return false;
   }
 
   protected getState(id: FiberId): Option<SchedulerFiberState> {
     return this.#fiber.get(id);
   }
 
-  protected modifyState(id: FiberId, mapFn: (state: SchedulerFiberState) => SchedulerFiberState): void {
+  protected modifyState(id: FiberId, mapFn: (state: SchedulerFiberState) => SchedulerFiberState): boolean {
     const fiberState = this.#fiber.get(id);
     if (fiberState != null) {
       const fiberStateNew = mapFn(fiberState);
       if (fiberStateNew !== fiberState) {
         this.#fiber.set(id, fiberStateNew);
+        return true;
       }
     }
+    return false;
   }
 
   protected now() {
