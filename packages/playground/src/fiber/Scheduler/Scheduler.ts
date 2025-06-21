@@ -10,7 +10,7 @@ export class Scheduler {
   #fiber: Map<FiberId, SchedulerFiberState> = new Map();
   #timerId: Option<number>;
 
-  register(callback: FiberCallback): FiberResult<any> {
+  spawn(callback: FiberCallback): FiberResult<any> {
     const id = this.nextId();
     const deferred = Promise.withResolvers();
     this.#fiber.set(id, {
@@ -47,6 +47,12 @@ export class Scheduler {
         : state,
     );
     this.scheduleNext();
+  }
+
+  terminate(id: FiberId): void {
+    if (this.#fiber.delete(id)) {
+      this.scheduleNext();
+    }
   }
 
   protected getState(id: FiberId): Option<SchedulerFiberState> {
