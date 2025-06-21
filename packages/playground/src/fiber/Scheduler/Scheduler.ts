@@ -108,9 +108,13 @@ export class Scheduler {
     for (const fiber of this.#fiber.values()) {
       if (fiber.running) {
         const generator = this.generator(fiber);
-        const result = generator.next();
-        if (result.done === true) {
-          this.resolve(fiber, result.value);
+        try {
+          const result = generator.next();
+          if (result.done === true) {
+            this.resolve(fiber, result.value);
+          }
+        } catch (error) {
+          this.reject(fiber, error);
         }
       }
     }

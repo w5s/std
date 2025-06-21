@@ -3,12 +3,22 @@ import { assertType } from '@w5s/core-type';
 import { run } from './run.js';
 
 describe(run, () => {
-  it('should run a generator function', async () => {
+  const createTracer = () => {
     const stack: string[] = [];
-    const trace = (name: string) => {
-      stack.push(name);
-      return name;
-    };
+
+    return Object.assign(
+      (name: string) => {
+        stack.push(name);
+        return name;
+      },
+      {
+        stack,
+      },
+    );
+  };
+
+  it('should run a generator function', async () => {
+    const trace = createTracer();
 
     const fiberA = run(function* fibA() {
       yield trace('a1');
@@ -25,9 +35,27 @@ describe(run, () => {
 
     await expect(fiberA.promise).resolves.toBe('resultA');
     await expect(fiberB.promise).resolves.toBe('resultB');
-    expect(stack).toEqual(['a1', 'b1', 'a2', 'b2', 'a3', 'b3']);
+    expect(trace.stack).toEqual(['a1', 'b1', 'a2', 'b2', 'a3', 'b3']);
 
     assertType<typeof fiberA.promise, Promise<'resultA'>>(true);
     assertType<typeof fiberB.promise, Promise<'resultB'>>(true);
+  });
+
+  it('handles thrown errors', async () => {
+    const trace = createTracer();
+
+    const fiberA = run(function* fibA() {
+      throw new Error('TestError');
+      yield trace('a1');
+      return 'resultA';
+    });
+    const fiberB = run(function* fibB() {
+      yield trace('b1');
+      return 'resultB';
+    });
+
+    await expect(fiberA.promise).rejects.toEqual(new Error('TestError'));
+    await expect(fiberB.promise).resolves.toBe('resultB');
+    expect(trace.stack).toEqual(['b1']);
   });
 });
