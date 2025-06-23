@@ -5839,7 +5839,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/async@npm:1.0.0-alpha.0, @w5s/async@workspace:packages/async":
+"@w5s/async@npm:1.0.0-alpha.0, @w5s/async@npm:^1.0.0-alpha.0, @w5s/async@workspace:packages/async":
   version: 0.0.0-use.local
   resolution: "@w5s/async@workspace:packages/async"
   dependencies:
@@ -6125,6 +6125,7 @@ __metadata:
   resolution: "@w5s/playground@workspace:packages/playground"
   dependencies:
     "@w5s/application": "npm:^1.0.0-alpha.0"
+    "@w5s/async": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"

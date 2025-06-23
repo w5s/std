@@ -1,4 +1,5 @@
 import type { Option } from '@w5s/core';
+import { defer } from '@w5s/async/dist/defer.js';
 import { FiberId } from '../FiberId.js';
 import type { SchedulerFiberState } from './SchedulerFiberState.js';
 import type { FiberCallback } from '../FiberCallback.js';
@@ -11,7 +12,7 @@ export class Scheduler {
 
   spawn(callback: FiberCallback): FiberResult<any> {
     const id = this.nextId();
-    const deferred = Promise.withResolvers();
+    const deferred = defer();
     this.#fiber.set(id, {
       id,
       callback,

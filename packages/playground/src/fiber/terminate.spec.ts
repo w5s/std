@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { defer } from '@w5s/async';
 import { run } from './run.js';
 import { terminate } from './terminate.js';
 
@@ -9,7 +10,7 @@ describe(terminate, () => {
       stack.push(name);
       return name;
     };
-    const terminated = Promise.withResolvers();
+    const terminated = defer();
     let terminatedResult;
 
     const fiberA = run(function* fibA() {
