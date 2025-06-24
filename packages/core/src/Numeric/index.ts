@@ -3,6 +3,7 @@ export type * from './CheckedAdd.js';
 export type * from './CheckedDivide.js';
 export type * from './CheckedMultiply.js';
 export type * from './CheckedPower.js';
+export type * from './CheckedRemainder.js';
 export type * from './CheckedSubtract.js';
 export type * from './Divide.js';
 export type * from './Multiply.js';
