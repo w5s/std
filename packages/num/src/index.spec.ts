@@ -9,6 +9,7 @@ describe('index', () => {
         'BigInt',
         'Int',
         'Number',
+        'RoundingMode',
       ].sort(),
     );
   });

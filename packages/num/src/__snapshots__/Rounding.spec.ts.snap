@@ -1,0 +1,35 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RoundingMode > has values 1`] = `
+{
+  "Ceil": "ceil",
+  "Down": "down",
+  "Floor": "floor",
+  "HalfDown": "half-down",
+  "HalfEven": "half-even",
+  "HalfUp": "half-up",
+  "Up": "up",
+  "__decode__": [Function],
+  "__encode__": [Function],
+  "__inspect__": undefined,
+  "__schema__": [Function],
+  "asInstance": [Function],
+  "asString": [Function],
+  "at": [Function],
+  "hasInstance": [Function],
+  "indexOf": [Function],
+  "indexType": "number",
+  "range": [Function],
+  "rangeSize": [Function],
+  "typeName": "RoundingMode",
+  Symbol(w5s.enumKeys): [
+    "Up",
+    "Down",
+    "Ceil",
+    "Floor",
+    "HalfUp",
+    "HalfDown",
+    "HalfEven",
+  ],
+}
+`;
