@@ -3,10 +3,8 @@ import { describeNot } from '../Testing.js';
 import { BooleanNot } from './BooleanNot.js';
 
 describe('BooleanNot', () => {
-  describeNot(BooleanNot, {
-    values: () => [
-      // values
-      [false, true],
-    ],
-  });
+  describeNot(BooleanNot, () => [
+    // values
+    [false, true],
+  ]);
 });
