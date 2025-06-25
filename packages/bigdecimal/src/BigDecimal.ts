@@ -11,6 +11,7 @@ import { BigDecimal as BigDecimalType } from './BigDecimal/BigDecimal.js';
 import { BigDecimalSigned } from './BigDecimal/BigDecimalSigned.js';
 import { BigDecimalNegate } from './BigDecimal/BigDecimalNegate.js';
 import { BigDecimalZero } from './BigDecimal/BigDecimalZero.js';
+import { fromBigInt } from './BigDecimal/fromBigInt.js';
 
 /**
  * Valid BigDecimal string representation
@@ -37,4 +38,5 @@ export const BigDecimal = Callable({
   scale,
   parse,
   format,
+  fromBigInt,
 });
