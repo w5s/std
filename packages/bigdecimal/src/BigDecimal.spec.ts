@@ -12,6 +12,7 @@ import { BigDecimalAsString } from './BigDecimal/BigDecimalAsString.js';
 import { BigDecimalNegate } from './BigDecimal/BigDecimalNegate.js';
 import { BigDecimalZero } from './BigDecimal/BigDecimalZero.js';
 import { fromBigInt } from './BigDecimal/fromBigInt.js';
+import { fromInt } from './BigDecimal/fromInt.js';
 
 describe('BigDecimal', () => {
   it('is an alias to functions', () => {
@@ -30,6 +31,7 @@ describe('BigDecimal', () => {
         parse,
         scale,
         fromBigInt,
+        fromInt,
       }),
     );
   });
