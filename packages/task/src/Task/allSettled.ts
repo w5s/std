@@ -1,10 +1,10 @@
-import { empty } from '@w5s/core/dist/Array/empty.js';
 import type { Result } from '@w5s/core/dist/Result.js';
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';
+import { __emptyArray } from './__emptyArray.js';
 
 /**
  * Resolves an array of all task results
@@ -32,7 +32,7 @@ export function allSettled<Value, Error>(
     const taskArray = Array.from(tasks);
 
     if (taskArray.length === 0) {
-      parameters.resolve(empty());
+      parameters.resolve(__emptyArray);
     } else {
       const state = TaskAggregateState(taskArray, parameters);
 
