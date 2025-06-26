@@ -1,4 +1,5 @@
 export * from './AnyFunction.js';
+export * from './Array.js';
 export * from './assertType.js';
 export * from './Awaitable.js';
 export * from './Day.js';
