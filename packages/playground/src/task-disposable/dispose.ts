@@ -1,6 +1,5 @@
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
 
 /**
  * Dispose the given Disposable or AsyncDisposable
