@@ -1,4 +1,4 @@
-import { Array as ArrayType } from '@w5s/core/dist/Type/Array.js';
+import type { Array as CoreArray } from '@w5s/core-type';
 import { at } from './Array/at.js';
 import { concat } from './Array/concat.js';
 import { deleteAt } from './Array/deleteAt.js';
@@ -31,9 +31,9 @@ import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
 
 /**
- * Alias to {@link ArrayType}
+ * Alias to {@link CoreArray}
  */
-export type Array<Item> = ArrayType<Item>;
+export type Array<Item> = CoreArray<Item>;
 
 /**
  * A collection of functions to manipulate readonly arrays.

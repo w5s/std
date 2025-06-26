@@ -1,3 +1,4 @@
+import type { Array as CoreArray } from '@w5s/core-type';
 import { decode } from '../Codec/decode.js';
 import { schema } from '../Codec/schema.js';
 import { isOk } from '../Result/isOk.js';
@@ -10,7 +11,7 @@ const { isArray } = globalThis.Array;
 /**
  * Type for immutable array
  */
-export type Array<Item> = ReadonlyArray<Item>;
+export type Array<Item> = CoreArray<Item>;
 
 /**
  * Returns a codec for `Array<V>`.
