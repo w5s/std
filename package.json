@@ -98,7 +98,7 @@
     "@types/node": "20.19.1",
     "@w5s/commitlint-config": "2.1.11",
     "@w5s/conventional-changelog": "2.2.4",
-    "@w5s/cspell-config": "2.3.22",
+    "@w5s/cspell-config": "2.4.0",
     "@w5s/eslint-config": "2.4.4",
     "@w5s/ts-config": "2.3.3",
     "cspell": "9.1.2",
