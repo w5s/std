@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { Option } from '@w5s/core';
 import { get } from './get.js';
-import { Option } from '../Option.js';
 
 describe(get, () => {
   it('should return undefined if key does not exist', () => {

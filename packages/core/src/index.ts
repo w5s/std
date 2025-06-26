@@ -20,7 +20,6 @@ export * from './Option.js';
 export * from './Order.js';
 export * from './Ordering.js';
 export type * from './Range.js';
-export * from './Record.js';
 export * from './Ref.js';
 export * from './Result.js';
 export * from './String.js';

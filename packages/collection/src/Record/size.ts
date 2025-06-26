@@ -1,4 +1,4 @@
-import type { Int } from '../Int.js';
+import type { Int } from '@w5s/core';
 import type { RecordKey } from '../Record.js';
 
 /**

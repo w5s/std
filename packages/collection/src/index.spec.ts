@@ -6,6 +6,7 @@ describe('index', () => {
     expect(Object.keys(Module)).toMatchInlineSnapshot(`
       [
         "Array",
+        "Record",
       ]
     `);
   });

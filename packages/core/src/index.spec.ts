@@ -24,7 +24,6 @@ describe('index', () => {
         'Option',
         'Order',
         'Ordering',
-        'Record',
         'Ref',
         'Result',
         'String',
