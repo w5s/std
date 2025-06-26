@@ -1,4 +1,3 @@
-import type { Array as ArrayType } from '../Array.js';
 import { decode } from '../Codec/decode.js';
 import { schema } from '../Codec/schema.js';
 import { isOk } from '../Result/isOk.js';
@@ -7,6 +6,11 @@ import type { Type } from '../Type.js';
 import { define } from './define.js';
 
 const { isArray } = globalThis.Array;
+
+/**
+ * Type for immutable array
+ */
+export type Array<Item> = ReadonlyArray<Item>;
 
 /**
  * Returns a codec for `Array<V>`.
@@ -19,10 +23,10 @@ const { isArray } = globalThis.Array;
  * ```
  * @param Item - the type module for array item
  */
-export function Array<V>(Item: Type.Module<V>): Type.Module<ArrayType<V>> {
+export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
   return define({
     typeName: `Array<${Item.typeName}>`,
-    hasInstance: (anyValue): anyValue is ArrayType<V> =>
+    hasInstance: (anyValue): anyValue is Array<V> =>
       // eslint-disable-next-line @typescript-eslint/unbound-method
       isArray(anyValue) && anyValue.every(Item.hasInstance),
     [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),

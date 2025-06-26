@@ -6,7 +6,6 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Std).sort()).toEqual(
       [
-        'Array',
         'Boolean',
         'Callable',
         'Char',

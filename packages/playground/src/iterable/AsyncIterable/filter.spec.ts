@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Array } from '@w5s/core';
+import { Array } from '@w5s/collection';
 import { filter } from './filter.js';
 import { withAsyncIterable } from '../Testing.js';
 import { of } from './of.js';

@@ -1,4 +1,3 @@
-export * from './Array.js';
 export type * from './AsString.js';
 export * from './Boolean.js';
 export * from './Bounded.js';
