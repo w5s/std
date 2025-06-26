@@ -7,13 +7,10 @@ models:
     provider: ollama
     model: qwen2.5-coder:1.5b
     roles: [autocomplete]
-  # - name: Ollama llama3.1 8b
-  #   provider: ollama
-  #   model: llama3.1:8b
-  #   roles: [chat, edit, apply]
-  - name: Ollama Cogito 8B
+  - name: Ollama Cogito 3B
     provider: ollama
-    model: cogito:8b
+    # model: cogito:8b
+    model: cogito:3b
     roles: [chat, edit, apply]
   - name: Ollama Nomic Embed Text
     provider: ollama
