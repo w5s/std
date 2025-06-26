@@ -5894,18 +5894,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:2.1.10":
-  version: 2.1.10
-  resolution: "@w5s/commitlint-config@npm:2.1.10"
+"@w5s/commitlint-config@npm:2.1.11":
+  version: 2.1.11
+  resolution: "@w5s/commitlint-config@npm:2.1.11"
   dependencies:
     "@commitlint/types": "npm:^19.0.0"
-    "@w5s/conventional-changelog": "npm:^2.2.3"
+    "@w5s/conventional-changelog": "npm:^2.2.4"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/32657e03e0495617a7ab57528b59ab32d84e513b4fdf95a02964d04b8c05a5c37d6385402e6edb12b5b55e04cd6ab4ef25691bb4c6c53d57bc1468bad8ed2cd0
+  checksum: 10c0/49418f20c3b145777cd91d5334a031369bec59fa96e580fa6d8331e22a9e88bed6df7a46766297205ce1d0d910a24b9140eb5920591ceb8f03c2a68cb95c1977
   languageName: node
   linkType: hard
 
@@ -5922,7 +5922,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/conventional-changelog@npm:2.2.3, @w5s/conventional-changelog@npm:^2.2.3":
+"@w5s/conventional-changelog@npm:2.2.3":
   version: 2.2.3
   resolution: "@w5s/conventional-changelog@npm:2.2.3"
   dependencies:
@@ -5930,6 +5930,17 @@ __metadata:
     emoji-regex: "npm:^10.2.1"
     gitmojis: "npm:^3.13.4"
   checksum: 10c0/4a979d596fa9111b2b090dc52c5c067545da230076a7f1685f047a493f3960d691ac0c3c3cca76c3565feedf24df0b273459aa1d763c125c3b765f400ce0d3f9
+  languageName: node
+  linkType: hard
+
+"@w5s/conventional-changelog@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "@w5s/conventional-changelog@npm:2.2.4"
+  dependencies:
+    "@commitlint/types": "npm:^19.0.0"
+    emoji-regex: "npm:^10.2.1"
+    gitmojis: "npm:^3.13.4"
+  checksum: 10c0/700e4274b6e1bae10945a80c4493847cbf69853a70cb130df347c2353a4aeaf5c83704e8217b69f8999efd24540a552a6e10370e2b4a2323af7f5f3f580589da
   languageName: node
   linkType: hard
 
@@ -6207,7 +6218,7 @@ __metadata:
     "@lerna-lite/publish": "npm:4.4.1"
     "@size-limit/preset-small-lib": "npm:11.2.0"
     "@types/node": "npm:20.19.1"
-    "@w5s/commitlint-config": "npm:2.1.10"
+    "@w5s/commitlint-config": "npm:2.1.11"
     "@w5s/conventional-changelog": "npm:2.2.3"
     "@w5s/cspell-config": "npm:2.3.22"
     "@w5s/eslint-config": "npm:2.4.3"
