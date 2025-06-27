@@ -1,5 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
-import type { Option } from '../Option.js';
+import type { Option, OptionLike } from '../Option.js';
 import { isNone } from './isNone.js';
 
 /**
@@ -15,7 +14,7 @@ import { isNone } from './isNone.js';
  * @param fn - the mapper function
  */
 export function map<ValueFrom, ValueTo>(
-  self: Nullable<ValueFrom>,
+  self: OptionLike<ValueFrom>,
   fn: (value: ValueFrom) => NonNullable<ValueTo>,
 ): Option<ValueTo> {
   return isNone(self) ? undefined : fn(self);

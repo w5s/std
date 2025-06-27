@@ -1,5 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
-import type { Option } from '../Option.js';
+import type { Option, OptionLike } from '../Option.js';
 import { from } from './from.js';
 
 /**
@@ -15,6 +14,6 @@ import { from } from './from.js';
  * @param self - an optional value
  * @param fn - a callback
  */
-export function orElse<ValueFrom>(self: Nullable<ValueFrom>, fn: () => Nullable<ValueFrom>): Option<ValueFrom> {
+export function orElse<ValueFrom>(self: OptionLike<ValueFrom>, fn: () => OptionLike<ValueFrom>): Option<ValueFrom> {
   return self == null ? from(fn()) : self;
 }

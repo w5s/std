@@ -45,6 +45,11 @@ import { orElse } from './Option/orElse.js';
 export type Option<Value> = Value | Option.None;
 
 /**
+ * `OptionLike<Value>` is the type used to represent either a Nullable value
+ */
+export type OptionLike<Value> = Nullable<Value>;
+
+/**
  * @namespace
  */
 export const Option = {

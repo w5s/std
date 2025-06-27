@@ -1,4 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
+import type { OptionLike } from '../Option.js';
 
 /**
  * Returns the value if `Some`, throw an error if `None`
@@ -16,7 +16,7 @@ import type { Nullable } from '@w5s/core-type';
  * @category Accessor
  * @param self - an optional value
  */
-export function getOrThrow<Value>(self: Nullable<Value>): Value {
+export function getOrThrow<Value>(self: OptionLike<Value>): Value {
   if (self != null) {
     return self;
   }

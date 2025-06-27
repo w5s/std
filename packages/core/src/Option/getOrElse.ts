@@ -1,4 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
+import type { OptionLike } from '../Option.js';
 
 /**
  * Returns the `value` if `Some`, `getDefaultValue()` if `None`.
@@ -16,7 +16,7 @@ import type { Nullable } from '@w5s/core-type';
  * @param getDefaultValue - a default value
  */
 export function getOrElse<Value, DefaultValue>(
-  self: Nullable<Value>,
+  self: OptionLike<Value>,
   getDefaultValue: () => DefaultValue,
 ): Value | DefaultValue {
   return self == null ? getDefaultValue() : self;

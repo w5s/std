@@ -1,5 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
-import type { Option } from '../Option.js';
+import type { Option, OptionLike } from '../Option.js';
 import { from } from './from.js';
 
 /**
@@ -17,8 +16,8 @@ import { from } from './from.js';
  * @param fn - a callback
  */
 export function andThen<ValueFrom, ValueTo>(
-  self: Nullable<ValueFrom>,
-  fn: (value: ValueFrom) => Nullable<ValueTo>,
+  self: OptionLike<ValueFrom>,
+  fn: (value: ValueFrom) => OptionLike<ValueTo>,
 ): Option<ValueTo> {
   return self == null ? undefined : from(fn(self));
 }

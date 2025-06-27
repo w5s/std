@@ -1,4 +1,4 @@
-import type { Nullable } from '@w5s/core-type';
+import type { OptionLike } from '../Option.js';
 
 /**
  * Return `true` if `anyValue` is `null`or `undefined`
@@ -15,6 +15,6 @@ import type { Nullable } from '@w5s/core-type';
  * @category Type
  * @param anyValue - the value to test
  */
-export function isNone(anyValue: unknown): anyValue is Nullable {
+export function isNone(anyValue: unknown): anyValue is OptionLike<never> {
   return anyValue == null;
 }

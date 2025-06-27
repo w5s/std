@@ -1,7 +1,6 @@
-import type { Nullable } from '@w5s/core-type';
-import type { Option } from '../Option.js';
+import type { Option, OptionLike } from '../Option.js';
 
-type NullableValues = Exclude<Nullable, Option.None>;
+type NullableValues = Exclude<OptionLike<never>, Option.None>;
 
 /**
  * Try to coerce value to `Option`
