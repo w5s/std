@@ -3,10 +3,12 @@
 // Test import
 import type {
   AnyFunction,
+  Array,
   assertType,
   Awaitable,
   Day,
   Hour,
+  Int,
   JSONArray,
   JSONObject,
   JSONPrimitive,

@@ -5,6 +5,7 @@ export * from './Awaitable.js';
 export * from './Day.js';
 export * from './EmptyObject.js';
 export * from './Hour.js';
+export * from './Int.js';
 export * from './JSONArray.js';
 export * from './JSONObject.js';
 export * from './JSONPrimitive.js';
