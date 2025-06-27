@@ -8,9 +8,11 @@ import type { Order } from '../Order.js';
  *   name: string;
  *   age: number;
  * }
- * const comparePerson = Order.combine(
- *   (left: Person, right: Person) => String.compare(left.name, right.name),
- *   (left: Person, right: Person) => Number.compare(left.age, right.age),
+ * const comparePerson = Order.combine<Person>(
+ *   // 1. Compare by name (ascending)
+ *   Order.compareBy((person) => person.name, String.compare),
+ *   // 2. Compare by age (ascending)
+ *   Order.compareBy((person) => person.age, Number.compare),
  * );
  * ```
  * @param self
