@@ -28,15 +28,24 @@ export namespace Enum {
    * Return enum values of T
    */
   export type ValueOf<T extends Enum<Record<string, any>>> = T[KeyOf<T>];
+
+  /**
+   * Module containing methods for working with enum types
+   */
+  export interface Module<T extends Record<string, any> = Record<string, unknown>>
+    extends Type.Module<T[keyof T]>,
+      Indexable<T[keyof T], number>,
+      EnumLike<T> {}
 }
 
-export interface Enumerable<T extends Record<string, any> = Record<string, unknown>>
-  extends Type.Module<T[keyof T]>,
-    Indexable<T[keyof T], number> {
+/**
+ * Interface for objects that can be used as enums
+ */
+export interface EnumLike<T extends Record<string, any> = Record<string, unknown>> {
   /**
    * An array of all keys
    */
   readonly [Symbol.enumKeys]: ReadonlyArray<keyof T>;
 }
 
-export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enumerable<Omit<T, 'typeName'>>;
+export type Enum<T extends Record<string, any> = Record<string, unknown>> = T & Enum.Module<Omit<T, 'typeName'>>;
