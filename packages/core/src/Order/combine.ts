@@ -8,7 +8,7 @@ import type { Order } from '../Order.js';
  *   name: string;
  *   age: number;
  * }
- * const comparePerson = combine(
+ * const comparePerson = Order.combine(
  *   (left: Person, right: Person) => String.compare(left.name, right.name),
  *   (left: Person, right: Person) => Number.compare(left.age, right.age),
  * );
