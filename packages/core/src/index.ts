@@ -20,6 +20,7 @@ export * from './omit.js';
 export * from './Option.js';
 export * from './Order.js';
 export * from './Ordering.js';
+export * from './pick.js';
 export type * from './Range.js';
 export * from './Ref.js';
 export * from './Result.js';
