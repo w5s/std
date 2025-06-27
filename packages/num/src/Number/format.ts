@@ -1,4 +1,4 @@
-import type { Radix36 } from './Radix36.js';
+import type { Radix36 } from '@w5s/core-type';
 
 /**
  * Return string representation of number

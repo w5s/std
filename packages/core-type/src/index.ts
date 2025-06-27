@@ -17,6 +17,7 @@ export * from './ObjectLike.js';
 export * from './PartialKeys.js';
 export * from './Pretty.js';
 export * from './Primitive.js';
+export * from './Radix36.js';
 export * from './RequiredKeys.js';
 export * from './Second.js';
 export * from './Tag.js';

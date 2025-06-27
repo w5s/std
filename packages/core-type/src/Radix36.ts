@@ -1,5 +1,7 @@
 /**
- * Number formatting radix
+ * Number parsing/formatting radix
+ *
+ * For example this can be used for a strict use of {@link parseInt}
  */
 export type Radix36 =
   | 2
