@@ -5275,12 +5275,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.1":
-  version: 20.19.1
-  resolution: "@types/node@npm:20.19.1"
+"@types/node@npm:20.19.2":
+  version: 20.19.2
+  resolution: "@types/node@npm:20.19.2"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/4f1c3c8ec24c79af6802b376fa307904abf19accb9ac291de0bfc02220494c8b027d3ef733dbf64cc09b37594f22f679a15eabb30f3785bcfcc13bd9bbd8c0e2
+  checksum: 10c0/85195d2435a215c886b3dabb2a93c557397e2b933a18803c6dd4fb3f87c3de9c8290fe78f08b52ebeb3b14063a00b217f66b4f9c0192581dc7a677c4f8663a9c
   languageName: node
   linkType: hard
 
@@ -6101,7 +6101,7 @@ __metadata:
   dependencies:
     "@lerna-lite/publish": "npm:4.5.0"
     "@size-limit/preset-small-lib": "npm:11.2.0"
-    "@types/node": "npm:20.19.1"
+    "@types/node": "npm:20.19.2"
     "@w5s/commitlint-config": "npm:2.1.11"
     "@w5s/conventional-changelog": "npm:2.2.4"
     "@w5s/cspell-config": "npm:2.4.0"
@@ -6222,7 +6222,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:3.8.1"
     "@docusaurus/tsconfig": "npm:3.8.1"
     "@mdx-js/react": "npm:3.1.0"
-    "@types/node": "npm:20.19.1"
+    "@types/node": "npm:20.19.2"
     clsx: "npm:2.1.1"
     docusaurus-plugin-typedoc-api: "npm:4.4.0"
     prism-react-renderer: "npm:2.4.1"
