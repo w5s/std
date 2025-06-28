@@ -1,8 +1,5 @@
+import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
 import type { RecordKey } from '../Record.js';
-
-const hasOwn: typeof Object.hasOwn =
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  Object.hasOwn ?? ((object, property) => Object.prototype.hasOwnProperty.call(object, property));
 
 /**
  * Return true if `record` contains `key`
@@ -17,5 +14,5 @@ const hasOwn: typeof Object.hasOwn =
  * @param key - the entry key
  */
 export function has<Key extends RecordKey>(self: Record<Key, any>, key: Key): boolean {
-  return hasOwn(self, key);
+  return __hasOwn(self, key);
 }

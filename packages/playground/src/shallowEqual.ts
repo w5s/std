@@ -3,6 +3,10 @@
 type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
 type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
 
+const __hasOwn =
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  Object.hasOwn ?? ((object, propertyName) => Object.prototype.hasOwnProperty.call(object, propertyName));
+
 /**
  * Returns `true` when left and right are strictly equal or have same properties
  *
@@ -36,7 +40,6 @@ export function shallowEqual<T = unknown>(
   if (leftKeys.length !== rightKeys.length) {
     return false;
   }
-  const rightHasOwnProperty = Object.prototype.hasOwnProperty.bind(right);
 
   if (equalValueFn == null) {
     // Test for A's keys different from B.
@@ -45,7 +48,7 @@ export function shallowEqual<T = unknown>(
       const key = leftKeys[index]!;
 
       if (
-        !rightHasOwnProperty(key) ||
+        !__hasOwn(right, key) ||
         // @ts-ignore Wrong typing
         !objectIs(left[key], right[key])
       ) {
@@ -58,7 +61,7 @@ export function shallowEqual<T = unknown>(
     for (let index = 0; index < leftKeys.length; index += 1) {
       const key = leftKeys[index]!;
 
-      if (!rightHasOwnProperty(key)) {
+      if (!__hasOwn(right, key)) {
         return false;
       }
 

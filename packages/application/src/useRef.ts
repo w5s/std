@@ -1,9 +1,6 @@
 import type { Ref } from '@w5s/core';
+import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
 import { type Storage } from './useStorage.js';
-
-const hasOwn =
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  Object.hasOwn ?? ((object, propertyName) => Object.prototype.hasOwnProperty.call(object, propertyName));
 
 function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: string, initialValue: T): Ref<T> {
   const propertyRef: Ref<T> = {
@@ -18,7 +15,7 @@ function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: 
     },
   };
 
-  if (!hasOwn(ref.current, propertyName)) {
+  if (!__hasOwn(ref.current, propertyName)) {
     propertyRef.current = initialValue;
   }
   return propertyRef;
