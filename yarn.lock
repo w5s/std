@@ -5755,6 +5755,7 @@ __metadata:
   resolution: "@w5s/async@workspace:packages/async"
   dependencies:
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
+    "@w5s/error": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.8.3"
     vite: "npm:latest"
     vitest: "npm:latest"
