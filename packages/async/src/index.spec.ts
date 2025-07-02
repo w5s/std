@@ -5,10 +5,12 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Module)).toMatchInlineSnapshot(`
       [
+        "clearImmediate",
         "defer",
         "delay",
         "isPromiseLike",
         "isPromise",
+        "setImmediate",
         "tryCall",
       ]
     `);
