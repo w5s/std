@@ -15,6 +15,7 @@ describe('index', () => {
         'EvalError',
         'invariant',
         'InvariantError',
+        'isDOMException',
         'isError',
         'NotImplementedError',
         'panic',

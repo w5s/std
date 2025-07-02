@@ -9,6 +9,7 @@ export * from './ErrorOptions.js';
 export * from './EvalError.js';
 export * from './invariant.js';
 export * from './InvariantError.js';
+export * from './isDOMException.js';
 export * from './isError.js';
 export * from './NotImplementedError.js';
 export * from './RangeError.js';
