@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // All keys
         'FiberId',
+        'Fiber',
       ].sort(),
     );
   });
