@@ -5,11 +5,11 @@ import type { SchedulerFiberState } from './SchedulerFiberState.js';
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';
 import {
-  __cancelScheduled,
-  __requestScheduled,
+  __cancelScheduledCallback,
+  __requestScheduledCallback,
   type ScheduledRequestCallback,
   type ScheduledRequestId,
-} from '../__requestScheduled.js';
+} from '../__requestScheduledCallback.js';
 
 export class Scheduler {
   #currentId = FiberId(1);
@@ -59,6 +59,10 @@ export class Scheduler {
     return false;
   }
 
+  protected getCycleDeadline() {
+    return 12;
+  }
+
   protected getState(id: FiberId): Option<SchedulerFiberState> {
     return this.#fiber.get(id);
   }
@@ -93,10 +97,10 @@ export class Scheduler {
     const countActive = this.#fiber.size;
     if (countActive > 0) {
       if (this.#timerId === undefined) {
-        this.#timerId = __requestScheduled(this.onCycle, 12);
+        this.#timerId = __requestScheduledCallback(this.onCycle, this.getCycleDeadline());
       }
     } else if (this.#timerId !== undefined) {
-      __cancelScheduled(this.#timerId);
+      __cancelScheduledCallback(this.#timerId);
     }
   }
 
