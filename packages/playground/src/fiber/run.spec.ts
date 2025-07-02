@@ -44,18 +44,18 @@ describe(run, () => {
   it('handles thrown errors', async () => {
     const trace = createTracer();
 
-    const fiberA = run(function* fibA() {
+    const fiberGenerator = run(function* fibA() {
       throw new Error('TestError');
       yield trace('a1');
       return 'resultA';
     });
-    const fiberB = run(function* fibB() {
+    const fiberSuccess = run(function* fibB() {
       yield trace('b1');
       return 'resultB';
     });
 
-    await expect(fiberA.promise).rejects.toEqual(new Error('TestError'));
-    await expect(fiberB.promise).resolves.toBe('resultB');
+    await expect(fiberGenerator.promise).rejects.toEqual(new Error('TestError'));
+    await expect(fiberSuccess.promise).resolves.toBe('resultB');
     expect(trace.stack).toEqual(['b1']);
   });
 });

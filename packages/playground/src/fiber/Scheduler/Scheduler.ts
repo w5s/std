@@ -4,11 +4,17 @@ import { FiberId } from '../FiberId.js';
 import type { SchedulerFiberState } from './SchedulerFiberState.js';
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';
+import {
+  __cancelScheduled,
+  __requestScheduled,
+  type ScheduledRequestCallback,
+  type ScheduledRequestId,
+} from '../__requestScheduled.js';
 
 export class Scheduler {
   #currentId = FiberId(1);
   #fiber: Map<FiberId, SchedulerFiberState> = new Map();
-  #timerId: Option<number>;
+  #timerId: Option<ScheduledRequestId>;
 
   spawn(callback: FiberCallback): FiberResult<any> {
     const id = this.nextId();
@@ -87,20 +93,25 @@ export class Scheduler {
     const countActive = this.#fiber.size;
     if (countActive > 0) {
       if (this.#timerId === undefined) {
-        this.#timerId = setTimeout(this.onCycle);
+        this.#timerId = __requestScheduled(this.onCycle, 12);
       }
     } else if (this.#timerId !== undefined) {
-      clearTimeout(this.#timerId);
+      __cancelScheduled(this.#timerId);
     }
   }
 
-  protected onCycle: IdleRequestCallback = (_deadline) => {
+  protected onCycle: ScheduledRequestCallback = (deadline) => {
     // Clear timer
     this.#timerId = undefined;
 
     for (const fiber of this.#fiber.values()) {
+      if (deadline.timeRemaining() === 0) {
+        break;
+      }
+
       if (fiber.running) {
         const generator = this.generator(fiber);
+
         try {
           const result = generator.next();
           if (result.done === true) {
