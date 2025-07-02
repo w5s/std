@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { AbortError } from '@w5s/error/dist/AbortError.js';
+import { isDOMException } from '@w5s/error/dist/isDOMException.js';
 import type { TimerOptions } from './TimerOptions.js';
 
 const __toAbortError = (reason: any): AbortError =>
   reason == null
     ? new AbortError()
-    : Object.prototype.toString.call(reason) === '[object DOMException]' &&
-        (reason as DOMException).name === 'AbortError'
+    : isDOMException(reason) && reason.name === 'AbortError'
       ? new AbortError()
       : reason;
 
