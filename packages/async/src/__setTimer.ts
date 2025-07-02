@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-promise-reject-errors */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { AbortError } from '@w5s/error/dist/AbortError.js';
 import type { TimerOptions } from './TimerOptions.js';
@@ -26,19 +27,29 @@ export function __setTimer<Timer>(
 ): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     const { signal } = options;
-    const __reject = () => {
-      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+    let timerId: Timer;
+    const __abort = () => {
       reject(__toAbortError(signal?.reason));
     };
+    const onAbort = () => {
+      clear(timerId);
+      __abort();
+    };
     if (signal?.aborted === true) {
-      __reject();
+      __abort();
     } else {
-      const timerId = request(resolve, reject);
+      timerId = request(
+        (value) => {
+          signal?.removeEventListener('abort', onAbort);
+          resolve(value);
+        },
+        (error) => {
+          signal?.removeEventListener('abort', onAbort);
+          reject(error);
+        },
+      );
 
-      signal?.addEventListener('abort', () => {
-        clear(timerId);
-        __reject();
-      });
+      signal?.addEventListener('abort', onAbort);
     }
   });
 }
