@@ -6,6 +6,6 @@ describe(AbortError, () => {
   describeError({ describe, it, expect })(AbortError, {
     defaultParameters: () => ({}),
     expectedName: 'AbortError',
-    expectedDefaultMessage: 'The operation was aborted',
+    expectedDefaultMessage: 'This operation was aborted',
   });
 });
