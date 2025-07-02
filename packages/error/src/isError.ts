@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+const hasStructuredClone = structuredClone !== undefined;
+
 /**
  * Check if the provided value is an Error object.
  *
@@ -14,11 +17,5 @@
  * @returns true if the value is an Error object, false otherwise.
  */
 export function isError(anyValue: unknown): anyValue is Error {
-  return (
-    typeof anyValue === 'object' &&
-    anyValue !== null &&
-    'name' in anyValue &&
-    'message' in anyValue &&
-    'stack' in anyValue
-  );
+  return anyValue instanceof Error ? true : hasStructuredClone ? structuredClone(anyValue) instanceof Error : false;
 }
