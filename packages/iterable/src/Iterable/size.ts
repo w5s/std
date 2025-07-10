@@ -12,8 +12,8 @@ const sum = (accumulator: Int) => (accumulator + 1) as Int;
  * size(iterable); // 3
  * ```
  * @category Accessor
- * @param source
+ * @param self
  */
-export function size<Value>(source: Iterable<Value>): Int {
-  return reduce(source, sum, 0 as Int);
+export function size<Value>(self: Iterable<Value>): Int {
+  return reduce(self, sum, 0 as Int);
 }

@@ -10,16 +10,16 @@ import type { Int } from '@w5s/core';
  * Iterable.every(iterable, (currentValue) => currentValue >= 2); // false
  * Iterable.every(iterable, (currentValue) => currentValue < 0); // false
  * ```
- * @category Predicate
- * @param source
+ * @category
+ * @param self
  * @param predicate
  */
 export function every<Value>(
-  source: Iterable<Value>,
+  self: Iterable<Value>,
   predicate: (currentValue: Value, currentIndex: Int) => boolean,
 ): boolean {
   let currentIndex = 0;
-  for (const currentValue of source) {
+  for (const currentValue of self) {
     if (!predicate(currentValue, currentIndex as Int)) {
       return false;
     }

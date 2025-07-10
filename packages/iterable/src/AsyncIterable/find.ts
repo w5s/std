@@ -14,15 +14,15 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * await AsyncIterable.find(iterable, (item) => item.name === 'bob') // { name: 'bob', id: 2 }
  * await AsyncIterable.find(iterable, (item) => item.name === 'cat') // undefined
  * ```
- * @param source - The input collection.
+ * @param self - The input collection.
  * @param predicate - A function to test whether an item in the collection should be returned.
  */
 export async function find<Value>(
-  source: AsyncIterableLike<Value>,
+  self: AsyncIterableLike<Value>,
   predicate: (currentValue: Value, currentIndex: number) => Awaitable<boolean>,
 ): Promise<Option<Value>> {
   let currentIndex = 0;
-  for await (const currentValue of source) {
+  for await (const currentValue of self) {
     if (await predicate(currentValue, currentIndex)) {
       return currentValue;
     }

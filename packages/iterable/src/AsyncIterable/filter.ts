@@ -13,17 +13,17 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  *   (currentValue, currentIndex) => currentValue > 1,
  * );// == AsyncIterable.of(2, 3)
  * ```
- * @param source - the iterable to be filtered
+ * @param self - the iterable to be filtered
  * @param predicate - a function that returns a boolean
  */
 export function filter<Value>(
-  source: AsyncIterableLike<Value>,
+  self: AsyncIterableLike<Value>,
   predicate: (currentValue: Value, currentIndex: Int) => Awaitable<boolean>,
 ): AsyncIterable<Value> {
   return {
     async *[Symbol.asyncIterator]() {
       let currentIndex = 0;
-      for await (const currentValue of source) {
+      for await (const currentValue of self) {
         if (await predicate(currentValue, currentIndex as Int)) {
           yield currentValue;
         }

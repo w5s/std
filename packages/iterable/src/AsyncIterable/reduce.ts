@@ -14,18 +14,18 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  *   0,
  * );// 6
  * ```
- * @param source - the iterator reduced
+ * @param self - the iterator reduced
  * @param reducer - the reducer function
  * @param initialValue - the initial value passed to the reducer
  */
 export async function reduce<Value, Return>(
-  source: AsyncIterableLike<Value>,
+  self: AsyncIterableLike<Value>,
   reducer: (accumulator: Return, currentValue: Value, currentIndex: Int) => Awaitable<Return>,
   initialValue: Return,
 ): Promise<Return> {
   let accumulator = initialValue;
   let currentIndex = 0;
-  for await (const currentValue of source) {
+  for await (const currentValue of self) {
     accumulator = await reducer(accumulator, currentValue, currentIndex as Int);
     currentIndex += 1;
   }

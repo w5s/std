@@ -13,15 +13,15 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * await AsyncIterable.every(iterable, (currentValue) => currentValue < 0); // false
  * ```
  * @category Predicate
- * @param source
+ * @param self
  * @param predicate
  */
 export async function every<Value>(
-  source: AsyncIterableLike<Value>,
+  self: AsyncIterableLike<Value>,
   predicate: (currentValue: Value, currentIndex: Int) => Awaitable<boolean>,
 ): Promise<boolean> {
   let currentIndex = 0;
-  for await (const currentValue of source) {
+  for await (const currentValue of self) {
     if (!(await predicate(currentValue, currentIndex as Int))) {
       return false;
     }
