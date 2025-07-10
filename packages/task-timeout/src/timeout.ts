@@ -13,7 +13,7 @@ const timeDurationString = TimeDurationAsString.asString;
  *
  * @example
  * ```typescript
- * const longTask = Task.delay(TimeDuration.hours(1));
+ * const longTask = Time.delay(TimeDuration({ hours: 1 }));
  * const timeoutTask = timeout(longTask, TimeDuration(4));
  * Task.run(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))
  * // Note that `longTask` will be canceled and will never resolve nor reject
