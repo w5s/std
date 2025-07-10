@@ -1,6 +1,6 @@
 import { hasInstance as isIterable } from '../../iterable/Iterable/hasInstance.js';
 import type { Seq } from '../Seq.js';
-import { iterable } from './iterable.js';
+import { seqIterable } from './seqIterable.js';
 
 /**
  * Returns `true` if `anyValue` is a `Seq`
@@ -13,5 +13,5 @@ import { iterable } from './iterable.js';
  * @param anyValue - any value to check
  */
 export function hasInstance(anyValue: unknown): anyValue is Seq<unknown> {
-  return isIterable(anyValue) && iterable in anyValue;
+  return isIterable(anyValue) && seqIterable in anyValue;
 }

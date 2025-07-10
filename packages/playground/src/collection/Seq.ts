@@ -2,10 +2,10 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { from } from './Seq/from.js';
 import { of } from './Seq/of.js';
 import { hasInstance } from './Seq/hasInstance.js';
-import type { iterable } from './Seq/iterable.js';
+import type { seqIterable } from './Seq/seqIterable.js';
 
 export interface Seq<T> extends Iterable<T> {
-  readonly [iterable]: Iterable<T>;
+  readonly [seqIterable]: Iterable<T>;
 }
 
 /**

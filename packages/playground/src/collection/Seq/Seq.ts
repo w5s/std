@@ -1,19 +1,19 @@
 import type { Seq as SeqInterface } from '../Seq.js';
-import { useSeqState } from './useSeqState.js';
-import { iterable as iterableSymbol } from './iterable.js';
+import { __useSeqState } from './__useSeqState.js';
+import { seqIterable } from './seqIterable.js';
 
 /**
  * @internal
  */
 export class Seq<T> implements SeqInterface<T> {
-  [iterableSymbol]: Iterable<T>;
+  [seqIterable]: Iterable<T>;
 
   constructor(iterable: Iterable<T>) {
-    this[iterableSymbol] = iterable;
+    this[seqIterable] = iterable;
   }
 
   *[Symbol.iterator]() {
-    const seqState = useSeqState(this[iterableSymbol]);
+    const seqState = __useSeqState(this[seqIterable]);
     const { resolvedValues, currentIterator } = seqState;
     yield* resolvedValues;
 

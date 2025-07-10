@@ -1,4 +1,4 @@
-const state = new WeakMap<Iterable<unknown>, ReturnType<typeof useSeqState<any>>>();
+const state = new WeakMap<Iterable<unknown>, ReturnType<typeof __useSeqState<any>>>();
 
 /**
  * @internal
@@ -12,7 +12,7 @@ export type SeqState<T> = {
  * @internal
  * @example
  */
-export function useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
+export function __useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
   if (typeof iterable === 'string') {
     return {
       resolvedValues: [...iterable],
