@@ -12,6 +12,7 @@ const sum = (accumulator: Int) => (accumulator + 1) as Int;
  * const iterable = AsyncIterable.of(1, 2, 3);
  * await AsyncIterable.size(iterable); // 3
  * ```
+ * @category Accessor
  * @param source
  */
 export function size<Value>(source: AsyncIterableLike<Value>): Promise<Int> {

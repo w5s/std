@@ -10,6 +10,7 @@ import type { Int } from '@w5s/core';
  * Iterable.every(iterable, (currentValue) => currentValue >= 2); // false
  * Iterable.every(iterable, (currentValue) => currentValue < 0); // false
  * ```
+ * @category Predicate
  * @param source
  * @param predicate
  */

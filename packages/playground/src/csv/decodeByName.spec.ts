@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { Result } from '@w5s/core';
+import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
 import { decodeByName } from './decodeByName.js';
 import { CSVError } from './CSVError.js';
-import { withAsyncIterable } from '../iterable/Testing.js';
 
 describe(decodeByName, () => {
   const expectTask = withTask(expect);

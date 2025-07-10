@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
 import { decodeByName } from './decodeByName.js';
-import { withAsyncIterable } from '../iterable/Testing.js';
 import { readLines } from './readLines.js';
 
 describe(decodeByName, () => {

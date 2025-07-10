@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import type { AsyncIterableLike } from '../iterable/AsyncIterableLike.js';
+import type { AsyncIterableLike } from '@w5s/iterable/dist/AsyncIterableLike.js';
 
 export interface ReadLineOptions {
   delimiter?: Option<string>;

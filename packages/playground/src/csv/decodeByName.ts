@@ -2,15 +2,15 @@ import { create as taskCreate } from '@w5s/task/dist/Task/create.js';
 import type { Task } from '@w5s/task';
 import { error } from '@w5s/task/dist/Task/error.js';
 import { ok } from '@w5s/task/dist/Task/ok.js';
-import { defaultCSVDecodeOptions, type CSVDecodeOptions } from './CSVDecodeOptions.js';
-import type { CSVParseResult } from './CSVParseResult.js';
-import type { CSVNamedRecord } from './CSVRecord.js';
-import type { AsyncIterableLike } from '../iterable/AsyncIterableLike.js';
+import type { AsyncIterableLike } from '@w5s/iterable/dist/AsyncIterableLike.js';
+import { find as asyncIterableFind } from '@w5s/iterable/dist/AsyncIterable/find.js';
+import { filter as asyncIterableFilter } from '@w5s/iterable/dist/AsyncIterable/filter.js';
+import { map as asyncIterableMap } from '@w5s/iterable/dist/AsyncIterable/map.js';
+import { map as iterableMap } from '@w5s/iterable/dist/Iterable/map.js';
 import { CSVError } from './CSVError.js';
-import { find as asyncIterableFind } from '../iterable/AsyncIterable/find.js';
-import { filter as asyncIterableFilter } from '../iterable/AsyncIterable/filter.js';
-import { map as asyncIterableMap } from '../iterable/AsyncIterable/map.js';
-import { map as iterableMap } from '../iterable/Iterable/map.js';
+import type { CSVNamedRecord } from './CSVRecord.js';
+import type { CSVParseResult } from './CSVParseResult.js';
+import { defaultCSVDecodeOptions, type CSVDecodeOptions } from './CSVDecodeOptions.js';
 import { readLines } from './readLines.js';
 
 export function decodeByName(

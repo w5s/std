@@ -1,21 +1,38 @@
 {
-  "name": "@w5s/playground",
+  "name": "@w5s/iterable",
   "version": "1.0.0-alpha.0",
-  "private": true,
-  "description": "Examples",
-  "homepage": "https://github.com/w5s/std/tree/master/packages/playground#readme",
+  "description": "Iterable and AsyncIterable modules",
+  "keywords": [
+    "fp",
+    "functional",
+    "iterable",
+    "async-iterable",
+    "async"
+  ],
+  "homepage": "https://github.com/w5s/std/tree/master/packages/iterable#readme",
   "bugs": {
     "url": "https://github.com/w5s/std/issues"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:w5s/std.git",
-    "directory": "packages/playground"
+    "directory": "packages/iterable"
   },
   "license": "MIT",
   "author": "Julien Polo <julien.polo@gmail.com>",
   "type": "module",
-  "files": [],
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/*": "./dist/*"
+  },
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "!*.d.ts.map",
+    "!**/*.spec.*",
+    "!**/__tests__/**"
+  ],
   "scripts": {
     "build": "npx run-p \"build:*\"",
     "build:tsc": "tsc -b tsconfig.build.json",
@@ -27,29 +44,15 @@
     "lint": "npx run-p \"lint:*\"",
     "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "prepare": "npx run-p \"prepare:*\"",
-    "prepublishOnly": "npm run clean;npm run build",
+    "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
     "test": "npx run-p \"test:*\"",
     "test:src": "vitest run",
     "tsc": "tsc",
-    "validate": "npm run build && npm run test"
+    "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@w5s/application": "^1.0.0-alpha.0",
-    "@w5s/async": "^1.0.0-alpha.0",
-    "@w5s/collection": "^1.0.0-alpha.0",
-    "@w5s/core": "^1.0.0-alpha.0",
-    "@w5s/error": "^1.0.0-alpha.0",
-    "@w5s/http": "^1.0.0-alpha.0",
-    "@w5s/iterable": "^1.0.0-alpha.0",
-    "@w5s/log": "^1.0.0-alpha.0",
-    "@w5s/money": "^1.0.0-alpha.0",
-    "@w5s/num": "^1.0.0-alpha.0",
-    "@w5s/random": "^1.0.0-alpha.0",
-    "@w5s/task": "^1.0.0-alpha.0",
-    "@w5s/task-timeout": "^1.0.0-alpha.0",
-    "@w5s/time": "^1.0.0-alpha.0",
-    "@w5s/uuid": "^1.0.0-alpha.0"
+    "@w5s/core-type": "^1.0.0-alpha.0"
   },
   "devDependencies": {
     "typescript": "5.8.3",
@@ -62,5 +65,24 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "sideEffect": false
+  "publishConfig": {
+    "access": "public"
+  },
+  "size-limit": [
+    {
+      "path": "dist/index.js",
+      "limit": "1 kB"
+    }
+  ],
+  "sideEffect": false,
+  "tsup": {
+    "format": [
+      "esm"
+    ],
+    "clean": true,
+    "dts": true,
+    "entry": [
+      "src/index.ts"
+    ]
+  }
 }

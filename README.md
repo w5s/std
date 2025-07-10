@@ -14,6 +14,7 @@
 * [@w5s/env](packages/env) - Environment variable module
 * [@w5s/error](packages/error) - Error module
 * [@w5s/http](packages/http) - HTTP client module
+* [@w5s/iterable](packages/iterable) - Iterable and AsyncIterable modules
 * [@w5s/log](packages/log) - Logging module
 * [@w5s/money](packages/money) - Money module
 * [@w5s/num](packages/num) - Number, BigInt, Int modules

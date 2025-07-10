@@ -12,6 +12,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * await AsyncIterable.every(iterable, (currentValue) => currentValue >= 2); // false
  * await AsyncIterable.every(iterable, (currentValue) => currentValue < 0); // false
  * ```
+ * @category Predicate
  * @param source
  * @param predicate
  */
