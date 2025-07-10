@@ -10,7 +10,7 @@ const sum = (accumulator: Int) => (accumulator + 1) as Int;
  * @example
  * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
- * size(iterable); // 3
+ * await AsyncIterable.size(iterable); // 3
  * ```
  * @param source
  */

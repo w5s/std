@@ -1,11 +1,11 @@
 /**
- * Returns `true` if `anyValue` is a valid {@link Iterable}
+ * Returns `true` if `anyValue` is a valid {@link AsyncIterable}
  *
  * @example
  * ```typescript
- * Iterable.hasInstance({});// false
- * Iterable.hasInstance([]);// true
- * Iterable.hasInstance({ [Symbol.iterable]: () => ({ next: () => ({ done: true }) }) });// true
+ * AsyncIterable.hasInstance({});// false
+ * AsyncIterable.hasInstance([]);// true
+ * AsyncIterable.hasInstance({ [Symbol.iterator]: () => ({ next: () => ({ done: true }) }) });// true
  * ```
  * @category Type
  * @param anyValue - the value to tested

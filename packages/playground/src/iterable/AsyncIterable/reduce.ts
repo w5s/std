@@ -8,7 +8,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * @example
  * ```typescript
  * const iterable = AsyncIterable.of(1, 2, 3);
- * AsyncIterable.reduce(
+ * await AsyncIterable.reduce(
  *   iterable,
  *   (total, value) => total + value,
  *   0,

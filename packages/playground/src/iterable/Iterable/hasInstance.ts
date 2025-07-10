@@ -5,7 +5,7 @@
  * ```typescript
  * Iterable.hasInstance({});// false
  * Iterable.hasInstance([]);// true
- * Iterable.hasInstance({ [Symbol.iterable]: () => ({ next: () => ({ done: true }) }) });// true
+ * Iterable.hasInstance({ [Symbol.iterator]: () => ({ next: () => ({ done: true }) }) });// true
  * ```
  * @category Type
  * @param anyValue - the value to tested

@@ -10,8 +10,8 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  * const iterable = AsyncIterable.of(1, 2, 3);
  * AsyncIterable.map(
  *   iterable,
- *   (currentValue, currentIndex) => currentValue * 2,
- * );// == Iterable.of(2, 4, 6)
+ *   async (currentValue, currentIndex) => currentValue * 2,
+ * );// == AsyncIterable.of(2, 4, 6)
  * ```
  * @param source - the iterable source
  * @param mapFn - a function that returns a new value

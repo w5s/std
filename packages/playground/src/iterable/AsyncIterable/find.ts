@@ -11,8 +11,8 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  *   { name: 'amy', id: 1 },
  *   { name: 'bob', id: 2 }
  * );
- * await find(iterable, (item) => item.name === 'bob') // { name: 'bob', id: 2 }
- * await find(iterable, (item) => item.name === 'cat') // undefined
+ * await AsyncIterable.find(iterable, (item) => item.name === 'bob') // { name: 'bob', id: 2 }
+ * await AsyncIterable.find(iterable, (item) => item.name === 'cat') // undefined
  * ```
  * @param source - The input collection.
  * @param predicate - A function to test whether an item in the collection should be returned.
