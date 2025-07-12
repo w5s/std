@@ -12,6 +12,8 @@ import { every } from './Iterable/every.js';
 import { flatMap } from './Iterable/flatMap.js';
 import { size } from './Iterable/size.js';
 import { find } from './Iterable/find.js';
+import { drop } from './Iterable/drop.js';
+import { take } from './Iterable/take.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -28,6 +30,7 @@ import { find } from './Iterable/find.js';
  */
 export const Iterable = {
   create,
+  drop,
   empty,
   every,
   filter,
@@ -40,5 +43,6 @@ export const Iterable = {
   reduce,
   size,
   some,
+  take,
   zip,
 };

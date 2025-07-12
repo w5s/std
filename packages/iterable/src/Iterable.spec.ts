@@ -14,11 +14,14 @@ import { some } from './Iterable/some.js';
 import { flatMap } from './Iterable/flatMap.js';
 import { size } from './Iterable/size.js';
 import { find } from './Iterable/find.js';
+import { drop } from './Iterable/drop.js';
+import { take } from './Iterable/take.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
     expect(Iterable).toEqual({
       create,
+      drop,
       empty,
       every,
       filter,
@@ -31,6 +34,7 @@ describe('Iterable', () => {
       reduce,
       size,
       some,
+      take,
       zip,
     });
   });
