@@ -5,7 +5,6 @@ import { Error } from './Error.js';
 import { Ok } from './Ok.js';
 
 describe('.getOrThrow', () => {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const anyValue = 'anyValue' as const;
   const anyError = 'anyError';
   it('should return undefined for Error', () => {

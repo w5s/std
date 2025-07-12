@@ -7,9 +7,8 @@ import { Error } from './Error.js';
 import { Result } from '../Result.js';
 
 describe(getError, () => {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const anyValue = 'anyValue' as const;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+
   const anyError = 'anyError' as const;
   it('should return undefined for Ok', () => {
     const error = getError(Ok(anyValue));
