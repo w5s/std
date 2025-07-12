@@ -58,7 +58,6 @@
   },
   "dependencies": {
     "@types/mysql": "^2.15.7",
-    "@types/sqlite3": "^5.0.0",
     "@w5s/application": "^1.0.0-alpha.0",
     "@w5s/core": "^1.0.0-alpha.0",
     "@w5s/error": "^1.0.0-alpha.0",
