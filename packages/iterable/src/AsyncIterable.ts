@@ -12,16 +12,19 @@ import { some } from './AsyncIterable/some.js';
 import { flatMap } from './AsyncIterable/flatMap.js';
 import { size } from './AsyncIterable/size.js';
 import { find } from './AsyncIterable/find.js';
+import { drop } from './AsyncIterable/drop.js';
+import { take } from './AsyncIterable/take.js';
 
 /**
  * @namespace
  */
 export const AsyncIterable = {
   create,
+  drop,
   empty,
   every,
-  find,
   filter,
+  find,
   flatMap,
   generate,
   hasInstance,
@@ -30,5 +33,6 @@ export const AsyncIterable = {
   reduce,
   size,
   some,
+  take,
   zip,
 };
