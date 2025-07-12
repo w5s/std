@@ -6100,6 +6100,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@w5s/iterable@workspace:packages/iterable"
   dependencies:
+    "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.8.3"
     vite: "npm:latest"
