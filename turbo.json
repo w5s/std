@@ -62,5 +62,5 @@
     "**/.env.*local",
     ".env"
   ],
-  "globalEnv": ["ASDF_*", "CI", "CI_*", "DATABASE_URL", "HOME", "NODE_ENV"]
+  "globalEnv": ["ASDF_*", "CI", "DATABASE_URL", "NODE_ENV"]
 }
