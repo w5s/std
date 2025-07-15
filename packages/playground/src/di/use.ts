@@ -1,12 +1,15 @@
-import type { Container } from './Container.js';
-import type { ContainerKey } from './ContainerKey.js';
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import type { Option } from '@w5s/core';
 import type { ContainerProvider } from './ContainerProvider.js';
+import type { ContainerKey } from './ContainerKey.js';
+import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 interface Cacheable {
   [use.cache]: use.Cache;
 }
 
-function cacheFor(appContext: Container): use.Cache {
+function cacheFor(appContext: object): use.Cache {
+  // @ts-ignore we know what we are doing
   const cache = appContext[use.cache] as use.Cache | undefined;
 
   if (cache === undefined || cache.appContext !== appContext) {
@@ -18,18 +21,24 @@ function cacheFor(appContext: Container): use.Cache {
   return cache;
 }
 
-function cacheGet<Value>(appContext: Container, cache: use.Cache, key: ContainerKey<Value>): Value {
+function cacheGet<Key extends string | symbol, Value>(
+  appContext: Partial<ContainerProvider<any, Key, Option<Value>>>,
+  cache: use.Cache,
+  key: ContainerKey<Key, Value>,
+): Value {
   const { containerKey } = key;
+  // @ts-ignore We can use containerKey as key
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const value: Value = cache[containerKey] ?? (cache[containerKey] = getProvider(appContext, key)(appContext));
   return value;
 }
 
-function getProvider<Value>(
-  appContext: Container,
-  { containerKey, containerDefaultProvider }: ContainerKey<Value>,
-): ContainerProvider<Value> {
-  return (appContext[containerKey] as ContainerProvider<Value> | undefined) ?? containerDefaultProvider;
+function getProvider<Key extends string | symbol, Value>(
+  appContext: ContainerProvider<any, Key, Value>,
+  { containerKey, containerDefaultProvider }: ContainerKey<Key, Value>,
+): ContainerProviderFunction<any, Value> {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  return appContext[containerKey] ?? containerDefaultProvider;
 }
 
 /**
@@ -38,7 +47,7 @@ function getProvider<Value>(
  * @example
  * ```typescript
  * interface SomeServiceInterface { ... }
- * const SomeService = ContainerKey<SomeServiceInterface>('SomeService');
+ * const SomeService = ContainerKey<'SomeService', SomeServiceInterface>('SomeService');
  * const appContext: AppContext = // ...
  *
  * const someService = use(appContext, SomeService);// typeof someService == SomeServiceInterface
@@ -46,7 +55,15 @@ function getProvider<Value>(
  * @param appContext - the app context container
  * @param key - the injection key
  */
-export function use<Value>(appContext: Container, key: ContainerKey<Value>): Value {
+export function use<Key extends string | symbol, Value>(
+  appContext: Partial<ContainerProvider<any, Key, Option<Value>>>,
+  key: ContainerKey<Key, NonNullable<Value>>,
+): Value;
+export function use<Key extends string | symbol, Value>(
+  appContext: ContainerProvider<any, Key, Value>,
+  key: ContainerKey<Key, Value>,
+): Value;
+export function use(appContext: any, key: any) {
   return cacheGet(appContext, cacheFor(appContext), key);
 }
 export namespace use {
@@ -56,7 +73,7 @@ export namespace use {
     /**
      * The app context
      */
-    appContext: Container;
+    appContext: object;
     [key: symbol]: any;
   }
 }

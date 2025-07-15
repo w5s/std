@@ -1,13 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import { ContainerKey } from './ContainerKey.js';
-import type { Container } from './Container.js';
 
 describe(ContainerKey, () => {
-  const anyContainer: Container = {};
+  const anyContainer = {};
   it('should be a symbol', () => {
     const provider = () => 'my_implementation';
     expect(ContainerKey('test', provider)).toEqual({
-      containerKey: expect.any(Symbol),
+      containerKey: 'test',
       containerDefaultProvider: provider,
     });
   });

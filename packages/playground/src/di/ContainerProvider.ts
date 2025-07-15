@@ -1,8 +1,8 @@
-import type { Container } from './Container.js';
+import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 /**
- * A container provider
+ * A container of dependencies.
  */
-export interface ContainerProvider<Value> {
-  (thisContainer: Container): Value;
-}
+export type ContainerProvider<Requirement extends object, Key extends string | symbol, Value> = {
+  readonly [key in Key]: ContainerProviderFunction<Requirement, Value>;
+};

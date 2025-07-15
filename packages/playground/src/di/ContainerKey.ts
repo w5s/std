@@ -1,27 +1,31 @@
 import type { Option } from '@w5s/core';
-import type { ContainerProvider } from './ContainerProvider.js';
+import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 /**
  * An injection key (as a symbol) with an optional default provider
  */
-export interface ContainerKey<Value> {
+export interface ContainerKey<Key extends string | symbol, Value> {
   /**
    * Injection symbol key
    */
-  containerKey: symbol;
+  containerKey: Key;
   /**
    * Default implementation of the key
    */
-  containerDefaultProvider: ContainerProvider<Value>;
+  containerDefaultProvider: ContainerProviderFunction<{}, Value>;
 }
-export function ContainerKey<Value>(description: string): ContainerKey<Option<Value>>;
-export function ContainerKey<Value>(description: string, defaultValue: ContainerProvider<Value>): ContainerKey<Value>;
+export function ContainerKey<Key extends string | symbol, Value>(key: Key): ContainerKey<Key, Option<Value>>;
+export function ContainerKey<Key extends string | symbol, Value>(
+  key: Key,
+  defaultValue: ContainerProviderFunction<{}, Value>,
+): ContainerKey<Key, Value>;
 export function ContainerKey<Value>(
-  description: string,
-  defaultProvider?: Option<ContainerProvider<Value>>,
-): ContainerKey<any> {
+  key: any,
+  defaultProvider?: Option<ContainerProviderFunction<{}, Value>>,
+): ContainerKey<any, any> {
   return {
-    containerKey: Symbol(description),
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    containerKey: key,
     containerDefaultProvider: defaultProvider ?? (() => undefined),
   };
 }
