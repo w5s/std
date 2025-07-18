@@ -16,10 +16,12 @@ import { size } from './AsyncIterable/size.js';
 import { find } from './AsyncIterable/find.js';
 import { drop } from './AsyncIterable/drop.js';
 import { take } from './AsyncIterable/take.js';
+import { chunks } from './AsyncIterable/chunks.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
     expect(AsyncIterable).toEqual({
+      chunks,
       create,
       drop,
       empty,
