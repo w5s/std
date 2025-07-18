@@ -53,7 +53,8 @@
   },
   "dependencies": {
     "@w5s/core": "^1.0.0-alpha.0",
-    "@w5s/core-type": "^1.0.0-alpha.0"
+    "@w5s/core-type": "^1.0.0-alpha.0",
+    "@w5s/error": "^1.0.0-alpha.0"
   },
   "devDependencies": {
     "typescript": "5.8.3",

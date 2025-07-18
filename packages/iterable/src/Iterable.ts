@@ -14,6 +14,7 @@ import { size } from './Iterable/size.js';
 import { find } from './Iterable/find.js';
 import { drop } from './Iterable/drop.js';
 import { take } from './Iterable/take.js';
+import { chunks } from './Iterable/chunks.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -29,6 +30,7 @@ import { take } from './Iterable/take.js';
  * @namespace
  */
 export const Iterable = {
+  chunks,
   create,
   drop,
   empty,
