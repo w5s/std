@@ -15,12 +15,14 @@ import { find } from './AsyncIterable/find.js';
 import { drop } from './AsyncIterable/drop.js';
 import { take } from './AsyncIterable/take.js';
 import { chunks } from './AsyncIterable/chunks.js';
+import { concat } from './AsyncIterable/concat.js';
 
 /**
  * @namespace
  */
 export const AsyncIterable = {
   chunks,
+  concat,
   create,
   drop,
   empty,

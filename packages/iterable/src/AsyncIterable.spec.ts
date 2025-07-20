@@ -17,11 +17,13 @@ import { find } from './AsyncIterable/find.js';
 import { drop } from './AsyncIterable/drop.js';
 import { take } from './AsyncIterable/take.js';
 import { chunks } from './AsyncIterable/chunks.js';
+import { concat } from './AsyncIterable/concat.js';
 
 describe('AsyncIterable', () => {
   it('has alias to methods', () => {
     expect(AsyncIterable).toEqual({
       chunks,
+      concat,
       create,
       drop,
       empty,
