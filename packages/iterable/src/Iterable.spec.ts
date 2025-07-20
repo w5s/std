@@ -17,11 +17,13 @@ import { find } from './Iterable/find.js';
 import { drop } from './Iterable/drop.js';
 import { take } from './Iterable/take.js';
 import { chunks } from './Iterable/chunks.js';
+import { concat } from './Iterable/concat.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
     expect(Iterable).toEqual({
       chunks,
+      concat,
       create,
       drop,
       empty,
