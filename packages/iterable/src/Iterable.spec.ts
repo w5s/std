@@ -18,6 +18,7 @@ import { drop } from './Iterable/drop.js';
 import { take } from './Iterable/take.js';
 import { chunks } from './Iterable/chunks.js';
 import { concat } from './Iterable/concat.js';
+import { from } from './Iterable/from.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {
@@ -31,6 +32,7 @@ describe('Iterable', () => {
       filter,
       find,
       flatMap,
+      from,
       generate,
       hasInstance,
       map,

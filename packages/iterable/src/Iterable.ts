@@ -16,6 +16,7 @@ import { drop } from './Iterable/drop.js';
 import { take } from './Iterable/take.js';
 import { chunks } from './Iterable/chunks.js';
 import { concat } from './Iterable/concat.js';
+import { from } from './Iterable/from.js';
 
 /**
  * A collection of functions to manipulate Iterable
@@ -40,6 +41,7 @@ export const Iterable = {
   filter,
   find,
   flatMap,
+  from,
   generate,
   hasInstance,
   map,
