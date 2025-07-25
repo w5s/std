@@ -93,7 +93,7 @@
     "root": true
   },
   "devDependencies": {
-    "@lerna-lite/publish": "4.6.1",
+    "@lerna-lite/publish": "4.6.2",
     "@size-limit/preset-small-lib": "11.2.0",
     "@types/node": "20.19.9",
     "@w5s/commitlint-config": "2.1.11",
