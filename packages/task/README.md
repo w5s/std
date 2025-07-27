@@ -2,8 +2,8 @@
 # W5S Task modules _(@w5s/task)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-[NPM Version][package-url]
-[License][license-url]
+[![NPM Version][package-version-svg]][package-url]
+[![License][license-image]][license-url]
 
 ## Installation
 
@@ -64,6 +64,10 @@ void Task.run(main()); // prints { _: 'Result/Ok', value: <random number> * <ran
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-url]: https://www.npmjs.com/package/${name}) -->
+[license-url]: https://www.npmjs.com/package/@w5s/task
+<!-- AUTO-GENERATED-CONTENT:END -->
+
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
 [issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -76,10 +80,3 @@ void Task.run(main()); // prints { _: 'Result/Ok', value: <random number> * <ran
 [homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/task.svg?style=flat-square
-[package-url]: https://www.npmjs.com/package/@w5s/task
-[license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
-[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/core/LICENSE
-[issues-url]: https://github.com/w5s/std/issues
-[sources-url]: git@github.com:w5s/std.git
-[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme

@@ -2,8 +2,8 @@
 # W5S Iterable and AsyncIterable modules _(@w5s/iterable)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-[NPM Version][package-url]
-[License][license-url]
+[![NPM Version][package-version-svg]][package-url]
+[![License][license-image]][license-url]
 
 ## Installation
 
@@ -45,8 +45,6 @@ export function main(): void {
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
-
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/object-id.svg?style=flat-square
-[package-url]: https://www.npmjs.com/package/@w5s/object-id
-[license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
-[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/uuid/LICENSE
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-url]: https://www.npmjs.com/package/${name}) -->
+[license-url]: https://www.npmjs.com/package/@w5s/iterable
+<!-- AUTO-GENERATED-CONTENT:END -->

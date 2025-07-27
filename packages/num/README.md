@@ -54,7 +54,9 @@ export function main() {
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
-[license-url]: https://github.com/w5s/project-config/blob/HEAD/packages/time/LICENSE
+<!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-url]: https://www.npmjs.com/package/${name}) -->
+[license-url]: https://www.npmjs.com/package/@w5s/num
+<!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
 [issues-url]: https://github.com/w5s/std/issues
 <!-- AUTO-GENERATED-CONTENT:END -->
