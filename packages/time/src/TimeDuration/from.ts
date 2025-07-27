@@ -2,7 +2,7 @@ import { of } from './of.js';
 import type { TimeDuration } from './TimeDuration.js';
 import { DAYS, HOURS, MINUTES, SECONDS, WEEKS } from '../__constants.js';
 
-export interface TimeDurationObject {
+export interface TimeDurationParameters {
   /**
    * Number of weeks
    */
@@ -47,7 +47,7 @@ export interface TimeDurationObject {
  *   - `milliseconds`
  * @returns a new TimeDuration
  */
-export function from(source: number | TimeDurationObject): TimeDuration {
+export function from(source: number | TimeDurationParameters): TimeDuration {
   if (typeof source === 'number') return of(source);
   const { weeks, days, hours, minutes, seconds, milliseconds } = source;
   let returnValue = 0;

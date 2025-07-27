@@ -14,7 +14,7 @@ import { toWeeks } from './TimeDuration/toWeeks.js';
 import { TimeDurationNegate } from './TimeDuration/TimeDurationNegate.js';
 import { TimeDurationZero } from './TimeDuration/TimeDurationZero.js';
 
-export type { TimeDurationObject as TimeDurationParameters } from './TimeDuration/from.js';
+export type { TimeDurationParameters } from './TimeDuration/from.js';
 
 /**
  * Represent a duration in milliseconds

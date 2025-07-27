@@ -11,7 +11,7 @@ import { TimeComparable } from './Time/TimeComparable.js';
 import { TimeBounded } from './Time/TimeBounded.js';
 import { TimeNumeric } from './Time/TimeNumeric.js';
 
-export type * from './Time/from.js';
+export type { TimeParameters } from './Time/from.js';
 
 /**
  * Represent a time typically returned by `Date.now()`

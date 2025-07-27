@@ -2,7 +2,7 @@ import type { Year, Month, Day, Hour, Minute, Second } from '@w5s/core-type';
 import { of } from './of.js';
 import type { Time } from './Time.js';
 
-export interface TimeObject {
+export interface TimeParameters {
   /**
    * Year number
    */
@@ -42,7 +42,7 @@ export interface TimeObject {
  * ```
  * @param source - The value to convert
  */
-export function from(source: number | TimeObject): Time {
+export function from(source: number | TimeParameters): Time {
   if (typeof source === 'number') return of(source);
   const { year = 0, month = 1, day = 1, hour = 0, minute = 0, second = 0, millisecond = 0 } = source;
 
