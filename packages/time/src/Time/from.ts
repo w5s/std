@@ -40,6 +40,8 @@ export interface TimeParameters {
  * ```typescript
  * Time.from({ year: 2020, month: 1, day: 1, hour: 0, minute: 0, second: 0, millisecond: 0 });// new Date('2020-01-01T00:00:00.000Z').getTime()
  * ```
+ *
+ * @category Constructor
  * @param source - The value to convert
  */
 export function from(source: number | TimeParameters): Time {

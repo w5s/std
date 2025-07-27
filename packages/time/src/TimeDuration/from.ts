@@ -38,6 +38,7 @@ export interface TimeDurationParameters {
  * const duration = TimeDuration.from({ milliseconds: 3, seconds: 2, hours: 1 });// 3 + 1000 * 2 + 1000 * 60 * 60 * 1
  * ```
  *
+ * @category Constructor
  * @param source - a number of milliseconds or an object with properties:
  *   - `weeks`
  *   - `days`
