@@ -29,12 +29,14 @@ export namespace Tag {
     /**
      * Convert an underlying type to a tagged type
      *
+     * @category Type
      * @param value
      */
     wrap(value: From): To;
     /**
      * Convert a tagged value to the underlying type
      *
+     * @category Type
      * @param value
      */
     unwrap(value: To): From;
