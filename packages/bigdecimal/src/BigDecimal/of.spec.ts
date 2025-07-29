@@ -10,5 +10,11 @@ describe(of, () => {
         scale: 100,
       }),
     );
+    expect(of(1n, -1)).toEqual(
+      BigDecimal.create({
+        value: 10n,
+        scale: 0,
+      }),
+    );
   });
 });

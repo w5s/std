@@ -13,8 +13,13 @@ import { BigDecimal } from './BigDecimal.js';
  * @param scale - The scale.
  */
 export function of(value: bigint, scale: number): BigDecimal {
-  return BigDecimal.create({
-    value,
-    scale,
-  });
+  return scale < 0
+    ? BigDecimal.create({
+        value: value * 10n ** BigInt(-scale),
+        scale: 0,
+      })
+    : BigDecimal.create({
+        value,
+        scale,
+      });
 }
