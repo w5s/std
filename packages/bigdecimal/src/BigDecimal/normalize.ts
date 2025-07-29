@@ -23,8 +23,5 @@ export function normalize(self: BigDecimal) {
     }
   }
 
-  if (trail === 0) {
-    return self;
-  }
-  return scale(self, self.scale - trail);
+  return trail === 0 ? (self.scale < 0 ? scale(self, 0) : self) : scale(self, self.scale - trail);
 }
