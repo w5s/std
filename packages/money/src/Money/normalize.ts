@@ -1,6 +1,6 @@
 import { normalize as bigDecimalNormalize } from '@w5s/bigdecimal/dist/BigDecimal/normalize.js';
 import { Money } from './Money.js';
-import { of } from './of.js';
+import { __mapAmount } from './__mapAmount.js';
 
 /**
  * Normalizes a `BigDecimal` object to its simplest form.
@@ -8,14 +8,11 @@ import { of } from './of.js';
  *
  * @example
  * ```typescript
- * normalize(USD('1.020'));// USD('1.02')
- * normalize(USD('1.02'));// USD('1.02')
+ * Money.normalize(USD('1.020'));// USD('1.02')
+ * Money.normalize(USD('1.02'));// USD('1.02')
  * ```
  * @param self - the `BigDecimal` object
  */
 export function normalize(self: Money): Money {
-  const { amount } = self;
-  const amountNew = bigDecimalNormalize(amount);
-
-  return amount === amountNew ? self : of(self.currency, amountNew);
+  return __mapAmount(self, bigDecimalNormalize);
 }
