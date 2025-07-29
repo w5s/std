@@ -15,10 +15,18 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
 interface BigDecimalNumeric
   extends Numeric.Add<BigDecimal>,
     Numeric.Subtract<BigDecimal>,
-    Numeric.Multiply<BigDecimal> {}
+    Numeric.Multiply<BigDecimal>,
+    Numeric.CheckedRemainder<BigDecimal> {}
 
 export const BigDecimalNumeric: BigDecimalNumeric = {
   '+': combine2((l, r) => l + r),
   '-': combine2((l, r) => l - r),
   '*': (l, r) => of(l.value * r.value, l.scale + r.scale),
+  '%?': (self, divisor) => {
+    if (divisor.value === 0n) {
+      return undefined;
+    }
+    const max = Math.max(self.scale, divisor.scale);
+    return of(__scaleValue(self, max) % __scaleValue(divisor, max), max);
+  },
 };

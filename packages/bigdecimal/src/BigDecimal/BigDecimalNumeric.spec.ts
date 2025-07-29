@@ -1,5 +1,6 @@
 import { describe } from 'vitest';
-import { describeAdd, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
+import { describeAdd, describeCheckedRemainder, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
+import { Option } from '@w5s/core';
 import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';
@@ -20,5 +21,10 @@ describe('BigDecimalNumeric', () => {
   describeMultiply(subject, [
     { call: [BigDecimal('0'), BigDecimal('0')], returns: BigDecimal('0') },
     { call: [BigDecimal('2.2'), BigDecimal('0.5')], returns: BigDecimal('1.10') },
+  ]);
+  describeCheckedRemainder(subject, [
+    { call: [BigDecimal('1'), BigDecimal('0')], returns: Option.None },
+    { call: [BigDecimal('5'), BigDecimal('2')], returns: Option.Some(BigDecimal('1')) },
+    { call: [BigDecimal('-5'), BigDecimal('2')], returns: Option.Some(BigDecimal('-1')) },
   ]);
 });
