@@ -55,7 +55,7 @@
     "@w5s/num": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "vite": "latest",
     "vitest": "latest"
   },
