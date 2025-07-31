@@ -6229,7 +6229,7 @@ __metadata:
   resolution: "@w5s/application@workspace:packages/application"
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6243,7 +6243,7 @@ __metadata:
   dependencies:
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6258,7 +6258,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/num": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6271,7 +6271,7 @@ __metadata:
   resolution: "@w5s/collection@workspace:packages/collection"
   dependencies:
     "@w5s/core": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6299,7 +6299,7 @@ __metadata:
   resolution: "@w5s/console@workspace:packages/console"
   dependencies:
     "@w5s/task": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6323,7 +6323,7 @@ __metadata:
   resolution: "@w5s/core-type@workspace:packages/core-type"
   dependencies:
     tsup: "npm:8.5.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6338,7 +6338,7 @@ __metadata:
     "@w5s/async": "npm:1.0.0-alpha.0"
     "@w5s/core-type": "npm:1.0.0-alpha.0"
     "@w5s/error": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6371,7 +6371,7 @@ __metadata:
     "@w5s/task": "npm:^1.0.0-alpha.0"
     mysql: "npm:^2.17.1"
     sqlite3: "npm:^5.1.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6394,7 +6394,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6407,7 +6407,7 @@ __metadata:
   resolution: "@w5s/error@workspace:packages/error"
   dependencies:
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6460,7 +6460,7 @@ __metadata:
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/task-timeout": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6475,7 +6475,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6494,7 +6494,7 @@ __metadata:
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     "@w5s/uuid": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6511,7 +6511,7 @@ __metadata:
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     currencies.json: "npm:1.1.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6525,7 +6525,7 @@ __metadata:
   dependencies:
     "@w5s/core": "npm:1.0.0-alpha.0"
     "@w5s/error": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6538,7 +6538,7 @@ __metadata:
   resolution: "@w5s/object-id@workspace:packages/object-id"
   dependencies:
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6565,7 +6565,7 @@ __metadata:
     "@w5s/task-timeout": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
     "@w5s/uuid": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6592,7 +6592,7 @@ __metadata:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6622,7 +6622,7 @@ __metadata:
     size-limit-preset-node-lib: "npm:0.4.0"
     turbo: "npm:2.5.5"
     typedoc: "npm:0.28.8"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   languageName: unknown
@@ -6637,7 +6637,7 @@ __metadata:
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6653,7 +6653,7 @@ __metadata:
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
     "@w5s/time": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6667,7 +6667,7 @@ __metadata:
   dependencies:
     "@w5s/async": "npm:1.0.0-alpha.0"
     "@w5s/core": "npm:1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6683,7 +6683,7 @@ __metadata:
     "@w5s/error": "npm:1.0.0-alpha.0"
     "@w5s/num": "npm:1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6710,7 +6710,7 @@ __metadata:
     "@w5s/application": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
     vite: "npm:latest"
     vitest: "npm:latest"
   peerDependencies:
@@ -6733,7 +6733,7 @@ __metadata:
     prism-react-renderer: "npm:2.4.1"
     react: "npm:19.1.0"
     react-dom: "npm:19.1.0"
-    typescript: "npm:5.8.3"
+    typescript: "npm:5.9.2"
   languageName: unknown
   linkType: soft
 
@@ -20052,23 +20052,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.8.3":
-  version: 5.8.3
-  resolution: "typescript@npm:5.8.3"
+"typescript@npm:5.9.2":
+  version: 5.9.2
+  resolution: "typescript@npm:5.9.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/5f8bb01196e542e64d44db3d16ee0e4063ce4f3e3966df6005f2588e86d91c03e1fb131c2581baf0fb65ee79669eea6e161cd448178986587e9f6844446dbb48
+  checksum: 10c0/cd635d50f02d6cf98ed42de2f76289701c1ec587a363369255f01ed15aaf22be0813226bff3c53e99d971f9b540e0b3cc7583dbe05faded49b1b0bed2f638a18
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>":
-  version: 5.8.3
-  resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
+"typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>":
+  version: 5.9.2
+  resolution: "typescript@patch:typescript@npm%3A5.9.2#optional!builtin<compat/typescript>::version=5.9.2&hash=5786d5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/39117e346ff8ebd87ae1510b3a77d5d92dae5a89bde588c747d25da5c146603a99c8ee588c7ef80faaf123d89ed46f6dbd918d534d641083177d5fac38b8a1cb
+  checksum: 10c0/34d2a8e23eb8e0d1875072064d5e1d9c102e0bdce56a10a25c0b917b8aa9001a9cf5c225df12497e99da107dc379360bc138163c66b55b95f5b105b50578067e
   languageName: node
   linkType: hard
 
