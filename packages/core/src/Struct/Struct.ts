@@ -40,8 +40,11 @@ export const Struct = class Object {
     inspectOptions: InspectOptions,
     inspect: InspectFunction,
   ) {
+    // This is a workaround for vitest / loupe
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    const inspectFn = inspect ?? inspectOptions['inspect'];
     return this.#module.__inspect__ == null
-      ? inspect({ ...this }, { ...inspectOptions, sorted: defaultSort })
+      ? inspectFn({ ...this }, { ...inspectOptions, sorted: defaultSort })
       : this.#module.__inspect__(this, depth, inspectOptions, inspect);
   }
 
