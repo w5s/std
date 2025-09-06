@@ -17191,11 +17191,11 @@ __metadata:
   linkType: hard
 
 "react-json-view-lite@npm:^2.3.0":
-  version: 2.4.2
-  resolution: "react-json-view-lite@npm:2.4.2"
+  version: 2.5.0
+  resolution: "react-json-view-lite@npm:2.5.0"
   peerDependencies:
     react: ^18.0.0 || ^19.0.0
-  checksum: 10c0/0fb71260615d9b9c463ef3332075e4604225f88de3870118bf05f7d3ca869e159872caae03015160773fbf9bb7961b53e30e30ab24fa872000703666d8811e09
+  checksum: 10c0/8ecaa23d2fddea03f84892ca96577c5416d60a59ed2cad01dff648a60d25b799dac75dea1771e2b9b639ad026ce1efa7b44e6e636bf497b1d6ea0bac5962b96d
   languageName: node
   linkType: hard
 
