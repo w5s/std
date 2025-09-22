@@ -3,7 +3,7 @@ import { withTask } from '@w5s/task/dist/Testing.js';
 import { executeQuery } from './execute.js';
 import { DatabaseError } from './error.js';
 import { sql } from './sql.js';
-import { SQLQuery } from './query.js';
+import { SQLQuery } from './SQLQuery.js';
 import './driver/all.js';
 
 describe(executeQuery, () => {

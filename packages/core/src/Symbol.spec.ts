@@ -57,9 +57,14 @@ describe('Symbol', () => {
       expect(typeof Symbol.schema).toBe('string');
     });
   });
+  describe('.enumKeys', () => {
+    it('should be a symbol', () => {
+      expect(typeof Symbol.enumKeys).toBe('string');
+    });
+  });
   describe('.run', () => {
     it('should be a symbol', () => {
-      expect(typeof Symbol.run).toBe('symbol');
+      expect(typeof Symbol.run).toBe('string');
     });
   });
 });

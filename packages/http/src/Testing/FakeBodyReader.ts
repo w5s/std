@@ -53,29 +53,26 @@ export interface FakeBodyReader<Format extends BodyReaderFormat> extends BodyRea
  * @param format
  * @param parameters
  */
-export function FakeBodyReader<F extends BodyReaderFormat>(
-  format: F,
-  parameters: Resolver<BodyReaderValue<F>>,
-): FakeBodyReader<F> {
-  return {
+export const FakeBodyReader = Object.assign(
+  <F extends BodyReaderFormat>(format: F, parameters: Resolver<BodyReaderValue<F>>): FakeBodyReader<F> => ({
     ...defaultBodyReader,
     fakeReaderFormat: format,
     [formatToProperty[format]]:
       // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
       'resolve' in parameters ? () => Promise.resolve(parameters.resolve) : () => Promise.reject(parameters.reject),
-  };
-}
-export namespace FakeBodyReader {
-  /**
-   * Returns a new body value
-   *
-   * @example
-   * ```typescript
-   * const value = FakeBodyReader.value('arrayBuffer');// ArrayBuffer
-   * ```
-   * @param format - the format to use to generate
-   */
-  export function value<F extends BodyReaderFormat>(format: F): BodyReaderValue<F> {
-    return fakeBodyValue(format);
-  }
-}
+  }),
+  {
+    /**
+     * Returns a new body value
+     *
+     * @example
+     * ```typescript
+     * const value = FakeBodyReader.value('arrayBuffer');// ArrayBuffer
+     * ```
+     * @param format - the format to use to generate
+     */
+    value<F extends BodyReaderFormat>(format: F): BodyReaderValue<F> {
+      return fakeBodyValue(format);
+    },
+  },
+);

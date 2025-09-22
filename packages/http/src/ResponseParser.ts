@@ -8,28 +8,31 @@ import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { BodyReader } from './BodyReader.js';
 
+function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponseParser<V> {
+  return (response) =>
+    taskFrom(async ({ resolve, reject }) => {
+      try {
+        resolve(await fn(response));
+      } catch (error: unknown) {
+        reject(
+          new HTTPError.ParserError({
+            cause: error,
+          }),
+        );
+      }
+    });
+}
+
 /**
  * A transformation function taking an {@link Response} as input
  */
 export interface ResponseParser<Value> {
   (response: Response<BodyReader>): Task<Value, HTTPError.ParserError>;
 }
-export namespace ResponseParser {
-  function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponseParser<V> {
-    return (response) =>
-      taskFrom(async ({ resolve, reject }) => {
-        try {
-          resolve(await fn(response));
-        } catch (error: unknown) {
-          reject(
-            new HTTPError.ParserError({
-              cause: error,
-            }),
-          );
-        }
-      });
-  }
-
+/**
+ * @namespace
+ */
+export const ResponseParser = {
   /**
    * ArrayBuffer response parser
    *
@@ -41,7 +44,7 @@ export namespace ResponseParser {
    * const body = Task.andThen(request, ResponseParser.arrayBuffer); // Task<ArrayBuffer, HTTPError>
    * ```
    */
-  export const arrayBuffer: ResponseParser<ArrayBuffer> = from((response) => response.body.unsafeArrayBuffer());
+  arrayBuffer: from<ArrayBuffer>((response) => response.body.unsafeArrayBuffer()),
 
   /**
    * FormData response parser
@@ -54,7 +57,7 @@ export namespace ResponseParser {
    * const body = Task.andThen(request, ResponseParser.formData); // Task<FormData, HTTPError>
    * ```
    */
-  export const formData: ResponseParser<FormData> = from((response) => response.body.unsafeFormData());
+  formData: from<FormData>((response) => response.body.unsafeFormData()),
 
   /**
    * FormData response parser
@@ -69,7 +72,7 @@ export namespace ResponseParser {
    * const body = Task.andThen(request, HTTPParser.json<MyData>('unsafe')); // Task<MyData, HTTPError>
    * ```
    */
-  export function json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): ResponseParser<Return> {
+  json<Return extends JSONValue>(CodecModule: 'unsafe' | Codec<Return>): ResponseParser<Return> {
     const parser = from<Return>((response) => response.body.unsafeJSON() as Promise<Return>);
     return CodecModule === 'unsafe'
       ? parser
@@ -79,7 +82,7 @@ export namespace ResponseParser {
               ? mapError(decode(CodecModule, result.value), (error) => new HTTPError.ParserError({ cause: error }))
               : result,
           );
-  }
+  },
 
   /**
    * Blob response parser
@@ -92,7 +95,7 @@ export namespace ResponseParser {
    * const body = Task.andThen(request, HTTPParser.blob); // Task<Blob, HTTPError>
    * ```
    */
-  export const blob: ResponseParser<Blob> = from((response) => response.body.unsafeBlob());
+  blob: from<Blob>((response) => response.body.unsafeBlob()),
 
   /**
    * Text response parser
@@ -105,5 +108,5 @@ export namespace ResponseParser {
    * const body = Task.andThen(request, HTTPParser.text); // Task<string, HTTPError>
    * ```
    */
-  export const text: ResponseParser<string> = from((response) => response.body.unsafeText());
-}
+  text: from<string>((response) => response.body.unsafeText()),
+};

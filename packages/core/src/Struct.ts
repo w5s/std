@@ -6,6 +6,8 @@ import { define as defineType } from './Type/define.js';
 import type { Type } from './Type.js';
 import type { Symbol } from './Symbol.js';
 
+const type = '_' as const;
+
 /**
  * An Immutable Data Object with a `type` identifier
  *
@@ -23,11 +25,76 @@ export type Struct<
     /**
      * The type unique identifier
      */
-    [Struct.type]: string;
+    [type]: string;
   } = {
-    [Struct.type]: string;
+    [type]: string;
   },
 > = Readonly<Properties>;
+
+/**
+ * @namespace
+ */
+export const Struct = {
+  /**
+   * The type property discriminator
+   */
+  type,
+  /**
+   * Return a new Struct from `properties`.
+   * Struct adds debugging / inspecting abilities
+   *
+   * @example
+   * ```typescript
+   * const SomeType = Type.define<{ some: boolean }>({ typeName: 'SomeType' });
+   *
+   * Struct.create(SomeType, { some: true });// Struct { _: 'SomeType', some: true }
+   * ```
+   * @param module
+   * @param properties
+   */
+  create<Properties>(module: Struct.ModuleParameter<Properties>, properties: Properties): Properties {
+    return StructImpl.create(module, properties);
+  },
+  /**
+   * Return a new `Struct` default factory
+   * See {@link Module} for additional properties added to the constructor
+   *
+   * @example
+   * ```typescript
+   * type Model = Struct<{ [Struct.type]: 'Model', foo: boolean }>
+   * const Model = Struct.define<Model>({ typeName: 'Model' });
+   *
+   * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
+   * Model.typeName === 'Model' // true
+   * Model.hasInstance(instance); // true
+   * ```
+   * @param parameters - The parameters to define the Struct
+   */
+  define<Model extends Struct<{ [type]: string }>>(parameters: Struct.DefineParameters<Model>): Struct.Module<Model> {
+    const { typeName } = parameters;
+    const module = {
+      ...defineType({
+        hasInstance: (anyValue: unknown): anyValue is Model =>
+          // @ts-ignore We know what we are doing
+          anyValue == null ? false : anyValue[type] === typeName,
+        ...parameters,
+        typeName,
+      }),
+      create: (properties: any) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+        Struct.create(module, {
+          [type]: typeName,
+          ...properties,
+        }),
+    };
+
+    // @ts-ignore We know what we are doing
+    return Callable({
+      [Callable.symbol]: module.create,
+      ...module,
+    });
+  },
+};
 
 export namespace Struct {
   /**
@@ -59,76 +126,13 @@ export namespace Struct {
      */
     readonly typeName: Model[Struct.type];
   }
-  /**
-   * The type property discriminator
-   */
-  export const type = '_';
 
   export type type = typeof type;
 
   export type ModuleParameter<T> = Pick<Type<T>, Symbol.inspect> & AsString<T>;
 
-  /**
-   * Return a new Struct from `properties`.
-   * Struct adds debugging / inspecting abilities
-   *
-   * @example
-   * ```typescript
-   * const SomeType = Type.define<{ some: boolean }>({ typeName: 'SomeType' });
-   *
-   * Struct.create(SomeType, { some: true });// Struct { _: 'SomeType', some: true }
-   * ```
-   * @param module
-   * @param properties
-   */
-  export function create<Properties>(module: ModuleParameter<Properties>, properties: Properties): Properties {
-    return StructImpl.create(module, properties);
-  }
-
-  export interface DefineParameters<Model extends Struct<{ [Struct.type]: string }>>
+  export interface DefineParameters<Model extends Struct<{ [type]: string }>>
     extends PartialKeys<Type.Parameters<Model>, 'hasInstance'> {
     typeName: Model[Struct.type];
-  }
-
-  /**
-   * Return a new `Struct` default factory
-   * See {@link Module} for additional properties added to the constructor
-   *
-   * @example
-   * ```typescript
-   * type Model = Struct<{ [Struct.type]: 'Model', foo: boolean }>
-   * const Model = Struct.define<Model>({ typeName: 'Model' });
-   *
-   * const instance = Model({ foo: true }); // { _: 'Model', foo: true }
-   * Model.typeName === 'Model' // true
-   * Model.hasInstance(instance); // true
-   * ```
-   * @param typeName - the type unique name
-   */
-  export function define<Model extends Struct<{ [Struct.type]: string }>>(
-    parameters: DefineParameters<Model>,
-  ): Module<Model> {
-    const { typeName } = parameters;
-    const module = {
-      ...defineType({
-        hasInstance: (anyValue: unknown): anyValue is Model =>
-          // @ts-ignore We know what we are doing
-          anyValue == null ? false : anyValue[type] === typeName,
-        ...parameters,
-        typeName,
-      }),
-      create: (properties: any) =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        create(module, {
-          [type]: typeName,
-          ...properties,
-        }),
-    };
-
-    // @ts-ignore We know what we are doing
-    return Callable({
-      [Callable.symbol]: module.create,
-      ...module,
-    });
   }
 }

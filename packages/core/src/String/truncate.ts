@@ -29,6 +29,11 @@ export function truncate(self: string, options: truncate.Options = truncate.defa
   }
   return self;
 }
+truncate.defaultOptions = {
+  ellipsis: '...',
+  maxLength: 30 as Int,
+} satisfies truncate.Options;
+
 export namespace truncate {
   export type Options = {
     /**
@@ -40,8 +45,4 @@ export namespace truncate {
      */
     maxLength?: number;
   };
-  export const defaultOptions = {
-    ellipsis: '...',
-    maxLength: 30 as Int,
-  } satisfies Options;
 }

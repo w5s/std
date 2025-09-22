@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { SQLDataType } from './dataType.js';
+import { SQLDataType } from './SQLDataType.js';
 
 describe('SQLDataType', () => {
   describe('.CHAR', () => {
