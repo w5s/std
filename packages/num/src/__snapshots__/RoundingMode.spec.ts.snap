@@ -11,6 +11,15 @@ exports[`RoundingMode > has values 1`] = `
   "Up": "up",
   "__decode__": [Function],
   "__encode__": [Function],
+  "__enumKeys__": [
+    "Up",
+    "Down",
+    "Ceil",
+    "Floor",
+    "HalfUp",
+    "HalfDown",
+    "HalfEven",
+  ],
   "__inspect__": undefined,
   "__schema__": [Function],
   "asInstance": [Function],
@@ -22,14 +31,5 @@ exports[`RoundingMode > has values 1`] = `
   "range": [Function],
   "rangeSize": [Function],
   "typeName": "RoundingMode",
-  Symbol(w5s.enumKeys): [
-    "Up",
-    "Down",
-    "Ceil",
-    "Floor",
-    "HalfUp",
-    "HalfDown",
-    "HalfEven",
-  ],
 }
 `;

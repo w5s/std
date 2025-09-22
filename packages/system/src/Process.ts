@@ -4,7 +4,10 @@ import type { FileError } from './FileError.js';
 import { errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';
 
-export namespace Process {
+/**
+ * @namespace
+ */
+export const Process = {
   /**
    * Exits the process with the specified exit `code`.
    *
@@ -15,9 +18,9 @@ export namespace Process {
    * ```
    * @param code - the exit code
    */
-  export function exit(code: number): Task<never, never> {
+  exit(code: number): Task<never, never> {
     return taskFrom(({ resolve }) => resolve(process.exit(code)));
-  }
+  },
 
   /**
    * Returns the current working directory of the process
@@ -28,9 +31,9 @@ export namespace Process {
    * Task.run(task);// Result.Ok(FilePath('current/working/directory'))
    * ```
    */
-  export function getCurrentDirectory(): Task<FilePath, never> {
+  getCurrentDirectory(): Task<FilePath, never> {
     return taskFrom(({ resolve }) => resolve(process.cwd() as FilePath));
-  }
+  },
 
   /**
    * Sets the current working directory of the process or rejects an error if doing so fails (for instance, if the specified `directory` does not exist).
@@ -42,8 +45,8 @@ export namespace Process {
    * ```
    * @param directory - the directory to set as the current working directory
    */
-  export function setCurrentDirectory(directory: FilePath): Task<void, FileError> {
+  setCurrentDirectory(directory: FilePath): Task<void, FileError> {
     // eslint-disable-next-line @typescript-eslint/unbound-method, n/no-sync
     return errnoTaskSync(process.chdir)(directory);
-  }
-}
+  },
+};
