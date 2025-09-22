@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { SQLDataType } from './dataType.js';
+import { SQLDataType } from './SQLDataType.js';
 import { sql } from './sql.js';
-import { SQLQuery } from './query.js';
+import { SQLQuery } from './SQLQuery.js';
 
 describe('SQLQuery', () => {
   describe('.toSQLStatement()', () => {

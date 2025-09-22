@@ -7,6 +7,11 @@ exports[`RequestRedirect > is an enum 1`] = `
   "Manual": "manual",
   "__decode__": [Function],
   "__encode__": [Function],
+  "__enumKeys__": [
+    "Follow",
+    "Error",
+    "Manual",
+  ],
   "__inspect__": undefined,
   "__schema__": [Function],
   "asInstance": [Function],
@@ -18,10 +23,5 @@ exports[`RequestRedirect > is an enum 1`] = `
   "range": [Function],
   "rangeSize": [Function],
   "typeName": "RequestRedirect",
-  Symbol(w5s.enumKeys): [
-    "Follow",
-    "Error",
-    "Manual",
-  ],
 }
 `;

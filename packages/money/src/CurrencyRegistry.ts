@@ -47,7 +47,6 @@ export function CurrencyRegistry(app: Application): CurrencyRegistry {
     getByCode,
   };
 }
-
-export namespace CurrencyRegistry {
-  export const { add, getByCode } = CurrencyRegistry(application);
-}
+const { add, getByCode } = CurrencyRegistry(application);
+CurrencyRegistry.add = add;
+CurrencyRegistry.getByCode = getByCode;

@@ -4,14 +4,15 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
 import type { TaskCanceler, TaskFunction, Task as TaskInterface } from '../Task.js';
 import { run as taskRun } from './run.js';
 
+const $run = Symbol.run;
 /**
  * An implementation of {@link @w5s/task!TaskLike}
  */
 export class Task<Value, Error> implements TaskInterface<Value, Error> {
-  [Symbol.run]: TaskFunction<Value, Error>;
+  [$run]: TaskFunction<Value, Error>;
 
   constructor(runFn: TaskFunction<Value, Error>) {
-    this[Symbol.run] = runFn;
+    this[$run] = runFn;
   }
 
   run(canceler?: TaskCanceler): Awaitable<Result<Value, Error>> {

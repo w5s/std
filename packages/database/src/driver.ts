@@ -5,29 +5,28 @@ import type { SQLStatement } from './sql.js';
 import { DatabaseError } from './error.js';
 import { application } from './application.js';
 
-export namespace DatabaseDriver {
-  const registry = useRef<Readonly<Record<string, any>>>(application.state, 'registry', {});
-
-  function notFound(name: string): never {
-    throw new ReferenceError(`${name} driver not found`);
-  }
-
-  export function get<Name extends keyof DatabaseDriverMap>(name: Name): ModuleOf<Name> {
+const registry = useRef<Readonly<Record<string, any>>>(application.state, 'registry', {});
+function notFound(name: string): never {
+  throw new ReferenceError(`${name} driver not found`);
+}
+/**
+ * @namespace
+ */
+export const DatabaseDriver = {
+  get<Name extends keyof DatabaseDriverMap>(name: Name): DatabaseDriver.ModuleOf<Name> {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return registry.current[name] ?? notFound(name);
-  }
-
-  export function set<Name extends keyof DatabaseDriverMap>(name: Name, module: ModuleOf<Name>): void {
+  },
+  set<Name extends keyof DatabaseDriverMap>(name: Name, module: DatabaseDriver.ModuleOf<Name>): void {
     registry.current = {
       ...registry.current,
       [name]: module,
     };
-  }
-
-  export function Make<Name extends string, Client>(
+  },
+  Make<Name extends string, Client>(
     adapter: Name,
     execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler) => Promise<unknown>,
-  ): Module<Name, Client> {
+  ): DatabaseDriver.Module<Name, Client> {
     return {
       adapter,
       execute,
@@ -35,8 +34,10 @@ export namespace DatabaseDriver {
         return new DatabaseError({ cause });
       },
     };
-  }
+  },
+};
 
+export namespace DatabaseDriver {
   export interface Module<Name extends string, Client> {
     adapter: Name;
 
@@ -46,7 +47,7 @@ export namespace DatabaseDriver {
   }
 
   type ClientOf<Name extends keyof DatabaseDriverMap> = DatabaseDriverMap[Name];
-  type ModuleOf<Name extends keyof DatabaseDriverMap> = Module<Name, ClientOf<Name>>;
+  export type ModuleOf<Name extends keyof DatabaseDriverMap> = Module<Name, ClientOf<Name>>;
 }
 
 export type Database = DatabaseDriverMap[keyof DatabaseDriverMap];

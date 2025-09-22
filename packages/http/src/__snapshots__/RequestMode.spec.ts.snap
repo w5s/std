@@ -8,6 +8,12 @@ exports[`RequestMode > is an enum 1`] = `
   "SameOrigin": "same-origin",
   "__decode__": [Function],
   "__encode__": [Function],
+  "__enumKeys__": [
+    "SameOrigin",
+    "CORS",
+    "Navigate",
+    "NoCORS",
+  ],
   "__inspect__": undefined,
   "__schema__": [Function],
   "asInstance": [Function],
@@ -19,11 +25,5 @@ exports[`RequestMode > is an enum 1`] = `
   "range": [Function],
   "rangeSize": [Function],
   "typeName": "RequestMode",
-  Symbol(w5s.enumKeys): [
-    "SameOrigin",
-    "CORS",
-    "Navigate",
-    "NoCORS",
-  ],
 }
 `;

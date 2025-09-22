@@ -108,8 +108,6 @@ export function sql(strings: TemplateStringsArray, ...values: Array<string | SQL
   }
   return SQLStatement(buffer);
 }
-export namespace sql {
-  export function raw(value: string) {
-    return SQLStatement({ strings: [value] });
-  }
-}
+sql.raw = function raw(value: string) {
+  return SQLStatement({ strings: [value] });
+};

@@ -2,7 +2,7 @@ import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { type Database, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
-import { SQLQuery } from './query.js';
+import { SQLQuery } from './SQLQuery.js';
 import type { DatabaseError } from './error.js';
 
 /**

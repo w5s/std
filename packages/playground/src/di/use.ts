@@ -4,8 +4,10 @@ import type { ContainerProvider } from './ContainerProvider.js';
 import type { ContainerKey } from './ContainerKey.js';
 import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
+const $cache: unique symbol = Symbol('use.cache');
+
 interface Cacheable {
-  [use.cache]: use.Cache;
+  [$cache]: use.Cache;
 }
 
 function cacheFor(appContext: object): use.Cache {
@@ -66,9 +68,9 @@ export function use<Key extends string | symbol, Value>(
 export function use(appContext: any, key: any) {
   return cacheGet(appContext, cacheFor(appContext), key);
 }
-export namespace use {
-  export const cache: unique symbol = Symbol('use.cache');
+use.cache = $cache;
 
+export namespace use {
   export interface Cache {
     /**
      * The app context
