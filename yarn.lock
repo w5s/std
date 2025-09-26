@@ -6354,7 +6354,7 @@ __metadata:
     "@w5s/conventional-changelog": "npm:2.2.5"
     "@w5s/cspell-config": "npm:2.4.1"
     "@w5s/eslint-config": "npm:2.4.5"
-    "@w5s/ts-config": "npm:2.3.3"
+    "@w5s/ts-config": "npm:2.4.0"
     cspell: "npm:9.2.1"
     eslint: "npm:8.57.1"
     markdown-magic: "npm:2.6.1"
@@ -6434,15 +6434,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/ts-config@npm:2.3.3":
-  version: 2.3.3
-  resolution: "@w5s/ts-config@npm:2.3.3"
+"@w5s/ts-config@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@w5s/ts-config@npm:2.4.0"
   peerDependencies:
     typescript: ">=5.x"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 10c0/885772a518328befb8db0fde5219f4782011f22f664df626d4c71308788e70b2f93cdf345252e6efa1d69fee75349788bd729f6ae91d0175b2b643e7911ec12a
+  checksum: 10c0/b4973ac8aa08fe9ea124deccc48b1ea9166a9d5eb436fa082487a9c0fb1a3ea22f81f5fc97dc00d99d44663b576e678a8a03c036557bef317ec13309b479121f
   languageName: node
   linkType: hard
 
