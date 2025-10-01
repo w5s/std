@@ -58,7 +58,7 @@
     "@docusaurus/module-type-aliases": "3.9.1",
     "@docusaurus/tsconfig": "3.9.1",
     "@types/node": "20.19.19",
-    "typescript": "5.9.2"
+    "typescript": "5.9.3"
   },
   "engines": {
     "node": ">=20.0.0"
