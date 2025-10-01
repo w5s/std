@@ -57,7 +57,7 @@
     "@w5s/error": "^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "typescript": "5.9.2",
+    "typescript": "5.9.3",
     "vite": "latest",
     "vitest": "latest"
   },
