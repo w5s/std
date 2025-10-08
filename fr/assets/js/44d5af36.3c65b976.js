@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_w5s_website=self.webpackChunk_w5s_website||[]).push([[8012],{1158:e=>{e.exports=JSON.parse('{"authors":[{"name":"Julien Polo","title":"Creator of W5S","url":"https://github.com/jpolo","imageURL":"https://github.com/jpolo.png","key":"jpolo","page":null,"count":2}]}')}}]);
