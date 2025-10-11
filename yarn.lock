@@ -3534,15 +3534,15 @@ __metadata:
   linkType: hard
 
 "@gerrit0/mini-shiki@npm:^3.12.0":
-  version: 3.13.0
-  resolution: "@gerrit0/mini-shiki@npm:3.13.0"
+  version: 3.13.1
+  resolution: "@gerrit0/mini-shiki@npm:3.13.1"
   dependencies:
     "@shikijs/engine-oniguruma": "npm:^3.13.0"
     "@shikijs/langs": "npm:^3.13.0"
     "@shikijs/themes": "npm:^3.13.0"
     "@shikijs/types": "npm:^3.13.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
-  checksum: 10c0/bc45e9f80c3583b32ede3aee870cdc37ce658618f7d1609416ac110ec0e764ff4114fa3690ced02d901980d8335b2b39d0b202c6f81ee863e09de28ce4caa323
+  checksum: 10c0/926babea969fb6788eb8c36fb69ff4c45273bbebde318297a89a45807aba42d266cab5654f13b4126b0bb9c4d074dbf2505d874d917daa9381d5281a5f66953c
   languageName: node
   linkType: hard
 
@@ -7695,9 +7695,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001702, caniuse-lite@npm:^1.0.30001746":
-  version: 1.0.30001749
-  resolution: "caniuse-lite@npm:1.0.30001749"
-  checksum: 10c0/f5100599361be03e93cae1f38380fdb78b477b573cb27f8aaf8ed8461ac0233ea84c7e127f441ca0a82ff23f4c37a8855b7c6a02e79d70769a786550bc1be69e
+  version: 1.0.30001750
+  resolution: "caniuse-lite@npm:1.0.30001750"
+  checksum: 10c0/aa77ebf264ca8dcfe913fadaa19f06bf839d65dec24498fdb9c45739ab0828b8275ca30c698f4ee86829d38264eaa461edf4577e407753da8205ab1d285e105d
   languageName: node
   linkType: hard
 
