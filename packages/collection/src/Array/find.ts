@@ -24,6 +24,6 @@ export function find<Item>(
   predicate: (value: Item, index: Int, array: Array<Item>) => boolean,
 ): Option<Item>;
 export function find<Item>(self: Array<Item>, predicate: (value: Item, index: Int, array: Array<Item>) => boolean) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return (self as any).find(predicate);
 }

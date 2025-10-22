@@ -93,7 +93,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
  */
 export function Application<Configuration extends object = EmptyObject>(
   id: string,
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+
   initialConfiguration: Configuration = {} as Configuration,
   store?: Ref<Readonly<Record<string, ApplicationState>>>,
 ): Application<Configuration> {
@@ -110,7 +110,7 @@ export function Application<Configuration extends object = EmptyObject>(
 
   function get<Key extends keyof Configuration>(key: Key): Configuration[Key] {
     // @ts-ignore Wrong typing
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+
     return state.current.configuration[key];
   }
 

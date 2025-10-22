@@ -15,6 +15,6 @@ export function reverse<Item>(self: Array<Item>): Array<Item> {
   return map(self, reverseFunction);
 }
 function reverseFunction<Item>(_: Item, index: Int, array: Array<Item>) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // eslint-disable-next-line ts/no-non-null-assertion
   return array[array.length - 1 - index]!;
 }

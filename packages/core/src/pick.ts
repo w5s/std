@@ -16,7 +16,6 @@ import { __hasOwn } from './__hasOwn.js';
 export function pick<T extends object, K extends keyof T>(self: Readonly<T>, keys: readonly K[]): Pick<T, K> {
   const returnValue: object = {};
   for (const key of keys) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (typeof key !== 'function' && key != null && __hasOwn(self, key)) {
       // @ts-ignore This is correct
       returnValue[key] = self[key];

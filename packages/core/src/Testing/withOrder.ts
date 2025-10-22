@@ -24,7 +24,7 @@ export interface ExpectOrder {
 export function withOrder(expectFn: ExpectFunction) {
   const create = <T>(order: Order<T>, isNot: boolean): ExpectOrder => ({
     toSortValues(orderedValues: Array<T>) {
-      const expectValue = expectFn(orderedValues.concat().sort(order));
+      const expectValue = expectFn([...orderedValues].sort(order));
       return (isNot ? expectValue.not : expectValue).toEqual(orderedValues);
     },
   });

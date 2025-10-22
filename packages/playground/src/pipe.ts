@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable ts/no-unsafe-call */
+/* eslint-disable ts/no-unsafe-function-type */
+/* eslint-disable ts/no-non-null-assertion */
+/* eslint-disable ts/no-unsafe-return */
 /**
  * Pipe `value` to a sequence of function.
  *

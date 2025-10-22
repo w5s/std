@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable ts/no-non-null-assertion */
 import type { LogLevel } from './LogLevel.js';
 import type { LogMessageItem } from './LogMessage.js';
 import type { LogRecord } from './LogRecord.js';

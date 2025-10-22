@@ -1,6 +1,5 @@
 /* eslint-disable no-self-assign */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { asString } from './CustomError/asString.js';
 import { isError } from './isError.js';
 
@@ -40,7 +39,7 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
   /**
    * New operator
    */
-  new <Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
+  new<Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
   /**
    * Call operator
    */
@@ -96,7 +95,7 @@ export const CustomError: CustomErrorConstructor = (() => {
       [extra: string]: unknown;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-argument
+    // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-argument
     const returnValue: MutableError = new.target ? (this as MutableError) : __create(CustomError.prototype);
 
     // Assign default properties from prototype

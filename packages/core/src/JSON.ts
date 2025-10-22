@@ -15,8 +15,8 @@ export type JSONValue =
   | string
   | ReadonlyArray<JSONValue>
   | {
-      readonly [key: string]: JSONValue;
-    };
+    readonly [key: string]: JSONValue;
+  };
 
 /**
  * A collection of functions to encode/decode JSON. Instead of throwing errors like `globalThis.JSON`, functions returns `Result`

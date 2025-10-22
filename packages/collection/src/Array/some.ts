@@ -19,6 +19,6 @@ export function some<Item>(
   self: Array<Item>,
   predicate: (item: Item, index: Int, array: Array<Item>) => boolean,
 ): boolean {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return (self as any).some(predicate);
 }

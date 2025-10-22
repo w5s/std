@@ -6,7 +6,7 @@ import { andThen } from './andThen.js';
 import { run } from './run.js';
 
 describe(andThen, () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line ts/no-unused-vars
   const anyError = Object.freeze({ message: 'error message' });
   const anyValue = Object.freeze({ foo: true });
   const expectTask = withTask(expect);

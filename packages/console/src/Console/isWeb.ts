@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable ts/no-unsafe-member-access */
 import type { Option } from '@w5s/core';
 
 export function isWeb(): boolean {

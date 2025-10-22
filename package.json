@@ -21,9 +21,9 @@
     "develop": ":",
     "docs": "node markdown.mjs && turbo run docs && yarn workspace @w5s/website run start",
     "format": "turbo run format --continue",
-    "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
+    "format:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
     "lint": "turbo run lint",
-    "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
+    "lint:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
     "postinstall": "npx run-p \"postinstall:*\"",
     "postinstall:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
@@ -58,7 +58,7 @@
       "eslint"
     ]
   },
-  "eslintConfig": {
+  "_eslintConfig": {
     "env": {
       "node": true
     },

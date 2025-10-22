@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { ImmediateId } from './ImmediateId.js';
 
 const __clearImmediate: (id: any) => void =

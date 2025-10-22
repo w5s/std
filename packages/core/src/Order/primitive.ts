@@ -19,7 +19,7 @@ export function primitive(left: any, right: any): Ordering {
   return left === right
     ? 0
     : // @ts-ignore workaround
-      left < right
+    left < right
       ? -1
       : 1;
 }

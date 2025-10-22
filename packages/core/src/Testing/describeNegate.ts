@@ -20,6 +20,7 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param subject - The subject to test
  * @param properties - Object containing test properties
+ * @param properties.values
  * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeNegate<T>(

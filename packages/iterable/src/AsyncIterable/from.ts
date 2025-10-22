@@ -12,7 +12,7 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 export function from<Value>(source: AsyncIterableLike<Value>): AsyncIterable<Value> {
   return {
     async *[Symbol.asyncIterator]() {
-      yield* source;
+      yield * source;
     },
   };
 }

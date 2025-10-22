@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import currencyData from 'currencies.json';

@@ -11,7 +11,7 @@ export type FileSize = Int & Tag<'FileSize'>;
  * @namespace
  */
 export const FileSize = Object.assign(
-  // eslint-disable-next-line @typescript-eslint/no-shadow, prefer-arrow-callback
+  // eslint-disable-next-line ts/no-shadow, prefer-arrow-callback
   function FileSize(value: number): FileSize {
     return Math.trunc(value) as FileSize;
   },

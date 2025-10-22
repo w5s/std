@@ -81,7 +81,7 @@ export const Hash = {
    * @param anyValue - hashed value
    */
   from(anyValue: undefined | null | boolean | number | string): Hash.Value {
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
+    // eslint-disable-next-line ts/switch-exhaustiveness-check
     switch (typeof anyValue) {
       case 'boolean': {
         return anyValue ? TRUE : FALSE;
@@ -96,7 +96,7 @@ export const Hash = {
         return hashString(anyValue);
       }
       default: {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+        // eslint-disable-next-line ts/no-unnecessary-condition
         if (anyValue === null) {
           return NULL;
         }

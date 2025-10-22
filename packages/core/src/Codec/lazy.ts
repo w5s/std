@@ -23,7 +23,7 @@ import { schema } from './schema.js';
  */
 export function lazy<T>(getCodec: () => Codec<T>): Codec<T> {
   let ref: Option<Codec<T>>;
-  // eslint-disable-next-line no-return-assign
+
   const resolve = () => ref ?? (ref = getCodec());
   return {
     [Symbol.decode]: (input) => decode(resolve(), input),

@@ -14,7 +14,7 @@ export interface Equal<T> {
    * ```
    * @category Comparator
    */
-  equals(this: void, left: T, right: T): boolean;
+  'equals'(this: void, left: T, right: T): boolean;
   /**
    * "Not equal to" operator
    *
@@ -45,6 +45,8 @@ export interface Equal<T> {
 /**
  * Equal module constructor
  *
+ * @param properties
+ * @param properties.equals
  * @example
  * ```typescript
  * type T;
@@ -61,7 +63,7 @@ export function Equal<T>(properties: { equals: (left: T, right: T) => boolean })
   const equals = (left: T, right: T) => properties.equals(left, right);
   const notEquals = (left: T, right: T) => !properties.equals(left, right);
   return {
-    equals: properties.equals,
+    'equals': properties.equals,
     '==': equals,
     '!=': notEquals,
   };

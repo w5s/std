@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-
 import type { Option } from '@w5s/core';
 import { panic } from '@w5s/error/dist/panic.js';
 

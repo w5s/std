@@ -15,7 +15,7 @@ export function concat<Value>(iterables: AsyncIterable<AsyncIterable<Value>>): A
   return {
     async *[Symbol.asyncIterator]() {
       for await (const iterable of iterables) {
-        yield* iterable;
+        yield * iterable;
       }
     },
   };

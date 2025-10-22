@@ -24,7 +24,7 @@ describe(writeFile, () => {
     let fileContent = '';
     vi.spyOn(Internal.FS, 'writeFile').mockImplementation(async (_file, content: any, options: any) => {
       for (const contentChar of content) {
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        // eslint-disable-next-line ts/strict-boolean-expressions
         if (options.signal.aborted) {
           return;
         }

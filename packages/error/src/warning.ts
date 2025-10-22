@@ -13,7 +13,6 @@
  */
 export function warning(condition: boolean, message?: string | null): void {
   if (!condition) {
-    // eslint-disable-next-line no-console
     console.warn(`Warning: ${message ?? ''}`);
   }
 }

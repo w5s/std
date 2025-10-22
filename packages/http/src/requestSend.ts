@@ -33,7 +33,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
   const { fetch: fetchFn } = client;
 
   return taskFrom(async ({ resolve, reject, canceler }) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line ts/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;
 
     const controller = new AbortController();
@@ -70,7 +70,6 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
 
 function isValidURL(url: string): boolean {
   try {
-    // eslint-disable-next-line no-new
     new globalThis.URL(url);
     return true;
   } catch {

@@ -24,7 +24,7 @@ export function ContainerKey<Value>(
   defaultProvider?: Option<ContainerProviderFunction<{}, Value>>,
 ): ContainerKey<any, any> {
   return {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // eslint-disable-next-line ts/no-unsafe-assignment
     containerKey: key,
     containerDefaultProvider: defaultProvider ?? (() => undefined),
   };

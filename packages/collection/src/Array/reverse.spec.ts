@@ -13,6 +13,6 @@ describe(reverse, () => {
   });
   it('should map each value to callback', () => {
     const array = [1, 2, 3];
-    expect(reverse(array)).toEqual(array.slice().reverse());
+    expect(reverse(array)).toEqual([...array].reverse());
   });
 });

@@ -28,6 +28,6 @@ import { __scheduler } from '../__scheduler.js';
 export function run<T>(callback: FiberCallback<T>): FiberResult<T> {
   const result = __scheduler.spawn(callback);
   __scheduler.resume(result.id);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line ts/no-unsafe-return
   return result;
 }

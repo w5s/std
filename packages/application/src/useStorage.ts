@@ -21,6 +21,6 @@ export function useStorage(hostObject: object): Storage {
   const target = hostObject as {
     [P in string | symbol]: unknown;
   };
-  // eslint-disable-next-line no-return-assign
+
   return (target[$storage] as Option<Storage>) ?? (target[$storage] = new Map());
 }

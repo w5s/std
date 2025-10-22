@@ -12,6 +12,6 @@ import type { Pretty } from './Pretty.js';
 export type RequiredKeys<T, Keys extends keyof T> = Pretty<
   // Forward all other keys
   Omit<T, Keys> &
-    // Make required only specified keys
-    Required<Pick<T, Keys>>
+  // Make required only specified keys
+  Required<Pick<T, Keys>>
 >;

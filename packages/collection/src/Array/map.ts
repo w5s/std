@@ -29,6 +29,5 @@ export function map<FromItem, ToItem>(
     return nextValue;
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return changed ? returnValue : (self as unknown as Array<ToItem>);
 }

@@ -3,9 +3,8 @@ import { panic } from '@w5s/error';
 
 const __tryImport = async (path: string): Promise<TestingLibrary | undefined> => {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const module = await import(path);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
     return module;
   } catch {
     return undefined;

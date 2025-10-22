@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable ts/no-non-null-assertion */
 import type { Type } from '../Type.js';
 import { define } from './define.js';
 import { encode } from '../Codec/encode.js';
@@ -30,7 +30,7 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
           return error(input, typeName);
         }
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
         returnValue[index] = decoded.value;
       }
       return ok(

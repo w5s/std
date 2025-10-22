@@ -11,8 +11,8 @@ interface IntNumeric
 
 const checked =
   (fn: (left: Int, right: Int) => number) =>
-  (left: Int, right: Int): Option<Int> =>
-    fromNumber(fn(left, right));
+    (left: Int, right: Int): Option<Int> =>
+      fromNumber(fn(left, right));
 
 export const IntNumeric: IntNumeric = {
   '+?': checked((left, right) => left + right),
