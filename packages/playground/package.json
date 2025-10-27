@@ -27,6 +27,7 @@
     "lint": "npx run-p \"lint:*\"",
     "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "prepare": "npx run-p \"prepare:*\"",
+    "prepare:empty": ":",
     "prepublishOnly": "npm run clean;npm run build",
     "spellcheck": "cspell --no-progress '**'",
     "test": "npx run-p \"test:*\"",

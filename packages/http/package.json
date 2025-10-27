@@ -45,6 +45,7 @@
     "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "prebuild:tsc": "node scripts/buildStatus.js",
     "prepare": "npx run-p \"prepare:*\"",
+    "prepare:empty": ":",
     "prepublishOnly": "npm run clean;npm run build",
     "size-limit": "npx size-limit",
     "spellcheck": "cspell --no-progress '**'",
