@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // import path from 'node:path';
-import markdownMagic from 'markdown-magic';
+import { markdownMagic } from 'markdown-magic';
 import markdownPackageJSON from 'markdown-magic-package-json';
 import markdownList from 'markdown-magic-subpackage-list';
 
