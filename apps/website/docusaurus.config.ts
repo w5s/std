@@ -2,8 +2,11 @@
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import fs from 'node:fs';
-import nodePath from 'node:path';
+import type typedocPluginFunction from 'docusaurus-plugin-typedoc-api';
+import { fileURLToPath } from 'node:url';
 import packageJSON from './package.json';
+
+type TypedocPluginOptions = Parameters<typeof typedocPluginFunction>[1];
 
 export interface CustomFields {
   metaTitle?: string;
@@ -25,7 +28,7 @@ const { themes } = require('prism-react-renderer');
 const lightTheme = themes.github;
 const darkTheme = themes.dracula;
 
-const projectRoot = nodePath.dirname(nodePath.dirname(nodePath.join(__dirname)));
+const projectRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 const githubHref = packageJSON.repository.url.replace('git@github.com:', 'https://github.com/');
 // eslint-disable-next-line n/no-sync
@@ -39,7 +42,7 @@ const packageList = fs
       // eslint-disable-next-line import/no-dynamic-require
       package: require(`${projectRoot}/packages/${entry}/package.json`),
       entry: {
-        index: { path: 'src/index.ts' },
+        index: { path: 'src/index.ts', label: undefined as unknown as string },
         ...(hasTesting ? { testing: { path: 'src/Testing.ts', label: 'Testing utilities' } } : undefined),
       },
     };
@@ -217,7 +220,8 @@ const config: Config = (() => {
           readmes: true,
           // debug: true,
           tsconfigName: 'tsconfig.json',
-        },
+          gitRefName: 'main',
+        } satisfies Partial<TypedocPluginOptions>,
       ],
     ],
   };
