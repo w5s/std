@@ -118,6 +118,11 @@ const config: Config = (() => {
       image: 'img/w5s_social_cover.png',
       metadata: [
         { name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' },
+        { name: 'revisit-after', content: '7 days' },
+        { name: 'robots', content: 'archive,follow,imageindex,index,odp,snippet,translate' },
+        { name: 'googlebot', content: 'index,follow' },
+        { name: 'summary', content: tagline },
+        { name: 'target', content: 'all' },
         /* cspell:disable-next-line */
         { name: 'google-site-verification', content: 'crTDqUN2i_LENrHWPhxylaLVKPZ8EdHYemMbluuGhIA' },
       ],

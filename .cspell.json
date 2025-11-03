@@ -3,15 +3,17 @@
   "language": "en",
   "import": ["@w5s/cspell-config"],
   "words": [
+    "bigdecimal",
     "CLOB",
     "concat",
+    "googlebot",
+    "imageindex",
+    "Infima",
+    "monoid",
     "NCHAR",
     "NVARCHAR",
     "SMALLINT",
     "VARBINARY",
-    "VARCHAR",
-    "bigdecimal",
-    "Infima",
-    "monoid"
+    "VARCHAR"
   ]
 }
