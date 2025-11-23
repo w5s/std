@@ -99,7 +99,7 @@
     "@types/node": "20.19.25",
     "@w5s/commitlint-config": "3.0.1",
     "@w5s/conventional-changelog": "3.0.2",
-    "@w5s/cspell-config": "3.0.1",
+    "@w5s/cspell-config": "3.0.2",
     "@w5s/eslint-config": "2.4.5",
     "@w5s/tsconfig": "3.0.1",
     "cspell": "9.3.2",
