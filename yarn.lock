@@ -6524,9 +6524,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/cspell-config@npm:3.0.1":
-  version: 3.0.1
-  resolution: "@w5s/cspell-config@npm:3.0.1"
+"@w5s/cspell-config@npm:3.0.2":
+  version: 3.0.2
+  resolution: "@w5s/cspell-config@npm:3.0.2"
   dependencies:
     "@cspell/cspell-bundled-dicts": "npm:^9.0.0"
   peerDependencies:
@@ -6534,7 +6534,7 @@ __metadata:
   peerDependenciesMeta:
     cspell:
       optional: true
-  checksum: 10c0/b08a233a23b10500ac25c130509dc11cf9d00161d311c226dc8e962b74e117ebcbae8744c5101eaac2c21282c0153be6cfb0b561a2a86d435b65047136e25bfd
+  checksum: 10c0/e6adc348c1cc565fc23a54d0841c50fb61807dfb8448911387be87f6c89fb0a0203a7a7a4d6e2dc5b78f02ea2c5f974846c272a29e84273adf68a62420250a88
   languageName: node
   linkType: hard
 
@@ -6787,7 +6787,7 @@ __metadata:
     "@types/node": "npm:20.19.25"
     "@w5s/commitlint-config": "npm:3.0.2"
     "@w5s/conventional-changelog": "npm:3.0.2"
-    "@w5s/cspell-config": "npm:3.0.1"
+    "@w5s/cspell-config": "npm:3.0.2"
     "@w5s/eslint-config": "npm:2.4.5"
     "@w5s/tsconfig": "npm:3.0.1"
     cspell: "npm:9.3.2"
