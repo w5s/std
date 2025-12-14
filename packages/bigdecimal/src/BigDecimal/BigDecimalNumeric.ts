@@ -13,7 +13,8 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
 }
 
 interface BigDecimalNumeric
-  extends Numeric.Add<BigDecimal>,
+  extends
+    Numeric.Add<BigDecimal>,
     Numeric.Subtract<BigDecimal>,
     Numeric.Multiply<BigDecimal>,
     Numeric.CheckedRemainder<BigDecimal> {}

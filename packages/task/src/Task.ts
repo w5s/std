@@ -35,8 +35,10 @@ export type TaskRunner = <Value, Error>(
   canceler: TaskCanceler,
 ) => Awaitable<Result<Value, Error>>;
 
-export interface TaskParametersOverrides<Value, Error>
-  extends PartialKeys<Pick<TaskParameters<Value, Error>, 'resolve' | 'reject' | 'canceler'>, 'canceler'> {}
+export interface TaskParametersOverrides<Value, Error> extends PartialKeys<
+  Pick<TaskParameters<Value, Error>, 'resolve' | 'reject' | 'canceler'>,
+  'canceler'
+> {}
 
 /**
  * All context passed to task in order to execute

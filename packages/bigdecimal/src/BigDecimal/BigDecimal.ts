@@ -29,18 +29,17 @@ const BigDecimalStruct = Struct.define<BigDecimal>({
 /**
  * A BigDecimal is decimal number with a strict, fixed and safe precision (scale)
  */
-export interface BigDecimal
-  extends Struct<{
-    _: 'BigDecimal';
-    /**
-     * The base denominator
-     */
-    value: bigint;
-    /**
-     * The decimal scale N = value / (2 ** scale)
-     */
-    scale: number;
-  }> {}
+export interface BigDecimal extends Struct<{
+  _: 'BigDecimal';
+  /**
+   * The base denominator
+   */
+  value: bigint;
+  /**
+   * The decimal scale N = value / (2 ** scale)
+   */
+  scale: number;
+}> {}
 
 export const BigDecimal = Callable({
   ...BigDecimalStruct,

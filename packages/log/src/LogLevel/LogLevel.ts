@@ -4,18 +4,17 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
 import { LogLevelAsString } from './LogLevelAsString.js';
 
-export interface LogLevel
-  extends Struct<{
-    [Struct.type]: 'LogLevel';
-    /**
-     * The level string representation.
-     */
-    name: string;
-    /**
-     * The level value
-     */
-    value: Int;
-  }> {}
+export interface LogLevel extends Struct<{
+  [Struct.type]: 'LogLevel';
+  /**
+   * The level string representation.
+   */
+  name: string;
+  /**
+   * The level value
+   */
+  value: Int;
+}> {}
 
 const typeName = 'LogLevel';
 const encode = ({ name, value }: LogLevel) => `${name}[${value}]`;

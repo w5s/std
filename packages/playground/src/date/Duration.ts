@@ -74,17 +74,16 @@ function format(duration: Duration): string {
   )}`;
 }
 
-export interface Duration
-  extends Struct<{
-    _: 'Duration';
-    years: Int;
-    months: Int;
-    weeks: Int;
-    days: Int;
-    hours: Int;
-    minutes: Int;
-    seconds: number;
-  }> {}
+export interface Duration extends Struct<{
+  _: 'Duration';
+  years: Int;
+  months: Int;
+  weeks: Int;
+  days: Int;
+  hours: Int;
+  minutes: Int;
+  seconds: number;
+}> {}
 
 const DurationStruct = Struct.define<Duration>({ typeName: 'Duration' });
 

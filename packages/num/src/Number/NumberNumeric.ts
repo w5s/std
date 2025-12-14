@@ -1,7 +1,8 @@
 import type { Numeric, Option } from '@w5s/core';
 
 interface NumberNumeric
-  extends Numeric.Add<number>,
+  extends
+    Numeric.Add<number>,
     Numeric.Multiply<number>,
     Numeric.Remainder<number>,
     Numeric.Subtract<number>,

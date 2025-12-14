@@ -131,14 +131,13 @@ export namespace Slack {
       return apiCall<postMessage.Response>(client, 'chat.postMessage', { as_user: 'true', ...request });
     }
     export namespace postMessage {
-      export interface Request
-        extends Readonly<{
-          // username?: Slack.UserId;
-          text?: Option<string>;
-          channel?: Option<Slack.ChannelId>;
-          // blocks?: Array<unknown>;
-          attachments?: Array<unknown>;
-        }> {}
+      export interface Request extends Readonly<{
+        // username?: Slack.UserId;
+        text?: Option<string>;
+        channel?: Option<Slack.ChannelId>;
+        // blocks?: Array<unknown>;
+        attachments?: Array<unknown>;
+      }> {}
       export type Response = void;
     }
   }

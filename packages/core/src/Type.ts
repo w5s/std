@@ -131,7 +131,8 @@ export namespace Type {
    * Type module constructor parameters
    */
   export interface Parameters<T>
-    extends PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
+    extends
+      PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
       Partial<Codec<T>>,
       Partial<AsString<T>> {
     hasInstance: (value: unknown) => boolean;

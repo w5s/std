@@ -75,79 +75,78 @@ export function GroupID(value: number): GroupID {
   return value as GroupID;
 }
 
-export interface FileStatus
-  extends Struct<{
-    _: 'FileStatus';
-    /**
-     * The device identifier
-     */
-    deviceID: DeviceID;
-    /**
-     * The file identifier
-     */
-    fileID: FileID;
-    // fileMode: FileMode;
-    /**
-     * The amount of links to the file
-     */
-    linkCount: Int;
-    /**
-     * The owner identifier of the file
-     */
-    fileOwner: UserID;
-    /**
-     * The group identifier of the file
-     */
-    fileGroup: GroupID;
-    /**
-     * The id of the special device
-     */
-    specialDeviceID: DeviceID;
-    /**
-     * The size of the file (in bytes)
-     */
-    fileSize: FileSize;
-    /**
-     * Time of last access
-     */
-    accessTime: Time;
-    /**
-     * Time of last modification.
-     */
-    modificationTime: Time;
-    /**
-     * Time of last status change (i.e. owner, group, link count, mode, etc.).
-     */
-    statusChangeTime: Time;
-    /**
-     * Checks if this file is a block device.
-     */
-    isBlockDevice: boolean;
-    /**
-     * Checks if this file is a character device.
-     */
-    isCharacterDevice: boolean;
-    /**
-     * Checks if this file is a named pipe device.
-     */
-    isNamedPipe: boolean;
-    /**
-     * Checks if this file is a regular file device.
-     */
-    isFile: boolean;
-    /**
-     * Checks if this file is a directory device.
-     */
-    isDirectory: boolean;
-    /**
-     * Checks if this file is a symbolic link device.
-     */
-    isSymbolicLink: boolean;
-    /**
-     * Checks if this file is a socket device.
-     */
-    isSocket: boolean;
-  }> {}
+export interface FileStatus extends Struct<{
+  _: 'FileStatus';
+  /**
+   * The device identifier
+   */
+  deviceID: DeviceID;
+  /**
+   * The file identifier
+   */
+  fileID: FileID;
+  // fileMode: FileMode;
+  /**
+   * The amount of links to the file
+   */
+  linkCount: Int;
+  /**
+   * The owner identifier of the file
+   */
+  fileOwner: UserID;
+  /**
+   * The group identifier of the file
+   */
+  fileGroup: GroupID;
+  /**
+   * The id of the special device
+   */
+  specialDeviceID: DeviceID;
+  /**
+   * The size of the file (in bytes)
+   */
+  fileSize: FileSize;
+  /**
+   * Time of last access
+   */
+  accessTime: Time;
+  /**
+   * Time of last modification.
+   */
+  modificationTime: Time;
+  /**
+   * Time of last status change (i.e. owner, group, link count, mode, etc.).
+   */
+  statusChangeTime: Time;
+  /**
+   * Checks if this file is a block device.
+   */
+  isBlockDevice: boolean;
+  /**
+   * Checks if this file is a character device.
+   */
+  isCharacterDevice: boolean;
+  /**
+   * Checks if this file is a named pipe device.
+   */
+  isNamedPipe: boolean;
+  /**
+   * Checks if this file is a regular file device.
+   */
+  isFile: boolean;
+  /**
+   * Checks if this file is a directory device.
+   */
+  isDirectory: boolean;
+  /**
+   * Checks if this file is a symbolic link device.
+   */
+  isSymbolicLink: boolean;
+  /**
+   * Checks if this file is a socket device.
+   */
+  isSocket: boolean;
+}> {}
 /**
  * FileStatus constructor
  *

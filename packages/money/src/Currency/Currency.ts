@@ -6,44 +6,43 @@ import { defaultRounding } from './defaultRounding.js';
 import { defaultPrecision } from './defaultPrecision.js';
 import { CurrencyAsString } from './CurrencyAsString.js';
 
-export interface Currency
-  extends Struct<{
-    [Struct.type]: 'Currency';
-    /**
-     * Name
-     */
-    name: string;
-    /**
-     * Plural name
-     */
-    namePlural: string;
-    /**
-     * Code ISO3
-     *
-     * @example 'USD'
-     */
-    code: string;
-    /**
-     * Currency precision
-     */
-    precision: Int;
-    /**
-     * Default rounding
-     */
-    rounding: Int;
-    /**
-     * Currency symbol
-     *
-     * @example '$'
-     */
-    symbol: string;
-    /**
-     * Currency native symbol
-     *
-     * @example '$'
-     */
-    symbolNative: string;
-  }> {}
+export interface Currency extends Struct<{
+  [Struct.type]: 'Currency';
+  /**
+   * Name
+   */
+  name: string;
+  /**
+   * Plural name
+   */
+  namePlural: string;
+  /**
+   * Code ISO3
+   *
+   * @example 'USD'
+   */
+  code: string;
+  /**
+   * Currency precision
+   */
+  precision: Int;
+  /**
+   * Default rounding
+   */
+  rounding: Int;
+  /**
+   * Currency symbol
+   *
+   * @example '$'
+   */
+  symbol: string;
+  /**
+   * Currency native symbol
+   *
+   * @example '$'
+   */
+  symbolNative: string;
+}> {}
 
 const CurrencyStruct = Struct.define<Currency>({
   typeName: 'Currency',
@@ -66,6 +65,8 @@ export const Currency = Callable({
 });
 
 export namespace Currency {
-  export interface Parameters
-    extends PartialKeys<Struct.Parameters<Currency>, 'namePlural' | 'precision' | 'rounding' | 'symbolNative'> {}
+  export interface Parameters extends PartialKeys<
+    Struct.Parameters<Currency>,
+    'namePlural' | 'precision' | 'rounding' | 'symbolNative'
+  > {}
 }
