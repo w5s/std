@@ -33,9 +33,7 @@ export namespace Enum {
    * Module containing methods for working with enum types
    */
   export interface Module<T extends Record<string, any> = Record<string, unknown>>
-    extends Type.Module<T[keyof T]>,
-      Indexable<T[keyof T], number>,
-      EnumLike<T> {}
+    extends Type.Module<T[keyof T]>, Indexable<T[keyof T], number>, EnumLike<T> {}
 }
 
 /**

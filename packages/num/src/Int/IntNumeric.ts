@@ -3,7 +3,8 @@ import { fromNumber } from './fromNumber.js';
 import type { Int } from '../Int.js';
 
 interface IntNumeric
-  extends Numeric.CheckedAdd<Int>,
+  extends
+    Numeric.CheckedAdd<Int>,
     Numeric.CheckedMultiply<Int>,
     Numeric.CheckedPower<Int>,
     Numeric.CheckedSubtract<Int> {}

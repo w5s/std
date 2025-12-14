@@ -99,6 +99,8 @@ export function Indexable<T, Index extends number | bigint = number>(
   };
 }
 export namespace Indexable {
-  export interface Parameters<T, Index extends number | bigint>
-    extends PartialKeys<Indexable<T, Index>, 'rangeSize' | 'range'> {}
+  export interface Parameters<T, Index extends number | bigint> extends PartialKeys<
+    Indexable<T, Index>,
+    'rangeSize' | 'range'
+  > {}
 }

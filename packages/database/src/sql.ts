@@ -72,12 +72,11 @@ function format(
   return returnValue;
 }
 
-export interface SQLStatement
-  extends Struct<{
-    [Struct.type]: 'SQLStatement';
-    strings: ReadonlyArray<string>;
-    values: ReadonlyArray<SQLStatement.Value>;
-  }> {}
+export interface SQLStatement extends Struct<{
+  [Struct.type]: 'SQLStatement';
+  strings: ReadonlyArray<string>;
+  values: ReadonlyArray<SQLStatement.Value>;
+}> {}
 
 /**
  * @namespace

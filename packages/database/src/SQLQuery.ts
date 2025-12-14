@@ -153,59 +153,51 @@ export namespace SQLQuery {
   }
   export interface TableAttributes extends Record<string, ColumnAttributes> {}
 
-  export interface AddColumn
-    extends Struct<{
-      [Struct.type]: 'SQLAddColumn';
-      tableName: string;
-      columnName: string;
-      columnAttributes: ColumnAttributes;
-    }> {}
+  export interface AddColumn extends Struct<{
+    [Struct.type]: 'SQLAddColumn';
+    tableName: string;
+    columnName: string;
+    columnAttributes: ColumnAttributes;
+  }> {}
 
-  export interface AddConstraint
-    extends Struct<{
-      [Struct.type]: 'SQLAddConstraint';
-      tableName: string;
-      constraintName: string;
-    }> {}
+  export interface AddConstraint extends Struct<{
+    [Struct.type]: 'SQLAddConstraint';
+    tableName: string;
+    constraintName: string;
+  }> {}
 
-  export interface CreateSchema
-    extends Struct<{
-      [Struct.type]: 'SQLCreateSchema';
-      schemaName: string;
-    }> {}
+  export interface CreateSchema extends Struct<{
+    [Struct.type]: 'SQLCreateSchema';
+    schemaName: string;
+  }> {}
 
-  export interface CreateTable
-    extends Struct<{
-      [Struct.type]: 'SQLCreateTable';
-      tableName: string;
-      tableAttributes: TableAttributes;
-    }> {}
+  export interface CreateTable extends Struct<{
+    [Struct.type]: 'SQLCreateTable';
+    tableName: string;
+    tableAttributes: TableAttributes;
+  }> {}
 
-  export interface DropSchema
-    extends Struct<{
-      [Struct.type]: 'SQLDropSchema';
-      schemaName: string;
-    }> {}
+  export interface DropSchema extends Struct<{
+    [Struct.type]: 'SQLDropSchema';
+    schemaName: string;
+  }> {}
 
-  export interface DropTable
-    extends Struct<{
-      [Struct.type]: 'SQLDropTable';
-      tableName: string;
-    }> {}
+  export interface DropTable extends Struct<{
+    [Struct.type]: 'SQLDropTable';
+    tableName: string;
+  }> {}
 
-  export interface RemoveConstraint
-    extends Struct<{
-      [Struct.type]: 'SQLRemoveConstraint';
-      tableName: string;
-      constraintName: string;
-    }> {}
+  export interface RemoveConstraint extends Struct<{
+    [Struct.type]: 'SQLRemoveConstraint';
+    tableName: string;
+    constraintName: string;
+  }> {}
 
-  export interface RemoveColumn
-    extends Struct<{
-      [Struct.type]: 'SQLRemoveColumn';
-      tableName: string;
-      columnName: string;
-    }> {}
+  export interface RemoveColumn extends Struct<{
+    [Struct.type]: 'SQLRemoveColumn';
+    tableName: string;
+    columnName: string;
+  }> {}
 }
 
 function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {

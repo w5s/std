@@ -103,8 +103,7 @@ export namespace Struct {
   export type Parameters<Model> = Omit<Model, Struct.type>;
 
   export interface Module<Model extends Struct>
-    extends Type.Module<Model>,
-      Callable<(properties: Parameters<Model>) => Model> {
+    extends Type.Module<Model>, Callable<(properties: Parameters<Model>) => Model> {
     /**
      * Construct a new model
      *
@@ -131,8 +130,10 @@ export namespace Struct {
 
   export type ModuleParameter<T> = Pick<Type<T>, Symbol.inspect> & AsString<T>;
 
-  export interface DefineParameters<Model extends Struct<{ [type]: string }>>
-    extends PartialKeys<Type.Parameters<Model>, 'hasInstance'> {
+  export interface DefineParameters<Model extends Struct<{ [type]: string }>> extends PartialKeys<
+    Type.Parameters<Model>,
+    'hasInstance'
+  > {
     typeName: Model[Struct.type];
   }
 }

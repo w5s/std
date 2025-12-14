@@ -14,11 +14,10 @@ export type IPv6Address = bigint;
 /**
  * IPv6 string type
  */
-export interface IPv6
-  extends Struct<{
-    [Struct.type]: 'IPv6';
-    ipv6: IPv6Address;
-  }> {}
+export interface IPv6 extends Struct<{
+  [Struct.type]: 'IPv6';
+  ipv6: IPv6Address;
+}> {}
 const IPv6Type = Struct.define<IPv6>({ typeName: 'IPv6' });
 
 const bigIntByteAt = (ipv6Value: bigint, index: number) =>
