@@ -1,4 +1,4 @@
-import { CodecError, Int, Option, Result } from '@w5s/core';
+import { CodecError, Int, Result } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { Console } from '@w5s/console';
 import { TimeDuration } from '@w5s/time';
@@ -10,7 +10,7 @@ import { AbortError, assertNever, TimeoutError } from '@w5s/error';
 import { Log as LogModule, debug, error } from '@w5s/log';
 import type { LogSendFunction } from '@w5s/log/dist/Log/sendWith.js';
 import { pipe } from './pipe.js';
-import { retry, RetryPolicy } from './task-retry/retry.js';
+import { retry, RetryPolicy, RetryResult } from './task-retry/retry.js';
 import { Slack } from './slackClient.js';
 import { ContainerKey, provide, use } from './di/index.js';
 import { abortable } from './task-abortable/index.js';
@@ -35,7 +35,7 @@ function sendMessage(text: string) {
     (_) =>
       retry(_, {
         policy: RetryPolicy.retries(Int(3)),
-        check: (result) => Task.resolve(Result.isError(result) ? { done: false, value: Option.None } : { done: true }),
+        check: (result) => Task.resolve(Result.isError(result) ? RetryResult.Continue() : RetryResult.Done),
       }),
   );
 }

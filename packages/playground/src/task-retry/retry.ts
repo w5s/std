@@ -275,6 +275,11 @@ interface RetryContinueResult {
  */
 export type RetryResult = RetryDoneResult | RetryContinueResult;
 
+export const RetryResult = {
+  Done: Object.freeze<RetryDoneResult>({ done: true }),
+  Continue: (value: Option<TimeDuration> = undefined): RetryContinueResult => ({ done: false, value }),
+};
+
 export function retry<Value, Error>(
   taskOrGetter: TaskLike<Value, Error> | ((state: RetryState) => TaskLike<Value, Error>),
   options: retry.Options<Value, Error>,
