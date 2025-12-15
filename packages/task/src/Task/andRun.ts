@@ -1,4 +1,5 @@
-import type { Task, TaskLike } from '../Task.js';
+import type { TaskLike } from '../Task.js';
+import type { Task } from './Task.js';
 import { andThen } from './andThen.js';
 import { map } from './map.js';
 

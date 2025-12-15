@@ -2,7 +2,7 @@ import type { Awaitable } from '@w5s/async';
 import { tryCall as asyncTryCall } from '@w5s/async/dist/tryCall.js';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import { from } from './from.js';
-import type { Task } from '../Task.js';
+import type { Task } from './Task.js';
 
 /**
  * Creates a new `Task` that resolves `sideEffect()`.

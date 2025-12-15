@@ -1,7 +1,8 @@
 import type { Result } from '@w5s/core/dist/Result.js';
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import type { Task, TaskLike } from '../Task.js';
+import type { TaskLike, Task as TTask } from '../Task.js';
+import type { Task } from './Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';
 import { __emptyArray } from './__emptyArray.js';
@@ -21,7 +22,7 @@ import { __emptyArray } from './__emptyArray.js';
  */
 export function allSettled<T extends TaskLike<any, any>[]>(
   tasks: [...T],
-): Task<{ [K in keyof T]: Result<Task.ValueOf<T[K]>, Task.ErrorOf<T[K]>> }, never>;
+): Task<{ [K in keyof T]: Result<TTask.ValueOf<T[K]>, TTask.ErrorOf<T[K]>> }, never>;
 export function allSettled<Value, Error>(
   tasks: Iterable<TaskLike<Value, Error>>,
 ): Task<ReadonlyArray<Result<Value, Error>>, never>;

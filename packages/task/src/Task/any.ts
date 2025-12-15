@@ -1,5 +1,6 @@
 import type { AggregateError } from '@w5s/error';
-import type { Task, TaskLike } from '../Task.js';
+import type { TaskLike, Task as TTask } from '../Task.js';
+import type { Task } from './Task.js';
 import { from } from './from.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 
@@ -24,7 +25,7 @@ import { TaskAggregateState } from './TaskAggregateState.js';
  */
 export function any<T extends TaskLike<any, any>[]>(
   tasks: [...T],
-): Task<Task.ValueOf<T[keyof T]>, AggregateError<{ [K in keyof T]: Task.ErrorOf<T[K]> }>>;
+): Task<TTask.ValueOf<T[keyof T]>, AggregateError<{ [K in keyof T]: TTask.ErrorOf<T[K]> }>>;
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>>;
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>> {
   return from((parameters) => {

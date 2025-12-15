@@ -1,7 +1,8 @@
 import type { Result } from '@w5s/core';
 import { error } from './error.js';
 import { ok } from './ok.js';
-import type { Task, TaskLike, TaskParameters } from '../Task.js';
+import type { TaskLike, TaskParameters } from '../Task.js';
+import type { Task } from './Task.js';
 import { from } from './from.js';
 
 const complete = <V, E>(parameters: TaskParameters<V, E>, result: Result<V, E>) =>
