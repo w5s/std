@@ -1,5 +1,4 @@
-import type { TaskLike, Task as TTask } from '../Task.js';
-import type { Task } from './Task.js';
+import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';
 import { __emptyArray } from './__emptyArray.js';
@@ -25,7 +24,7 @@ import { __emptyArray } from './__emptyArray.js';
  */
 export function all<T extends readonly TaskLike<any, any>[]>(
   tasks: [...T],
-): Task<{ [K in keyof T]: TTask.ValueOf<T[K]> }, TTask.ErrorOf<T[keyof T]>>;
+): Task<{ [K in keyof T]: Task.ValueOf<T[K]> }, Task.ErrorOf<T[keyof T]>>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
   return from((parameters) => {

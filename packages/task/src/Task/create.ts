@@ -1,8 +1,7 @@
 import type { Awaitable } from '@w5s/async';
 import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '@w5s/core/dist/Result.js';
-import type { TaskCanceler, TaskLike } from '../Task.js';
-import type { Task } from './Task.js';
+import type { Task, TaskCanceler, TaskLike } from '../Task.js';
 import { from } from './from.js';
 import { run } from './run.js';
 

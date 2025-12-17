@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
 import { reject } from './reject.js';
 import { withTask } from '../Testing.js';
-import type { Task } from './Task.js';
+import type { Task } from '../Task.js';
 
 describe(reject, () => {
   const anyError = 'anyError';

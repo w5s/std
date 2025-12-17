@@ -1,5 +1,4 @@
-import type { TaskLike } from '../Task.js';
-import type { Task } from './Task.js';
+import type { Task, TaskLike } from '../Task.js';
 import { from } from './from.js';
 
 /**
