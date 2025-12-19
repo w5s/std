@@ -19,7 +19,7 @@ export type FilePath = string & Tag<'FilePath'>;
  * @namespace
  */
 export const FilePath = Object.assign(
-  // eslint-disable-next-line @typescript-eslint/no-shadow, prefer-arrow-callback
+  // eslint-disable-next-line ts/no-shadow, prefer-arrow-callback
   function FilePath(value: string): FilePath {
     return value as FilePath;
   },

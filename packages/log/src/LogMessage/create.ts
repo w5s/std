@@ -16,7 +16,7 @@ export function create(parts: Array<LogMessageItem>): LogMessage {
   const returnValue = [];
   let buffer = '';
   for (let index = 0; index < parts.length; index += 1) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    // eslint-disable-next-line ts/no-non-null-assertion
     const value = parts[index]!;
     if (typeof value === 'string') {
       buffer += value;

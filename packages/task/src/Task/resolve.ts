@@ -26,6 +26,6 @@ export function resolve<Error = never>(): Task<void, Error>;
  */
 export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
 export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+  // eslint-disable-next-line ts/no-shadow
   return from(({ resolve }) => resolve(value));
 }

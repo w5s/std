@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
-
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import type { Array } from '../Array.js';
 import { __fromAsync as __fromAsyncCompat } from './__fromAsync.compat.js';
 

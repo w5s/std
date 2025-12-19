@@ -4,12 +4,10 @@ import { entries } from './entries.js';
 describe(entries, () => {
   it('should return an array of [key, value]', () => {
     expect(
-      Array.from(
-        entries({
-          anyKey: 'anyValue',
-          anyOtherKey: 'anyOtherValue',
-        }),
-      ),
+      [...entries({
+        anyKey: 'anyValue',
+        anyOtherKey: 'anyOtherValue',
+      })],
     ).toEqual([
       ['anyKey', 'anyValue'],
       ['anyOtherKey', 'anyOtherValue'],
@@ -20,6 +18,6 @@ describe(entries, () => {
       anyKey: 'anyValue',
       anyOtherKey: 'anyOtherValue',
     });
-    expect(Array.from(result)).toEqual(Array.from(result));
+    expect([...result]).toEqual([...result]);
   });
 });

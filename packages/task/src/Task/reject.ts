@@ -26,6 +26,6 @@ export function reject<Value = never>(): Task<Value, void>;
  */
 export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
 export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+  // eslint-disable-next-line ts/no-shadow
   return from(({ reject }) => reject(errorValue));
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/no-unused-vars */
 import type { JSONObject } from './JSONObject.js';
 
 // @ts-expect-error

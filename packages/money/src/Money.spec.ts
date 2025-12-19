@@ -18,9 +18,9 @@ describe('Money', () => {
       expect.objectContaining({
         '+': expect.any(Function),
         '-': expect.any(Function),
-        format: expect.any(Function),
-        normalize: expect.any(Function),
-        parse: expect.any(Function),
+        'format': expect.any(Function),
+        'normalize': expect.any(Function),
+        'parse': expect.any(Function),
       }),
     );
   });

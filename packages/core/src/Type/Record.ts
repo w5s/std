@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { Type } from '../Type.js';
 import { define } from './define.js';
 import { encode } from '../Codec/encode.js';

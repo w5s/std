@@ -5,7 +5,7 @@ import type { Initializer } from './Initializer.js';
 import { InitializerApplication } from './InitializerApplication.js';
 import { InitializerStatus } from './InitializerStatus.js';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+// eslint-disable-next-line ts/consistent-type-assertions
 const status = useRef(InitializerApplication.state, 'status', {} as Record<Initializer['id'], InitializerStatus>);
 
 function getStatus(initializer: Initializer) {

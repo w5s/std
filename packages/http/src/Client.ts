@@ -74,6 +74,7 @@ export const Client = Object.assign(
      * const duration = Client.getRequestTimeoutDuration(client);
      * ```
      * @param client
+     * @param requestObject
      */
     getRequestTimeoutDuration(client: Client, requestObject: Request): Option<TimeDuration> {
       const { timeout: requestTimeout = 'default' } = requestObject;
@@ -91,7 +92,6 @@ export namespace Client {
 }
 
 function getDefaultFetch() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   invariant(globalThis.fetch != null, 'globalThis.fetch is not defined');
   return globalThis.fetch;
 }

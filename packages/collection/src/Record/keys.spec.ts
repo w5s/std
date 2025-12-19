@@ -6,22 +6,18 @@ describe(keys, () => {
 
   it('should return an array of keys', () => {
     expect(
-      Array.from(
-        keys({
-          anyKey: 'anyValue',
-          anyOtherKey: 'anyOtherValue',
-        }),
-      ),
+      [...keys({
+        anyKey: 'anyValue',
+        anyOtherKey: 'anyOtherValue',
+      })],
     ).toEqual(['anyKey', 'anyOtherKey']);
   });
   it('should handle symbol keys', () => {
     expect(
-      Array.from(
-        keys({
-          [anySymbolKey]: 'anyValue',
-          anyOtherKey: 'anyOtherValue',
-        }),
-      ),
+      [...keys({
+        [anySymbolKey]: 'anyValue',
+        anyOtherKey: 'anyOtherValue',
+      })],
     ).toEqual(['anyOtherKey', anySymbolKey]);
   });
   it('is idempotent', () => {
@@ -29,6 +25,6 @@ describe(keys, () => {
       anyKey: 'anyValue',
       anyOtherKey: 'anyOtherValue',
     });
-    expect(Array.from(result)).toEqual(Array.from(result));
+    expect([...result]).toEqual([...result]);
   });
 });

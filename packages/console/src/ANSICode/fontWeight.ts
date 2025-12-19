@@ -27,6 +27,6 @@ const fontWeightMap = new Map(
  * @returns The ANSI escape code associated with the provided font weight.
  */
 export function fontWeight(value: FontWeight) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // eslint-disable-next-line ts/no-non-null-assertion
   return fontWeightMap.get(value)!;
 }

@@ -28,7 +28,7 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
   return define({
     typeName: `Array<${Item.typeName}>`,
     hasInstance: (anyValue): anyValue is Array<V> =>
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+
       isArray(anyValue) && anyValue.every(Item.hasInstance),
     [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),
     [Symbol.decode]: (input, { ok, error }) => {

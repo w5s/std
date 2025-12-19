@@ -21,9 +21,9 @@
     "develop": ":",
     "docs": "node markdown.mjs && turbo run docs && yarn workspace @w5s/website run start",
     "format": "turbo run format --continue",
-    "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
+    "format:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
     "lint": "turbo run lint",
-    "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
+    "lint:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
     "postinstall": "npx run-p \"postinstall:*\"",
     "postinstall:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
@@ -58,7 +58,7 @@
       "eslint"
     ]
   },
-  "eslintConfig": {
+  "_eslintConfig": {
     "env": {
       "node": true
     },
@@ -100,7 +100,8 @@
     "@w5s/commitlint-config": "3.0.2",
     "@w5s/conventional-changelog": "3.0.2",
     "@w5s/cspell-config": "3.0.2",
-    "@w5s/eslint-config": "2.4.5",
+    "@w5s/eslint-config": "3.0.1",
+    "@w5s/ts-config": "3.0.0",
     "@w5s/tsconfig": "3.1.0",
     "cspell": "9.4.0",
     "eslint": "8.57.1",

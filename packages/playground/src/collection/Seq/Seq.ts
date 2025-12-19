@@ -18,11 +18,11 @@ export class Seq<T> implements SeqInterface<T> {
     yield* resolvedValues;
 
     if (currentIterator !== undefined) {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      // eslint-disable-next-line ts/no-unnecessary-condition
       while (true) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        // eslint-disable-next-line ts/no-unsafe-assignment
         const { value, done } = currentIterator.next();
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        // eslint-disable-next-line ts/strict-boolean-expressions
         if (done) {
           seqState.currentIterator = undefined;
           break;

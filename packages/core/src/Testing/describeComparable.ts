@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable ts/no-non-null-assertion */
 import type { Comparable } from '../Comparable.js';
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import { describeEqual } from './describeEqual.js';
@@ -21,7 +21,9 @@ import type { TestingLibrary } from './type.js';
  * ```
  * @param subject - The subject to test Comparable behavior on.
  * @param properties - An object containing the properties to test Comparable
+ * @param properties.ordered
  * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param properties.equivalent
  */
 export function describeComparable<T>(
   subject: Comparable<T>,

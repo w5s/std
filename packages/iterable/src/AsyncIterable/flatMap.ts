@@ -23,7 +23,7 @@ export function flatMap<ValueFrom, ValueTo>(
     async *[Symbol.asyncIterator]() {
       let currentIndex = 0;
       for await (const currentValue of self) {
-        yield* mapFn(currentValue, currentIndex as Int);
+        yield * mapFn(currentValue, currentIndex as Int);
         currentIndex += 1;
       }
     },

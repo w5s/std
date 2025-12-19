@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable ts/no-unnecessary-condition */
 import { setImmediate } from '@w5s/async/dist/setImmediate.js';
 import { clearImmediate } from '@w5s/async/dist/clearImmediate.js';
 import type { ImmediateId } from '@w5s/async';

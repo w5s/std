@@ -19,7 +19,7 @@ export function readLines(chunks: AsyncIterableLike<string>, options: ReadLineOp
             yield buffer;
           }
           for (let partIndex = 1; partIndex < partCount; partIndex += 1) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            // eslint-disable-next-line ts/no-non-null-assertion
             buffer = parts[partIndex]!;
             if (buffer.length > 0) {
               yield buffer;

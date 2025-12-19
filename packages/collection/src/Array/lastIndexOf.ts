@@ -18,7 +18,6 @@ export function lastIndexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex
   const arrayLength = self.length;
 
   if (arrayLength > 0) {
-    // eslint-disable-next-line no-self-compare
     if (searchItem === searchItem) {
       // not NaN
       const indexNumber = self.lastIndexOf(searchItem, fromIndex);
@@ -33,7 +32,7 @@ export function lastIndexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex
     // NaN
     while (index >= 0) {
       const value = self[index];
-      // eslint-disable-next-line no-self-compare
+
       if (value !== value) {
         return index as Int;
       }

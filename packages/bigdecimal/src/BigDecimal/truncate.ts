@@ -4,6 +4,8 @@ import { of } from './of.js';
 /**
  * Truncates the `BigDecimal` to a specified number of decimal places.
  *
+ * @param self
+ * @param scale
  * @example
  * ```typescript
  * BigDecimal.truncate(BigDecimal('123'), -1);// == BigDecimal('123'))

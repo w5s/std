@@ -1,5 +1,4 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable ts/no-non-null-assertion */
 /* eslint-disable unicorn/no-for-loop */
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';

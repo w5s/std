@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { Type, Codec, Result, JSON } from '@w5s/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';

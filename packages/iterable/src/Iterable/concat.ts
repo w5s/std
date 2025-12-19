@@ -15,7 +15,7 @@ export function concat<Value>(iterables: Iterable<Iterable<Value>>): Iterable<Va
   return {
     *[Symbol.iterator]() {
       for (const iterable of iterables) {
-        yield* iterable;
+        yield * iterable;
       }
     },
   };

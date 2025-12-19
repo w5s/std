@@ -14,7 +14,7 @@ import { has } from './has.js';
  */
 export function $delete<Key extends RecordKey, Value>(self: Record<Key, Value>, key: Key): Record<Key, Value> {
   if (has(self, key)) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line ts/no-unused-vars
     const { [key]: _, ...newRecord } = self;
 
     return newRecord as Record<Key, Value>;

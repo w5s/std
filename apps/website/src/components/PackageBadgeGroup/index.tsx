@@ -8,7 +8,7 @@ export type BadgeStyle = 'flat' | 'flat-square' | 'plastic' | 'for-the-badge' | 
 export type BadgeType = 'bundle-size' | 'npm-version' | 'npm-license';
 
 const renderBadge = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line ts/no-unused-vars
   { siteConfig }: ReturnType<typeof useDocusaurusContext>,
   props: PackageBadgeGroupProps,
   badgeProps: {

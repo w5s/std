@@ -22,7 +22,7 @@ export function flatMap<ValueFrom, ValueTo>(
     *[Symbol.iterator]() {
       let currentIndex = 0;
       for (const currentValue of self) {
-        yield* mapFn(currentValue, currentIndex as Int);
+        yield * mapFn(currentValue, currentIndex as Int);
         currentIndex += 1;
       }
     },

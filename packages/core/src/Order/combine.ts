@@ -26,7 +26,7 @@ export function combine<T>(self: Order<T>, ...others: Order<T>[]): Order<T> {
     }
     // eslint-disable-next-line unicorn/no-for-loop
     for (let index = 0; index < others.length; index += 1) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      // eslint-disable-next-line ts/no-non-null-assertion
       returnValue = others[index]!(left, right);
       if (returnValue !== 0) {
         return returnValue;

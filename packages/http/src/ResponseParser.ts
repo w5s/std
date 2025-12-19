@@ -62,6 +62,7 @@ export const ResponseParser = {
   /**
    * FormData response parser
    *
+   * @param CodecModule
    * @example
    * ```typescript
    * type MyData = { foo: string, bar: boolean };

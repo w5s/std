@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable ts/ban-ts-comment */
 import type { PartialKeys } from '@w5s/core-type';
 import type { Int } from './Int.js';
 import type { Option } from './Option.js';
@@ -63,7 +63,7 @@ export function Indexable<T, Index extends number | bigint = number>(
         const startIndex = indexOf(start);
         const endIndex = indexOf(end);
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/restrict-plus-operands
+        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
         return startIndex == null || endIndex == null ? zero : endIndex - startIndex + one;
       }),
     range:
@@ -77,7 +77,7 @@ export function Indexable<T, Index extends number | bigint = number>(
           if (startIndex != null && endIndex != null) {
             if (startIndex <= endIndex) {
               // @ts-ignore
-              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+
               for (let index = startIndex; index <= endIndex; index += one) {
                 const value = at(index);
                 if (value != null) {

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 /**
  * Alias to native {@link globalThis.AggregateError}
  *

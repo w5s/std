@@ -19,6 +19,6 @@ export function reduce<Item, ReturnValue>(
   reduceFn: (previousValue: ReturnValue, currentItem: Item, currentIndex: Int, array: Array<Item>) => ReturnValue,
   initialValue: ReturnValue,
 ): ReturnValue {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return (self as any).reduce(reduceFn, initialValue);
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
+/* eslint-disable ts/no-unsafe-function-type */
 /**
  * A type representing non primitive values. This includes :
  * - symbol

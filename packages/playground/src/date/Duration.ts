@@ -52,7 +52,7 @@ function parse(expression: string): Option<Duration> {
     return undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  // eslint-disable-next-line ts/no-use-before-define
   return DurationStruct.create({
     years,
     months,

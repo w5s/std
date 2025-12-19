@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 const hasStructuredClone = structuredClone !== undefined;
 
 /**

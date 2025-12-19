@@ -18,7 +18,6 @@ export function indexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex?: n
   const arrayLength = self.length;
 
   if (arrayLength > 0) {
-    // eslint-disable-next-line no-self-compare
     if (searchItem === searchItem) {
       const indexNumber = self.indexOf(searchItem, fromIndex);
       return indexNumber === -1 ? undefined : (indexNumber as Int);
@@ -27,7 +26,7 @@ export function indexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex?: n
     let index = fromIndex == null ? 0 : fromIndex < 0 ? Math.max(arrayLength + fromIndex, 0) : fromIndex;
     while (index < arrayLength) {
       const value = self[index];
-      // eslint-disable-next-line no-self-compare
+
       if (value !== value) {
         return index as Int;
       }

@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/custom-error-definition */
-
 import type { Pretty } from '@w5s/core-type';
 import { CustomError } from './CustomError.js';
 
@@ -60,7 +58,7 @@ export interface ErrorClass<Name extends string> extends Pretty<typeof CustomErr
   /**
    * Error constructor
    */
-  new <Properties extends Record<string, any> = {}>(
+  new<Properties extends Record<string, any> = {}>(
     ...properties: ErrorClassParameters<Properties>
   ): ErrorType<Name, Properties>;
 }

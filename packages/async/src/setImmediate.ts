@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { ImmediateId } from './ImmediateId.js';
 
 const __setImmediate =

@@ -28,12 +28,12 @@ export interface ExpectIterable {
 export function withIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: Iterable<V>, isNot: boolean): ExpectIterable => ({
     toHaveValues(expected: Array<unknown>) {
-      const expectValue = expectFn(Array.from(iterable));
+      const expectValue = expectFn([...iterable]);
       (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     toBeIdemPotent() {
-      const expectValue = expectFn(Array.from(iterable));
-      (isNot ? expectValue.not : expectValue).toEqual(Array.from(iterable));
+      const expectValue = expectFn([...iterable]);
+      (isNot ? expectValue.not : expectValue).toEqual([...iterable]);
     },
   });
   return <V>(iterable: Iterable<V>) =>

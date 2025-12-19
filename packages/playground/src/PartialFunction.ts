@@ -45,7 +45,7 @@ export function orElse<F extends PartialApplyFunction, FElse extends PartialAppl
   return partial({
     isDefinedAt: (value) => self.isDefinedAt(value) || elseFn.isDefinedAt(value),
     // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    // eslint-disable-next-line ts/no-unsafe-return
     apply: (value) => (self.isDefinedAt(value) ? self.apply(value) : elseFn.apply(value)),
   });
 }
@@ -66,7 +66,7 @@ export function andThen<F extends PartialApplyFunction, FThen extends PartialApp
   const thenApply = typeof thenFn === 'function' ? thenFn : thenFn.apply;
   return partial({
     isDefinedAt,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
+    // eslint-disable-next-line ts/no-unsafe-return, @typescript-eslint/no-unsafe-argument
     apply: (value: PartialParameter<F>) => thenApply(apply(value)),
   });
 }

@@ -46,7 +46,7 @@ export const Process = {
    * @param directory - the directory to set as the current working directory
    */
   setCurrentDirectory(directory: FilePath): Task<void, FileError> {
-    // eslint-disable-next-line @typescript-eslint/unbound-method, n/no-sync
+    // eslint-disable-next-line ts/unbound-method, n/no-sync
     return errnoTaskSync(process.chdir)(directory);
   },
 };

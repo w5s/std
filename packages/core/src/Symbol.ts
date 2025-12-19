@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
 const GlobalSymbol = globalThis.Symbol;
 const __symbolAlias = <K extends keyof globalThis.SymbolConstructor>(name: K): globalThis.SymbolConstructor[K] =>
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
   GlobalSymbol[name] ?? (GlobalSymbol.for(`Symbol.${name}`) as any);
 
 // W5S symbols

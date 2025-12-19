@@ -20,7 +20,7 @@ export const Ref = Object.assign(
    * @category Constructor
    * @param initialValue - the initial value contained
    */
-  // eslint-disable-next-line prefer-arrow-callback, @typescript-eslint/no-shadow
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   function Ref<Value>(initialValue: Value): Ref<Value> {
     return { current: initialValue };
   },

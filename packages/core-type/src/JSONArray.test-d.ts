@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/no-unused-vars */
 import type { JSONArray } from './JSONArray.js';
 
 // @ts-expect-error

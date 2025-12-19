@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable ts/no-non-null-assertion */
 import type { Spread } from './Spread.js';
 
 /**
@@ -16,7 +16,7 @@ import type { Spread } from './Spread.js';
  * @param extension - an extension object map
  */
 export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  // eslint-disable-next-line ts/no-unsafe-return
   return mergeObject(source, extension);
 }
 

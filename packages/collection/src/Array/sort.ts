@@ -14,5 +14,5 @@ import type { Array } from '../Array.js';
  * value otherwise.
  */
 export function sort<Item>(self: Array<Item>, compareFn: (a: Item, b: Item) => Ordering) {
-  return self.length === 0 ? self : self.slice().sort(compareFn);
+  return self.length === 0 ? self : [...self].sort(compareFn);
 }

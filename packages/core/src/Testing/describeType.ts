@@ -65,11 +65,10 @@ export function describeType<S extends Type<any>>(
   });
 
   (inspectDefault.length === 0 ? describe.todo : describe)('node:util.inspect()', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, global-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, unicorn/prefer-module
+    // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, unicorn/prefer-module
     const { inspect } = require('node:util');
 
     it.each(inspectDefault)('($0) returns $1', (instance, expected) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       expect(inspect(instance)).toEqual(expected);
     });
   });

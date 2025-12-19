@@ -31,6 +31,6 @@ const colorMap = new Map(
  * @returns the ANSI escape sequence for the given color
  */
 export function color(value: Color) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  // eslint-disable-next-line ts/no-non-null-assertion
   return colorMap.get(value)!;
 }

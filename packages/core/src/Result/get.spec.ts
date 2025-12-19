@@ -18,7 +18,7 @@ describe(get, () => {
     assertType<typeof value, 'anyValue'>(true);
 
     const anyResult: Result<'anyValue', 'anyError'> = Ok('anyValue');
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line ts/no-unused-vars
     const optValue = get(anyResult);
     assertType<typeof optValue, 'anyValue' | Option.None>(true);
   });

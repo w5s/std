@@ -14,7 +14,6 @@ function notFound(name: string): never {
  */
 export const DatabaseDriver = {
   get<Name extends keyof DatabaseDriverMap>(name: Name): DatabaseDriver.ModuleOf<Name> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return registry.current[name] ?? notFound(name);
   },
   set<Name extends keyof DatabaseDriverMap>(name: Name, module: DatabaseDriver.ModuleOf<Name>): void {
