@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_w5s_website=globalThis.webpackChunk_w5s_website||[]).push([[5637],{782(e){e.exports=JSON.parse('{"banner":"","breadcrumbs":true,"gitRefName":"main","minimal":true,"pluginId":"default","scopes":[]}')}}]);

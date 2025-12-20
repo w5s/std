@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunk_w5s_website=globalThis.webpackChunk_w5s_website||[]).push([[3481],{8669(s){s.exports=JSON.parse('{"tags":[{"label":"facebook","permalink":"/std/blog/tags/facebook","count":1},{"label":"hello","permalink":"/std/blog/tags/hello","count":1},{"label":"docusaurus","permalink":"/std/blog/tags/docusaurus","count":2}]}')}}]);
