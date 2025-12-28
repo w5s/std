@@ -19431,11 +19431,11 @@ __metadata:
   linkType: hard
 
 "ts-api-utils@npm:^2.1.0":
-  version: 2.2.0
-  resolution: "ts-api-utils@npm:2.2.0"
+  version: 2.3.0
+  resolution: "ts-api-utils@npm:2.3.0"
   peerDependencies:
     typescript: ">=4.8.4"
-  checksum: 10c0/533861e49558964e2934ba618245205cb8e22def86ca5e758b6c8920d6f940392380c13bdfa41e2e18fc556943df392e37f42672f9b4130d50334eae84c573a5
+  checksum: 10c0/9f2aadb8ac55926c79db03e37ee3b014135923d1705f6868b9e787e6b8822d2fd8e19df2f9002563f4e6268c994425ddaad61df24d0dad833a4be9f26f789213
   languageName: node
   linkType: hard
 
