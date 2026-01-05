@@ -50,8 +50,8 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
             state.cancelAll();
           }
         },
-        (error, entry, index) => {
-          errors[index] = error;
+        (error, entry) => {
+          errors[entry.key] = error;
           if (state.isComplete()) {
             state.reject(globalThis.AggregateError(errors) as AggregateError<Error[]>);
           }

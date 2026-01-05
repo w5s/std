@@ -40,8 +40,8 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
       // eslint-disable-next-line unicorn/no-new-array
       const values = new Array<Value | undefined>(taskArray.length);
       state.runAll(
-        (value, entry, index) => {
-          values[index] = value;
+        (value, entry) => {
+          values[entry.key] = value;
           if (state.isComplete()) {
             state.resolve(values as ReadonlyArray<Value>);
           }

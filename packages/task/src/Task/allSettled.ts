@@ -44,12 +44,12 @@ export function allSettled<Value, Error>(
         }
       };
       state.runAll(
-        (value, entry, index) => {
-          results[index] = Ok(value);
+        (value, entry) => {
+          results[entry.key] = Ok(value);
           finish();
         },
-        (error, entry, index) => {
-          results[index] = Error(error);
+        (error, entry) => {
+          results[entry.key] = Error(error);
           finish();
         },
       );
