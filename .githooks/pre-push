@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# BEGIN MANAGED BLOCK
-npm run validate
-# END MANAGED BLOCK

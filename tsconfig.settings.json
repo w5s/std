@@ -1,7 +1,0 @@
-{
-  "extends": "@w5s/tsconfig",
-  "compilerOptions": {
-    "forceConsistentCasingInFileNames": false,
-    "lib": ["DOM", "ESNext", "ScriptHost"]
-  }
-}

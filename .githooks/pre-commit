@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# BEGIN MANAGED BLOCK
-npm exec -- lint-staged
-# END MANAGED BLOCK
