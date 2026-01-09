@@ -29,7 +29,7 @@ export function allSettled<Value, Error>(
   tasks: Iterable<TaskLike<Value, Error>>,
 ): Task<ReadonlyArray<Result<Value, Error>>, never> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks);
+    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
 
     if (taskArray.length === 0) {
       parameters.resolve(__emptyArray);

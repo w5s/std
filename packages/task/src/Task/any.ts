@@ -28,7 +28,7 @@ export function any<T extends TaskLike<any, any>[]>(
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>>;
 export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks);
+    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
 
     if (taskArray.length === 0) {
       parameters.reject(globalThis.AggregateError([]) as AggregateError<Error[]>);

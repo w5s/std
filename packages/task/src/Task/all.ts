@@ -28,7 +28,7 @@ export function all<T extends readonly TaskLike<any, any>[]>(
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks);
+    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
     if (taskArray.length === 0) {
       parameters.resolve(__emptyArray);
     } else {

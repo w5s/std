@@ -8,20 +8,23 @@ const cancel = (cancelerRef: TaskCanceler) => {
   }
 };
 
-type TaskEntry<Key, Value, Error> = {
+interface TaskInputEntry<Key, Value, Error> {
   /**
    * The task to run
    */
   task: TaskLike<Value, Error>;
   /**
-   * The canceler of the task
-   */
-  canceler: TaskCanceler;
-  /**
    * The key of the task (number or string)
    */
   key: Key;
-};
+}
+
+interface TaskEntry<Key, Value, Error> extends TaskInputEntry<Key, Value, Error> {
+  /**
+   * The canceler of the task
+   */
+  canceler: TaskCanceler;
+}
 
 interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   isComplete: () => boolean;
@@ -35,14 +38,12 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   reject: (error: ReturnError) => void;
 }
 
-type EntryKey = number;
-
-export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
-  tasks: Array<TaskLike<Value, Error>>,
+export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
+  tasks: Array<TaskInputEntry<Key, Value, Error>>,
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
-): TaskAggregateState<EntryKey, Value, Error, ReturnValue, ReturnError> {
+): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   const { reject, resolve, execute } = taskParameters;
-  const taskEntries = tasks.map((task, index) => ({ task, key: index, canceler: { current: undefined } }));
+  const taskEntries = tasks.map((task) => ({ ...task, canceler: { current: undefined } }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
   let closed = false;
@@ -67,8 +68,8 @@ export function TaskAggregateState<Value, Error, ReturnValue, ReturnError>(
   };
 
   const runAll = (
-    resolveTask: (value: Value, entry: TaskEntry<EntryKey, Value, Error>) => void,
-    rejectTask: (error: Error, entry: TaskEntry<EntryKey, Value, Error>) => void,
+    resolveTask: (value: Value, entry: TaskEntry<Key, Value, Error>) => void,
+    rejectTask: (error: Error, entry: TaskEntry<Key, Value, Error>) => void,
   ) => {
     taskEntries.forEach((entry) => {
       execute(entry.task, {
