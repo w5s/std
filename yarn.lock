@@ -5488,12 +5488,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.19.27, @types/node@npm:^20.14.9":
-  version: 20.19.27
-  resolution: "@types/node@npm:20.19.27"
+"@types/node@npm:20.19.28":
+  version: 20.19.28
+  resolution: "@types/node@npm:20.19.28"
   dependencies:
     undici-types: "npm:~6.21.0"
-  checksum: 10c0/7599c24d80465c1aa6e29b53581fc20ad8862ff33e6eef31d05c1c706868476ee57319c89b802ea972dd4d64ce86d18020aa5344f851fb59b730ea509a63300f
+  checksum: 10c0/aaa2de8570bfafdb9c160c1dbe3ecd7d9b2ccdc496ab6b0f24ccd5023aabe6f8c7fd02d7090185c2912052174f7cffef4ace80edd7d2a433200429c7a0a4869d
   languageName: node
   linkType: hard
 
@@ -5501,6 +5501,15 @@ __metadata:
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: 10c0/0db377133d709b33a47892581a21a41cd7958f22723a3cc6c71d55ac018121382de42fbfc7970d5ae3e7819dbe5f40e1c6a5174aedf7e7964e9cb8fa72b580b0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^20.14.9":
+  version: 20.19.27
+  resolution: "@types/node@npm:20.19.27"
+  dependencies:
+    undici-types: "npm:~6.21.0"
+  checksum: 10c0/7599c24d80465c1aa6e29b53581fc20ad8862ff33e6eef31d05c1c706868476ee57319c89b802ea972dd4d64ce86d18020aa5344f851fb59b730ea509a63300f
   languageName: node
   linkType: hard
 
@@ -6320,7 +6329,7 @@ __metadata:
   dependencies:
     "@lerna-lite/publish": "npm:4.10.5"
     "@size-limit/preset-small-lib": "npm:12.0.0"
-    "@types/node": "npm:20.19.27"
+    "@types/node": "npm:20.19.28"
     "@w5s/commitlint-config": "npm:3.0.2"
     "@w5s/conventional-changelog": "npm:3.0.2"
     "@w5s/cspell-config": "npm:3.0.2"
@@ -6441,7 +6450,7 @@ __metadata:
     "@docusaurus/preset-classic": "npm:3.9.2"
     "@docusaurus/tsconfig": "npm:3.9.2"
     "@mdx-js/react": "npm:3.1.1"
-    "@types/node": "npm:20.19.27"
+    "@types/node": "npm:20.19.28"
     clsx: "npm:2.1.1"
     docusaurus-plugin-typedoc-api: "npm:4.4.0"
     prism-react-renderer: "npm:2.4.1"
