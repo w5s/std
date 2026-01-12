@@ -1,0 +1,75 @@
+---
+sidebar_position: 2
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# BigInt
+
+> BigInt utilities with parsing, formatting and arithmetic
+
+<PackageBadgeGroup apiHref="/api/num/namespace/bigint" />
+
+## Overview
+
+The `BigInt` module provides utilities for working with JavaScript's native `bigint` type, including parsing, formatting, and arithmetic operations.
+
+## Creating BigInt values
+
+```typescript
+import { BigInt } from '@w5s/num';
+
+// From a literal
+const value = 42n;
+
+// From a number
+const fromNumber = BigInt.fromNumber(42);
+
+// From Int
+const fromInt = BigInt.fromInt(Int(42));
+
+// Parsing from string
+const parsed = BigInt.parse('123n'); // Option<bigint>
+```
+
+## Arithmetic Operations
+
+`BigInt` supports arithmetic operations using bracket notation:
+
+```typescript
+import { BigInt } from '@w5s/num';
+
+const a = 10n;
+const b = 3n;
+
+// Addition
+BigInt['+'](a, b); // 13n
+
+// Subtraction
+BigInt['-'](a, b); // 7n
+
+// Multiplication
+BigInt['*'](a, b); // 30n
+```
+
+## Comparison
+
+```typescript
+import { BigInt } from '@w5s/num';
+
+const a = 10n;
+const b = 20n;
+
+BigInt['<'](a, b);  // true
+BigInt['>'](a, b);  // false
+BigInt['=='](a, b); // false
+```
+
+## Formatting
+
+```typescript
+import { BigInt } from '@w5s/num';
+
+const value = 1234n;
+BigInt.format(value); // '1234'
+BigInt.format(value, { radix: 16 }); // '4d2'
+```

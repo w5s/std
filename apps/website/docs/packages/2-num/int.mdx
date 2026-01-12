@@ -1,0 +1,85 @@
+---
+sidebar_position: 1
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Int
+
+> Safe integer type with arithmetic operations
+
+<PackageBadgeGroup apiHref="/api/num/namespace/int" />
+
+## Overview
+
+`Int` is a branded type that represents a safe integer value. It provides type-safe arithmetic operations and conversion utilities.
+
+## Creating Int values
+
+```typescript
+import { Int } from '@w5s/num';
+
+// From a number literal
+const value = Int(42);
+
+// From a number variable
+const fromNumber = Int.fromNumber(someNumber);
+
+// Parsing from string
+const parsed = Int.parse('123'); // Option<Int>
+```
+
+## Arithmetic Operations
+
+`Int` supports standard arithmetic operations using bracket notation:
+
+```typescript
+import { Int } from '@w5s/num';
+
+const a = Int(10);
+const b = Int(3);
+
+// Addition
+Int['+'](a, b); // 13
+
+// Subtraction
+Int['-'](a, b); // 7
+
+// Multiplication
+Int['*'](a, b); // 30
+```
+
+## Comparison
+
+```typescript
+import { Int } from '@w5s/num';
+
+const a = Int(10);
+const b = Int(20);
+
+Int['<'](a, b);  // true
+Int['>'](a, b);  // false
+Int['=='](a, b); // false
+Int['<='](a, b); // true
+Int['>='](a, b); // false
+```
+
+## Formatting
+
+```typescript
+import { Int } from '@w5s/num';
+
+const value = Int(1234);
+Int.format(value); // '1234'
+Int.format(value, { radix: 16 }); // '4d2'
+```
+
+## Bounds
+
+`Int` provides safe bounds for integers:
+
+```typescript
+import { Int } from '@w5s/num';
+
+Int.minValue; // Number.MIN_SAFE_INTEGER
+Int.maxValue; // Number.MAX_SAFE_INTEGER
+```

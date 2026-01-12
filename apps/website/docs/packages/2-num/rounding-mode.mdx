@@ -1,0 +1,136 @@
+---
+sidebar_position: 3
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# RoundingMode
+
+> Enumeration of rounding strategies
+
+<PackageBadgeGroup apiHref="/api/num/namespace/roundingmode" />
+
+## Overview
+
+`RoundingMode` is an enumeration that defines different strategies for rounding numeric values.
+
+## Available Modes
+
+### `RoundingMode.Up`
+
+Always round away from zero.
+
+```
+5.5  → 6.0
+2.5  → 3.0
+1.6  → 2.0
+1.1  → 2.0
+-1.1 → -2.0
+-1.6 → -2.0
+-2.5 → -3.0
+-5.5 → -6.0
+```
+
+### `RoundingMode.Down`
+
+Always round towards zero.
+
+```
+5.5  → 5.0
+2.5  → 2.0
+1.6  → 1.0
+1.1  → 1.0
+-1.1 → -1.0
+-1.6 → -1.0
+-2.5 → -2.0
+-5.5 → -5.0
+```
+
+### `RoundingMode.Ceil`
+
+Round towards positive infinity (+∞).
+
+```
+5.5  → 6.0
+2.5  → 3.0
+1.6  → 2.0
+1.1  → 2.0
+-1.1 → -1.0
+-1.6 → -1.0
+-2.5 → -2.0
+-5.5 → -5.0
+```
+
+### `RoundingMode.Floor`
+
+Round towards negative infinity (-∞).
+
+```
+5.5  → 5.0
+2.5  → 2.0
+1.6  → 1.0
+1.1  → 1.0
+-1.1 → -2.0
+-1.6 → -2.0
+-2.5 → -3.0
+-5.5 → -6.0
+```
+
+### `RoundingMode.HalfUp`
+
+Round to nearest neighbor, or up if ending decimal is 5.
+
+```
+5.5  → 6.0
+2.5  → 3.0
+1.6  → 2.0
+1.1  → 1.0
+-1.1 → -1.0
+-1.6 → -2.0
+-2.5 → -3.0
+-5.5 → -6.0
+```
+
+### `RoundingMode.HalfDown`
+
+Round to nearest neighbor, or down if ending decimal is 5.
+
+```
+5.5  → 5.0
+2.5  → 2.0
+1.6  → 2.0
+1.1  → 1.0
+-1.1 → -1.0
+-1.6 → -2.0
+-2.5 → -2.0
+-5.5 → -5.0
+```
+
+### `RoundingMode.HalfEven`
+
+Round to nearest neighbor, if equidistant, round towards nearest even digit (also known as "banker's rounding").
+
+```
+5.5  → 6.0
+2.5  → 2.0
+1.6  → 2.0
+1.1  → 1.0
+-1.1 → -1.0
+-1.6 → -2.0
+-2.5 → -2.0
+-5.5 → -6.0
+```
+
+## Usage
+
+```typescript
+import { RoundingMode } from '@w5s/num';
+
+// Access rounding mode values
+const mode = RoundingMode.HalfUp; // 'half-up'
+
+// Enumerate all modes
+import { Enum } from '@w5s/core';
+
+Enum.keys(RoundingMode);   // ['Up', 'Down', 'Ceil', 'Floor', 'HalfUp', 'HalfDown', 'HalfEven']
+Enum.values(RoundingMode); // ['up', 'down', 'ceil', 'floor', 'half-up', 'half-down', 'half-even']
+```

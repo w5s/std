@@ -1,0 +1,47 @@
+---
+sidebar_position: 0
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
+
+# Overview
+
+> Number, BigInt, Int modules
+
+<PackageBadgeGroup packageName="@w5s/num" apiHref="/api/num" />
+
+## Installation
+
+<PackageInstallBlock packageName="@w5s/num" />
+
+## Motivation
+
+The `@w5s/num` package provides a collection of utilities to work with numeric values in a type-safe and functional way. It extends the standard JavaScript `number`, `bigint`, and introduces a safe `Int` type.
+
+## Key Features
+
+- **Int**: Safe integer type with bounds checking
+- **Number**: Extended number utilities with parsing, formatting and arithmetic operations
+- **BigInt**: Extended bigint utilities with parsing, formatting and arithmetic operations
+- **RoundingMode**: Enum for different rounding strategies
+
+## Quick Start
+
+```typescript
+import { Option } from '@w5s/core';
+import { BigInt, Int, Number } from '@w5s/num';
+
+// Parsing BigInt values
+const parsed = BigInt.parse('123n');
+if (Option.isSome(parsed)) {
+  console.log(BigInt['+'](parsed, 1n)); // 124n
+}
+
+// Using Int for safe integer operations
+const intValue = Int(42);
+console.log(Int['*'](intValue, 2)); // 84
+
+// Number utilities
+console.log(Number.parse('3.14')); // Option.Some(3.14)
+console.log(Number.format(1234.5)); // '1234.5'
+```
