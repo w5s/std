@@ -1,0 +1,57 @@
+---
+sidebar_position: 0
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+import { PackageInstallBlock } from '@site/src/components/PackageInstallBlock';
+
+# Overview
+
+> Lazy, composable and cancelable async computations
+
+<PackageBadgeGroup packageName="@w5s/task" apiHref="/api/task" />
+
+## Installation
+
+<PackageInstallBlock packageName="@w5s/task" />
+
+## Motivation
+
+A `Task<Value, Error>` is a lazy computation that will be evaluated later. Unlike Promises, Tasks:
+
+- **Are lazy**: Nothing happens until you explicitly run them
+- **Are composable**: Chain operations without triggering execution
+- **Are cancelable**: Stop running tasks when no longer needed
+- **Return Results**: Always resolve to `Result<Value, Error>`, making error handling explicit
+
+This makes Tasks ideal for:
+
+- Side effects management
+- Complex async workflows
+- Testable async code
+- Resource management with cancellation
+
+## Quick Start
+
+```typescript
+import { Task } from '@w5s/task';
+
+// Create a task that generates a random number
+function randomNumber() {
+  return Task.create(() => Task.ok(Math.random()));
+}
+
+// Create a task that logs a value
+function log(value: unknown) {
+  return Task.create(() => Task.ok(console.log(value)));
+}
+
+// Compose tasks
+export function main() {
+  const randomValueTask = randomNumber();
+  const squareValueTask = Task.map(randomValueTask, (value) => value * value);
+  return Task.andThen(squareValueTask, log);
+}
+
+// Run at the edge of your program
+void Task.run(main());
+```

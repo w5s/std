@@ -12,7 +12,10 @@
     "monoid",
     "NCHAR",
     "NVARCHAR",
+    "randomuuid",
+    "roundingmode",
     "SMALLINT",
+    "timeduration",
     "VARBINARY",
     "VARCHAR"
   ]

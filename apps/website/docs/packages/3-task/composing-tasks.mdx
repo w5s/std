@@ -1,0 +1,190 @@
+---
+sidebar_position: 2
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Composing Tasks
+
+> Chaining and combining tasks
+
+<PackageBadgeGroup apiHref="/api/task/namespace/task" />
+
+## Overview
+
+Tasks are designed to be composed together. Multiple operations can be chained without triggering execution until `Task.run` is called.
+
+## Transforming Values
+
+### Task.map
+
+Transform the success value of a task:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const numberTask = Task.resolve(42);
+const stringTask = Task.map(numberTask, (n) => `The answer is ${n}`);
+
+await Task.run(stringTask); // Result.Ok('The answer is 42')
+```
+
+### Task.andThen
+
+Chain tasks that depend on previous results:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const fetchUser = (id: string) => Task.create(async () => {
+  // ... fetch user
+  return Task.ok({ id, name: 'John' });
+});
+
+const fetchPosts = (userId: string) => Task.create(async () => {
+  // ... fetch posts
+  return Task.ok([{ title: 'Post 1' }]);
+});
+
+const userWithPosts = Task.andThen(
+  fetchUser('123'),
+  (user) => Task.map(
+    fetchPosts(user.id),
+    (posts) => ({ ...user, posts })
+  )
+);
+```
+
+### Task.andRun
+
+Chain tasks when and the previous value:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const logStart = Task.create(() => Task.ok(console.log('Starting...')));
+const mainTask = Task.create(() => Task.ok('result'));
+const logEnd = Task.create(() => Task.ok(console.log('Done!')));
+
+const workflow = Task.andRun(
+  Task.andRun(logStart, mainTask),
+  logEnd
+);
+```
+
+## Handling Errors
+
+### Task.mapError
+
+Transform the error type of a task:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const failingTask = Task.reject('string error');
+const mappedError = Task.mapError(failingTask, (err) => new AnotherError(err));
+```
+
+### Task.orElse
+
+Recover from errors:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const failingTask = Task.reject(new NetworkError());
+const recovered = Task.orElse(failingTask, (error) => {
+  console.log('Recovering from:', error);
+  return Task.resolve('fallback value');
+});
+```
+
+### Task.mapResult
+
+Transform both success and error at once:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const task = Task.resolve(42);
+const mapped = Task.mapResult(task, (result) => {
+  if (result.ok) {
+    return Result.Ok(result.value * 2);
+  }
+  return Result.Error(new WrappedError({ cause: result.error }));
+});
+```
+
+## Parallel Execution
+
+### Task.all
+
+Run multiple tasks in parallel and collect all results:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const tasks = [
+  Task.resolve(1),
+  Task.resolve(2),
+  Task.resolve(3),
+];
+
+const allResults = Task.all(tasks);
+await Task.run(allResults); // Result.Ok([1, 2, 3])
+
+// If any task fails, the whole operation fails
+const withFailure = Task.all([
+  Task.resolve(1),
+  Task.reject('error'),
+]);
+await Task.run(withFailure); // Result.Error('error')
+```
+
+### Task.any
+
+Get the first successful result:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const first = Task.any([
+  Task.reject('error 1'),
+  Task.resolve('success'),
+  Task.reject('error 2'),
+]);
+await Task.run(first); // Result.Ok('success')
+```
+
+### Task.allSettled
+
+Run all tasks and collect all results (success or failure):
+
+```typescript
+import { Task } from '@w5s/task';
+
+const settled = Task.allSettled([
+  Task.resolve(1),
+  Task.reject('error'),
+  Task.resolve(3),
+]);
+await Task.run(settled);
+// Result.Ok([
+//   Result.Ok(1),
+//   Result.Error('error'),
+//   Result.Ok(3)
+// ])
+```
+
+## Utility Functions
+
+### Task.ignore
+
+Discard the result value:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const task = Task.resolve(42);
+const ignored = Task.ignore(task);
+await Task.run(ignored); // Result.Ok(undefined)
+```

@@ -1,0 +1,123 @@
+---
+sidebar_position: 1
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Creating Tasks
+
+> Different ways to create Task instances
+
+<PackageBadgeGroup apiHref="/api/task/namespace/task" />
+
+## Overview
+
+Tasks can be created in multiple ways depending on your use case. The main entry point is `Task.create`, but there are also convenience methods for common patterns.
+
+## Task.create
+
+The primary way to create a task with custom logic:
+
+```typescript
+import { Task } from '@w5s/task';
+
+// Synchronous computation
+const syncTask = Task.create(() => Task.ok(42));
+
+// Asynchronous computation
+const asyncTask = Task.create(async () => {
+  const response = await fetch('/api/data');
+  const data = await response.json();
+  return Task.ok(data);
+});
+
+// With error handling
+const fetchTask = Task.create(async () => {
+  try {
+    const response = await fetch('/api/data');
+    return Task.ok(await response.json());
+  } catch (error) {
+    return Task.error(new NetworkError({ cause: error }));
+  }
+});
+```
+
+## Task.resolve / Task.reject
+
+Create tasks that immediately resolve or reject:
+
+```typescript
+import { Task } from '@w5s/task';
+
+// A task that resolves with a value
+const resolvedTask = Task.resolve(42);
+
+// A task that rejects with an error
+const rejectedTask = Task.reject(new Error('Something went wrong'));
+```
+
+## Task.ok / Task.error
+
+Shorthand for creating `Result` objects within tasks:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const myTask = Task.create(() => {
+  const random = Math.random();
+  if (random > 0.5) {
+    return Task.ok(random);
+  }
+  return Task.error('Too low');
+});
+```
+
+## Task.tryCall
+
+Safely wrap functions that might throw:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const parseJSON = (text: string) =>
+  Task.tryCall(
+    () => JSON.parse(text),
+    (error) => new ParseError({ message: 'Invalid JSON', cause: error })
+  );
+```
+
+## Task.from (Advanced)
+
+Lower-level API for creating tasks with full control over execution:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const delayedTask = Task.from(({ resolve, reject, canceler }) => {
+  const timeoutId = setTimeout(() => resolve(42), 1000);
+  
+  // Setup cancellation
+  canceler.current = () => clearTimeout(timeoutId);
+});
+```
+
+## Accessing Canceler and Subtask Runner
+
+`Task.create` provides access to the canceler and a subtask runner:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const complexTask = Task.create(async ({ canceler, run }) => {
+  // Setup cancellation logic
+  canceler.current = () => {
+    console.log('Task was cancelled');
+  };
+  
+  // Run subtasks
+  const result1 = await run(someOtherTask);
+  if (!result1.ok) return Task.error(result1.error);
+  
+  const result2 = await run(anotherTask);
+  return result2.ok ? Task.ok(result2.value) : Task.error(result2.error);
+});
+```

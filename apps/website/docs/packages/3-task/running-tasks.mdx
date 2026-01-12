@@ -1,0 +1,170 @@
+---
+sidebar_position: 3
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Running Tasks
+
+> Executing tasks and handling cancellation
+
+<PackageBadgeGroup apiHref="/api/task/namespace/task" />
+
+## Overview
+
+Tasks are lazy - they don't execute until explicitly run. This section covers how to execute tasks and handle cancellation.
+
+## Task.run
+
+The primary way to execute a task:
+
+```typescript
+import { Task } from '@w5s/task';
+import { Result } from '@w5s/core';
+
+const myTask = Task.resolve(42);
+
+// Run and get the result
+const result = await Task.run(myTask);
+
+if (Result.isOk(result)) {
+  console.log('Success:', result.value);
+} else {
+  console.error('Error:', result.error);
+}
+```
+
+## Cancellation
+
+Tasks can be cancelled using a canceler reference:
+
+```typescript
+import { Task } from '@w5s/task';
+import { Ref } from '@w5s/core';
+
+// Create a canceler
+const canceler = Ref(undefined);
+
+// Start a long-running task
+const longTask = Task.create(async ({ canceler: taskCanceler }) => {
+  // Setup what happens on cancel
+  taskCanceler.current = () => {
+    console.log('Task was cancelled');
+  };
+  
+  await new Promise(resolve => setTimeout(resolve, 10000));
+  return Task.ok('completed');
+});
+
+// Run with canceler
+const resultPromise = Task.run(longTask, canceler);
+
+// Cancel after 1 second
+setTimeout(() => {
+  if (canceler.current) {
+    canceler.current();
+  }
+}, 1000);
+```
+
+## Using task.run() Method
+
+Tasks also have a `run` method for convenience:
+
+```typescript
+import { Task } from '@w5s/task';
+
+const myTask = Task.create(() => Task.ok(42));
+
+// Direct method call
+const result = await myTask.run();
+```
+
+## Best Practices
+
+:::tip
+
+### Keep Task.run at the Edge
+
+Place `Task.run` calls at the edges of your application (entry points, event handlers, etc.) to maintain the benefits of lazy evaluation:
+
+```typescript
+// ✓ Good: Run at the application entry point
+async function main() {
+  const program = buildProgram();
+  const result = await Task.run(program);
+  handleResult(result);
+}
+
+// ⤫ Bad: Running tasks inside business logic
+function processData(data: Data) {
+  const task = transform(data);
+  return Task.run(task); // Loses composability
+}
+```
+
+:::
+
+:::tip
+
+### Handle Both Result Cases
+
+Always handle both success and error cases:
+
+```typescript
+import { Task } from '@w5s/task';
+import { Result } from '@w5s/core';
+
+const result = await Task.run(myTask);
+
+// ✓ Good: Explicit handling
+if (Result.isOk(result)) {
+  processValue(result.value);
+} else {
+  handleError(result.error);
+}
+
+// ⤫ Bad: Ignoring potential errors
+const value = (await Task.run(myTask)).value; // Might be undefined!
+```
+
+:::
+
+## FAQ
+
+<details>
+<summary>
+When should I use Task vs Promise?
+</summary>
+
+Use **Task** when:
+- You need lazy evaluation
+- You need cancellation
+- You want explicit error handling with `Result`
+- You're building composable async workflows
+
+Use **Promise** when:
+- You need immediate execution
+- Inter-operating with APIs that expect Promises
+- Simple one-off async operations
+
+</details>
+
+<details>
+<summary>
+Can I convert between Task and Promise?
+</summary>
+
+Yes! `Task.run` returns a Promise, and you can wrap Promises in Tasks:
+
+```typescript
+// Promise to Task
+const fromPromise = Task.create(async () => {
+  const value = await somePromise;
+  return Task.ok(value);
+});
+
+// Task to Promise
+const toPromise = Task.run(someTask);
+```
+
+</details>
