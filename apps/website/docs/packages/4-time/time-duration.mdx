@@ -1,0 +1,223 @@
+---
+sidebar_position: 2
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# TimeDuration
+
+> Working with time durations
+
+<PackageBadgeGroup apiHref="/api/time/namespace/timeduration" />
+
+## Overview
+
+`TimeDuration` represents an amount of time in milliseconds. It's a branded `number` type that provides type safety and convenient creation from human-readable units.
+
+## Creating Durations
+
+### Using Object Syntax (Recommended)
+
+Create durations using an object with named units:
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+// Single unit
+const oneHour = TimeDuration({ hours: 1 });
+const thirtyMinutes = TimeDuration({ minutes: 30 });
+const fiveSeconds = TimeDuration({ seconds: 5 });
+
+// Combined units
+const complexDuration = TimeDuration({
+  weeks: 1,
+  days: 2,
+  hours: 3,
+  minutes: 45,
+  seconds: 30,
+  milliseconds: 500,
+});
+```
+
+### TimeDuration.of
+
+Create from raw milliseconds:
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const duration = TimeDuration.of(3600000); // 1 hour in milliseconds
+```
+
+### TimeDuration.from
+
+Alternative constructor (same as calling `TimeDuration()`):
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const duration = TimeDuration.from({ hours: 1, minutes: 30 });
+const rawDuration = TimeDuration.from(5000);
+```
+
+## Unit Conversions
+
+Convert durations to different time units:
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const duration = TimeDuration({ hours: 2, minutes: 30 });
+
+TimeDuration.toWeeks(duration);   // Duration in weeks
+TimeDuration.toDays(duration);    // Duration in days
+TimeDuration.toHours(duration);   // 2.5
+TimeDuration.toMinutes(duration); // 150
+TimeDuration.toSeconds(duration); // 9000
+```
+
+## Arithmetic Operations
+
+### Addition
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const a = TimeDuration({ hours: 1 });
+const b = TimeDuration({ minutes: 30 });
+
+const sum = TimeDuration['+'](a, b);
+// TimeDuration of 1 hour 30 minutes
+```
+
+### Subtraction
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const a = TimeDuration({ hours: 2 });
+const b = TimeDuration({ minutes: 30 });
+
+const diff = TimeDuration['-'](a, b);
+// TimeDuration of 1 hour 30 minutes
+```
+
+### Negation
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const positive = TimeDuration({ hours: 1 });
+const negative = TimeDuration.negate(positive);
+// -3600000 (negative 1 hour)
+```
+
+## Comparison
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const oneHour = TimeDuration({ hours: 1 });
+const twoHours = TimeDuration({ hours: 2 });
+
+TimeDuration['<'](oneHour, twoHours);  // true
+TimeDuration['>'](oneHour, twoHours);  // false
+TimeDuration['=='](oneHour, twoHours); // false
+```
+
+## Constants
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+// Zero duration
+TimeDuration.zero; // 0
+```
+
+## String Representation
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const duration = TimeDuration({ hours: 1, minutes: 30 });
+
+// Format to string
+TimeDuration.asString(duration);
+```
+
+## Common Patterns
+
+### Readable Durations
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+// Define common durations
+const SECOND = TimeDuration({ seconds: 1 });
+const MINUTE = TimeDuration({ minutes: 1 });
+const HOUR = TimeDuration({ hours: 1 });
+const DAY = TimeDuration({ days: 1 });
+const WEEK = TimeDuration({ weeks: 1 });
+
+// Use in code
+function getCacheExpiry() {
+  return TimeDuration['*'](HOUR, 24); // 24 hours
+}
+```
+
+### Duration Scaling
+
+```typescript
+import { TimeDuration } from '@w5s/time';
+
+const baseInterval = TimeDuration({ seconds: 1 });
+
+// Exponential backoff
+function getBackoffDuration(attempt: number) {
+  const multiplier = Math.pow(2, attempt);
+  return TimeDuration['*'](baseInterval, multiplier);
+}
+```
+
+### Working with Time
+
+```typescript
+import { Task } from '@w5s/task';
+import { Time, TimeDuration } from '@w5s/time';
+
+// Add duration to current time
+function getExpirationTime(ttl: TimeDuration) {
+  return Task.map(Time.now(), (now) => Time['+'](now, ttl));
+}
+
+// Check if time has elapsed
+function hasElapsed(startTime: Time, duration: TimeDuration) {
+  return Task.map(Time.now(), (now) => {
+    const elapsed = Time.diff(now, startTime);
+    return TimeDuration['>='](elapsed, duration);
+  });
+}
+```
+
+## FAQ
+
+<details>
+<summary>
+Why use TimeDuration instead of plain numbers?
+</summary>
+
+`TimeDuration` provides:
+
+1. **Type Safety**: Prevents mixing up durations with other numbers
+2. **Readable Construction**: `TimeDuration({ hours: 1 })` is clearer than `3600000`
+3. **Unit Conversion**: Built-in methods for converting between units
+4. **Documentation**: Types communicate intent better than raw numbers
+
+```typescript
+// Without TimeDuration
+function setTimeout(ms: number) {} // What unit? Easy to pass seconds by mistake
+
+// With TimeDuration  
+function setTimeout(duration: TimeDuration) {} // Clear it's a duration
+```
+
+</details>

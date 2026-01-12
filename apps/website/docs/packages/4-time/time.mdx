@@ -1,0 +1,186 @@
+---
+sidebar_position: 1
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Time
+
+> Working with points in time
+
+<PackageBadgeGroup apiHref="/api/time/namespace/time" />
+
+## Overview
+
+`Time` represents a specific point in time as milliseconds since Unix epoch. It's a branded `number` type that provides type safety while being fully compatible with numeric operations.
+
+## Creating Time Values
+
+### Time.of
+
+Create a Time from a raw timestamp:
+
+```typescript
+import { Time } from '@w5s/time';
+
+const time = Time.of(1609459200000); // Jan 1, 2021 00:00:00 UTC
+```
+
+### Time.from
+
+Create a Time from date components:
+
+```typescript
+import { Time } from '@w5s/time';
+
+const time = Time.from({
+  year: 2021,
+  month: 1,    // January (1-12)
+  day: 1,      // Day of month (1-31)
+  hour: 12,
+  minute: 30,
+  second: 0,
+  millisecond: 0,
+});
+```
+
+### Time.parse
+
+Parse from an ISO 8601 string:
+
+```typescript
+import { Time } from '@w5s/time';
+import { Option } from '@w5s/core';
+
+const parsed = Time.parse('2021-01-01T12:30:00.000Z');
+
+if (Option.isSome(parsed)) {
+  console.log('Parsed time:', parsed);
+}
+```
+
+### Time.now
+
+Get the current time as a Task:
+
+```typescript
+import { Task } from '@w5s/task';
+import { Time } from '@w5s/time';
+
+const currentTimeTask = Time.now();
+const result = await Task.run(currentTimeTask);
+// Result.Ok(<current timestamp>)
+```
+
+## Arithmetic Operations
+
+### Adding Duration to Time
+
+```typescript
+import { Time, TimeDuration } from '@w5s/time';
+
+const now = Time.of(Date.now());
+const oneHour = TimeDuration({ hours: 1 });
+
+const inOneHour = Time['+'](now, oneHour);
+```
+
+### Difference Between Times
+
+```typescript
+import { Time } from '@w5s/time';
+
+const start = Time.of(1609459200000);
+const end = Time.of(1609462800000);
+
+const duration = Time.diff(end, start);
+// TimeDuration representing the difference
+```
+
+## Comparison
+
+```typescript
+import { Time } from '@w5s/time';
+
+const time1 = Time.of(1609459200000);
+const time2 = Time.of(1609462800000);
+
+Time['<'](time1, time2);  // true
+Time['>'](time1, time2);  // false
+Time['=='](time1, time2); // false
+Time['<='](time1, time2); // true
+```
+
+## Formatting
+
+```typescript
+import { Time } from '@w5s/time';
+
+const time = Time.from({ year: 2021, month: 1, day: 1 });
+
+Time.format(time); // ISO 8601 string
+```
+
+## Bounds
+
+```typescript
+import { Time } from '@w5s/time';
+
+Time.minValue; // Minimum representable time
+Time.maxValue; // Maximum representable time
+```
+
+## Delays
+
+Create a Task that resolves after a delay:
+
+```typescript
+import { Task } from '@w5s/task';
+import { Time, TimeDuration } from '@w5s/time';
+
+const delayedTask = Task.andThen(
+  Time.delay(TimeDuration({ seconds: 2 })),
+  () => Task.resolve('Done after 2 seconds')
+);
+
+await Task.run(delayedTask);
+```
+
+## Common Patterns
+
+### Timeout Handling
+
+```typescript
+import { Task } from '@w5s/task';
+import { Time, TimeDuration } from '@w5s/time';
+
+function withTimeout<V, E>(
+  task: Task<V, E>,
+  timeout: TimeDuration
+): Task<V, E | 'timeout'> {
+  return Task.any([
+    task,
+    Task.andThen(
+      Time.delay(timeout),
+      () => Task.reject('timeout' as const)
+    ),
+  ]);
+}
+```
+
+### Measuring Elapsed Time
+
+```typescript
+import { Task } from '@w5s/task';
+import { Time, TimeDuration } from '@w5s/time';
+
+function measureTime<V, E>(task: Task<V, E>) {
+  return Task.andThen(Time.now(), (start) =>
+    Task.andThen(task, (value) =>
+      Task.map(Time.now(), (end) => ({
+        value,
+        elapsed: Time.diff(end, start),
+      }))
+    )
+  );
+}
+```
