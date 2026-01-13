@@ -35,36 +35,25 @@ if (Result.isOk(result)) {
 
 ## Cancellation
 
-Tasks can be cancelled using a canceler reference:
+Tasks can be cancelled by passing a canceler reference to `Task.run`:
 
 ```typescript
 import { Task } from '@w5s/task';
 import { Ref } from '@w5s/core';
 
-// Create a canceler
+// Create a canceler reference
 const canceler = Ref(undefined);
 
-// Start a long-running task
-const longTask = Task.create(async ({ canceler: taskCanceler }) => {
-  // Setup what happens on cancel
-  taskCanceler.current = () => {
-    console.log('Task was cancelled');
-  };
-  
-  await new Promise(resolve => setTimeout(resolve, 10000));
-  return Task.ok('completed');
-});
-
 // Run with canceler
-const resultPromise = Task.run(longTask, canceler);
+const resultPromise = Task.run(myTask, canceler);
 
-// Cancel after 1 second
-setTimeout(() => {
-  if (canceler.current) {
-    canceler.current();
-  }
-}, 1000);
+// Cancel the task
+if (canceler.current != null) {
+  canceler.current();
+}
 ```
+
+For detailed information on making tasks cancellable and advanced patterns, see [Cancelling tasks](./cancelling-tasks.mdx).
 
 ## Using task.run() Method
 

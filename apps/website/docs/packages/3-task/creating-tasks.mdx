@@ -100,24 +100,3 @@ const delayedTask = Task.from(({ resolve, reject, canceler }) => {
 });
 ```
 
-## Accessing Canceler and Subtask Runner
-
-`Task.create` provides access to the canceler and a subtask runner:
-
-```typescript
-import { Task } from '@w5s/task';
-
-const complexTask = Task.create(async ({ canceler, run }) => {
-  // Setup cancellation logic
-  canceler.current = () => {
-    console.log('Task was cancelled');
-  };
-  
-  // Run subtasks
-  const result1 = await run(someOtherTask);
-  if (!result1.ok) return Task.error(result1.error);
-  
-  const result2 = await run(anotherTask);
-  return result2.ok ? Task.ok(result2.value) : Task.error(result2.error);
-});
-```

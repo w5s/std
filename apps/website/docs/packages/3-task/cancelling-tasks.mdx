@@ -1,0 +1,247 @@
+---
+sidebar_position: 4
+---
+import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
+
+# Cancelling Tasks
+
+> Stopping running tasks and freeing resources
+
+<PackageBadgeGroup apiHref="/api/task/namespace/task" />
+
+## Overview
+
+One of the key features of Tasks is their ability to be cancelled. Cancellation means that:
+
+- The current execution does not need to resolve or reject
+- The execution can be stopped
+- Resources can be freed (timers, network requests, file handles, etc.)
+
+## Making a Task Cancellable
+
+Any task can be configured as cancellable by setting the `canceler.current` value with a callback function.
+
+### Basic Pattern
+
+```typescript
+import { Task } from '@w5s/task';
+
+const cancellableTask = Task.create(({ canceler }) => {
+  // Setup your async operation
+  const timeoutId = setTimeout(() => {/* ... */}, 1000);
+  
+  // Define what happens when cancelled
+  canceler.current = () => {
+    clearTimeout(timeoutId);
+    console.log('Task was cancelled');
+  };
+  
+  return Task.ok('result');
+});
+```
+
+### With Fetch API (AbortController)
+
+```typescript
+import { Task } from '@w5s/task';
+
+const fetchAPIData = (): Task<string, NetworkError> => Task.create(async ({ canceler }) => {
+  const abortController = new AbortController();
+  // Set the canceler to abort the request when the task is cancelled
+  canceler.current = () => abortController.abort();
+
+  try {
+    const response = await fetch('/api/data', { signal: abortController.signal });
+    return Task.ok(await response.text());
+  } catch (error) {
+    return Task.error(new NetworkError({ cause: error }));
+  }
+});
+```
+
+### With Task.from (Low-level)
+
+```typescript
+import { Task } from '@w5s/task';
+
+const delayedTask = Task.from(({ resolve, reject, canceler }) => {
+  const timeoutId = setTimeout(() => resolve(42), 1000);
+  
+  // Setup cancellation
+  canceler.current = () => clearTimeout(timeoutId);
+});
+```
+
+## Triggering Cancellation
+
+### Using a Canceler Ref
+
+Pass a canceler reference to `Task.run` to be able to cancel the task later:
+
+```typescript
+import { Task } from '@w5s/task';
+
+// Create a canceler reference
+const controller = new AbortController();
+
+// Start the task with the canceler
+const resultPromise = Task.run(longRunningTask, { signal: controller.signal });
+
+// Cancel after 5 seconds
+setTimeout(() => {
+  controller.abort();
+}, 5000);
+```
+
+## Timeout Pattern
+
+Use `@w5s/task-timeout` to automatically cancel a task after a delay:
+
+```typescript
+import { Task } from '@w5s/task';
+import { timeout } from '@w5s/task-timeout';
+import { TimeDuration } from '@w5s/time';
+
+const longTask = fetchLargeData();
+
+// Cancel if not completed within 30 seconds
+const timeoutTask = timeout(longTask, TimeDuration({ seconds: 30 }));
+
+const result = await Task.run(timeoutTask);
+// Result.Error(TimeoutError) if task takes longer than 30 seconds
+```
+
+## Best Practices
+
+:::tip
+
+### Always Clean Up Resources
+
+When creating cancellable tasks, ensure all resources are properly released:
+
+```typescript
+const task = Task.create(async ({ canceler }) => {
+  const connection = await openConnection();
+  const subscription = events.subscribe(handler);
+  
+  // Clean up everything on cancel
+  canceler.current = () => {
+    connection.close();
+    subscription.unsubscribe();
+  };
+  
+  // ... task logic
+});
+```
+
+:::
+
+:::tip
+
+### Check for Cancellation in Long Operations
+
+For tasks with multiple steps, check if cancellation was requested:
+
+```typescript
+const processItems = (items: Item[]) => Task.create(async ({ canceler }) => {
+  let isCancelled = false;
+  canceler.current = () => { isCancelled = true; };
+  
+  const results = [];
+  for (const item of items) {
+    if (isCancelled) {
+      // Stop processing if cancelled
+      break;
+    }
+    results.push(await processItem(item));
+  }
+  
+  return Task.ok(results);
+});
+```
+
+:::
+
+:::tip
+
+### Propagate Cancellation to Subtasks
+
+When running subtasks, ensure cancellation propagates:
+
+```typescript
+const parentTask = Task.create(async ({ canceler, run }) => {
+  // The `run` function automatically propagates the canceler
+  const result1 = await run(childTask1);
+  const result2 = await run(childTask2);
+  
+  return Task.ok({ result1, result2 });
+});
+```
+
+:::
+
+## FAQ
+
+<details>
+<summary>
+What happens to the result when a task is cancelled?
+</summary>
+
+When a task is cancelled, it neither resolves nor rejects. The Promise returned by `Task.run` will remain pending unless the task handles cancellation by resolving or rejecting explicitly.
+
+</details>
+
+<details>
+<summary>
+Can I know if a task was cancelled?
+</summary>
+
+You can track cancellation state within your task:
+
+```typescript
+const task = Task.create(async ({ canceler }) => {
+  let wasCancelled = false;
+  
+  canceler.current = () => {
+    wasCancelled = true;
+    console.log('Task was cancelled');
+  };
+  
+  // ... task logic
+  
+  if (wasCancelled) {
+    return Task.error(new CancelledError());
+  }
+  
+  return Task.ok(result);
+});
+```
+
+</details>
+
+<details>
+<summary>
+Does cancellation work with async/await?
+</summary>
+
+Yes, but you need to handle it properly. When using `AbortController` with fetch or similar APIs, the abort will cause the Promise to reject with an `AbortError`:
+
+```typescript
+const task = Task.create(async ({ canceler }) => {
+  const abortController = new AbortController();
+  canceler.current = () => abortController.abort();
+
+  try {
+    const response = await fetch('/api', { signal: abortController.signal });
+    return Task.ok(await response.json());
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      // Handle cancellation specifically
+      return Task.error(new CancelledError());
+    }
+    return Task.error(new NetworkError({ cause: error }));
+  }
+});
+```
+
+</details>
