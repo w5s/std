@@ -65,6 +65,16 @@ export interface TaskParameters<Value, Error> {
 export type TaskFunction<Value, Error> = (parameters: TaskParameters<Value, Error>) => Awaitable<void>;
 
 /**
+ * Options for running a task
+ */
+export type TaskRunOptions = {
+  /**
+   * The abort signal to use for the task.
+   */
+  signal?: AbortSignal;
+};
+
+/**
  * A Task interface that represents a lazy computation that will be evaluated later.
  * The result of the computation is a {@link @w5s/core!Result}
  * A task is also cancelable and can run other subtasks
@@ -83,9 +93,9 @@ export interface Task<Value, Error> extends TaskLike<Value, Error> {
   /**
    * Shorthand to run the current task
    *
-   * @param canceler
+   * @param options
    */
-  run(canceler?: TaskCanceler): Awaitable<Result<Value, Error>>;
+  run(options?: TaskRunOptions): Awaitable<Result<Value, Error>>;
 }
 
 /**

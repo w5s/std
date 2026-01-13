@@ -3,7 +3,7 @@ import { Ref, Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { orElse } from './orElse.js';
-import { run } from './run.js';
+import { __run } from './__run.js';
 
 describe(orElse, () => {
   const anyError = Object.freeze({ message: 'error message' });
@@ -44,7 +44,7 @@ describe(orElse, () => {
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
     const canceler = Ref(() => {});
-    const result = run(thenTask, canceler);
+    const result = __run(thenTask, canceler);
     await result;
 
     expect(task[Symbol.run]).toHaveBeenCalledWith({

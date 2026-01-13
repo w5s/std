@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { Ref, Symbol } from '@w5s/core';
 import { FakeTask, withTask } from '../Testing.js';
 import { map } from './map.js';
-import { run } from './run.js';
+import { __run } from './__run.js';
 
 describe(map, () => {
   const anyError = 'anyError';
@@ -36,7 +36,7 @@ describe(map, () => {
     const mapTask = map(task, (_) => _);
     vi.spyOn(task, Symbol.run);
     const canceler = Ref(() => {});
-    const result = run(mapTask, canceler);
+    const result = __run(mapTask, canceler);
     expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),

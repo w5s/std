@@ -3,7 +3,7 @@ import { Ref, Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andThen } from './andThen.js';
-import { run } from './run.js';
+import { __run } from './__run.js';
 
 describe(andThen, () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +42,7 @@ describe(andThen, () => {
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
     const canceler = Ref(() => {});
-    const result = run(thenTask, canceler);
+    const result = __run(thenTask, canceler);
     await result;
     expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),

@@ -1,7 +1,7 @@
 import type { Awaitable } from '@w5s/async';
 import type { Result } from '@w5s/core';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
-import type { TaskCanceler, TaskFunction, Task as TaskInterface } from '../Task.js';
+import type { TaskFunction, Task as TaskInterface, TaskRunOptions } from '../Task.js';
 import { run as taskRun } from './run.js';
 
 const $run = Symbol.run;
@@ -15,7 +15,7 @@ export class Task<Value, Error> implements TaskInterface<Value, Error> {
     this[$run] = runFn;
   }
 
-  run(canceler?: TaskCanceler): Awaitable<Result<Value, Error>> {
-    return taskRun(this, canceler);
+  run(options?: TaskRunOptions): Awaitable<Result<Value, Error>> {
+    return taskRun(this, options);
   }
 }

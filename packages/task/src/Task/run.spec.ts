@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Result, Ref, Symbol } from '@w5s/core';
+import { Result, Symbol } from '@w5s/core';
 import { run } from './run.js';
-import { Task } from '../Task.js';
+import { Task, type TaskLike } from '../Task.js';
 
 const anyError = new Error('TestError');
 const anyObject = Object.freeze({ foo: true });
@@ -32,15 +32,21 @@ describe(run, () => {
     const task = Task.create(() => Promise.reject(new Error('TestError')));
     await expect(run(task)).rejects.toEqual(new Error('TestError'));
   });
-  it('should handle canceler', () => {
-    const canceler = Ref(undefined);
-    const task = { [Symbol.run]: vi.fn() };
-    void run(task, canceler);
-    expect(task[Symbol.run]).toHaveBeenCalledWith({
-      resolve: expect.any(Function),
-      reject: expect.any(Function),
-      canceler,
-      execute: expect.any(Function),
-    });
+  it('should handle canceler', async () => {
+    const controller = new AbortController();
+    const cancelerFn = vi.fn();
+    const task: TaskLike<any, any> = {
+      [Symbol.run]: vi.fn(({ canceler }) => {
+        canceler.current = cancelerFn;
+
+        return Promise.resolve();
+      }),
+    };
+    void run(task, { signal: controller.signal });
+    controller.abort();
+
+    expect(task[Symbol.run]).toHaveBeenCalled();
+    await Promise.resolve();
+    expect(cancelerFn).toHaveBeenCalledTimes(1);
   });
 });

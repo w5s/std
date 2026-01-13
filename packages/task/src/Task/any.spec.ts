@@ -3,9 +3,9 @@ import { AggregateError } from '@w5s/error';
 import { assertType } from '@w5s/core-type';
 import { Ref } from '@w5s/core';
 import { any } from './any.js';
-import { run as taskRun } from './run.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
+import { __run } from './__run.js';
 
 describe(any, () => {
   const expectTask = withTask(expect);
@@ -56,7 +56,7 @@ describe(any, () => {
 
     const anyTask = any(taskData.map((_) => _.task));
     const cancelerRef = Ref(() => {});
-    const result = taskRun(anyTask, cancelerRef);
+    const result = __run(anyTask, cancelerRef);
     cancelerRef.current();
 
     taskData.forEach(({ canceler }) => {

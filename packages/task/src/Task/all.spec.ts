@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
 import { Ref } from '@w5s/core';
 import { all } from './all.js';
-import { run as taskRun } from './run.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
+import { __run } from './__run.js';
 
 describe(all, () => {
   const expectTask = withTask(expect);
@@ -54,7 +54,7 @@ describe(all, () => {
 
     const allTask = all(taskData.map((_) => _.task));
     const cancelerRef = Ref(() => {});
-    const result = taskRun(allTask, cancelerRef);
+    const result = __run(allTask, cancelerRef);
     cancelerRef.current();
 
     taskData.forEach(({ canceler }) => {

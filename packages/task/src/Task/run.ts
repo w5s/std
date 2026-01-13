@@ -1,29 +1,8 @@
 import type { Awaitable } from '@w5s/async';
-import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
 import { Ref } from '@w5s/core/dist/Ref.js';
-import { error } from './error.js';
-import { ok } from './ok.js';
-import type { TaskCanceler, TaskLike, TaskParameters, TaskParametersOverrides } from '../Task.js';
-import { execute } from './execute.js';
-
-const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskParameters<V, E> => {
-  const self: TaskParameters<V, E> = {
-    resolve: overrides.resolve,
-    reject: overrides.reject,
-    canceler: overrides.canceler ?? Ref(undefined),
-    execute: (subtask, subOverrides) =>
-      execute(
-        subtask,
-        createParameters({
-          resolve: subOverrides.resolve,
-          reject: subOverrides.reject,
-          canceler: subOverrides.canceler ?? self.canceler,
-        }),
-      ),
-  };
-  return self;
-};
+import type { TaskCanceler, TaskLike, TaskRunOptions } from '../Task.js';
+import { __run } from './__run.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -36,37 +15,19 @@ const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskP
  * const messageResult = Task.run(getMessage);// Result.Ok('Hello World!')
  * ```
  * @param self - the task to be run
+ * @param options - the options for running the task
  */
 export function run<Value, Error>(
   self: TaskLike<Value, Error>,
-  canceler: TaskCanceler = { current: undefined },
+  options: TaskRunOptions = {},
 ): Awaitable<Result<Value, Error>> {
-  let returnValue: Result<Value, Error> | undefined;
-  let resolveHandler = (result: Result<Value, Error>) => {
-    returnValue = result;
-  };
-  let rejectHandler = (_error: unknown) => {};
-
-  const runValue: Awaitable<void> = execute(
-    self,
-    createParameters({
-      resolve: (_value) => resolveHandler(ok(_value)),
-      reject: (_error) => resolveHandler(error(_error)),
-      canceler,
-    }),
-  );
-  // Try to catch promise errors
-  if (isPromiseLike(runValue)) {
-    // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return
-    runValue.then(undefined, (_error) => rejectHandler(_error));
-  }
-  if (returnValue === undefined) {
-    // eslint-disable-next-line promise/param-names
-    return new Promise<Result<Value, Error>>((resolvePromise, rejectPromise) => {
-      resolveHandler = resolvePromise;
-      rejectHandler = rejectPromise;
+  const { signal } = options;
+  const canceler: TaskCanceler = Ref(undefined);
+  if (signal != null) {
+    signal.addEventListener('abort', () => {
+      canceler.current?.();
     });
   }
 
-  return returnValue;
+  return __run(self, canceler);
 }

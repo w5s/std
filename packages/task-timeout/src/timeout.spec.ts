@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Option, Ref, Symbol } from '@w5s/core';
+import { Option, Symbol } from '@w5s/core';
 import { Task, type TaskLike } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error';
@@ -36,9 +36,9 @@ describe(timeout, () => {
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(canceled, anyDelay);
-    const cancelerRef = Ref(cancelerFn);
-    Task.run(task, cancelerRef);
-    cancelerRef.current();
+    const controller = new AbortController();
+    Task.run(task, { signal: controller.signal });
+    controller.abort();
     expect(cancelerFn).toHaveBeenCalled();
     expect(clearTimeoutSpy).toHaveBeenCalled();
   });

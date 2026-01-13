@@ -3,7 +3,7 @@ import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '@w5s/core/dist/Result.js';
 import type { Task, TaskCanceler, TaskLike } from '../Task.js';
 import { from } from './from.js';
-import { run } from './run.js';
+import { __run } from './__run.js';
 
 /**
  * Task constructor
@@ -35,7 +35,7 @@ export function create<Value, Error = never>(
       () =>
         sideEffect({
           canceler,
-          run: (task) => run(task, canceler),
+          run: (task) => __run(task, canceler),
         }),
       (result) => (result.ok ? resolve(result.value) : reject(result.error)),
     );
