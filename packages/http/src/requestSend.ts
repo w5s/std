@@ -36,14 +36,11 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;
 
-    const controller = new AbortController();
-    canceler.current = controller.abort.bind(controller);
-
     if (isValidURL(url)) {
       let sent = false;
       try {
         const originalResponse = await fetchFn(url, {
-          signal: controller.signal,
+          signal: canceler,
           ...requestInfo,
           body: body ?? null,
         });

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref, Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { orElse } from './orElse.js';
@@ -43,7 +43,7 @@ describe(orElse, () => {
     const thenTask = orElse(task, (_) => afterTask);
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
-    const canceler = Ref(() => {});
+    const canceler = new AbortController().signal;
     const result = __run(thenTask, canceler);
     await result;
 

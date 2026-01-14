@@ -1,5 +1,5 @@
 import type { Awaitable } from '@w5s/async';
-import type { Option, Result, Ref } from '@w5s/core';
+import type { Result } from '@w5s/core';
 import type { Symbol } from '@w5s/core/dist/Symbol.js';
 import type { PartialKeys } from '@w5s/core-type';
 import { create } from './Task/create.js';
@@ -25,7 +25,7 @@ import { error } from './Task/error.js';
 /**
  * Interface used to cancel running task
  */
-export interface TaskCanceler extends Ref<Option<() => void>> {}
+export type TaskCanceler = AbortSignal;
 
 /**
  * A function that runs the task and returns a {@link @w5s/core!Result}

@@ -1,5 +1,5 @@
 import { Int, Option } from '@w5s/core';
-import { Task, type TaskCanceler } from '@w5s/task';
+import { Task } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { beforeEach } from 'node:test';
 import { TimeDuration } from '@w5s/time';
@@ -118,11 +118,9 @@ describe(requestSend, () => {
     });
     const resolve = vi.fn();
     const reject = vi.fn();
-    const canceler: TaskCanceler = { current: undefined };
-    Task.run(task, canceler);
-    if (canceler.current != null) {
-      canceler.current();
-    }
+    const controller = new AbortController();
+    Task.run(task, { signal: controller.signal });
+    controller.abort();
 
     await finished.promise;
     expect(resolve).not.toHaveBeenCalled();

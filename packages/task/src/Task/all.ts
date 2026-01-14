@@ -35,7 +35,7 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
       const state = TaskAggregateState(taskArray, parameters);
 
       // Set global canceler
-      parameters.canceler.current = state.cancelAll;
+      state.configure({ cancelChildrenFromParent: true });
 
       // eslint-disable-next-line unicorn/no-new-array
       const values = new Array<Value | undefined>(taskArray.length);
@@ -46,13 +46,12 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
             state.resolve(values as ReadonlyArray<Value>);
           }
         },
-        (error: Error, entry) => {
+        (error: Error, { key: currentKey }) => {
           if (!state.isComplete()) {
             state.complete();
             state.reject(error);
             // cancel all but the current task
-            entry.canceler.current = undefined;
-            state.cancelAll();
+            state.cancelIf(({ key }) => key !== currentKey);
           }
         },
       );

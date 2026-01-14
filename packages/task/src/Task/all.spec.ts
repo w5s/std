@@ -1,6 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { Ref } from '@w5s/core';
 import { all } from './all.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
@@ -53,9 +52,9 @@ describe(all, () => {
     });
 
     const allTask = all(taskData.map((_) => _.task));
-    const cancelerRef = Ref(() => {});
-    const result = __run(allTask, cancelerRef);
-    cancelerRef.current();
+    const controller = new AbortController();
+    const result = __run(allTask, controller.signal);
+    controller.abort();
 
     taskData.forEach(({ canceler }) => {
       expect(canceler).toHaveBeenCalledTimes(1);

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Option, Ref, Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core';
 import { create } from './create.js';
 import { ok } from './ok.js';
 import { error } from './error.js';
@@ -9,7 +9,7 @@ vi.mock('./run.js', async () => ({
 }));
 
 describe(create, () => {
-  const anyCancelerRef = Ref(() => {});
+  const anyCanceler = new AbortController().signal;
   const anyExecute = vi.fn();
 
   describe('sync', () => {
@@ -18,7 +18,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('foo');
     });
@@ -27,7 +27,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -36,21 +36,9 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
       expect(reject).toHaveBeenCalledTimes(1);
       expect(reject).toHaveBeenCalledWith('err');
-    });
-    it('should always set default canceler', () => {
-      const task = create(() => ok(undefined));
-      const ref = Ref(() => {});
-
-      task[Symbol.run]({
-        resolve: () => {},
-        reject: () => {},
-        canceler: ref,
-        execute: anyExecute,
-      });
-      expect(Ref.read(ref)).toBe(Option.None);
     });
   });
   describe('async', () => {
@@ -59,7 +47,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
     });
@@ -68,57 +56,25 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCancelerRef, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
-    it('should set default canceler if omitted', () => {
-      const task = create(async () => ok(undefined));
-      const ref = Ref(() => {});
-
-      task[Symbol.run]({
-        resolve: () => {},
-        reject: () => {},
-        canceler: ref,
-        execute: anyExecute,
-      });
-      expect(Ref.read(ref)).toBe(Option.None);
-    });
-    it('should set forward canceler reference', () => {
-      const cancelerFn = () => {};
-      const task = create(async ({ canceler }) => {
-        canceler.current = cancelerFn;
-        canceler.current = undefined;
-
-        return ok(Option.None);
-      });
-      const ref = Ref(() => {});
-
-      task[Symbol.run]({
-        resolve: () => {},
-        reject: () => {},
-        canceler: ref,
-        execute: anyExecute,
-      });
-      expect(Ref.read(ref)).toBe(Option.None);
+  });
+  it('should forward canceler', () => {
+    const someCanceler = new AbortController().signal;
+    let innerCanceler: AbortSignal | undefined;
+    const task = create(async ({ canceler }) => {
+      innerCanceler = canceler;
+      return ok();
     });
 
-    it('should set canceler', () => {
-      const cancelerFn = () => {};
-      const task = create(async ({ canceler }) => {
-        canceler.current = cancelerFn;
-
-        return ok();
-      });
-      const ref = Ref(() => {});
-
-      task[Symbol.run]({
-        resolve: () => {},
-        reject: () => {},
-        canceler: ref,
-        execute: anyExecute,
-      });
-      expect(Ref.read(ref)).toBe(cancelerFn);
+    task[Symbol.run]({
+      resolve: () => {},
+      reject: () => {},
+      canceler: someCanceler,
+      execute: anyExecute,
     });
+    expect(innerCanceler).toBe(someCanceler);
   });
 });

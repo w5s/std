@@ -29,16 +29,18 @@ export function abortable<Value, Error>(
 ): Task<Value, Error | AbortError> {
   return from((parameters) => {
     const { reject, canceler } = parameters;
-    const { signal } = options;
+    const { signal: abortSignal } = options;
     const doAbort = () => {
-      canceler.current?.();
       reject(new AbortError());
     };
-    if (signal.aborted) {
+    if (abortSignal.aborted) {
       doAbort();
       return undefined;
     }
-    signal.addEventListener('abort', doAbort);
-    return parameters.execute(task, parameters);
+    abortSignal.addEventListener('abort', doAbort);
+    return parameters.execute(task, {
+      ...parameters,
+      canceler: AbortSignal.any([abortSignal, canceler]),
+    });
   });
 }

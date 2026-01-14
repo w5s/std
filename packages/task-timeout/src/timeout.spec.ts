@@ -32,7 +32,7 @@ describe(timeout, () => {
     const cancelerFn = vi.fn();
     const canceled = {
       [Symbol.run]: ({ canceler }) => {
-        canceler.current = cancelerFn;
+        canceler.addEventListener('abort', cancelerFn);
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(canceled, anyDelay);
@@ -46,7 +46,7 @@ describe(timeout, () => {
     const cancelerFn = vi.fn();
     const willCancel = {
       [Symbol.run]: ({ canceler }) => {
-        canceler.current = cancelerFn;
+        canceler.addEventListener('abort', cancelerFn);
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(willCancel, anyDelay);

@@ -29,15 +29,14 @@ export function create<Value, Error = never>(
     run: <V, E>(task: TaskLike<V, E>) => Awaitable<Result<V, E>>;
   }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
-  return from(({ resolve, reject, canceler }) => {
-    canceler.current = undefined;
-    return tryCall(
+  return from(({ resolve, reject, canceler }) =>
+    tryCall(
       () =>
         sideEffect({
           canceler,
           run: (task) => __run(task, canceler),
         }),
       (result) => (result.ok ? resolve(result.value) : reject(result.error)),
-    );
-  });
+    ),
+  );
 }

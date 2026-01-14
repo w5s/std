@@ -1,12 +1,4 @@
-import type { TaskCanceler, TaskLike, TaskParameters } from '../Task.js';
-
-const cancel = (cancelerRef: TaskCanceler) => {
-  const { current } = cancelerRef;
-  if (current != null) {
-    cancelerRef.current = undefined;
-    current();
-  }
-};
+import type { TaskLike, TaskParameters } from '../Task.js';
 
 interface TaskInputEntry<Key, Value, Error> {
   /**
@@ -23,18 +15,55 @@ interface TaskEntry<Key, Value, Error> extends TaskInputEntry<Key, Value, Error>
   /**
    * The canceler of the task
    */
-  canceler: TaskCanceler;
+  controller: AbortController;
+}
+
+interface TaskAggregateStateConfiguration {
+  /**
+   * Cancel children when parent is cancelled
+   */
+  cancelChildrenFromParent?: boolean;
 }
 
 interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
+  /**
+   * Configure the aggregate state
+   *
+   * @param options
+   */
+  configure: (options: TaskAggregateStateConfiguration) => void;
+  /**
+   * Check if the aggregate state is complete
+   */
   isComplete: () => boolean;
+  /**
+   * Complete the aggregate state
+   */
   complete: () => void;
+  /**
+   * Cancel all the tasks
+   */
   cancelAll: () => void;
+  /**
+   * Cancel the tasks if the predicate is true
+   *
+   * @param predicate - the predicate to check if the tasks should be cancelled
+   */
+  cancelIf: (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => void;
+  /**
+   * Run all the tasks
+   */
   runAll: (
     resolveTask: (value: Value, entry: TaskEntry<Key, Value, Error>) => void,
     rejectTask: (error: Error, entry: TaskEntry<Key, Value, Error>) => void,
   ) => void;
+  /**
+   * Resolve the aggregate state
+   */
   resolve: (value: ReturnValue) => void;
+  /**
+   * Reject the aggregate state
+   */
   reject: (error: ReturnError) => void;
 }
 
@@ -43,19 +72,10 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
 ): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   const { reject, resolve, execute } = taskParameters;
-  const taskEntries = tasks.map((task) => ({ ...task, canceler: { current: undefined } }));
+  const taskEntries = tasks.map((task) => ({ ...task, controller: new AbortController() }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
   let closed = false;
-
-  const withClose =
-    <Fn extends (value: any) => any>(fn: Fn) =>
-    (value: any) => {
-      if (!closed) {
-        closed = true;
-        fn(value);
-      }
-    };
 
   const isComplete = () => taskCompleted === taskCount;
 
@@ -64,8 +84,33 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   };
 
   const cancelAll = () => {
-    taskEntries.forEach(({ canceler }) => cancel(canceler));
+    taskEntries.forEach(({ controller }) => controller.abort());
   };
+  const cancelIf = (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => {
+    taskEntries.forEach((entry) => {
+      if (predicate(entry)) {
+        entry.controller.abort();
+      }
+    });
+  };
+
+  const setCancelChildrenFromParent = (cancelChildrenFromParent: boolean) => {
+    if (cancelChildrenFromParent) {
+      taskParameters.canceler.addEventListener('abort', cancelAll);
+    } else {
+      taskParameters.canceler.removeEventListener('abort', cancelAll);
+    }
+  };
+
+  const withClose =
+    <Fn extends (value: any) => any>(fn: Fn) =>
+    (value: any) => {
+      if (!closed) {
+        closed = true;
+        setCancelChildrenFromParent(false); // remove listener
+        fn(value);
+      }
+    };
 
   const runAll = (
     resolveTask: (value: Value, entry: TaskEntry<Key, Value, Error>) => void,
@@ -85,10 +130,23 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
             rejectTask(error, entry);
           }
         },
-        canceler: entry.canceler,
+        canceler: entry.controller.signal,
       });
     });
   };
 
-  return { isComplete, complete, cancelAll, runAll, resolve: withClose(resolve), reject: withClose(reject) };
+  const configure = ({ cancelChildrenFromParent = false }: TaskAggregateStateConfiguration) => {
+    setCancelChildrenFromParent(cancelChildrenFromParent);
+  };
+
+  return {
+    isComplete,
+    complete,
+    cancelAll,
+    cancelIf,
+    runAll,
+    resolve: withClose(resolve),
+    reject: withClose(reject),
+    configure,
+  };
 }

@@ -19,12 +19,12 @@ export function delay(duration: TimeDuration): Task<Time, never> {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     // Set Canceler
-    canceler.current = () => {
+    canceler.addEventListener('abort', () => {
       if (timeoutId != null) {
         clearTimeout(timeoutId);
         timeoutId = undefined;
       }
-    };
+    });
     // Wait delay
     await new Promise<void>((_resolve) => {
       timeoutId = setTimeout(() => {

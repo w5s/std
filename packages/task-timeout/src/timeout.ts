@@ -1,8 +1,7 @@
-import type { TaskCanceler, Task, TaskLike } from '@w5s/task';
+import type { Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
-import { Ref } from '@w5s/core/dist/Ref.js';
 import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
 import type { Option } from '@w5s/core';
 
@@ -28,13 +27,9 @@ export function timeout<Value, Error>(
   return delay == null
     ? from(self)
     : from(({ resolve, reject, canceler, execute }) => {
-        const taskCancelerRef: TaskCanceler = Ref(undefined);
+        const taskCancelController = new AbortController();
         const taskCancel = () => {
-          const { current } = taskCancelerRef;
-          if (current != null) {
-            taskCancelerRef.current = undefined;
-            current();
-          }
+          taskCancelController.abort();
         };
 
         const timeoutId = setTimeout(() => {
@@ -47,10 +42,10 @@ export function timeout<Value, Error>(
         }, delay);
         const timeoutCancel = () => clearTimeout(timeoutId);
 
-        canceler.current = () => {
+        canceler.addEventListener('abort', () => {
           taskCancel();
           timeoutCancel();
-        };
+        });
 
         return execute(self, {
           resolve: (value) => {
@@ -61,7 +56,7 @@ export function timeout<Value, Error>(
             timeoutCancel();
             reject(error);
           },
-          canceler: taskCancelerRef,
+          canceler: taskCancelController.signal,
         });
       });
 }

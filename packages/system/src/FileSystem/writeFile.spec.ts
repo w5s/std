@@ -1,4 +1,3 @@
-import { type TaskCanceler } from '@w5s/task';
 import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
@@ -32,7 +31,7 @@ describe(writeFile, () => {
       }
     });
     let index = 0;
-    const cancelerRef: TaskCanceler = { current: undefined };
+    const controller = new AbortController();
     const content: Iterable<string> = {
       [Symbol.iterator]: () => ({
         next: () => {
@@ -40,9 +39,7 @@ describe(writeFile, () => {
           index += 1;
           let value = currentIndex.toString(16);
           if (currentIndex > 9) {
-            if (cancelerRef.current != null) {
-              cancelerRef.current();
-            }
+            controller.abort();
 
             value = 'X';
           }
@@ -60,7 +57,7 @@ describe(writeFile, () => {
     task[Symbol.run]({
       resolve: () => {},
       reject: () => {},
-      canceler: cancelerRef,
+      canceler: controller.signal,
       execute: vi.fn(),
     });
     expect(fileContent).toEqual('0123456789');

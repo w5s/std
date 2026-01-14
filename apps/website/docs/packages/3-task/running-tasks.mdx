@@ -42,15 +42,13 @@ import { Task } from '@w5s/task';
 import { Ref } from '@w5s/core';
 
 // Create a canceler reference
-const canceler = Ref(undefined);
+const controller = new AbortController();
 
 // Run with canceler
-const resultPromise = Task.run(myTask, canceler);
+const resultPromise = Task.run(myTask, { signal: controller.signal });
 
 // Cancel the task
-if (canceler.current != null) {
-  canceler.current();
-}
+controller.abort();
 ```
 
 For detailed information on making tasks cancellable and advanced patterns, see [Cancelling tasks](./cancelling-tasks.mdx).

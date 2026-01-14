@@ -17,18 +17,23 @@ Tasks can be created in multiple ways depending on your use case. The main entry
 
 The primary way to create a task with custom logic:
 
+### Synchronous
+
 ```typescript
+
 import { Task } from '@w5s/task';
 
 // Synchronous computation
-const syncTask = Task.create(() => Task.ok(42));
+const randomNext = Task.create(() => Task.ok(Math.random()));
 
-// Asynchronous computation
-const asyncTask = Task.create(async () => {
-  const response = await fetch('/api/data');
-  const data = await response.json();
-  return Task.ok(data);
-});
+// Execute synchronously
+const result = Task.run(randomNext); // Result.Ok([generated number])
+```
+
+### Asynchronous
+
+```typescript
+import { Task } from '@w5s/task';
 
 // With error handling
 const fetchTask = Task.create(async () => {
@@ -39,6 +44,9 @@ const fetchTask = Task.create(async () => {
     return Task.error(new NetworkError({ cause: error }));
   }
 });
+
+// Execute asynchronously
+const result = await Task.run(fetchTask); // Result.Ok([json response]) or Result.Error(NetworkError())
 ```
 
 ## Task.resolve / Task.reject
@@ -96,7 +104,6 @@ const delayedTask = Task.from(({ resolve, reject, canceler }) => {
   const timeoutId = setTimeout(() => resolve(42), 1000);
   
   // Setup cancellation
-  canceler.current = () => clearTimeout(timeoutId);
+  canceler.addEventListener('abort', () => clearTimeout(timeoutId));
 });
 ```
-

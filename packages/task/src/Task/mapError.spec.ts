@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref, Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core';
 import { mapError } from './mapError.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { __run } from './__run.js';
@@ -37,7 +37,7 @@ describe(mapError, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = mapError(task, (_) => _);
     vi.spyOn(task, Symbol.run);
-    const canceler = Ref(() => {});
+    const canceler = new AbortController().signal;
     const result = __run(mapTask, canceler);
 
     expect(task[Symbol.run]).toHaveBeenCalledWith({

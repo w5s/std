@@ -7,12 +7,10 @@ function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
     ? Promise.resolve(true)
     : new Promise((resolve) => {
         const timerId = setTimeout(() => resolve(true), milliseconds);
-        const cancelerCurrent = canceler.current;
-        canceler.current = () => {
+        canceler.addEventListener('abort', () => {
           clearTimeout(timerId);
-          cancelerCurrent?.();
           resolve(true);
-        };
+        });
       });
 }
 
@@ -81,7 +79,7 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
 
   return isAsync === true
     ? from<Value, Error>(async (parameters) => {
-        parameters.canceler.current = canceler;
+        parameters.canceler.addEventListener('abort', () => canceler());
         if (await delay(delayMs, parameters.canceler)) {
           return parameters.execute(base, parameters);
         }

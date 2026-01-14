@@ -8,7 +8,7 @@ function sayHelloWorld(delay: TimeDuration) {
       console.log('Hello World!');
       resolve(undefined);
     }, delay);
-    canceler.current = () => clearTimeout(timerId);
+    canceler.addEventListener('abort', () => clearTimeout(timerId));
   });
 }
 
