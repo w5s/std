@@ -1,17 +1,17 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
-import { Ref } from '@w5s/core/dist/Ref.js';
+import type { PartialKeys } from '@w5s/core-type';
 import { error } from './error.js';
 import { ok } from './ok.js';
-import type { TaskCanceler, TaskLike, TaskParameters, TaskParametersOverrides } from '../Task.js';
+import type { TaskCanceler, TaskLike, TaskParameters } from '../Task.js';
 import { execute } from './execute.js';
 
-const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskParameters<V, E> => {
+const createParameters = <V, E>(overrides: PartialKeys<TaskParameters<V, E>, 'execute'>): TaskParameters<V, E> => {
   const self: TaskParameters<V, E> = {
     resolve: overrides.resolve,
     reject: overrides.reject,
-    canceler: overrides.canceler ?? Ref(undefined),
+    canceler: overrides.canceler,
     execute: (subtask, subOverrides) =>
       execute(
         subtask,
@@ -41,7 +41,7 @@ const createParameters = <V, E>(overrides: TaskParametersOverrides<V, E>): TaskP
  */
 export function __run<Value, Error>(
   self: TaskLike<Value, Error>,
-  canceler: TaskCanceler = { current: undefined },
+  canceler: TaskCanceler,
 ): Awaitable<Result<Value, Error>> {
   let returnValue: Result<Value, Error> | undefined;
   let resolveHandler = (result: Result<Value, Error>) => {
