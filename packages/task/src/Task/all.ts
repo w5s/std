@@ -32,10 +32,7 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
     if (taskArray.length === 0) {
       parameters.resolve(__emptyArray);
     } else {
-      const state = TaskAggregateState(taskArray, parameters);
-
-      // Set global canceler
-      state.configure({ cancelChildrenFromParent: true });
+      const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
 
       // eslint-disable-next-line unicorn/no-new-array
       const values = new Array<Value | undefined>(taskArray.length);

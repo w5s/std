@@ -33,8 +33,7 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
     if (taskArray.length === 0) {
       parameters.reject(globalThis.AggregateError([]) as AggregateError<Error[]>);
     } else {
-      const state = TaskAggregateState(taskArray, parameters);
-      state.configure({ cancelChildrenFromParent: true });
+      const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
 
       // eslint-disable-next-line unicorn/no-new-array
       const errors = new Array<Error | undefined>(taskArray.length);

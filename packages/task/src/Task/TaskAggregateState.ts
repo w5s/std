@@ -27,12 +27,6 @@ interface TaskAggregateStateConfiguration {
 
 interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   /**
-   * Configure the aggregate state
-   *
-   * @param options
-   */
-  configure: (options: TaskAggregateStateConfiguration) => void;
-  /**
    * Check if the aggregate state is complete
    */
   isComplete: () => boolean;
@@ -70,6 +64,7 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
 export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   tasks: Array<TaskInputEntry<Key, Value, Error>>,
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
+  options: TaskAggregateStateConfiguration = {},
 ): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   const { reject, resolve, execute } = taskParameters;
   const taskEntries = tasks.map((task) => ({ ...task, controller: new AbortController() }));
@@ -135,9 +130,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     });
   };
 
-  const configure = ({ cancelChildrenFromParent = false }: TaskAggregateStateConfiguration) => {
-    setCancelChildrenFromParent(cancelChildrenFromParent);
-  };
+  setCancelChildrenFromParent(options.cancelChildrenFromParent ?? false);
 
   return {
     isComplete,
@@ -147,6 +140,5 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     runAll,
     resolve: withClose(resolve),
     reject: withClose(reject),
-    configure,
   };
 }
