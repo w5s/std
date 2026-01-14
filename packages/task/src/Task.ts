@@ -21,6 +21,8 @@ import { mapResult } from './Task/mapResult.js';
 import { ignore } from './Task/ignore.js';
 import { ok } from './Task/ok.js';
 import { error } from './Task/error.js';
+import { allKeyed } from './Task/allKeyed.js';
+import { allSettledKeyed } from './Task/allSettledKeyed.js';
 
 /**
  * Interface used to cancel running task
@@ -103,7 +105,9 @@ export interface Task<Value, Error> extends TaskLike<Value, Error> {
  */
 export const Task = {
   all,
+  allKeyed,
   allSettled,
+  allSettledKeyed,
   andRun,
   andThen,
   any,

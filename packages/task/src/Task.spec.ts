@@ -19,12 +19,16 @@ import { mapResult } from './Task/mapResult.js';
 import { ignore } from './Task/ignore.js';
 import { error } from './Task/error.js';
 import { ok } from './Task/ok.js';
+import { allKeyed } from './Task/allKeyed.js';
+import { allSettledKeyed } from './Task/allSettledKeyed.js';
 
 describe('Task', () => {
   it('is an alias to functions', () => {
     expect(Task).toEqual({
       all,
+      allKeyed,
       allSettled,
+      allSettledKeyed,
       andRun,
       andThen,
       any,
