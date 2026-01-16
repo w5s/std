@@ -41,7 +41,6 @@ export function allKeyed<TaskRecord extends Record<string, TaskLike<any, any>>>(
           }
         },
         (error, { key: entryKey }) => {
-          state.complete();
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           state.reject(error);
           state.cancelIf(({ key }) => key !== entryKey);

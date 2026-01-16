@@ -114,16 +114,12 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     taskEntries.forEach((entry) => {
       execute(entry.task, {
         resolve: (value: Value) => {
-          if (!isComplete()) {
-            taskCompleted += 1;
-            resolveTask(value, entry);
-          }
+          taskCompleted += 1;
+          resolveTask(value, entry);
         },
         reject: (error: Error) => {
-          if (!isComplete()) {
-            taskCompleted += 1;
-            rejectTask(error, entry);
-          }
+          taskCompleted += 1;
+          rejectTask(error, entry);
         },
         canceler: entry.controller.signal,
       });

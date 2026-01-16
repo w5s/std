@@ -44,7 +44,6 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
           }
         },
         (error: Error, { key: currentKey }) => {
-          state.complete();
           state.reject(error);
           // cancel all but the current task
           state.cancelIf(({ key }) => key !== currentKey);
