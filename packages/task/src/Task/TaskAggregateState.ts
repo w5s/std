@@ -2,14 +2,6 @@ import type { TaskLike, TaskParameters } from '../Task.js';
 import { TaskCanceler } from '../TaskCanceler.js';
 import { unsafeCall } from './unsafeCall.js';
 
-const cancel = (canceler: TaskCanceler) => {
-  const { current } = canceler;
-  if (current != null) {
-    canceler.current = undefined;
-    current();
-  }
-};
-
 interface TaskInputEntry<Key, Value, Error> {
   /**
    * The task to run
@@ -97,12 +89,12 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   };
 
   const cancelAll = () => {
-    taskEntries.forEach(({ canceler }) => cancel(canceler));
+    taskEntries.forEach(({ canceler }) => canceler.cancel());
   };
   const cancelIf = (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => {
     taskEntries.forEach((entry) => {
       if (predicate(entry)) {
-        cancel(entry.canceler);
+        entry.canceler.cancel();
       }
     });
   };

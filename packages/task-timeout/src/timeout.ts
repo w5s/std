@@ -7,14 +7,6 @@ import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
 import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
 import type { Option } from '@w5s/core';
 
-const cancel = (canceler: TaskCanceler) => {
-  const { current } = canceler;
-  if (current != null) {
-    canceler.current = undefined;
-    current();
-  }
-};
-
 const timeDurationString = TimeDurationAsString.asString;
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
@@ -38,9 +30,7 @@ export function timeout<Value, Error>(
     ? from(self)
     : from(({ resolve, reject, canceler }) => {
         const taskCanceler = TaskCanceler();
-        const taskCancel = () => {
-          cancel(taskCanceler);
-        };
+        const taskCancel = taskCanceler.cancel;
 
         const timeoutId = setTimeout(() => {
           taskCancel();
