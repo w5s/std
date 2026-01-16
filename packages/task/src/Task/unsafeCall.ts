@@ -5,12 +5,12 @@ import type { TaskLike, TaskParameters } from '../Task.js';
 /**
  *
  * @example
- * @param task
- * @param context
+ * @param task - the task to be called
+ * @param parameters - the parameters to call the task with
  */
-export function execute<Value, Error>(
+export function unsafeCall<Value, Error>(
   task: TaskLike<Value, Error>,
-  context: TaskParameters<Value, Error>,
+  parameters: TaskParameters<Value, Error>,
 ): Awaitable<void> {
-  return task[Symbol.run](context);
+  return task[Symbol.run](parameters);
 }

@@ -48,13 +48,11 @@ describe(andThen, () => {
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,
-      execute: expect.any(Function),
     });
     expect(afterTask[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,
-      execute: expect.any(Function),
     });
   });
 });

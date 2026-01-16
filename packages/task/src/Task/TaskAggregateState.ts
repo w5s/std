@@ -1,4 +1,5 @@
 import type { TaskLike, TaskParameters } from '../Task.js';
+import { unsafeCall } from './unsafeCall.js';
 
 interface TaskInputEntry<Key, Value, Error> {
   /**
@@ -74,7 +75,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
   options: TaskAggregateStateConfiguration = {},
 ): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
-  const { reject, resolve, execute } = taskParameters;
+  const { reject, resolve } = taskParameters;
   const taskEntries = tasks.map((task) => ({ ...task, controller: new AbortController() }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
@@ -128,7 +129,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     ) => void,
   ) => {
     taskEntries.forEach((entry) => {
-      execute(entry.task, {
+      unsafeCall(entry.task, {
         resolve: (value: Value) => {
           taskCompleted += 1;
           // eslint-disable-next-line @typescript-eslint/no-use-before-define

@@ -1,29 +1,10 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
-import type { PartialKeys } from '@w5s/core-type';
 import { error } from './error.js';
 import { ok } from './ok.js';
-import type { TaskCanceler, TaskLike, TaskParameters } from '../Task.js';
-import { execute } from './execute.js';
-
-const createParameters = <V, E>(overrides: PartialKeys<TaskParameters<V, E>, 'execute'>): TaskParameters<V, E> => {
-  const self: TaskParameters<V, E> = {
-    resolve: overrides.resolve,
-    reject: overrides.reject,
-    canceler: overrides.canceler,
-    execute: (subtask, subOverrides) =>
-      execute(
-        subtask,
-        createParameters({
-          resolve: subOverrides.resolve,
-          reject: subOverrides.reject,
-          canceler: subOverrides.canceler ?? self.canceler,
-        }),
-      ),
-  };
-  return self;
-};
+import type { TaskCanceler, TaskLike } from '../Task.js';
+import { unsafeCall } from './unsafeCall.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -49,14 +30,11 @@ export function __run<Value, Error>(
   };
   let rejectHandler = (_error: unknown) => {};
 
-  const runValue: Awaitable<void> = execute(
-    self,
-    createParameters({
-      resolve: (_value) => resolveHandler(ok(_value)),
-      reject: (_error) => resolveHandler(error(_error)),
-      canceler,
-    }),
-  );
+  const runValue: Awaitable<void> = unsafeCall(self, {
+    resolve: (_value) => resolveHandler(ok(_value)),
+    reject: (_error) => resolveHandler(error(_error)),
+    canceler,
+  });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
     // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return

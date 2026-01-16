@@ -1,5 +1,6 @@
 import type { Task, TaskLike } from '../Task.js';
 import { from } from './from.js';
+import { unsafeCall } from './unsafeCall.js';
 
 /**
  * Calls `fn` if the task is failed, otherwise returns the successful task untouched.
@@ -11,7 +12,7 @@ import { from } from './from.js';
  * Task.orElse(success, (value) => Task.resolve(`never_used`));// Task.resolve('foo')
  *
  * const failure = Task.reject('PreviousError');
- * Task.orElse(failure, (error) => Task.reject(`${value}_caught`));// Task.reject('PreviousError_caught')
+ * Task.orElse(failure, (error) => Task.reject(`${error}_caught`));// Task.reject('PreviousError_caught')
  * ```
  * @param self - a Task object
  * @param fn - the error mapper function
@@ -21,9 +22,10 @@ export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   fn: (error: ErrorFrom) => TaskLike<ValueTo, ErrorTo>,
 ): Task<ValueFrom | ValueTo, ErrorTo> {
   return from((parameters) =>
-    parameters.execute(self, {
-      reject: (error) => parameters.execute(fn(error), parameters),
+    unsafeCall(self, {
+      reject: (error) => unsafeCall(fn(error), parameters),
       resolve: parameters.resolve,
+      canceler: parameters.canceler,
     }),
   );
 }

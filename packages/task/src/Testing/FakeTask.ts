@@ -1,6 +1,7 @@
 import type { Option } from '@w5s/core';
 import type { Task, TaskCanceler } from '../Task.js';
 import { from } from '../Task/from.js';
+import { unsafeCall } from '../Task/unsafeCall.js';
 
 function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
   return milliseconds === 0
@@ -81,7 +82,7 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
     ? from<Value, Error>(async (parameters) => {
         parameters.canceler.addEventListener('abort', () => canceler());
         if (await delay(delayMs, parameters.canceler)) {
-          return parameters.execute(base, parameters);
+          return unsafeCall(base, parameters);
         }
         return undefined;
       })

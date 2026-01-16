@@ -1,5 +1,6 @@
 import type { Task, TaskLike } from '../Task.js';
 import { from } from './from.js';
+import { unsafeCall } from './unsafeCall.js';
 
 /**
  * Maps a `Task<Value, Error>` to `Task<NewValue, Error>` by applying a function to a success value, leaving a failure untouched.
@@ -17,5 +18,7 @@ export function map<ValueFrom, ErrorFrom, ValueTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (value: ValueFrom) => ValueTo,
 ): Task<ValueTo, ErrorFrom> {
-  return from(({ execute, resolve, reject }) => execute(self, { resolve: (value) => resolve(fn(value)), reject }));
+  return from(({ resolve, reject, canceler }) =>
+    unsafeCall(self, { resolve: (value) => resolve(fn(value)), reject, canceler }),
+  );
 }

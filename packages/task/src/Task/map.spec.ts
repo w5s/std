@@ -41,7 +41,6 @@ describe(map, () => {
       resolve: expect.any(Function),
       reject: expect.any(Function),
       canceler,
-      execute: expect.any(Function),
     });
     await result;
   });

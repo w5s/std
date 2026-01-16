@@ -58,10 +58,6 @@ export interface TaskParameters<Value, Error> {
    * Reference to cancel function
    */
   readonly canceler: TaskCanceler;
-  /**
-   * The execute function to run task or subtask injecting parameters
-   */
-  readonly execute: <V, E>(task: TaskLike<V, E>, overrides: TaskParametersOverrides<V, E>) => Awaitable<void>;
 }
 
 export type TaskFunction<Value, Error> = (parameters: TaskParameters<Value, Error>) => Awaitable<void>;

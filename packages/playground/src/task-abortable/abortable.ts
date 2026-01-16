@@ -1,6 +1,7 @@
 import type { TaskLike, Task } from '@w5s/task';
 import { AbortError } from '@w5s/error/dist/AbortError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
+import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
 
 export interface AbortOptions {
   /**
@@ -38,7 +39,7 @@ export function abortable<Value, Error>(
       return undefined;
     }
     abortSignal.addEventListener('abort', doAbort);
-    return parameters.execute(task, {
+    return unsafeCall(task, {
       ...parameters,
       canceler: AbortSignal.any([abortSignal, canceler]),
     });
