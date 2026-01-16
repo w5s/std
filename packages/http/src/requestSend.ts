@@ -35,12 +35,16 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
   return taskFrom(async ({ resolve, reject, canceler }) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;
+    const controller = new AbortController();
+    canceler.current = () => {
+      controller.abort();
+    };
 
     if (isValidURL(url)) {
       let sent = false;
       try {
         const originalResponse = await fetchFn(url, {
-          signal: canceler,
+          signal: controller.signal,
           ...requestInfo,
           body: body ?? null,
         });

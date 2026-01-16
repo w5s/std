@@ -3,7 +3,7 @@ import { assertType } from '@w5s/core-type';
 import { all } from './all.js';
 import { FakeTask, withTask } from '../Testing.js';
 import type { Task } from '../Task.js';
-import { __run } from './__run.js';
+import { run } from './run.js';
 
 describe(all, () => {
   const expectTask = withTask(expect);
@@ -53,7 +53,7 @@ describe(all, () => {
 
     const allTask = all(taskData.map((_) => _.task));
     const controller = new AbortController();
-    const result = __run(allTask, controller.signal);
+    const result = run(allTask, { signal: controller.signal });
     controller.abort();
 
     taskData.forEach(({ canceler }) => {

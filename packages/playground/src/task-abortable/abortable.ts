@@ -1,4 +1,4 @@
-import type { TaskLike, Task } from '@w5s/task';
+import { type TaskLike, Task } from '@w5s/task';
 import { AbortError } from '@w5s/error/dist/AbortError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
 import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
@@ -29,7 +29,7 @@ export function abortable<Value, Error>(
   options: AbortOptions,
 ): Task<Value, Error | AbortError> {
   return from((parameters) => {
-    const { reject, canceler } = parameters;
+    const { reject } = parameters;
     const { signal: abortSignal } = options;
     const doAbort = () => {
       reject(new AbortError());
@@ -39,9 +39,6 @@ export function abortable<Value, Error>(
       return undefined;
     }
     abortSignal.addEventListener('abort', doAbort);
-    return unsafeCall(task, {
-      ...parameters,
-      canceler: AbortSignal.any([abortSignal, canceler]),
-    });
+    return unsafeCall(task, parameters);
   });
 }

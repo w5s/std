@@ -3,7 +3,8 @@ import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
 import { error } from './error.js';
 import { ok } from './ok.js';
-import type { TaskCanceler, TaskLike } from '../Task.js';
+import type { TaskLike } from '../Task.js';
+import type { TaskCanceler } from '../TaskCanceler.js';
 import { unsafeCall } from './unsafeCall.js';
 
 /**

@@ -32,13 +32,14 @@ describe(timeout, () => {
     const cancelerFn = vi.fn();
     const canceled = {
       [Symbol.run]: ({ canceler }) => {
-        canceler.addEventListener('abort', cancelerFn);
+        canceler.current = cancelerFn;
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(canceled, anyDelay);
     const controller = new AbortController();
-    Task.run(task, { signal: controller.signal });
+    void Task.run(task, { signal: controller.signal });
     controller.abort();
+    await Promise.resolve(); // Allow microtask to process
     expect(cancelerFn).toHaveBeenCalled();
     expect(clearTimeoutSpy).toHaveBeenCalled();
   });
@@ -46,7 +47,7 @@ describe(timeout, () => {
     const cancelerFn = vi.fn();
     const willCancel = {
       [Symbol.run]: ({ canceler }) => {
-        canceler.addEventListener('abort', cancelerFn);
+        canceler.current = cancelerFn;
       },
     } satisfies TaskLike<any, any>;
     const task = timeout(willCancel, anyDelay);

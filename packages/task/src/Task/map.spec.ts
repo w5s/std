@@ -3,6 +3,7 @@ import { Symbol } from '@w5s/core';
 import { FakeTask, withTask } from '../Testing.js';
 import { map } from './map.js';
 import { __run } from './__run.js';
+import { TaskCanceler } from '../TaskCanceler.js';
 
 describe(map, () => {
   const anyError = 'anyError';
@@ -35,7 +36,7 @@ describe(map, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = map(task, (_) => _);
     vi.spyOn(task, Symbol.run);
-    const canceler = new AbortController().signal;
+    const canceler = TaskCanceler();
     const result = __run(mapTask, canceler);
     expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),

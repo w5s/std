@@ -4,6 +4,7 @@ import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andThen } from './andThen.js';
 import { __run } from './__run.js';
+import { TaskCanceler } from '../TaskCanceler.js';
 
 describe(andThen, () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,7 +42,7 @@ describe(andThen, () => {
     const thenTask = andThen(task, (_) => afterTask);
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
-    const canceler = new AbortController().signal;
+    const canceler = TaskCanceler();
     const result = __run(thenTask, canceler);
     await result;
     expect(task[Symbol.run]).toHaveBeenCalledWith({

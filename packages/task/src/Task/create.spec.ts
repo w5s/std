@@ -3,14 +3,14 @@ import { Symbol } from '@w5s/core';
 import { create } from './create.js';
 import { ok } from './ok.js';
 import { error } from './error.js';
+import { TaskCanceler } from '../TaskCanceler.js';
 
 vi.mock('./run.js', async () => ({
   run: vi.fn(),
 }));
 
 describe(create, () => {
-  const anyCanceler = new AbortController().signal;
-  const anyExecute = vi.fn();
+  const anyCanceler = TaskCanceler();
 
   describe('sync', () => {
     it('should construct a success sync task', () => {
@@ -18,7 +18,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('foo');
     });
@@ -27,7 +27,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -36,7 +36,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
+      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
       expect(reject).toHaveBeenCalledTimes(1);
       expect(reject).toHaveBeenCalledWith('err');
     });
@@ -47,7 +47,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
     });
@@ -56,14 +56,14 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler, execute: anyExecute });
+      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
   });
   it('should forward canceler', () => {
-    const someCanceler = new AbortController().signal;
-    let innerCanceler: AbortSignal | undefined;
+    const someCanceler = TaskCanceler();
+    let innerCanceler: TaskCanceler | undefined;
     const task = create(async ({ canceler }) => {
       innerCanceler = canceler;
       return ok();
@@ -73,7 +73,6 @@ describe(create, () => {
       resolve: () => {},
       reject: () => {},
       canceler: someCanceler,
-      execute: anyExecute,
     });
     expect(innerCanceler).toBe(someCanceler);
   });

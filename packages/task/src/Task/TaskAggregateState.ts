@@ -1,5 +1,14 @@
 import type { TaskLike, TaskParameters } from '../Task.js';
+import { TaskCanceler } from '../TaskCanceler.js';
 import { unsafeCall } from './unsafeCall.js';
+
+const cancel = (canceler: TaskCanceler) => {
+  const { current } = canceler;
+  if (current != null) {
+    canceler.current = undefined;
+    current();
+  }
+};
 
 interface TaskInputEntry<Key, Value, Error> {
   /**
@@ -16,7 +25,7 @@ interface TaskEntry<Key, Value, Error> extends TaskInputEntry<Key, Value, Error>
   /**
    * The canceler of the task
    */
-  controller: AbortController;
+  canceler: TaskCanceler;
 }
 
 interface TaskAggregateStateConfiguration {
@@ -75,8 +84,8 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   taskParameters: TaskParameters<ReturnValue, ReturnError>,
   options: TaskAggregateStateConfiguration = {},
 ): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
-  const { reject, resolve } = taskParameters;
-  const taskEntries = tasks.map((task) => ({ ...task, controller: new AbortController() }));
+  const { reject, resolve, canceler: parentCanceler } = taskParameters;
+  const taskEntries = tasks.map((task) => ({ ...task, canceler: TaskCanceler() }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
   let closed = false;
@@ -88,21 +97,23 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   };
 
   const cancelAll = () => {
-    taskEntries.forEach(({ controller }) => controller.abort());
+    taskEntries.forEach(({ canceler }) => cancel(canceler));
   };
   const cancelIf = (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => {
     taskEntries.forEach((entry) => {
       if (predicate(entry)) {
-        entry.controller.abort();
+        cancel(entry.canceler);
       }
     });
   };
 
   const setCancelChildrenFromParent = (cancelChildrenFromParent: boolean) => {
     if (cancelChildrenFromParent) {
-      taskParameters.canceler.addEventListener('abort', cancelAll);
-    } else {
-      taskParameters.canceler.removeEventListener('abort', cancelAll);
+      const parentCurrent = parentCanceler.current;
+      parentCanceler.current = () => {
+        cancelAll();
+        parentCurrent?.();
+      };
     }
   };
 
@@ -111,7 +122,6 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     (value: any) => {
       if (!closed) {
         closed = true;
-        setCancelChildrenFromParent(false); // remove listener
         fn(value);
       }
     };
@@ -140,7 +150,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
           // eslint-disable-next-line @typescript-eslint/no-use-before-define
           rejectTask(error, entry, self);
         },
-        canceler: entry.controller.signal,
+        canceler: entry.canceler,
       });
     });
   };

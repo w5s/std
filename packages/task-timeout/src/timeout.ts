@@ -2,9 +2,18 @@ import type { Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
+import { TaskCanceler } from '@w5s/task/dist/TaskCanceler.js';
 import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
 import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
 import type { Option } from '@w5s/core';
+
+const cancel = (canceler: TaskCanceler) => {
+  const { current } = canceler;
+  if (current != null) {
+    canceler.current = undefined;
+    current();
+  }
+};
 
 const timeDurationString = TimeDurationAsString.asString;
 /**
@@ -28,9 +37,9 @@ export function timeout<Value, Error>(
   return delay == null
     ? from(self)
     : from(({ resolve, reject, canceler }) => {
-        const taskCancelController = new AbortController();
+        const taskCanceler = TaskCanceler();
         const taskCancel = () => {
-          taskCancelController.abort();
+          cancel(taskCanceler);
         };
 
         const timeoutId = setTimeout(() => {
@@ -43,10 +52,10 @@ export function timeout<Value, Error>(
         }, delay);
         const timeoutCancel = () => clearTimeout(timeoutId);
 
-        canceler.addEventListener('abort', () => {
+        canceler.current = () => {
           taskCancel();
           timeoutCancel();
-        });
+        };
 
         return unsafeCall(self, {
           resolve: (value) => {
@@ -57,7 +66,7 @@ export function timeout<Value, Error>(
             timeoutCancel();
             reject(error);
           },
-          canceler: taskCancelController.signal,
+          canceler: taskCanceler,
         });
       });
 }

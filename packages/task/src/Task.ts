@@ -23,11 +23,7 @@ import { ok } from './Task/ok.js';
 import { error } from './Task/error.js';
 import { allKeyed } from './Task/allKeyed.js';
 import { allSettledKeyed } from './Task/allSettledKeyed.js';
-
-/**
- * Interface used to cancel running task
- */
-export type TaskCanceler = AbortSignal;
+import type { TaskCanceler } from './TaskCanceler.js';
 
 /**
  * A function that runs the task and returns a {@link @w5s/core!Result}
