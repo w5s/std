@@ -39,12 +39,9 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
       const errors = new Array<Error | undefined>(taskArray.length);
       state.runAll(
         (value, { key: currentKey }) => {
-          if (!state.isComplete()) {
-            state.complete();
-            state.resolve(value);
-            // cancel all but the current task
-            state.cancelIf(({ key }) => key !== currentKey);
-          }
+          state.resolve(value);
+          // cancel all but the current task
+          state.cancelIf(({ key }) => key !== currentKey);
         },
         (error, entry) => {
           errors[entry.key] = error;
