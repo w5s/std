@@ -32,21 +32,19 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
     if (taskArray.length === 0) {
       parameters.resolve(__emptyArray);
     } else {
-      const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
-
       // eslint-disable-next-line unicorn/no-new-array
       const values = new Array<Value | undefined>(taskArray.length);
-      state.runAll(
-        (value, entry) => {
+      TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true }).runAll(
+        (value, entry, self) => {
           values[entry.key] = value;
-          if (state.isComplete()) {
-            state.resolve(values as ReadonlyArray<Value>);
+          if (self.isComplete()) {
+            self.resolve(values as ReadonlyArray<Value>);
           }
         },
-        (error: Error, { key: currentKey }) => {
-          state.reject(error);
+        (error: Error, { key: currentKey }, self) => {
+          self.reject(error);
           // cancel all but the current task
-          state.cancelIf(({ key }) => key !== currentKey);
+          self.cancelIf(({ key }) => key !== currentKey);
         },
       );
     }

@@ -30,20 +30,19 @@ export function allKeyed<TaskRecord extends Record<string, TaskLike<any, any>>>(
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       parameters.resolve({} as { [K in keyof TaskRecord]: Task.ValueOf<TaskRecord[K]> });
     } else {
-      const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
       const values: Record<string, any> = {};
-      state.runAll(
-        (value, entry) => {
+      TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true }).runAll(
+        (value, entry, self) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           values[entry.key] = value;
-          if (state.isComplete()) {
-            state.resolve(values as { [K in keyof TaskRecord]: Task.ValueOf<TaskRecord[K]> });
+          if (self.isComplete()) {
+            self.resolve(values as { [K in keyof TaskRecord]: Task.ValueOf<TaskRecord[K]> });
           }
         },
-        (error, { key: entryKey }) => {
+        (error, { key: entryKey }, self) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-          state.reject(error);
-          state.cancelIf(({ key }) => key !== entryKey);
+          self.reject(error);
+          self.cancelIf(({ key }) => key !== entryKey);
         },
       );
     }

@@ -48,8 +48,16 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
    * Run all the tasks
    */
   runAll: (
-    resolveTask: (value: Value, entry: TaskEntry<Key, Value, Error>) => void,
-    rejectTask: (error: Error, entry: TaskEntry<Key, Value, Error>) => void,
+    resolveTask: (
+      value: Value,
+      entry: TaskEntry<Key, Value, Error>,
+      self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
+    ) => void,
+    rejectTask: (
+      error: Error,
+      entry: TaskEntry<Key, Value, Error>,
+      self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
+    ) => void,
   ) => void;
   /**
    * Resolve the aggregate state
@@ -108,18 +116,28 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     };
 
   const runAll = (
-    resolveTask: (value: Value, entry: TaskEntry<Key, Value, Error>) => void,
-    rejectTask: (error: Error, entry: TaskEntry<Key, Value, Error>) => void,
+    resolveTask: (
+      value: Value,
+      entry: TaskEntry<Key, Value, Error>,
+      self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
+    ) => void,
+    rejectTask: (
+      error: Error,
+      entry: TaskEntry<Key, Value, Error>,
+      self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
+    ) => void,
   ) => {
     taskEntries.forEach((entry) => {
       execute(entry.task, {
         resolve: (value: Value) => {
           taskCompleted += 1;
-          resolveTask(value, entry);
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          resolveTask(value, entry, self);
         },
         reject: (error: Error) => {
           taskCompleted += 1;
-          rejectTask(error, entry);
+          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          rejectTask(error, entry, self);
         },
         canceler: entry.controller.signal,
       });
@@ -128,7 +146,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   setCancelChildrenFromParent(options.cancelChildrenFromParent ?? false);
 
-  return {
+  const self = {
     isComplete,
     complete,
     cancelAll,
@@ -137,4 +155,5 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
     resolve: withClose(resolve),
     reject: withClose(reject),
   };
+  return self;
 }
