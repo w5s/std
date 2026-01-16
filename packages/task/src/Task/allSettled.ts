@@ -34,7 +34,7 @@ export function allSettled<Value, Error>(
     if (taskArray.length === 0) {
       parameters.resolve(__emptyArray);
     } else {
-      const state = TaskAggregateState(taskArray, parameters);
+      const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
 
       // eslint-disable-next-line unicorn/no-new-array
       const results = new Array<Result<Value, Error>>(taskArray.length);
