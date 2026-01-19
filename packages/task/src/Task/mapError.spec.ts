@@ -38,7 +38,7 @@ describe(mapError, () => {
     const task = FakeTask<typeof anyValue, typeof anyError>({ delayMs: 0, value: anyValue });
     const mapTask = mapError(task, (_) => _);
     vi.spyOn(task, Symbol.run);
-    const canceler = TaskCanceler();
+    const canceler = new TaskCanceler();
     const result = __run(mapTask, canceler);
 
     expect(task[Symbol.run]).toHaveBeenCalledWith({

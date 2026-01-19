@@ -22,14 +22,14 @@ export function run<Value, Error>(
   options: TaskRunOptions = {},
 ): Awaitable<Result<Value, Error>> {
   const { signal } = options;
-  const canceler = TaskCanceler();
+  const canceler = new TaskCanceler();
 
   // Bridge AbortSignal to internal Ref-based cancellation
   if (signal != null) {
     if (signal.aborted) {
       canceler.cancel();
     } else {
-      signal.addEventListener('abort', canceler.cancel, { once: true });
+      signal.addEventListener('abort', canceler.cancel.bind(canceler), { once: true });
     }
   }
 

@@ -44,7 +44,7 @@ describe(orElse, () => {
     const thenTask = orElse(task, (_) => afterTask);
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
-    const canceler = TaskCanceler();
+    const canceler = new TaskCanceler();
     const result = __run(thenTask, canceler);
     await result;
 

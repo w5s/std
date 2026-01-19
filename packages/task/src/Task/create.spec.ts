@@ -10,7 +10,7 @@ vi.mock('./run.js', async () => ({
 }));
 
 describe(create, () => {
-  const anyCanceler = TaskCanceler();
+  const anyCanceler = new TaskCanceler();
 
   describe('sync', () => {
     it('should construct a success sync task', () => {
@@ -62,7 +62,7 @@ describe(create, () => {
     });
   });
   it('should forward canceler', () => {
-    const someCanceler = TaskCanceler();
+    const someCanceler = new TaskCanceler();
     let innerCanceler: TaskCanceler | undefined;
     const task = create(async ({ canceler }) => {
       innerCanceler = canceler;

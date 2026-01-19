@@ -37,7 +37,7 @@ describe(run, () => {
     const cancelerFn = vi.fn();
     const task: TaskLike<any, any> = {
       [Symbol.run]: vi.fn(({ canceler }) => {
-        canceler.current = cancelerFn;
+        canceler.onCancel = cancelerFn;
 
         return Promise.resolve();
       }),

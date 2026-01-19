@@ -29,11 +29,10 @@ export function timeout<Value, Error>(
   return delay == null
     ? from(self)
     : from(({ resolve, reject, canceler }) => {
-        const taskCanceler = TaskCanceler();
-        const taskCancel = taskCanceler.cancel;
+        const taskCanceler = new TaskCanceler();
 
         const timeoutId = setTimeout(() => {
-          taskCancel();
+          taskCanceler.cancel();
           reject(
             new TimeoutError({
               message: `Task timed out after ${timeDurationString(delay)}`,
@@ -42,8 +41,8 @@ export function timeout<Value, Error>(
         }, delay);
         const timeoutCancel = () => clearTimeout(timeoutId);
 
-        canceler.current = () => {
-          taskCancel();
+        canceler.onCancel = () => {
+          taskCanceler.cancel();
           timeoutCancel();
         };
 

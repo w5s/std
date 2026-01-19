@@ -1,22 +1,28 @@
-import type { Option, Ref } from '@w5s/core';
-import { Ref as createRef } from '@w5s/core/dist/Ref.js';
+import type { Option } from '@w5s/core';
 
 /**
  * Interface used to cancel running task (internal)
  */
-export interface TaskCanceler extends Ref<Option<() => void>> {
-  cancel: () => void;
-}
+export class TaskCanceler {
+  /**
+   * Cancel event callback
+   */
+  onCancel?: Option<() => void>;
 
-export function TaskCanceler(): TaskCanceler {
-  // @ts-ignore Add cancel method to Ref
-  const ref: TaskCanceler = createRef(undefined);
-  ref.cancel = () => {
-    const { current } = ref;
-    if (current != null) {
-      ref.current = undefined;
-      current();
+  /**
+   * Cancel by running callback, then unsetting it
+   *
+   * @example
+   * ```typescript
+   * const canceler = new TaskCanceler();
+   * canceler.cancel();
+   * ```
+   */
+  cancel(): void {
+    const { onCancel } = this;
+    if (onCancel != null) {
+      this.onCancel = undefined;
+      onCancel();
     }
-  };
-  return ref;
+  }
 }

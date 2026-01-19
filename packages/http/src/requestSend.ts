@@ -36,7 +36,7 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { url, body, window: _window, ...requestInfo } = requestObject;
     const controller = new AbortController();
-    canceler.current = () => {
+    canceler.onCancel = () => {
       controller.abort();
     };
 

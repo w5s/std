@@ -42,7 +42,7 @@ describe(andThen, () => {
     const thenTask = andThen(task, (_) => afterTask);
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
-    const canceler = TaskCanceler();
+    const canceler = new TaskCanceler();
     const result = __run(thenTask, canceler);
     await result;
     expect(task[Symbol.run]).toHaveBeenCalledWith({

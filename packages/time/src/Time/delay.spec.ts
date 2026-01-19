@@ -28,7 +28,7 @@ describe('.delay', () => {
     const duration = TimeDuration({ seconds: 1 });
     const task = delay(duration);
 
-    const canceler = TaskCanceler();
+    const canceler = new TaskCanceler();
     const resolve = vi.fn();
     const reject = vi.fn();
 
@@ -39,7 +39,7 @@ describe('.delay', () => {
     const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
 
     // Trigger cancellation
-    canceler.current?.();
+    canceler.cancel();
 
     vi.runAllTimers();
 

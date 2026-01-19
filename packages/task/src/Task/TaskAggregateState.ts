@@ -77,7 +77,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   options: TaskAggregateStateConfiguration = {},
 ): TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
   const { reject, resolve, canceler: parentCanceler } = taskParameters;
-  const taskEntries = tasks.map((task) => ({ ...task, canceler: TaskCanceler() }));
+  const taskEntries = tasks.map((task) => ({ ...task, canceler: new TaskCanceler() }));
   const taskCount = taskEntries.length;
   let taskCompleted = 0;
   let closed = false;
@@ -101,10 +101,9 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   const setCancelChildrenFromParent = (cancelChildrenFromParent: boolean) => {
     if (cancelChildrenFromParent) {
-      const parentCurrent = parentCanceler.current;
-      parentCanceler.current = () => {
+      parentCanceler.onCancel = () => {
         cancelAll();
-        parentCurrent?.();
+        parentCanceler.cancel();
       };
     }
   };

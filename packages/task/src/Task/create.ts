@@ -31,7 +31,7 @@ export function create<Value, Error = never>(
   }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
   return from(({ resolve, reject, canceler }) => {
-    canceler.current = undefined;
+    canceler.onCancel = undefined;
     return tryCall(
       () =>
         sideEffect({
