@@ -33,10 +33,6 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
    */
   isComplete: () => boolean;
   /**
-   * Complete the aggregate state
-   */
-  complete: () => void;
-  /**
    * Cancel all the tasks
    */
   cancelAll: () => void;
@@ -84,10 +80,6 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   const isComplete = () => taskCompleted === taskCount;
 
-  const complete = () => {
-    taskCompleted = taskCount;
-  };
-
   const cancelAll = () => {
     taskEntries.forEach(({ canceler }) => canceler.cancel());
   };
@@ -101,9 +93,10 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   const setCancelChildrenFromParent = (cancelChildrenFromParent: boolean) => {
     if (cancelChildrenFromParent) {
+      const { onCancel } = parentCanceler;
       parentCanceler.onCancel = () => {
         cancelAll();
-        parentCanceler.cancel();
+        onCancel?.();
       };
     }
   };
@@ -150,7 +143,6 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   const self = {
     isComplete,
-    complete,
     cancelAll,
     cancelIf,
     runAll,
