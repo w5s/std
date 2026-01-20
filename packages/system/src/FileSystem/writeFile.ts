@@ -29,11 +29,15 @@ export function writeFile(
   options?: writeFile.Options,
 ): Task<void, FileError> {
   return taskFrom(async ({ resolve, reject, canceler }) => {
+    const controller = new AbortController();
+    canceler.onCancel = () => {
+      controller.abort();
+    };
     try {
       resolve(
         await Internal.FS.writeFile(file, data, {
           ...options,
-          signal: canceler,
+          signal: controller.signal,
         }),
       );
     } catch (error_: unknown) {
