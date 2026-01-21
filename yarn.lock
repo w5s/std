@@ -6190,6 +6190,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@w5s/byte-size@workspace:packages/byte-size":
+  version: 0.0.0-use.local
+  resolution: "@w5s/byte-size@workspace:packages/byte-size"
+  dependencies:
+    "@w5s/core": "npm:1.0.0-alpha.0"
+    "@w5s/error": "npm:1.0.0-alpha.0"
+    "@w5s/num": "npm:1.0.0-alpha.0"
+    "@w5s/task": "npm:^1.0.0-alpha.0"
+    typescript: "npm:5.9.3"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^5.0.0
+  languageName: unknown
+  linkType: soft
+
 "@w5s/collection@npm:^1.0.0-alpha.0, @w5s/collection@workspace:packages/collection":
   version: 0.0.0-use.local
   resolution: "@w5s/collection@workspace:packages/collection"
