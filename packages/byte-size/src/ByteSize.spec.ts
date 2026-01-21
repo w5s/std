@@ -3,10 +3,12 @@ import { ByteSize } from './ByteSize.js';
 import { format } from './ByteSize/format.js';
 import { parse } from './ByteSize/parse.js';
 import { ByteSizeZero } from './ByteSize/ByteSizeZero.js';
+import { ByteSizeBounded } from './ByteSize/ByteSizeBounded.js';
 
 describe(ByteSize, () => {
   it('contains alias to functions', () => {
     expect(ByteSize).toEqual(expect.objectContaining(ByteSizeZero));
+    expect(ByteSize).toEqual(expect.objectContaining(ByteSizeBounded));
     expect(ByteSize).toEqual(
       expect.objectContaining({
         parse,

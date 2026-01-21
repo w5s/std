@@ -9,12 +9,12 @@ const formatOptions = { standard: 'IEC' as const };
 /**
  * A file size in bytes
  */
-export type ByteSize = Int & Tag<'ByteSize'>;
+export type ByteSize = number & Tag<'ByteSize'>;
 
 /**
  * @namespace
  */
-export const ByteSize = Tag.define<Int, ByteSize>({
+export const ByteSize = Tag.define<number, ByteSize>({
   typeName: 'ByteSize' as const,
   hasInstance: Int.hasInstance,
   [Symbol.encode]: (value) => format(value, formatOptions),
