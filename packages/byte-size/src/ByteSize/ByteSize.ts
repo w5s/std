@@ -3,8 +3,9 @@ import { Tag } from '@w5s/core/dist/Tag.js';
 import { Int } from '@w5s/core/dist/Type/Int.js';
 import { format } from './format.js';
 import { parse } from './parse.js';
+import { defaultStandard } from './defaultStandard.js';
 
-const formatOptions = { standard: 'IEC' as const };
+const formatOptions = { standard: defaultStandard };
 
 /**
  * A file size in bytes

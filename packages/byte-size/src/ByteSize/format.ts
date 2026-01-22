@@ -1,5 +1,7 @@
 import type { ByteSize } from './ByteSize.js';
 import type { ByteSizeStandard } from '../ByteSizeStandard.js';
+import { byteSizeStandardData } from '../ByteSizeStandard/data.js';
+import { defaultStandard } from './defaultStandard.js';
 
 export interface FormatOptions {
   /**
@@ -13,11 +15,6 @@ export interface FormatOptions {
   standard?: ByteSizeStandard;
 }
 
-const standardSpec: Record<Exclude<FormatOptions['standard'], undefined>, { base: number; units: string[] }> = {
-  IEC: { base: 1024, units: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'] },
-  SI: { base: 1000, units: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] },
-};
-
 /**
  * Formats a ByteSize into a human-readable string.
  *
@@ -29,8 +26,8 @@ const standardSpec: Record<Exclude<FormatOptions['standard'], undefined>, { base
  * @param self
  */
 export function format(self: ByteSize, options: FormatOptions = {}): string {
-  const { standard = 'SI' } = options;
-  const { base, units } = standardSpec[standard];
+  const { standard = defaultStandard } = options;
+  const { base, units } = byteSizeStandardData[standard];
 
   let size = self as number;
   let unitIndex = 0;

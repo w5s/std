@@ -13,13 +13,13 @@ describe(ByteSize, () => {
     encode: [
       [ByteSize(1), '1 B'],
       [ByteSize(0), '0 B'],
-      [ByteSize(512 * 1024), '512 KiB'],
-      [ByteSize(22_020_096), '21 MiB'],
+      [ByteSize(512 * 1000), '512 KB'],
+      [ByteSize(21_000_000), '21 MB'],
     ],
     decode: [
       ['0 B', Result.Ok(ByteSize(0))],
-      ['1 KB', Result.Ok(ByteSize(1024))],
-      ['21 MB', Result.Ok(ByteSize(22_020_096))],
+      ['1 KB', Result.Ok(ByteSize(1000))],
+      ['21 MB', Result.Ok(ByteSize(21_000_000))],
       [
         null,
         Result.Error(

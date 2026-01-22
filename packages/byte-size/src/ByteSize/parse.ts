@@ -1,17 +1,6 @@
 import type { Option } from '@w5s/core';
 import type { ByteSize } from './ByteSize.js';
-
-const UNITS: { [key: string]: number } = {
-  B: 1,
-  KB: 1024,
-  MB: 1024 ** 2,
-  GB: 1024 ** 3,
-  TB: 1024 ** 4,
-  PB: 1024 ** 5,
-  EB: 1024 ** 6,
-  ZB: 1024 ** 7,
-  YB: 1024 ** 8,
-};
+import { byteSizeStandardIndex } from '../ByteSizeStandard/data.js';
 
 /**
  * Parses a human-readable file size string into a ByteSize.
@@ -25,7 +14,7 @@ const UNITS: { [key: string]: number } = {
  * @param value
  */
 export function parse(value: string): Option<ByteSize> {
-  const regex = /^([\d,.]+)\s*(b|kb|mb|gb|tb|pb|eb|zb|yb)?$/i;
+  const regex = /^([\d,.]+)\s*([a-z]+)?$/i;
   const match = value.trim().match(regex);
 
   if (match == null) return undefined;
@@ -35,8 +24,7 @@ export function parse(value: string): Option<ByteSize> {
   const amount = Number.parseFloat(amountStr.replaceAll(',', ''));
 
   if (Number.isNaN(amount)) return undefined;
-
-  const multiplier = unit == null ? 1 : UNITS[unit.toUpperCase()];
+  const multiplier = unit == null ? 1 : byteSizeStandardIndex()[unit];
   if (multiplier == null) return undefined;
 
   return (amount * multiplier) as ByteSize;
