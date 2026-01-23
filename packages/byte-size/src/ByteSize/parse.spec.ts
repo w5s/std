@@ -4,6 +4,7 @@ import { parse } from './parse.js';
 describe(parse, () => {
   it.each([
     ['', undefined],
+    ['1B', 1],
     ['1 B', 1],
     ['1 KB', 1000],
     ['1 KiB', 1024],

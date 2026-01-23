@@ -1,6 +1,6 @@
 import type { ByteSize } from './ByteSize.js';
 import type { ByteSizeStandard } from '../ByteSizeStandard.js';
-import { byteSizeStandardData } from '../ByteSizeStandard/data.js';
+import { byteSizePrefixes, byteSizeStandardData } from '../ByteSizeStandard/data.js';
 import { defaultStandard } from './defaultStandard.js';
 
 export interface FormatOptions {
@@ -27,15 +27,15 @@ export interface FormatOptions {
  */
 export function format(self: ByteSize, options: FormatOptions = {}): string {
   const { standard = defaultStandard } = options;
-  const { base, units } = byteSizeStandardData[standard];
+  const { base, suffix } = byteSizeStandardData[standard];
 
   let size = self as number;
   let unitIndex = 0;
 
-  while (size >= base && unitIndex < units.length - 1) {
+  while (size >= base && unitIndex < byteSizePrefixes.length - 1) {
     size /= base;
     unitIndex += 1;
   }
 
-  return `${size} ${units[unitIndex]}`;
+  return `${size} ${byteSizePrefixes[unitIndex]}${suffix}`;
 }
