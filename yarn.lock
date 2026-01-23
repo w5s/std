@@ -6190,7 +6190,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/byte-size@workspace:packages/byte-size":
+"@w5s/byte-size@npm:^1.0.0-alpha.0, @w5s/byte-size@workspace:packages/byte-size":
   version: 0.0.0-use.local
   resolution: "@w5s/byte-size@workspace:packages/byte-size"
   dependencies:
@@ -6571,6 +6571,7 @@ __metadata:
   resolution: "@w5s/system@workspace:packages/system"
   dependencies:
     "@types/node": "npm:^20.14.9"
+    "@w5s/byte-size": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
     "@w5s/task": "npm:^1.0.0-alpha.0"
