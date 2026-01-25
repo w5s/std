@@ -2,5 +2,9 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  test: {},
+  test: {
+    typecheck: {
+      enabled: true,
+    },
+  },
 });
