@@ -1,9 +1,8 @@
 import { Callable } from '@w5s/core';
+import { Int } from '@w5s/num';
 import { ByteSize as ByteSizeType } from './ByteSize/ByteSize.js';
 import { format } from './ByteSize/format.js';
 import { parse } from './ByteSize/parse.js';
-import { ByteSizeZero } from './ByteSize/ByteSizeZero.js';
-import { ByteSizeBounded } from './ByteSize/ByteSizeBounded.js';
 
 export type ByteSize = ByteSizeType;
 
@@ -12,8 +11,7 @@ export type ByteSize = ByteSizeType;
  */
 export const ByteSize = Callable({
   ...ByteSizeType,
-  ...ByteSizeZero,
-  ...ByteSizeBounded,
+  ...Int.Make<ByteSize>(),
   format,
   parse,
 });

@@ -1,4 +1,5 @@
 import { number as NumberType } from '@w5s/core/dist/Type/number.js';
+import type { Bounded, Comparable, Numeric } from '@w5s/core';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberBounded } from './Number/NumberBounded.js';
@@ -7,6 +8,23 @@ import { NumberNumeric } from './Number/NumberNumeric.js';
 import { NumberSigned } from './Number/NumberSigned.js';
 import { NumberNegate } from './Number/NumberNegate.js';
 import { NumberZero } from './Number/NumberZero.js';
+
+/**
+ * Create a module `number` type
+ *
+ * @example
+ */
+function Make<T extends number>(): Number.Module<T> {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  return {
+    ...NumberComparable,
+    ...NumberNumeric,
+    ...NumberSigned,
+    ...NumberBounded,
+    ...NumberNegate,
+    ...NumberZero,
+  } as Number.Module<T>;
+}
 
 /**
  * A collection of functions to manipulate `number`
@@ -22,12 +40,24 @@ import { NumberZero } from './Number/NumberZero.js';
  */
 export const Number = {
   ...NumberType,
-  ...NumberComparable,
-  ...NumberNumeric,
-  ...NumberSigned,
-  ...NumberBounded,
-  ...NumberNegate,
-  ...NumberZero,
+  ...Make<number>(),
+  Make,
   parse,
   format,
 };
+
+export namespace Number {
+  export interface Module<T extends number>
+    extends
+      Comparable<T>,
+      Numeric.Add<T>,
+      Numeric.Multiply<T>,
+      Numeric.Remainder<T>,
+      Numeric.Subtract<T>,
+      Numeric.Power<T>,
+      Numeric.CheckedDivide<T>,
+      Numeric.Signed<T>,
+      Numeric.Negate<T>,
+      Numeric.Zero<T>,
+      Bounded<T> {}
+}

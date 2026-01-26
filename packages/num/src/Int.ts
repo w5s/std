@@ -1,5 +1,6 @@
 import { Int as IntType } from '@w5s/core/dist/Type/Int.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
+import type { Bounded, Comparable, Numeric } from '@w5s/core';
 import { IntBounded } from './Int/IntBounded.js';
 import { IntComparable } from './Int/IntComparable.js';
 import { format } from './Int/format.js';
@@ -10,6 +11,22 @@ import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
 import { IntNegate } from './Int/IntNegate.js';
 import { IntZero } from './Int/IntZero.js';
+
+/**
+ * Create a module `number` type
+ *
+ * @example
+ */
+function Make<T extends number>(): Int.Module<T> {
+  return {
+    ...IntComparable,
+    ...IntNumeric,
+    ...IntSigned,
+    ...IntBounded,
+    ...IntNegate,
+    ...IntZero,
+  } as unknown as Int.Module<T>;
+}
 
 /**
  * Integer value
@@ -25,14 +42,26 @@ export type Int = IntType;
  */
 export const Int = Callable({
   ...IntType,
-  ...IntComparable,
   ...IntIndexable,
-  ...IntBounded,
-  ...IntNegate,
-  ...IntNumeric,
-  ...IntSigned,
-  ...IntZero,
+  ...Make<Int>(),
+  Make,
   format,
   parse,
   fromNumber,
 });
+
+export namespace Int {
+  export interface Module<T extends number>
+    extends
+      Comparable<T>,
+      Numeric.Add<T>,
+      Numeric.Multiply<T>,
+      Numeric.Remainder<T>,
+      Numeric.Subtract<T>,
+      Numeric.Power<T>,
+      Numeric.CheckedDivide<T>,
+      Numeric.Signed<T>,
+      Numeric.Negate<T>,
+      Numeric.Zero<T>,
+      Bounded<T> {}
+}
