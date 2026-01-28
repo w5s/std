@@ -22,7 +22,7 @@ function Make<T extends number>(): Int.Module<T> {
     ...IntComparable,
     ...IntNumeric,
     ...IntSigned,
-    ...IntBounded,
+    ...IntBounded(),
     ...IntNegate,
     ...IntZero,
   } as unknown as Int.Module<T>;

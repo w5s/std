@@ -1,9 +1,5 @@
 import type { Option } from '@w5s/core';
 import type { Int } from '../Int.js';
-import { IntBounded } from './IntBounded.js';
-
-const MIN_SAFE_INTEGER = IntBounded.minValue;
-const MAX_SAFE_INTEGER = IntBounded.maxValue;
 
 /**
  * Return a new integer from `value`
@@ -16,7 +12,7 @@ const MAX_SAFE_INTEGER = IntBounded.maxValue;
  * @param value - an initial numeric value
  */
 export function fromNumber(value: number): Option<Int> {
-  return value < MIN_SAFE_INTEGER || value > MAX_SAFE_INTEGER || Number.isNaN(value)
+  return value < Number.MIN_SAFE_INTEGER || value > Number.MAX_SAFE_INTEGER || Number.isNaN(value)
     ? undefined
     : value < 0
       ? (Math.ceil(value) as Int)

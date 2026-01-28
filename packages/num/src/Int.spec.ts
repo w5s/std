@@ -14,7 +14,7 @@ describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
   const maxValue = Number.MAX_SAFE_INTEGER;
   it('is an alias to functions', () => {
-    expect(Int).toEqual(expect.objectContaining(IntBounded));
+    expect(Int).toEqual(expect.objectContaining(IntBounded()));
     expect(Int).toEqual(expect.objectContaining(IntSigned));
     expect(Int).toEqual(expect.objectContaining(IntIndexable));
     expect(Int).toEqual(expect.objectContaining(IntNegate));

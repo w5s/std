@@ -4,7 +4,7 @@ import { fromNumber } from './fromNumber.js';
 import { IntBounded } from './IntBounded.js';
 
 describe(fromNumber, () => {
-  const { minValue, maxValue } = IntBounded;
+  const { minValue, maxValue } = IntBounded();
 
   it('should return identity for 0', () => {
     expect(fromNumber(0)).toBe(0);
