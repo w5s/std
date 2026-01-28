@@ -1,10 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { Option } from '@w5s/core';
 import { fromNumber } from './fromNumber.js';
-import { IntBounded } from './IntBounded.js';
 
 describe(fromNumber, () => {
-  const { minValue, maxValue } = IntBounded();
+  const { MIN_SAFE_INTEGER: minValue, MAX_SAFE_INTEGER: maxValue } = Number;
 
   it('should return identity for 0', () => {
     expect(fromNumber(0)).toBe(0);

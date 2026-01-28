@@ -1,7 +1,6 @@
 import { Int as IntType } from '@w5s/core/dist/Type/Int.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
-import type { Bounded, Comparable, Numeric } from '@w5s/core';
-import { IntBounded } from './Int/IntBounded.js';
+import type { Bounded as BoundedInterface, Comparable, Numeric } from '@w5s/core';
 import { IntComparable } from './Int/IntComparable.js';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
@@ -11,6 +10,7 @@ import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
 import { IntNegate } from './Int/IntNegate.js';
 import { IntZero } from './Int/IntZero.js';
+import { Bounded } from './IntConversion/Bounded.js';
 
 /**
  * Create a module `number` type
@@ -22,7 +22,7 @@ function Make<T extends number>(): Int.Module<T> {
     ...IntComparable,
     ...IntNumeric,
     ...IntSigned,
-    ...IntBounded(),
+    ...Bounded(),
     ...IntNegate,
     ...IntZero,
   } as unknown as Int.Module<T>;
@@ -63,5 +63,5 @@ export namespace Int {
       Numeric.Signed<T>,
       Numeric.Negate<T>,
       Numeric.Zero<T>,
-      Bounded<T> {}
+      BoundedInterface<T> {}
 }

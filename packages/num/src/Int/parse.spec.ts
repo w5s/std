@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { Option } from '@w5s/core';
 import { parse } from './parse.js';
-import { IntBounded } from './IntBounded.js';
+import { Bounded } from '../IntConversion/Bounded.js';
 
 describe(parse, () => {
+  const IntBounded = Bounded();
   it('should return a valid parsed integer when radix is omitted', () => {
     expect(parse('0xff')).toBe(Option.Some(255));
   });

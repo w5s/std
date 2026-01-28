@@ -8,9 +8,10 @@ import {
 import { Option } from '@w5s/core';
 import { IntNumeric } from './IntNumeric.js';
 import { Int } from '../Int.js';
-import { IntBounded } from './IntBounded.js';
+import { Bounded } from '../IntConversion/Bounded.js';
 
 describe('IntNumeric', () => {
+  const IntBounded = Bounded();
   describeCheckedAdd(IntNumeric, [
     { call: [Int(1), Int(1)], returns: Option.Some(Int(2)) },
     { call: [Int(1), Int(-1)], returns: Option.Some(Int(0)) },

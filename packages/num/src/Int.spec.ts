@@ -4,17 +4,17 @@ import { CodecError, Result } from '@w5s/core';
 import { Int } from './Int.js';
 import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';
-import { IntBounded } from './Int/IntBounded.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
 import { IntNegate } from './Int/IntNegate.js';
 import { IntZero } from './Int/IntZero.js';
+import { Bounded } from './IntConversion/Bounded.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
   const maxValue = Number.MAX_SAFE_INTEGER;
   it('is an alias to functions', () => {
-    expect(Int).toEqual(expect.objectContaining(IntBounded()));
+    expect(Int).toEqual(expect.objectContaining(Bounded()));
     expect(Int).toEqual(expect.objectContaining(IntSigned));
     expect(Int).toEqual(expect.objectContaining(IntIndexable));
     expect(Int).toEqual(expect.objectContaining(IntNegate));
