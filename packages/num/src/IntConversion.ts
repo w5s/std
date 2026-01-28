@@ -1,5 +1,7 @@
 import type { Int } from './Int.js';
 import { Bounded } from './IntConversion/Bounded.js';
+import { Comparable } from './IntConversion/Comparable.js';
+import { Negate } from './IntConversion/Negate.js';
 
 export interface IntConversion<T> {
   /**
@@ -21,4 +23,6 @@ export interface IntConversion<T> {
  */
 export const IntConversion = {
   Bounded,
+  Comparable,
+  Negate,
 };

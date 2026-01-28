@@ -2,7 +2,7 @@ import { describe } from 'vitest';
 import { describeBounded } from '@w5s/core/dist/Testing.js';
 import { Bounded } from './Bounded.js';
 
-describe('Bounded', () => {
+describe(Bounded, () => {
   describeBounded(Bounded(), {
     minValue: Number.MIN_SAFE_INTEGER,
     maxValue: Number.MAX_SAFE_INTEGER,

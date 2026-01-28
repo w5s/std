@@ -1,11 +1,11 @@
 import { describe } from 'vitest';
 import { describeSigned } from '@w5s/core/dist/Testing.js';
 import { IntSigned } from './IntSigned.js';
-import { IntComparable } from './IntComparable.js';
+import { Comparable } from '../IntConversion/Comparable.js';
 
 describe('IntNumeric', () => {
   describeSigned(
-    { ...IntComparable, ...IntSigned },
+    { ...Comparable(), ...IntSigned },
     {
       values: () => [
         { value: -2, type: 'negative', sign: -1, abs: 2 },

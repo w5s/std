@@ -1,16 +1,16 @@
 import { Int as IntType } from '@w5s/core/dist/Type/Int.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
-import type { Bounded as BoundedInterface, Comparable, Numeric } from '@w5s/core';
-import { IntComparable } from './Int/IntComparable.js';
+import type { Bounded as BoundedInterface, Comparable as ComparableInterface, Numeric } from '@w5s/core';
+import { Comparable } from './IntConversion/Comparable.js';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
 import { fromNumber } from './Int/fromNumber.js';
 import { IntNumeric } from './Int/IntNumeric.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
-import { IntNegate } from './Int/IntNegate.js';
 import { IntZero } from './Int/IntZero.js';
 import { Bounded } from './IntConversion/Bounded.js';
+import { Negate } from './IntConversion/Negate.js';
 
 /**
  * Create a module `number` type
@@ -19,11 +19,11 @@ import { Bounded } from './IntConversion/Bounded.js';
  */
 function Make<T extends number>(): Int.Module<T> {
   return {
-    ...IntComparable,
+    ...Comparable(),
     ...IntNumeric,
     ...IntSigned,
     ...Bounded(),
-    ...IntNegate,
+    ...Negate(),
     ...IntZero,
   } as unknown as Int.Module<T>;
 }
@@ -53,7 +53,7 @@ export const Int = Callable({
 export namespace Int {
   export interface Module<T extends number>
     extends
-      Comparable<T>,
+      ComparableInterface<T>,
       Numeric.Add<T>,
       Numeric.Multiply<T>,
       Numeric.Remainder<T>,

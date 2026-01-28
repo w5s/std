@@ -1,6 +1,7 @@
 import type { Bounded } from '@w5s/core';
 import type { Int } from '../Int.js';
 import type { IntConversion } from '../IntConversion.js';
+import { __defaultConversion } from './__defaultConversion.js';
 
 /**
  * Creates a Bounded instance for a type T that can be converted to and from Int.
@@ -19,7 +20,7 @@ import type { IntConversion } from '../IntConversion.js';
  * @param IntLikeType
  */
 export function Bounded<T = Int>(IntLikeType?: Pick<IntConversion<T>, 'fromInt'>): Bounded<T> {
-  const fromInt = IntLikeType?.fromInt ?? ((v: Int) => v as unknown as T);
+  const { fromInt } = IntLikeType ?? (__defaultConversion as IntConversion<T>);
   return {
     maxValue: fromInt(Number.MAX_SAFE_INTEGER as Int),
     minValue: fromInt(Number.MIN_SAFE_INTEGER as Int),
