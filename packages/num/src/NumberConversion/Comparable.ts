@@ -3,7 +3,9 @@ import { compare } from '../Number/compare.js';
 import type { NumberConversion } from '../NumberConversion.js';
 import { __defaultConversion } from './__defaultConversion.js';
 
-export function Comparable<T = number>(BaseType?: Pick<NumberConversion<T>, 'asNumber'>): ComparableModule<T> {
+export function Comparable(): ComparableModule<number>;
+export function Comparable<T = number>(BaseType: Pick<NumberConversion<T>, 'asNumber'>): ComparableModule<T>;
+export function Comparable<T>(BaseType?: Pick<NumberConversion<T>, 'asNumber'>): ComparableModule<T> {
   const { asNumber } = BaseType ?? __defaultConversion<T>();
   return ComparableModule<T>({
     compare(left, right) {

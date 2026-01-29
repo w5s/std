@@ -1,3 +1,6 @@
+import type * as Core from '@w5s/core';
+import { Callable } from '@w5s/core/dist/Callable.js';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Negate } from './NumberConversion/Negate.js';
@@ -20,14 +23,49 @@ export interface NumberConversion<T> {
   asNumber(this: void, value: T): number;
 }
 
+function call(): NumberConversion.Module<number>;
+function call<T>(BaseType: NumberConversion<T>): NumberConversion.Module<T>;
+function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
+  return {
+    // @ts-ignore hard to type correctly
+    ...Comparable(BaseType),
+    // @ts-ignore hard to type correctly
+    ...Numeric(BaseType),
+    // @ts-ignore hard to type correctly
+    ...Signed(BaseType),
+    // @ts-ignore hard to type correctly
+    ...Bounded(BaseType),
+    // @ts-ignore hard to type correctly
+    ...Negate(BaseType),
+    // @ts-ignore hard to type correctly
+    ...Zero(BaseType),
+  };
+}
+
 /**
  * @namespace
  */
-export const NumberConversion = {
+export const NumberConversion = Callable({
+  [Symbol.call]: call,
   Bounded,
   Comparable,
   Negate,
   Numeric,
   Signed,
   Zero,
-};
+});
+export namespace NumberConversion {
+  export interface Module<T>
+    extends
+      Core.Comparable<T>,
+      Core.Numeric.Add<T>,
+      Core.Numeric.Multiply<T>,
+      Core.Numeric.Remainder<T>,
+      Core.Numeric.Subtract<T>,
+      Core.Numeric.Power<T>,
+      Core.Numeric.CheckedDivide<T>,
+      Core.Numeric.Signed<T>,
+      Core.Numeric.Negate<T>,
+      Core.Numeric.Zero<T>,
+      Core.Bounded<T> {}
+}
