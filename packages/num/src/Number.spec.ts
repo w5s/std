@@ -3,7 +3,6 @@ import { Type } from '@w5s/core/dist/Type.js';
 import { Number } from './Number.js';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
-import { NumberSigned } from './Number/NumberSigned.js';
 import { NumberConversion } from './NumberConversion.js';
 
 describe('Number', () => {
@@ -19,7 +18,14 @@ describe('Number', () => {
         '**': expect.any(Function),
       }),
     );
-    expect(Number).toEqual(expect.objectContaining(NumberSigned));
+    expect(Number).toEqual(
+      expect.objectContaining({
+        sign: expect.any(Function),
+        abs: expect.any(Function),
+        isNegative: expect.any(Function),
+        isPositive: expect.any(Function),
+      }),
+    );
     expect(Number).toEqual(expect.objectContaining(NumberConversion.Bounded()));
     expect(Number).toEqual(
       expect.objectContaining({

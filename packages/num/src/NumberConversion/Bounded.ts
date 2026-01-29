@@ -18,7 +18,9 @@ import { __defaultConversion } from './__defaultConversion.js';
  * const MyTypeBounded = NumberConversion.Bounded<MyType>(MyTypeConversion);
  * @param BaseType
  */
-export function Bounded<T = number>(BaseType?: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T> {
+export function Bounded(): Bounded<number>;
+export function Bounded<T>(BaseType: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T>;
+export function Bounded<T>(BaseType?: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T> {
   const { fromNumber } = BaseType ?? __defaultConversion<T>();
   return {
     maxValue: fromNumber(globalThis.Number.MAX_VALUE),
