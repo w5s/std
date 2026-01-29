@@ -3,7 +3,7 @@ import type { IntConversion } from '../IntConversion.js';
 import { __defaultConversion } from './__defaultConversion.js';
 
 export function Negate<T>(IntLikeType?: IntConversion<T>): Numeric.Negate<T> {
-  const { fromInt, asInt } = IntLikeType ?? (__defaultConversion as IntConversion<T>);
+  const { fromInt, asInt } = IntLikeType ?? __defaultConversion();
   return {
     negate(self) {
       // @ts-ignore we know asInt(self) is Int

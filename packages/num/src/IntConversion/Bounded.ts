@@ -20,7 +20,7 @@ import { __defaultConversion } from './__defaultConversion.js';
  * @param IntLikeType
  */
 export function Bounded<T = Int>(IntLikeType?: Pick<IntConversion<T>, 'fromInt'>): Bounded<T> {
-  const { fromInt } = IntLikeType ?? (__defaultConversion as IntConversion<T>);
+  const { fromInt } = IntLikeType ?? __defaultConversion();
   return {
     maxValue: fromInt(Number.MAX_SAFE_INTEGER as Int),
     minValue: fromInt(Number.MIN_SAFE_INTEGER as Int),

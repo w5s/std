@@ -8,7 +8,9 @@ describe('index', () => {
         // Public API
         'BigInt',
         'Int',
+        'IntConversion',
         'Number',
+        'NumberConversion',
         'RoundingMode',
       ].sort(),
     );

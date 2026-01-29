@@ -3,18 +3,30 @@ import { Type } from '@w5s/core/dist/Type.js';
 import { Number } from './Number.js';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
-import { NumberComparable } from './Number/NumberComparable.js';
 import { NumberSigned } from './Number/NumberSigned.js';
-import { NumberBounded } from './Number/NumberBounded.js';
-import { NumberNegate } from './Number/NumberNegate.js';
+import { NumberConversion } from './NumberConversion.js';
 import { NumberZero } from './Number/NumberZero.js';
 
 describe('Number', () => {
   it('is an alias to functions', () => {
-    expect(Number).toEqual(expect.objectContaining(NumberComparable));
+    expect(Number).toEqual(
+      expect.objectContaining({
+        compare: expect.any(Function),
+        '==': expect.any(Function),
+        '+': expect.any(Function),
+        '*': expect.any(Function),
+        '%': expect.any(Function),
+        '-': expect.any(Function),
+        '**': expect.any(Function),
+      }),
+    );
     expect(Number).toEqual(expect.objectContaining(NumberSigned));
-    expect(Number).toEqual(expect.objectContaining(NumberBounded));
-    expect(Number).toEqual(expect.objectContaining(NumberNegate));
+    expect(Number).toEqual(expect.objectContaining(NumberConversion.Bounded()));
+    expect(Number).toEqual(
+      expect.objectContaining({
+        negate: expect.any(Function),
+      }),
+    );
     expect(Number).toEqual(expect.objectContaining(NumberZero));
     expect(Number).toEqual(expect.objectContaining(Type.number));
     expect(Number).toEqual(

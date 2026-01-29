@@ -2,11 +2,9 @@ import { number as NumberType } from '@w5s/core/dist/Type/number.js';
 import type { Bounded, Comparable, Numeric } from '@w5s/core';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
-import { NumberBounded } from './Number/NumberBounded.js';
-import { NumberComparable } from './Number/NumberComparable.js';
+import { NumberConversion } from './NumberConversion.js';
 import { NumberNumeric } from './Number/NumberNumeric.js';
 import { NumberSigned } from './Number/NumberSigned.js';
-import { NumberNegate } from './Number/NumberNegate.js';
 import { NumberZero } from './Number/NumberZero.js';
 
 /**
@@ -17,11 +15,11 @@ import { NumberZero } from './Number/NumberZero.js';
 function Make<T extends number>(): Number.Module<T> {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return {
-    ...NumberComparable,
+    ...NumberConversion.Comparable(),
     ...NumberNumeric,
     ...NumberSigned,
-    ...NumberBounded,
-    ...NumberNegate,
+    ...NumberConversion.Bounded(),
+    ...NumberConversion.Negate(),
     ...NumberZero,
   } as Number.Module<T>;
 }
