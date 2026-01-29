@@ -8,10 +8,10 @@ import {
   describeRemainder,
 } from '@w5s/core/dist/Testing.js';
 import { NumberConversion } from '../NumberConversion.js';
-import { NumberNumeric } from './NumberNumeric.js';
+import { Numeric } from './Numeric.js';
 
 describe('NumberNumeric', () => {
-  const subject = { ...NumberConversion.Comparable(), ...NumberNumeric };
+  const subject = { ...NumberConversion.Comparable(), ...Numeric() };
   describeAdd(subject, [
     { call: [1, 1], returns: 2 },
     { call: [1, -1], returns: 0 },

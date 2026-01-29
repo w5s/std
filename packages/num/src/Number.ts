@@ -3,7 +3,6 @@ import type { Bounded, Comparable, Numeric } from '@w5s/core';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberConversion } from './NumberConversion.js';
-import { NumberNumeric } from './Number/NumberNumeric.js';
 
 /**
  * Create a module `number` type
@@ -14,7 +13,7 @@ function Make<T extends number>(): Number.Module<T> {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   return {
     ...NumberConversion.Comparable(),
-    ...NumberNumeric,
+    ...NumberConversion.Numeric(),
     ...NumberConversion.Signed(),
     ...NumberConversion.Bounded(),
     ...NumberConversion.Negate(),

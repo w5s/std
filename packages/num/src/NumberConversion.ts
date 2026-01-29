@@ -1,6 +1,7 @@
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Negate } from './NumberConversion/Negate.js';
+import { Numeric } from './NumberConversion/Numeric.js';
 import { Signed } from './NumberConversion/Signed.js';
 import { Zero } from './NumberConversion/Zero.js';
 
@@ -26,6 +27,7 @@ export const NumberConversion = {
   Bounded,
   Comparable,
   Negate,
+  Numeric,
   Signed,
   Zero,
 };
