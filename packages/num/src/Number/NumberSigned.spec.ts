@@ -1,11 +1,11 @@
 import { describe } from 'vitest';
 import { describeSigned } from '@w5s/core/dist/Testing.js';
-import { NumberComparable } from './NumberComparable.js';
+import { NumberConversion } from '../NumberConversion.js';
 import { NumberSigned } from './NumberSigned.js';
 
 describe('NumberSigned', () => {
   describeSigned(
-    { ...NumberComparable, ...NumberSigned },
+    { ...NumberConversion.Comparable(), ...NumberSigned },
     {
       values: () => [
         { value: -2, type: 'negative', sign: -1, abs: 2 },

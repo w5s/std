@@ -1,6 +1,7 @@
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Negate } from './NumberConversion/Negate.js';
+import { Zero } from './NumberConversion/Zero.js';
 
 export interface NumberConversion<T> {
   /**
@@ -24,4 +25,5 @@ export const NumberConversion = {
   Bounded,
   Comparable,
   Negate,
+  Zero,
 };

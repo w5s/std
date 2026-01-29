@@ -5,7 +5,6 @@ import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberSigned } from './Number/NumberSigned.js';
 import { NumberConversion } from './NumberConversion.js';
-import { NumberZero } from './Number/NumberZero.js';
 
 describe('Number', () => {
   it('is an alias to functions', () => {
@@ -27,7 +26,12 @@ describe('Number', () => {
         negate: expect.any(Function),
       }),
     );
-    expect(Number).toEqual(expect.objectContaining(NumberZero));
+    expect(Number).toEqual(
+      expect.objectContaining({
+        isZero: expect.any(Function),
+        zero: expect.any(Function),
+      }),
+    );
     expect(Number).toEqual(expect.objectContaining(Type.number));
     expect(Number).toEqual(
       expect.objectContaining({

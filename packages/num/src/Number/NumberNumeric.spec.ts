@@ -7,11 +7,11 @@ import {
   describePower,
   describeRemainder,
 } from '@w5s/core/dist/Testing.js';
-import { NumberComparable } from './NumberComparable.js';
+import { NumberConversion } from '../NumberConversion.js';
 import { NumberNumeric } from './NumberNumeric.js';
 
 describe('NumberNumeric', () => {
-  const subject = { ...NumberComparable, ...NumberNumeric };
+  const subject = { ...NumberConversion.Comparable(), ...NumberNumeric };
   describeAdd(subject, [
     { call: [1, 1], returns: 2 },
     { call: [1, -1], returns: 0 },

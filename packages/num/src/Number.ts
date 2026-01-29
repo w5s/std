@@ -5,7 +5,6 @@ import { format } from './Number/format.js';
 import { NumberConversion } from './NumberConversion.js';
 import { NumberNumeric } from './Number/NumberNumeric.js';
 import { NumberSigned } from './Number/NumberSigned.js';
-import { NumberZero } from './Number/NumberZero.js';
 
 /**
  * Create a module `number` type
@@ -20,7 +19,7 @@ function Make<T extends number>(): Number.Module<T> {
     ...NumberSigned,
     ...NumberConversion.Bounded(),
     ...NumberConversion.Negate(),
-    ...NumberZero,
+    ...NumberConversion.Zero(),
   } as Number.Module<T>;
 }
 

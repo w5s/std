@@ -3,6 +3,7 @@ import { NumberConversion } from './NumberConversion.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Negate } from './NumberConversion/Negate.js';
+import { Zero } from './NumberConversion/Zero.js';
 
 describe('NumberConversion', () => {
   it('should reexport sub namespaces', () => {
@@ -11,6 +12,7 @@ describe('NumberConversion', () => {
         Bounded,
         Comparable,
         Negate,
+        Zero,
       }),
     );
   });
