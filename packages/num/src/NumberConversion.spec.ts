@@ -20,4 +20,17 @@ describe('NumberConversion', () => {
       }),
     );
   });
+  it('should create a default number conversion module', () => {
+    expect(NumberConversion()).toEqual(
+      expect.objectContaining({
+        '+': expect.any(Function),
+        '*': expect.any(Function),
+        negate: expect.any(Function),
+        zero: expect.any(Function),
+        minValue: expect.any(Number),
+        maxValue: expect.any(Number),
+        compare: expect.any(Function),
+      }),
+    );
+  });
 });

@@ -7,6 +7,7 @@ import { Negate } from './NumberConversion/Negate.js';
 import { Numeric } from './NumberConversion/Numeric.js';
 import { Signed } from './NumberConversion/Signed.js';
 import { Zero } from './NumberConversion/Zero.js';
+import { __defaultConversion } from './NumberConversion/__defaultConversion.js';
 
 export interface NumberConversion<T> {
   /**
@@ -26,19 +27,14 @@ export interface NumberConversion<T> {
 function call(): NumberConversion.Module<number>;
 function call<T>(BaseType: NumberConversion<T>): NumberConversion.Module<T>;
 function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
+  const base = BaseType ?? __defaultConversion();
   return {
-    // @ts-ignore hard to type correctly
-    ...Comparable(BaseType),
-    // @ts-ignore hard to type correctly
-    ...Numeric(BaseType),
-    // @ts-ignore hard to type correctly
-    ...Signed(BaseType),
-    // @ts-ignore hard to type correctly
-    ...Bounded(BaseType),
-    // @ts-ignore hard to type correctly
-    ...Negate(BaseType),
-    // @ts-ignore hard to type correctly
-    ...Zero(BaseType),
+    ...Comparable(base),
+    ...Numeric(base),
+    ...Signed(base),
+    ...Bounded(base),
+    ...Negate(base),
+    ...Zero(base),
   };
 }
 
