@@ -6,7 +6,6 @@ import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
-import { IntZero } from './Int/IntZero.js';
 import { Bounded } from './IntConversion/Bounded.js';
 
 describe('Int', () => {
@@ -22,7 +21,12 @@ describe('Int', () => {
         negate: expect.any(Function),
       }),
     );
-    expect(IntFunctions).toEqual(expect.objectContaining(IntZero));
+    expect(IntFunctions).toEqual(
+      expect.objectContaining({
+        zero: expect.any(Function),
+        isZero: expect.any(Function),
+      }),
+    );
     expect(IntFunctions).toEqual(
       expect.objectContaining({
         parse,

@@ -7,8 +7,6 @@ import { fromNumber } from './Int/fromNumber.js';
 import { IntNumeric } from './Int/IntNumeric.js';
 import { IntSigned } from './Int/IntSigned.js';
 import { IntIndexable } from './Int/IntIndexable.js';
-import { IntZero } from './Int/IntZero.js';
-import { Bounded } from './IntConversion/Bounded.js';
 import { IntConversion } from './IntConversion.js';
 
 /**
@@ -21,9 +19,9 @@ function Make<T extends number>(): Int.Module<T> {
     ...IntConversion.Comparable(),
     ...IntNumeric,
     ...IntSigned,
-    ...Bounded(),
+    ...IntConversion.Bounded(),
     ...IntConversion.Negate(),
-    ...IntZero,
+    ...IntConversion.Zero(),
   } as unknown as Int.Module<T>;
 }
 
