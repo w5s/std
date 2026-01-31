@@ -1,6 +1,7 @@
 import type { Numeric as CoreNumeric, Option } from '@w5s/core';
 import type { NumberConversion } from '../NumberConversion.js';
 import { __defaultConversion } from './__defaultConversion.js';
+import { Add } from './Add.js';
 
 interface NumberNumeric<T>
   extends
@@ -14,7 +15,8 @@ interface NumberNumeric<T>
 export function Numeric(): NumberNumeric<number>;
 export function Numeric<T>(BaseType: NumberConversion<T>): NumberNumeric<T>;
 export function Numeric<T>(BaseType?: NumberConversion<T>): NumberNumeric<T> {
-  const { fromNumber, asNumber } = BaseType ?? __defaultConversion<T>();
+  const BaseTypeDefault = BaseType ?? __defaultConversion<T>();
+  const { fromNumber, asNumber } = BaseTypeDefault;
   const unchecked =
     (fn: (left: number, right: number) => number) =>
     (left: T, right: T): T =>
@@ -26,7 +28,7 @@ export function Numeric<T>(BaseType?: NumberConversion<T>): NumberNumeric<T> {
       return Number.isNaN(result) || Number.isFinite(result) ? fromNumber(result) : undefined;
     };
   return {
-    '+': unchecked((left, right) => left + right),
+    ...Add(BaseTypeDefault),
     '-': unchecked((left, right) => left - right),
     '*': unchecked((left, right) => left * right),
     '**': unchecked((left, right) => left ** right),

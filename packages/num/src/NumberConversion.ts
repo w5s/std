@@ -1,6 +1,7 @@
 import type * as Core from '@w5s/core';
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Add } from './NumberConversion/Add.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Negate } from './NumberConversion/Negate.js';
@@ -43,6 +44,7 @@ function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
  */
 export const NumberConversion = Callable({
   [Symbol.call]: call,
+  Add,
   Bounded,
   Comparable,
   Negate,
