@@ -4,9 +4,13 @@ import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Add } from './NumberConversion/Add.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
+import { Multiply } from './NumberConversion/Multiply.js';
 import { Negate } from './NumberConversion/Negate.js';
 import { Numeric } from './NumberConversion/Numeric.js';
+import { Power } from './NumberConversion/Power.js';
+import { Remainder } from './NumberConversion/Remainder.js';
 import { Signed } from './NumberConversion/Signed.js';
+import { Subtract } from './NumberConversion/Subtract.js';
 import { Zero } from './NumberConversion/Zero.js';
 import { __defaultConversion } from './NumberConversion/__defaultConversion.js';
 
@@ -47,9 +51,13 @@ export const NumberConversion = Callable({
   Add,
   Bounded,
   Comparable,
+  Multiply,
   Negate,
   Numeric,
+  Power,
+  Remainder,
   Signed,
+  Subtract,
   Zero,
 });
 export namespace NumberConversion {
@@ -61,7 +69,6 @@ export namespace NumberConversion {
       Core.Numeric.Remainder<T>,
       Core.Numeric.Subtract<T>,
       Core.Numeric.Power<T>,
-      Core.Numeric.CheckedDivide<T>,
       Core.Numeric.Signed<T>,
       Core.Numeric.Negate<T>,
       Core.Numeric.Zero<T>,
