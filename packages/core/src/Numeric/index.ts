@@ -8,6 +8,7 @@ export type * from './CheckedSubtract.js';
 export type * from './Divide.js';
 export type * from './Multiply.js';
 export type * from './Negate.js';
+export type * from './Numeric.js';
 export type * from './One.js';
 export type * from './Power.js';
 export type * from './Remainder.js';
