@@ -1,5 +1,5 @@
 import type { Numeric } from '@w5s/core';
-import { NumberSigned } from '@w5s/num/dist/Number/NumberSigned.js';
+import { Signed } from '@w5s/num/dist/NumberConversion/Signed.js';
 import type { TimeDuration } from './TimeDuration.js';
 
-export const TimeDurationSigned: Numeric.Signed<TimeDuration> = NumberSigned as Numeric.Signed<TimeDuration>;
+export const TimeDurationSigned: Numeric.Signed<TimeDuration> = Signed() as Numeric.Signed<TimeDuration>;

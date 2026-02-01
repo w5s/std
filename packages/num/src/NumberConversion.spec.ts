@@ -4,7 +4,6 @@ import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Multiply } from './NumberConversion/Multiply.js';
 import { Negate } from './NumberConversion/Negate.js';
-import { Numeric } from './NumberConversion/Numeric.js';
 import { Power } from './NumberConversion/Power.js';
 import { Remainder } from './NumberConversion/Remainder.js';
 import { Signed } from './NumberConversion/Signed.js';
@@ -19,7 +18,6 @@ describe('NumberConversion', () => {
         Comparable,
         Multiply,
         Negate,
-        Numeric,
         Power,
         Remainder,
         Signed,

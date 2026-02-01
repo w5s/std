@@ -6,7 +6,6 @@ import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
 import { Multiply } from './NumberConversion/Multiply.js';
 import { Negate } from './NumberConversion/Negate.js';
-import { Numeric } from './NumberConversion/Numeric.js';
 import { Power } from './NumberConversion/Power.js';
 import { Remainder } from './NumberConversion/Remainder.js';
 import { Signed } from './NumberConversion/Signed.js';
@@ -34,11 +33,15 @@ function call<T>(BaseType: NumberConversion<T>): NumberConversion.Module<T>;
 function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
   const base = BaseType ?? __defaultConversion();
   return {
-    ...Comparable(base),
-    ...Numeric(base),
-    ...Signed(base),
+    ...Add(base),
     ...Bounded(base),
+    ...Comparable(base),
+    ...Multiply(base),
     ...Negate(base),
+    ...Power(base),
+    ...Remainder(base),
+    ...Signed(base),
+    ...Subtract(base),
     ...Zero(base),
   };
 }
@@ -53,7 +56,6 @@ export const NumberConversion = Callable({
   Comparable,
   Multiply,
   Negate,
-  Numeric,
   Power,
   Remainder,
   Signed,
