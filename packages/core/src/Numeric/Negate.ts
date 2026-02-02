@@ -11,5 +11,5 @@ export interface Negate<Self, Output = Self> {
    * @category Numeric
    * @param self - The value to negate.
    */
-  negate(self: Self): Output;
+  negate(this: void, self: Self): Output;
 }

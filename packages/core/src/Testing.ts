@@ -14,6 +14,7 @@ export * from './Testing/describeEqual.js';
 export * from './Testing/describeIndexable.js';
 export * from './Testing/describeMultiply.js';
 export * from './Testing/describeNegate.js';
+export * from './Testing/describeNumeric.js';
 export * from './Testing/describeNot.js';
 export * from './Testing/describePower.js';
 export * from './Testing/describeRemainder.js';
