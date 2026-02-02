@@ -8,18 +8,14 @@ import type { Add } from './Add.js';
 import type { Subtract } from './Subtract.js';
 import type { Multiply } from './Multiply.js';
 import type { Signed } from './Signed.js';
+import type { AsInt } from '../AsInt.js';
 
-export interface Numeric<T> extends Negate<T>, One<T>, Zero<T>, Add<T>, Signed<T>, Subtract<T>, Multiply<T> {
+export interface Numeric<T> extends Negate<T>, One<T>, Zero<T>, Add<T>, Signed<T>, Subtract<T>, Multiply<T>, AsInt<T> {
   /**
    *
    * @param value - the Int value to convert to T
    */
   fromInt(this: void, value: Int): T;
-  /**
-   *
-   * @param value - the value to convert to Int
-   */
-  asInt(this: void, value: T): Int;
 }
 
 export interface NumericParameters<T>
