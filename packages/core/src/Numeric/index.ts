@@ -6,6 +6,7 @@ export type * from './CheckedPower.js';
 export type * from './CheckedRemainder.js';
 export type * from './CheckedSubtract.js';
 export type * from './Divide.js';
+export type * from './Integral.js';
 export type * from './Multiply.js';
 export type * from './Negate.js';
 export type * from './Numeric.js';
