@@ -20,14 +20,16 @@ export interface Numeric<T> extends Negate<T>, One<T>, Zero<T>, Add<T>, Signed<T
 
 export interface NumericParameters<T>
   extends
-    PartialKeys<Numeric<T>, keyof Zero<T> | keyof One<T> | keyof Signed<T> | keyof Subtract<T>>,
+    PartialKeys<Numeric<T>, keyof Zero<T> | keyof Negate<T> | keyof One<T> | keyof Signed<T> | keyof Subtract<T>>,
     Comparable.Parameters<T> {}
 
 export function Numeric<T>(BaseType: NumericParameters<T>): Numeric<T> {
   const {
     fromInt,
+    asInt,
     compare,
-    negate,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-unary-minus
+    negate = (self) => fromInt(-asInt(self) as Int),
     '+': add,
     '-': subtract = (left, right) => add(left, negate(right)),
     '*': multiply,
@@ -42,7 +44,6 @@ export function Numeric<T>(BaseType: NumericParameters<T>): Numeric<T> {
     },
     isPositive = (self: T) => compare(self, zero()) > 0,
     isNegative = (self: T) => compare(self, zero()) < 0,
-    asInt,
   } = BaseType;
   return {
     negate,

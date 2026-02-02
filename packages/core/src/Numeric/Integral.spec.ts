@@ -20,8 +20,6 @@ describe(Integral, () => {
 
       '/': (left, right) => ({ custom: true, value: (left.value / right.value) as Int }),
       '%': (left, right) => ({ custom: true, value: (left.value % right.value) as Int }),
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-unary-minus
-      negate: (self) => ({ custom: true, value: -self.value as Int }),
       fromInt: (value: Int) => ({ custom: true, value }),
       asInt: (value) => value.value,
     }),
