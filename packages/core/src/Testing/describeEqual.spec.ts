@@ -3,7 +3,7 @@ import { Equal } from '../Equal.js';
 import { describeEqual } from './describeEqual.js';
 
 describe('describeEqual', () => {
-  const NumberEqual: Equal<number> = Equal({
+  const NumberEqual = Equal<number>({
     equals: (left, right) => left === right,
   });
 

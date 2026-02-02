@@ -3,7 +3,7 @@ import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
 
 export function describeEqual<T>(
-  subject: Equal<T>,
+  subject: Equal.Interface<T>,
   properties: {
     equivalent: () => [T, T][];
     different: () => [T, T][];
@@ -15,32 +15,18 @@ export function describeEqual<T>(
   const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
   const different = () => differentDefault().map(([left, right]) => ({ left, right }));
 
-  describe('==', () => {
+  describe('equals', () => {
     it.each(equivalent())('($left, $right) returns true // left == right', ({ left, right }) => {
-      expect(subject['=='](left, right)).toBe(true);
+      expect(subject.equals(left, right)).toBe(true);
     });
     it.each(equivalent())('($right, $left) returns true // left == right', ({ left, right }) => {
-      expect(subject['=='](right, left)).toBe(true);
+      expect(subject.equals(right, left)).toBe(true);
     });
     it.each(different())('($left, $right) returns false // left != right', ({ left, right }) => {
-      expect(subject['=='](left, right)).toBe(false);
+      expect(subject.equals(left, right)).toBe(false);
     });
     it.each(different())('($right, $left) returns false // right != left', ({ left, right }) => {
-      expect(subject['=='](right, left)).toBe(false);
-    });
-  });
-  describe('!=', () => {
-    it.each(different())('($left, $right) returns false // left != right', ({ left, right }) => {
-      expect(subject['!='](left, right)).toBe(true);
-    });
-    it.each(different())('($left, $right) returns false // right != left', ({ left, right }) => {
-      expect(subject['!='](right, left)).toBe(true);
-    });
-    it.each(equivalent())('($left, $right) returns true // left == right', ({ left, right }) => {
-      expect(subject['!='](left, right)).toBe(false);
-    });
-    it.each(equivalent())('($left, $right) returns true // right == left', ({ left, right }) => {
-      expect(subject['!='](right, left)).toBe(false);
+      expect(subject.equals(right, left)).toBe(false);
     });
   });
 }

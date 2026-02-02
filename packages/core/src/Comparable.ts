@@ -4,7 +4,7 @@ import type { Ordering } from './Ordering.js';
 /**
  * Module interface for values that have total order
  */
-export interface Comparable<T> extends Equal<T> {
+export interface Comparable<T> extends Equal.Module<T> {
   /**
    * Return an {@link Ordering} that represents comparison result
    *

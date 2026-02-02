@@ -25,7 +25,7 @@ import type { TestingLibrary } from './type.js';
  * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeSigned<T>(
-  subject: Numeric.Signed<T> & Equal<T>,
+  subject: Numeric.Signed<T> & Equal.Interface<T>,
   properties: {
     values: () => Array<{
       value: T;
@@ -50,12 +50,12 @@ export function describeSigned<T>(
 
   describeIfValue('abs', () => {
     it.each(properties.values())('satisfies abs($value) == $abs', ({ abs, value }) => {
-      expect(subject['=='](subject.abs(value), abs)).toBe(true);
+      expect(subject.equals(subject.abs(value), abs)).toBe(true);
     });
   });
   describeIfValue('sign', () => {
     it.each(properties.values())('satisfies sign($value) == $sign', ({ sign, value }) => {
-      expect(subject['=='](subject.sign(value), sign)).toBe(true);
+      expect(subject.equals(subject.sign(value), sign)).toBe(true);
     });
   });
   describeIfValue('isPositive', () => {
