@@ -1,9 +1,9 @@
-import type { Equal } from '../Equal.js';
+import type { EqualsInterface } from '../Equal.js';
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
 
 export function describeEqual<T>(
-  subject: Equal.Interface<T>,
+  subject: EqualsInterface<T>,
   properties: {
     equivalent: () => [T, T][];
     different: () => [T, T][];

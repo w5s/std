@@ -1,4 +1,4 @@
-import type { Equal } from '../Equal.js';
+import type { EqualsInterface } from '../Equal.js';
 import type { Numeric } from '../Numeric.js';
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
@@ -25,7 +25,7 @@ import type { TestingLibrary } from './type.js';
  * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
  */
 export function describeSigned<T>(
-  subject: Numeric.Signed<T> & Equal.Interface<T>,
+  subject: Numeric.Signed<T> & EqualsInterface<T>,
   properties: {
     values: () => Array<{
       value: T;

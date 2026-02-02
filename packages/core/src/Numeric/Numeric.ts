@@ -25,7 +25,7 @@ export interface Numeric<T> extends Negate<T>, One<T>, Zero<T>, Add<T>, Signed<T
 export interface NumericParameters<T>
   extends
     PartialKeys<Numeric<T>, keyof Zero<T> | keyof One<T> | keyof Signed<T> | keyof Subtract<T>>,
-    Pick<Comparable<T>, 'compare'> {}
+    Comparable.Parameters<T> {}
 
 export function Numeric<T>(BaseType: NumericParameters<T>): Numeric<T> {
   const {

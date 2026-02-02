@@ -1,10 +1,7 @@
 import type { Equal } from './Equal.js';
 import type { Ordering } from './Ordering.js';
 
-/**
- * Module interface for values that have total order
- */
-export interface Comparable<T> extends Equal.Module<T> {
+export interface ComparableInterface<T> {
   /**
    * Return an {@link Ordering} that represents comparison result
    *
@@ -19,6 +16,12 @@ export interface Comparable<T> extends Equal.Module<T> {
    * @category Comparator
    */
   compare(this: void, left: T, right: T): Ordering;
+}
+
+/**
+ * Module interface for values that have total order
+ */
+export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
   /**
    * "Less than or equal to" operator
    *
@@ -124,7 +127,6 @@ export interface Comparable<T> extends Equal.Module<T> {
    */
   clamp(this: void, value: T, minValue: T, maxValue: T): T;
 }
-
 /**
  * Construct Comparable instance
  *
@@ -141,7 +143,7 @@ export interface Comparable<T> extends Equal.Module<T> {
  * @param properties
  * @param properties.compare - the comparison function
  */
-export function Comparable<T>(properties: { compare: (left: T, right: T) => Ordering }): Comparable<T> {
+export function Comparable<T>(properties: Comparable.Parameters<T>): Comparable<T> {
   const { compare } = properties;
   const equals = (left: T, right: T) => compare(left, right) === 0;
   const min = (left: T, right: T) => (compare(left, right) <= 0 ? left : right);
@@ -158,5 +160,10 @@ export function Comparable<T>(properties: { compare: (left: T, right: T) => Orde
     min,
     max,
     clamp: (value, minValue, maxValue) => min(max(value, minValue), maxValue),
+  };
+}
+export namespace Comparable {
+  export type Parameters<T> = {
+    compare: (left: T, right: T) => Ordering;
   };
 }

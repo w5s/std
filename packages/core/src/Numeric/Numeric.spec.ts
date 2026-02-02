@@ -16,11 +16,12 @@ describe(Numeric, () => {
   const TestType = {
     ...Numeric({
       compare: TestComparable.compare,
-      '+': (left, right) => ({ custom: true, value: left.value + right.value }),
-      '*': (left, right) => ({ custom: true, value: left.value * right.value }),
-      negate: (self) => ({ custom: true, value: -self.value }),
+      '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
+      '*': (left, right) => ({ custom: true, value: (left.value * right.value) as Int }),
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-unary-minus
+      negate: (self) => ({ custom: true, value: -self.value as Int }),
       fromInt: (value: Int) => ({ custom: true, value }),
-      asInt: (value) => value.value as Int,
+      asInt: (value) => value.value,
     }),
     ...TestComparable,
   };
@@ -41,8 +42,8 @@ describe(Numeric, () => {
   });
   describe('#isOne', () => {
     it('should return true when compare to one is 0', () => {
-      expect(TestType.isOne({ custom: true, value: 1 })).toBe(true);
-      expect(TestType.isOne({ custom: true, value: 0 })).toBe(false);
+      expect(TestType.isOne({ custom: true, value: Int(1) })).toBe(true);
+      expect(TestType.isOne({ custom: true, value: Int(0) })).toBe(false);
     });
     it('overrides with isOne when set', () => {
       const isOne = vi.fn();
@@ -70,8 +71,8 @@ describe(Numeric, () => {
   });
   describe('#isZero', () => {
     it('should return true when compare to zero is 0', () => {
-      expect(TestType.isZero({ custom: true, value: 0 })).toBe(true);
-      expect(TestType.isZero({ custom: true, value: 1 })).toBe(false);
+      expect(TestType.isZero({ custom: true, value: Int(0) })).toBe(true);
+      expect(TestType.isZero({ custom: true, value: Int(1) })).toBe(false);
     });
     it('overrides with isZero when set', () => {
       const isZero = vi.fn();
@@ -85,12 +86,12 @@ describe(Numeric, () => {
   });
   describe('#negate', () => {
     it('should negate the value', () => {
-      expect(TestType.negate({ custom: true, value: 2 })).toEqual({ custom: true, value: -2 });
+      expect(TestType.negate({ custom: true, value: Int(2) })).toEqual({ custom: true, value: -2 });
     });
   });
   describe('+', () => {
     it('should add two values', () => {
-      expect(TestType['+']({ custom: true, value: 2 }, { custom: true, value: 3 })).toEqual({
+      expect(TestType['+']({ custom: true, value: Int(2) }, { custom: true, value: Int(3) })).toEqual({
         custom: true,
         value: 5,
       });
@@ -98,7 +99,7 @@ describe(Numeric, () => {
   });
   describe('-', () => {
     it('should subtract two values using negate', () => {
-      expect(TestType['-']({ custom: true, value: 2 }, { custom: true, value: 3 })).toEqual({
+      expect(TestType['-']({ custom: true, value: Int(2) }, { custom: true, value: Int(3) })).toEqual({
         custom: true,
         value: -1,
       });

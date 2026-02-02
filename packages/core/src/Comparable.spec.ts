@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { Comparable } from './Comparable.js';
 
 describe('Comparable', () => {
-  const anyCompare = (_left: unknown, _right: unknown) => 0;
-  const numberCompare = (left: number, right: number) => left - right;
+  const anyCompare = (_left: unknown, _right: unknown) => 0 as const;
+  const numberCompare = (left: number, right: number) => (left === right ? 0 : left < right ? -1 : 1);
   const NumWithCompare = Comparable<number>({ compare: numberCompare });
 
   describe('compare', () => {

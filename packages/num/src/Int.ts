@@ -1,6 +1,6 @@
 import { Int as IntType } from '@w5s/core/dist/Type/Int.js';
 import { Callable } from '@w5s/core/dist/Callable.js';
-import type { Bounded as BoundedInterface, Comparable as ComparableInterface, Numeric } from '@w5s/core';
+import type * as Core from '@w5s/core';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
 import { fromNumber } from './Int/fromNumber.js';
@@ -50,15 +50,15 @@ export const Int = Callable({
 export namespace Int {
   export interface Module<T extends number>
     extends
-      ComparableInterface<T>,
-      Numeric.Add<T>,
-      Numeric.Multiply<T>,
-      Numeric.Remainder<T>,
-      Numeric.Subtract<T>,
-      Numeric.Power<T>,
-      Numeric.CheckedDivide<T>,
-      Numeric.Signed<T>,
-      Numeric.Negate<T>,
-      Numeric.Zero<T>,
-      BoundedInterface<T> {}
+      Core.Comparable<T>,
+      Core.Numeric.Add<T>,
+      Core.Numeric.Multiply<T>,
+      Core.Numeric.Remainder<T>,
+      Core.Numeric.Subtract<T>,
+      Core.Numeric.Power<T>,
+      Core.Numeric.CheckedDivide<T>,
+      Core.Numeric.Signed<T>,
+      Core.Numeric.Negate<T>,
+      Core.Numeric.Zero<T>,
+      Core.Bounded<T> {}
 }
