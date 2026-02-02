@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { asInt } from './asInt.js';
+import { LogLevelAsInt } from './LogLevelAsInt.js';
 import { LogLevelValue } from './LogLevelValue.js';
 
-describe(asInt, () => {
+describe('LogLevelAsInt', () => {
   it.each([
     [LogLevelValue.Critical, 50],
     [LogLevelValue.Error, 40],
@@ -10,6 +10,6 @@ describe(asInt, () => {
     [LogLevelValue.Info, 20],
     [LogLevelValue.Debug, 10],
   ])(`should return value for %s`, (level, expectedValue) => {
-    expect(asInt(level)).toBe(expectedValue);
+    expect(LogLevelAsInt.asInt(level)).toBe(expectedValue);
   });
 });

@@ -5,7 +5,7 @@ import { LogLevelComparable } from './LogLevel/LogLevelComparable.js';
 import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { of } from './LogLevel/of.js';
 import { LogLevelAsString } from './LogLevel/LogLevelAsString.js';
-import { asInt } from './LogLevel/asInt.js';
+import { LogLevelAsInt } from './LogLevel/LogLevelAsInt.js';
 
 describe('LogLevel', () => {
   it('is an alias to functions', () => {
@@ -13,10 +13,10 @@ describe('LogLevel', () => {
     expect(LogLevel).toEqual(expect.objectContaining(LogLevelComparable));
     expect(LogLevel).toEqual(expect.objectContaining(LogLevelValue));
     expect(LogLevel).toEqual(expect.objectContaining(LogLevelAsString));
+    expect(LogLevel).toEqual(expect.objectContaining(LogLevelAsInt));
     expect(LogLevel).toEqual(
       expect.objectContaining({
         of,
-        asInt,
       }),
     );
   });

@@ -6,7 +6,7 @@ import { LogLevelValue } from './LogLevel/LogLevelValue.js';
 import { of } from './LogLevel/of.js';
 import { from } from './LogLevel/from.js';
 import { LogLevelAsString } from './LogLevel/LogLevelAsString.js';
-import { asInt } from './LogLevel/asInt.js';
+import { LogLevelAsInt } from './LogLevel/LogLevelAsInt.js';
 
 export interface LogLevel extends LogLevelType {}
 
@@ -20,8 +20,8 @@ export const LogLevel = Callable({
   ...LogLevelValue,
   ...LogLevelBounded,
   ...LogLevelAsString,
+  ...LogLevelAsInt,
   of,
   from,
-  asInt,
   [Callable.symbol]: of,
 });

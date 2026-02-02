@@ -4,7 +4,7 @@ import { color as ansiColor } from '@w5s/console/dist/ANSICode/color.js';
 import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
-import { asInt as logLevelAsInt } from '../LogLevel/asInt.js';
+import { LogLevelAsInt } from '../LogLevel/LogLevelAsInt.js';
 import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
 import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
@@ -16,6 +16,7 @@ const blue = ansiColor('blue');
 const black = ansiColor('black');
 const dim = ansiFontWeight('dim');
 const formatTime = dim;
+const logLevelAsInt = LogLevelAsInt.asInt;
 
 const formatLevelFor = (level: LogLevel) =>
   logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error)
