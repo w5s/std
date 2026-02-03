@@ -37,7 +37,7 @@ export function ErrorClass<Name extends string>(options: ErrorClassOptions<Name>
     name: errorName,
     message: errorMessage,
   });
-  // @ts-ignore
+  // @ts-ignore ensure types here and rely on testing
   return BaseError;
 }
 

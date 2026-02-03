@@ -10,7 +10,7 @@ import { LogLevel } from './LogLevel.js';
  * ```
  * @category Constructor
  * @param name - the level string representation
- * @param value - the level value
+ * @param levelValue - the level value
  */
 export function of(name: string, levelValue: Int): LogLevel {
   return LogLevel.create({ name, value: levelValue });

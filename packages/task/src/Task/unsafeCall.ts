@@ -5,6 +5,14 @@ import type { TaskLike, TaskParameters } from '../Task.js';
 /**
  *
  * @example
+ * ```typescript
+ * const canceler = TaskCanceler();
+ * Task.unsafeCall(task, {
+ *   resolve: (value) => { ... },
+ *   reject: (value) => { ... },
+ *   canceler,
+ * });// Will perform the task passing the parameters
+ * ```
  * @param task - the task to be called
  * @param parameters - the parameters to call the task with
  */

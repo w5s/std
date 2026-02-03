@@ -8,6 +8,9 @@ import type { Headers } from '../Headers.js';
  * Returns a new {@link Response} object from {@link globalThis.Response}
  *
  * @example
+ * ```typescript
+ * Response.from(new globalThis.Response());
+ * ```
  * @param originalResponse
  */
 export function from(originalResponse: globalThis.Response): Response<BodyReader> {

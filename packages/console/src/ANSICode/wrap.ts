@@ -1,3 +1,4 @@
+/* cSpell: ignore mfoo */
 import { format } from './format.js';
 
 const identity = Object.assign((_: string): string => _, { open: undefined, close: undefined });
@@ -21,6 +22,9 @@ export interface ANSIWrapper {
  * Wraps a given string with ANSI escape codes for styling.
  *
  * @example
+ * ```typescript
+ * ANSICode.wrap([1, 4, 42], 0, 'm')('foo'); // '\u001B[1;4;42mfoo\u001B[0m'
+ * ```
  * @param open - An array of numbers representing the opening ANSI codes.
  * @param close - A number representing the closing ANSI code.
  * @param code - A string representing the ANSI code suffix.

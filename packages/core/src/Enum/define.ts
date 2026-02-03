@@ -40,7 +40,7 @@ export function define<const T extends Record<string, string | number | boolean>
     indexOf: (value) => enumValuesIndex.get(value),
   });
 
-  // @ts-ignore
+  // @ts-ignore ignore errors and rely on tests
   return Object.freeze({
     [Symbol.enumKeys]: enumKeysList,
     ...EnumType,

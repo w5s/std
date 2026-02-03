@@ -22,7 +22,9 @@ export interface ApplicationTest<Configuration = EmptyObject> extends Applicatio
  * console.log(app.current);// {}
  * console.log(app.store);// { ['some-id']:  }
  * ```
- * @param properties
+ * @param id
+ * @param initialConfiguration
+ * @param store
  */
 export function ApplicationTest<Configuration extends Readonly<Record<string | symbol, unknown>> = EmptyObject>(
   id: string,

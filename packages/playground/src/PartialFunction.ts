@@ -29,7 +29,7 @@ export class PartialFunction<F extends PartialApplyFunction> implements PartialF
   andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
     thenFn: PartialFunctionLike<FThen> | FThen,
   ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>> {
-    // @ts-ignore
+    // @ts-ignore Typing is hard here
     return andThen(this, thenFn);
   }
 }
@@ -44,7 +44,7 @@ export function orElse<F extends PartialApplyFunction, FElse extends PartialAppl
 ): PartialFunction<F & FElse> {
   return partial({
     isDefinedAt: (value) => self.isDefinedAt(value) || elseFn.isDefinedAt(value),
-    // @ts-ignore
+    // @ts-ignore Typing is hard here
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     apply: (value) => (self.isDefinedAt(value) ? self.apply(value) : elseFn.apply(value)),
   });

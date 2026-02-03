@@ -1,8 +1,8 @@
 import type { BigDecimal } from './BigDecimal.js';
 
+// eslint-disable-next-line jsdoc/require-example
 /**
  * @internal
- * @example
  * @param self - the BigDecimal to scale
  * @param newScale - the new scale to apply
  * @returns the scaled BigDecimal value

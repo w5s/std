@@ -21,7 +21,7 @@ const fakeBodyValueFactory = {
 };
 
 function fakeBodyValue<F extends BodyReaderFormat>(format: F): BodyReaderValue<F> {
-  // @ts-ignore
+  // @ts-ignore return type is set by BodyReaderValue
   return fakeBodyValueFactory[format]();
 }
 

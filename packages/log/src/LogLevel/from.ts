@@ -11,8 +11,8 @@ const logLevelMap = Object.fromEntries(
  * ```typescript
  * LogLevel.from('critical') // LogLevel.Critical
  * ```
- * @param level
+ * @param value - the level named value
  */
-export function from(value: LogLevelValue) {
+export function from(value: LogLevelValue): LogLevel {
   return logLevelMap[value];
 }
