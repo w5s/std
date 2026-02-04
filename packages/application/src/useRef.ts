@@ -1,6 +1,6 @@
 import type { Ref } from '@w5s/core';
 import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
-import { type Storage } from './useStorage.js';
+import type { Storage } from '@w5s/global-storage';
 
 function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: string, initialValue: T): Ref<T> {
   const propertyRef: Ref<T> = {

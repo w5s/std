@@ -5,9 +5,10 @@ describe('index', () => {
   it('exports', () => {
     expect(Object.keys(Module).sort()).toEqual(
       [
-        // public exports
-        'useRef',
-        'Application',
+        // Public API
+        '$storage',
+        'globalStorage',
+        'useStorage',
       ].sort(),
     );
   });

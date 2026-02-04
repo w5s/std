@@ -1,10 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { Ref } from '@w5s/core';
+import { globalStorage } from '@w5s/global-storage';
 import { Application } from './Application.js';
-import { useStorage } from './useStorage.js';
 
 describe('Application', () => {
-  const globalStorage = useStorage(globalThis);
   const generateId = () => Math.round(Math.random() * 2 ** 32).toString(36);
   const generateAppId = () => `test-app-${generateId()}`;
   const _target = Ref({});

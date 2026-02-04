@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { useStorage, $storage } from './useStorage.js';
+import { useStorage } from './useStorage.js';
+import { $storage } from './$storage.js';
 
-describe('useStorage', () => {
+describe(useStorage, () => {
   it('should be a map', () => {
     const storage = useStorage({});
 

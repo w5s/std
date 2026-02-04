@@ -1,6 +1,6 @@
 import type { Ref, Tag } from '@w5s/core';
+import { useStorage } from '@w5s/global-storage';
 import { useRef } from './useRef.js';
-import { useStorage } from './useStorage.js';
 
 type AnyObject = Readonly<Record<string | symbol, unknown>>;
 type EmptyObject = Readonly<Record<string | symbol, never>>;

@@ -6264,6 +6264,7 @@ __metadata:
   resolution: "@w5s/application@workspace:packages/application"
   dependencies:
     "@w5s/core": "npm:^1.0.0-alpha.0"
+    "@w5s/global-storage": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.9.3"
     vite: "npm:latest"
     vitest: "npm:latest"
@@ -6498,6 +6499,18 @@ __metadata:
   checksum: 10c0/b368b87c320c569ee9672dbedd8bff7fa0ef17e1ec7270d73193733025af58cadd0f3ff5372bfa7720e1ee2d31e9edc14183b605e43c234139520e4b42a29895
   languageName: node
   linkType: hard
+
+"@w5s/global-storage@npm:^1.0.0-alpha.0, @w5s/global-storage@workspace:packages/global-storage":
+  version: 0.0.0-use.local
+  resolution: "@w5s/global-storage@workspace:packages/global-storage"
+  dependencies:
+    typescript: "npm:5.9.3"
+    vite: "npm:latest"
+    vitest: "npm:latest"
+  peerDependencies:
+    typescript: ^5.0.0
+  languageName: unknown
+  linkType: soft
 
 "@w5s/http@npm:^1.0.0-alpha.0, @w5s/http@workspace:packages/http":
   version: 0.0.0-use.local

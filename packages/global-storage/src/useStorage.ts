@@ -1,11 +1,5 @@
-import type { Option } from '@w5s/core';
-
-export const $storage = Symbol.for('@w5s/storage');
-
-/**
- * Type for the global Map that holds all application states
- */
-export interface Storage extends Map<string, unknown> {}
+import { $storage } from './$storage.js';
+import type { Storage } from './Storage.js';
 
 /**
  * Get or create a map object storage for `hostObject`
@@ -22,5 +16,5 @@ export function useStorage(hostObject: object): Storage {
     [P in string | symbol]: unknown;
   };
   // eslint-disable-next-line no-return-assign
-  return (target[$storage] as Option<Storage>) ?? (target[$storage] = new Map());
+  return (target[$storage] as Storage | undefined) ?? (target[$storage] = new Map());
 }
