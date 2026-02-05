@@ -9,6 +9,7 @@ describe('index', () => {
         '$storage',
         'globalStorage',
         'useStorage',
+        'useGlobalValue',
       ].sort(),
     );
   });
