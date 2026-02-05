@@ -52,7 +52,8 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
-    "@w5s/core-type": "^1.0.0-alpha.0"
+    "@w5s/core-type": "^1.0.0-alpha.0",
+    "@w5s/global-state": "^1.0.0-alpha.0"
   },
   "devDependencies": {
     "typescript": "5.9.3",

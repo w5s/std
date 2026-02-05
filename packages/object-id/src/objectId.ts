@@ -1,5 +1,5 @@
 import type { ObjectLike, Tag } from '@w5s/core-type';
-import { useObjectIdState } from './useObjectIdState.js';
+import { objectIdState } from './objectIdState.js';
 
 /**
  * Type representing values that can have an {@link ObjectId}
@@ -12,8 +12,6 @@ export type ObjectIdParameter = ObjectLike;
  * Type representing a unique object id
  */
 export type ObjectId = number & Tag<'ObjectId'>;
-
-const objectIdState = useObjectIdState(globalThis);
 
 /**
  * Return a unique identifier for an object or function
