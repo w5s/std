@@ -7,12 +7,36 @@ import type { Awaitable } from '@w5s/core-type';
 import { Initializer } from './Initializer.js';
 import { start } from './start.js';
 
-export async function startAll<AppContext extends object, AppError>(
+type InitializerErrorType<T> = T extends () => Awaitable<Initializer<any, infer AppError>>
+  ? AppError
+  : T extends () => Awaitable<{ default: Initializer<any, infer AppError> }>
+    ? AppError
+    : never;
+
+type InitializersErrorType<Initializers extends readonly unknown[]> = Initializers extends readonly [
+  infer First,
+  ...infer Rest,
+]
+  ? InitializerErrorType<First> | InitializersErrorType<Rest>
+  : never;
+
+export async function startAll<
+  AppContext extends object,
+  const Initializers extends readonly (
+    | (() => Awaitable<Initializer<AppContext, any>>)
+    | (() => Awaitable<{ default: Initializer<AppContext, any> }>)
+  )[],
+>(
   appContext: AppContext,
-  initializers: Array<() => Awaitable<Initializer<AppContext, AppError>>>,
-): Promise<Result<void, AggregateError<Array<AppError>>>> {
-  const resolvedInitializers = await Promise.all(initializers.map(async (initializer) => initializer()));
-  const results = await Promise.all(resolvedInitializers.map((initializer) => start(appContext, initializer)));
+  initializers: Initializers,
+): Promise<Result<void, AggregateError<Array<InitializersErrorType<Initializers>>>>> {
+  const resolvedInitializers = await Promise.all(
+    initializers.map(async (initializerOrPromise) => {
+      const initializer = await initializerOrPromise();
+      return 'default' in initializer ? initializer.default : initializer;
+    }),
+  );
+  const results = await Promise.all(resolvedInitializers.map(async (initializer) => start(appContext, initializer)));
 
   return results.every((result) => isOk(result)) ? Ok() : Error(new AggregateError([]));
 }

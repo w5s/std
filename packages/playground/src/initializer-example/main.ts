@@ -1,12 +1,13 @@
-/* eslint-disable unicorn/no-await-expression-member */
 import { startAll } from '../initializer/index.js';
 import type { AppContext } from './AppContext.js';
 
-export function main3() {
+export async function main3() {
   const appContext: AppContext = { foo: true };
-  return startAll(appContext, [
+  const result = await startAll(appContext, [
     // initializers
-    async () => (await import('./initializers/init1.js')).default,
-    async () => (await import('./initializers/init2.js')).default,
+    () => import('./initializers/init1.js'),
+    () => import('./initializers/init2.js'),
   ]);
+  // eslint-disable-next-line no-console
+  console.log(result);
 }

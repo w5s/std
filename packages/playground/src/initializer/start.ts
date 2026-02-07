@@ -1,12 +1,10 @@
-import { useRef } from '@w5s/application/dist/useRef.js';
-import type { Result } from '@w5s/core';
+import { Ref, type Result } from '@w5s/core';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
+import { useGlobalValue } from '@w5s/global-storage';
 import type { Initializer } from './Initializer.js';
-import { InitializerApplication } from './InitializerApplication.js';
 import { InitializerStatus } from './InitializerStatus.js';
 
-// eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-const status = useRef(InitializerApplication.state, 'status', {} as Record<Initializer['id'], InitializerStatus>);
+const status = useGlobalValue('@w5s/initializer', () => Ref<Record<Initializer['id'], InitializerStatus>>({}));
 
 function getStatus(initializer: Initializer) {
   return status.current[initializer.id] ?? InitializerStatus.Stopped;
