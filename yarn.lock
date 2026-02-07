@@ -6600,6 +6600,7 @@ __metadata:
   resolution: "@w5s/object-id@workspace:packages/object-id"
   dependencies:
     "@w5s/core-type": "npm:^1.0.0-alpha.0"
+    "@w5s/global-storage": "npm:^1.0.0-alpha.0"
     typescript: "npm:5.9.3"
     vite: "npm:latest"
     vitest: "npm:latest"
