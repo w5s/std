@@ -1,4 +1,7 @@
+import { modify } from './Ref/modify.js';
 import { property } from './Ref/property.js';
+import { read } from './Ref/read.js';
+import { write } from './Ref/write.js';
 
 export interface Ref<Value> {
   /**
@@ -47,53 +50,9 @@ export const Ref = Object.assign(
         anyValue != null && (typeof anyValue === 'object' || typeof anyValue === 'function') && 'current' in anyValue
       );
     },
-
-    /**
-     * Returns the current ref value
-     *
-     * @example
-     *```typescript
-     * const ref = Ref('foo');
-     * Ref.read(ref); // 'foo'
-     * ```
-     * @category Accessor
-     * @param ref - the reference object
-     */
-    read<Value>(ref: Ref<Value>): Value {
-      return ref.current;
-    },
-
-    /**
-     * Change the current value
-     *
-     * @example
-     *```typescript
-     * const ref = Ref('foo');
-     * Ref.write(ref, 'bar'); // Ref.read(ref) == 'bar'
-     * ```
-     * @category Accessor
-     * @param ref - the reference object
-     * @param newValue - the new value to be set
-     */
-    write<Value>(ref: Ref<Value>, newValue: Value): void {
-      ref.current = newValue;
-    },
-
-    /**
-     * Change the current value using a mapping function that returns the new value
-     *
-     * @example
-     *```typescript
-     * const ref = Ref('foo');
-     * Ref.modify(ref, (current) => current + 'bar'); // Ref.read(ref) == 'foobar'
-     * ```
-     * @category Accessor
-     * @param ref - the reference object
-     * @param mapFn - the mapping function that will be applied
-     */
-    modify<Value>(ref: Ref<Value>, mapFn: (current: Value) => Value): void {
-      ref.current = mapFn(ref.current);
-    },
+    read,
+    modify,
     property,
+    write,
   },
 );
