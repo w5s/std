@@ -1,3 +1,5 @@
+import { property } from './Ref/property.js';
+
 export interface Ref<Value> {
   /**
    * Mutable reference to a value
@@ -92,5 +94,6 @@ export const Ref = Object.assign(
     modify<Value>(ref: Ref<Value>, mapFn: (current: Value) => Value): void {
       ref.current = mapFn(ref.current);
     },
+    property,
   },
 );

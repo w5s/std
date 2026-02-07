@@ -1,9 +1,17 @@
 import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
 import { Ref } from './Ref.js';
+import { property } from './Ref/property.js';
 
 describe('Ref', () => {
   const anyValue = 123;
+  it('is an alias to functions', () => {
+    expect(Ref).toEqual(
+      expect.objectContaining({
+        property,
+      }),
+    );
+  });
   it('should return the current value', () => {
     expect(Ref(anyValue)).toEqual({ [Ref.current]: anyValue });
   });
