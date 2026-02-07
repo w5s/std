@@ -6574,6 +6574,7 @@ __metadata:
     "@w5s/collection": "npm:^1.0.0-alpha.0"
     "@w5s/core": "npm:^1.0.0-alpha.0"
     "@w5s/error": "npm:^1.0.0-alpha.0"
+    "@w5s/global-storage": "npm:^1.0.0-alpha.0"
     "@w5s/http": "npm:^1.0.0-alpha.0"
     "@w5s/iterable": "npm:^1.0.0-alpha.0"
     "@w5s/log": "npm:^1.0.0-alpha.0"
