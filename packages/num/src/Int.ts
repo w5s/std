@@ -4,26 +4,10 @@ import type * as Core from '@w5s/core';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
 import { fromNumber } from './Int/fromNumber.js';
-import { IntNumeric } from './Int/IntNumeric.js';
-import { IntSigned } from './Int/IntSigned.js';
+import { IntIntegral } from './Int/IntIntegral.js';
 import { IntIndexable } from './Int/IntIndexable.js';
-import { IntConversion } from './IntConversion.js';
-
-/**
- * Create a module `number` type
- *
- * @example
- */
-function Make<T extends number>(): Int.Module<T> {
-  return {
-    ...IntConversion.Comparable(),
-    ...IntNumeric,
-    ...IntSigned,
-    ...IntConversion.Bounded(),
-    ...IntConversion.Negate(),
-    ...IntConversion.Zero(),
-  } as unknown as Int.Module<T>;
-}
+import { IntComparable } from './Int/IntComparable.js';
+import { IntBounded } from './Int/IntBounded.js';
 
 /**
  * Integer value
@@ -39,9 +23,10 @@ export type Int = IntType;
  */
 export const Int = Callable({
   ...IntType,
+  ...IntComparable,
+  ...IntIntegral,
+  ...IntBounded,
   ...IntIndexable,
-  ...Make<Int>(),
-  Make,
   format,
   parse,
   fromNumber,
