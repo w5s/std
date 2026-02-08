@@ -93,13 +93,10 @@ function main2() {
   const task = Task.create(async ({ run }) => {
     const amount = EUR('1.55');
     const uuid = await run(randomUUID());
-    if (!uuid.ok) {
-      return uuid;
-    }
+    if (!uuid.ok) return uuid;
+
     const messageSent = await run(sendMessage(uuid.value + Money.format(amount)));
-    if (!messageSent.ok) {
-      return messageSent;
-    }
+    if (!messageSent.ok) return messageSent;
 
     return Task.ok();
   });
