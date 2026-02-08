@@ -12,7 +12,7 @@ export interface ObjectIdState {
   refs: WeakMap<ObjectIdParameter, ObjectId>;
 }
 
-export const objectIdState = useGlobalValue(
+export const __state = useGlobalValue(
   '@w5s/object-id',
   (): ObjectIdState => ({
     currentId: 1 as ObjectId,
