@@ -32,7 +32,7 @@ describe(ByteSize, () => {
     ],
     schema: {
       type: 'string',
-      format: 'file-size',
+      format: 'byte-size',
     },
   }));
 });

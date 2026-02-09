@@ -25,6 +25,6 @@ export const ByteSize = Tag.define<number, ByteSize>({
   },
   [Symbol.schema]: () => ({
     type: 'string',
-    format: 'file-size',
+    format: 'byte-size',
   }),
 });
