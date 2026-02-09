@@ -7,7 +7,6 @@ describe('index', () => {
       [
         // List of all public exports
         'randomBoolean',
-        'randomGenerator',
         'randomInt',
         'randomNumber',
       ].sort(),

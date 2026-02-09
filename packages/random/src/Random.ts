@@ -1,3 +1,4 @@
+import { next } from './Random/next.js';
 import { RandomApplication } from './Random/RandomApplication.js';
 
 /**
@@ -7,4 +8,5 @@ import { RandomApplication } from './Random/RandomApplication.js';
  */
 export const Random = {
   ...RandomApplication,
+  next,
 };

@@ -1,6 +1,7 @@
 import type { Task } from '@w5s/task';
 import { map } from '@w5s/task/dist/Task/map.js';
-import { type RandomGenerator, randomGenerator } from './randomGenerator.js';
+import { next } from './Random/next.js';
+import type { RandomGenerator } from './RandomGenerator.js';
 
 /**
  * Return a Task that will generate floating numbers between [`min`, `max`].
@@ -15,5 +16,5 @@ import { type RandomGenerator, randomGenerator } from './randomGenerator.js';
  * @param generator - a custom optional random number generator
  */
 export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
-  return map(generator ?? randomGenerator, (value) => min + (max - min) * value);
+  return map(generator ?? next, (value) => min + (max - min) * value);
 }

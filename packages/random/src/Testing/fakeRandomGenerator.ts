@@ -1,5 +1,5 @@
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import type { RandomGenerator } from '../randomGenerator.js';
+import type { RandomGenerator } from '../RandomGenerator.js';
 
 /**
  *

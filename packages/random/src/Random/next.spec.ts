@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { randomGenerator } from './randomGenerator.js';
-import { RandomApplication } from './Random/RandomApplication.js';
+import { next } from './next.js';
+import { RandomApplication } from './RandomApplication.js';
 
-describe('randomGenerator', () => {
+describe('next', () => {
   const expectTask = withTask(expect);
   it('should use configuration implementation', async () => {
     const nextRandom = 0.123;
     RandomApplication.configure({
       randomNumberGenerator: () => nextRandom,
     });
-    expectTask(randomGenerator).toResolveSync(nextRandom);
+    expectTask(next).toResolveSync(nextRandom);
   });
 });
