@@ -1,9 +1,9 @@
 import type { Numeric } from '@w5s/core';
-import { BigIntSigned } from '@w5s/num/dist/BigInt/BigIntSigned.js';
+import { BigIntIntegral } from '@w5s/num/dist/BigInt/BigIntIntegral.js';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 
-const { abs: bigIntAbs, sign: bigIntSign, isNegative: bigIntIsNegative, isPositive: bigIntIsPositive } = BigIntSigned;
+const { abs: bigIntAbs, sign: bigIntSign, isNegative: bigIntIsNegative, isPositive: bigIntIsPositive } = BigIntIntegral;
 
 export const BigDecimalSigned: Numeric.Signed<BigDecimal> = {
   abs: (self) => of(bigIntAbs(self.value), self.scale),
