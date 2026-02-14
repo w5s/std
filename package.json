@@ -110,7 +110,7 @@
     "npm-run-all2": "8.0.4",
     "prettier": "3.8.1",
     "size-limit-preset-node-lib": "0.4.0",
-    "turbo": "2.8.7",
+    "turbo": "2.8.8",
     "typedoc": "0.28.17",
     "typescript": "5.9.3",
     "vite": "latest",
