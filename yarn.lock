@@ -6291,18 +6291,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/commitlint-config@npm:3.0.5":
-  version: 3.0.5
-  resolution: "@w5s/commitlint-config@npm:3.0.5"
+"@w5s/commitlint-config@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@w5s/commitlint-config@npm:3.0.6"
   dependencies:
     "@commitlint/types": "npm:^20.0.0"
-    "@w5s/conventional-changelog": "npm:^3.0.5"
+    "@w5s/conventional-changelog": "npm:^3.0.6"
   peerDependencies:
     "@commitlint/cli": ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0
   peerDependenciesMeta:
     "@commitlint/cli":
       optional: true
-  checksum: 10c0/f551a16abff2ddc1065079d8f8b55f51d0e307413142c0788200037460180fe7044f95fcbd5d3f348865ba4d8d8ca23bb8c76a92fae678dd392a14e978ddf84a
+  checksum: 10c0/acdcd1f2a13f5e0233e6eae885811a49d77a520a7fbe0fa2b518c54e261b1747c0b8f9f5b1c3d5955e1f135a6743b01c853e90d8aff624ed3d2ba5b52f8f9f5e
   languageName: node
   linkType: hard
 
@@ -6319,7 +6319,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@w5s/conventional-changelog@npm:3.0.5, @w5s/conventional-changelog@npm:^3.0.5":
+"@w5s/conventional-changelog@npm:3.0.5":
   version: 3.0.5
   resolution: "@w5s/conventional-changelog@npm:3.0.5"
   dependencies:
@@ -6327,6 +6327,17 @@ __metadata:
     emoji-regex: "npm:^10.2.1"
     gitmojis: "npm:^3.13.4"
   checksum: 10c0/f57d669c064d90bc1b3e1cf05de1609ea009739e2d062f816374fd3f604f49d72b619f568e6116454f5e57c94142fe5661112d19889d53025e79f9565c58b0dc
+  languageName: node
+  linkType: hard
+
+"@w5s/conventional-changelog@npm:^3.0.6":
+  version: 3.0.6
+  resolution: "@w5s/conventional-changelog@npm:3.0.6"
+  dependencies:
+    "@commitlint/types": "npm:^20.0.0"
+    emoji-regex: "npm:^10.2.1"
+    gitmojis: "npm:^3.13.4"
+  checksum: 10c0/a5c0194d95f1519a1d2c6a4b8aa66205fca60e0758accd32ab672645d3c250a1380a66a067528a22db8e768350c9f6095ee8c440cf25b4512c27c32c46a61928
   languageName: node
   linkType: hard
 
@@ -6633,7 +6644,7 @@ __metadata:
     "@lerna-lite/publish": "npm:4.11.3"
     "@size-limit/preset-small-lib": "npm:12.0.0"
     "@types/node": "npm:20.19.33"
-    "@w5s/commitlint-config": "npm:3.0.5"
+    "@w5s/commitlint-config": "npm:3.0.6"
     "@w5s/conventional-changelog": "npm:3.0.5"
     "@w5s/cspell-config": "npm:3.0.5"
     "@w5s/eslint-config": "npm:2.4.5"
