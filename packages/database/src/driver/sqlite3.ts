@@ -1,7 +1,13 @@
-import { Database } from 'sqlite3';
+import { createRequire } from 'node:module';
+import type { Database } from 'sqlite3';
 import { SQLStatement } from '../sql.js';
 import type { AbstractDatabase } from '../client.js';
 import { DatabaseDriver } from '../driver.js';
+
+const require = createRequire(import.meta.url);
+type SQLite3Module = {
+  Database: new (filename: string) => Database;
+};
 
 function sqlite3SQLStatement(statement: SQLStatement) {
   return {
@@ -17,6 +23,7 @@ export interface SQLite3Client extends AbstractDatabase<'sqlite3'> {
 }
 export const SQLite3 = {
   createDatabase(filename: string) {
+    const { Database } = require('sqlite3') as SQLite3Module;
     return new Database(filename);
   },
   ...DatabaseDriver.Make(

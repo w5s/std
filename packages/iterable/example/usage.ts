@@ -1,7 +1,9 @@
-import { objectId } from '@w5s/object-id';
+import { Iterable } from '@w5s/iterable';
 
 export function main(): void {
-  const someObject = { foo: 1 };
-  const id = objectId(someObject); // typeof id === 'number'
-  console.log(id === objectId(someObject)); // true (because idempotent)
+  const values = ['a', 'b', 'c'];
+  const upper = Iterable.map(values, (x) => x.toUpperCase());
+  const withDash = Iterable.flatMap(upper, (x) => [x, '-']);
+
+  console.log([...withDash]); // "A-B-C-"
 }

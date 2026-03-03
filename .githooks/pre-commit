@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # BEGIN MANAGED BLOCK
-npm exec -- lint-staged
+pnpm dlx lint-staged
 # END MANAGED BLOCK
