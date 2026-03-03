@@ -98,7 +98,7 @@ export function Application<Configuration extends object = EmptyObject>(
   store?: Ref<Readonly<Record<string, ApplicationState>>>,
 ): Application<Configuration> {
   const initialState = Object.freeze({});
-  const state = useRef(store == null ? useStorage(globalThis) : store, `application/${id}`, initialState);
+  const state = useRef(store == null ? useStorage(globalThis) : store, id, initialState);
   const configuration = useRef(state, 'configuration', initialConfiguration);
 
   function configure(patch: Partial<Configuration>): void {

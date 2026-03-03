@@ -15,7 +15,7 @@ describe('Application', () => {
     expect(globalStorage).toEqual(
       new Map([
         [
-          `application/${id}`,
+          `${id}`,
           {
             configuration: { foo: 'bar' },
           },
@@ -28,7 +28,7 @@ describe('Application', () => {
     const target = Ref({});
     Application(id, { foo: 'bar' }, target);
     expect(target.current).toEqual({
-      [`application/${id}`]: {
+      [`${id}`]: {
         configuration: { foo: 'bar' },
       },
     });
@@ -64,7 +64,7 @@ describe('Application', () => {
       foo: true,
     });
     expect(_target.current).toEqual({
-      'application/test-app': {
+      'test-app': {
         configuration: {},
         foo: true,
       },
