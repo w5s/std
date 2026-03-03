@@ -19,19 +19,17 @@
     "configure": "npm run mrm -- configure",
     "coverage": ":",
     "develop": ":",
-    "docs": "node markdown.mjs && turbo run docs && yarn workspace @w5s/website run start",
+    "docs": "node markdown.mjs && turbo run docs && pnpm --filter @w5s/website run start",
     "format": "turbo run format --continue",
     "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
     "lint": "turbo run lint",
     "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
-    "postinstall": "npx run-p \"postinstall:*\"",
-    "postinstall:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
-    "prepare": "npx run-p \"prepare:*\"",
-    "prepare:empty": ":",
+    "prepare": "pnpm run \"/^prepare:.*/\"",
+    "prepare:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
     "prepare:packages": "turbo run prepare",
     "release": "[ -n \"${CI:-}\" ] && npx lerna publish --yes || npx lerna publish",
-    "rescue": "git clean -fdx;yarn install",
+    "rescue": "git clean -fdx;pnpm install",
     "size-limit": "turbo run size-limit",
     "spellcheck": "turbo run spellcheck",
     "spellcheck:root": "cspell --no-progress '**' --exclude='apps/*/**' --exclude='packages/*/**'",
@@ -107,8 +105,8 @@
     "markdown-magic": "4.8.0",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "1.1.2",
-    "npm-run-all2": "8.0.4",
     "prettier": "3.8.1",
+    "size-limit": "12.0.0",
     "size-limit-preset-node-lib": "0.4.0",
     "turbo": "2.8.12",
     "typedoc": "0.28.17",
@@ -116,10 +114,10 @@
     "vite": "latest",
     "vitest": "latest"
   },
-  "packageManager": "yarn@4.12.0",
+  "packageManager": "pnpm@10.30.3",
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=6.0.0",
-    "yarn": ">=1.0.0"
+    "pnpm": ">=10.0.0"
   }
 }

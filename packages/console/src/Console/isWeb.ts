@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import type { Option } from '@w5s/core';
-
 export function isWeb(): boolean {
-  const stdout = (console as any)._stdout as Option<NodeJS.WriteStream>;
-  const stderr = (console as any)._stderr as Option<NodeJS.WriteStream>;
+  const consoleWithStreams = console as Partial<{
+    _stdout: NodeJS.WriteStream;
+    _stderr: NodeJS.WriteStream;
+  }>;
+  const { _stdout: stdout, _stderr: stderr } = consoleWithStreams;
   return stderr == null || stdout == null;
 }
