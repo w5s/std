@@ -1,7 +1,7 @@
 import type { Task } from '@w5s/task';
 import { from } from '@w5s/task/dist/Task/from.js';
 import type { UUID } from './UUID.js';
-import { UUIDApplication } from './UUID/UUIDApplication.js';
+import { application } from './application.js';
 
 /**
  * A task that returns a new `UUID`
@@ -15,5 +15,5 @@ import { UUIDApplication } from './UUID/UUIDApplication.js';
  * ```
  */
 export function randomUUID(): Task<UUID, never> {
-  return from(({ resolve }) => resolve(UUIDApplication.get('randomUUIDGenerator')() as UUID));
+  return from(({ resolve }) => resolve(application.get('randomUUIDGenerator')() as UUID));
 }

@@ -3,7 +3,7 @@ import { Task } from '@w5s/task';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
 import { handle } from './handle.js';
-import { LogApplication } from './LogApplication.js';
+import { application } from '../application.js';
 import { fakeLogRecord } from '../Testing.js';
 
 describe(handle, () => {
@@ -11,7 +11,7 @@ describe(handle, () => {
 
   const mockHandler1 = vi.fn(() => Task.resolve());
   const mockHandler2 = vi.fn(() => Task.resolve());
-  LogApplication.configure({
+  application.configure({
     handler: {
       mock1: mockHandler1,
       mock2: mockHandler2,

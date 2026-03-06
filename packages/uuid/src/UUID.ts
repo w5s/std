@@ -1,6 +1,5 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { UUID as UUIDType } from '@w5s/core/dist/Type/UUID.js';
-import { UUIDApplication } from './UUID/UUIDApplication.js';
 import { empty } from './UUID/empty.js';
 import { of } from './UUID/of.js';
 import { toUint32Array } from './UUID/toUint32Array.js';
@@ -20,7 +19,6 @@ export type UUID = UUIDType;
  */
 export const UUID = Callable({
   ...UUIDType,
-  ...UUIDApplication,
   empty,
   of,
   toUint32Array,

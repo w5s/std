@@ -18,6 +18,6 @@ export interface UUIDConfiguration {
 /**
  * Random Application
  */
-export const UUIDApplication = Application<UUIDConfiguration>('@w5s/uuid', {
+export const application = Application<UUIDConfiguration>('@w5s/uuid', {
   randomUUIDGenerator: () => cryptoModule.randomUUID(),
 });

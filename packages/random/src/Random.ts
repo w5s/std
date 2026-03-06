@@ -1,5 +1,4 @@
 import { next } from './Random/next.js';
-import { RandomApplication } from './Random/RandomApplication.js';
 
 /**
  * Random namespace
@@ -7,6 +6,5 @@ import { RandomApplication } from './Random/RandomApplication.js';
  * @namespace
  */
 export const Random = {
-  ...RandomApplication,
   next,
 };
