@@ -43,7 +43,7 @@
     "format": "pnpm run \"/^format:.*/\"",
     "format:src": "eslint . --fix --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
     "lint": "pnpm run \"/^lint:.*/\"",
-    "lint:src": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
+    "lint:src": "eslint .",
     "size-limit": "size-limit",
     "spellcheck": "cspell --no-progress '**'",
     "test": "pnpm run \"/^test:.*/\"",

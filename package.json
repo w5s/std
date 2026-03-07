@@ -21,9 +21,9 @@
     "develop": ":",
     "docs": "node markdown.mjs && turbo run docs && pnpm --filter @w5s/website run start",
     "format": "turbo run format --continue",
-    "format:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
+    "format:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**' --fix",
     "lint": "turbo run lint",
-    "lint:root": "eslint . --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
+    "lint:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
     "prepare": "pnpm run \"/^prepare:.*/\"",
     "prepare:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
@@ -55,41 +55,6 @@
     "*.{yml,yaml}": [
       "eslint"
     ]
-  },
-  "eslintConfig": {
-    "env": {
-      "node": true
-    },
-    "parserOptions": {
-      "project": "./tsconfig.json"
-    },
-    "extends": [
-      "@w5s/eslint-config"
-    ],
-    "rules": {
-      "@typescript-eslint/naming-convention": "off",
-      "jsdoc/check-tag-names": "off",
-      "jsdoc/require-example": [
-        "warn",
-        {
-          "checkConstructors": false,
-          "exemptedBy": [
-            "type"
-          ]
-        }
-      ]
-    },
-    "overrides": [
-      {
-        "files": [
-          "**/*.spec.*"
-        ],
-        "rules": {
-          "jsdoc/require-example": "off"
-        }
-      }
-    ],
-    "root": true
   },
   "devDependencies": {
     "@lerna-lite/publish": "4.11.4",
