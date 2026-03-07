@@ -29,7 +29,9 @@ jobs:
         uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
           node-version: ${{ matrix.node-version }}
-          cache: pnpm
+
+      - name: ⚙️ Setup PNPM cache
+        uses: w5s/actions/cache-pnpm@main
       - run: corepack enable
       - run: pnpm install
       - run: pnpm build
