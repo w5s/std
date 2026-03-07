@@ -96,7 +96,7 @@
     "@rushstack/eslint-patch": "1.16.1",
     "@size-limit/preset-small-lib": "12.0.1",
     "@types/node": "20.19.37",
-    "@w5s/commitlint-config": "3.0.6",
+    "@w5s/commitlint-config": "3.1.1",
     "@w5s/conventional-changelog": "3.0.6",
     "@w5s/cspell-config": "3.0.5",
     "@w5s/eslint-config": "2.4.5",
