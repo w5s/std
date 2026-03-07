@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import currencyData from 'currencies.json';
@@ -10,8 +9,7 @@ function getTargetPath() {
 }
 
 function buildImports() {
-  return `/* eslint-disable prettier/prettier */
-/* cSpell:disable */
+  return `/* cSpell:disable */
 import { Currency } from './Currency.js';
 import { factory as moneyFactory } from './Money/factory.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
@@ -40,21 +38,21 @@ function buildRegistry() {
     }),
   );
   return moneyFactory(code);
-};
-`;
+};`;
 }
 
 function buildFactories() {
   return currencyData.currencies
     .map(
-      (currency) => `/**
+      (currency) => `
+/**
  * ${currency.name} money factory
  *
  * @example
  * \`\`\`typescript
  * const money = ${currency.code}('1.25');// Money({ currency: Currency({ code: '${currency.code}' }), amount: BigDecimal('1') })
  * \`\`\`
- * @param amount - The amount of money
+ * @param amount The amount of money
  */
 export const ${currency.code} = register('${currency.code}', ${currency.decimalDigits}, '${currency.name}', '${currency.namePlural}', ${currency.rounding}, '${currency.symbol}', '${currency.symbolNative}');`,
     )

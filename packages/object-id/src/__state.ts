@@ -7,6 +7,7 @@ export interface ObjectIdState {
    * Current id number
    */
   currentId: ObjectId;
+
   /**
    * A WeakMap of value => id
    */

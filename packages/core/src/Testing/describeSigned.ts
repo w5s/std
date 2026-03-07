@@ -20,23 +20,27 @@ import type { TestingLibrary } from './type.js';
  * });
  *
  * ```
- * @param subject - The subject to test
- * @param properties - Object containing test properties
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The subject to test
+ * @param properties Object containing test properties
+ * @param properties.values
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeSigned<T>(
   subject: Numeric.Signed<T> & EqualsInterface<T>,
   properties: {
     values: () => Array<{
       value: T;
+
       /**
        * Expected type for isNegative / isPositive
        */
       type: 'negative' | 'zero' | 'positive';
+
       /**
        * Expected sign value
        */
       sign: T;
+
       /**
        * Expected abs value
        */

@@ -21,6 +21,8 @@ export const ErrnoException = {
 
 /**
  * Converts an ErrnoException to a FileError.
+ *
+ * @param error
  */
 export function errnoExceptionHandler(error: unknown): FileError {
   return FileError.hasInstance(error)

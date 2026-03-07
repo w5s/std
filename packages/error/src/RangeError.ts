@@ -1,6 +1,3 @@
-/* eslint-disable unicorn/custom-error-definition */
-/* eslint-disable prefer-destructuring */
-
 import type { ErrorOptions } from './ErrorOptions.js';
 
 /**

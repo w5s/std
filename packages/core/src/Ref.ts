@@ -23,9 +23,9 @@ export const Ref = Object.assign(
    * const ref = Ref(123);// { current: initialValue }
    * ```
    * @category Constructor
-   * @param initialValue - the initial value contained
+   * @param initialValue the initial value contained
    */
-  // eslint-disable-next-line prefer-arrow-callback, @typescript-eslint/no-shadow
+  // eslint-disable-next-line ts/no-shadow
   function Ref<Value>(initialValue: Value): Ref<Value> {
     return { current: initialValue };
   },
@@ -34,6 +34,7 @@ export const Ref = Object.assign(
      * Current value symbol
      */
     current: 'current' as const,
+
     /**
      * Returns `true` when `anyValue` has a `current` property
      *
@@ -43,7 +44,7 @@ export const Ref = Object.assign(
      * Ref.hasInstance(null)) // false
      * ```
      * @category Type
-     * @param anyValue - a tested value
+     * @param anyValue a tested value
      */
     hasInstance(anyValue: unknown): anyValue is Ref<unknown> {
       return (

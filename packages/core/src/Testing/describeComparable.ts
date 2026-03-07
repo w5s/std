@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { ComparableInterface } from '../Comparable.js';
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
@@ -18,9 +17,11 @@ import type { TestingLibrary } from './type.js';
  * });
  *
  * ```
- * @param subject - The subject to test Comparable behavior on.
- * @param properties - An object containing the properties to test Comparable
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The subject to test Comparable behavior on.
+ * @param properties An object containing the properties to test Comparable
+ * @param properties.equivalent
+ * @param properties.ordered
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeComparable<T>(
   subject: ComparableInterface<T>,

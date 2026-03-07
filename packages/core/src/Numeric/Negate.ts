@@ -9,7 +9,7 @@ export interface Negate<Self, Output = Self> {
    * ```
    *
    * @category Numeric
-   * @param self - The value to negate.
+   * @param self The value to negate.
    */
   negate(this: void, self: Self): Output;
 }

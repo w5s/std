@@ -14,7 +14,7 @@ describe(Currency, () => {
     symbolNative: '$',
   };
   const omitProperty = <V, N extends keyof V>(parameters: V, name: N): Omit<V, N> => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line ts/no-unused-vars
     const { [name]: _, ...rest } = parameters;
     return rest;
   };

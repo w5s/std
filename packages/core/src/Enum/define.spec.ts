@@ -18,7 +18,6 @@ describe(define, () => {
   const MyEnum = {
     ...MyEnumObject,
     label(value: MyEnum): string {
-      // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
       switch (value) {
         case MyEnumObject.Foo: {
           return 'foo_label';

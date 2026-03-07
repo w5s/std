@@ -9,8 +9,8 @@ import { splice } from './splice.js';
  * ```typescript
  * Array.deletedAt([1, 2, 3, 4], 1);// [1, 3, 4]
  * ```
- * @param self - The array object
- * @param index - The position of the deleted item in the array
+ * @param self The array object
+ * @param index The position of the deleted item in the array
  */
 export function deleteAt<Item>(self: Array<Item>, index: number): Array<Item> {
   const arrayLength = self.length;

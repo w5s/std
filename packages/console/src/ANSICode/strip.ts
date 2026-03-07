@@ -14,7 +14,7 @@ const ansiRegex = new RegExp(
  * ```typescript
  * ANSICode.strip(red("Hello, world!"));// == "Hello, world!"
  * ```
- * @param expression - The text to remove ANSI escape codes from
+ * @param expression The text to remove ANSI escape codes from
  */
 export function strip(expression: string): string {
   return expression.replaceAll(ansiRegex, '');

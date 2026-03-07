@@ -7,7 +7,7 @@ export interface AsString<T> {
    * Number.asString(123); // '123'
    * ```
    * @category Formatting
-   * @param self - the object to convert to string
+   * @param self the object to convert to string
    */
   asString(this: void, self: T): string;
 }

@@ -5,6 +5,7 @@ export interface FiberResult<Return> {
    * The id of the fiber.
    */
   readonly id: FiberId;
+
   /**
    * A Promise that resolves to the return value of the fiber.
    */

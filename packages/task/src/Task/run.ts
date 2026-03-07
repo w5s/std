@@ -14,8 +14,8 @@ import { __run } from './__run.js';
  * const getMessage = Task.resolve('Hello World!');
  * const messageResult = Task.run(getMessage);// Result.Ok('Hello World!')
  * ```
- * @param self - the task to be run
- * @param options - the options for running the task
+ * @param self the task to be run
+ * @param options the options for running the task
  */
 export function run<Value, Error>(
   self: TaskLike<Value, Error>,

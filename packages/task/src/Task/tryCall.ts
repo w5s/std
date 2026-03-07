@@ -18,8 +18,8 @@ import type { Task } from '../Task.js';
  *
  * const randomNumber = Task.tryCall(async () => Math.random());// Task<number, never>
  * ```
- * @param sideEffect - A function that will be called
- * @param onError - An error handler that transforms `unknown` to a normalized and typed error
+ * @param sideEffect A function that will be called
+ * @param onError An error handler that transforms `unknown` to a normalized and typed error
  */
 export function tryCall<Value, Error = never>(
   sideEffect: () => Awaitable<Value>,
@@ -33,7 +33,6 @@ export function tryCall<Value, Error = never>(
         ? onError
         : (error) => {
             const awaitableError = onError(error);
-            // eslint-disable-next-line promise/prefer-await-to-then, promise/no-promise-in-callback
             return isPromiseLike(awaitableError) ? awaitableError.then(reject) : reject(awaitableError);
           },
     ),

@@ -9,7 +9,7 @@ import type { LogLevel } from './LogLevel.js';
  * const level = LogLevel('Foo', 1);
  * LogLevel.asInt(level);// 1
  * ```
- * @param self - the log level
+ * @param self the log level
  */
 export const LogLevelAsInt: AsInt<LogLevel> = {
   asInt(self) {

@@ -14,8 +14,8 @@ import { unsafeCall } from './unsafeCall.js';
  * const failure = Task.reject('PreviousError');
  * Task.andThen(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
  * ```
- * @param self - a Task object
- * @param fn - the value mapper function
+ * @param self a Task object
+ * @param fn the value mapper function
  */
 export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

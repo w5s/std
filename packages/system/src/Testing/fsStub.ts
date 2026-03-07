@@ -44,28 +44,32 @@ export interface FSStubModule extends AsyncDisposable {
    * A temporary path
    */
   tmpPath: FilePath;
+
   /**
    * Return a new path
    *
    * @param parts
    */
   path(...parts: string[]): FilePath;
+
   /**
    * Create a directory named `pathString` relative to `rootPath`
    *
-   * @param pathString - the path string
+   * @param pathString the path string
    */
   mkdir(pathString: string): Promise<Option<FilePath>>;
+
   /**
    *
    * @param target
    * @param path
    */
   symlink(target: string, path: string): Promise<void>;
+
   /**
    * Create a new `pathString` relative to `rootPath`
    *
-   * @param pathString - the path string
+   * @param pathString the path string
    */
   touch(pathString: string): Promise<void>;
 }
@@ -78,6 +82,7 @@ export interface FSOptions {
    * Current working directory
    */
   cwd?: string;
+
   /**
    * Return a new sub path from `pwd`
    */

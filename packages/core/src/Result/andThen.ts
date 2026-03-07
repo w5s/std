@@ -11,8 +11,8 @@ import { isOk } from './isOk.js';
  * Result.andThen(Result.Ok(4), square); // Result.Ok(16)
  * Result.andThen(Result.Error('TestError'), square); // Result.Error('TestError')
  * ```
- * @param self - a Result object
- * @param fn - a value mapping function
+ * @param self a Result object
+ * @param fn a value mapping function
  */
 export function andThen<VFrom, EFrom, VTo, ETo>(
   self: Result<VFrom, EFrom>,

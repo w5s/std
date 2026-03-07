@@ -8,6 +8,7 @@ export interface CSVEncodeOptions {
    * @default ","
    */
   delimiter: string;
+
   /**
    * Record delimiter
    */

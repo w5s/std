@@ -9,8 +9,8 @@ import type { Ref } from '../Ref.js';
  * Ref.modify(ref, (current) => current + 'bar'); // Ref.read(ref) == 'foobar'
  * ```
  * @category Accessor
- * @param self - the reference object
- * @param mapFn - the mapping function that will be applied
+ * @param self the reference object
+ * @param mapFn the mapping function that will be applied
  */
 export function modify<Value>(self: Ref<Value>, mapFn: (current: Value) => Value): void {
   self.current = mapFn(self.current);

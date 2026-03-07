@@ -12,7 +12,7 @@ type NullableValues = Exclude<OptionLike<never>, Option.None>;
  * Option.from('foo');// 'foo'
  * ```
  * @category Constructor
- * @param value - the converted value
+ * @param value the converted value
  */
 export function from<Value>(value: Value): Option<Exclude<Value, NullableValues>> {
   return value == null ? undefined : (value as Exclude<Value, NullableValues>);

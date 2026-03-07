@@ -24,6 +24,7 @@ export namespace Enum {
    * Return enum keys of T
    */
   export type KeyOf<T extends Enum<Record<string, any>>> = ArrayValue<T[typeof Symbol.enumKeys]>;
+
   /**
    * Return enum values of T
    */

@@ -13,6 +13,7 @@ export interface EqualsInterface<T> {
    */
   equals(this: void, left: T, right: T): boolean;
 }
+
 /**
  * Module interface for values that have equivalence relation
  */
@@ -29,6 +30,7 @@ export interface Equal<T> extends EqualsInterface<T> {
    * @category Comparator
    */
   '!='(this: void, left: T, right: T): boolean;
+
   /**
    * "Equal to" operator
    *
@@ -43,9 +45,11 @@ export interface Equal<T> extends EqualsInterface<T> {
    */
   '=='(this: void, left: T, right: T): boolean;
 }
+
 /**
  * Equal module constructor
  *
+ * @param properties
  * @example
  * ```typescript
  * type T;
@@ -62,7 +66,7 @@ export function Equal<T>(properties: Equal.Parameters<T>): Equal<T> {
   const equals = (left: T, right: T) => properties.equals(left, right);
   const notEquals = (left: T, right: T) => !properties.equals(left, right);
   return {
-    equals: properties.equals,
+    'equals': properties.equals,
     '==': equals,
     '!=': notEquals,
   };

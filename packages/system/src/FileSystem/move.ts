@@ -6,7 +6,6 @@ import { FilePath } from '../FilePath.js';
 export async function moveAsync(source: FilePath, destination: FilePath, options?: move.Options): Promise<void> {
   const sourceStatus = await Internal.FS.stat(source);
   if (sourceStatus.isDirectory() && FilePath.isParentOf(source, destination)) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw subdirectoryError(source, destination);
   }
   const existResult = await existsAsync(destination);
@@ -14,7 +13,6 @@ export async function moveAsync(source: FilePath, destination: FilePath, options
     if (options?.overwrite === true) {
       await Internal.FS.rm(destination, { recursive: true });
     } else {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error
       throw alreadyExistError(destination);
     }
   }
@@ -30,9 +28,9 @@ export async function moveAsync(source: FilePath, destination: FilePath, options
  * const moveTask = move(FilePath('source'), FilePath('destination'));
  * Task.run(moveTask);
  * ```
- * @param source - The source path
- * @param destination - The destination path
- * @param options - The options to use
+ * @param source The source path
+ * @param destination The destination path
+ * @param options The options to use
  */
 export function move(source: FilePath, destination: FilePath, options?: move.Options): Task<void, FileError> {
   return errnoTask(moveAsync)(source, destination, options);

@@ -8,7 +8,7 @@ import type { Char } from '../Char.js';
  * Char.fromCodePoint(65, 9731) == "A☃"
  * ```
  * @category Constructor
- * @param code - an array of string codes
+ * @param code an array of string codes
  */
 export function fromCodePoint(...code: number[]): Char {
   return globalThis.String.fromCodePoint(...code) as Char;

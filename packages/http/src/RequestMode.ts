@@ -8,6 +8,7 @@ export const RequestMode = define({
   Navigate: 'navigate',
   NoCORS: 'no-cors',
 });
+
 /**
  * HTTP referrer policy type
  *

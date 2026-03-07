@@ -7,22 +7,27 @@ export interface TimeDurationParameters {
    * Number of weeks
    */
   weeks?: number;
+
   /**
    * Number of days
    */
   days?: number;
+
   /**
    * Number of hours
    */
   hours?: number;
+
   /**
    * Number of minutes
    */
   minutes?: number;
+
   /**
    * Number of seconds
    */
   seconds?: number;
+
   /**
    * Number of milliseconds
    */
@@ -39,7 +44,7 @@ export interface TimeDurationParameters {
  * ```
  *
  * @category Constructor
- * @param source - a number of milliseconds or an object with properties:
+ * @param source a number of milliseconds or an object with properties:
  *   - `weeks`
  *   - `days`
  *   - `hours`

@@ -11,9 +11,9 @@ import type { RandomGenerator } from './RandomGenerator.js';
  * const next = randomNumber(-10, 10);
  * Task.run(next);// Result.Ok(F); where F is a floating number between -10 and 10
  * ```
- * @param min - the minimum inclusive bound for generated value
- * @param max - the maximum inclusive bound for generated value
- * @param generator - a custom optional random number generator
+ * @param min the minimum inclusive bound for generated value
+ * @param max the maximum inclusive bound for generated value
+ * @param generator a custom optional random number generator
  */
 export function randomNumber(min: number, max: number, generator?: RandomGenerator): Task<number, never> {
   return map(generator ?? next, (value) => min + (max - min) * value);

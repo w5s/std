@@ -11,7 +11,7 @@ export interface AsInt<T> {
    * SomeType.asInt(value); // Int(...)
    * ```
    * @category Numeric
-   * @param self - the object to convert to Int
+   * @param self the object to convert to Int
    */
   asInt(this: void, self: T): Int;
 }

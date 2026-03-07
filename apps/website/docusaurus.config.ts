@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 import fs from 'node:fs';
 import type typedocPluginFunction from 'docusaurus-plugin-typedoc-api';
 import { fileURLToPath } from 'node:url';
+import { themes } from 'prism-react-renderer';
 import packageJSON from './package.json';
 
 type TypedocPluginOptions = Parameters<typeof typedocPluginFunction>[1];
@@ -15,7 +15,6 @@ export interface CustomFields {
 
 const fileExists = (path: fs.PathLike) => {
   try {
-    // eslint-disable-next-line n/no-sync
     fs.accessSync(path, fs.constants.F_OK);
     return true;
   } catch {
@@ -23,15 +22,13 @@ const fileExists = (path: fs.PathLike) => {
   }
 };
 
-const { themes } = require('prism-react-renderer');
-
 const lightTheme = themes.github;
 const darkTheme = themes.dracula;
 
 const projectRoot = fileURLToPath(new URL('../..', import.meta.url));
 
 const githubHref = packageJSON.repository.url.replace('git@github.com:', 'https://github.com/');
-// eslint-disable-next-line n/no-sync
+
 const packageList = fs
   .readdirSync(`${projectRoot}/packages`)
   .map((entry) => {
@@ -39,8 +36,7 @@ const packageList = fs
     const hasTesting = fileExists(`${projectRoot}/${path}/src/testing.ts`);
     return {
       path,
-      // eslint-disable-next-line import/no-dynamic-require
-      package: require(`${projectRoot}/packages/${entry}/package.json`),
+      package: JSON.parse(fs.readFileSync(`${projectRoot}/packages/${entry}/package.json`, 'utf8')),
       entry: {
         index: { path: 'src/index.ts', label: undefined as unknown as string },
         ...(hasTesting ? { testing: { path: 'src/Testing.ts', label: 'Testing utilities' } } : undefined),
@@ -95,7 +91,7 @@ const config: Config = (() => {
         'classic',
         {
           docs: {
-            sidebarPath: require.resolve('./sidebars.js'),
+            sidebarPath: fileURLToPath(new URL('sidebars.js', import.meta.url)),
             // Please change this to your repo.
             // Remove this to remove the "edit this page" links.
             editUrl: `${githubHref}/tree/main/apps/website/`,
@@ -107,7 +103,7 @@ const config: Config = (() => {
             editUrl: `${githubHref}/tree/main/apps/website/blog/`,
           },
           theme: {
-            customCss: require.resolve('./src/css/custom.css'),
+            customCss: fileURLToPath(new URL('src/css/custom.css', import.meta.url)),
           },
         } satisfies Preset.Options,
       ],

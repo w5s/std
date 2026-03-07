@@ -13,19 +13,22 @@ export interface Client {
   /**
    * Wrap a request before sent
    *
-   * @param request - the request to wrap
+   * @param request the request to wrap
    */
   onRequest: (request: Request) => TaskLike<Request, HTTPError>;
+
   /**
    * Wrap a received response
    *
-   * @param response - the response to wrap
+   * @param response the response to wrap
    */
   onResponse: (response: Response<BodyReader>) => TaskLike<Response<BodyReader>, HTTPError>;
+
   /**
    * Fetch function. Default to `globalThis.fetch`.
    */
   fetch: typeof globalThis.fetch;
+
   /**
    * Response timeout setting
    */
@@ -51,6 +54,7 @@ export const Client = Object.assign(
      * Default timeout duration in milliseconds for client
      */
     defaultTimeoutDuration: (30 * 1000) as TimeDuration, // 30 seconds
+
     /**
      * Returns the timeout duration in milliseconds for client
      *
@@ -65,6 +69,7 @@ export const Client = Object.assign(
       const { timeout } = client;
       return timeout === 'none' ? undefined : timeout === 'default' ? Client.defaultTimeoutDuration : timeout;
     },
+
     /**
      * Returns the timeout duration in milliseconds for the request and client
      *
@@ -74,6 +79,7 @@ export const Client = Object.assign(
      * const duration = Client.getRequestTimeoutDuration(client);
      * ```
      * @param client
+     * @param requestObject
      */
     getRequestTimeoutDuration(client: Client, requestObject: Request): Option<TimeDuration> {
       const { timeout: requestTimeout = 'default' } = requestObject;
@@ -91,7 +97,6 @@ export namespace Client {
 }
 
 function getDefaultFetch() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   invariant(globalThis.fetch != null, 'globalThis.fetch is not defined');
   return globalThis.fetch;
 }

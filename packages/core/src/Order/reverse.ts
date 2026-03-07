@@ -9,7 +9,7 @@ import { reverse as orderingReverse } from '../Ordering/reverse.js';
  * Order.reverse(Number.compare); // == (left, right) => Ordering.reverse(Number.compare(left, right))
  * Order.reverse(Number); // == reverse(Number.compare)
  * ```
- * @param self - the comparator function or comparable object to be reversed.
+ * @param self the comparator function or comparable object to be reversed.
  */
 export function reverse<T>(self: OrderLike<T>): Order<T> {
   const compareFn = typeof self === 'function' ? self : self.compare;

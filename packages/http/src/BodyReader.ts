@@ -27,6 +27,7 @@ export interface BodyReader {
    * @internal
    */
   unsafeStream(): Option<BodyReaderValue<'stream'>>;
+
   /**
    * Returns a promise of {@link ArrayBuffer}
    * This is an internal method that should not be used directly
@@ -34,6 +35,7 @@ export interface BodyReader {
    * @internal
    */
   unsafeArrayBuffer(): Promise<BodyReaderValue<'arrayBuffer'>>;
+
   /**
    * Returns a promise of {@link Blob}
    * This is an internal method that should not be used directly
@@ -41,6 +43,7 @@ export interface BodyReader {
    * @internal
    */
   unsafeBlob(): Promise<BodyReaderValue<'blob'>>;
+
   /**
    * Returns a promise of {@link FormData}
    * This is an internal method that should not be used directly
@@ -48,6 +51,7 @@ export interface BodyReader {
    * @internal
    */
   unsafeFormData(): Promise<BodyReaderValue<'formData'>>;
+
   /**
    * Returns a promise of {@link @w5s/core!JSONValue}
    * This is an internal method that should not be used directly
@@ -55,6 +59,7 @@ export interface BodyReader {
    * @internal
    */
   unsafeJSON(): Promise<BodyReaderValue<'json'>>;
+
   /**
    * Returns a promise of `string`
    * This is an internal method that should not be used directly

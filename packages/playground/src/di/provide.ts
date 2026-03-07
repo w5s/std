@@ -23,7 +23,7 @@ export function provide<Requirement extends {}, Key extends string | symbol, Val
   provider: ContainerProviderFunction<Requirement, Value>,
 ): <AppContext extends Requirement>(appContext: AppContext) => AppContext & ContainerProvider<Requirement, Key, Value> {
   return <AppContext extends Requirement>(appContext: AppContext) =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
     ({
       ...appContext,
       [key.containerKey]: provider,

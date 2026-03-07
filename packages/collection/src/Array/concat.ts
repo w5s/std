@@ -9,9 +9,9 @@ import { isEmpty } from './isEmpty.js';
  * ```typescript
  * Array.concat([1, 2], [3, 4], [5, 6]);// [1, 2, 3, 4, 5, 6]
  * ```
- * @param self - The array object
- * @param extensions - The other arrays to append
+ * @param self The array object
+ * @param extensions The other arrays to append
  */
 export function concat<Item>(self: Array<Item>, ...extensions: Array<Item>[]): Array<Item> {
-  return extensions.length > 0 && !extensions.every(isEmpty) ? self.concat(...extensions) : self;
+  return extensions.length > 0 && !extensions.every(isEmpty) ? [...self, ...extensions.flat()] : self;
 }

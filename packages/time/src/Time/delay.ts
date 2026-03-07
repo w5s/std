@@ -12,7 +12,7 @@ import type { Time } from './Time.js';
  * const logTime = Task.andThen(wait2s, (time) => Console.debug(time));
  * Task.run(logTime);// wait 2 seconds then console.debug(Date.now())
  * ```
- * @param duration - delay in milliseconds to wait
+ * @param duration delay in milliseconds to wait
  */
 export function delay(duration: TimeDuration): Task<Time, never> {
   return from(async ({ resolve, canceler }) => {

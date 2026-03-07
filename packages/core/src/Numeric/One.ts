@@ -9,6 +9,7 @@ export interface One<T> {
    * @category Numeric
    */
   one(this: void): T;
+
   /**
    * Returns true if self is equal to the multiplicative identity.
    *
@@ -18,7 +19,7 @@ export interface One<T> {
    * Number.isOne(0); // false
    * ```
    * @category Numeric
-   * @param self - the value to test
+   * @param self the value to test
    */
   isOne(this: void, self: T): boolean;
 }

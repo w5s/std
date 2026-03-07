@@ -1,5 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable unicorn/no-for-loop */
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
@@ -40,8 +38,7 @@ function call({
   values?: ReadonlyArray<SQLStatement.Value>;
 }): SQLStatement {
   return SQLStatementType.create({
-    strings:
-      strings.length <= values.length ? strings.concat(Array(values.length + 1 - strings.length).fill('')) : strings,
+    strings: strings.length <= values.length ? [...strings, ...Array(values.length + 1 - strings.length).fill('')] : strings,
     values,
   });
 }

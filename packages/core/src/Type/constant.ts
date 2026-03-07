@@ -15,8 +15,8 @@ import { Symbol } from '../Symbol.js';
  * const someSymbol = Symbol('someSymbol');
  * const someSymbolType = Type.constant(someSymbol, '__someSymbol__'); // Encoded value is '__someSymbol__'
  * ```
- * @param value - the decoded constant value
- * @param encodedValue - the encoded value (required only for non JSON representable values)
+ * @param value the decoded constant value
+ * @param encodedValue the encoded value (required only for non JSON representable values)
  */
 export function constant<const Value extends string | number | boolean | null>(
   value: Value,

@@ -12,5 +12,5 @@ export class CodecError extends ErrorClass({
   /**
    * Input given for encoding/decoding
    */
-  input: unknown;
-}> {}
+    input: unknown;
+  }> {}

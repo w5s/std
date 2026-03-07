@@ -8,7 +8,7 @@ import type { Time } from './Time.js';
  * ```typescript
  * Time.parse('1970-01-01T00:00:00.000Z');// 0
  * ```
- * @param expression - an expression
+ * @param expression an expression
  */
 export function parse(expression: string): Option<Time> {
   const time = Date.parse(expression);

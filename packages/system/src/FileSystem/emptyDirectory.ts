@@ -27,7 +27,7 @@ export async function emptyDirectoryAsync(path: string): Promise<void> {
  * const task = emptyDirectory(FilePath('/path/to/directory'));
  * await Task.run(task);// Will delete directory contents
  * ```
- * @param filePath - The directory to empty
+ * @param filePath The directory to empty
  */
 export function emptyDirectory(filePath: FilePath): Task<void, FileError> {
   return errnoTask(emptyDirectoryAsync)(filePath);

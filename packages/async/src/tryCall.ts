@@ -13,9 +13,9 @@ import { isPromiseLike } from './isPromiseLike.js';
  * tryCall(asyncBlock, (_) => `${_}_foo`);// Promise.resolve('async_foo')
  * ```
  *
- * @param block - the callback returning an awaitable value
- * @param onSuccess - the value mapper function
- * @param onError - the error mapper function
+ * @param block the callback returning an awaitable value
+ * @param onSuccess the value mapper function
+ * @param onError the error mapper function
  */
 export function tryCall<T, TResult1 = T, TResult2 = never>(
   block: () => Awaitable<T>,
@@ -25,8 +25,7 @@ export function tryCall<T, TResult1 = T, TResult2 = never>(
   try {
     const valueOrPromise = block();
     return isPromiseLike(valueOrPromise)
-      ? // eslint-disable-next-line promise/prefer-await-to-then
-        valueOrPromise.then(onSuccess, onError)
+      ? valueOrPromise.then(onSuccess, onError)
       : onSuccess == null
         ? (valueOrPromise as Awaitable<TResult1>)
         : onSuccess(valueOrPromise);

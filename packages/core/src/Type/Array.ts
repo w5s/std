@@ -22,13 +22,13 @@ export type Array<Item> = CoreArray<Item>;
  * const encoded = Codec.encode(codec, [new Date('1970-01-01T00:00:00.000Z')]);// ['1970-01-01T00:00:00.000Z']
  * const decoded = Codec.decode(codec, ['1970-01-01T00:00:00.000Z']);// Result.Ok([Date('1970-01-01T00:00:00.000Z')])
  * ```
- * @param Item - the type module for array item
+ * @param Item the type module for array item
  */
 export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
   return define({
     typeName: `Array<${Item.typeName}>`,
     hasInstance: (anyValue): anyValue is Array<V> =>
-      // eslint-disable-next-line @typescript-eslint/unbound-method
+
       isArray(anyValue) && anyValue.every(Item.hasInstance),
     [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),
     [Symbol.decode]: (input, { ok, error }) => {

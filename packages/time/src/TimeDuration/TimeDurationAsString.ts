@@ -11,7 +11,7 @@ export const TimeDurationAsString: AsString<TimeDuration> = {
    * TimeDuration.asString(TimeDuration({ seconds: 2, milliseconds: 0 })); // == "2000ms"
    * ```
    * @category Formatting
-   * @param self - The TimeDuration object to convert.
+   * @param self The TimeDuration object to convert.
    * @returns A string representation of the TimeDuration object.
    */
   asString(self: TimeDuration): string {

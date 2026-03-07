@@ -17,7 +17,7 @@ export interface Not<Self, Output = Self> {
    * Answer.not('no') // 'yes'
    * ```
    *
-   * @param self - The value to negate.
+   * @param self The value to negate.
    */
   not(self: Self): Output;
 }

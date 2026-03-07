@@ -17,7 +17,7 @@ import { __emptyArray } from './__emptyArray.js';
  * ]);
  * const taskResults = Task.run(task);// [Result.Error(1), Result.Ok(2)]
  * ```
- * @param tasks - tasks to be run in parallel
+ * @param tasks tasks to be run in parallel
  */
 export function allSettled<T extends TaskLike<any, any>[]>(
   tasks: [...T],

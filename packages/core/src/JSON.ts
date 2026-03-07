@@ -15,8 +15,8 @@ export type JSONValue =
   | string
   | ReadonlyArray<JSONValue>
   | {
-      readonly [key: string]: JSONValue;
-    };
+    readonly [key: string]: JSONValue;
+  };
 
 /**
  * A collection of functions to encode/decode JSON. Instead of throwing errors like `globalThis.JSON`, functions returns `Result`
@@ -46,7 +46,7 @@ export const JSON = {
    * const invalid = '{ "a": }';
    * JSON.parse(invalid); // Result.Error(new SyntaxError('Unexpected token } in JSON at position 7'))
    * ```
-   * @param anyString - the string to parse
+   * @param anyString the string to parse
    */
   parse(anyString: string): Result<JSONValue, SyntaxError> {
     try {
@@ -71,7 +71,7 @@ export const JSON = {
    * };
    * JSON.stringify(circular);// Result.Error(new TypeError(...));
    * ```
-   * @param anyValue - the value to convert
+   * @param anyValue the value to convert
    */
   stringify(anyValue: unknown): Result<string, TypeError> {
     try {

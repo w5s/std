@@ -9,11 +9,11 @@
  * );
  * Iterable.concat(iterable); // == Iterable.of(1, 2, 3, 4)
  * ```
- * @param iterables - An array of iterables to concatenate.
+ * @param iterables An array of iterables to concatenate.
  */
 export function concat<Value>(iterables: Iterable<Iterable<Value>>): Iterable<Value> {
   return {
-    *[Symbol.iterator]() {
+    * [Symbol.iterator]() {
       for (const iterable of iterables) {
         yield* iterable;
       }

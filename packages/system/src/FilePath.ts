@@ -19,7 +19,7 @@ export type FilePath = string & Tag<'FilePath'>;
  * @namespace
  */
 export const FilePath = Object.assign(
-  // eslint-disable-next-line @typescript-eslint/no-shadow, prefer-arrow-callback
+  // eslint-disable-next-line ts/no-shadow
   function FilePath(value: string): FilePath {
     return value as FilePath;
   },
@@ -34,7 +34,7 @@ export const FilePath = Object.assign(
      * ```typescript
      * const path = FilePath.normalize('foo/./bar/../baz//quux/');// FilePath('foo/baz/quux/')
      * ```
-     * @param path - The path to normalize
+     * @param path The path to normalize
      */
     normalize(path: FilePath): FilePath {
       return nodePath.normalize(path) as FilePath;
@@ -48,8 +48,8 @@ export const FilePath = Object.assign(
      * ```typescript
      * const path = FilePath.basename('/foo/bar.html');// 'bar.html'
      * ```
-     * @param path - The path to extract base name from
-     * @param extension - The extension to remove
+     * @param path The path to extract base name from
+     * @param extension The extension to remove
      */
     basename(path: FilePath, extension?: Option<FilePath.Extension>): FileName {
       return nodePath.basename(path, extension) as FilePath;
@@ -62,7 +62,7 @@ export const FilePath = Object.assign(
      * ```typescript
      * const path = FilePath.dirname('/foo/bar.html');// '/foo'
      * ```
-     * @param path - The path to extract directory name from
+     * @param path The path to extract directory name from
      */
     dirname(path: FilePath): FilePath {
       return nodePath.dirname(path) as FilePath;
@@ -76,7 +76,7 @@ export const FilePath = Object.assign(
      * ```typescript
      * const path = FilePath.extname('/foo/bar.html');// '.html'
      * ```
-     * @param path - The path to extract extension name from
+     * @param path The path to extract extension name from
      */
     extname(path: FilePath): FilePath.Extension {
       return nodePath.extname(path) as FilePath.Extension;
@@ -85,6 +85,7 @@ export const FilePath = Object.assign(
     /**
      * Returns a path string from an object - the opposite of `parse()`.
      *
+     * @param parsed
      * @example
      * ```typescript
      * const formatted = FilePath.format({
@@ -113,7 +114,7 @@ export const FilePath = Object.assign(
      * ```typescript
      * const path = FilePath.parse('/foo/bar.html');// { root: '/', dir: '/foo', base: 'bar.html', ext: '.html', name: 'bar' }
      * ```
-     * @param string - The path to parse
+     * @param string The path to parse
      */
     parse(string: FilePath): FilePath.Parsed {
       const parsed = nodePath.parse(string);
@@ -136,8 +137,8 @@ export const FilePath = Object.assign(
      * const to = FilePath('home/earth');
      * FilePath.relative(from, to);// FilePath('../../earth')
      * ```
-     * @param from - The source path
-     * @param to - The destination path
+     * @param from The source path
+     * @param to The destination path
      */
     relative(from: FilePath, to: FilePath): FilePath {
       return nodePath.relative(from, to) as FilePath;
@@ -159,8 +160,8 @@ export const FilePath = Object.assign(
      * const to = FilePath('./world');
      * FilePath.resolve(from, to);// Task.resolve(FilePath('/hello/world'))
      * ```
-     * @param from - The source path
-     * @param to - The destination path
+     * @param from The source path
+     * @param to The destination path
      */
     resolve(from: ReadonlyArray<FilePath>, to: FilePath): Task<FilePath, never> {
       return taskFrom(({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath));
@@ -174,7 +175,7 @@ export const FilePath = Object.assign(
      * const paths = [FilePath('hello'), FilePath('world')];
      * FilePath.concat(paths);// FilePath('hello/world')
      * ```
-     * @param paths - paths to join.
+     * @param paths paths to join.
      */
     concat(paths: ReadonlyArray<FilePath | FileName>): FilePath {
       return nodePath.join(...paths) as FilePath;

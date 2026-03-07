@@ -3,7 +3,7 @@ import type { Struct as TStruct } from '../Struct.js';
 import type { InspectFunction, InspectOptions } from '../Type.js';
 
 const {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
+
   Object: { assign },
   String: toString,
 } = globalThis;
@@ -12,7 +12,7 @@ const defaultSort = (left: string | symbol, right: string | symbol) =>
 
 /**
  * @internal
- * @param mod - the module (or TS namespace)
+ * @param mod the module (or TS namespace)
  */
 export const Struct = class Object {
   // Important : we name Object so it is shown as anonymous object in snapshot.
@@ -41,7 +41,7 @@ export const Struct = class Object {
     inspect: InspectFunction,
   ) {
     // This is a workaround for vitest / loupe
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
     const inspectFn = inspect ?? inspectOptions['inspect'];
     return this.#module.__inspect__ == null
       ? inspectFn({ ...this }, { ...inspectOptions, sorted: defaultSort })

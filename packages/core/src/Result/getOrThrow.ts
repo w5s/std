@@ -15,7 +15,7 @@ import { isOk } from './isOk.js';
  * Result.getOrThrow(x);// throw 'error'
  * ```
  * @category Accessor
- * @param self - a Result object
+ * @param self a Result object
  */
 export function getOrThrow<V>(self: Result<V, unknown>): V {
   if (isOk(self)) {

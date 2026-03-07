@@ -9,9 +9,9 @@ import type { Int } from '../Int.js';
  * truncate('Hello World', { maxLength: 5 }); // 'He...'
  * truncate('Hello World', { maxLength: 5, ellipsis: '[...]' }); // 'He[...]'
  * ```
- * @param self - The input string to truncate. If not provided or null/undefined,
- *                           will return the default truncation string ('...')
- * @param options - An optional object containing additional options for the truncation.
+ * @param self The input string to truncate. If not provided or null/undefined,
+ * will return the default truncation string ('...')
+ * @param options An optional object containing additional options for the truncation.
  */
 export function truncate(self: string, options: truncate.Options = truncate.defaultOptions): string {
   const { ellipsis, maxLength } = {
@@ -40,6 +40,7 @@ export namespace truncate {
      * A string to append at the end of the truncated string if it is shorter than the `maxLength`
      */
     ellipsis?: string;
+
     /**
      * The desired length of the output string
      */

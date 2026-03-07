@@ -23,6 +23,7 @@ export interface ApplicationRef {
    * Application id
    */
   readonly id: ApplicationId;
+
   /**
    * Ref to application state
    */
@@ -37,6 +38,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
    * Application initial configuration
    */
   readonly initialConfiguration: Configuration;
+
   /**
    * Return the configuration value
    *
@@ -50,9 +52,10 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
    * });
    * app.get('myVar');// 2
    * ```
-   * @param updater - Configuration updater
+   * @param updater Configuration updater
    */
   configure(updater: Partial<Configuration>): void;
+
   /**
    * Return the configuration value
    *
@@ -63,7 +66,7 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
    * });
    * app.get(app, 'myVar');// 1
    * ```
-   * @param key - Configuration key
+   * @param key Configuration key
    */
   get<Key extends keyof Configuration>(key: Key): Configuration[Key];
 }
@@ -87,13 +90,13 @@ export interface Application<Configuration = EmptyObject> extends ApplicationRef
  *   myProperty: 'hello world !',
  * };
  * ```
- * @param id - Application unique identifier
- * @param initialConfiguration - Application initial configuration
- * @param store - Application store ref where the data will be set
+ * @param id Application unique identifier
+ * @param initialConfiguration Application initial configuration
+ * @param store Application store ref where the data will be set
  */
 export function Application<Configuration extends object = EmptyObject>(
   id: string,
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  // eslint-disable-next-line ts/consistent-type-assertions
   initialConfiguration: Configuration = {} as Configuration,
   store?: Ref<Readonly<Record<string, ApplicationState>>>,
 ): Application<Configuration> {
@@ -110,7 +113,7 @@ export function Application<Configuration extends object = EmptyObject>(
 
   function get<Key extends keyof Configuration>(key: Key): Configuration[Key] {
     // @ts-ignore Wrong typing
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access
+
     return state.current.configuration[key];
   }
 

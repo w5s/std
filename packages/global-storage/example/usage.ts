@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { globalStorage, useStorage } from '@w5s/global-storage';
 
 export const moduleStorage = useStorage({});

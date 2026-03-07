@@ -13,8 +13,8 @@ import type { TaskLike, TaskParameters } from '../Task.js';
  *   canceler,
  * });// Will perform the task passing the parameters
  * ```
- * @param task - the task to be called
- * @param parameters - the parameters to call the task with
+ * @param task the task to be called
+ * @param parameters the parameters to call the task with
  */
 export function unsafeCall<Value, Error>(
   task: TaskLike<Value, Error>,

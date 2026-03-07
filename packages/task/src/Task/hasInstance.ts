@@ -10,7 +10,7 @@ import type { TaskLike } from '../Task.js';
  * Task.hasInstance({}); // false
  * ```
  * @category Type
- * @param anyValue - a tested value
+ * @param anyValue a tested value
  */
 export function hasInstance(anyValue: unknown): anyValue is TaskLike<unknown, unknown> {
   // @ts-ignore We know what we are doing here

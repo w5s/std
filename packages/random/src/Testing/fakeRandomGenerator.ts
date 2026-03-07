@@ -7,7 +7,7 @@ import type { RandomGenerator } from '../RandomGenerator.js';
  * ```typescript
  * const randomGenerator = fakeRandomGenerator(() => 0.123)
  * ```
- * @param getNextValue - the implementation
+ * @param getNextValue the implementation
  */
 export function fakeRandomGenerator(getNextValue: () => number): RandomGenerator {
   return taskFrom(({ resolve }) => resolve(getNextValue()));

@@ -20,7 +20,7 @@ import { __emptyArray } from './__emptyArray.js';
  * ]);
  * const failureResult = Task.run(failure);// Result.Error('error')
  * ```
- * @param tasks - tasks to be run in parallel
+ * @param tasks tasks to be run in parallel
  */
 export function all<T extends readonly TaskLike<any, any>[]>(
   tasks: [...T],

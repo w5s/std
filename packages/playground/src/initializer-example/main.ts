@@ -8,6 +8,6 @@ export async function main3() {
     () => import('./initializers/init1.js'),
     () => import('./initializers/init2.js'),
   ]);
-  // eslint-disable-next-line no-console
+
   console.log(result);
 }

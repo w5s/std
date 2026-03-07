@@ -8,9 +8,10 @@ export type SeqState<T> = {
   currentIterator: Iterator<T> | undefined;
 };
 
-// eslint-disable-next-line jsdoc/require-example
 /**
+ * @param iterable
  * @internal
+ * @example
  */
 export function __useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
   if (typeof iterable === 'string') {

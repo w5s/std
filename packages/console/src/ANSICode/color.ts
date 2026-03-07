@@ -27,10 +27,9 @@ const colorMap = new Map(
  * @example
  * color('red')('foo') // '\x1b[31mfoo\x1b[39m'
  *
- * @param value - one of: black, red, green, yellow, blue, magenta, cyan, white
+ * @param value one of: black, red, green, yellow, blue, magenta, cyan, white
  * @returns the ANSI escape sequence for the given color
  */
 export function color(value: Color) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return colorMap.get(value)!;
 }

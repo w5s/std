@@ -23,9 +23,9 @@ import type { TestingLibrary } from './type.js';
  *   },
  * }));
  * ```
- * @param subject - the Codec instance to test
- * @param properties - an object containing the properties to test
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject the Codec instance to test
+ * @param properties an object containing the properties to test
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeCodec<S extends Codec<any>>(
   subject: S,

@@ -23,7 +23,9 @@ describe(flatMap, () => {
   it('calls callback with parameters', () => {
     const source = of('a', 'b', 'c');
     const callback = vi.fn(() => []);
-    Array.from(flatMap(source, callback)); // Force evaluations
+    for (const _value of flatMap(source, callback)) {
+      void _value;
+    }
     expect(callback.mock.calls).toEqual([
       ['a', 0],
       ['b', 1],

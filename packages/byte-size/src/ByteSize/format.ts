@@ -24,6 +24,7 @@ export interface FormatOptions {
  * format(ByteSize(1234), { standard: 'IEC' }); // '1,234.00 KiB'
  * ```
  * @param self
+ * @param options
  */
 export function format(self: ByteSize, options: FormatOptions = {}): string {
   const { standard = defaultStandard } = options;

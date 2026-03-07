@@ -11,7 +11,7 @@ export const LogLevelAsString: AsString<LogLevel> = {
    * LogLevel.asString(level);// 'Foo'
    * ```
    * @category Formatting
-   * @param self - the log level
+   * @param self the log level
    */
   asString(self: LogLevel): string {
     return self.name;

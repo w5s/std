@@ -14,9 +14,10 @@ import { empty } from './empty.js';
  * // Replace items at index 1
  * splice(array, 1, 2, 'u', 'v'); // ['a', 'u', 'v', 'd', 'e']
  * ```
- * @param self - The array object
- * @param start - The position of the inserted item in the array
- * @param deleteCount - The number of deleted items
+ * @param self The array object
+ * @param start The position of the inserted item in the array
+ * @param deleteCount The number of deleted items
+ * @param {...any} items
  */
 export function splice<Item>(self: Array<Item>, start: number, deleteCount: number, ...items: Item[]): Array<Item> {
   const result = self.toSpliced(start, deleteCount, ...items);

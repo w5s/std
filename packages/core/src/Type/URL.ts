@@ -17,10 +17,8 @@ export const URL = define<string, URL>({
   hasInstance: (anyValue) => {
     if (typeof anyValue === 'string') {
       try {
-        // eslint-disable-next-line no-new
         new globalThis.URL(anyValue);
         return true;
-        // eslint-disable-next-line no-empty
       } catch {}
     }
     return false;

@@ -8,7 +8,7 @@
  * AsyncIterable.hasInstance({ [Symbol.iterator]: () => ({ next: () => ({ done: true }) }) });// true
  * ```
  * @category Type
- * @param anyValue - the value to tested
+ * @param anyValue the value to tested
  */
 export function hasInstance(anyValue: unknown): anyValue is AsyncIterable<unknown> {
   return (

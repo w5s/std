@@ -9,7 +9,7 @@ import type { Ref } from '../Ref.js';
  * Ref.read(ref); // 'foo'
  * ```
  * @category Accessor
- * @param self - the reference object
+ * @param self the reference object
  */
 export function read<Value>(self: Ref<Value>): Value {
   return self.current;

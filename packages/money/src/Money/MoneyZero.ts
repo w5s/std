@@ -13,7 +13,7 @@ interface MoneyZero {
    * Money.isZero(EUR('1')); // false
    * ```
    * @category Numeric
-   * @param self - the value to test
+   * @param self the value to test
    */
   isZero(this: void, self: Money): boolean;
 }

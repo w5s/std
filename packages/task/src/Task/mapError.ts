@@ -11,8 +11,8 @@ import { unsafeCall } from './unsafeCall.js';
  * const task = Task.reject('error');
  * Task.mapError(task, (value) => `${value}_bar`));// Task.reject('error_bar')
  * ```
- * @param self - a Task object
- * @param fn - the error mapper function
+ * @param self a Task object
+ * @param fn the error mapper function
  */
 export function mapError<ValueFrom, ErrorFrom, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

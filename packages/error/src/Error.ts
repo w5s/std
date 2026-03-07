@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 import type { ErrorOptions } from './ErrorOptions.js';
 
 /**
@@ -36,8 +35,8 @@ export declare class Error {
   /**
    * Error constructor
    *
-   * @param message - the error message
-   * @param options - the error options
+   * @param message the error message
+   * @param options the error options
    */
   constructor(message?: string, options?: ErrorOptions);
 }

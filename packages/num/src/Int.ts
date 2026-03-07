@@ -35,15 +35,15 @@ export const Int = Callable({
 export namespace Int {
   export interface Module<T extends number>
     extends
-      Core.Comparable<T>,
-      Core.Numeric.Add<T>,
-      Core.Numeric.Multiply<T>,
-      Core.Numeric.Remainder<T>,
-      Core.Numeric.Subtract<T>,
-      Core.Numeric.Power<T>,
-      Core.Numeric.CheckedDivide<T>,
-      Core.Numeric.Signed<T>,
-      Core.Numeric.Negate<T>,
-      Core.Numeric.Zero<T>,
-      Core.Bounded<T> {}
+    Core.Comparable<T>,
+    Core.Numeric.Add<T>,
+    Core.Numeric.Multiply<T>,
+    Core.Numeric.Remainder<T>,
+    Core.Numeric.Subtract<T>,
+    Core.Numeric.Power<T>,
+    Core.Numeric.CheckedDivide<T>,
+    Core.Numeric.Signed<T>,
+    Core.Numeric.Negate<T>,
+    Core.Numeric.Zero<T>,
+    Core.Bounded<T> {}
 }

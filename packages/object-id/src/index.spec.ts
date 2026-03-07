@@ -3,12 +3,12 @@ import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module).sort()).toEqual(
+    expect(Object.keys(Module).toSorted()).toEqual(
       [
         // List of all public exports
         'meta',
         'objectId',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

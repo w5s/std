@@ -11,6 +11,7 @@ export interface LogSendFunction {
    * Returns a new logging task
    */
   (parameters: LogLevelParameters): Task<void, never>;
+
   /**
    * The log domain added to all records
    */

@@ -8,7 +8,7 @@ import { TimeDuration } from './TimeDuration.js';
  * const duration = TimeDuration.of(0);// typeof duration === 'number'
  * ```
  * @category Constructor
- * @param milliseconds - Number of milliseconds
+ * @param milliseconds Number of milliseconds
  */
 export function of(milliseconds: number): TimeDuration {
   return TimeDuration.wrap(milliseconds);

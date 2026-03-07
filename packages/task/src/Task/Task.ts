@@ -5,6 +5,7 @@ import type { TaskFunction, Task as TaskInterface, TaskRunOptions } from '../Tas
 import { run as taskRun } from './run.js';
 
 const $run = Symbol.run;
+
 /**
  * An implementation of {@link @w5s/task!TaskLike}
  */

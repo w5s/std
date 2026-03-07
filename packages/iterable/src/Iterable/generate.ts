@@ -10,14 +10,14 @@ import { empty } from './empty.js';
  * Iterable.generate(3, (index) => index * 2);// == Iterable.of(0, 2, 4)
  * ```
  * @category Constructor
- * @param length - The number of elements
- * @param mapFn - The mapping function
+ * @param length The number of elements
+ * @param mapFn The mapping function
  */
 export function generate<Value>(length: number, mapFn: (index: Int) => Value): Iterable<Value> {
   return length === 0
     ? empty()
     : {
-        *[Symbol.iterator]() {
+        * [Symbol.iterator]() {
           for (let index = 0; index < length; index += 1) {
             yield mapFn(index as Int);
           }

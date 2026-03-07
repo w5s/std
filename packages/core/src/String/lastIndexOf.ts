@@ -10,9 +10,9 @@ import type { Option } from '../Option.js';
  * String.lastIndexOf('aaa', 'a', 1); // Option.Some(1)
  * String.lastIndexOf('ab', 'absent'); // Option.None
  * ```
- * @param self - The string
- * @param searchString - The string to search
- * @param fromIndex - The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
+ * @param self The string
+ * @param searchString The string to search
+ * @param fromIndex The character index at which to begin the search. If fromIndex is omitted, the search starts at index 0.
  */
 export function lastIndexOf(self: string, searchString: string, fromIndex?: number): Option<Int> {
   if (self.length === 0) {

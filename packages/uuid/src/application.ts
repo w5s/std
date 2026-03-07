@@ -1,8 +1,8 @@
 import { Application } from '@w5s/application';
 import type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
+import { randomUUID as randomUUIDNode } from 'node:crypto';
 
-// eslint-disable-next-line global-require, @typescript-eslint/no-require-imports, unicorn/prefer-module, @typescript-eslint/no-unnecessary-condition
-const cryptoModule: Pick<Crypto, 'randomUUID'> = globalThis.crypto ?? require('node:crypto');
+const randomUUID = () => (globalThis.crypto == null ? randomUUIDNode() : globalThis.crypto.randomUUID());
 
 interface RandomUUIDFunction {
   /**
@@ -19,5 +19,5 @@ export interface UUIDConfiguration {
  * Random Application
  */
 export const application = Application<UUIDConfiguration>('@w5s/uuid', {
-  randomUUIDGenerator: () => cryptoModule.randomUUID(),
+  randomUUIDGenerator: randomUUID,
 });

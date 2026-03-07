@@ -31,11 +31,11 @@ describe('NumberConversion', () => {
       expect.objectContaining({
         '+': expect.any(Function),
         '*': expect.any(Function),
-        negate: expect.any(Function),
-        zero: expect.any(Function),
-        minValue: expect.any(Number),
-        maxValue: expect.any(Number),
-        compare: expect.any(Function),
+        'negate': expect.any(Function),
+        'zero': expect.any(Function),
+        'minValue': expect.any(Number),
+        'maxValue': expect.any(Number),
+        'compare': expect.any(Function),
       }),
     );
   });

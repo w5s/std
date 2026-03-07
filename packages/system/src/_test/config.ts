@@ -7,7 +7,6 @@ export const anyPath = 'anyPath' as FilePath;
 export const anyError = new Error('AnyError');
 export const anyErrnoException = (() => {
   try {
-    // eslint-disable-next-line n/no-sync
     fs.lstatSync('non-existent-file');
     return undefined as never;
   } catch (error: unknown) {

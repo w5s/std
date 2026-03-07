@@ -22,10 +22,9 @@ const fontStyleMap = new Map(
  * ```typescript
  * fontStyle('italic')('foo');// '\u001B[3mfoo\u001B[22m');
  * ```
- * @param value - The font style to retrieve the escape code for. Can be 'normal' or 'italic'.
+ * @param value The font style to retrieve the escape code for. Can be 'normal' or 'italic'.
  * @returns The ANSI escape code associated with the provided font weight.
  */
 export function fontStyle(value: FontStyle) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return fontStyleMap.get(value)!;
 }

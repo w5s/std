@@ -9,7 +9,7 @@ import { create } from './create.js';
  * const message = LogMessage.of('foo', ['key', 'value'], 'bar');
  * ```
  * @category Constructor
- * @param parts - constructor parameters
+ * @param parts constructor parameters
  */
 export function of(...parts: Array<LogMessageItem>): LogMessage {
   return create(parts);

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable ts/no-use-before-define */
 import { describe, it, expect } from 'vitest';
 import { run } from './run.js';
 import { suspend } from './suspend.js';

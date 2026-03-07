@@ -7,8 +7,8 @@
  * String.includes('abc', 'absent'); // false
  * ```
  * @category Predicate
- * @param self - The string
- * @param searchString - The string to search
+ * @param self The string
+ * @param searchString The string to search
  */
 export function includes(self: string, searchString: string): boolean {
   return self.includes(searchString);

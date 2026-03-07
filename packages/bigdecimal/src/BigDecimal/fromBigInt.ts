@@ -10,7 +10,7 @@ import { of } from './of.js';
  * BigDecimal.fromBigInt(-1n); // BigDecimal('-1')
  * ```
  * @category Constructor
- * @param bigIntValue - the bigint value to convert to a big decimal
+ * @param bigIntValue the bigint value to convert to a big decimal
  */
 export function fromBigInt(bigIntValue: bigint): BigDecimal {
   return of(bigIntValue, 0);

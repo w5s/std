@@ -14,7 +14,7 @@ import { isError } from './isError.js';
  * Result.get(x);// Option.None
  * ```
  * @category Accessor
- * @param self - a Result object
+ * @param self a Result object
  */
 export function get<V>(self: Result.Ok<V> | Result<V, never>): Option.Some<V>;
 export function get(self: Result.Error<unknown> | Result<never, unknown>): Option.None;

@@ -39,6 +39,7 @@ export const Struct = {
    * The type property discriminator
    */
   type,
+
   /**
    * Return a new Struct from `properties`.
    * Struct adds debugging / inspecting abilities
@@ -55,6 +56,7 @@ export const Struct = {
   create<Properties>(module: Struct.ModuleParameter<Properties>, properties: Properties): Properties {
     return StructImpl.create(module, properties);
   },
+
   /**
    * Return a new `Struct` default factory
    * See {@link Module} for additional properties added to the constructor
@@ -68,7 +70,7 @@ export const Struct = {
    * Model.typeName === 'Model' // true
    * Model.hasInstance(instance); // true
    * ```
-   * @param parameters - The parameters to define the Struct
+   * @param parameters The parameters to define the Struct
    */
   define<Model extends Struct<{ [type]: string }>>(parameters: Struct.DefineParameters<Model>): Struct.Module<Model> {
     const { typeName } = parameters;
@@ -81,7 +83,7 @@ export const Struct = {
         typeName,
       }),
       create: (properties: any) =>
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
         Struct.create(module, {
           [type]: typeName,
           ...properties,
@@ -108,16 +110,18 @@ export namespace Struct {
      * Construct a new model
      *
      * @category Constructor
-     * @param properties - The properties for initialization
+     * @param properties The properties for initialization
      */
     (properties: Parameters<Model>): Model;
+
     /**
      * Construct a new model
      *
      * @category Constructor
-     * @param properties - The properties for initialization
+     * @param properties The properties for initialization
      */
     create(this: void, properties: Parameters<Model>): Model;
+
     /**
      * The factory type constant
      *

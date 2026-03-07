@@ -10,7 +10,7 @@
  * isDOMException({ name: 'Error' }); // false
  * ```
  *
- * @param anyValue - The value to check.
+ * @param anyValue The value to check.
  * @returns true if the value is an Error object, false otherwise.
  */
 export function isDOMException(anyValue: unknown): anyValue is DOMException {

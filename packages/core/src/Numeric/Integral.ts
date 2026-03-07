@@ -18,8 +18,8 @@ export interface Integral<T> extends Numeric<T>, Divide<T>, Remainder<T> {
    * const result = Numeric['/%'](left, right);// represents [ left / right, left % right ]
    * ```
    * @category Numeric
-   * @param base - the base part
-   * @param divider - the divider part
+   * @param base the base part
+   * @param divider the divider part
    */
   '/%'(this: void, base: T, divider: T): [quot: T, mod: T];
 }

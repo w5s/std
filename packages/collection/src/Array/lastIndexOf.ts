@@ -10,15 +10,14 @@ import type { Array } from '../Array.js';
  * Array.lastIndexOf(['a', 'b', 'a', 'b', 'a'], 'a', 4); // Option.Some(2)
  * Array.lastIndexOf(['a', 'b'], 'absent') // Option.None
  * ```
- * @param self - The array object
- * @param searchItem - The item to locate in the array.
- * @param fromIndex - The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
+ * @param self The array object
+ * @param searchItem The item to locate in the array.
+ * @param fromIndex The array index at which to begin the search. If fromIndex is omitted, the search starts at the last index of the array.
  */
 export function lastIndexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex?: number): Option<Int> {
   const arrayLength = self.length;
 
   if (arrayLength > 0) {
-    // eslint-disable-next-line no-self-compare
     if (searchItem === searchItem) {
       // not NaN
       const indexNumber = self.lastIndexOf(searchItem, fromIndex);
@@ -33,7 +32,7 @@ export function lastIndexOf<Item>(self: Array<Item>, searchItem: Item, fromIndex
     // NaN
     while (index >= 0) {
       const value = self[index];
-      // eslint-disable-next-line no-self-compare
+
       if (value !== value) {
         return index as Int;
       }

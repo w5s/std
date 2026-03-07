@@ -11,26 +11,32 @@ import { LogLevel } from '../LogLevel/LogLevel.js';
 
 export const LogRecord = TObject({
   _: constant('LogRecord'),
+
   /**
    * Event identifier
    */
   id: UUID,
+
   /**
    * The log domain (i.e. category)
    */
   domain: string,
+
   /**
    * The log level
    */
   level: LogLevel,
+
   /**
    * Unformatted message
    */
   message: LogMessage,
+
   /**
    * Time when the record was created
    */
   created: Time,
+
   /**
    * Additional data
    */

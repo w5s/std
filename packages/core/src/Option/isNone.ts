@@ -13,7 +13,7 @@ import type { OptionLike } from '../Option.js';
  * Option.isNone('foo');// false
  * ```
  * @category Type
- * @param anyValue - the value to test
+ * @param anyValue the value to test
  */
 export function isNone(anyValue: unknown): anyValue is OptionLike<never> {
   return anyValue == null;

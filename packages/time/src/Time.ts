@@ -44,8 +44,8 @@ export const Time = Callable({
    * const end = Time.of(10);
    * Time.diff(end, begin);// TimeDuration.of(10)
    * ```
-   * @param left - A time value
-   * @param right - A time value
+   * @param left A time value
+   * @param right A time value
    */
   diff(left: Time, right: Time): TimeDuration {
     return TimeDuration(left - right);

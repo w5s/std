@@ -8,6 +8,7 @@ import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAs
 import type { Option } from '@w5s/core';
 
 const timeDurationString = TimeDurationAsString.asString;
+
 /**
  * Creates a task that will reject a {@link TimeoutError} if `task` is not resolved or rejected within `delay`
  * If timeout is omitted, the task is returned unchanged
@@ -19,8 +20,8 @@ const timeDurationString = TimeDurationAsString.asString;
  * Task.run(timeoutTask); // Result.Error(TimeoutError({ message: 'Task timed out after 4ms', delay: 4 }))
  * // Note that `longTask` will be canceled and will never resolve nor reject
  * ```
- * @param self - task to cancel after delay
- * @param delay - delay in milliseconds
+ * @param self task to cancel after delay
+ * @param delay delay in milliseconds
  */
 export function timeout<Value, Error>(
   self: TaskLike<Value, Error>,

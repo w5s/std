@@ -10,6 +10,7 @@ export const RequestCache = define({
   ForceCache: 'force-cache',
   OnlyIfCached: 'only-if-cached',
 });
+
 /**
  * HTTP cache type
  *

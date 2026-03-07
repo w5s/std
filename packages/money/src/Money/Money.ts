@@ -7,10 +7,12 @@ import { MoneyAsString } from './MoneyAsString.js';
 
 export interface Money extends Struct<{
   [Struct.type]: 'Money';
+
   /**
    * Amount of currency
    */
   amount: BigDecimal;
+
   /**
    * Currency unit
    */

@@ -40,7 +40,7 @@ import { orElse } from './Option/orElse.js';
  *   print(option); // alternate console.log('Some(Django)'); and console.warn('None');
  * }
  * ```
- * @param Value - the type of the contained value
+ * @param Value the type of the contained value
  */
 export type Option<Value> = Value | Option.None;
 

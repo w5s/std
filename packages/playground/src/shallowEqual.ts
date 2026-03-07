@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
 type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
 type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
 
 const __hasOwn =
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
   Object.hasOwn ?? ((object, propertyName) => Object.prototype.hasOwnProperty.call(object, propertyName));
 
 /**
@@ -17,9 +15,9 @@ const __hasOwn =
  * shallowEqual({ a: 1 }, { a: 1 });// true
  * shallowEqual({ a: 1 }, { a: 2 });// false
  * ```
- * @param left - the left operand
- * @param right  - the right operand
- * @param equalValueFn - the property equality function
+ * @param left the left operand
+ * @param right the right operand
+ * @param equalValueFn the property equality function
  */
 export function shallowEqual<T = unknown>(
   left: T,
@@ -66,7 +64,7 @@ export function shallowEqual<T = unknown>(
       }
 
       // @ts-ignore Wrong typing
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+
       if (!equalValueFn(left[key], right[key], key)) {
         return false;
       }

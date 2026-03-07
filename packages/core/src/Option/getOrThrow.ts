@@ -14,7 +14,7 @@ import type { OptionLike } from '../Option.js';
  * Option.getOrThrow(x);// throw TypeError('option must not be a null|undefined')
  * ```
  * @category Accessor
- * @param self - an optional value
+ * @param self an optional value
  */
 export function getOrThrow<Value>(self: OptionLike<Value>): Value {
   if (self != null) {

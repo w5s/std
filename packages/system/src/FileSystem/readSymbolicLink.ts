@@ -12,8 +12,8 @@ import type { FilePath } from '../FilePath.js';
  * const task = readSymbolicLink(FilePath('/path/to/symlink'));
  * await Task.run(task); // Result.Ok(FilePath('...'))
  * ```
- * @param path - The path to the file.
- * @param options - The options to use.
+ * @param path The path to the file.
+ * @param options The options to use.
  */
 export function readSymbolicLink(path: FilePath, options?: readSymbolicLink.Options): Task<FilePath, FileError> {
   return errnoTask(Internal.FS.readlink)(path, options) as Task<FilePath, FileError>;

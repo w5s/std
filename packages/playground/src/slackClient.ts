@@ -20,10 +20,12 @@ export interface Slack {
    * Slack base URL
    */
   readonly slackBaseURL: string;
+
   /**
    * Slack API token
    */
   readonly slackToken: string;
+
   /**
    * HTTP client
    */

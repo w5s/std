@@ -8,12 +8,11 @@
  * warning(true, 'this should be true');// pass
  * warning(false, 'this should be true');// console.warn('Warning: this should be true')
  * ```
- * @param condition - the predicate result
- * @param message - an optional message for Error
+ * @param condition the predicate result
+ * @param message an optional message for Error
  */
 export function warning(condition: boolean, message?: string | null): void {
   if (!condition) {
-    // eslint-disable-next-line no-console
     console.warn(`Warning: ${message ?? ''}`);
   }
 }

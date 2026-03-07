@@ -12,7 +12,7 @@ export interface CurrencyRegistry {
    * const currency = Currency({ ... })
    * currencyRegistry.add(currency);
    * ```
-   * @param currency - The currency to register
+   * @param currency The currency to register
    */
   readonly add: (currency: Currency) => void;
 
@@ -24,7 +24,7 @@ export interface CurrencyRegistry {
    * currencyRegistry.getByCode('EUR'); // Currency({ code: 'EUR', ... });
    * currencyRegistry.getByCode('NOT_EXIST'); // undefined
    * ```
-   * @param currencyCode - The currency to register
+   * @param currencyCode The currency to register
    */
   readonly getByCode: (currencyCode: Currency['code']) => Option<Currency>;
 }

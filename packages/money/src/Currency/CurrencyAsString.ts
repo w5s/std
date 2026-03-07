@@ -10,7 +10,7 @@ export const CurrencyAsString: AsString<Currency> = {
    * Currency.asString(EUR('1.10'));// 'EUR';
    * ```
    * @category Formatting
-   * @param self - the currency object to format
+   * @param self the currency object to format
    */
   asString(self: Currency): string {
     return self.code;

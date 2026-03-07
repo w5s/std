@@ -7,6 +7,7 @@ export const RequestRedirect = define({
   Error: 'error',
   Manual: 'manual',
 });
+
 /**
  * HTTP redirect type
  *

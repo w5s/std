@@ -13,6 +13,7 @@ export interface Bounded<T> {
    * @category Bound
    */
   readonly minValue: T;
+
   /**
    * Maximum value for this type
    *

@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { Type, Codec, Result, JSON } from '@w5s/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -45,7 +44,7 @@ async function generateFiles() {
         '/**',
         ` * ${status.comment.doc}`,
         ` *`,
-        ` * ${status.comment.description}`,
+        ` * ${status.comment.description.split('\n').join(`${eol} * `)}`,
         ...(status.isDeprecated ? [' *', ' * @deprecated'] : []),
         ' */',
         `export const ${toConstant(status.phrase)} = Status(${status.code} as Int, \`${status.phrase}\`);`,

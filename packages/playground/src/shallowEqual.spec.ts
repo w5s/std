@@ -69,12 +69,12 @@ describe('shallowEqual', () => {
     const equalFn = (value: string | number) => typeof value === 'string';
 
     // expect(shallowEqual(['a'], ['b'], equalFn)).toEqual(true);
-    expect(shallowEqual({ '0': 'a' }, { '0': 'b' }, equalFn)).toEqual(true);
+    expect(shallowEqual({ 0: 'a' }, { 0: 'b' }, equalFn)).toEqual(true);
   });
 
   it('should not handle comparisons if `equalFn` returns `false`', () => {
     expect(shallowEqual(['a'], ['a'], (left, _right, _key) => typeof left !== 'string')).toEqual(false);
-    expect(shallowEqual({ '0': 'a' }, { '0': 'a' }, (left, _right, _key) => typeof left !== 'string')).toEqual(false);
+    expect(shallowEqual({ 0: 'a' }, { 0: 'a' }, (left, _right, _key) => typeof left !== 'string')).toEqual(false);
   });
 
   it('should treat objects created by `Object.create(null)` like any other plain object', () => {

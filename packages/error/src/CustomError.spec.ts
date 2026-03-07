@@ -84,12 +84,10 @@ describe('CustomError', () => {
         ].join('\n'),
       ],
     ])('should return correctly formatted string representation', (error, expected) => {
-      // eslint-disable-next-line @typescript-eslint/no-base-to-string
       expect(String(error)).toEqual(expected);
     });
   });
   describe('#stack', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     (Error.captureStackTrace == null ? it.skip : it)('should capture stack', () => {
       const error = CustomError({
         name: 'CustomError',

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { LogLevel } from './LogLevel.js';
 import type { LogMessageItem } from './LogMessage.js';
 import type { LogRecord } from './LogRecord.js';
@@ -60,7 +59,7 @@ function levelWithData(logLevel: LogLevel, baseData: LogRecord['data']): LogLeve
  * level('debug')`foo=${['foo', 'foo_value']}`; // { ..., message: LogMessage('foo=', LogMessageRef('foo)), data: { foo: 'foo_value' } }
  * level('debug').withData({ someData: true })`debug message`;// { level: LogLevel.Critical, message: LogMessage(...), data: { someData: true } }
  * ```
- * @param logLevel - the default message level
+ * @param logLevel the default message level
  * @returns a new logger params factory
  */
 export function level(logLevel: LogLevelValue | LogLevel): LogLevelFactory {

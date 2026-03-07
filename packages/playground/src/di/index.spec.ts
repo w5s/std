@@ -3,13 +3,13 @@ import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module).sort()).toEqual(
+    expect(Object.keys(Module).toSorted()).toEqual(
       [
         // All keys
         'ContainerKey',
         'provide',
         'use',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

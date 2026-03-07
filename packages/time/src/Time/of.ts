@@ -8,7 +8,7 @@ import { Time } from './Time.js';
  * const time = Time.of(0);
  * ```
  * @category Constructor
- * @param milliseconds - the value in milliseconds
+ * @param milliseconds the value in milliseconds
  */
 export function of(milliseconds: number): Time {
   return Time(milliseconds);

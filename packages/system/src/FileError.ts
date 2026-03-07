@@ -16,9 +16,9 @@ export type FileErrorType = (typeof FileErrorType)[keyof typeof FileErrorType];
 export class FileError extends ErrorClass({
   errorName: 'FileError',
 })<{
-  fileErrorType: FileErrorType;
-  errno: Option<number>;
-  code: Option<string>;
-  path: Option<FilePath>;
-  syscall: Option<string>;
-}> {}
+    fileErrorType: FileErrorType;
+    errno: Option<number>;
+    code: Option<string>;
+    path: Option<FilePath>;
+    syscall: Option<string>;
+  }> {}

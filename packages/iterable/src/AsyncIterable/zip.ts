@@ -11,8 +11,8 @@ import { from } from './from.js';
  * const right = AsyncIterable.of('a', 'b');
  * AsyncIterable.zip(left, right);// == AsyncIterable.of([1, 'a'], [2, 'b'])
  * ```
- * @param left - Left iterable
- * @param right - Right iterable
+ * @param left Left iterable
+ * @param right Right iterable
  */
 export function zip<L, R>(left: AsyncIterableLike<L>, right: AsyncIterableLike<R>): AsyncIterable<[L, R]> {
   const leftIterable = from(left);

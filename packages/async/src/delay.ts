@@ -13,8 +13,8 @@ import type { TimerOptions } from './TimerOptions.js';
  * await delay(5, { signal: controller.signal });// Will reject with Error('CustomError')
  * ```
  *
- * @param milliseconds - the delay to wait in milliseconds
- * @param options - the timer options
+ * @param milliseconds the delay to wait in milliseconds
+ * @param options the timer options
  */
 export async function delay(milliseconds: number, options?: TimerOptions): Promise<void> {
   return __setTimer((resolve) => setTimeout(resolve, milliseconds), clearTimeout, options);

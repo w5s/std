@@ -12,8 +12,8 @@ import type { Option } from '@w5s/core';
  * find(iterable, (item) => item.name === 'bob') // { name: 'bob', id: 2 }
  * find(iterable, (item) => item.name === 'cat') // undefined
  * ```
- * @param self - The input collection.
- * @param predicate - A function to test whether an item in the collection should be returned.
+ * @param self The input collection.
+ * @param predicate A function to test whether an item in the collection should be returned.
  */
 export function find<Value>(
   self: Iterable<Value>,

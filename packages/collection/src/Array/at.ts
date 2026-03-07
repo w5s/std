@@ -11,8 +11,8 @@ import type { Option } from '@w5s/core';
  * Array.at(array, 99) // Option.None
  * ```
  * @category Accessor
- * @param self - The array object
- * @param index - The zero based position
+ * @param self The array object
+ * @param index The zero based position
  */
 export function at<Item>(self: ArrayLike<Item>, index: number): Option<Item> {
   return self[index < 0 ? index + self.length : index] ?? undefined;

@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/custom-error-definition */
-
 import type { Pretty } from '@w5s/core-type';
 import { CustomError } from './CustomError.js';
 
@@ -26,7 +24,7 @@ export type ErrorType<Name extends string, Properties> = CustomError<
  * MyError.errorName === 'MyError' // true
  * MyError.hasInstance(instance); // true
  * ```
- * @param options - the options for the new error type
+ * @param options the options for the new error type
  */
 export function ErrorClass<Name extends string>(options: ErrorClassOptions<Name>): ErrorClass<Name> {
   const { errorName, errorMessage } = options;
@@ -46,6 +44,7 @@ export interface ErrorClassOptions<Name extends string> {
    * Error name
    */
   errorName: Name;
+
   /**
    * Default error message
    */
@@ -57,10 +56,11 @@ export interface ErrorClass<Name extends string> extends Pretty<typeof CustomErr
    * Error name
    */
   readonly errorName: Name;
+
   /**
    * Error constructor
    */
-  new <Properties extends Record<string, any> = {}>(
+  new<Properties extends Record<string, any> = {}>(
     ...properties: ErrorClassParameters<Properties>
   ): ErrorType<Name, Properties>;
 }
@@ -84,6 +84,7 @@ export type ErrorClassProperties<Properties extends object> = Omit<
    * Optional message, if omitted default one will be used
    */
   message?: string;
+
   /**
    * Optional cause
    */

@@ -38,6 +38,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * @category Comparator
    */
   '<='(this: void, left: T, right: T): boolean;
+
   /**
    * "Less than" operator
    *
@@ -54,6 +55,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * @category Comparator
    */
   '<'(this: void, left: T, right: T): boolean;
+
   /**
    * "Greater than or equal to" operator
    *
@@ -70,6 +72,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * @category Comparator
    */
   '>='(this: void, left: T, right: T): boolean;
+
   /**
    * "Greater than" operator
    *
@@ -86,6 +89,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * @category Comparator
    */
   '>'(this: void, left: T, right: T): boolean;
+
   /**
    * "minimum" operator
    *
@@ -99,7 +103,8 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * ```
    * @category Comparator
    */
-  min(this: void, left: T, right: T): T;
+  'min'(this: void, left: T, right: T): T;
+
   /**
    * "maximum" operator
    *
@@ -113,7 +118,8 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * ```
    * @category Comparator
    */
-  max(this: void, left: T, right: T): T;
+  'max'(this: void, left: T, right: T): T;
+
   /**
    * Clamp value between minValue and maxValue
    *
@@ -125,8 +131,9 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * ```
    * @category Comparator
    */
-  clamp(this: void, value: T, minValue: T, maxValue: T): T;
+  'clamp'(this: void, value: T, minValue: T, maxValue: T): T;
 }
+
 /**
  * Construct Comparable instance
  *
@@ -141,7 +148,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
  * ```
  * @category Functor
  * @param properties
- * @param properties.compare - the comparison function
+ * @param properties.compare the comparison function
  */
 export function Comparable<T>(properties: Comparable.Parameters<T>): Comparable<T> {
   const { compare } = properties;
@@ -159,7 +166,7 @@ export function Comparable<T>(properties: Comparable.Parameters<T>): Comparable<
     '>=': (left: T, right: T) => compare(left, right) >= 0,
     min,
     max,
-    clamp: (value, minValue, maxValue) => min(max(value, minValue), maxValue),
+    'clamp': (value, minValue, maxValue) => min(max(value, minValue), maxValue),
   };
 }
 export namespace Comparable {

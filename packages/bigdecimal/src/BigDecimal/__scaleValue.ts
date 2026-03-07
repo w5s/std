@@ -1,11 +1,11 @@
 import type { BigDecimal } from './BigDecimal.js';
 
-// eslint-disable-next-line jsdoc/require-example
 /**
  * @internal
- * @param self - the BigDecimal to scale
- * @param newScale - the new scale to apply
+ * @param self the BigDecimal to scale
+ * @param newScale the new scale to apply
  * @returns the scaled BigDecimal value
+ * @example
  */
 export function __scaleValue(self: BigDecimal, newScale: number): bigint {
   const { value, scale } = self;

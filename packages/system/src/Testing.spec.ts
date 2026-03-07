@@ -3,12 +3,12 @@ import * as Module from './Testing.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module).sort()).toEqual(
+    expect(Object.keys(Module).toSorted()).toEqual(
       [
         // public exports
         'fsStub',
         'withFile',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

@@ -12,8 +12,8 @@ import type { FilePath } from '../FilePath.js';
  * const task = createDirectory(FilePath('/path/to/directory'));
  * await Task.run(task); // Will create the directory
  * ```
- * @param path - The path to the directory.
- * @param options - The options to use.
+ * @param path The path to the directory.
+ * @param options The options to use.
  */
 export function createDirectory(path: FilePath, options?: createDirectory.Options): Task<void, FileError> {
   return errnoTask(async (pathString: string, optionObject?: nodeFS.MakeDirectoryOptions) => {

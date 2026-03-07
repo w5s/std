@@ -13,8 +13,8 @@ import { of } from './of.js';
  * ```
  *
  * @category Scaling
- * @param self - The `BigDecimal` object.
- * @param newScale - The new scale
+ * @param self The `BigDecimal` object.
+ * @param newScale The new scale
  */
 export function scale(self: BigDecimal, newScale: number): BigDecimal {
   if (self.scale === newScale) {

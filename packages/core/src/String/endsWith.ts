@@ -7,8 +7,8 @@
  * String.endsWith('abc', 'ab'); // false
  * ```
  * @category Predicate
- * @param self - The string
- * @param searchString - The string to search
+ * @param self The string
+ * @param searchString The string to search
  */
 export function endsWith(self: string, searchString: string): boolean {
   return self.endsWith(searchString);

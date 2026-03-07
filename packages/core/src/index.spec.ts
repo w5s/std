@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/no-unused-vars */
 import { describe, it, expect } from 'vitest';
 import * as Std from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Std).sort()).toEqual(
+    expect(Object.keys(Std).toSorted()).toEqual(
       [
         'Boolean',
         'Callable',
@@ -32,7 +32,7 @@ describe('index', () => {
         'Symbol',
         'Tag',
         'Type',
-      ].sort(),
+      ].toSorted(),
     );
   });
 

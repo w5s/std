@@ -9,8 +9,8 @@ import type { Ref } from '../Ref.js';
  * Ref.write(ref, 'bar'); // Ref.read(ref) == 'bar'
  * ```
  * @category Accessor
- * @param self - the reference object
- * @param newValue - the new value to be set
+ * @param self the reference object
+ * @param newValue the new value to be set
  */
 export function write<Value>(self: Ref<Value>, newValue: Value): void {
   self.current = newValue;

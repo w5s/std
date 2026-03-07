@@ -14,8 +14,8 @@ import { unsafeCall } from './unsafeCall.js';
  * const failure = Task.reject('PreviousError');
  * Task.orElse(failure, (error) => Task.reject(`${error}_caught`));// Task.reject('PreviousError_caught')
  * ```
- * @param self - a Task object
- * @param fn - the error mapper function
+ * @param self a Task object
+ * @param fn the error mapper function
  */
 export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

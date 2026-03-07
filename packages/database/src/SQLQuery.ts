@@ -63,6 +63,7 @@ function toSQLStatement(query: SQLQuery): SQLStatement {
     }
   }
 }
+
 /**
  * @namespace
  */
@@ -201,7 +202,6 @@ export namespace SQLQuery {
 }
 
 function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   return Object.keys(object).map((propertyName) => [propertyName, object[propertyName]!]);
 }
 

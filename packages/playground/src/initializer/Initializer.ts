@@ -6,6 +6,7 @@ export interface Initializer<AppContext extends object = EmptyObject, AppError =
    * Initializer id
    */
   readonly id: symbol;
+
   /**
    * Initializer effect
    *

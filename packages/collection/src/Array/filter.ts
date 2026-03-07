@@ -11,8 +11,8 @@ import { empty } from './empty.js';
  * const isEven = (_: number) => _ % 2 === 0;
  * Array.filter(array, isEven); // [2, 4]
  * ```
- * @param self - The array object
- * @param predicate - A function that accepts up to three arguments. The filter method calls the predicate function one time for each item in the array.
+ * @param self The array object
+ * @param predicate A function that accepts up to three arguments. The filter method calls the predicate function one time for each item in the array.
  */
 export function filter<Item, RefinedItem extends Item>(
   self: Array<Item>,

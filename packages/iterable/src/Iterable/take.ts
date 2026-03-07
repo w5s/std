@@ -8,8 +8,8 @@ import { filter } from './filter.js';
  * const iterable = Iterable.of(1, 2, 3);
  * Iterable.take(iterable, 2); // == Iterable.of(1, 2)
  * ```
- * @param self - the iterator
- * @param limit - the limit of items to take
+ * @param self the iterator
+ * @param limit the limit of items to take
  */
 export function take<Value>(self: Iterable<Value>, limit: number): Iterable<Value> {
   return limit < 0 ? self : filter(self, (_, currentIndex) => currentIndex < limit);

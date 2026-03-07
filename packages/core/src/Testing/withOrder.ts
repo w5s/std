@@ -5,7 +5,7 @@ export interface ExpectOrder {
   /**
    * Asserts that the ordered values are in the correct order using the provided compare function.
    *
-   * @param orderedValues - the ordered values that should be compared
+   * @param orderedValues the ordered values that should be compared
    */
   toSortValues(orderedValues: Array<any>): void;
 }
@@ -19,12 +19,12 @@ export interface ExpectOrder {
  *
  * expectOrder(Number.compare).toSortValues([1, 2, 3]);
  * ```
- * @param expectFn - the expect function from the test library
+ * @param expectFn the expect function from the test library
  */
 export function withOrder(expectFn: ExpectFunction) {
   const create = <T>(order: Order<T>, isNot: boolean): ExpectOrder => ({
     toSortValues(orderedValues: Array<T>) {
-      const expectValue = expectFn(orderedValues.concat().sort(order));
+      const expectValue = expectFn(orderedValues.toSorted(order));
       return (isNot ? expectValue.not : expectValue).toEqual(orderedValues);
     },
   });

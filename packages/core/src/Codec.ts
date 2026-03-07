@@ -21,9 +21,10 @@ export interface Codec<T> {
    * const decoded = Codec.decode(someCodec, input);
    * ```
    * @category Codec
-   * @param input - The value to decode
+   * @param input The value to decode
    */
   [Symbol.decode](this: void, input: unknown, context: Codec.Context<T>): Result<T, CodecError>;
+
   /**
    * Returns the encoded `input`
    *
@@ -37,9 +38,10 @@ export interface Codec<T> {
    * const encoded = Codec.decode(someCodec, someObject);
    * ```
    * @category Codec
-   * @param input - The value to encode
+   * @param input The value to encode
    */
   [Symbol.encode](this: void, input: T): unknown;
+
   /**
    * Returns the JSONSchema corresponding to the decoded type
    *
@@ -72,6 +74,7 @@ export namespace Codec {
      * @param value
      */
     ok: (value: T) => Result<T, CodecError>;
+
     /**
      * Helper that returns a new Error result
      *

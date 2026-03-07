@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import type { Bounded, Int, Option, Ordering } from '@w5s/core';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
@@ -21,7 +20,7 @@ export interface IPv6 extends Struct<{
 const IPv6Type = Struct.define<IPv6>({ typeName: 'IPv6' });
 
 const bigIntByteAt = (ipv6Value: bigint, index: number) =>
-  Number((ipv6Value >> BigInt((7 - index) * 16)) & 0xff_ffn) as Int;
+  Number((ipv6Value >> BigInt((7 - index) * 16)) & 0xFF_FFn) as Int;
 const bigIntStringifyAt = (ipv6Value: bigint, index: number): string => {
   const byte = bigIntByteAt(ipv6Value, index);
   return byte === 0 ? '' : byte.toString(16);
@@ -43,7 +42,6 @@ const IPv6Format = {
     let parts = expression.split(':');
     if (parts.length <= 2) return undefined;
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const lastPart = parts.pop()!;
     const last32Bits = (() => {
       const ipv4Value = parseIPv4(lastPart);
@@ -63,7 +61,6 @@ const IPv6Format = {
     let bigintAddress = 0n;
     // eslint-disable-next-line unicorn/no-for-loop
     for (let index = 0; index < parts.length; index += 1) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const parsedPart = parseHex(parts[index]!);
       if (parsedPart == null) return undefined;
       bigintAddress = (bigintAddress << 16n) + parsedPart;
@@ -125,7 +122,7 @@ const IPv6Comparable = Comparable<IPv6>({
 
 const IPv6Bounded: Bounded<IPv6> = {
   minValue: fromBigInt(0n),
-  maxValue: fromBigInt(0xff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ff_ffn),
+  maxValue: fromBigInt(0xFF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FFn),
 };
 
 const IPv6Indexable = Indexable<IPv6, bigint>({

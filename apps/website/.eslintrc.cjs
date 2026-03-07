@@ -1,10 +1,10 @@
 module.exports = {
   rules: {
-    '@typescript-eslint/no-require-imports': 'off',
+    'ts/no-require-imports': 'off',
     /// FIXME: Start
-    '@typescript-eslint/no-unsafe-assignment': 'off',
-    '@typescript-eslint/no-var-requires': 'off',
-    '@typescript-eslint/no-unsafe-member-access': 'off',
+    'ts/no-unsafe-assignment': 'off',
+    'ts/no-var-requires': 'off',
+    'ts/no-unsafe-member-access': 'off',
     // End
     'global-require': 'off',
     'unicorn/prefer-module': 'off',

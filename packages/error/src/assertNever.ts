@@ -12,7 +12,7 @@
  *   }
  * }
  * ```
- * @param subject - the never value that should be reported
+ * @param subject the never value that should be reported
  */
 export function assertNever<V extends never>(subject: V): V {
   return subject;

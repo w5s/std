@@ -16,7 +16,9 @@ describe(filter, () => {
   it('calls callback with parameters', () => {
     const source = of('a', 'b', 'c');
     const callback = vi.fn(() => true);
-    Array.from(filter(source, callback)); // Force evaluations
+    for (const _value of filter(source, callback)) {
+      void _value;
+    }
     expect(callback.mock.calls).toEqual([
       ['a', 0],
       ['b', 1],

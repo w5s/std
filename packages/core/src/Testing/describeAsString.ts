@@ -12,10 +12,12 @@ import type { TestingLibrary } from './type.js';
  *   [subject(2), '2'],
  * ]);
  * ```
- * @param subject - The subject to test
- * @param properties - Object containing test properties
- * @param withTest - Optional object containing test options
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The subject to test
+ * @param properties Object containing test properties
+ * @param withTest Optional object containing test options
+ * @param withTest.String
+ * @param withTest.asString
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeAsString<S extends AsString<any>>(
   subject: S,
@@ -25,6 +27,7 @@ export function describeAsString<S extends AsString<any>>(
      * Test asString(self) method
      */
     asString?: boolean;
+
     /**
      * Test String(self) method
      */

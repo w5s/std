@@ -12,8 +12,8 @@ import { fromNumber } from './fromNumber.js';
  * Int.parse('1');// Option.Some(1)
  * Int.parse('invalid');// Option.None
  * ```
- * @param expression - an integer expression
- * @param radix - an optional base (ex: 10, 16)
+ * @param expression an integer expression
+ * @param radix an optional base (ex: 10, 16)
  */
 export function parse(expression: string, radix?: Radix36): Option<Int> {
   /* eslint-disable unicorn/prefer-number-properties */

@@ -9,7 +9,7 @@ import type { Result } from '../Result.js';
  * Ok('value');// { _: 'Ok', ok: true, value: 'value'}
  * ```
  * @category Constructor
- * @param resultValue - the success value
+ * @param resultValue the success value
  */
 export function Ok(): Result<void, never>;
 export function Ok<V>(resultValue: V): Result<V, never>;

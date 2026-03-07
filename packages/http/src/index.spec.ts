@@ -3,7 +3,7 @@ import * as Fetch from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Fetch).sort()).toEqual(
+    expect(Object.keys(Fetch).toSorted()).toEqual(
       [
         'HTTPError',
         'Client',
@@ -18,7 +18,7 @@ describe('index', () => {
         'Response',
         'ResponseParser',
         'ResponseType',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

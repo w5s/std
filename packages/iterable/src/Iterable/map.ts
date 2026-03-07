@@ -11,15 +11,15 @@ import type { Int } from '@w5s/core';
  *   (currentValue, currentIndex) => currentValue * 2,
  * );// == Iterable.of(2, 4, 6)
  * ```
- * @param self - the iterable source
- * @param mapFn - a function that returns a new value
+ * @param self the iterable source
+ * @param mapFn a function that returns a new value
  */
 export function map<ValueFrom, ValueTo>(
   self: Iterable<ValueFrom>,
   mapFn: (currentValue: ValueFrom, currentIndex: Int) => ValueTo,
 ): Iterable<ValueTo> {
   return {
-    *[Symbol.iterator]() {
+    * [Symbol.iterator]() {
       let currentIndex = 0;
       for (const currentValue of self) {
         yield mapFn(currentValue, currentIndex as Int);

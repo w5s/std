@@ -12,8 +12,8 @@ import type { Option } from '../Option.js';
  * String.at(string, 99) // Option.None
  * ```
  * @category Accessor
- * @param self - The string
- * @param index - The zero based position
+ * @param self The string
+ * @param index The zero based position
  */
 export function at(self: string, index: number): Option<Char> {
   const stringIndex = index < 0 ? index + self.length : index;

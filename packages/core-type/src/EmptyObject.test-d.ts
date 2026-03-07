@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/no-unused-vars */
 import { assertType } from './assertType.js';
 import type { EmptyObject } from './EmptyObject.js';
 

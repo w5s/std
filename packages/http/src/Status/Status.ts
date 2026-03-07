@@ -18,6 +18,7 @@ export const Status = Callable({
      * Standard HTTP status code integer
      */
     statusCode: Int,
+
     /**
      * Standard HTTP status message
      */

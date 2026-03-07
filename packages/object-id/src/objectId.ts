@@ -21,7 +21,7 @@ export type ObjectId = number & Tag<'ObjectId'>;
  * const object = {};
  * objectId(object);// an integer
  * ```
- * @param objectLike - a non literal object
+ * @param objectLike a non literal object
  */
 export function objectId(objectLike: ObjectIdParameter): ObjectId {
   const id = __state.refs.get(objectLike);

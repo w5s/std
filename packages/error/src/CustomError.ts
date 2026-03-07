@@ -1,6 +1,5 @@
-/* eslint-disable no-self-assign */
-/* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable ts/no-shadow */
+
 import { asString } from './CustomError/asString.js';
 import { isError } from './isError.js';
 
@@ -17,14 +16,17 @@ export type CustomError<Properties extends CustomErrorRequiredProperties = Custo
      * Error name (used as tag)
      */
     name: Properties['name'];
+
     /**
      * Error message
      */
     message: string;
+
     /**
      * Stack trace
      */
     stack: string;
+
     /**
      * Optional `Error` that was thrown
      */
@@ -37,15 +39,18 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
    * Error name
    */
   readonly errorName: string;
+
   /**
    * New operator
    */
-  new <Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
+  new<Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
+
   /**
    * Call operator
    */
   <Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
   readonly prototype: CustomError;
+
   /**
    * Static method to convert an error to a string
    *
@@ -56,11 +61,12 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
    * @param self
    */
   asString(self: Error): string;
+
   /**
    * Return true if anyValue is an instance of current class
    *
    * @param this
-   * @param anyValue - any value to test
+   * @param anyValue any value to test
    */
   hasInstance<Class extends abstract new (...args: any) => any>(
     this: Class,
@@ -81,7 +87,7 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
  * })
  * ```
  * @category Constructor
- * @param properties - initial properties
+ * @param properties initial properties
  */
 export const CustomError: CustomErrorConstructor = (() => {
   const errorName = 'CustomError';
@@ -96,7 +102,6 @@ export const CustomError: CustomErrorConstructor = (() => {
       [extra: string]: unknown;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-argument
     const returnValue: MutableError = new.target ? (this as MutableError) : __create(CustomError.prototype);
 
     // Assign default properties from prototype

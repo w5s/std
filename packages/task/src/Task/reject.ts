@@ -12,6 +12,7 @@ import { from } from './from.js';
  * @category Constructor
  */
 export function reject<Value = never>(): Task<Value, void>;
+
 /**
  * Constructor that always returns a failed `Task` that rejects `errorValue`.
  * This is a shorthand for `Task(({ error }) => error(errorValue))`
@@ -22,10 +23,10 @@ export function reject<Value = never>(): Task<Value, void>;
  * const result = Task.run(task);// Result.Error(new Error('Something went wrong'))
  * ```
  * @category Constructor
- * @param errorValue - the error value
+ * @param errorValue the error value
  */
 export function reject<Value = never, Error = never>(errorValue: Error): Task<Value, Error>;
 export function reject<Value = never>(errorValue?: unknown): Task<Value, unknown> {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+  // eslint-disable-next-line ts/no-shadow
   return from(({ reject }) => reject(errorValue));
 }

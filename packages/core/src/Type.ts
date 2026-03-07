@@ -44,6 +44,7 @@ export interface Type<T> {
    * @category Type
    */
   typeName: string;
+
   /**
    * Return `true` if the given value is an instance of the class.
    *
@@ -58,6 +59,7 @@ export interface Type<T> {
    * @param anyValue
    */
   hasInstance(this: void, anyValue: unknown): anyValue is T;
+
   /**
    * Try to convert anyValue to enum value or else returns `Option.None`
    *
@@ -71,6 +73,7 @@ export interface Type<T> {
    * @param anyValue
    */
   asInstance(this: void, anyValue: unknown): Option<T>;
+
   /**
    * When defined, returns a custom string representation.
    * To be useful, it should be bound to a prototype (ex: {@link Struct})
@@ -132,9 +135,9 @@ export namespace Type {
    */
   export interface Parameters<T>
     extends
-      PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
-      Partial<Codec<T>>,
-      Partial<AsString<T>> {
+    PartialKeys<Omit<Type<T>, 'hasInstance'>, 'asInstance' | Symbol.inspect>,
+    Partial<Codec<T>>,
+    Partial<AsString<T>> {
     hasInstance: (value: unknown) => boolean;
   }
 

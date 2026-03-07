@@ -11,8 +11,8 @@ export interface CheckedMultiply<Base, Multiplier = Base, Output = Base> {
    * const result = Numeric['*?'](left, right);// represents (left * right)
    * ```
    * @category Numeric
-   * @param base - the left operand
-   * @param multiplier - the right operand
+   * @param base the left operand
+   * @param multiplier the right operand
    */
   '*?'(base: Base, multiplier: Multiplier): Option<Output>;
 }

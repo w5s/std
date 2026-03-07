@@ -40,7 +40,7 @@ function fileStatusFromNodeJSStats(stats: nodeFS.Stats): FileStatus {
  * const task = FileSystem.readFileStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.run(task);// Result.Ok({ isFile: true, ... })
  * ```
- * @param filePath - The path to the file
+ * @param filePath The path to the file
  */
 export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> {
   return errnoTask(async (p: string) => fileStatusFromNodeJSStats(await Internal.FS.stat(p)))(filePath);
@@ -54,7 +54,7 @@ export function readFileStatus(filePath: FilePath): Task<FileStatus, FileError> 
  * const task = FileSystem.readSymbolicLinkStatus(FilePath('/etc/passwd'));
  * const fileStatus = await Task.run(task);// Result.Ok({ isFile: true, ... })
  * ```
- * @param filePath - The path to the file
+ * @param filePath The path to the file
  */
 export function readSymbolicLinkStatus(filePath: FilePath): Task<FileStatus, FileError> {
   return errnoTask(async (p: string) => fileStatusFromNodeJSStats(await Internal.FS.lstat(p)))(filePath);

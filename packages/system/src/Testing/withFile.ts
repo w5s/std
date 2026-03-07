@@ -6,34 +6,40 @@ export interface ExpectFile {
    * Assert that the file exists
    */
   toExist(): Promise<void>;
+
   /**
    * Assert that the file has the content equals to `expectedContent`
    *
-   * @param expectedContent - the expected content
+   * @param expectedContent the expected content
    */
   toHaveFileContent(expectedContent: string): Promise<void>;
+
   /**
    * Assert that the file is (not) a directory
    */
   toBeADirectory(): Promise<void>;
+
   /**
    * Assert that the file is a (not) file
    */
   toBeAFile(): Promise<void>;
+
   /**
    * Assert that the file is (not) a symbolic link
    */
   toBeASymbolicLink(): Promise<void>;
+
   /**
    * Assert that a file (not) containing `expectedContent` entries
    *
-   * @param expectedContent - the expected entry list
+   * @param expectedContent the expected entry list
    */
   toHaveDirContent(expectedContent: string[]): Promise<void>;
+
   /**
    * Assert that a file (not) containing `expectedLength` entry count
    *
-   * @param expectedLength - the expected length
+   * @param expectedLength the expected length
    */
   toHaveDirLength(expectedLength: number): Promise<void>;
 }

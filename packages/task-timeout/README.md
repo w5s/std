@@ -87,10 +87,5 @@ void Task.run(main());
 
 <!-- AUTO-GENERATED-CONTENT:END -->
 
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/task-timeout.svg?style=flat-square
 [package-url]: https://www.npmjs.com/package/@w5s/task-timeout
-[license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 [license-url]: https://www.npmjs.com/package/@w5s/task-timeout
-[issues-url]: https://github.com/w5s/std/issues
-[sources-url]: git@github.com:w5s/std.git
-[homepage-url]: https://github.com/w5s/std/tree/master/packages/std#readme

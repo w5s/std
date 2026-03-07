@@ -3,7 +3,7 @@ import * as Module from './Testing.js';
 
 describe('Testing', () => {
   it('exports', () => {
-    expect(Object.keys(Module).sort()).toEqual(
+    expect(Object.keys(Module).toSorted()).toEqual(
       [
         // public exports
         'describeAdd',
@@ -31,7 +31,7 @@ describe('Testing', () => {
         'describeType',
         'describeZero',
         'withOrder',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

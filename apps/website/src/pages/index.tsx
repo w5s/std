@@ -35,7 +35,6 @@ function HomepageHeader() {
   );
 }
 
-// eslint-disable-next-line import/no-default-export
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
   const { metaTitle = siteConfig.title, metaDescription = siteConfig.tagline } = (siteConfig.customFields ??
