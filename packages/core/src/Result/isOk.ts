@@ -12,7 +12,7 @@ import type { Result } from '../Result.js';
  * console.log(isOk(x));// false
  * ```
  * @category Type
- * @param anyValue - the value to tested
+ * @param anyValue the value to tested
  */
 export function isOk<V, E>(anyValue: Result<V, E>): anyValue is Result.Ok<V> {
   return anyValue.ok;

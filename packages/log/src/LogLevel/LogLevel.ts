@@ -6,10 +6,12 @@ import { LogLevelAsString } from './LogLevelAsString.js';
 
 export interface LogLevel extends Struct<{
   [Struct.type]: 'LogLevel';
+
   /**
    * The level string representation.
    */
   name: string;
+
   /**
    * The level value
    */
@@ -22,9 +24,8 @@ const decode: Codec<LogLevel>[Symbol.decode] = (input, { ok, error }) => {
   if (typeof input === 'string') {
     const match = input.match(/^(\w+)\[(\d+)]$/);
     if (match != null && match.length === 3) {
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const name = match[1]!;
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
       const value = parseInt(match[2]!);
       if (value != null) {
         return ok(LogLevel.create({ name, value }));

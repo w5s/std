@@ -8,7 +8,7 @@ import type { UUID } from '../UUID.js';
  * const uuid: UUID;
  * const parts = UUID.toUint32Array(uuid);
  * ```
- * @param self - the UUID to convert
+ * @param self the UUID to convert
  */
 export function toUint32Array(self: UUID): Uint32Array {
   const returnValue = new Uint32Array(4);

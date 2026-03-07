@@ -23,7 +23,7 @@ export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
  * const task = ensureDirectory(FilePath('/path/to/directory'));
  * await Task.run(task);// Will create a directory
  * ```
- * @param filePath - The path to ensure
+ * @param filePath The path to ensure
  */
 export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
   return errnoTask(ensureDirectoryAsync)(filePath);
@@ -47,7 +47,7 @@ export async function ensureFileAsync(filePath: FilePath): Promise<void> {
  * const task = ensureFile(FilePath('/path/to/file'));
  * await Task.run(task);// Will create a file
  * ```
- * @param filePath - The path to ensure
+ * @param filePath The path to ensure
  */
 export function ensureFile(filePath: FilePath): Task<void, FileError> {
   return errnoTask(ensureFileAsync)(filePath);
@@ -71,8 +71,8 @@ export async function ensureSymbolicLinkAsync(source: FilePath, destination: Fil
  * const task = ensureSymbolicLink(FilePath('/path/to/file'), FilePath('/path/to/link'));
  * await Task.run(task);// Will create a symbolic link
  * ```
- * @param source - The source path
- * @param destination - The destination path
+ * @param source The source path
+ * @param destination The destination path
  */
 export function ensureSymbolicLink(source: FilePath, destination: FilePath): Task<void, FileError> {
   return errnoTask(ensureSymbolicLinkAsync)(source, destination);
@@ -93,7 +93,6 @@ async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   if (actualType !== expectedType) {
-    // eslint-disable-next-line @typescript-eslint/only-throw-error
     throw ensureTypeError(filePath, expectedType, actualType);
   }
 }

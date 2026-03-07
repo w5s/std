@@ -3,6 +3,7 @@ import type { Tag } from '../Tag.js';
 import { define } from '../Tag/define.js';
 
 export type UUIDString = `${string}-${string}-${string}-${string}-${string}`;
+
 /**
  * UUID string type
  */

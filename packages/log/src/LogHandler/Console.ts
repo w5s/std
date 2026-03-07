@@ -45,12 +45,14 @@ export interface ConsoleOptions {
    * Enable colors in the console output (default: true)
    */
   colors: boolean;
+
   /**
    * Returns an array of arguments passed to the console.{log|warn|...}() function
    *
    * @param logRecord
    */
   format: (logRecord: LogRecord, options: ConsoleOptions) => [required: unknown, ...optionalParameters: unknown[]];
+
   /**
    * Custom console instance (default: Console)
    */

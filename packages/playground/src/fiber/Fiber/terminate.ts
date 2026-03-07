@@ -11,7 +11,7 @@ import { __scheduler } from '../__scheduler.js';
  *
  * Fiber.terminate(fiber);// This will stop execution
  * ```
- * @param fiber - The fiber to terminate
+ * @param fiber The fiber to terminate
  */
 export function terminate(fiber: FiberIdLike): boolean {
   return __scheduler.terminate(__toFiberId(fiber));

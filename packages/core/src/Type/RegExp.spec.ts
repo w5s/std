@@ -1,4 +1,3 @@
-/* eslint-disable prefer-regex-literals */
 import { describe, it, expect } from 'vitest';
 import { RegExp } from './RegExp.js';
 import { describeCodec, describeType } from '../Testing.js';

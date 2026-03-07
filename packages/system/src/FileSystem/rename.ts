@@ -11,8 +11,8 @@ import type { FilePath } from '../FilePath.js';
  * const task = rename(FilePath('/path/to/old'), FilePath('/path/to/new'));
  * await Task.run(task); // Will rename the file
  * ```
- * @param oldPath - The path to the file to be renamed.
- * @param newPath - The path to the new file.
+ * @param oldPath The path to the file to be renamed.
+ * @param newPath The path to the new file.
  */
 export function rename(oldPath: FilePath, newPath: FilePath): Task<void, FileError> {
   return errnoTask(Internal.FS.rename)(oldPath, newPath);

@@ -53,12 +53,11 @@ describe(from, () => {
   it('caches values between iterations', () => {
     let i = 0;
     const iterable = {
-      *[Symbol.iterator]() {
-        // eslint-disable-next-line no-plusplus
+      * [Symbol.iterator]() {
         yield i++;
-        // eslint-disable-next-line no-plusplus
+
         yield i++;
-        // eslint-disable-next-line no-plusplus
+
         yield i++;
       },
     };

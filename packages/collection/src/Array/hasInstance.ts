@@ -9,7 +9,7 @@ import type { Array } from '../Array.js';
  * Array.hasInstance(null)) // false
  * ```
  * @category Type
- * @param anyValue - a tested value
+ * @param anyValue a tested value
  */
 export function hasInstance(anyValue: unknown): anyValue is Array<unknown> {
   return globalThis.Array.isArray(anyValue);

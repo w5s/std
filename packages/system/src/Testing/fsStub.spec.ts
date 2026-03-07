@@ -1,11 +1,12 @@
 import { describe, it, expect, afterAll } from 'vitest';
 import nodePath from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { Symbol } from '@w5s/core';
 import { fsStub } from './fsStub.js';
 import { withFile } from './withFile.js';
 
 describe('fsStub', () => {
-  const rootPath = nodePath.dirname(nodePath.dirname(__dirname));
+  const rootPath = nodePath.dirname(nodePath.dirname(fileURLToPath(import.meta.url)));
   const cwd = rootPath;
   const fsContext = fsStub({
     cwd,

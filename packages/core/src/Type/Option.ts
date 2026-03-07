@@ -12,7 +12,7 @@ import { Symbol } from '../Symbol.js';
  * @example
  * const OptionString = Type.Option(Type.String);
  *
- * @param Value - the value type
+ * @param Value the value type
  */
 export function Option<T>(Value: Type.Module<T>): Type.Module<OptionType<T>> {
   return define({

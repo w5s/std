@@ -23,9 +23,11 @@ export class PartialFunction<F extends PartialApplyFunction> implements PartialF
   andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
     thenFn: FThen,
   ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+  /* eslint-disable ts/unified-signatures -- Keep explicit overloads for call-site inference */
   andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
     thenFn: PartialFunctionLike<FThen>,
   ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+  /* eslint-enable ts/unified-signatures */
   andThen<FThen extends PartialApplyFunction<PartialParameter<F>>>(
     thenFn: PartialFunctionLike<FThen> | FThen,
   ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>> {
@@ -45,7 +47,7 @@ export function orElse<F extends PartialApplyFunction, FElse extends PartialAppl
   return partial({
     isDefinedAt: (value) => self.isDefinedAt(value) || elseFn.isDefinedAt(value),
     // @ts-ignore Typing is hard here
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
     apply: (value) => (self.isDefinedAt(value) ? self.apply(value) : elseFn.apply(value)),
   });
 }
@@ -54,10 +56,12 @@ export function andThen<F extends PartialApplyFunction, FThen extends PartialApp
   self: PartialFunctionLike<F>,
   thenFn: FThen,
 ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+/* eslint-disable ts/unified-signatures -- Keep explicit overloads for call-site inference */
 export function andThen<F extends PartialApplyFunction, FThen extends PartialApplyFunction<PartialParameter<F>>>(
   self: PartialFunctionLike<F>,
   thenFn: PartialFunctionLike<FThen>,
 ): PartialFunction<(parameter: PartialParameter<F>) => ReturnType<FThen>>;
+/* eslint-enable ts/unified-signatures */
 export function andThen<F extends PartialApplyFunction, FThen extends PartialApplyFunction<PartialParameter<F>>>(
   self: PartialFunctionLike<F>,
   thenFn: PartialFunctionLike<FThen> | FThen,
@@ -66,7 +70,7 @@ export function andThen<F extends PartialApplyFunction, FThen extends PartialApp
   const thenApply = typeof thenFn === 'function' ? thenFn : thenFn.apply;
   return partial({
     isDefinedAt,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
+
     apply: (value: PartialParameter<F>) => thenApply(apply(value)),
   });
 }

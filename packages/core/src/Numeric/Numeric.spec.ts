@@ -15,11 +15,11 @@ describe(Numeric, () => {
   });
   const TestType = {
     ...Numeric({
-      compare: TestComparable.compare,
+      'compare': TestComparable.compare,
       '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
       '*': (left, right) => ({ custom: true, value: (left.value * right.value) as Int }),
-      fromInt: (value: Int) => ({ custom: true, value }),
-      asInt: (value) => value.value,
+      'fromInt': (value: Int) => ({ custom: true, value }),
+      'asInt': (value) => value.value,
     }),
     ...TestComparable,
   };

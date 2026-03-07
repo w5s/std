@@ -49,9 +49,9 @@ function useRefStorage<V>(hostObject: Storage, key: string, initialValue: V): Re
  * const counterRef = useRef<number>(state, 'counter', 2);
  * // state == { counter: 2 }
  * ```
- * @param hostObject - the ref or storage containing the value
- * @param key - the key where data is stored
- * @param initialValue - the initial value
+ * @param hostObject the ref or storage containing the value
+ * @param key the key where data is stored
+ * @param initialValue the initial value
  */
 export function useRef<V>(
   hostObject: Ref<Record<string | symbol, unknown>> | Storage,

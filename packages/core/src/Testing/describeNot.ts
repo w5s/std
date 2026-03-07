@@ -16,9 +16,9 @@ import type { TestingLibrary } from './type.js';
  *   ],
  * });
  * ```
- * @param subject - the subject to test
- * @param cases - Generates a list of [value, negation] values to test against
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject the subject to test
+ * @param cases Generates a list of [value, negation] values to test against
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeNot<T>(
   subject: Not<T>,

@@ -8,7 +8,7 @@ export interface ReadLineOptions {
 export function readLines(chunks: AsyncIterableLike<string>, options: ReadLineOptions = {}): AsyncIterable<string> {
   const lineDelimiter = options.delimiter ?? '\n';
   return {
-    async *[Symbol.asyncIterator]() {
+    async* [Symbol.asyncIterator]() {
       let buffer = '';
       for await (const chunk of chunks) {
         const parts = chunk.split(lineDelimiter);
@@ -19,7 +19,6 @@ export function readLines(chunks: AsyncIterableLike<string>, options: ReadLineOp
             yield buffer;
           }
           for (let partIndex = 1; partIndex < partCount; partIndex += 1) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             buffer = parts[partIndex]!;
             if (buffer.length > 0) {
               yield buffer;

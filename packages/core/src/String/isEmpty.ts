@@ -7,7 +7,7 @@
  * String.isEmpty('abc');// false
  * ```
  * @category Predicate
- * @param self - The string
+ * @param self The string
  */
 export function isEmpty(self: string): boolean {
   return self.length === 0;

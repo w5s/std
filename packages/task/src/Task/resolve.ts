@@ -12,6 +12,7 @@ import { from } from './from.js';
  * @category Constructor
  */
 export function resolve<Error = never>(): Task<void, Error>;
+
 /**
  * Returns a successful task that always resolves `value`.
  * This is a shorthand for `Task.from(({ resolve }) => resolve(value))`
@@ -22,10 +23,10 @@ export function resolve<Error = never>(): Task<void, Error>;
  * const result = Task.run(task);// Result.Ok(1)
  * ```
  * @category Constructor
- * @param value - the success value
+ * @param value the success value
  */
 export function resolve<Value, Error = never>(value: Value): Task<Value, Error>;
 export function resolve<Error = never>(value?: unknown): Task<unknown, Error> {
-  // eslint-disable-next-line @typescript-eslint/no-shadow
+  // eslint-disable-next-line ts/no-shadow
   return from(({ resolve }) => resolve(value));
 }

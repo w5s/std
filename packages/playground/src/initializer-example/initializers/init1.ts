@@ -1,5 +1,3 @@
-/* eslint-disable import/no-default-export */
-/* eslint-disable no-console */
 import { Result } from '@w5s/core';
 import { TypeError } from '@w5s/error';
 import { Initializer } from '../../initializer/index.js';

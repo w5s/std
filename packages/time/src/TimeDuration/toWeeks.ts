@@ -12,8 +12,8 @@ import type { TimeDuration } from './TimeDuration.js';
  * TimeDuration.toWeeks(TimeDuration.from({ weeks: 1.5 }), true); // == 1
  * ```
  *
- * @param self - The time duration in milliseconds.
- * @param truncate - Whether to truncate the result to an integer. Defaults to false.
+ * @param self The time duration in milliseconds.
+ * @param truncate Whether to truncate the result to an integer. Defaults to false.
  * @returns The time duration in weeks.
  */
 export function toWeeks(self: TimeDuration, truncate = false): number {

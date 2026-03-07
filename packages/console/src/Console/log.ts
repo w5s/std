@@ -8,7 +8,7 @@ import { write } from './write.js';
  * ```typescript
  * Task.run(Console.log('Hello', 'World !'));// > Hello World !
  * ```
- * @param parameters - an array of values to be logged
+ * @param parameters an array of values to be logged
  */
 export function log(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
   return write('log', parameters);

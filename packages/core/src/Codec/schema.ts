@@ -8,7 +8,7 @@ import type { Symbol } from '../Symbol.js';
  * ```typescript
  * Codec.schema(string);// { type: 'string' }
  * ```
- * @param codec - the codec module
+ * @param codec the codec module
  */
 export function schema<T>(codec: Pick<Codec<T>, Symbol.schema>) {
   return codec.__schema__();

@@ -37,9 +37,8 @@ export const Callable = Object.assign(
    * ```
    * @param properties
    */
-  // eslint-disable-next-line @typescript-eslint/no-shadow, prefer-arrow-callback
+  // eslint-disable-next-line ts/no-shadow
   function Callable<T extends Callable<AnyFunction>>(properties: T): CallableFunction<T> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-argument
     return Object.assign((...args: any) => properties[Symbol.call](...args), properties);
   },
   {

@@ -11,8 +11,8 @@ import { from } from './from.js';
  * Option.orElse(Option.Some('foo'), alt); // Option.Some('foo')
  * Option.orElse(Option.None, alt); // Option.Some('bar')
  * ```
- * @param self - an optional value
- * @param fn - a callback
+ * @param self an optional value
+ * @param fn a callback
  */
 export function orElse<ValueFrom>(self: OptionLike<ValueFrom>, fn: () => OptionLike<ValueFrom>): Option<ValueFrom> {
   return self == null ? from(fn()) : self;

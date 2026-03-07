@@ -11,9 +11,10 @@ import type { TestingLibrary } from './type.js';
  *   notZero: () => [1, -1, 1.5],
  * });
  * ```
- * @param subject - The subject to test
- * @param properties - Object containing test properties
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The subject to test
+ * @param properties Object containing test properties
+ * @param properties.nonZero
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeZero<T>(
   subject: Numeric.Zero<T>,

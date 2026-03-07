@@ -18,8 +18,8 @@ const complete = <V, E>({ resolve, reject }: TaskParameters<V, E>, result: Resul
  *    Result.isOk(result) ? result : Result.Ok('handled_value') )
  * ); // Task.resolve('handled_value')
  * ```
- * @param self - A task
- * @param mapFn - A result mapper function
+ * @param self A task
+ * @param mapFn A result mapper function
  */
 export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

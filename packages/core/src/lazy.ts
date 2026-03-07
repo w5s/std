@@ -13,7 +13,7 @@
  *   expensiveRead() // <- fs.readDirSync not called, return value from cache
  * );
  * ```
- * @param getValue - the computation
+ * @param getValue the computation
  */
 export function lazy<T>(getValue: () => T): () => T {
   let defined = false;

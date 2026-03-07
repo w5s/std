@@ -10,7 +10,7 @@ import { seqIterable } from './seqIterable.js';
  * Seq.hasInstance([1, 2, 3]); // == false
  * Seq.hasInstance(Seq([1, 2, 3])); // == true
  * ```
- * @param anyValue - any value to check
+ * @param anyValue any value to check
  */
 export function hasInstance(anyValue: unknown): anyValue is Seq<unknown> {
   return isIterable(anyValue) && seqIterable in anyValue;

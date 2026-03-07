@@ -28,7 +28,7 @@ export interface ApplicationTest<Configuration = EmptyObject> extends Applicatio
  */
 export function ApplicationTest<Configuration extends Readonly<Record<string | symbol, unknown>> = EmptyObject>(
   id: string,
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  // eslint-disable-next-line ts/consistent-type-assertions
   initialConfiguration: Configuration = {} as Configuration,
   store: Ref<Record<string, ApplicationState>> = { current: {} },
 ): ApplicationTest<Configuration> {

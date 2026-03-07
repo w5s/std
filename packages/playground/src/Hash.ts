@@ -1,9 +1,8 @@
-/* eslint-disable no-bitwise */
 // see https://github.com/facebook/immutable-js/blob/master/src/Hash.js
 
 import type { Int } from '@w5s/core';
 
-const INT32_MASK = 0xff_ff_ff_ff;
+const INT32_MASK = 0xFF_FF_FF_FF;
 const ZERO = 0 as Int;
 const TRUE = 0x42_10_84_21 as Int;
 const FALSE = 0x42_10_84_20 as Int;
@@ -11,11 +10,10 @@ const UNDEFINED = 0x42_10_84_23 as Int;
 const NULL = 0x42_10_84_22 as Int;
 
 function int32SMI(i32: number): Int {
-  return (((i32 >>> 1) & 0x40_00_00_00) | (i32 & 0xbf_ff_ff_ff)) as Int;
+  return (((i32 >>> 1) & 0x40_00_00_00) | (i32 & 0xBF_FF_FF_FF)) as Int;
 }
 
 function hashNumber(value: number): Hash.Value {
-  // eslint-disable-next-line no-self-compare
   if (value !== value || value === Number.POSITIVE_INFINITY) {
     return ZERO;
   }
@@ -62,12 +60,13 @@ export const Hash = {
    * ```typescript
    * HashCode.combine(HashCode.from(...), HashCode.from(...))
    * ```
-   * @param left - hash code
-   * @param right - hash code
+   * @param left hash code
+   * @param right hash code
    */
   combine(left: Hash.Value, right: Hash.Value): Hash.Value {
-    return int32SMI(left ^ ((right as number) + 0x9e_37_79_b9 + (left << 6) + (left >> 2)));
+    return int32SMI(left ^ ((right as number) + 0x9E_37_79_B9 + (left << 6) + (left >> 2)));
   },
+
   /**
    * Return a hash number from `anyValue`
    *
@@ -78,10 +77,9 @@ export const Hash = {
    * Hash.from('foo-bar'); //-682120564
    * ```
    * @category Constructor
-   * @param anyValue - hashed value
+   * @param anyValue hashed value
    */
   from(anyValue: undefined | null | boolean | number | string): Hash.Value {
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (typeof anyValue) {
       case 'boolean': {
         return anyValue ? TRUE : FALSE;
@@ -96,7 +94,6 @@ export const Hash = {
         return hashString(anyValue);
       }
       default: {
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (anyValue === null) {
           return NULL;
         }

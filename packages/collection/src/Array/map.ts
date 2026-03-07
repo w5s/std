@@ -10,8 +10,8 @@ import type { Array } from '../Array.js';
  * const double = (_: number) => _ * 2;
  * Array.map(array, double); // [2, 4, 6]
  * ```
- * @param self - The array object
- * @param mapFn - A function that accepts up to three arguments. The map method calls the function one time for each item in the array.
+ * @param self The array object
+ * @param mapFn A function that accepts up to three arguments. The map method calls the function one time for each item in the array.
  */
 export function map<FromItem, ToItem>(
   self: Array<FromItem>,
@@ -29,6 +29,5 @@ export function map<FromItem, ToItem>(
     return nextValue;
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return changed ? returnValue : (self as unknown as Array<ToItem>);
 }

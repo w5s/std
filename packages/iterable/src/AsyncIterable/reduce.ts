@@ -14,9 +14,9 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  *   0,
  * );// 6
  * ```
- * @param self - the iterator reduced
- * @param reducer - the reducer function
- * @param initialValue - the initial value passed to the reducer
+ * @param self the iterator reduced
+ * @param reducer the reducer function
+ * @param initialValue the initial value passed to the reducer
  */
 export async function reduce<Value, Return>(
   self: AsyncIterableLike<Value>,

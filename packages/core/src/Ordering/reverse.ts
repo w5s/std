@@ -13,7 +13,7 @@ import type { Ordering } from '../Ordering.js';
  * reverse(Ordering.Equal); // == Ordering.Equal
  *
  * ```
- * @param self - the ordering
+ * @param self the ordering
  */
 export function reverse(self: Ordering): Ordering {
   return self === 0 ? self : (-self as Ordering);

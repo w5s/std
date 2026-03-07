@@ -12,8 +12,8 @@ import { has } from './has.js';
  * Record.get(record, 'nonExistent'); // Option.None
  * ```
  * @category Accessor
- * @param self - the record
- * @param key - the entry key
+ * @param self the record
+ * @param key the entry key
  */
 export function get<Key extends RecordKey, Value>(self: Record<Key, Value>, key: Key): Option<Value> {
   return has(self, key) ? self[key] : undefined;

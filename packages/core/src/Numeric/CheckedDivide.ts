@@ -11,8 +11,8 @@ export interface CheckedDivide<Base, Divider = Base, Output = Base> {
    * const result = Numeric['/?'](left, right);// represents (left / right)
    * ```
    * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
+   * @param left the left operand
+   * @param right the right operand
    */
   '/?'(left: Base, right: Divider): Option<Output>;
 }

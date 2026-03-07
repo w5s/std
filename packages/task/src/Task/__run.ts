@@ -18,8 +18,8 @@ import { unsafeCall } from './unsafeCall.js';
  * const getMessage = Task.resolve('Hello World!');
  * const messageResult = __run(getMessage);// Result.Ok('Hello World!')
  * ```
- * @param self - the task to be run
- * @param canceler - the canceler to use for the task
+ * @param self the task to be run
+ * @param canceler the canceler to use for the task
  */
 export function __run<Value, Error>(
   self: TaskLike<Value, Error>,
@@ -38,11 +38,9 @@ export function __run<Value, Error>(
   });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
-    // eslint-disable-next-line promise/prefer-await-to-then, promise/catch-or-return
     runValue.then(undefined, (_error) => rejectHandler(_error));
   }
   if (returnValue === undefined) {
-    // eslint-disable-next-line promise/param-names
     return new Promise<Result<Value, Error>>((resolvePromise, rejectPromise) => {
       resolveHandler = resolvePromise;
       rejectHandler = rejectPromise;

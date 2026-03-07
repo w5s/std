@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable no-plusplus */
 import type { ExpectFunction } from '@w5s/core-type';
 
 async function __fromAsync(iterable: any, mapFn: any = (_: any) => _) {
@@ -13,7 +10,6 @@ async function __fromAsync(iterable: any, mapFn: any = (_: any) => _) {
     }
   } else {
     for (const item of iterable) {
-      // eslint-disable-next-line no-await-in-loop
       returnValue.push(await mapFn(await item, index++));
     }
   }
@@ -27,6 +23,7 @@ export interface ExpectAsyncIterable {
    * @param expected
    */
   toHaveValues(expected: Array<unknown>): Promise<void>;
+
   /**
    * Asserts that `[Symbol.iterator]()` always returns the same value
    */
@@ -43,7 +40,7 @@ export interface ExpectAsyncIterable {
  * const someIterable: AsyncIterable<any> = ...;
  * await expectAsyncIterable(someIterable).toHaveValues([1]);
  * ```
- * @param expectFn - the expect function from the test library
+ * @param expectFn the expect function from the test library
  */
 export function withAsyncIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: AsyncIterable<V>, isNot: boolean): ExpectAsyncIterable => ({

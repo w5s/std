@@ -8,7 +8,7 @@
  * }))
  * ```
  * @category Constructor
- * @param iteratorFn - function that creates a new iterator
+ * @param iteratorFn function that creates a new iterator
  */
 export function create<Value>(iteratorFn: () => Iterator<Value>): Iterable<Value> {
   return {

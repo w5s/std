@@ -13,7 +13,7 @@ import { isOk } from './isOk.js';
  * console.log(Result.isError(x));// true
  * ```
  * @category Type
- * @param anyValue - the value to tested
+ * @param anyValue the value to tested
  */
 export function isError<V, E>(anyValue: Result<V, E>): anyValue is Result.Error<E> {
   return !isOk(anyValue);

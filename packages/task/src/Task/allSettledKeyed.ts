@@ -20,7 +20,7 @@ import { error as resultError } from './error.js';
  * })
  *
  * ```
- * @param tasks - tasks to be run in parallel
+ * @param tasks tasks to be run in parallel
  */
 export function allSettledKeyed<TaskRecord extends Record<string, TaskLike<any, any>>>(
   tasks: TaskRecord,
@@ -28,7 +28,7 @@ export function allSettledKeyed<TaskRecord extends Record<string, TaskLike<any, 
   return from((parameters) => {
     const taskArray = Object.entries(tasks).map(([key, task]) => ({ key, task }));
     if (taskArray.length === 0) {
-      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      // eslint-disable-next-line ts/consistent-type-assertions
       parameters.resolve({} as { [K in keyof TaskRecord]: Task.ValueOf<TaskRecord[K]> });
     } else {
       const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });

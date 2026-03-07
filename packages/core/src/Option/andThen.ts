@@ -12,8 +12,8 @@ import { from } from './from.js';
  * Option.andThen(Option.Some(2), square); // Option.Some(16)
  * Option.andThen(Option.None, square); // Option.None
  * ```
- * @param self - an optional value
- * @param fn - a callback
+ * @param self an optional value
+ * @param fn a callback
  */
 export function andThen<ValueFrom, ValueTo>(
   self: OptionLike<ValueFrom>,

@@ -26,6 +26,7 @@ export namespace Tag {
      * @param value
      */
     (value: From): To;
+
     /**
      * Convert an underlying type to a tagged type
      *
@@ -33,6 +34,7 @@ export namespace Tag {
      * @param value
      */
     wrap(value: From): To;
+
     /**
      * Convert a tagged value to the underlying type
      *

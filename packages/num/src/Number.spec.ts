@@ -9,7 +9,7 @@ describe('Number', () => {
   it('is an alias to functions', () => {
     expect(Number).toEqual(
       expect.objectContaining({
-        compare: expect.any(Function),
+        'compare': expect.any(Function),
         '==': expect.any(Function),
         '+': expect.any(Function),
         '*': expect.any(Function),

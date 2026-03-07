@@ -1,3 +1,4 @@
+import { inspect } from 'node:util';
 import type { Type } from '../Type.js';
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
@@ -15,9 +16,9 @@ import type { TestingLibrary } from './type.js';
  *   ]
  * }));
  * ```
- * @param subject - The type to describe.
- * @param properties - A function that returns an object with the following properties
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The type to describe.
+ * @param properties A function that returns an object with the following properties
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeType<S extends Type<any>>(
   subject: S,
@@ -65,11 +66,7 @@ export function describeType<S extends Type<any>>(
   });
 
   (inspectDefault.length === 0 ? describe.todo : describe)('node:util.inspect()', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, global-require, @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, unicorn/prefer-module
-    const { inspect } = require('node:util');
-
     it.each(inspectDefault)('($0) returns $1', (instance, expected) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       expect(inspect(instance)).toEqual(expected);
     });
   });

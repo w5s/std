@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/no-unused-vars */
 import { describe, it } from 'vitest';
 import { assertNever } from './assertNever.js';
 
@@ -7,15 +7,17 @@ describe('assertNever', () => {
   const neverValue: never = undefined as never;
 
   it('should report ts error', () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    () => {
+    if (false) {
       // @ts-expect-error anyValue is not never
       assertNever(anyValue);
-    };
+    }
   });
 
   /**
    * Type check
+   *
+   * @param fruit
+   * @example
    */
   const typeTestExhaustive = (fruit: 'banana' | 'kiwi'): string => {
     switch (fruit) {
@@ -31,7 +33,6 @@ describe('assertNever', () => {
     }
   };
   const typeTestNonExhaustive = (fruit: 'banana' | 'kiwi'): string => {
-    // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
     switch (fruit) {
       case 'banana': {
         return '🍌 Banana';

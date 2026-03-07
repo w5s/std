@@ -6,14 +6,17 @@ import { define } from '../Enum/define.js';
  */
 export const Ordering = define({
   typeName: 'Ordering',
+
   /**
    * An ordering where a compared value is less than another.
    */
   Less: -1,
+
   /**
    * An ordering where a compared value is equal to another.
    */
   Equal: 0,
+
   /**
    * An ordering where a compared value is greater than another.
    */

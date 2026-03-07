@@ -14,8 +14,8 @@ import { map } from './map.js';
  * const failure = Task.reject('PreviousError');
  * Task.andRun(failure, (value) => Task.resolve(`never_used`));// Task.reject('PreviousError')
  * ```
- * @param self - a Task object
- * @param fn - the value mapper function
+ * @param self a Task object
+ * @param fn the value mapper function
  */
 export function andRun<ValueFrom, ErrorFrom, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

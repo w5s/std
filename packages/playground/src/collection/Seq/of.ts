@@ -8,7 +8,7 @@ import { from } from './from.js';
  * ```typescript
  * Seq.of(1, 2, 3); // A sequence of 1, 2, 3
  * ```
- * @param values - values to be converted to a sequence
+ * @param values values to be converted to a sequence
  */
 export function of<T>(...values: T[]): Seq<T> {
   return from(values);

@@ -20,7 +20,7 @@ import { TaskAggregateState } from './TaskAggregateState.js';
  * ]);
  * const failureResult = Task.run(failure);// Result.Error(AggregateError({ errors: ['error1', 'error2']}))
  * ```
- * @param tasks - tasks to be run in parallel
+ * @param tasks tasks to be run in parallel
  */
 export function any<T extends TaskLike<any, any>[]>(
   tasks: [...T],

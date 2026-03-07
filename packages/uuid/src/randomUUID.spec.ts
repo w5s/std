@@ -25,7 +25,7 @@ describe(randomUUID, () => {
 
     expectTask(task).toResolveSync(uuidMock);
   });
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+
   it.runIf(!globalThis.crypto)('should use node:crypto.randomUUID', async () => {
     const uuidMock = empty();
     const task = randomUUID();

@@ -11,8 +11,8 @@ import { unsafeCall } from './unsafeCall.js';
  * const task = Task.resolve('foo');
  * Task.map(task, (value) => `${value}_bar`));// Task.resolve('foo_bar')
  * ```
- * @param self - a Task object
- * @param fn - the mapper function
+ * @param self a Task object
+ * @param fn the mapper function
  */
 export function map<ValueFrom, ErrorFrom, ValueTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,

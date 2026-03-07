@@ -6,6 +6,7 @@ import { ensure as ensureType } from '../Type/ensure.js';
 /**
  * Returns a new Tag module
  *
+ * @param parameters
  * @example
  * ```typescript
  * type Foo = string & Tag<'Foo'>;

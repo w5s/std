@@ -11,10 +11,12 @@ export const RequestTimeout = union(
    * No Timeout
    */
   constant('none'),
+
   /**
    * Default timeout value (30sec)
    */
   constant('default'),
+
   /**
    * Custom timeout value
    */

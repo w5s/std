@@ -9,8 +9,8 @@
  * console.log(object); // > { foo: true, bar: true, baz: true }; (unchanged)
  * ```
  *
- * @param self - the object
- * @param keys - the keys to exclude
+ * @param self the object
+ * @param keys the keys to exclude
  */
 export function omit<T extends object, K extends keyof T>(self: Readonly<T>, keys: readonly K[]): Omit<T, K> {
   const excludes = new Set(keys);

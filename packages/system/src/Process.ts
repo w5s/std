@@ -16,7 +16,7 @@ export const Process = {
    * const exitTask = Process.exit(0);
    * Task.run(exitTask);// Will exit program with code 0
    * ```
-   * @param code - the exit code
+   * @param code the exit code
    */
   exit(code: number): Task<never, never> {
     return taskFrom(({ resolve }) => resolve(process.exit(code)));
@@ -43,10 +43,9 @@ export const Process = {
    * const task = Process.setCurrentDirectory(FilePath('other/directory'));
    * Task.run(task);// Result.Ok(undefined)
    * ```
-   * @param directory - the directory to set as the current working directory
+   * @param directory the directory to set as the current working directory
    */
   setCurrentDirectory(directory: FilePath): Task<void, FileError> {
-    // eslint-disable-next-line @typescript-eslint/unbound-method, n/no-sync
     return errnoTaskSync(process.chdir)(directory);
   },
 };

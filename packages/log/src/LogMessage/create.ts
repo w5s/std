@@ -8,7 +8,7 @@ import type { LogMessage, LogMessageItem } from '../LogMessage.js';
  * const message = LogMessage.create(['foo', { $ref: 'key' }, 'bar']);
  * ```
  * @category Constructor
- * @param parts - constructor parameters
+ * @param parts constructor parameters
  */
 export function create(parts: Array<LogMessageItem>): LogMessage {
   /* eslint-disable unicorn/no-for-loop */
@@ -16,7 +16,6 @@ export function create(parts: Array<LogMessageItem>): LogMessage {
   const returnValue = [];
   let buffer = '';
   for (let index = 0; index < parts.length; index += 1) {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const value = parts[index]!;
     if (typeof value === 'string') {
       buffer += value;

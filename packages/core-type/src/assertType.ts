@@ -8,7 +8,7 @@
  * assertType<'foo', Expected>(true);// -> everything is fine
  * assertType<'bar', Expected>(true);// -> ts raises an error
  * ```
- * @param _shouldBeEqual - an inferred value
+ * @param _shouldBeEqual an inferred value
  */
 export function assertType<Actual, Expected>(_shouldBeEqual: IsExact<Actual, Expected>): void {}
 

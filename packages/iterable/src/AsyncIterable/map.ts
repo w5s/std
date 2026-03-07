@@ -13,15 +13,15 @@ import type { AsyncIterableLike } from '../AsyncIterableLike.js';
  *   async (currentValue, currentIndex) => currentValue * 2,
  * );// == AsyncIterable.of(2, 4, 6)
  * ```
- * @param self - the iterable source
- * @param mapFn - a function that returns a new value
+ * @param self the iterable source
+ * @param mapFn a function that returns a new value
  */
 export function map<ValueFrom, ValueTo>(
   self: AsyncIterableLike<ValueFrom>,
   mapFn: (currentValue: ValueFrom, currentIndex: Int) => Awaitable<ValueTo>,
 ): AsyncIterable<ValueTo> {
   return {
-    async *[Symbol.asyncIterator]() {
+    async* [Symbol.asyncIterator]() {
       let currentIndex = 0;
       for await (const currentValue of self) {
         yield mapFn(currentValue, currentIndex as Int);

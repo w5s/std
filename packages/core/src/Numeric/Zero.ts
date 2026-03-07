@@ -9,6 +9,7 @@ export interface Zero<T> {
    * @category Numeric
    */
   zero(this: void): T;
+
   /**
    * Returns true if self is equal to the additive identity.
    *
@@ -18,7 +19,7 @@ export interface Zero<T> {
    * Number.isZero(1); // false
    * ```
    * @category Numeric
-   * @param self - the value to test
+   * @param self the value to test
    */
   isZero(this: void, self: T): boolean;
 }

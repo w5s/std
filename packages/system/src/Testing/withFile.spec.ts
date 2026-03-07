@@ -64,7 +64,7 @@ describe('withFile', () => {
       }).rejects.toEqual(
         expect.objectContaining({
           name: 'AssertionError',
-          message: `expected 'test1_content\\n' to deeply equal ''`,
+          message: String.raw`expected 'test1_content\n' to deeply equal ''`,
         }),
       );
     });

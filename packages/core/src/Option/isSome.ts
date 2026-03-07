@@ -14,7 +14,7 @@ import type { OptionLike } from '../Option.js';
  * Option.isSome('foo');// true
  * ```
  * @category Type
- * @param anyValue - the value to test
+ * @param anyValue the value to test
  */
 export function isSome<Value>(anyValue: Value): anyValue is Exclude<Value, OptionLike<never>> {
   return !isNone(anyValue);

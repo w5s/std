@@ -9,8 +9,8 @@ import { LogLevel } from './LogLevel.js';
  * const level = LogLevel('UberCritical', 60);// LogLevel.create({ name: 'UberCritical', value: 60 })
  * ```
  * @category Constructor
- * @param name - the level string representation
- * @param levelValue - the level value
+ * @param name the level string representation
+ * @param levelValue the level value
  */
 export function of(name: string, levelValue: Int): LogLevel {
   return LogLevel.create({ name, value: levelValue });

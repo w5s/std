@@ -14,7 +14,7 @@ import { of } from './of.js';
  * Money.parse('1.1EUR');// Option.Some(EUR('1.1'))
  * Money.parse('invalid');// Option.None
  * ```
- * @param expression - an number expression
+ * @param expression an number expression
  */
 export function parse(expression: string): Option<Money> {
   const code = expression.slice(-3);

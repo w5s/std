@@ -24,9 +24,12 @@ import type { TestingLibrary } from './type.js';
  * });
  *
  * ```
- * @param subject - The object to test
- * @param cases - The test cases to run
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param subject The object to test
+ * @param cases The test cases to run
+ * @param cases.range
+ * @param cases.rangeSize
+ * @param cases.index
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeIndexable<V, Index extends number | bigint>(
   subject: Indexable<V, Index>,

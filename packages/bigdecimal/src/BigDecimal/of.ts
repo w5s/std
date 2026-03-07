@@ -9,8 +9,8 @@ import { BigDecimal } from './BigDecimal.js';
  * BigDecimal.of(-234n, 2); // BigDecimal('2.34')
  * ```
  * @category Constructor
- * @param value - The base integer value.
- * @param scale - The scale.
+ * @param value The base integer value.
+ * @param scale The scale.
  */
 export function of(value: bigint, scale: number): BigDecimal {
   return scale < 0

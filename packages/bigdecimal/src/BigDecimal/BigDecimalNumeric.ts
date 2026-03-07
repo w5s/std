@@ -14,10 +14,10 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
 
 interface BigDecimalNumeric
   extends
-    Numeric.Add<BigDecimal>,
-    Numeric.Subtract<BigDecimal>,
-    Numeric.Multiply<BigDecimal>,
-    Numeric.CheckedRemainder<BigDecimal> {}
+  Numeric.Add<BigDecimal>,
+  Numeric.Subtract<BigDecimal>,
+  Numeric.Multiply<BigDecimal>,
+  Numeric.CheckedRemainder<BigDecimal> {}
 
 export const BigDecimalNumeric: BigDecimalNumeric = {
   '+': combine2((l, r) => l + r),

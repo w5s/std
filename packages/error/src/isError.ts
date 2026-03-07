@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 const hasStructuredClone = structuredClone !== undefined;
 
 /**
@@ -13,7 +12,7 @@ const hasStructuredClone = structuredClone !== undefined;
  * isError({ name: 'Error' }); // false
  * ```
  *
- * @param anyValue - The value to check.
+ * @param anyValue The value to check.
  * @returns true if the value is an Error object, false otherwise.
  */
 export function isError(anyValue: unknown): anyValue is Error {

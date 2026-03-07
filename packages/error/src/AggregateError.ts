@@ -1,4 +1,3 @@
-/* eslint-disable prefer-destructuring */
 /**
  * Alias to native {@link globalThis.AggregateError}
  *
@@ -28,8 +27,8 @@ export declare class AggregateError<Errors extends any[] | Iterable<any>> extend
   /**
    * AggregateError constructor
    *
-   * @param errors - an iterable of error
-   * @param message - the error message
+   * @param errors an iterable of error
+   * @param message the error message
    */
   constructor(errors: Errors, message?: string);
 }

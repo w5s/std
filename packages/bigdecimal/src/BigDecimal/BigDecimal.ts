@@ -31,10 +31,12 @@ const BigDecimalStruct = Struct.define<BigDecimal>({
  */
 export interface BigDecimal extends Struct<{
   _: 'BigDecimal';
+
   /**
    * The base denominator
    */
   value: bigint;
+
   /**
    * The decimal scale N = value / (2 ** scale)
    */

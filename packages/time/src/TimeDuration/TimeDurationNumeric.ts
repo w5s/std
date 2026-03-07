@@ -7,10 +7,10 @@ import type { TimeDuration } from './TimeDuration.js';
 
 interface TimeDurationNumeric
   extends
-    Numeric.Add<TimeDuration>,
-    Numeric.Subtract<TimeDuration>,
-    Numeric.Multiply<TimeDuration, number, TimeDuration>,
-    Numeric.Power<TimeDuration, number, TimeDuration> {}
+  Numeric.Add<TimeDuration>,
+  Numeric.Subtract<TimeDuration>,
+  Numeric.Multiply<TimeDuration, number, TimeDuration>,
+  Numeric.Power<TimeDuration, number, TimeDuration> {}
 export const TimeDurationNumeric: TimeDurationNumeric = {
   ...(Add() as Numeric.Add<TimeDuration>),
   ...(Subtract() as Numeric.Subtract<TimeDuration>),

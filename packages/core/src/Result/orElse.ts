@@ -11,8 +11,8 @@ import { isOk } from './isOk.js';
  * Result.orElse(Result.Error('TestError'), square); // Result.Ok('TestError_handled')
  * Result.orElse(Result.Ok(4), square); // Result.Ok(4)
  * ```
- * @param self - a Result object
- * @param fn - a error mapping function
+ * @param self a Result object
+ * @param fn a error mapping function
  */
 export function orElse<VFrom, EFrom, VTo, ETo>(
   self: Result<VFrom, EFrom>,

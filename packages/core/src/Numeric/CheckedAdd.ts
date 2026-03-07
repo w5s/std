@@ -11,8 +11,8 @@ export interface CheckedAdd<Left, Right = Left, Output = Left> {
    * const result = TNumeric['+?'](left, right);// represents (left + right)
    * ```
    * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
+   * @param left the left operand
+   * @param right the right operand
    */
   '+?'(left: Left, right: Right): Option<Output>;
 }

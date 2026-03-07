@@ -8,8 +8,8 @@
  * const right = ['a', 'b'];
  * Iterable.zip(left, right);// == Iterable.of([1, 'a'], [2, 'b'])
  * ```
- * @param left - Left iterable
- * @param right - Right iterable
+ * @param left Left iterable
+ * @param right Right iterable
  */
 export function zip<L, R>(left: Iterable<L>, right: Iterable<R>): Iterable<[L, R]> {
   return {

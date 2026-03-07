@@ -58,7 +58,7 @@ export const FakeBodyReader = Object.assign(
     ...defaultBodyReader,
     fakeReaderFormat: format,
     [formatToProperty[format]]:
-      // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors
+
       'resolve' in parameters ? () => Promise.resolve(parameters.resolve) : () => Promise.reject(parameters.reject),
   }),
   {
@@ -69,7 +69,7 @@ export const FakeBodyReader = Object.assign(
      * ```typescript
      * const value = FakeBodyReader.value('arrayBuffer');// ArrayBuffer
      * ```
-     * @param format - the format to use to generate
+     * @param format the format to use to generate
      */
     value<F extends BodyReaderFormat>(format: F): BodyReaderValue<F> {
       return fakeBodyValue(format);

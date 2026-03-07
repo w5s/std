@@ -7,6 +7,7 @@ export const RequestCredentials = define({
   Omit: 'omit',
   SameOrigin: 'same-origin',
 });
+
 /**
  * HTTP credentials
  *

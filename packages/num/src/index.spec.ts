@@ -3,7 +3,7 @@ import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module).sort()).toEqual(
+    expect(Object.keys(Module).toSorted()).toEqual(
       [
         // Public API
         'BigInt',
@@ -11,7 +11,7 @@ describe('index', () => {
         'Number',
         'NumberConversion',
         'RoundingMode',
-      ].sort(),
+      ].toSorted(),
     );
   });
 });

@@ -14,9 +14,9 @@ import type { FilePath } from '../FilePath.js';
  * const write = writeFile(FilePath('my/file'), 'my content');
  * Task.run(write);
  * ```
- * @param file - Path to the file to be read.
- * @param data - The buffer that the data will be appended to.
- * @param options - An object of write options
+ * @param file Path to the file to be read.
+ * @param data The buffer that the data will be appended to.
+ * @param options An object of write options
  */
 export function writeFile(
   file: FilePath,
@@ -51,10 +51,12 @@ export namespace writeFile {
      * The file encoding
      */
     encoding?: Option<BufferEncoding>;
+
     /**
      * The file mode
      */
     mode?: Option<nodeFS.Mode>;
+
     /**
      * The system flag used to determine if the file should be truncated
      */

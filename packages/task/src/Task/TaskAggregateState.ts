@@ -7,6 +7,7 @@ interface TaskInputEntry<Key, Value, Error> {
    * The task to run
    */
   task: TaskLike<Value, Error>;
+
   /**
    * The key of the task (number or string)
    */
@@ -32,16 +33,19 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
    * Check if the aggregate state is complete
    */
   isComplete: () => boolean;
+
   /**
    * Cancel all the tasks
    */
   cancelAll: () => void;
+
   /**
    * Cancel the tasks if the predicate is true
    *
-   * @param predicate - the predicate to check if the tasks should be cancelled
+   * @param predicate the predicate to check if the tasks should be cancelled
    */
   cancelIf: (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => void;
+
   /**
    * Run all the tasks
    */
@@ -57,10 +61,12 @@ interface TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError> {
       self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
     ) => void,
   ) => void;
+
   /**
    * Resolve the aggregate state
    */
   resolve: (value: ReturnValue) => void;
+
   /**
    * Reject the aggregate state
    */
@@ -103,12 +109,12 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
 
   const withClose =
     <Fn extends (value: any) => any>(fn: Fn) =>
-    (value: any) => {
-      if (!closed) {
-        closed = true;
-        fn(value);
-      }
-    };
+      (value: any) => {
+        if (!closed) {
+          closed = true;
+          fn(value);
+        }
+      };
 
   const runAll = (
     resolveTask: (
@@ -126,12 +132,12 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
       unsafeCall(entry.task, {
         resolve: (value: Value) => {
           taskCompleted += 1;
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          // eslint-disable-next-line ts/no-use-before-define
           resolveTask(value, entry, self);
         },
         reject: (error: Error) => {
           taskCompleted += 1;
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
+          // eslint-disable-next-line ts/no-use-before-define
           rejectTask(error, entry, self);
         },
         canceler: entry.canceler,

@@ -4,6 +4,7 @@ import { Currency as CurrencyType } from './Currency/Currency.js';
 import { CurrencyAsString } from './Currency/CurrencyAsString.js';
 
 export type Currency = CurrencyType;
+
 /**
  * @namespace
  */

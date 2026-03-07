@@ -22,7 +22,7 @@ export interface Headers extends HeadersType {}
  * });// { key1: 'value1, key2: 'value2' }
  *```
  * @category Constructor
- * @param values - a record or iterable to initialize
+ * @param values a record or iterable to initialize
  */
 export const Headers = Callable({
   ...HeadersType,

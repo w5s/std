@@ -178,12 +178,11 @@ function isEmpty(anyValue: readonly unknown[]): anyValue is never[] {
  * ```typescript
  * SQLDataType.format(SQLDataType.BINARY(1)); 'BINARY(1)'
  * ```
- * @param data - the data to stringify
+ * @param data the data to stringify
  */
 function format(data: SQLDataType): string {
   const { keys } = Modules[data.dataType];
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return
   return `${data.dataType}${isEmpty(keys) ? '' : `(${keys.map((key) => (data as any)[key]).join(',')})`}`;
 }
 

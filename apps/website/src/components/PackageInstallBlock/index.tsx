@@ -18,13 +18,23 @@ export function PackageInstallBlock({ packageName }: PackageInstallBlockProps) {
       ]}
     >
       <TabItem value="yarn">
-        <CodeBlock language="bash">yarn add {packageName}</CodeBlock>
+        <CodeBlock language="bash">
+          yarn add
+          {' '}
+          {packageName}
+        </CodeBlock>
       </TabItem>
       <TabItem value="pnpm">
-        <CodeBlock language="bash">pnpm add {packageName}</CodeBlock>
+        <CodeBlock language="bash">
+          pnpm add
+          {packageName}
+        </CodeBlock>
       </TabItem>
       <TabItem value="npm">
-        <CodeBlock language="bash">npm install {packageName}</CodeBlock>
+        <CodeBlock language="bash">
+          npm install
+          {packageName}
+        </CodeBlock>
       </TabItem>
     </Tabs>
   );

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
 import { Console } from './Console.js';

@@ -9,8 +9,8 @@ export interface Multiply<Left, Right = Left, Output = Left> {
    * const result = Numeric['*'](left, right);// represents (left * right)
    * ```
    * @category Numeric
-   * @param left - the left operand
-   * @param right - the right operand
+   * @param left the left operand
+   * @param right the right operand
    */
   '*'(left: Left, right: Right): Output;
 }

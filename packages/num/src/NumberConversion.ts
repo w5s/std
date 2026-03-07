@@ -17,13 +17,14 @@ export interface NumberConversion<T> {
   /**
    * Converts a number value to type T
    *
-   * @param value - A number value
+   * @param value A number value
    */
   fromNumber(this: void, value: number): T;
+
   /**
    * Converts a value of type T to a number
    *
-   * @param value - A value of type T
+   * @param value A value of type T
    */
   asNumber(this: void, value: T): number;
 }
@@ -65,14 +66,14 @@ export const NumberConversion = Callable({
 export namespace NumberConversion {
   export interface Module<T>
     extends
-      Core.Comparable<T>,
-      Core.Numeric.Add<T>,
-      Core.Numeric.Multiply<T>,
-      Core.Numeric.Remainder<T>,
-      Core.Numeric.Subtract<T>,
-      Core.Numeric.Power<T>,
-      Core.Numeric.Signed<T>,
-      Core.Numeric.Negate<T>,
-      Core.Numeric.Zero<T>,
-      Core.Bounded<T> {}
+    Core.Comparable<T>,
+    Core.Numeric.Add<T>,
+    Core.Numeric.Multiply<T>,
+    Core.Numeric.Remainder<T>,
+    Core.Numeric.Subtract<T>,
+    Core.Numeric.Power<T>,
+    Core.Numeric.Signed<T>,
+    Core.Numeric.Negate<T>,
+    Core.Numeric.Zero<T>,
+    Core.Bounded<T> {}
 }

@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-function-type */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable ts/no-unsafe-function-type */
+
 /**
  * Pipe `value` to a sequence of function.
  *
@@ -12,7 +10,7 @@
  * pipe(value).to(f, g);// g(f(value)) or value |> f |> g
  * // and so on...
  * ```
- * @param value - the value to pass to the first function
+ * @param value the value to pass to the first function
  */
 export function pipe<Value>(value: Value): Pipe<Value> {
   return {

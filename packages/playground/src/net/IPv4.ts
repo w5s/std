@@ -1,4 +1,3 @@
-/* eslint-disable no-bitwise */
 import type { Bounded, Int, Codec, Option, Ordering } from '@w5s/core';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
@@ -38,7 +37,7 @@ const IPv4Format = {
     return undefined;
   },
   format({ ipv4 }: IPv4): string {
-    return `${(ipv4 >>> 24) & 0xff}.${(ipv4 >>> 16) & 0xff}.${(ipv4 >>> 8) & 0xff}.${ipv4 & 0xff}`;
+    return `${(ipv4 >>> 24) & 0xFF}.${(ipv4 >>> 16) & 0xFF}.${(ipv4 >>> 8) & 0xFF}.${ipv4 & 0xFF}`;
   },
 };
 
@@ -60,7 +59,7 @@ const IPv4Codec: Codec<IPv4> = {
 };
 
 function fromNumber(value: number): IPv4 {
-  return IPv4Type({ ipv4: (value & 0xff_ff_ff_ff) as IPv4Address });
+  return IPv4Type({ ipv4: (value & 0xFF_FF_FF_FF) as IPv4Address });
 }
 
 function of(_0: number, _1: number, _2: number, _3: number) {
@@ -77,7 +76,7 @@ const IPv4Comparable = Comparable<IPv4>({
 
 const IPv4Bounded: Bounded<IPv4> = {
   minValue: fromNumber(0),
-  maxValue: fromNumber(0xff_ff_ff_ff),
+  maxValue: fromNumber(0xFF_FF_FF_FF),
 };
 
 const IPv4Indexable = Indexable({

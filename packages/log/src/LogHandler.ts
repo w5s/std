@@ -6,6 +6,7 @@ import { filter } from './LogHandler/filter.js';
 export interface LogHandler {
   (logRecord: LogRecord): Task<void, never>;
 }
+
 /**
  * @namespace
  */

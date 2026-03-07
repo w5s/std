@@ -11,8 +11,8 @@ import type { FilePath } from '../FilePath.js';
  * const task = copyFile(FilePath('/path/to/source'), FilePath('/path/to/destination'));
  * await Task.run(task); // Will copy the file
  * ```
- * @param source - The source path.
- * @param destination - The destination path.
+ * @param source The source path.
+ * @param destination The destination path.
  */
 export function copyFile(source: FilePath, destination: FilePath): Task<void, FileError> {
   return errnoTask(Internal.FS.copyFile)(source, destination);

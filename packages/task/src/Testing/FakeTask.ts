@@ -26,29 +26,30 @@ export type FakeTaskOptions<Value, Error> = {
    * Default Canceler function
    */
   canceler?: Option<() => void>;
+
   /**
    * Waiting delay in milliseconds before resolving/rejecting/throwing
    */
   delayMs?: Option<number>;
 } & (
   | {
-      /**
-       * The value to resolve
-       */
-      value: Value;
-    }
+    /**
+     * The value to resolve
+     */
+    value: Value;
+  }
   | {
-      /**
-       * The error to reject
-       */
-      error: Error;
-    }
+    /**
+     * The error to reject
+     */
+    error: Error;
+  }
   | {
-      /**
-       * The error to throw
-       */
-      throwError: unknown;
-    }
+    /**
+     * The error to throw
+     */
+    throwError: unknown;
+  }
 );
 
 /**

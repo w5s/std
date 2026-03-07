@@ -39,7 +39,6 @@ describe(`Hash`, () => {
     });
 
     it('for any value', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       expect(Hash.from({} as any)).toBe(0);
     });
 

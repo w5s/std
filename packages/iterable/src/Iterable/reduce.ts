@@ -8,9 +8,9 @@ import type { Int } from '@w5s/core';
  * const iterable = [1, 2, 3];
  * Iterable.reduce(iterable, (total, currentValue, currentIndex) => total + value, 0);// 6
  * ```
- * @param self - the iterator reduced
- * @param reducer - the reducer function
- * @param initialValue - the initial value passed to the reducer
+ * @param self the iterator reduced
+ * @param reducer the reducer function
+ * @param initialValue the initial value passed to the reducer
  */
 export function reduce<Value, Return>(
   self: Iterable<Value>,

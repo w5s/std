@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable ts/consistent-type-assertions */
 import { describe } from 'vitest';
 import { describeType, describeCodec } from '@w5s/core/dist/Testing.js';
 import { Result, CodecError } from '@w5s/core';

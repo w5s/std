@@ -11,7 +11,7 @@ import type { BigDecimal } from './BigDecimal.js';
  * BigDecimal.fromInt(Int(-1)); // BigDecimal('-1')
  * ```
  * @category Constructor
- * @param intValue - the integer value to convert to a big decimal
+ * @param intValue the integer value to convert to a big decimal
  */
 export function fromInt(intValue: Int): BigDecimal {
   return of(BigInt(intValue), 0);

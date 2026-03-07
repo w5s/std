@@ -11,7 +11,7 @@ import { Ok } from './Ok.js';
  * Result.hasInstance(Result.Ok(null)); // === true
  * ```
  * @category Type
- * @param anyValue - the value to tested
+ * @param anyValue the value to tested
  */
 export function hasInstance(anyValue: unknown): anyValue is Result<unknown, unknown> {
   return (

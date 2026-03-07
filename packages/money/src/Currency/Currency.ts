@@ -8,34 +8,41 @@ import { CurrencyAsString } from './CurrencyAsString.js';
 
 export interface Currency extends Struct<{
   [Struct.type]: 'Currency';
+
   /**
    * Name
    */
   name: string;
+
   /**
    * Plural name
    */
   namePlural: string;
+
   /**
    * Code ISO3
    *
    * @example 'USD'
    */
   code: string;
+
   /**
    * Currency precision
    */
   precision: Int;
+
   /**
    * Default rounding
    */
   rounding: Int;
+
   /**
    * Currency symbol
    *
    * @example '$'
    */
   symbol: string;
+
   /**
    * Currency native symbol
    *

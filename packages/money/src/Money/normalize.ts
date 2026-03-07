@@ -11,7 +11,7 @@ import { __mapAmount } from './__mapAmount.js';
  * Money.normalize(USD('1.020'));// USD('1.02')
  * Money.normalize(USD('1.02'));// USD('1.02')
  * ```
- * @param self - the `BigDecimal` object
+ * @param self the `BigDecimal` object
  */
 export function normalize(self: Money): Money {
   return __mapAmount(self, bigDecimalNormalize);

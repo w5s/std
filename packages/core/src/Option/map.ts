@@ -10,8 +10,8 @@ import { isNone } from './isNone.js';
  * const x = Some('foo');
  * Option.map(x, (value) => `${value}_bar`));// Some('foo_bar') == 'foo_bar'
  * ```
- * @param self - an optional value
- * @param fn - the mapper function
+ * @param self an optional value
+ * @param fn the mapper function
  */
 export function map<ValueFrom, ValueTo>(
   self: OptionLike<ValueFrom>,

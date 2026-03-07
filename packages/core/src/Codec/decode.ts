@@ -18,8 +18,8 @@ function inspect(anyValue: unknown) {
  * const input = '2022-07-31T14:04:48.449Z';
  * const decoded = Codec.decode(codec, input);// Result.Ok('2022-07-31T14:04:48.449Z')
  * ```
- * @param codec - the decoder module
- * @param input - the input to encode
+ * @param codec the decoder module
+ * @param input the input to encode
  */
 export function decode<T>(codec: Pick<Codec<T>, Symbol.decode>, input: unknown): Result<T, CodecError> {
   return codec.__decode__(input, {

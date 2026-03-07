@@ -7,10 +7,12 @@ export interface Style {
    * The color to apply to the string.
    */
   color: Color;
+
   /**
    * The font weight to apply to the string.
    */
   fontWeight: FontWeight;
+
   /**
    * The font style to apply to the string.
    */
@@ -20,8 +22,8 @@ export interface Style {
 const andThen =
   (format: (_: string) => string, thenFn: (_: string) => string) =>
   // Return new formatter function
-  (str: string) =>
-    thenFn(format(str));
+    (str: string) =>
+      thenFn(format(str));
 
 /**
  * Apply ANSI styles to a string.
@@ -30,7 +32,7 @@ const andThen =
  * ```typescript
  * ANSICode.style({ color: 'red', fontWeight: 'bold' })('foo');
  * ```
- * @param value - The style definition.
+ * @param value The style definition.
  * @returns A function that takes a string and applies the styles.
  */
 export function style(value: Partial<Style>) {

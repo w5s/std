@@ -7,6 +7,7 @@ export interface CSVDecodeOptions {
    * @default ","
    */
   delimiter: string;
+
   /**
    * Record delimiter
    */

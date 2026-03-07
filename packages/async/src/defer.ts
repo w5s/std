@@ -1,17 +1,15 @@
 const __withResolvers: typeof Promise.withResolvers =
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
   Promise.withResolvers == null
     ? () => {
         const deferred: any = {};
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
         deferred.promise = new Promise((resolve, reject) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           deferred.resolve = resolve;
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+
           deferred.reject = reject;
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return deferred;
       }
     : () => Promise.withResolvers();

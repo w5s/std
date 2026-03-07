@@ -7,6 +7,7 @@ export interface ExpectIterable {
    * @param expected
    */
   toHaveValues(expected: Array<unknown>): void;
+
   /**
    * Asserts that `[Symbol.iterator]()` always returns the same value
    */
@@ -23,17 +24,17 @@ export interface ExpectIterable {
  * const someIterable: Iterable<any> = ...;
  * expectIterable(someIterable).toHaveValues([1]);
  * ```
- * @param expectFn - the expect function from the test library
+ * @param expectFn the expect function from the test library
  */
 export function withIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: Iterable<V>, isNot: boolean): ExpectIterable => ({
     toHaveValues(expected: Array<unknown>) {
-      const expectValue = expectFn(Array.from(iterable));
+      const expectValue = expectFn([...iterable]);
       (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     toBeIdemPotent() {
-      const expectValue = expectFn(Array.from(iterable));
-      (isNot ? expectValue.not : expectValue).toEqual(Array.from(iterable));
+      const expectValue = expectFn([...iterable]);
+      (isNot ? expectValue.not : expectValue).toEqual([...iterable]);
     },
   });
   return <V>(iterable: Iterable<V>) =>

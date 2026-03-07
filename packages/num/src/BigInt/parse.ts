@@ -11,7 +11,7 @@ import type { Option } from '@w5s/core/dist/Option.js';
  * BigInt.parse('0x123');// Option.Some(291n)
  * BigInt.parse('invalid');// Option.None
  * ```
- * @param expression - the expression to parse
+ * @param expression the expression to parse
  */
 export function parse(expression: string): Option<bigint> {
   if (expression !== '' && !/^\s+$/.test(expression)) {

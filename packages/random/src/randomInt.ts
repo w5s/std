@@ -14,9 +14,9 @@ const toInt = (value: number) => Math.floor(value) as Int;
  * const next = randomInt(-10, 10);
  * Task.run(next);// Result.Ok(N); where N is an integer between -10 and 10
  * ```
- * @param min - the minimum inclusive bound for generated value
- * @param max - the maximum inclusive bound for generated value
- * @param generator - a custom optional random number generator
+ * @param min the minimum inclusive bound for generated value
+ * @param max the maximum inclusive bound for generated value
+ * @param generator a custom optional random number generator
  */
 export function randomInt(min: Int, max: Int, generator?: RandomGenerator): Task<Int, never> {
   return map(randomNumber(min, max, generator), toInt);

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { TestingLibrary } from '@w5s/core-type';
 
 /**
@@ -14,7 +11,7 @@ import type { TestingLibrary } from '@w5s/core-type';
  *   expectedDefaultMessage: 'My custom error default message',
  * });
  * ```
- * @param testingLibrary - Optional testing library to use. Automatically detects if not provided.
+ * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeError(testingLibrary: TestingLibrary) {
   const { describe, it, expect } = testingLibrary;
@@ -22,10 +19,12 @@ export function describeError(testingLibrary: TestingLibrary) {
     subject: Constructor,
     spec: {
       defaultParameters: () => Constructor extends abstract new (properties: infer R) => any ? R : never;
+
       /**
        * Expected error name
        */
       expectedName: string;
+
       /**
        * Expected default message
        */

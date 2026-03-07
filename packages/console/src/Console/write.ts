@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 

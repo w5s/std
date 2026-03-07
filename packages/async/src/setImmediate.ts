@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type { ImmediateId } from './ImmediateId.js';
 
 const __setImmediate =
@@ -13,7 +12,7 @@ const __setImmediate =
  * ```typescript
  * const id = setImmediate(() => console.log('Hello World!'));
  * ```
- * @param callback - the function to call
+ * @param callback the function to call
  */
 export function setImmediate(callback: () => void): ImmediateId {
   return __setImmediate(callback) as ImmediateId;

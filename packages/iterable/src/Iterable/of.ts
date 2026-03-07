@@ -6,7 +6,7 @@
  * Iterable.of('a', 'b', 'c');// 'a', 'b', 'c'
  * ```
  * @category Constructor
- * @param values - The values of the iterable
+ * @param values The values of the iterable
  */
 export function of<Value>(...values: Value[]): Iterable<Value> {
   return {

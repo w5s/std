@@ -16,7 +16,7 @@ import { __run } from './__run.js';
  * const delay = (ms: number) => Task(() => new Promise(resolve => { setTimeout(() => resolve(Task.ok()); }), ms));
  * ```
  * @category Constructor
- * @param sideEffect - the effect function
+ * @param sideEffect the effect function
  */
 export function create<Value, Error = never>(
   sideEffect: (resolver: {
@@ -24,6 +24,7 @@ export function create<Value, Error = never>(
      * Canceler
      */
     canceler: TaskCanceler;
+
     /**
      * A task runner that can be used to run subtasks
      */

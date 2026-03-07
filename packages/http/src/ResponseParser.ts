@@ -29,6 +29,7 @@ function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponsePa
 export interface ResponseParser<Value> {
   (response: Response<BodyReader>): Task<Value, HTTPError.ParserError>;
 }
+
 /**
  * @namespace
  */
@@ -62,6 +63,7 @@ export const ResponseParser = {
   /**
    * FormData response parser
    *
+   * @param CodecModule
    * @example
    * ```typescript
    * type MyData = { foo: string, bar: boolean };

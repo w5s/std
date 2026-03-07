@@ -5,7 +5,7 @@
  * ```typescript
  * identity('foo');// 'foo'
  * ```
- * @param value - the input and return value
+ * @param value the input and return value
  */
 export function identity<T>(value: T): T {
   return value;

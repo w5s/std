@@ -46,10 +46,12 @@ export interface TaskParameters<Value, Error> {
    * Resolve callback
    */
   readonly resolve: (value: Value) => Awaitable<void>;
+
   /**
    * Reject callback
    */
   readonly reject: (error: Error) => Awaitable<void>;
+
   /**
    * Reference to cancel function
    */
@@ -124,6 +126,7 @@ export namespace Task {
    * Extracts value type of task T
    */
   export type ValueOf<T> = T extends Task<infer V, any> ? V : never;
+
   /**
    * Extracts error type of task T
    */

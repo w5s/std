@@ -6,7 +6,7 @@
  * const unknownValue: unknown = 123;
  * const stringValue = typeof unknownValue === 'string' ? unknownValue : panic(new Error('not a string'));
  * ```
- * @param error - the error to throw
+ * @param error the error to throw
  */
 export function panic(error: unknown): never {
   throw error;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import type { Spread } from './Spread.js';
 
 /**
@@ -12,17 +11,14 @@ import type { Spread } from './Spread.js';
  * const base = { a: 1 }
  * const newObject = assign(base, { b: 3 });// { a: 2, b: 3 }
  * ```
- * @param source - a base object
- * @param extension - an extension object map
+ * @param source a base object
+ * @param extension an extension object map
  */
 export function extend<T, Ext>(source: T, extension: Ext): Spread<T, Ext> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return mergeObject(source, extension);
 }
 
 function mergeObject(source: any, extension: any): any {
-  /* eslint-disable  @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
-
   if (extension == null) {
     return source;
   }
@@ -54,5 +50,4 @@ function mergeObject(source: any, extension: any): any {
   }
 
   return changed ? returnValue : source;
-  /* eslint-enable  @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
 }

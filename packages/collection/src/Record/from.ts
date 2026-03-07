@@ -3,6 +3,7 @@ import type { RecordKey } from '../Record.js';
 /**
  * Return a new {@link Record} from an iterable of [key, value]
  *
+ * @param iterable
  * @example
  * ```typescript
  * const record = Record.from([['a', 1], ['b', 2]]); // frozen { a: 1, b: 2}

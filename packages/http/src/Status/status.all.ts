@@ -224,10 +224,10 @@ export const NotModified = Status(304 as Int, `Not Modified`);
  * Official Documentation @ https://tools.ietf.org/html/rfc7231#section-6.3.1
  *
  * The request has succeeded. The meaning of a success varies depending on the HTTP method:
-GET: The resource has been fetched and is transmitted in the message body.
-HEAD: The entity headers are in the message body.
-POST: The resource describing the result of the action is transmitted in the message body.
-TRACE: The message body contains the request message as received by the server
+ * GET: The resource has been fetched and is transmitted in the message body.
+ * HEAD: The entity headers are in the message body.
+ * POST: The resource describing the result of the action is transmitted in the message body.
+ * TRACE: The message body contains the request message as received by the server
  */
 export const OK = Status(200 as Int, `OK`);
 

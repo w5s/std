@@ -6,7 +6,7 @@ import { Callable } from '@w5s/core/dist/Callable.js';
 import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
 
 const numbers = String.raw`\d+`;
-const fractionalNumbers = `${numbers}(?:[\\.,]${numbers})?`;
+const fractionalNumbers = String.raw`${numbers}(?:[\.,]${numbers})?`;
 const date = `(${numbers}Y)?(${numbers}M)?(${numbers}W)?(${numbers}D)?`;
 const time = `T(${fractionalNumbers}H)?(${fractionalNumbers}M)?(${fractionalNumbers}S)?`;
 const durationISO8601 = `P(?:${date}(?:${time})?)`;
@@ -52,7 +52,7 @@ function parse(expression: string): Option<Duration> {
     return undefined;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  // eslint-disable-next-line ts/no-use-before-define
   return DurationStruct.create({
     years,
     months,

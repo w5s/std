@@ -8,8 +8,8 @@ import type { ComparableInterface } from './Comparable.js';
 /**
  * Return an {@link Ordering} thats represents the comparison result
  *
- * @param left - left side operand
- * @param right - left side operand
+ * @param left left side operand
+ * @param right left side operand
  */
 export type Order<T> = (left: T, right: T) => Ordering;
 

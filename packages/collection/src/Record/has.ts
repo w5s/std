@@ -10,8 +10,8 @@ import type { RecordKey } from '../Record.js';
  * Record.has(record, 'myProperty'); // true
  * Record.has(record, 'nonExistent'); // false
  * ```
- * @param self - the record
- * @param key - the entry key
+ * @param self the record
+ * @param key the entry key
  */
 export function has<Key extends RecordKey>(self: Record<Key, any>, key: Key): boolean {
   return __hasOwn(self, key);

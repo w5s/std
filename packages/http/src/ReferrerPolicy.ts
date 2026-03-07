@@ -13,6 +13,7 @@ export const ReferrerPolicy = define({
   StrictOriginWhenCrossOrigin: 'strict-origin-when-cross-origin',
   UnsafeURL: 'unsafe-url',
 });
+
 /**
  * HTTP referrer policy type
  *

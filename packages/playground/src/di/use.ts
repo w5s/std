@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import type { Option } from '@w5s/core';
 import type { ContainerProvider } from './ContainerProvider.js';
 import type { ContainerKey } from './ContainerKey.js';
@@ -30,7 +29,7 @@ function cacheGet<Key extends string | symbol, Value>(
 ): Value {
   const { containerKey } = key;
   // @ts-ignore We can use containerKey as key
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+
   const value: Value = cache[containerKey] ?? (cache[containerKey] = getProvider(appContext, key)(appContext));
   return value;
 }
@@ -39,7 +38,6 @@ function getProvider<Key extends string | symbol, Value>(
   appContext: ContainerProvider<any, Key, Value>,
   { containerKey, containerDefaultProvider }: ContainerKey<Key, Value>,
 ): ContainerProviderFunction<any, Value> {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return appContext[containerKey] ?? containerDefaultProvider;
 }
 
@@ -54,8 +52,8 @@ function getProvider<Key extends string | symbol, Value>(
  *
  * const someService = use(appContext, SomeService);// typeof someService == SomeServiceInterface
  * ```
- * @param appContext - the app context container
- * @param key - the injection key
+ * @param appContext the app context container
+ * @param key the injection key
  */
 export function use<Key extends string | symbol, Value>(
   appContext: Partial<ContainerProvider<any, Key, Option<Value>>>,

@@ -13,7 +13,7 @@ describe('describeType', () => {
   describeType(StringType, () => ({
     typeName: 'String',
     instances: ['', 'a', 'hello world !'],
-    // eslint-disable-next-line no-new-wrappers
+
     notInstances: [null, undefined, 1, {}, new String('')],
   }));
 });

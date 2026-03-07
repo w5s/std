@@ -12,8 +12,8 @@ import type { FilePath } from '../FilePath.js';
  * const task = remove(FilePath('/path/to/file.txt'));
  * Task.run(task);
  * ```
- * @param filePath - The path to the file to be removed.
- * @param options - The options to be used when removing the file.
+ * @param filePath The path to the file to be removed.
+ * @param options The options to be used when removing the file.
  */
 export function remove(filePath: FilePath, options?: remove.Options): Task<void, FileError> {
   return errnoTask(Internal.FS.rm)(filePath, options);

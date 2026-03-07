@@ -26,15 +26,18 @@ export interface RetryState {
    * The index of the current attempt.
    */
   readonly retryIndex: Int;
+
   /**
    * The cumulative delay of the all attempts.
    */
   readonly retryCumulativeDelay: TimeDuration;
+
   /**
    * The duration of the current retry attempt
    */
   readonly retryPreviousDelay: Option<TimeDuration>;
 }
+
 /**
  * RetryState constructor
  *
@@ -46,7 +49,7 @@ export interface RetryState {
  *  retryPreviousDelay: TimeDuration({ seconds: 1 }),
  * });
  * ```
- * @param parameters - The parameters to create the RetryState
+ * @param parameters The parameters to create the RetryState
  */
 export function RetryState(parameters: Partial<RetryState>): RetryState {
   return {
@@ -55,6 +58,7 @@ export function RetryState(parameters: Partial<RetryState>): RetryState {
     retryPreviousDelay: parameters.retryPreviousDelay,
   };
 }
+
 /**
  * Default RetryState
  */
@@ -76,8 +80,8 @@ export const RetryPolicy = {
    * const policy = RetryPolicy.wait(TimeDuration.of(2));
    * const mappedPolicy = RetryPolicy.map(policy, (delay) => TimeDuration.of(delay * 3));// Wait 6 seconds policy
    * ```
-   * @param policy - The policy
-   * @param thenFn - The map function
+   * @param policy The policy
+   * @param thenFn The map function
    */
   andThen(policy: RetryPolicy, thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>): RetryPolicy {
     return (state) => taskMap(policy(state), (delayMs) => (delayMs == null ? undefined : thenFn(delayMs, state)));
@@ -92,8 +96,8 @@ export const RetryPolicy = {
    * const policy = RetryPolicy.wait(TimeDuration.of(2));
    * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
    * ```
-   * @param policy - The policy
-   * @param predicate - The predicate function
+   * @param policy The policy
+   * @param predicate The predicate function
    */
   filter(policy: RetryPolicy, predicate: (delay: TimeDuration, state: RetryState) => boolean): RetryPolicy {
     return RetryPolicy.andThen(policy, (delay, state) => (predicate(delay, state) ? delay : undefined));
@@ -109,8 +113,8 @@ export const RetryPolicy = {
    * const newState = RetryPolicy.apply(policy, retryState);
    * Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
-   * @param policy - The policy to apply
-   * @param state - The current state of the retry operation
+   * @param policy The policy to apply
+   * @param state The current state of the retry operation
    */
   apply(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
     return taskMap(policy(state), (retryPreviousDelay) =>
@@ -134,8 +138,8 @@ export const RetryPolicy = {
    * const newState = RetryPolicy.applyAndDelay(policy, retryState);
    * await Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
    * ```
-   * @param policy - The policy to apply
-   * @param state - The current state of the retry operation
+   * @param policy The policy to apply
+   * @param state The current state of the retry operation
    */
   applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
     return taskThenRun(RetryPolicy.apply(policy, state), (nextStatus) =>
@@ -154,8 +158,8 @@ export const RetryPolicy = {
    * const retryLimit3 = RetryPolicy.limitRetries(3);
    * const retryWait1msAndLimit3 = RetryPolicy.append(retryWait1ms, retryLimit3);
    * ```
-   * @param left - The left policy
-   * @param right - The right policy
+   * @param left The left policy
+   * @param right The right policy
    */
   append(left: RetryPolicy, right: RetryPolicy): RetryPolicy {
     return (state: RetryState) => {
@@ -169,6 +173,7 @@ export const RetryPolicy = {
   /**
    * A retry policy that never retries
    *
+   * @param _state
    * @example
    * ```typescript
    * const policy: RetryPolicy = ...;
@@ -187,7 +192,7 @@ export const RetryPolicy = {
    * ```typescript
    * const policy = RetryPolicy.wait(TimeDuration.of(1)); // 1ms, 1ms, 1ms, 1ms, ...
    * ```
-   * @param delay - The waiting delay between two attempts
+   * @param delay The waiting delay between two attempts
    */
   wait(delay: TimeDuration): RetryPolicy {
     return (_state) => taskResolve(delay);
@@ -202,7 +207,7 @@ export const RetryPolicy = {
    * ```typescript
    * const policy = RetryPolicy.waitExponential(TimeDuration.of(1)); // 1ms, 2ms, 4ms, 8ms, ...
    * ```
-   * @param initialDelay - The initial delay
+   * @param initialDelay The initial delay
    */
   waitExponential(initialDelay: TimeDuration): RetryPolicy {
     return ({ retryIndex }) => taskResolve((initialDelay * 2 ** retryIndex) as TimeDuration);
@@ -219,8 +224,8 @@ export const RetryPolicy = {
    * ```typescript
    * const policy = RetryPolicy.waitFullJitter(TimeDuration.of(1)); // 0ms, 1 + rand(0, 1) ms, 2 + rand(0, 2)ms, ...
    * ```
-   * @param initialDelay - The initial delay
-   * @param generator - The random generator
+   * @param initialDelay The initial delay
+   * @param generator The random generator
    */
   waitExponentialJitter(initialDelay: TimeDuration, generator = defaultRandom): RetryPolicy {
     return ({ retryIndex }) => {
@@ -237,7 +242,7 @@ export const RetryPolicy = {
    * const policy = RetryPolicy.retries(Int(3));// Retry 3 times
    * ```
    * @category Constructor
-   * @param count - The number of retries to allow
+   * @param count The number of retries to allow
    */
   retries(count: Int): RetryPolicy {
     return ({ retryIndex }) => taskResolve(retryIndex >= count ? undefined : (0 as TimeDuration));
@@ -251,8 +256,8 @@ export const RetryPolicy = {
    * const wait1_2_3ms: RetryPolicy; // Wait 1ms, 2ms, 3ms
    * const policy = RetryPolicy.waitMax(wait1_2_3ms, TimeDuration.of(2));// Wait 1ms, 2ms, 2ms
    * ```
-   * @param policy - The policy to limit
-   * @param maxDelay - The maximum delay between two attempts
+   * @param policy The policy to limit
+   * @param maxDelay The maximum delay between two attempts
    */
   waitMax(policy: RetryPolicy, maxDelay: TimeDuration): RetryPolicy {
     return RetryPolicy.andThen(policy, (delay) => Math.min(maxDelay, delay) as TimeDuration);

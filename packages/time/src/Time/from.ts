@@ -7,26 +7,32 @@ export interface TimeParameters {
    * Year number
    */
   year?: Year;
+
   /**
    * Month number (1-12)
    */
   month?: Month;
+
   /**
    * Day of month (1-31)
    */
   day?: Day;
+
   /**
    * Hour of the day
    */
   hour?: Hour;
+
   /**
    * Minute of the hour
    */
   minute?: Minute;
+
   /**
    * Second of the minute
    */
   second?: Second;
+
   /**
    * Number of milliseconds
    */
@@ -42,7 +48,7 @@ export interface TimeParameters {
  * ```
  *
  * @category Constructor
- * @param source - The value to convert
+ * @param source The value to convert
  */
 export function from(source: number | TimeParameters): Time {
   if (typeof source === 'number') return of(source);

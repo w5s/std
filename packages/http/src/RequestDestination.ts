@@ -24,6 +24,7 @@ export const RequestDestination = define({
   Worker: 'worker',
   XSLT: 'xslt',
 });
+
 /**
  * HTTP destination
  *

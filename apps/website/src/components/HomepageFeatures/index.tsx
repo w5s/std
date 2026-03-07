@@ -2,6 +2,11 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 import { Def } from '../Def';
+import Stripes from '@site/static/img/stripes.svg';
+import Circle from '@site/static/img/circle.svg';
+import Infinity from '@site/static/img/infinity.svg';
+import Jewel from '@site/static/img/jewel.svg';
+import Feather from '@site/static/img/feather.svg';
 
 type FeatureItem = {
   title: string;
@@ -12,72 +17,117 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Standardized',
-    Svg: require('@site/static/img/stripes.svg').default,
+    Svg: Stripes,
     description: (
       <>
-        Standardized code and conventions for high productivity <br />
+        Standardized code and conventions for high productivity
+        {' '}
+        <br />
         <em>
-          ✓ Inspired by industry-grade technologies (Rust, Ocaml) <br />
-          ✓ Self explanatory names, (almost) no abbreviations <br />
-          ✓ Smooth tool integration and testability <br />
+          ✓ Inspired by industry-grade technologies (Rust, Ocaml)
+          {' '}
+          <br />
+          ✓ Self explanatory names, (almost) no abbreviations
+          {' '}
+          <br />
+          ✓ Smooth tool integration and testability
+          {' '}
+          <br />
         </em>
       </>
     ),
   },
   {
     title: 'Simple',
-    Svg: require('@site/static/img/circle.svg').default,
+    Svg: Circle,
     description: (
       <>
-        Functional programming, done simple. <br />
+        Functional programming, done simple.
+        {' '}
+        <br />
         <em>
-          ✓ No OOP : Plain Javascript object <br />✓ Pragmatic <Def>FP</Def> : pure but never obscure <br />
-          ✓ Explicit and deterministic API <br />
+          ✓ No OOP : Plain Javascript object
+          {' '}
+          <br />
+          ✓ Pragmatic
+          {' '}
+          <Def>FP</Def>
+          {' '}
+          : pure but never obscure
+          {' '}
+          <br />
+          ✓ Explicit and deterministic API
+          {' '}
+          <br />
         </em>
       </>
     ),
   },
   {
     title: 'Stable',
-    Svg: require('@site/static/img/infinity.svg').default,
+    Svg: Infinity,
     description: (
       <>
-        Fight framework obsolescence ! <br />
+        Fight framework obsolescence !
+        {' '}
+        <br />
         <em>
-          ✓ Loose coupling between packages <br />
-          ✓ Designed for maintainable applications <br />
-          ✓ Harmonize frontend/backend practices <br />
+          ✓ Loose coupling between packages
+          {' '}
+          <br />
+          ✓ Designed for maintainable applications
+          {' '}
+          <br />
+          ✓ Harmonize frontend/backend practices
+          {' '}
+          <br />
         </em>
       </>
     ),
   },
   {
     title: 'Safe',
-    Svg: require('@site/static/img/jewel.svg').default,
+    Svg: Jewel,
     description: (
       <>
-        One ambitious goal : 0 bug in production <br />
+        One ambitious goal : 0 bug in production
+        {' '}
+        <br />
         <em>
-          ✓ Strict and type safe <br />
-          ✓ Battle tested <br />
-          ✓ No external NPM runtime dependencies <br />
+          ✓ Strict and type safe
+          {' '}
+          <br />
+          ✓ Battle tested
+          {' '}
+          <br />
+          ✓ No external NPM runtime dependencies
+          {' '}
+          <br />
         </em>
       </>
     ),
   },
   {
     title: 'Slim',
-    Svg: require('@site/static/img/feather.svg').default,
+    Svg: Feather,
     description: (
       <>
-        Because CI performances and environment matters <br />
+        Because CI performances and environment matters
+        {' '}
+        <br />
         <em>
-          ✓ Lean yet highly composable API <br />✓ Low bundle size enforced by{' '}
+          ✓ Lean yet highly composable API
+          {' '}
+          <br />
+          ✓ Low bundle size enforced by
+          {' '}
           <a href="https://www.npmjs.com/package/size-limit" target="size-limit">
             size-limit
           </a>
           <br />
-          ✓ No constraint to use all `@w5s` packages, pick only the needed ones. <br />
+          ✓ No constraint to use all `@w5s` packages, pick only the needed ones.
+          {' '}
+          <br />
         </em>
       </>
     ),

@@ -12,8 +12,8 @@ import type { OptionLike } from '../Option.js';
  * Option.getOrElse(x, () => 'bar');// 'bar'
  * ```
  * @category Accessor
- * @param self - an optional value
- * @param getDefaultValue - a default value
+ * @param self an optional value
+ * @param getDefaultValue a default value
  */
 export function getOrElse<Value, DefaultValue>(
   self: OptionLike<Value>,

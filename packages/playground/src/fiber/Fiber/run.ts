@@ -23,11 +23,11 @@ import { __scheduler } from '../__scheduler.js';
  * // > Meow !
  * ```
  *
- * @param callback - The generator function to run.
+ * @param callback The generator function to run.
  */
 export function run<T>(callback: FiberCallback<T>): FiberResult<T> {
   const result = __scheduler.spawn(callback);
   __scheduler.resume(result.id);
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
   return result;
 }

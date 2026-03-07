@@ -9,12 +9,12 @@ const registry = useRef<Readonly<Record<string, any>>>(application.state, 'regis
 function notFound(name: string): never {
   throw new ReferenceError(`${name} driver not found`);
 }
+
 /**
  * @namespace
  */
 export const DatabaseDriver = {
   get<Name extends keyof DatabaseDriverMap>(name: Name): DatabaseDriver.ModuleOf<Name> {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return registry.current[name] ?? notFound(name);
   },
   set<Name extends keyof DatabaseDriverMap>(name: Name, module: DatabaseDriver.ModuleOf<Name>): void {

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable ts/ban-ts-comment */
 import type { PartialKeys } from '@w5s/core-type';
 import type { Int } from './Int.js';
 import type { Option } from './Option.js';
@@ -14,6 +14,7 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * @category Indexable
    */
   indexType: Index extends number ? 'number' : Index extends bigint ? 'bigint' : never;
+
   /**
    * Returns the value at the index
    *
@@ -21,6 +22,7 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * @param index
    */
   at(index: Index): Option<T>;
+
   /**
    * Returns the integer index of a value
    *
@@ -28,22 +30,24 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * @param value
    */
   indexOf(value: T): Option<Index>;
+
   /**
    * Returns the size of a range.
    * If `start` or `end` is not in range then returns 0.
    *
    * @category Indexable
-   * @param start - the start of the range
-   * @param end - the end of the range
+   * @param start the start of the range
+   * @param end the end of the range
    */
   rangeSize(start: T, end: T): Index;
+
   /**
    * Returns an Iterable starting from `start` to `end`.
    * If `start` or `end` is not in range then returns an empty iterable.
    *
    * @category Indexable
-   * @param start - the start of the range
-   * @param end - the end of the range
+   * @param start the start of the range
+   * @param end the end of the range
    */
   range(start: T, end: T): Range<T>;
 }
@@ -63,7 +67,7 @@ export function Indexable<T, Index extends number | bigint = number>(
         const startIndex = indexOf(start);
         const endIndex = indexOf(end);
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/restrict-plus-operands
+
         return startIndex == null || endIndex == null ? zero : endIndex - startIndex + one;
       }),
     range:
@@ -71,13 +75,13 @@ export function Indexable<T, Index extends number | bigint = number>(
       ((rangeStart, rangeEnd) => ({
         rangeStart,
         rangeEnd,
-        *[Symbol.iterator]() {
+        * [Symbol.iterator]() {
           const startIndex = indexOf(rangeStart);
           const endIndex = indexOf(rangeEnd);
           if (startIndex != null && endIndex != null) {
             if (startIndex <= endIndex) {
               // @ts-ignore
-              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+
               for (let index = startIndex; index <= endIndex; index += one) {
                 const value = at(index);
                 if (value != null) {

@@ -12,16 +12,16 @@ import { IPv4 } from './IPv4.js';
 describe('IPv4', () => {
   describeType(IPv4, () => ({
     typeName: 'IPv4',
-    instances: [IPv4(0xff_ff_ff_ff)],
-    notInstances: [undefined, 0xff_ff_ff_ff, '127.0.0.1'],
+    instances: [IPv4(0xFF_FF_FF_FF)],
+    notInstances: [undefined, 0xFF_FF_FF_FF, '127.0.0.1'],
   }));
   describe(IPv4.of, () => {
     it('should return an IPv4 instance', () => {
       expect(IPv4.of(0, 0, 0, 0)).toEqual(IPv4(0x00_00_00_00));
-      expect(IPv4.of(127, 0, 0, 1)).toEqual(IPv4(0x7f_00_00_01));
+      expect(IPv4.of(127, 0, 0, 1)).toEqual(IPv4(0x7F_00_00_01));
       expect(IPv4.of(0, 0, 0, 1)).toEqual(IPv4(0x00_00_00_01));
-      expect(IPv4.of(192, 168, 0, 1)).toEqual(IPv4(0xc0_a8_00_01));
-      expect(IPv4.of(255, 255, 255, 255)).toEqual(IPv4(0xff_ff_ff_ff));
+      expect(IPv4.of(192, 168, 0, 1)).toEqual(IPv4(0xC0_A8_00_01));
+      expect(IPv4.of(255, 255, 255, 255)).toEqual(IPv4(0xFF_FF_FF_FF));
     });
   });
   describe(IPv4.parse, () => {

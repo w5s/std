@@ -41,8 +41,8 @@ import { tryCall } from './Result/tryCall.js';
  *   print(result); // alternate console.log('name: Django'); and console.error('error!');
  * }
  * ```
- * @param Value - the type of value in case of `Ok`
- * @param Error - the type of error in case of `Error`
+ * @param Value the type of value in case of `Ok`
+ * @param Error the type of error in case of `Error`
  */
 export type Result<Value, Error> = Result.Ok<Value> | Result.Error<Error>;
 
@@ -72,6 +72,7 @@ export namespace Result {
      * `true` only for Ok objects
      */
     readonly ok: true;
+
     /**
      * The success value
      */
@@ -83,6 +84,7 @@ export namespace Result {
      * `false` only for Error objects
      */
     readonly ok: false;
+
     /**
      * The error value
      */

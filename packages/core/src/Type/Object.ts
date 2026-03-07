@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { encode } from '../Codec/encode.js';
 import { decode } from '../Codec/decode.js';
 import { schema } from '../Codec/schema.js';
@@ -17,7 +16,8 @@ import { Symbol } from '../Symbol.js';
  * const encoded = Codec.encode(SomeType, { created: new Date('1970-01-01T00:00:00.000Z') });// { created: '1970-01-01T00:00:00.000Z' }
  * const decoded = Codec.decode(SomeType, { created: '1970-01-01T00:00:00.000Z' });// Result.Ok({ created: Date('1970-01-01T00:00:00.000Z') })
  * ```
- * @param Properties - the codec for each array item
+ * @param Properties the codec for each array item
+ * @param typeName
  */
 export function TObject<P>(
   Properties: {
@@ -81,7 +81,7 @@ export function TObject(
         },
         {
           type: 'object',
-          // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+          // eslint-disable-next-line ts/consistent-type-assertions
           properties: {} as Record<string, unknown>,
           required: [] as string[],
         },

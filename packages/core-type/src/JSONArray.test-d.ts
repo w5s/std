@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable ts/ban-ts-comment */
+/* eslint-disable ts/no-unused-vars */
 import type { JSONArray } from './JSONArray.js';
 
 // @ts-expect-error
