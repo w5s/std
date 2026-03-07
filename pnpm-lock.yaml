@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@rushstack/eslint-patch': 1.10.5
-
 importers:
 
   .:
@@ -14,9 +11,6 @@ importers:
       '@lerna-lite/publish':
         specifier: 4.11.4
         version: 4.11.4(@types/node@20.19.37)(conventional-commits-filter@5.0.0)
-      '@rushstack/eslint-patch':
-        specifier: 1.10.5
-        version: 1.10.5
       '@size-limit/preset-small-lib':
         specifier: 12.0.1
         version: 12.0.1(size-limit@12.0.1(jiti@2.6.1))
@@ -53,9 +47,6 @@ importers:
       markdown-magic-subpackage-list:
         specifier: 1.1.2
         version: 1.1.2(markdown-magic@4.8.0(encoding@0.1.13))
-      prettier:
-        specifier: 3.8.1
-        version: 3.8.1
       size-limit:
         specifier: 12.0.1
         version: 12.0.1(jiti@2.6.1)
@@ -3156,9 +3147,6 @@ packages:
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
-
-  '@rushstack/eslint-patch@1.10.5':
-    resolution: {integrity: sha512-kkKUDVlII2DQiKy7UstOR1ErJP8kUKAQ4oa+SQtM0K+lPdmmjj0YnnxBgtTVYH7mUKtbsxeFC9y0AmK7Yb78/A==}
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -12711,8 +12699,6 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@rushstack/eslint-patch@1.10.5': {}
-
   '@sec-ant/readable-stream@0.4.1': {}
 
   '@shikijs/engine-oniguruma@3.23.0':
@@ -18255,7 +18241,8 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.8.1: {}
+  prettier@3.8.1:
+    optional: true
 
   pretty-error@4.0.0:
     dependencies:
