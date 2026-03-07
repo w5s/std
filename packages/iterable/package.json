@@ -76,15 +76,5 @@
       "limit": "2 kB"
     }
   ],
-  "sideEffect": false,
-  "tsup": {
-    "format": [
-      "esm"
-    ],
-    "clean": true,
-    "dts": true,
-    "entry": [
-      "src/index.ts"
-    ]
-  }
+  "sideEffect": false
 }

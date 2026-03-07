@@ -1,5 +1,6 @@
 import { useGlobalValue } from '@w5s/global-storage';
 import type { ObjectId, ObjectIdParameter } from './objectId.js';
+import { meta } from './meta.js';
 
 export interface ObjectIdState {
   /**
@@ -13,7 +14,7 @@ export interface ObjectIdState {
 }
 
 export const __state = useGlobalValue(
-  '@w5s/object-id',
+  meta.name,
   (): ObjectIdState => ({
     currentId: 1 as ObjectId,
     refs: new WeakMap<ObjectIdParameter, ObjectId>(),

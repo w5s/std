@@ -7,6 +7,7 @@ describe('index', () => {
       [
         // Public API
         '$storage',
+        'meta',
         'globalStorage',
         'useStorage',
         'useGlobalValue',

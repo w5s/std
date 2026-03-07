@@ -39,7 +39,7 @@
   ],
   "scripts": {
     "build": "pnpm run \"/^build:.*/\"",
-    "build:tsc": "tsup",
+    "build:tsc": "tsdown",
     "clean": "pnpm run \"/^clean:.*/\"",
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
@@ -56,7 +56,8 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
-    "tsup": "8.5.1",
+    "@w5s/tsdown-config": "1.0.0-alpha.2",
+    "tsdown": "0.21.0",
     "typescript": "5.9.3",
     "vite": "latest",
     "vitest": "latest"
@@ -70,14 +71,9 @@
   "publishConfig": {
     "access": "public"
   },
-  "tsup": {
-    "format": [
-      "esm"
-    ],
-    "clean": true,
-    "dts": true,
-    "entry": [
-      "src/index.ts"
+  "tsdown": {
+    "extends": [
+      "@w5s/tsdown-config"
     ]
   },
   "size-limit": [
