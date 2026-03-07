@@ -58,7 +58,6 @@
   },
   "devDependencies": {
     "@lerna-lite/publish": "4.11.4",
-    "@rushstack/eslint-patch": "1.16.1",
     "@size-limit/preset-small-lib": "12.0.1",
     "@types/node": "20.19.37",
     "@w5s/commitlint-config": "3.1.1",
@@ -71,7 +70,6 @@
     "markdown-magic": "4.8.0",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "1.1.2",
-    "prettier": "3.8.1",
     "size-limit": "12.0.1",
     "size-limit-preset-node-lib": "0.4.0",
     "tsdown": "0.21.0",
@@ -86,10 +84,5 @@
     "node": ">=20.0.0",
     "npm": ">=6.0.0",
     "pnpm": ">=10.0.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "@rushstack/eslint-patch": "1.10.5"
-    }
   }
 }
