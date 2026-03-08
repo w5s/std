@@ -27,8 +27,8 @@ importers:
         specifier: 3.1.2
         version: 3.1.2(cspell@9.7.0)
       '@w5s/eslint-config':
-        specifier: 3.5.1
-        version: 3.5.1(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
+        specifier: 3.5.2
+        version: 3.5.2(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
       '@w5s/tsconfig':
         specifier: 3.1.3
         version: 3.1.3(typescript@5.9.3)
@@ -3664,12 +3664,12 @@ packages:
       cspell:
         optional: true
 
-  '@w5s/dev@3.2.1':
-    resolution: {integrity: sha512-CC0AcxRsSvlB+RFPxnqwtQ96Um0Zo7OTlMtl7ud5NLiucF0rwYstKSzP4hEtWGDcoLxvMXOY0aCExM6T97zS4g==}
+  '@w5s/dev@3.2.2':
+    resolution: {integrity: sha512-qlZQZagML9KYjGeDZMzPfOTd1hiqA+8SQlJdtCBNVOa69SF9X5cIOZMCdQl1/Q66AM7mVSIbOk2dgoCkIKu39w==}
     engines: {node: '>=20.0.0'}
 
-  '@w5s/eslint-config@3.5.1':
-    resolution: {integrity: sha512-8Z3jd0OTQk6ScxNBGuT3GV/Ld629i++eSjMSb8oYOr1Ljg1Y2hfSCmgxdM6c5+zF83bpQNH94m5rITalRTzb4Q==}
+  '@w5s/eslint-config@3.5.2':
+    resolution: {integrity: sha512-URn0vBnu9DRXee5L1p7SWJnfWT8CwN9LGC14JuZgpWlZ0/TR63moHZdKgLqPUJDcGsUjNdIYeUczNmmn5LxtJg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       eslint: 9.x
@@ -3680,8 +3680,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/prettier-config@3.1.1':
-    resolution: {integrity: sha512-jRezQXlHf3clf9nN1tVE8/M2DWwkDgPjDLeMiLquIu/EkgQB5dG7chR8urE8fe2xCqQvgONWsv0o/Sbfh2k5eg==}
+  '@w5s/prettier-config@3.1.2':
+    resolution: {integrity: sha512-oxkm/vWC/Ck8ZkqXU9pl/r9XF6nhsGZJdTtuHOMMScHM1aTSFCy8a3JCj8S5qQywygQozR4whb/egGJ7ujB7lQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       prettier: 2.x || 3.x
@@ -13300,11 +13300,11 @@ snapshots:
     optionalDependencies:
       cspell: 9.7.0
 
-  '@w5s/dev@3.2.1':
+  '@w5s/dev@3.2.2':
     dependencies:
       '@types/eslint': 9.6.1
 
-  '@w5s/eslint-config@3.5.1(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))':
+  '@w5s/eslint-config@3.5.2(eslint@9.39.4(jiti@2.6.1))(prettier@3.8.1)(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))':
     dependencies:
       '@eslint/js': 9.39.4
       '@eslint/markdown': 7.5.1
@@ -13312,8 +13312,8 @@ snapshots:
       '@typescript-eslint/eslint-plugin': 8.56.1(@typescript-eslint/parser@8.56.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       '@typescript-eslint/parser': 8.56.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
       '@vitest/eslint-plugin': 1.6.9(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
-      '@w5s/dev': 3.2.1
-      '@w5s/prettier-config': 3.1.1(prettier@3.8.1)
+      '@w5s/dev': 3.2.2
+      '@w5s/prettier-config': 3.1.2(prettier@3.8.1)
       eslint-merge-processors: 2.0.0(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.56.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-jsdoc: 62.7.1(eslint@9.39.4(jiti@2.6.1))
@@ -13337,7 +13337,7 @@ snapshots:
       - supports-color
       - vitest
 
-  '@w5s/prettier-config@3.1.1(prettier@3.8.1)':
+  '@w5s/prettier-config@3.1.2(prettier@3.8.1)':
     optionalDependencies:
       prettier: 3.8.1
 
