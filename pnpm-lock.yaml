@@ -260,8 +260,8 @@ importers:
   packages/core-type:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.2
-        version: 1.0.0-alpha.2(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
       tsdown:
         specifier: 0.21.0
         version: 0.21.0(synckit@0.11.12)(typescript@5.9.3)
@@ -347,8 +347,8 @@ importers:
   packages/global-storage:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.2
-        version: 1.0.0-alpha.2(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
       tsdown:
         specifier: 0.21.0
         version: 0.21.0(synckit@0.11.12)(typescript@5.9.3)
@@ -518,8 +518,8 @@ importers:
         version: link:../global-storage
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.2
-        version: 1.0.0-alpha.2(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
+        specifier: 1.0.0-alpha.3
+        version: 1.0.0-alpha.3(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))
       tsdown:
         specifier: 0.21.0
         version: 0.21.0(synckit@0.11.12)(typescript@5.9.3)
@@ -3698,8 +3698,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/tsdown-config@1.0.0-alpha.2':
-    resolution: {integrity: sha512-KZIagERYoeYFjcU8DjZE9wamEvh1hdfj2JPg9QA1b9bggO43+u13vyP9qvVrR38ca7TpLha8ZjGehJeenxUAMw==}
+  '@w5s/tsdown-config@1.0.0-alpha.3':
+    resolution: {integrity: sha512-XXmIL2jbp8I2gxs52YG7hdmlMNFNRffJw4hMpLAZmCRGzqEAoqMnkXEmX48utS1zIK6sVhpwC4u0+8NV6OKoDA==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       tsdown: 0.x
@@ -13345,7 +13345,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@w5s/tsdown-config@1.0.0-alpha.2(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))':
+  '@w5s/tsdown-config@1.0.0-alpha.3(tsdown@0.21.0(synckit@0.11.12)(typescript@5.9.3))':
     optionalDependencies:
       tsdown: 0.21.0(synckit@0.11.12)(typescript@5.9.3)
 
