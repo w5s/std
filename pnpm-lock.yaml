@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@rushstack/eslint-patch': 1.10.5
+  '@rushstack/eslint-patch': 1.16.1
 
 importers:
 
@@ -15,8 +15,8 @@ importers:
         specifier: 4.11.4
         version: 4.11.4(@types/node@20.19.37)(conventional-commits-filter@5.0.0)
       '@rushstack/eslint-patch':
-        specifier: 1.10.5
-        version: 1.10.5
+        specifier: 1.16.1
+        version: 1.16.1
       '@size-limit/preset-small-lib':
         specifier: 12.0.1
         version: 12.0.1(size-limit@12.0.1(jiti@2.6.1))
@@ -3114,8 +3114,8 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
-  '@rushstack/eslint-patch@1.10.5':
-    resolution: {integrity: sha512-kkKUDVlII2DQiKy7UstOR1ErJP8kUKAQ4oa+SQtM0K+lPdmmjj0YnnxBgtTVYH7mUKtbsxeFC9y0AmK7Yb78/A==}
+  '@rushstack/eslint-patch@1.16.1':
+    resolution: {integrity: sha512-TvZbIpeKqGQQ7X0zSCvPH9riMSFQFSggnfBjFZ1mEoILW+UuXCKwOoPcgjMwiUtRqFZ8jWhPJc4um14vC6I4ag==}
 
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
@@ -12668,7 +12668,7 @@ snapshots:
 
   '@rtsao/scc@1.1.0': {}
 
-  '@rushstack/eslint-patch@1.10.5': {}
+  '@rushstack/eslint-patch@1.16.1': {}
 
   '@sec-ant/readable-stream@0.4.1': {}
 
@@ -13249,7 +13249,7 @@ snapshots:
 
   '@w5s/eslint-config@2.4.5(@types/eslint@9.6.1)(eslint@8.57.1)(prettier@3.8.1)(typescript@5.9.3)':
     dependencies:
-      '@rushstack/eslint-patch': 1.10.5
+      '@rushstack/eslint-patch': 1.16.1
       '@typescript-eslint/eslint-plugin': 8.56.1(@typescript-eslint/parser@8.56.1(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
       '@typescript-eslint/parser': 8.56.1(eslint@8.57.1)(typescript@5.9.3)
       '@w5s/dev': 2.5.4

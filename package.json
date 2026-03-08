@@ -124,7 +124,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@rushstack/eslint-patch": "1.10.5"
+      "@rushstack/eslint-patch": "1.16.1"
     }
   }
 }
