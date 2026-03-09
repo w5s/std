@@ -21,18 +21,8 @@ jobs:
     steps:
       - name: ⬇️ Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
-      # - name: ⚙️ Setup
-      #   uses: w5s/actions/setup@main
-      # - run: make build
-      # - run: make validate
-      - name: ⚙️ Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6
+      - name: ⚙️ Setup
+        uses: w5s/actions/setup@main
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: ⚙️ Setup PNPM cache
-        uses: w5s/actions/cache-pnpm@main
-      - run: corepack enable
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm validate
+      - run: make validate
