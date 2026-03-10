@@ -24,8 +24,8 @@ importers:
         specifier: 3.1.3
         version: 3.1.3
       '@w5s/cspell-config':
-        specifier: 3.1.2
-        version: 3.1.2(cspell@9.7.0)
+        specifier: 3.1.3
+        version: 3.1.3(cspell@9.7.0)
       '@w5s/eslint-config':
         specifier: 3.5.2
         version: 3.5.2(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
@@ -3650,8 +3650,8 @@ packages:
     resolution: {integrity: sha512-t6FE79YF3uS5sUkB56a8C2vGwQj1kJY1+SwYE9GjngpW9YGccJ2K2fHLtHlVLd8RCurU+WqJZuMKWBNjego9KA==}
     engines: {node: '>=20.0.0'}
 
-  '@w5s/cspell-config@3.1.2':
-    resolution: {integrity: sha512-mSYsCOEEln7cxEmRjs6zHl0rGZnEamgkAWqZiSPIqYC0CFHE5DM94iFX7eEk95m1Hu78WbjyE9Iaaa+nWwWL5w==}
+  '@w5s/cspell-config@3.1.3':
+    resolution: {integrity: sha512-WcK4eOxv8fxV6VTQ6LHdGnslhuRVlzxFx62DcMRu+CkWive8F1fm813c26k9ErAFF4aqK1v2+L46+o1aCN6mpg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       cspell: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
@@ -13259,7 +13259,7 @@ snapshots:
       emoji-regex: 10.6.0
       gitmojis: 3.15.0
 
-  '@w5s/cspell-config@3.1.2(cspell@9.7.0)':
+  '@w5s/cspell-config@3.1.3(cspell@9.7.0)':
     dependencies:
       '@cspell/cspell-bundled-dicts': 9.7.0
     optionalDependencies:
