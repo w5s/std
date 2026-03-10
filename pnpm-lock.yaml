@@ -30,8 +30,8 @@ importers:
         specifier: 3.5.2
         version: 3.5.2(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.0)(yaml@2.8.2))
       '@w5s/tsconfig':
-        specifier: 3.1.3
-        version: 3.1.3(typescript@5.9.3)
+        specifier: 3.1.4
+        version: 3.1.4(typescript@5.9.3)
       cspell:
         specifier: 9.7.0
         version: 9.7.0
@@ -3684,8 +3684,8 @@ packages:
       prettier:
         optional: true
 
-  '@w5s/tsconfig@3.1.3':
-    resolution: {integrity: sha512-NrBYZyXfkYvUn0Cq0B8a1aEHKHGgWz5VRySZBtLKsYkz1hcGDyAsT9WEjWwS5hKXbByWN9fPONlW5o+kKB8SsQ==}
+  '@w5s/tsconfig@3.1.4':
+    resolution: {integrity: sha512-s8fltJWCmJM4t8Cdy8aCetALzTHMW+d0OAmyDtedrAn7dE+80Tam29+n2eVVWGtSzpr3zrDMOLdzVyK/2DkIIQ==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       typescript: '>=5.x'
@@ -13304,7 +13304,7 @@ snapshots:
 
   '@w5s/prettier-config@3.1.2': {}
 
-  '@w5s/tsconfig@3.1.3(typescript@5.9.3)':
+  '@w5s/tsconfig@3.1.4(typescript@5.9.3)':
     optionalDependencies:
       typescript: 5.9.3
 
