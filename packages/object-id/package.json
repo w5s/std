@@ -54,7 +54,7 @@
     "@w5s/global-storage": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@w5s/tsdown-config": "1.0.0-alpha.3",
+    "@w5s/tsdown-config": "1.0.0-alpha.4",
     "tsdown": "0.21.1",
     "typescript": "5.9.3",
     "vite": "latest",
