@@ -3,13 +3,14 @@ import { useRef } from './useRef.js';
 import { useNamespace } from './useNamespace.js';
 import type { Ref } from '@w5s/core';
 import type { State } from './State.js';
+import type { Meta } from './Meta.js';
 
 export function useConfiguration<Configuration>(
-  name: string | { name: string },
+  meta: Meta,
   initial: Configuration,
   store?: Ref<State>,
 ): ConfigurationRef<Configuration> {
-  const namespace = useNamespace(name, store);
+  const namespace = useNamespace(meta, store);
   const configuration = useRef(namespace, 'configuration', initial);
 
   function modify(fn: (current: Configuration) => Configuration): void {

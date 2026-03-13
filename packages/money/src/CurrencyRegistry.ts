@@ -1,5 +1,5 @@
 import type { Option } from '@w5s/core';
-import { useState } from '@w5s/application';
+import { useState, type Meta } from '@w5s/application';
 import type { Currency } from './Currency/Currency.js';
 import { meta } from './meta.js';
 
@@ -29,10 +29,8 @@ export interface CurrencyRegistry {
   readonly getByCode: (currencyCode: Currency['code']) => Option<Currency>;
 }
 
-export function CurrencyRegistry(name: string | {
-  name: string;
-}): CurrencyRegistry {
-  const codeIndex = useState<Readonly<Record<string, Currency>>>(name, 'currency', Object.freeze({}));
+export function CurrencyRegistry(_meta: Meta): CurrencyRegistry {
+  const codeIndex = useState<Readonly<Record<string, Currency>>>(_meta, 'currency', Object.freeze({}));
 
   function add(currency: Currency): void {
     codeIndex.current = {

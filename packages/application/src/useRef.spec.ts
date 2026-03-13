@@ -3,7 +3,7 @@ import { Ref } from '@w5s/core';
 import { useStorage } from '@w5s/global-storage';
 import { useRef } from './useRef.js';
 
-describe('useRef()', () => {
+describe(useRef, () => {
   describe('+ Storage', () => {
     const anyStorage = useStorage({});
 
