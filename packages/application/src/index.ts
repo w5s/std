@@ -1,5 +1,5 @@
+export * from './meta.js';
 export * from './ConfigurationRef.js';
-export * from './Meta.js';
 export * from './State.js';
 export * from './StateKey.js';
 export * from './useConfiguration.js';

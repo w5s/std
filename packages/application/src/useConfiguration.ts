@@ -3,8 +3,21 @@ import { useRef } from './useRef.js';
 import { useNamespace } from './useNamespace.js';
 import type { Ref } from '@w5s/core';
 import type { State } from './State.js';
-import type { Meta } from './Meta.js';
+import type { Meta } from './meta.js';
 
+/**
+ *
+ * @example
+ * ```typescript
+ * const app = { name: 'my-app' };
+ * const configRef = useConfiguration(app, { mode: 'light', retries: 3 });
+ * configRef.update({ retries: 4 });
+ * console.log(configRef.current); // { mode: 'light', retries: 4 }
+ * ```
+ * @param meta
+ * @param initial
+ * @param store
+ */
 export function useConfiguration<Configuration>(
   meta: Meta,
   initial: Configuration,

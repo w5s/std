@@ -3,7 +3,7 @@ import { useNamespace } from './useNamespace.js';
 import { useRef } from './useRef.js';
 import type { State } from './State.js';
 import type { StateKey } from './StateKey.js';
-import type { Meta } from './Meta.js';
+import type { Meta } from './meta.js';
 
 /**
  * Return a new `Ref` containing the state for the given `meta.name` and `key`.
