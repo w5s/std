@@ -4,11 +4,11 @@ import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
 import { ignore as taskIgnore } from '@w5s/task/dist/Task/ignore.js';
 import type { Task } from '@w5s/task';
 import type { LogRecord } from '../LogRecord.js';
-import { application } from '../application.js';
+import { configuration } from '../configuration.js';
 
 function getHandleTasks(logRecord: LogRecord): Task<Array<Task<void, never>>, never> {
   return taskFrom(({ resolve }) => {
-    const handlerMap = application.get('handler');
+    const handlerMap = configuration.get('handler');
     resolve(Object.values(handlerMap).map((handler) => handler(logRecord)));
   });
 }

@@ -6,7 +6,8 @@ describe('index', () => {
     expect(Object.keys(Module).toSorted()).toEqual(
       [
         // List of all public exports
-        'application',
+        'meta',
+        'configuration',
         'randomUUID',
         'UUID',
       ].toSorted(),

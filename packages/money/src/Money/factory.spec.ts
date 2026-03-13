@@ -1,6 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { Int } from '@w5s/core';
-import { ApplicationTest } from '@w5s/application/dist/Testing.js';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { Currency } from '../Currency.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
@@ -11,7 +10,7 @@ describe(factory, () => {
   let registry: CurrencyRegistry;
   const TEST = 'TEST';
   beforeEach(() => {
-    const app = ApplicationTest('money-test');
+    const app = { name: 'money-test' };
     registry = CurrencyRegistry(app);
     registry.add(
       Currency({

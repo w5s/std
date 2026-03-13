@@ -1,8 +1,9 @@
 import type { Ref } from '@w5s/core';
 import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
 import type { Storage } from '@w5s/global-storage';
+import type { StateKey } from './StateKey.js';
 
-function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: string, initialValue: T): Ref<T> {
+function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: StateKey, initialValue: T): Ref<T> {
   const propertyRef: Ref<T> = {
     get current() {
       return ref.current[propertyName] as T;
@@ -21,7 +22,7 @@ function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: 
   return propertyRef;
 }
 
-function useRefStorage<V>(hostObject: Storage, key: string, initialValue: V): Ref<V> {
+function useRefStorage<V>(hostObject: Storage, key: StateKey, initialValue: V): Ref<V> {
   const ref: Ref<V> = {
     get current() {
       return hostObject.get(key) as V;
@@ -55,7 +56,7 @@ function useRefStorage<V>(hostObject: Storage, key: string, initialValue: V): Re
  */
 export function useRef<V>(
   hostObject: Ref<Record<string | symbol, unknown>> | Storage,
-  key: string,
+  key: StateKey,
   initialValue: V,
 ): Ref<V> {
   return 'get' in hostObject ? useRefStorage(hostObject, key, initialValue) : useRefMap(hostObject, key, initialValue);

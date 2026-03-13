@@ -6,6 +6,8 @@ describe('index', () => {
     expect(Object.keys(Module).toSorted()).toEqual(
       [
         // List of all public exports
+        'meta',
+        'configuration',
         'randomBoolean',
         'randomInt',
         'randomNumber',

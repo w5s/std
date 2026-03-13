@@ -7,7 +7,8 @@ describe('index', () => {
       [
         // public exports
         'useRef',
-        'Application',
+        'useConfiguration',
+        'useState',
       ].toSorted(),
     );
   });

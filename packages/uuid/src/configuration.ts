@@ -1,8 +1,7 @@
-import { Application } from '@w5s/application';
+import { useConfiguration } from '@w5s/application';
 import type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
 import { randomUUID as randomUUIDNode } from 'node:crypto';
-
-const randomUUID = () => (globalThis.crypto == null ? randomUUIDNode() : globalThis.crypto.randomUUID());
+import { meta } from './meta.js';
 
 interface RandomUUIDFunction {
   /**
@@ -11,13 +10,13 @@ interface RandomUUIDFunction {
   (): UUIDString;
 }
 
-export interface UUIDConfiguration {
+export interface Configuration {
   readonly randomUUIDGenerator: RandomUUIDFunction;
 }
 
 /**
  * Random Application
  */
-export const application = Application<UUIDConfiguration>('@w5s/uuid', {
-  randomUUIDGenerator: randomUUID,
+export const configuration = useConfiguration<Configuration>(meta, {
+  randomUUIDGenerator: () => (globalThis.crypto == null ? randomUUIDNode() : globalThis.crypto.randomUUID()),
 });

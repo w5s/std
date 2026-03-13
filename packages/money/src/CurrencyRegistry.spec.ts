@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { ApplicationTest } from '@w5s/application/dist/Testing.js';
 import { Currency } from './Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
 
@@ -8,7 +7,7 @@ describe('CurrencyRegistry', () => {
 
   describe('.getByCode() / .add()', () => {
     it('should store data', () => {
-      const app = ApplicationTest();
+      const app = { name: 'test123' };
       const registry = CurrencyRegistry(app);
 
       expect(registry.getByCode(anyCurrency.code)).toBe(undefined);

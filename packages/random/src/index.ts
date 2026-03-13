@@ -1,4 +1,5 @@
-export * from './RandomConfiguration.js';
+export * from './meta.js';
+export * from './configuration.js';
 export * from './RandomGenerator.js';
 export * from './randomBoolean.js';
 export * from './randomInt.js';
