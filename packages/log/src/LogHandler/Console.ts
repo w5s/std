@@ -1,6 +1,4 @@
-import { Console as defaultConsole } from '@w5s/console/dist/Console.js';
-import { fontWeight as ansiFontWeight } from '@w5s/console/dist/ANSICode/fontWeight.js';
-import { color as ansiColor } from '@w5s/console/dist/ANSICode/color.js';
+import { Console as defaultConsole, ANSICode } from '@w5s/console';
 import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
@@ -10,11 +8,11 @@ import type { LogRecord } from '../LogRecord.js';
 import { messageWithData } from '../LogRecord/messageWithData.js';
 import type { LogLevel } from '../LogLevel.js';
 
-const red = ansiColor('red');
-const yellow = ansiColor('yellow');
-const blue = ansiColor('blue');
-const black = ansiColor('black');
-const dim = ansiFontWeight('dim');
+const red = ANSICode.color('red');
+const yellow = ANSICode.color('yellow');
+const blue = ANSICode.color('blue');
+const black = ANSICode.color('black');
+const dim = ANSICode.fontWeight('dim');
 const formatTime = dim;
 const logLevelAsInt = LogLevelAsInt.asInt;
 

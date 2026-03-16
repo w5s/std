@@ -34,7 +34,7 @@
   ],
   "scripts": {
     "build": "pnpm run \"/^build:.*/\"",
-    "build:tsc": "tsc -b tsconfig.build.json",
+    "build:tsc": "tsdown",
     "clean": "pnpm run \"/^clean:.*/\"",
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
@@ -53,6 +53,8 @@
     "@w5s/task": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
+    "@w5s/tsdown-config": "1.0.0-alpha.4",
+    "tsdown": "0.21.3",
     "typescript": "5.9.3",
     "vite": "latest",
     "vitest": "latest"
