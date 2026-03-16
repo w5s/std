@@ -5,7 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  vite: 7.3.1
   vitest: 4.0.18
 
 importers:
@@ -69,9 +68,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -137,9 +133,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -156,9 +149,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -178,9 +168,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -197,9 +184,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -222,9 +206,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -244,9 +225,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -266,9 +244,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -284,9 +259,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -318,9 +290,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -337,9 +306,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -353,9 +319,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -371,9 +334,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -405,9 +365,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -430,9 +387,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -464,9 +418,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -495,9 +446,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -517,9 +465,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -542,9 +487,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -609,9 +551,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -631,9 +570,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -665,9 +601,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -690,9 +623,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -715,9 +645,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -743,9 +670,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -765,9 +689,6 @@ importers:
       typescript:
         specifier: 5.9.3
         version: 5.9.3
-      vite:
-        specifier: 7.3.1
-        version: 7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
       vitest:
         specifier: 4.0.18
         version: 4.0.18(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2)
@@ -3633,7 +3554,7 @@ packages:
     resolution: {integrity: sha512-HhVd0MDnzzsgevnOWCBj5Otnzobjy5wLBe4EdeeFGv8luMsGcYqDuFRMcttKWZA5vVO8RFjexVovXvAM4JoJDQ==}
     peerDependencies:
       msw: ^2.4.9
-      vite: 7.3.1
+      vite: ^6.0.0 || ^7.0.0-0
     peerDependenciesMeta:
       msw:
         optional: true
