@@ -3,9 +3,9 @@ import { Tag } from '@w5s/core/dist/Tag.js';
 import { Int } from '@w5s/core/dist/Type/Int.js';
 import { format } from './format.js';
 import { parse } from './parse.js';
-import { defaultStandard } from './defaultStandard.js';
+import { defaultFormat } from './defaultFormat.js';
 
-const formatOptions = { standard: defaultStandard };
+const formatOptions = { standard: defaultFormat };
 
 /**
  * A file size in bytes

@@ -1,2 +1,2 @@
 export * from './ByteSize.js';
-export * from './ByteSizeStandard.js';
+export * from './ByteSizeFormat.js';

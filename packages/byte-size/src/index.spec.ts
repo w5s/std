@@ -7,7 +7,7 @@ describe('index', () => {
       [
         // Public API
         'ByteSize',
-        'ByteSizeStandard',
+        'ByteSizeFormat',
       ].toSorted(),
     );
   });

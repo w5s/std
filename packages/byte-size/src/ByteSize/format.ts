@@ -1,7 +1,7 @@
 import type { ByteSize } from './ByteSize.js';
-import type { ByteSizeStandard } from '../ByteSizeStandard.js';
-import { byteSizePrefixes, byteSizeStandardData } from '../ByteSizeStandard/data.js';
-import { defaultStandard } from './defaultStandard.js';
+import type { ByteSizeFormat } from '../ByteSizeFormat.js';
+import { byteSizePrefixes, byteSizeFormatData } from '../ByteSizeFormat/data.js';
+import { defaultFormat } from './defaultFormat.js';
 
 export interface FormatOptions {
   /**
@@ -12,7 +12,7 @@ export interface FormatOptions {
    *
    * @default 'SI'
    */
-  standard?: ByteSizeStandard;
+  standard?: ByteSizeFormat;
 }
 
 /**
@@ -27,8 +27,8 @@ export interface FormatOptions {
  * @param options
  */
 export function format(self: ByteSize, options: FormatOptions = {}): string {
-  const { standard = defaultStandard } = options;
-  const { base, suffix } = byteSizeStandardData[standard];
+  const { standard = defaultFormat } = options;
+  const { base, suffix } = byteSizeFormatData[standard];
 
   let size = self as number;
   let unitIndex = 0;

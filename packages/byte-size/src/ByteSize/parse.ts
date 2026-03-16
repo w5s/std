@@ -1,6 +1,6 @@
 import type { Option } from '@w5s/core';
 import type { ByteSize } from './ByteSize.js';
-import { byteSizeStandardIndex } from '../ByteSizeStandard/data.js';
+import { byteSizeFormatIndex } from '../ByteSizeFormat/data.js';
 
 /**
  * Parses a human-readable file size string into a ByteSize.
@@ -24,7 +24,7 @@ export function parse(value: string): Option<ByteSize> {
   const amount = Number.parseFloat(amountStr.replaceAll(',', ''));
 
   if (Number.isNaN(amount)) return undefined;
-  const multiplier = unit == null ? 1 : byteSizeStandardIndex()[unit];
+  const multiplier = unit == null ? 1 : byteSizeFormatIndex()[unit];
   if (multiplier == null) return undefined;
 
   return (amount * multiplier) as ByteSize;
