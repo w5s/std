@@ -1,18 +1,4 @@
-const __withResolvers: typeof Promise.withResolvers =
-
-  Promise.withResolvers == null
-    ? () => {
-        const deferred: any = {};
-
-        deferred.promise = new Promise((resolve, reject) => {
-          deferred.resolve = resolve;
-
-          deferred.reject = reject;
-        });
-
-        return deferred;
-      }
-    : () => Promise.withResolvers();
+import { __withResolvers } from './__withResolver.js';
 
 /**
  * Creates a new Promise and returns it in an object, along with its resolve and reject functions.
