@@ -72,17 +72,23 @@
     "markdown-magic-subpackage-list": "1.1.2",
     "size-limit": "12.0.1",
     "size-limit-preset-node-lib": "0.4.0",
-    "tsdown": "0.21.2",
+    "tsdown": "0.21.3",
     "turbo": "2.8.16",
     "typedoc": "0.28.17",
     "typescript": "5.9.3",
-    "vite": "latest",
-    "vitest": "latest"
+    "vite": "7.3.1",
+    "vitest": "4.0.18"
   },
   "packageManager": "pnpm@10.32.1",
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=6.0.0",
     "pnpm": ">=10.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "7.3.1",
+      "vitest": "4.0.18"
+    }
   }
 }
