@@ -6,6 +6,7 @@ import * as fsReadSymbolicLink from './FileSystem/readSymbolicLink.js';
 import * as fsListDirectory from './FileSystem/listDirectory.js';
 import * as fsEnsure from './FileSystem/ensure.js';
 import * as fsReadFileStatus from './FileSystem/readFileStatus.js';
+import * as fsReadFile from './FileSystem/readFile.js';
 import * as fsRemove from './FileSystem/remove.js';
 import * as fsRename from './FileSystem/rename.js';
 import * as fsWriteFile from './FileSystem/writeFile.js';
@@ -25,6 +26,7 @@ export const FileSystem = {
   ensureFile: fsEnsure.ensureFile,
   ensureSymbolicLink: fsEnsure.ensureSymbolicLink,
   ...fsReadFileStatus,
+  ...fsReadFile,
   ...fsRename,
   ...fsWriteFile,
   move: fsMove.move,
