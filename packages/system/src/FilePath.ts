@@ -207,7 +207,7 @@ export const FilePath = Object.assign(
 );
 export namespace FilePath {
   export type Delimiter = ':' | ';';
-  export type Extension = `.${string}`;
+  export type Extension = `.${string}` | '';
   export type Separator = '/' | '\\';
 
   export interface Parsed {
