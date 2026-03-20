@@ -1,4 +1,4 @@
-name: Node.js CI
+name: CI
 on:
   merge_group: {}
   push:
@@ -25,4 +25,11 @@ jobs:
         uses: w5s/actions/setup@main
         with:
           node-version: ${{ matrix.node-version }}
-      - run: make validate
+      - name: 🔨 Build
+        uses: w5s/actions/task@main
+        with:
+          task: build
+      - name: 🔍 Validate
+        uses: w5s/actions/task@main
+        with:
+          task: validate

@@ -18,10 +18,10 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: ⚙️ Setup
         uses: w5s/actions/setup@main
-      - name: 📦 Install dependencies
-        run: pnpm install
-      - name: Build website
-        run: pnpm --filter @w5s/website run build
+      - name: 🔨 Build
+        uses: w5s/actions/task@main
+        with:
+          task: build
 
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
