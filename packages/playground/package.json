@@ -23,7 +23,7 @@
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
     "format": "pnpm run \"/^format:.*/\"",
-    "format:src": "eslint . --fix --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
+    "format:src": "eslint . --fix",
     "lint": "pnpm run \"/^lint:.*/\"",
     "lint:src": "eslint .",
     "prepublishOnly": "npm run clean;npm run build",

@@ -17,7 +17,7 @@
     "deploy": "docusaurus deploy",
     "docusaurus": "docusaurus",
     "format": "pnpm run \"/^format:.*/\"",
-    "format:src": "eslint . --fix --ext=mjs,cjs,js,jsx,ts,tsx,json,jsonc,json5,yml,yaml",
+    "format:src": "eslint . --fix",
     "lint": "pnpm run \"/^lint:.*/\"",
     "lint:src": "eslint .",
     "serve": "docusaurus serve",
