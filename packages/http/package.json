@@ -62,11 +62,11 @@
     "@w5s/time": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "typescript": "5.9.3",
+    "typescript": "6.0.2",
     "vitest": "latest"
   },
   "peerDependencies": {
-    "typescript": "^3.8.0 || ^4.0.0 || ^5.0.0"
+    "typescript": "^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
