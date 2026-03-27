@@ -1,9 +1,9 @@
 import type { ImmediateId } from './ImmediateId.js';
 
 const __clearImmediate: (id: any) => void =
-  globalThis.clearImmediate == null
+  (globalThis as any).clearImmediate == null
     ? (id: any) => globalThis.clearTimeout(id)
-    : (id: any) => Number(globalThis.clearImmediate(id));
+    : (id: any) => Number((globalThis as any).clearImmediate(id));
 
 /**
  * A polyfill for {@link clearImmediate}
