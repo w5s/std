@@ -3,6 +3,7 @@
   "language": "en",
   "import": ["@w5s/cspell-config"],
   "words": [
+    "apify",
     "bigdecimal",
     "CLOB",
     "concat",

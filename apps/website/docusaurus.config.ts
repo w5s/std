@@ -210,7 +210,7 @@ const config: Config = (() => {
 
     plugins: [
       [
-        'docusaurus-plugin-typedoc-api',
+        '@apify/docusaurus-plugin-typedoc-api',
         {
           projectRoot,
           packages: packageList.map(({ path, entry }) => ({
