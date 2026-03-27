@@ -93,6 +93,8 @@ export const CustomError: CustomErrorConstructor = (() => {
   const errorName = 'CustomError';
   const __assign = Object.assign;
   const __create = Object.create;
+  // eslint-disable-next-line ts/no-unsafe-function-type
+  const __captureStackTrace = (Error as any).captureStackTrace ?? ((_targetObject: object, _constructorOpt?: Function | undefined) => {});
 
   function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
     this: any,
@@ -113,9 +115,7 @@ export const CustomError: CustomErrorConstructor = (() => {
     __assign(returnValue, properties);
 
     // Capture stack trace
-    if (typeof Error.captureStackTrace === 'function') {
-      Error.captureStackTrace(returnValue, returnValue.constructor);
-    }
+    __captureStackTrace(returnValue, returnValue.constructor);
 
     return returnValue as CustomError<Properties>;
   }

@@ -1,9 +1,9 @@
 import type { ImmediateId } from './ImmediateId.js';
 
 const __setImmediate =
-  globalThis.setImmediate == null
+  (globalThis as any).setImmediate == null
     ? (fn: () => void) => globalThis.setTimeout(fn, 0)
-    : (fn: () => void) => Number(globalThis.setImmediate(fn));
+    : (fn: () => void) => Number((globalThis as any).setImmediate(fn));
 
 /**
  * A polyfill for {@link setImmediate}
