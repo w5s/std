@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@w5s/tsdown-config": "1.0.0-alpha.4",
-    "tsdown": "0.21.5",
+    "tsdown": "0.21.6",
     "typescript": "6.0.2",
     "vitest": "latest"
   },
