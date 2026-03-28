@@ -12,6 +12,7 @@
 * [@w5s/core-type](packages/core-type) - Core type modules
 * [@w5s/database](packages/database) - Database client module
 * [@w5s/env](packages/env) - Environment variable module
+* [@w5s/config](packages/config) - Configuration explorer module
 * [@w5s/error](packages/error) - Error module
 * [@w5s/http](packages/http) - HTTP client module
 * [@w5s/iterable](packages/iterable) - Iterable and AsyncIterable modules
