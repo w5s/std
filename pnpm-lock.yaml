@@ -57,8 +57,8 @@ importers:
         specifier: 0.4.0
         version: 0.4.0(size-limit@12.0.1(jiti@2.6.1))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       turbo:
         specifier: 2.8.21
         version: 2.8.21
@@ -126,10 +126,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -218,10 +218,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -252,10 +252,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -289,10 +289,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -333,10 +333,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -486,10 +486,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -575,10 +575,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -700,10 +700,10 @@ importers:
     devDependencies:
       '@w5s/tsdown-config':
         specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))
+        version: 1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))
       tsdown:
-        specifier: 0.21.6
-        version: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+        specifier: 0.21.7
+        version: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
       typescript:
         specifier: 6.0.2
         version: 6.0.2
@@ -5485,9 +5485,6 @@ packages:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
 
-  get-tsconfig@4.13.6:
-    resolution: {integrity: sha512-shZT/QMiSHc/YBLxxOkMtgSid5HFoauqCE3/exfsEcwg1WkeqjG+V40yBbBrsD+jW2HDXcs28xOfcbm2jI8Ddw==}
-
   get-tsconfig@4.13.7:
     resolution: {integrity: sha512-7tN6rFgBlMgpBML5j8typ92BKFi2sFQvIdpAqLA2beia5avZDrMs0FLZiM5etShWq5irVyGcGMEA1jcDaK7A/Q==}
 
@@ -7958,8 +7955,8 @@ packages:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rolldown-plugin-dts@0.23.1:
-    resolution: {integrity: sha512-VTnvu5cksnumMMOiL7FUvACGpdGtCVNGbeVc6/6KffImIrA0DZOp7/0lBIt0qI6Nu3/K/lL/Dy7piuVGt9ZeGw==}
+  rolldown-plugin-dts@0.23.2:
+    resolution: {integrity: sha512-PbSqLawLgZBGcOGT3yqWBGn4cX+wh2nt5FuBGdcMHyOhoukmjbhYAl8NT9sE4U38Cm9tqLOIQeOrvzeayM0DLQ==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       '@ts-macro/tsc': ^0.3.6
@@ -8559,14 +8556,14 @@ packages:
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
-  tsdown@0.21.6:
-    resolution: {integrity: sha512-YsgPuWczqxPkXiJwMPrv3eOiqx4KPhOdksqubVCDhS7lChK3RYlWsEGhZixc0+lqN3fmBYEnETaujEWDpMPZmA==}
+  tsdown@0.21.7:
+    resolution: {integrity: sha512-ukKIxKQzngkWvOYJAyptudclkm4VQqbjq+9HF5K5qDO8GJsYtMh8gIRwicbnZEnvFPr6mquFwYAVZ8JKt3rY2g==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
       '@arethetypeswrong/core': ^0.18.1
-      '@tsdown/css': 0.21.6
-      '@tsdown/exe': 0.21.6
+      '@tsdown/css': 0.21.7
+      '@tsdown/exe': 0.21.7
       '@vitejs/devtools': '*'
       publint: ^0.3.0
       typescript: ^5.0.0 || ^6.0.0
@@ -13151,9 +13148,9 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.2
 
-  '@w5s/tsdown-config@1.0.0-alpha.4(tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2))':
+  '@w5s/tsdown-config@1.0.0-alpha.4(tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2))':
     optionalDependencies:
-      tsdown: 0.21.6(synckit@0.11.12)(typescript@6.0.2)
+      tsdown: 0.21.7(synckit@0.11.12)(typescript@6.0.2)
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
@@ -14778,7 +14775,7 @@ snapshots:
       enhanced-resolve: 5.20.0
       eslint: 10.1.0(jiti@2.6.1)
       eslint-plugin-es-x: 7.8.0(eslint@10.1.0(jiti@2.6.1))
-      get-tsconfig: 4.13.6
+      get-tsconfig: 4.13.7
       globals: 15.15.0
       globrex: 0.1.2
       ignore: 5.3.2
@@ -15260,10 +15257,6 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
-
-  get-tsconfig@4.13.6:
-    dependencies:
-      resolve-pkg-maps: 1.0.0
 
   get-tsconfig@4.13.7:
     dependencies:
@@ -18257,7 +18250,7 @@ snapshots:
 
   reusify@1.1.0: {}
 
-  rolldown-plugin-dts@0.23.1(rolldown@1.0.0-rc.12)(typescript@6.0.2):
+  rolldown-plugin-dts@0.23.2(rolldown@1.0.0-rc.12)(typescript@6.0.2):
     dependencies:
       '@babel/generator': 8.0.0-rc.3
       '@babel/helper-validator-identifier': 8.0.0-rc.3
@@ -18268,6 +18261,7 @@ snapshots:
       dts-resolver: 2.1.3
       get-tsconfig: 4.13.7
       obug: 2.1.1
+      picomatch: 4.0.4
       rolldown: 1.0.0-rc.12
     optionalDependencies:
       typescript: 6.0.2
@@ -18985,7 +18979,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.21.6(synckit@0.11.12)(typescript@6.0.2):
+  tsdown@0.21.7(synckit@0.11.12)(typescript@6.0.2):
     dependencies:
       ansis: 4.2.0
       cac: 7.0.0
@@ -18996,7 +18990,7 @@ snapshots:
       obug: 2.1.1
       picomatch: 4.0.4
       rolldown: 1.0.0-rc.12
-      rolldown-plugin-dts: 0.23.1(rolldown@1.0.0-rc.12)(typescript@6.0.2)
+      rolldown-plugin-dts: 0.23.2(rolldown@1.0.0-rc.12)(typescript@6.0.2)
       semver: 7.7.4
       tinyexec: 1.0.4
       tinyglobby: 0.2.15
