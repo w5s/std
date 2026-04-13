@@ -16,7 +16,7 @@ importers:
         version: 5.0.0(@types/node@20.19.39)(conventional-commits-filter@5.0.0)
       '@size-limit/preset-small-lib':
         specifier: 12.1.0
-        version: 12.1.0(size-limit@12.0.1(jiti@2.6.1))
+        version: 12.1.0(size-limit@12.1.0(jiti@2.6.1))
       '@types/node':
         specifier: 20.19.39
         version: 20.19.39
@@ -51,11 +51,11 @@ importers:
         specifier: 1.1.2
         version: 1.1.2(markdown-magic@4.8.0(encoding@0.1.13))
       size-limit:
-        specifier: 12.0.1
-        version: 12.0.1(jiti@2.6.1)
+        specifier: 12.1.0
+        version: 12.1.0(jiti@2.6.1)
       size-limit-preset-node-lib:
         specifier: 0.4.0
-        version: 0.4.0(size-limit@12.0.1(jiti@2.6.1))
+        version: 0.4.0(size-limit@12.1.0(jiti@2.6.1))
       tsdown:
         specifier: 0.21.8
         version: 0.21.8(synckit@0.11.12)(typescript@6.0.2)
@@ -8498,8 +8498,8 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  size-limit@12.0.1:
-    resolution: {integrity: sha512-vuFj+6lDOoBJQu6OLhcMQv7jnbXjuoEn4WsQHlSLOV/8EFfOka/tfjtLQ/rZig5Gagi3R0GnU/0kd4EY/y2etg==}
+  size-limit@12.1.0:
+    resolution: {integrity: sha512-VnDS2fycANrJFVPQwjaD+h+hkISY7EB3LsPsYWje4lBCjQwwsZLxjwwRwVJKHrcj2ZqyG+DdXykWm9mbZklZrw==}
     engines: {node: ^20.0.0 || ^22.0.0 || >=24.0.0}
     hasBin: true
     peerDependencies:
@@ -12380,7 +12380,7 @@ snapshots:
       p-map: 7.0.4
       p-queue: 9.1.0
       semver: 7.7.4
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
       write-file-atomic: 7.0.1
       write-json-file: 7.0.0
       yaml: 2.8.3
@@ -13129,25 +13129,25 @@ snapshots:
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
-  '@size-limit/esbuild@12.1.0(size-limit@12.0.1(jiti@2.6.1))':
+  '@size-limit/esbuild@12.1.0(size-limit@12.1.0(jiti@2.6.1))':
     dependencies:
       esbuild: 0.28.0
       nanoid: 5.1.7
-      size-limit: 12.0.1(jiti@2.6.1)
+      size-limit: 12.1.0(jiti@2.6.1)
 
-  '@size-limit/file@11.2.0(size-limit@12.0.1(jiti@2.6.1))':
+  '@size-limit/file@11.2.0(size-limit@12.1.0(jiti@2.6.1))':
     dependencies:
-      size-limit: 12.0.1(jiti@2.6.1)
+      size-limit: 12.1.0(jiti@2.6.1)
 
-  '@size-limit/file@12.1.0(size-limit@12.0.1(jiti@2.6.1))':
+  '@size-limit/file@12.1.0(size-limit@12.1.0(jiti@2.6.1))':
     dependencies:
-      size-limit: 12.0.1(jiti@2.6.1)
+      size-limit: 12.1.0(jiti@2.6.1)
 
-  '@size-limit/preset-small-lib@12.1.0(size-limit@12.0.1(jiti@2.6.1))':
+  '@size-limit/preset-small-lib@12.1.0(size-limit@12.1.0(jiti@2.6.1))':
     dependencies:
-      '@size-limit/esbuild': 12.1.0(size-limit@12.0.1(jiti@2.6.1))
-      '@size-limit/file': 12.1.0(size-limit@12.0.1(jiti@2.6.1))
-      size-limit: 12.0.1(jiti@2.6.1)
+      '@size-limit/esbuild': 12.1.0(size-limit@12.1.0(jiti@2.6.1))
+      '@size-limit/file': 12.1.0(size-limit@12.1.0(jiti@2.6.1))
+      size-limit: 12.1.0(jiti@2.6.1)
 
   '@slorber/react-helmet-async@1.3.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
@@ -13568,7 +13568,7 @@ snapshots:
       debug: 4.4.3
       minimatch: 10.2.4
       semver: 7.7.4
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
       ts-api-utils: 2.4.0(typescript@6.0.2)
       typescript: 6.0.2
     transitivePeerDependencies:
@@ -17571,7 +17571,7 @@ snapshots:
       proc-log: 6.1.0
       semver: 7.7.4
       tar: 7.5.11
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
       which: 6.0.1
     transitivePeerDependencies:
       - supports-color
@@ -19194,10 +19194,10 @@ snapshots:
       size-limit: 11.2.0
       tslib: 2.8.1
 
-  size-limit-preset-node-lib@0.4.0(size-limit@12.0.1(jiti@2.6.1)):
+  size-limit-preset-node-lib@0.4.0(size-limit@12.1.0(jiti@2.6.1)):
     dependencies:
-      '@size-limit/file': 11.2.0(size-limit@12.0.1(jiti@2.6.1))
-      size-limit: 12.0.1(jiti@2.6.1)
+      '@size-limit/file': 11.2.0(size-limit@12.1.0(jiti@2.6.1))
+      size-limit: 12.1.0(jiti@2.6.1)
       size-limit-node-esbuild: 0.4.0
       tslib: 2.8.1
 
@@ -19209,15 +19209,15 @@ snapshots:
       lilconfig: 3.1.3
       nanospinner: 1.2.2
       picocolors: 1.1.1
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
 
-  size-limit@12.0.1(jiti@2.6.1):
+  size-limit@12.1.0(jiti@2.6.1):
     dependencies:
       bytes-iec: 3.1.1
       lilconfig: 3.1.3
       nanospinner: 1.2.2
       picocolors: 1.1.1
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
     optionalDependencies:
       jiti: 2.6.1
 
@@ -19919,7 +19919,7 @@ snapshots:
       picomatch: 4.0.4
       postcss: 8.5.8
       rollup: 4.59.0
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
     optionalDependencies:
       '@types/node': 20.19.37
       fsevents: 2.3.3
@@ -19934,7 +19934,7 @@ snapshots:
       picomatch: 4.0.4
       postcss: 8.5.8
       rollup: 4.59.0
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
     optionalDependencies:
       '@types/node': 20.19.39
       fsevents: 2.3.3
