@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@w5s/collection": "workspace:^1.0.0-alpha.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "latest"
   },
   "peerDependencies": {

@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "currencies.json": "1.1.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "latest"
   },
   "peerDependencies": {

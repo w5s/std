@@ -57,7 +57,7 @@
   "devDependencies": {
     "@w5s/console": "workspace:1.0.0-alpha.0",
     "@w5s/task": "workspace:1.0.0-alpha.0",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "latest"
   },
   "peerDependencies": {
