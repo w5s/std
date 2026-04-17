@@ -67,7 +67,7 @@
   "devDependencies": {
     "@w5s/tsdown-config": "1.0.0-alpha.4",
     "tsdown": "0.21.9",
-    "typescript": "6.0.2",
+    "typescript": "6.0.3",
     "vitest": "latest"
   },
   "peerDependencies": {
