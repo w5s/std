@@ -211,6 +211,28 @@ importers:
         specifier: 4.1.5
         version: 4.1.5(@types/node@20.19.39)(vite@7.3.2(@types/node@20.19.39)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.3))
 
+  packages/config:
+    dependencies:
+      '@w5s/core':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../core
+      '@w5s/error':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../error
+      '@w5s/system':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../system
+      '@w5s/task':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../task
+    devDependencies:
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 4.1.0
+        version: 4.1.0(@types/node@20.19.37)(vite@7.3.1(@types/node@20.19.37)(jiti@2.6.1)(terser@5.46.1)(yaml@2.8.2))
+
   packages/console:
     dependencies:
       '@w5s/task':
