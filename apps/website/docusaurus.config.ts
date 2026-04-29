@@ -65,6 +65,11 @@ const config: Config = (() => {
       return `/${this.projectName}`;
     },
 
+    // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+    future: {
+      v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    },
+
     // GitHub pages deployment config.
     // If you aren't using GitHub pages, you don't need these.
     organizationName, // Usually your GitHub org/user name.
