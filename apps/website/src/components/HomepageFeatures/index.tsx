@@ -11,7 +11,7 @@ import Feather from '@site/static/img/feather.svg';
 type FeatureItem = {
   title: string;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
-  description: JSX.Element;
+  description: React.ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -51,7 +51,7 @@ const FeatureList: FeatureItem[] = [
           <br />
           ✓ Pragmatic
           {' '}
-          <Def>FP</Def>
+          <Def abbr="FP" />
           {' '}
           : pure but never obscure
           {' '}
@@ -155,7 +155,7 @@ function Feature({ title, Svg, description }: FeatureItem) {
   );
 }
 
-export function HomepageFeatures(): JSX.Element {
+export function HomepageFeatures(): React.JSX.Element {
   return (
     <section className={styles.features}>
       <div className="container">
