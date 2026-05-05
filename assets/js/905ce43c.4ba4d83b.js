@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_w5s_website=self.webpackChunk_w5s_website||[]).push([["9398"],{782(e){e.exports=JSON.parse('{"banner":"","breadcrumbs":true,"gitRefName":"main","minimal":true,"pluginId":"default","scopes":[]}')}}]);
