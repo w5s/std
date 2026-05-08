@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # BEGIN MANAGED BLOCK
-pnpm dlx commitlint --edit $1
+pnpm dlx --package=@commitlint/cli@20.1.0 commitlint --edit "$1"
 # END MANAGED BLOCK
