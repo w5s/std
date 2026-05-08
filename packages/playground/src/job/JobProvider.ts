@@ -1,8 +1,5 @@
+import type { JobEnqueue } from './JobEnqueue.js';
 import type { JobRequest } from './JobRequest.js';
-
-export type JobEnqueueOptions =
-  | { _: 'immediate' }
-  | { _: 'delayed'; delay: number };
 
 export interface JobProvider {
   /**
@@ -12,5 +9,5 @@ export interface JobProvider {
    * @param request
    * @param options
    */
-  enqueue<Request extends JobRequest>(request: Request, options: JobEnqueueOptions): Promise<void>;
+  enqueue<Request extends JobRequest>(request: Request, options: JobEnqueue): Promise<void>;
 }

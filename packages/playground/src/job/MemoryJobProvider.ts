@@ -1,4 +1,5 @@
-import type { JobEnqueueOptions, JobProvider } from './JobProvider.js';
+import type { JobEnqueue } from './JobEnqueue.js';
+import type { JobProvider } from './JobProvider.js';
 import type { JobRequest } from './JobRequest.js';
 
 export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
@@ -40,9 +41,9 @@ export class MemoryJobProvider implements JobProvider {
     this.#queue.length = 0;
   }
 
-  async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueueOptions): Promise<void> {
+  async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueue): Promise<void> {
     const enqueuedAt = this.#now();
-    const availableAt = options._ === 'delayed'
+    const availableAt = options._ === 'JobEnqueueDelayed'
       ? enqueuedAt + options.delay
       : enqueuedAt;
     const entry: MemoryJobQueueEntry<Request> = {
@@ -51,7 +52,7 @@ export class MemoryJobProvider implements JobProvider {
       availableAt,
     };
 
-    if (options._ === 'delayed') {
+    if (options._ === 'JobEnqueueDelayed') {
       const timer = setTimeout(() => {
         this.#timers.delete(timer);
         this.#queue.push(entry);
