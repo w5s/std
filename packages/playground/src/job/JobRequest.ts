@@ -8,5 +8,5 @@ export interface JobRequest {
   /**
    * The payload of the job request, containing the data necessary for processing the job.
    */
-  jobPayload: Record<string, unknown>;
+  parameters: Record<string, unknown>;
 }
