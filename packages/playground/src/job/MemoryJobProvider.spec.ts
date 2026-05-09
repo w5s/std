@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryJobProvider } from './MemoryJobProvider.js';
+import { JobEnqueue } from './JobEnqueue.js';
 
 describe(MemoryJobProvider, () => {
   afterEach(() => {
@@ -8,9 +9,9 @@ describe(MemoryJobProvider, () => {
 
   it('enqueues immediate jobs in memory', async () => {
     const provider = new MemoryJobProvider();
-    const request = { _: 'email', payload: { userId: '1' } };
+    const request = { jobName: 'email', jobPayload: { userId: '1' } };
 
-    await provider.enqueue(request, { _: 'JobEnqueueImmediate' });
+    await provider.enqueue(request, JobEnqueue.Immediate);
 
     expect(provider.size).toBe(1);
     expect(provider.peek()).toEqual({
@@ -29,9 +30,9 @@ describe(MemoryJobProvider, () => {
   it('keeps delayed jobs out of the queue until ready', async () => {
     vi.useFakeTimers();
     const provider = new MemoryJobProvider({ now: () => Date.now() });
-    const request = { _: 'reminder', payload: { userId: '1' } };
+    const request = { jobName: 'reminder', jobPayload: { userId: '1' } };
 
-    await provider.enqueue(request, { _: 'JobEnqueueDelayed', delay: 100 });
+    await provider.enqueue(request, JobEnqueue.Delayed(100));
 
     expect(provider.size).toBe(0);
     vi.advanceTimersByTime(99);
@@ -50,8 +51,8 @@ describe(MemoryJobProvider, () => {
     vi.useFakeTimers();
     const provider = new MemoryJobProvider({ now: () => Date.now() });
 
-    await provider.enqueue({ _: 'immediate', payload: {} }, { _: 'JobEnqueueImmediate' });
-    await provider.enqueue({ _: 'delayed', payload: {} }, { _: 'JobEnqueueDelayed', delay: 100 });
+    await provider.enqueue({ jobName: 'immediate', jobPayload: {} }, JobEnqueue.Immediate);
+    await provider.enqueue({ jobName: 'delayed', jobPayload: {} }, JobEnqueue.Delayed(100));
 
     provider.clear();
     vi.advanceTimersByTime(100);

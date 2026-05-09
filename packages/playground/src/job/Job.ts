@@ -6,11 +6,11 @@ import type { JobRequest } from './JobRequest.js';
 import { JobEnqueue } from './JobEnqueue.js';
 
 export namespace Job {
-  export interface Module<Request extends { _: string; payload: unknown }> {
-    jobName: Request['_'];
+  export interface Module<Request extends JobRequest> {
+    jobName: Request['jobName'];
     Request: Type.Module<Request>;
 
-    performNow(payload: Request['payload']): Task<JobId, never>;
+    performNow(payload: Request['jobPayload']): Task<JobId, never>;
   }
 }
 
@@ -19,17 +19,17 @@ export type JobId = UUID & Tag<'JobId'>;
 export const Job = {
   nextJobId: randomUUID() as Task<JobId, never>,
 
-  define<JobName extends string, Payload>(jobName: JobName, PayloadType: Type.Module<Payload>): Job.Module<{ _: JobName; payload: Payload }> {
+  define<JobName extends JobRequest['jobName'], Payload extends JobRequest['jobPayload']>(jobName: JobName, PayloadType: Type.Module<Payload>): Job.Module<{ jobName: JobName; jobPayload: Payload }> {
     const Request = Type.Object({
-      _: Type.constant(jobName),
-      payload: PayloadType,
+      jobName: Type.constant(jobName),
+      jobPayload: PayloadType,
     }, `${jobName}Job`);
 
     return {
       jobName,
       Request,
       performNow(payload) {
-        const request = { _: jobName, payload };
+        const request = { jobName, jobPayload: payload };
         const requestEncoded = lazy(() => Codec.encode(Request, request));
         return Task.andThen(Job.nextJobId, (jobId) => {
           return Task.create<JobId, never>(async () => {
