@@ -52,7 +52,7 @@
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
-    "@w5s/tsdown-config": "1.0.0-alpha.4",
+    "@w5s/tsdown-config": "1.0.0-alpha.5",
     "tsdown": "0.22.0",
     "typescript": "6.0.3",
     "vitest": "latest"
