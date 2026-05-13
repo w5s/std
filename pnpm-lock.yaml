@@ -125,8 +125,8 @@ importers:
         version: link:../global-storage
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -217,8 +217,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -251,8 +251,8 @@ importers:
   packages/core-type:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -288,8 +288,8 @@ importers:
         version: 6.0.1
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -332,8 +332,8 @@ importers:
   packages/global-storage:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -485,8 +485,8 @@ importers:
         version: link:../global-storage
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -574,8 +574,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -699,8 +699,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.4
-        version: 1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))
+        specifier: 1.0.0-alpha.5
+        version: 1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))
       tsdown:
         specifier: 0.22.0
         version: 0.22.0(typescript@6.0.3)
@@ -4161,9 +4161,9 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/tsdown-config@1.0.0-alpha.4':
-    resolution: {integrity: sha512-U3WSlSVX9DR6qMOCL+apu5t0aasFT6i9LPXXekxfTc3e4PfdLKMzy7j9emjP7i7b/hpzziZQAN3R/qNs9FLcyQ==}
-    engines: {node: '>=20.0.0'}
+  '@w5s/tsdown-config@1.0.0-alpha.5':
+    resolution: {integrity: sha512-MmI8xGMca7CkGtjwL7doNLw3JgtALMD9Kb6eyaNOdQW/8DGCKIfiXRc23l/TxSlXUazybnY/6i53bvZ7pcEmjQ==}
+    engines: {node: '>=22.0.0'}
     peerDependencies:
       tsdown: 0.x
     peerDependenciesMeta:
@@ -14000,7 +14000,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@w5s/tsdown-config@1.0.0-alpha.4(tsdown@0.22.0(typescript@6.0.3))':
+  '@w5s/tsdown-config@1.0.0-alpha.5(tsdown@0.22.0(typescript@6.0.3))':
     optionalDependencies:
       tsdown: 0.22.0(typescript@6.0.3)
 
