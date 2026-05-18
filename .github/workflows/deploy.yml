@@ -17,9 +17,9 @@ jobs:
       - name: ⬇️ Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
       - name: ⚙️ Setup
-        uses: w5s/actions/setup@b35e1214e86be3cb8a34f63b78654a66550800d3 # main
+        uses: w5s/actions/setup@280dc5b0060a2fdf6a6da68325f7205a105f7e83 # main
       - name: 🔨 Build
-        uses: w5s/actions/task@b35e1214e86be3cb8a34f63b78654a66550800d3 # main
+        uses: w5s/actions/task@280dc5b0060a2fdf6a6da68325f7205a105f7e83 # main
         with:
           task: build
 
