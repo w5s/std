@@ -1,6 +1,0 @@
-name: W5S std docs
-version: 0.0.1
-schema: v1
-docs:
-  - name: W5S std
-    startUrl: https://w5s.github.io/std/
