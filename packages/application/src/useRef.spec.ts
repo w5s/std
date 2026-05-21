@@ -18,6 +18,21 @@ describe(useRef, () => {
       expect(ref.current).toBe(1);
       expect(anyStorage.get('some_test_ref')).toBe(1);
     });
+    it('should return same ref for same host and key', () => {
+      const first = useRef(anyStorage, 'memoized_ref', 0);
+      const second = useRef(anyStorage, 'memoized_ref', 42);
+      first.current += 1;
+
+      expect(first).toBe(second);
+      expect(second.current).toBe(1);
+      expect(anyStorage.get('memoized_ref')).toBe(1);
+    });
+    it('should return different refs for different keys', () => {
+      const first = useRef(anyStorage, 'memoized_ref_a', 0);
+      const second = useRef(anyStorage, 'memoized_ref_b', 0);
+
+      expect(first).not.toBe(second);
+    });
   });
 
   describe('+ Ref', () => {
@@ -40,6 +55,23 @@ describe(useRef, () => {
 
       expect(prop).toEqual({ current: 2 });
       expect(ref).toEqual({ current: { counter: 2 } });
+    });
+    it('should return same ref for same host and key', () => {
+      const ref = Ref({});
+      const first = useRef(ref, 'counter', 1);
+      const second = useRef(ref, 'counter', 42);
+      first.current += 1;
+
+      expect(first).toBe(second);
+      expect(second).toEqual({ current: 2 });
+      expect(ref).toEqual({ current: { counter: 2 } });
+    });
+    it('should return different refs for different keys', () => {
+      const ref = Ref({});
+      const first = useRef(ref, 'counter_a', 1);
+      const second = useRef(ref, 'counter_b', 1);
+
+      expect(first).not.toBe(second);
     });
   });
 });
