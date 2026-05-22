@@ -24,6 +24,23 @@ export namespace Job {
      * @param parameters The parameters of the job, which will be passed to the job handler when the job is executed.
      */
     performLater(parameters: Request['parameters']): Task<JobId, never>;
+
+    /**
+     * Defines a job implementation
+     *
+     * @example
+     * ```ts
+     * const MyJob = Job.define('MyJob', Type.Object({
+     *   foo: Type.string,
+     * }));
+     *
+     * Job.implement(MyJob, (request) =>
+     *   Console.log(request.parameters.foo)
+     * );
+     * ```
+     * @param handler
+     */
+    implement(handler: JobHandler<Request>): void;
   }
 }
 
@@ -33,7 +50,7 @@ export const Job = {
     const Request = Type.Object({
       jobName: Type.constant(jobName),
       parameters: ParameterType,
-    }, `${jobName}Job`);
+    }, jobName);
 
     const instance: Job.Module<{ jobName: JobName; parameters: Payload }> = {
       jobName,
@@ -46,6 +63,9 @@ export const Job = {
           const { jobId } = await provider.enqueue(instance, request, JobEnqueue.Immediate);
           return Task.ok(jobId);
         });
+      },
+      implement(handler) {
+        Job.implement(instance, handler);
       },
     };
     return instance;
