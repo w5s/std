@@ -36,6 +36,9 @@ describe('Job', () => {
     expect(Result.getOrThrow(result)).toBe('job-1');
     expect(provider.enqueue).toHaveBeenCalledTimes(1);
     expect(provider.enqueue).toHaveBeenCalledWith(
+      expect.objectContaining({
+        jobName: 'EmailJob',
+      }),
       {
         jobName: 'EmailJob',
         parameters: { to: 'dev@w5s.io', retries: 2 },

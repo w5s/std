@@ -2,6 +2,7 @@ import { Option } from '@w5s/core';
 import type { JobEnqueue } from './JobEnqueue.js';
 import type { JobProvider } from './JobProvider.js';
 import type { JobRequest } from './JobRequest.js';
+import type { Job } from './Job.js';
 import { JobId } from './JobId.js';
 
 export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
@@ -47,7 +48,7 @@ export class MemoryJobProvider implements JobProvider {
     this.#queue.length = 0;
   }
 
-  async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueue) {
+  async enqueue<Request extends JobRequest>(_jobModule: Job.Module<Request>, request: Request, options: JobEnqueue) {
     const jobId = this.#nextJobId();
     const enqueuedAt = this.#now();
     const availableAt = options._ === 'JobEnqueueDelayed'

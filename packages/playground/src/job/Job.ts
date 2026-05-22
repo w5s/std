@@ -1,4 +1,4 @@
-import { Codec, lazy, Type } from '@w5s/core';
+import { Type } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { configuration } from './configuration.js';
 import type { JobRequest } from './JobRequest.js';
@@ -35,20 +35,20 @@ export const Job = {
       parameters: ParameterType,
     }, `${jobName}Job`);
 
-    return {
+    const instance: Job.Module<{ jobName: JobName; parameters: Payload }> = {
       jobName,
       Request,
       performLater(parameters) {
         const request = { jobName, parameters };
-        const requestEncoded = lazy(() => Codec.encode(Request, request));
         return Task.create<JobId, never>(async () => {
           const { provider } = configuration.current;
 
-          const { jobId } = await provider.enqueue(requestEncoded() as JobRequest, JobEnqueue.Immediate);
+          const { jobId } = await provider.enqueue(instance, request, JobEnqueue.Immediate);
           return Task.ok(jobId);
         });
       },
     };
+    return instance;
   },
 
   /**
