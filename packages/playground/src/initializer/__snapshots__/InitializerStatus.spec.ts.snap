@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InitializerStatus > should have correct values 1`] = `
+{
+  "Crashed": "crashed",
+  "Ready": "ready",
+  "Starting": "starting",
+  "Stopped": "stopped",
+}
+`;

@@ -1,7 +1,6 @@
-import type { Result } from '@w5s/core';
 import type { Awaitable, EmptyObject } from '@w5s/core-type';
 
-export interface Initializer<AppContext extends object = EmptyObject, AppError = unknown> {
+export interface Initializer<AppContext extends object = EmptyObject> {
   /**
    * Initializer id
    */
@@ -12,12 +11,12 @@ export interface Initializer<AppContext extends object = EmptyObject, AppError =
    *
    * @param appContext
    */
-  readonly onStart: (appContext: AppContext) => Awaitable<Result<void, AppError>>;
+  readonly onStart: (appContext: AppContext) => Awaitable<void>;
 }
-export function Initializer<AppContext extends object, AppError = never>(
+export function Initializer<AppContext extends object>(
   id: string,
-  onStart: (appContext: AppContext) => Awaitable<Result<void, AppError>>,
-): Initializer<AppContext, AppError> {
+  onStart: (appContext: AppContext) => Awaitable<void>,
+): Initializer<AppContext> {
   return {
     id: Symbol(id),
     onStart,

@@ -1,26 +1,25 @@
-import { Ref, type Result } from '@w5s/core';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { useGlobalValue } from '@w5s/global-storage';
 import type { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';
+import { getStatus, setStatus } from './__state.js';
 
-const status = useGlobalValue('@w5s/initializer', () => Ref<Record<Initializer['id'], InitializerStatus>>({}));
-
-function getStatus(initializer: Initializer) {
-  return status.current[initializer.id] ?? InitializerStatus.Stopped;
-}
-
-function setStatus(initializer: Initializer, statusValue: InitializerStatus) {
-  status.current = {
-    ...status.current,
-    [initializer.id]: statusValue,
-  };
-}
-
-export async function start<AppContext extends object, AppError>(
+/**
+ * Starts the given initializer if it is not already started.
+ *
+ * @param appContext
+ * @param initializer
+ * @example
+ * ```typescript
+ * import { start } from '@w5s/initializer';
+ * import init1 from './initializers/init1.js';
+ * ```
+ * const appContext = {};
+ * await start(appContext, init1);
+ * ```
+ */
+export async function start<AppContext extends object>(
   appContext: AppContext,
-  initializer: Initializer<AppContext, AppError>,
-): Promise<Result<void, AppError>> {
+  initializer: Initializer<AppContext>,
+): Promise<void> {
   const currentStatus = getStatus(initializer);
   if (currentStatus === InitializerStatus.Stopped) {
     setStatus(initializer, InitializerStatus.Starting);
@@ -28,5 +27,4 @@ export async function start<AppContext extends object, AppError>(
     setStatus(initializer, InitializerStatus.Ready);
     return result;
   }
-  return Ok();
 }
