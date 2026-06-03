@@ -54,6 +54,12 @@
     },
     "size-limit": {
       "dependsOn": ["build"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "//#typecheck:root": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*", "!apps/**", "!packages/**"]
     }
   },
   "globalDependencies": [
