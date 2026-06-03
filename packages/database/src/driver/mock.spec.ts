@@ -1,10 +1,10 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Ref } from '@w5s/core';
 import { sql } from '../sql.js';
 import { DatabaseDriver } from '../driver.js';
 import { Mock } from './mock.js';
 
 describe('Mock', () => {
+  const anyCanceler = { cancel() {} };
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;
   it('should be registered as driver', () => {
     expect(DatabaseDriver.get('mock')).toBe(Mock);
@@ -21,8 +21,7 @@ describe('Mock', () => {
         databaseType: 'mock' as const,
         mockExecuteQuery,
       };
-      const cancelerRef = Ref(vi.fn());
-      await expect(Mock.execute(mockClient, anyStatement, cancelerRef)).resolves.toEqual('returnValue');
+      await expect(Mock.execute(mockClient, anyStatement, anyCanceler)).resolves.toEqual('returnValue');
       expect(mockExecuteQuery).toHaveBeenCalledWith(anyStatement);
     });
   });

@@ -8,9 +8,11 @@ describe(tryCall, () => {
 
   class TestError extends Error {
     override name = 'TestError';
+    public innerError: unknown;
 
-    constructor(public innerError: unknown = undefined) {
+    constructor(innerError: unknown = undefined) {
       super('TestMessage');
+      this.innerError = innerError;
     }
   }
   it('should resolve(block()) when nothing is thrown', async () => {
