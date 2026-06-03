@@ -45,6 +45,7 @@
     "spellcheck": "cspell --no-progress '**'",
     "test": "pnpm run \"/^test:.*/\"",
     "test:src": "vitest run",
+    "typecheck": "tsc --noEmit",
     "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {

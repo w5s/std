@@ -47,6 +47,7 @@
     "test": "pnpm run \"/^test:.*/\"",
     "test:src": "vitest run",
     "tsc": "tsc",
+    "typecheck": "tsc --noEmit",
     "validate": "npm run lint && npm run build && npm run test"
   },
   "dependencies": {
