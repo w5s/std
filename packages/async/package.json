@@ -54,6 +54,8 @@
     "@w5s/error": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
+    "@w5s/tsdown-config": "1.0.0-alpha.6",
+    "tsdown": "0.22.0",
     "typescript": "6.0.3",
     "vitest": "latest"
   },

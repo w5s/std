@@ -9,3 +9,5 @@ allowBuilds:
   es5-ext: true
   esbuild: true
   sqlite3: true
+minimumReleaseAgeExclude:
+  - '@w5s/tsdown-config@1.0.0-alpha.6'
