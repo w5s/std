@@ -50,7 +50,7 @@
     "test": "pnpm run \"/^test:.*/\"",
     "test:src": "vitest run",
     "tsc": "tsc",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit -p tsconfig.build.json",
     "validate": "npm run build && npm run test"
   },
   "dependencies": {

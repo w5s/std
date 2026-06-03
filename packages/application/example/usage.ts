@@ -1,9 +1,11 @@
-import { Application } from '@w5s/application';
+import { useConfiguration } from '@w5s/application';
 
-const app = Application('my-app', {
+const meta = { name: 'my-app' };
+
+const configuration = useConfiguration(meta, {
   myVar: 1,
 });
-app.configure({
+configuration.update({
   myVar: 2,
 });
-app.get('myVar'); // 2
+configuration.get('myVar'); // 2
