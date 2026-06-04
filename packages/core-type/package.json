@@ -53,7 +53,7 @@
     "test": "pnpm run \"/^test:.*/\"",
     "test:src": "tsc -b tsconfig.test.json",
     "tsc": "tsc",
-    "__typecheck": "tsc --noEmit -b tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
     "validate": "npm run lint && npm run build && npm run test"
   },
   "devDependencies": {
