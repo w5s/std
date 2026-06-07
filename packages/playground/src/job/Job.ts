@@ -1,46 +1,93 @@
-import { Codec, lazy, Tag, Type } from '@w5s/core';
+import { Type } from '@w5s/core';
 import { Task } from '@w5s/task';
-import { randomUUID, type UUID } from '@w5s/uuid';
+import { configuration } from './configuration.js';
+import type { JobRequest } from './JobRequest.js';
+import { JobEnqueue } from './JobEnqueue.js';
+import type { JobId } from './JobId.js';
+import { JobHandler } from './JobHandler.js';
 
 export namespace Job {
-  export interface Module<Request extends { _: string; payload: unknown }> {
-    jobName: Request['_'];
+  export interface Module<Request extends JobRequest> {
+    /**
+     * The name of the job, used to identify the job type and retrieve the corresponding handler.
+     */
+    jobName: Request['jobName'];
+
+    /**
+     * The codec for the job request, used to encode and decode job requests when enqueuing and executing jobs.
+     */
     Request: Type.Module<Request>;
 
-    create(payload: Request['payload']): Task<JobId, never>;
+    /**
+     * Enqueues a job to be executed later with the given parameters.
+     *
+     * @param parameters The parameters of the job, which will be passed to the job handler when the job is executed.
+     */
+    performLater(parameters: Request['parameters']): Task<JobId, never>;
+
+    /**
+     * Defines a job implementation
+     *
+     * @example
+     * ```ts
+     * const MyJob = Job.define('MyJob', Type.Object({
+     *   foo: Type.string,
+     * }));
+     *
+     * Job.implement(MyJob, (request) =>
+     *   Console.log(request.parameters.foo)
+     * );
+     * ```
+     * @param handler
+     */
+    implement(handler: JobHandler<Request>): void;
   }
 }
 
-export type JobId = UUID & Tag<'JobId'>;
-
 export const Job = {
-  nextJobId: randomUUID() as Task<JobId, never>,
 
-  define<JobName extends string, Payload>(jobName: JobName, PayloadType: Type.Module<Payload>): Job.Module<{ _: JobName; payload: Payload }> {
+  define<JobName extends JobRequest['jobName'], Payload extends JobRequest['parameters']>(jobName: JobName, ParameterType: Type.Module<Payload>): Job.Module<{ jobName: JobName; parameters: Payload }> {
     const Request = Type.Object({
-      _: Type.constant(jobName),
-      payload: PayloadType,
-    }, `${jobName}Job`);
-    return {
+      jobName: Type.constant(jobName),
+      parameters: ParameterType,
+    }, jobName);
+
+    const instance: Job.Module<{ jobName: JobName; parameters: Payload }> = {
       jobName,
       Request,
-      create(payload) {
-        const request = { _: jobName, payload };
-        const requestEncoded = lazy(() => Codec.encode(Request, request));
-        return Task.andThen(Job.nextJobId, (jobId) => {
-          return Task.create<JobId, never>(async () => {
-            console.log(`Running job ${jobName} with payload:`, payload, requestEncoded());
-            return Task.ok(jobId as JobId);
-          });
+      performLater(parameters) {
+        const request = { jobName, parameters };
+        return Task.create<JobId, never>(async () => {
+          const { provider } = configuration.current;
+
+          const { jobId } = await provider.enqueue(instance, request, JobEnqueue.Immediate);
+          return Task.ok(jobId);
         });
       },
+      implement(handler) {
+        Job.implement(instance, handler);
+      },
     };
+    return instance;
+  },
+
+  /**
+   * Defines a job implementation
+   *
+   * @example
+   * ```ts
+   * const MyJob = Job.define('MyJob', Type.Object({
+   *   foo: Type.string,
+   * }));
+   *
+   * Job.implement(MyJob, (request) =>
+   *   Console.log(request.parameters.foo)
+   * );
+   * ```
+   * @param module
+   * @param handler
+   */
+  implement<Request extends JobRequest>(module: Job.Module<Request>, handler: JobHandler<Request>): void {
+    JobHandler.register(module.jobName, handler);
   },
 };
-
-// export const Blah = Job.define('Blah', Type.Object({
-//   foo: Type.string,
-//   bar: Type.number,
-// }));
-
-// const jobId = await Blah.create({ foo: 'hello', bar: 42 }).run();

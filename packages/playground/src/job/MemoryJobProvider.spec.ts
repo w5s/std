@@ -1,24 +1,32 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { MemoryJobProvider } from './MemoryJobProvider.js';
+import { JobEnqueue } from './JobEnqueue.js';
+import { Option } from '@w5s/core';
+import type { JobId } from './JobId.js';
+import type { Job } from './Job.js';
 
 describe(MemoryJobProvider, () => {
   afterEach(() => {
     vi.useRealTimers();
   });
+  const jobEmailModule = {} as any as Job.Module<any>;
 
   it('enqueues immediate jobs in memory', async () => {
-    const provider = new MemoryJobProvider();
-    const request = { _: 'email', payload: { userId: '1' } };
+    const provider = new MemoryJobProvider({ nextJobId: () => 'job-1' as JobId });
+    const request = { jobName: 'email', jobPayload: { userId: '1' } };
 
-    await provider.enqueue(request, { _: 'immediate' });
+    const result = await provider.enqueue(jobEmailModule, request, JobEnqueue.Immediate);
 
+    expect(result).toEqual({ jobId: 'job-1', providerJobId: Option.None });
     expect(provider.size).toBe(1);
     expect(provider.peek()).toEqual({
+      jobId: 'job-1',
       request,
       enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
     });
     expect(provider.dequeue()).toEqual({
+      jobId: 'job-1',
       request,
       enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
@@ -28,11 +36,12 @@ describe(MemoryJobProvider, () => {
 
   it('keeps delayed jobs out of the queue until ready', async () => {
     vi.useFakeTimers();
-    const provider = new MemoryJobProvider({ now: () => Date.now() });
-    const request = { _: 'reminder', payload: { userId: '1' } };
+    const provider = new MemoryJobProvider({ now: () => Date.now(), nextJobId: () => 'job-2' as JobId });
+    const request = { jobName: 'reminder', jobPayload: { userId: '1' } };
 
-    await provider.enqueue(request, { _: 'delayed', delay: 100 });
+    const result = await provider.enqueue(jobEmailModule, request, JobEnqueue.Delayed(100));
 
+    expect(result).toEqual({ jobId: 'job-2', providerJobId: Option.None });
     expect(provider.size).toBe(0);
     vi.advanceTimersByTime(99);
     expect(provider.size).toBe(0);
@@ -40,6 +49,7 @@ describe(MemoryJobProvider, () => {
     vi.advanceTimersByTime(1);
     expect(provider.size).toBe(1);
     expect(provider.dequeue()).toEqual({
+      jobId: 'job-2',
       request,
       enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
@@ -50,8 +60,8 @@ describe(MemoryJobProvider, () => {
     vi.useFakeTimers();
     const provider = new MemoryJobProvider({ now: () => Date.now() });
 
-    await provider.enqueue({ _: 'immediate', payload: {} }, { _: 'immediate' });
-    await provider.enqueue({ _: 'delayed', payload: {} }, { _: 'delayed', delay: 100 });
+    await provider.enqueue(jobEmailModule, { jobName: 'immediate', jobPayload: {} }, JobEnqueue.Immediate);
+    await provider.enqueue(jobEmailModule, { jobName: 'delayed', jobPayload: {} }, JobEnqueue.Delayed(100));
 
     provider.clear();
     vi.advanceTimersByTime(100);

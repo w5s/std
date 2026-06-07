@@ -1,7 +1,12 @@
-import type { JobEnqueueOptions, JobProvider } from './JobProvider.js';
+import { Option } from '@w5s/core';
+import type { JobEnqueue } from './JobEnqueue.js';
+import type { JobProvider } from './JobProvider.js';
 import type { JobRequest } from './JobRequest.js';
+import type { Job } from './Job.js';
+import { JobId } from './JobId.js';
 
 export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
+  readonly jobId: JobId;
   readonly request: Request;
   readonly enqueuedAt: number;
   readonly availableAt: number;
@@ -9,15 +14,18 @@ export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
 
 export interface MemoryJobProviderOptions {
   readonly now?: () => number;
+  readonly nextJobId?: () => JobId;
 }
 
 export class MemoryJobProvider implements JobProvider {
   readonly #queue: MemoryJobQueueEntry[] = [];
   readonly #timers = new Set<ReturnType<typeof setTimeout>>();
   readonly #now: () => number;
+  readonly #nextJobId: () => JobId;
 
   constructor(options: MemoryJobProviderOptions = {}) {
     this.#now = options.now ?? (() => Date.now());
+    this.#nextJobId = options.nextJobId ?? (() => JobId(globalThis.crypto.randomUUID()));
   }
 
   get size(): number {
@@ -40,26 +48,29 @@ export class MemoryJobProvider implements JobProvider {
     this.#queue.length = 0;
   }
 
-  async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueueOptions): Promise<void> {
+  async enqueue<Request extends JobRequest>(_jobModule: Job.Module<Request>, request: Request, options: JobEnqueue) {
+    const jobId = this.#nextJobId();
     const enqueuedAt = this.#now();
-    const availableAt = options._ === 'delayed'
+    const availableAt = options._ === 'JobEnqueueDelayed'
       ? enqueuedAt + options.delay
       : enqueuedAt;
     const entry: MemoryJobQueueEntry<Request> = {
+      jobId,
       request,
       enqueuedAt,
       availableAt,
     };
 
-    if (options._ === 'delayed') {
+    if (options._ === 'JobEnqueueDelayed') {
       const timer = setTimeout(() => {
         this.#timers.delete(timer);
         this.#queue.push(entry);
       }, options.delay);
       this.#timers.add(timer);
-      return;
+      return { jobId, providerJobId: Option.None };
     }
 
     this.#queue.push(entry);
+    return { jobId, providerJobId: Option.None };
   }
 }
