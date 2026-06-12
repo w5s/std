@@ -1,7 +1,9 @@
+import type { Struct } from '@w5s/core';
 import { of } from './Secret/of.js';
+import { SecretAsString } from './Secret/SecretAsString.js';
 import { value } from './Secret/value.js';
 
-export interface Secret<T> {
+export interface Secret<T> extends Struct<{ _: 'Secret' }> {
   ['@@secret']: T;
 
   /**
@@ -26,5 +28,6 @@ export const Secret = Object.assign(
   {
     of,
     value,
+    ...SecretAsString,
   },
 );

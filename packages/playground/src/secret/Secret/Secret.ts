@@ -1,22 +1,23 @@
 import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { __state } from '../__state.js';
-
-const SECRET = '<secret>';
+import { SecretAsString } from './SecretAsString.js';
 
 export class Secret<T> {
+  _ = 'Secret' as const;
+
   constructor(value: T) {
     __state.set(this, value);
   }
 
   [Symbol.inspect]() {
-    return SECRET;
+    return SecretAsString.asString(this);
   }
 
   toString() {
-    return SECRET;
+    return SecretAsString.asString(this);
   }
 
   toJSON() {
-    return SECRET;
+    return SecretAsString.asString(this);
   }
 }
