@@ -1,5 +1,5 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
-# W5S Time manipulation _(@w5s/time)_
+# W5S Byte size manipulation _(@w5s/byte-size)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
@@ -9,7 +9,7 @@
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/time
+npm install @w5s/byte-size
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -18,11 +18,14 @@ npm install @w5s/time
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Time, TimeDuration } from '@w5s/time';
-import { Task } from '@w5s/task';
+import { ByteSize } from '@w5s/byte-size';
+import { Codec } from '@w5s/core';
 
-export function nowPlusTwoMinutes() {
-  return Task.map(Time.now(), (currentTime) => Time['+'](currentTime, TimeDuration({ minutes: 2 })));
+export function main() {
+  const size = ByteSize(123);
+  console.log(`Size: ${ByteSize.format(size)}`); // Size: 123 B
+
+  console.log(Codec.decode(ByteSize, '1 KB')); // ByteSize(1024)
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -34,16 +37,16 @@ export function nowPlusTwoMinutes() {
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/time.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/byte-size.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/time
+[package-url]: https://www.npmjs.com/package/@w5s/byte-size
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-url]: https://www.npmjs.com/package/${name}) -->
-[license-url]: https://www.npmjs.com/package/@w5s/time
+[license-url]: https://www.npmjs.com/package/@w5s/byte-size
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
 <!-- AUTO-GENERATED-CONTENT:END -->
