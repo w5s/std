@@ -1,11 +1,11 @@
 {
   "extends": "../../../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "../../",
     "noEmit": true,
     "paths": {
       "@w5s/time": ["./time"]
-    }
+    },
+    "rootDir": "../../"
   },
   "include": ["."]
 }

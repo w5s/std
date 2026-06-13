@@ -1,12 +1,12 @@
 {
   "extends": "../../../tsconfig.settings.json",
   "compilerOptions": {
-    "rootDir": "../../",
     "noEmit": true,
     "paths": {
       "@w5s/bigdecimal": ["./bigdecimal"],
       "@w5s/core": ["./core"]
-    }
+    },
+    "rootDir": "../../"
   },
   "include": ["."]
 }
