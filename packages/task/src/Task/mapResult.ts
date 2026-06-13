@@ -1,4 +1,4 @@
-import type { Result } from '@w5s/core';
+import type { Result } from '@w5s/core/Result';
 
 import type { Task, TaskLike, TaskParameters } from '../Task.js';
 

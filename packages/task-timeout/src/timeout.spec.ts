@@ -1,7 +1,8 @@
-import { Option, Symbol } from '@w5s/core';
-import { TimeoutError } from '@w5s/error';
+import { Option } from '@w5s/core/Option';
+import { Symbol } from '@w5s/core/Symbol';
+import { TimeoutError } from '@w5s/error/TimeoutError';
 import { Task, type TaskLike } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { TimeDuration } from '@w5s/time';
 import { describe, expect, it, vi } from 'vitest';
 

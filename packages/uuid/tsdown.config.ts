@@ -1,3 +1,5 @@
 import { defineConfig } from '@w5s/tsdown-config';
 
-export default defineConfig({});
+export default defineConfig({
+  unbundle: true,
+});

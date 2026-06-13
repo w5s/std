@@ -1,4 +1,4 @@
-import { Ref } from '@w5s/core/dist/Ref.js';
+import { Ref } from '@w5s/core/Ref';
 
 import { Client } from '../Client.js';
 

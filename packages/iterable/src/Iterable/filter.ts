@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 /**
  * Return a new iterable that filters values using `predicate`

@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 
 import { delay } from './Time/delay.js';
 import { format } from './Time/format.js';

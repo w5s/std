@@ -1,7 +1,7 @@
-import type { Awaitable } from '@w5s/async';
-import type { Result } from '@w5s/core';
+import type { Awaitable } from '@w5s/async/Awaitable';
+import type { Result } from '@w5s/core/Result';
 
-import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
+import { isPromiseLike } from '@w5s/async/isPromiseLike';
 
 import type { TaskLike } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';

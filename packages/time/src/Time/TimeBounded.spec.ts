@@ -1,4 +1,4 @@
-import { describeBounded } from '@w5s/core/dist/Testing.js';
+import { describeBounded } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { TimeBounded } from './TimeBounded.js';

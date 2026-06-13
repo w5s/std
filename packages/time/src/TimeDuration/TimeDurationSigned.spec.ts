@@ -1,4 +1,4 @@
-import { describeSigned } from '@w5s/core/dist/Testing.js';
+import { describeSigned } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { TimeDuration } from './TimeDuration.js';

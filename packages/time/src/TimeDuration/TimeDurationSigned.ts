@@ -1,6 +1,6 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { Signed } from '@w5s/num/dist/NumberConversion/Signed.js';
+import { Signed } from '@w5s/num/NumberConversion/Signed';
 
 import type { TimeDuration } from './TimeDuration.js';
 

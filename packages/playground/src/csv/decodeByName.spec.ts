@@ -1,6 +1,6 @@
-import { Result } from '@w5s/core';
-import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { Result } from '@w5s/core/Result';
+import { withAsyncIterable } from '@w5s/iterable/Testing';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it } from 'vitest';
 
 import { CSVError } from './CSVError.js';

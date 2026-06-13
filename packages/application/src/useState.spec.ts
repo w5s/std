@@ -1,4 +1,4 @@
-import { Ref } from '@w5s/core';
+import { Ref } from '@w5s/core/Ref';
 import { describe, expect, it } from 'vitest';
 
 import { useState } from './useState.js';

@@ -1,4 +1,4 @@
-import { Type } from '@w5s/core/dist/Type.js';
+import { Type } from '@w5s/core/Type';
 import { describe, expect, it } from 'vitest';
 
 import { Number } from './Number.js';

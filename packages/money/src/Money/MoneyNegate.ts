@@ -1,6 +1,6 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { BigDecimalNegate } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNegate.js';
+import { BigDecimalNegate } from '@w5s/bigdecimal/BigDecimal/BigDecimalNegate';
 
 import { Money } from './Money.js';
 

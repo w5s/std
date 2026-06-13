@@ -1,7 +1,9 @@
-import type * as Core from '@w5s/core';
+import type { Bounded as CoreBounded } from '@w5s/core/Bounded';
+import type { Comparable as CoreComparable } from '@w5s/core/Comparable';
+import type { Numeric as CoreNumeric } from '@w5s/core/Numeric';
 
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Callable } from '@w5s/core/Callable';
+import { Symbol } from '@w5s/core/Symbol';
 
 import { defaultConversion } from './internal/defaultConversion.js';
 import { Add } from './NumberConversion/Add.js';
@@ -68,14 +70,14 @@ export const NumberConversion = Callable({
 export namespace NumberConversion {
   export interface Module<T>
     extends
-    Core.Numeric.Add<T>,
-    Core.Bounded<T>,
-    Core.Comparable<T>,
-    Core.Numeric.Multiply<T>,
-    Core.Numeric.Negate<T>,
-    Core.Numeric.Power<T>,
-    Core.Numeric.Remainder<T>,
-    Core.Numeric.Signed<T>,
-    Core.Numeric.Subtract<T>,
-    Core.Numeric.Zero<T> {}
+    CoreNumeric.Add<T>,
+    CoreBounded<T>,
+    CoreComparable<T>,
+    CoreNumeric.Multiply<T>,
+    CoreNumeric.Negate<T>,
+    CoreNumeric.Power<T>,
+    CoreNumeric.Remainder<T>,
+    CoreNumeric.Signed<T>,
+    CoreNumeric.Subtract<T>,
+    CoreNumeric.Zero<T> {}
 }

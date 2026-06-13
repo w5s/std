@@ -1,4 +1,4 @@
-import type { Bounded } from '@w5s/core';
+import type { Bounded } from '@w5s/core/Bounded';
 
 import type { Time } from '../Time.js';
 

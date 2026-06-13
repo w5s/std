@@ -1,5 +1,5 @@
-import { Int } from '@w5s/core';
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { Int } from '@w5s/core/Int';
+import { describeComparable } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { LogLevelComparable } from './LogLevelComparable.js';

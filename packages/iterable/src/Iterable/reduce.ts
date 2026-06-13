@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 /**
  * Reduce an `initialValue` to the `reducer` function

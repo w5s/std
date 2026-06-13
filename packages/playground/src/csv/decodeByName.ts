@@ -1,13 +1,13 @@
-import type { AsyncIterableLike } from '@w5s/iterable/dist/AsyncIterableLike.js';
-import type { Task } from '@w5s/task';
+import type { AsyncIterableLike } from '@w5s/iterable/AsyncIterableLike';
+import type { Task } from '@w5s/task/Task';
 
-import { filter as asyncIterableFilter } from '@w5s/iterable/dist/AsyncIterable/filter.js';
-import { find as asyncIterableFind } from '@w5s/iterable/dist/AsyncIterable/find.js';
-import { map as asyncIterableMap } from '@w5s/iterable/dist/AsyncIterable/map.js';
-import { map as iterableMap } from '@w5s/iterable/dist/Iterable/map.js';
-import { create as taskCreate } from '@w5s/task/dist/Task/create.js';
-import { error } from '@w5s/task/dist/Task/error.js';
-import { ok } from '@w5s/task/dist/Task/ok.js';
+import { filter as asyncIterableFilter } from '@w5s/iterable/AsyncIterable/filter';
+import { find as asyncIterableFind } from '@w5s/iterable/AsyncIterable/find';
+import { map as asyncIterableMap } from '@w5s/iterable/AsyncIterable/map';
+import { map as iterableMap } from '@w5s/iterable/Iterable/map';
+import { create as taskCreate } from '@w5s/task/Task/create';
+import { error } from '@w5s/task/Task/error';
+import { ok } from '@w5s/task/Task/ok';
 
 import type { CSVParseResult } from './CSVParseResult.js';
 import type { CSVNamedRecord } from './CSVRecord.js';

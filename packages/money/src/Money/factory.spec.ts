@@ -1,5 +1,5 @@
-import { BigDecimal } from '@w5s/bigdecimal';
-import { Int } from '@w5s/core';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { Int } from '@w5s/core/Int';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { Currency } from '../Currency.js';

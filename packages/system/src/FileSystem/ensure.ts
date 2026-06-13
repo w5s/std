@@ -1,5 +1,5 @@
-import type { Option } from '@w5s/core';
-import type { Task } from '@w5s/task';
+import type { Option } from '@w5s/core/Option';
+import type { Task } from '@w5s/task/Task';
 
 import { FileError } from '../FileError.js';
 import { FilePath } from '../FilePath.js';

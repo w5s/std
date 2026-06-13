@@ -1,6 +1,8 @@
-import { Int, Option, Result } from '@w5s/core';
+import { Int } from '@w5s/core/Int';
+import { Option } from '@w5s/core/Option';
+import { Result } from '@w5s/core/Result';
 import { Task } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { TimeDuration } from '@w5s/time';
 import { describe, expect, it, vi } from 'vitest';
 

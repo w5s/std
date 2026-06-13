@@ -1,4 +1,4 @@
-import { defer } from '@w5s/async';
+import { defer } from '@w5s/async/defer';
 import { describe, expect, it } from 'vitest';
 
 import { run } from './run.js';

@@ -1,15 +1,21 @@
-import type { LogSendFunction } from '@w5s/log/dist/Log/sendWith.js';
+import type { LogSendFunction } from '@w5s/log/Log/sendWith';
 
-import { Console } from '@w5s/console';
-import { CodecError, Int, Result } from '@w5s/core';
-import { AbortError, assertNever, TimeoutError } from '@w5s/error';
-import { HTTPError } from '@w5s/http';
-import { debug, error, Log as LogModule } from '@w5s/log';
-import { EUR, Money } from '@w5s/money';
-import { Task } from '@w5s/task';
-import { timeout } from '@w5s/task-timeout';
-import { TimeDuration } from '@w5s/time';
-import { randomUUID as defaultRandomUUID } from '@w5s/uuid';
+import { Console } from '@w5s/console/Console';
+import { CodecError } from '@w5s/core/CodecError';
+import { Int } from '@w5s/core/Int';
+import { Result } from '@w5s/core/Result';
+import { AbortError } from '@w5s/error/AbortError';
+import { assertNever } from '@w5s/error/assertNever';
+import { TimeoutError } from '@w5s/error/TimeoutError';
+import { HTTPError } from '@w5s/http/HTTPError';
+import { debug, error } from '@w5s/log/level';
+import { Log as LogModule } from '@w5s/log/Log';
+import { Money } from '@w5s/money/Money';
+import { EUR } from '@w5s/money/moneyFactory.all';
+import { timeout } from '@w5s/task-timeout/timeout';
+import { Task } from '@w5s/task/Task';
+import { TimeDuration } from '@w5s/time/TimeDuration';
+import { randomUUID as defaultRandomUUID } from '@w5s/uuid/randomUUID';
 
 import { ContainerKey, provide, use } from './di/index.js';
 import { pipe } from './pipe.js';

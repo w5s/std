@@ -1,4 +1,4 @@
-import { describeError } from '@w5s/error/dist/Testing.js';
+import { describeError } from '@w5s/error/Testing';
 import { describe, expect, it } from 'vitest';
 
 import { CodecError } from './CodecError.js';

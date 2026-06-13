@@ -1,5 +1,5 @@
-import { Int } from '@w5s/core';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { Int } from '@w5s/core/Int';
+import { withTask } from '@w5s/task/Testing';
 import { Time } from '@w5s/time';
 import { describe, expect, it, vi } from 'vitest';
 

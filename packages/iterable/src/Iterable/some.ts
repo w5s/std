@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 /**
  * Tests whether any element in the iterable pass the test implemented by the provided function.

@@ -1,4 +1,4 @@
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { describe, expect, it } from 'vitest';
 
 import { run } from '../Task/run.js';

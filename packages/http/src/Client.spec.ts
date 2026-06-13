@@ -1,4 +1,4 @@
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { describe, expect, it } from 'vitest';

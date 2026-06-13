@@ -1,7 +1,7 @@
-import { Result } from '@w5s/core';
-import { UUID } from '@w5s/core/dist/Type/UUID.js';
+import { Result } from '@w5s/core/Result';
+import { UUID } from '@w5s/core/Type/UUID';
 import { Task } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { randomUUID as randomUUIDNodeJS } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
 

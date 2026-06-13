@@ -1,5 +1,5 @@
-import { Symbol } from '@w5s/core';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { Symbol } from '@w5s/core/Symbol';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it, vi } from 'vitest';
 
 import { next } from './Random/next.js';

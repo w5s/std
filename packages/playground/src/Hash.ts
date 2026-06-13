@@ -1,6 +1,6 @@
 // see https://github.com/facebook/immutable-js/blob/master/src/Hash.js
 
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 const INT32_MASK = 0xFF_FF_FF_FF;
 const ZERO = 0 as Int;

@@ -28,7 +28,9 @@ import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
 ## Usage
 
 ```typescript
-import { String, Option, Int } from '@w5s/core';
+import { Int } from '@w5s/core/Int';
+import { Option } from '@w5s/core/Option';
+import { String } from '@w5s/core/String';
 
 const baseName = (path: string): Option<string> => {
   const positionOption = String.lastIndexOf(path, '/'); // Option<Int>;

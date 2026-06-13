@@ -5,7 +5,7 @@ import {
   describeSigned,
   describeSubtract,
   describeZero,
-} from '@w5s/core/dist/Testing.js';
+} from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { BigIntComparable } from './BigIntComparable.js';

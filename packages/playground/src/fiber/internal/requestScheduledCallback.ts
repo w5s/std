@@ -1,7 +1,7 @@
-import type { ImmediateId } from '@w5s/async';
+import type { ImmediateId } from '@w5s/async/ImmediateId';
 
-import { clearImmediate } from '@w5s/async/dist/clearImmediate.js';
-import { setImmediate } from '@w5s/async/dist/setImmediate.js';
+import { clearImmediate } from '@w5s/async/clearImmediate';
+import { setImmediate } from '@w5s/async/setImmediate';
 
 const performanceNow = globalThis.performance == null ? () => Date.now() : () => performance.now();
 

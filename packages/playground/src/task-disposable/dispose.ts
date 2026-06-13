@@ -1,6 +1,6 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import { from as taskFrom } from '@w5s/task/Task/from';
 
 /**
  * Dispose the given Disposable or AsyncDisposable

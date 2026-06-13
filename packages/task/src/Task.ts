@@ -1,7 +1,7 @@
-import type { Awaitable } from '@w5s/async';
-import type { Result } from '@w5s/core';
+import type { Awaitable } from '@w5s/async/Awaitable';
 import type { PartialKeys } from '@w5s/core-type';
-import type { Symbol } from '@w5s/core/dist/Symbol.js';
+import type { Result } from '@w5s/core/Result';
+import type { Symbol } from '@w5s/core/Symbol';
 
 import type { TaskCanceler } from './TaskCanceler.js';
 

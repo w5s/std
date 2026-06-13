@@ -1,4 +1,4 @@
-import { Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core/Symbol';
 import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterAll, describe, expect, it } from 'vitest';

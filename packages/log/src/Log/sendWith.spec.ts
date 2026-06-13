@@ -1,5 +1,5 @@
 import { Task } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it, vi } from 'vitest';
 
 import { critical } from '../level.js';

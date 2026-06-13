@@ -1,6 +1,6 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { from } from '@w5s/task/dist/Task/from.js';
+import { from } from '@w5s/task/Task/from';
 
 import type { DatabaseError } from './error.js';
 

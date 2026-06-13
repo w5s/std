@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 import type { BodyReader } from '../BodyReader.js';
 import type { Headers } from '../Headers.js';

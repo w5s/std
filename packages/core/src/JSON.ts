@@ -1,4 +1,5 @@
-import type { SyntaxError, TypeError } from '@w5s/error';
+import type { SyntaxError } from '@w5s/error/SyntaxError';
+import type { TypeError } from '@w5s/error/TypeError';
 
 import type { Result } from './Result.js';
 
@@ -25,7 +26,7 @@ export type JSONValue =
  *
  * @example
  * ```typescript
- * import { JSON } from '@w5s/core';
+ * import { JSON } from '@w5s/core/JSON';
  *
  * const object = { a: true };
  * const encoded = JSON.stringify(object); // Result.Ok('{"a":true}')

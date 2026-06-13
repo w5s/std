@@ -1,8 +1,9 @@
 import type { PartialKeys } from '@w5s/core-type';
+import type { Int } from '@w5s/core/Int';
 
-import { type Int, Symbol } from '@w5s/core';
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
+import { Callable } from '@w5s/core/Callable';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
 
 import { CurrencyAsString } from './CurrencyAsString.js';
 import { defaultPrecision } from './defaultPrecision.js';

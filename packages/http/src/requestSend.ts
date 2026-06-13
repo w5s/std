@@ -1,8 +1,8 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { timeout as taskTimeout } from '@w5s/task-timeout';
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import { timeout as taskTimeout } from '@w5s/task-timeout/timeout';
+import { andThen as taskThen } from '@w5s/task/Task/andThen';
+import { from as taskFrom } from '@w5s/task/Task/from';
 
 import type { BodyReader } from './BodyReader.js';
 import type { Request } from './Request.js';

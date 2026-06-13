@@ -1,6 +1,7 @@
-import { CodecError, Type } from '@w5s/core';
+import { CodecError } from '@w5s/core/CodecError';
+import { Type } from '@w5s/core/Type';
 import { Task } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it } from 'vitest';
 
 import type { BodyReader, BodyReaderFormat } from './BodyReader.js';

@@ -1,4 +1,4 @@
-import { describeZero } from '@w5s/core/dist/Testing.js';
+import { describeZero } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { BigDecimal } from './BigDecimal.js';

@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prefer-array-from-map */
 import { assertType } from '@w5s/core-type';
-import { AggregateError } from '@w5s/error';
+import { AggregateError } from '@w5s/error/AggregateError';
 import { describe, expect, it, vi } from 'vitest';
 
 import type { Task } from '../Task.js';

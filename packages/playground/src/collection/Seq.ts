@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 
 import type { seqIterable } from './Seq/seqIterable.js';
 

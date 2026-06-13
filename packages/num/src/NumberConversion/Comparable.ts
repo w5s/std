@@ -1,4 +1,4 @@
-import { Comparable as CoreComparable } from '@w5s/core/dist/Comparable.js';
+import { Comparable as CoreComparable } from '@w5s/core/Comparable';
 
 import type { NumberConversion } from '../NumberConversion.js';
 

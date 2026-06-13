@@ -1,6 +1,6 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
-import { parse as bigDecimalParse } from '@w5s/bigdecimal/dist/BigDecimal/parse.js';
+import { parse as bigDecimalParse } from '@w5s/bigdecimal/BigDecimal/parse';
 
 import type { Money } from './Money.js';
 

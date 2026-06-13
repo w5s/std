@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
 import type { ContainerKey } from './ContainerKey.js';
 import type { ContainerProvider } from './ContainerProvider.js';

@@ -1,6 +1,6 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { BigIntIntegral } from '@w5s/num/dist/BigInt/BigIntIntegral.js';
+import { BigIntIntegral } from '@w5s/num/BigInt/BigIntIntegral';
 
 import type { BigDecimal } from './BigDecimal.js';
 

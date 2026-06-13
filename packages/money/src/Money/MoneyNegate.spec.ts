@@ -1,4 +1,4 @@
-import { describeNegate } from '@w5s/core/dist/Testing.js';
+import { describeNegate } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { ANY } from '../Testing.js';

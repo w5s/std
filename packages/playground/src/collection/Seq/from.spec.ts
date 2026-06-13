@@ -1,4 +1,4 @@
-import { withIterable } from '@w5s/iterable/dist/Testing.js';
+import { withIterable } from '@w5s/iterable/Testing';
 import { describe, expect, it } from 'vitest';
 
 import { from } from './from.js';

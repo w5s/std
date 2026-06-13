@@ -1,6 +1,6 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { Zero } from '@w5s/num/dist/NumberConversion/Zero.js';
+import { Zero } from '@w5s/num/NumberConversion/Zero';
 
 import type { TimeDuration } from './TimeDuration.js';
 

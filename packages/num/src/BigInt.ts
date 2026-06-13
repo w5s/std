@@ -1,4 +1,4 @@
-import { bigint as BigIntType } from '@w5s/core/dist/Type/bigint.js';
+import { bigint as BigIntType } from '@w5s/core/Type/bigint';
 
 import { BigIntComparable } from './BigInt/BigIntComparable.js';
 import { BigIntIndexable } from './BigInt/BigIntIndexable.js';
@@ -13,7 +13,7 @@ import { parse } from './BigInt/parse.js';
  *
  * @example
  * ```typescript
- * import { BigInt } from '@w5s/core';
+ * import { BigInt } from '@w5s/core/BigInt';
  *
  * const total = [1n, 2n, 3n].reduce(BigInt['+'], 0n);// 6n
  * BigInt['=='](total, 6n);// true

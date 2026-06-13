@@ -1,10 +1,12 @@
-import type { Codec, Int, Option } from '@w5s/core';
+import type { Codec } from '@w5s/core/Codec';
+import type { Int } from '@w5s/core/Int';
+import type { Option } from '@w5s/core/Option';
 
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
-import { parse as parseNumber } from '@w5s/num/dist/Number/parse.js';
+import { Callable } from '@w5s/core/Callable';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
+import { parse as parseInt } from '@w5s/num/Int/parse';
+import { parse as parseNumber } from '@w5s/num/Number/parse';
 
 const numbers = String.raw`\d+`;
 const fractionalNumbers = String.raw`${numbers}(?:[\.,]${numbers})?`;

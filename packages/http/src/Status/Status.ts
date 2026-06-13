@@ -1,9 +1,9 @@
-import type { Type } from '@w5s/core';
+import type { Type } from '@w5s/core/Type';
 
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Int } from '@w5s/core/dist/Type/Int.js';
-import { TObject } from '@w5s/core/dist/Type/Object.js';
-import { string } from '@w5s/core/dist/Type/string.js';
+import { Callable } from '@w5s/core/Callable';
+import { Int } from '@w5s/core/Type/Int';
+import { TObject } from '@w5s/core/Type/Object';
+import { string } from '@w5s/core/Type/string';
 
 /**
  * @namespace

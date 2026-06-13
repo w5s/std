@@ -1,7 +1,7 @@
-import type { BigDecimal } from '@w5s/bigdecimal';
+import type { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
 
 import type { Currency } from '../Currency/Currency.js';
 

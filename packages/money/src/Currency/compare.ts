@@ -1,6 +1,6 @@
-import type { Ordering } from '@w5s/core';
+import type { Ordering } from '@w5s/core/Ordering';
 
-import { compare as compareString } from '@w5s/core/dist/String/compare.js';
+import { compare as compareString } from '@w5s/core/String/compare';
 
 import type { Currency } from './Currency.js';
 

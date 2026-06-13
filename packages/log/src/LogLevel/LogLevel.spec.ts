@@ -1,5 +1,7 @@
-import { CodecError, Int, Result } from '@w5s/core';
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { CodecError } from '@w5s/core/CodecError';
+import { Int } from '@w5s/core/Int';
+import { Result } from '@w5s/core/Result';
+import { describeCodec, describeType } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { LogLevel } from './LogLevel.js';

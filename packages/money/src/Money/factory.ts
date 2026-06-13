@@ -1,7 +1,7 @@
-import type { BigDecimalString } from '@w5s/bigdecimal';
+import type { BigDecimalString } from '@w5s/bigdecimal/BigDecimal';
 
-import { call as BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/call.js';
-import { invariant } from '@w5s/error/dist/invariant.js';
+import { call as BigDecimal } from '@w5s/bigdecimal/BigDecimal/call';
+import { invariant } from '@w5s/error/invariant';
 
 import type { Currency } from '../Currency/Currency.js';
 

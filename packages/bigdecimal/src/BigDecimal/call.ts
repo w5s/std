@@ -1,4 +1,4 @@
-import { panic } from '@w5s/error/dist/panic.js';
+import { panic } from '@w5s/error/panic';
 
 import type { BigDecimalString } from '../BigDecimal.js';
 import type { BigDecimal } from './BigDecimal.js';

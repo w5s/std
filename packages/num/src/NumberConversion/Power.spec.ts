@@ -1,4 +1,4 @@
-import { describePower } from '@w5s/core/dist/Testing.js';
+import { describePower } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { NumberConversion } from '../NumberConversion.js';

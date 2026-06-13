@@ -1,6 +1,6 @@
-import type { Struct } from '@w5s/core';
+import type { Struct } from '@w5s/core/Struct';
 
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 
 import { LogRecord as LogRecordType } from './LogRecord/LogRecord.js';
 import { messageWithData } from './LogRecord/messageWithData.js';
