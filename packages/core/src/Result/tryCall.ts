@@ -1,4 +1,4 @@
-import { isPromise } from '@w5s/async/dist/isPromise.js';
+import { isPromise } from '@w5s/async/isPromise';
 import type { Result } from '../Result.js';
 import { Ok } from './Ok.js';
 import { Error } from './Error.js';

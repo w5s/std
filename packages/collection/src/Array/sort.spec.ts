@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Ordering } from '@w5s/core';
+import type { Ordering } from '@w5s/core/Ordering';
 import { sort } from './sort.js';
 import { empty } from './empty.js';
 

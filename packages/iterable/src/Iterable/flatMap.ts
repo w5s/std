@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 /**
  * Return a new Iterable which applies `mapFn` and concatenate the result to the previous

@@ -1,6 +1,6 @@
-import type { BigDecimal } from '@w5s/bigdecimal';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import type { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
 import type { Currency } from '../Currency/Currency.js';
 import { parse } from './parse.js';
 import { MoneyAsString } from './MoneyAsString.js';

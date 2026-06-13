@@ -1,6 +1,6 @@
-import { invariant } from '@w5s/error/dist/invariant.js';
-import { call as BigDecimal } from '@w5s/bigdecimal/dist/BigDecimal/call.js';
-import type { BigDecimalString } from '@w5s/bigdecimal';
+import { invariant } from '@w5s/error/invariant';
+import { call as BigDecimal } from '@w5s/bigdecimal/BigDecimal/call';
+import type { BigDecimalString } from '@w5s/bigdecimal/BigDecimal';
 import type { Currency } from '../Currency/Currency.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
 import { Money } from './Money.js';

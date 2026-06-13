@@ -1,5 +1,5 @@
-import { BigDecimalAsString } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalAsString.js';
-import type { AsString } from '@w5s/core';
+import { BigDecimalAsString } from '@w5s/bigdecimal/BigDecimal/BigDecimalAsString';
+import type { AsString } from '@w5s/core/AsString';
 import { CurrencyAsString } from '../Currency/CurrencyAsString.js';
 import type { Money } from './Money.js';
 

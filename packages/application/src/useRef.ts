@@ -1,6 +1,6 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 import { meta } from './meta.js';
-import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
+import { __hasOwn } from '@w5s/core/__hasOwn';
 import { useGlobalValue, type Storage } from '@w5s/global-storage';
 import type { StateKey } from './StateKey.js';
 

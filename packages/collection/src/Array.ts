@@ -40,7 +40,7 @@ export type Array<Item> = CoreArray<Item>;
  *
  * @example
  * ```typescript
- * import { Array } from '@w5s/collection';
+ * import { Array } from '@w5s/collection/Array';
  *
  * const array = Array.of(2, 1, 3);
  * const reversed = Array.reverse(array);// [3, 1, 2]

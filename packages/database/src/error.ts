@@ -1,4 +1,4 @@
-import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
+import { ErrorClass } from '@w5s/error/ErrorClass';
 
 /**
  * An error reported when the Database fails to perform an operation

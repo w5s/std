@@ -1,6 +1,7 @@
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describeCodec, describeType } from '@w5s/core/Testing';
 import { describe } from 'vitest';
-import { CodecError, Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { CodecError } from '@w5s/core/CodecError';
 import { Time } from './Time.js';
 import { TimeBounded } from './TimeBounded.js';
 

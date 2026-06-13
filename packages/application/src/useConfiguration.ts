@@ -1,7 +1,7 @@
 import type { ConfigurationRef } from './ConfigurationRef.js';
 import { useRef } from './useRef.js';
 import { useNamespace } from './useNamespace.js';
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 import type { State } from './State.js';
 import type { Meta } from './meta.js';
 

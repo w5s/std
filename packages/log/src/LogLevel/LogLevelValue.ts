@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 import { of } from './of.js';
 
 const None = of('none', 0 as Int);

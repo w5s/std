@@ -1,5 +1,5 @@
 import { useConfiguration } from '@w5s/application';
-import type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
+import type { UUIDString } from '@w5s/core/Type/UUID';
 import { meta } from './meta.js';
 
 interface RandomUUIDFunction {

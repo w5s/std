@@ -1,4 +1,4 @@
-import { Enum } from '@w5s/core/dist/Enum.js';
+import { Enum } from '@w5s/core/Enum';
 
 /**
  * Byte size formats

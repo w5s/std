@@ -1,7 +1,7 @@
 import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
-import { Type } from '@w5s/core';
-import { Task } from '@w5s/task';
-import { TimeoutError } from '@w5s/error';
+import { Type } from '@w5s/core/Type';
+import { Task } from '@w5s/task/Task';
+import { TimeoutError } from '@w5s/error/TimeoutError';
 
 const client = Client();
 const getText = (id: number) => ({

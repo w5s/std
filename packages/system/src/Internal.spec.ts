@@ -1,6 +1,6 @@
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { describe, it, expect } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { FileError } from './FileError.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';

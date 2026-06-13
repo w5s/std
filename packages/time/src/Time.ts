@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { TimeDuration } from './TimeDuration/TimeDuration.js';
 import { Time as TimeType } from './Time/Time.js';
 import { of } from './Time/of.js';

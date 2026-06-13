@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 import type { Array } from '../Array.js';
 import { empty } from './empty.js';
 

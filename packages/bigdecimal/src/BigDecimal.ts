@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { format } from './BigDecimal/format.js';
 import { parse } from './BigDecimal/parse.js';
 import { BigDecimalComparable } from './BigDecimal/BigDecimalComparable.js';

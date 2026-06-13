@@ -1,4 +1,4 @@
-import type { BigDecimal } from '@w5s/bigdecimal';
+import type { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { Money } from './Money.js';
 import type { Currency } from '../Currency.js';
 

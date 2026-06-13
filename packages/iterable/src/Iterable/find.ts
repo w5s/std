@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
 /**
  * Returns the first element for which the given function returns true, otherwise undefined.

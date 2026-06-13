@@ -1,4 +1,4 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 import { __scaleValue } from './__scaleValue.js';

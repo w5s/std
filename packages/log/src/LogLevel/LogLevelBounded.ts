@@ -1,4 +1,4 @@
-import type { Bounded } from '@w5s/core';
+import type { Bounded } from '@w5s/core/Bounded';
 import { LogLevelValue } from './LogLevelValue.js';
 import type { LogLevel } from './LogLevel.js';
 

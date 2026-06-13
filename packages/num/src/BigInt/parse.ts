@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core/dist/Option.js';
+import type { Option } from '@w5s/core/Option';
 
 /**
  * Parse the expression and returns a bigint

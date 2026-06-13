@@ -1,8 +1,10 @@
-import { Int, Option, Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { Option } from '@w5s/core/Option';
+import { Int } from '@w5s/core/Int';
 import { Task } from '@w5s/task';
 import { TimeDuration } from '@w5s/time';
 import { describe, it, expect, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
 const expectTask = withTask(expect);

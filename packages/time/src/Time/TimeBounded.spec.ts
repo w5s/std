@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeBounded } from '@w5s/core/dist/Testing.js';
+import { describeBounded } from '@w5s/core/Testing';
 import { TimeBounded } from './TimeBounded.js';
 
 describe('TimeBounded', () => {

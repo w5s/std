@@ -1,11 +1,11 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { UUID as UUIDType } from '@w5s/core/dist/Type/UUID.js';
+import { Callable } from '@w5s/core/Callable';
+import { UUID as UUIDType } from '@w5s/core/Type/UUID';
 import { empty } from './UUID/empty.js';
 import { of } from './UUID/of.js';
 import { toUint32Array } from './UUID/toUint32Array.js';
 import { toBigInt } from './UUID/toBigInt.js';
 
-export type { UUIDString } from '@w5s/core/dist/Type/UUID.js';
+export type { UUIDString } from '@w5s/core/Type/UUID';
 
 /**
  * UUID string type

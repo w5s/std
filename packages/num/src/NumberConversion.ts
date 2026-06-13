@@ -1,6 +1,8 @@
-import type * as Core from '@w5s/core';
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import type { Bounded as CoreBounded } from '@w5s/core/Bounded';
+import type { Numeric as CoreNumeric } from '@w5s/core/Numeric';
+import type { Comparable as CoreComparable } from '@w5s/core/Comparable';
+import { Callable } from '@w5s/core/Callable';
+import { Symbol } from '@w5s/core/Symbol';
 import { Add } from './NumberConversion/Add.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
@@ -66,14 +68,14 @@ export const NumberConversion = Callable({
 export namespace NumberConversion {
   export interface Module<T>
     extends
-    Core.Comparable<T>,
-    Core.Numeric.Add<T>,
-    Core.Numeric.Multiply<T>,
-    Core.Numeric.Remainder<T>,
-    Core.Numeric.Subtract<T>,
-    Core.Numeric.Power<T>,
-    Core.Numeric.Signed<T>,
-    Core.Numeric.Negate<T>,
-    Core.Numeric.Zero<T>,
-    Core.Bounded<T> {}
+    CoreComparable<T>,
+    CoreNumeric.Add<T>,
+    CoreNumeric.Multiply<T>,
+    CoreNumeric.Remainder<T>,
+    CoreNumeric.Subtract<T>,
+    CoreNumeric.Power<T>,
+    CoreNumeric.Signed<T>,
+    CoreNumeric.Negate<T>,
+    CoreNumeric.Zero<T>,
+    CoreBounded<T> {}
 }

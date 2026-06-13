@@ -1,5 +1,5 @@
-import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import type { Task } from '@w5s/task/Task';
+import { from as taskFrom } from '@w5s/task/Task/from';
 
 export function write(
   method: 'debug' | 'log' | 'info' | 'warn' | 'error',

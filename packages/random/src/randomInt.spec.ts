@@ -1,6 +1,7 @@
-import { Int, Symbol } from '@w5s/core';
+import { Int } from '@w5s/core/Int';
+import { Symbol } from '@w5s/core/Symbol';
 import { describe, expect, it, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { randomInt } from './randomInt.js';
 import { next } from './Random/next.js';
 import { fakeRandomGenerator } from './Testing.js';

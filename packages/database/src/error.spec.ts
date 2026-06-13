@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { describeError } from '@w5s/error/dist/Testing.js';
+import { describeError } from '@w5s/error/Testing';
 import { DatabaseError } from './error.js';
 
 describe('DatabaseError', () => {

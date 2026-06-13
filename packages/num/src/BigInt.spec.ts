@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Type } from '@w5s/core';
+import { Type } from '@w5s/core/Type';
 import { BigInt } from './BigInt.js';
 import { parse } from './BigInt/parse.js';
 import { format } from './BigInt/format.js';

@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { describeComparable } from '@w5s/core/Testing';
 import { BigIntComparable } from './BigIntComparable.js';
 
 describe('BigIntComparable', () => {

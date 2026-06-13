@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { describeType, describeCodec, describeAsString } from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+import { describeType, describeCodec, describeAsString } from '@w5s/core/Testing';
+import { Result } from '@w5s/core/Result';
+import { CodecError } from '@w5s/core/CodecError';
 import { Int } from './Int.js';
 import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';

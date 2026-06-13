@@ -24,7 +24,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./dist/*": "./dist/*",
+    "./*": "./dist/*.js",
     "./internal/*": null
   },
   "files": [
@@ -63,6 +63,7 @@
     "@w5s/time": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
+    "@w5s/core": "workspace:^1.0.0-alpha.0",
     "@w5s/tsdown-config": "1.0.0-alpha.6",
     "tsdown": "catalog:",
     "typescript": "catalog:",
@@ -75,7 +76,10 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": false,
+    "provenance": true
   },
   "size-limit": [
     {

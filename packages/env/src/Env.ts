@@ -1,5 +1,5 @@
-import type { Option } from '@w5s/core';
-import { panic } from '@w5s/error/dist/panic.js';
+import type { Option } from '@w5s/core/Option';
+import { panic } from '@w5s/error/panic';
 
 const readImportMetaEnv = () => {
   try {

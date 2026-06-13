@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { Task } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';
 import { from } from '../Task/from.js';

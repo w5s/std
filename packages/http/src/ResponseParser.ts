@@ -1,9 +1,10 @@
-import type { Codec, JSONValue } from '@w5s/core';
-import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
-import { decode } from '@w5s/core/dist/Codec/decode.js';
-import { mapError } from '@w5s/core/dist/Result/mapError.js';
+import type { JSONValue } from '@w5s/core/JSON';
+import type { Codec } from '@w5s/core/Codec';
+import type { Task } from '@w5s/task/Task';
+import { from as taskFrom } from '@w5s/task/Task/from';
+import { mapResult } from '@w5s/task/Task/mapResult';
+import { decode } from '@w5s/core/Codec/decode';
+import { mapError } from '@w5s/core/Result/mapError';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';
 import type { BodyReader } from './BodyReader.js';

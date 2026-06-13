@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
-import { Symbol } from '@w5s/core';
+import { withTask } from '@w5s/task/Testing';
+import { Symbol } from '@w5s/core/Symbol';
 import { TaskCanceler } from '@w5s/task';
 import { writeFile } from './writeFile.js';
 import { FilePath } from '../FilePath.js';

@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 import { reduce } from './reduce.js';
 
 const sum = (accumulator: Int) => (accumulator + 1) as Int;

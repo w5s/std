@@ -1,8 +1,8 @@
-import { create as taskCreate } from '@w5s/task/dist/Task/create.js';
-import type { Task } from '@w5s/task';
-import { ok } from '@w5s/task/dist/Task/ok.js';
-import type { AsyncIterableLike } from '@w5s/iterable/dist/AsyncIterableLike.js';
-import { map as asyncIterableMap } from '@w5s/iterable/dist/AsyncIterable/map.js';
+import { create as taskCreate } from '@w5s/task/Task/create';
+import type { Task } from '@w5s/task/Task';
+import { ok } from '@w5s/task/Task/ok';
+import type { AsyncIterableLike } from '@w5s/iterable/AsyncIterableLike';
+import { map as asyncIterableMap } from '@w5s/iterable/AsyncIterable/map';
 import { defaultCSVEncodeOptions, type CSVEncodeOptions } from './CSVEncodeOptions.js';
 import type { CSVNamedRecord } from './CSVRecord.js';
 

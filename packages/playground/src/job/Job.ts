@@ -1,4 +1,7 @@
-import { Codec, lazy, Tag, Type } from '@w5s/core';
+import { lazy } from '@w5s/core/lazy';
+import { Codec } from '@w5s/core/Codec';
+import { Tag } from '@w5s/core/Tag';
+import { Type } from '@w5s/core/Type';
 import { Task } from '@w5s/task';
 import { randomUUID, type UUID } from '@w5s/uuid';
 

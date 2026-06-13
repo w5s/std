@@ -1,9 +1,9 @@
-import type { Result } from '@w5s/core';
-import { ArgumentError } from '@w5s/error/dist/ArgumentError.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { BigDecimalNumeric } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNumeric.js';
-import type { BigDecimal } from '@w5s/bigdecimal';
+import type { Result } from '@w5s/core/Result';
+import { ArgumentError } from '@w5s/error/ArgumentError';
+import { Ok } from '@w5s/core/Result/Ok';
+import { Error } from '@w5s/core/Result/Error';
+import { BigDecimalNumeric } from '@w5s/bigdecimal/BigDecimal/BigDecimalNumeric';
+import type { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { compare as currencyCompare } from '../Currency/compare.js';
 import { Money } from './Money.js';
 

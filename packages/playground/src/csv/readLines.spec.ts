@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
+import { withAsyncIterable } from '@w5s/iterable/Testing';
 import { decodeByName } from './decodeByName.js';
 import { readLines } from './readLines.js';
 

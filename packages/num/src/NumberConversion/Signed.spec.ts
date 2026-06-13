@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeSigned } from '@w5s/core/dist/Testing.js';
+import { describeSigned } from '@w5s/core/Testing';
 import { NumberConversion } from '../NumberConversion.js';
 import { Signed } from './Signed.js';
 

@@ -1,7 +1,8 @@
-import { CodecError, Type } from '@w5s/core';
+import { CodecError } from '@w5s/core/CodecError';
+import { Type } from '@w5s/core/Type';
 import { Task } from '@w5s/task';
 import { describe, it, expect } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { ResponseParser } from './ResponseParser.js';
 import { HTTPError } from './HTTPError.js';
 import type { Response } from './Response.js';

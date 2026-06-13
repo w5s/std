@@ -1,19 +1,27 @@
-import { Type, Codec, Result, JSON } from '@w5s/core';
+import { TObject } from '@w5s/core/Type/Object';
+import { string } from '@w5s/core/Type/string';
+import { number } from '@w5s/core/Type/number';
+import { boolean } from '@w5s/core/Type/boolean';
+import { Array as TArray } from '@w5s/core/Type/Array';
+import { Option as TOption } from '@w5s/core/Type/Option';
+import { Codec } from '@w5s/core/Codec';
+import { Result } from '@w5s/core/Result';
+import { JSON } from '@w5s/core/JSON';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const eol = '\n';
-const StatusDataComment = Type.Object({
-  doc: Type.string,
-  description: Type.string,
+const StatusDataComment = TObject({
+  doc: string,
+  description: string,
 });
-const StatusData = Type.Object({
-  code: Type.number,
-  phrase: Type.string,
+const StatusData = TObject({
+  code: number,
+  phrase: string,
   comment: StatusDataComment,
-  isDeprecated: Type.Option(Type.boolean),
+  isDeprecated: TOption(boolean),
 });
-const StatusArrayData = Type.Array(StatusData);
+const StatusArrayData = TArray(StatusData);
 
 function outFile(file: string) {
   return path.join('src', file);
@@ -34,7 +42,7 @@ async function generateFiles() {
     return decodedResult;
   }
   let statusAllContent = '';
-  statusAllContent += `import type { Int } from '@w5s/core/dist/Type/Int.js';${eol}`;
+  statusAllContent += `import type { Int } from '@w5s/core/Type/Int';${eol}`;
   statusAllContent += `import { Status } from './Status.js';${eol}`;
   statusAllContent += `${eol}`;
   statusAllContent += decodedResult.value

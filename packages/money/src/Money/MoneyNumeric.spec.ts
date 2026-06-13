@@ -1,7 +1,7 @@
-import { BigDecimal, type BigDecimalString } from '@w5s/bigdecimal';
+import { BigDecimal, type BigDecimalString } from '@w5s/bigdecimal/BigDecimal';
 import { describe, it, expect } from 'vitest';
-import { Result } from '@w5s/core';
-import { ArgumentError } from '@w5s/error';
+import { Result } from '@w5s/core/Result';
+import { ArgumentError } from '@w5s/error/ArgumentError';
 import { Money } from './Money.js';
 import { Currency } from '../Currency/Currency.js';
 import { MoneyNumeric } from './MoneyNumeric.js';

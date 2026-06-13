@@ -1,4 +1,4 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 import { write } from './write.js';
 
 /**

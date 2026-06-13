@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { Array } from '../Array.js';
 import { empty } from './empty.js';
 

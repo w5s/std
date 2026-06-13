@@ -1,5 +1,5 @@
 import type { Awaitable } from '@w5s/core-type';
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 
 /**

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { get } from './get.js';
 
 describe(get, () => {

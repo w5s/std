@@ -1,4 +1,4 @@
-import { invariant } from '@w5s/error/dist/invariant.js';
+import { invariant } from '@w5s/error/invariant';
 
 /**
  * Splits an iterable into chunks of a specified size

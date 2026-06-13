@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeZero } from '@w5s/core/dist/Testing.js';
+import { describeZero } from '@w5s/core/Testing';
 import { BigDecimalZero } from './BigDecimalZero.js';
 import { BigDecimal } from './BigDecimal.js';
 

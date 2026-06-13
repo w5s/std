@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core/Symbol';
 import { create } from './create.js';
 import { withIterable } from '../Testing.js';
 

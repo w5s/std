@@ -19,7 +19,7 @@ npm install @w5s/byte-size
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { ByteSize } from '@w5s/byte-size';
-import { Codec } from '@w5s/core';
+import { Codec } from '@w5s/core/Codec';
 
 export function main() {
   const size = ByteSize(123);

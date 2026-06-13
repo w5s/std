@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeAsString } from '@w5s/core/dist/Testing.js';
+import { describeAsString } from '@w5s/core/Testing';
 import { TimeDurationAsString } from './TimeDurationAsString.js';
 import { from } from './from.js';
 

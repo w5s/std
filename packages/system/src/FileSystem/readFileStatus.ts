@@ -1,7 +1,7 @@
 import type * as nodeFS from 'node:fs';
-import type { Int } from '@w5s/core';
-import type { Task } from '@w5s/task';
-import type { Time } from '@w5s/time';
+import type { Int } from '@w5s/core/Int';
+import type { Task } from '@w5s/task/Task';
+import type { Time } from '@w5s/time/Time';
 import type { FileError } from '../FileError.js';
 import { Internal, errnoTask } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';

@@ -1,4 +1,5 @@
-import type { JSONValue, Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
+import type { JSONValue } from '@w5s/core/JSON';
 
 export type BodyReaderFormat = 'arrayBuffer' | 'blob' | 'formData' | 'json' | 'stream' | 'text';
 

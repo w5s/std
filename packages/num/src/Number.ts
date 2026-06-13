@@ -1,4 +1,4 @@
-import { number as NumberType } from '@w5s/core/dist/Type/number.js';
+import { number as NumberType } from '@w5s/core/Type/number';
 import { parse } from './Number/parse.js';
 import { format } from './Number/format.js';
 import { NumberConversion } from './NumberConversion.js';
@@ -8,7 +8,7 @@ import { NumberConversion } from './NumberConversion.js';
  *
  * @example
  * ```typescript
- * import { Number } from '@w5s/core';
+ * import { Number } from '@w5s/core/Number';
  *
  * const total = [1, 1.5, 2].reduce(Number['+'], 0);// 4.5
  * Number['=='](total, 4.5);// true

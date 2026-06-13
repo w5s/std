@@ -20,7 +20,7 @@ npm install @w5s/http
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
-import { Type } from '@w5s/core';
+import { Type } from '@w5s/core/Type';
 import { Task } from '@w5s/task';
 import { TimeoutError } from '@w5s/error';
 

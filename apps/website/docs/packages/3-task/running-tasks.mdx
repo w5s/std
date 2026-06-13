@@ -19,7 +19,7 @@ The primary way to execute a task:
 
 ```typescript
 import { Task } from '@w5s/task';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 
 const myTask = Task.resolve(42);
 
@@ -39,7 +39,7 @@ Tasks can be cancelled by passing a canceler reference to `Task.run`:
 
 ```typescript
 import { Task } from '@w5s/task';
-import { Ref } from '@w5s/core';
+import { Ref } from '@w5s/core/Ref';
 
 // Create a canceler reference
 const controller = new AbortController();
@@ -99,7 +99,7 @@ Always handle both success and error cases:
 
 ```typescript
 import { Task } from '@w5s/task';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 
 const result = await Task.run(myTask);
 

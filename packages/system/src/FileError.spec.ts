@@ -1,4 +1,4 @@
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { describe, it, expect } from 'vitest';
 import { FileError } from './FileError.js';
 import type { FilePath } from './FilePath.js';

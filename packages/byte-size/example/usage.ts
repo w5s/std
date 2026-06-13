@@ -1,5 +1,5 @@
 import { ByteSize } from '@w5s/byte-size';
-import { Codec } from '@w5s/core';
+import { Codec } from '@w5s/core/Codec';
 
 export function main() {
   const size = ByteSize(123);

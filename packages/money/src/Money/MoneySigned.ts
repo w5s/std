@@ -1,4 +1,4 @@
-import { BigDecimalSigned } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalSigned.js';
+import { BigDecimalSigned } from '@w5s/bigdecimal/BigDecimal/BigDecimalSigned';
 import type { Money } from './Money.js';
 
 const { isPositive: bigDecimalIsPositive, isNegative: bigDecimalIsNegative } = BigDecimalSigned;

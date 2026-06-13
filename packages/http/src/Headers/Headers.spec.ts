@@ -1,7 +1,8 @@
 /* eslint-disable ts/consistent-type-assertions */
 import { describe } from 'vitest';
-import { describeType, describeCodec } from '@w5s/core/dist/Testing.js';
-import { Result, CodecError } from '@w5s/core';
+import { describeType, describeCodec } from '@w5s/core/Testing';
+import { Result } from '@w5s/core/Result';
+import { CodecError } from '@w5s/core/CodecError';
 import { Headers } from './Headers.js';
 
 describe('Headers', () => {

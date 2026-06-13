@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import type { PartialKeys } from '@w5s/core-type';
 import type { Status } from './Status.js';
 import type { URL } from './URL.js';

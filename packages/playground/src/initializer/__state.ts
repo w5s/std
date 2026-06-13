@@ -1,4 +1,4 @@
-import { Ref } from '@w5s/core/dist/Ref.js';
+import { Ref } from '@w5s/core/Ref';
 import { useGlobalValue } from '@w5s/global-storage';
 import type { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';

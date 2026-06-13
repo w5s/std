@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { Headers as HeadersType } from './Headers/Headers.js';
 import { empty } from './Headers/empty.js';
 

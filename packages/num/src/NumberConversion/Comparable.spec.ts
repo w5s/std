@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { describeComparable } from '@w5s/core/Testing';
 import { Int } from '../Int.js';
 import { Comparable } from './Comparable.js';
 

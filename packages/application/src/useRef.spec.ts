@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Ref } from '@w5s/core';
+import { Ref } from '@w5s/core/Ref';
 import { useStorage } from '@w5s/global-storage';
 import { useRef } from './useRef.js';
 

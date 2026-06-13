@@ -1,4 +1,4 @@
-import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
+import { __hasOwn } from '@w5s/core/__hasOwn';
 import type { RecordKey } from '../Record.js';
 
 /**

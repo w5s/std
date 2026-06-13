@@ -1,6 +1,8 @@
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describeCodec, describeType } from '@w5s/core/Testing';
 import { describe } from 'vitest';
-import { CodecError, Int, Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { CodecError } from '@w5s/core/CodecError';
+import { Int } from '@w5s/core/Int';
 import { LogLevel } from './LogLevel.js';
 
 describe('LogLevel', () => {

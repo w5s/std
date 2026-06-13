@@ -1,4 +1,4 @@
-import { Tag } from '@w5s/core/dist/Tag.js';
+import { Tag } from '@w5s/core/Tag';
 
 /**
  * A type representing a unique identifier for a fiber.
