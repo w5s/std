@@ -1,5 +1,5 @@
-import { BigDecimal } from '@w5s/bigdecimal';
-import { Option } from '@w5s/core';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { Option } from '@w5s/core/Option';
 import { describe, expect, it } from 'vitest';
 
 import { CurrencyRegistry } from '../CurrencyRegistry.js';

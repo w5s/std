@@ -1,4 +1,7 @@
-import { Codec, JSON, Result, Type } from '@w5s/core';
+import { Codec } from '@w5s/core/Codec';
+import { JSON } from '@w5s/core/JSON';
+import { Result } from '@w5s/core/Result';
+import { Type } from '@w5s/core/Type';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
@@ -21,7 +24,7 @@ async function generateFiles() {
     return decodedResult;
   }
   let statusAllContent = '';
-  statusAllContent += `import type { Int } from '@w5s/core/dist/Type/Int.js';${eol}`;
+  statusAllContent += `import type { Int } from '@w5s/core/Type/Int';${eol}`;
   statusAllContent += `${eol}`;
   statusAllContent += `import { Status } from './Status.js';${eol}`;
   statusAllContent += `${eol}`;

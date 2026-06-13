@@ -1,5 +1,5 @@
-import { BigDecimal } from '@w5s/bigdecimal';
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { describeComparable } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { Currency } from '../Currency.js';

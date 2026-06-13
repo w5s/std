@@ -1,9 +1,9 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { Add } from '@w5s/num/dist/NumberConversion/Add.js';
-import { Multiply } from '@w5s/num/dist/NumberConversion/Multiply.js';
-import { Power } from '@w5s/num/dist/NumberConversion/Power.js';
-import { Subtract } from '@w5s/num/dist/NumberConversion/Subtract.js';
+import { Add } from '@w5s/num/NumberConversion/Add';
+import { Multiply } from '@w5s/num/NumberConversion/Multiply';
+import { Power } from '@w5s/num/NumberConversion/Power';
+import { Subtract } from '@w5s/num/NumberConversion/Subtract';
 
 import type { TimeDuration } from './TimeDuration.js';
 

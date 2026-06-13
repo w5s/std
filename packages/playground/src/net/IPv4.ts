@@ -1,11 +1,15 @@
-import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
+import type { Bounded } from '@w5s/core/Bounded';
+import type { Codec } from '@w5s/core/Codec';
+import type { Int } from '@w5s/core/Int';
+import type { Option } from '@w5s/core/Option';
+import type { Ordering } from '@w5s/core/Ordering';
 
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { Indexable } from '@w5s/core/dist/Indexable.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { compare as numberCompare } from '@w5s/num/dist/Number/compare.js';
+import { Callable } from '@w5s/core/Callable';
+import { Comparable } from '@w5s/core/Comparable';
+import { Indexable } from '@w5s/core/Indexable';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
+import { compare as numberCompare } from '@w5s/num/Number/compare';
 
 /**
  * IPv4 string type

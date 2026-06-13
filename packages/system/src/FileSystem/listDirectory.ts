@@ -1,5 +1,5 @@
 import type { Array } from '@w5s/core-type';
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 import type * as nodeFS from 'node:fs';
 
 import type { FileError } from '../FileError.js';

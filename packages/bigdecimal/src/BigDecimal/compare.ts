@@ -1,6 +1,6 @@
-import type { Ordering } from '@w5s/core';
+import type { Ordering } from '@w5s/core/Ordering';
 
-import { compare as bigIntCompare } from '@w5s/num/dist/BigInt/compare.js';
+import { compare as bigIntCompare } from '@w5s/num/BigInt/compare';
 
 import type { BigDecimal } from './BigDecimal.js';
 

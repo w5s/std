@@ -1,6 +1,6 @@
-import type { Ordering } from '@w5s/core';
+import type { Ordering } from '@w5s/core/Ordering';
 
-import { compare as compareNumber } from '@w5s/num/dist/Number/compare.js';
+import { compare as compareNumber } from '@w5s/num/Number/compare';
 
 import type { Status } from './Status.js';
 

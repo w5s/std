@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { Result } from '@w5s/core';
 import { assertType } from '@w5s/core-type';
+import { Result } from '@w5s/core/Result';
 import { describe, expect, it, vi } from 'vitest';
 
 import type { Task } from '../Task.js';

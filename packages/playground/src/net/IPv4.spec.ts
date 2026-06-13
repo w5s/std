@@ -1,11 +1,12 @@
-import { CodecError, Result } from '@w5s/core';
+import { CodecError } from '@w5s/core/CodecError';
+import { Result } from '@w5s/core/Result';
 import {
   describeBounded,
   describeCodec,
   describeComparable,
   describeIndexable,
   describeType,
-} from '@w5s/core/dist/Testing.js';
+} from '@w5s/core/Testing';
 import { describe, expect, it } from 'vitest';
 
 import { IPv4 } from './IPv4.js';

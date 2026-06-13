@@ -1,5 +1,5 @@
-import { Int } from '@w5s/core';
-import { describeAsString } from '@w5s/core/dist/Testing.js';
+import { Int } from '@w5s/core/Int';
+import { describeAsString } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { LogLevelAsString } from './LogLevelAsString.js';

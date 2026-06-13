@@ -1,9 +1,9 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { all as taskAll } from '@w5s/task/dist/Task/all.js';
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import { ignore as taskIgnore } from '@w5s/task/dist/Task/ignore.js';
+import { all as taskAll } from '@w5s/task/Task/all';
+import { andThen as taskThen } from '@w5s/task/Task/andThen';
+import { from as taskFrom } from '@w5s/task/Task/from';
+import { ignore as taskIgnore } from '@w5s/task/Task/ignore';
 
 import type { LogRecord } from '../LogRecord.js';
 

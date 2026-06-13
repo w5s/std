@@ -1,4 +1,4 @@
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { describe } from 'vitest';
 
 import { CodecError } from '../CodecError.js';

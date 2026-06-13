@@ -1,4 +1,4 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 
 import type { Meta } from './meta.js';
 import type { State } from './State.js';

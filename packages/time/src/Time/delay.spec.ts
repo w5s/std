@@ -1,4 +1,5 @@
-import { Result, Symbol } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { Symbol } from '@w5s/core/Symbol';
 import { Task, TaskCanceler } from '@w5s/task';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

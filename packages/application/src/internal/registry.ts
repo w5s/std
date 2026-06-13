@@ -1,4 +1,4 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 
 import { useGlobal } from '@w5s/shadow-storage';
 

@@ -1,5 +1,5 @@
-import { Symbol } from '@w5s/core';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { Symbol } from '@w5s/core/Symbol';
+import { withTask } from '@w5s/task/Testing';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
 import { fsStub, withFile } from '../Testing.js';

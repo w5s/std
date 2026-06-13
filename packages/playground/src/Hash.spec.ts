@@ -1,4 +1,4 @@
-import { Int } from '@w5s/core';
+import { Int } from '@w5s/core/Int';
 import { describe, expect, it } from 'vitest';
 
 import { Hash } from './Hash.js';

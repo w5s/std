@@ -1,4 +1,4 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 
 import type { ConfigurationRef } from './ConfigurationRef.js';
 import type { Meta } from './meta.js';

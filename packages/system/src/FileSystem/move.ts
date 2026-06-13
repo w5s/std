@@ -1,4 +1,4 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
 import { FileError } from '../FileError.js';
 import { FilePath } from '../FilePath.js';

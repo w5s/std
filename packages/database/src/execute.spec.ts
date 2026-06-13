@@ -1,4 +1,4 @@
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it, vi } from 'vitest';
 
 import { DatabaseError } from './error.js';

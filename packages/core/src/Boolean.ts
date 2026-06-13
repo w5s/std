@@ -7,7 +7,7 @@ import { boolean as BooleanType } from './Type/boolean.js';
  *
  * @example
  * ```typescript
- * import { Boolean } from '@w5s/core';
+ * import { Boolean } from '@w5s/core/Boolean';
  *
  * if (Boolean.hasInstance(unknownValue)) {
  *   // typeof unknownValue === 'boolean'

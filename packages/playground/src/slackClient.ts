@@ -1,20 +1,21 @@
-import type { JSONValue, Option } from '@w5s/core';
-import type { Method } from '@w5s/http';
-import type { Task } from '@w5s/task';
+import type { JSONValue } from '@w5s/core/JSON';
+import type { Option } from '@w5s/core/Option';
+import type { Method } from '@w5s/http/Method';
+import type { Task } from '@w5s/task/Task';
 
-import { CodecError } from '@w5s/core/dist/CodecError.js';
-import { Enum } from '@w5s/core/dist/Enum.js';
-import { Error as Err } from '@w5s/core/dist/Result/Error.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Tag } from '@w5s/core/dist/Tag.js';
-import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
-import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
-import { Client } from '@w5s/http/dist/Client.js';
-import { HTTPError } from '@w5s/http/dist/HTTPError.js';
-import { requestSend } from '@w5s/http/dist/requestSend.js';
-import { ResponseParser } from '@w5s/http/dist/ResponseParser.js';
-import { andThen } from '@w5s/task/dist/Task/andThen.js';
-import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
+import { CodecError } from '@w5s/core/CodecError';
+import { Enum } from '@w5s/core/Enum';
+import { Error as Err } from '@w5s/core/Result/Error';
+import { Ok } from '@w5s/core/Result/Ok';
+import { Tag } from '@w5s/core/Tag';
+import { ErrorClass } from '@w5s/error/ErrorClass';
+import { TimeoutError } from '@w5s/error/TimeoutError';
+import { Client } from '@w5s/http/Client';
+import { HTTPError } from '@w5s/http/HTTPError';
+import { requestSend } from '@w5s/http/requestSend';
+import { ResponseParser } from '@w5s/http/ResponseParser';
+import { andThen } from '@w5s/task/Task/andThen';
+import { mapResult } from '@w5s/task/Task/mapResult';
 
 export interface Slack {
   /**

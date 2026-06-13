@@ -1,4 +1,4 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
 import type { TimeDuration } from '../TimeDuration.js';
 import type { Time } from './Time.js';

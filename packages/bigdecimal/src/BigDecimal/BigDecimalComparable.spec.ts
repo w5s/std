@@ -1,4 +1,4 @@
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { describeComparable } from '@w5s/core/Testing';
 
 import { BigDecimal } from './BigDecimal.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';

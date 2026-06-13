@@ -1,8 +1,9 @@
-import { Int, Option } from '@w5s/core';
-import { Task } from '@w5s/task';
-import { timeout } from '@w5s/task-timeout';
-import { withTask } from '@w5s/task/dist/Testing.js';
-import { TimeDuration } from '@w5s/time';
+import { Int } from '@w5s/core/Int';
+import { Option } from '@w5s/core/Option';
+import { timeout } from '@w5s/task-timeout/timeout';
+import { Task } from '@w5s/task/Task';
+import { withTask } from '@w5s/task/Testing';
+import { TimeDuration } from '@w5s/time/TimeDuration';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Client } from './Client.js';
@@ -11,7 +12,7 @@ import { requestSend } from './requestSend.js';
 import { Response } from './Response.js';
 import { Status } from './Status.js';
 
-vi.mock('@w5s/task-timeout', () => ({
+vi.mock('@w5s/task-timeout/timeout', () => ({
   timeout: vi.fn((_) => _),
 }));
 beforeEach(() => {

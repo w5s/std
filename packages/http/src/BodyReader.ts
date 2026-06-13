@@ -1,4 +1,5 @@
-import type { JSONValue, Option } from '@w5s/core';
+import type { JSONValue } from '@w5s/core/JSON';
+import type { Option } from '@w5s/core/Option';
 
 /**
  * Represents an object that `BodyReader`

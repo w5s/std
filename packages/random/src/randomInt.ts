@@ -1,7 +1,7 @@
-import type { Int } from '@w5s/core';
-import type { Task } from '@w5s/task';
+import type { Int } from '@w5s/core/Int';
+import type { Task } from '@w5s/task/Task';
 
-import { map } from '@w5s/task/dist/Task/map.js';
+import { map } from '@w5s/task/Task/map';
 
 import type { RandomGenerator } from './RandomGenerator.js';
 

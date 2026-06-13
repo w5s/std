@@ -1,5 +1,5 @@
-import { Int } from '@w5s/core';
-import { describeIndexable } from '@w5s/core/dist/Testing.js';
+import { Int } from '@w5s/core/Int';
+import { describeIndexable } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import * as StatusAll from './status.all.js';

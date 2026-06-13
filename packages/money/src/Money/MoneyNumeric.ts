@@ -1,10 +1,10 @@
-import type { BigDecimal } from '@w5s/bigdecimal';
-import type { Result } from '@w5s/core';
+import type { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import type { Result } from '@w5s/core/Result';
 
-import { BigDecimalNumeric } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNumeric.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { ArgumentError } from '@w5s/error/dist/ArgumentError.js';
+import { BigDecimalNumeric } from '@w5s/bigdecimal/BigDecimal/BigDecimalNumeric';
+import { Error } from '@w5s/core/Result/Error';
+import { Ok } from '@w5s/core/Result/Ok';
+import { ArgumentError } from '@w5s/error/ArgumentError';
 
 import { compare as currencyCompare } from '../Currency/compare.js';
 import { Money } from './Money.js';

@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { describe, expect, it, vi } from 'vitest';
 
 import { FakeTask, withTask } from '../Testing.js';

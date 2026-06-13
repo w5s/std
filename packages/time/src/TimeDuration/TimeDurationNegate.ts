@@ -1,6 +1,6 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 
-import { Negate } from '@w5s/num/dist/NumberConversion/Negate.js';
+import { Negate } from '@w5s/num/NumberConversion/Negate';
 
 import type { TimeDuration } from './TimeDuration.js';
 

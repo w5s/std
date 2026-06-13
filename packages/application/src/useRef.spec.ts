@@ -1,4 +1,4 @@
-import { Ref } from '@w5s/core';
+import { Ref } from '@w5s/core/Ref';
 import { useShadowStorage } from '@w5s/shadow-storage';
 import { describe, expect, it } from 'vitest';
 

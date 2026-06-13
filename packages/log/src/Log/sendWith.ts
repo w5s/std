@@ -1,8 +1,8 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { now as timeNow } from '@w5s/time/dist/Time/now.js';
-import { randomUUID } from '@w5s/uuid';
+import { andThen as taskThen } from '@w5s/task/Task/andThen';
+import { now as timeNow } from '@w5s/time/Time/now';
+import { randomUUID } from '@w5s/uuid/randomUUID';
 
 import type { LogLevelParameters } from '../level.js';
 import type { LogRecord } from '../LogRecord.js';

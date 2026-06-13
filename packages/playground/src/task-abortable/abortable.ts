@@ -1,7 +1,7 @@
-import { AbortError } from '@w5s/error/dist/AbortError.js';
-import { Task, type TaskLike } from '@w5s/task';
-import { from } from '@w5s/task/dist/Task/from.js';
-import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
+import { AbortError } from '@w5s/error/AbortError';
+import { Task, type TaskLike } from '@w5s/task/Task';
+import { from } from '@w5s/task/Task/from';
+import { unsafeCall } from '@w5s/task/Task/unsafeCall';
 
 export interface AbortOptions {
   /**

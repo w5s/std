@@ -1,4 +1,4 @@
-import { BigDecimal } from '@w5s/bigdecimal';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { describe, expect, it } from 'vitest';
 
 import { CurrencyRegistry } from '../CurrencyRegistry.js';

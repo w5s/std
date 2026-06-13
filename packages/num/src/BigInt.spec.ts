@@ -1,4 +1,4 @@
-import { Type } from '@w5s/core';
+import { Type } from '@w5s/core/Type';
 import { describe, expect, it } from 'vitest';
 
 import { BigInt } from './BigInt.js';

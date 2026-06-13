@@ -1,4 +1,4 @@
-import type { Numeric } from '@w5s/core/dist/Numeric.js';
+import type { Numeric } from '@w5s/core/Numeric';
 
 import { fromInt } from './fromInt.js';
 

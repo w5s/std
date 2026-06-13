@@ -1,4 +1,4 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 
 export interface ConfigurationRef<Configuration> extends Ref<Configuration> {
   /**

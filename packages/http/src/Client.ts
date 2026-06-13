@@ -1,9 +1,9 @@
-import type { Option } from '@w5s/core';
-import type { TaskLike } from '@w5s/task';
-import type { TimeDuration } from '@w5s/time';
+import type { Option } from '@w5s/core/Option';
+import type { TaskLike } from '@w5s/task/Task';
+import type { TimeDuration } from '@w5s/time/TimeDuration';
 
-import { invariant } from '@w5s/error/dist/invariant.js';
-import { resolve } from '@w5s/task/dist/Task/resolve.js';
+import { invariant } from '@w5s/error/invariant';
+import { resolve } from '@w5s/task/Task/resolve';
 
 import type { BodyReader } from './BodyReader.js';
 import type { HTTPError } from './HTTPError.js';

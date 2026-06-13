@@ -1,4 +1,4 @@
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 import { describe, expect, it } from 'vitest';
 
 import { BigDecimal } from './BigDecimal.js';

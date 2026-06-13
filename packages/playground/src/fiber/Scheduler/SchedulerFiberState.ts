@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberId } from '../FiberId.js';

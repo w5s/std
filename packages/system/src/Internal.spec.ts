@@ -1,5 +1,5 @@
-import { Option } from '@w5s/core';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { Option } from '@w5s/core/Option';
+import { withTask } from '@w5s/task/Testing';
 import { describe, expect, it } from 'vitest';
 
 import type { FilePath } from './FilePath.js';

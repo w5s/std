@@ -1,9 +1,9 @@
-import type { Task, TaskLike } from '@w5s/task';
+import type { Task, TaskLike } from '@w5s/task/Task';
 
-import { all as taskAll } from '@w5s/task/dist/Task/all.js';
-import { andRun as taskAndRun } from '@w5s/task/dist/Task/andRun.js';
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { map as taskMap } from '@w5s/task/dist/Task/map.js';
+import { all as taskAll } from '@w5s/task/Task/all';
+import { andRun as taskAndRun } from '@w5s/task/Task/andRun';
+import { andThen as taskThen } from '@w5s/task/Task/andThen';
+import { map as taskMap } from '@w5s/task/Task/map';
 
 import { dispose } from './dispose.js';
 

@@ -1,6 +1,6 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
-import { defer } from '@w5s/async/dist/defer.js';
+import { defer } from '@w5s/async/defer';
 
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';

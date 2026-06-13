@@ -1,4 +1,4 @@
-import { lazy } from '@w5s/core/dist/lazy.js';
+import { lazy } from '@w5s/core/lazy';
 
 import type { ByteSizeFormat } from '../ByteSizeFormat.js';
 

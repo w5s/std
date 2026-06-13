@@ -36,7 +36,7 @@ npm install @w5s/core
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 
 export function main() {
   const parsed = parseNumber('1.1'); // Result.Ok(1.1)

@@ -1,5 +1,5 @@
-import { Int } from '@w5s/core';
-import { describeBounded } from '@w5s/core/dist/Testing.js';
+import { Int } from '@w5s/core/Int';
+import { describeBounded } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { LogLevelBounded } from './LogLevelBounded.js';

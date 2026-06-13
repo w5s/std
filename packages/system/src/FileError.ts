@@ -1,6 +1,6 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 
-import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
+import { ErrorClass } from '@w5s/error/ErrorClass';
 
 import type { FilePath } from './FilePath.js';
 

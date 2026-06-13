@@ -1,7 +1,7 @@
-import type { Awaitable } from '@w5s/async';
+import type { Awaitable } from '@w5s/async/Awaitable';
 
-import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
-import { tryCall as asyncTryCall } from '@w5s/async/dist/tryCall.js';
+import { isPromiseLike } from '@w5s/async/isPromiseLike';
+import { tryCall as asyncTryCall } from '@w5s/async/tryCall';
 
 import type { Task } from '../Task.js';
 

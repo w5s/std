@@ -18,7 +18,7 @@ npm install @w5s/num
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { BigInt } from '@w5s/num';
 
 export function main() {

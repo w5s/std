@@ -1,8 +1,8 @@
-import type { Type } from '@w5s/core';
+import type { Type } from '@w5s/core/Type';
 
-import { constant } from '@w5s/core/dist/Type/constant.js';
-import { union } from '@w5s/core/dist/Type/union.js';
-import { TimeDuration } from '@w5s/time/dist/TimeDuration/TimeDuration.js';
+import { constant } from '@w5s/core/Type/constant';
+import { union } from '@w5s/core/Type/union';
+import { TimeDuration } from '@w5s/time/TimeDuration/TimeDuration';
 
 /**
  * Request timeout setting

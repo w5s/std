@@ -1,4 +1,6 @@
-import { type Option, Symbol } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
+
+import { Symbol } from '@w5s/core/Symbol';
 import * as fs from 'node:fs';
 import nodePath from 'node:path';
 

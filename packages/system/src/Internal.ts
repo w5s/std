@@ -1,6 +1,6 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import { from as taskFrom } from '@w5s/task/Task/from';
 import * as nodeFS from 'node:fs';
 import nodePath from 'node:path';
 

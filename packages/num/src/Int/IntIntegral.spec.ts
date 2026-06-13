@@ -1,4 +1,4 @@
-import { describeNegate, describeNumeric, describeSigned, describeZero } from '@w5s/core/dist/Testing.js';
+import { describeNegate, describeNumeric, describeSigned, describeZero } from '@w5s/core/Testing';
 import { describe } from 'vitest';
 
 import { Int } from '../Int.js';

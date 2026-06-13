@@ -1,18 +1,20 @@
-import type { Int, Option, Result } from '@w5s/core';
-import type { Task, TaskLike } from '@w5s/task';
-import type { TimeDuration } from '@w5s/time';
+import type { Int } from '@w5s/core/Int';
+import type { Option } from '@w5s/core/Option';
+import type { Result } from '@w5s/core/Result';
+import type { Task, TaskLike } from '@w5s/task/Task';
+import type { TimeDuration } from '@w5s/time/TimeDuration';
 
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { all as taskAll } from '@w5s/task/dist/Task/all.js';
-import { andRun as taskThenRun } from '@w5s/task/dist/Task/andRun.js';
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { from } from '@w5s/task/dist/Task/from.js';
-import { map as taskMap } from '@w5s/task/dist/Task/map.js';
-import { orElse as taskElse } from '@w5s/task/dist/Task/orElse.js';
-import { reject as taskReject } from '@w5s/task/dist/Task/reject.js';
-import { resolve as taskResolve } from '@w5s/task/dist/Task/resolve.js';
-import { delay as timeDelay } from '@w5s/time/dist/Time/delay.js';
+import { Error } from '@w5s/core/Result/Error';
+import { Ok } from '@w5s/core/Result/Ok';
+import { all as taskAll } from '@w5s/task/Task/all';
+import { andRun as taskThenRun } from '@w5s/task/Task/andRun';
+import { andThen as taskThen } from '@w5s/task/Task/andThen';
+import { from } from '@w5s/task/Task/from';
+import { map as taskMap } from '@w5s/task/Task/map';
+import { orElse as taskElse } from '@w5s/task/Task/orElse';
+import { reject as taskReject } from '@w5s/task/Task/reject';
+import { resolve as taskResolve } from '@w5s/task/Task/resolve';
+import { delay as timeDelay } from '@w5s/time/Time/delay';
 
 const taskFromResult = <V, E>(result: Result<V, E>) =>
   result.ok ? taskResolve(result.value) : taskReject(result.error);

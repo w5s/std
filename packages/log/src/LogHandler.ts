@@ -1,4 +1,4 @@
-import type { Task } from '@w5s/task';
+import type { Task } from '@w5s/task/Task';
 
 import type { LogRecord } from './LogRecord.js';
 

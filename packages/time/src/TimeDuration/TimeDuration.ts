@@ -1,5 +1,5 @@
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { Tag } from '@w5s/core/dist/Tag.js';
+import { Symbol } from '@w5s/core/Symbol';
+import { Tag } from '@w5s/core/Tag';
 
 /**
  * Represent a duration in milliseconds

@@ -1,6 +1,6 @@
-import type { Enum } from '@w5s/core';
+import type { Enum } from '@w5s/core/Enum';
 
-import { define } from '@w5s/core/dist/Enum/define.js';
+import { define } from '@w5s/core/Enum/define';
 
 export const RequestRedirect = define({
   Error: 'error',

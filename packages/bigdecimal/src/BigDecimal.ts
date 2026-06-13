@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 
 import { BigDecimal as BigDecimalType } from './BigDecimal/BigDecimal.js';
 import { BigDecimalAsString } from './BigDecimal/BigDecimalAsString.js';

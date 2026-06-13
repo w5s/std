@@ -1,6 +1,6 @@
 /* eslint-disable ts/prefer-promise-reject-errors */
-import { AbortError } from '@w5s/error/dist/AbortError.js';
-import { isDOMException } from '@w5s/error/dist/isDOMException.js';
+import { AbortError } from '@w5s/error/AbortError';
+import { isDOMException } from '@w5s/error/isDOMException';
 
 import type { TimerOptions } from '../TimerOptions.js';
 

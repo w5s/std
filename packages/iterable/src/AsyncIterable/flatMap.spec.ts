@@ -1,4 +1,4 @@
-import { Array } from '@w5s/collection';
+import { Array } from '@w5s/collection/Array';
 import { describe, expect, it, vi } from 'vitest';
 
 import { withAsyncIterable } from '../Testing.js';

@@ -1,4 +1,4 @@
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { describe, expect, it } from 'vitest';
 
 import { findIndex } from './findIndex.js';
