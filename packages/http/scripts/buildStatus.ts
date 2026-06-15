@@ -15,13 +15,13 @@ const StatusData = Type.Object({
 });
 const StatusArrayData = Type.Array(StatusData);
 
-function outFile(file) {
+function outFile(file: string) {
   return path.join('src', file);
 }
 
 async function readStatusFile() {
   const statusContent = await fs.readFile('resource/status.json');
-  const statusDecoded = JSON.parse(statusContent);
+  const statusDecoded = JSON.parse(String(statusContent));
   if (!statusDecoded.ok) {
     return statusDecoded;
   }
@@ -56,12 +56,12 @@ async function generateFiles() {
   return Result.Ok();
 }
 
-function toConstant(str) {
+function toConstant(str: string) {
   return str
     .replaceAll("'", ' ')
     .replaceAll('-', '')
     .split(' ')
-    .map((_) => `${_[0].toUpperCase()}${_.slice(1)}`)
+    .map((_) => `${(_[0] ?? '').toUpperCase()}${_.slice(1)}`)
     .join('');
 }
 

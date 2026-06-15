@@ -43,7 +43,7 @@
     "format:src": "eslint . --fix",
     "lint": "pnpm run \"/^lint:.*/\"",
     "lint:src": "eslint .",
-    "prebuild:tsc": "node scripts/buildStatus.js",
+    "prebuild:tsc": "node scripts/buildStatus.ts",
     "prepublishOnly": "npm run clean;npm run build",
     "size-limit": "size-limit",
     "spellcheck": "cspell --no-progress '**'",
