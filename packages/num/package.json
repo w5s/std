@@ -26,7 +26,6 @@
     ".": "./dist/index.js",
     "./dist/*": "./dist/*"
   },
-  "typings": "./dist/index.d.ts",
   "files": [
     "dist/",
     "src/",

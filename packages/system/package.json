@@ -22,7 +22,6 @@
   "author": "Julien Polo <julien.polo@gmail.com>",
   "type": "module",
   "exports": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
   "files": [
     "dist/",
     "src/",
