@@ -65,7 +65,7 @@
     "@w5s/conventional-changelog": "3.1.4",
     "@w5s/cspell-config": "3.1.4",
     "@w5s/eslint-config": "3.5.4",
-    "@w5s/tsconfig": "3.1.5",
+    "@w5s/tsconfig": "3.1.7",
     "cspell": "10.0.0",
     "eslint": "10.4.0",
     "markdown-magic": "4.8.0",
