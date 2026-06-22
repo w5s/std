@@ -7,6 +7,12 @@ on:
   pull_request:
     branches:
       - main
+
+permissions:
+  actions: read
+  code-quality: write
+  contents: read
+
 jobs:
   build:
     name: Node.js ${{ matrix.node-version }}
