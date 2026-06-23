@@ -34,7 +34,6 @@
   "files": [
     "dist/",
     "src/",
-    "!*.d.ts.map",
     "!**/*.spec.*",
     "!**/__tests__/**"
   ],
