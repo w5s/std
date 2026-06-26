@@ -87,8 +87,8 @@ importers:
   apps/website:
     dependencies:
       '@apify/docusaurus-plugin-typedoc-api':
-        specifier: 5.1.6
-        version: 5.1.6(f0143b43c84fb35a64cac3aafdee73e6)
+        specifier: 5.1.16
+        version: 5.1.16(f0143b43c84fb35a64cac3aafdee73e6)
       '@docusaurus/core':
         specifier: 3.10.1
         version: 3.10.1(@docusaurus/faster@3.10.1(@docusaurus/types@3.10.1(@swc/core@1.15.33)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)))(@mdx-js/react@3.1.1(@types/react@19.2.15)(react@19.2.6))(@rspack/core@1.7.11)(@swc/core@1.15.33)(lightningcss@1.32.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
@@ -911,8 +911,8 @@ packages:
     resolution: {integrity: sha512-tqZXM+54rWo4mk5jL5Z/flE11nPmNEdXwFBM5py9DkOmbjeCNemfVd45FyM97XdzfZ0dl9uOJC6PYn1FpkeyQg==}
     engines: {node: '>= 14.0.0'}
 
-  '@apify/docusaurus-plugin-typedoc-api@5.1.6':
-    resolution: {integrity: sha512-qBjozPWltxMNyrH8GSM6V7KNTNc17KGcAOn8Z9RZftRH5SRhn/PKn/ENRAwjW8kpxT+0vEQAf+n32W/G7diZ8A==}
+  '@apify/docusaurus-plugin-typedoc-api@5.1.16':
+    resolution: {integrity: sha512-zAKTwPpXq03lvNGfw3BE6SyyVUFyzkht15YUYki15Znm25h6Tpk2/n/tphgSPooYqMo8Sh0c7ljhCsDDpkT9NQ==}
     engines: {node: '>=16.12.0'}
     peerDependencies:
       '@docusaurus/core': ^3.8.1
@@ -9903,7 +9903,7 @@ snapshots:
     dependencies:
       '@algolia/client-common': 5.52.1
 
-  '@apify/docusaurus-plugin-typedoc-api@5.1.6(f0143b43c84fb35a64cac3aafdee73e6)':
+  '@apify/docusaurus-plugin-typedoc-api@5.1.16(f0143b43c84fb35a64cac3aafdee73e6)':
     dependencies:
       '@docusaurus/core': 3.10.1(@docusaurus/faster@3.10.1(@docusaurus/types@3.10.1(@swc/core@1.15.33)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)))(@mdx-js/react@3.1.1(@types/react@19.2.15)(react@19.2.6))(@rspack/core@1.7.11)(@swc/core@1.15.33)(lightningcss@1.32.0)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3)
       '@docusaurus/mdx-loader': 3.10.1(@swc/core@1.15.33)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
