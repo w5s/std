@@ -18,6 +18,7 @@
     "SMALLINT",
     "timeduration",
     "VARBINARY",
-    "VARCHAR"
+    "VARCHAR",
+    "vitest"
   ]
 }
