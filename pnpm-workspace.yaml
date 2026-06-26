@@ -1,6 +1,11 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+catalog:
+  '@types/node': 20.19.41
+  tsdown: 0.22.3
+  typescript: 6.0.3
+  vitest: 4.1.7
 linkWorkspacePackages: true
 preferWorkspacePackages: true
 allowBuilds:
