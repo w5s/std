@@ -10,7 +10,7 @@ describe('index', () => {
         'meta',
         'globalStorage',
         'useStorage',
-        'useGlobalValue',
+        'useGlobal',
       ].toSorted(),
     );
   });

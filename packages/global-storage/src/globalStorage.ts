@@ -1,7 +1,7 @@
 import { useStorage } from './useStorage.js';
 
 /**
- * Storage linked to `globalThis`.
+ * Get or create a storage {@link Map} at `globalThis[Symbol.for('@w5s/storage')]`.
  * This storage is persistent through hot module reload and shared across modules.
  *
  * @example
