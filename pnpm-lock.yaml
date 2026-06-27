@@ -54,14 +54,14 @@ importers:
         specifier: 10.4.0
         version: 10.4.0(jiti@2.7.0)
       markdown-magic:
-        specifier: 4.8.0
-        version: 4.8.0
+        specifier: 4.10.4
+        version: 4.10.4
       markdown-magic-package-json:
         specifier: 2.0.2
         version: 2.0.2
       markdown-magic-subpackage-list:
         specifier: 1.1.2
-        version: 1.1.2(markdown-magic@4.8.0)
+        version: 1.1.2(markdown-magic@4.10.4)
       size-limit:
         specifier: 12.1.0
         version: 12.1.0(jiti@2.7.0)
@@ -2077,6 +2077,11 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       postcss: ^8.4
+
+  '@davidwells/dx-args@0.2.2':
+    resolution: {integrity: sha512-IrYO/reKy4EIa/gl0YSaF7lgGpQ3M2TJsDKgfKMj3qOCRoUIJVzMmvHNcft4lngTb3oS+Z2tKn1jQjDVbagOxg==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   '@davidwells/md-utils@0.0.53':
     resolution: {integrity: sha512-qAF7lvZ8ZduJQ/9SPfhlYU03/bPdG3g9IQVmfGzPvi0XM5EJPj/8cUMf5bcoIREF1P2nz82LYeFGHTXQ0slJbg==}
@@ -4888,16 +4893,16 @@ packages:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
     engines: {node: '>= 12'}
 
-  comment-block-parser@1.5.4:
-    resolution: {integrity: sha512-GNE9VPctaq5HDkD7lKiLvkUq+mn2NMpOS9/IxA7oDVOPaIAqN6363giJD5D12Wnp1eCZyw7amTTR2pv7iZRbWw==}
+  comment-block-parser@1.6.4:
+    resolution: {integrity: sha512-6eOoZjlhx536BXik5daCjwGTS15uZsJ47FfHT2nftBLXRu2mCrOeY7rGFuzB20/QgRSttlQBgUBJ/jbOGF9Rqw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  comment-block-replacer@0.1.18:
-    resolution: {integrity: sha512-BEs/FwF7yOeBUpi1ailt18PG/8PnrZYf+iFIQac2jyOJS0/y5owNdeS/5ld5qbx3PCERP0d68B4U/Yc7M3GpWg==}
+  comment-block-replacer@0.1.23:
+    resolution: {integrity: sha512-K5GsWdqznR1YOQFxt2MPzi7dvIZLPiBLpzFmfyE6inG3AYswQV39vfIMeW7T00myQ2Hq1Yia3qmSXnUl+CPGCQ==}
 
-  comment-block-transformer@0.7.0:
-    resolution: {integrity: sha512-l9siH057cNJgvzQq8JC/D8y5thKx0K0M0syfXDUr/y0Ded8SzjA1ccVmS//w3A+9cu5A9+802QsjY4P3LdSwnA==}
+  comment-block-transformer@0.8.4:
+    resolution: {integrity: sha512-V9s5gU0B+Kes3Y1zQMNMM/5s3XzxO6uxwVDQ5e9lnW9WLpZha8QYYcy1YTg4iHsZCkB16Ho4NlwZvm8J5/JGgA==}
 
   comment-json@5.0.0:
     resolution: {integrity: sha512-uiqLcOiVDJtBP8WGkZHEP+FZIhTzP1dxvn59EfoYUi9gqupjrBWVQkO2atDrbnKPwLeotFYDsuNb26uBMqB+hw==}
@@ -6726,6 +6731,9 @@ packages:
   json-alexander@0.1.13:
     resolution: {integrity: sha512-s84SuqZwnb7mGJB03sGlcdx458FR91Uwwy2lKJBDN+TBJ7ARbyP/ssGnjW9t5QyxwG/b23W22Dz9Ga6nuyHqnA==}
 
+  json-alexander@0.1.14:
+    resolution: {integrity: sha512-gM2u2bGDQWCAplwKEOo39ETOxZspMYKSzkQPzZ2+bX2gIqOo0im9JjesAs9yKjIE2xDuwOqa5pLEJ/M/O4Mv3g==}
+
   json-buffer@3.0.1:
     resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
 
@@ -6989,8 +6997,8 @@ packages:
     peerDependencies:
       markdown-magic: '>=0.1 <=2.x'
 
-  markdown-magic@4.8.0:
-    resolution: {integrity: sha512-NfsKEgfLhVpk0wvSbq8hKMY+tVtw7ErR7GYvmBeiX6Sui2FpsjOoN3Ec39UzL0fIz+w9As/MZOUgvFhsIumclg==}
+  markdown-magic@4.10.4:
+    resolution: {integrity: sha512-VmeO73movJVirnk5c2Rra3bxqIko14H3w7AK1Yda5mgD6AHSoA0W1uMxA+bvkW8pbwB9QvlcjY12DUWXsFDYCQ==}
     hasBin: true
 
   markdown-table@3.0.4:
@@ -7564,6 +7572,9 @@ packages:
 
   oparser@3.0.24:
     resolution: {integrity: sha512-dBeR+X0BTWn2JI/7/YSuUxQOPOnHcNxd0ViBaoHQQLkYzkLqzYBaLraa2i7IK2hjg7Xc3rwCZNdZUucJjBuUgg==}
+
+  oparser@3.1.1:
+    resolution: {integrity: sha512-gESndQMHLfymx2xXgFdxqcyYJ7qKDF5ZHcbbt8DGLSBGIg01dEusRDlcGEkvgwvRdM4u2hGXrnUOFgancT3bLQ==}
 
   open@10.2.0:
     resolution: {integrity: sha512-YgBpdJHPyQ2UE5x+hlSXcnejzAvD0b22U2OuAP+8OnlJT+PjWPxtgmGqKKc+RgTM63U9gN0YzrYc71R2WT/hTA==}
@@ -11303,6 +11314,13 @@ snapshots:
     dependencies:
       postcss: 8.5.14
 
+  '@davidwells/dx-args@0.2.2':
+    dependencies:
+      is-glob: 4.0.3
+      is-valid-path: 0.1.1
+      mri: 1.2.0
+      oparser: 3.1.1
+
   '@davidwells/md-utils@0.0.53':
     dependencies:
       gray-matter: 4.0.3
@@ -14750,24 +14768,24 @@ snapshots:
 
   commander@8.3.0: {}
 
-  comment-block-parser@1.5.4:
+  comment-block-parser@1.6.4:
     dependencies:
       dedent: 1.7.2
       mri: 1.2.0
-      oparser: 3.0.24
+      oparser: 3.1.1
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  comment-block-replacer@0.1.18:
+  comment-block-replacer@0.1.23:
     dependencies:
-      comment-block-transformer: 0.7.0
+      comment-block-transformer: 0.8.4
       is-valid-path: 0.1.1
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  comment-block-transformer@0.7.0:
+  comment-block-transformer@0.8.4:
     dependencies:
-      comment-block-parser: 1.5.4
+      comment-block-parser: 1.6.4
     transitivePeerDependencies:
       - babel-plugin-macros
 
@@ -16917,6 +16935,8 @@ snapshots:
 
   json-alexander@0.1.13: {}
 
+  json-alexander@0.1.14: {}
+
   json-buffer@3.0.1: {}
 
   json-parse-even-better-errors@2.3.1: {}
@@ -17156,17 +17176,18 @@ snapshots:
     dependencies:
       findup: 0.1.5
 
-  markdown-magic-subpackage-list@1.1.2(markdown-magic@4.8.0):
+  markdown-magic-subpackage-list@1.1.2(markdown-magic@4.10.4):
     dependencies:
-      markdown-magic: 4.8.0
+      markdown-magic: 4.10.4
 
-  markdown-magic@4.8.0:
+  markdown-magic@4.10.4:
     dependencies:
+      '@davidwells/dx-args': 0.2.2
       '@davidwells/md-utils': 0.0.53
       color-convert: 2.0.1
-      comment-block-parser: 1.5.4
-      comment-block-replacer: 0.1.18
-      comment-block-transformer: 0.7.0
+      comment-block-parser: 1.6.4
+      comment-block-replacer: 0.1.23
+      comment-block-transformer: 0.8.4
       globrex: 0.1.2
       gray-matter: 4.0.3
       is-glob: 4.0.3
@@ -17176,7 +17197,6 @@ snapshots:
       module-alias: 2.3.4
       mri: 1.2.0
       node-fetch: 2.7.0
-      oparser: 3.0.24
       punycode: 2.3.1
       smart-glob: 1.0.2
       string-width: 4.2.3
@@ -18072,6 +18092,10 @@ snapshots:
   oparser@3.0.24:
     dependencies:
       json-alexander: 0.1.13
+
+  oparser@3.1.1:
+    dependencies:
+      json-alexander: 0.1.14
 
   open@10.2.0:
     dependencies:
