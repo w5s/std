@@ -25,11 +25,11 @@ jobs:
       - name: ⬇️ Checkout
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       - name: ⚙️ Setup
-        uses: w5s/actions/setup@90bf2df3a27e77244fb08b3a4501d9b6ba619d34 # main
+        uses: w5s/actions/setup@a26290b5bb2e149d250abfb9cdc9d01114170eea # main
       - name: 📄 Setup Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6
       - name: 🔨 Build
-        uses: w5s/actions/task@90bf2df3a27e77244fb08b3a4501d9b6ba619d34 # main
+        uses: w5s/actions/task@a26290b5bb2e149d250abfb9cdc9d01114170eea # main
         with:
           task: build
       - name: ⬆️ Upload Pages Artifact
