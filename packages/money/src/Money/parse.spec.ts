@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { Option } from '@w5s/core';
-import { BigDecimal } from '@w5s/bigdecimal';
+import { Option } from '@w5s/core/Option';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { parse } from './parse.js';
 import { Money } from './Money.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';

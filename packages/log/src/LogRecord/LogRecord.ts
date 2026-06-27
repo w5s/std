@@ -1,11 +1,11 @@
-import { Time } from '@w5s/time/dist/Time/Time.js';
-import { UUID } from '@w5s/core/dist/Type/UUID.js';
-import { TObject } from '@w5s/core/dist/Type/Object.js';
-import { constant } from '@w5s/core/dist/Type/constant.js';
-import { string } from '@w5s/core/dist/Type/string.js';
-import { Record } from '@w5s/core/dist/Type/Record.js';
-import { unknown } from '@w5s/core/dist/Type/unknown.js';
-import type { Type } from '@w5s/core';
+import { Time } from '@w5s/time/Time/Time';
+import { UUID } from '@w5s/core/Type/UUID';
+import { TObject } from '@w5s/core/Type/Object';
+import { constant } from '@w5s/core/Type/constant';
+import { string } from '@w5s/core/Type/string';
+import { Record } from '@w5s/core/Type/Record';
+import { unknown } from '@w5s/core/Type/unknown';
+import type { Type } from '@w5s/core/Type';
 import { LogMessage } from '../LogMessage.js';
 import { LogLevel } from '../LogLevel/LogLevel.js';
 

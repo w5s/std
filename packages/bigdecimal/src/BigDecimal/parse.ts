@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 

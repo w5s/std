@@ -1,6 +1,6 @@
-import { describeComparable } from '@w5s/core/dist/Testing.js';
+import { describeComparable } from '@w5s/core/Testing';
 import { describe } from 'vitest';
-import { BigDecimal } from '@w5s/bigdecimal';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { MoneyComparable } from './MoneyComparable.js';
 import { Money } from './Money.js';
 import { Currency } from '../Currency.js';

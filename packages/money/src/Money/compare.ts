@@ -1,5 +1,5 @@
-import { compare as bigDecimalCompare } from '@w5s/bigdecimal/dist/BigDecimal/compare.js';
-import type { Ordering } from '@w5s/core';
+import { compare as bigDecimalCompare } from '@w5s/bigdecimal/BigDecimal/compare';
+import type { Ordering } from '@w5s/core/Ordering';
 import { compare as currencyCompare } from '../Currency/compare.js';
 import type { Money } from './Money.js';
 

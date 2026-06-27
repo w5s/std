@@ -1,4 +1,4 @@
-import type { Bounded } from '@w5s/core';
+import type { Bounded } from '@w5s/core/Bounded';
 import type { NumberConversion } from '../NumberConversion.js';
 import { __defaultConversion } from './__defaultConversion.js';
 

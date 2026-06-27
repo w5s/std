@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-for-loop */
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
+import { Callable } from '@w5s/core/Callable';
+import { Struct } from '@w5s/core/Struct';
 
 const emptyStrings = Object.freeze(['']);
 const emptyArray = Object.freeze([]);

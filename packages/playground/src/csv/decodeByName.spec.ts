@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
-import { Result } from '@w5s/core';
-import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
+import { Result } from '@w5s/core/Result';
+import { withAsyncIterable } from '@w5s/iterable/Testing';
 import { decodeByName } from './decodeByName.js';
 import { CSVError } from './CSVError.js';
 

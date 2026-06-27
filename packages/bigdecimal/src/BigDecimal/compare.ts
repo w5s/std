@@ -1,5 +1,5 @@
-import { compare as bigIntCompare } from '@w5s/num/dist/BigInt/compare.js';
-import type { Ordering } from '@w5s/core';
+import { compare as bigIntCompare } from '@w5s/num/BigInt/compare';
+import type { Ordering } from '@w5s/core/Ordering';
 import type { BigDecimal } from './BigDecimal.js';
 import { __scaleValue } from './__scaleValue.js';
 

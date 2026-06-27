@@ -23,7 +23,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": "./dist/index.js",
-    "./dist/*": "./dist/*",
+    "./*": "./dist/*.js",
     "./internal/*": null
   },
   "files": [
@@ -67,11 +67,14 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": false,
+    "provenance": true
   },
   "size-limit": [
     {
-      "path": "dist/index.js",
+      "path": "dist/*.js",
       "limit": "5 kB"
     }
   ],

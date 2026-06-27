@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { ByteSize } from './ByteSize.js';
 import { byteSizeFormatIndex } from '../ByteSizeFormat/data.js';
 

@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import type { Method } from './Method.js';
 import type { Headers } from './Headers.js';
 import type { RequestCredentials } from './RequestCredentials.js';

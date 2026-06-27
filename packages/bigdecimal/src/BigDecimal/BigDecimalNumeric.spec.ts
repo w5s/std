@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
-import { describeAdd, describeCheckedRemainder, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
-import { Option } from '@w5s/core';
+import { describeAdd, describeCheckedRemainder, describeMultiply, describeSubtract } from '@w5s/core/Testing';
+import { Option } from '@w5s/core/Option';
 import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';

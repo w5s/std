@@ -1,6 +1,6 @@
-import { setImmediate } from '@w5s/async/dist/setImmediate.js';
-import { clearImmediate } from '@w5s/async/dist/clearImmediate.js';
-import type { ImmediateId } from '@w5s/async';
+import { setImmediate } from '@w5s/async/setImmediate';
+import { clearImmediate } from '@w5s/async/clearImmediate';
+import type { ImmediateId } from '@w5s/async/ImmediateId';
 
 const __now = globalThis.performance == null ? () => Date.now() : () => performance.now();
 

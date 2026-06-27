@@ -5,8 +5,9 @@ import {
   describeComparable,
   describeIndexable,
   describeType,
-} from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+} from '@w5s/core/Testing';
+import { CodecError } from '@w5s/core/CodecError';
+import { Result } from '@w5s/core/Result';
 import { IPv4 } from './IPv4.js';
 
 describe('IPv4', () => {

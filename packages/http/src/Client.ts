@@ -1,8 +1,8 @@
-import { invariant } from '@w5s/error/dist/invariant.js';
-import type { Option } from '@w5s/core';
-import type { TimeDuration } from '@w5s/time';
-import type { TaskLike } from '@w5s/task';
-import { resolve } from '@w5s/task/dist/Task/resolve.js';
+import { invariant } from '@w5s/error/invariant';
+import type { Option } from '@w5s/core/Option';
+import type { TimeDuration } from '@w5s/time/TimeDuration';
+import type { TaskLike } from '@w5s/task/Task';
+import { resolve } from '@w5s/task/Task/resolve';
 import type { RequestTimeout } from './RequestTimeout.js';
 import type { Request } from './Request.js';
 import type { HTTPError } from './HTTPError.js';

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 import { Indexable } from './Indexable.js';
 
 describe(Indexable, () => {

@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
-import { describeComparable } from '@w5s/core/dist/Testing.js';
-import { Int } from '@w5s/core';
+import { describeComparable } from '@w5s/core/Testing';
+import { Int } from '@w5s/core/Int';
 import { LogLevelComparable } from './LogLevelComparable.js';
 import { of } from './of.js';
 

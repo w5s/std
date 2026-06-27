@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeMultiply } from '@w5s/core/dist/Testing.js';
+import { describeMultiply } from '@w5s/core/Testing';
 import { NumberConversion } from '../NumberConversion.js';
 import { Multiply } from './Multiply.js';
 

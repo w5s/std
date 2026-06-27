@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeNegate, describeNumeric, describeSigned, describeZero } from '@w5s/core/dist/Testing.js';
+import { describeNegate, describeNumeric, describeSigned, describeZero } from '@w5s/core/Testing';
 import { IntIntegral } from './IntIntegral.js';
 import { Int } from '../Int.js';
 import { IntComparable } from './IntComparable.js';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { FakeTask } from './FakeTask.js';
 import { run } from '../Task/run.js';
 

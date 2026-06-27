@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core/Symbol';
 import { FakeTask, withTask } from '../Testing.js';
 import { map } from './map.js';
 import { __run } from './__run.js';

@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 
 /**
  * Default precision when omitted

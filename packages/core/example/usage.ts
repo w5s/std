@@ -1,4 +1,4 @@
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 
 function parseNumber(expr: string) {
   const parsed = Number(expr);

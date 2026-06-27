@@ -1,4 +1,4 @@
-import type { Ordering } from '@w5s/core';
+import type { Ordering } from '@w5s/core/Ordering';
 import type { Array } from '../Array.js';
 
 /**

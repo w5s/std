@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { Result } from '@w5s/core/dist/Result.js';
-import { Symbol } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { Symbol } from '@w5s/core/Symbol';
 import { from } from './from.js';
 import { run } from './run.js';
 

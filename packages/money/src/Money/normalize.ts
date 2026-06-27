@@ -1,4 +1,4 @@
-import { normalize as bigDecimalNormalize } from '@w5s/bigdecimal/dist/BigDecimal/normalize.js';
+import { normalize as bigDecimalNormalize } from '@w5s/bigdecimal/BigDecimal/normalize';
 import { Money } from './Money.js';
 import { __mapAmount } from './__mapAmount.js';
 

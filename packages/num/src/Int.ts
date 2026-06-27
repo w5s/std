@@ -1,6 +1,8 @@
-import { Int as IntType } from '@w5s/core/dist/Type/Int.js';
-import { Callable } from '@w5s/core/dist/Callable.js';
-import type * as Core from '@w5s/core';
+import { Int as IntType } from '@w5s/core/Type/Int';
+import { Callable } from '@w5s/core/Callable';
+import type { Bounded } from '@w5s/core/Bounded';
+import type { Comparable } from '@w5s/core/Comparable';
+import type { Numeric } from '@w5s/core/Numeric';
 import { format } from './Int/format.js';
 import { parse } from './Int/parse.js';
 import { fromNumber } from './Int/fromNumber.js';
@@ -35,15 +37,15 @@ export const Int = Callable({
 export namespace Int {
   export interface Module<T extends number>
     extends
-    Core.Comparable<T>,
-    Core.Numeric.Add<T>,
-    Core.Numeric.Multiply<T>,
-    Core.Numeric.Remainder<T>,
-    Core.Numeric.Subtract<T>,
-    Core.Numeric.Power<T>,
-    Core.Numeric.CheckedDivide<T>,
-    Core.Numeric.Signed<T>,
-    Core.Numeric.Negate<T>,
-    Core.Numeric.Zero<T>,
-    Core.Bounded<T> {}
+    Comparable<T>,
+    Numeric.Add<T>,
+    Numeric.Multiply<T>,
+    Numeric.Remainder<T>,
+    Numeric.Subtract<T>,
+    Numeric.Power<T>,
+    Numeric.CheckedDivide<T>,
+    Numeric.Signed<T>,
+    Numeric.Negate<T>,
+    Numeric.Zero<T>,
+    Bounded<T> {}
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defer } from '@w5s/async';
+import { defer } from '@w5s/async/defer';
 import { run } from './run.js';
 import { terminate } from './terminate.js';
 

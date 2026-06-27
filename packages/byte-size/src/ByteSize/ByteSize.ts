@@ -1,6 +1,6 @@
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { Tag } from '@w5s/core/dist/Tag.js';
-import { Int } from '@w5s/core/dist/Type/Int.js';
+import { Symbol } from '@w5s/core/Symbol';
+import { Tag } from '@w5s/core/Tag';
+import { Int } from '@w5s/core/Type/Int';
 import { format } from './format.js';
 import { parse } from './parse.js';
 import { defaultFormat } from './defaultFormat.js';

@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { describeSigned } from '@w5s/core/dist/Testing.js';
+import { describeSigned } from '@w5s/core/Testing';
 import { BigDecimalSigned } from './BigDecimalSigned.js';
 import { BigDecimalComparable } from './BigDecimalComparable.js';
 import { BigDecimal } from './BigDecimal.js';

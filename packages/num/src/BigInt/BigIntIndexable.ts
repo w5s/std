@@ -1,4 +1,4 @@
-import { Indexable } from '@w5s/core/dist/Indexable.js';
+import { Indexable } from '@w5s/core/Indexable';
 
 export const BigIntIndexable: Indexable<bigint, bigint> = Indexable({
   indexType: 'bigint',

@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { from } from './Seq/from.js';
 import { of } from './Seq/of.js';
 import { hasInstance } from './Seq/hasInstance.js';

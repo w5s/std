@@ -1,4 +1,4 @@
-import { Enum } from '@w5s/core';
+import { Enum } from '@w5s/core/Enum';
 
 export const RoundingMode = Enum.define({
   typeName: 'RoundingMode',

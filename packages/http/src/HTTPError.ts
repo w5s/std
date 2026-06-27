@@ -1,4 +1,4 @@
-import type { TimeoutError } from '@w5s/error';
+import type { TimeoutError } from '@w5s/error/TimeoutError';
 import { NetworkError as NetworkErrorClass } from './HTTPError/NetworkError.js';
 import { InvalidURL as InvalidURLClass } from './HTTPError/InvalidURL.js';
 import { ParserError as ParserErrorClass } from './HTTPError/ParserError.js';

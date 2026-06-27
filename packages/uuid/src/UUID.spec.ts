@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { UUID as UUIDType } from '@w5s/core/dist/Type/UUID.js';
+import { UUID as UUIDType } from '@w5s/core/Type/UUID';
 import { UUID } from './UUID.js';
 import { empty } from './UUID/empty.js';
 import { of } from './UUID/of.js';

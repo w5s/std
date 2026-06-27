@@ -1,6 +1,7 @@
 import nodePath from 'node:path';
 import * as fs from 'node:fs';
-import { Symbol, type Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
+import { Symbol } from '@w5s/core/Symbol';
 import type { FilePath } from '../FilePath.js';
 
 /**

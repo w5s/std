@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { Status as StatusType } from './Status/Status.js';
 import { StatusBounded } from './Status/StatusBounded.js';
 import { StatusComparable } from './Status/StatusComparable.js';

@@ -1,7 +1,7 @@
-import { Int } from '@w5s/core';
+import { Int } from '@w5s/core/Int';
 import { Time } from '@w5s/time';
 import { describe, it, expect, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { readFileStatus, readSymbolicLinkStatus } from './readFileStatus.js';
 import { FilePath } from '../FilePath.js';
 import { generateStats } from '../_test/config.js';

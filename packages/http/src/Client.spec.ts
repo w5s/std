@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { TimeDuration } from '@w5s/time';
-import { Option } from '@w5s/core';
+import { Option } from '@w5s/core/Option';
 import { Task } from '@w5s/task';
 import { Client } from './Client.js';
 

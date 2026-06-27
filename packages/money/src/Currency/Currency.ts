@@ -1,6 +1,7 @@
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol, type Int } from '@w5s/core';
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
+import type { Int } from '@w5s/core/Int';
+import { Callable } from '@w5s/core/Callable';
 import type { PartialKeys } from '@w5s/core-type';
 import { defaultRounding } from './defaultRounding.js';
 import { defaultPrecision } from './defaultPrecision.js';

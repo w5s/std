@@ -1,4 +1,4 @@
-import type { Option } from '@w5s/core';
+import type { Option } from '@w5s/core/Option';
 import { useState, type Meta } from '@w5s/application';
 import type { Currency } from './Currency/Currency.js';
 import { meta } from './meta.js';

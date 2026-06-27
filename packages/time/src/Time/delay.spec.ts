@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Result, Symbol } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
+import { Symbol } from '@w5s/core/Symbol';
 import { Task, TaskCanceler } from '@w5s/task';
 import { TimeDuration } from '../TimeDuration.js';
 import { delay } from './delay.js';

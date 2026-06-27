@@ -1,4 +1,4 @@
-import type { Integral } from '@w5s/core/dist/Numeric/Integral.js';
+import type { Integral } from '@w5s/core/Numeric/Integral';
 import type { Int } from '../Int.js';
 import { fromNumber } from './fromNumber.js';
 

@@ -1,4 +1,4 @@
-import type { Result } from '@w5s/core';
+import type { Result } from '@w5s/core/Result';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';

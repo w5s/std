@@ -1,4 +1,4 @@
-import type { Struct } from '@w5s/core';
+import type { Struct } from '@w5s/core/Struct';
 import { of } from './Secret/of.js';
 import { SecretAsString } from './Secret/SecretAsString.js';
 import { value } from './Secret/value.js';

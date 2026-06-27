@@ -1,4 +1,4 @@
-import type { AggregateError } from '@w5s/error';
+import type { AggregateError } from '@w5s/error/AggregateError';
 import type { Task, TaskLike } from '../Task.js';
 import { from } from './from.js';
 import { TaskAggregateState } from './TaskAggregateState.js';

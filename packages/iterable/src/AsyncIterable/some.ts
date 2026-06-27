@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core';
+import type { Int } from '@w5s/core/Int';
 import type { Awaitable } from '@w5s/core-type';
 import type { AsyncIterableLike } from '../AsyncIterableLike.js';
 

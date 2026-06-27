@@ -1,4 +1,4 @@
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Symbol } from '@w5s/core/Symbol';
 import { __state } from '../__state.js';
 import { SecretAsString } from './SecretAsString.js';
 

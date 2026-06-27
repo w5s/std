@@ -1,7 +1,8 @@
 import nodePath from 'node:path';
-import type { Tag, Option } from '@w5s/core';
-import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import type { Option } from '@w5s/core/Option';
+import type { Tag } from '@w5s/core/Tag';
+import type { Task } from '@w5s/task/Task';
+import { from as taskFrom } from '@w5s/task/Task/from';
 
 function orEmpty<V>(optionalValue: Option<V>) {
   return optionalValue == null ? '' : optionalValue;

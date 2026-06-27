@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
-import { BigDecimal } from '@w5s/bigdecimal';
-import { describeAsString } from '@w5s/core/dist/Testing.js';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { describeAsString } from '@w5s/core/Testing';
 import { MoneyAsString } from './MoneyAsString.js';
 import { Money } from './Money.js';
 import { Currency } from '../Currency.js';

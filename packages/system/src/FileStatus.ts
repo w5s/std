@@ -1,6 +1,7 @@
-import type { Int, Tag } from '@w5s/core';
-import type { Time } from '@w5s/time';
-import { Struct } from '@w5s/core/dist/Struct.js';
+import type { Int } from '@w5s/core/Int';
+import type { Tag } from '@w5s/core/Tag';
+import type { Time } from '@w5s/time/Time';
+import { Struct } from '@w5s/core/Struct';
 import type { FileSize } from './FileSize.js';
 
 /**

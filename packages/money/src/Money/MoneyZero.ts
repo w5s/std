@@ -1,4 +1,4 @@
-import { BigDecimalZero } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalZero.js';
+import { BigDecimalZero } from '@w5s/bigdecimal/BigDecimal/BigDecimalZero';
 import type { Money } from './Money.js';
 
 const { isZero: bigDecimalIsZero } = BigDecimalZero;

@@ -1,5 +1,5 @@
-import type { Awaitable } from '@w5s/async';
-import type { Result } from '@w5s/core';
+import type { Awaitable } from '@w5s/async/Awaitable';
+import type { Result } from '@w5s/core/Result';
 import type { TaskLike, TaskRunOptions } from '../Task.js';
 import { TaskCanceler } from '../TaskCanceler.js';
 import { __run } from './__run.js';

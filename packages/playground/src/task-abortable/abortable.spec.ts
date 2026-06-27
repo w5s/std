@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { FakeTask, withTask } from '@w5s/task/dist/Testing.js';
-import { AbortError } from '@w5s/error';
+import { FakeTask, withTask } from '@w5s/task/Testing';
+import { AbortError } from '@w5s/error/AbortError';
 import { abortable } from './abortable.js';
 
 describe(abortable, () => {

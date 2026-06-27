@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { MoneyComparable } from './Money/MoneyComparable.js';
 import { MoneyNumeric } from './Money/MoneyNumeric.js';
 import { Money as MoneyType } from './Money/Money.js';

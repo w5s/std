@@ -1,4 +1,4 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
+import { Callable } from '@w5s/core/Callable';
 import { LogLevel as LogLevelType } from './LogLevel/LogLevel.js';
 import { LogLevelComparable } from './LogLevel/LogLevelComparable.js';
 import { LogLevelBounded } from './LogLevel/LogLevelBounded.js';

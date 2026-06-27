@@ -1,4 +1,4 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 import { BigDecimal } from './BigDecimal.js';
 
 export const BigDecimalNegate: Numeric.Negate<BigDecimal> = {

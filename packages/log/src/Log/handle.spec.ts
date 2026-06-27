@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/task';
-import { withTask } from '@w5s/task/dist/Testing.js';
-import { Symbol } from '@w5s/core';
+import { withTask } from '@w5s/task/Testing';
+import { Symbol } from '@w5s/core/Symbol';
 import { handle } from './handle.js';
 import { configuration } from '../configuration.js';
 import { fakeLogRecord } from '../Testing.js';

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core/Symbol';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andRun } from './andRun.js';

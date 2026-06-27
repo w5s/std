@@ -1,5 +1,5 @@
 import { describe } from 'vitest';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { URL } from './URL.js';

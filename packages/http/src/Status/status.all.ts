@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/core/dist/Type/Int.js';
+import type { Int } from '@w5s/core/Type/Int';
 import { Status } from './Status.js';
 
 /**

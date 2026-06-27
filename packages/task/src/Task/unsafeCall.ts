@@ -1,5 +1,5 @@
-import type { Awaitable } from '@w5s/async';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import type { Awaitable } from '@w5s/async/Awaitable';
+import { Symbol } from '@w5s/core/Symbol';
 import type { TaskLike, TaskParameters } from '../Task.js';
 
 /**

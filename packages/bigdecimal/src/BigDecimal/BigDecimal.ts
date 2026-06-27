@@ -1,6 +1,6 @@
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Callable } from '@w5s/core/Callable';
+import { Struct } from '@w5s/core/Struct';
+import { Symbol } from '@w5s/core/Symbol';
 import { parse } from './parse.js';
 import { BigDecimalAsString } from './BigDecimalAsString.js';
 import { call } from './call.js';

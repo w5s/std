@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { allSettledKeyed } from './allSettledKeyed.js';
 import { run as taskRun } from './run.js';
 import { FakeTask, withTask } from '../Testing.js';

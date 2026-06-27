@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { Result } from '@w5s/core';
+import { Result } from '@w5s/core/Result';
 import { allSettled } from './allSettled.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { run as taskRun } from './run.js';

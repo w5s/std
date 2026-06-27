@@ -1,6 +1,7 @@
 import { describe } from 'vitest';
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+import { describeCodec, describeType } from '@w5s/core/Testing';
+import { CodecError } from '@w5s/core/CodecError';
+import { Result } from '@w5s/core/Result';
 import { ByteSize } from './ByteSize.js';
 
 describe(ByteSize, () => {

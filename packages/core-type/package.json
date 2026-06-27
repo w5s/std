@@ -68,7 +68,10 @@
     "node": ">=22.0.0"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": false,
+    "provenance": true
   },
   "tsdown": {
     "extends": [

@@ -1,6 +1,6 @@
-import type { Result } from '@w5s/core/dist/Result.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
+import type { Result } from '@w5s/core/Result';
+import { Error } from '@w5s/core/Result/Error';
+import { Ok } from '@w5s/core/Result/Ok';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { BigDecimal } from '@w5s/bigdecimal';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 import { normalize } from './normalize.js';
 import { Money } from './Money.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';

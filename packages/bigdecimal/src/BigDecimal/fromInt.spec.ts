@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 import { fromInt } from './fromInt.js';
 import { BigDecimal } from './BigDecimal.js';
 

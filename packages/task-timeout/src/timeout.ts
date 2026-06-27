@@ -1,11 +1,11 @@
 import type { Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
-import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
-import { from } from '@w5s/task/dist/Task/from.js';
-import { TaskCanceler } from '@w5s/task/dist/TaskCanceler.js';
-import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
-import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
-import type { Option } from '@w5s/core';
+import { TimeoutError } from '@w5s/error/TimeoutError';
+import { from } from '@w5s/task/Task/from';
+import { TaskCanceler } from '@w5s/task/TaskCanceler';
+import { unsafeCall } from '@w5s/task/Task/unsafeCall';
+import { TimeDurationAsString } from '@w5s/time/TimeDuration/TimeDurationAsString';
+import type { Option } from '@w5s/core/Option';
 
 const timeDurationString = TimeDurationAsString.asString;
 

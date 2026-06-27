@@ -1,12 +1,15 @@
-import type { Bounded, Int, Option, Ordering } from '@w5s/core';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Callable } from '@w5s/core/dist/Callable.js';
-import { Codec } from '@w5s/core/dist/Codec.js';
-import { Comparable } from '@w5s/core/dist/Comparable.js';
-import { Indexable } from '@w5s/core/dist/Indexable.js';
-import { compare as bigintCompare } from '@w5s/num/dist/BigInt/compare.js';
+import type { Bounded } from '@w5s/core/Bounded';
+import type { Int } from '@w5s/core/Int';
+import type { Option } from '@w5s/core/Option';
+import { Symbol } from '@w5s/core/Symbol';
+import { Struct } from '@w5s/core/Struct';
+import { Callable } from '@w5s/core/Callable';
+import { Codec } from '@w5s/core/Codec';
+import { Comparable } from '@w5s/core/Comparable';
+import { Indexable } from '@w5s/core/Indexable';
+import { compare as bigintCompare } from '@w5s/num/BigInt/compare';
 import { IPv4 } from './IPv4.js';
+import type { Ordering } from '@w5s/core/Ordering';
 
 export type IPv6Address = bigint;
 

@@ -1,4 +1,4 @@
-import type { AsString } from '@w5s/core';
+import type { AsString } from '@w5s/core/AsString';
 import type { LogLevel } from './LogLevel.js';
 
 export const LogLevelAsString: AsString<LogLevel> = {

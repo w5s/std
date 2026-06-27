@@ -1,5 +1,6 @@
-import { Console as defaultConsole, ANSICode } from '@w5s/console';
-import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
+import { Console as defaultConsole } from '@w5s/console/Console';
+import { ANSICode } from '@w5s/console/ANSICode';
+import { format as timeAsString } from '@w5s/time/Time/format';
 import type { LogHandler } from '../LogHandler.js';
 import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
 import { LogLevelAsInt } from '../LogLevel/LogLevelAsInt.js';

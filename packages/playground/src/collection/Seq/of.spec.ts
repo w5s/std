@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { withIterable } from '@w5s/iterable/dist/Testing.js';
+import { withIterable } from '@w5s/iterable/Testing';
 import { of } from './of.js';
 
 describe(of, () => {

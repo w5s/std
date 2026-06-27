@@ -1,5 +1,5 @@
-import { lazy } from '@w5s/core/dist/lazy.js';
-import { Indexable } from '@w5s/core/dist/Indexable.js';
+import { lazy } from '@w5s/core/lazy';
+import { Indexable } from '@w5s/core/Indexable';
 import * as StatusAll from './status.all.js';
 import type { Status } from './Status.js';
 

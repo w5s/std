@@ -1,4 +1,4 @@
-import { UUID as UUIDType } from '@w5s/core/dist/Type/UUID.js';
+import { UUID as UUIDType } from '@w5s/core/Type/UUID';
 import type { UUID, UUIDString } from '../UUID.js';
 
 /**

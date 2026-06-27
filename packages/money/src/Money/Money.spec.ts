@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { BigDecimal } from '@w5s/bigdecimal';
-import { describeAsString, describeCodec, describeType } from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
+import { describeAsString, describeCodec, describeType } from '@w5s/core/Testing';
+import { Result } from '@w5s/core/Result';
+import { CodecError } from '@w5s/core/CodecError';
 import { Money } from './Money.js';
 import { Currency } from '../Currency/Currency.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';

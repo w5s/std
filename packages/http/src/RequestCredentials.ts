@@ -1,5 +1,5 @@
-import type { Enum } from '@w5s/core';
-import { define } from '@w5s/core/dist/Enum/define.js';
+import type { Enum } from '@w5s/core/Enum';
+import { define } from '@w5s/core/Enum/define';
 
 export const RequestCredentials = define({
   typeName: 'RequestCredentials',

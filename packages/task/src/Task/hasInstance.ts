@@ -1,4 +1,4 @@
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Symbol } from '@w5s/core/Symbol';
 import type { TaskLike } from '../Task.js';
 
 /**

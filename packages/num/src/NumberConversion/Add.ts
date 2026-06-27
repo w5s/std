@@ -1,4 +1,4 @@
-import type { Numeric } from '@w5s/core';
+import type { Numeric } from '@w5s/core/Numeric';
 import type { NumberConversion } from '../NumberConversion.js';
 import { __defaultConversion } from './__defaultConversion.js';
 import { __uncheckedOperator } from './__uncheckedOperator.js';

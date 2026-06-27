@@ -1,7 +1,7 @@
 import * as nodeFS from 'node:fs';
-import { Symbol } from '@w5s/core';
+import { Symbol } from '@w5s/core/Symbol';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
+import { withTask } from '@w5s/task/Testing';
 import { fsStub, withFile } from '../Testing.js';
 import { move } from './move.js';
 

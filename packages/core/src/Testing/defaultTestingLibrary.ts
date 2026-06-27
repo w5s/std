@@ -1,5 +1,5 @@
 import type { TestingLibrary } from '@w5s/core-type';
-import { panic } from '@w5s/error';
+import { panic } from '@w5s/error/panic';
 
 const __tryImport = async (path: string): Promise<TestingLibrary | undefined> => {
   try {

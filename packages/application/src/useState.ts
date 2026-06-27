@@ -1,4 +1,4 @@
-import type { Ref } from '@w5s/core';
+import type { Ref } from '@w5s/core/Ref';
 import { useNamespace } from './useNamespace.js';
 import { useRef } from './useRef.js';
 import type { State } from './State.js';

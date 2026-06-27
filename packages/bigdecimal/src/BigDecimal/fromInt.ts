@@ -1,4 +1,4 @@
-import type { Int } from '@w5s/num';
+import type { Int } from '@w5s/num/Int';
 import { of } from './of.js';
 import type { BigDecimal } from './BigDecimal.js';
 
