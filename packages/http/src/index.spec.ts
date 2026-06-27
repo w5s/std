@@ -3,8 +3,8 @@ import * as Fetch from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Fetch).toSorted()).toEqual(
-      [
+    expect(new Set(Object.keys(Fetch))).toEqual(
+      new Set([
         'HTTPError',
         'Client',
         'ReferrerPolicy',
@@ -18,7 +18,7 @@ describe('index', () => {
         'Response',
         'ResponseParser',
         'ResponseType',
-      ].toSorted(),
+      ]),
     );
   });
 });

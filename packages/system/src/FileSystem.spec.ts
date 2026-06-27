@@ -3,8 +3,8 @@ import { FileSystem } from './FileSystem.js';
 
 describe('FileSystem', () => {
   it('exports', () => {
-    expect(Object.keys(FileSystem).toSorted()).toEqual(
-      [
+    expect(new Set(Object.keys(FileSystem))).toEqual(
+      new Set([
         // List of all public exports
         'copyFile',
         'createDirectory',
@@ -22,7 +22,7 @@ describe('FileSystem', () => {
         'remove',
         'rename',
         'writeFile',
-      ].toSorted(),
+      ]),
     );
   });
 });

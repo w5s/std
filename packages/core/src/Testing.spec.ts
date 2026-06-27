@@ -3,8 +3,8 @@ import * as Module from './Testing.js';
 
 describe('Testing', () => {
   it('exports', () => {
-    expect(Object.keys(Module).toSorted()).toEqual(
-      [
+    expect(new Set(Object.keys(Module))).toEqual(
+      new Set([
         // public exports
         'describeAdd',
         'describeAsString',
@@ -31,7 +31,7 @@ describe('Testing', () => {
         'describeType',
         'describeZero',
         'withOrder',
-      ].toSorted(),
+      ]),
     );
   });
 });

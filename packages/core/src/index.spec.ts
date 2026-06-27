@@ -4,8 +4,8 @@ import * as Std from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Std).toSorted()).toEqual(
-      [
+    expect(new Set(Object.keys(Std))).toEqual(
+      new Set([
         'Boolean',
         'Callable',
         'Char',
@@ -32,7 +32,7 @@ describe('index', () => {
         'Symbol',
         'Tag',
         'Type',
-      ].toSorted(),
+      ]),
     );
   });
 

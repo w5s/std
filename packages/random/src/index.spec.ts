@@ -3,15 +3,15 @@ import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
-    expect(Object.keys(Module).toSorted()).toEqual(
-      [
+    expect(new Set(Object.keys(Module))).toEqual(
+      new Set([
         // List of all public exports
         'meta',
         'configuration',
         'randomBoolean',
         'randomInt',
         'randomNumber',
-      ].toSorted(),
+      ]),
     );
   });
 });
