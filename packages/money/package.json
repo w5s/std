@@ -60,7 +60,7 @@
     "@w5s/error": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@w5s/tsdown-config": "1.0.0-alpha.6",
+    "@w5s/tsdown-config": "1.0.0-alpha.12",
     "currencies.json": "1.1.0",
     "tsdown": "catalog:",
     "typescript": "catalog:",
