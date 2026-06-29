@@ -62,7 +62,7 @@
     "@size-limit/preset-small-lib": "12.1.0",
     "@types/node": "catalog:",
     "@w5s/commitlint-config": "3.1.15",
-    "@w5s/conventional-changelog": "3.1.4",
+    "@w5s/conventional-changelog": "3.2.7",
     "@w5s/cspell-config": "3.1.15",
     "@w5s/eslint-config": "3.5.4",
     "@w5s/tsconfig": "3.1.11",
