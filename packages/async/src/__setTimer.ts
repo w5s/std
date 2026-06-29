@@ -2,12 +2,17 @@ import { AbortError } from '@w5s/error/dist/AbortError.js';
 import { isDOMException } from '@w5s/error/dist/isDOMException.js';
 import type { TimerOptions } from './TimerOptions.js';
 
-const __toAbortError = (reason: any): AbortError =>
-  reason == null
-    ? new AbortError()
-    : isDOMException(reason) && reason.name === 'AbortError'
-      ? new AbortError()
-      : reason;
+const __toAbortError = (reason: any): AbortError => {
+  if (reason == null) {
+    return new AbortError();
+  }
+
+  if (isDOMException(reason) && reason.name === 'AbortError') {
+    return new AbortError();
+  }
+
+  return reason;
+};
 
 export function __setTimer<Timer>(
   request: (

@@ -22,9 +22,9 @@ describe(`Hash`, () => {
       expect(Hash.from(0)).toBe(0);
       expect(Hash.from(123)).toBe(123);
       expect(Hash.from(-1)).toBe(-1);
-      expect(Hash.from(Number.NaN)).toBe(0);
-      expect(Hash.from(Number.POSITIVE_INFINITY)).toBe(0);
-      expect(Hash.from(Number.NEGATIVE_INFINITY)).toBe(0);
+      expect(Hash.from(NaN)).toBe(0);
+      expect(Hash.from(Infinity)).toBe(0);
+      expect(Hash.from(-Infinity)).toBe(0);
       expect(Hash.from(Number.MAX_SAFE_INTEGER)).toBe(0);
       expect(Hash.from(-Number.MAX_SAFE_INTEGER)).toBe(1);
     });

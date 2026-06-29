@@ -16,7 +16,7 @@ export function deleteAt<Item>(self: Array<Item>, index: number): Array<Item> {
   const arrayLength = self.length;
   return arrayLength === 0 || !(index >= 0 && index <= arrayLength - 1)
     ? self
-    : arrayLength - 1 === 0
+    : arrayLength === 1
       ? empty()
       : splice(self, index, 1);
 }

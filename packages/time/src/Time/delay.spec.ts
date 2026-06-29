@@ -35,8 +35,8 @@ describe('.delay', () => {
     // Run task
     task[Symbol.run]({ resolve, reject, canceler });
     // Memorize the last setTimeout call
-    // eslint-disable-next-line unicorn/prefer-at
-    const setTimeoutResult = setTimeoutSpy.mock.results[setTimeoutSpy.mock.results.length - 1]?.value;
+
+    const setTimeoutResult = setTimeoutSpy.mock.results.at(-1)?.value;
 
     // Trigger cancellation
     canceler.cancel();

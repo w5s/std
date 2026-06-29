@@ -7,7 +7,8 @@
  * ```
  * @param args a list of arguments
  * @param code a code suffix
+ * @returns A formatted ANSI escape sequence.
  */
 export function format(args: number[], code: string): string {
-  return `\u001B[${args.join(';')}${code}`;
+  return `\u{1B}[${args.join(';')}${code}`;
 }

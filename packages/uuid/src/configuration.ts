@@ -17,5 +17,5 @@ export interface Configuration {
  * Random Application
  */
 export const configuration = useConfiguration<Configuration>(meta, {
-  randomUUIDGenerator: () => globalThis.crypto.randomUUID(),
+  randomUUIDGenerator: () => crypto.randomUUID(),
 });

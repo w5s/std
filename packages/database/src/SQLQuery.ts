@@ -202,7 +202,7 @@ export namespace SQLQuery {
 }
 
 function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {
-  return Object.keys(object).map((propertyName) => [propertyName, object[propertyName]!]);
+  return Object.entries(object);
 }
 
 function stringifyDataType(data: SQLDataType): string {

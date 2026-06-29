@@ -7,7 +7,7 @@ describe('TimeDuration', () => {
   describeType(TimeDuration, () => ({
     typeName: 'TimeDuration',
     instances: [-1 as TimeDuration, 0 as TimeDuration, 1 as TimeDuration],
-    notInstances: [null, undefined, [], Number.NaN],
+    notInstances: [null, undefined, [], NaN],
   }));
   describeCodec(TimeDuration, () => ({
     encode: [

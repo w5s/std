@@ -11,8 +11,6 @@ import type { LogMessage, LogMessageItem } from '../LogMessage.js';
  * @param parts constructor parameters
  */
 export function create(parts: Array<LogMessageItem>): LogMessage {
-  /* eslint-disable unicorn/no-for-loop */
-
   const returnValue = [];
   let buffer = '';
   for (let index = 0; index < parts.length; index += 1) {

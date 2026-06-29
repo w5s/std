@@ -2,6 +2,8 @@ import type { Option } from '@w5s/core';
 import type { ByteSize } from './ByteSize.js';
 import { byteSizeFormatIndex } from '../ByteSizeFormat/data.js';
 
+const __byteSizeRegex = /^([\d,.]+)\s*([a-z]+)?$/i;
+
 /**
  * Parses a human-readable file size string into a ByteSize.
  *
@@ -14,14 +16,13 @@ import { byteSizeFormatIndex } from '../ByteSizeFormat/data.js';
  * @param value
  */
 export function parse(value: string): Option<ByteSize> {
-  const regex = /^([\d,.]+)\s*([a-z]+)?$/i;
-  const match = value.trim().match(regex);
+  const match = value.trim().match(__byteSizeRegex);
 
   if (match == null) return undefined;
 
   const [, amountStr, unit] = match;
   if (amountStr == null) return undefined;
-  const amount = Number.parseFloat(amountStr.replaceAll(',', ''));
+  const amount = Number(amountStr.replaceAll(',', ''));
 
   if (Number.isNaN(amount)) return undefined;
   const multiplier = unit == null ? 1 : byteSizeFormatIndex()[unit];

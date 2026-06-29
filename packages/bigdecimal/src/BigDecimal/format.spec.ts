@@ -11,6 +11,6 @@ describe(format, () => {
     [BigDecimal('200'), '200'],
     [BigDecimal('2.00'), '2.00'],
   ])('returns string conversion', (bigDecimal, expected) => {
-    expect(format(bigDecimal), expected);
+    expect(format(bigDecimal)).toBe(expected);
   });
 });

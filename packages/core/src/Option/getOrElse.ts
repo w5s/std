@@ -19,5 +19,5 @@ export function getOrElse<Value, DefaultValue>(
   self: OptionLike<Value>,
   getDefaultValue: () => DefaultValue,
 ): Value | DefaultValue {
-  return self == null ? getDefaultValue() : self;
+  return self ?? getDefaultValue();
 }

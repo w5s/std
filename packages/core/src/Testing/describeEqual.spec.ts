@@ -17,7 +17,7 @@ describe('describeEqual', () => {
     different: () => [
       [1, -1],
       [0.1, 0],
-      [Number.NaN, Number.NaN],
+      [NaN, NaN],
     ],
   });
 });

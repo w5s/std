@@ -9,9 +9,9 @@ describe(lastIndexOf, () => {
     expect(lastIndexOf(array, 'a', 1)).toEqual(0);
   });
   it('should work with NaN', () => {
-    const array = ['a', Number.NaN, 'a', Number.NaN, 'a'];
+    const array = ['a', NaN, 'a', NaN, 'a'];
 
-    expect(lastIndexOf(array, Number.NaN)).toEqual(3);
+    expect(lastIndexOf(array, NaN)).toEqual(3);
   });
   it('should return Option.None when not found', () => {
     const array = ['a', 'b', 'c'];

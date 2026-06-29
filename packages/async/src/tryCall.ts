@@ -25,6 +25,7 @@ export function tryCall<T, TResult1 = T, TResult2 = never>(
   try {
     const valueOrPromise = block();
     return isPromiseLike(valueOrPromise)
+
       ? valueOrPromise.then(onSuccess, onError)
       : onSuccess == null
         ? (valueOrPromise as Awaitable<TResult1>)

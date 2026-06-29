@@ -15,5 +15,5 @@ import { from } from './from.js';
  * @param fn a callback
  */
 export function orElse<ValueFrom>(self: OptionLike<ValueFrom>, fn: () => OptionLike<ValueFrom>): Option<ValueFrom> {
-  return self == null ? from(fn()) : self;
+  return self ?? from(fn());
 }

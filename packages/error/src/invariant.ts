@@ -17,6 +17,6 @@ export function invariant(condition: false, message?: string | null): never;
 export function invariant(condition: boolean, message?: string | null): asserts condition;
 export function invariant(condition: boolean, message?: string | null): asserts condition {
   if (!condition) {
-    throw new InvariantError({ message: message == null ? '' : message });
+    throw new InvariantError({ message: message ?? '' });
   }
 }

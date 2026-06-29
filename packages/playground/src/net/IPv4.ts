@@ -25,6 +25,7 @@ const IPv4Format = {
     if (parts.length === 4) {
       // Parse each part and ensure it’s a valid number between 0 and 255
       const result = parts.map((part) => {
+        // eslint-disable-next-line unicorn/prefer-number-coercion
         const num = Number.parseInt(part, 10);
         return num >= 0 && num <= 255 ? num : undefined;
       });

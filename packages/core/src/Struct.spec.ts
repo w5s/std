@@ -33,7 +33,7 @@ describe('Struct', () => {
       });
     });
     describe('#hasInstance()', () => {
-      it.each([undefined, null, Number.NaN, 0, ''])('should return false for %s', (value) => {
+      it.each([undefined, null, NaN, 0, ''])('should return false for %s', (value) => {
         expect(Test.hasInstance(value)).toBe(false);
       });
       it('should return true for instance', () => {

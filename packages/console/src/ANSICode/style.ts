@@ -35,7 +35,7 @@ const andThen =
  * @param value The style definition.
  * @returns A function that takes a string and applies the styles.
  */
-export function style(value: Partial<Style>) {
+export function style(value: Partial<Style>): ((_: string) => string) {
   let format = (_: string) => _;
   if (value.color != null) {
     format = andThen(format, color(value.color));

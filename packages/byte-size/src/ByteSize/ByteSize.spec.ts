@@ -7,7 +7,7 @@ describe(ByteSize, () => {
   describeType(ByteSize, () => ({
     typeName: 'ByteSize',
     instances: [ByteSize(1), ByteSize(0), ByteSize(1024)],
-    notInstances: [null, undefined, [], Number.NaN],
+    notInstances: [null, undefined, [], NaN],
   }));
   describeCodec(ByteSize, () => ({
     encode: [

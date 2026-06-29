@@ -1,5 +1,5 @@
 /* eslint-disable ts/no-unused-vars */
-import { describe, it } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { assertNever } from './assertNever.js';
 
 describe('assertNever', () => {

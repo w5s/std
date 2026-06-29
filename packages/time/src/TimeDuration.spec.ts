@@ -36,7 +36,7 @@ describe('TimeDuration', () => {
   });
   describe('()', () => {
     it('should throw invariant error', () => {
-      expect(() => TimeDuration(Number.NaN)).toThrow('NaN is not a valid TimeDuration');
+      expect(() => TimeDuration(NaN)).toThrow('NaN is not a valid TimeDuration');
     });
     it.each([
       [1, 1],

@@ -42,6 +42,7 @@ export function main() {
 }
 
 // runTask is impure and should be put at the edge of the program
+
 void Task.run(main()); // prints { _: 'Result/Ok', value: <random number> * <random number> }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
@@ -76,4 +77,3 @@ void Task.run(main()); // prints { _: 'Result/Ok', value: <random number> * <ran
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[homepage-url]: ${homepage}) -->
 <!-- AUTO-GENERATED-CONTENT:END -->
-

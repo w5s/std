@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-array-from-map */
 import { describe, it, expect, vi } from 'vitest';
 import { AggregateError } from '@w5s/error';
 import { assertType } from '@w5s/core-type';

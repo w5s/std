@@ -30,5 +30,4 @@ const sidebars = {
    */
 };
 
-// eslint-disable-next-line unicorn/prefer-module -- CommonJS export required by Docusaurus.
 module.exports = sidebars;

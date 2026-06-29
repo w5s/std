@@ -1,6 +1,8 @@
 /* cSpell:disable */
 import { wrap } from './wrap.js';
 
+import type { ANSIWrapper } from './wrap.js';
+
 /**
  * ANSI Color
  */
@@ -30,6 +32,6 @@ const colorMap = new Map(
  * @param value one of: black, red, green, yellow, blue, magenta, cyan, white
  * @returns the ANSI escape sequence for the given color
  */
-export function color(value: Color) {
+export function color(value: Color): ANSIWrapper {
   return colorMap.get(value)!;
 }

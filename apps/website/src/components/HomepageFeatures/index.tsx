@@ -136,7 +136,7 @@ const FeatureList: FeatureItem[] = [
 
 const renderTitle = (value: string) => (
   <>
-    <span className="text--primary">{value[0]}</span>
+    <span className="text--primary">{value.at(0)}</span>
     {value.slice(1)}
   </>
 );

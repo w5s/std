@@ -13,7 +13,7 @@ describe('CustomError', () => {
   });
   describe('()', () => {
     it('should return instance of Error', () => {
-      expect(CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
+      expect(CustomError({ name: anyString })).toBeInstanceOf(Error);
       expect(CustomError({ name: anyString })).toBeInstanceOf(CustomError);
     });
     it('should return Error with default properties', () => {
@@ -45,7 +45,7 @@ describe('CustomError', () => {
   });
   describe('new ()', () => {
     it('returns instance of Error', () => {
-      expect(new CustomError({ name: anyString })).toBeInstanceOf(globalThis.Error);
+      expect(new CustomError({ name: anyString })).toBeInstanceOf(Error);
       expect(new CustomError({ name: anyString })).toBeInstanceOf(CustomError);
       expect(new CustomError({ name: anyString, foo: true })).toEqual(expect.objectContaining({ foo: true }));
     });
@@ -88,7 +88,11 @@ describe('CustomError', () => {
     });
   });
   describe('#stack', () => {
-    (Error.captureStackTrace == null ? it.skip : it)('should capture stack', () => {
+    it('should capture stack', () => {
+      if (Error.captureStackTrace == null) {
+        return;
+      }
+
       const error = CustomError({
         name: 'CustomError',
         message: 'CustomMessage',

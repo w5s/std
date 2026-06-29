@@ -8,9 +8,9 @@ describe(indexOf, () => {
     expect(indexOf(array, 'a', 1)).toEqual(2);
   });
   it('should work with NaN', () => {
-    const array = ['a', Number.NaN, 'a', '', 'a'];
+    const array = ['a', NaN, 'a', '', 'a'];
 
-    expect(indexOf(array, Number.NaN)).toEqual(1);
+    expect(indexOf(array, NaN)).toEqual(1);
   });
   it('should return Option.None when not found', () => {
     const array = ['a', 'b', 'c'];
