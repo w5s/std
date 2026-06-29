@@ -54,14 +54,14 @@ importers:
         specifier: 10.5.0
         version: 10.5.0(jiti@2.7.0)
       markdown-magic:
-        specifier: 4.10.4
-        version: 4.10.4
+        specifier: 4.10.5
+        version: 4.10.5
       markdown-magic-package-json:
         specifier: 2.0.2
         version: 2.0.2
       markdown-magic-subpackage-list:
         specifier: 1.1.2
-        version: 1.1.2(markdown-magic@4.10.4)
+        version: 1.1.2(markdown-magic@4.10.5)
       size-limit:
         specifier: 12.1.0
         version: 12.1.0(jiti@2.7.0)
@@ -4910,11 +4910,11 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
-  comment-block-replacer@0.1.23:
-    resolution: {integrity: sha512-K5GsWdqznR1YOQFxt2MPzi7dvIZLPiBLpzFmfyE6inG3AYswQV39vfIMeW7T00myQ2Hq1Yia3qmSXnUl+CPGCQ==}
+  comment-block-replacer@0.1.24:
+    resolution: {integrity: sha512-Zwnewk8TLf2OKBn8F4QuWh38+WCzqxd+20rWMGJvyF6jiqzon/mnx3jOJqoV64uUsx9wE6fca4PV5U+AUdhQ0g==}
 
-  comment-block-transformer@0.8.4:
-    resolution: {integrity: sha512-V9s5gU0B+Kes3Y1zQMNMM/5s3XzxO6uxwVDQ5e9lnW9WLpZha8QYYcy1YTg4iHsZCkB16Ho4NlwZvm8J5/JGgA==}
+  comment-block-transformer@0.8.5:
+    resolution: {integrity: sha512-AhUKknBQ+d5dbloJlW48oE1C/6i+tKfRyKCPJk+vJOkdNcn1K9ZlhTXBMPqPOp2R285NxMDoHsm187C43FawHQ==}
 
   comment-json@5.0.0:
     resolution: {integrity: sha512-uiqLcOiVDJtBP8WGkZHEP+FZIhTzP1dxvn59EfoYUi9gqupjrBWVQkO2atDrbnKPwLeotFYDsuNb26uBMqB+hw==}
@@ -6740,9 +6740,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  json-alexander@0.1.13:
-    resolution: {integrity: sha512-s84SuqZwnb7mGJB03sGlcdx458FR91Uwwy2lKJBDN+TBJ7ARbyP/ssGnjW9t5QyxwG/b23W22Dz9Ga6nuyHqnA==}
-
   json-alexander@0.1.14:
     resolution: {integrity: sha512-gM2u2bGDQWCAplwKEOo39ETOxZspMYKSzkQPzZ2+bX2gIqOo0im9JjesAs9yKjIE2xDuwOqa5pLEJ/M/O4Mv3g==}
 
@@ -7009,8 +7006,8 @@ packages:
     peerDependencies:
       markdown-magic: '>=0.1 <=2.x'
 
-  markdown-magic@4.10.4:
-    resolution: {integrity: sha512-VmeO73movJVirnk5c2Rra3bxqIko14H3w7AK1Yda5mgD6AHSoA0W1uMxA+bvkW8pbwB9QvlcjY12DUWXsFDYCQ==}
+  markdown-magic@4.10.5:
+    resolution: {integrity: sha512-aPYWSU1BMG33QgMUIpWWePWs3y4+AOXeffZI65ot3MyvzPYoxjbdj9nfZOJf9Aqtw0eMU0tniyfuYgN9MlkgQA==}
     hasBin: true
 
   markdown-table@3.0.4:
@@ -7581,9 +7578,6 @@ packages:
 
   oniguruma-to-es@2.3.0:
     resolution: {integrity: sha512-bwALDxriqfKGfUufKGGepCzu9x7nJQuoRoAFp4AnwehhC2crqrDIAP/uN2qdlsAvSMpeRC3+Yzhqc7hLmle5+g==}
-
-  oparser@3.0.24:
-    resolution: {integrity: sha512-dBeR+X0BTWn2JI/7/YSuUxQOPOnHcNxd0ViBaoHQQLkYzkLqzYBaLraa2i7IK2hjg7Xc3rwCZNdZUucJjBuUgg==}
 
   oparser@3.1.1:
     resolution: {integrity: sha512-gESndQMHLfymx2xXgFdxqcyYJ7qKDF5ZHcbbt8DGLSBGIg01dEusRDlcGEkvgwvRdM4u2hGXrnUOFgancT3bLQ==}
@@ -11342,7 +11336,7 @@ snapshots:
     dependencies:
       gray-matter: 4.0.3
       micro-mdx-parser: 1.1.24
-      oparser: 3.0.24
+      oparser: 3.1.1
 
   '@discoveryjs/json-ext@0.5.7': {}
 
@@ -14804,14 +14798,14 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  comment-block-replacer@0.1.23:
+  comment-block-replacer@0.1.24:
     dependencies:
-      comment-block-transformer: 0.8.4
+      comment-block-transformer: 0.8.5
       is-valid-path: 0.1.1
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  comment-block-transformer@0.8.4:
+  comment-block-transformer@0.8.5:
     dependencies:
       comment-block-parser: 1.6.4
     transitivePeerDependencies:
@@ -16961,8 +16955,6 @@ snapshots:
 
   jsesc@3.1.0: {}
 
-  json-alexander@0.1.13: {}
-
   json-alexander@0.1.14: {}
 
   json-buffer@3.0.1: {}
@@ -17204,18 +17196,18 @@ snapshots:
     dependencies:
       findup: 0.1.5
 
-  markdown-magic-subpackage-list@1.1.2(markdown-magic@4.10.4):
+  markdown-magic-subpackage-list@1.1.2(markdown-magic@4.10.5):
     dependencies:
-      markdown-magic: 4.10.4
+      markdown-magic: 4.10.5
 
-  markdown-magic@4.10.4:
+  markdown-magic@4.10.5:
     dependencies:
       '@davidwells/dx-args': 0.2.2
       '@davidwells/md-utils': 0.0.53
       color-convert: 2.0.1
       comment-block-parser: 1.6.4
-      comment-block-replacer: 0.1.23
-      comment-block-transformer: 0.8.4
+      comment-block-replacer: 0.1.24
+      comment-block-transformer: 0.8.5
       globrex: 0.1.2
       gray-matter: 4.0.3
       is-glob: 4.0.3
@@ -17491,7 +17483,7 @@ snapshots:
 
   micro-mdx-parser@1.1.24:
     dependencies:
-      oparser: 3.0.24
+      oparser: 3.1.1
 
   micromark-core-commonmark@2.0.3:
     dependencies:
@@ -18116,10 +18108,6 @@ snapshots:
       emoji-regex-xs: 1.0.0
       regex: 5.1.1
       regex-recursion: 5.1.1
-
-  oparser@3.0.24:
-    dependencies:
-      json-alexander: 0.1.13
 
   oparser@3.1.1:
     dependencies:
