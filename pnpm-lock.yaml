@@ -45,8 +45,8 @@ importers:
         specifier: 3.5.4
         version: 3.5.4(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3)(vitest@4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0)))
       '@w5s/tsconfig':
-        specifier: 3.1.7
-        version: 3.1.7(typescript@6.0.3)
+        specifier: 3.1.11
+        version: 3.1.11(typescript@6.0.3)
       cspell:
         specifier: 10.0.1
         version: 10.0.1
@@ -4276,8 +4276,8 @@ packages:
       prettier:
         optional: true
 
-  '@w5s/tsconfig@3.1.7':
-    resolution: {integrity: sha512-jJ9+JpFHGyJCyr8q9rYcPlSo7eyMglcKHT+KquV2yV3lmTcQzIGKwVYH9jKx+a7Jpse7mKkzLncgt5vbdQz9gg==}
+  '@w5s/tsconfig@3.1.11':
+    resolution: {integrity: sha512-CQLhyI+gnMyxxA1aFHk5PlsH+VVWgTONoi48qH9K7uboaGxavX8Qb2UIavB10wXLJvRhLmASx+eUtwZwx+dAfw==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       typescript: '>=5.x'
@@ -14034,7 +14034,7 @@ snapshots:
 
   '@w5s/prettier-config@3.1.4': {}
 
-  '@w5s/tsconfig@3.1.7(typescript@6.0.3)':
+  '@w5s/tsconfig@3.1.11(typescript@6.0.3)':
     optionalDependencies:
       typescript: 6.0.3
 
