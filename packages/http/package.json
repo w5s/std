@@ -63,7 +63,7 @@
     "@w5s/time": "workspace:^1.0.0-alpha.0"
   },
   "devDependencies": {
-    "@w5s/tsdown-config": "1.0.0-alpha.6",
+    "@w5s/tsdown-config": "1.0.0-alpha.12",
     "tsdown": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"

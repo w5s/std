@@ -140,8 +140,8 @@ importers:
         version: link:../global-storage
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -162,8 +162,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -187,8 +187,8 @@ importers:
         version: link:../num
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -209,8 +209,8 @@ importers:
         version: link:../num
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -237,8 +237,8 @@ importers:
         specifier: workspace:1.0.0-alpha.0
         version: link:../task
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -256,8 +256,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -281,8 +281,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -296,8 +296,8 @@ importers:
   packages/core-type:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -333,8 +333,8 @@ importers:
         version: 6.0.1
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -355,8 +355,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -374,8 +374,8 @@ importers:
         version: link:../core-type
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -389,8 +389,8 @@ importers:
   packages/global-storage:
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -426,8 +426,8 @@ importers:
         version: link:../time
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -454,8 +454,8 @@ importers:
         specifier: workspace:^1.0.0-alpha.0
         version: link:../collection
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -491,8 +491,8 @@ importers:
         version: link:../uuid
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -522,8 +522,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       currencies.json:
         specifier: 1.1.0
         version: 1.1.0
@@ -550,8 +550,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -572,8 +572,8 @@ importers:
         version: link:../global-storage
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -661,8 +661,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -698,8 +698,8 @@ importers:
         version: link:../time
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -726,8 +726,8 @@ importers:
         version: link:../error
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -754,8 +754,8 @@ importers:
         version: link:../time
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -785,8 +785,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -810,8 +810,8 @@ importers:
         version: link:../task
     devDependencies:
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.6
-        version: 1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       tsdown:
         specifier: 'catalog:'
         version: 0.22.3(typescript@6.0.3)
@@ -4289,8 +4289,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/tsdown-config@1.0.0-alpha.6':
-    resolution: {integrity: sha512-DnoYVyc1TgRjnVHaI5Ekmnya6dE6wZdbXVctEZCTHzOTOQvTeuNiMR8NfeMk7vXsZwY7iICR0n3lqGYL2g9a5A==}
+  '@w5s/tsdown-config@1.0.0-alpha.12':
+    resolution: {integrity: sha512-UxpecAL+FYsPMjF1PXNJhm3v9MzBjlM17ynxvSW2BDYmancHfBM9szQQo8yQ4qDBUB+Yyc3/2xQ+fxvhjzSWWA==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       tsdown: 0.x
@@ -14104,7 +14104,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@w5s/tsdown-config@1.0.0-alpha.6(tsdown@0.22.3(typescript@6.0.3))':
+  '@w5s/tsdown-config@1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))':
     optionalDependencies:
       tsdown: 0.22.3(typescript@6.0.3)
 
