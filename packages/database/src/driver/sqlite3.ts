@@ -13,6 +13,7 @@ function sqlite3SQLStatement(statement: SQLStatement) {
   return {
     sql: SQLStatement.format(statement, {
       formatValue: () => '?',
+
     }).replace(/UNIX_TIMESTAMP\(\)/, "strftime('%s','now')"),
     params: statement.values,
   };

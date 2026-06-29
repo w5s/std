@@ -37,7 +37,7 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
       }
 
       const values = [];
-      // eslint-disable-next-line unicorn/no-for-loop
+
       for (let index = 0; index < input.length; index += 1) {
         const result = decode(Item, input[index]);
         if (!isOk(result)) {

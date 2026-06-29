@@ -87,33 +87,33 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
   const isComplete = () => taskCompleted === taskCount;
 
   const cancelAll = () => {
-    taskEntries.forEach(({ canceler }) => canceler.cancel());
+    for (const { canceler } of taskEntries) {
+      canceler.cancel();
+    }
   };
   const cancelIf = (predicate: (entry: TaskEntry<Key, Value, Error>) => boolean) => {
-    taskEntries.forEach((entry) => {
+    for (const entry of taskEntries) {
       if (predicate(entry)) {
         entry.canceler.cancel();
       }
-    });
+    }
   };
 
   const setCancelChildrenFromParent = (cancelChildrenFromParent: boolean) => {
-    if (cancelChildrenFromParent) {
-      const { onCancel } = parentCanceler;
-      parentCanceler.onCancel = () => {
-        cancelAll();
-        onCancel?.();
-      };
-    }
+    if (!cancelChildrenFromParent) return;
+    const { onCancel } = parentCanceler;
+    parentCanceler.onCancel = () => {
+      cancelAll();
+      onCancel?.();
+    };
   };
 
   const withClose =
     <Fn extends (value: any) => any>(fn: Fn) =>
       (value: any) => {
-        if (!closed) {
-          closed = true;
-          fn(value);
-        }
+        if (closed) return;
+        closed = true;
+        fn(value);
       };
 
   const runAll = (
@@ -128,13 +128,15 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
       self: TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>,
     ) => void,
   ) => {
-    taskEntries.forEach((entry) => {
+    for (const entry of taskEntries) {
       unsafeCall(entry.task, {
+        // eslint-disable-next-line ts/no-loop-func
         resolve: (value: Value) => {
           taskCompleted += 1;
           // eslint-disable-next-line ts/no-use-before-define
           resolveTask(value, entry, self);
         },
+        // eslint-disable-next-line ts/no-loop-func
         reject: (error: Error) => {
           taskCompleted += 1;
           // eslint-disable-next-line ts/no-use-before-define
@@ -142,7 +144,7 @@ export function TaskAggregateState<Key, Value, Error, ReturnValue, ReturnError>(
         },
         canceler: entry.canceler,
       });
-    });
+    }
   };
 
   setCancelChildrenFromParent(options.cancelChildrenFromParent ?? false);

@@ -2,7 +2,7 @@ type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
 type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
 
 const __hasOwn =
-
+  // eslint-disable-next-line e18e/prefer-object-has-own
   Object.hasOwn ?? ((object, propertyName) => Object.prototype.hasOwnProperty.call(object, propertyName));
 
 /**
@@ -41,7 +41,7 @@ export function shallowEqual<T = unknown>(
 
   if (equalValueFn == null) {
     // Test for A's keys different from B.
-    // eslint-disable-next-line unicorn/no-for-loop
+
     for (let index = 0; index < leftKeys.length; index += 1) {
       const key = leftKeys[index]!;
 
@@ -55,7 +55,7 @@ export function shallowEqual<T = unknown>(
     }
   } else {
     // Test for A's keys different from B.
-    // eslint-disable-next-line unicorn/no-for-loop
+
     for (let index = 0; index < leftKeys.length; index += 1) {
       const key = leftKeys[index]!;
 

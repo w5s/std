@@ -57,9 +57,10 @@ const IPv6Format = {
     if (last32Bits == null) return undefined;
     if (parts.length >= 6) return undefined;
 
+    // eslint-disable-next-line e18e/prefer-array-fill
     parts = [...Array.from({ length: 6 - parts.length }, () => '0'), ...parts];
     let bigintAddress = 0n;
-    // eslint-disable-next-line unicorn/no-for-loop
+
     for (let index = 0; index < parts.length; index += 1) {
       const parsedPart = parseHex(parts[index]!);
       if (parsedPart == null) return undefined;

@@ -1,5 +1,3 @@
-/* eslint-disable jsdoc/require-example */
-
 import * as nodeFS from 'node:fs';
 import nodePath from 'node:path';
 import type { Task } from '@w5s/task';

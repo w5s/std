@@ -9,4 +9,5 @@ export const anyCurrency = Currency({
   code: 'ANY',
   symbol: 'Ᾰ',
 });
+
 CurrencyRegistry.add(anyCurrency);

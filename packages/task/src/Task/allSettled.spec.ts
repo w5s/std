@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-array-from-map */
 import { describe, it, expect, vi } from 'vitest';
 import { Result } from '@w5s/core';
 import { allSettled } from './allSettled.js';

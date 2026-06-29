@@ -22,7 +22,6 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
       }
       const returnValue = [];
 
-      // eslint-disable-next-line unicorn/no-for-loop
       for (let index = 0; index < items.length; index += 1) {
         const decoded = decode(items[index]!, input[index]);
         if (!decoded.ok) {

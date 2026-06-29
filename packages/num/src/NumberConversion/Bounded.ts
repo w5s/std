@@ -23,7 +23,7 @@ export function Bounded<T>(BaseType: Pick<NumberConversion<T>, 'fromNumber'>): B
 export function Bounded<T>(BaseType?: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T> {
   const { fromNumber } = BaseType ?? __defaultConversion<T>();
   return {
-    maxValue: fromNumber(globalThis.Number.MAX_VALUE),
-    minValue: fromNumber(globalThis.Number.MIN_VALUE),
+    maxValue: fromNumber(Number.MAX_VALUE),
+    minValue: fromNumber(Number.MIN_VALUE),
   };
 }

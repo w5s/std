@@ -25,5 +25,5 @@ export function useNamespace(
   store?: Ref<State>,
 ): Ref<State> {
   const initialState = Object.freeze({});
-  return useRef(store == null ? useStorage(globalThis) : store, meta.name, initialState);
+  return useRef(store ?? useStorage(globalThis), meta.name, initialState);
 }

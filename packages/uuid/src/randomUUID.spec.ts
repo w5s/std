@@ -12,13 +12,14 @@ vi.mock('node:crypto', async () => ({
 }));
 
 describe(randomUUID, () => {
+  const crypto = globalThis.crypto;
   const expectTask = withTask(expect);
   it('should return a valid UUID', async () => {
     const uuidResult = Result.getOrThrow(await Task.run(randomUUID()));
     expect(UUID.hasInstance(uuidResult)).toBe(true);
   });
-  it.runIf(globalThis.crypto)('should use globalThis.crypto.randomUUID', async () => {
-    const randomUUIDGlobal = vi.spyOn(globalThis.crypto, 'randomUUID');
+  it.runIf(crypto != null)('should use globalThis.crypto.randomUUID', async () => {
+    const randomUUIDGlobal = vi.spyOn(crypto, 'randomUUID');
     const uuidMock = empty();
     const task = randomUUID();
     randomUUIDGlobal.mockReturnValue(uuidMock);
@@ -26,7 +27,7 @@ describe(randomUUID, () => {
     expectTask(task).toResolveSync(uuidMock);
   });
 
-  it.runIf(!globalThis.crypto)('should use node:crypto.randomUUID', async () => {
+  it.runIf(crypto == null)('should use node:crypto.randomUUID', async () => {
     const uuidMock = empty();
     const task = randomUUID();
     (randomUUIDNodeJS as any).mockReturnValue(uuidMock);

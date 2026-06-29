@@ -14,7 +14,7 @@ function int32SMI(i32: number): Int {
 }
 
 function hashNumber(value: number): Hash.Value {
-  if (value !== value || value === Number.POSITIVE_INFINITY) {
+  if (value !== value || value === Infinity) {
     return ZERO;
   }
 

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/prefer-array-from-map */
 import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
 import { allKeyed } from './allKeyed.js';

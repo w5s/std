@@ -4,9 +4,13 @@ import type { BigDecimal } from './BigDecimal.js';
 import { __scaleValue } from './__scaleValue.js';
 
 export function compare(left: BigDecimal, right: BigDecimal): Ordering {
-  return left.scale > right.scale
-    ? bigIntCompare(left.value, __scaleValue(right, left.scale))
-    : left.scale < right.scale
-      ? bigIntCompare(__scaleValue(left, right.scale), right.value)
-      : bigIntCompare(left.value, right.value);
+  if (left.scale > right.scale) {
+    return bigIntCompare(left.value, __scaleValue(right, left.scale));
+  }
+
+  if (left.scale < right.scale) {
+    return bigIntCompare(__scaleValue(left, right.scale), right.value);
+  }
+
+  return bigIntCompare(left.value, right.value);
 }

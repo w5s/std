@@ -8,7 +8,7 @@ function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
   return milliseconds === 0
     ? Promise.resolve(true)
     : new Promise((resolve) => {
-        const timerId = setTimeout(() => resolve(true), milliseconds);
+        const timerId = setTimeout(resolve, milliseconds, true);
         const cancelerCurrent = canceler.onCancel;
         canceler.onCancel = () => {
           clearTimeout(timerId);

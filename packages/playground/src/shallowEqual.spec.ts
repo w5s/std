@@ -13,7 +13,7 @@ describe('shallowEqual', () => {
     expect(shallowEqual(undefined, undefined)).toEqual(true);
   });
   it('returns true if both arguments are NaN', () => {
-    expect(shallowEqual(Number.NaN, Number.NaN)).toEqual(true);
+    expect(shallowEqual(NaN, NaN)).toEqual(true);
   });
 
   it('returns true if arguments are shallow equal', () => {

@@ -24,7 +24,7 @@ export function combine<T>(self: Order<T>, ...others: Order<T>[]): Order<T> {
     if (returnValue !== 0) {
       return returnValue;
     }
-    // eslint-disable-next-line unicorn/no-for-loop
+
     for (let index = 0; index < others.length; index += 1) {
       returnValue = others[index]!(left, right);
       if (returnValue !== 0) {

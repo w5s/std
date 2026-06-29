@@ -30,6 +30,7 @@ const myError = new MyError({
   bar: true,
   cause: TypeError('this is the cause'),
 });
+
 console.log(myError instanceof Error); // true
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->

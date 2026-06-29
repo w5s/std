@@ -4,7 +4,7 @@ import type { Task } from '@w5s/task';
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 
 function orEmpty<V>(optionalValue: Option<V>) {
-  return optionalValue == null ? '' : optionalValue;
+  return optionalValue ?? '';
 }
 
 function filterNotEmpty<V extends string>(value: string): Option<V> {

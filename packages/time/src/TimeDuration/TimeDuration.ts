@@ -9,7 +9,7 @@ export type TimeDuration = number & Tag<'TimeDuration'>;
 export const TimeDuration = Tag.define<number, TimeDuration>({
   typeName: 'TimeDuration',
   hasInstance(anyValue: unknown): anyValue is TimeDuration {
-    return typeof anyValue === 'number' && !globalThis.Number.isNaN(anyValue);
+    return typeof anyValue === 'number' && !Number.isNaN(anyValue);
   },
   [Symbol.schema]: () => ({ type: 'number' }),
 });

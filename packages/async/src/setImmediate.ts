@@ -2,7 +2,7 @@ import type { ImmediateId } from './ImmediateId.js';
 
 const __setImmediate =
   (globalThis as any).setImmediate == null
-    ? (fn: () => void) => globalThis.setTimeout(fn, 0)
+    ? (fn: () => void) => setTimeout(fn, 0)
     : (fn: () => void) => Number((globalThis as any).setImmediate(fn));
 
 /**

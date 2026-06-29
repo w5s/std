@@ -38,13 +38,19 @@ export function __run<Value, Error>(
   });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
-    runValue.then(undefined, (_error) => rejectHandler(_error));
+    void (async () => {
+      try {
+        await runValue;
+      } catch (_error) {
+        rejectHandler(_error);
+      }
+    })();
   }
   if (returnValue === undefined) {
-    return new Promise<Result<Value, Error>>((resolvePromise, rejectPromise) => {
-      resolveHandler = resolvePromise;
-      rejectHandler = rejectPromise;
-    });
+    const { promise, resolve, reject } = Promise.withResolvers<Result<Value, Error>>();
+    resolveHandler = resolve;
+    rejectHandler = reject;
+    return promise;
   }
 
   return returnValue;

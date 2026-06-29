@@ -9,8 +9,8 @@ describe(includes, () => {
     expect(includes(array, 'absent')).toEqual(false);
   });
   it('should work with NaN', () => {
-    const array = ['a', Number.NaN, 'a', '', 'a'];
+    const array = ['a', NaN, 'a', '', 'a'];
 
-    expect(includes(array, Number.NaN)).toEqual(true);
+    expect(includes(array, NaN)).toEqual(true);
   });
 });

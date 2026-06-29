@@ -12,6 +12,7 @@ import type { Option } from '@w5s/core';
  * @param expression an number expression
  */
 export function parse(expression: string): Option<number> {
+  // eslint-disable-next-line unicorn/prefer-number-coercion
   const intValue = Number.parseFloat(expression);
 
   return Number.isNaN(intValue) ? undefined : intValue;

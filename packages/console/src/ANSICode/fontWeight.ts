@@ -1,5 +1,5 @@
 /* cSpell:disable */
-import { wrap } from './wrap.js';
+import { wrap, type ANSIWrapper } from './wrap.js';
 
 /**
  * Font weight
@@ -26,6 +26,6 @@ const fontWeightMap = new Map(
  * @param value The font weight to retrieve the escape code for. Can be 'bold' or 'dim'.
  * @returns The ANSI escape code associated with the provided font weight.
  */
-export function fontWeight(value: FontWeight) {
+export function fontWeight(value: FontWeight): ANSIWrapper {
   return fontWeightMap.get(value)!;
 }

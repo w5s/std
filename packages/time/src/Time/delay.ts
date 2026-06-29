@@ -20,10 +20,9 @@ export function delay(duration: TimeDuration): Task<Time, never> {
 
     // Set Canceler
     canceler.onCancel = () => {
-      if (timeoutId != null) {
-        clearTimeout(timeoutId);
-        timeoutId = undefined;
-      }
+      if (timeoutId == null) return;
+      clearTimeout(timeoutId);
+      timeoutId = undefined;
     };
     // Wait delay
     await new Promise<void>((_resolve) => {

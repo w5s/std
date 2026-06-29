@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/no-for-loop */
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 

@@ -27,6 +27,7 @@ describe('invariant', () => {
       expect.objectContaining({ message: 'my message' }),
     );
   });
+
   it('should refine typing', () => {
     const value: unknown = true;
     const isBoolean = (anyValue: unknown): anyValue is boolean => typeof anyValue === 'boolean';

@@ -38,7 +38,7 @@ describe('tryCall', () => {
         ),
       ).toEqual(`${anyValue}_bar`);
     });
-    it('returns a value when no throw', () => {
+    it('returns an error when thrown', () => {
       expect(() =>
         tryCall(
           () => {

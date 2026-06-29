@@ -2,6 +2,9 @@ import type { Option } from '@w5s/core';
 import type { BigDecimal } from './BigDecimal.js';
 import { of } from './of.js';
 
+const __dotRegex = /\./;
+const __digitsRegex = /^[+-]?\d+$/;
+
 /**
  * Returns a new BigDecimal from a string
  *
@@ -16,7 +19,7 @@ export function parse(expression: string): Option<BigDecimal> {
   let digits: string;
   let scale: number;
 
-  const dot = expression.search(/\./);
+  const dot = expression.search(__dotRegex);
   if (dot === -1) {
     digits = expression;
     scale = 0;
@@ -31,7 +34,7 @@ export function parse(expression: string): Option<BigDecimal> {
     return undefined;
   }
 
-  if (!/^[+-]?\d+$/.test(digits)) {
+  if (!__digitsRegex.test(digits)) {
     return undefined;
   }
 

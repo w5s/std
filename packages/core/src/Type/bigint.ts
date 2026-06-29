@@ -13,7 +13,7 @@ export const bigint = define<bigint>({
   [Symbol.decode]: (input, { ok, error }) => {
     if (typeof input === 'string' && input.endsWith('n')) {
       try {
-        return ok(globalThis.BigInt(input.slice(0, -1)));
+        return ok(BigInt(input.slice(0, -1)));
       } catch {
         // do nothing, let it return an error
       }

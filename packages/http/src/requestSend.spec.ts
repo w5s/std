@@ -1,7 +1,6 @@
 import { Int, Option } from '@w5s/core';
 import { Task } from '@w5s/task';
-import { describe, it, expect, vi } from 'vitest';
-import { beforeEach } from 'node:test';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TimeDuration } from '@w5s/time';
 import { timeout } from '@w5s/task-timeout';
 import { withTask } from '@w5s/task/dist/Testing.js';

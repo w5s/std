@@ -27,7 +27,7 @@ export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
     __schema__ = () => ({}),
     asInstance = (value) => (hasInstance(value) ? value : undefined),
 
-    asString = (self) => (typeof self === 'object' ? `[object ${typeName}]` : `${self}`),
+    asString = (self) => (typeof self === 'object' ? `[object ${typeName}]` : String(self)),
   } = parameters;
   return {
     typeName,

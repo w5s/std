@@ -1,4 +1,4 @@
-import { test, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 export const allSyncCombination = [
   ['sync', 'sync'],
@@ -7,4 +7,8 @@ export const allSyncCombination = [
   ['async', 'async'],
 ] as Array<['sync' | 'async', 'sync' | 'async']>;
 
-test('allSyncCombination', () => expect(typeof allSyncCombination).toBe('object'));
+describe('allSyncCombination', () => {
+  it('exports combinations', () => {
+    expect(typeof allSyncCombination).toBe('object');
+  });
+});
