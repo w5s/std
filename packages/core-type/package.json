@@ -38,28 +38,22 @@
   ],
   "scripts": {
     "build": "pnpm run \"/^build:.*/\"",
-    "build:tsc": "tsdown",
+    "build:tsc": "pnpm exec tsdown",
     "clean": "pnpm run \"/^clean:.*/\"",
     "clean:tsc": "rm -rf dist",
     "docs": "node '../../markdown.mjs'",
     "format": "pnpm run \"/^format:.*/\"",
-    "format:src": "eslint . --fix",
+    "format:src": "pnpm exec eslint . --fix",
     "lint": "pnpm run \"/^lint:.*/\"",
-    "lint:src": "eslint .",
+    "lint:src": "pnpm exec eslint .",
     "prepublishOnly": "npm run clean;npm run build",
-    "size-limit": "size-limit",
-    "spellcheck": "cspell --no-progress '**'",
+    "size-limit": "pnpm exec size-limit",
+    "spellcheck": "pnpm exec cspell --no-progress '**'",
     "test": "pnpm run \"/^test:.*/\"",
-    "test:src": "tsc -b tsconfig.test.json",
-    "tsc": "tsc",
-    "typecheck": "tsc --noEmit",
+    "test:src": "pnpm exec tsc -b tsconfig.test.json",
+    "tsc": "pnpm exec tsc",
+    "typecheck": "pnpm exec tsc --noEmit",
     "validate": "npm run lint && npm run build && npm run test"
-  },
-  "devDependencies": {
-    "@w5s/tsdown-config": "1.0.0-alpha.12",
-    "tsdown": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"

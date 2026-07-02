@@ -4,21 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-catalogs:
-  default:
-    '@types/node':
-      specifier: 20.19.43
-      version: 20.19.43
-    tsdown:
-      specifier: 0.22.3
-      version: 0.22.3
-    typescript:
-      specifier: 6.0.3
-      version: 6.0.3
-    vitest:
-      specifier: 4.1.9
-      version: 4.1.9
-
 importers:
 
   .:
@@ -30,7 +15,7 @@ importers:
         specifier: 12.1.0
         version: 12.1.0(size-limit@12.1.0(jiti@2.7.0))
       '@types/node':
-        specifier: 'catalog:'
+        specifier: 20.19.43
         version: 20.19.43
       '@w5s/commitlint-config':
         specifier: 3.1.15
@@ -47,6 +32,9 @@ importers:
       '@w5s/tsconfig':
         specifier: 3.1.11
         version: 3.1.11(typescript@6.0.3)
+      '@w5s/tsdown-config':
+        specifier: 1.0.0-alpha.12
+        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       cspell:
         specifier: 10.0.1
         version: 10.0.1
@@ -69,7 +57,7 @@ importers:
         specifier: 0.4.0
         version: 0.4.0(size-limit@12.1.0(jiti@2.7.0))
       tsdown:
-        specifier: 'catalog:'
+        specifier: 0.22.3
         version: 0.22.3(typescript@6.0.3)
       turbo:
         specifier: 2.10.1
@@ -78,10 +66,10 @@ importers:
         specifier: 0.28.19
         version: 0.28.19(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: 6.0.3
         version: 6.0.3
       vitest:
-        specifier: 'catalog:'
+        specifier: 4.1.9
         version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   apps/website:
@@ -121,13 +109,13 @@ importers:
         specifier: 3.10.1
         version: 3.10.1
       '@types/node':
-        specifier: 'catalog:'
+        specifier: 20.19.43
         version: 20.19.43
       '@types/react':
         specifier: 19.2.17
         version: 19.2.17
       typescript:
-        specifier: 'catalog:'
+        specifier: 6.0.3
         version: 6.0.3
 
   packages/application:
@@ -138,19 +126,9 @@ importers:
       '@w5s/global-storage':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../global-storage
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/async:
     dependencies:
@@ -160,19 +138,9 @@ importers:
       '@w5s/error':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/bigdecimal:
     dependencies:
@@ -185,19 +153,9 @@ importers:
       '@w5s/num':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../num
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/byte-size:
     dependencies:
@@ -207,66 +165,36 @@ importers:
       '@w5s/num':
         specifier: workspace:1.0.0-alpha.0
         version: link:../num
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/collection:
     dependencies:
+      '@w5s/console':
+        specifier: workspace:1.0.0-alpha.0
+        version: link:../console
       '@w5s/core':
         specifier: workspace:1.0.0-alpha.0
         version: link:../core
       '@w5s/core-type':
         specifier: workspace:1.0.0-alpha.0
         version: link:../core-type
-    devDependencies:
-      '@w5s/console':
-        specifier: workspace:1.0.0-alpha.0
-        version: link:../console
       '@w5s/task':
         specifier: workspace:1.0.0-alpha.0
         version: link:../task
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/console:
     dependencies:
       '@w5s/task':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../task
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/core:
     dependencies:
@@ -279,34 +207,15 @@ importers:
       '@w5s/error':
         specifier: workspace:1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/core-type:
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
+    dependencies:
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/database:
     dependencies:
@@ -331,19 +240,9 @@ importers:
       sqlite3:
         specifier: ^6.0.0
         version: 6.0.1
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/env:
     dependencies:
@@ -353,53 +252,24 @@ importers:
       '@w5s/error':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/error:
     dependencies:
       '@w5s/core-type':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../core-type
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/global-storage:
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
+    dependencies:
       typescript:
-        specifier: 'catalog:'
+        specifier: ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/http:
     dependencies:
@@ -424,22 +294,15 @@ importers:
       '@w5s/time':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../time
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/iterable:
     dependencies:
+      '@w5s/collection':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../collection
       '@w5s/core':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../core
@@ -449,22 +312,9 @@ importers:
       '@w5s/error':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/collection':
-        specifier: workspace:^1.0.0-alpha.0
-        version: link:../collection
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/log:
     dependencies:
@@ -489,19 +339,9 @@ importers:
       '@w5s/uuid':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../uuid
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/money:
     dependencies:
@@ -520,22 +360,12 @@ importers:
       '@w5s/error':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
       currencies.json:
         specifier: 1.1.0
         version: 1.1.0
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/num:
     dependencies:
@@ -548,19 +378,9 @@ importers:
       '@w5s/error':
         specifier: workspace:1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/object-id:
     dependencies:
@@ -570,19 +390,9 @@ importers:
       '@w5s/global-storage':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../global-storage
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/playground:
     dependencies:
@@ -640,13 +450,9 @@ importers:
       '@w5s/uuid':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../uuid
-    devDependencies:
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/random:
     dependencies:
@@ -659,24 +465,14 @@ importers:
       '@w5s/task':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../task
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/system:
     dependencies:
       '@types/node':
-        specifier: 'catalog:'
+        specifier: 20.19.43
         version: 20.19.43
       '@w5s/byte-size':
         specifier: workspace:^1.0.0-alpha.0
@@ -696,19 +492,9 @@ importers:
       '@w5s/time':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../time
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/task:
     dependencies:
@@ -724,19 +510,9 @@ importers:
       '@w5s/error':
         specifier: workspace:1.0.0-alpha.0
         version: link:../error
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/task-timeout:
     dependencies:
@@ -752,19 +528,9 @@ importers:
       '@w5s/time':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../time
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/time:
     dependencies:
@@ -783,19 +549,9 @@ importers:
       '@w5s/task':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../task
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
   packages/uuid:
     dependencies:
@@ -808,19 +564,9 @@ importers:
       '@w5s/task':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../task
-    devDependencies:
-      '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.12
-        version: 1.0.0-alpha.12(tsdown@0.22.3(typescript@6.0.3))
-      tsdown:
-        specifier: 'catalog:'
-        version: 0.22.3(typescript@6.0.3)
       typescript:
-        specifier: 'catalog:'
+        specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.9(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0))
 
 packages:
 
