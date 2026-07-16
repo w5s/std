@@ -78,7 +78,7 @@
     "turbo": "2.10.5",
     "typedoc": "0.28.19",
     "typescript": "6.0.3",
-    "vitest": "4.1.9"
+    "vitest": "4.1.10"
   },
   "packageManager": "pnpm@11.9.0",
   "engines": {
@@ -88,6 +88,6 @@
   },
   "overrides": {
     "vite": "8.1.4",
-    "vitest": "4.1.9"
+    "vitest": "4.1.10"
   }
 }
