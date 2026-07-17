@@ -144,9 +144,8 @@ $(NODEJS_CACHE_PATH)/node-version: $(NODEJS_CACHE_PATH)
 	$(Q)echo $(NODEJS_VERSION) > $@
 
 # A target that will run node install only if lockfile was changed
-NODEJS_PACKAGE_JSON_FILES := $(shell find . -name package.json -not -path '**/node_modules/*' -not -path './.git/*')
 
-$(NODEJS_STATEFILE): $(wildcard $(NODEJS_LOCKFILE)) $(NODEJS_PACKAGE_JSON_FILES)
+$(NODEJS_STATEFILE): $(wildcard $(NODEJS_LOCKFILE))
 # Try installing package manager
 ifeq ($(filter npm,$(NODEJS_PACKAGE_MANAGER)),)
 # Only for asdf we have to reshim after corepack
@@ -204,17 +203,6 @@ ifneq ($(filter $(NODEJS_PACKAGE_MANAGER),npm),)
 	fi
 endif
 .setup:: node-setup # Add to `make setup`
-
-#
-# Install node dependencies (ex: npm install)
-#
-# This will install dependencies using $(NODEJS_PACKAGE_MANAGER). In CI mode, the lockfile update will be forbidden.
-#
-.PHONY: node-install
-node-install: node-setup
-	$(Q)$(RM) -f $(NODEJS_STATEFILE)
-	$(Q)$(MAKE) node-dependencies
-.install:: node-install	# Add `npm install` to `make install`
 
 #
 # Run npm lint script (ex: npm run lint)
