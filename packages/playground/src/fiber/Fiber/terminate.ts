@@ -1,6 +1,6 @@
-import { __toFiberId } from '../__toFiberId.js';
+import { toFiberId } from '../internal/toFiberId.js';
 import type { FiberIdLike } from '../FiberIdLike.js';
-import { __scheduler } from '../__scheduler.js';
+import { scheduler } from '../internal/scheduler.js';
 
 /**
  * Terminate a fiber
@@ -14,5 +14,5 @@ import { __scheduler } from '../__scheduler.js';
  * @param fiber The fiber to terminate
  */
 export function terminate(fiber: FiberIdLike): boolean {
-  return __scheduler.terminate(__toFiberId(fiber));
+  return scheduler.terminate(toFiberId(fiber));
 }

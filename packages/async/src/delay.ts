@@ -1,4 +1,4 @@
-import { __setTimer } from './__setTimer.js';
+import { promiseFromTimer } from './internal/promiseFromTimer.js';
 import type { TimerOptions } from './TimerOptions.js';
 
 /**
@@ -17,5 +17,5 @@ import type { TimerOptions } from './TimerOptions.js';
  * @param options the timer options
  */
 export async function delay(milliseconds: number, options?: TimerOptions): Promise<void> {
-  return __setTimer((resolve) => setTimeout(resolve, milliseconds), clearTimeout, options);
+  return promiseFromTimer((resolve) => setTimeout(resolve, milliseconds), clearTimeout, options);
 }

@@ -1,5 +1,5 @@
-import { SECONDS } from '../__constants.js';
-import { __truncate } from '../__truncate.js';
+import { SECONDS } from '../internal/constants.js';
+import { truncateIf } from '../internal/truncateIf.js';
 import type { TimeDuration } from './TimeDuration.js';
 
 /**
@@ -15,5 +15,5 @@ import type { TimeDuration } from './TimeDuration.js';
  * @returns The time duration in seconds.
  */
 export function toSeconds(self: TimeDuration, truncate = false): number {
-  return __truncate(self / SECONDS, truncate);
+  return truncateIf(self / SECONDS, truncate);
 }

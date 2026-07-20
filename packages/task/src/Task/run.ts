@@ -2,7 +2,7 @@ import type { Awaitable } from '@w5s/async';
 import type { Result } from '@w5s/core';
 import type { TaskLike, TaskRunOptions } from '../Task.js';
 import { TaskCanceler } from '../TaskCanceler.js';
-import { __run } from './__run.js';
+import { taskRun } from '../internal/taskRun.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -33,5 +33,5 @@ export function run<Value, Error>(
     }
   }
 
-  return __run(self, canceler);
+  return taskRun(self, canceler);
 }

@@ -11,7 +11,7 @@ import { Remainder } from './NumberConversion/Remainder.js';
 import { Signed } from './NumberConversion/Signed.js';
 import { Subtract } from './NumberConversion/Subtract.js';
 import { Zero } from './NumberConversion/Zero.js';
-import { __defaultConversion } from './NumberConversion/__defaultConversion.js';
+import { defaultConversion } from './internal/defaultConversion.js';
 
 export interface NumberConversion<T> {
   /**
@@ -32,7 +32,7 @@ export interface NumberConversion<T> {
 function call(): NumberConversion.Module<number>;
 function call<T>(BaseType: NumberConversion<T>): NumberConversion.Module<T>;
 function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
-  const base = BaseType ?? __defaultConversion();
+  const base = BaseType ?? defaultConversion();
   return {
     ...Add(base),
     ...Bounded(base),

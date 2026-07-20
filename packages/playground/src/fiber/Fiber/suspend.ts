@@ -1,6 +1,6 @@
-import { __toFiberId } from '../__toFiberId.js';
+import { toFiberId } from '../internal/toFiberId.js';
 import type { FiberIdLike } from '../FiberIdLike.js';
-import { __scheduler } from '../__scheduler.js';
+import { scheduler } from '../internal/scheduler.js';
 
 /**
  * Suspend temporarily a fiber execution
@@ -15,5 +15,5 @@ import { __scheduler } from '../__scheduler.js';
  * @param fiber The fiber to suspend
  */
 export function suspend(fiber: FiberIdLike): void {
-  __scheduler.suspend(__toFiberId(fiber));
+  scheduler.suspend(toFiberId(fiber));
 }

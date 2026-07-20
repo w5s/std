@@ -1,4 +1,3 @@
-import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
 import type { RecordKey } from '../Record.js';
 
 /**
@@ -14,5 +13,5 @@ import type { RecordKey } from '../Record.js';
  * @param key the entry key
  */
 export function has<Key extends RecordKey>(self: Record<Key, any>, key: Key): boolean {
-  return __hasOwn(self, key);
+  return Object.hasOwn(self, key);
 }

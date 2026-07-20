@@ -3,7 +3,7 @@ import { Symbol } from '@w5s/core';
 import { allSyncCombination } from './_stub.spec.js';
 import { FakeTask, withTask } from '../Testing.js';
 import { andThen } from './andThen.js';
-import { __run } from './__run.js';
+import { taskRun } from '../internal/taskRun.js';
 import { TaskCanceler } from '../TaskCanceler.js';
 
 describe(andThen, () => {
@@ -43,7 +43,7 @@ describe(andThen, () => {
     vi.spyOn(task, Symbol.run);
     vi.spyOn(afterTask, Symbol.run);
     const canceler = new TaskCanceler();
-    const result = __run(thenTask, canceler);
+    const result = taskRun(thenTask, canceler);
     await result;
     expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),

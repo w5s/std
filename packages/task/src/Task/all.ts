@@ -1,7 +1,7 @@
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';
-import { __emptyArray } from './__emptyArray.js';
+import { emptyArray } from '../internal/emptyArray.js';
 
 /**
  * Resolves with the array of all task values, or reject with the first error
@@ -30,7 +30,7 @@ export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
   return from((parameters) => {
     const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
     if (taskArray.length === 0) {
-      parameters.resolve(__emptyArray);
+      parameters.resolve(emptyArray);
     } else {
       // eslint-disable-next-line unicorn/no-new-array
       const values = new Array<Value | undefined>(taskArray.length);

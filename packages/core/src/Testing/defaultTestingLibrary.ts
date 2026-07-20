@@ -1,7 +1,7 @@
 import type { TestingLibrary } from '@w5s/core-type';
 import { panic } from '@w5s/error';
 
-const __tryImport = async (path: string): Promise<TestingLibrary | undefined> => {
+const tryImport = async (path: string): Promise<TestingLibrary | undefined> => {
   try {
     const module = await import(path);
 
@@ -11,8 +11,8 @@ const __tryImport = async (path: string): Promise<TestingLibrary | undefined> =>
   }
 };
 
-const vitestLibrary = await __tryImport('vitest');
-const jestLibrary = await __tryImport('@jest/globals');
+const vitestLibrary = await tryImport('vitest');
+const jestLibrary = await tryImport('@jest/globals');
 
 export function defaultTestingLibrary() {
   return vitestLibrary ?? jestLibrary ?? panic(new ReferenceError('Cannot find testing library'));

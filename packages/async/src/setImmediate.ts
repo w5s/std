@@ -1,9 +1,5 @@
 import type { ImmediateId } from './ImmediateId.js';
-
-const __setImmediate =
-  (globalThis as any).setImmediate == null
-    ? (fn: () => void) => setTimeout(fn, 0)
-    : (fn: () => void) => Number((globalThis as any).setImmediate(fn));
+import { globalSetImmediate } from './internal/globalSetImmediate.js';
 
 /**
  * A polyfill for {@link setImmediate}
@@ -15,5 +11,5 @@ const __setImmediate =
  * @param callback the function to call
  */
 export function setImmediate(callback: () => void): ImmediateId {
-  return __setImmediate(callback) as ImmediateId;
+  return globalSetImmediate(callback) as ImmediateId;
 }

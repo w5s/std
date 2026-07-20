@@ -1,6 +1,6 @@
 import type { Option } from '@w5s/core/dist/Option.js';
 
-const __nonWhitespaceRegex = /^\s+$/;
+const nonWhitespaceRegex = /^\s+$/;
 
 /**
  * Parse the expression and returns a bigint
@@ -16,7 +16,7 @@ const __nonWhitespaceRegex = /^\s+$/;
  * @param expression the expression to parse
  */
 export function parse(expression: string): Option<bigint> {
-  if (expression !== '' && !__nonWhitespaceRegex.test(expression)) {
+  if (expression !== '' && !nonWhitespaceRegex.test(expression)) {
     try {
       return BigInt(expression);
     } catch {

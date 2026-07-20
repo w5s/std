@@ -1,6 +1,6 @@
 import type { ExpectFunction } from '@w5s/core-type';
 
-async function __fromAsync(iterable: any, mapFn: any = (_: any) => _) {
+async function arrayFromAsync(iterable: any, mapFn: any = (_: any) => _) {
   const returnValue: globalThis.Array<any> = [];
   let index = 0;
 
@@ -45,12 +45,12 @@ export interface ExpectAsyncIterable {
 export function withAsyncIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: AsyncIterable<V>, isNot: boolean): ExpectAsyncIterable => ({
     async toHaveValues(expected: Array<unknown>) {
-      const expectValue = expectFn(__fromAsync(iterable)).resolves;
+      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
       return (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
     async toBeIdemPotent() {
-      const expectValue = expectFn(__fromAsync(iterable)).resolves;
-      return (isNot ? expectValue.not : expectValue).toEqual(await __fromAsync(iterable));
+      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
+      return (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
     },
   });
   return <V>(iterable: AsyncIterable<V>) =>

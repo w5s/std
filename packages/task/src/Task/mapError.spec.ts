@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { Symbol } from '@w5s/core';
 import { mapError } from './mapError.js';
 import { FakeTask, withTask } from '../Testing.js';
-import { __run } from './__run.js';
+import { taskRun } from '../internal/taskRun.js';
 import { TaskCanceler } from '../TaskCanceler.js';
 
 describe(mapError, () => {
@@ -39,7 +39,7 @@ describe(mapError, () => {
     const mapTask = mapError(task, (_) => _);
     vi.spyOn(task, Symbol.run);
     const canceler = new TaskCanceler();
-    const result = __run(mapTask, canceler);
+    const result = taskRun(mapTask, canceler);
 
     expect(task[Symbol.run]).toHaveBeenCalledWith({
       resolve: expect.any(Function),

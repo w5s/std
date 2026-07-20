@@ -1,6 +1,6 @@
 // packages/time/src/TimeDuration/toDays.ts
-import { DAYS } from '../__constants.js';
-import { __truncate } from '../__truncate.js';
+import { DAYS } from '../internal/constants.js';
+import { truncateIf } from '../internal/truncateIf.js';
 import type { TimeDuration } from './TimeDuration.js';
 
 /**
@@ -17,5 +17,5 @@ import type { TimeDuration } from './TimeDuration.js';
  * @returns The time duration in days.
  */
 export function toDays(self: TimeDuration, truncate = false): number {
-  return __truncate(self / DAYS, truncate);
+  return truncateIf(self / DAYS, truncate);
 }

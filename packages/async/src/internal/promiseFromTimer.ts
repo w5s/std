@@ -1,8 +1,8 @@
 import { AbortError } from '@w5s/error/dist/AbortError.js';
 import { isDOMException } from '@w5s/error/dist/isDOMException.js';
-import type { TimerOptions } from './TimerOptions.js';
+import type { TimerOptions } from '../TimerOptions.js';
 
-const __toAbortError = (reason: any): AbortError => {
+const toAbortError = (reason: any): AbortError => {
   if (reason == null) {
     return new AbortError();
   }
@@ -14,7 +14,7 @@ const __toAbortError = (reason: any): AbortError => {
   return reason;
 };
 
-export function __setTimer<Timer>(
+export function promiseFromTimer<Timer>(
   request: (
     /**
      * Resolver
@@ -32,15 +32,15 @@ export function __setTimer<Timer>(
   return new Promise<void>((resolve, reject) => {
     const { signal } = options;
     let timerId: Timer;
-    const __abort = () => {
-      reject(__toAbortError(signal?.reason));
+    const abort = () => {
+      reject(toAbortError(signal?.reason));
     };
     const onAbort = () => {
       clear(timerId);
-      __abort();
+      abort();
     };
     if (signal?.aborted === true) {
-      __abort();
+      abort();
     } else {
       timerId = request(
         (value) => {

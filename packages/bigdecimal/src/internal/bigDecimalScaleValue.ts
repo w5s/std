@@ -1,4 +1,4 @@
-import type { BigDecimal } from './BigDecimal.js';
+import type { BigDecimal } from '../BigDecimal/BigDecimal.js';
 
 /**
  * @internal
@@ -7,7 +7,7 @@ import type { BigDecimal } from './BigDecimal.js';
  * @returns {bigint} the scaled BigDecimal value
  * @example
  */
-export function __scaleValue(self: BigDecimal, newScale: number): bigint {
+export function bigDecimalScaleValue(self: BigDecimal, newScale: number): bigint {
   const { value, scale } = self;
   if (newScale > scale) {
     return value * 10n ** BigInt(newScale - scale);

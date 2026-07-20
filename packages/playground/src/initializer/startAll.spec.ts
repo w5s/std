@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';
-import { getStatus, __state } from './__state.js';
+import { getStatus, state } from './internal/state.js';
 import { startAll } from './startAll.js';
 
 describe(startAll, () => {
   beforeEach(() => {
-    __state.current = {};
+    state.current = {};
   });
 
   it('starts all initializers from both direct and default module exports', async () => {

@@ -91,12 +91,11 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
  */
 export const CustomError: CustomErrorConstructor = (() => {
   const errorName = 'CustomError';
-  const __assign = Object.assign;
-  const __create = Object.create;
+  const objectAssign = Object.assign;
+  const objectCreate = Object.create;
   type CaptureStackTrace = (targetObject: object, constructorOpt?: () => void) => void;
 
-  const captureStackTrace = (Error as any).captureStackTrace;
-  const __captureStackTrace: CaptureStackTrace = captureStackTrace ?? ((_targetObject: object, _constructorOpt?: () => void) => {});
+  const captureStackTrace: CaptureStackTrace = (Error as any).captureStackTrace ?? ((_targetObject: object, _constructorOpt?: () => void) => {});
 
   function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
     this: any,
@@ -106,7 +105,7 @@ export const CustomError: CustomErrorConstructor = (() => {
       [extra: string]: unknown;
     }
 
-    const returnValue: MutableError = new.target ? (this as MutableError) : __create(CustomError.prototype);
+    const returnValue: MutableError = new.target ? (this as MutableError) : objectCreate(CustomError.prototype);
 
     // Assign default properties from prototype
     returnValue.message = returnValue.message;
@@ -114,21 +113,21 @@ export const CustomError: CustomErrorConstructor = (() => {
     returnValue.cause = returnValue.cause;
 
     // Assign properties
-    __assign(returnValue, properties);
+    objectAssign(returnValue, properties);
 
     // Capture stack trace
-    __captureStackTrace(returnValue, returnValue.constructor as any);
+    captureStackTrace(returnValue, returnValue.constructor as any);
 
     return returnValue as CustomError<Properties>;
   }
 
-  return __assign(CustomError, {
+  return objectAssign(CustomError, {
     errorName,
     hasInstance(anyValue: unknown): boolean {
       return isError(anyValue) && anyValue.name === this.errorName;
     },
     asString,
-    prototype: __assign(__create(Error.prototype), {
+    prototype: objectAssign(objectCreate(Error.prototype), {
       constructor: CustomError,
       name: errorName,
       message: '',

@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';
-import { getStatus, __state } from './__state.js';
+import { getStatus, state } from './internal/state.js';
 import { start } from './start.js';
 
 describe(start, () => {
   beforeEach(() => {
-    __state.current = {};
+    state.current = {};
   });
 
   it('starts a stopped initializer and marks it as ready', async () => {

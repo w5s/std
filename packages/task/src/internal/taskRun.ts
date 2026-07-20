@@ -1,11 +1,11 @@
 import type { Awaitable } from '@w5s/async';
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
-import { error } from './error.js';
-import { ok } from './ok.js';
+import { error } from '../Task/error.js';
+import { ok } from '../Task/ok.js';
 import type { TaskLike } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';
-import { unsafeCall } from './unsafeCall.js';
+import { unsafeCall } from '../Task/unsafeCall.js';
 
 /**
  * Run `task` and return the result or a promise of the result
@@ -16,12 +16,12 @@ import { unsafeCall } from './unsafeCall.js';
  * @example
  * ```typescript
  * const getMessage = Task.resolve('Hello World!');
- * const messageResult = __run(getMessage);// Result.Ok('Hello World!')
+ * const messageResult = taskRun(getMessage);// Result.Ok('Hello World!')
  * ```
  * @param self the task to be run
  * @param canceler the canceler to use for the task
  */
-export function __run<Value, Error>(
+export function taskRun<Value, Error>(
   self: TaskLike<Value, Error>,
   canceler: TaskCanceler,
 ): Awaitable<Result<Value, Error>> {

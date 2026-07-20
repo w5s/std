@@ -4,7 +4,7 @@ import { Ok } from '@w5s/core/dist/Result/Ok.js';
 import type { Task, TaskLike } from '../Task.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 import { from } from './from.js';
-import { __emptyArray } from './__emptyArray.js';
+import { emptyArray } from '../internal/emptyArray.js';
 
 /**
  * Resolves an array of all task results
@@ -32,7 +32,7 @@ export function allSettled<Value, Error>(
     const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
 
     if (taskArray.length === 0) {
-      parameters.resolve(__emptyArray);
+      parameters.resolve(emptyArray);
     } else {
       const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });
 

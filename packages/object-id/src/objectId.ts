@@ -1,5 +1,5 @@
 import type { ObjectLike, Tag } from '@w5s/core-type';
-import { __state } from './__state.js';
+import { state } from './internal/state.js';
 
 /**
  * Type representing values that can have an {@link ObjectId}
@@ -24,11 +24,11 @@ export type ObjectId = number & Tag<'ObjectId'>;
  * @param objectLike a non literal object
  */
 export function objectId(objectLike: ObjectIdParameter): ObjectId {
-  const id = __state.refs.get(objectLike);
+  const id = state.refs.get(objectLike);
   if (id === undefined) {
-    const nextId = __state.currentId;
-    __state.currentId = (nextId + 1) as ObjectId;
-    __state.refs.set(objectLike, nextId);
+    const nextId = state.currentId;
+    state.currentId = (nextId + 1) as ObjectId;
+    state.refs.set(objectLike, nextId);
 
     return nextId;
   }

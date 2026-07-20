@@ -1,5 +1,5 @@
 import type { BigDecimal } from './BigDecimal.js';
-import { __scaleValue } from './__scaleValue.js';
+import { bigDecimalScaleValue } from '../internal/bigDecimalScaleValue.js';
 import { of } from './of.js';
 
 /**
@@ -20,6 +20,6 @@ export function scale(self: BigDecimal, newScale: number): BigDecimal {
   if (self.scale === newScale) {
     return self;
   }
-  const newValue = __scaleValue(self, newScale);
+  const newValue = bigDecimalScaleValue(self, newScale);
   return newValue === self.value ? self : of(newValue, newScale);
 }

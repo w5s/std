@@ -1,6 +1,6 @@
 import { of } from './of.js';
 import type { TimeDuration } from './TimeDuration.js';
-import { DAYS, HOURS, MINUTES, SECONDS, WEEKS } from '../__constants.js';
+import { DAYS, HOURS, MINUTES, SECONDS, WEEKS } from '../internal/constants.js';
 
 export interface TimeDurationParameters {
   /**

@@ -1,10 +1,7 @@
 import type { Ref } from '@w5s/core';
-import { meta } from './meta.js';
-import { __hasOwn } from '@w5s/core/dist/__hasOwn.js';
-import { useGlobal, type Storage } from '@w5s/global-storage';
+import type { Storage } from '@w5s/global-storage';
+import { registry } from './internal/registry.js';
 import type { StateKey } from './StateKey.js';
-
-const __registry = useGlobal(meta.name + '/useRefRegistry', () => new WeakMap<object, Map<StateKey, Ref<unknown>>>());
 
 function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: StateKey, initialValue: T): Ref<T> {
   const propertyRef: Ref<T> = {
@@ -19,7 +16,7 @@ function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: 
     },
   };
 
-  if (!__hasOwn(ref.current, propertyName)) {
+  if (!Object.hasOwn(ref.current, propertyName)) {
     propertyRef.current = initialValue;
   }
   return propertyRef;
@@ -62,10 +59,10 @@ export function useRef<V>(
   key: StateKey,
   initialValue: V,
 ): Ref<V> {
-  let hostRegistry = __registry.get(hostObject);
+  let hostRegistry = registry.get(hostObject);
   if (hostRegistry === undefined) {
     hostRegistry = new Map<StateKey, Ref<unknown>>();
-    __registry.set(hostObject, hostRegistry);
+    registry.set(hostObject, hostRegistry);
   }
   let returnValue: Ref<any> | undefined = hostRegistry.get(key);
   if (returnValue === undefined) {

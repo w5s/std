@@ -1,6 +1,6 @@
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';
-import { __scheduler } from '../__scheduler.js';
+import { scheduler } from '../internal/scheduler.js';
 
 /**
  * Runs a fiber and returns the result.
@@ -26,8 +26,8 @@ import { __scheduler } from '../__scheduler.js';
  * @param callback The generator function to run.
  */
 export function run<T>(callback: FiberCallback<T>): FiberResult<T> {
-  const result = __scheduler.spawn(callback);
-  __scheduler.resume(result.id);
+  const result = scheduler.spawn(callback);
+  scheduler.resume(result.id);
 
   return result;
 }

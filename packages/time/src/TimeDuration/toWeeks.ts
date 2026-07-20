@@ -1,5 +1,5 @@
-import { WEEKS } from '../__constants.js';
-import { __truncate } from '../__truncate.js';
+import { WEEKS } from '../internal/constants.js';
+import { truncateIf } from '../internal/truncateIf.js';
 import type { TimeDuration } from './TimeDuration.js';
 
 /**
@@ -17,5 +17,5 @@ import type { TimeDuration } from './TimeDuration.js';
  * @returns The time duration in weeks.
  */
 export function toWeeks(self: TimeDuration, truncate = false): number {
-  return __truncate(self / WEEKS, truncate);
+  return truncateIf(self / WEEKS, truncate);
 }

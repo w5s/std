@@ -1,7 +1,5 @@
 import type { Array } from '../Array.js';
-import { __fromAsync as __fromAsyncCompat } from './__fromAsync.compat.js';
-
-const __fromAsync: any = globalThis.Array.fromAsync ?? __fromAsyncCompat;
+import { arrayFromAsync } from '../internal/arrayFromAsync.js';
 
 /**
  * Creates an array from an async iterator or iterable object.
@@ -42,5 +40,5 @@ export function fromAsync<T, U>(
   mapFn: (value: Awaited<T>, index: number) => U,
 ): Promise<Array<Awaited<U>>>;
 export function fromAsync(iterableOrArrayLike: any, mapFn: any = (_: any) => _) {
-  return __fromAsync(iterableOrArrayLike, mapFn);
+  return arrayFromAsync(iterableOrArrayLike, mapFn);
 }

@@ -1,4 +1,4 @@
-import { __withResolvers } from './__withResolver.js';
+import { promiseWithResolvers } from './internal/promiseWithResolver.js';
 
 /**
  * Creates a new Promise and returns it in an object, along with its resolve and reject functions.
@@ -14,5 +14,5 @@ import { __withResolvers } from './__withResolver.js';
  * @returns {PromiseWithResolvers<T>} An object with the properties promise, resolve, and reject.
  */
 export function defer<T>(): PromiseWithResolvers<T> {
-  return __withResolvers();
+  return promiseWithResolvers();
 }

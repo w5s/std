@@ -1,5 +1,5 @@
 import type { Seq as SeqInterface } from '../Seq.js';
-import { __useSeqState } from './__useSeqState.js';
+import { useSeqState } from '../internal/useSeqState.js';
 import { seqIterable } from './seqIterable.js';
 
 /**
@@ -13,7 +13,7 @@ export class Seq<T> implements SeqInterface<T> {
   }
 
   * [Symbol.iterator]() {
-    const seqState = __useSeqState(this[seqIterable]);
+    const seqState = useSeqState(this[seqIterable]);
     const { resolvedValues, currentIterator } = seqState;
     yield* resolvedValues;
 

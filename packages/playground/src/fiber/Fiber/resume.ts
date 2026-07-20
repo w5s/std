@@ -1,6 +1,6 @@
-import { __toFiberId } from '../__toFiberId.js';
+import { toFiberId } from '../internal/toFiberId.js';
 import type { FiberIdLike } from '../FiberIdLike.js';
-import { __scheduler } from '../__scheduler.js';
+import { scheduler } from '../internal/scheduler.js';
 
 /**
  * Resume a previously suspended fiber execution
@@ -15,5 +15,5 @@ import { __scheduler } from '../__scheduler.js';
  * @param fiber The fiber to resume
  */
 export function resume(fiber: FiberIdLike): void {
-  __scheduler.resume(__toFiberId(fiber));
+  scheduler.resume(toFiberId(fiber));
 }

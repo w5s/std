@@ -1,11 +1,11 @@
 import type { Numeric } from '@w5s/core';
 import type { NumberConversion } from '../NumberConversion.js';
-import { __defaultConversion } from './__defaultConversion.js';
+import { defaultConversion } from '../internal/defaultConversion.js';
 
 export function Signed(): Numeric.Signed<number>;
 export function Signed<T>(BaseType: NumberConversion<T>): Numeric.Signed<T>;
 export function Signed<T>(BaseType?: NumberConversion<T>): Numeric.Signed<T> {
-  const { fromNumber, asNumber } = BaseType ?? __defaultConversion();
+  const { fromNumber, asNumber } = BaseType ?? defaultConversion();
   return {
     abs: (self) => fromNumber(Math.abs(asNumber(self))),
     sign: (self) => fromNumber(Math.sign(asNumber(self))),

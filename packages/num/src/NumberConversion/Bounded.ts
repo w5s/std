@@ -1,6 +1,6 @@
 import type { Bounded } from '@w5s/core';
 import type { NumberConversion } from '../NumberConversion.js';
-import { __defaultConversion } from './__defaultConversion.js';
+import { defaultConversion } from '../internal/defaultConversion.js';
 
 /**
  * Creates a Bounded instance for a type T that can be converted to and from Int.
@@ -21,7 +21,7 @@ import { __defaultConversion } from './__defaultConversion.js';
 export function Bounded(): Bounded<number>;
 export function Bounded<T>(BaseType: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T>;
 export function Bounded<T>(BaseType?: Pick<NumberConversion<T>, 'fromNumber'>): Bounded<T> {
-  const { fromNumber } = BaseType ?? __defaultConversion<T>();
+  const { fromNumber } = BaseType ?? defaultConversion<T>();
   return {
     maxValue: fromNumber(Number.MAX_VALUE),
     minValue: fromNumber(Number.MIN_VALUE),

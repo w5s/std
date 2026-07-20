@@ -1,5 +1,3 @@
-import { __hasOwn } from './__hasOwn.js';
-
 /**
  * Creates a new object by including the specified keys from provided object.
  *
@@ -16,7 +14,7 @@ import { __hasOwn } from './__hasOwn.js';
 export function pick<T extends object, K extends keyof T>(self: Readonly<T>, keys: readonly K[]): Pick<T, K> {
   const returnValue: object = {};
   for (const key of keys) {
-    if (typeof key !== 'function' && key != null && __hasOwn(self, key)) {
+    if (typeof key !== 'function' && key != null && Object.hasOwn(self, key)) {
       // @ts-ignore This is correct
       returnValue[key] = self[key];
     }

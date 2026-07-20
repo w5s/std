@@ -1,4 +1,4 @@
-import { __state } from '../__state.js';
+import { state } from '../internal/state.js';
 import type { Secret } from '../Secret.js';
 
 /**
@@ -12,5 +12,5 @@ import type { Secret } from '../Secret.js';
  * @param self
  */
 export function value<T>(self: Secret<T>): T {
-  return __state.get(self);
+  return state.get(self);
 }
