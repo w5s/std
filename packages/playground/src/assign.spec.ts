@@ -15,6 +15,7 @@ describe('assign', () => {
     const object = { unchanged: '', foo: true };
     expect(assign(object, { foo: true })).toBe(object);
   });
+  // eslint-disable-next-line test/expect-expect
   it('should not allow adding property', () => {
     const object = { unchanged: '', foo: true };
     // @ts-expect-error notAllowed is not present in object

@@ -10,6 +10,7 @@ describe(isSome, () => {
     expect(isSome(undefined)).toBe(false);
     expect(isSome(null)).toBe(false);
   });
+  // eslint-disable-next-line test/expect-expect
   it('should narrow type in typescript', () => {
     const anyValue: Option<string> = '';
     if (isSome(anyValue)) {

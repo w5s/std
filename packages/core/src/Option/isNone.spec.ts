@@ -10,6 +10,7 @@ describe(isNone, () => {
     expect(isNone(undefined)).toBe(true);
     expect(isNone(null)).toBe(true);
   });
+  // eslint-disable-next-line test/expect-expect
   it('should narrow type in typescript', () => {
     const anyValue: Option<string> = '';
     if (isNone(anyValue)) {

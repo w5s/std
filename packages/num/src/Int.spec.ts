@@ -66,6 +66,7 @@ describe('Int', () => {
   });
 
   describe('type', () => {
+    // eslint-disable-next-line test/expect-expect
     it('should avoid type mismatch', () => {
       const square = (value: Int) => Int(value * value);
       // @ts-expect-error number is not a Int32

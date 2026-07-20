@@ -41,7 +41,7 @@ export default [...(await defineConfig({
     'e18e/prefer-static-regex': 'off',
     'jsdoc/require-returns-type': 'off',
     'next/no-assign-module-variable': 'off',
-    'test/expect-expect': 'off', // ['error', { assertFunctionNames: ['expect', 'expect*'] }],
+    'test/expect-expect': ['error', { assertFunctionNames: ['expect*', 'assert*'] }],
     'test/valid-expect': 'off',
     'test/no-unneeded-async-expect-function': 'off',
     'unicorn/prefer-minimal-ternary': 'off',

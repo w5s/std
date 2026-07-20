@@ -53,6 +53,7 @@ describe(omit, () => {
   });
 
   describe('Type safety', () => {
+    // eslint-disable-next-line test/expect-expect
     it('enforces type constraints on the self parameter', async () => {
       // @ts-expect-error - should not compile
       omit('not an object', ['foo']);

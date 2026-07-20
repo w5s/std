@@ -28,6 +28,7 @@ describe(Char, () => {
   });
 
   describe('type', () => {
+    // eslint-disable-next-line test/expect-expect
     it('should avoid type mismatch', () => {
       const square = (value: Char) => Char(value);
       // @ts-expect-error number is not a Int32
