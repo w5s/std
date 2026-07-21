@@ -14,7 +14,6 @@ export default [...(await defineConfig({
   },
   ts: {
     rules: {
-      'ts/naming-convention': 'off',
       'jsdoc/check-tag-names': 'off',
       'jsdoc/require-example': [
         'warn',
@@ -25,6 +24,7 @@ export default [...(await defineConfig({
           ],
         },
       ],
+      'ts/naming-convention': 'off',
       // `void` in unions is intentionally used across public type-level APIs.
       // Converting to `undefined` would be a semantic change with compatibility risk.
       'ts/no-invalid-void-type': 'off',
@@ -42,21 +42,21 @@ export default [...(await defineConfig({
     'jsdoc/require-returns-type': 'off',
     'next/no-assign-module-variable': 'off',
     'test/expect-expect': ['error', { assertFunctionNames: ['expect*', 'assert*'] }],
-    'test/valid-expect': 'off',
     'test/no-unneeded-async-expect-function': 'off',
-    'unicorn/prefer-minimal-ternary': 'off',
-    'unicorn/prefer-await': 'off',
-    'unicorn/prefer-logical-operator-over-ternary': 'off',
+    'test/valid-expect': 'off',
+    'unicorn/no-array-from-fill': 'off',
+    'unicorn/no-for-each': 'off',
+    'unicorn/no-nonstandard-builtin-properties': 'off',
     'unicorn/no-top-level-side-effects': 'off',
     'unicorn/no-unnecessary-global-this': 'off',
-    'unicorn/no-useless-template-literals': 'off',
-    'unicorn/prefer-unicode-code-point-escapes': 'off',
     'unicorn/no-unreadable-object-destructuring': 'off',
-    'unicorn/no-for-each': 'off',
+    'unicorn/no-useless-template-literals': 'off',
+    'unicorn/prefer-await': 'off',
+    'unicorn/prefer-logical-operator-over-ternary': 'off',
+    'unicorn/prefer-minimal-ternary': 'off',
     'unicorn/prefer-split-limit': 'off',
-    'unicorn/no-nonstandard-builtin-properties': 'off',
+    'unicorn/prefer-unicode-code-point-escapes': 'off',
     'unicorn/prefer-url-href': 'off',
-    'unicorn/no-array-from-fill': 'off',
   },
 },
 ];
