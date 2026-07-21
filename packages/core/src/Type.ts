@@ -26,7 +26,7 @@ import type { Symbol } from './Symbol.js';
 
 export type InspectFunction = (anyValue: unknown, options: InspectOptions) => string;
 
-export type InspectOptions = Record<string, unknown>;
+export type InspectOptions = globalThis.Record<string, unknown>;
 
 /**
  * A type that represents a class module of `T` instances
