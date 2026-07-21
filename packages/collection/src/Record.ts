@@ -15,9 +15,7 @@ export type RecordKey = string | symbol;
 /**
  * A Record is an immutable mapping `{ [string]: value }`
  */
-export type Record<Key extends RecordKey, Value> = {
-  readonly [P in Key]: Value;
-};
+export type Record<Key extends RecordKey, Value> = Readonly<globalThis.Record<Key, Value>>;
 
 /**
  * A collection of functions to manipulate Record

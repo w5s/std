@@ -9,9 +9,7 @@ export type RecordKey = string | symbol;
 /**
  * A Record is an immutable mapping `{ [string]: value }`
  */
-export type Record<Key extends RecordKey, Value> = {
-  readonly [P in Key]: Value;
-};
+export type Record<Key extends RecordKey, Value> = Readonly<globalThis.Record<Key, Value>>;
 
 export function Record<Key extends Type.Module<any>, Value extends Type.Module<any>>(
   Key: Key,
