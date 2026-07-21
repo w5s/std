@@ -2,4 +2,4 @@ packages:
   - 'apps/*'
   - 'packages/*'
 configDependencies:
-  '@w5s/pnpm-plugin-config': 1.0.0-alpha.3
+  '@w5s/pnpm-plugin-config': 1.0.0-alpha.4

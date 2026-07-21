@@ -6,17 +6,17 @@ importers:
   .:
     configDependencies:
       '@w5s/pnpm-plugin-config':
-        specifier: 1.0.0-alpha.3
-        version: 1.0.0-alpha.3
+        specifier: 1.0.0-alpha.4
+        version: 1.0.0-alpha.4
 
 packages:
 
-  '@w5s/pnpm-plugin-config@1.0.0-alpha.3':
-    resolution: {integrity: sha512-5ht4anEKTsOuap+Pult+zQkeXBqkwJo8c+48pLmW/f/JhXiGiwWXtiTvCxm7PBQuNrl19dsTfmOksPjlwuJJXA==}
+  '@w5s/pnpm-plugin-config@1.0.0-alpha.4':
+    resolution: {integrity: sha512-Q1TLO0c51zdgtNk//hI0jF9rueDVYj7ib+hYBjuhnmh2103zLqfWFWzpdKtLBQRqkfyP3CtryJjxpqkhr/6ZSQ==}
 
 snapshots:
 
-  '@w5s/pnpm-plugin-config@1.0.0-alpha.3': {}
+  '@w5s/pnpm-plugin-config@1.0.0-alpha.4': {}
 
 ---
 lockfileVersion: '9.0'
