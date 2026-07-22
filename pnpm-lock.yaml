@@ -25,8 +25,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-pnpmfileChecksum: sha256-tCJbkr+GnoWNSMaDQFgd966cR9jmibhCv56g3yv48RU=
-
 importers:
 
   .:
@@ -56,8 +54,8 @@ importers:
         specifier: 3.1.16
         version: 3.1.16(typescript@6.0.3)
       '@w5s/tsdown-config':
-        specifier: 1.0.0-alpha.17
-        version: 1.0.0-alpha.17(tsdown@0.22.9(typescript@6.0.3))
+        specifier: 1.0.0-alpha.21
+        version: 1.0.0-alpha.21(tsdown@0.22.9(typescript@6.0.3))
       cspell:
         specifier: 10.0.1
         version: 10.0.1
@@ -4147,8 +4145,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/tsdown-config@1.0.0-alpha.17':
-    resolution: {integrity: sha512-+4NEnytp4j8YX2NmlG96Up+X3J5kmSd8ejnObZ9C0DQLyGHzXil3mFqmtFORviVtgBcBmjNL6svbE1vDQzuKqQ==}
+  '@w5s/tsdown-config@1.0.0-alpha.21':
+    resolution: {integrity: sha512-+7spmvA9Eczc0CaRjhXkiZmkJFPC4C36cw/lq+wJhUgBiIlwirOcFhRPS7aK6XUr3JFRJmd8fR8VqD/jrpwesw==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       tsdown: 0.x
@@ -14222,7 +14220,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@w5s/tsdown-config@1.0.0-alpha.17(tsdown@0.22.9(typescript@6.0.3))':
+  '@w5s/tsdown-config@1.0.0-alpha.21(tsdown@0.22.9(typescript@6.0.3))':
     optionalDependencies:
       tsdown: 0.22.9(typescript@6.0.3)
 
