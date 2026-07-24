@@ -1,9 +1,12 @@
 import type { Task } from '@w5s/task';
+
 import { from } from '@w5s/task/dist/Task/from.js';
+
+import type { DatabaseError } from './error.js';
+
 import { type Database, DatabaseDriver } from './driver.js';
 import { SQLStatement } from './sql.js';
 import { SQLQuery } from './SQLQuery.js';
-import type { DatabaseError } from './error.js';
 
 /**
  * Execute the `sqlStatement` on an `client`
@@ -21,10 +24,10 @@ import type { DatabaseError } from './error.js';
  * @param client created with a database adapter `createEnvironment(environmentConfig)` function
  * @param sqlOrQuery SQL query object or a raw sql statement
  */
-export function executeQuery(client: Database, sqlOrQuery: SQLStatement | SQLQuery): Task<unknown, DatabaseError> {
+export function executeQuery(client: Database, sqlOrQuery: SQLQuery | SQLStatement): Task<unknown, DatabaseError> {
   const driver = DatabaseDriver.get(client.databaseType);
 
-  return from(async ({ resolve, reject, canceler }) => {
+  return from(async ({ canceler, reject, resolve }) => {
     try {
       const sqlStatement = SQLStatement.hasInstance(sqlOrQuery) ? sqlOrQuery : SQLQuery.toSQLStatement(sqlOrQuery);
       const returnValue = await driver.execute(client, sqlStatement, canceler);

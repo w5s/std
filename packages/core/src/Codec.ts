@@ -1,10 +1,11 @@
-import type { Result } from './Result.js';
 import type { JSONValue } from './JSON.js';
-import { CodecError } from './CodecError.js';
+import type { Result } from './Result.js';
+
 import { decode } from './Codec/decode.js';
 import { encode } from './Codec/encode.js';
 import { lazy } from './Codec/lazy.js';
 import { schema } from './Codec/schema.js';
+import { CodecError } from './CodecError.js';
 import { Symbol } from './Symbol.js';
 
 export interface Codec<T> {
@@ -65,21 +66,21 @@ export const Codec = {
   schema,
 };
 export namespace Codec {
-  export type TypeOf<V> = V extends Codec<infer Type> ? Type : never;
-
   export interface Context<T> {
-    /**
-     * Helper that returns a new Ok result
-     *
-     * @param value
-     */
-    ok: (value: T) => Result<T, CodecError>;
-
     /**
      * Helper that returns a new Error result
      *
      * @param message
      */
     error: (input: unknown, asType?: string) => Result<T, CodecError>;
+
+    /**
+     * Helper that returns a new Ok result
+     *
+     * @param value
+     */
+    ok: (value: T) => Result<T, CodecError>;
   }
+
+  export type TypeOf<V> = V extends Codec<infer Type> ? Type : never;
 }

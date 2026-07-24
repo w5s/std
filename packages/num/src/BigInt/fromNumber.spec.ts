@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { fromNumber } from './fromNumber.js';
 
 describe(fromNumber, () => {

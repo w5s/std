@@ -1,17 +1,18 @@
 import type { EqualsInterface } from '../Equal.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 export function describeEqual<T>(
   subject: EqualsInterface<T>,
   properties: {
-    equivalent: () => [T, T][];
-    different: () => [T, T][];
+    different: () => Array<[T, T]>;
+    equivalent: () => Array<[T, T]>;
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
-  const { equivalent: equivalentDefault, different: differentDefault } = properties;
+  const { describe, expect, it } = testingLibrary;
+  const { different: differentDefault, equivalent: equivalentDefault } = properties;
   const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
   const different = () => differentDefault().map(([left, right]) => ({ left, right }));
 

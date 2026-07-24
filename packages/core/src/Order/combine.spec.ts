@@ -1,16 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { combine } from './combine.js';
+
+import type { Ordering } from '../Ordering.js';
+
 import { String } from '../String.js';
 import { withOrder } from '../Testing.js';
-import type { Ordering } from '../Ordering.js';
+import { combine } from './combine.js';
 
 describe(combine, () => {
   const numberCompare = (a: number, b: number): Ordering => (a === b ? 0 : a < b ? -1 : 1);
   const expectOrder = withOrder(expect);
   interface Person {
-    lastName: string;
-    firstName: string;
     age: number;
+    firstName: string;
+    lastName: string;
   }
 
   it('combine two orders', () => {
@@ -20,11 +22,11 @@ describe(combine, () => {
     );
 
     expectOrder(compare).toSortValues([
-      { lastName: 'A', firstName: 'Alice', age: 25 },
-      { lastName: 'B', firstName: 'Alice', age: 25 },
-      { lastName: 'B', firstName: 'Alice', age: 26 },
-      { lastName: 'A', firstName: 'Bob', age: 25 },
-      { lastName: 'B', firstName: 'Bob', age: 25 },
+      { age: 25, firstName: 'Alice', lastName: 'A' },
+      { age: 25, firstName: 'Alice', lastName: 'B' },
+      { age: 26, firstName: 'Alice', lastName: 'B' },
+      { age: 25, firstName: 'Bob', lastName: 'A' },
+      { age: 25, firstName: 'Bob', lastName: 'B' },
     ]);
   });
   it('combine three orders', () => {
@@ -34,11 +36,11 @@ describe(combine, () => {
       (left: Person, right: Person) => numberCompare(left.age, right.age),
     );
     expectOrder(compare).toSortValues([
-      { lastName: 'A', firstName: 'Alice', age: 25 },
-      { lastName: 'B', firstName: 'Alice', age: 25 },
-      { lastName: 'B', firstName: 'Alice', age: 26 },
-      { lastName: 'B', firstName: 'Bob', age: 25 },
-      { lastName: 'B', firstName: 'Bob', age: 25 },
+      { age: 25, firstName: 'Alice', lastName: 'A' },
+      { age: 25, firstName: 'Alice', lastName: 'B' },
+      { age: 26, firstName: 'Alice', lastName: 'B' },
+      { age: 25, firstName: 'Bob', lastName: 'B' },
+      { age: 25, firstName: 'Bob', lastName: 'B' },
     ]);
   });
 });

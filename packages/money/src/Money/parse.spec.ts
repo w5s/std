@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
-import { Option } from '@w5s/core';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { parse } from './parse.js';
-import { Money } from './Money.js';
+import { Option } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
+import { Money } from './Money.js';
+import { parse } from './parse.js';
 
 describe(parse, async () => {
   const EUR = CurrencyRegistry.getByCode('EUR')!;

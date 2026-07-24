@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from 'vitest';
 import { Result, Symbol } from '@w5s/core';
-import { run } from './run.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { Task, type TaskLike } from '../Task.js';
+import { run } from './run.js';
 
 const anyError = new Error('TestError');
 const anyObject = Object.freeze({ foo: true });

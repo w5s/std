@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { keys } from './keys.js';
 
 describe(keys, () => {
@@ -15,8 +16,8 @@ describe(keys, () => {
   it('should handle symbol keys', () => {
     expect(
       [...keys({
-        [anySymbolKey]: 'anyValue',
         anyOtherKey: 'anyOtherValue',
+        [anySymbolKey]: 'anyValue',
       })],
     ).toEqual(['anyOtherKey', anySymbolKey]);
   });

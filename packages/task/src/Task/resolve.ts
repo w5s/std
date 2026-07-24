@@ -1,4 +1,5 @@
 import type { Task } from '../Task.js';
+
 import { from } from './from.js';
 
 /**
@@ -12,7 +13,6 @@ import { from } from './from.js';
  * @category Constructor
  */
 export function resolve<Error = never>(): Task<void, Error>;
-
 /**
  * Returns a successful task that always resolves `value`.
  * This is a shorthand for `Task.from(({ resolve }) => resolve(value))`

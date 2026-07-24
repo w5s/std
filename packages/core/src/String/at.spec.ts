@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { at } from './at.js';
+import { describe, expect, it } from 'vitest';
+
 import { Option } from '../Option.js';
+import { at } from './at.js';
 
 describe(at, () => {
   it('should return Option.None when index is not defined', () => {

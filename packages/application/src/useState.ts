@@ -1,9 +1,11 @@
 import type { Ref } from '@w5s/core';
-import { useNamespace } from './useNamespace.js';
-import { useRef } from './useRef.js';
+
+import type { Meta } from './meta.js';
 import type { State } from './State.js';
 import type { StateKey } from './StateKey.js';
-import type { Meta } from './meta.js';
+
+import { useNamespace } from './useNamespace.js';
+import { useRef } from './useRef.js';
 
 /**
  * Return a new `Ref` containing the state for the given `meta.name` and `key`.

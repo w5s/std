@@ -1,4 +1,5 @@
 import type { Option } from '../Option.js';
+
 import { Symbol } from '../Symbol.js';
 import { define } from './define.js';
 
@@ -24,10 +25,8 @@ function parse(expression: string): Option<RegExp> {
  */
 export const RegExp = {
   ...define<RegExp>({
-    typeName: 'RegExp',
     hasInstance: (anyValue) => Object.prototype.toString.call(anyValue) === '[object RegExp]',
-    [Symbol.encode]: (input) => `${input.toString()}`,
-    [Symbol.decode]: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { error, ok }) => {
       if (typeof input === 'string') {
         const result = parse(input);
         if (result != null) {
@@ -36,7 +35,9 @@ export const RegExp = {
       }
       return error(input, 'RegExp');
     },
-    [Symbol.schema]: () => ({ type: 'string', format: 'regex' }),
+    [Symbol.encode]: (input) => `${input.toString()}`,
+    [Symbol.schema]: () => ({ format: 'regex', type: 'string' }),
+    typeName: 'RegExp',
   }),
 
   /**

@@ -1,18 +1,19 @@
 import { describe } from 'vitest';
-import { Tuple } from './Tuple.js';
-import { describeType, describeCodec } from '../Testing.js';
-import { Result } from '../Result.js';
+
 import { CodecError } from '../CodecError.js';
+import { Result } from '../Result.js';
+import { describeCodec, describeType } from '../Testing.js';
 import { bigint } from './bigint.js';
 import { string } from './string.js';
+import { Tuple } from './Tuple.js';
 
 describe(Tuple, () => {
   const subject = Tuple;
 
   describeType(subject(string, bigint), () => ({
-    typeName: '[string,bigint]',
     instances: [['toto', 1n] as const, ['', 2n] as const],
     notInstances: [null, 1, [1]],
+    typeName: '[string,bigint]',
   }));
   describeCodec(subject(string, bigint), () => ({
     decode: [
@@ -21,8 +22,8 @@ describe(Tuple, () => {
         ['a', '1'],
         Result.Error(
           new CodecError({
-            message: 'Cannot decode a,1 as [string,bigint]',
             input: ['a', '1'],
+            message: 'Cannot decode a,1 as [string,bigint]',
           }),
         ),
       ],
@@ -33,6 +34,6 @@ describe(Tuple, () => {
         ['a', '1n'],
       ],
     ],
-    schema: { type: 'array', items: [{ type: 'string' }, { type: 'string', format: 'bigint' }] },
+    schema: { items: [{ type: 'string' }, { format: 'bigint', type: 'string' }], type: 'array' },
   }));
 });

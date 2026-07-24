@@ -1,33 +1,17 @@
 import type { ExpectFunction } from '@w5s/core-type';
 
-async function arrayFromAsync(iterable: any, mapFn: any = (_: any) => _) {
-  const returnValue: globalThis.Array<any> = [];
-  let index = 0;
-
-  if (Symbol.asyncIterator in iterable) {
-    for await (const item of iterable) {
-      returnValue.push(await mapFn(item, index++));
-    }
-  } else {
-    for (const item of iterable) {
-      returnValue.push(await mapFn(await item, index++));
-    }
-  }
-  return returnValue;
-}
-
 export interface ExpectAsyncIterable {
+  /**
+   * Asserts that `[Symbol.iterator]()` always returns the same value
+   */
+  toBeIdemPotent(): Promise<void>;
+
   /**
    * Asserts `[Symbol.iterator]()` emits the same values as `expected`
    *
    * @param expected
    */
   toHaveValues(expected: Array<unknown>): Promise<void>;
-
-  /**
-   * Asserts that `[Symbol.iterator]()` always returns the same value
-   */
-  toBeIdemPotent(): Promise<void>;
 }
 
 /**
@@ -44,17 +28,33 @@ export interface ExpectAsyncIterable {
  */
 export function withAsyncIterable(expectFn: ExpectFunction) {
   const create = <V>(iterable: AsyncIterable<V>, isNot: boolean): ExpectAsyncIterable => ({
-    async toHaveValues(expected: Array<unknown>) {
-      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
-      return (isNot ? expectValue.not : expectValue).toEqual(expected);
-    },
     async toBeIdemPotent() {
       const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
       return (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
+    },
+    async toHaveValues(expected: Array<unknown>) {
+      const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
+      return (isNot ? expectValue.not : expectValue).toEqual(expected);
     },
   });
   return <V>(iterable: AsyncIterable<V>) =>
     Object.assign(create(iterable, false), {
       not: create(iterable, true),
     });
+}
+
+async function arrayFromAsync(iterable: any, mapFn: any = (_: any) => _) {
+  const returnValue: globalThis.Array<any> = [];
+  let index = 0;
+
+  if (Symbol.asyncIterator in iterable) {
+    for await (const item of iterable) {
+      returnValue.push(await mapFn(item, index++));
+    }
+  } else {
+    for (const item of iterable) {
+      returnValue.push(await mapFn(await item, index++));
+    }
+  }
+  return returnValue;
 }

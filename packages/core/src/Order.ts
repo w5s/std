@@ -1,9 +1,10 @@
+import type { ComparableInterface } from './Comparable.js';
 import type { Ordering } from './Ordering.js';
-import { reverse } from './Order/reverse.js';
+
 import { combine } from './Order/combine.js';
 import { compareBy } from './Order/compareBy.js';
 import { primitive } from './Order/primitive.js';
-import type { ComparableInterface } from './Comparable.js';
+import { reverse } from './Order/reverse.js';
 
 /**
  * Return an {@link Ordering} thats represents the comparison result
@@ -16,14 +17,14 @@ export type Order<T> = (left: T, right: T) => Ordering;
 /**
  * A type that is an Order or Comparable with only compare property required
  */
-export type OrderLike<T> = Order<T> | ComparableInterface<T>;
+export type OrderLike<T> = ComparableInterface<T> | Order<T>;
 
 /**
  * @namespace
  */
 export const Order = {
-  compareBy,
   combine,
+  compareBy,
   primitive,
   reverse,
 };

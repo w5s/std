@@ -1,7 +1,8 @@
 import type { EqualsInterface } from '../Equal.js';
 import type { Numeric } from '../Numeric.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for {@link Numeric.Negate} interface
@@ -24,13 +25,13 @@ import type { TestingLibrary } from './type.js';
  * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeNegate<T>(
-  subject: Numeric.Negate<T> & EqualsInterface<T>,
+  subject: EqualsInterface<T> & Numeric.Negate<T>,
   properties: {
     values: () => Array<[base: T, negated: T]>;
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   const values = properties.values();
   const describeIfValue = values.length === 0 ? describe.todo : describe;
   describeIfValue('negate', () => {

@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { AbortError } from '@w5s/error';
+import { describe, expect, it } from 'vitest';
+
 import { delay } from './delay.js';
 
 describe(delay, () => {

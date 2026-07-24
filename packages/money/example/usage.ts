@@ -1,4 +1,4 @@
-import { Money, EUR } from '@w5s/money';
+import { EUR, Money } from '@w5s/money';
 
 export function main(): void {
   const price = EUR(10);

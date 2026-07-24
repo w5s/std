@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
-import { TimeoutError } from './TimeoutError.js';
+import { describe, expect, it } from 'vitest';
+
 import { describeError } from './Testing.js';
+import { TimeoutError } from './TimeoutError.js';
 
 describe('TimeoutError', () => {
-  describeError({ describe, it, expect })(TimeoutError, {
+  describeError({ describe, expect, it })(TimeoutError, {
     defaultParameters: () => ({}),
-    expectedName: 'TimeoutError',
     expectedDefaultMessage: 'Operation timed out',
+    expectedName: 'TimeoutError',
   });
 });

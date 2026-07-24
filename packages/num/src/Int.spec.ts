@@ -1,12 +1,13 @@
-import { describe, it, expect } from 'vitest';
-import { describeType, describeCodec, describeAsString } from '@w5s/core/dist/Testing.js';
 import { CodecError, Result } from '@w5s/core';
+import { describeAsString, describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { Int } from './Int.js';
-import { parse } from './Int/parse.js';
 import { format } from './Int/format.js';
-import { IntIntegral } from './Int/IntIntegral.js';
-import { IntIndexable } from './Int/IntIndexable.js';
 import { IntBounded } from './Int/IntBounded.js';
+import { IntIndexable } from './Int/IntIndexable.js';
+import { IntIntegral } from './Int/IntIntegral.js';
+import { parse } from './Int/parse.js';
 
 describe('Int', () => {
   const minValue = Number.MIN_SAFE_INTEGER;
@@ -23,26 +24,26 @@ describe('Int', () => {
     );
     expect(IntFunctions).toEqual(
       expect.objectContaining({
-        zero: expect.any(Function),
         isZero: expect.any(Function),
+        zero: expect.any(Function),
       }),
     );
     expect(IntFunctions).toEqual(
       expect.objectContaining({
-        parse,
         format,
+        parse,
       }),
     );
   });
   describeType(Int, () => ({
-    typeName: 'Int',
     instances: [0 as Int, 1 as Int, 2 as Int, -1 as Int, minValue as Int, maxValue as Int],
     notInstances: ['1', 1.1, undefined, minValue - 1, maxValue + 1],
+    typeName: 'Int',
   }));
   describeCodec(Int, () => ({
     decode: [
       [1, Result.Ok(Int(1))],
-      [null, Result.Error(new CodecError({ message: 'Cannot decode null as Int', input: null }))],
+      [null, Result.Error(new CodecError({ input: null, message: 'Cannot decode null as Int' }))],
     ],
     encode: [
       [Int(0), 0],

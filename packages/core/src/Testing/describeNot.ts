@@ -1,6 +1,7 @@
 import type { Not } from '../Not.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for {@link @w5s/core!Not} interface
@@ -25,7 +26,7 @@ export function describeNot<T>(
   cases: () => Array<[value: T, negation: T]>,
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   (cases().length === 0 ? describe.todo : describe)('not', () => {
     it.each(cases())('satisfies not($0) == $1', (left, right) => {
       expect(subject.not(left)).toEqual(right);

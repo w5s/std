@@ -1,6 +1,8 @@
 import type { Int } from '@w5s/core';
-import { reduce } from './reduce.js';
+
 import type { AsyncIterableLike } from '../AsyncIterableLike.js';
+
+import { reduce } from './reduce.js';
 
 const sum = (accumulator: Int) => (accumulator + 1) as Int;
 

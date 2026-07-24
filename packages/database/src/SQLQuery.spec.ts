@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { SQLDataType } from './SQLDataType.js';
+import { describe, expect, it } from 'vitest';
+
 import { sql } from './sql.js';
+import { SQLDataType } from './SQLDataType.js';
 import { SQLQuery } from './SQLQuery.js';
 
 describe('SQLQuery', () => {
@@ -9,11 +10,11 @@ describe('SQLQuery', () => {
       expect(
         SQLQuery.toSQLStatement(
           SQLQuery.AddColumn({
-            tableName: 'anyTableName',
-            columnName: 'anyColumnName',
             columnAttributes: {
               type: SQLDataType.VARCHAR(255),
             },
+            columnName: 'anyColumnName',
+            tableName: 'anyTableName',
           }),
         ),
       ).toEqual(sql`ALTER TABLE anyTableName ADD anyColumnName VARCHAR(255)`);
@@ -21,7 +22,7 @@ describe('SQLQuery', () => {
 
     it('should correct statement for AddConstraint', () => {
       expect(
-        SQLQuery.toSQLStatement(SQLQuery.AddConstraint({ tableName: 'anyTableName', constraintName: 'anyConstraint' })),
+        SQLQuery.toSQLStatement(SQLQuery.AddConstraint({ constraintName: 'anyConstraint', tableName: 'anyTableName' })),
       ).toEqual(sql`ALTER TABLE anyTableName ADD CONSTRAINT anyConstraint`);
     });
     it('should correct statement for CreateSchema', () => {
@@ -33,14 +34,14 @@ describe('SQLQuery', () => {
       expect(
         SQLQuery.toSQLStatement(
           SQLQuery.CreateTable({
-            tableName: 'anyTableName',
             tableAttributes: {
-              name: { type: SQLDataType.VARCHAR(255) },
               description: { type: SQLDataType.VARCHAR(255) },
+              name: { type: SQLDataType.VARCHAR(255) },
             },
+            tableName: 'anyTableName',
           }),
         ),
-      ).toEqual(sql`CREATE TABLE anyTableName (\n  name VARCHAR(255),\n  description VARCHAR(255)\n)`);
+      ).toEqual(sql`CREATE TABLE anyTableName (\n  description VARCHAR(255),\n  name VARCHAR(255)\n)`);
     });
 
     it('should correct statement for DropSchema', () => {
@@ -56,13 +57,13 @@ describe('SQLQuery', () => {
     it('should correct statement for RemoveConstraint', () => {
       expect(
         SQLQuery.toSQLStatement(
-          SQLQuery.RemoveConstraint({ tableName: 'anyTableName', constraintName: 'anyConstraint' }),
+          SQLQuery.RemoveConstraint({ constraintName: 'anyConstraint', tableName: 'anyTableName' }),
         ),
       ).toEqual(sql`ALTER TABLE anyTableName DROP CONSTRAINT anyConstraint`);
     });
     it('should correct statement for RemoveColumn', () => {
       expect(
-        SQLQuery.toSQLStatement(SQLQuery.RemoveColumn({ tableName: 'anyTableName', columnName: 'anyColumn' })),
+        SQLQuery.toSQLStatement(SQLQuery.RemoveColumn({ columnName: 'anyColumn', tableName: 'anyTableName' })),
       ).toEqual(sql`ALTER TABLE anyTableName DROP COLUMN anyColumn`);
     });
   });

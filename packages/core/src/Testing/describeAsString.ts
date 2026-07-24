@@ -1,6 +1,7 @@
 import type { AsString } from '../AsString.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for {@link @w5s/core#AsString} interface
@@ -36,7 +37,7 @@ export function describeAsString<S extends AsString<any>>(
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
   const { asString = true, String = true } = withTest;
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   if (asString) {
     describe('asString', () => {
       it.each(properties(subject))('satisfies asString($0) == $1', (instance, string) => {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { format } from './format.js';
+
 import { BigDecimal } from './BigDecimal.js';
+import { format } from './format.js';
 
 describe(format, () => {
   it.each([

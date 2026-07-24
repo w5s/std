@@ -1,8 +1,11 @@
-import { useRef } from './useRef.js';
-import { useStorage } from '@w5s/global-storage';
 import type { Ref } from '@w5s/core';
-import type { State } from './State.js';
+
+import { useStorage } from '@w5s/global-storage';
+
 import type { Meta } from './meta.js';
+import type { State } from './State.js';
+
+import { useRef } from './useRef.js';
 
 /**
  * Return a new `Ref` containing the namespace for the given `meta.name`.

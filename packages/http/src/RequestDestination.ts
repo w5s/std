@@ -1,13 +1,13 @@
 import type { Enum } from '@w5s/core';
+
 import { define } from '@w5s/core/dist/Enum/define.js';
 
 export const RequestDestination = define({
-  typeName: 'RequestDestination',
-  Empty: '',
   Audio: 'audio',
   AudioWorklet: 'audioworklet',
   Document: 'document',
   Embed: 'embed',
+  Empty: '',
   Font: 'font',
   Frame: 'frame',
   Iframe: 'iframe',
@@ -20,6 +20,7 @@ export const RequestDestination = define({
   SharedWorker: 'sharedworker',
   Style: 'style',
   Track: 'track',
+  typeName: 'RequestDestination',
   Video: 'video',
   Worker: 'worker',
   XSLT: 'xslt',

@@ -14,7 +14,7 @@ import { extend } from './extend.js';
  * @param source a base object
  * @param properties an extension object map
  */
-export function assign<T>(source: T, properties: Partial<T> | undefined | null): T {
+export function assign<T>(source: T, properties: null | Partial<T> | undefined): T {
   // @ts-ignore extends has a different typing but does the same thing
   return extend(source, properties);
 }

@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { read } from './read.js';
+import { describe, expect, it } from 'vitest';
+
 import { Ref } from '../Ref.js';
+import { read } from './read.js';
 
 describe(read, () => {
   it('should return current value', () => {

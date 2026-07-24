@@ -1,4 +1,5 @@
 import * as fs from 'node:fs';
+
 import type { FilePath } from '../FilePath.js';
 import type { ErrnoException } from '../Internal.js';
 // import * as url from 'node:url';
@@ -27,42 +28,42 @@ export const generateStats = (): fs.Stats => {
   const isFIFO = randomBoolean();
   const isSocket = randomBoolean();
   return {
-    isFile: () => isFile,
-    isDirectory: () => isDirectory,
-    isSymbolicLink: () => isSymbolicLink,
-    isBlockDevice: () => isBlockDevice,
-    isCharacterDevice: () => isCharacterDevice,
-    isFIFO: () => isFIFO,
-    isSocket: () => isSocket,
-    size: 0,
     atime: randomDate(),
     get atimeMs() {
       return this.atime.getTime();
-    },
-    // atimeNs: Math.random(),
-    mtime: randomDate(),
-    get mtimeMs() {
-      return this.mtime.getTime();
-    },
-    // mtimeNs: Math.random(),
-    ctime: randomDate(),
-    get ctimeMs() {
-      return this.ctime.getTime();
     },
     // ctimeNs: Math.random(),
     birthtime: randomDate(),
     get birthtimeMs() {
       return this.birthtime.getTime();
     },
-    // birthtimeNs: Math.random(),
-    dev: randomInt(),
-    ino: randomInt(),
-    mode: randomInt(),
-    nlink: randomInt(),
-    uid: randomInt(),
-    gid: randomInt(),
-    rdev: randomInt(),
     blksize: randomInt(),
     blocks: randomInt(),
+    // mtimeNs: Math.random(),
+    ctime: randomDate(),
+    get ctimeMs() {
+      return this.ctime.getTime();
+    },
+    // birthtimeNs: Math.random(),
+    dev: randomInt(),
+    gid: randomInt(),
+    ino: randomInt(),
+    isBlockDevice: () => isBlockDevice,
+    isCharacterDevice: () => isCharacterDevice,
+    isDirectory: () => isDirectory,
+    isFIFO: () => isFIFO,
+    isFile: () => isFile,
+    isSocket: () => isSocket,
+    isSymbolicLink: () => isSymbolicLink,
+    mode: randomInt(),
+    // atimeNs: Math.random(),
+    mtime: randomDate(),
+    get mtimeMs() {
+      return this.mtime.getTime();
+    },
+    nlink: randomInt(),
+    rdev: randomInt(),
+    size: 0,
+    uid: randomInt(),
   };
 };

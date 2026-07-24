@@ -1,6 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { next } from './Random/next.js';
 import { randomNumber } from './randomNumber.js';
 import { fakeRandomGenerator } from './Testing.js';
@@ -15,10 +16,10 @@ describe('randomNumber', () => {
     expectTask(task).toResolveSync(-1.508);
   });
   it.each([
-    [{ genValue: 0, min: -2, max: 2 }, -2],
-    [{ genValue: 0.5, min: -2, max: 2 }, 0],
-    [{ genValue: 1, min: -2, max: 2 }, 2],
-  ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
+    [{ genValue: 0, max: 2, min: -2 }, -2],
+    [{ genValue: 0.5, max: 2, min: -2 }, 0],
+    [{ genValue: 1, max: 2, min: -2 }, 2],
+  ])('should return correct bounded values %s', async ({ genValue, max, min }, expected) => {
     const gen = fakeRandomGenerator(() => genValue);
     const genNum = randomNumber(min, max, gen);
     expectTask(genNum).toResolveSync(expected);

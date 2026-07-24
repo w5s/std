@@ -18,13 +18,14 @@ import type { Order } from '../Order.js';
  * @param self
  * @param others
  */
-export function combine<T>(self: Order<T>, ...others: Order<T>[]): Order<T> {
+export function combine<T>(self: Order<T>, ...others: Array<Order<T>>): Order<T> {
   return (left, right) => {
     let returnValue = self(left, right);
     if (returnValue !== 0) {
       return returnValue;
     }
 
+    // eslint-disable-next-line ts/prefer-for-of
     for (let index = 0; index < others.length; index += 1) {
       returnValue = others[index]!(left, right);
       if (returnValue !== 0) {

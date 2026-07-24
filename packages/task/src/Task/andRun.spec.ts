@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Symbol } from '@w5s/core';
-import { allSyncCombination } from './_stub.spec.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FakeTask, withTask } from '../Testing.js';
+import { allSyncCombination } from './_stub.spec.js';
 import { andRun } from './andRun.js';
-import { run } from './run.js';
 import { from } from './from.js';
+import { run } from './run.js';
 
 describe(andRun, () => {
   const anyValue = Object.freeze({ foo: true });

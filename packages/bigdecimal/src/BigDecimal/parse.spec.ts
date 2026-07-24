@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { parse } from './parse.js';
+
 import { BigDecimal } from './BigDecimal.js';
+import { parse } from './parse.js';
 
 describe(parse, () => {
   it.each([

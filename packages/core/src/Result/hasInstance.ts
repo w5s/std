@@ -1,4 +1,5 @@
 import type { Result } from '../Result.js';
+
 import { Error } from './Error.js';
 import { Ok } from './Ok.js';
 

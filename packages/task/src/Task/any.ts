@@ -1,5 +1,7 @@
 import type { AggregateError } from '@w5s/error';
+
 import type { Task, TaskLike } from '../Task.js';
+
 import { from } from './from.js';
 import { TaskAggregateState } from './TaskAggregateState.js';
 
@@ -22,16 +24,16 @@ import { TaskAggregateState } from './TaskAggregateState.js';
  * ```
  * @param tasks tasks to be run in parallel
  */
-export function any<T extends TaskLike<any, any>[]>(
+export function any<T extends Array<TaskLike<any, any>>>(
   tasks: [...T],
 ): Task<Task.ValueOf<T[keyof T]>, AggregateError<{ [K in keyof T]: Task.ErrorOf<T[K]> }>>;
-export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>>;
-export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Error[]>> {
+export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Array<Error>>>;
+export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<Value, AggregateError<Array<Error>>> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
+    const taskArray = Array.from(tasks, (task, key) => ({ key, task }));
 
     if (taskArray.length === 0) {
-      parameters.reject(globalThis.AggregateError([]) as AggregateError<Error[]>);
+      parameters.reject(globalThis.AggregateError([]) as AggregateError<Array<Error>>);
     } else {
       // eslint-disable-next-line unicorn/no-new-array
       const errors = new Array<Error | undefined>(taskArray.length);
@@ -44,7 +46,7 @@ export function any<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task
         (error, entry, self) => {
           errors[entry.key] = error;
           if (self.isComplete()) {
-            self.reject(globalThis.AggregateError(errors) as AggregateError<Error[]>);
+            self.reject(globalThis.AggregateError(errors) as AggregateError<Array<Error>>);
           }
         },
       );

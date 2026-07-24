@@ -1,4 +1,5 @@
 import type { Result } from '../Result.js';
+
 import { isOk } from './isOk.js';
 
 /**

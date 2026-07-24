@@ -1,5 +1,7 @@
 import { Symbol } from '@w5s/core/dist/Symbol.js';
+
 import type { TaskFunction, TaskLike } from '../Task.js';
+
 import { Task } from './Task.js';
 
 /**
@@ -12,7 +14,7 @@ import { Task } from './Task.js';
  * ```
  * @param taskLike
  */
-export function from<Value, Error>(taskLike: TaskLike<Value, Error> | TaskFunction<Value, Error>): Task<Value, Error> {
+export function from<Value, Error>(taskLike: TaskFunction<Value, Error> | TaskLike<Value, Error>): Task<Value, Error> {
   return taskLike instanceof Task
     ? taskLike
     : new Task<Value, Error>(typeof taskLike === 'function' ? taskLike : taskLike[Symbol.run]);

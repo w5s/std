@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Ordering } from './Ordering.js';
-import { Ordering as OrderingType } from './Type/Ordering.js';
 import { reverse } from './Ordering/reverse.js';
+import { Ordering as OrderingType } from './Type/Ordering.js';
 
 describe('Ordering', () => {
   it('is an alias to functions', () => {

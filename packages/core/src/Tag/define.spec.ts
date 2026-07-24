@@ -1,23 +1,25 @@
 import { describe, expect, it } from 'vitest';
-import { describeType } from '../Testing.js';
+
+import type { Tag } from '../Tag.js';
+
+import { Callable } from '../Callable.js';
 import { Codec } from '../Codec.js';
 import { CodecError } from '../CodecError.js';
 import { Result } from '../Result.js';
-import type { Tag } from '../Tag.js';
+import { describeType } from '../Testing.js';
 import { define } from './define.js';
-import { Callable } from '../Callable.js';
 
 describe(define, () => {
   type PositiveNumber = number & Tag<'Positive'>;
   const PositiveNumber = define<number, PositiveNumber>({
-    typeName: 'PositiveNumber',
     hasInstance: (value) => typeof value === 'number' && value > 0,
+    typeName: 'PositiveNumber',
   });
 
   describeType(PositiveNumber, () => ({
-    typeName: 'PositiveNumber',
     instances: [1 as PositiveNumber, 1000 as PositiveNumber],
     notInstances: [0, -1, -1000],
+    typeName: 'PositiveNumber',
   }));
   describe('#()', () => {
     it('returns identity', () => {
@@ -62,11 +64,11 @@ describe(define, () => {
       expect(Codec.decode(PositiveNumber, 1)).toEqual(Result.Ok(1));
       expect(Codec.decode(PositiveNumber, 'invalid_value')).toEqual(
         Result.Error(
-          new CodecError({ message: 'Cannot decode "invalid_value" as PositiveNumber', input: 'invalid_value' }),
+          new CodecError({ input: 'invalid_value', message: 'Cannot decode "invalid_value" as PositiveNumber' }),
         ),
       );
       expect(Codec.decode(PositiveNumber, undefined)).toEqual(
-        Result.Error(new CodecError({ message: 'Cannot decode undefined as PositiveNumber', input: undefined })),
+        Result.Error(new CodecError({ input: undefined, message: 'Cannot decode undefined as PositiveNumber' })),
       );
     });
   });
@@ -76,11 +78,11 @@ describe(define, () => {
     });
     it('is overridable', () => {
       const PositiveNumberWithSchema = define<number, PositiveNumber>({
-        typeName: 'PositiveNumber',
-        hasInstance: (value) => typeof value === 'number' && value > 0,
         __schema__: () => ({
           type: 'number',
         }),
+        hasInstance: (value) => typeof value === 'number' && value > 0,
+        typeName: 'PositiveNumber',
       });
       expect(Codec.schema(PositiveNumberWithSchema)).toEqual({ type: 'number' });
     });

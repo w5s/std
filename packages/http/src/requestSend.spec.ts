@@ -1,12 +1,13 @@
 import { Int, Option } from '@w5s/core';
 import { Task } from '@w5s/task';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { TimeDuration } from '@w5s/time';
 import { timeout } from '@w5s/task-timeout';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { TimeDuration } from '@w5s/time';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
+import { Client } from './Client.js';
 import { HTTPError } from './HTTPError.js';
 import { requestSend } from './requestSend.js';
-import { Client } from './Client.js';
 import { Response } from './Response.js';
 import { Status } from './Status.js';
 
@@ -24,24 +25,24 @@ describe(requestSend, () => {
   const anyURL = 'https://localhost';
   const anyTask = expect.any(Object);
   const anyRequest = {
-    url: 'http://localhost#test',
     method: 'GET',
+    url: 'http://localhost#test',
   };
   const anyResponse = new globalThis.Response();
   const defer = <V>(): {
-    resolve(value: V | PromiseLike<V>): void;
-    reject(error: unknown): void;
     promise: Promise<V>;
+    reject(error: unknown): void;
+    resolve(value: PromiseLike<V> | V): void;
   } => {
-    const state: any = { resolve: (_: V) => undefined, reject: (_: unknown) => undefined };
+    const state: any = { reject: (_: unknown) => undefined, resolve: (_: V) => undefined };
     const promise = new Promise<V>((resolve, reject) => {
       state.resolve = resolve;
       state.reject = reject;
     });
     return {
-      resolve: (_) => state.resolve(_),
-      reject: (_) => state.reject(_),
       promise,
+      reject: (_) => state.reject(_),
+      resolve: (_) => state.resolve(_),
     };
   };
   const globalFetchMock = vi.fn<typeof globalThis.fetch>(async () => anyResponse);
@@ -52,12 +53,11 @@ describe(requestSend, () => {
   it('should call global fetch and send to parser', async () => {
     const url = 'http://localhost#test';
     const task = requestSend(anyClient, {
-      url,
       method: 'GET',
+      url,
     });
     await expectTask(task).toResolveAsync(
       Response({
-        status: Status(Int(200), ''),
         body: {
           unsafeArrayBuffer: expect.any(Function),
           unsafeBlob: expect.any(Function),
@@ -66,6 +66,7 @@ describe(requestSend, () => {
           unsafeStream: expect.any(Function),
           unsafeText: expect.any(Function),
         },
+        status: Status(Int(200), ''),
         url: '',
       }),
     );
@@ -76,7 +77,7 @@ describe(requestSend, () => {
       url: 'http://www.exam ple.com', // invalid url
     });
     await expectTask(task).toRejectAsync(
-      new HTTPError.InvalidURL({ message: 'Invalid URL', input: 'http://www.exam ple.com' }),
+      new HTTPError.InvalidURL({ input: 'http://www.exam ple.com', message: 'Invalid URL' }),
     );
   });
   it('should convert fetch error to NetworkError', async () => {
@@ -127,23 +128,24 @@ describe(requestSend, () => {
   });
   it('should use client#onRequest', async () => {
     const clientCustom = Client({
-      onRequest: (request) => Task.resolve({ ...request, url: 'http://localhost#custom' }),
       fetch: globalFetchMock,
+      onRequest: (request) => Task.resolve({ ...request, url: 'http://localhost#custom' }),
     });
     const request = {
-      url: 'http://localhost#test',
       method: 'GET',
+      url: 'http://localhost#test',
     };
     const task = requestSend(clientCustom, request);
     await expectTask(task).toResolveAsync(expect.any(Object));
     expect(globalFetchMock).toHaveBeenLastCalledWith('http://localhost#custom', {
+      body: null,
       method: 'GET',
       signal: expect.any(Object),
-      body: null,
     });
   });
   it('should use client#onResponse', async () => {
     const clientCustom = Client({
+      fetch: globalFetchMock,
       onResponse: (response) =>
         Task.resolve({
           ...response,
@@ -152,7 +154,6 @@ describe(requestSend, () => {
             bar: 'bar_value',
           },
         }),
-      fetch: globalFetchMock,
     });
     const mockResponse = new globalThis.Response(null, {
       headers: new globalThis.Headers({
@@ -164,8 +165,8 @@ describe(requestSend, () => {
     await expectTask(task).toResolveAsync(
       expect.objectContaining({
         headers: {
-          foo: 'foo_value',
           bar: 'bar_value',
+          foo: 'foo_value',
         },
       }),
     );
@@ -205,8 +206,8 @@ describe(requestSend, () => {
         timeout: 'default',
       });
       requestSend(client, {
-        url: anyURL,
         timeout: 'none',
+        url: anyURL,
       });
       expect(timeout).toHaveBeenLastCalledWith(anyTask, Option.None);
     });
@@ -215,8 +216,8 @@ describe(requestSend, () => {
         timeout: anyDuration,
       });
       requestSend(client, {
-        url: anyURL,
         timeout: 'default',
+        url: anyURL,
       });
       expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });
@@ -235,8 +236,8 @@ describe(requestSend, () => {
         timeout: 'default',
       });
       requestSend(client, {
-        url: anyURL,
         timeout: anyDuration,
+        url: anyURL,
       });
       expect(timeout).toHaveBeenLastCalledWith(anyTask, anyDuration);
     });

@@ -1,11 +1,12 @@
+import type { Option } from '@w5s/core';
 import type { Task, TaskLike } from '@w5s/task';
 import type { TimeDuration } from '@w5s/time';
+
 import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { from } from '@w5s/task/dist/Task/from.js';
-import { TaskCanceler } from '@w5s/task/dist/TaskCanceler.js';
 import { unsafeCall } from '@w5s/task/dist/Task/unsafeCall.js';
+import { TaskCanceler } from '@w5s/task/dist/TaskCanceler.js';
 import { TimeDurationAsString } from '@w5s/time/dist/TimeDuration/TimeDurationAsString.js';
-import type { Option } from '@w5s/core';
 
 const timeDurationString = TimeDurationAsString.asString;
 
@@ -26,10 +27,10 @@ const timeDurationString = TimeDurationAsString.asString;
 export function timeout<Value, Error>(
   self: TaskLike<Value, Error>,
   delay: Option<TimeDuration>,
-): Task<Value, TimeoutError | Error> {
+): Task<Value, Error | TimeoutError> {
   return delay == null
     ? from(self)
-    : from(({ resolve, reject, canceler }) => {
+    : from(({ canceler, reject, resolve }) => {
         const taskCanceler = new TaskCanceler();
 
         const timeoutId = setTimeout(() => {
@@ -48,15 +49,15 @@ export function timeout<Value, Error>(
         };
 
         return unsafeCall(self, {
-          resolve: (value) => {
-            timeoutCancel();
-            resolve(value);
-          },
+          canceler: taskCanceler,
           reject: (error) => {
             timeoutCancel();
             reject(error);
           },
-          canceler: taskCanceler,
+          resolve: (value) => {
+            timeoutCancel();
+            resolve(value);
+          },
         });
       });
 }

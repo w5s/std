@@ -1,33 +1,9 @@
 import type { JSONValue, Option } from '@w5s/core';
 
-export type BodyReaderFormat = 'arrayBuffer' | 'blob' | 'formData' | 'json' | 'stream' | 'text';
-
-export type BodyReaderValue<F extends BodyReaderFormat> = F extends 'arrayBuffer'
-  ? ArrayBuffer
-  : F extends 'blob'
-    ? Blob
-    : F extends 'formData'
-      ? FormData
-      : F extends 'json'
-        ? JSONValue
-        : F extends 'stream'
-          ? Option<ReadableStream>
-          : F extends 'text'
-            ? string
-            : never;
-
 /**
  * Represents an object that `BodyReader`
  */
 export interface BodyReader {
-  /**
-   * Returns a promise of {@link ReadableStream}
-   * This is an internal method that should not be used directly
-   *
-   * @internal
-   */
-  unsafeStream(): Option<BodyReaderValue<'stream'>>;
-
   /**
    * Returns a promise of {@link ArrayBuffer}
    * This is an internal method that should not be used directly
@@ -61,6 +37,14 @@ export interface BodyReader {
   unsafeJSON(): Promise<BodyReaderValue<'json'>>;
 
   /**
+   * Returns a promise of {@link ReadableStream}
+   * This is an internal method that should not be used directly
+   *
+   * @internal
+   */
+  unsafeStream(): Option<BodyReaderValue<'stream'>>;
+
+  /**
    * Returns a promise of `string`
    * This is an internal method that should not be used directly
    *
@@ -68,3 +52,19 @@ export interface BodyReader {
    */
   unsafeText(): Promise<BodyReaderValue<'text'>>;
 }
+
+export type BodyReaderFormat = 'arrayBuffer' | 'blob' | 'formData' | 'json' | 'stream' | 'text';
+
+export type BodyReaderValue<F extends BodyReaderFormat> = F extends 'arrayBuffer'
+  ? ArrayBuffer
+  : F extends 'blob'
+    ? Blob
+    : F extends 'formData'
+      ? FormData
+      : F extends 'json'
+        ? JSONValue
+        : F extends 'stream'
+          ? Option<ReadableStream>
+          : F extends 'text'
+            ? string
+            : never;

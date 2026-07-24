@@ -1,109 +1,5 @@
 /* eslint-disable ts/no-unsafe-function-type */
 
-/**
- * Pipe `value` to a sequence of function.
- *
- * @example
- * ```typescript
- * pipe(value).to();// value
- * pipe(value).to(f);// f(value) or value |> f
- * pipe(value).to(f, g);// g(f(value)) or value |> f |> g
- * // and so on...
- * ```
- * @param value the value to pass to the first function
- */
-export function pipe<Value>(value: Value): Pipe<Value> {
-  return {
-    to(
-      ab?: Function,
-      bc?: Function,
-      cd?: Function,
-      de?: Function,
-      ef?: Function,
-      fg?: Function,
-      gh?: Function,
-      hi?: Function,
-      ij?: Function,
-      jk?: Function,
-      kl?: Function,
-      lm?: Function,
-      mn?: Function,
-      no?: Function,
-      op?: Function,
-      pq?: Function,
-      qr?: Function,
-      rs?: Function,
-      st?: Function,
-    ) {
-      switch (arguments.length) {
-        case 0: {
-          return value;
-        }
-        case 1: {
-          return ab!(value);
-        }
-        case 2: {
-          return bc!(ab!(value));
-        }
-        case 3: {
-          return cd!(bc!(ab!(value)));
-        }
-        case 4: {
-          return de!(cd!(bc!(ab!(value))));
-        }
-        case 5: {
-          return ef!(de!(cd!(bc!(ab!(value)))));
-        }
-        case 6: {
-          return fg!(ef!(de!(cd!(bc!(ab!(value))))));
-        }
-        case 7: {
-          return gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))));
-        }
-        case 8: {
-          return hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))));
-        }
-        case 9: {
-          return ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))));
-        }
-        case 10: {
-          return jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))));
-        }
-        case 11: {
-          return kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))));
-        }
-        case 12: {
-          return lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))));
-        }
-        case 13: {
-          return mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))));
-        }
-        case 14: {
-          return no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))));
-        }
-        case 15: {
-          return op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))));
-        }
-        case 16: {
-          return pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))));
-        }
-        case 17: {
-          return qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))));
-        }
-        case 18: {
-          return rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))))));
-        }
-        case 19: {
-          return st!(rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))))));
-        }
-        default: {
-          throw new TypeError('Wrong arity');
-        }
-      }
-    },
-  };
-}
-
 interface Pipe<A> {
   to(): A;
   to<B>(ab: (_: A) => B): B;
@@ -314,4 +210,108 @@ interface Pipe<A> {
     rs: (_: R) => S,
     st: (_: S) => T,
   ): T;
+}
+
+/**
+ * Pipe `value` to a sequence of function.
+ *
+ * @example
+ * ```typescript
+ * pipe(value).to();// value
+ * pipe(value).to(f);// f(value) or value |> f
+ * pipe(value).to(f, g);// g(f(value)) or value |> f |> g
+ * // and so on...
+ * ```
+ * @param value the value to pass to the first function
+ */
+export function pipe<Value>(value: Value): Pipe<Value> {
+  return {
+    to(
+      ab?: Function,
+      bc?: Function,
+      cd?: Function,
+      de?: Function,
+      ef?: Function,
+      fg?: Function,
+      gh?: Function,
+      hi?: Function,
+      ij?: Function,
+      jk?: Function,
+      kl?: Function,
+      lm?: Function,
+      mn?: Function,
+      no?: Function,
+      op?: Function,
+      pq?: Function,
+      qr?: Function,
+      rs?: Function,
+      st?: Function,
+    ) {
+      switch (arguments.length) {
+        case 0: {
+          return value;
+        }
+        case 1: {
+          return ab!(value);
+        }
+        case 2: {
+          return bc!(ab!(value));
+        }
+        case 3: {
+          return cd!(bc!(ab!(value)));
+        }
+        case 4: {
+          return de!(cd!(bc!(ab!(value))));
+        }
+        case 5: {
+          return ef!(de!(cd!(bc!(ab!(value)))));
+        }
+        case 6: {
+          return fg!(ef!(de!(cd!(bc!(ab!(value))))));
+        }
+        case 7: {
+          return gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))));
+        }
+        case 8: {
+          return hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))));
+        }
+        case 9: {
+          return ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))));
+        }
+        case 10: {
+          return jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))));
+        }
+        case 11: {
+          return kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))));
+        }
+        case 12: {
+          return lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))));
+        }
+        case 13: {
+          return mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))));
+        }
+        case 14: {
+          return no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))));
+        }
+        case 15: {
+          return op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))));
+        }
+        case 16: {
+          return pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))));
+        }
+        case 17: {
+          return qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))));
+        }
+        case 18: {
+          return rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value))))))))))))))))));
+        }
+        case 19: {
+          return st!(rs!(qr!(pq!(op!(no!(mn!(lm!(kl!(jk!(ij!(hi!(gh!(fg!(ef!(de!(cd!(bc!(ab!(value)))))))))))))))))));
+        }
+        default: {
+          throw new TypeError('Wrong arity');
+        }
+      }
+    },
+  };
 }

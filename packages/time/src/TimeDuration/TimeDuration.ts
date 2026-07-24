@@ -7,9 +7,9 @@ import { Tag } from '@w5s/core/dist/Tag.js';
 export type TimeDuration = number & Tag<'TimeDuration'>;
 
 export const TimeDuration = Tag.define<number, TimeDuration>({
-  typeName: 'TimeDuration',
   hasInstance(anyValue: unknown): anyValue is TimeDuration {
     return typeof anyValue === 'number' && !Number.isNaN(anyValue);
   },
   [Symbol.schema]: () => ({ type: 'number' }),
+  typeName: 'TimeDuration',
 });

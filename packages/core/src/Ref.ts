@@ -51,9 +51,9 @@ export const Ref = Object.assign(
         anyValue != null && (typeof anyValue === 'object' || typeof anyValue === 'function') && 'current' in anyValue
       );
     },
-    read,
     modify,
     property,
+    read,
     write,
   },
 );

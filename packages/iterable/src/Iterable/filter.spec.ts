@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { filter } from './filter.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { filter } from './filter.js';
 import { of } from './of.js';
 
 describe(filter, () => {

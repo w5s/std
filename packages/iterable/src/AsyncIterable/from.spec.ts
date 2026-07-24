@@ -1,8 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import type { Awaitable } from '@w5s/core-type';
-import { from } from './from.js';
-import { withAsyncIterable } from '../Testing.js';
+
+import { describe, expect, it } from 'vitest';
+
 import { Iterable } from '../Iterable.js';
+import { withAsyncIterable } from '../Testing.js';
+import { from } from './from.js';
 
 describe(from, () => {
   const expectIterable = withAsyncIterable(expect);

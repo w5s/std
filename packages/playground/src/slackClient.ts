@@ -1,21 +1,27 @@
-import type { Option, JSONValue } from '@w5s/core';
-import type { Task } from '@w5s/task';
+import type { JSONValue, Option } from '@w5s/core';
 import type { Method } from '@w5s/http';
+import type { Task } from '@w5s/task';
+
+import { CodecError } from '@w5s/core/dist/CodecError.js';
+import { Enum } from '@w5s/core/dist/Enum.js';
+import { Error as Err } from '@w5s/core/dist/Result/Error.js';
+import { Ok } from '@w5s/core/dist/Result/Ok.js';
+import { Tag } from '@w5s/core/dist/Tag.js';
+import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
+import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { Client } from '@w5s/http/dist/Client.js';
+import { HTTPError } from '@w5s/http/dist/HTTPError.js';
 import { requestSend } from '@w5s/http/dist/requestSend.js';
 import { ResponseParser } from '@w5s/http/dist/ResponseParser.js';
-import { HTTPError } from '@w5s/http/dist/HTTPError.js';
-import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
-import { Tag } from '@w5s/core/dist/Tag.js';
-import { Enum } from '@w5s/core/dist/Enum.js';
-import { CodecError } from '@w5s/core/dist/CodecError.js';
-import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error as Err } from '@w5s/core/dist/Result/Error.js';
-import { TimeoutError } from '@w5s/error/dist/TimeoutError.js';
 import { andThen } from '@w5s/task/dist/Task/andThen.js';
+import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
 
 export interface Slack {
+  /**
+   * HTTP client
+   */
+  readonly httpClient: Client;
+
   /**
    * Slack base URL
    */
@@ -25,38 +31,33 @@ export interface Slack {
    * Slack API token
    */
   readonly slackToken: string;
-
-  /**
-   * HTTP client
-   */
-  readonly httpClient: Client;
 }
 export function Slack({
   baseURL: slackBaseURL = 'https://slack.com/api',
-  token: slackToken,
   httpClient = Client(),
+  token: slackToken,
 }: {
   baseURL?: Slack['slackBaseURL'];
-  token: Slack['slackToken'];
   httpClient?: Client;
+  token: Slack['slackToken'];
 }): Slack {
   return {
+    httpClient,
     slackBaseURL,
     slackToken,
-    httpClient,
   };
 }
 
 export namespace Slack {
-  type Id<T extends string> = string & Tag<T>;
+  export type ChannelId = Id<'SlackChannelId'>;
 
-  function MakeId<IdType extends Id<any>>(typeName: string) {
-    return Tag.define<string, IdType>({ typeName, hasInstance: (anyValue) => typeof anyValue === 'string' });
-  }
+  type Id<T extends string> = string & Tag<T>;
 
   // export type URL = string;
 
-  export type ChannelId = Id<'SlackChannelId'>;
+  function MakeId<IdType extends Id<any>>(typeName: string) {
+    return Tag.define<string, IdType>({ hasInstance: (anyValue) => typeof anyValue === 'string', typeName });
+  }
   export const ChannelId = MakeId<ChannelId>('SlackChannelId');
 
   export type UserId = Id<'SlackUserId'>;
@@ -83,15 +84,12 @@ export namespace Slack {
   });
   export type ErrorCode = Enum.ValueOf<typeof ErrorCode>;
 
-  export class Error extends ErrorClass({ errorName: 'SlackError' })<{ slackErrorCode: ErrorCode }> {}
+  type ResponseBase =
+    | { [key: string]: JSONValue; ok: true }
+    | { error: ErrorCode; ok: false }
+    | { ok: Exclude<JSONValue, boolean> };
 
-  function urlWithQuery(url: string, parameters: { [key: string]: string }) {
-    const urlObject = new URL(url);
-    for (const [key, value] of Object.entries(parameters)) {
-      urlObject.searchParams.append(key, value);
-    }
-    return urlObject.toString();
-  }
+  type ResponseError = CodecError | Error | HTTPError | TimeoutError;
 
   // const TResponseError = Type.Object({
   //   ok: Type.Boolean.False,
@@ -99,21 +97,16 @@ export namespace Slack {
   // });
   // type TResponseError = Type.TypeOf<typeof TResponseError>;
 
-  type ResponseBase =
-    | { ok: true; [key: string]: JSONValue }
-    | { ok: false; error: ErrorCode }
-    | { ok: Exclude<JSONValue, boolean> };
+  export class Error extends ErrorClass({ errorName: 'SlackError' })<{ slackErrorCode: ErrorCode }> {}
 
-  type ResponseError = CodecError | HTTPError | TimeoutError | Error;
-
-  function apiCall<R>(client: Slack, method: Method, parameters: { [key: string]: unknown }): Task<R, ResponseError> {
+  function apiCall<R>(client: Slack, method: Method, parameters: Record<string, unknown>): Task<R, ResponseError> {
     const { httpClient } = client;
     const request = requestSend(httpClient, {
+      method: 'POST',
       url: urlWithQuery(`${client.slackBaseURL}/${method}`, {
         token: client.slackToken,
         ...parameters,
       }),
-      method: 'POST',
     });
     const parsed = andThen(request, ResponseParser.json<ResponseBase>('unsafe'));
     const requestParsed = mapResult<ResponseBase, HTTPError, R, ResponseError>(parsed, (result) =>
@@ -122,10 +115,18 @@ export namespace Slack {
           ? Ok(result.value as R)
           : result.value.ok === false
             ? Err(new Error({ message: 'Slack Error!', slackErrorCode: result.value.error }))
-            : Err(new CodecError({ message: 'Decode Error!', input: result.value }))
+            : Err(new CodecError({ input: result.value, message: 'Decode Error!' }))
         : result,
     );
     return requestParsed;
+  }
+
+  function urlWithQuery(url: string, parameters: Record<string, string>) {
+    const urlObject = new URL(url);
+    for (const [key, value] of Object.entries(parameters)) {
+      urlObject.searchParams.append(key, value);
+    }
+    return urlObject.toString();
   }
 
   export namespace Chat {
@@ -134,11 +135,11 @@ export namespace Slack {
     }
     export namespace postMessage {
       export interface Request extends Readonly<{
-        // username?: Slack.UserId;
-        text?: Option<string>;
-        channel?: Option<Slack.ChannelId>;
         // blocks?: Array<unknown>;
         attachments?: Array<unknown>;
+        channel?: Option<Slack.ChannelId>;
+        // username?: Slack.UserId;
+        text?: Option<string>;
       }> {}
       export type Response = void;
     }

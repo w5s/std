@@ -1,6 +1,7 @@
 import { Symbol } from '@w5s/core';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+
 import { fsStub, withFile } from '../Testing.js';
 import { ensureDirectory, ensureFile, ensureSymbolicLink } from './ensure.js';
 
@@ -40,11 +41,11 @@ describe(ensureDirectory, () => {
     const task = ensureDirectory(ensured);
     await expectTask(task).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        message: `Ensure path exists, expected 'directory', got 'file'`,
-        fileErrorType: 'UserError',
-        errno: undefined,
         code: undefined,
+        errno: undefined,
+        fileErrorType: 'UserError',
+        message: `Ensure path exists, expected 'directory', got 'file'`,
+        name: 'FileError',
         path: expect.any(String),
         syscall: undefined,
       }),
@@ -75,11 +76,11 @@ describe(ensureFile, () => {
     const task = ensureFile(ensured);
     await expectTask(task).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        message: `Ensure path exists, expected 'file', got 'directory'`,
-        fileErrorType: 'UserError',
-        errno: undefined,
         code: undefined,
+        errno: undefined,
+        fileErrorType: 'UserError',
+        message: `Ensure path exists, expected 'file', got 'directory'`,
+        name: 'FileError',
         path: expect.any(String),
         syscall: undefined,
       }),
@@ -114,11 +115,11 @@ describe(ensureSymbolicLink, () => {
     const task = ensureSymbolicLink(source, destination);
     await expectTask(task).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        message: `Ensure path exists, expected 'symlink', got 'directory'`,
-        fileErrorType: 'UserError',
-        errno: undefined,
         code: undefined,
+        errno: undefined,
+        fileErrorType: 'UserError',
+        message: `Ensure path exists, expected 'symlink', got 'directory'`,
+        name: 'FileError',
         path: expect.any(String),
         syscall: undefined,
       }),

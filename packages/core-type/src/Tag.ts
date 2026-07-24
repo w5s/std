@@ -13,8 +13,6 @@
  * }
  * ```
  */
-export type Tag<T extends string | symbol, Value = true> = {
-  readonly '@@tag': {
-    readonly [K in T]: Value;
-  };
-};
+export interface Tag<T extends string | symbol, Value = true> {
+  readonly '@@tag': Readonly<Record<T, Value>>;
+}

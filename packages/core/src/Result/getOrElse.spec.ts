@@ -1,8 +1,9 @@
-import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { getOrElse } from './getOrElse.js';
-import { Error } from './Error.js';
+import { describe, expect, it } from 'vitest';
+
 import { Result } from '../Result.js';
+import { Error } from './Error.js';
+import { getOrElse } from './getOrElse.js';
 import { Ok } from './Ok.js';
 
 describe(getOrElse, () => {
@@ -11,7 +12,7 @@ describe(getOrElse, () => {
   it('should return defaultValue for Error', () => {
     const returnValue = getOrElse(Error(anyError) as Result<typeof anyValue, typeof anyError>, () => 1);
     expect(returnValue).toEqual(1);
-    assertType<typeof returnValue, typeof anyValue | number>(true);
+    assertType<typeof returnValue, number | typeof anyValue>(true);
   });
   it('should return value for Ok', () => {
     expect(getOrElse(Ok(anyValue), () => 1)).toBe(anyValue);

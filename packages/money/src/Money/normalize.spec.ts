@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest';
 import { BigDecimal } from '@w5s/bigdecimal';
-import { normalize } from './normalize.js';
-import { Money } from './Money.js';
+import { describe, expect, it } from 'vitest';
+
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
+import { Money } from './Money.js';
+import { normalize } from './normalize.js';
 import '../moneyFactory.all.js';
 
 describe(normalize, () => {

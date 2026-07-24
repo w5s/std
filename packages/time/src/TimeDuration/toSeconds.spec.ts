@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { toSeconds } from './toSeconds.js';
+import { describe, expect, it } from 'vitest';
+
 import { TimeDuration } from './TimeDuration.js';
+import { toSeconds } from './toSeconds.js';
 
 describe(toSeconds, () => {
   it('should convert milliseconds to seconds', () => {

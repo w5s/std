@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Result, Symbol } from '@w5s/core';
 import { Task, TaskCanceler } from '@w5s/task';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { TimeDuration } from '../TimeDuration.js';
 import { delay } from './delay.js';
 
@@ -33,7 +34,7 @@ describe('.delay', () => {
     const reject = vi.fn();
 
     // Run task
-    task[Symbol.run]({ resolve, reject, canceler });
+    task[Symbol.run]({ canceler, reject, resolve });
     // Memorize the last setTimeout call
 
     const setTimeoutResult = setTimeoutSpy.mock.results.at(-1)?.value;

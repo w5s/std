@@ -1,5 +1,6 @@
-import { Symbol } from '../Symbol.js';
 import type { Tag } from '../Tag.js';
+
+import { Symbol } from '../Symbol.js';
 import { define } from '../Tag/define.js';
 
 export type Char = string & Tag<'Char'>;
@@ -10,11 +11,11 @@ export type Char = string & Tag<'Char'>;
  * @namespace
  */
 export const Char = define<string, Char>({
-  typeName: 'Char',
   hasInstance: (anyValue) => typeof anyValue === 'string' && anyValue.length === 1,
   [Symbol.schema]: () => ({
-    type: 'string',
-    minLength: 1,
     maxLength: 1,
+    minLength: 1,
+    type: 'string',
   }),
+  typeName: 'Char',
 });

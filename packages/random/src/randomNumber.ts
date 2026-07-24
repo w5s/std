@@ -1,7 +1,10 @@
 import type { Task } from '@w5s/task';
+
 import { map } from '@w5s/task/dist/Task/map.js';
-import { next } from './Random/next.js';
+
 import type { RandomGenerator } from './RandomGenerator.js';
+
+import { next } from './Random/next.js';
 
 /**
  * Return a Task that will generate floating numbers between [`min`, `max`].

@@ -1,7 +1,10 @@
-import { BigDecimalAsString } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalAsString.js';
 import type { AsString } from '@w5s/core';
-import { CurrencyAsString } from '../Currency/CurrencyAsString.js';
+
+import { BigDecimalAsString } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalAsString.js';
+
 import type { Money } from './Money.js';
+
+import { CurrencyAsString } from '../Currency/CurrencyAsString.js';
 
 const bigDecimalAsString = BigDecimalAsString.asString;
 const currencyAsString = CurrencyAsString.asString;

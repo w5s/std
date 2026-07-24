@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
 import { TaskCanceler } from '@w5s/task';
-import { readFile } from './readFile.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
+import { readFile } from './readFile.js';
 
 describe(readFile, () => {
   const expectTask = withTask(expect);
@@ -34,9 +35,9 @@ describe(readFile, () => {
     const canceler = new TaskCanceler();
     const task = readFile(FilePath('myPath'));
     task[Symbol.run]({
-      resolve: () => {},
-      reject: () => {},
       canceler,
+      reject: () => {},
+      resolve: () => {},
     });
 
     canceler.cancel();

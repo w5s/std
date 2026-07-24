@@ -1,9 +1,10 @@
 import type { Type } from '../Type.js';
-import { define } from './define.js';
-import { encode } from '../Codec/encode.js';
+
 import { decode } from '../Codec/decode.js';
+import { encode } from '../Codec/encode.js';
 import { schema } from '../Codec/schema.js';
 import { Symbol } from '../Symbol.js';
+import { define } from './define.js';
 
 const { isArray } = globalThis.Array;
 
@@ -12,11 +13,9 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
 ): Type.Module<{ readonly [K in keyof C]: Type.TypeOf<C[K]> }> {
   const typeName = `[${items.map((item) => item.typeName).join(',')}]`;
   return define({
-    typeName,
     hasInstance: (anyValue): boolean =>
       isArray(anyValue) && items.every((item, itemIndex) => item.hasInstance(anyValue[itemIndex])),
-    [Symbol.encode]: (input) => items.map((item, itemIndex) => encode(item, input[itemIndex])),
-    [Symbol.decode]: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { error, ok }) => {
       if (!Array.isArray(input)) {
         return error(input, typeName);
       }
@@ -36,9 +35,11 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
         returnValue,
       );
     },
+    [Symbol.encode]: (input) => items.map((item, itemIndex) => encode(item, input[itemIndex])),
     [Symbol.schema]: () => ({
-      type: 'array',
       items: items.map(schema),
+      type: 'array',
     }),
+    typeName,
   });
 }

@@ -1,6 +1,7 @@
 import type { Numeric } from '../Numeric.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for {@link Zero} interface
@@ -26,7 +27,7 @@ export function describeZero<T>(
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
 
   describe('isZero', () => {
     it('satisfies isZero(zero()) == true', () => {

@@ -1,5 +1,6 @@
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { assertNever } from '@w5s/error/dist/assertNever.js';
+
 import { sql, SQLStatement } from './sql.js';
 import { SQLDataType } from './SQLDataType.js';
 
@@ -10,8 +11,8 @@ export type SQLQuery =
   | SQLQuery.CreateTable
   | SQLQuery.DropSchema
   | SQLQuery.DropTable
-  | SQLQuery.RemoveConstraint
-  | SQLQuery.RemoveColumn;
+  | SQLQuery.RemoveColumn
+  | SQLQuery.RemoveConstraint;
 
 const Order = Object.freeze({
   Ascending: 'ASC',
@@ -52,11 +53,11 @@ function toSQLStatement(query: SQLQuery): SQLStatement {
     case DropTable.typeName: {
       return sql`DROP TABLE ${identifier(query.tableName)}`;
     }
-    case RemoveConstraint.typeName: {
-      return alterTable(query.tableName, `DROP CONSTRAINT ${query.constraintName}`);
-    }
     case RemoveColumn.typeName: {
       return alterTable(query.tableName, `DROP COLUMN ${query.columnName}`);
+    }
+    case RemoveConstraint.typeName: {
+      return alterTable(query.tableName, `DROP CONSTRAINT ${query.constraintName}`);
     }
     default: {
       return assertNever(query);
@@ -68,62 +69,37 @@ function toSQLStatement(query: SQLQuery): SQLStatement {
  * @namespace
  */
 export const SQLQuery = {
-  Order,
   AddColumn,
   AddConstraint,
   CreateSchema,
   CreateTable,
   DropSchema,
   DropTable,
-  RemoveConstraint,
+  Order,
   RemoveColumn,
+  RemoveConstraint,
   toSQLStatement,
 };
 
 export namespace SQLQuery {
-  export type Order = 'ASC' | 'DESC';
+  export interface AddColumn extends Struct<{
+    [Struct.type]: 'SQLAddColumn';
+    columnAttributes: ColumnAttributes;
+    columnName: string;
+    tableName: string;
+  }> {}
 
-  export type OrderClause = string | Readonly<[string, Order]>;
-
-  type TriggerAction = 'CASCADE' | 'RESTRICT' | 'SET DEFAULT' | 'SET NULL' | 'NO ACTION';
-
-  type ColumnReferencesOptions = {
-    /**
-     * Reference to another table
-     */
-    tableName?: string;
-
-    /**
-     * Reference to a column
-     */
-    columnName?: string;
-  };
+  export interface AddConstraint extends Struct<{
+    [Struct.type]: 'SQLAddConstraint';
+    constraintName: string;
+    tableName: string;
+  }> {}
 
   export interface ColumnAttributes {
     /**
      * Nullable column
      */
     allowNull?: boolean;
-
-    /**
-     * Default value
-     */
-    defaultValue?: any;
-
-    /**
-     * Column type
-     */
-    type: SQLDataType;
-
-    /**
-     * Unique constraint on column
-     */
-    unique?: boolean | string | { name: string; message: string };
-
-    /**
-     * Primary key field
-     */
-    primaryKey?: boolean;
 
     /**
      * Auto-incremented field
@@ -136,9 +112,14 @@ export namespace SQLQuery {
     comment?: string;
 
     /**
-     * An object with reference configurations
+     * Default value
      */
-    references?: ColumnReferencesOptions;
+    defaultValue?: any;
+
+    /**
+     * Trigger action when deleted
+     */
+    onDelete?: TriggerAction;
 
     /**
      * Trigger action when updated
@@ -146,26 +127,27 @@ export namespace SQLQuery {
     onUpdate?: TriggerAction;
 
     /**
-     * Trigger action when deleted
+     * Primary key field
      */
-    onDelete?: TriggerAction;
+    primaryKey?: boolean;
+
+    /**
+     * An object with reference configurations
+     */
+    references?: ColumnReferencesOptions;
+
+    /**
+     * Column type
+     */
+    type: SQLDataType;
+
+    /**
+     * Unique constraint on column
+     */
+    unique?: boolean | string | { message: string; name: string };
 
     // values?: string[];
   }
-  export interface TableAttributes extends Record<string, ColumnAttributes> {}
-
-  export interface AddColumn extends Struct<{
-    [Struct.type]: 'SQLAddColumn';
-    tableName: string;
-    columnName: string;
-    columnAttributes: ColumnAttributes;
-  }> {}
-
-  export interface AddConstraint extends Struct<{
-    [Struct.type]: 'SQLAddConstraint';
-    tableName: string;
-    constraintName: string;
-  }> {}
 
   export interface CreateSchema extends Struct<{
     [Struct.type]: 'SQLCreateSchema';
@@ -174,10 +156,9 @@ export namespace SQLQuery {
 
   export interface CreateTable extends Struct<{
     [Struct.type]: 'SQLCreateTable';
-    tableName: string;
     tableAttributes: TableAttributes;
+    tableName: string;
   }> {}
-
   export interface DropSchema extends Struct<{
     [Struct.type]: 'SQLDropSchema';
     schemaName: string;
@@ -188,37 +169,57 @@ export namespace SQLQuery {
     tableName: string;
   }> {}
 
-  export interface RemoveConstraint extends Struct<{
-    [Struct.type]: 'SQLRemoveConstraint';
-    tableName: string;
-    constraintName: string;
-  }> {}
+  export type Order = 'ASC' | 'DESC';
+
+  export type OrderClause = Readonly<[string, Order]> | string;
 
   export interface RemoveColumn extends Struct<{
     [Struct.type]: 'SQLRemoveColumn';
-    tableName: string;
     columnName: string;
+    tableName: string;
   }> {}
+
+  export interface RemoveConstraint extends Struct<{
+    [Struct.type]: 'SQLRemoveConstraint';
+    constraintName: string;
+    tableName: string;
+  }> {}
+
+  export interface TableAttributes extends Record<string, ColumnAttributes> {}
+
+  interface ColumnReferencesOptions {
+    /**
+     * Reference to a column
+     */
+    columnName?: string;
+
+    /**
+     * Reference to another table
+     */
+    tableName?: string;
+  }
+
+  type TriggerAction = 'CASCADE' | 'NO ACTION' | 'RESTRICT' | 'SET DEFAULT' | 'SET NULL';
+}
+
+function alterTable(tableName: string, operation: string): SQLStatement {
+  return sql`ALTER TABLE ${sql.raw(tableName)} ${sql.raw(operation)}`;
 }
 
 function objectEntries<V>(object: Record<string, V>): Array<[string, V]> {
   return Object.entries(object);
 }
 
-function stringifyDataType(data: SQLDataType): string {
-  return SQLDataType.format(data);
-}
-
 function stringifyColumnAttributes(columnAttributes: SQLQuery.ColumnAttributes): string {
   return stringifyDataType(columnAttributes.type);
+}
+
+function stringifyDataType(data: SQLDataType): string {
+  return SQLDataType.format(data);
 }
 
 function stringifyTableAttributes(tableAttributes: SQLQuery.TableAttributes): string {
   return objectEntries(tableAttributes)
     .map(([columnName, columnAttributes]) => `\n  ${columnName} ${stringifyColumnAttributes(columnAttributes)}`)
     .join(',');
-}
-
-function alterTable(tableName: string, operation: string): SQLStatement {
-  return sql`ALTER TABLE ${sql.raw(tableName)} ${sql.raw(operation)}`;
 }

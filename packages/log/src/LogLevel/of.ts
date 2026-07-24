@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+
 import { LogLevel } from './LogLevel.js';
 
 /**

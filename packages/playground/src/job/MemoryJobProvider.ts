@@ -1,35 +1,28 @@
 import type { JobEnqueueOptions, JobProvider } from './JobProvider.js';
 import type { JobRequest } from './JobRequest.js';
 
-export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
-  readonly request: Request;
-  readonly enqueuedAt: number;
-  readonly availableAt: number;
-}
-
 export interface MemoryJobProviderOptions {
   readonly now?: () => number;
 }
 
+export interface MemoryJobQueueEntry<Request extends JobRequest = JobRequest> {
+  readonly availableAt: number;
+  readonly enqueuedAt: number;
+  readonly request: Request;
+}
+
 export class MemoryJobProvider implements JobProvider {
-  readonly #queue: MemoryJobQueueEntry[] = [];
-  readonly #timers = new Set<ReturnType<typeof setTimeout>>();
-  readonly #now: () => number;
-
-  constructor(options: MemoryJobProviderOptions = {}) {
-    this.#now = options.now ?? (() => Date.now());
-  }
-
   get size(): number {
     return this.#queue.length;
   }
 
-  peek(): MemoryJobQueueEntry | undefined {
-    return this.#queue[0];
-  }
+  readonly #now: () => number;
+  readonly #queue: Array<MemoryJobQueueEntry> = [];
 
-  dequeue(): MemoryJobQueueEntry | undefined {
-    return this.#queue.shift();
+  readonly #timers = new Set<ReturnType<typeof setTimeout>>();
+
+  constructor(options: MemoryJobProviderOptions = {}) {
+    this.#now = options.now ?? (() => Date.now());
   }
 
   clear(): void {
@@ -40,15 +33,19 @@ export class MemoryJobProvider implements JobProvider {
     this.#queue.length = 0;
   }
 
+  dequeue(): MemoryJobQueueEntry | undefined {
+    return this.#queue.shift();
+  }
+
   async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueueOptions): Promise<void> {
     const enqueuedAt = this.#now();
     const availableAt = options._ === 'delayed'
       ? enqueuedAt + options.delay
       : enqueuedAt;
     const entry: MemoryJobQueueEntry<Request> = {
-      request,
-      enqueuedAt,
       availableAt,
+      enqueuedAt,
+      request,
     };
 
     if (options._ === 'delayed') {
@@ -61,5 +58,9 @@ export class MemoryJobProvider implements JobProvider {
     }
 
     this.#queue.push(entry);
+  }
+
+  peek(): MemoryJobQueueEntry | undefined {
+    return this.#queue[0];
   }
 }

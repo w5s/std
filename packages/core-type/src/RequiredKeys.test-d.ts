@@ -1,6 +1,7 @@
-import { assertType } from './assertType.js';
 import type { RequiredKeys } from './RequiredKeys.js';
 
-type RequiredObject = RequiredKeys<{ foo?: boolean; bar?: string; optional: number }, 'bar'>;
+import { assertType } from './assertType.js';
 
-assertType<RequiredObject, { foo?: boolean; bar: string; optional: number }>(true);
+type RequiredObject = RequiredKeys<{ bar?: string; foo?: boolean; optional: number }, 'bar'>;
+
+assertType<RequiredObject, { bar: string; foo?: boolean; optional: number }>(true);

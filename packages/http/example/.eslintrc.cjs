@@ -3,8 +3,8 @@ module.exports = {
     project: require.resolve('./tsconfig.json'),
   },
   rules: {
-    'no-console': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-console': 'off',
     'ts/no-floating-promises': 'off',
   },
 };

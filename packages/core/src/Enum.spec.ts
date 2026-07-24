@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Enum } from './Enum.js';
 import { define } from './Enum/define.js';
 import { keys } from './Enum/keys.js';
@@ -9,9 +10,9 @@ describe('Enum', () => {
   it('is an alias to functions', () => {
     expect(Enum).toEqual({
       define,
+      enumKeys: Symbol.enumKeys,
       keys,
       values,
-      enumKeys: Symbol.enumKeys,
     });
   });
 });

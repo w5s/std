@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { find } from './find.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { Option } from '../../../core/src/Option.js';
+import { find } from './find.js';
 
 describe(find, () => {
   it('should map each value to callback', () => {

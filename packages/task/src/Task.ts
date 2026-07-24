@@ -1,74 +1,45 @@
 import type { Awaitable } from '@w5s/async';
 import type { Result } from '@w5s/core';
-import type { Symbol } from '@w5s/core/dist/Symbol.js';
 import type { PartialKeys } from '@w5s/core-type';
-import { create } from './Task/create.js';
-import { resolve } from './Task/resolve.js';
-import { reject } from './Task/reject.js';
-import { all } from './Task/all.js';
-import { any } from './Task/any.js';
-import { allSettled } from './Task/allSettled.js';
-import { map } from './Task/map.js';
-import { mapError } from './Task/mapError.js';
-import { andThen } from './Task/andThen.js';
-import { andRun } from './Task/andRun.js';
-import { orElse } from './Task/orElse.js';
-import { tryCall } from './Task/tryCall.js';
-import { hasInstance } from './Task/hasInstance.js';
-import { run } from './Task/run.js';
-import { from } from './Task/from.js';
-import { mapResult } from './Task/mapResult.js';
-import { ignore } from './Task/ignore.js';
-import { ok } from './Task/ok.js';
-import { error } from './Task/error.js';
-import { allKeyed } from './Task/allKeyed.js';
-import { allSettledKeyed } from './Task/allSettledKeyed.js';
+import type { Symbol } from '@w5s/core/dist/Symbol.js';
+
 import type { TaskCanceler } from './TaskCanceler.js';
 
+import { all } from './Task/all.js';
+import { allKeyed } from './Task/allKeyed.js';
+import { allSettled } from './Task/allSettled.js';
+import { allSettledKeyed } from './Task/allSettledKeyed.js';
+import { andRun } from './Task/andRun.js';
+import { andThen } from './Task/andThen.js';
+import { any } from './Task/any.js';
+import { create } from './Task/create.js';
+import { error } from './Task/error.js';
+import { from } from './Task/from.js';
+import { hasInstance } from './Task/hasInstance.js';
+import { ignore } from './Task/ignore.js';
+import { map } from './Task/map.js';
+import { mapError } from './Task/mapError.js';
+import { mapResult } from './Task/mapResult.js';
+import { ok } from './Task/ok.js';
+import { orElse } from './Task/orElse.js';
+import { reject } from './Task/reject.js';
+import { resolve } from './Task/resolve.js';
+import { run } from './Task/run.js';
+import { tryCall } from './Task/tryCall.js';
+
 /**
- * A function that runs the task and returns a {@link @w5s/core!Result}
+ * An implementation of {@link @w5s/task!TaskLike}
  */
-export type TaskRunner = <Value, Error>(
-  task: TaskLike<Value, Error>,
-  canceler: TaskCanceler,
-) => Awaitable<Result<Value, Error>>;
-
-export interface TaskParametersOverrides<Value, Error> extends PartialKeys<
-  Pick<TaskParameters<Value, Error>, 'resolve' | 'reject' | 'canceler'>,
-  'canceler'
-> {}
-
-/**
- * All context passed to task in order to execute
- */
-export interface TaskParameters<Value, Error> {
+export interface Task<Value, Error> extends TaskLike<Value, Error> {
   /**
-   * Resolve callback
+   * Shorthand to run the current task
+   *
+   * @param options
    */
-  readonly resolve: (value: Value) => Awaitable<void>;
-
-  /**
-   * Reject callback
-   */
-  readonly reject: (error: Error) => Awaitable<void>;
-
-  /**
-   * Reference to cancel function
-   */
-  readonly canceler: TaskCanceler;
+  run(options?: TaskRunOptions): Awaitable<Result<Value, Error>>;
 }
 
 export type TaskFunction<Value, Error> = (parameters: TaskParameters<Value, Error>) => Awaitable<void>;
-
-/**
- * Options for running a task
- */
-export type TaskRunOptions = {
-  /**
-   * The abort signal to use for the task.
-   */
-  signal?: AbortSignal;
-};
 
 /**
  * A Task interface that represents a lazy computation that will be evaluated later.
@@ -83,15 +54,46 @@ export interface TaskLike<Value, Error> {
 }
 
 /**
- * An implementation of {@link @w5s/task!TaskLike}
+ * All context passed to task in order to execute
  */
-export interface Task<Value, Error> extends TaskLike<Value, Error> {
+export interface TaskParameters<Value, Error> {
   /**
-   * Shorthand to run the current task
-   *
-   * @param options
+   * Reference to cancel function
    */
-  run(options?: TaskRunOptions): Awaitable<Result<Value, Error>>;
+  readonly canceler: TaskCanceler;
+
+  /**
+   * Reject callback
+   */
+  readonly reject: (error: Error) => Awaitable<void>;
+
+  /**
+   * Resolve callback
+   */
+  readonly resolve: (value: Value) => Awaitable<void>;
+}
+
+export interface TaskParametersOverrides<Value, Error> extends PartialKeys<
+  Pick<TaskParameters<Value, Error>, 'canceler' | 'reject' | 'resolve'>,
+  'canceler'
+> {}
+
+/**
+ * A function that runs the task and returns a {@link @w5s/core!Result}
+ */
+export type TaskRunner = <Value, Error>(
+  task: TaskLike<Value, Error>,
+  canceler: TaskCanceler,
+) => Awaitable<Result<Value, Error>>;
+
+/**
+ * Options for running a task
+ */
+export interface TaskRunOptions {
+  /**
+   * The abort signal to use for the task.
+   */
+  signal?: AbortSignal;
 }
 
 /**
@@ -117,18 +119,18 @@ export const Task = {
   orElse,
   reject,
   resolve,
-  tryCall,
   run,
+  tryCall,
 };
 
 export namespace Task {
   /**
-   * Extracts value type of task T
-   */
-  export type ValueOf<T> = T extends Task<infer V, any> ? V : never;
-
-  /**
    * Extracts error type of task T
    */
   export type ErrorOf<T> = T extends Task<any, infer Error> ? Error : never;
+
+  /**
+   * Extracts value type of task T
+   */
+  export type ValueOf<T> = T extends Task<infer V, any> ? V : never;
 }

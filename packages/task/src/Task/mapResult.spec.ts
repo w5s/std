@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { Result } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { FakeTask, withTask } from '../Testing.js';
 import { mapResult } from './mapResult.js';
 

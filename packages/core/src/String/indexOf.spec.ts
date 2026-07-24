@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { indexOf } from './indexOf.js';
+
 import { Option } from '../Option.js';
+import { indexOf } from './indexOf.js';
 
 describe(indexOf, () => {
   it('should return index of element', () => {

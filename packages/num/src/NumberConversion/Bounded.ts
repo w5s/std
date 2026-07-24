@@ -1,5 +1,7 @@
 import type { Bounded } from '@w5s/core';
+
 import type { NumberConversion } from '../NumberConversion.js';
+
 import { defaultConversion } from '../internal/defaultConversion.js';
 
 /**

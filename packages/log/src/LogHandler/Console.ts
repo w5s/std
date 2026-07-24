@@ -1,12 +1,14 @@
-import { Console as defaultConsole, ANSICode } from '@w5s/console';
+import { ANSICode, Console as defaultConsole } from '@w5s/console';
 import { format as timeAsString } from '@w5s/time/dist/Time/format.js';
+
 import type { LogHandler } from '../LogHandler.js';
-import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
-import { LogLevelAsInt } from '../LogLevel/LogLevelAsInt.js';
-import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
-import type { LogRecord } from '../LogRecord.js';
-import { messageWithData } from '../LogRecord/messageWithData.js';
 import type { LogLevel } from '../LogLevel.js';
+import type { LogRecord } from '../LogRecord.js';
+
+import { LogLevelAsInt } from '../LogLevel/LogLevelAsInt.js';
+import { LogLevelAsString } from '../LogLevel/LogLevelAsString.js';
+import { LogLevelValue } from '../LogLevel/LogLevelValue.js';
+import { messageWithData } from '../LogRecord/messageWithData.js';
 
 const red = ANSICode.color('red');
 const yellow = ANSICode.color('yellow');
@@ -28,7 +30,7 @@ const formatLevelFor = (level: LogLevel) =>
 const formatNoColor = (_: string): string => _;
 
 const defaultFormat: Exclude<ConsoleOptions['format'], undefined> = (logRecord, { colors }) => {
-  const { domain, level, created } = logRecord;
+  const { created, domain, level } = logRecord;
 
   return [
     (colors ? formatTime : formatNoColor)(timeAsString(created)),
@@ -45,16 +47,16 @@ export interface ConsoleOptions {
   colors: boolean;
 
   /**
+   * Custom console instance (default: Console)
+   */
+  console: Pick<typeof defaultConsole, 'debug' | 'error' | 'info' | 'warn'>;
+
+  /**
    * Returns an array of arguments passed to the console.{log|warn|...}() function
    *
    * @param logRecord
    */
-  format: (logRecord: LogRecord, options: ConsoleOptions) => [required: unknown, ...optionalParameters: unknown[]];
-
-  /**
-   * Custom console instance (default: Console)
-   */
-  console: Pick<typeof defaultConsole, 'debug' | 'info' | 'warn' | 'error'>;
+  format: (logRecord: LogRecord, options: ConsoleOptions) => [required: unknown, ...optionalParameters: Array<unknown>];
 }
 
 /**
@@ -71,12 +73,12 @@ export interface ConsoleOptions {
 export function Console(options: Partial<ConsoleOptions> = {}): LogHandler {
   const resolvedOptions = {
     colors: true,
-    format: defaultFormat,
     console: defaultConsole,
+    format: defaultFormat,
     ...options,
   };
-  const { format, console } = resolvedOptions;
-  const consoleWrite = (level: LogLevel, args: [required: unknown, ...optionalParameters: unknown[]]) =>
+  const { console, format } = resolvedOptions;
+  const consoleWrite = (level: LogLevel, args: [required: unknown, ...optionalParameters: Array<unknown>]) =>
     logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Error)
       ? console.error(...args)
       : logLevelAsInt(level) >= logLevelAsInt(LogLevelValue.Warn)

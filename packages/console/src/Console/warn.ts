@@ -1,4 +1,5 @@
 import type { Task } from '@w5s/task';
+
 import { write } from './write.js';
 
 /**
@@ -10,6 +11,6 @@ import { write } from './write.js';
  * ```
  * @param parameters an array of values to be logged
  */
-export function warn(...parameters: [required: unknown, ...optionalParameters: unknown[]]): Task<void, never> {
+export function warn(...parameters: [required: unknown, ...optionalParameters: Array<unknown>]): Task<void, never> {
   return write('warn', parameters);
 }

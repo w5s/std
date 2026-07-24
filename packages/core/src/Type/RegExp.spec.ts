@@ -1,29 +1,30 @@
-import { describe, it, expect } from 'vitest';
-import { RegExp } from './RegExp.js';
-import { describeCodec, describeType } from '../Testing.js';
-import { Result } from '../Result.js';
+import { describe, expect, it } from 'vitest';
+
 import { CodecError } from '../CodecError.js';
+import { Result } from '../Result.js';
+import { describeCodec, describeType } from '../Testing.js';
+import { RegExp } from './RegExp.js';
 
 describe('RegExp', () => {
   describeType(RegExp, () => ({
-    typeName: 'RegExp',
     instances: [/abc/],
     notInstances: ['anything', null, undefined],
+    typeName: 'RegExp',
   }));
   describeCodec(RegExp, () => ({
-    encode: [
-      [new globalThis.RegExp(''), '/(?:)/'],
-      [/[a-z][A-Z]/, '/[a-z][A-Z]/'],
-    ],
     decode: [
       ['', Result.Ok(/(?:)/)],
       ['[a-z][A-Z]', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z][A-Z]/', Result.Ok(/[a-z][A-Z]/)],
       ['/[a-z]{2}/gi', Result.Ok(/[a-z]{2}/gi)],
-      [undefined, Result.Error(new CodecError({ message: 'Cannot decode undefined as RegExp', input: undefined }))],
-      [null, Result.Error(new CodecError({ message: 'Cannot decode null as RegExp', input: null }))],
+      [undefined, Result.Error(new CodecError({ input: undefined, message: 'Cannot decode undefined as RegExp' }))],
+      [null, Result.Error(new CodecError({ input: null, message: 'Cannot decode null as RegExp' }))],
     ],
-    schema: { type: 'string', format: 'regex' },
+    encode: [
+      [new globalThis.RegExp(''), '/(?:)/'],
+      [/[a-z][A-Z]/, '/[a-z][A-Z]/'],
+    ],
+    schema: { format: 'regex', type: 'string' },
   }));
   describe(RegExp.parse, () => {
     it('should parse a regexp string', () => {

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Symbol } from './Symbol.js';
 
 const GlobalSymbol = globalThis.Symbol;

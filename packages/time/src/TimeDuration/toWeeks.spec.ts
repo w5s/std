@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { toWeeks } from './toWeeks.js';
+import { describe, expect, it } from 'vitest';
+
 import { TimeDuration } from './TimeDuration.js';
+import { toWeeks } from './toWeeks.js';
 
 describe(toWeeks, () => {
   it('should convert milliseconds to weeks', () => {

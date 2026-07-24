@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+
 import { splice } from './splice.js';
 
 /**

@@ -1,44 +1,13 @@
 import type { Option } from '@w5s/core';
-import type { ContainerProvider } from './ContainerProvider.js';
+
 import type { ContainerKey } from './ContainerKey.js';
+import type { ContainerProvider } from './ContainerProvider.js';
 import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 const $cache: unique symbol = Symbol('use.cache');
 
 interface Cacheable {
   [$cache]: use.Cache;
-}
-
-function cacheFor(appContext: object): use.Cache {
-  // @ts-ignore we know what we are doing
-  const cache = appContext[use.cache] as use.Cache | undefined;
-
-  if (cache === undefined || cache.appContext !== appContext) {
-    const cacheNew = { appContext };
-
-    (appContext as unknown as Cacheable)[use.cache] = cacheNew;
-    return cacheNew;
-  }
-  return cache;
-}
-
-function cacheGet<Key extends string | symbol, Value>(
-  appContext: Partial<ContainerProvider<any, Key, Option<Value>>>,
-  cache: use.Cache,
-  key: ContainerKey<Key, Value>,
-): Value {
-  const { containerKey } = key;
-  // @ts-ignore We can use containerKey as key
-
-  const value: Value = cache[containerKey] ?? (cache[containerKey] = getProvider(appContext, key)(appContext));
-  return value;
-}
-
-function getProvider<Key extends string | symbol, Value>(
-  appContext: ContainerProvider<any, Key, Value>,
-  { containerKey, containerDefaultProvider }: ContainerKey<Key, Value>,
-): ContainerProviderFunction<any, Value> {
-  return appContext[containerKey] ?? containerDefaultProvider;
 }
 
 /**
@@ -66,14 +35,45 @@ export function use<Key extends string | symbol, Value>(
 export function use(appContext: any, key: any) {
   return cacheGet(appContext, cacheFor(appContext), key);
 }
+
+function cacheFor(appContext: object): use.Cache {
+  // @ts-ignore we know what we are doing
+  const cache = appContext[use.cache] as undefined | use.Cache;
+
+  if (cache === undefined || cache.appContext !== appContext) {
+    const cacheNew = { appContext };
+
+    (appContext as unknown as Cacheable)[use.cache] = cacheNew;
+    return cacheNew;
+  }
+  return cache;
+}
+function cacheGet<Key extends string | symbol, Value>(
+  appContext: Partial<ContainerProvider<any, Key, Option<Value>>>,
+  cache: use.Cache,
+  key: ContainerKey<Key, Value>,
+): Value {
+  const { containerKey } = key;
+  // @ts-ignore We can use containerKey as key
+
+  const value: Value = cache[containerKey] ?? (cache[containerKey] = getProvider(appContext, key)(appContext));
+  return value;
+}
+function getProvider<Key extends string | symbol, Value>(
+  appContext: ContainerProvider<any, Key, Value>,
+  { containerDefaultProvider, containerKey }: ContainerKey<Key, Value>,
+): ContainerProviderFunction<any, Value> {
+  return appContext[containerKey] ?? containerDefaultProvider;
+}
 use.cache = $cache;
 
 export namespace use {
   export interface Cache {
+    [key: symbol]: any;
+
     /**
      * The app context
      */
     appContext: object;
-    [key: symbol]: any;
   }
 }

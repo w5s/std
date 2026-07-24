@@ -35,7 +35,7 @@ truncate.defaultOptions = {
 } satisfies truncate.Options;
 
 export namespace truncate {
-  export type Options = {
+  export interface Options {
     /**
      * A string to append at the end of the truncated string if it is shorter than the `maxLength`
      */
@@ -45,5 +45,5 @@ export namespace truncate {
      * The desired length of the output string
      */
     maxLength?: number;
-  };
+  }
 }

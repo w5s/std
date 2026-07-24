@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { encode } from './encode.js';
+
 import { Symbol } from '../Symbol.js';
+import { encode } from './encode.js';
 
 describe(encode, () => {
   it('should call __encode__', () => {

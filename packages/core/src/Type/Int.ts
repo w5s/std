@@ -1,4 +1,5 @@
 import type { Int as CoreInt } from '@w5s/core-type';
+
 import { Symbol } from '../Symbol.js';
 import { define } from '../Tag/define.js';
 
@@ -15,9 +16,9 @@ export type Int = CoreInt;
  * @namespace
  */
 export const Int = define<number, Int>({
-  typeName: 'Int',
   hasInstance: (anyValue) => Number.isSafeInteger(anyValue),
   [Symbol.schema]: () => ({
     type: 'integer',
   }),
+  typeName: 'Int',
 });

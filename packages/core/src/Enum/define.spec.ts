@@ -1,19 +1,21 @@
-import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it } from 'vitest';
+
+import type { Enum } from '../Enum.js';
+
+import { CodecError } from '../CodecError.js';
+import { Option } from '../Option.js';
+import { Result } from '../Result.js';
+import { Symbol } from '../Symbol.js';
 import { describeCodec, describeIndexable, describeType } from '../Testing.js';
 import { define } from './define.js';
-import { Result } from '../Result.js';
-import { CodecError } from '../CodecError.js';
-import type { Enum } from '../Enum.js';
-import { Symbol } from '../Symbol.js';
-import { Option } from '../Option.js';
 
 describe(define, () => {
   const MyEnumObject = define({
-    typeName: 'MyEnumObject',
-    Foo: 'foo',
     Bar: 'bar',
     Baz: 'baz',
+    Foo: 'foo',
+    typeName: 'MyEnumObject',
   });
   const MyEnum = {
     ...MyEnumObject,
@@ -29,56 +31,56 @@ describe(define, () => {
     },
   };
   type MyEnum = Enum.ValueOf<typeof MyEnumObject>;
-  assertType<MyEnum, 'foo' | 'bar' | 'baz'>(true);
+  assertType<MyEnum, 'bar' | 'baz' | 'foo'>(true);
 
   type MyEnumKeys = Enum.KeyOf<typeof MyEnumObject>;
-  assertType<MyEnumKeys, 'Foo' | 'Bar' | 'Baz'>(true);
+  assertType<MyEnumKeys, 'Bar' | 'Baz' | 'Foo'>(true);
 
   it('returns a new type', () => {
     expect(
       define({
-        Foo: 'foo',
         Bar: 'bar',
         Baz: 'baz',
+        Foo: 'foo',
       }),
     ).toEqual({
-      Foo: 'foo',
-      Bar: 'bar',
-      Baz: 'baz',
-      typeName: expect.any(String),
-      hasInstance: expect.any(Function),
-      __schema__: expect.any(Function),
       __decode__: expect.any(Function),
       __encode__: expect.any(Function),
+      __schema__: expect.any(Function),
       asInstance: expect.any(Function),
       asString: expect.any(Function),
-      [Symbol.enumKeys]: ['Foo', 'Bar', 'Baz'],
       at: expect.any(Function),
-      indexType: 'number',
+      Bar: 'bar',
+      Baz: 'baz',
+      Foo: 'foo',
+      hasInstance: expect.any(Function),
       indexOf: expect.any(Function),
+      indexType: 'number',
+      inspect: Option.None,
       range: expect.any(Function),
       rangeSize: expect.any(Function),
-      inspect: Option.None,
+      [Symbol.enumKeys]: ['Bar', 'Baz', 'Foo'],
+      typeName: expect.any(String),
     });
   });
   it('generates a default typeName', () => {
     expect(
       define({
-        Foo: 'foo',
         Bar: 'bar',
         Baz: 'baz',
+        Foo: 'foo',
       }),
     ).toEqual(
       expect.objectContaining({
-        typeName: 'foo|bar|baz',
+        typeName: 'bar|baz|foo',
       }),
     );
   });
 
   describeType(MyEnumObject, () => ({
-    typeName: 'MyEnumObject',
     instances: [MyEnumObject.Foo, MyEnumObject.Bar],
     notInstances: ['anything', null, undefined, MyEnumObject.hasInstance],
+    typeName: 'MyEnumObject',
   }));
   describeCodec(MyEnumObject, () => ({
     decode: [
@@ -86,7 +88,7 @@ describe(define, () => {
       ['bar', Result.Ok(MyEnumObject.Bar)],
       [
         'foo_invalid',
-        Result.Error(new CodecError({ message: 'Cannot decode "foo_invalid" as MyEnumObject', input: 'foo_invalid' })),
+        Result.Error(new CodecError({ input: 'foo_invalid', message: 'Cannot decode "foo_invalid" as MyEnumObject' })),
       ],
     ],
     encode: [
@@ -94,19 +96,19 @@ describe(define, () => {
       [MyEnum.Bar, 'bar'],
     ],
     schema: {
-      enum: ['foo', 'bar', 'baz'],
+      enum: ['bar', 'baz', 'foo'],
     },
   }));
   describeIndexable(MyEnumObject, {
     index: [
-      [0, MyEnumObject.Foo],
-      [1, MyEnumObject.Bar],
-      [2, MyEnumObject.Baz],
+      [0, MyEnumObject.Bar],
+      [1, MyEnumObject.Baz],
+      [2, MyEnumObject.Foo],
     ],
     range: [
       [MyEnumObject.Foo, MyEnumObject.Foo, [MyEnumObject.Foo]],
-      [MyEnumObject.Foo, MyEnumObject.Bar, [MyEnumObject.Foo, MyEnumObject.Bar]],
-      [MyEnumObject.Foo, MyEnumObject.Baz, [MyEnumObject.Foo, MyEnumObject.Bar, MyEnumObject.Baz]],
+      [MyEnumObject.Baz, MyEnumObject.Foo, [MyEnumObject.Baz, MyEnumObject.Foo]],
+      [MyEnumObject.Bar, MyEnumObject.Foo, [MyEnumObject.Bar, MyEnumObject.Baz, MyEnumObject.Foo]],
     ],
   });
 });

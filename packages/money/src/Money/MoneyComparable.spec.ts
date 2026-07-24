@@ -1,28 +1,30 @@
+import { BigDecimal } from '@w5s/bigdecimal';
 import { describeComparable } from '@w5s/core/dist/Testing.js';
 import { describe } from 'vitest';
-import { BigDecimal } from '@w5s/bigdecimal';
-import { MoneyComparable } from './MoneyComparable.js';
-import { Money } from './Money.js';
+
 import { Currency } from '../Currency.js';
+import { Money } from './Money.js';
+import { MoneyComparable } from './MoneyComparable.js';
 
 describe('MoneyComparable', () => {
   const currencyEuro = Currency({
-    name: 'Euro',
     code: 'EUR',
+    name: 'Euro',
     symbol: '€',
   });
   const currencyDollar = Currency({
-    name: 'Dollar',
     code: 'USD',
+    name: 'Dollar',
     symbol: '$',
   });
   const _0 = BigDecimal('0');
   const _1 = BigDecimal('1');
   const _2 = BigDecimal('2');
-  const EUR = (amount: BigDecimal) => Money({ currency: currencyEuro, amount });
-  const USD = (amount: BigDecimal) => Money({ currency: currencyDollar, amount });
+  const EUR = (amount: BigDecimal) => Money({ amount, currency: currencyEuro });
+  const USD = (amount: BigDecimal) => Money({ amount, currency: currencyDollar });
 
   describeComparable(MoneyComparable, {
+    equivalent: () => [[EUR(_1), EUR(_1)]],
     ordered: () => [
       // Money({ currency: anyCurrency, amount: anyAmount }),
       EUR(_0),
@@ -30,6 +32,5 @@ describe('MoneyComparable', () => {
       EUR(_2),
       USD(_1),
     ],
-    equivalent: () => [[EUR(_1), EUR(_1)]],
   });
 });

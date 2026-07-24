@@ -1,16 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { define } from './define.js';
+
 import { Codec } from '../Codec.js';
 import { CodecError } from '../CodecError.js';
-import { Result } from '../Result.js';
 import { Option } from '../Option.js';
+import { Result } from '../Result.js';
+import { define } from './define.js';
 
 describe(define, () => {
   const inspect = (value: string) => `String(${value})`;
   const TestType = define<string>({
-    typeName: 'String',
-    hasInstance: (anyValue) => typeof anyValue === 'string',
     __inspect__: inspect,
+    hasInstance: (anyValue) => typeof anyValue === 'string',
+    typeName: 'String',
   });
 
   describe('#typeName', () => {
@@ -32,15 +33,15 @@ describe(define, () => {
   describe('#asString', () => {
     it('has default implementation', () => {
       const SomeType = define<boolean>({
-        typeName: 'Boolean',
         hasInstance: (anyValue) => typeof anyValue === 'boolean',
+        typeName: 'Boolean',
       });
       expect(SomeType.asString(true)).toBe('true');
     });
     it('has default implementation for objects', () => {
       const SomeType = define<{}>({
-        typeName: 'Foo',
         hasInstance: (anyValue) => typeof anyValue === 'object',
+        typeName: 'Foo',
       });
       expect(SomeType.asString({})).toBe('[object Foo]');
     });
@@ -82,10 +83,10 @@ describe(define, () => {
     it('returns a decoded value', () => {
       expect(Codec.decode(TestType, 'hello')).toEqual(Result.Ok('hello'));
       expect(Codec.decode(TestType, 1)).toEqual(
-        Result.Error(new CodecError({ message: 'Cannot decode 1 as String', input: 1 })),
+        Result.Error(new CodecError({ input: 1, message: 'Cannot decode 1 as String' })),
       );
       expect(Codec.decode(TestType, undefined)).toEqual(
-        Result.Error(new CodecError({ message: 'Cannot decode undefined as String', input: undefined })),
+        Result.Error(new CodecError({ input: undefined, message: 'Cannot decode undefined as String' })),
       );
     });
     it('is overridable by parameters', () => {

@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/task';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { LogLevel } from '../LogLevel.js';
 import { LogMessage } from '../LogMessage.js';
 import { fakeLogRecord } from '../Testing.js';
@@ -9,19 +10,19 @@ import { Console } from './Console.js';
 describe(Console, () => {
   const fakeWebConsole = () => ({
     debug: vi.fn(() => Task.resolve()),
+    error: vi.fn(() => Task.resolve()),
     info: vi.fn(() => Task.resolve()),
+    isWeb: vi.fn(() => true),
     log: vi.fn(() => Task.resolve()),
     warn: vi.fn(() => Task.resolve()),
-    error: vi.fn(() => Task.resolve()),
-    isWeb: vi.fn(() => true),
   });
   const expectTask = withTask(expect);
 
   describe('[web]', () => {
     const console = fakeWebConsole();
     const consoleHandler = Console({
-      console,
       colors: false,
+      console,
     });
     const defaultRecord = fakeLogRecord({ level: LogLevel.Debug, message: LogMessage('foobar') });
 
@@ -49,12 +50,12 @@ describe(Console, () => {
       expectTask(
         consoleHandler(
           fakeLogRecord({
-            domain: 'myDomain',
-            level: LogLevel.Debug,
-            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
+            domain: 'myDomain',
+            level: LogLevel.Debug,
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
           }),
         ),
       ).toResolveSync(undefined);
@@ -71,11 +72,11 @@ describe(Console, () => {
       expectTask(
         consoleHandler(
           fakeLogRecord({
-            level: LogLevel.Debug,
-            message: LogMessage('message=', { $ref: 'foo' }, '.'),
             data: {
               foo: 'bar',
             },
+            level: LogLevel.Debug,
+            message: LogMessage('message=', { $ref: 'foo' }, '.'),
           }),
         ),
       ).toResolveSync(undefined);

@@ -1,9 +1,9 @@
 import { debug } from './Console/debug.js';
-import { log } from './Console/log.js';
-import { info } from './Console/info.js';
-import { warn } from './Console/warn.js';
 import { error } from './Console/error.js';
+import { info } from './Console/info.js';
 import { isWeb } from './Console/isWeb.js';
+import { log } from './Console/log.js';
+import { warn } from './Console/warn.js';
 
 /**
  * A collection of functions to write in stdin (NodeJS) or WebConsole (browser)
@@ -12,9 +12,9 @@ import { isWeb } from './Console/isWeb.js';
  */
 export const Console = {
   debug,
-  log,
-  info,
-  warn,
   error,
+  info,
   isWeb,
+  log,
+  warn,
 };

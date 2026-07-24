@@ -1,7 +1,7 @@
 /* cSpell: ignore mfoo */
 import { format } from './format.js';
 
-const identity = Object.assign((_: string): string => _, { open: undefined, close: undefined });
+const identity = Object.assign((_: string): string => _, { close: undefined, open: undefined });
 
 export interface ANSIWrapper {
   /**
@@ -10,14 +10,14 @@ export interface ANSIWrapper {
   (text: string): string;
 
   /**
-   * Open tag
-   */
-  open: string | undefined;
-
-  /**
    * Close tag
    */
   close: string | undefined;
+
+  /**
+   * Open tag
+   */
+  open: string | undefined;
 }
 
 /**
@@ -32,14 +32,14 @@ export interface ANSIWrapper {
  * @param code A string representing the ANSI code suffix.
  * @returns A function that takes a string and returns it wrapped with the specified ANSI codes.
  */
-export function wrap(open: number[], close: number, code: string): ANSIWrapper {
+export function wrap(open: Array<number>, close: number, code: string): ANSIWrapper {
   if (open.length === 0) return identity;
   const openTag = format(open, code);
   const closeTag = format([close], code);
   const regexp = new RegExp(String.raw`\x1b\[${close}m`, 'g');
 
   return Object.assign((text: string): string => `${openTag}${text.replace(regexp, openTag)}${closeTag}`, {
-    open: openTag,
     close: closeTag,
+    open: openTag,
   });
 }

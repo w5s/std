@@ -11,6 +11,6 @@ import { ErrorClass } from './ErrorClass.js';
  * ```
  */
 export class NotImplementedError extends ErrorClass({
-  errorName: 'NotImplementedError',
   errorMessage: 'Not implemented',
+  errorName: 'NotImplementedError',
 }) {}

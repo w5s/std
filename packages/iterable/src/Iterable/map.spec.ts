@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { map } from './map.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { map } from './map.js';
 import { of } from './of.js';
 
 describe(map, () => {

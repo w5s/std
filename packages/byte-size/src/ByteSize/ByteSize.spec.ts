@@ -1,21 +1,16 @@
-import { describe } from 'vitest';
-import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
 import { CodecError, Result } from '@w5s/core';
+import { describeCodec, describeType } from '@w5s/core/dist/Testing.js';
+import { describe } from 'vitest';
+
 import { ByteSize } from './ByteSize.js';
 
 describe(ByteSize, () => {
   describeType(ByteSize, () => ({
-    typeName: 'ByteSize',
     instances: [ByteSize(1), ByteSize(0), ByteSize(1024)],
     notInstances: [null, undefined, [], NaN],
+    typeName: 'ByteSize',
   }));
   describeCodec(ByteSize, () => ({
-    encode: [
-      [ByteSize(1), '1 B'],
-      [ByteSize(0), '0 B'],
-      [ByteSize(512 * 1000), '512 KB'],
-      [ByteSize(21_000_000), '21 MB'],
-    ],
     decode: [
       ['0 B', Result.Ok(ByteSize(0))],
       ['1 KB', Result.Ok(ByteSize(1000))],
@@ -24,15 +19,21 @@ describe(ByteSize, () => {
         null,
         Result.Error(
           new CodecError({
-            message: 'Cannot decode null as ByteSize',
             input: null,
+            message: 'Cannot decode null as ByteSize',
           }),
         ),
       ],
     ],
+    encode: [
+      [ByteSize(1), '1 B'],
+      [ByteSize(0), '0 B'],
+      [ByteSize(512 * 1000), '512 KB'],
+      [ByteSize(21_000_000), '21 MB'],
+    ],
     schema: {
-      type: 'string',
       format: 'byte-size',
+      type: 'string',
     },
   }));
 });

@@ -1,4 +1,5 @@
 import type { Task, TaskLike } from '../Task.js';
+
 import { from } from './from.js';
 import { unsafeCall } from './unsafeCall.js';
 
@@ -23,9 +24,9 @@ export function orElse<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
 ): Task<ValueFrom | ValueTo, ErrorTo> {
   return from((parameters) =>
     unsafeCall(self, {
+      canceler: parameters.canceler,
       reject: (error) => unsafeCall(fn(error), parameters),
       resolve: parameters.resolve,
-      canceler: parameters.canceler,
     }),
   );
 }

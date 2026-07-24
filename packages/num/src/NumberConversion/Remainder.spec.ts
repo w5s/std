@@ -1,5 +1,6 @@
-import { describe } from 'vitest';
 import { describeRemainder } from '@w5s/core/dist/Testing.js';
+import { describe } from 'vitest';
+
 import { NumberConversion } from '../NumberConversion.js';
 import { Remainder } from './Remainder.js';
 

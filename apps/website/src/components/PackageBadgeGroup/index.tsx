@@ -1,19 +1,19 @@
 import Link from '@docusaurus/Link';
-import IconExternalLink from '@theme/Icon/ExternalLink';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import IconExternalLink from '@theme/Icon/ExternalLink';
+
 import styles from './styles.module.css';
 
-export type BadgeStyle = 'flat' | 'flat-square' | 'plastic' | 'for-the-badge' | 'social';
+export type BadgeStyle = 'flat' | 'flat-square' | 'for-the-badge' | 'plastic' | 'social';
 
-export type BadgeType = 'bundle-size' | 'npm-version' | 'npm-license';
+export type BadgeType = 'bundle-size' | 'npm-license' | 'npm-version';
 
 const renderBadge = (
-  // eslint-disable-next-line ts/no-unused-vars
-  { siteConfig }: ReturnType<typeof useDocusaurusContext>,
+  _context: ReturnType<typeof useDocusaurusContext>,
   props: PackageBadgeGroupProps,
   badgeProps: {
-    badgeType: BadgeType;
     badgeStyle?: BadgeStyle;
+    badgeType: BadgeType;
   },
 ) => {
   const defaultBadgeProps = {
@@ -57,8 +57,8 @@ const renderBadge = (
 };
 
 export interface PackageBadgeGroupProps {
-  packageName?: string;
   apiHref?: string;
+  packageName?: string;
 }
 
 export function PackageBadgeGroup(props: PackageBadgeGroupProps) {

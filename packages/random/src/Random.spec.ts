@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Random } from './Random.js';
 import { next } from './Random/next.js';
 

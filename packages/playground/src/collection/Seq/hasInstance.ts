@@ -1,5 +1,7 @@
 import { hasInstance as isIterable } from '@w5s/iterable/dist/Iterable/hasInstance.js';
+
 import type { Seq } from '../Seq.js';
+
 import { seqIterable } from './seqIterable.js';
 
 /**

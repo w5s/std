@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+
 import { indexOf } from './indexOf.js';
 
 /**

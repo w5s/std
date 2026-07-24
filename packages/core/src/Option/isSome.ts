@@ -1,5 +1,6 @@
-import { isNone } from './isNone.js';
 import type { OptionLike } from '../Option.js';
+
+import { isNone } from './isNone.js';
 
 /**
  * Return `true` if `anyValue` is neither `null` nor `undefined`

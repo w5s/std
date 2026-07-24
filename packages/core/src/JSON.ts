@@ -1,7 +1,9 @@
-import type { TypeError, SyntaxError } from '@w5s/error';
+import type { SyntaxError, TypeError } from '@w5s/error';
+
 import type { Result } from './Result.js';
-import { Ok } from './Result/Ok.js';
+
 import { Error } from './Result/Error.js';
+import { Ok } from './Result/Ok.js';
 
 const NativeJSON = globalThis.JSON;
 
@@ -9,11 +11,11 @@ const NativeJSON = globalThis.JSON;
  * Any valid JSON value
  */
 export type JSONValue =
-  | null
   | boolean
+  | null
   | number
-  | string
   | ReadonlyArray<JSONValue>
+  | string
   | {
     readonly [key: string]: JSONValue;
   };

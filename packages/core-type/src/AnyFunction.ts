@@ -8,4 +8,4 @@
  * }
  * ```
  */
-export type AnyFunction = (...args: any[]) => any;
+export type AnyFunction = (...args: Array<any>) => any;

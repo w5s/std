@@ -1,32 +1,19 @@
-import { Type, Codec, Result, JSON } from '@w5s/core';
+import { Codec, JSON, Result, Type } from '@w5s/core';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const eol = '\n';
 const StatusDataComment = Type.Object({
-  doc: Type.string,
   description: Type.string,
+  doc: Type.string,
 });
 const StatusData = Type.Object({
   code: Type.number,
-  phrase: Type.string,
   comment: StatusDataComment,
   isDeprecated: Type.Option(Type.boolean),
+  phrase: Type.string,
 });
 const StatusArrayData = Type.Array(StatusData);
-
-function outFile(file: string) {
-  return path.join('src', file);
-}
-
-async function readStatusFile() {
-  const statusContent = await fs.readFile('resource/status.json');
-  const statusDecoded = JSON.parse(String(statusContent));
-  if (!statusDecoded.ok) {
-    return statusDecoded;
-  }
-  return Codec.decode(StatusArrayData, statusDecoded.value);
-}
 
 async function generateFiles() {
   const decodedResult = await readStatusFile();
@@ -35,6 +22,7 @@ async function generateFiles() {
   }
   let statusAllContent = '';
   statusAllContent += `import type { Int } from '@w5s/core/dist/Type/Int.js';${eol}`;
+  statusAllContent += `${eol}`;
   statusAllContent += `import { Status } from './Status.js';${eol}`;
   statusAllContent += `${eol}`;
   statusAllContent += decodedResult.value
@@ -56,6 +44,23 @@ async function generateFiles() {
   return Result.Ok();
 }
 
+async function main() {
+  return Result.getOrThrow(await generateFiles());
+}
+
+function outFile(file: string) {
+  return path.join('src', file);
+}
+
+async function readStatusFile() {
+  const statusContent = await fs.readFile('resource/status.json');
+  const statusDecoded = JSON.parse(String(statusContent));
+  if (!statusDecoded.ok) {
+    return statusDecoded;
+  }
+  return Codec.decode(StatusArrayData, statusDecoded.value);
+}
+
 function toConstant(str: string) {
   return str
     .replaceAll("'", ' ')
@@ -63,10 +68,6 @@ function toConstant(str: string) {
     .split(' ')
     .map((_) => `${(_[0] ?? '').toUpperCase()}${_.slice(1)}`)
     .join('');
-}
-
-async function main() {
-  return Result.getOrThrow(await generateFiles());
 }
 
 await main();

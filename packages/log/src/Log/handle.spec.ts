@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
+import { Symbol } from '@w5s/core';
 import { Task } from '@w5s/task';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { Symbol } from '@w5s/core';
-import { handle } from './handle.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { configuration } from '../configuration.js';
 import { fakeLogRecord } from '../Testing.js';
+import { handle } from './handle.js';
 
 describe(handle, () => {
   const expectTask = withTask(expect);

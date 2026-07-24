@@ -1,7 +1,8 @@
 import type { EqualsInterface } from '../Equal.js';
 import type { Numeric } from '../Numeric.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for Numeric.Signed behavior
@@ -26,15 +27,13 @@ import type { TestingLibrary } from './type.js';
  * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeSigned<T>(
-  subject: Numeric.Signed<T> & EqualsInterface<T>,
+  subject: EqualsInterface<T> & Numeric.Signed<T>,
   properties: {
     values: () => Array<{
-      value: T;
-
       /**
-       * Expected type for isNegative / isPositive
+       * Expected abs value
        */
-      type: 'negative' | 'zero' | 'positive';
+      abs: T;
 
       /**
        * Expected sign value
@@ -42,14 +41,16 @@ export function describeSigned<T>(
       sign: T;
 
       /**
-       * Expected abs value
+       * Expected type for isNegative / isPositive
        */
-      abs: T;
+      type: 'negative' | 'positive' | 'zero';
+
+      value: T;
     }>;
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   const describeIfValue = properties.values().length === 0 ? describe.todo : describe;
 
   describeIfValue('abs', () => {
@@ -63,7 +64,7 @@ export function describeSigned<T>(
     });
   });
   describeIfValue('isPositive', () => {
-    it.each(properties.values().map(({ type, value }) => ({ value, expected: type === 'positive' })))(
+    it.each(properties.values().map(({ type, value }) => ({ expected: type === 'positive', value })))(
       'satisfies isPositive($value) == $expected',
       ({ expected, value }) => {
         expect(subject.isPositive(value)).toBe(expected);
@@ -71,7 +72,7 @@ export function describeSigned<T>(
     );
   });
   describeIfValue('isNegative', () => {
-    it.each(properties.values().map(({ type, value }) => ({ value, expected: type === 'negative' })))(
+    it.each(properties.values().map(({ type, value }) => ({ expected: type === 'negative', value })))(
       'satisfies isNegative($value) == $expected',
       ({ expected, value }) => {
         expect(subject.isNegative(value)).toBe(expected);

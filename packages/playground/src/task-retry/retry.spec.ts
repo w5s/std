@@ -1,8 +1,9 @@
 import { Int, Option, Result } from '@w5s/core';
 import { Task } from '@w5s/task';
-import { TimeDuration } from '@w5s/time';
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { TimeDuration } from '@w5s/time';
+import { describe, expect, it, vi } from 'vitest';
+
 import { defaultRetryState, RetryPolicy, RetryState } from './retry.js';
 
 const expectTask = withTask(expect);
@@ -11,20 +12,20 @@ describe('RetryState', () => {
   it('should return a new state', () => {
     expect(
       RetryState({
-        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
+        retryIndex: Int(1),
         retryPreviousDelay: TimeDuration.of(3),
       }),
     ).toEqual({
-      retryIndex: 1,
       retryCumulativeDelay: 2,
+      retryIndex: 1,
       retryPreviousDelay: 3,
     });
   });
   it('should use default values', () => {
     expect(RetryState({})).toEqual({
-      retryIndex: 0,
       retryCumulativeDelay: 0,
+      retryIndex: 0,
       retryPreviousDelay: Option.None,
     });
   });
@@ -32,16 +33,16 @@ describe('RetryState', () => {
 describe('defaultRetryState', () => {
   it('should have all values to 0', () => {
     expect(defaultRetryState).toEqual({
-      retryIndex: 0,
       retryCumulativeDelay: 0,
+      retryIndex: 0,
       retryPreviousDelay: Option.None,
     });
   });
 });
 describe('RetryPolicy', () => {
   const anyState = RetryState({
-    retryIndex: Int(1),
     retryCumulativeDelay: TimeDuration.of(2),
+    retryIndex: Int(1),
     retryPreviousDelay: TimeDuration.of(3),
   });
   const anyDuration = TimeDuration.of(123);
@@ -151,14 +152,14 @@ describe('RetryPolicy', () => {
     it('should return a new state', () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
       const state = RetryState({
-        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
+        retryIndex: Int(1),
         retryPreviousDelay: TimeDuration.of(3),
       });
       expectTask(RetryPolicy.apply(policy, state)).toResolveSync(
         RetryState({
-          retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
+          retryIndex: Int(2),
           retryPreviousDelay: TimeDuration.of(1),
         }),
       );
@@ -173,14 +174,14 @@ describe('RetryPolicy', () => {
     it('should return a new state', async () => {
       const policy: RetryPolicy = (_state) => Task.resolve(Option.Some(TimeDuration.of(1)));
       const state = RetryState({
-        retryIndex: Int(1),
         retryCumulativeDelay: TimeDuration.of(2),
+        retryIndex: Int(1),
         retryPreviousDelay: TimeDuration.of(3),
       });
       await expectTask(RetryPolicy.applyAndDelay(policy, state)).toResolveAsync(
         RetryState({
-          retryIndex: Int(2),
           retryCumulativeDelay: TimeDuration.of(3),
+          retryIndex: Int(2),
           retryPreviousDelay: TimeDuration.of(1),
         }),
       );

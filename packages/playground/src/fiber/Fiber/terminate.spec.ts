@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
 import { defer } from '@w5s/async';
+import { describe, expect, it } from 'vitest';
+
 import { run } from './run.js';
 import { terminate } from './terminate.js';
 
 describe(terminate, () => {
   it('should run a generator function', async () => {
-    const stack: string[] = [];
+    const stack: Array<string> = [];
     const trace = (name: string) => {
       stack.push(name);
       return name;

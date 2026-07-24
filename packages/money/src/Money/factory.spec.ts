@@ -1,6 +1,7 @@
-import { describe, it, expect, beforeEach } from 'vitest';
-import { Int } from '@w5s/core';
 import { BigDecimal } from '@w5s/bigdecimal';
+import { Int } from '@w5s/core';
+import { beforeEach, describe, expect, it } from 'vitest';
+
 import { Currency } from '../Currency.js';
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
 import { Money } from '../Money.js';
@@ -14,8 +15,8 @@ describe(factory, () => {
     registry = CurrencyRegistry(app);
     registry.add(
       Currency({
-        name: 'test',
         code: TEST,
+        name: 'test',
         symbol: '#',
       }),
     );
@@ -29,9 +30,9 @@ describe(factory, () => {
     expect(currency).toEqual(
       Currency({
         code: TEST,
-        precision: Int(2),
         name: 'test',
         namePlural: 'test',
+        precision: Int(2),
         rounding: Int(0),
         symbol: '#',
         symbolNative: '#',
@@ -44,14 +45,14 @@ describe(factory, () => {
     });
     const currency = Currency({
       code: TEST,
-      precision: Int(2),
       name: 'test',
       namePlural: 'test',
+      precision: Int(2),
       rounding: Int(0),
       symbol: '#',
       symbolNative: '#',
     });
-    expect(testFactory(BigDecimal('1'))).toEqual(Money({ currency, amount: BigDecimal('1') }));
+    expect(testFactory(BigDecimal('1'))).toEqual(Money({ amount: BigDecimal('1'), currency }));
   });
 
   it('should return a new factory by string', () => {
@@ -60,13 +61,13 @@ describe(factory, () => {
     });
     const currency = Currency({
       code: TEST,
-      precision: Int(2),
       name: 'test',
       namePlural: 'test',
+      precision: Int(2),
       rounding: Int(0),
       symbol: '#',
       symbolNative: '#',
     });
-    expect(testFactory('1')).toEqual(Money({ currency, amount: BigDecimal('1') }));
+    expect(testFactory('1')).toEqual(Money({ amount: BigDecimal('1'), currency }));
   });
 });

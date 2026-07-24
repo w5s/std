@@ -1,5 +1,7 @@
 import type { Option } from '@w5s/core';
+
 import type { ByteSize } from './ByteSize.js';
+
 import { byteSizeFormatIndex } from '../ByteSizeFormat/data.js';
 
 const byteSizeRegex = /^([\d,.]+)\s*([a-z]+)?$/i;

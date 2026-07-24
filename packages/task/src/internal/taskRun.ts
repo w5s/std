@@ -1,10 +1,13 @@
 import type { Awaitable } from '@w5s/async';
-import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
 import type { Result } from '@w5s/core';
-import { error } from '../Task/error.js';
-import { ok } from '../Task/ok.js';
+
+import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
+
 import type { TaskLike } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';
+
+import { error } from '../Task/error.js';
+import { ok } from '../Task/ok.js';
 import { unsafeCall } from '../Task/unsafeCall.js';
 
 /**
@@ -32,9 +35,9 @@ export function taskRun<Value, Error>(
   let rejectHandler = (_error: unknown) => {};
 
   const runValue: Awaitable<void> = unsafeCall(self, {
-    resolve: (_value) => resolveHandler(ok(_value)),
-    reject: (_error) => resolveHandler(error(_error)),
     canceler,
+    reject: (_error) => resolveHandler(error(_error)),
+    resolve: (_value) => resolveHandler(ok(_value)),
   });
   // Try to catch promise errors
   if (isPromiseLike(runValue)) {
@@ -47,7 +50,7 @@ export function taskRun<Value, Error>(
     })();
   }
   if (returnValue === undefined) {
-    const { promise, resolve, reject } = Promise.withResolvers<Result<Value, Error>>();
+    const { promise, reject, resolve } = Promise.withResolvers<Result<Value, Error>>();
     resolveHandler = resolve;
     rejectHandler = reject;
     return promise;

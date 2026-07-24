@@ -1,5 +1,7 @@
 import type { Task } from '@w5s/task';
+
 import { from } from '@w5s/task/dist/Task/from.js';
+
 import type { TimeDuration } from '../TimeDuration.js';
 import type { Time } from './Time.js';
 
@@ -15,7 +17,7 @@ import type { Time } from './Time.js';
  * @param duration delay in milliseconds to wait
  */
 export function delay(duration: TimeDuration): Task<Time, never> {
-  return from(async ({ resolve, canceler }) => {
+  return from(async ({ canceler, resolve }) => {
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
     // Set Canceler

@@ -1,12 +1,13 @@
 /* eslint-disable ts/no-use-before-define */
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
+import { resume } from './resume.js';
 import { run } from './run.js';
 import { suspend } from './suspend.js';
-import { resume } from './resume.js';
 
 describe(suspend, () => {
   it('should run a generator function', async () => {
-    const stack: string[] = [];
+    const stack: Array<string> = [];
     const trace = (name: string) => {
       stack.push(name);
       return name;

@@ -12,7 +12,7 @@
  */
 export function split(
   self: string,
-  separator: string | RegExp | { [Symbol.split](string: string, limit?: number): string[] },
+  separator: RegExp | string | { [Symbol.split](string: string, limit?: number): Array<string> },
   limit?: number,
 ): Array<string> {
   return self.split(

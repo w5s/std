@@ -1,18 +1,20 @@
-import { createConnection, type ConnectionConfig } from 'mysql';
-import { SQLStatement } from '../sql.js';
+import { type ConnectionConfig, createConnection } from 'mysql';
+
 import type { AbstractDatabase } from '../client.js';
+
 import { DatabaseDriver } from '../driver.js';
+import { SQLStatement } from '../sql.js';
+
+export interface MySQLClient extends AbstractDatabase<'mysql'>, ConnectionConfig {}
 
 function mysqlSQLStatement(statement: SQLStatement) {
   return {
+    params: statement.values,
     sql: SQLStatement.format(statement, {
       formatValue: () => '?',
     }),
-    params: statement.values,
   };
 }
-
-export interface MySQLClient extends AbstractDatabase<'mysql'>, ConnectionConfig {}
 
 export const MySQL = {
   createConnection,
@@ -22,7 +24,7 @@ export const MySQL = {
     try {
       connection.connect();
       const queryResultPromise = new Promise((resolve, reject) => {
-        const { sql, params } = mysqlSQLStatement(sqlStatement);
+        const { params, sql } = mysqlSQLStatement(sqlStatement);
         connection.query(sql, params, (error, result) => (error == null ? resolve(result) : reject(error)));
       });
 

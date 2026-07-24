@@ -1,4 +1,5 @@
 import type { Option } from '@w5s/core';
+
 import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 /**
@@ -6,14 +7,14 @@ import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
  */
 export interface ContainerKey<Key extends string | symbol, Value> {
   /**
-   * Injection symbol key
-   */
-  containerKey: Key;
-
-  /**
    * Default implementation of the key
    */
   containerDefaultProvider: ContainerProviderFunction<{}, Value>;
+
+  /**
+   * Injection symbol key
+   */
+  containerKey: Key;
 }
 export function ContainerKey<Key extends string | symbol, Value>(key: Key): ContainerKey<Key, Option<Value>>;
 export function ContainerKey<Key extends string | symbol, Value>(
@@ -26,7 +27,7 @@ export function ContainerKey<Value>(
 ): ContainerKey<any, any> {
   return {
 
-    containerKey: key,
     containerDefaultProvider: defaultProvider ?? (() => undefined),
+    containerKey: key,
   };
 }

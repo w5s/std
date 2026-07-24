@@ -1,7 +1,9 @@
 import { isPromise } from '@w5s/async/dist/isPromise.js';
+
 import type { Result } from '../Result.js';
-import { Ok } from './Ok.js';
+
 import { Error } from './Error.js';
+import { Ok } from './Ok.js';
 
 type NonPromise<V> = Exclude<V, Promise<unknown>>;
 
@@ -27,7 +29,7 @@ type NonPromise<V> = Exclude<V, Promise<unknown>>;
  */
 export function tryCall<V, E>(block: () => Promise<V>, onError: (error: unknown) => Promise<E>): Promise<Result<V, E>>;
 export function tryCall<V, E>(block: () => NonPromise<V>, onError: (error: unknown) => NonPromise<E>): Result<V, E>;
-export function tryCall<V, E>(block: () => V | Promise<V>, onError: (error: unknown) => E | Promise<E>) {
+export function tryCall<V, E>(block: () => Promise<V> | V, onError: (error: unknown) => E | Promise<E>) {
   try {
     const returnValue = block();
     if (isPromise(returnValue)) {

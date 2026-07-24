@@ -1,17 +1,18 @@
-import type { Option, Int, Result } from '@w5s/core';
+import type { Int, Option, Result } from '@w5s/core';
 import type { Task, TaskLike } from '@w5s/task';
+import type { TimeDuration } from '@w5s/time';
+
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { map as taskMap } from '@w5s/task/dist/Task/map.js';
-import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { orElse as taskElse } from '@w5s/task/dist/Task/orElse.js';
-import { andRun as taskThenRun } from '@w5s/task/dist/Task/andRun.js';
 import { all as taskAll } from '@w5s/task/dist/Task/all.js';
-import { resolve as taskResolve } from '@w5s/task/dist/Task/resolve.js';
-import { reject as taskReject } from '@w5s/task/dist/Task/reject.js';
-import type { TimeDuration } from '@w5s/time';
-import { delay as timeDelay } from '@w5s/time/dist/Time/delay.js';
+import { andRun as taskThenRun } from '@w5s/task/dist/Task/andRun.js';
+import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
 import { from } from '@w5s/task/dist/Task/from.js';
+import { map as taskMap } from '@w5s/task/dist/Task/map.js';
+import { orElse as taskElse } from '@w5s/task/dist/Task/orElse.js';
+import { reject as taskReject } from '@w5s/task/dist/Task/reject.js';
+import { resolve as taskResolve } from '@w5s/task/dist/Task/resolve.js';
+import { delay as timeDelay } from '@w5s/time/dist/Time/delay.js';
 
 const taskFromResult = <V, E>(result: Result<V, E>) =>
   result.ok ? taskResolve(result.value) : taskReject(result.error);
@@ -23,14 +24,14 @@ const resolveNone = taskResolve(undefined);
  */
 export interface RetryState {
   /**
-   * The index of the current attempt.
-   */
-  readonly retryIndex: Int;
-
-  /**
    * The cumulative delay of the all attempts.
    */
   readonly retryCumulativeDelay: TimeDuration;
+
+  /**
+   * The index of the current attempt.
+   */
+  readonly retryIndex: Int;
 
   /**
    * The duration of the current retry attempt
@@ -53,8 +54,8 @@ export interface RetryState {
  */
 export function RetryState(parameters: Partial<RetryState>): RetryState {
   return {
-    retryIndex: parameters.retryIndex ?? (0 as Int),
     retryCumulativeDelay: parameters.retryCumulativeDelay ?? (0 as TimeDuration),
+    retryIndex: parameters.retryIndex ?? (0 as Int),
     retryPreviousDelay: parameters.retryPreviousDelay,
   };
 }
@@ -63,14 +64,12 @@ export function RetryState(parameters: Partial<RetryState>): RetryState {
  * Default RetryState
  */
 export const defaultRetryState: RetryState = RetryState({
-  retryIndex: 0 as Int,
   retryCumulativeDelay: 0 as TimeDuration,
+  retryIndex: 0 as Int,
   retryPreviousDelay: undefined,
 });
 
-export interface RetryPolicy {
-  (state: RetryState): Task<Option<TimeDuration>, never>;
-}
+export type RetryPolicy = (state: RetryState) => Task<Option<TimeDuration>, never>;
 export const RetryPolicy = {
   /**
    * Map the policy delay using `mapFn(delay, state)`
@@ -85,66 +84,6 @@ export const RetryPolicy = {
    */
   andThen(policy: RetryPolicy, thenFn: (delay: TimeDuration, state: RetryState) => Option<TimeDuration>): RetryPolicy {
     return (state) => taskMap(policy(state), (delayMs) => (delayMs == null ? undefined : thenFn(delayMs, state)));
-  },
-
-  /**
-   * Filter the policy delay using `predicate(delay, state)`
-   *
-   * @example
-   * ```typescript
-   * const maxDelay = TimeDuration.of(4);
-   * const policy = RetryPolicy.wait(TimeDuration.of(2));
-   * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
-   * ```
-   * @param policy The policy
-   * @param predicate The predicate function
-   */
-  filter(policy: RetryPolicy, predicate: (delay: TimeDuration, state: RetryState) => boolean): RetryPolicy {
-    return RetryPolicy.andThen(policy, (delay, state) => (predicate(delay, state) ? delay : undefined));
-  },
-
-  /**
-   * Apply a retry policy to a retry state.
-   *
-   * @example
-   * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration.of(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
-   * const newState = RetryPolicy.apply(policy, retryState);
-   * Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
-   * ```
-   * @param policy The policy to apply
-   * @param state The current state of the retry operation
-   */
-  apply(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
-    return taskMap(policy(state), (retryPreviousDelay) =>
-      retryPreviousDelay == null
-        ? retryPreviousDelay
-        : RetryState({
-            retryIndex: (+state.retryIndex + 1) as Int,
-            retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
-            retryPreviousDelay,
-          }),
-    );
-  },
-
-  /**
-   * Apply a retry policy to a retry state and wait `state.retryPreviousDelay` milliseconds.
-   *
-   * @example
-   * ```typescript
-   * const policy = RetryPolicy.wait(TimeDuration.of(1));
-   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
-   * const newState = RetryPolicy.applyAndDelay(policy, retryState);
-   * await Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
-   * ```
-   * @param policy The policy to apply
-   * @param state The current state of the retry operation
-   */
-  applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
-    return taskThenRun(RetryPolicy.apply(policy, state), (nextStatus) =>
-      timeDelay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration)),
-    );
   },
 
   /**
@@ -171,6 +110,66 @@ export const RetryPolicy = {
   },
 
   /**
+   * Apply a retry policy to a retry state.
+   *
+   * @example
+   * ```typescript
+   * const policy = RetryPolicy.wait(TimeDuration.of(1));
+   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
+   * const newState = RetryPolicy.apply(policy, retryState);
+   * Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * ```
+   * @param policy The policy to apply
+   * @param state The current state of the retry operation
+   */
+  apply(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
+    return taskMap(policy(state), (retryPreviousDelay) =>
+      retryPreviousDelay == null
+        ? retryPreviousDelay
+        : RetryState({
+            retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
+            retryIndex: (+state.retryIndex + 1) as Int,
+            retryPreviousDelay,
+          }),
+    );
+  },
+
+  /**
+   * Apply a retry policy to a retry state and wait `state.retryPreviousDelay` milliseconds.
+   *
+   * @example
+   * ```typescript
+   * const policy = RetryPolicy.wait(TimeDuration.of(1));
+   * const oldState = RetryState({ retryIndex: Int(0), retryCumulativeDelay: TimeDuration.of(1), retryPreviousDelay: Option.None });
+   * const newState = RetryPolicy.applyAndDelay(policy, retryState);
+   * await Task.run(newState) // Result.Ok(RetryState({ retryIndex: Int(1), retryCumulativeDelay: 1, retryPreviousDelay: 1 }))
+   * ```
+   * @param policy The policy to apply
+   * @param state The current state of the retry operation
+   */
+  applyAndDelay(policy: RetryPolicy, state: RetryState): Task<Option<RetryState>, never> {
+    return taskThenRun(RetryPolicy.apply(policy, state), (nextStatus) =>
+      timeDelay(nextStatus?.retryPreviousDelay ?? (0 as TimeDuration)),
+    );
+  },
+
+  /**
+   * Filter the policy delay using `predicate(delay, state)`
+   *
+   * @example
+   * ```typescript
+   * const maxDelay = TimeDuration.of(4);
+   * const policy = RetryPolicy.wait(TimeDuration.of(2));
+   * const mappedPolicy = RetryPolicy.filter(policy, (delay, state) => state.cumulativeDelay > maxDelay);// Retry until cumulative delay is greater than 4 seconds
+   * ```
+   * @param policy The policy
+   * @param predicate The predicate function
+   */
+  filter(policy: RetryPolicy, predicate: (delay: TimeDuration, state: RetryState) => boolean): RetryPolicy {
+    return RetryPolicy.andThen(policy, (delay, state) => (predicate(delay, state) ? delay : undefined));
+  },
+
+  /**
    * A retry policy that never retries
    *
    * @param _state
@@ -183,6 +182,20 @@ export const RetryPolicy = {
   never: function never(_state) {
     return resolveNone;
   } as RetryPolicy,
+
+  /**
+   * A retry policy that retries immediately, but only up to `count` times.
+   *
+   * @example
+   * ```typescript
+   * const policy = RetryPolicy.retries(Int(3));// Retry 3 times
+   * ```
+   * @category Constructor
+   * @param count The number of retries to allow
+   */
+  retries(count: Int): RetryPolicy {
+    return ({ retryIndex }) => taskResolve(retryIndex >= count ? undefined : (0 as TimeDuration));
+  },
 
   /**
    * A retry policy with a constant delay and unlimited retries.
@@ -235,20 +248,6 @@ export const RetryPolicy = {
   },
 
   /**
-   * A retry policy that retries immediately, but only up to `count` times.
-   *
-   * @example
-   * ```typescript
-   * const policy = RetryPolicy.retries(Int(3));// Retry 3 times
-   * ```
-   * @category Constructor
-   * @param count The number of retries to allow
-   */
-  retries(count: Int): RetryPolicy {
-    return ({ retryIndex }) => taskResolve(retryIndex >= count ? undefined : (0 as TimeDuration));
-  },
-
-  /**
    * Set a time upper bound for any delays that may be directed by the given policy.
    *
    * @example
@@ -264,32 +263,32 @@ export const RetryPolicy = {
   },
 };
 
-interface RetryDoneResult {
-  readonly done: true;
-}
-interface RetryContinueResult {
-  readonly done: false;
-  readonly value: Option<TimeDuration>;
-}
-
 /**
  * Acts like the iterator protocol for retry attempts.
  * When `{ done: true }` is returned, the retry operation is complete.
  * When `{ done: false, value: Option.None }` is returned, the retry operation will be done using the default policy delay.
  * When `{ done: false, value: Option.Some(TimeDuration.of(...)) }` is returned, the retry operation will be done using given delay.
  */
-export type RetryResult = RetryDoneResult | RetryContinueResult;
+export type RetryResult = RetryContinueResult | RetryDoneResult;
+interface RetryContinueResult {
+  readonly done: false;
+  readonly value: Option<TimeDuration>;
+}
+
+interface RetryDoneResult {
+  readonly done: true;
+}
 
 export const RetryResult = {
-  Done: Object.freeze<RetryDoneResult>({ done: true }),
   Continue: (value: Option<TimeDuration> = undefined): RetryContinueResult => ({ done: false, value }),
+  Done: Object.freeze<RetryDoneResult>({ done: true }),
 };
 
 export function retry<Value, Error>(
-  taskOrGetter: TaskLike<Value, Error> | ((state: RetryState) => TaskLike<Value, Error>),
+  taskOrGetter: ((state: RetryState) => TaskLike<Value, Error>) | TaskLike<Value, Error>,
   options: retry.Options<Value, Error>,
 ): Task<Value, Error> {
-  const { policy, check, initialState = defaultRetryState } = options;
+  const { check, initialState = defaultRetryState, policy } = options;
   const go = (state: RetryState): Task<Value, Error> =>
     andThenResult(typeof taskOrGetter === 'function' ? taskOrGetter(state) : taskOrGetter, (result) =>
       taskThen(check(result), (retryResult) =>
@@ -310,11 +309,11 @@ export function retry<Value, Error>(
   return go(initialState);
 }
 export namespace retry {
-  export type Options<Value, Error> = {
-    policy: RetryPolicy;
-    initialState?: RetryState;
+  export interface Options<Value, Error> {
     check: (result: Result<Value, Error>) => Task<RetryResult, never>;
-  };
+    initialState?: RetryState;
+    policy: RetryPolicy;
+  }
 }
 
 function andThenResult<Value, ValueTo, Error>(

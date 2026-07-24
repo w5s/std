@@ -1,6 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { of } from './of.js';
+import { describe, expect, it } from 'vitest';
+
 import type { UUID } from '../UUID.js';
+
+import { of } from './of.js';
 
 describe(of, () => {
   const anyValidUUID = '1c19548b-7cac-4222-b722-dc38f2870669' as UUID;

@@ -1,7 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { executeQuery } from './execute.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { DatabaseError } from './error.js';
+import { executeQuery } from './execute.js';
 import { sql } from './sql.js';
 import { SQLQuery } from './SQLQuery.js';
 import './driver/all.js';

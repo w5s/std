@@ -1,5 +1,6 @@
-import { state } from '../internal/state.js';
 import type { Secret } from '../Secret.js';
+
+import { state } from '../internal/state.js';
 
 /**
  * Returns the content of self

@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
-import { TimeDuration } from '@w5s/time';
 import { Option } from '@w5s/core';
 import { Task } from '@w5s/task';
+import { TimeDuration } from '@w5s/time';
+import { describe, expect, it } from 'vitest';
+
 import { Client } from './Client.js';
 
 describe(Client, () => {
@@ -9,9 +10,9 @@ describe(Client, () => {
   const anyURL = 'https://localhost';
   it('constructs a client', () => {
     expect(Client()).toEqual({
+      fetch: globalThis.fetch,
       onRequest: Task.resolve,
       onResponse: Task.resolve,
-      fetch: globalThis.fetch,
       timeout: 'default',
     });
   });
@@ -41,8 +42,8 @@ describe(Client, () => {
         timeout: anyDuration,
       });
       const request = {
-        url: anyURL,
         timeout: 'default' as const,
+        url: anyURL,
       };
       expect(Client.getRequestTimeoutDuration(client, request)).toBe(anyDuration);
     });
@@ -51,8 +52,8 @@ describe(Client, () => {
         timeout: 'none',
       });
       const request = {
-        url: anyURL,
         timeout: 'none' as const,
+        url: anyURL,
       };
       expect(Client.getRequestTimeoutDuration(client, request)).toBe(Option.None);
     });
@@ -61,8 +62,8 @@ describe(Client, () => {
         timeout: 'none',
       });
       const request = {
-        url: anyURL,
         timeout: anyDuration,
+        url: anyURL,
       };
       expect(Client.getRequestTimeoutDuration(client, request)).toBe(anyDuration);
     });

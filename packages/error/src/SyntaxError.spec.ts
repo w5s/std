@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { SyntaxError } from './SyntaxError.js';
 
 describe(SyntaxError, () => {

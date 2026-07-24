@@ -1,10 +1,11 @@
 // packages/iterable/src/Iterable/chunks.spec.ts
 
 import { describe, expect, it } from 'vitest';
-import { concat } from './concat.js';
+
 import { withAsyncIterable } from '../Testing.js';
-import { of } from './of.js';
+import { concat } from './concat.js';
 import { empty } from './empty.js';
+import { of } from './of.js';
 
 describe(concat, () => {
   const expectIterable = withAsyncIterable(expect);

@@ -1,6 +1,5 @@
 import type { Nullable } from '@w5s/core-type';
-import { None } from './Option/None.js';
-import { Some } from './Option/Some.js';
+
 import { andThen } from './Option/andThen.js';
 import { from } from './Option/from.js';
 import { getOrElse } from './Option/getOrElse.js';
@@ -8,7 +7,9 @@ import { getOrThrow } from './Option/getOrThrow.js';
 import { isNone } from './Option/isNone.js';
 import { isSome } from './Option/isSome.js';
 import { map } from './Option/map.js';
+import { None } from './Option/None.js';
 import { orElse } from './Option/orElse.js';
+import { Some } from './Option/Some.js';
 
 // https://doc.rust-lang.org/std/option/enum.Option.html
 
@@ -42,7 +43,7 @@ import { orElse } from './Option/orElse.js';
  * ```
  * @param Value the type of the contained value
  */
-export type Option<Value> = Value | Option.None;
+export type Option<Value> = Option.None | Value;
 
 /**
  * `OptionLike<Value>` is the type used to represent either a Nullable value
@@ -53,8 +54,6 @@ export type OptionLike<Value> = Nullable<Value>;
  * @namespace
  */
 export const Option = {
-  Some,
-  None,
   andThen,
   from,
   getOrElse,
@@ -62,7 +61,9 @@ export const Option = {
   isNone,
   isSome,
   map,
+  None,
   orElse,
+  Some,
 };
 
 export namespace Option {

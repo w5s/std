@@ -1,14 +1,12 @@
 export type CSVField = string;
 
-export type CSVRecord = ReadonlyArray<CSVField>;
+export type CSVHeader = ReadonlyArray<CSVHeaderName>;
 
 export type CSVHeaderName = string;
 
-export type CSVHeader = ReadonlyArray<CSVHeaderName>;
+export type CSVNamedRecord = Readonly<Record<CSVHeaderName, CSVField>>;
 
-export type CSVNamedRecord = {
-  readonly [name: CSVHeaderName]: CSVField;
-};
+export type CSVRecord = ReadonlyArray<CSVField>;
 export const CSVNamedRecord = {
   fromCSVRecord(header: CSVHeader, record: CSVRecord): CSVNamedRecord {
     const length = Math.min(header.length, record.length);

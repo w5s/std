@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { Ref } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { useNamespace } from './useNamespace.js';
 
 describe(useNamespace, () => {
@@ -32,8 +33,8 @@ describe(useNamespace, () => {
     namespace.current = { configuration: { retries: 2 } };
 
     expect(store.current).toEqual({
-      other: { state: { value: 1 } },
       app: { configuration: { retries: 2 } },
+      other: { state: { value: 1 } },
     });
   });
 });

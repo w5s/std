@@ -1,10 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
 import { TaskCanceler } from '@w5s/task';
-import { writeFile } from './writeFile.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
+import { writeFile } from './writeFile.js';
 
 describe(writeFile, () => {
   const expectTask = withTask(expect);
@@ -55,9 +56,9 @@ describe(writeFile, () => {
     };
     const task = writeFile(FilePath('oldPath'), content);
     task[Symbol.run]({
-      resolve: () => {},
-      reject: () => {},
       canceler,
+      reject: () => {},
+      resolve: () => {},
     });
     expect(fileContent).toEqual('0123456789');
   });

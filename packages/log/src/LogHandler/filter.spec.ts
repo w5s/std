@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Task } from '@w5s/task';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { fakeLogRecord } from '../Testing.js';
 import { filter } from './filter.js';
 
@@ -28,8 +29,8 @@ describe(filter, () => {
       ),
     ).toResolveSync(undefined);
     expect(handler).not.toHaveBeenLastCalledWith({
-      id: '',
       category: 'foo',
+      id: '',
     });
   });
 });

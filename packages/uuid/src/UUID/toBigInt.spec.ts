@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { toBigInt } from './toBigInt.js'; // Replace with the actual path to your module
+import { describe, expect, it } from 'vitest';
+
 import { of } from './of.js';
+import { toBigInt } from './toBigInt.js'; // Replace with the actual path to your module
 
 describe(toBigInt, () => {
   it('should correctly convert a valid UUID to a bigint', () => {

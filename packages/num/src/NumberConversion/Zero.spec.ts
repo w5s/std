@@ -1,5 +1,6 @@
-import { describe } from 'vitest';
 import { describeZero } from '@w5s/core/dist/Testing.js';
+import { describe } from 'vitest';
+
 import { Zero } from './Zero.js';
 
 describe(Zero, () => {
@@ -7,8 +8,8 @@ describe(Zero, () => {
     nonZero: () => [1, 2, -1],
   });
   const CustomConversion = {
-    fromNumber: (v: number) => ({ custom: true, value: v }),
     asNumber: (v: { custom: true; value: number }) => v.value,
+    fromNumber: (v: number) => ({ custom: true, value: v }),
   };
   describeZero(Zero(CustomConversion), {
     nonZero: () => [

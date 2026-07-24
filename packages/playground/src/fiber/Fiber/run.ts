@@ -1,5 +1,6 @@
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';
+
 import { scheduler } from '../internal/scheduler.js';
 
 /**

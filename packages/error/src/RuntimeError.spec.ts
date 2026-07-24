@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { RuntimeError } from './RuntimeError.js';
 import { describeError } from './Testing.js';
 
 describe(RuntimeError, () => {
-  describeError({ describe, it, expect })(RuntimeError, {
+  describeError({ describe, expect, it })(RuntimeError, {
     defaultParameters: () => ({}),
-    expectedName: 'RuntimeError',
     expectedDefaultMessage: 'An error occurred during program execution',
+    expectedName: 'RuntimeError',
   });
 });

@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { objectId } from './objectId.js';
 
 describe(objectId, () => {
@@ -6,9 +7,9 @@ describe(objectId, () => {
 
   describe.each([
     // Generator
-    { type: 'function', generate: (): object => ({ property: Math.random() }) },
-    { type: 'symbol', generate: () => Symbol('foo') },
-    { type: 'function', generate: () => function foo() {} },
+    { generate: (): object => ({ property: Math.random() }), type: 'function' },
+    { generate: () => Symbol('foo'), type: 'symbol' },
+    { generate: () => function foo() {}, type: 'function' },
   ])('with $function', ({ generate }) => {
     it('returns an integer value', () => {
       const value = generate();

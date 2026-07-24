@@ -1,9 +1,11 @@
-import type * as nodeFS from 'node:fs';
 import type { Array } from '@w5s/core-type';
 import type { Task } from '@w5s/task';
+import type * as nodeFS from 'node:fs';
+
 import type { FileError } from '../FileError.js';
-import { Internal, errnoTask } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';
+
+import { errnoTask, Internal } from '../Internal.js';
 
 /**
  * Reads the contents of a directory.
@@ -18,7 +20,7 @@ import type { FilePath } from '../FilePath.js';
  */
 export function listDirectory(filePath: FilePath, options?: listDirectory.Options): Task<Array<FilePath>, FileError> {
   // @ts-ignore - `readdir` returns an array of strings instead of a Array<FilePath>
-  return errnoTask<[path: nodeFS.PathLike, options?: BufferEncoding], string[]>(Internal.FS.readdir)(filePath, options);
+  return errnoTask<[path: nodeFS.PathLike, options?: BufferEncoding], Array<string>>(Internal.FS.readdir)(filePath, options);
 }
 export namespace listDirectory {
   export type Options = BufferEncoding;

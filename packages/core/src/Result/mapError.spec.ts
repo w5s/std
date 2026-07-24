@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
+
+import { Error } from './Error.js';
 import { mapError } from './mapError.js';
 import { Ok } from './Ok.js';
-import { Error } from './Error.js';
 
 describe(mapError, () => {
   it('should return true for Ok() object', () => {

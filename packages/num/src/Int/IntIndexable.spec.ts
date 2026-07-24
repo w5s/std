@@ -1,7 +1,8 @@
-import { describe } from 'vitest';
 import { describeIndexable } from '@w5s/core/dist/Testing.js';
-import { IntIndexable } from './IntIndexable.js';
+import { describe } from 'vitest';
+
 import { Int } from '../Int.js';
+import { IntIndexable } from './IntIndexable.js';
 
 describe('IntIndexable', () => {
   describeIndexable(IntIndexable, {

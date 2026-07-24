@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { EvalError } from './EvalError.js';
 
 describe(EvalError, () => {

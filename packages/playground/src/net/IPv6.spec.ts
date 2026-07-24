@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { CodecError, Result } from '@w5s/core';
 import {
   describeBounded,
   describeCodec,
@@ -6,14 +6,15 @@ import {
   describeIndexable,
   describeType,
 } from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { IPv6 } from './IPv6.js';
 
 describe('IPv6', () => {
   describeType(IPv6, () => ({
-    typeName: 'IPv6',
     instances: [IPv6(0xFF_FF, 0xFF_FF, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x7F_00, 0x00_01)],
     notInstances: [undefined, 0xFF_FF, '::ffff:127.0.0.1'],
+    typeName: 'IPv6',
   }));
 
   describe(IPv6.of, () => {
@@ -50,28 +51,28 @@ describe('IPv6', () => {
     decode: [
       ['::ffff:7f00:1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xFF_FF, 0x7F_00, 0x00_01))],
       ['::ffff:127.0.0.1', Result.Ok(IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xFF_FF, 0x7F_00, 0x00_01))],
-      [null, Result.Error(new CodecError({ message: 'Cannot decode null as IPv6', input: null }))],
+      [null, Result.Error(new CodecError({ input: null, message: 'Cannot decode null as IPv6' }))],
     ],
     encode: [[IPv6.of(0x00_00, 0x00_00, 0x00_00, 0x00_00, 0x00_00, 0xFF_FF, 0x7F_00, 0x00_01), '::ffff:7f00:1']],
     schema: {
-      type: 'string',
       format: 'ipv6',
+      type: 'string',
     },
   }));
 
   describeComparable(IPv6, {
+    equivalent: () => [[IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0, 1), IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0, 1)]],
     ordered: () => [
       IPv6.of(0, 0, 0, 0, 0, 0, 0, 0),
       IPv6.of(0, 0, 0, 0, 0, 0, 0, 1),
       IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0, 0),
       IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0xC0_A8, 0x00_01),
     ],
-    equivalent: () => [[IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0, 1), IPv6.of(0xFF_FF, 0xFF_FF, 0, 0, 0, 0, 0, 1)]],
   });
 
   describeBounded(IPv6, {
-    minValue: IPv6.of(0, 0, 0, 0, 0, 0, 0, 0),
     maxValue: IPv6.of(0xFF_FF, 0xFF_FF, 0xFF_FF, 0xFF_FF, 0xFF_FF, 0xFF_FF, 0xFF_FF, 0xFF_FF),
+    minValue: IPv6.of(0, 0, 0, 0, 0, 0, 0, 0),
   });
 
   describeIndexable(IPv6, {

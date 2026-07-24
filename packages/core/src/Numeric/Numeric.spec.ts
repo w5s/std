@@ -1,9 +1,11 @@
-import { describe, it, expect, vi } from 'vitest';
-import { Numeric } from './Numeric.js';
-import { Int } from '../Int.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import type { Ordering } from '../Ordering.js';
-import { describeSigned } from '../Testing.js';
+
 import { Comparable } from '../Comparable.js';
+import { Int } from '../Int.js';
+import { describeSigned } from '../Testing.js';
+import { Numeric } from './Numeric.js';
 
 describe(Numeric, () => {
   interface TestCustom {
@@ -15,11 +17,11 @@ describe(Numeric, () => {
   });
   const TestType = {
     ...Numeric({
-      'compare': TestComparable.compare,
-      '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
       '*': (left, right) => ({ custom: true, value: (left.value * right.value) as Int }),
-      'fromInt': (value: Int) => ({ custom: true, value }),
+      '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
       'asInt': (value) => value.value,
+      'compare': TestComparable.compare,
+      'fromInt': (value: Int) => ({ custom: true, value }),
     }),
     ...TestComparable,
   };
@@ -135,29 +137,29 @@ describe(Numeric, () => {
   describeSigned(TestType, {
     values: () => [
       {
+        abs: TestType.fromInt(Int(2)),
+        sign: TestType.fromInt(Int(-1)),
+        type: 'negative',
         value: TestType.fromInt(Int(-2)),
-        type: 'negative',
-        sign: TestType.fromInt(Int(-1)),
-        abs: TestType.fromInt(Int(2)),
       },
       {
+        abs: TestType.fromInt(Int(1)),
+        sign: TestType.fromInt(Int(-1)),
+        type: 'negative',
         value: TestType.fromInt(Int(-1)),
-        type: 'negative',
-        sign: TestType.fromInt(Int(-1)),
-        abs: TestType.fromInt(Int(1)),
       },
-      { value: TestType.fromInt(Int(0)), type: 'zero', sign: TestType.fromInt(Int(0)), abs: TestType.fromInt(Int(0)) },
+      { abs: TestType.fromInt(Int(0)), sign: TestType.fromInt(Int(0)), type: 'zero', value: TestType.fromInt(Int(0)) },
       {
+        abs: TestType.fromInt(Int(1)),
+        sign: TestType.fromInt(Int(1)),
+        type: 'positive',
         value: TestType.fromInt(Int(1)),
-        type: 'positive',
-        sign: TestType.fromInt(Int(1)),
-        abs: TestType.fromInt(Int(1)),
       },
       {
-        value: TestType.fromInt(Int(2)),
-        type: 'positive',
-        sign: TestType.fromInt(Int(1)),
         abs: TestType.fromInt(Int(2)),
+        sign: TestType.fromInt(Int(1)),
+        type: 'positive',
+        value: TestType.fromInt(Int(2)),
       },
     ],
   });

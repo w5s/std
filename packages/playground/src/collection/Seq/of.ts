@@ -1,4 +1,5 @@
 import type { Seq } from '../Seq.js';
+
 import { from } from './from.js';
 
 /**
@@ -10,6 +11,6 @@ import { from } from './from.js';
  * ```
  * @param values values to be converted to a sequence
  */
-export function of<T>(...values: T[]): Seq<T> {
+export function of<T>(...values: Array<T>): Seq<T> {
   return from(values);
 }

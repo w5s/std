@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { generate } from './generate.js';
+import { describe, expect, it } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { generate } from './generate.js';
 
 describe(generate, () => {
   const expectIterable = withIterable(expect);

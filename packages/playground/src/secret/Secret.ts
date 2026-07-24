@@ -1,4 +1,5 @@
 import type { Struct } from '@w5s/core';
+
 import { of } from './Secret/of.js';
 import { SecretAsString } from './Secret/SecretAsString.js';
 import { value } from './Secret/value.js';
@@ -7,14 +8,14 @@ export interface Secret<T> extends Struct<{ _: 'Secret' }> {
   ['@@secret']: T;
 
   /**
-   * Returns string conversion
-   */
-  toString(): string;
-
-  /**
    * Return JSON conversion
    */
   toJSON(): string;
+
+  /**
+   * Returns string conversion
+   */
+  toString(): string;
 }
 
 /**

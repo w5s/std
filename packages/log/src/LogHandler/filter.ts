@@ -1,5 +1,7 @@
-import { resolve } from '@w5s/task/dist/Task/resolve.js';
 import type { Task } from '@w5s/task';
+
+import { resolve } from '@w5s/task/dist/Task/resolve.js';
+
 import type { LogHandler } from '../LogHandler.js';
 import type { LogRecord } from '../LogRecord.js';
 

@@ -1,6 +1,7 @@
 import type { ComparableInterface } from '../Comparable.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for Comparable behavior
@@ -26,12 +27,12 @@ import type { TestingLibrary } from './type.js';
 export function describeComparable<T>(
   subject: ComparableInterface<T>,
   properties: {
-    ordered: () => T[];
-    equivalent: () => [T, T][];
+    equivalent: () => Array<[T, T]>;
+    ordered: () => Array<T>;
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   const { equivalent: equivalentDefault, ordered } = properties;
   const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
   const inferiorData = () => {

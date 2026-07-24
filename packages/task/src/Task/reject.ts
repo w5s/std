@@ -1,4 +1,5 @@
 import type { Task } from '../Task.js';
+
 import { from } from './from.js';
 
 /**
@@ -12,7 +13,6 @@ import { from } from './from.js';
  * @category Constructor
  */
 export function reject<Value = never>(): Task<Value, void>;
-
 /**
  * Constructor that always returns a failed `Task` that rejects `errorValue`.
  * This is a shorthand for `Task(({ error }) => error(errorValue))`

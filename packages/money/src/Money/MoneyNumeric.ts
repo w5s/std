@@ -1,9 +1,11 @@
-import type { Result } from '@w5s/core';
-import { ArgumentError } from '@w5s/error/dist/ArgumentError.js';
-import { Ok } from '@w5s/core/dist/Result/Ok.js';
-import { Error } from '@w5s/core/dist/Result/Error.js';
-import { BigDecimalNumeric } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNumeric.js';
 import type { BigDecimal } from '@w5s/bigdecimal';
+import type { Result } from '@w5s/core';
+
+import { BigDecimalNumeric } from '@w5s/bigdecimal/dist/BigDecimal/BigDecimalNumeric.js';
+import { Error } from '@w5s/core/dist/Result/Error.js';
+import { Ok } from '@w5s/core/dist/Result/Ok.js';
+import { ArgumentError } from '@w5s/error/dist/ArgumentError.js';
+
 import { compare as currencyCompare } from '../Currency/compare.js';
 import { Money } from './Money.js';
 
@@ -12,8 +14,8 @@ function createOperator(combineFn: (leftAmount: Money['amount'], rightAmount: Mo
     currencyCompare(left.currency, right.currency) === 0
       ? Ok(
           Money({
-            currency: left.currency,
             amount: combineFn(left.amount, right.amount),
+            currency: left.currency,
           }),
         )
       : Error(
@@ -24,6 +26,19 @@ function createOperator(combineFn: (leftAmount: Money['amount'], rightAmount: Mo
 }
 
 export const MoneyNumeric: {
+  /**
+   * Multiply operator
+   *
+   * @example
+   * ```typescript
+   * Money['*'](EUR(2), BigDecimal('2'));// EUR("4")
+   * ```
+   * @category Numeric
+   * @param money money object
+   * @param multiplier multiplication factor
+   */
+  '*'(money: Money, multiplier: BigDecimal): Money;
+
   /**
    * Addition operator
    *
@@ -51,25 +66,12 @@ export const MoneyNumeric: {
    * @param right Right operand money
    */
   '-'(this: void, left: Money, right: Money): Result<Money, ArgumentError>;
-
-  /**
-   * Multiply operator
-   *
-   * @example
-   * ```typescript
-   * Money['*'](EUR(2), BigDecimal('2'));// EUR("4")
-   * ```
-   * @category Numeric
-   * @param money money object
-   * @param multiplier multiplication factor
-   */
-  '*'(money: Money, multiplier: BigDecimal): Money;
 } = {
-  '+': createOperator(BigDecimalNumeric['+']),
-  '-': createOperator(BigDecimalNumeric['-']),
   '*': (money, multiplier) =>
     Money({
-      currency: money.currency,
       amount: BigDecimalNumeric['*'](money.amount, multiplier),
+      currency: money.currency,
     }),
+  '+': createOperator(BigDecimalNumeric['+']),
+  '-': createOperator(BigDecimalNumeric['-']),
 };

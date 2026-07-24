@@ -7,7 +7,7 @@ import { define } from './define.js';
  * @namespace
  */
 export const number = define<number>({
-  typeName: 'number',
   hasInstance: (anyValue) => typeof anyValue === 'number',
   [Symbol.schema]: () => ({ type: 'number' }),
+  typeName: 'number',
 });

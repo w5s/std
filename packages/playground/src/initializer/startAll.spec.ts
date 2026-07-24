@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';
 import { getStatus, state } from './internal/state.js';

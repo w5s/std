@@ -1,9 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Symbol } from '@w5s/core';
-import { mapError } from './mapError.js';
-import { FakeTask, withTask } from '../Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { taskRun } from '../internal/taskRun.js';
 import { TaskCanceler } from '../TaskCanceler.js';
+import { FakeTask, withTask } from '../Testing.js';
+import { mapError } from './mapError.js';
 
 describe(mapError, () => {
   const anyError = Object.freeze({ message: 'error message' });
@@ -42,9 +43,9 @@ describe(mapError, () => {
     const result = taskRun(mapTask, canceler);
 
     expect(task[Symbol.run]).toHaveBeenCalledWith({
-      resolve: expect.any(Function),
-      reject: expect.any(Function),
       canceler,
+      reject: expect.any(Function),
+      resolve: expect.any(Function),
     });
     await result;
   });

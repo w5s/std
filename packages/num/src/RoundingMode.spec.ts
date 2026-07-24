@@ -1,4 +1,5 @@
-import { describe, it, expect, expectTypeOf } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
+
 import { RoundingMode } from './RoundingMode.js';
 
 describe('RoundingMode', () => {

@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Currency } from './Currency.js';
 import { CurrencyAsString } from './Currency/CurrencyAsString.js';
 import { CurrencyComparable } from './Currency/CurrencyComparable.js';

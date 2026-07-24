@@ -1,4 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+
 import { shallowEqual } from './shallowEqual.js';
 
 describe('shallowEqual', () => {
@@ -47,10 +48,10 @@ describe('shallowEqual', () => {
   });
 
   it('should provide the correct `equalValueFn` arguments', () => {
-    type TestObject = {
-      a: number[];
+    interface TestObject {
+      a: Array<number>;
       b: typeof objectCommon;
-    };
+    }
 
     const objectCommon = { common: true };
     const object1: TestObject = { a: [1, 2], b: objectCommon };
@@ -66,7 +67,7 @@ describe('shallowEqual', () => {
   });
 
   it('should not handle comparisons if `equalFn` returns `true`', () => {
-    const equalFn = (value: string | number) => typeof value === 'string';
+    const equalFn = (value: number | string) => typeof value === 'string';
 
     // expect(shallowEqual(['a'], ['b'], equalFn)).toEqual(true);
     expect(shallowEqual({ 0: 'a' }, { 0: 'b' }, equalFn)).toEqual(true);

@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
 import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { describe, expect, it } from 'vitest';
+
 import { withFile } from './withFile.js';
 
 describe('withFile', () => {
@@ -15,8 +16,8 @@ describe('withFile', () => {
         await expectFile('blah').toExist();
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: 'expected blah to exist',
+          name: 'AssertionError',
         }),
       );
     });
@@ -27,8 +28,8 @@ describe('withFile', () => {
         await expectFile(__dirname).toBeAFile();
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: `expected ${__dirname} to be a file`,
+          name: 'AssertionError',
         }),
       );
     });
@@ -39,8 +40,8 @@ describe('withFile', () => {
         await expectFile(__filename).toBeADirectory();
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: `expected ${__filename} to be a directory`,
+          name: 'AssertionError',
         }),
       );
     });
@@ -51,8 +52,8 @@ describe('withFile', () => {
         await expectFile(__filename).toBeASymbolicLink();
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: `expected ${__filename} to be a symbolic link`,
+          name: 'AssertionError',
         }),
       );
     });
@@ -63,8 +64,8 @@ describe('withFile', () => {
         await expectFile(nodePath.join(fixtureDir, 'test1')).toHaveFileContent('');
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: String.raw`expected 'test1_content\n' to deeply equal ''`,
+          name: 'AssertionError',
         }),
       );
     });
@@ -75,8 +76,8 @@ describe('withFile', () => {
         await expectFile(fixtureDir).toHaveDirContent([]);
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: `expected [ 'test1', 'test2' ] to deeply equal []`,
+          name: 'AssertionError',
         }),
       );
     });
@@ -87,8 +88,8 @@ describe('withFile', () => {
         await expectFile(nodePath.join(__dirname, '__fixture__')).toHaveDirLength(1);
       }).rejects.toEqual(
         expect.objectContaining({
-          name: 'AssertionError',
           message: `expected [ 'test1', 'test2' ] to have property "length" with value 1`,
+          name: 'AssertionError',
         }),
       );
     });

@@ -1,5 +1,7 @@
 import type { Option } from '@w5s/core';
+
 import type { RecordKey } from '../Record.js';
+
 import { has } from './has.js';
 
 /**

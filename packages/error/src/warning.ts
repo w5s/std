@@ -11,7 +11,7 @@
  * @param condition the predicate result
  * @param message an optional message for Error
  */
-export function warning(condition: boolean, message?: string | null): void {
+export function warning(condition: boolean, message?: null | string): void {
   if (!condition) {
     console.warn(`Warning: ${message ?? ''}`);
   }

@@ -18,19 +18,19 @@ npm install @w5s/uuid
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { randomUUID } from '@w5s/uuid';
 import { Task } from '@w5s/task';
+import { randomUUID } from '@w5s/uuid';
+
+export function main(): void {
+  const userTask = createUser('John Doe');
+  console.log(Task.run(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
+}
 
 function createUser(name: string) {
   return Task.map(randomUUID(), (uuid) => ({
     id: uuid,
     name,
   }));
-}
-
-export function main(): void {
-  const userTask = createUser('John Doe');
-  console.log(Task.run(userTask)); // > Result.Ok({ id: 'XXXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX', name: 'John Doe' })
 }
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->

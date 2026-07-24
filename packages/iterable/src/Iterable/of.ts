@@ -8,7 +8,7 @@
  * @category Constructor
  * @param values The values of the iterable
  */
-export function of<Value>(...values: Value[]): Iterable<Value> {
+export function of<Value>(...values: Array<Value>): Iterable<Value> {
   return {
     [Symbol.iterator]: values[Symbol.iterator].bind(values),
   };

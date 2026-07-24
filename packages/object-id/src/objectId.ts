@@ -1,5 +1,11 @@
 import type { ObjectLike, Tag } from '@w5s/core-type';
+
 import { state } from './internal/state.js';
+
+/**
+ * Type representing a unique object id
+ */
+export type ObjectId = number & Tag<'ObjectId'>;
 
 /**
  * Type representing values that can have an {@link ObjectId}
@@ -7,11 +13,6 @@ import { state } from './internal/state.js';
  * Alias of {@link ObjectLike}
  */
 export type ObjectIdParameter = ObjectLike;
-
-/**
- * Type representing a unique object id
- */
-export type ObjectId = number & Tag<'ObjectId'>;
 
 /**
  * Return a unique identifier for an object or function

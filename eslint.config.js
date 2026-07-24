@@ -1,40 +1,41 @@
 import { defineConfig } from '@w5s/eslint-config';
 
-export default [...(await defineConfig({
+export default await defineConfig({
   ignores: [
     '**/build',
     '**/dist',
   ],
-  node: {
-    rules: {
+  plugins: {
+    node: {
+      rules: {
       // Temporarily disabled globally: eslint-plugin-n `node/no-sync` crashes on TS files
       // without parser services in this monorepo; keep local `node/no-sync` disables where needed.
-      'node/no-sync': 'off',
+        'node/no-sync': 'off',
+      },
+    },
+    react: false,
+    ts: {
+      rules: {
+        'jsdoc/check-tag-names': 'off',
+        'jsdoc/require-example': [
+          'warn',
+          {
+            checkConstructors: false,
+            exemptedBy: [
+              'type',
+            ],
+          },
+        ],
+        'ts/naming-convention': 'off',
+        // `void` in unions is intentionally used across public type-level APIs.
+        // Converting to `undefined` would be a semantic change with compatibility risk.
+        'ts/no-invalid-void-type': 'off',
+        // Existing APIs intentionally rely on non-null assertions; replacing them safely
+        // needs deeper refactors and test expansion to avoid runtime regressions.
+        'ts/no-non-null-assertion': 'off',
+      },
     },
   },
-  ts: {
-    rules: {
-      'jsdoc/check-tag-names': 'off',
-      'jsdoc/require-example': [
-        'warn',
-        {
-          checkConstructors: false,
-          exemptedBy: [
-            'type',
-          ],
-        },
-      ],
-      'ts/naming-convention': 'off',
-      // `void` in unions is intentionally used across public type-level APIs.
-      // Converting to `undefined` would be a semantic change with compatibility risk.
-      'ts/no-invalid-void-type': 'off',
-      // Existing APIs intentionally rely on non-null assertions; replacing them safely
-      // needs deeper refactors and test expansion to avoid runtime regressions.
-      'ts/no-non-null-assertion': 'off',
-    },
-  },
-})),
-{
   // TODO: move this to eslint-config or find a solution
   rules: {
     'e18e/prefer-array-at': 'off',
@@ -58,5 +59,4 @@ export default [...(await defineConfig({
     'unicorn/prefer-unicode-code-point-escapes': 'off',
     'unicorn/prefer-url-href': 'off',
   },
-},
-];
+});

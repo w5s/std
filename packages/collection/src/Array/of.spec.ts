@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { of } from './of.js';
 
 describe(of, () => {

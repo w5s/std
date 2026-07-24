@@ -1,19 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { of } from './of.js';
+
 import { BigDecimal } from './BigDecimal.js';
+import { of } from './of.js';
 
 describe(of, () => {
   it('constructs from parameters', () => {
     expect(of(1n, 100)).toEqual(
       BigDecimal.create({
-        value: 1n,
         scale: 100,
+        value: 1n,
       }),
     );
     expect(of(1n, -1)).toEqual(
       BigDecimal.create({
-        value: 10n,
         scale: 0,
+        value: 10n,
       }),
     );
   });

@@ -1,4 +1,5 @@
 import type { AsInt } from '@w5s/core';
+
 import type { LogLevel } from './LogLevel.js';
 
 /**

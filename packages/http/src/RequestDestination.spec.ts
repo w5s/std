@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { RequestDestination } from './RequestDestination.js';
 
 describe('RequestDestination', () => {

@@ -1,10 +1,13 @@
 import type { Awaitable } from '@w5s/async';
-import { tryCall } from '@w5s/async/dist/tryCall.js';
 import type { Result } from '@w5s/core/dist/Result.js';
+
+import { tryCall } from '@w5s/async/dist/tryCall.js';
+
 import type { Task, TaskLike } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';
-import { from } from './from.js';
+
 import { taskRun } from '../internal/taskRun.js';
+import { from } from './from.js';
 
 /**
  * Task constructor
@@ -31,7 +34,7 @@ export function create<Value, Error = never>(
     run: <V, E>(task: TaskLike<V, E>) => Awaitable<Result<V, E>>;
   }) => Awaitable<Result<Value, Error>>,
 ): Task<Value, Error> {
-  return from(({ resolve, reject, canceler }) => {
+  return from(({ canceler, reject, resolve }) => {
     canceler.onCancel = undefined;
     return tryCall(
       () =>

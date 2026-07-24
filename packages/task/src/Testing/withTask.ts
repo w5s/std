@@ -1,31 +1,12 @@
 import type { ExpectFunction } from '@w5s/core-type';
+
+import type { TaskLike } from '../Task.js';
+
 import { error as Error } from '../Task/error.js';
 import { ok } from '../Task/ok.js';
-import type { TaskLike } from '../Task.js';
 import { run } from '../Task/run.js';
 
 export interface ExpectTask {
-  /**
-   * Asserts that task resolve value asynchronously or synchronously
-   *
-   * @param value
-   */
-  toResolve(value: unknown): Promise<void>;
-
-  /**
-   * Asserts that task resolve value asynchronously
-   *
-   * @param value
-   */
-  toResolveAsync(value: unknown): Promise<void>;
-
-  /**
-   * Asserts that task resolve value synchronously
-   *
-   * @param value
-   */
-  toResolveSync(value: unknown): void;
-
   /**
    * Asserts that task rejects value asynchronously or synchronously
    *
@@ -46,6 +27,27 @@ export interface ExpectTask {
    * @param error
    */
   toRejectSync(error: unknown): void;
+
+  /**
+   * Asserts that task resolve value asynchronously or synchronously
+   *
+   * @param value
+   */
+  toResolve(value: unknown): Promise<void>;
+
+  /**
+   * Asserts that task resolve value asynchronously
+   *
+   * @param value
+   */
+  toResolveAsync(value: unknown): Promise<void>;
+
+  /**
+   * Asserts that task resolve value synchronously
+   *
+   * @param value
+   */
+  toResolveSync(value: unknown): void;
 
   /**
    * Asserts that task throws an error asynchronously or synchronously
@@ -83,24 +85,6 @@ export interface ExpectTask {
  */
 export function withTask(expectFn: ExpectFunction) {
   const create = <V, E>(task: TaskLike<V, E>, isNot: boolean): ExpectTask => ({
-    async toResolve(value: V) {
-      const getResult = async () => run(task);
-      const expectValue = expectFn(getResult()).resolves;
-
-      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
-    },
-    async toResolveAsync(value: V) {
-      const result = run(task);
-      const expectValue = expectFn(result).resolves;
-
-      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
-    },
-    toResolveSync(value: V) {
-      const result = run(task);
-      const expectValue = expectFn(result);
-
-      (isNot ? expectValue.not : expectValue).toEqual(ok(value));
-    },
     async toReject(error_: E) {
       const getResult = async () => run(task);
       const expectValue = expectFn(getResult()).resolves;
@@ -119,20 +103,38 @@ export function withTask(expectFn: ExpectFunction) {
 
       (isNot ? expectValue.not : expectValue).toEqual(Error(error_));
     },
+    async toResolve(value: V) {
+      const getResult = async () => run(task);
+      const expectValue = expectFn(getResult()).resolves;
+
+      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
+    },
+    async toResolveAsync(value: V) {
+      const result = run(task);
+      const expectValue = expectFn(result).resolves;
+
+      await (isNot ? expectValue.not : expectValue).toEqual(ok(value));
+    },
+    toResolveSync(value: V) {
+      const result = run(task);
+      const expectValue = expectFn(result);
+
+      (isNot ? expectValue.not : expectValue).toEqual(ok(value));
+    },
     async toThrow(error_: unknown) {
       const getResult = async () => run(task);
       const expectValue = expectFn(getResult()).rejects;
 
       await (isNot ? expectValue.not : expectValue).toEqual(error_);
     },
-    toThrowSync(error_: unknown) {
-      const expectValue = expectFn(() => run(task));
-      (isNot ? expectValue.not : expectValue).toThrow(error_);
-    },
     async toThrowAsync(error_: unknown) {
       const expectValue = expectFn(run(task)).rejects;
 
       await (isNot ? expectValue.not : expectValue).toEqual(error_);
+    },
+    toThrowSync(error_: unknown) {
+      const expectValue = expectFn(() => run(task));
+      (isNot ? expectValue.not : expectValue).toThrow(error_);
     },
   });
 

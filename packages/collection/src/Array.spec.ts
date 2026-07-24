@@ -1,14 +1,18 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Array } from './Array.js';
 import { at } from './Array/at.js';
 import { concat } from './Array/concat.js';
 import { deleteAt } from './Array/deleteAt.js';
 import { empty } from './Array/empty.js';
 import { every } from './Array/every.js';
-import { find } from './Array/find.js';
 import { filter } from './Array/filter.js';
+import { find } from './Array/find.js';
 import { findIndex } from './Array/findIndex.js';
+import { findLast } from './Array/findLast.js';
+import { findLastIndex } from './Array/findLastIndex.js';
 import { flatMap } from './Array/flatMap.js';
+import { fromAsync } from './Array/fromAsync.js';
 import { generate } from './Array/generate.js';
 import { hasInstance } from './Array/hasInstance.js';
 import { includes } from './Array/includes.js';
@@ -27,9 +31,6 @@ import { slice } from './Array/slice.js';
 import { some } from './Array/some.js';
 import { sort } from './Array/sort.js';
 import { splice } from './Array/splice.js';
-import { findLast } from './Array/findLast.js';
-import { findLastIndex } from './Array/findLastIndex.js';
-import { fromAsync } from './Array/fromAsync.js';
 
 describe('Array', () => {
   it('is an alias to functions', () => {
@@ -61,9 +62,9 @@ describe('Array', () => {
       setAt,
       size,
       slice,
-      splice,
       some,
       sort,
+      splice,
     });
   });
 });

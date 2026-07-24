@@ -12,7 +12,6 @@ import type { Result } from '../Result.js';
  * @param resultError the failure value
  */
 export function Error(): Result<never, void>;
-
 /**
  *
  * @example
@@ -23,7 +22,7 @@ export function Error(): Result<never, void>;
 export function Error<E>(resultError: E): Result<never, E>;
 export function Error(resultError?: unknown): Result<never, unknown> {
   return {
-    ok: false,
     error: resultError,
+    ok: false,
   };
 }

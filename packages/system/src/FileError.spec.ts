@@ -1,7 +1,9 @@
 import { Option } from '@w5s/core';
-import { describe, it, expect } from 'vitest';
-import { FileError } from './FileError.js';
+import { describe, expect, it } from 'vitest';
+
 import type { FilePath } from './FilePath.js';
+
+import { FileError } from './FileError.js';
 
 describe('FileError', () => {
   const anyPath = 'anyPath' as FilePath;
@@ -10,17 +12,17 @@ describe('FileError', () => {
     it('should construct FileError instance', () => {
       expect(
         new FileError({
-          fileErrorType: 'OtherError',
           code: 'ENOENT',
           errno: Option.Some(2),
+          fileErrorType: 'OtherError',
           path: Option.Some(anyPath),
           syscall: Option.Some('read'),
         }),
       ).toEqual(
         expect.objectContaining({
-          name: 'FileError',
-          fileErrorType: 'OtherError',
           code: 'ENOENT',
+          fileErrorType: 'OtherError',
+          name: 'FileError',
           path: anyPath,
           syscall: 'read',
         }),

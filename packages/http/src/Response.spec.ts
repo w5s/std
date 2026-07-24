@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
+
 import { Response } from './Response.js';
-import { Status } from './Status.js';
 import { from } from './Response/from.js';
+import { Status } from './Status.js';
 
 describe(Response, () => {
   it('is an alias to functions', () => {
@@ -14,18 +15,18 @@ describe(Response, () => {
   it('returns a new instance', () => {
     expect(
       Response({
-        url: 'my/url',
         body: 'some body',
         status: Status.OK,
+        url: 'my/url',
       }),
     ).toEqual({
+      body: 'some body',
       headers: {},
       ok: true,
-      url: 'my/url',
-      status: Status.OK,
-      body: 'some body',
       redirected: false,
+      status: Status.OK,
       type: 'default',
+      url: 'my/url',
     });
   });
 });

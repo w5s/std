@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { split } from './split.js';
 
 describe(split, () => {

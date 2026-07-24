@@ -1,9 +1,10 @@
 import { describeAdd, describeSubtract } from '@w5s/core/dist/Testing.js';
 import { describe } from 'vitest';
-import { Time } from './Time.js';
-import { TimeNumeric } from './TimeNumeric.js';
-import { TimeComparable } from './TimeComparable.js';
+
 import { TimeDuration } from '../TimeDuration.js';
+import { Time } from './Time.js';
+import { TimeComparable } from './TimeComparable.js';
+import { TimeNumeric } from './TimeNumeric.js';
 
 describe('TimeNumeric', () => {
   const subject = { ...TimeComparable, ...TimeNumeric };

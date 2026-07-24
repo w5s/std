@@ -10,12 +10,12 @@ import { set } from './Record/set.js';
 import { size } from './Record/size.js';
 import { values } from './Record/values.js';
 
-export type RecordKey = string | symbol;
-
 /**
  * A Record is an immutable mapping `{ [string]: value }`
  */
 export type Record<Key extends RecordKey, Value> = Readonly<globalThis.Record<Key, Value>>;
+
+export type RecordKey = string | symbol;
 
 /**
  * A collection of functions to manipulate Record

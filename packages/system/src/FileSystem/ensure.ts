@@ -1,19 +1,11 @@
 import type { Option } from '@w5s/core';
 import type { Task } from '@w5s/task';
-import { FilePath } from '../FilePath.js';
+
 import { FileError } from '../FileError.js';
+import { FilePath } from '../FilePath.js';
 import { ErrnoException, errnoTask, Internal } from '../Internal.js';
 
-type FileType = 'file' | 'directory' | 'symlink';
-
-export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
-  const linkType = await linkStat(filePath);
-  if (linkType == null) {
-    await Internal.FS.mkdir(filePath, { recursive: true });
-  } else {
-    ensureType(filePath, 'directory', linkType);
-  }
-}
+type FileType = 'directory' | 'file' | 'symlink';
 
 /**
  * Ensures that the directory exists. If the directory structure does not exist, it is created.
@@ -29,13 +21,12 @@ export function ensureDirectory(filePath: FilePath): Task<void, FileError> {
   return errnoTask(ensureDirectoryAsync)(filePath);
 }
 
-export async function ensureFileAsync(filePath: FilePath): Promise<void> {
+export async function ensureDirectoryAsync(filePath: FilePath): Promise<void> {
   const linkType = await linkStat(filePath);
   if (linkType == null) {
-    await ensureDirectoryAsync(FilePath.dirname(filePath));
-    await Internal.FS.writeFile(filePath, '');
+    await Internal.FS.mkdir(filePath, { recursive: true });
   } else {
-    ensureType(filePath, 'file', linkType);
+    ensureType(filePath, 'directory', linkType);
   }
 }
 
@@ -53,13 +44,13 @@ export function ensureFile(filePath: FilePath): Task<void, FileError> {
   return errnoTask(ensureFileAsync)(filePath);
 }
 
-export async function ensureSymbolicLinkAsync(source: FilePath, destination: FilePath): Promise<void> {
-  const destinationLinkType = await linkStat(destination);
-  if (destinationLinkType == null) {
-    await ensureDirectoryAsync(FilePath.dirname(destination));
-    await Internal.FS.symlink(source, destination);
+export async function ensureFileAsync(filePath: FilePath): Promise<void> {
+  const linkType = await linkStat(filePath);
+  if (linkType == null) {
+    await ensureDirectoryAsync(FilePath.dirname(filePath));
+    await Internal.FS.writeFile(filePath, '');
   } else {
-    ensureType(destination, 'symlink', destinationLinkType);
+    ensureType(filePath, 'file', linkType);
   }
 }
 
@@ -78,16 +69,13 @@ export function ensureSymbolicLink(source: FilePath, destination: FilePath): Tas
   return errnoTask(ensureSymbolicLinkAsync)(source, destination);
 }
 
-async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
-  try {
-    const stats = await Internal.FS.lstat(filePath);
-
-    return stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : undefined;
-  } catch (error: unknown) {
-    if ((error as ErrnoException).code === 'ENOENT') {
-      return undefined;
-    }
-    throw error;
+export async function ensureSymbolicLinkAsync(source: FilePath, destination: FilePath): Promise<void> {
+  const destinationLinkType = await linkStat(destination);
+  if (destinationLinkType == null) {
+    await ensureDirectoryAsync(FilePath.dirname(destination));
+    await Internal.FS.symlink(source, destination);
+  } else {
+    ensureType(destination, 'symlink', destinationLinkType);
   }
 }
 
@@ -99,11 +87,24 @@ function ensureType(filePath: FilePath, expectedType: FileType, actualType: File
 
 function ensureTypeError(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   return new FileError({
+    code: undefined,
+    errno: undefined,
     fileErrorType: 'UserError',
     message: `Ensure path exists, expected '${expectedType}', got '${actualType}'`,
     path: filePath,
-    errno: undefined,
-    code: undefined,
     syscall: undefined,
   });
+}
+
+async function linkStat(filePath: FilePath): Promise<Option<FileType>> {
+  try {
+    const stats = await Internal.FS.lstat(filePath);
+
+    return stats.isFile() ? 'file' : stats.isDirectory() ? 'directory' : stats.isSymbolicLink() ? 'symlink' : undefined;
+  } catch (error: unknown) {
+    if ((error as ErrnoException).code === 'ENOENT') {
+      return undefined;
+    }
+    throw error;
+  }
 }

@@ -1,22 +1,10 @@
 import type { Option } from '@w5s/core';
+
 import type { Task } from '../Task.js';
 import type { TaskCanceler } from '../TaskCanceler.js';
+
 import { from } from '../Task/from.js';
 import { unsafeCall } from '../Task/unsafeCall.js';
-
-function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
-  return milliseconds === 0
-    ? Promise.resolve(true)
-    : new Promise((resolve) => {
-        const timerId = setTimeout(resolve, milliseconds, true);
-        const cancelerCurrent = canceler.onCancel;
-        canceler.onCancel = () => {
-          clearTimeout(timerId);
-          cancelerCurrent?.();
-          resolve(true);
-        };
-      });
-}
 
 /**
  * Options to create a TaskStub
@@ -34,12 +22,6 @@ export type FakeTaskOptions<Value, Error> = {
 } & (
   | {
     /**
-     * The value to resolve
-     */
-    value: Value;
-  }
-  | {
-    /**
      * The error to reject
      */
     error: Error;
@@ -49,6 +31,12 @@ export type FakeTaskOptions<Value, Error> = {
      * The error to throw
      */
     throwError: unknown;
+  }
+  | {
+    /**
+     * The value to resolve
+     */
+    value: Value;
   }
 );
 
@@ -72,7 +60,7 @@ export type FakeTaskOptions<Value, Error> = {
 export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<Value, Error>): Task<Value, Error> {
   const { canceler = () => {}, delayMs } = options;
   const isAsync = delayMs != null && delayMs >= 0;
-  const base = from<Value, Error>(({ resolve, reject }) => {
+  const base = from<Value, Error>(({ reject, resolve }) => {
     if ('value' in options) {
       resolve(options.value);
     } else if ('error' in options) {
@@ -91,4 +79,18 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
         return undefined;
       })
     : base;
+}
+
+function delay(milliseconds: number, canceler: TaskCanceler): Promise<boolean> {
+  return milliseconds === 0
+    ? Promise.resolve(true)
+    : new Promise((resolve) => {
+        const timerId = setTimeout(resolve, milliseconds, true);
+        const cancelerCurrent = canceler.onCancel;
+        canceler.onCancel = () => {
+          clearTimeout(timerId);
+          cancelerCurrent?.();
+          resolve(true);
+        };
+      });
 }

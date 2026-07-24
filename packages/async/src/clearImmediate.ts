@@ -1,4 +1,5 @@
 import type { ImmediateId } from './ImmediateId.js';
+
 import { globalClearImmediate } from './internal/globalClearImmediate.js';
 
 /**

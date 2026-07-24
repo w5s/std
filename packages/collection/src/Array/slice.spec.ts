@@ -1,26 +1,26 @@
-import { describe, it, expect } from 'vitest';
-import { slice } from './slice.js';
+/* eslint-disable perfectionist/sort-objects */
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { slice } from './slice.js';
 
 describe(slice, () => {
   const anyArray = [11, 4, 6, 2];
-  type ItemType<ArrayType extends readonly unknown[]> = ArrayType extends readonly (infer ElementType)[]
+  type ItemType<ArrayType extends ReadonlyArray<unknown>> = ArrayType extends ReadonlyArray<infer ElementType>
     ? ElementType
     : never;
-  const generate = <T extends { [key: string]: Array<unknown> }>(
+  const generate = <T extends Record<string, Array<unknown>>>(
     input: T,
   ): Array<{ [K in keyof T]: ItemType<T[K]> }> => {
     const addProperty = <O, P extends string, V>(element: O, property: P, values: Array<V>) =>
       values.map((value) => ({ ...element, [property]: value }));
     const genArray = <O, P extends string, V>(array: Array<O>, property: P, values: Array<V>) =>
       array.reduce<
-        (O & {
-          [x: string]: V;
-        })[]
+        Array<O & Record<string, V>>
       >((_, element) => [..._, ...addProperty(element, property, values)], []);
 
     // @ts-ignore hard to type
-    return Object.keys(input).reduce((acc, property) => {
+    return ['start', 'end'].reduce((acc, property) => {
       const values = input[property]!;
 
       return acc.length === 0 ? addProperty({}, property, values) : genArray(acc, property, values);
@@ -31,8 +31,8 @@ describe(slice, () => {
     it('should generate data for test cases', () => {
       expect(
         generate({
-          start: [undefined, 0, 1, -1],
           end: [undefined, -1, 1, 2],
+          start: [undefined, 0, 1, -1],
         }),
       ).toEqual([
         {

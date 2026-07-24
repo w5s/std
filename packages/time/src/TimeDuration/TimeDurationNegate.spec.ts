@@ -1,8 +1,9 @@
-import { describe } from 'vitest';
 import { describeNegate } from '@w5s/core/dist/Testing.js';
-import { TimeDurationNegate } from './TimeDurationNegate.js';
-import { TimeDurationComparable } from './TimeDurationComparable.js';
+import { describe } from 'vitest';
+
 import { TimeDuration } from './TimeDuration.js';
+import { TimeDurationComparable } from './TimeDurationComparable.js';
+import { TimeDurationNegate } from './TimeDurationNegate.js';
 
 describe('TimeDurationNegate', () => {
   describeNegate(

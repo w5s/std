@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
+
 import { Money } from './Money.js';
-import { MoneyNegate } from './Money/MoneyNegate.js';
-import { MoneyComparable } from './Money/MoneyComparable.js';
-import { MoneyZero } from './Money/MoneyZero.js';
-import { MoneySigned } from './Money/MoneySigned.js';
 import { MoneyAsString } from './Money/MoneyAsString.js';
+import { MoneyComparable } from './Money/MoneyComparable.js';
+import { MoneyNegate } from './Money/MoneyNegate.js';
+import { MoneySigned } from './Money/MoneySigned.js';
+import { MoneyZero } from './Money/MoneyZero.js';
 
 describe('Money', () => {
   it('has defined shape', () => {

@@ -1,9 +1,11 @@
-import { describe, it, expect } from 'vitest';
-import { ContainerKey } from './ContainerKey.js';
-import { use } from './use.js';
-import { provide } from './provide.js';
+import { describe, expect, it } from 'vitest';
+
 import type { ContainerProvider } from './ContainerProvider.js';
+
 import { pipe } from '../pipe.js';
+import { ContainerKey } from './ContainerKey.js';
+import { provide } from './provide.js';
+import { use } from './use.js';
 
 describe(use, () => {
   interface ServiceA {

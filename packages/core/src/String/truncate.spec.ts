@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { truncate } from './truncate.js';
 
 describe(truncate, () => {
@@ -7,14 +8,14 @@ describe(truncate, () => {
     expect(truncate('', { maxLength: 1 })).toBe('');
   });
   it('keeps original string if it is shorter than the length', () => {
-    expect(truncate('abc', { maxLength: 3, ellipsis: '...' })).toBe('abc');
+    expect(truncate('abc', { ellipsis: '...', maxLength: 3 })).toBe('abc');
   });
   it('handles length', () => {
-    expect(truncate('abc', { maxLength: 1, ellipsis: '...' })).toBe('...');
-    expect(truncate('abc', { maxLength: 2, ellipsis: '...' })).toBe('...');
+    expect(truncate('abc', { ellipsis: '...', maxLength: 1 })).toBe('...');
+    expect(truncate('abc', { ellipsis: '...', maxLength: 2 })).toBe('...');
   });
   it('handles custom ellipsis', () => {
-    expect(truncate('abc', { maxLength: 1, ellipsis: 'XX' })).toBe('XX');
+    expect(truncate('abc', { ellipsis: 'XX', maxLength: 1 })).toBe('XX');
   });
   it('truncates string to specified length', () => {
     expect(truncate('Hello World', { maxLength: 4 })).toBe('H...');

@@ -11,7 +11,7 @@ import { promiseWithResolvers } from './internal/promiseWithResolver.js';
  *   return promise;
  * }
  * ```
- * @returns {PromiseWithResolvers<T>} An object with the properties promise, resolve, and reject.
+ * @returns An object with the properties promise, resolve, and reject.
  */
 export function defer<T>(): PromiseWithResolvers<T> {
   return promiseWithResolvers();

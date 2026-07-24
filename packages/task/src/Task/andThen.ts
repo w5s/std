@@ -1,4 +1,5 @@
 import type { Task, TaskLike } from '../Task.js';
+
 import { from } from './from.js';
 import { unsafeCall } from './unsafeCall.js';
 
@@ -23,9 +24,9 @@ export function andThen<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
 ): Task<ValueTo, ErrorFrom | ErrorTo> {
   return from((parameters) =>
     unsafeCall(self, {
-      resolve: (value) => unsafeCall(fn(value), parameters),
-      reject: parameters.reject,
       canceler: parameters.canceler,
+      reject: parameters.reject,
+      resolve: (value) => unsafeCall(fn(value), parameters),
     }),
   );
 }

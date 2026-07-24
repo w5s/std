@@ -1,10 +1,6 @@
 import type { AnyFunction } from '@w5s/core-type';
-import { Symbol } from './Symbol.js';
 
-/**
- * A callable function with callable interface
- */
-export type CallableFunction<T extends Callable<AnyFunction>> = T[typeof Callable.symbol] & T;
+import { Symbol } from './Symbol.js';
 
 /**
  * Callable interface
@@ -17,6 +13,11 @@ export interface Callable<F extends AnyFunction = AnyFunction> {
    */
   [Callable.symbol]: F;
 }
+
+/**
+ * A callable function with callable interface
+ */
+export type CallableFunction<T extends Callable<AnyFunction>> = T & T[typeof Callable.symbol];
 
 /**
  * @namespace

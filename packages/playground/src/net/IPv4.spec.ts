@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { CodecError, Result } from '@w5s/core';
 import {
   describeBounded,
   describeCodec,
@@ -6,14 +6,15 @@ import {
   describeIndexable,
   describeType,
 } from '@w5s/core/dist/Testing.js';
-import { CodecError, Result } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { IPv4 } from './IPv4.js';
 
 describe('IPv4', () => {
   describeType(IPv4, () => ({
-    typeName: 'IPv4',
     instances: [IPv4(0xFF_FF_FF_FF)],
     notInstances: [undefined, 0xFF_FF_FF_FF, '127.0.0.1'],
+    typeName: 'IPv4',
   }));
   describe(IPv4.of, () => {
     it('should return an IPv4 instance', () => {
@@ -39,18 +40,22 @@ describe('IPv4', () => {
   describeCodec(IPv4, () => ({
     decode: [
       ['127.0.0.1', Result.Ok(IPv4.of(127, 0, 0, 1))],
-      [null, Result.Error(new CodecError({ message: 'Cannot decode null as IPv4', input: null }))],
+      [null, Result.Error(new CodecError({ input: null, message: 'Cannot decode null as IPv4' }))],
     ],
     encode: [
       [IPv4.of(127, 0, 0, 1), '127.0.0.1'],
       [IPv4.of(192, 168, 0, 1), '192.168.0.1'],
     ],
     schema: {
-      type: 'string',
       format: 'ipv4',
+      type: 'string',
     },
   }));
   describeComparable(IPv4, {
+    equivalent: () => [
+      [IPv4.of(0, 0, 0, 1), IPv4.of(0, 0, 0, 1)],
+      [IPv4.of(192, 168, 0, 1), IPv4.of(192, 168, 0, 1)],
+    ],
     ordered: () => [
       // lower to higher
       IPv4.of(0, 0, 0, 0),
@@ -59,14 +64,10 @@ describe('IPv4', () => {
       IPv4.of(192, 168, 0, 255),
       IPv4.of(255, 255, 255, 255),
     ],
-    equivalent: () => [
-      [IPv4.of(0, 0, 0, 1), IPv4.of(0, 0, 0, 1)],
-      [IPv4.of(192, 168, 0, 1), IPv4.of(192, 168, 0, 1)],
-    ],
   });
   describeBounded(IPv4, {
-    minValue: IPv4.of(0, 0, 0, 0),
     maxValue: IPv4.of(255, 255, 255, 255),
+    minValue: IPv4.of(0, 0, 0, 0),
   });
   describeIndexable(IPv4, {
     index: [

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { orElse } from './orElse.js';
+
 import { None } from './None.js';
+import { orElse } from './orElse.js';
 import { Some } from './Some.js';
 
 describe(orElse, () => {

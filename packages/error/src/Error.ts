@@ -13,9 +13,9 @@ import type { ErrorOptions } from './ErrorOptions.js';
 // @ts-ignore Ignore duplicate
 export declare class Error {
   /**
-   * Error name
+   * Error cause
    */
-  name: 'Error';
+  cause?: unknown;
 
   /**
    * Error message
@@ -23,14 +23,14 @@ export declare class Error {
   message: string;
 
   /**
+   * Error name
+   */
+  name: 'Error';
+
+  /**
    * Error stack description (when supported)
    */
   stack?: string;
-
-  /**
-   * Error cause
-   */
-  cause?: unknown;
 
   /**
    * Error constructor

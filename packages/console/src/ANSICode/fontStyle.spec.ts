@@ -1,5 +1,6 @@
 /* cSpell:disable */
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { fontStyle } from './fontStyle.js';
 
 describe(fontStyle, () => {

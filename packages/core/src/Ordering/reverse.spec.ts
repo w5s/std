@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { reverse } from './reverse.js';
+import { describe, expect, it } from 'vitest';
+
 import { Ordering } from '../Ordering.js';
+import { reverse } from './reverse.js';
 
 describe(reverse, () => {
   it('inverts less and greater', () => {

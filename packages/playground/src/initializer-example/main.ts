@@ -1,5 +1,6 @@
-import { startAll } from '../initializer/index.js';
 import type { AppContext } from './AppContext.js';
+
+import { startAll } from '../initializer/index.js';
 
 export async function main3() {
   const appContext: AppContext = { foo: true };

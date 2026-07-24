@@ -7,10 +7,8 @@ import { define } from './define.js';
  * @namespace
  */
 export const bigint = define<bigint>({
-  typeName: 'bigint',
   hasInstance: (anyValue) => typeof anyValue === 'bigint',
-  [Symbol.encode]: (input) => `${input.toString(10)}n`,
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     if (typeof input === 'string' && input.endsWith('n')) {
       try {
         return ok(BigInt(input.slice(0, -1)));
@@ -20,5 +18,7 @@ export const bigint = define<bigint>({
     }
     return error(input, 'bigint');
   },
-  [Symbol.schema]: () => ({ type: 'string', format: 'bigint' }),
+  [Symbol.encode]: (input) => `${input.toString(10)}n`,
+  [Symbol.schema]: () => ({ format: 'bigint', type: 'string' }),
+  typeName: 'bigint',
 });

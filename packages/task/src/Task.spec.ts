@@ -1,26 +1,27 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Task } from './Task.js';
-import { resolve } from './Task/resolve.js';
 import { all } from './Task/all.js';
+import { allKeyed } from './Task/allKeyed.js';
 import { allSettled } from './Task/allSettled.js';
+import { allSettledKeyed } from './Task/allSettledKeyed.js';
 import { andRun } from './Task/andRun.js';
 import { andThen } from './Task/andThen.js';
 import { any } from './Task/any.js';
 import { create } from './Task/create.js';
+import { error } from './Task/error.js';
+import { from } from './Task/from.js';
 import { hasInstance } from './Task/hasInstance.js';
+import { ignore } from './Task/ignore.js';
 import { map } from './Task/map.js';
 import { mapError } from './Task/mapError.js';
+import { mapResult } from './Task/mapResult.js';
+import { ok } from './Task/ok.js';
 import { orElse } from './Task/orElse.js';
 import { reject } from './Task/reject.js';
-import { tryCall } from './Task/tryCall.js';
+import { resolve } from './Task/resolve.js';
 import { run } from './Task/run.js';
-import { from } from './Task/from.js';
-import { mapResult } from './Task/mapResult.js';
-import { ignore } from './Task/ignore.js';
-import { error } from './Task/error.js';
-import { ok } from './Task/ok.js';
-import { allKeyed } from './Task/allKeyed.js';
-import { allSettledKeyed } from './Task/allSettledKeyed.js';
+import { tryCall } from './Task/tryCall.js';
 
 describe('Task', () => {
   it('is an alias to functions', () => {
@@ -33,8 +34,8 @@ describe('Task', () => {
       andThen,
       any,
       create,
-      from,
       error,
+      from,
       hasInstance,
       ignore,
       map,
@@ -44,8 +45,8 @@ describe('Task', () => {
       orElse,
       reject,
       resolve,
-      tryCall,
       run,
+      tryCall,
     });
   });
 });

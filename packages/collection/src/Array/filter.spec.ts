@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { filter } from './filter.js';
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { filter } from './filter.js';
 
 describe('.filter', () => {
   it('should return unchanged if empty', () => {

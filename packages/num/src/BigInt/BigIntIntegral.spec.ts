@@ -1,4 +1,3 @@
-import { describe } from 'vitest';
 import {
   describeAdd,
   describeMultiply,
@@ -7,8 +6,10 @@ import {
   describeSubtract,
   describeZero,
 } from '@w5s/core/dist/Testing.js';
-import { BigIntIntegral } from './BigIntIntegral.js';
+import { describe } from 'vitest';
+
 import { BigIntComparable } from './BigIntComparable.js';
+import { BigIntIntegral } from './BigIntIntegral.js';
 
 describe('BigIntIntegral', () => {
   const subject = {
@@ -45,11 +46,11 @@ describe('BigIntIntegral', () => {
   // ]);
   describeSigned(subject, {
     values: () => [
-      { value: -2n, type: 'negative', sign: -1n, abs: 2n },
-      { value: -1n, type: 'negative', sign: -1n, abs: 1n },
-      { value: 0n, type: 'zero', sign: 0n, abs: 0n },
-      { value: 1n, type: 'positive', sign: 1n, abs: 1n },
-      { value: 2n, type: 'positive', sign: 1n, abs: 2n },
+      { abs: 2n, sign: -1n, type: 'negative', value: -2n },
+      { abs: 1n, sign: -1n, type: 'negative', value: -1n },
+      { abs: 0n, sign: 0n, type: 'zero', value: 0n },
+      { abs: 1n, sign: 1n, type: 'positive', value: 1n },
+      { abs: 2n, sign: 1n, type: 'positive', value: 2n },
     ],
   });
 });

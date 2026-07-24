@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { find } from './find.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { create } from './create.js';
+import { find } from './find.js';
 import { of } from './of.js';
 
 describe(find, () => {

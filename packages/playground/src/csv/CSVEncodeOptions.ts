@@ -1,4 +1,5 @@
 import type { Option } from '@w5s/core';
+
 import { defaultCSVDecodeOptions } from './CSVDecodeOptions.js';
 
 export interface CSVEncodeOptions {

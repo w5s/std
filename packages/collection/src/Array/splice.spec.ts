@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { splice } from './splice.js';
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { splice } from './splice.js';
 
 describe(splice, () => {
   it('should return unchanged when empty', () => {

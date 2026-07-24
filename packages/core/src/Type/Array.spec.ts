@@ -1,27 +1,28 @@
 import { describe } from 'vitest';
-import { Array } from './Array.js';
-import { describeCodec, describeType } from '../Testing.js';
-import { Result } from '../Result.js';
+
 import { CodecError } from '../CodecError.js';
-import { define } from './define.js';
+import { Result } from '../Result.js';
 import { Symbol } from '../Symbol.js';
+import { describeCodec, describeType } from '../Testing.js';
+import { Array } from './Array.js';
+import { define } from './define.js';
 
 describe(Array, () => {
   const subject = Array;
 
   const AnyType = define<string>({
-    typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
-    [Symbol.encode]: (_) => `_${_}`,
-    [Symbol.decode]: (input, { ok, error }) =>
+    [Symbol.decode]: (input, { error, ok }) =>
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
-    [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
+    [Symbol.encode]: (_) => `_${_}`,
+    [Symbol.schema]: () => ({ format: 'custom_underscore', type: 'any' }),
+    typeName: 'AnyType',
   });
 
   describeType(subject(AnyType), () => ({
-    typeName: 'Array<AnyType>',
     instances: [[], ['']],
     notInstances: [null, 1, [1]],
+    typeName: 'Array<AnyType>',
   }));
   describeCodec(subject(AnyType), () => ({
     decode: [
@@ -30,8 +31,8 @@ describe(Array, () => {
         ['a', '_b', '_c'],
         Result.Error(
           new CodecError({
-            message: 'Cannot decode "a" as UnderscoreString',
             input: 'a',
+            message: 'Cannot decode "a" as UnderscoreString',
           }),
         ),
       ],
@@ -42,6 +43,6 @@ describe(Array, () => {
         ['_a', '_b', '_c'],
       ],
     ],
-    schema: { type: 'array', item: { type: 'any', format: 'custom_underscore' } },
+    schema: { item: { format: 'custom_underscore', type: 'any' }, type: 'array' },
   }));
 });

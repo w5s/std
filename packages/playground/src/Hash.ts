@@ -9,10 +9,6 @@ const FALSE = 0x42_10_84_20 as Int;
 const UNDEFINED = 0x42_10_84_23 as Int;
 const NULL = 0x42_10_84_22 as Int;
 
-function int32SMI(i32: number): Int {
-  return (((i32 >>> 1) & 0x40_00_00_00) | (i32 & 0xBF_FF_FF_FF)) as Int;
-}
-
 function hashNumber(value: number): Hash.Value {
   if (value !== value || value === Infinity) {
     return ZERO;
@@ -49,6 +45,10 @@ function hashString(str: string): Hash.Value {
   return int32SMI(hashValue);
 }
 
+function int32SMI(i32: number): Int {
+  return (((i32 >>> 1) & 0x40_00_00_00) | (i32 & 0xBF_FF_FF_FF)) as Int;
+}
+
 /**
  * @namespace
  */
@@ -79,7 +79,7 @@ export const Hash = {
    * @category Constructor
    * @param anyValue hashed value
    */
-  from(anyValue: undefined | null | boolean | number | string): Hash.Value {
+  from(anyValue: boolean | null | number | string | undefined): Hash.Value {
     switch (typeof anyValue) {
       case 'boolean': {
         return anyValue ? TRUE : FALSE;
@@ -87,11 +87,11 @@ export const Hash = {
       case 'number': {
         return hashNumber(anyValue);
       }
-      case 'undefined': {
-        return UNDEFINED;
-      }
       case 'string': {
         return hashString(anyValue);
+      }
+      case 'undefined': {
+        return UNDEFINED;
       }
       default: {
         if (anyValue === null) {

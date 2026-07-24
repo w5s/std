@@ -1,7 +1,8 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Array } from '@w5s/collection';
-import { filter } from './filter.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { withAsyncIterable } from '../Testing.js';
+import { filter } from './filter.js';
 import { of } from './of.js';
 
 describe(filter, () => {

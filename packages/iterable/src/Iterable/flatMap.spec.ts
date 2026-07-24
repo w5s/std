@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { flatMap } from './flatMap.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { flatMap } from './flatMap.js';
 import { of } from './of.js';
 
 describe(flatMap, () => {

@@ -1,8 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { resolve } from './resolve.js';
-import { withTask } from '../Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import type { Task } from '../Task.js';
+
+import { withTask } from '../Testing.js';
+import { resolve } from './resolve.js';
 
 describe(resolve, () => {
   const anyValue = 'anyValue';

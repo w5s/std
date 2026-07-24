@@ -1,24 +1,25 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Iterable } from './Iterable.js';
+import { chunks } from './Iterable/chunks.js';
+import { concat } from './Iterable/concat.js';
 import { create } from './Iterable/create.js';
+import { drop } from './Iterable/drop.js';
 import { empty } from './Iterable/empty.js';
+import { every } from './Iterable/every.js';
 import { filter } from './Iterable/filter.js';
+import { find } from './Iterable/find.js';
+import { flatMap } from './Iterable/flatMap.js';
+import { from } from './Iterable/from.js';
 import { generate } from './Iterable/generate.js';
 import { hasInstance } from './Iterable/hasInstance.js';
 import { map } from './Iterable/map.js';
 import { of } from './Iterable/of.js';
 import { reduce } from './Iterable/reduce.js';
-import { zip } from './Iterable/zip.js';
-import { every } from './Iterable/every.js';
-import { some } from './Iterable/some.js';
-import { flatMap } from './Iterable/flatMap.js';
 import { size } from './Iterable/size.js';
-import { find } from './Iterable/find.js';
-import { drop } from './Iterable/drop.js';
+import { some } from './Iterable/some.js';
 import { take } from './Iterable/take.js';
-import { chunks } from './Iterable/chunks.js';
-import { concat } from './Iterable/concat.js';
-import { from } from './Iterable/from.js';
+import { zip } from './Iterable/zip.js';
 
 describe('Iterable', () => {
   it('has alias to methods', () => {

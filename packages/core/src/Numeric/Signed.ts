@@ -14,20 +14,6 @@ export interface Signed<T> {
   abs(this: void, value: T): T;
 
   /**
-   * Returns true if the number is positive and false if the number is zero or negative.
-   *
-   * @example
-   * ```typescript
-   * Number.isPositive(-1);// false
-   * Number.isPositive(0);// false
-   * Number.isPositive(1);// true
-   * ```
-   * @category Numeric
-   * @param self the numeric value
-   */
-  isPositive(this: void, self: T): boolean;
-
-  /**
    * Returns true if the number is negative and false if the number is zero or positive.
    *
    * @example
@@ -40,6 +26,20 @@ export interface Signed<T> {
    * @param self the numeric value
    */
   isNegative(this: void, self: T): boolean;
+
+  /**
+   * Returns true if the number is positive and false if the number is zero or negative.
+   *
+   * @example
+   * ```typescript
+   * Number.isPositive(-1);// false
+   * Number.isPositive(0);// false
+   * Number.isPositive(1);// true
+   * ```
+   * @category Numeric
+   * @param self the numeric value
+   */
+  isPositive(this: void, self: T): boolean;
 
   /**
    * Sign of a number. It should satisfy `TSigned['*'](TSigned.abs(x), TSigned.sign(x)) == x`

@@ -1,7 +1,9 @@
 import type { JSONPrimitive, Primitive } from '@w5s/core-type';
+
 import type { Type } from '../Type.js';
-import { define } from './define.js';
+
 import { Symbol } from '../Symbol.js';
+import { define } from './define.js';
 
 /**
  * A type for constant `value`. An encoded value can be specified as second argument.
@@ -18,7 +20,7 @@ import { Symbol } from '../Symbol.js';
  * @param value the decoded constant value
  * @param encodedValue the encoded value (required only for non JSON representable values)
  */
-export function constant<const Value extends string | number | boolean | null>(
+export function constant<const Value extends boolean | null | number | string>(
   value: Value,
   encodedValue?: JSONPrimitive,
 ): Type.Module<Value>;
@@ -33,8 +35,9 @@ export function constant<const Value extends Primitive>(
   const typeName = String(value);
   const resolvedEncodedValue = (encodedValue === undefined ? value : encodedValue) as unknown as JSONPrimitive;
   return define({
-    typeName,
     hasInstance: (anyValue): boolean => anyValue === value,
+    [Symbol.decode]: (input, { error, ok }) => (input === resolvedEncodedValue ? ok(value) : error(input, typeName)),
+    [Symbol.encode]: () => resolvedEncodedValue,
     [Symbol.schema]:
       resolvedEncodedValue === null
         ? () => ({
@@ -43,7 +46,6 @@ export function constant<const Value extends Primitive>(
         : () => ({
             const: resolvedEncodedValue,
           }),
-    [Symbol.encode]: () => resolvedEncodedValue,
-    [Symbol.decode]: (input, { ok, error }) => (input === resolvedEncodedValue ? ok(value) : error(input, typeName)),
+    typeName,
   });
 }

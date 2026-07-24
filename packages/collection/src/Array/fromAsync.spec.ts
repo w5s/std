@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { fromAsync } from './fromAsync.js';
 
 describe(fromAsync, () => {
@@ -26,7 +27,7 @@ describe(fromAsync, () => {
   });
 
   it.skip('should process items sequentially by default', async () => {
-    const order: number[] = [];
+    const order: Array<number> = [];
     const array = [1, 2, 3];
 
     await fromAsync(array, async (x) => {
@@ -43,7 +44,7 @@ describe(fromAsync, () => {
 
   it('should pass the index as the second parameter to the mapping function', async () => {
     const array = ['a', 'b', 'c'];
-    const indexes: number[] = [];
+    const indexes: Array<number> = [];
 
     await fromAsync(array, async (_, index) => {
       indexes.push(index);

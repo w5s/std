@@ -1,4 +1,5 @@
 import type { Money } from './Money.js';
+
 import { MoneyAsString } from './MoneyAsString.js';
 
 /**

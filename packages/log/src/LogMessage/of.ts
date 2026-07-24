@@ -1,4 +1,5 @@
 import type { LogMessage, LogMessageItem } from '../LogMessage.js';
+
 import { create } from './create.js';
 
 /**

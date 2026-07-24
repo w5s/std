@@ -1,4 +1,5 @@
 import type { ImmediateId } from './ImmediateId.js';
+
 import { globalSetImmediate } from './internal/globalSetImmediate.js';
 
 /**

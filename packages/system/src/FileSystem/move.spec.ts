@@ -1,7 +1,8 @@
-import * as nodeFS from 'node:fs';
 import { Symbol } from '@w5s/core';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import * as nodeFS from 'node:fs';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+
 import { fsStub, withFile } from '../Testing.js';
 import { move } from './move.js';
 
@@ -26,11 +27,11 @@ describe('move', () => {
     const task = move(srcDir, destDir);
     await expectTask(task).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        fileErrorType: 'OtherError',
-        path: expect.any(String),
-        errno: -2,
         code: 'ENOENT',
+        errno: -2,
+        fileErrorType: 'OtherError',
+        name: 'FileError',
+        path: expect.any(String),
         syscall: 'stat',
       }),
     );
@@ -63,11 +64,11 @@ describe('move', () => {
     const task = move(srcFile, destFile);
     await expectTask(task).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        fileErrorType: 'OtherError',
-        path: expect.any(String),
-        errno: -2,
         code: 'ENOENT',
+        errno: -2,
+        fileErrorType: 'OtherError',
+        name: 'FileError',
+        path: expect.any(String),
         syscall: 'stat',
       }),
     );
@@ -88,12 +89,12 @@ describe('move', () => {
     const taskFail = move(srcFile, destFile);
     await expectTask(taskFail).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        fileErrorType: 'UserError',
-        path: expect.any(String),
-        message: 'Destination already exists',
-        errno: undefined,
         code: undefined,
+        errno: undefined,
+        fileErrorType: 'UserError',
+        message: 'Destination already exists',
+        name: 'FileError',
+        path: expect.any(String),
         syscall: undefined,
       }),
     );
@@ -152,12 +153,12 @@ describe('move', () => {
 
     await expectTask(move(srcDir, destDir)).toRejectAsync(
       expect.objectContaining({
-        name: 'FileError',
-        fileErrorType: 'UserError',
-        path: expect.any(String),
-        message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
-        errno: undefined,
         code: undefined,
+        errno: undefined,
+        fileErrorType: 'UserError',
+        message: `Cannot move '${srcDir}' to a subdirectory of itself, '${destDir}'.`,
+        name: 'FileError',
+        path: expect.any(String),
         syscall: undefined,
       }),
     );

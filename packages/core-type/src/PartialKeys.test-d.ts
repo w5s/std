@@ -1,6 +1,7 @@
-import { assertType } from './assertType.js';
 import type { PartialKeys } from './PartialKeys.js';
 
-type PartialObject = PartialKeys<{ foo: boolean; bar: string; optional?: number }, 'bar'>;
+import { assertType } from './assertType.js';
 
-assertType<PartialObject, { foo: boolean; bar?: string; optional?: number }>(true);
+type PartialObject = PartialKeys<{ bar: string; foo: boolean; optional?: number }, 'bar'>;
+
+assertType<PartialObject, { bar?: string; foo: boolean; optional?: number }>(true);

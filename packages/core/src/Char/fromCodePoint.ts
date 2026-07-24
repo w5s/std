@@ -10,6 +10,6 @@ import type { Char } from '../Char.js';
  * @category Constructor
  * @param code an array of string codes
  */
-export function fromCodePoint(...code: number[]): Char {
+export function fromCodePoint(...code: Array<number>): Char {
   return globalThis.String.fromCodePoint(...code) as Char;
 }

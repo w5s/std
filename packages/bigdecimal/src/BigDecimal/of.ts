@@ -15,11 +15,11 @@ import { BigDecimal } from './BigDecimal.js';
 export function of(value: bigint, scale: number): BigDecimal {
   return scale < 0
     ? BigDecimal.create({
-        value: value * 10n ** BigInt(-scale),
         scale: 0,
+        value: value * 10n ** BigInt(-scale),
       })
     : BigDecimal.create({
-        value,
         scale,
+        value,
       });
 }

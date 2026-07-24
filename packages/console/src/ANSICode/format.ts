@@ -9,6 +9,6 @@
  * @param code a code suffix
  * @returns A formatted ANSI escape sequence.
  */
-export function format(args: number[], code: string): string {
+export function format(args: Array<number>, code: string): string {
   return `\u{1B}[${args.join(';')}${code}`;
 }

@@ -1,7 +1,9 @@
 import { Comparable as CoreComparable } from '@w5s/core/dist/Comparable.js';
-import { compare } from '../Number/compare.js';
+
 import type { NumberConversion } from '../NumberConversion.js';
+
 import { defaultConversion } from '../internal/defaultConversion.js';
+import { compare } from '../Number/compare.js';
 
 export function Comparable(): CoreComparable<number>;
 export function Comparable<T = number>(BaseType: Pick<NumberConversion<T>, 'asNumber'>): CoreComparable<T>;

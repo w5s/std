@@ -1,10 +1,12 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { describe, expect, it, vi } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it, vi } from 'vitest';
+
+import type { Task } from '../Task.js';
+
+import { FakeTask, withTask } from '../Testing.js';
 import { allKeyed } from './allKeyed.js';
 import { run as taskRun } from './run.js';
-import { FakeTask, withTask } from '../Testing.js';
-import type { Task } from '../Task.js';
 
 describe(allKeyed, () => {
   const expectTask = withTask(expect);
@@ -28,12 +30,12 @@ describe(allKeyed, () => {
     const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
+        canceler,
         key: `task${taskIndex}`,
         task:
           taskIndex === 0
-            ? FakeTask({ delayMs: 1, error: `error${taskIndex}`, canceler })
-            : FakeTask({ delayMs: 100, value: `value${taskIndex}`, canceler }),
-        canceler,
+            ? FakeTask({ canceler, delayMs: 1, error: `error${taskIndex}` })
+            : FakeTask({ canceler, delayMs: 100, value: `value${taskIndex}` }),
       };
     });
     const allTask = allKeyed(Object.fromEntries(taskData.map(({ key, task }) => [key, task])));
@@ -48,9 +50,9 @@ describe(allKeyed, () => {
     const taskEntries = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
-        key: `task${taskIndex}`,
-        task: FakeTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
         canceler,
+        key: `task${taskIndex}`,
+        task: FakeTask({ canceler, delayMs: 2, value: `value${taskIndex}` }),
       };
     });
     const allTask = allKeyed(Object.fromEntries(taskEntries.map(({ key, task }) => [key, task])));

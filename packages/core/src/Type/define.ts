@@ -19,24 +19,23 @@ import type { Type } from '../Type.js';
  */
 export function define<T>(parameters: Type.Parameters<T>): Type.Module<T> {
   const hasInstance = parameters.hasInstance as Type<T>['hasInstance'];
+  const { typeName } = parameters;
   const {
-    typeName,
-    __inspect__,
+    __decode__ = (value, { error, ok }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
     __encode__ = (value) => value,
-    __decode__ = (value, { ok, error }) => (hasInstance(value) ? ok(value) : error(value, typeName)),
+    __inspect__,
     __schema__ = () => ({}),
     asInstance = (value) => (hasInstance(value) ? value : undefined),
-
     asString = (self) => (typeof self === 'object' ? `[object ${typeName}]` : String(self)),
   } = parameters;
   return {
-    typeName,
-    hasInstance,
-    __inspect__,
-    __encode__,
     __decode__,
+    __encode__,
+    __inspect__,
     __schema__,
     asInstance,
     asString,
+    hasInstance,
+    typeName,
   };
 }

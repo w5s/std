@@ -1,5 +1,6 @@
 // packages/async/src/__tests__/defer.test.ts
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { defer } from './defer.js';
 
 describe(defer, () => {

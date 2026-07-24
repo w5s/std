@@ -19,10 +19,10 @@ npm install @w5s/http
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { requestSend, HTTPError, ResponseParser, Client } from '@w5s/http';
 import { Type } from '@w5s/core';
-import { Task } from '@w5s/task';
 import { TimeoutError } from '@w5s/error';
+import { Client, HTTPError, requestSend, ResponseParser } from '@w5s/http';
+import { Task } from '@w5s/task';
 
 const client = Client();
 const getText = (id: number) => ({

@@ -1,8 +1,11 @@
-import { describe, expect, it, vi } from 'vitest';
 import type { Int } from '@w5s/core-type';
-import { Integral } from './Integral.js';
-import { Comparable } from '../Comparable.js';
+
+import { describe, expect, it, vi } from 'vitest';
+
 import type { Ordering } from '../Ordering.js';
+
+import { Comparable } from '../Comparable.js';
+import { Integral } from './Integral.js';
 
 describe(Integral, () => {
   interface TestCustom {
@@ -14,14 +17,14 @@ describe(Integral, () => {
   });
   const TestType = {
     ...Integral({
-      'compare': TestComparable.compare,
-      '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
+      '%': (left, right) => ({ custom: true, value: (left.value % right.value) as Int }),
       '*': (left, right) => ({ custom: true, value: (left.value * right.value) as Int }),
+      '+': (left, right) => ({ custom: true, value: (left.value + right.value) as Int }),
 
       '/': (left, right) => ({ custom: true, value: (left.value / right.value) as Int }),
-      '%': (left, right) => ({ custom: true, value: (left.value % right.value) as Int }),
-      'fromInt': (value: Int) => ({ custom: true, value }),
       'asInt': (value) => value.value,
+      'compare': TestComparable.compare,
+      'fromInt': (value: Int) => ({ custom: true, value }),
     }),
     ...TestComparable,
   };
@@ -29,8 +32,8 @@ describe(Integral, () => {
   it('extends Numeric', () => {
     expect(TestType).toEqual(
       expect.objectContaining({
-        '+': expect.any(Function),
         '*': expect.any(Function),
+        '+': expect.any(Function),
       }),
     );
   });

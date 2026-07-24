@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { NumberConversion } from './NumberConversion.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
@@ -29,13 +30,13 @@ describe('NumberConversion', () => {
   it('should create a default number conversion module', () => {
     expect(NumberConversion()).toEqual(
       expect.objectContaining({
-        '+': expect.any(Function),
         '*': expect.any(Function),
+        '+': expect.any(Function),
+        'compare': expect.any(Function),
+        'maxValue': expect.any(Number),
+        'minValue': expect.any(Number),
         'negate': expect.any(Function),
         'zero': expect.any(Function),
-        'minValue': expect.any(Number),
-        'maxValue': expect.any(Number),
-        'compare': expect.any(Function),
       }),
     );
   });

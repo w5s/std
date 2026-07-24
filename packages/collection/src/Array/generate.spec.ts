@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { generate } from './generate.js';
 
 describe(generate, () => {

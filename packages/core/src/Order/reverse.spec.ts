@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { reverse } from './reverse.js';
-import { withOrder } from '../Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { Comparable } from '../Comparable.js';
+import { withOrder } from '../Testing.js';
+import { reverse } from './reverse.js';
 
 describe(reverse, () => {
   const NumberComparable = Comparable<number>({

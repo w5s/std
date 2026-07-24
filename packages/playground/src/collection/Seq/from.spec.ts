@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { withIterable } from '@w5s/iterable/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { from } from './from.js';
 
 describe(from, () => {

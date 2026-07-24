@@ -1,4 +1,5 @@
 import type { Int, Option } from '@w5s/core';
+
 import type { Array } from '../Array.js';
 
 /**

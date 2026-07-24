@@ -1,4 +1,5 @@
 import type { Array as CoreArray } from '@w5s/core-type';
+
 import { at } from './Array/at.js';
 import { concat } from './Array/concat.js';
 import { deleteAt } from './Array/deleteAt.js';
@@ -76,7 +77,7 @@ export const Array = {
   setAt,
   size,
   slice,
-  splice,
   some,
   sort,
+  splice,
 };

@@ -1,5 +1,3 @@
-/* eslint-disable ts/no-unused-vars */
-
 /**
  * Always return `undefined` and ignore passed value.
  *
@@ -16,4 +14,5 @@
  * ```
  * @param anyValue any value that should be ignored
  */
+// eslint-disable-next-line unused-imports/no-unused-vars
 export function ignore(anyValue: unknown): void {}

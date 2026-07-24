@@ -1,7 +1,10 @@
-import type { TaskCanceler } from '@w5s/task';
 import type { DatabaseDriverMap } from '@w5s/database';
+import type { TaskCanceler } from '@w5s/task';
+
 import { useState } from '@w5s/application';
+
 import type { SQLStatement } from './sql.js';
+
 import { DatabaseError } from './error.js';
 import { meta } from './meta.js';
 
@@ -18,12 +21,6 @@ export const DatabaseDriver = {
   get<Name extends keyof DatabaseDriverMap>(name: Name): DatabaseDriver.ModuleOf<Name> {
     return registry.current[name] ?? notFound(name);
   },
-  set<Name extends keyof DatabaseDriverMap>(name: Name, module: DatabaseDriver.ModuleOf<Name>): void {
-    registry.current = {
-      ...registry.current,
-      [name]: module,
-    };
-  },
   Make<Name extends string, Client>(
     adapter: Name,
     execute: (client: Client, sqlStatement: SQLStatement, cancelerRef: TaskCanceler) => Promise<unknown>,
@@ -34,6 +31,12 @@ export const DatabaseDriver = {
       async handleError(cause: unknown) {
         return new DatabaseError({ cause });
       },
+    };
+  },
+  set<Name extends keyof DatabaseDriverMap>(name: Name, module: DatabaseDriver.ModuleOf<Name>): void {
+    registry.current = {
+      ...registry.current,
+      [name]: module,
     };
   },
 };
@@ -47,8 +50,8 @@ export namespace DatabaseDriver {
     handleError(cause: unknown): Promise<DatabaseError>;
   }
 
-  type ClientOf<Name extends keyof DatabaseDriverMap> = DatabaseDriverMap[Name];
   export type ModuleOf<Name extends keyof DatabaseDriverMap> = Module<Name, ClientOf<Name>>;
+  type ClientOf<Name extends keyof DatabaseDriverMap> = DatabaseDriverMap[Name];
 }
 
 export type Database = DatabaseDriverMap[keyof DatabaseDriverMap];

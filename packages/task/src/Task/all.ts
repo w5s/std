@@ -1,7 +1,8 @@
 import type { Task, TaskLike } from '../Task.js';
-import { TaskAggregateState } from './TaskAggregateState.js';
-import { from } from './from.js';
+
 import { emptyArray } from '../internal/emptyArray.js';
+import { from } from './from.js';
+import { TaskAggregateState } from './TaskAggregateState.js';
 
 /**
  * Resolves with the array of all task values, or reject with the first error
@@ -22,18 +23,18 @@ import { emptyArray } from '../internal/emptyArray.js';
  * ```
  * @param tasks tasks to be run in parallel
  */
-export function all<T extends readonly TaskLike<any, any>[]>(
+export function all<T extends ReadonlyArray<TaskLike<any, any>>>(
   tasks: [...T],
 ): Task<{ [K in keyof T]: Task.ValueOf<T[K]> }, Task.ErrorOf<T[keyof T]>>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error>;
 export function all<Value, Error>(tasks: Iterable<TaskLike<Value, Error>>): Task<ReadonlyArray<Value>, Error> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
+    const taskArray = Array.from(tasks, (task, key) => ({ key, task }));
     if (taskArray.length === 0) {
       parameters.resolve(emptyArray);
     } else {
       // eslint-disable-next-line unicorn/no-new-array
-      const values = new Array<Value | undefined>(taskArray.length);
+      const values = new Array<undefined | Value>(taskArray.length);
       TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true }).runAll(
         (value, entry, self) => {
           values[entry.key] = value;

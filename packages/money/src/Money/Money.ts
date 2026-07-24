@@ -1,9 +1,12 @@
 import type { BigDecimal } from '@w5s/bigdecimal';
+
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
+
 import type { Currency } from '../Currency/Currency.js';
-import { parse } from './parse.js';
+
 import { MoneyAsString } from './MoneyAsString.js';
+import { parse } from './parse.js';
 
 export interface Money extends Struct<{
   [Struct.type]: 'Money';
@@ -19,9 +22,7 @@ export interface Money extends Struct<{
   currency: Currency;
 }> {}
 export const Money = Struct.define<Money>({
-  typeName: 'Money',
-  [Symbol.encode]: (input) => MoneyAsString.asString(input),
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     if (typeof input === 'string') {
       const parseResult = parse(input);
       if (parseResult != null) {
@@ -30,10 +31,12 @@ export const Money = Struct.define<Money>({
     }
     return error(input, 'Money');
   },
-  [Symbol.schema]: () => ({
-    type: 'string',
-    format: 'money',
-  }),
+  [Symbol.encode]: (input) => MoneyAsString.asString(input),
   [Symbol.inspect]: MoneyAsString.asString,
+  [Symbol.schema]: () => ({
+    format: 'money',
+    type: 'string',
+  }),
+  typeName: 'Money',
   ...MoneyAsString,
 });

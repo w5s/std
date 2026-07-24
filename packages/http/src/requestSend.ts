@@ -1,12 +1,15 @@
 import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+
 import { timeout as taskTimeout } from '@w5s/task-timeout';
 import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { HTTPError } from './HTTPError.js';
-import type { Response } from './Response.js';
-import type { Request } from './Request.js';
-import { Client } from './Client.js';
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+
 import type { BodyReader } from './BodyReader.js';
+import type { Request } from './Request.js';
+import type { Response } from './Response.js';
+
+import { Client } from './Client.js';
+import { HTTPError } from './HTTPError.js';
 import { from as responseFrom } from './Response/from.js';
 
 /**
@@ -29,12 +32,20 @@ export function requestSend(client: Client, requestObject: Request): Task<Respon
   return taskThen(responseTimeout, onResponse);
 }
 
+function isValidURL(url: string): boolean {
+  try {
+    new globalThis.URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 function requestSendImplementation(client: Client, requestObject: Request): Task<Response<BodyReader>, HTTPError> {
   const { fetch: fetchFn } = client;
 
-  return taskFrom(async ({ resolve, reject, canceler }) => {
-    // eslint-disable-next-line ts/no-unused-vars
-    const { url, body, window: _window, ...requestInfo } = requestObject;
+  return taskFrom(async ({ canceler, reject, resolve }) => {
+    const { body, url, window: _window, ...requestInfo } = requestObject;
     const controller = new AbortController();
     canceler.onCancel = () => {
       controller.abort();
@@ -61,19 +72,10 @@ function requestSendImplementation(client: Client, requestObject: Request): Task
       await Promise.resolve();
       reject(
         new HTTPError.InvalidURL({
-          message: 'Invalid URL',
           input: url,
+          message: 'Invalid URL',
         }),
       );
     }
   });
-}
-
-function isValidURL(url: string): boolean {
-  try {
-    new globalThis.URL(url);
-    return true;
-  } catch {
-    return false;
-  }
 }

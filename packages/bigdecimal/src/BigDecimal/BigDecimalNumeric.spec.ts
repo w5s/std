@@ -1,9 +1,10 @@
-import { describe } from 'vitest';
-import { describeAdd, describeCheckedRemainder, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
 import { Option } from '@w5s/core';
-import { BigDecimalNumeric } from './BigDecimalNumeric.js';
-import { BigDecimalComparable } from './BigDecimalComparable.js';
+import { describeAdd, describeCheckedRemainder, describeMultiply, describeSubtract } from '@w5s/core/dist/Testing.js';
+import { describe } from 'vitest';
+
 import { BigDecimal } from './BigDecimal.js';
+import { BigDecimalComparable } from './BigDecimalComparable.js';
+import { BigDecimalNumeric } from './BigDecimalNumeric.js';
 
 describe('BigDecimalNumeric', () => {
   const subject = {

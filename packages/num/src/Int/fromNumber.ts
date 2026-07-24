@@ -1,4 +1,5 @@
 import type { Option } from '@w5s/core';
+
 import type { Int } from '../Int.js';
 
 /**

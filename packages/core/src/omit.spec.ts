@@ -1,13 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { omit } from './omit.js';
 
 describe(omit, () => {
   it('returns a new object without specified keys', async () => {
-    const original = { foo: true, bar: true, baz: true };
+    const original = { bar: true, baz: true, foo: true };
     const omitted = omit(original, ['foo']);
 
     expect(omitted).toEqual({ bar: true, baz: true });
-    expect(original).toEqual({ foo: true, bar: true, baz: true });
+    expect(original).toEqual({ bar: true, baz: true, foo: true });
   });
 
   it('handles multiple keys', async () => {
@@ -20,11 +21,11 @@ describe(omit, () => {
 
   it('handles symbol keys', async () => {
     const $symbol = Symbol('test');
-    const original = { a: 1, [$symbol]: 2 };
+    const original = { [$symbol]: 2, a: 1 };
     const omitted = omit(original, [$symbol]);
 
     expect(omitted).toEqual({ a: 1 });
-    expect(original).toEqual({ a: 1, [$symbol]: 2 });
+    expect(original).toEqual({ [$symbol]: 2, a: 1 });
   });
 
   it("handles keys that don't exist in the object", async () => {

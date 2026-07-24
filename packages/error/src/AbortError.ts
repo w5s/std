@@ -5,6 +5,6 @@ import { ErrorClass } from './ErrorClass.js';
  *
  */
 export class AbortError extends ErrorClass({
-  errorName: 'AbortError',
   errorMessage: 'This operation was aborted',
+  errorName: 'AbortError',
 }) {}

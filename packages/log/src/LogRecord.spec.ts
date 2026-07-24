@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import { Time } from '@w5s/time';
 import { UUID } from '@w5s/uuid';
-import { LogRecord } from './LogRecord.js';
+import { describe, expect, it } from 'vitest';
+
 import { LogLevel } from './LogLevel.js';
 import { LogMessage } from './LogMessage.js';
+import { LogRecord } from './LogRecord.js';
 import { messageWithData } from './LogRecord/messageWithData.js';
 
 describe('LogRecord', () => {
@@ -11,21 +12,21 @@ describe('LogRecord', () => {
     it('should return a new message', () => {
       expect(
         LogRecord({
-          id: UUID.empty(),
+          created: Time.of(1),
+          data: {},
           domain: 'myDomain',
+          id: UUID.empty(),
           level: LogLevel.Warn,
           message: LogMessage.of('foo', 'bar', ''),
-          data: {},
-          created: Time.of(1),
         }),
       ).toEqual({
         _: 'LogRecord',
-        id: UUID.empty(),
+        created: 1,
+        data: {},
         domain: 'myDomain',
+        id: UUID.empty(),
         level: LogLevel.Warn,
         message: ['foobar'],
-        data: {},
-        created: 1,
       });
     });
   });

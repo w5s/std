@@ -1,11 +1,13 @@
 import type { Result } from '@w5s/core';
-import { error } from './error.js';
-import { ok } from './ok.js';
+
 import type { Task, TaskLike, TaskParameters } from '../Task.js';
+
+import { error } from './error.js';
 import { from } from './from.js';
+import { ok } from './ok.js';
 import { unsafeCall } from './unsafeCall.js';
 
-const complete = <V, E>({ resolve, reject }: TaskParameters<V, E>, result: Result<V, E>) =>
+const complete = <V, E>({ reject, resolve }: TaskParameters<V, E>, result: Result<V, E>) =>
   result.ok ? resolve(result.value) : reject(result.error);
 
 /**
@@ -27,9 +29,9 @@ export function mapResult<ValueFrom, ErrorFrom, ValueTo, ErrorTo>(
 ): Task<ValueTo, ErrorTo> {
   return from((parameters) =>
     unsafeCall(self, {
+      canceler: parameters.canceler,
       reject: (error_) => complete(parameters, mapFn(error(error_))),
       resolve: (value) => complete(parameters, mapFn(ok(value))),
-      canceler: parameters.canceler,
     }),
   );
 }

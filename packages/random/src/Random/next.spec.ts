@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { next } from './next.js';
+import { describe, expect, it } from 'vitest';
+
 import { configuration } from '../configuration.js';
+import { next } from './next.js';
 
 describe('next', () => {
   const expectTask = withTask(expect);

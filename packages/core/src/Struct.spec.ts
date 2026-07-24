@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
 import { inspect } from 'node:util';
-import { Struct } from './Struct.js';
+import { describe, expect, it } from 'vitest';
+
 import { Callable } from './Callable.js';
+import { Struct } from './Struct.js';
 
 describe('Struct', () => {
   describe(Struct.define, () => {

@@ -1,14 +1,14 @@
-import { ErrorClass, Error, TypeError } from '@w5s/error';
+import { Error, ErrorClass, TypeError } from '@w5s/error';
 
 export class MyError extends ErrorClass({ errorName: 'MyError' })<{
-  foo: string;
   bar: boolean;
+  foo: string;
 }> {}
 
 const myError = new MyError({
-  foo: 'this is foo',
   bar: true,
   cause: TypeError('this is the cause'),
+  foo: 'this is foo',
 });
 
 console.log(myError instanceof Error); // true

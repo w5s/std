@@ -1,11 +1,12 @@
 import { describe } from 'vitest';
-import { union } from './union.js';
+
+import { CodecError } from '../CodecError.js';
+import { Result } from '../Result.js';
+import { describeCodec, describeType } from '../Testing.js';
+import { number } from './number.js';
 import { TObject } from './Object.js';
 import { string } from './string.js';
-import { number } from './number.js';
-import { describeCodec, describeType } from '../Testing.js';
-import { Result } from '../Result.js';
-import { CodecError } from '../CodecError.js';
+import { union } from './union.js';
 
 describe(union, () => {
   const AType = TObject(
@@ -20,16 +21,11 @@ describe(union, () => {
   const ABCType = union(AType, BCType);
 
   describeType(ABCType, () => ({
-    typeName: 'AType|string|number',
     instances: [{ a: 'a_value' }, 1, 'a'],
     notInstances: [undefined, null, { a: 1 }],
+    typeName: 'AType|string|number',
   }));
   describeCodec(ABCType, () => ({
-    encode: [
-      [1, 1],
-      ['a', 'a'],
-      [{ a: 'va' }, { a: 'va' }],
-    ],
     decode: [
       [1, Result.Ok(1)],
       ['a', Result.Ok('a')],
@@ -37,14 +33,19 @@ describe(union, () => {
       [
         { a: 1 },
         Result.Error(
-          new CodecError({ message: 'Cannot decode [object Object] as AType|string|number', input: { a: 1 } }),
+          new CodecError({ input: { a: 1 }, message: 'Cannot decode [object Object] as AType|string|number' }),
         ),
       ],
       [
         undefined,
-        Result.Error(new CodecError({ message: 'Cannot decode undefined as AType|string|number', input: undefined })),
+        Result.Error(new CodecError({ input: undefined, message: 'Cannot decode undefined as AType|string|number' })),
       ],
-      [null, Result.Error(new CodecError({ message: 'Cannot decode null as AType|string|number', input: null }))],
+      [null, Result.Error(new CodecError({ input: null, message: 'Cannot decode null as AType|string|number' }))],
+    ],
+    encode: [
+      [1, 1],
+      ['a', 'a'],
+      [{ a: 'va' }, { a: 'va' }],
     ],
     schema: {
       anyOf: [

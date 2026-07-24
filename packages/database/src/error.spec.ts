@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
 import { describeError } from '@w5s/error/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { DatabaseError } from './error.js';
 
 describe('DatabaseError', () => {
-  describeError({ describe, it, expect })(DatabaseError, {
+  describeError({ describe, expect, it })(DatabaseError, {
     defaultParameters: () => ({}),
-    expectedName: 'DatabaseError',
     expectedDefaultMessage: 'An unknown error occurred with database',
+    expectedName: 'DatabaseError',
   });
 });

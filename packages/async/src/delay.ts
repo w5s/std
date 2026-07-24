@@ -1,5 +1,6 @@
-import { promiseFromTimer } from './internal/promiseFromTimer.js';
 import type { TimerOptions } from './TimerOptions.js';
+
+import { promiseFromTimer } from './internal/promiseFromTimer.js';
 
 /**
  * Resolves a promise after waiting `milliseconds`

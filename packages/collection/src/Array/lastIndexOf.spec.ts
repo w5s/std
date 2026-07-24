@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { Option } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { lastIndexOf } from './lastIndexOf.js';
 
 describe(lastIndexOf, () => {

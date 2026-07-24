@@ -1,7 +1,9 @@
 import { useConfiguration } from '@w5s/application';
-import { meta } from './meta.js';
-import { MemoryJobProvider } from './MemoryJobProvider.js';
+
 import type { JobProvider } from './JobProvider.js';
+
+import { MemoryJobProvider } from './MemoryJobProvider.js';
+import { meta } from './meta.js';
 
 export interface Configuration {
   /**

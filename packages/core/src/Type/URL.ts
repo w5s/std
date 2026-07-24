@@ -1,5 +1,6 @@
-import { Symbol } from '../Symbol.js';
 import type { Tag } from '../Tag.js';
+
+import { Symbol } from '../Symbol.js';
 import { define } from '../Tag/define.js';
 
 /**
@@ -13,7 +14,6 @@ export type URL = string & Tag<'URL'>;
  * @namespace
  */
 export const URL = define<string, URL>({
-  typeName: 'URL',
   hasInstance: (anyValue) => {
     if (typeof anyValue === 'string') {
       try {
@@ -24,7 +24,8 @@ export const URL = define<string, URL>({
     return false;
   },
   [Symbol.schema]: () => ({
-    type: 'string',
     format: 'url',
+    type: 'string',
   }),
+  typeName: 'URL',
 });

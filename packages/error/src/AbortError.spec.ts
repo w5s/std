@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { AbortError } from './AbortError.js';
 import { describeError } from './Testing.js';
 
 describe(AbortError, () => {
-  describeError({ describe, it, expect })(AbortError, {
+  describeError({ describe, expect, it })(AbortError, {
     defaultParameters: () => ({}),
-    expectedName: 'AbortError',
     expectedDefaultMessage: 'This operation was aborted',
+    expectedName: 'AbortError',
   });
 });

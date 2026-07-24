@@ -1,10 +1,12 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { describe, it, expect, vi } from 'vitest';
-import { AggregateError } from '@w5s/error';
 import { assertType } from '@w5s/core-type';
-import { any } from './any.js';
-import { FakeTask, withTask } from '../Testing.js';
+import { AggregateError } from '@w5s/error';
+import { describe, expect, it, vi } from 'vitest';
+
 import type { Task } from '../Task.js';
+
+import { FakeTask, withTask } from '../Testing.js';
+import { any } from './any.js';
 import { run } from './run.js';
 
 describe(any, () => {
@@ -29,11 +31,11 @@ describe(any, () => {
     const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
+        canceler,
         task:
           taskIndex === 0
-            ? FakeTask({ delayMs: 1, value: `value${taskIndex}`, canceler })
-            : FakeTask({ delayMs: 100, error: `error${taskIndex}`, canceler }),
-        canceler,
+            ? FakeTask({ canceler, delayMs: 1, value: `value${taskIndex}` })
+            : FakeTask({ canceler, delayMs: 100, error: `error${taskIndex}` }),
       };
     });
     const anyTask = any(taskData.map((_) => _.task));
@@ -49,8 +51,8 @@ describe(any, () => {
     const taskData = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
-        task: FakeTask({ delayMs: 2, value: `value${taskIndex}`, canceler }),
         canceler,
+        task: FakeTask({ canceler, delayMs: 2, value: `value${taskIndex}` }),
       };
     });
 

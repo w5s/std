@@ -5,12 +5,12 @@
  */
 export interface Range<T> extends Iterable<T> {
   /**
-   * Start of range
-   */
-  readonly rangeStart: T;
-
-  /**
    * End of range
    */
   readonly rangeEnd: T;
+
+  /**
+   * Start of range
+   */
+  readonly rangeStart: T;
 }

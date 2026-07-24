@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { Result } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { Task } from './Task.js';
 
 describe('Task', () => {

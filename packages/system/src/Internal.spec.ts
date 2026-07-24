@@ -1,10 +1,12 @@
 import { Option } from '@w5s/core';
-import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
+import type { FilePath } from './FilePath.js';
+
+import { anyErrnoException, anyError } from './_test/config.js';
 import { FileError } from './FileError.js';
 import { ErrnoException, errnoExceptionHandler, errnoTask, errnoTaskSync } from './Internal.js';
-import type { FilePath } from './FilePath.js';
-import { anyErrnoException, anyError } from './_test/config.js';
 
 const expectTask = withTask(expect);
 
@@ -25,24 +27,24 @@ describe('errnoExceptionHandler', () => {
   it('should convert anything to "OtherError"', () => {
     expect(errnoExceptionHandler('anything')).toEqual(
       new FileError({
+        cause: 'anything',
+        code: Option.None,
+        errno: Option.None,
         fileErrorType: 'OtherError',
         path: Option.None,
-        cause: 'anything',
         syscall: Option.None,
-        errno: Option.None,
-        code: Option.None,
       }),
     );
   });
   it('should convert any ErrnoException to "OtherError" and forward properties', () => {
     expect(errnoExceptionHandler(anyErrnoException)).toEqual(
       new FileError({
+        cause: anyErrnoException,
+        code: anyErrnoException.code,
+        errno: anyErrnoException.errno,
         fileErrorType: 'OtherError',
         path: anyErrnoException.path as FilePath,
-        cause: anyErrnoException,
         syscall: anyErrnoException.syscall,
-        errno: anyErrnoException.errno,
-        code: anyErrnoException.code,
       }),
     );
   });

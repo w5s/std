@@ -1,15 +1,22 @@
-import { invariant } from '@w5s/error/dist/invariant.js';
 import type { Option } from '@w5s/core';
-import type { TimeDuration } from '@w5s/time';
 import type { TaskLike } from '@w5s/task';
+import type { TimeDuration } from '@w5s/time';
+
+import { invariant } from '@w5s/error/dist/invariant.js';
 import { resolve } from '@w5s/task/dist/Task/resolve.js';
-import type { RequestTimeout } from './RequestTimeout.js';
-import type { Request } from './Request.js';
-import type { HTTPError } from './HTTPError.js';
-import type { Response } from './Response.js';
+
 import type { BodyReader } from './BodyReader.js';
+import type { HTTPError } from './HTTPError.js';
+import type { Request } from './Request.js';
+import type { RequestTimeout } from './RequestTimeout.js';
+import type { Response } from './Response.js';
 
 export interface Client {
+  /**
+   * Fetch function. Default to `globalThis.fetch`.
+   */
+  fetch: typeof globalThis.fetch;
+
   /**
    * Wrap a request before sent
    *
@@ -25,11 +32,6 @@ export interface Client {
   onResponse: (response: Response<BodyReader>) => TaskLike<Response<BodyReader>, HTTPError>;
 
   /**
-   * Fetch function. Default to `globalThis.fetch`.
-   */
-  fetch: typeof globalThis.fetch;
-
-  /**
    * Response timeout setting
    */
   timeout: RequestTimeout;
@@ -41,11 +43,11 @@ export interface Client {
  */
 export const Client = Object.assign(
   (parameters: Client.Options = {}): Client => {
-    const { timeout = 'default', fetch = getDefaultFetch(), onRequest = resolve, onResponse = resolve } = parameters;
+    const { fetch = getDefaultFetch(), onRequest = resolve, onResponse = resolve, timeout = 'default' } = parameters;
     return {
+      fetch,
       onRequest,
       onResponse,
-      fetch,
       timeout,
     };
   },
@@ -54,21 +56,6 @@ export const Client = Object.assign(
      * Default timeout duration in milliseconds for client
      */
     defaultTimeoutDuration: (30 * 1000) as TimeDuration, // 30 seconds
-
-    /**
-     * Returns the timeout duration in milliseconds for client
-     *
-     * @example
-     * ```typescript
-     * const client = Client();
-     * const duration = Client.getTimeoutDuration(client);
-     * ```
-     * @param client
-     */
-    getTimeoutDuration(client: Client): Option<TimeDuration> {
-      const { timeout } = client;
-      return timeout === 'none' ? undefined : timeout === 'default' ? Client.defaultTimeoutDuration : timeout;
-    },
 
     /**
      * Returns the timeout duration in milliseconds for the request and client
@@ -88,6 +75,21 @@ export const Client = Object.assign(
         : requestTimeout === 'default'
           ? Client.getTimeoutDuration(client)
           : requestTimeout;
+    },
+
+    /**
+     * Returns the timeout duration in milliseconds for client
+     *
+     * @example
+     * ```typescript
+     * const client = Client();
+     * const duration = Client.getTimeoutDuration(client);
+     * ```
+     * @param client
+     */
+    getTimeoutDuration(client: Client): Option<TimeDuration> {
+      const { timeout } = client;
+      return timeout === 'none' ? undefined : timeout === 'default' ? Client.defaultTimeoutDuration : timeout;
     },
   },
 );

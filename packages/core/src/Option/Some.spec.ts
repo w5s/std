@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Some } from './Some.js';
 
 describe('Some', () => {

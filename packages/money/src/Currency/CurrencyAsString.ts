@@ -1,4 +1,5 @@
 import type { AsString } from '@w5s/core';
+
 import type { Currency } from './Currency.js';
 
 export const CurrencyAsString: AsString<Currency> = {

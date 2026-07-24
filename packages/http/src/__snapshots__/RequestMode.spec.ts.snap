@@ -9,10 +9,10 @@ exports[`RequestMode > is an enum 1`] = `
   "__decode__": [Function],
   "__encode__": [Function],
   "__enumKeys__": [
-    "SameOrigin",
     "CORS",
     "Navigate",
     "NoCORS",
+    "SameOrigin",
   ],
   "__inspect__": undefined,
   "__schema__": [Function],
