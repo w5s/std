@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { of } from './of.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { every } from './every.js';
+import { of } from './of.js';
 
 describe(every, () => {
   it('returns true when every elements satisfies the given predicate', async () => {

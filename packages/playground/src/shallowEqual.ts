@@ -1,5 +1,6 @@
-type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
+/* eslint-disable ts/prefer-for-of */
 type KeyOf<T> = T extends Array<unknown> ? number : keyof T;
+type ValueOf<T> = T extends Array<infer V> ? V : T[keyof T];
 
 /**
  * Returns `true` when left and right are strictly equal or have same properties

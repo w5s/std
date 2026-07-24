@@ -1,4 +1,5 @@
 import type { Task, TaskLike } from '../Task.js';
+
 import { from } from './from.js';
 import { unsafeCall } from './unsafeCall.js';
 
@@ -18,7 +19,7 @@ export function mapError<ValueFrom, ErrorFrom, ErrorTo>(
   self: TaskLike<ValueFrom, ErrorFrom>,
   fn: (error: ErrorFrom) => ErrorTo,
 ): Task<ValueFrom, ErrorTo> {
-  return from(({ reject, resolve, canceler }) =>
-    unsafeCall(self, { reject: (error) => reject(fn(error)), resolve, canceler }),
+  return from(({ canceler, reject, resolve }) =>
+    unsafeCall(self, { canceler, reject: (error) => reject(fn(error)), resolve }),
   );
 }

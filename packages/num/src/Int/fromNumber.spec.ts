@@ -1,9 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import { Option } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { fromNumber } from './fromNumber.js';
 
 describe(fromNumber, () => {
-  const { MIN_SAFE_INTEGER: minValue, MAX_SAFE_INTEGER: maxValue } = Number;
+  const { MAX_SAFE_INTEGER: maxValue, MIN_SAFE_INTEGER: minValue } = Number;
 
   it('should return identity for 0', () => {
     expect(fromNumber(0)).toBe(0);

@@ -1,4 +1,4 @@
-import { FileSystem, FilePath } from '@w5s/system';
+import { FilePath, FileSystem } from '@w5s/system';
 import { Task } from '@w5s/task';
 
 declare function log(message: string): Task<void, never>;

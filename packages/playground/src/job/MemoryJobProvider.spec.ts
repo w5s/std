@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
+
 import { MemoryJobProvider } from './MemoryJobProvider.js';
 
 describe(MemoryJobProvider, () => {
@@ -14,14 +15,14 @@ describe(MemoryJobProvider, () => {
 
     expect(provider.size).toBe(1);
     expect(provider.peek()).toEqual({
-      request,
-      enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
+      enqueuedAt: expect.any(Number),
+      request,
     });
     expect(provider.dequeue()).toEqual({
-      request,
-      enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
+      enqueuedAt: expect.any(Number),
+      request,
     });
     expect(provider.size).toBe(0);
   });
@@ -40,9 +41,9 @@ describe(MemoryJobProvider, () => {
     vi.advanceTimersByTime(1);
     expect(provider.size).toBe(1);
     expect(provider.dequeue()).toEqual({
-      request,
-      enqueuedAt: expect.any(Number),
       availableAt: expect.any(Number),
+      enqueuedAt: expect.any(Number),
+      request,
     });
   });
 

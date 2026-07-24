@@ -1,17 +1,18 @@
 import { describe, expect, it } from 'vitest';
-import { values } from './values.js';
+
 import { define } from './define.js';
+import { values } from './values.js';
 
 describe(values, () => {
   it('returns the values of Enum', () => {
     const MyEnum = {
       ...define({
-        Foo: 'foo',
         Bar: 'bar',
+        Foo: 'foo',
       }),
       other: true,
     };
     const actual = values(MyEnum);
-    expect(actual).toEqual(['foo', 'bar']);
+    expect(actual).toEqual(['bar', 'foo']);
   });
 });

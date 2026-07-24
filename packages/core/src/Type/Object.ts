@@ -1,11 +1,12 @@
-import { encode } from '../Codec/encode.js';
-import { decode } from '../Codec/decode.js';
-import { schema } from '../Codec/schema.js';
 import type { JSONValue } from '../JSON.js';
-import { isOk } from '../Result/isOk.js';
 import type { Type } from '../Type.js';
-import { define } from './define.js';
+
+import { decode } from '../Codec/decode.js';
+import { encode } from '../Codec/encode.js';
+import { schema } from '../Codec/schema.js';
+import { isOk } from '../Result/isOk.js';
 import { Symbol } from '../Symbol.js';
+import { define } from './define.js';
 
 /**
  * Returns a new Type for `P`.
@@ -32,7 +33,6 @@ export function TObject(
   const propertyNames = globalThis.Object.keys(Properties);
   const propertyNameCount = propertyNames.length;
   return define({
-    typeName: typeName ?? 'Object',
     hasInstance: (anyValue): anyValue is Record<string, unknown> => {
       if (typeof anyValue === 'object' && anyValue !== null) {
         for (let index = 0; index < propertyNameCount; index += 1) {
@@ -45,18 +45,7 @@ export function TObject(
       }
       return false;
     },
-    [Symbol.encode]: (input) => {
-      const returnValue: Record<string, unknown> = {};
-
-      for (let index = 0; index < propertyNameCount; index += 1) {
-        const propertyName = propertyNames[index]!;
-
-        returnValue[propertyName] = encode(Properties[propertyName]!, input[propertyName]);
-      }
-
-      return returnValue;
-    },
-    [Symbol.decode]: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { error, ok }) => {
       if (input == null || typeof input !== 'object') {
         return error(input, 'object');
       }
@@ -72,6 +61,17 @@ export function TObject(
       }
       return ok(returnValue);
     },
+    [Symbol.encode]: (input) => {
+      const returnValue: Record<string, unknown> = {};
+
+      for (let index = 0; index < propertyNameCount; index += 1) {
+        const propertyName = propertyNames[index]!;
+
+        returnValue[propertyName] = encode(Properties[propertyName]!, input[propertyName]);
+      }
+
+      return returnValue;
+    },
     [Symbol.schema]: () =>
       propertyNames.reduce(
         (acc, propertyName) => {
@@ -80,11 +80,12 @@ export function TObject(
           return acc;
         },
         {
-          type: 'object',
-          // eslint-disable-next-line ts/consistent-type-assertions
+
           properties: {} as Record<string, unknown>,
-          required: [] as string[],
+          required: [] as Array<string>,
+          type: 'object',
         },
       ) as JSONValue,
+    typeName: typeName ?? 'Object',
   });
 }

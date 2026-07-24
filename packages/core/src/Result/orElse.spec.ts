@@ -1,8 +1,9 @@
 import { describe, expect, it } from 'vitest';
+
 import { Result } from '../Result.js';
+import { Error } from './Error.js';
 import { Ok } from './Ok.js';
 import { orElse } from './orElse.js';
-import { Error } from './Error.js';
 
 describe(orElse, () => {
   const handleError = (message: string): Result<string, 'TestError'> => Ok(`${message}_handled`);

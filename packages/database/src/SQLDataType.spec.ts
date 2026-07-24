@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { SQLDataType } from './SQLDataType.js';
 
 describe('SQLDataType', () => {
@@ -52,7 +53,7 @@ describe('SQLDataType', () => {
   });
   describe('.BINARY', () => {
     it('should return a correct record', () => {
-      expect(SQLDataType.BINARY(2)).toEqual({ dataType: 'BINARY', byteLength: 2 });
+      expect(SQLDataType.BINARY(2)).toEqual({ byteLength: 2, dataType: 'BINARY' });
     });
     it('should be correctly stringified', () => {
       expect(SQLDataType.format(SQLDataType.BINARY(2))).toEqual('BINARY(2)');
@@ -60,7 +61,7 @@ describe('SQLDataType', () => {
   });
   describe('.VARBINARY', () => {
     it('should return a correct record', () => {
-      expect(SQLDataType.VARBINARY(2)).toEqual({ dataType: 'VARBINARY', byteLength: 2 });
+      expect(SQLDataType.VARBINARY(2)).toEqual({ byteLength: 2, dataType: 'VARBINARY' });
     });
     it('should be correctly stringified', () => {
       expect(SQLDataType.format(SQLDataType.VARBINARY(2))).toEqual('VARBINARY(2)');

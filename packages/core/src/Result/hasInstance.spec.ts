@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
+
+import { Error } from './Error.js';
 import { hasInstance } from './hasInstance.js';
 import { Ok } from './Ok.js';
-import { Error } from './Error.js';
 
 describe(hasInstance, () => {
   const anyValue = 'anyValue';

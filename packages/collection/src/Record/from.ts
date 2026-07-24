@@ -11,9 +11,7 @@ import type { RecordKey } from '../Record.js';
  * @category Constructor
  */
 export function from<Key extends RecordKey, Value>(iterable: Iterable<[Key, Value]>): Record<Key, Value> {
-  const returnValue = {} as unknown as {
-    [P in Key]: Value;
-  };
+  const returnValue = {} as unknown as Record<Key, Value>;
   for (const [key, value] of iterable) {
     returnValue[key] = value;
   }

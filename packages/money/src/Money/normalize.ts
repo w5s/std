@@ -1,6 +1,7 @@
 import { normalize as bigDecimalNormalize } from '@w5s/bigdecimal/dist/BigDecimal/normalize.js';
-import { Money } from './Money.js';
+
 import { moneyMapAmount } from '../internal/moneyMapAmount.js';
+import { Money } from './Money.js';
 
 /**
  * Normalizes a `BigDecimal` object to its simplest form.

@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it } from 'vitest';
+
 import { run } from './run.js';
 
 describe(run, () => {
   const createTracer = () => {
-    const stack: string[] = [];
+    const stack: Array<string> = [];
 
     return Object.assign(
       (name: string) => {

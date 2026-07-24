@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { AggregateError } from './AggregateError.js';
 
 describe(AggregateError, () => {

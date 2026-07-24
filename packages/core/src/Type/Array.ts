@@ -1,9 +1,11 @@
 import type { Array as CoreArray } from '@w5s/core-type';
+
+import type { Type } from '../Type.js';
+
 import { decode } from '../Codec/decode.js';
 import { schema } from '../Codec/schema.js';
 import { isOk } from '../Result/isOk.js';
 import { Symbol } from '../Symbol.js';
-import type { Type } from '../Type.js';
 import { define } from './define.js';
 
 const { isArray } = globalThis.Array;
@@ -26,18 +28,16 @@ export type Array<Item> = CoreArray<Item>;
  */
 export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
   return define({
-    typeName: `Array<${Item.typeName}>`,
     hasInstance: (anyValue): anyValue is Array<V> =>
-
       isArray(anyValue) && anyValue.every(Item.hasInstance),
-    [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),
-    [Symbol.decode]: (input, { ok, error }) => {
+    [Symbol.decode]: (input, { error, ok }) => {
       if (!isArray(input)) {
         return error(input, 'Array');
       }
 
       const values = [];
 
+      // eslint-disable-next-line ts/prefer-for-of
       for (let index = 0; index < input.length; index += 1) {
         const result = decode(Item, input[index]);
         if (!isOk(result)) {
@@ -47,6 +47,8 @@ export function Array<V>(Item: Type.Module<V>): Type.Module<Array<V>> {
       }
       return ok(values);
     },
-    [Symbol.schema]: () => ({ type: 'array', item: schema(Item) }),
+    [Symbol.encode]: (input) => input.map(Item[Symbol.encode]),
+    [Symbol.schema]: () => ({ item: schema(Item), type: 'array' }),
+    typeName: `Array<${Item.typeName}>`,
   });
 }

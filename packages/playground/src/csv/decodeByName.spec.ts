@@ -1,9 +1,10 @@
-import { describe, expect, it } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
 import { Result } from '@w5s/core';
 import { withAsyncIterable } from '@w5s/iterable/dist/Testing.js';
-import { decodeByName } from './decodeByName.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { CSVError } from './CSVError.js';
+import { decodeByName } from './decodeByName.js';
 
 describe(decodeByName, () => {
   const expectTask = withTask(expect);
@@ -37,7 +38,7 @@ describe(decodeByName, () => {
   });
 
   it('should throw an error for missing header', async () => {
-    const input: string[] = [];
+    const input: Array<string> = [];
     await expectTask(decodeByName(input)).toRejectAsync(new CSVError({ message: 'No header found' }));
   });
 });

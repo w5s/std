@@ -1,7 +1,9 @@
-import { describe, it, expect, vi, type Mocked } from 'vitest';
 import type { Database } from 'sqlite3';
-import { sql } from '../sql.js';
+
+import { describe, expect, it, type Mocked, vi } from 'vitest';
+
 import { DatabaseDriver } from '../driver.js';
+import { sql } from '../sql.js';
 import { SQLite3 } from './sqlite3.js';
 
 const mockDatabase = (): Mocked<Database> => {

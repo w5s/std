@@ -1,7 +1,8 @@
-import { describe } from 'vitest';
 import { describeNegate } from '@w5s/core/dist/Testing.js';
-import { Negate } from './Negate.js';
+import { describe } from 'vitest';
+
 import { Comparable } from './Comparable.js';
+import { Negate } from './Negate.js';
 
 describe(Negate, () => {
   describeNegate(
@@ -16,8 +17,8 @@ describe(Negate, () => {
   );
 
   const CustomConversion = {
-    fromNumber: (v: number) => ({ custom: true, value: v }),
     asNumber: (v: { custom: true; value: number }) => v.value,
+    fromNumber: (v: number) => ({ custom: true, value: v }),
   };
   describeNegate(
     { ...Negate(CustomConversion), ...Comparable(CustomConversion) },

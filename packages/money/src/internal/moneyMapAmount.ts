@@ -1,4 +1,5 @@
 import type { Money } from '../Money/Money.js';
+
 import { of } from '../Money/of.js';
 
 export function moneyMapAmount(self: Money, fn: (amount: Money['amount']) => Money['amount']): Money {

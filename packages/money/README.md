@@ -18,7 +18,7 @@ npm install @w5s/money
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Money, EUR } from '@w5s/money';
+import { EUR, Money } from '@w5s/money';
 
 export function main(): void {
   const price = EUR(10);

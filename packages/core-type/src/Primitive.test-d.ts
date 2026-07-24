@@ -1,4 +1,4 @@
-/* eslint-disable ts/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
 import type { Primitive } from './Primitive.js';
 
 const num: Primitive = 1;

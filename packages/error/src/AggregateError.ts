@@ -16,13 +16,13 @@
  * ```
  */
 // @ts-ignore Ignore duplicate
-export declare class AggregateError<Errors extends any[] | Iterable<any>> extends Error {
-  name: 'AggregateError';
-
+export declare class AggregateError<Errors extends Array<any> | Iterable<any>> extends Error {
   /**
    * Array of error
    */
-  errors: Errors extends any[] ? Array<[...Errors]> : Errors extends Iterable<infer T> ? Array<T> : never;
+  errors: Errors extends Array<any> ? Array<[...Errors]> : Errors extends Iterable<infer T> ? Array<T> : never;
+
+  name: 'AggregateError';
 
   /**
    * AggregateError constructor

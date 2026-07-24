@@ -1,6 +1,7 @@
 import type { Option } from '@w5s/core';
-import type { ContainerProvider } from './ContainerProvider.js';
+
 import type { ContainerKey } from './ContainerKey.js';
+import type { ContainerProvider } from './ContainerProvider.js';
 import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
 
 /**

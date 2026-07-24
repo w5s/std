@@ -1,9 +1,12 @@
+import type { Task } from '@w5s/task';
+
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 import * as nodeFS from 'node:fs';
 import nodePath from 'node:path';
-import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import { FileError } from './FileError.js';
+
 import type { FilePath } from './FilePath.js';
+
+import { FileError } from './FileError.js';
 
 export const Internal = {
   FS: { ...nodeFS.promises, ...nodeFS.constants },
@@ -27,26 +30,26 @@ export function errnoExceptionHandler(error: unknown): FileError {
     ? error
     : ErrnoException.hasInstance(error)
       ? new FileError({
+          cause: error,
+          code: error.code,
+          errno: error.errno,
           fileErrorType: 'OtherError',
           path: error.path as FilePath,
-          cause: error,
           syscall: error.syscall,
-          errno: error.errno,
-          code: error.code,
         })
       : new FileError({
+          cause: error,
+          code: undefined,
+          errno: undefined,
           fileErrorType: 'OtherError',
           path: undefined,
-          cause: error,
           syscall: undefined,
-          errno: undefined,
-          code: undefined,
         });
 }
 
-export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>) {
+export function errnoTask<A extends Array<unknown>, R>(fn: (...args: A) => Promise<R>) {
   return (...args: A): Task<Awaited<R>, FileError> =>
-    taskFrom(async ({ resolve, reject }) => {
+    taskFrom(async ({ reject, resolve }) => {
       try {
         resolve(await fn(...args));
       } catch (error_: unknown) {
@@ -55,9 +58,9 @@ export function errnoTask<A extends unknown[], R>(fn: (...args: A) => Promise<R>
     });
 }
 
-export function errnoTaskSync<A extends unknown[], R>(fn: (...args: A) => R) {
+export function errnoTaskSync<A extends Array<unknown>, R>(fn: (...args: A) => R) {
   return (...args: A): Task<R, FileError> =>
-    taskFrom(({ resolve, reject }) => {
+    taskFrom(({ reject, resolve }) => {
       try {
         resolve(fn(...args));
       } catch (error_: unknown) {

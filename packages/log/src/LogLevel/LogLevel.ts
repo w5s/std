@@ -1,7 +1,9 @@
 import type { Codec, Int } from '@w5s/core';
+
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
+
 import { LogLevelAsString } from './LogLevelAsString.js';
 
 export interface LogLevel extends Struct<{
@@ -20,7 +22,7 @@ export interface LogLevel extends Struct<{
 
 const typeName = 'LogLevel';
 const encode = ({ name, value }: LogLevel) => `${name}[${value}]`;
-const decode: Codec<LogLevel>[Symbol.decode] = (input, { ok, error }) => {
+const decode: Codec<LogLevel>[Symbol.decode] = (input, { error, ok }) => {
   if (typeof input === 'string') {
     const match = input.match(/^(\w+)\[(\d+)]$/);
     if (match != null && match.length === 3) {
@@ -37,13 +39,13 @@ const decode: Codec<LogLevel>[Symbol.decode] = (input, { ok, error }) => {
 };
 
 export const LogLevel = Struct.define<LogLevel>({
-  typeName,
   [Symbol.decode]: decode,
   [Symbol.encode]: encode,
   [Symbol.inspect]: encode,
   [Symbol.schema]: () => ({
-    type: 'string',
     format: typeName,
+    type: 'string',
   }),
+  typeName,
   ...LogLevelAsString,
 });

@@ -1,12 +1,13 @@
 import type { Option } from '@w5s/core';
-import type { Method } from './Method.js';
+
 import type { Headers } from './Headers.js';
+import type { Method } from './Method.js';
+import type { ReferrerPolicy } from './ReferrerPolicy.js';
+import type { RequestCache } from './RequestCache.js';
 import type { RequestCredentials } from './RequestCredentials.js';
 import type { RequestDestination } from './RequestDestination.js';
-import type { RequestCache } from './RequestCache.js';
-import type { RequestRedirect } from './RequestRedirect.js';
-import type { ReferrerPolicy } from './ReferrerPolicy.js';
 import type { RequestMode } from './RequestMode.js';
+import type { RequestRedirect } from './RequestRedirect.js';
 import type { RequestTimeout } from './RequestTimeout.js';
 import type { URL } from './URL.js';
 
@@ -17,6 +18,11 @@ import type { URL } from './URL.js';
  */
 export interface Request {
   // https://fetch.spec.whatwg.org/#requests
+
+  /**
+   * An optional BodyInit object to set request's body.
+   */
+  readonly body?: Option<BodyInit>;
 
   /**
    * Indicates how the request will interact with the browser's cache to set request's cache.
@@ -32,15 +38,8 @@ export interface Request {
    * A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL.
    */
   readonly credentials?: RequestCredentials;
-  readonly destination?: RequestDestination;
 
-  /**
-   * Request URL
-   *
-   * @example
-   * 'https://foo.com'
-   */
-  readonly url: URL;
+  readonly destination?: RequestDestination;
 
   /**
    * Request headers
@@ -58,14 +57,9 @@ export interface Request {
   readonly integrity?: string;
 
   /**
-   * Indicates whether request follows redirects, results in an error upon encountering a redirect, or returns the redirect (in an opaque fashion).
+   * A boolean to set request's keepalive.
    */
-  readonly redirect?: RequestRedirect;
-
-  /**
-   * Request referrer policy
-   */
-  readonly referrerPolicy?: ReferrerPolicy;
+  readonly keepalive?: boolean;
 
   /**
    * Request Method
@@ -75,19 +69,14 @@ export interface Request {
   readonly method?: Method;
 
   /**
-   * A boolean to set request's keepalive.
-   */
-  readonly keepalive?: boolean;
-
-  /**
    * Indicates whether the request will use CORS, or will be restricted to same-origin URLs. Sets request's mode.
    */
   readonly mode?: RequestMode;
 
   /**
-   * An optional BodyInit object to set request's body.
+   * Indicates whether request follows redirects, results in an error upon encountering a redirect, or returns the redirect (in an opaque fashion).
    */
-  readonly body?: Option<BodyInit>;
+  readonly redirect?: RequestRedirect;
 
   /**
    * A string whose value is a same-origin URL, "about:client", or the empty string, to set request's referrer.
@@ -95,17 +84,30 @@ export interface Request {
   readonly referrer?: string;
 
   /**
-   * An AbortSignal to set request's signal.
+   * Request referrer policy
    */
-  // readonly signal?: Option<AbortSignal>;
-
-  /**
-   * Can only be undefined. Used to disassociate request from any Window.
-   */
-  readonly window?: undefined;
+  readonly referrerPolicy?: ReferrerPolicy;
 
   /**
    * Request timeout setting
    */
   readonly timeout?: RequestTimeout;
+
+  /**
+   * An AbortSignal to set request's signal.
+   */
+  // readonly signal?: Option<AbortSignal>;
+
+  /**
+   * Request URL
+   *
+   * @example
+   * 'https://foo.com'
+   */
+  readonly url: URL;
+
+  /**
+   * Can only be undefined. Used to disassociate request from any Window.
+   */
+  readonly window?: undefined;
 }

@@ -8,6 +8,6 @@ import { ErrorClass } from './ErrorClass.js';
  *
  */
 export class InvariantError extends ErrorClass({
-  errorName: 'InvariantError',
   errorMessage: 'An invariant error occurred',
+  errorName: 'InvariantError',
 }) {}

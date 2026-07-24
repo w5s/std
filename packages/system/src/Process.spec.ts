@@ -1,9 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { errnoExceptionHandler } from './Internal.js';
-import { FilePath } from './FilePath.js';
-import { Process } from './Process.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { anyErrnoException } from './_test/config.js';
+import { FilePath } from './FilePath.js';
+import { errnoExceptionHandler } from './Internal.js';
+import { Process } from './Process.js';
 
 describe('Process', () => {
   const expectTask = withTask(expect);

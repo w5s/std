@@ -1,7 +1,9 @@
 import type * as mysql from 'mysql';
-import { describe, it, expect, vi, type Mocked } from 'vitest';
-import { sql } from '../sql.js';
+
+import { describe, expect, it, type Mocked, vi } from 'vitest';
+
 import { DatabaseDriver } from '../driver.js';
+import { sql } from '../sql.js';
 import { MySQL } from './mysql.js';
 
 describe('MySQL', () => {
@@ -9,12 +11,12 @@ describe('MySQL', () => {
   const anyStatement = sql`SELECT author FROM books WHERE name=${'Toto'}`;
   const mockConnection = (connectionProperties?: any): Mocked<mysql.Connection> => {
     const connection: Mocked<mysql.Connection> = {
+      connect: vi.fn(),
+      end: vi.fn(),
       query: vi.fn<mysql.Connection['query']>(
         // @ts-ignore mock partial signature
         (_sql, _params, callback?) => callback(null, []),
       ),
-      connect: vi.fn(),
-      end: vi.fn(),
       ...connectionProperties,
     };
     vi.spyOn(MySQL, 'createConnection').mockImplementation(

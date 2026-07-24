@@ -1,12 +1,13 @@
-import { describe } from 'vitest';
 import { BigDecimal } from '@w5s/bigdecimal';
 import { describeAsString } from '@w5s/core/dist/Testing.js';
-import { MoneyAsString } from './MoneyAsString.js';
-import { Money } from './Money.js';
+import { describe } from 'vitest';
+
 import { Currency } from '../Currency.js';
+import { Money } from './Money.js';
+import { MoneyAsString } from './MoneyAsString.js';
 
 describe('MoneyAsString', () => {
-  const EUR = Currency({ code: 'EUR', symbol: '€', name: 'Euro' });
+  const EUR = Currency({ code: 'EUR', name: 'Euro', symbol: '€' });
 
   describeAsString(MoneyAsString, () => [
     // cases

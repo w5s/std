@@ -1,6 +1,7 @@
-/* eslint-disable ts/no-unused-vars */
-import { assertType } from './assertType.js';
+/* eslint-disable unused-imports/no-unused-vars */
 import type { EmptyObject } from './EmptyObject.js';
+
+import { assertType } from './assertType.js';
 
 declare let foo: EmptyObject;
 

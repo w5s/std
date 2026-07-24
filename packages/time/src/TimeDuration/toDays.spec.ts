@@ -1,7 +1,8 @@
 // packages/time/src/TimeDuration/toDays.spec.ts
-import { describe, it, expect } from 'vitest';
-import { toDays } from './toDays.js';
+import { describe, expect, it } from 'vitest';
+
 import { TimeDuration } from './TimeDuration.js';
+import { toDays } from './toDays.js';
 
 describe(toDays, () => {
   it('should convert milliseconds to days', () => {

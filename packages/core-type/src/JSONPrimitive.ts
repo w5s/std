@@ -6,4 +6,4 @@
  * - number
  * - string
  */
-export type JSONPrimitive = null | boolean | number | string;
+export type JSONPrimitive = boolean | null | number | string;

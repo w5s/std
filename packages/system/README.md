@@ -18,7 +18,7 @@ npm install @w5s/system
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { FileSystem, FilePath } from '@w5s/system';
+import { FilePath, FileSystem } from '@w5s/system';
 import { Task } from '@w5s/task';
 
 declare function log(message: string): Task<void, never>;

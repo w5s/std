@@ -1,6 +1,9 @@
 import type { Option } from '@w5s/core';
-import { useState, type Meta } from '@w5s/application';
+
+import { type Meta, useState } from '@w5s/application';
+
 import type { Currency } from './Currency/Currency.js';
+
 import { meta } from './meta.js';
 
 export interface CurrencyRegistry {

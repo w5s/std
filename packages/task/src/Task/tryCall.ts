@@ -1,8 +1,11 @@
 import type { Awaitable } from '@w5s/async';
-import { tryCall as asyncTryCall } from '@w5s/async/dist/tryCall.js';
+
 import { isPromiseLike } from '@w5s/async/dist/isPromiseLike.js';
-import { from } from './from.js';
+import { tryCall as asyncTryCall } from '@w5s/async/dist/tryCall.js';
+
 import type { Task } from '../Task.js';
+
+import { from } from './from.js';
 
 /**
  * Creates a new `Task` that resolves `sideEffect()`.
@@ -25,7 +28,7 @@ export function tryCall<Value, Error = never>(
   sideEffect: () => Awaitable<Value>,
   onError?: (error: unknown) => Awaitable<Error>,
 ): Task<Value, Error> {
-  return from(({ resolve, reject }) =>
+  return from(({ reject, resolve }) =>
     asyncTryCall(
       sideEffect,
       resolve,

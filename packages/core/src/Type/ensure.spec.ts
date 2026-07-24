@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { ensure } from './ensure.js';
+
 import { define } from './define.js';
+import { ensure } from './ensure.js';
 
 describe('#ensure', () => {
   const TestType = define<string>({
-    typeName: 'String',
     hasInstance: (anyValue) => typeof anyValue === 'string',
+    typeName: 'String',
   });
 
   it('throws an error only when not of type', () => {

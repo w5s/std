@@ -1,16 +1,17 @@
 import type { Option } from '@w5s/core';
+
 import { panic } from '@w5s/error/dist/panic.js';
 
 const readImportMetaEnv = () => {
   try {
-    return (import.meta as { env?: Readonly<{ [key: string]: string }> }).env;
+    return (import.meta as { env?: Readonly<Record<string, string>> }).env;
   } catch {
     return undefined;
   }
 };
-const readProcessEnv = () => globalThis.process?.env as Option<{ [key: string]: string }>;
+const readProcessEnv = () => globalThis.process?.env as Option<Record<string, string>>;
 
-const createProxy = (properties: Option<{ [key: string]: string }>) =>
+const createProxy = (properties: Option<Record<string, string>>) =>
   properties == null ? undefined : (Object.assign(Object.create(null), properties) as Env);
 const readEnv = (): Env =>
   // NodeJS
@@ -22,9 +23,7 @@ const readEnv = (): Env =>
 /**
  * A dictionary of environment variables
  */
-export interface Env {
-  [key: string]: Option<string>;
-}
+export type Env = Record<string, Option<string>>;
 
 /**
  * An object containing the environment variables

@@ -1,4 +1,5 @@
 import type { ExpectFunction } from '@w5s/core-type';
+
 import type { Order } from '../Order.js';
 
 export interface ExpectOrder {

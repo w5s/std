@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { schema } from './schema.js';
+
 import { Symbol } from '../Symbol.js';
+import { schema } from './schema.js';
 
 describe(schema, () => {
   it('should call __schema__', () => {

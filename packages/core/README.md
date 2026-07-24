@@ -38,6 +38,11 @@ npm install @w5s/core
 ```ts
 import { Result } from '@w5s/core';
 
+export function main() {
+  const parsed = parseNumber('1.1'); // Result.Ok(1.1)
+  return Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
+}
+
 function parseNumber(expr: string) {
   const parsed = Number(expr);
 
@@ -45,11 +50,6 @@ function parseNumber(expr: string) {
   // - Avoid throwing error because impure
   // - Avoid using NaN because the error case is implicit in the typing
   return Number.isNaN(parsed) ? Result.Ok(parsed) : Result.Error('NotANumber');
-}
-
-export function main() {
-  const parsed = parseNumber('1.1'); // Result.Ok(1.1)
-  return Result.map(parsed, (amount) => amount + 2); // Result.Ok(3.1)
 }
 
 // runTask is impure and should be put at the edge of the program

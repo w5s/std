@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import * as Module from './index.js';
 
 describe('index', () => {
@@ -7,8 +8,8 @@ describe('index', () => {
       new Set([
         // public exports
         'meta',
-        'useRef',
         'useConfiguration',
+        'useRef',
         'useState',
       ]),
     );

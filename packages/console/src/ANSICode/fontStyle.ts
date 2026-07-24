@@ -4,7 +4,7 @@ import { wrap } from './wrap.js';
 /**
  * Font weight
  */
-export type FontStyle = 'normal' | 'italic';
+export type FontStyle = 'italic' | 'normal';
 
 const fontStyleMap = new Map(
   (

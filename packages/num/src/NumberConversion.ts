@@ -1,6 +1,9 @@
 import type * as Core from '@w5s/core';
+
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
+
+import { defaultConversion } from './internal/defaultConversion.js';
 import { Add } from './NumberConversion/Add.js';
 import { Bounded } from './NumberConversion/Bounded.js';
 import { Comparable } from './NumberConversion/Comparable.js';
@@ -11,22 +14,21 @@ import { Remainder } from './NumberConversion/Remainder.js';
 import { Signed } from './NumberConversion/Signed.js';
 import { Subtract } from './NumberConversion/Subtract.js';
 import { Zero } from './NumberConversion/Zero.js';
-import { defaultConversion } from './internal/defaultConversion.js';
 
 export interface NumberConversion<T> {
-  /**
-   * Converts a number value to type T
-   *
-   * @param value A number value
-   */
-  fromNumber(this: void, value: number): T;
-
   /**
    * Converts a value of type T to a number
    *
    * @param value A value of type T
    */
   asNumber(this: void, value: T): number;
+
+  /**
+   * Converts a number value to type T
+   *
+   * @param value A number value
+   */
+  fromNumber(this: void, value: number): T;
 }
 
 function call(): NumberConversion.Module<number>;
@@ -51,7 +53,6 @@ function call<T>(BaseType?: NumberConversion<T>): NumberConversion.Module<T> {
  * @namespace
  */
 export const NumberConversion = Callable({
-  [Symbol.call]: call,
   Add,
   Bounded,
   Comparable,
@@ -61,19 +62,20 @@ export const NumberConversion = Callable({
   Remainder,
   Signed,
   Subtract,
+  [Symbol.call]: call,
   Zero,
 });
 export namespace NumberConversion {
   export interface Module<T>
     extends
-    Core.Comparable<T>,
     Core.Numeric.Add<T>,
+    Core.Bounded<T>,
+    Core.Comparable<T>,
     Core.Numeric.Multiply<T>,
-    Core.Numeric.Remainder<T>,
-    Core.Numeric.Subtract<T>,
-    Core.Numeric.Power<T>,
-    Core.Numeric.Signed<T>,
     Core.Numeric.Negate<T>,
-    Core.Numeric.Zero<T>,
-    Core.Bounded<T> {}
+    Core.Numeric.Power<T>,
+    Core.Numeric.Remainder<T>,
+    Core.Numeric.Signed<T>,
+    Core.Numeric.Subtract<T>,
+    Core.Numeric.Zero<T> {}
 }

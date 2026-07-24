@@ -1,15 +1,16 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { asString } from './asString.js';
 
 describe(asString, () => {
-  const CustomError = <P extends { name?: string; message?: string; cause?: unknown }>(properties: P) =>
+  const CustomError = <P extends { cause?: unknown; message?: string; name?: string }>(properties: P) =>
     Object.assign(new Error(properties.message), properties);
 
   it.each([
     [CustomError({ name: 'CustomError' }), 'CustomError'],
-    [CustomError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
+    [CustomError({ message: 'CustomMessage', name: 'CustomError' }), 'CustomError: CustomMessage'],
     [
-      CustomError({ name: 'CustomError', message: 'CustomMessage', cause: new Error('CauseMessage') }),
+      CustomError({ cause: new Error('CauseMessage'), message: 'CustomMessage', name: 'CustomError' }),
       [
         // lines
         'CustomError: CustomMessage',
@@ -18,16 +19,16 @@ describe(asString, () => {
     ],
     [
       CustomError({
-        name: 'CustomError1',
-        message: 'Level 1',
         cause: CustomError({
-          name: 'CustomError2',
-          message: 'Level 2',
           cause: CustomError({
-            name: 'CustomError3',
             message: 'Level 3',
+            name: 'CustomError3',
           }),
+          message: 'Level 2',
+          name: 'CustomError2',
         }),
+        message: 'Level 1',
+        name: 'CustomError1',
       }),
       [
         // lines

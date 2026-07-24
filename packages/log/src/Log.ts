@@ -7,6 +7,6 @@ import { sendWith } from './Log/sendWith.js';
  * @namespace
  */
 export const Log = {
-  sendWith,
   send,
+  sendWith,
 };

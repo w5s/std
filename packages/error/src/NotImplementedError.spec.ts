@@ -1,11 +1,12 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { NotImplementedError } from './NotImplementedError.js';
 import { describeError } from './Testing.js';
 
 describe(NotImplementedError, () => {
-  describeError({ describe, it, expect })(NotImplementedError, {
+  describeError({ describe, expect, it })(NotImplementedError, {
     defaultParameters: () => ({}),
-    expectedName: 'NotImplementedError',
     expectedDefaultMessage: 'Not implemented',
+    expectedName: 'NotImplementedError',
   });
 });

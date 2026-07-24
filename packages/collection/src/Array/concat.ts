@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+
 import { isEmpty } from './isEmpty.js';
 
 /**
@@ -12,6 +13,6 @@ import { isEmpty } from './isEmpty.js';
  * @param self The array object
  * @param extensions The other arrays to append
  */
-export function concat<Item>(self: Array<Item>, ...extensions: Array<Item>[]): Array<Item> {
+export function concat<Item>(self: Array<Item>, ...extensions: Array<Array<Item>>): Array<Item> {
   return extensions.length > 0 && !extensions.every(isEmpty) ? [...self, ...extensions.flat()] : self;
 }

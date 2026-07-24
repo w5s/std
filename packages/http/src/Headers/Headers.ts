@@ -1,4 +1,5 @@
 import type { Type } from '@w5s/core';
+
 import { Record } from '@w5s/core/dist/Type/Record.js';
 import { string } from '@w5s/core/dist/Type/string.js';
 

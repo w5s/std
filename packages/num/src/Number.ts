@@ -1,6 +1,7 @@
 import { number as NumberType } from '@w5s/core/dist/Type/number.js';
-import { parse } from './Number/parse.js';
+
 import { format } from './Number/format.js';
+import { parse } from './Number/parse.js';
 import { NumberConversion } from './NumberConversion.js';
 
 /**
@@ -18,6 +19,6 @@ import { NumberConversion } from './NumberConversion.js';
 export const Number = {
   ...NumberType,
   ...NumberConversion(),
-  parse,
   format,
+  parse,
 };

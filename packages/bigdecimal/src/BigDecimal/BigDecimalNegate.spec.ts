@@ -1,8 +1,9 @@
-import { describe } from 'vitest';
 import { describeNegate } from '@w5s/core/dist/Testing.js';
-import { BigDecimalNegate } from './BigDecimalNegate.js';
-import { BigDecimalComparable } from './BigDecimalComparable.js';
+import { describe } from 'vitest';
+
 import { BigDecimal } from './BigDecimal.js';
+import { BigDecimalComparable } from './BigDecimalComparable.js';
+import { BigDecimalNegate } from './BigDecimalNegate.js';
 
 describe('BigDecimalNegate', () => {
   describeNegate(

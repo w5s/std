@@ -1,17 +1,19 @@
-import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
-import fs from 'node:fs';
+import type { Config } from '@docusaurus/types';
 import type typedocPluginFunction from 'docusaurus-plugin-typedoc-api';
+
+import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { themes } from 'prism-react-renderer';
+
 import packageJSON from './package.json';
 
-type TypedocPluginOptions = Parameters<typeof typedocPluginFunction>[1];
-
 export interface CustomFields {
-  metaTitle?: string;
   metaDescription?: string;
+  metaTitle?: string;
 }
+
+type TypedocPluginOptions = Parameters<typeof typedocPluginFunction>[1];
 
 const fileExists = (path: fs.PathLike) => {
   try {
@@ -35,12 +37,12 @@ const packageList = fs
     const path = `packages/${entry}`;
     const hasTesting = fileExists(`${projectRoot}/${path}/src/testing.ts`);
     return {
-      path,
-      package: JSON.parse(fs.readFileSync(`${projectRoot}/packages/${entry}/package.json`, 'utf8')),
       entry: {
-        index: { path: 'src/index.ts', label: undefined as unknown as string },
-        ...(hasTesting ? { testing: { path: 'src/Testing.ts', label: 'Testing utilities' } } : undefined),
+        index: { label: undefined as unknown as string, path: 'src/index.ts' },
+        ...(hasTesting ? { testing: { label: 'Testing utilities', path: 'src/Testing.ts' } } : undefined),
       },
+      package: JSON.parse(fs.readFileSync(`${projectRoot}/packages/${entry}/package.json`, 'utf8')),
+      path,
     };
   })
   .filter((_) => _.package.private !== true);
@@ -50,40 +52,21 @@ const config: Config = (() => {
   const tagline = 'A collection of type safe, functional style packages for building great applications and libraries';
   const organizationName = 'w5s';
   return {
-    title,
-    tagline,
-    favicon: 'img/favicon.ico',
-
-    // Set the production url of your site here
-    // url: 'https://your-docusaurus-test-site.com',
-    url: `https://${organizationName}.github.io/`,
-
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
     // baseUrl: '/',
     get baseUrl() {
       return `/${this.projectName}`;
     },
+    customFields: {
+      metaDescription: tagline,
+      metaTitle: 'Build faster, cleaner and safer apps',
+    } satisfies CustomFields,
+    favicon: 'img/favicon.ico',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
     future: {
       v4: true, // Improve compatibility with the upcoming Docusaurus v4
-    },
-
-    // GitHub pages deployment config.
-    // If you aren't using GitHub pages, you don't need these.
-    organizationName, // Usually your GitHub org/user name.
-    projectName: 'std', // Usually your repo name.
-
-    onBrokenLinks: 'throw',
-    markdown: {
-      mdx1Compat: {
-        comments: true,
-        headingIds: true,
-      },
-      hooks: {
-        onBrokenMarkdownLinks: 'warn',
-      },
     },
 
     // Even if you don't use internalization, you can use this field to set useful
@@ -94,26 +77,53 @@ const config: Config = (() => {
       locales: ['en', 'fr'],
     },
 
-    customFields: {
-      metaTitle: 'Build faster, cleaner and safer apps',
-      metaDescription: tagline,
-    } satisfies CustomFields,
+    markdown: {
+      hooks: {
+        onBrokenMarkdownLinks: 'warn',
+      },
+      mdx1Compat: {
+        comments: true,
+        headingIds: true,
+      },
+    },
 
+    onBrokenLinks: 'throw',
+    // GitHub pages deployment config.
+    // If you aren't using GitHub pages, you don't need these.
+    organizationName, // Usually your GitHub org/user name.
+
+    plugins: [
+      [
+        '@apify/docusaurus-plugin-typedoc-api',
+        {
+          gitRefName: 'main',
+          minimal: true,
+          packages: packageList.map(({ entry, path }) => ({
+            entry,
+            path,
+          })),
+          projectRoot,
+          readmes: true,
+          // debug: true,
+          tsconfigName: 'tsconfig.json',
+        } satisfies Partial<TypedocPluginOptions>,
+      ],
+    ],
     presets: [
       [
         'classic',
         {
-          docs: {
-            sidebarPath: fileURLToPath(new URL('sidebars.js', import.meta.url)),
-            // Please change this to your repo.
-            // Remove this to remove the "edit this page" links.
-            editUrl: `${githubHref}/tree/main/apps/website/`,
-          },
           blog: {
-            showReadingTime: true,
             // Please change this to your repo.
             // Remove this to remove the "edit this page" links.
             editUrl: `${githubHref}/tree/main/apps/website/blog/`,
+            showReadingTime: true,
+          },
+          docs: {
+            // Please change this to your repo.
+            // Remove this to remove the "edit this page" links.
+            editUrl: `${githubHref}/tree/main/apps/website/`,
+            sidebarPath: fileURLToPath(new URL('sidebars.js', import.meta.url)),
           },
           theme: {
             customCss: fileURLToPath(new URL('src/css/custom.css', import.meta.url)),
@@ -122,71 +132,28 @@ const config: Config = (() => {
       ],
     ],
 
+    projectName: 'std', // Usually your repo name.
+
+    tagline,
+
     themeConfig: {
-      // Replace with your project's social card
-      image: 'img/w5s_social_cover.png',
-      metadata: [
-        { name: 'keywords', content: 'functional, typescript, javascript, fp, rust, ocaml' },
-        { name: 'revisit-after', content: '7 days' },
-        { name: 'robots', content: 'archive,follow,imageindex,index,odp,snippet,translate' },
-        { name: 'googlebot', content: 'index,follow' },
-        { name: 'summary', content: tagline },
-        { name: 'target', content: 'all' },
-        /* cspell:disable-next-line */
-        { name: 'google-site-verification', content: 'crTDqUN2i_LENrHWPhxylaLVKPZ8EdHYemMbluuGhIA' },
-      ],
-      navbar: {
-        title: 'Standard Library',
-        logo: {
-          alt: 'W5S standard library',
-          src: 'img/logo.svg',
-        },
-        items: [
-          {
-            label: `v${packageList[0].package.version[0]}`,
-            position: 'left',
-            items: packageList.map(({ package: _package }) => ({
-              label: `v${_package.version} · ${_package.name.split('/')[1]}`,
-              href: `https://www.npmjs.com/package/${_package.name}`,
-            })),
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Docs',
-          },
-          {
-            to: 'api',
-            label: 'API',
-            position: 'left',
-          },
-          // { to: '/blog', label: 'Blog', position: 'left' },
-          {
-            href: githubHref,
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
-      },
       footer: {
-        style: 'dark',
+        copyright: `Copyright © ${new Date().getFullYear()} Julien Polo. Built with Docusaurus.`,
         links: [
           {
-            title: 'Docs',
             items: [
               {
                 label: 'Tutorial',
                 to: '/docs/getting-started/Introduction',
               },
             ],
+            title: 'Docs',
           },
           {
-            title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/w5s',
+                label: 'Stack Overflow',
               },
               // {
               //   label: 'Discord',
@@ -197,47 +164,82 @@ const config: Config = (() => {
               //   href: 'https://twitter.com/docusaurus',
               // },
             ],
+            title: 'Community',
           },
           {
-            title: 'More',
             items: [
               {
                 label: 'Blog',
                 to: '/blog',
               },
               {
-                label: 'GitHub',
                 href: githubHref,
+                label: 'GitHub',
               },
             ],
+            title: 'More',
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Julien Polo. Built with Docusaurus.`,
+        style: 'dark',
+      },
+      // Replace with your project's social card
+      image: 'img/w5s_social_cover.png',
+      metadata: [
+        { content: 'functional, typescript, javascript, fp, rust, ocaml', name: 'keywords' },
+        { content: '7 days', name: 'revisit-after' },
+        { content: 'archive,follow,imageindex,index,odp,snippet,translate', name: 'robots' },
+        { content: 'index,follow', name: 'googlebot' },
+        { content: tagline, name: 'summary' },
+        { content: 'all', name: 'target' },
+        /* cspell:disable-next-line */
+        { content: 'crTDqUN2i_LENrHWPhxylaLVKPZ8EdHYemMbluuGhIA', name: 'google-site-verification' },
+      ],
+      navbar: {
+        items: [
+          {
+            items: packageList.map(({ package: _package }) => ({
+              href: `https://www.npmjs.com/package/${_package.name}`,
+              label: `v${_package.version} · ${_package.name.split('/')[1]}`,
+            })),
+            label: `v${packageList[0].package.version[0]}`,
+            position: 'left',
+          },
+          {
+            label: 'Docs',
+            position: 'left',
+            sidebarId: 'tutorialSidebar',
+            type: 'docSidebar',
+          },
+          {
+            label: 'API',
+            position: 'left',
+            to: 'api',
+          },
+          // { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            href: githubHref,
+            label: 'GitHub',
+            position: 'right',
+          },
+        ],
+        logo: {
+          alt: 'W5S standard library',
+          src: 'img/logo.svg',
+        },
+        title: 'Standard Library',
       },
       prism: {
-        theme: lightTheme,
-        darkTheme,
         additionalLanguages: ['bash', 'diff', 'json'],
+        darkTheme,
+        theme: lightTheme,
       },
     } satisfies Preset.ThemeConfig,
 
-    plugins: [
-      [
-        '@apify/docusaurus-plugin-typedoc-api',
-        {
-          projectRoot,
-          packages: packageList.map(({ path, entry }) => ({
-            path,
-            entry,
-          })),
-          minimal: true,
-          readmes: true,
-          // debug: true,
-          tsconfigName: 'tsconfig.json',
-          gitRefName: 'main',
-        } satisfies Partial<TypedocPluginOptions>,
-      ],
-    ],
+    title,
+
+    // Set the production url of your site here
+    // url: 'https://your-docusaurus-test-site.com',
+    url: `https://${organizationName}.github.io/`,
   };
 })();
 

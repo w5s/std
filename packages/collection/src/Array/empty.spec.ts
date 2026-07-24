@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
 
 describe(empty, () => {

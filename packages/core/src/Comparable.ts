@@ -1,44 +1,10 @@
 import type { Equal } from './Equal.js';
 import type { Ordering } from './Ordering.js';
 
-export interface ComparableInterface<T> {
-  /**
-   * Return an {@link Ordering} that represents comparison result
-   *
-   * @see {@link Order}
-   *
-   * @example
-   * ```typescript
-   * type T;
-   * const TCompare: Comparable<T>;
-   * const sorted = [3, 1, 1].sort(TCompare.compare);
-   * ```
-   * @category Comparator
-   */
-  compare(this: void, left: T, right: T): Ordering;
-}
-
 /**
  * Module interface for values that have total order
  */
-export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
-  /**
-   * "Less than or equal to" operator
-   *
-   * @example
-   * ```typescript
-   * type T;
-   * const TCompare: Comparable<T>;
-   * const smallerT: T;
-   * const greaterT: T;
-   * TCompare['<='](smallerT, smallerT); // true
-   * TCompare['<='](smallerT, greaterT); // true
-   * TCompare['<='](greaterT, smallerT); // false
-   * ```
-   * @category Comparator
-   */
-  '<='(this: void, left: T, right: T): boolean;
-
+export interface Comparable<T> extends ComparableInterface<T>, Equal<T> {
   /**
    * "Less than" operator
    *
@@ -57,7 +23,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
   '<'(this: void, left: T, right: T): boolean;
 
   /**
-   * "Greater than or equal to" operator
+   * "Less than or equal to" operator
    *
    * @example
    * ```typescript
@@ -65,13 +31,13 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * const TCompare: Comparable<T>;
    * const smallerT: T;
    * const greaterT: T;
-   * TCompare['>='](smallerT, smallerT); // true
-   * TCompare['>='](smallerT, greaterT); // false
-   * TCompare['>='](greaterT, smallerT); // true
+   * TCompare['<='](smallerT, smallerT); // true
+   * TCompare['<='](smallerT, greaterT); // true
+   * TCompare['<='](greaterT, smallerT); // false
    * ```
    * @category Comparator
    */
-  '>='(this: void, left: T, right: T): boolean;
+  '<='(this: void, left: T, right: T): boolean;
 
   /**
    * "Greater than" operator
@@ -91,7 +57,7 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
   '>'(this: void, left: T, right: T): boolean;
 
   /**
-   * "minimum" operator
+   * "Greater than or equal to" operator
    *
    * @example
    * ```typescript
@@ -99,11 +65,26 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
    * const TCompare: Comparable<T>;
    * const smallerT: T;
    * const greaterT: T;
-   * TCompare.min(smallerT, greaterT); // smallerT
+   * TCompare['>='](smallerT, smallerT); // true
+   * TCompare['>='](smallerT, greaterT); // false
+   * TCompare['>='](greaterT, smallerT); // true
    * ```
    * @category Comparator
    */
-  'min'(this: void, left: T, right: T): T;
+  '>='(this: void, left: T, right: T): boolean;
+
+  /**
+   * Clamp value between minValue and maxValue
+   *
+   * @example
+   * ```typescript
+   * type T;
+   * const TCompare: Comparable<T>;
+   * TCompare.clamp(value, min, max); // min if value < min, max if value > max, otherwise value itself
+   * ```
+   * @category Comparator
+   */
+  'clamp'(this: void, value: T, minValue: T, maxValue: T): T;
 
   /**
    * "maximum" operator
@@ -121,17 +102,36 @@ export interface Comparable<T> extends Equal<T>, ComparableInterface<T> {
   'max'(this: void, left: T, right: T): T;
 
   /**
-   * Clamp value between minValue and maxValue
+   * "minimum" operator
    *
    * @example
    * ```typescript
    * type T;
    * const TCompare: Comparable<T>;
-   * TCompare.clamp(value, min, max); // min if value < min, max if value > max, otherwise value itself
+   * const smallerT: T;
+   * const greaterT: T;
+   * TCompare.min(smallerT, greaterT); // smallerT
    * ```
    * @category Comparator
    */
-  'clamp'(this: void, value: T, minValue: T, maxValue: T): T;
+  'min'(this: void, left: T, right: T): T;
+}
+
+export interface ComparableInterface<T> {
+  /**
+   * Return an {@link Ordering} that represents comparison result
+   *
+   * @see {@link Order}
+   *
+   * @example
+   * ```typescript
+   * type T;
+   * const TCompare: Comparable<T>;
+   * const sorted = [3, 1, 1].sort(TCompare.compare);
+   * ```
+   * @category Comparator
+   */
+  compare(this: void, left: T, right: T): Ordering;
 }
 
 /**
@@ -156,21 +156,21 @@ export function Comparable<T>(properties: Comparable.Parameters<T>): Comparable<
   const min = (left: T, right: T) => (compare(left, right) <= 0 ? left : right);
   const max = (left: T, right: T) => (compare(left, right) > 0 ? left : right);
   return {
-    compare,
-    equals,
-    '==': equals,
     '!=': (left: T, right: T) => compare(left, right) !== 0,
     '<': (left: T, right: T) => compare(left, right) < 0,
     '<=': (left: T, right: T) => compare(left, right) <= 0,
+    '==': equals,
     '>': (left: T, right: T) => compare(left, right) > 0,
     '>=': (left: T, right: T) => compare(left, right) >= 0,
-    min,
-    max,
     'clamp': (value, minValue, maxValue) => min(max(value, minValue), maxValue),
+    compare,
+    equals,
+    max,
+    min,
   };
 }
 export namespace Comparable {
-  export type Parameters<T> = {
+  export interface Parameters<T> {
     compare: (left: T, right: T) => Ordering;
-  };
+  }
 }

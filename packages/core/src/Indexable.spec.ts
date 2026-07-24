@@ -1,21 +1,23 @@
-import { describe, it, expect, vi } from 'vitest';
 import type { Int } from '@w5s/core';
+
+import { describe, expect, it, vi } from 'vitest';
+
 import { Indexable } from './Indexable.js';
 
 describe(Indexable, () => {
   const anyIndexOf = vi.fn();
   const anyAt = vi.fn();
   const defaultIndexable = {
-    indexType: 'number' as const,
-    indexOf: anyIndexOf,
     at: anyAt,
+    indexOf: anyIndexOf,
+    indexType: 'number' as const,
   };
   const charIndexable = Indexable<string, number>({
-    indexType: 'number',
+    at: (index) => String.fromCodePoint(index),
     indexOf(value) {
       return value.codePointAt(0) as Int;
     },
-    at: (index) => String.fromCodePoint(index),
+    indexType: 'number',
   });
 
   describe('#at', () => {

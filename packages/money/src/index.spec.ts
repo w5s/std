@@ -1,15 +1,16 @@
-import { describe, expect, it } from 'vitest';
 import currencyData from 'currencies.json';
-import * as Module from './index.js';
+import { describe, expect, it } from 'vitest';
+
 import { configuration } from './configuration.js';
+import * as Module from './index.js';
 
 describe('module public API', () => {
   it('should return correct values', () => {
     expect(Module).toEqual(
       expect.objectContaining({
-        meta: expect.any(Object),
         configuration,
         Currency: expect.any(Function),
+        meta: expect.any(Object),
         Money: expect.any(Function),
       }),
     );

@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
+
 import { Currency } from './Currency.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
 
 describe('CurrencyRegistry', () => {
-  const anyCurrency = Currency({ name: 'TEST', code: 'TEST', symbol: 'T' });
+  const anyCurrency = Currency({ code: 'TEST', name: 'TEST', symbol: 'T' });
 
   describe('.getByCode() / .add()', () => {
     it('should store data', () => {

@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { toUint32Array } from './toUint32Array.js';
+import { describe, expect, it } from 'vitest';
+
 import { of } from './of.js';
+import { toUint32Array } from './toUint32Array.js';
 
 describe(toUint32Array, () => {
   it('should return a 0 based UUID', () => {

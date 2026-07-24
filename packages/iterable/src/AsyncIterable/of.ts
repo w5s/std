@@ -8,7 +8,7 @@
  * @category Constructor
  * @param values The values of the iterable
  */
-export function of<Value>(...values: Value[]): AsyncIterable<Value> {
+export function of<Value>(...values: Array<Value>): AsyncIterable<Value> {
   return {
     async* [Symbol.asyncIterator]() {
       for (const value of values) {

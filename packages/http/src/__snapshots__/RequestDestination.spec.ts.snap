@@ -25,11 +25,11 @@ exports[`RequestDestination > is an enum 1`] = `
   "__decode__": [Function],
   "__encode__": [Function],
   "__enumKeys__": [
-    "Empty",
     "Audio",
     "AudioWorklet",
     "Document",
     "Embed",
+    "Empty",
     "Font",
     "Frame",
     "Iframe",

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { hasInstance } from './hasInstance.js';
+
 import { empty } from './empty.js';
+import { hasInstance } from './hasInstance.js';
 
 describe(hasInstance, () => {
   it('should return true for Array', () => {

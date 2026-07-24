@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { from } from './from.js';
 import { None } from './None.js';
 

@@ -1,6 +1,7 @@
-import type { ByteSize } from './ByteSize.js';
 import type { ByteSizeFormat } from '../ByteSizeFormat.js';
-import { byteSizePrefixes, byteSizeFormatData } from '../ByteSizeFormat/data.js';
+import type { ByteSize } from './ByteSize.js';
+
+import { byteSizeFormatData, byteSizePrefixes } from '../ByteSizeFormat/data.js';
 import { defaultFormat } from './defaultFormat.js';
 
 export interface FormatOptions {

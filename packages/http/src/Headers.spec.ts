@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
+
 import { Headers } from './Headers.js';
-import { Headers as HeadersType } from './Headers/Headers.js';
 import { empty } from './Headers/empty.js';
+import { Headers as HeadersType } from './Headers/Headers.js';
 
 describe(Headers, () => {
   it('is an alias to functions', () => {

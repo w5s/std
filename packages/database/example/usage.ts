@@ -1,4 +1,4 @@
-import { sql, executeQuery, type Database } from '@w5s/database';
+import { type Database, executeQuery, sql } from '@w5s/database';
 import { Task } from '@w5s/task';
 
 interface User {
@@ -15,8 +15,8 @@ export function getUserById(client: Database, id: User['id']) {
 
 export async function main(): Promise<void> {
   const client: Database = {
-    databaseType: 'mysql',
     database: '',
+    databaseType: 'mysql',
     user: '',
   };
 

@@ -10,4 +10,4 @@
  * }
  * ```
  */
-export type Nullable<T = never> = null | undefined | T;
+export type Nullable<T = never> = null | T | undefined;

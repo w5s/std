@@ -1,4 +1,5 @@
 import { Ref } from '@w5s/core/dist/Ref.js';
+
 import { Client } from '../Client.js';
 
 export interface FakeClient<FetchFn extends Client['fetch']> extends Omit<Client, 'fetch'> {

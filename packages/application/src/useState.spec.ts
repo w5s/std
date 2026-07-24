@@ -1,5 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { Ref } from '@w5s/core';
+import { describe, expect, it } from 'vitest';
+
 import { useState } from './useState.js';
 
 describe(useState, () => {

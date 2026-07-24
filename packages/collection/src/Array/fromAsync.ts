@@ -1,4 +1,5 @@
 import type { Array } from '../Array.js';
+
 import { arrayFromAsync } from '../internal/arrayFromAsync.js';
 
 /**
@@ -16,8 +17,7 @@ import { arrayFromAsync } from '../internal/arrayFromAsync.js';
  * });// [0, 1, 2, 3, 4]
  * ```
  */
-export function fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<T | PromiseLike<T>>): Promise<Array<T>>;
-
+export function fromAsync<T>(iterableOrArrayLike: AsyncIterable<T> | Iterable<PromiseLike<T> | T>): Promise<Array<T>>;
 /**
  * Creates an array from an async iterator or iterable object.
  *

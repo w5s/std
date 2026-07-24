@@ -1,4 +1,5 @@
 import type { Seq as SeqInterface } from '../Seq.js';
+
 import { useSeqState } from '../internal/useSeqState.js';
 import { seqIterable } from './seqIterable.js';
 
@@ -14,12 +15,12 @@ export class Seq<T> implements SeqInterface<T> {
 
   * [Symbol.iterator]() {
     const seqState = useSeqState(this[seqIterable]);
-    const { resolvedValues, currentIterator } = seqState;
+    const { currentIterator, resolvedValues } = seqState;
     yield* resolvedValues;
 
     if (currentIterator !== undefined) {
       while (true) {
-        const { value, done } = currentIterator.next();
+        const { done, value } = currentIterator.next();
 
         if (done) {
           seqState.currentIterator = undefined;

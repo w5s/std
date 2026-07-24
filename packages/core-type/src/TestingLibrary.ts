@@ -1,25 +1,37 @@
 /* eslint-disable ts/no-unsafe-function-type */
 import type { Awaitable } from './Awaitable.js';
 
-export interface ExpectAssertionObject {
-  toBeLessThan: (anyValue: any) => void;
-  toBeGreaterThan: (anyValue: any) => void;
-  toBe: (anyValue: unknown) => void;
-  toEqual(expected: unknown): void;
-  toHaveProperty(property: string | (string | number)[], value: unknown): void;
-  toThrow(error: unknown): void;
-}
-
 export type ExpectAssertion = ExpectAssertionObject & {
   not: ExpectAssertionObject;
 };
 
+export interface ExpectAssertionObject {
+  toBe: (anyValue: unknown) => void;
+  toBeGreaterThan: (anyValue: any) => void;
+  toBeLessThan: (anyValue: any) => void;
+  toEqual(expected: unknown): void;
+  toHaveProperty(property: Array<number | string> | string, value: unknown): void;
+  toThrow(error: unknown): void;
+}
+
 export interface ExpectFunction {
   (value: unknown): ExpectAssertion & {
-    resolves: ExpectAssertion;
     rejects: ExpectAssertion;
+    resolves: ExpectAssertion;
   };
   fail: (message: string) => never;
+}
+
+export interface TestEachFunction {
+  <T extends [any] | Array<any>>(cases: ReadonlyArray<T>): TestEachFunctionReturn<T>;
+  <T extends ReadonlyArray<any>>(cases: ReadonlyArray<T>): TestEachFunctionReturn<ExtractEachCallbackArgs<T>>;
+  <T>(cases: ReadonlyArray<T>): TestEachFunctionReturn<Array<T>>;
+  (...args: [TemplateStringsArray, ...any]): TestEachFunctionReturn<Array<any>>;
+}
+
+export interface TestEachFunctionReturn<T extends Array<any>> {
+  (name: Function | string, fn: (...args: T) => Awaitable<void> /* , options?: number | TestCollectorOptions */): void;
+  (name: Function | string, /* , options: TestCollectorOptions, */ fn: (...args: T) => Awaitable<void>): void;
 }
 
 /**
@@ -30,23 +42,12 @@ export interface TestingLibrary {
     (description: string, fn: () => void): void;
     todo: (description: string, fn: () => void) => void;
   };
+  expect: ExpectFunction;
   it: {
     (description: string, fn: () => void): void;
-    todo: (description: string, fn: () => void) => void;
     each: TestEachFunction;
+    todo: (description: string, fn: () => void) => void;
   };
-  expect: ExpectFunction;
-}
-
-export interface TestEachFunctionReturn<T extends any[]> {
-  (name: string | Function, fn: (...args: T) => Awaitable<void> /* , options?: number | TestCollectorOptions */): void;
-  (name: string | Function, /* , options: TestCollectorOptions, */ fn: (...args: T) => Awaitable<void>): void;
-}
-export interface TestEachFunction {
-  <T extends any[] | [any]>(cases: ReadonlyArray<T>): TestEachFunctionReturn<T>;
-  <T extends ReadonlyArray<any>>(cases: ReadonlyArray<T>): TestEachFunctionReturn<ExtractEachCallbackArgs<T>>;
-  <T>(cases: ReadonlyArray<T>): TestEachFunctionReturn<T[]>;
-  (...args: [TemplateStringsArray, ...any]): TestEachFunctionReturn<any[]>;
 }
 
 type ExtractEachCallbackArgs<T extends ReadonlyArray<any>> = {

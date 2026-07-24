@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { zip } from './zip.js';
+import { describe, expect, it } from 'vitest';
+
 import { withIterable } from '../Testing.js';
 import { of } from './of.js';
+import { zip } from './zip.js';
 
 describe(zip, () => {
   const expectIterable = withIterable(expect);

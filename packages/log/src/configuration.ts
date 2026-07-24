@@ -1,6 +1,8 @@
 import { useConfiguration } from '@w5s/application';
-import { meta } from './meta.js';
+
 import type { LogHandler } from './LogHandler.js';
+
+import { meta } from './meta.js';
 
 export interface Configuration {
   /**

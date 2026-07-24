@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { None } from './None.js';
+
 import { isNone } from './isNone.js';
+import { None } from './None.js';
 
 describe('None', () => {
   it('should be an alias for undefined', () => {

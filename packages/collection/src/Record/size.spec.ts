@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { size } from './size.js';
+
 import { empty } from './empty.js';
+import { size } from './size.js';
 
 describe(size, () => {
   it('should return 0 for empty', () => {

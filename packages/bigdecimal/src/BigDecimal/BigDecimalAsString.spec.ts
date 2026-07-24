@@ -1,7 +1,8 @@
-import { describe } from 'vitest';
 import { describeAsString } from '@w5s/core/dist/Testing.js';
-import { BigDecimalAsString } from './BigDecimalAsString.js';
+import { describe } from 'vitest';
+
 import { BigDecimal } from './BigDecimal.js';
+import { BigDecimalAsString } from './BigDecimalAsString.js';
 
 describe('BigDecimalAsString', () => {
   describeAsString(BigDecimalAsString, () => [

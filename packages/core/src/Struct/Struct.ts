@@ -1,6 +1,7 @@
-import { compare } from '../String/compare.js';
 import type { Struct as TStruct } from '../Struct.js';
 import type { InspectFunction, InspectOptions } from '../Type.js';
+
+import { compare } from '../String/compare.js';
 
 const {
 
@@ -17,14 +18,14 @@ const defaultSort = (left: string | symbol, right: string | symbol) =>
 export const Struct = class Object {
   // Important : we name Object so it is shown as anonymous object in snapshot.
 
-  static create<T>(mod: TStruct.ModuleParameter<T>, properties: T): T {
-    return assign(new Struct(mod), properties);
-  }
-
   #module: TStruct.ModuleParameter<unknown>;
 
   protected constructor(mod: TStruct.ModuleParameter<any>) {
     this.#module = mod;
+  }
+
+  static create<T>(mod: TStruct.ModuleParameter<T>, properties: T): T {
+    return assign(new Struct(mod), properties);
   }
 
   /**

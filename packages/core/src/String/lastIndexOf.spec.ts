@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { lastIndexOf } from './lastIndexOf.js';
+
 import { Option } from '../Option.js';
+import { lastIndexOf } from './lastIndexOf.js';
 
 describe(lastIndexOf, () => {
   it('should return index of element', () => {

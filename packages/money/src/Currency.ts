@@ -1,7 +1,8 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
-import { CurrencyComparable } from './Currency/CurrencyComparable.js';
+
 import { Currency as CurrencyType } from './Currency/Currency.js';
 import { CurrencyAsString } from './Currency/CurrencyAsString.js';
+import { CurrencyComparable } from './Currency/CurrencyComparable.js';
 
 export type Currency = CurrencyType;
 

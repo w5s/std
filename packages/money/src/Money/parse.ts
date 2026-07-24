@@ -1,6 +1,9 @@
 import type { Option } from '@w5s/core';
+
 import { parse as bigDecimalParse } from '@w5s/bigdecimal/dist/BigDecimal/parse.js';
+
 import type { Money } from './Money.js';
+
 import { CurrencyRegistry } from '../CurrencyRegistry.js';
 import '../moneyFactory.all.js'; // Important : load well known currencies
 import { of } from './of.js';

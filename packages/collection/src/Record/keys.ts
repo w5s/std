@@ -1,6 +1,6 @@
 import type { RecordKey } from '../Record.js';
 
-const ownKeys = <Key extends RecordKey>(record: Record<Key, any>) => Reflect.ownKeys(record) as Key[];
+const ownKeys = <Key extends RecordKey>(record: Record<Key, any>) => Reflect.ownKeys(record) as Array<Key>;
 
 /**
  * Return an iterator over all keys

@@ -1,8 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { createDirectory } from './createDirectory.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
+import { createDirectory } from './createDirectory.js';
 
 describe(createDirectory, () => {
   const expectTask = withTask(expect);

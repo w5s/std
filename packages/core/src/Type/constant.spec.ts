@@ -1,16 +1,17 @@
 import { describe } from 'vitest';
-import { constant } from './constant.js';
-import { describeCodec, describeType } from '../Testing.js';
-import { Result } from '../Result.js';
+
 import { CodecError } from '../CodecError.js';
+import { Result } from '../Result.js';
+import { describeCodec, describeType } from '../Testing.js';
+import { constant } from './constant.js';
 
 describe(constant, () => {
   const subject = constant;
 
   describeType(subject('anyValue'), () => ({
-    typeName: 'anyValue',
     instances: ['anyValue' as const],
     notInstances: [null, 1, [1], ''],
+    typeName: 'anyValue',
   }));
   describeCodec(subject('anyValue'), () => ({
     decode: [
@@ -19,8 +20,8 @@ describe(constant, () => {
         'otherValue',
         Result.Error(
           new CodecError({
-            message: 'Cannot decode "otherValue" as anyValue',
             input: 'otherValue',
+            message: 'Cannot decode "otherValue" as anyValue',
           }),
         ),
       ],
@@ -38,8 +39,8 @@ describe(constant, () => {
         'otherValue',
         Result.Error(
           new CodecError({
-            message: 'Cannot decode "otherValue" as Symbol(anySymbol)',
             input: 'otherValue',
+            message: 'Cannot decode "otherValue" as Symbol(anySymbol)',
           }),
         ),
       ],
@@ -56,8 +57,8 @@ describe(constant, () => {
         undefined,
         Result.Error(
           new CodecError({
-            message: 'Cannot decode undefined as undefined',
             input: undefined,
+            message: 'Cannot decode undefined as undefined',
           }),
         ),
       ],

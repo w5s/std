@@ -13,9 +13,9 @@ import { InvariantError } from './InvariantError.js';
  * @param condition the predicate result
  * @param message an optional message for Error
  */
-export function invariant(condition: false, message?: string | null): never;
-export function invariant(condition: boolean, message?: string | null): asserts condition;
-export function invariant(condition: boolean, message?: string | null): asserts condition {
+export function invariant(condition: false, message?: null | string): never;
+export function invariant(condition: boolean, message?: null | string): asserts condition;
+export function invariant(condition: boolean, message?: null | string): asserts condition {
   if (!condition) {
     throw new InvariantError({ message: message ?? '' });
   }

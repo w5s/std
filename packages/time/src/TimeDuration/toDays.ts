@@ -1,7 +1,8 @@
+import type { TimeDuration } from './TimeDuration.js';
+
 // packages/time/src/TimeDuration/toDays.ts
 import { DAYS } from '../internal/constants.js';
 import { truncateIf } from '../internal/truncateIf.js';
-import type { TimeDuration } from './TimeDuration.js';
 
 /**
  * Converts a time duration to days.

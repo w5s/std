@@ -1,7 +1,8 @@
-import { describe, it, expect, afterAll } from 'vitest';
+import { Symbol } from '@w5s/core';
 import nodePath from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Symbol } from '@w5s/core';
+import { afterAll, describe, expect, it } from 'vitest';
+
 import { fsStub } from './fsStub.js';
 import { withFile } from './withFile.js';
 
@@ -11,7 +12,7 @@ describe('fsStub', () => {
   const fsContext = fsStub({
     cwd,
   });
-  const { path, mkdir, touch } = fsContext;
+  const { mkdir, path, touch } = fsContext;
   const expectFile = withFile(expect);
 
   afterAll(async () => {

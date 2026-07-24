@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { runInNewContext } from 'node:vm';
+import { describe, expect, it } from 'vitest';
+
 import { isError } from './isError.js';
 
 describe(isError, () => {
@@ -24,8 +25,8 @@ describe(isError, () => {
     expect(isError(obj)).toBe(false);
     expect(
       isError({
-        name: 'John',
         message: 'Hello',
+        name: 'John',
         stack: 'Some stack',
       }),
     ).toBe(false);

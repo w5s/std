@@ -1,5 +1,6 @@
 import type { Option } from '../Option.js';
 import type { Result } from '../Result.js';
+
 import { isError } from './isError.js';
 
 /**

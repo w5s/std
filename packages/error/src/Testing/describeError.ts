@@ -14,21 +14,21 @@ import type { TestingLibrary } from '@w5s/core-type';
  * @param testingLibrary Optional testing library to use. Automatically detects if not provided.
  */
 export function describeError(testingLibrary: TestingLibrary) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   return <Constructor extends abstract new (properties: any) => any>(
     subject: Constructor,
     spec: {
       defaultParameters: () => Constructor extends abstract new (properties: infer R) => any ? R : never;
 
       /**
-       * Expected error name
-       */
-      expectedName: string;
-
-      /**
        * Expected default message
        */
       expectedDefaultMessage: string;
+
+      /**
+       * Expected error name
+       */
+      expectedName: string;
     },
   ) => {
     describe('errorName', () => {

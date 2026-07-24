@@ -1,5 +1,5 @@
-/* eslint-disable ts/no-unused-vars */
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import * as Std from './index.js';
 
 describe('index', () => {
@@ -12,9 +12,8 @@ describe('index', () => {
         'Codec',
         'CodecError',
         'Comparable',
-        'Struct',
-        'Equal',
         'Enum',
+        'Equal',
         'identity',
         'ignore',
         'Indexable',
@@ -29,6 +28,7 @@ describe('index', () => {
         'Ref',
         'Result',
         'String',
+        'Struct',
         'Symbol',
         'Tag',
         'Type',
@@ -37,7 +37,9 @@ describe('index', () => {
   });
 
   it('exports types', () => {
+    // eslint-disable-next-line unused-imports/no-unused-vars
     type Bounded = Std.Bounded<any>;
+    // eslint-disable-next-line unused-imports/no-unused-vars
     type Numeric = Std.Numeric.Add<any>;
 
     expect(true).toBe(true);

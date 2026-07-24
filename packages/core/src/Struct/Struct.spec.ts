@@ -1,13 +1,14 @@
-import { describe, it, expect, vi } from 'vitest';
 import { inspect } from 'node:util';
-import { Struct } from './Struct.js';
-import { Type } from '../Type.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { Symbol } from '../Symbol.js';
+import { Type } from '../Type.js';
+import { Struct } from './Struct.js';
 
 describe(Struct, () => {
   const defaultProperties = {
-    typeName: 'Foo',
     hasInstance: vi.fn(),
+    typeName: 'Foo',
   };
   describe(Struct.create, () => {
     it('returns a new instance', () => {
@@ -27,7 +28,7 @@ describe(Struct, () => {
     });
     it('always have _ tag first', () => {
       const Foo = Type.define<{ _: string; foo: boolean }>(defaultProperties);
-      const instance = Struct.create(Foo, { foo: true, _: 'Toto' });
+      const instance = Struct.create(Foo, { _: 'Toto', foo: true });
       expect(inspect(instance)).toBe(`{ _: 'Toto', foo: true }`);
     });
     it('returns a custom representation when specified', () => {

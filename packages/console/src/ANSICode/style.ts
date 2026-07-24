@@ -9,14 +9,14 @@ export interface Style {
   color: Color;
 
   /**
-   * The font weight to apply to the string.
-   */
-  fontWeight: FontWeight;
-
-  /**
    * The font style to apply to the string.
    */
   fontStyle: FontStyle;
+
+  /**
+   * The font weight to apply to the string.
+   */
+  fontWeight: FontWeight;
 }
 
 const andThen =

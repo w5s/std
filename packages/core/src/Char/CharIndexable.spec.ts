@@ -1,7 +1,8 @@
 import { describe } from 'vitest';
+
+import { Char } from '../Char.js';
 import { describeIndexable } from '../Testing.js';
 import { CharIndexable } from './CharIndexable.js';
-import { Char } from '../Char.js';
 
 describe('CharIndexable', () => {
   describeIndexable(CharIndexable, {

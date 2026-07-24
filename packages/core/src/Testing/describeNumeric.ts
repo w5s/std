@@ -1,20 +1,22 @@
 import type { TestingLibrary } from '@w5s/core-type';
+
+import type { ComparableInterface } from '../Comparable.js';
+import type { EqualsInterface } from '../Equal.js';
 import type { Numeric } from '../Numeric.js';
+
 import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import { describeAdd } from './describeAdd.js';
-import { describeZero } from './describeZero.js';
 import { describeComparable } from './describeComparable.js';
-import type { ComparableInterface } from '../Comparable.js';
 import { describeMultiply } from './describeMultiply.js';
-import { describeSubtract } from './describeSubtract.js';
 import { describeSigned } from './describeSigned.js';
-import type { EqualsInterface } from '../Equal.js';
+import { describeSubtract } from './describeSubtract.js';
+import { describeZero } from './describeZero.js';
 
 export function describeNumeric<T>(
-  subject: Numeric.Numeric<T> & ComparableInterface<T> & EqualsInterface<T>,
+  subject: ComparableInterface<T> & EqualsInterface<T> & Numeric.Numeric<T>,
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { zero, one, negate } = subject;
+  const { negate, one, zero } = subject;
   const minusOne = () => negate(one());
 
   describeAdd(
@@ -31,9 +33,9 @@ export function describeNumeric<T>(
     subject,
     {
       values: () => [
-        { value: zero(), type: 'zero', sign: zero(), abs: zero() },
-        { value: one(), type: 'positive', sign: one(), abs: one() },
-        { value: minusOne(), type: 'negative', sign: minusOne(), abs: one() },
+        { abs: zero(), sign: zero(), type: 'zero', value: zero() },
+        { abs: one(), sign: one(), type: 'positive', value: one() },
+        { abs: one(), sign: minusOne(), type: 'negative', value: minusOne() },
       ],
     },
     testingLibrary,
@@ -61,12 +63,12 @@ export function describeNumeric<T>(
   describeComparable(
     subject,
     {
-      ordered: () => [minusOne(), zero(), one()],
       equivalent: () => [
         [one(), one()],
         [zero(), zero()],
         [minusOne(), minusOne()],
       ],
+      ordered: () => [minusOne(), zero(), one()],
     },
     testingLibrary,
   );

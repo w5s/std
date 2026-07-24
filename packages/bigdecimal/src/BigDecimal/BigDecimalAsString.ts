@@ -1,4 +1,5 @@
 import type { AsString } from '@w5s/core';
+
 import type { BigDecimal } from './BigDecimal.js';
 
 export const BigDecimalAsString: AsString<BigDecimal> = {
@@ -12,7 +13,7 @@ export const BigDecimalAsString: AsString<BigDecimal> = {
    * @param self
    */
   asString(self: BigDecimal): string {
-    const { value, scale } = self;
+    const { scale, value } = self;
     const valueString = String(value);
     const negative = value < 0n;
     const absolute = negative ? valueString.slice(1) : valueString;

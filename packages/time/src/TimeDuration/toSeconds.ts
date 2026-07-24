@@ -1,6 +1,7 @@
+import type { TimeDuration } from './TimeDuration.js';
+
 import { SECONDS } from '../internal/constants.js';
 import { truncateIf } from '../internal/truncateIf.js';
-import type { TimeDuration } from './TimeDuration.js';
 
 /**
  * Converts a time duration to seconds.

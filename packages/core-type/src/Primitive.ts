@@ -12,4 +12,4 @@
  *
  * @see https://developer.mozilla.org/en-US/docs/Glossary/Primitive
  */
-export type Primitive = string | number | symbol | bigint | boolean | null | undefined;
+export type Primitive = bigint | boolean | null | number | string | symbol | undefined;

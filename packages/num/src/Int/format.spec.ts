@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { format } from './format.js';
+
 import { Int } from '../Int.js';
+import { format } from './format.js';
 
 describe(format, () => {
   it('should return a valid string representation', () => {

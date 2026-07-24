@@ -10,6 +10,6 @@ import type { Array } from '../Array.js';
  * @category Constructor
  * @param items A set of items to include in the new array object.
  */
-export function of<Item>(...items: Item[]): Array<Item> {
+export function of<Item>(...items: Array<Item>): Array<Item> {
   return items;
 }

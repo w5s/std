@@ -1,8 +1,9 @@
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { readSymbolicLink } from './readSymbolicLink.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FilePath } from '../FilePath.js';
 import { Internal } from '../Internal.js';
+import { readSymbolicLink } from './readSymbolicLink.js';
 
 describe(readSymbolicLink, () => {
   const expectTask = withTask(expect);

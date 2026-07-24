@@ -1,23 +1,22 @@
-import React from 'react';
-import clsx from 'clsx';
-import styles from './styles.module.css';
-import { Def } from '../Def';
-import Stripes from '@site/static/img/stripes.svg';
 import Circle from '@site/static/img/circle.svg';
+import Feather from '@site/static/img/feather.svg';
 import Infinity from '@site/static/img/infinity.svg';
 import Jewel from '@site/static/img/jewel.svg';
-import Feather from '@site/static/img/feather.svg';
+import Stripes from '@site/static/img/stripes.svg';
+import clsx from 'clsx';
+import React from 'react';
 
-type FeatureItem = {
-  title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+import { Def } from '../Def';
+import styles from './styles.module.css';
+
+interface FeatureItem {
   description: React.ReactNode;
-};
+  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  title: string;
+}
 
-const FeatureList: FeatureItem[] = [
+const FeatureList: Array<FeatureItem> = [
   {
-    title: 'Standardized',
-    Svg: Stripes,
     description: (
       <>
         Standardized code and conventions for high productivity
@@ -36,10 +35,10 @@ const FeatureList: FeatureItem[] = [
         </em>
       </>
     ),
+    Svg: Stripes,
+    title: 'Standardized',
   },
   {
-    title: 'Simple',
-    Svg: Circle,
     description: (
       <>
         Functional programming, done simple.
@@ -62,10 +61,10 @@ const FeatureList: FeatureItem[] = [
         </em>
       </>
     ),
+    Svg: Circle,
+    title: 'Simple',
   },
   {
-    title: 'Stable',
-    Svg: Infinity,
     description: (
       <>
         Fight framework obsolescence !
@@ -84,10 +83,10 @@ const FeatureList: FeatureItem[] = [
         </em>
       </>
     ),
+    Svg: Infinity,
+    title: 'Stable',
   },
   {
-    title: 'Safe',
-    Svg: Jewel,
     description: (
       <>
         One ambitious goal : 0 bug in production
@@ -106,10 +105,10 @@ const FeatureList: FeatureItem[] = [
         </em>
       </>
     ),
+    Svg: Jewel,
+    title: 'Safe',
   },
   {
-    title: 'Slim',
-    Svg: Feather,
     description: (
       <>
         Because CI performances and environment matters
@@ -131,6 +130,8 @@ const FeatureList: FeatureItem[] = [
         </em>
       </>
     ),
+    Svg: Feather,
+    title: 'Slim',
   },
 ];
 
@@ -140,20 +141,6 @@ const renderTitle = (value: string) => (
     {value.slice(1)}
   </>
 );
-
-function Feature({ title, Svg, description }: FeatureItem) {
-  return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center padding--md">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{renderTitle(title)}</h3>
-        <p>{description}</p>
-      </div>
-    </div>
-  );
-}
 
 export function HomepageFeatures(): React.JSX.Element {
   return (
@@ -166,5 +153,19 @@ export function HomepageFeatures(): React.JSX.Element {
         </div>
       </div>
     </section>
+  );
+}
+
+function Feature({ description, Svg, title }: FeatureItem) {
+  return (
+    <div className={clsx('col col--4')}>
+      <div className="text--center padding--md">
+        <Svg className={styles.featureSvg} role="img" />
+      </div>
+      <div className="text--center padding-horiz--md">
+        <h3>{renderTitle(title)}</h3>
+        <p>{description}</p>
+      </div>
+    </div>
   );
 }

@@ -8,8 +8,8 @@ exports[`RequestRedirect > is an enum 1`] = `
   "__decode__": [Function],
   "__encode__": [Function],
   "__enumKeys__": [
-    "Follow",
     "Error",
+    "Follow",
     "Manual",
   ],
   "__inspect__": undefined,

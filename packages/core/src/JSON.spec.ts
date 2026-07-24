@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { JSON } from './JSON.js';
 import { Result } from './Result.js';
 

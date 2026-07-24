@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { reverse } from './reverse.js';
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { reverse } from './reverse.js';
 
 describe(reverse, () => {
   it('should return unchanged if empty', () => {

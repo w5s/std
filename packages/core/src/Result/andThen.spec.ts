@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Result } from '../Result.js';
 import { andThen } from './andThen.js';
 import { Error } from './Error.js';

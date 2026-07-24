@@ -1,14 +1,15 @@
-import { describe, expect, it } from 'vitest';
 import { Int } from '@w5s/core';
 import { describeType } from '@w5s/core/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { Currency } from './Currency.js';
 
 describe(Currency, () => {
   const anyProperties = {
+    code: 'EUR',
     name: 'Name',
     namePlural: 'Name plural',
     precision: Int(2),
-    code: 'EUR',
     rounding: Int(0),
     symbol: '$',
     symbolNative: '$',
@@ -21,13 +22,13 @@ describe(Currency, () => {
   };
 
   describeType(Currency, () => ({
-    typeName: 'Currency',
-    instances: [Currency.create(anyProperties), { _: 'Currency' as const, ...anyProperties }],
-    notInstances: [],
     inspect: [
       [Currency.create({ ...anyProperties, code: 'EUR' }), 'EUR'],
       [Currency.create({ ...anyProperties, code: 'USD' }), 'USD'],
     ],
+    instances: [Currency.create(anyProperties), { _: 'Currency' as const, ...anyProperties }],
+    notInstances: [],
+    typeName: 'Currency',
   }));
 
   it('should initialize Currency', () => {

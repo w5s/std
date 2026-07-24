@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { drop } from './drop.js';
+import { describe, expect, it } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { drop } from './drop.js';
 import { of } from './of.js';
 
 describe(drop, () => {

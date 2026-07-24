@@ -1,26 +1,29 @@
-import { createRequire } from 'node:module';
 import type { Database } from 'sqlite3';
-import { SQLStatement } from '../sql.js';
+
+import { createRequire } from 'node:module';
+
 import type { AbstractDatabase } from '../client.js';
+
 import { DatabaseDriver } from '../driver.js';
+import { SQLStatement } from '../sql.js';
 
 const require = createRequire(import.meta.url);
-type SQLite3Module = {
+export interface SQLite3Client extends AbstractDatabase<'sqlite3'> {
+  filename: string;
+}
+
+interface SQLite3Module {
   Database: new (filename: string) => Database;
-};
+}
 
 function sqlite3SQLStatement(statement: SQLStatement) {
   return {
+    params: statement.values,
     sql: SQLStatement.format(statement, {
       formatValue: () => '?',
 
     }).replace(/UNIX_TIMESTAMP\(\)/, "strftime('%s','now')"),
-    params: statement.values,
   };
-}
-
-export interface SQLite3Client extends AbstractDatabase<'sqlite3'> {
-  filename: string;
 }
 export const SQLite3 = {
   createDatabase(filename: string) {
@@ -30,7 +33,7 @@ export const SQLite3 = {
   ...DatabaseDriver.Make(
     'sqlite3',
     async (sqlite3Client: SQLite3Client, sqlStatement: SQLStatement): Promise<unknown> => {
-      const { sql, params } = sqlite3SQLStatement(sqlStatement);
+      const { params, sql } = sqlite3SQLStatement(sqlStatement);
       const database = SQLite3.createDatabase(sqlite3Client.filename);
       const queryResultPromise = new Promise((resolve, reject) => {
         database.all(sql, params, (error, result) => (error == null ? resolve(result) : reject(error)));

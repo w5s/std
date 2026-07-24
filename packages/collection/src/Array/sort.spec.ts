@@ -1,7 +1,9 @@
-import { describe, it, expect } from 'vitest';
 import type { Ordering } from '@w5s/core';
-import { sort } from './sort.js';
+
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { sort } from './sort.js';
 
 describe(sort, () => {
   const compare = (a: number, b: number): Ordering => (a === b ? 0 : a < b ? -1 : 1);

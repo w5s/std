@@ -1,4 +1,5 @@
 import type { Enum } from '../Enum.js';
+
 import { keys } from './keys.js';
 
 /**

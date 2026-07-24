@@ -1,6 +1,6 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
+import TabItem from '@theme/TabItem';
+import Tabs from '@theme/Tabs';
 
 export interface PackageInstallBlockProps {
   packageName: string;
@@ -9,8 +9,8 @@ export interface PackageInstallBlockProps {
 export function PackageInstallBlock({ packageName }: PackageInstallBlockProps) {
   return (
     <Tabs
-      groupId="package-manager"
       defaultValue="yarn"
+      groupId="package-manager"
       values={[
         { label: 'yarn', value: 'yarn' },
         { label: 'pnpm', value: 'pnpm' },

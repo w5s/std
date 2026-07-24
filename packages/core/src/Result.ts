@@ -1,16 +1,16 @@
-import { Ok } from './Result/Ok.js';
+import { andThen } from './Result/andThen.js';
 import { Error } from './Result/Error.js';
-import { isOk } from './Result/isOk.js';
-import { isError } from './Result/isError.js';
-import { map } from './Result/map.js';
 import { get } from './Result/get.js';
 import { getError } from './Result/getError.js';
 import { getOrElse } from './Result/getOrElse.js';
-import { mapError } from './Result/mapError.js';
 import { getOrThrow } from './Result/getOrThrow.js';
-import { andThen } from './Result/andThen.js';
-import { orElse } from './Result/orElse.js';
 import { hasInstance } from './Result/hasInstance.js';
+import { isError } from './Result/isError.js';
+import { isOk } from './Result/isOk.js';
+import { map } from './Result/map.js';
+import { mapError } from './Result/mapError.js';
+import { Ok } from './Result/Ok.js';
+import { orElse } from './Result/orElse.js';
 import { tryCall } from './Result/tryCall.js';
 
 // https://doc.rust-lang.org/std/result/enum.Result.html
@@ -44,15 +44,14 @@ import { tryCall } from './Result/tryCall.js';
  * @param Value the type of value in case of `Ok`
  * @param Error the type of error in case of `Error`
  */
-export type Result<Value, Error> = Result.Ok<Value> | Result.Error<Error>;
+export type Result<Value, Error> = Result.Error<Error> | Result.Ok<Value>;
 
 /**
  * @namespace
  */
 export const Result = {
-  Ok,
-  Error,
   andThen,
+  Error,
   get,
   getError,
   getOrElse,
@@ -62,11 +61,24 @@ export const Result = {
   isOk,
   map,
   mapError,
+  Ok,
   orElse,
   tryCall,
 };
 
 export namespace Result {
+  export interface Error<E> {
+    /**
+     * The error value
+     */
+    readonly error: E;
+
+    /**
+     * `false` only for Error objects
+     */
+    readonly ok: false;
+  }
+
   export interface Ok<V> {
     /**
      * `true` only for Ok objects
@@ -77,17 +89,5 @@ export namespace Result {
      * The success value
      */
     readonly value: V;
-  }
-
-  export interface Error<E> {
-    /**
-     * `false` only for Error objects
-     */
-    readonly ok: false;
-
-    /**
-     * The error value
-     */
-    readonly error: E;
   }
 }

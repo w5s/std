@@ -1,16 +1,24 @@
 import type { Codec, JSONValue } from '@w5s/core';
 import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
-import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
+
 import { decode } from '@w5s/core/dist/Codec/decode.js';
 import { mapError } from '@w5s/core/dist/Result/mapError.js';
-import { HTTPError } from './HTTPError.js';
-import type { Response } from './Response.js';
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import { mapResult } from '@w5s/task/dist/Task/mapResult.js';
+
 import type { BodyReader } from './BodyReader.js';
+import type { Response } from './Response.js';
+
+import { HTTPError } from './HTTPError.js';
+
+/**
+ * A transformation function taking an {@link Response} as input
+ */
+export type ResponseParser<Value> = (response: Response<BodyReader>) => Task<Value, HTTPError.ParserError>;
 
 function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponseParser<V> {
   return (response) =>
-    taskFrom(async ({ resolve, reject }) => {
+    taskFrom(async ({ reject, resolve }) => {
       try {
         resolve(await fn(response));
       } catch (error: unknown) {
@@ -21,13 +29,6 @@ function from<V>(fn: (response: Response<BodyReader>) => Promise<V>): ResponsePa
         );
       }
     });
-}
-
-/**
- * A transformation function taking an {@link Response} as input
- */
-export interface ResponseParser<Value> {
-  (response: Response<BodyReader>): Task<Value, HTTPError.ParserError>;
 }
 
 /**
@@ -46,6 +47,19 @@ export const ResponseParser = {
    * ```
    */
   arrayBuffer: from<ArrayBuffer>((response) => response.body.unsafeArrayBuffer()),
+
+  /**
+   * Blob response parser
+   *
+   * @example
+   * ```typescript
+   * const request = requestSend({
+   *   url: 'http://localhost',
+   * });
+   * const body = Task.andThen(request, HTTPParser.blob); // Task<Blob, HTTPError>
+   * ```
+   */
+  blob: from<Blob>((response) => response.body.unsafeBlob()),
 
   /**
    * FormData response parser
@@ -85,19 +99,6 @@ export const ResponseParser = {
               : result,
           );
   },
-
-  /**
-   * Blob response parser
-   *
-   * @example
-   * ```typescript
-   * const request = requestSend({
-   *   url: 'http://localhost',
-   * });
-   * const body = Task.andThen(request, HTTPParser.blob); // Task<Blob, HTTPError>
-   * ```
-   */
-  blob: from<Blob>((response) => response.body.unsafeBlob()),
 
   /**
    * Text response parser

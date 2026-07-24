@@ -1,4 +1,5 @@
 import type { Option, OptionLike } from '../Option.js';
+
 import { isNone } from './isNone.js';
 
 /**

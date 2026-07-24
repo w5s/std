@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { deleteAt } from './deleteAt.js';
 import { empty } from './empty.js';
 

@@ -1,9 +1,12 @@
 import type { Task } from '@w5s/task';
+
 import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
-import { randomUUID } from '@w5s/uuid';
 import { now as timeNow } from '@w5s/time/dist/Time/now.js';
+import { randomUUID } from '@w5s/uuid';
+
 import type { LogLevelParameters } from '../level.js';
 import type { LogRecord } from '../LogRecord.js';
+
 import { handle } from './handle.js';
 
 export interface LogSendFunction {
@@ -34,9 +37,9 @@ export function sendWith(domain: LogRecord['domain']): LogSendFunction {
         taskThen(timeNow(), (now) => {
           const initialRecord: LogRecord = {
             _: 'LogRecord',
-            id: uuid,
-            domain,
             created: now,
+            domain,
+            id: uuid,
             ...parameters,
           };
           return handle(initialRecord);

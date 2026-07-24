@@ -1,12 +1,11 @@
-import type { Bounded, Int, Codec, Option, Ordering } from '@w5s/core';
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
+import type { Bounded, Codec, Int, Option, Ordering } from '@w5s/core';
+
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
+import { Struct } from '@w5s/core/dist/Struct.js';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { compare as numberCompare } from '@w5s/num/dist/Number/compare.js';
-
-export type IPv4Address = Int;
 
 /**
  * IPv4 string type
@@ -15,9 +14,14 @@ export interface IPv4 extends Struct<{
   [Struct.type]: 'IPv4';
   ipv4: IPv4Address;
 }> {}
+
+export type IPv4Address = Int;
 const IPv4Type = Struct.define<IPv4>({ typeName: 'IPv4' });
 
 const IPv4Format = {
+  format({ ipv4 }: IPv4): string {
+    return `${(ipv4 >>> 24) & 0xFF}.${(ipv4 >>> 16) & 0xFF}.${(ipv4 >>> 8) & 0xFF}.${ipv4 & 0xFF}`;
+  },
   parse(expression: string): Option<IPv4> {
     const parts = expression.split('.');
 
@@ -37,14 +41,10 @@ const IPv4Format = {
     }
     return undefined;
   },
-  format({ ipv4 }: IPv4): string {
-    return `${(ipv4 >>> 24) & 0xFF}.${(ipv4 >>> 16) & 0xFF}.${(ipv4 >>> 8) & 0xFF}.${ipv4 & 0xFF}`;
-  },
 };
 
 const IPv4Codec: Codec<IPv4> = {
-  [Symbol.encode]: (input) => IPv4Format.format(input),
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     if (typeof input === 'string') {
       const parsed = IPv4Format.parse(input);
       if (parsed != null) {
@@ -53,11 +53,16 @@ const IPv4Codec: Codec<IPv4> = {
     }
     return error(input, 'IPv4');
   },
+  [Symbol.encode]: (input) => IPv4Format.format(input),
   [Symbol.schema]: () => ({
-    type: 'string',
     format: 'ipv4',
+    type: 'string',
   }),
 };
+
+function compare(left: IPv4, right: IPv4): Ordering {
+  return numberCompare(left.ipv4 >>> 0, right.ipv4 >>> 0);
+}
 
 function fromNumber(value: number): IPv4 {
   return IPv4Type({ ipv4: (value & 0xFF_FF_FF_FF) as IPv4Address });
@@ -67,23 +72,19 @@ function of(_0: number, _1: number, _2: number, _3: number) {
   return IPv4Type({ ipv4: ((_0 << 24) | (_1 << 16) | (_2 << 8) | _3) as IPv4Address });
 }
 
-function compare(left: IPv4, right: IPv4): Ordering {
-  return numberCompare(left.ipv4 >>> 0, right.ipv4 >>> 0);
-}
-
 const IPv4Comparable = Comparable<IPv4>({
   compare,
 });
 
 const IPv4Bounded: Bounded<IPv4> = {
-  minValue: fromNumber(0),
   maxValue: fromNumber(0xFF_FF_FF_FF),
+  minValue: fromNumber(0),
 };
 
 const IPv4Indexable = Indexable({
-  indexType: 'number',
   at: (index) => fromNumber(index),
   indexOf: (value) => value.ipv4,
+  indexType: 'number',
 });
 
 const any = of(0, 0, 0, 0);
@@ -106,11 +107,11 @@ export const IPv4 = Callable({
   ...IPv4Comparable,
   ...IPv4Bounded,
   ...IPv4Indexable,
-  fromNumber,
-  of,
   any,
-  localhost,
-  loopback,
   broadcast,
   [Callable.symbol]: fromNumber,
+  fromNumber,
+  localhost,
+  loopback,
+  of,
 });

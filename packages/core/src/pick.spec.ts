@@ -1,13 +1,14 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { pick } from './pick.js';
 
 describe(pick, () => {
   it('returns a new object without specified keys', async () => {
-    const original = { foo: true, bar: true, baz: true };
+    const original = { bar: true, baz: true, foo: true };
     const picked = pick(original, ['foo']);
 
     expect(picked).toEqual({ foo: true });
-    expect(original).toEqual({ foo: true, bar: true, baz: true });
+    expect(original).toEqual({ bar: true, baz: true, foo: true });
   });
 
   it('handles multiple keys', async () => {
@@ -20,11 +21,11 @@ describe(pick, () => {
 
   it('handles symbol keys', async () => {
     const $symbol = Symbol('test');
-    const original = { a: 1, [$symbol]: 2 };
+    const original = { [$symbol]: 2, a: 1 };
     const picked = pick(original, [$symbol]);
 
     expect(picked).toEqual({ [$symbol]: 2 });
-    expect(original).toEqual({ a: 1, [$symbol]: 2 });
+    expect(original).toEqual({ [$symbol]: 2, a: 1 });
   });
 
   it("handles keys that don't exist in the object", async () => {

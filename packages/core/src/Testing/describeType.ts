@@ -1,7 +1,9 @@
 import { inspect } from 'node:util';
+
 import type { Type } from '../Type.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * @example
@@ -23,25 +25,25 @@ import type { TestingLibrary } from './type.js';
 export function describeType<S extends Type<any>>(
   subject: S,
   properties: (subject: S) => {
-    typeName: string;
+    inspect?: Array<[instance: S extends Type<infer T> ? T : never, expected: string]>;
     instances: Array<S extends Type<infer T> ? T : never>;
     notInstances: Array<unknown>;
-    inspect?: Array<[instance: S extends Type<infer T> ? T : never, expected: string]>;
+    typeName: string;
   },
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   const {
-    typeName,
+    inspect: inspectDefault = [],
     instances: instancesDefault,
     notInstances: notInstancesDefault,
-    inspect: inspectDefault = [],
+    typeName,
   } = properties(subject);
   const instances = () => instancesDefault.map((instance) => ({ instance }));
   const notInstances = () => notInstancesDefault.map((instance) => ({ instance }));
   const fromData = [
-    ...instancesDefault.map((_) => ({ value: _, expected: _ })),
-    ...notInstancesDefault.map((_) => ({ value: _, expected: undefined })),
+    ...instancesDefault.map((_) => ({ expected: _, value: _ })),
+    ...notInstancesDefault.map((_) => ({ expected: undefined, value: _ })),
   ];
 
   describe('typeName', () => {
@@ -60,7 +62,7 @@ export function describeType<S extends Type<any>>(
   });
 
   (fromData.length === 0 ? describe.todo : describe)('asInstance', () => {
-    it.each(fromData)('($value) returns $expected', ({ value, expected }) => {
+    it.each(fromData)('($value) returns $expected', ({ expected, value }) => {
       expect(subject.asInstance(value)).toEqual(expected);
     });
   });

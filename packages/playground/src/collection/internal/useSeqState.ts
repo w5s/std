@@ -3,10 +3,10 @@ const state = new WeakMap<Iterable<unknown>, ReturnType<typeof useSeqState<any>>
 /**
  * @internal
  */
-export type SeqState<T> = {
-  resolvedValues: Array<T>;
+export interface SeqState<T> {
   currentIterator: Iterator<T> | undefined;
-};
+  resolvedValues: Array<T>;
+}
 
 /**
  * @param iterable
@@ -16,8 +16,8 @@ export type SeqState<T> = {
 export function useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
   if (typeof iterable === 'string') {
     return {
-      resolvedValues: [...iterable],
       currentIterator: undefined,
+      resolvedValues: [...iterable],
     };
   }
 
@@ -25,12 +25,12 @@ export function useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
   if (returnValue === undefined) {
     returnValue = Array.isArray(iterable)
       ? {
-          resolvedValues: iterable as Array<T>,
           currentIterator: undefined,
+          resolvedValues: iterable as Array<T>,
         }
       : {
-          resolvedValues: [],
           currentIterator: iterable[Symbol.iterator](),
+          resolvedValues: [],
         };
     state.set(iterable, returnValue);
   }

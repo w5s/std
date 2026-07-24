@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { isPromiseLike } from './isPromiseLike.js';
 
 describe('isPromiseLike()', () => {

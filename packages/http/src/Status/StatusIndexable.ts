@@ -1,7 +1,9 @@
-import { lazy } from '@w5s/core/dist/lazy.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
-import * as StatusAll from './status.all.js';
+import { lazy } from '@w5s/core/dist/lazy.js';
+
 import type { Status } from './Status.js';
+
+import * as StatusAll from './status.all.js';
 
 const indexByCode = lazy(() => {
   const returnValue = new Map<number, Status>();
@@ -12,7 +14,6 @@ const indexByCode = lazy(() => {
 });
 
 export const StatusIndexable = Indexable({
-  indexType: 'number',
   at(code) {
     return (
       indexByCode().get(code) ?? {
@@ -24,4 +25,5 @@ export const StatusIndexable = Indexable({
   indexOf(status) {
     return status.statusCode;
   },
+  indexType: 'number',
 });

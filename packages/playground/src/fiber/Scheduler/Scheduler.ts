@@ -1,9 +1,12 @@
 import type { Option } from '@w5s/core';
+
 import { defer } from '@w5s/async/dist/defer.js';
-import { FiberId } from '../FiberId.js';
-import type { SchedulerFiberState } from './SchedulerFiberState.js';
+
 import type { FiberCallback } from '../FiberCallback.js';
 import type { FiberResult } from '../FiberResult.js';
+import type { SchedulerFiberState } from './SchedulerFiberState.js';
+
+import { FiberId } from '../FiberId.js';
 import {
   cancelScheduledCallback,
   requestScheduledCallback,
@@ -13,21 +16,8 @@ import {
 
 export class Scheduler {
   #currentId = FiberId(1);
-  #fiber: Map<FiberId, SchedulerFiberState> = new Map();
+  #fiber = new Map<FiberId, SchedulerFiberState>();
   #timerId: Option<ScheduledRequestId>;
-
-  spawn(callback: FiberCallback): FiberResult<any> {
-    const id = this.nextId();
-    const deferred = defer();
-    this.#fiber.set(id, {
-      id,
-      callback,
-      running: false,
-      generator: undefined,
-      deferred,
-    });
-    return { id, promise: deferred.promise };
-  }
 
   resume(id: FiberId): void {
     this.modifyState(id, (state) =>
@@ -38,6 +28,19 @@ export class Scheduler {
             running: true,
           },
     );
+  }
+
+  spawn(callback: FiberCallback): FiberResult<any> {
+    const id = this.nextId();
+    const deferred = defer();
+    this.#fiber.set(id, {
+      callback,
+      deferred,
+      generator: undefined,
+      id,
+      running: false,
+    });
+    return { id, promise: deferred.promise };
   }
 
   suspend(id: FiberId): void {
@@ -57,6 +60,16 @@ export class Scheduler {
       return true;
     }
     return false;
+  }
+
+  protected generator(fiber: SchedulerFiberState) {
+    const { callback } = fiber;
+    let { generator } = fiber;
+    if (generator === undefined) {
+      generator = callback();
+      this.modifyState(fiber.id, (state) => ({ ...state, generator }));
+    }
+    return generator;
   }
 
   protected getCycleDeadline() {
@@ -80,28 +93,11 @@ export class Scheduler {
     return false;
   }
 
-  protected onStateChange(previous: SchedulerFiberState, next: SchedulerFiberState): void {
-    if (previous.running !== next.running) {
-      this.scheduleNext();
-    }
-  }
-
   protected nextId(): FiberId {
     const currentId = this.#currentId;
     // @ts-ignore we know what we are doing
     this.#currentId += 1;
     return currentId;
-  }
-
-  protected scheduleNext() {
-    const countActive = this.#fiber.size;
-    if (countActive > 0) {
-      if (this.#timerId === undefined) {
-        this.#timerId = requestScheduledCallback(this.onCycle, this.getCycleDeadline());
-      }
-    } else if (this.#timerId !== undefined) {
-      cancelScheduledCallback(this.#timerId);
-    }
   }
 
   protected onCycle: ScheduledRequestCallback = (deadline) => {
@@ -129,14 +125,15 @@ export class Scheduler {
     this.scheduleNext();
   };
 
-  protected generator(fiber: SchedulerFiberState) {
-    const { callback } = fiber;
-    let { generator } = fiber;
-    if (generator === undefined) {
-      generator = callback();
-      this.modifyState(fiber.id, (state) => ({ ...state, generator }));
+  protected onStateChange(previous: SchedulerFiberState, next: SchedulerFiberState): void {
+    if (previous.running !== next.running) {
+      this.scheduleNext();
     }
-    return generator;
+  }
+
+  protected reject(fiber: SchedulerFiberState, error: any): void {
+    this.#fiber.delete(fiber.id);
+    fiber.deferred.reject(error);
   }
 
   protected resolve(fiber: SchedulerFiberState, value: any): void {
@@ -144,8 +141,14 @@ export class Scheduler {
     fiber.deferred.resolve(value);
   }
 
-  protected reject(fiber: SchedulerFiberState, error: any): void {
-    this.#fiber.delete(fiber.id);
-    fiber.deferred.reject(error);
+  protected scheduleNext() {
+    const countActive = this.#fiber.size;
+    if (countActive > 0) {
+      if (this.#timerId === undefined) {
+        this.#timerId = requestScheduledCallback(this.onCycle, this.getCycleDeadline());
+      }
+    } else if (this.#timerId !== undefined) {
+      cancelScheduledCallback(this.#timerId);
+    }
   }
 }

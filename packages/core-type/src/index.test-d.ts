@@ -1,4 +1,4 @@
-/* eslint-disable ts/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-imports */
 
 // Test import
 import type {

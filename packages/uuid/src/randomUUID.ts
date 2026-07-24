@@ -1,6 +1,9 @@
 import type { Task } from '@w5s/task';
+
 import { from } from '@w5s/task/dist/Task/from.js';
+
 import type { UUID } from './UUID.js';
+
 import { configuration } from './configuration.js';
 
 /**

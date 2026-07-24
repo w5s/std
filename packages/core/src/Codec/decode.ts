@@ -1,13 +1,10 @@
 import type { Codec } from '../Codec.js';
 import type { Result } from '../Result.js';
-import { Error } from '../Result/Error.js';
-import { Ok } from '../Result/Ok.js';
-import { CodecError } from '../CodecError.js';
 import type { Symbol } from '../Symbol.js';
 
-function inspect(anyValue: unknown) {
-  return typeof anyValue === 'string' ? `"${anyValue}"` : String(anyValue);
-}
+import { CodecError } from '../CodecError.js';
+import { Error } from '../Result/Error.js';
+import { Ok } from '../Result/Ok.js';
 
 /**
  * Returns a `Result` containing the decoded `input`
@@ -23,13 +20,17 @@ function inspect(anyValue: unknown) {
  */
 export function decode<T>(codec: Pick<Codec<T>, Symbol.decode>, input: unknown): Result<T, CodecError> {
   return codec.__decode__(input, {
-    ok: Ok as Codec.Context<T>['ok'],
     error: (inputError, asType) =>
       Error(
         new CodecError({
-          message: `Cannot decode ${inspect(inputError)}${asType == null ? '' : ` as ${asType}`}`,
           input: inputError,
+          message: `Cannot decode ${inspect(inputError)}${asType == null ? '' : ` as ${asType}`}`,
         }),
       ),
+    ok: Ok as Codec.Context<T>['ok'],
   });
+}
+
+function inspect(anyValue: unknown) {
+  return typeof anyValue === 'string' ? `"${anyValue}"` : String(anyValue);
 }

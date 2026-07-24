@@ -1,8 +1,9 @@
 import { Int, Symbol } from '@w5s/core';
-import { describe, expect, it, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { randomInt } from './randomInt.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { next } from './Random/next.js';
+import { randomInt } from './randomInt.js';
 import { fakeRandomGenerator } from './Testing.js';
 
 describe('randomInt', () => {
@@ -15,11 +16,11 @@ describe('randomInt', () => {
     expectTask(task).toResolveSync(-8);
   });
   it.each([
-    [{ genValue: 0, min: Int(-2), max: Int(2) }, -2],
-    [{ genValue: 0.5, min: Int(-2), max: Int(2) }, 0],
-    [{ genValue: 0.8, min: Int(-2), max: Int(2) }, 1],
-    [{ genValue: 1, min: Int(-2), max: Int(2) }, 2],
-  ])('should return correct bounded values %s', async ({ genValue, min, max }, expected) => {
+    [{ genValue: 0, max: Int(2), min: Int(-2) }, -2],
+    [{ genValue: 0.5, max: Int(2), min: Int(-2) }, 0],
+    [{ genValue: 0.8, max: Int(2), min: Int(-2) }, 1],
+    [{ genValue: 1, max: Int(2), min: Int(-2) }, 2],
+  ])('should return correct bounded values %s', async ({ genValue, max, min }, expected) => {
     const gen = fakeRandomGenerator(() => genValue);
     const genNum = randomInt(min, max, gen);
     expectTask(genNum).toResolveSync(expected);

@@ -1,24 +1,25 @@
 import { BigDecimal, type BigDecimalString } from '@w5s/bigdecimal';
-import { describe, it, expect } from 'vitest';
 import { Result } from '@w5s/core';
 import { ArgumentError } from '@w5s/error';
-import { Money } from './Money.js';
+import { describe, expect, it } from 'vitest';
+
 import { Currency } from '../Currency/Currency.js';
+import { Money } from './Money.js';
 import { MoneyNumeric } from './MoneyNumeric.js';
 
 describe('MoneyNumeric', () => {
   const currencyEuro = Currency({
-    name: 'Euro',
     code: 'EUR',
+    name: 'Euro',
     symbol: '€',
   });
   const currencyDollar = Currency({
-    name: 'Dollar',
     code: 'USD',
+    name: 'Dollar',
     symbol: '$',
   });
   const anyAmount = '1';
-  const money = (currency: Currency, amount: BigDecimalString) => Money({ currency, amount: BigDecimal(amount) });
+  const money = (currency: Currency, amount: BigDecimalString) => Money({ amount: BigDecimal(amount), currency });
   const EUR = (amount: BigDecimalString) => money(currencyEuro, amount);
   const USD = (amount: BigDecimalString) => money(currencyDollar, amount);
 

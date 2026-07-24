@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { MoneySigned } from './MoneySigned.js';
+import { describe, expect, it } from 'vitest';
+
 import { ANY } from '../Testing.js';
+import { MoneySigned } from './MoneySigned.js';
 
 describe('MoneySigned', () => {
   describe(MoneySigned.isPositive, () => {

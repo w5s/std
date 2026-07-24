@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it } from 'vitest';
+
 import { extend } from './extend.js';
 
 describe('extend', () => {
@@ -10,16 +11,16 @@ describe('extend', () => {
     expect(extend(anyObject, {})).toBe(anyObject);
   });
   it('should return identity when values are shallow equals', () => {
-    const object = { unchanged: '', foo: true };
+    const object = { foo: true, unchanged: '' };
     expect(extend(object, { foo: true })).toBe(object);
   });
   it('should return a new object when another object is passed', () => {
-    const result = extend({ unchanged: '', override: true }, { override: 'false', newProperty: false });
+    const result = extend({ override: true, unchanged: '' }, { newProperty: false, override: 'false' });
     expect(result).toEqual({
-      unchanged: '',
-      override: 'false',
       newProperty: false,
+      override: 'false',
+      unchanged: '',
     });
-    assertType<typeof result, { unchanged: string; override: string; newProperty: boolean }>(true);
+    assertType<typeof result, { newProperty: boolean; override: string; unchanged: string }>(true);
   });
 });

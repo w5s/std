@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Option } from '@w5s/core';
+import { describe, expect, it, vi } from 'vitest';
+
 import { findLast } from './findLast.js';
 
 describe(findLast, () => {

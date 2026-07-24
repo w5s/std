@@ -1,5 +1,6 @@
-import { BigDecimalAsString } from './BigDecimalAsString.js';
 import type { BigDecimal } from './BigDecimal.js';
+
+import { BigDecimalAsString } from './BigDecimalAsString.js';
 
 /**
  * Returns a string representation of a BigDecimal

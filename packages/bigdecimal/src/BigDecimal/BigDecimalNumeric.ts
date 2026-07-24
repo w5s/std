@@ -1,7 +1,16 @@
 import type { Numeric } from '@w5s/core';
+
 import type { BigDecimal } from './BigDecimal.js';
-import { of } from './of.js';
+
 import { bigDecimalScaleValue } from '../internal/bigDecimalScaleValue.js';
+import { of } from './of.js';
+
+interface BigDecimalNumeric
+  extends
+  Numeric.Add<BigDecimal>,
+  Numeric.CheckedRemainder<BigDecimal>,
+  Numeric.Multiply<BigDecimal>,
+  Numeric.Subtract<BigDecimal> {}
 
 function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
   return (left: BigDecimal, right: BigDecimal) =>
@@ -12,17 +21,7 @@ function combine2(combineFn: (left: bigint, right: bigint) => bigint) {
         : of(combineFn(left.value, right.value), left.scale);
 }
 
-interface BigDecimalNumeric
-  extends
-  Numeric.Add<BigDecimal>,
-  Numeric.Subtract<BigDecimal>,
-  Numeric.Multiply<BigDecimal>,
-  Numeric.CheckedRemainder<BigDecimal> {}
-
 export const BigDecimalNumeric: BigDecimalNumeric = {
-  '+': combine2((l, r) => l + r),
-  '-': combine2((l, r) => l - r),
-  '*': (l, r) => of(l.value * r.value, l.scale + r.scale),
   '%?': (self, divisor) => {
     if (divisor.value === 0n) {
       return undefined;
@@ -30,4 +29,7 @@ export const BigDecimalNumeric: BigDecimalNumeric = {
     const max = Math.max(self.scale, divisor.scale);
     return of(bigDecimalScaleValue(self, max) % bigDecimalScaleValue(divisor, max), max);
   },
+  '*': (l, r) => of(l.value * r.value, l.scale + r.scale),
+  '+': combine2((l, r) => l + r),
+  '-': combine2((l, r) => l - r),
 };

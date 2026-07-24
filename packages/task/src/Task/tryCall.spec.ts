@@ -1,14 +1,15 @@
-import { describe, it, expect, vi } from 'vitest';
-import { tryCall } from './tryCall.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { withTask } from '../Testing.js';
+import { tryCall } from './tryCall.js';
 
 describe(tryCall, () => {
   const expectTask = withTask(expect);
   const anyValue = 'return_value';
 
   class TestError extends Error {
-    override name = 'TestError';
     public innerError: unknown;
+    override name = 'TestError';
 
     constructor(innerError: unknown = undefined) {
       super('TestMessage');

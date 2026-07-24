@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { truncate } from './truncate.js';
+
 import { BigDecimal } from './BigDecimal.js';
+import { truncate } from './truncate.js';
 
 describe(truncate, () => {
   it.each([

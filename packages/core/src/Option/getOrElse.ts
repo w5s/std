@@ -18,6 +18,6 @@ import type { OptionLike } from '../Option.js';
 export function getOrElse<Value, DefaultValue>(
   self: OptionLike<Value>,
   getDefaultValue: () => DefaultValue,
-): Value | DefaultValue {
+): DefaultValue | Value {
   return self ?? getDefaultValue();
 }

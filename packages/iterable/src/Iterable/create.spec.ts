@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
 import { Symbol } from '@w5s/core';
-import { create } from './create.js';
+import { describe, expect, it } from 'vitest';
+
 import { withIterable } from '../Testing.js';
+import { create } from './create.js';
 
 describe(create, () => {
   const expectIterable = withIterable(expect);

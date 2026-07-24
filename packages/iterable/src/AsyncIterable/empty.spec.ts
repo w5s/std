@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { empty } from './empty.js';
+import { describe, expect, it } from 'vitest';
+
 import { withAsyncIterable } from '../Testing.js';
+import { empty } from './empty.js';
 
 describe(empty, () => {
   const expectAsyncIterable = withAsyncIterable(expect);

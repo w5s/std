@@ -1,44 +1,17 @@
+import currencyData from 'currencies.json';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';
-import currencyData from 'currencies.json';
 
 const EOL = '\n';
 
-function getTargetPath() {
-  return path.join('src', 'moneyFactory.all.ts');
+export async function main() {
+  const contents = buildContents();
+  const targetPath = getTargetPath();
+  await writeFile(targetPath, contents);
 }
 
-function buildImports() {
-  return `/* cSpell:disable */
-import { Currency } from './Currency.js';
-import { factory as moneyFactory } from './Money/factory.js';
-import { CurrencyRegistry } from './CurrencyRegistry.js';
-`;
-}
-
-function buildRegistry() {
-  return `const register = (
-  code: Currency['code'],
-  precision: number,
-  name: Currency['name'],
-  namePlural: Currency['namePlural'],
-  rounding: number,
-  symbol: Currency['symbol'],
-  symbolNative: Currency['symbolNative'],
-) => {
-  CurrencyRegistry.add(
-    Currency({
-      code,
-      precision: precision as Currency['precision'],
-      name,
-      namePlural,
-      rounding: rounding as Currency['rounding'],
-      symbol,
-      symbolNative,
-    }),
-  );
-  return moneyFactory(code);
-};`;
+function buildContents() {
+  return buildImports() + EOL + buildRegistry() + EOL + buildFactories() + EOL;
 }
 
 function buildFactories() {
@@ -59,14 +32,41 @@ export const ${currency.code} = register('${currency.code}', ${currency.decimalD
     .join(EOL);
 }
 
-function buildContents() {
-  return buildImports() + EOL + buildRegistry() + EOL + buildFactories() + EOL;
+function buildImports() {
+  return `/* cSpell:disable */
+import { Currency } from './Currency.js';
+import { CurrencyRegistry } from './CurrencyRegistry.js';
+import { factory as moneyFactory } from './Money/factory.js';
+`;
 }
 
-export async function main() {
-  const contents = buildContents();
-  const targetPath = getTargetPath();
-  await writeFile(targetPath, contents);
+function buildRegistry() {
+  return `const register = (
+  code: Currency['code'],
+  precision: number,
+  name: Currency['name'],
+  namePlural: Currency['namePlural'],
+  rounding: number,
+  symbol: Currency['symbol'],
+  symbolNative: Currency['symbolNative'],
+) => {
+  CurrencyRegistry.add(
+    Currency({
+      code,
+      name,
+      namePlural,
+      precision: precision as Currency['precision'],
+      rounding: rounding as Currency['rounding'],
+      symbol,
+      symbolNative,
+    }),
+  );
+  return moneyFactory(code);
+};`;
+}
+
+function getTargetPath() {
+  return path.join('src', 'moneyFactory.all.ts');
 }
 
 await main();

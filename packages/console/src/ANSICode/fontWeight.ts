@@ -1,10 +1,10 @@
 /* cSpell:disable */
-import { wrap, type ANSIWrapper } from './wrap.js';
+import { type ANSIWrapper, wrap } from './wrap.js';
 
 /**
  * Font weight
  */
-export type FontWeight = 'normal' | 'bold' | 'dim';
+export type FontWeight = 'bold' | 'dim' | 'normal';
 
 const fontWeightMap = new Map(
   (

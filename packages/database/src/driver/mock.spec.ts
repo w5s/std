@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { sql } from '../sql.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { DatabaseDriver } from '../driver.js';
+import { sql } from '../sql.js';
 import { Mock } from './mock.js';
 
 describe('Mock', () => {

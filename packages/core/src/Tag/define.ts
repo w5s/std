@@ -1,5 +1,6 @@
-import { Callable } from '../Callable.js';
 import type { Tag } from '../Tag.js';
+
+import { Callable } from '../Callable.js';
 import { define as defineType } from '../Type/define.js';
 import { ensure as ensureType } from '../Type/ensure.js';
 
@@ -29,8 +30,8 @@ export function define<From, To extends From>(parameters: Tag.Parameters<To>): T
   }
 
   return Callable({
-    wrap,
     unwrap,
+    wrap,
     ...TagType,
     [Callable.symbol]: (value: From) => wrap(value),
   });

@@ -1,6 +1,7 @@
 import type { Numeric } from '@w5s/core';
-import type { Time } from './Time.js';
+
 import type { TimeDuration } from '../TimeDuration.js';
+import type { Time } from './Time.js';
 
 interface TimeNumeric extends Numeric.Add<Time, TimeDuration, Time>, Numeric.Subtract<Time, TimeDuration, Time> {}
 

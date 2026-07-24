@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it } from 'vitest';
+
 import { Ref } from './Ref.js';
-import { property } from './Ref/property.js';
 import { modify } from './Ref/modify.js';
+import { property } from './Ref/property.js';
 import { read } from './Ref/read.js';
 import { write } from './Ref/write.js';
 
@@ -11,9 +12,9 @@ describe('Ref', () => {
   it('is an alias to functions', () => {
     expect(Ref).toEqual(
       expect.objectContaining({
-        read,
         modify,
         property,
+        read,
         write,
       }),
     );

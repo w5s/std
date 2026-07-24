@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { FileSystem } from './FileSystem.js';
 
 describe('FileSystem', () => {
@@ -14,11 +15,11 @@ describe('FileSystem', () => {
         'ensureFile',
         'ensureSymbolicLink',
         'listDirectory',
+        'move',
         'readFile',
         'readFileStatus',
         'readSymbolicLink',
         'readSymbolicLinkStatus',
-        'move',
         'remove',
         'rename',
         'writeFile',

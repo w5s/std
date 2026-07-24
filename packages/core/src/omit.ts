@@ -12,7 +12,7 @@
  * @param self the object
  * @param keys the keys to exclude
  */
-export function omit<T extends object, K extends keyof T>(self: Readonly<T>, keys: readonly K[]): Omit<T, K> {
+export function omit<T extends object, K extends keyof T>(self: Readonly<T>, keys: ReadonlyArray<K>): Omit<T, K> {
   const excludes = new Set(keys);
   const returnValue: object = {};
   for (const [key, value] of Object.entries(self)) {

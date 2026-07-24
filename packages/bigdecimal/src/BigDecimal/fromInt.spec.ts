@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest';
 import { Int } from '@w5s/num';
-import { fromInt } from './fromInt.js';
+import { describe, expect, it } from 'vitest';
+
 import { BigDecimal } from './BigDecimal.js';
+import { fromInt } from './fromInt.js';
 
 describe(fromInt, () => {
   it.each([

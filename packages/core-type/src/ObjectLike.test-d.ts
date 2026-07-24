@@ -1,4 +1,4 @@
-/* eslint-disable ts/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
 import type { ObjectLike } from './ObjectLike.js';
 
 // @ts-expect-error Number

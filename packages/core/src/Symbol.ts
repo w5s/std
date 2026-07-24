@@ -20,9 +20,9 @@ const run = '__run__' as const; // GlobalSymbol.for('w5s.run') as any;
  */
 export const Symbol = {
   /**
-   * A method that returns the default iterator for an object. Called by the semantics of the for-of statement.
+   * A method that is used to asynchronously release resources held by an object. Called by the semantics of the await using statement.
    */
-  iterator: __symbolAlias('iterator') as SymbolConstructor['iterator'],
+  asyncDispose: __symbolAlias('asyncDispose') as SymbolConstructor['asyncDispose'],
 
   /**
    * A method that returns the default async iterator for an object. Called by the semantics of the for-await-of statement.
@@ -30,14 +30,53 @@ export const Symbol = {
   asyncIterator: __symbolAlias('asyncIterator') as SymbolConstructor['asyncIterator'],
 
   /**
+   * Call signature
+   */
+  call,
+
+  /**
+   * Decode property symbol
+   *
+   * @see {@link Codec}
+   */
+  decode,
+
+  /**
+   * A method that is used to release resources held by an object. Called by the semantics of the using statement.
+   */
+  dispose: __symbolAlias('dispose') as SymbolConstructor['dispose'],
+
+  /**
+   * Encode property symbol
+   *
+   * @see {@link Codec}
+   */
+  encode,
+
+  /**
+   * Enum keys
+   */
+  enumKeys,
+
+  /**
    * A method that determines if a constructor object recognizes an object as one of the constructor’s instances. Called by the semantics of the instanceof operator.
    */
   hasInstance: __symbolAlias('hasInstance') as SymbolConstructor['hasInstance'],
 
   /**
+   * NodeJS Inspect callback
+   */
+  inspect,
+
+  /**
    * A Boolean value that if true indicates that an object should flatten to its array elements by Array.prototype.concat.
    */
   isConcatSpreadable: __symbolAlias('isConcatSpreadable') as SymbolConstructor['isConcatSpreadable'],
+
+  /**
+   * A method that returns the default iterator for an object. Called by the semantics of the for-of statement.
+   */
+  iterator: __symbolAlias('iterator') as SymbolConstructor['iterator'],
 
   /**
    * A regular expression method that matches the regular expression against a string. Called by the String.prototype.match method.
@@ -55,6 +94,18 @@ export const Symbol = {
   replace: __symbolAlias('replace') as SymbolConstructor['replace'],
 
   /**
+   * Task run effect
+   */
+  run,
+
+  /**
+   * Schema property symbol
+   *
+   * @see {@link Codec}
+   */
+  schema,
+
+  /**
    * A regular expression method that replaces matched substrings of a string. Called by the String.prototype.replace method.
    */
   search: __symbolAlias('search') as SymbolConstructor['search'],
@@ -70,70 +121,19 @@ export const Symbol = {
   split: __symbolAlias('split') as SymbolConstructor['split'],
 
   /**
-   * A String value that is used in the creation of the default string description of an object. Called by the built-in method Object.prototype.toString.
-   */
-  toStringTag: __symbolAlias('toStringTag') as SymbolConstructor['toStringTag'],
-
-  /**
    * A method that converts an object to a corresponding primitive value. Called by the ToPrimitive abstract operation.
    */
   toPrimitive: __symbolAlias('toPrimitive') as SymbolConstructor['toPrimitive'],
 
   /**
+   * A String value that is used in the creation of the default string description of an object. Called by the built-in method Object.prototype.toString.
+   */
+  toStringTag: __symbolAlias('toStringTag') as SymbolConstructor['toStringTag'],
+
+  /**
    * An Object whose truthy properties are properties that are excluded from the 'with' environment bindings of the associated objects.
    */
   unscopables: __symbolAlias('unscopables') as SymbolConstructor['unscopables'],
-
-  /**
-   * A method that is used to release resources held by an object. Called by the semantics of the using statement.
-   */
-  dispose: __symbolAlias('dispose') as SymbolConstructor['dispose'],
-
-  /**
-   * A method that is used to asynchronously release resources held by an object. Called by the semantics of the await using statement.
-   */
-  asyncDispose: __symbolAlias('asyncDispose') as SymbolConstructor['asyncDispose'],
-
-  /**
-   * Call signature
-   */
-  call,
-
-  /**
-   * NodeJS Inspect callback
-   */
-  inspect,
-
-  /**
-   * Encode property symbol
-   *
-   * @see {@link Codec}
-   */
-  encode,
-
-  /**
-   * Decode property symbol
-   *
-   * @see {@link Codec}
-   */
-  decode,
-
-  /**
-   * Schema property symbol
-   *
-   * @see {@link Codec}
-   */
-  schema,
-
-  /**
-   * Enum keys
-   */
-  enumKeys,
-
-  /**
-   * Task run effect
-   */
-  run,
 };
 
 /**
@@ -141,30 +141,30 @@ export const Symbol = {
  *
  */
 export namespace Symbol {
-  export type iterator = typeof Symbol.iterator;
+  export type asyncDispose = typeof Symbol.asyncDispose;
   export type asyncIterator = typeof Symbol.asyncIterator;
+  // W5S symbols
+  export type call = typeof Symbol.call;
+  export type decode = typeof Symbol.decode;
+  export type dispose = typeof Symbol.dispose;
+  export type encode = typeof Symbol.encode;
+  export type enumKeys = typeof Symbol.enumKeys;
   export type hasInstance = typeof Symbol.hasInstance;
+  export type inspect = typeof Symbol.inspect;
   export type isConcatSpreadable = typeof Symbol.isConcatSpreadable;
+  export type iterator = typeof Symbol.iterator;
   export type match = typeof Symbol.match;
   export type matchAll = typeof Symbol.matchAll;
   export type replace = typeof Symbol.replace;
-  export type search = typeof Symbol.search;
-  export type species = typeof Symbol.species;
-  export type split = typeof Symbol.split;
-  export type toStringTag = typeof Symbol.toStringTag;
-  export type toPrimitive = typeof Symbol.toPrimitive;
-  export type unscopables = typeof Symbol.unscopables;
-  export type dispose = typeof Symbol.dispose;
-  export type asyncDispose = typeof Symbol.asyncDispose;
+  export type run = typeof Symbol.run;
 
   // NodeJS
 
-  // W5S symbols
-  export type call = typeof Symbol.call;
-  export type inspect = typeof Symbol.inspect;
-  export type encode = typeof Symbol.encode;
-  export type decode = typeof Symbol.decode;
   export type schema = typeof Symbol.schema;
-  export type enumKeys = typeof Symbol.enumKeys;
-  export type run = typeof Symbol.run;
+  export type search = typeof Symbol.search;
+  export type species = typeof Symbol.species;
+  export type split = typeof Symbol.split;
+  export type toPrimitive = typeof Symbol.toPrimitive;
+  export type toStringTag = typeof Symbol.toStringTag;
+  export type unscopables = typeof Symbol.unscopables;
 }

@@ -1,26 +1,27 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import * as Module from './index.js';
 
 describe('index', () => {
   it('exports', () => {
     expect(new Set(Object.keys(Module))).toEqual(
       new Set([
-        // List of all public exports
-        'meta',
         'configuration',
+        'critical',
+        'debug',
+        'error',
+        'info',
+        'level',
         'Log',
+        'LogHandler',
         'LogLevel',
         'LogMessage',
-        'LogMessageRef',
         'LogMessageItem',
+        'LogMessageRef',
         'LogRecord',
-        'LogHandler',
-        'level',
-        'critical',
-        'error',
+        // List of all public exports
+        'meta',
         'warn',
-        'info',
-        'debug',
       ]),
     );
   });

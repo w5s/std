@@ -1,11 +1,13 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { describe, expect, it, vi } from 'vitest';
-import { assertType } from '@w5s/core-type';
 import { Result } from '@w5s/core';
+import { assertType } from '@w5s/core-type';
+import { describe, expect, it, vi } from 'vitest';
+
+import type { Task } from '../Task.js';
+
+import { FakeTask, withTask } from '../Testing.js';
 import { allSettledKeyed } from './allSettledKeyed.js';
 import { run as taskRun } from './run.js';
-import { FakeTask, withTask } from '../Testing.js';
-import type { Task } from '../Task.js';
 
 describe(allSettledKeyed, () => {
   const expectTask = withTask(expect);
@@ -46,9 +48,9 @@ describe(allSettledKeyed, () => {
     const taskEntries = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
-        key: `task${taskIndex}`,
-        task: FakeTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
         canceler,
+        key: `task${taskIndex}`,
+        task: FakeTask({ canceler, delayMs: 2, value: `value${taskIndex}` }),
       };
     });
     const allTask = allSettledKeyed(Object.fromEntries(taskEntries.map(({ key, task }) => [key, task])));

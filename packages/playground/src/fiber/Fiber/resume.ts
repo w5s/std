@@ -1,6 +1,7 @@
-import { toFiberId } from '../internal/toFiberId.js';
 import type { FiberIdLike } from '../FiberIdLike.js';
+
 import { scheduler } from '../internal/scheduler.js';
+import { toFiberId } from '../internal/toFiberId.js';
 
 /**
  * Resume a previously suspended fiber execution

@@ -1,6 +1,7 @@
-import { describe, it, expect, vi } from 'vitest';
-import { flatMap } from './flatMap.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { empty } from './empty.js';
+import { flatMap } from './flatMap.js';
 
 describe(flatMap, () => {
   it('should return unchanged if empty', () => {

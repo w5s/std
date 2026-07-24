@@ -1,15 +1,16 @@
 import { Callable } from '@w5s/core/dist/Callable.js';
-import { TimeDuration } from './TimeDuration/TimeDuration.js';
-import { Time as TimeType } from './Time/Time.js';
-import { of } from './Time/of.js';
-import { now } from './Time/now.js';
+
 import { delay } from './Time/delay.js';
-import { parse } from './Time/parse.js';
 import { format } from './Time/format.js';
 import { from } from './Time/from.js';
-import { TimeComparable } from './Time/TimeComparable.js';
+import { now } from './Time/now.js';
+import { of } from './Time/of.js';
+import { parse } from './Time/parse.js';
+import { Time as TimeType } from './Time/Time.js';
 import { TimeBounded } from './Time/TimeBounded.js';
+import { TimeComparable } from './Time/TimeComparable.js';
 import { TimeNumeric } from './Time/TimeNumeric.js';
+import { TimeDuration } from './TimeDuration/TimeDuration.js';
 
 export type { TimeParameters } from './Time/from.js';
 
@@ -28,12 +29,8 @@ export const Time = Callable({
   ...TimeComparable,
   ...TimeBounded,
   ...TimeNumeric,
-  of,
-  now,
+  [Callable.symbol]: from,
   delay,
-  parse,
-  format,
-  from,
 
   /**
    * Return the difference between 2 time values
@@ -50,5 +47,10 @@ export const Time = Callable({
   diff(left: Time, right: Time): TimeDuration {
     return TimeDuration(left - right);
   },
-  [Callable.symbol]: from,
+  format,
+  from,
+  now,
+
+  of,
+  parse,
 });

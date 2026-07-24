@@ -1,4 +1,5 @@
 import type { Enum } from '../Enum.js';
+
 import { Indexable } from '../Indexable.js';
 import { Symbol } from '../Symbol.js';
 import { define as defineType } from '../Type/define.js';
@@ -16,7 +17,7 @@ import { define as defineType } from '../Type/define.js';
  * ```
  * @param enumObject
  */
-export function define<const T extends Record<string, string | number | boolean>>(
+export function define<const T extends Record<string, boolean | number | string>>(
   enumObject: T & { typeName?: string },
 ): Enum<T> {
   type Value = T[keyof T];
@@ -26,18 +27,18 @@ export function define<const T extends Record<string, string | number | boolean>
   const enumValuesIndex = new Map<unknown, number>(enumValuesList.map((value, index) => [value, index]));
 
   const EnumType = defineType<Value>({
-    typeName: typeName ?? enumValuesList.join('|'),
     hasInstance(anyValue) {
       return enumValuesIndex.has(anyValue);
     },
     [Symbol.schema]: () => ({
       enum: enumValuesList,
     }),
+    typeName: typeName ?? enumValuesList.join('|'),
   });
   const EnumIndexable = Indexable<Value>({
-    indexType: 'number',
     at: (index) => enumValuesList[index],
     indexOf: (value) => enumValuesIndex.get(value),
+    indexType: 'number',
   });
 
   // @ts-ignore ignore errors and rely on tests

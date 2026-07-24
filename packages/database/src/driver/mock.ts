@@ -1,5 +1,6 @@
-import type { SQLStatement } from '../sql.js';
 import type { AbstractDatabase } from '../client.js';
+import type { SQLStatement } from '../sql.js';
+
 import { DatabaseDriver } from '../driver.js';
 
 export interface MockClient extends AbstractDatabase<'mock'> {

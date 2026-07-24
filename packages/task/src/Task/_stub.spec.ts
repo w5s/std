@@ -5,7 +5,7 @@ export const allSyncCombination = [
   ['async', 'sync'],
   ['sync', 'async'],
   ['async', 'async'],
-] as Array<['sync' | 'async', 'sync' | 'async']>;
+] as Array<['async' | 'sync', 'async' | 'sync']>;
 
 describe('allSyncCombination', () => {
   it('exports combinations', () => {

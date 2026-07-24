@@ -1,12 +1,13 @@
 import { Option } from '@w5s/core';
-import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it } from 'vitest';
+
 import { FilePath } from './FilePath.js';
 
 describe('FilePath', () => {
-  const { separator, dirname, concat, resolve, parse, format, relative, normalize, basename, extname, isAbsolute, isRelative, isParentOf } = FilePath;
-  const absolutePath = (...parts: string[]) => (separator + parts.join(separator)) as FilePath;
-  const relativePath = (...parts: string[]) => parts.join(separator) as FilePath;
+  const { basename, concat, dirname, extname, format, isAbsolute, isParentOf, isRelative, normalize, parse, relative, resolve, separator } = FilePath;
+  const absolutePath = (...parts: Array<string>) => (separator + parts.join(separator)) as FilePath;
+  const relativePath = (...parts: Array<string>) => parts.join(separator) as FilePath;
   const expectTask = withTask(expect);
 
   describe(dirname, () => {
@@ -51,11 +52,11 @@ describe('FilePath', () => {
     it('should parse empty path', () => {
       const path = relativePath('');
       expect(parse(path)).toStrictEqual({
-        root: Option.None,
         base: Option.None,
         dir: Option.None,
         ext: Option.None,
         name: Option.None,
+        root: Option.None,
       });
     });
   });
@@ -64,11 +65,11 @@ describe('FilePath', () => {
     it('should format empty path object', () => {
       expect(
         format({
-          root: Option.None,
           base: Option.None,
           dir: Option.None,
           ext: Option.None,
           name: Option.None,
+          root: Option.None,
         }),
       ).toBe('');
     });
@@ -124,17 +125,17 @@ describe('FilePath', () => {
   });
   describe(isParentOf, () => {
     it.each([
-      [{ parent: '', child: '' }, false],
-      [{ parent: '/first/second', child: '/first' }, false],
-      [{ parent: '/first', child: '/first' }, false],
-      [{ parent: '/first', child: '/first/second' }, true],
-      [{ parent: 'first', child: 'first/second' }, true],
-      [{ parent: '../first', child: '../first/second' }, true],
-      [{ parent: String.raw`c:\first`, child: String.raw`c:\first` }, false],
-      [{ parent: String.raw`c:\first`, child: String.raw`c:\first\second` }, true],
-    ] as [{ parent: string; child: string }, boolean][])(
+      [{ child: '', parent: '' }, false],
+      [{ child: '/first', parent: '/first/second' }, false],
+      [{ child: '/first', parent: '/first' }, false],
+      [{ child: '/first/second', parent: '/first' }, true],
+      [{ child: 'first/second', parent: 'first' }, true],
+      [{ child: '../first/second', parent: '../first' }, true],
+      [{ child: String.raw`c:\first`, parent: String.raw`c:\first` }, false],
+      [{ child: String.raw`c:\first\second`, parent: String.raw`c:\first` }, true],
+    ] as Array<[{ child: string; parent: string }, boolean]>)(
       'should return correct value for %s',
-      ({ parent, child }, expected) => {
+      ({ child, parent }, expected) => {
         expect(isParentOf(FilePath(parent), FilePath(child))).toBe(expected);
       },
     );

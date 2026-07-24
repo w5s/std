@@ -3,19 +3,15 @@
 import { asString } from './CustomError/asString.js';
 import { isError } from './isError.js';
 
-type CustomErrorRequiredProperties = {
-  name: string;
-};
-
 /**
  * A Standard extendable error type
  */
 export type CustomError<Properties extends CustomErrorRequiredProperties = CustomErrorRequiredProperties> = Readonly<
-  globalThis.Error & {
+  globalThis.Error & Properties & {
     /**
-     * Error name (used as tag)
+     * Optional `Error` that was thrown
      */
-    name: Properties['name'];
+    cause: unknown;
 
     /**
      * Error message
@@ -23,15 +19,15 @@ export type CustomError<Properties extends CustomErrorRequiredProperties = Custo
     message: string;
 
     /**
+     * Error name (used as tag)
+     */
+    name: Properties['name'];
+
+    /**
      * Stack trace
      */
     stack: string;
-
-    /**
-     * Optional `Error` that was thrown
-     */
-    cause: unknown;
-  } & Properties
+  }
 >;
 
 interface CustomErrorConstructor /* extends ErrorConstructor */ {
@@ -49,7 +45,6 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
    * Call operator
    */
   <Properties extends CustomErrorRequiredProperties>(properties: Properties): CustomError<Properties>;
-  readonly prototype: CustomError;
 
   /**
    * Static method to convert an error to a string
@@ -72,6 +67,12 @@ interface CustomErrorConstructor /* extends ErrorConstructor */ {
     this: Class,
     anyValue: unknown,
   ): anyValue is InstanceType<Class>;
+
+  readonly prototype: CustomError;
+}
+
+interface CustomErrorRequiredProperties {
+  name: string;
 }
 
 /**
@@ -97,10 +98,11 @@ export const CustomError: CustomErrorConstructor = (() => {
 
   const captureStackTrace: CaptureStackTrace = (Error as any).captureStackTrace ?? ((_targetObject: object, _constructorOpt?: () => void) => {});
 
-  function CustomError<Properties extends { name: string; message?: string; cause?: unknown }>(
+  function CustomError<Properties extends { cause?: unknown; message?: string; name: string }>(
     this: any,
     properties: Properties,
   ): CustomError<Properties> {
+    // eslint-disable-next-line ts/consistent-indexed-object-style
     interface MutableError extends Error {
       [extra: string]: unknown;
     }
@@ -122,16 +124,16 @@ export const CustomError: CustomErrorConstructor = (() => {
   }
 
   return objectAssign(CustomError, {
+    asString,
     errorName,
     hasInstance(anyValue: unknown): boolean {
       return isError(anyValue) && anyValue.name === this.errorName;
     },
-    asString,
     prototype: objectAssign(objectCreate(Error.prototype), {
-      constructor: CustomError,
-      name: errorName,
-      message: '',
       cause: undefined,
+      constructor: CustomError,
+      message: '',
+      name: errorName,
       toString(this: Error) {
         return asString(this);
       },

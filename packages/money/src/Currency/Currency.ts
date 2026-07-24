@@ -1,13 +1,22 @@
-import { Struct } from '@w5s/core/dist/Struct.js';
-import { Symbol, type Int } from '@w5s/core';
-import { Callable } from '@w5s/core/dist/Callable.js';
 import type { PartialKeys } from '@w5s/core-type';
-import { defaultRounding } from './defaultRounding.js';
-import { defaultPrecision } from './defaultPrecision.js';
+
+import { type Int, Symbol } from '@w5s/core';
+import { Callable } from '@w5s/core/dist/Callable.js';
+import { Struct } from '@w5s/core/dist/Struct.js';
+
 import { CurrencyAsString } from './CurrencyAsString.js';
+import { defaultPrecision } from './defaultPrecision.js';
+import { defaultRounding } from './defaultRounding.js';
 
 export interface Currency extends Struct<{
   [Struct.type]: 'Currency';
+
+  /**
+   * Code ISO3
+   *
+   * @example 'USD'
+   */
+  code: string;
 
   /**
    * Name
@@ -18,13 +27,6 @@ export interface Currency extends Struct<{
    * Plural name
    */
   namePlural: string;
-
-  /**
-   * Code ISO3
-   *
-   * @example 'USD'
-   */
-  code: string;
 
   /**
    * Currency precision
@@ -52,20 +54,20 @@ export interface Currency extends Struct<{
 }> {}
 
 const CurrencyStruct = Struct.define<Currency>({
-  typeName: 'Currency',
   [Symbol.inspect]: CurrencyAsString.asString,
+  typeName: 'Currency',
   ...CurrencyAsString,
 });
 
 export const Currency = Callable({
-  defaultRounding,
   defaultPrecision,
+  defaultRounding,
   ...CurrencyStruct,
   [Callable.symbol]: (parameters: Currency.Parameters): Currency =>
     CurrencyStruct.create({
-      rounding: defaultRounding,
-      precision: defaultPrecision,
       namePlural: parameters.name,
+      precision: defaultPrecision,
+      rounding: defaultRounding,
       symbolNative: parameters.symbol,
       ...parameters,
     }),

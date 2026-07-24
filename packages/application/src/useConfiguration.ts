@@ -1,9 +1,11 @@
-import type { ConfigurationRef } from './ConfigurationRef.js';
-import { useRef } from './useRef.js';
-import { useNamespace } from './useNamespace.js';
 import type { Ref } from '@w5s/core';
-import type { State } from './State.js';
+
+import type { ConfigurationRef } from './ConfigurationRef.js';
 import type { Meta } from './meta.js';
+import type { State } from './State.js';
+
+import { useNamespace } from './useNamespace.js';
+import { useRef } from './useRef.js';
 
 /**
  *
@@ -39,9 +41,9 @@ export function useConfiguration<Configuration>(
   }
 
   return Object.assign(configuration, {
-    initial,
     get,
-    update,
+    initial,
     modify,
+    update,
   });
 }

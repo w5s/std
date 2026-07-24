@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+
 import { Initializer } from './Initializer.js';
 import { InitializerStatus } from './InitializerStatus.js';
 import { getStatus, state } from './internal/state.js';
@@ -24,7 +25,7 @@ describe(start, () => {
   });
 
   it('marks initializer as starting before running onStart', async () => {
-    const statuses: string[] = [];
+    const statuses: Array<string> = [];
 
     const initializer = Initializer('init-2', async () => {
       statuses.push(getStatus(initializer));

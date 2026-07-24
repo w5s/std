@@ -1,13 +1,11 @@
 import type { Task, TaskLike } from '@w5s/task';
+
 import { all as taskAll } from '@w5s/task/dist/Task/all.js';
 import { andRun as taskAndRun } from '@w5s/task/dist/Task/andRun.js';
 import { andThen as taskThen } from '@w5s/task/dist/Task/andThen.js';
 import { map as taskMap } from '@w5s/task/dist/Task/map.js';
-import { dispose } from './dispose.js';
 
-function disposeAll(resources: { disposables: ReadonlyArray<Disposable | AsyncDisposable> }) {
-  return taskAll(resources.disposables.map(dispose));
-}
+import { dispose } from './dispose.js';
 
 /**
  * Returns a task that will be mapped to `thenFn` arguments and then disposed.
@@ -23,15 +21,15 @@ function disposeAll(resources: { disposables: ReadonlyArray<Disposable | AsyncDi
  * @param tasks
  * @param thenFn
  */
-export function using<T extends readonly TaskLike<Disposable | AsyncDisposable, any>[], ToValue, ToError>(
+export function using<T extends ReadonlyArray<TaskLike<AsyncDisposable | Disposable, any>>, ToValue, ToError>(
   tasks: [...T],
   thenFn: (disposables: { [K in keyof T]: Task.ValueOf<T[K]> }) => TaskLike<ToValue, ToError>,
 ): Task<ToValue, Task.ErrorOf<T[keyof T]> | ToError>;
-export function using<Value extends Disposable | AsyncDisposable, Error, ToValue, ToError>(
+export function using<Value extends AsyncDisposable | Disposable, Error, ToValue, ToError>(
   tasks: Iterable<TaskLike<Value, Error>>,
   thenFn: (disposables: ReadonlyArray<Value>) => TaskLike<ToValue, ToError>,
 ): Task<ReadonlyArray<Value>, Error | ToError>;
-export function using<Value extends Disposable | AsyncDisposable, Error, ToValue, ToError>(
+export function using<Value extends AsyncDisposable | Disposable, Error, ToValue, ToError>(
   tasks: Iterable<TaskLike<Value, Error>>,
   thenFn: (disposables: any) => TaskLike<ToValue, ToError>,
 ): Task<ToValue, Error | ToError> {
@@ -43,4 +41,7 @@ export function using<Value extends Disposable | AsyncDisposable, Error, ToValue
   );
   const disposed = taskAndRun(state, disposeAll);
   return taskMap(disposed, ({ returnValue }) => returnValue);
+}
+function disposeAll(resources: { disposables: ReadonlyArray<AsyncDisposable | Disposable> }) {
+  return taskAll(resources.disposables.map(dispose));
 }

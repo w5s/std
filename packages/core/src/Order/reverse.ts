@@ -1,4 +1,5 @@
 import type { Order, OrderLike } from '../Order.js';
+
 import { reverse as orderingReverse } from '../Ordering/reverse.js';
 
 /**

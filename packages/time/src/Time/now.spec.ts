@@ -1,5 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { now } from './now.js';
 
 describe(now, () => {

@@ -6,4 +6,4 @@
  * - object (null is excluded)
  * - function
  */
-export type ObjectLike = symbol | object | Function;
+export type ObjectLike = Function | object | symbol;

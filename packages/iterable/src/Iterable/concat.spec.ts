@@ -1,8 +1,9 @@
 // packages/iterable/src/Iterable/chunks.spec.ts
 
 import { describe, expect, it } from 'vitest';
-import { concat } from './concat.js';
+
 import { withIterable } from '../Testing.js';
+import { concat } from './concat.js';
 import { of } from './of.js';
 
 describe(concat, () => {

@@ -4,4 +4,4 @@
  *
  * @see https://stackoverflow.com/a/56129545
  */
-export type Awaitable<T> = T | PromiseLike<T>;
+export type Awaitable<T> = PromiseLike<T> | T;

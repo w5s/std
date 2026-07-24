@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { MoneyZero } from './MoneyZero.js';
+import { describe, expect, it } from 'vitest';
+
 import { ANY } from '../Testing.js';
+import { MoneyZero } from './MoneyZero.js';
 
 describe('MoneyZero', () => {
   describe(MoneyZero.isZero, () => {

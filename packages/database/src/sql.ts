@@ -4,10 +4,10 @@ import { Struct } from '@w5s/core/dist/Struct.js';
 const emptyStrings = Object.freeze(['']);
 const emptyArray = Object.freeze([]);
 
-type SQLBuffer = {
-  strings: string[];
-  values: unknown[];
-};
+interface SQLBuffer {
+  strings: Array<string>;
+  values: Array<unknown>;
+}
 
 const SQLBuffer = (): SQLBuffer => ({
   strings: [''],
@@ -22,12 +22,19 @@ const append = ({ strings: targetStrings, values: targetValues }: SQLBuffer, { s
       targetStrings[stringsBufferIndex++] = strings[stringsIndex]!;
     }
   }
+  // eslint-disable-next-line ts/prefer-for-of
   for (let valuesIndex = 0; valuesIndex < values.length; valuesIndex++) {
     targetValues[valuesBufferIndex++] = values[valuesIndex]!;
   }
 };
 
 const SQLStatementType = Struct.define<SQLStatement>({ typeName: 'SQLStatement' });
+
+export interface SQLStatement extends Struct<{
+  [Struct.type]: 'SQLStatement';
+  strings: ReadonlyArray<string>;
+  values: ReadonlyArray<SQLStatement.Value>;
+}> {}
 
 function call({
   strings = emptyStrings,
@@ -42,9 +49,10 @@ function call({
   });
 }
 
-function concat(...statements: SQLStatement[]): SQLStatement {
+function concat(...statements: Array<SQLStatement>): SQLStatement {
   const buffer = SQLBuffer();
 
+  // eslint-disable-next-line ts/prefer-for-of
   for (let statementIndex = 0; statementIndex < statements.length; statementIndex++) {
     append(buffer, statements[statementIndex]!);
   }
@@ -68,12 +76,6 @@ function format(
   return returnValue;
 }
 
-export interface SQLStatement extends Struct<{
-  [Struct.type]: 'SQLStatement';
-  strings: ReadonlyArray<string>;
-  values: ReadonlyArray<SQLStatement.Value>;
-}> {}
-
 /**
  * @namespace
  */
@@ -88,7 +90,7 @@ export namespace SQLStatement {
   export type Value = unknown;
 }
 
-export function sql(strings: TemplateStringsArray, ...values: Array<string | SQLStatement>) {
+export function sql(strings: TemplateStringsArray, ...values: Array<SQLStatement | string>) {
   const buffer = SQLBuffer();
   buffer.strings[0] = strings[0]!;
   for (let stringIndex = 1; stringIndex < strings.length; stringIndex++) {

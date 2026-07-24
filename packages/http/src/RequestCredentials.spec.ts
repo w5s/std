@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { RequestCredentials } from './RequestCredentials.js';
 
 describe('RequestCredentials', () => {

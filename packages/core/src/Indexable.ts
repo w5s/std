@@ -1,5 +1,6 @@
 /* eslint-disable ts/ban-ts-comment */
 import type { PartialKeys } from '@w5s/core-type';
+
 import type { Int } from './Int.js';
 import type { Option } from './Option.js';
 import type { Range } from './Range.js';
@@ -7,14 +8,7 @@ import type { Range } from './Range.js';
 /**
  * A type Indexable is a type with values that can be indexed by a number.
  */
-export interface Indexable<T, Index extends number | bigint = number> {
-  /**
-   * Index type
-   *
-   * @category Indexable
-   */
-  indexType: Index extends number ? 'number' : Index extends bigint ? 'bigint' : never;
-
+export interface Indexable<T, Index extends bigint | number = number> {
   /**
    * Returns the value at the index
    *
@@ -32,14 +26,11 @@ export interface Indexable<T, Index extends number | bigint = number> {
   indexOf(value: T): Option<Index>;
 
   /**
-   * Returns the size of a range.
-   * If `start` or `end` is not in range then returns 0.
+   * Index type
    *
    * @category Indexable
-   * @param start the start of the range
-   * @param end the end of the range
    */
-  rangeSize(start: T, end: T): Index;
+  indexType: Index extends number ? 'number' : Index extends bigint ? 'bigint' : never;
 
   /**
    * Returns an Iterable starting from `start` to `end`.
@@ -50,31 +41,32 @@ export interface Indexable<T, Index extends number | bigint = number> {
    * @param end the end of the range
    */
   range(start: T, end: T): Range<T>;
+
+  /**
+   * Returns the size of a range.
+   * If `start` or `end` is not in range then returns 0.
+   *
+   * @category Indexable
+   * @param start the start of the range
+   * @param end the end of the range
+   */
+  rangeSize(start: T, end: T): Index;
 }
-export function Indexable<T, Index extends number | bigint = number>(
+export function Indexable<T, Index extends bigint | number = number>(
   properties: Indexable.Parameters<T, Index>,
 ): Indexable<T, Index> {
-  const { indexType, indexOf, at, rangeSize, range } = properties;
+  const { at, indexOf, indexType, range, rangeSize } = properties;
   const zero = indexType === 'bigint' ? 0n : (0 as Int);
   const one = indexType === 'bigint' ? 1n : (1 as Int);
   return {
     at,
     indexOf,
     indexType,
-    rangeSize:
-      rangeSize ??
-      ((start, end) => {
-        const startIndex = indexOf(start);
-        const endIndex = indexOf(end);
-        // @ts-ignore
-
-        return startIndex == null || endIndex == null ? zero : endIndex - startIndex + one;
-      }),
     range:
       range ??
       ((rangeStart, rangeEnd) => ({
-        rangeStart,
         rangeEnd,
+        rangeStart,
         * [Symbol.iterator]() {
           const startIndex = indexOf(rangeStart);
           const endIndex = indexOf(rangeEnd);
@@ -100,11 +92,20 @@ export function Indexable<T, Index extends number | bigint = number>(
           }
         },
       })),
+    rangeSize:
+      rangeSize ??
+      ((start, end) => {
+        const startIndex = indexOf(start);
+        const endIndex = indexOf(end);
+        // @ts-ignore
+
+        return startIndex == null || endIndex == null ? zero : endIndex - startIndex + one;
+      }),
   };
 }
 export namespace Indexable {
-  export interface Parameters<T, Index extends number | bigint> extends PartialKeys<
+  export interface Parameters<T, Index extends bigint | number> extends PartialKeys<
     Indexable<T, Index>,
-    'rangeSize' | 'range'
+    'range' | 'rangeSize'
   > {}
 }

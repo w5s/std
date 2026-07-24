@@ -1,8 +1,9 @@
-import { describe } from 'vitest';
 import { describeNegate, describeNumeric, describeSigned, describeZero } from '@w5s/core/dist/Testing.js';
-import { IntIntegral } from './IntIntegral.js';
+import { describe } from 'vitest';
+
 import { Int } from '../Int.js';
 import { IntComparable } from './IntComparable.js';
+import { IntIntegral } from './IntIntegral.js';
 
 describe('IntIntegral', () => {
   describeZero(IntIntegral, {
@@ -22,11 +23,11 @@ describe('IntIntegral', () => {
     { ...IntComparable, ...IntIntegral },
     {
       values: () => [
-        { value: -2, type: 'negative', sign: -1, abs: 2 },
-        { value: -1, type: 'negative', sign: -1, abs: 1 },
-        { value: 0, type: 'zero', sign: 0, abs: 0 },
-        { value: 1, type: 'positive', sign: 1, abs: 1 },
-        { value: 2, type: 'positive', sign: 1, abs: 2 },
+        { abs: 2, sign: -1, type: 'negative', value: -2 },
+        { abs: 1, sign: -1, type: 'negative', value: -1 },
+        { abs: 0, sign: 0, type: 'zero', value: 0 },
+        { abs: 1, sign: 1, type: 'positive', value: 1 },
+        { abs: 2, sign: 1, type: 'positive', value: 2 },
       ],
     },
   );

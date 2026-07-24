@@ -1,10 +1,11 @@
-import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
+import { describe, expect, it } from 'vitest';
+
+import { Option } from '../Option.js';
+import { Result } from '../Result.js';
+import { Error } from './Error.js';
 import { getError } from './getError.js';
 import { Ok } from './Ok.js';
-import { Option } from '../Option.js';
-import { Error } from './Error.js';
-import { Result } from '../Result.js';
 
 describe(getError, () => {
   const anyValue = 'anyValue' as const;
@@ -21,8 +22,9 @@ describe(getError, () => {
     assertType<typeof error, typeof anyError>(true);
 
     const anyResult: Result<'anyValue', 'anyError'> = Ok('anyValue');
-    // eslint-disable-next-line ts/no-unused-vars
+
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const optError = getError(anyResult);
-    assertType<typeof optError, typeof anyError | Option.None>(true);
+    assertType<typeof optError, Option.None | typeof anyError>(true);
   });
 });

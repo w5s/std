@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { Result } from '@w5s/core';
-import { FakeTask } from './FakeTask.js';
+import { describe, expect, it } from 'vitest';
+
 import { run } from '../Task/run.js';
+import { FakeTask } from './FakeTask.js';
 
 describe(FakeTask, () => {
   it('should resolve value', () => {

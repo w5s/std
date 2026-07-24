@@ -1,4 +1,5 @@
 import type { Int } from '@w5s/core';
+
 import { of } from './of.js';
 
 const None = of('none', 0 as Int);
@@ -32,12 +33,12 @@ const Debug = of('debug', 10 as Int);
  * @namespace
  */
 export const LogLevelValue = {
-  None,
   Critical,
-  Error,
-  Warn,
-  Info,
   Debug,
+  Error,
+  Info,
+  None,
+  Warn,
 };
 
 export type LogLevelValue = Lowercase<keyof typeof LogLevelValue>;

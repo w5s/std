@@ -1,13 +1,12 @@
 import type { Divide } from './Divide.js';
-import { Numeric, type NumericParameters } from './Numeric.js';
 import type { Remainder } from './Remainder.js';
 
-export interface IntegralParameters<T> extends NumericParameters<T>, Divide<T>, Remainder<T> {}
+import { Numeric, type NumericParameters } from './Numeric.js';
 
 /**
  * Integral type
  */
-export interface Integral<T> extends Numeric<T>, Divide<T>, Remainder<T> {
+export interface Integral<T> extends Divide<T>, Numeric<T>, Remainder<T> {
   /**
    * Quotient/Modulo operator
    *
@@ -24,12 +23,14 @@ export interface Integral<T> extends Numeric<T>, Divide<T>, Remainder<T> {
   '/%'(this: void, base: T, divider: T): [quot: T, mod: T];
 }
 
+export interface IntegralParameters<T> extends Divide<T>, NumericParameters<T>, Remainder<T> {}
+
 export function Integral<T>(properties: IntegralParameters<T>): Integral<T> {
-  const { '/': quot, '%': mod } = properties;
+  const { '%': mod, '/': quot } = properties;
   return {
     ...Numeric(properties),
-    '/': quot,
     '%': mod,
+    '/': quot,
     '/%': (base, divider) => [quot(base, divider), mod(base, divider)],
   };
 }

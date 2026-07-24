@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { provide } from './provide.js';
+import { describe, expect, it } from 'vitest';
+
 import { ContainerKey } from './ContainerKey.js';
+import { provide } from './provide.js';
 
 describe(provide, () => {
   it('should add property to object', () => {

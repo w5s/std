@@ -1,16 +1,17 @@
 import type { Enum } from '@w5s/core';
+
 import { define } from '@w5s/core/dist/Enum/define.js';
 
 export const ReferrerPolicy = define({
-  typeName: 'ReferrerPolicy',
   Empty: '',
   NoReferrer: 'no-referrer',
   NoReferrerWhenDowngrade: 'no-referrer-when-downgrade',
-  SameOrigin: 'same-origin',
   Origin: 'origin',
-  StrictOrigin: 'strict-origin',
   OriginWhenCrossOrigin: 'origin-when-cross-origin',
+  SameOrigin: 'same-origin',
+  StrictOrigin: 'strict-origin',
   StrictOriginWhenCrossOrigin: 'strict-origin-when-cross-origin',
+  typeName: 'ReferrerPolicy',
   UnsafeURL: 'unsafe-url',
 });
 

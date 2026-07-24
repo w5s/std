@@ -1,16 +1,17 @@
 import { describe, expect, it, vi } from 'vitest';
-import { tryCall } from './tryCall.js';
-import { Ok } from './Ok.js';
+
 import { Error } from './Error.js';
+import { Ok } from './Ok.js';
+import { tryCall } from './tryCall.js';
 
 describe(tryCall, () => {
   class TestError extends globalThis.Error {
+    override name = 'TestError';
+
     constructor() {
       super();
       this.name = 'TestError';
     }
-
-    override name = 'TestError';
   }
   describe('sync', () => {
     it('should return Ok(block()) when nothing is thrown', () => {

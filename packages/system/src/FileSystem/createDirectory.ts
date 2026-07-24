@@ -1,8 +1,10 @@
-import type * as nodeFS from 'node:fs';
 import type { Task } from '@w5s/task';
+import type * as nodeFS from 'node:fs';
+
 import type { FileError } from '../FileError.js';
-import { Internal, errnoTask } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';
+
+import { errnoTask, Internal } from '../Internal.js';
 
 /**
  * Asynchronously creates a directory.

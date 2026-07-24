@@ -1,10 +1,12 @@
 import type { PartialKeys } from '@w5s/core-type';
+
 import type { AsString } from './AsString.js';
-import { Struct as StructImpl } from './Struct/Struct.js';
-import { Callable } from './Callable.js';
-import { define as defineType } from './Type/define.js';
-import type { Type } from './Type.js';
 import type { Symbol } from './Symbol.js';
+import type { Type } from './Type.js';
+
+import { Callable } from './Callable.js';
+import { Struct as StructImpl } from './Struct/Struct.js';
+import { define as defineType } from './Type/define.js';
 
 const type = '_' as const;
 
@@ -35,11 +37,6 @@ export type Struct<
  * @namespace
  */
 export const Struct = {
-  /**
-   * The type property discriminator
-   */
-  type,
-
   /**
    * Return a new Struct from `properties`.
    * Struct adds debugging / inspecting abilities
@@ -96,16 +93,23 @@ export const Struct = {
       ...module,
     });
   },
+
+  /**
+   * The type property discriminator
+   */
+  type,
 };
 
 export namespace Struct {
-  /**
-   * Extract all parameters to create a new Struct
-   */
-  export type Parameters<Model> = Omit<Model, Struct.type>;
+  export interface DefineParameters<Model extends Struct<{ [type]: string }>> extends PartialKeys<
+    Type.Parameters<Model>,
+    'hasInstance'
+  > {
+    typeName: Model[Struct.type];
+  }
 
   export interface Module<Model extends Struct>
-    extends Type.Module<Model>, Callable<(properties: Parameters<Model>) => Model> {
+    extends Callable<(properties: Parameters<Model>) => Model>, Type.Module<Model> {
     /**
      * Construct a new model
      *
@@ -130,14 +134,12 @@ export namespace Struct {
     readonly typeName: Model[Struct.type];
   }
 
+  export type ModuleParameter<T> = AsString<T> & Pick<Type<T>, Symbol.inspect>;
+
+  /**
+   * Extract all parameters to create a new Struct
+   */
+  export type Parameters<Model> = Omit<Model, Struct.type>;
+
   export type type = typeof type;
-
-  export type ModuleParameter<T> = Pick<Type<T>, Symbol.inspect> & AsString<T>;
-
-  export interface DefineParameters<Model extends Struct<{ [type]: string }>> extends PartialKeys<
-    Type.Parameters<Model>,
-    'hasInstance'
-  > {
-    typeName: Model[Struct.type];
-  }
 }

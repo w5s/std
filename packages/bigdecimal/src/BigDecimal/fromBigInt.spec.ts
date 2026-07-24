@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { BigDecimal } from './BigDecimal.js';
 import { fromBigInt } from './fromBigInt.js';
 

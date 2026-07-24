@@ -1,7 +1,7 @@
 /* cSpell:disable */
 import { Currency } from './Currency.js';
-import { factory as moneyFactory } from './Money/factory.js';
 import { CurrencyRegistry } from './CurrencyRegistry.js';
+import { factory as moneyFactory } from './Money/factory.js';
 
 const register = (
   code: Currency['code'],
@@ -15,9 +15,9 @@ const register = (
   CurrencyRegistry.add(
     Currency({
       code,
-      precision: precision as Currency['precision'],
       name,
       namePlural,
+      precision: precision as Currency['precision'],
       rounding: rounding as Currency['rounding'],
       symbol,
       symbolNative,

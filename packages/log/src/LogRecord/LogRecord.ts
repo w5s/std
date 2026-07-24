@@ -1,36 +1,18 @@
-import { Time } from '@w5s/time/dist/Time/Time.js';
-import { UUID } from '@w5s/core/dist/Type/UUID.js';
-import { TObject } from '@w5s/core/dist/Type/Object.js';
-import { constant } from '@w5s/core/dist/Type/constant.js';
-import { string } from '@w5s/core/dist/Type/string.js';
-import { Record } from '@w5s/core/dist/Type/Record.js';
-import { unknown } from '@w5s/core/dist/Type/unknown.js';
 import type { Type } from '@w5s/core';
-import { LogMessage } from '../LogMessage.js';
+
+import { constant } from '@w5s/core/dist/Type/constant.js';
+import { TObject } from '@w5s/core/dist/Type/Object.js';
+import { Record } from '@w5s/core/dist/Type/Record.js';
+import { string } from '@w5s/core/dist/Type/string.js';
+import { unknown } from '@w5s/core/dist/Type/unknown.js';
+import { UUID } from '@w5s/core/dist/Type/UUID.js';
+import { Time } from '@w5s/time/dist/Time/Time.js';
+
 import { LogLevel } from '../LogLevel/LogLevel.js';
+import { LogMessage } from '../LogMessage.js';
 
 export const LogRecord = TObject({
   _: constant('LogRecord'),
-
-  /**
-   * Event identifier
-   */
-  id: UUID,
-
-  /**
-   * The log domain (i.e. category)
-   */
-  domain: string,
-
-  /**
-   * The log level
-   */
-  level: LogLevel,
-
-  /**
-   * Unformatted message
-   */
-  message: LogMessage,
 
   /**
    * Time when the record was created
@@ -41,5 +23,25 @@ export const LogRecord = TObject({
    * Additional data
    */
   data: Record(string, unknown),
+
+  /**
+   * The log domain (i.e. category)
+   */
+  domain: string,
+
+  /**
+   * Event identifier
+   */
+  id: UUID,
+
+  /**
+   * The log level
+   */
+  level: LogLevel,
+
+  /**
+   * Unformatted message
+   */
+  message: LogMessage,
 });
 export interface LogRecord extends Type.TypeOf<typeof LogRecord> {}

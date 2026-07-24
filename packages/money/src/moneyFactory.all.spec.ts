@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import currencyData from 'currencies.json';
+import { describe, expect, it } from 'vitest';
+
 import * as MoneyFactory from './moneyFactory.all.js';
 
 describe.each(['USD', 'EUR'] as const)('%s()', (factoryName) => {

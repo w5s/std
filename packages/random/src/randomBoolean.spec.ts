@@ -1,8 +1,9 @@
-import { describe, expect, it, vi } from 'vitest';
-import { withTask } from '@w5s/task/dist/Testing.js';
 import { Symbol } from '@w5s/core';
-import { randomBoolean } from './randomBoolean.js';
+import { withTask } from '@w5s/task/dist/Testing.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { next } from './Random/next.js';
+import { randomBoolean } from './randomBoolean.js';
 import { fakeRandomGenerator } from './Testing.js';
 
 describe('randomBoolean', () => {

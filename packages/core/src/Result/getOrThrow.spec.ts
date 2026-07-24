@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { getOrThrow } from './getOrThrow.js';
+import { describe, expect, it } from 'vitest';
+
 import { Error } from './Error.js';
+import { getOrThrow } from './getOrThrow.js';
 import { Ok } from './Ok.js';
 
 describe('.getOrThrow', () => {

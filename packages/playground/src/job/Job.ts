@@ -4,26 +4,22 @@ import { randomUUID, type UUID } from '@w5s/uuid';
 
 export namespace Job {
   export interface Module<Request extends { _: string; payload: unknown }> {
-    jobName: Request['_'];
-    Request: Type.Module<Request>;
-
     create(payload: Request['payload']): Task<JobId, never>;
+    jobName: Request['_'];
+
+    Request: Type.Module<Request>;
   }
 }
 
-export type JobId = UUID & Tag<'JobId'>;
+export type JobId = Tag<'JobId'> & UUID;
 
 export const Job = {
-  nextJobId: randomUUID() as Task<JobId, never>,
-
   define<JobName extends string, Payload>(jobName: JobName, PayloadType: Type.Module<Payload>): Job.Module<{ _: JobName; payload: Payload }> {
     const Request = Type.Object({
       _: Type.constant(jobName),
       payload: PayloadType,
     }, `${jobName}Job`);
     return {
-      jobName,
-      Request,
       create(payload) {
         const request = { _: jobName, payload };
         const requestEncoded = lazy(() => Codec.encode(Request, request));
@@ -34,8 +30,12 @@ export const Job = {
           });
         });
       },
+      jobName,
+      Request,
     };
   },
+
+  nextJobId: randomUUID() as Task<JobId, never>,
 };
 
 // export const Blah = Job.define('Blah', Type.Object({

@@ -1,5 +1,6 @@
-import { Tag } from '@w5s/core/dist/Tag.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
+import { Tag } from '@w5s/core/dist/Tag.js';
+
 import { parse } from './parse.js';
 
 /**
@@ -8,14 +9,14 @@ import { parse } from './parse.js';
 export type Time = number & Tag<'Time'>;
 
 export const Time = Tag.define<number, Time>({
-  typeName: 'Time',
   hasInstance(anyValue) {
     return typeof anyValue === 'number' && anyValue >= -8.64e15 && anyValue <= 8.64e15;
   },
-  [Symbol.encode]: (input) => new Date(input).toISOString(),
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     const timestamp = typeof input === 'string' ? parse(input) : undefined;
     return timestamp == null ? error(input, 'Time') : ok(timestamp);
   },
-  [Symbol.schema]: () => ({ type: 'string', format: 'date-time' }),
+  [Symbol.encode]: (input) => new Date(input).toISOString(),
+  [Symbol.schema]: () => ({ format: 'date-time', type: 'string' }),
+  typeName: 'Time',
 });

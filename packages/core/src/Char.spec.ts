@@ -1,10 +1,11 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { Char } from './Char.js';
-import { Char as CharType } from './Type/Char.js';
-import { CharComparable } from './Char/CharComparable.js';
 import { CharBounded } from './Char/CharBounded.js';
-import { fromCodePoint } from './Char/fromCodePoint.js';
+import { CharComparable } from './Char/CharComparable.js';
 import { CharIndexable } from './Char/CharIndexable.js';
+import { fromCodePoint } from './Char/fromCodePoint.js';
+import { Char as CharType } from './Type/Char.js';
 
 describe(Char, () => {
   it('is an alias to functions', () => {

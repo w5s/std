@@ -1,10 +1,13 @@
 import type { Result } from '@w5s/core/dist/Result.js';
+
 import { Error } from '@w5s/core/dist/Result/Error.js';
 import { Ok } from '@w5s/core/dist/Result/Ok.js';
+
 import type { Task, TaskLike } from '../Task.js';
-import { TaskAggregateState } from './TaskAggregateState.js';
-import { from } from './from.js';
+
 import { emptyArray } from '../internal/emptyArray.js';
+import { from } from './from.js';
+import { TaskAggregateState } from './TaskAggregateState.js';
 
 /**
  * Resolves an array of all task results
@@ -19,7 +22,7 @@ import { emptyArray } from '../internal/emptyArray.js';
  * ```
  * @param tasks tasks to be run in parallel
  */
-export function allSettled<T extends TaskLike<any, any>[]>(
+export function allSettled<T extends Array<TaskLike<any, any>>>(
   tasks: [...T],
 ): Task<{ [K in keyof T]: Result<Task.ValueOf<T[K]>, Task.ErrorOf<T[K]>> }, never>;
 export function allSettled<Value, Error>(
@@ -29,7 +32,7 @@ export function allSettled<Value, Error>(
   tasks: Iterable<TaskLike<Value, Error>>,
 ): Task<ReadonlyArray<Result<Value, Error>>, never> {
   return from((parameters) => {
-    const taskArray = Array.from(tasks, (task, key) => ({ task, key }));
+    const taskArray = Array.from(tasks, (task, key) => ({ key, task }));
 
     if (taskArray.length === 0) {
       parameters.resolve(emptyArray);

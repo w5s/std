@@ -1,4 +1,5 @@
 import type { Secret } from '../Secret.js';
+
 import { Secret as SecretImpl } from './Secret.js';
 
 /**

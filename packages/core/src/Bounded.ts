@@ -3,18 +3,6 @@
  */
 export interface Bounded<T> {
   /**
-   * Minimum value for this type
-   *
-   * @example
-   * ```typescript
-   * const anyNumber: number
-   * anyNumber > Number.minValue // true
-   * ```
-   * @category Bound
-   */
-  readonly minValue: T;
-
-  /**
    * Maximum value for this type
    *
    * @example
@@ -25,4 +13,16 @@ export interface Bounded<T> {
    * @category Bound
    */
   readonly maxValue: T;
+
+  /**
+   * Minimum value for this type
+   *
+   * @example
+   * ```typescript
+   * const anyNumber: number
+   * anyNumber > Number.minValue // true
+   * ```
+   * @category Bound
+   */
+  readonly minValue: T;
 }

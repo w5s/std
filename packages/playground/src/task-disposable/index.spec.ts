@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import * as Module from './index.js';
+
 import { dispose } from './dispose.js';
+import * as Module from './index.js';
 import { using } from './using.js';
 
 describe('module public API', () => {

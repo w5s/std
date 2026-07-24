@@ -1,12 +1,12 @@
+import type { ANSIWrapper } from './wrap.js';
+
 /* cSpell:disable */
 import { wrap } from './wrap.js';
-
-import type { ANSIWrapper } from './wrap.js';
 
 /**
  * ANSI Color
  */
-export type Color = 'black' | 'red' | 'green' | 'yellow' | 'blue' | 'magenta' | 'cyan' | 'white';
+export type Color = 'black' | 'blue' | 'cyan' | 'green' | 'magenta' | 'red' | 'white' | 'yellow';
 
 const colorMap = new Map(
   (

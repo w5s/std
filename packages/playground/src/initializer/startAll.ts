@@ -1,4 +1,5 @@
 import type { Awaitable } from '@w5s/core-type';
+
 import { Initializer } from './Initializer.js';
 import { start } from './start.js';
 
@@ -18,10 +19,9 @@ import { start } from './start.js';
  */
 export async function startAll<
   AppContext extends object,
-  const Initializers extends readonly (
-    | (() => Awaitable<Initializer<AppContext>>)
-    | (() => Awaitable<{ default: Initializer<AppContext> }>)
-  )[],
+  const Initializers extends ReadonlyArray<
+  | (() => Awaitable<Initializer<AppContext>>)
+  | (() => Awaitable<{ default: Initializer<AppContext> }>)>,
 >(
   appContext: AppContext,
   initializers: Initializers,

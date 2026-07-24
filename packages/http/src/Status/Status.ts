@@ -1,4 +1,5 @@
 import type { Type } from '@w5s/core';
+
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Int } from '@w5s/core/dist/Type/Int.js';
 import { TObject } from '@w5s/core/dist/Type/Object.js';

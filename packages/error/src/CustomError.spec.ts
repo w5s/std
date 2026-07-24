@@ -1,4 +1,5 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
+
 import { CustomError } from './CustomError.js';
 import { asString } from './CustomError/asString.js';
 
@@ -19,26 +20,26 @@ describe('CustomError', () => {
     it('should return Error with default properties', () => {
       expect(CustomError({ name: anyString })).toEqual(
         expect.objectContaining({
-          message: '',
           cause: undefined,
+          message: '',
         }),
       );
     });
     it('should merge custom properties', () => {
-      expect(CustomError({ name: 'MockError', message: 'custom message', foo: true })).toEqual(
+      expect(CustomError({ foo: true, message: 'custom message', name: 'MockError' })).toEqual(
         expect.objectContaining({
-          name: 'MockError',
-          message: 'custom message',
           foo: true,
+          message: 'custom message',
+          name: 'MockError',
         }),
       );
     });
     it('should keep original message', () => {
       const cause = new Error('CauseMessage');
-      expect(CustomError({ name: anyString, message: 'OriginalMessage', cause })).toEqual(
+      expect(CustomError({ cause, message: 'OriginalMessage', name: anyString })).toEqual(
         expect.objectContaining({
-          message: 'OriginalMessage',
           cause,
+          message: 'OriginalMessage',
         }),
       );
     });
@@ -47,16 +48,16 @@ describe('CustomError', () => {
     it('returns instance of Error', () => {
       expect(new CustomError({ name: anyString })).toBeInstanceOf(Error);
       expect(new CustomError({ name: anyString })).toBeInstanceOf(CustomError);
-      expect(new CustomError({ name: anyString, foo: true })).toEqual(expect.objectContaining({ foo: true }));
+      expect(new CustomError({ foo: true, name: anyString })).toEqual(expect.objectContaining({ foo: true }));
     });
   });
 
   describe('#toString()', () => {
     it.each([
       [CustomError({ name: 'CustomError' }), 'CustomError'],
-      [CustomError({ name: 'CustomError', message: 'CustomMessage' }), 'CustomError: CustomMessage'],
+      [CustomError({ message: 'CustomMessage', name: 'CustomError' }), 'CustomError: CustomMessage'],
       [
-        CustomError({ name: 'CustomError', message: 'CustomMessage', cause: new Error('CauseMessage') }),
+        CustomError({ cause: new Error('CauseMessage'), message: 'CustomMessage', name: 'CustomError' }),
         [
           // lines
           'CustomError: CustomMessage',
@@ -65,16 +66,16 @@ describe('CustomError', () => {
       ],
       [
         CustomError({
-          name: 'CustomError1',
-          message: 'Level 1',
           cause: CustomError({
-            name: 'CustomError2',
-            message: 'Level 2',
             cause: CustomError({
-              name: 'CustomError3',
               message: 'Level 3',
+              name: 'CustomError3',
             }),
+            message: 'Level 2',
+            name: 'CustomError2',
           }),
+          message: 'Level 1',
+          name: 'CustomError1',
         }),
         [
           // lines
@@ -94,9 +95,9 @@ describe('CustomError', () => {
       }
 
       const error = CustomError({
-        name: 'CustomError',
-        message: 'CustomMessage',
         cause: new Error('CauseMessage'),
+        message: 'CustomMessage',
+        name: 'CustomError',
       });
       const lines = error.stack.split('\n');
 
@@ -109,9 +110,9 @@ describe('CustomError', () => {
     it('forwards cause property', () => {
       const cause = new Error('CauseMessage');
       const error = CustomError({
-        name: 'CustomError',
-        message: 'CustomMessage',
         cause: new Error('CauseMessage'),
+        message: 'CustomMessage',
+        name: 'CustomError',
       });
 
       expect(error.cause).toStrictEqual(cause);
@@ -120,8 +121,8 @@ describe('CustomError', () => {
   describe('#message', () => {
     it('forwards cause property', () => {
       const error = CustomError({
-        name: 'CustomError',
         message: 'CustomMessage',
+        name: 'CustomError',
       });
 
       expect(error.message).toStrictEqual('CustomMessage');

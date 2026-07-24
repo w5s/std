@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { startsWith } from './startsWith.js';
 
 describe(startsWith, () => {

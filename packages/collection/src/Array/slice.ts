@@ -1,5 +1,7 @@
 import type { Option } from '@w5s/core';
+
 import type { Array } from '../Array.js';
+
 import { empty } from './empty.js';
 
 /**

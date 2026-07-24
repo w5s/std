@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { setAt } from './setAt.js';
+import { describe, expect, it } from 'vitest';
+
 import { empty } from './empty.js';
+import { setAt } from './setAt.js';
 
 describe(setAt, () => {
   it('returns unchanged when empty', () => {

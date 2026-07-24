@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { isSome } from './isSome.js';
+
 import type { Option } from '../Option.js';
+
+import { isSome } from './isSome.js';
 
 describe(isSome, () => {
   it('should return true for any value', () => {

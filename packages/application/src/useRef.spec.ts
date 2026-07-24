@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
 import { Ref } from '@w5s/core';
 import { useStorage } from '@w5s/global-storage';
+import { describe, expect, it } from 'vitest';
+
 import { useRef } from './useRef.js';
 
 describe(useRef, () => {

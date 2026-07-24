@@ -1,6 +1,8 @@
 import type { Int } from '@w5s/num';
-import { of } from './of.js';
+
 import type { BigDecimal } from './BigDecimal.js';
+
+import { of } from './of.js';
 
 /**
  * Converts an integer to a big decimal.

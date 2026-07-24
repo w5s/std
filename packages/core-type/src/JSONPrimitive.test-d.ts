@@ -1,4 +1,4 @@
-/* eslint-disable ts/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
 import type { JSONPrimitive } from './JSONPrimitive.js';
 
 const num: JSONPrimitive = 1;

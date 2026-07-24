@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest';
 import { Iterable } from '@w5s/iterable';
+import { describe, expect, it } from 'vitest';
+
 import { hasInstance } from './hasInstance.js';
 import { of as Seq } from './of.js';
 

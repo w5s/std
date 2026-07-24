@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Status } from './Status.js';
 import { StatusBounded } from './Status/StatusBounded.js';
 import { StatusComparable } from './Status/StatusComparable.js';
@@ -13,10 +14,10 @@ describe('Status', () => {
   it('is a constructor', () => {
     expect(Status).toEqual(
       expect.objectContaining({
-        hasInstance: expect.any(Function),
-        __schema__: expect.any(Function),
-        __encode__: expect.any(Function),
         __decode__: expect.any(Function),
+        __encode__: expect.any(Function),
+        __schema__: expect.any(Function),
+        hasInstance: expect.any(Function),
       }),
     );
   });

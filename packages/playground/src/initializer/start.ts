@@ -1,4 +1,5 @@
 import type { Initializer } from './Initializer.js';
+
 import { InitializerStatus } from './InitializerStatus.js';
 import { getStatus, setStatus } from './internal/state.js';
 

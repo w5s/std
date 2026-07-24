@@ -1,9 +1,10 @@
 import type { Codec, Int, Option } from '@w5s/core';
+
+import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { parse as parseNumber } from '@w5s/num/dist/Number/parse.js';
-import { Callable } from '@w5s/core/dist/Callable.js';
 import { parse as parseInt } from '@w5s/num/dist/Int/parse.js';
+import { parse as parseNumber } from '@w5s/num/dist/Number/parse.js';
 
 const numbers = String.raw`\d+`;
 const fractionalNumbers = String.raw`${numbers}(?:[\.,]${numbers})?`;
@@ -54,18 +55,29 @@ function parse(expression: string): Option<Duration> {
 
   // eslint-disable-next-line ts/no-use-before-define
   return DurationStruct.create({
-    years,
-    months,
-    weeks,
     days,
     hours,
     minutes,
+    months,
     seconds,
+    weeks,
+    years,
   });
 }
 
 const formatPart = (prefix: string, part: number) => (part === 0 ? '' : `${part}${prefix}`);
 const formatSection = (prefix: string, content: string) => (content.length === 0 ? '' : `${prefix}${content}`);
+
+export interface Duration extends Struct<{
+  _: 'Duration';
+  days: Int;
+  hours: Int;
+  minutes: Int;
+  months: Int;
+  seconds: number;
+  weeks: Int;
+  years: Int;
+}> {}
 
 function format(duration: Duration): string {
   return `P${formatPart('Y', duration.years)}${formatPart('M', duration.months)}${formatPart('D', duration.days)}${formatSection(
@@ -74,28 +86,17 @@ function format(duration: Duration): string {
   )}`;
 }
 
-export interface Duration extends Struct<{
-  _: 'Duration';
-  years: Int;
-  months: Int;
-  weeks: Int;
-  days: Int;
-  hours: Int;
-  minutes: Int;
-  seconds: number;
-}> {}
-
 const DurationStruct = Struct.define<Duration>({ typeName: 'Duration' });
 
 const DurationCodec: Codec<Duration> = {
-  [Symbol.encode]: (value) => format(value),
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     const returnValue = typeof input === 'string' ? parse(input) : undefined;
     return returnValue === undefined ? error(input, 'Duration') : ok(returnValue);
   },
+  [Symbol.encode]: (value) => format(value),
   [Symbol.schema]: () => ({
-    type: 'string',
     format: 'duration',
+    type: 'string',
   }),
 };
 
@@ -107,12 +108,12 @@ export const Duration = Callable({
   ...DurationCodec,
   [Callable.symbol]: (properties?: Partial<Struct.Parameters<Duration>>): Duration =>
     Duration.create({
-      years: properties?.years ?? (0 as Int),
-      months: properties?.months ?? (0 as Int),
-      weeks: properties?.weeks ?? (0 as Int),
       days: properties?.days ?? (0 as Int),
       hours: properties?.hours ?? (0 as Int),
       minutes: properties?.minutes ?? (0 as Int),
+      months: properties?.months ?? (0 as Int),
       seconds: properties?.seconds ?? 0,
+      weeks: properties?.weeks ?? (0 as Int),
+      years: properties?.years ?? (0 as Int),
     }),
 });

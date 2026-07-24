@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { write } from './write.js';
+import { describe, expect, it } from 'vitest';
+
 import { Ref } from '../Ref.js';
+import { write } from './write.js';
 
 describe(write, () => {
   it('should set current value', () => {

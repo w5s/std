@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { Comparable } from './Comparable.js';
 
 describe('Comparable', () => {

@@ -5,4 +5,4 @@ import type { JSONPrimitive } from './JSONPrimitive.js';
 /**
  * Any valid JSON value
  */
-export type JSONValue = JSONPrimitive | JSONArray | JSONObject;
+export type JSONValue = JSONArray | JSONObject | JSONPrimitive;

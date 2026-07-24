@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { ReferenceError } from './ReferenceError.js';
 
 describe(ReferenceError, () => {

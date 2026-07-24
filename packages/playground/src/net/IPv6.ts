@@ -1,14 +1,14 @@
 import type { Bounded, Int, Option, Ordering } from '@w5s/core';
-import { Symbol } from '@w5s/core/dist/Symbol.js';
-import { Struct } from '@w5s/core/dist/Struct.js';
+
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Codec } from '@w5s/core/dist/Codec.js';
 import { Comparable } from '@w5s/core/dist/Comparable.js';
 import { Indexable } from '@w5s/core/dist/Indexable.js';
+import { Struct } from '@w5s/core/dist/Struct.js';
+import { Symbol } from '@w5s/core/dist/Symbol.js';
 import { compare as bigintCompare } from '@w5s/num/dist/BigInt/compare.js';
-import { IPv4 } from './IPv4.js';
 
-export type IPv6Address = bigint;
+import { IPv4 } from './IPv4.js';
 
 /**
  * IPv6 string type
@@ -17,6 +17,8 @@ export interface IPv6 extends Struct<{
   [Struct.type]: 'IPv6';
   ipv6: IPv6Address;
 }> {}
+
+export type IPv6Address = bigint;
 const IPv6Type = Struct.define<IPv6>({ typeName: 'IPv6' });
 
 const bigIntByteAt = (ipv6Value: bigint, index: number) =>
@@ -38,6 +40,21 @@ const parseIPv4 = (ipv4Expr: string): Option<bigint> => {
 };
 
 const IPv6Format = {
+  format({ ipv6 }: IPv6): string {
+    // Convert bigint to 8 segments of 16-bit hex values
+    return [
+      bigIntStringifyAt(ipv6, 0),
+      bigIntStringifyAt(ipv6, 1),
+      bigIntStringifyAt(ipv6, 2),
+      bigIntStringifyAt(ipv6, 3),
+      bigIntStringifyAt(ipv6, 4),
+      bigIntStringifyAt(ipv6, 5),
+      bigIntStringifyAt(ipv6, 6),
+      bigIntStringifyAt(ipv6, 7),
+    ]
+      .join(':')
+      .replaceAll(/^(:){2,}/g, '::');
+  },
   parse(expression: string): Option<IPv6> {
     let parts = expression.split(':');
     if (parts.length <= 2) return undefined;
@@ -61,6 +78,7 @@ const IPv6Format = {
     parts = [...Array.from({ length: 6 - parts.length }, () => '0'), ...parts];
     let bigintAddress = 0n;
 
+    // eslint-disable-next-line ts/prefer-for-of
     for (let index = 0; index < parts.length; index += 1) {
       const parsedPart = parseHex(parts[index]!);
       if (parsedPart == null) return undefined;
@@ -70,26 +88,10 @@ const IPv6Format = {
 
     return fromBigInt(bigintAddress);
   },
-  format({ ipv6 }: IPv6): string {
-    // Convert bigint to 8 segments of 16-bit hex values
-    return [
-      bigIntStringifyAt(ipv6, 0),
-      bigIntStringifyAt(ipv6, 1),
-      bigIntStringifyAt(ipv6, 2),
-      bigIntStringifyAt(ipv6, 3),
-      bigIntStringifyAt(ipv6, 4),
-      bigIntStringifyAt(ipv6, 5),
-      bigIntStringifyAt(ipv6, 6),
-      bigIntStringifyAt(ipv6, 7),
-    ]
-      .join(':')
-      .replaceAll(/^(:){2,}/g, '::');
-  },
 };
 
 const IPv6Codec: Codec<IPv6> = {
-  [Symbol.encode]: (input) => IPv6Format.format(input),
-  [Symbol.decode]: (input, { ok, error }) => {
+  [Symbol.decode]: (input, { error, ok }) => {
     if (typeof input === 'string') {
       const parsed = IPv6Format.parse(input);
       if (parsed != null) {
@@ -98,11 +100,16 @@ const IPv6Codec: Codec<IPv6> = {
     }
     return error(input, 'IPv6');
   },
+  [Symbol.encode]: (input) => IPv6Format.format(input),
   [Symbol.schema]: () => ({
-    type: 'string',
     format: 'ipv6',
+    type: 'string',
   }),
 };
+
+function compare(left: IPv6, right: IPv6): Ordering {
+  return bigintCompare(left.ipv6, right.ipv6);
+}
 
 function fromBigInt(value: bigint): IPv6 {
   return IPv6Type({ ipv6: value });
@@ -113,23 +120,19 @@ function of(...parts: [number, number, number, number, number, number, number, n
   return fromBigInt(bigintAddress);
 }
 
-function compare(left: IPv6, right: IPv6): Ordering {
-  return bigintCompare(left.ipv6, right.ipv6);
-}
-
 const IPv6Comparable = Comparable<IPv6>({
   compare,
 });
 
 const IPv6Bounded: Bounded<IPv6> = {
-  minValue: fromBigInt(0n),
   maxValue: fromBigInt(0xFF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FF_FFn),
+  minValue: fromBigInt(0n),
 };
 
 const IPv6Indexable = Indexable<IPv6, bigint>({
-  indexType: 'bigint',
   at: (index) => fromBigInt(index),
   indexOf: (value) => value.ipv6,
+  indexType: 'bigint',
 });
 
 const any = of(0, 0, 0, 0, 0, 0, 0, 0);
@@ -150,10 +153,10 @@ export const IPv6 = Callable({
   ...IPv6Comparable,
   ...IPv6Bounded,
   ...IPv6Indexable,
-  fromBigInt,
-  of,
   any,
-  loopback,
-  localhost,
   [Callable.symbol]: of,
+  fromBigInt,
+  localhost,
+  loopback,
+  of,
 });

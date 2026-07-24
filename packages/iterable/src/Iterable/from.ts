@@ -8,7 +8,7 @@
  * @category Constructor
  * @param source
  */
-export function from<Value>(source: Iterable<Value> | (() => Iterator<Value>)): Iterable<Value> {
+export function from<Value>(source: (() => Iterator<Value>) | Iterable<Value>): Iterable<Value> {
   const getIterator = typeof source === 'function' ? source : () => source[Symbol.iterator]();
   return {
     [Symbol.iterator]() {

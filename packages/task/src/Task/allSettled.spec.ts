@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/prefer-array-from-map */
-import { describe, it, expect, vi } from 'vitest';
 import { Result } from '@w5s/core';
-import { allSettled } from './allSettled.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { FakeTask, withTask } from '../Testing.js';
+import { allSettled } from './allSettled.js';
 import { run as taskRun } from './run.js';
 
 describe(allSettled, () => {
@@ -31,9 +32,9 @@ describe(allSettled, () => {
     const taskEntries = Array.from({ length: taskCount }).map((_, taskIndex) => {
       const canceler = vi.fn();
       return {
-        key: taskIndex,
-        task: FakeTask({ value: `value${taskIndex}`, canceler, delayMs: 2 }),
         canceler,
+        key: taskIndex,
+        task: FakeTask({ canceler, delayMs: 2, value: `value${taskIndex}` }),
       };
     });
     const allTask = allSettled(taskEntries.map(({ task }) => task));

@@ -1,12 +1,14 @@
 import type { Option } from '@w5s/core';
+
 import { ErrorClass } from '@w5s/error/dist/ErrorClass.js';
+
 import type { FilePath } from './FilePath.js';
 
 export const FileErrorType = {
   AlreadyExists: 'AlreadyExists',
   IllegalOperation: 'IllegalOperation',
-  UserError: 'UserError',
   OtherError: 'OtherError',
+  UserError: 'UserError',
 } as const;
 export type FileErrorType = (typeof FileErrorType)[keyof typeof FileErrorType];
 
@@ -16,9 +18,9 @@ export type FileErrorType = (typeof FileErrorType)[keyof typeof FileErrorType];
 export class FileError extends ErrorClass({
   errorName: 'FileError',
 })<{
-    fileErrorType: FileErrorType;
-    errno: Option<number>;
     code: Option<string>;
+    errno: Option<number>;
+    fileErrorType: FileErrorType;
     path: Option<FilePath>;
     syscall: Option<string>;
   }> {}

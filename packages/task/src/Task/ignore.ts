@@ -1,7 +1,6 @@
 import type { Task } from '../Task.js';
-import { map } from './map.js';
 
-function ignoreValue(_anyValue: unknown): void {}
+import { map } from './map.js';
 
 /**
  * Ignores value of task
@@ -16,3 +15,5 @@ function ignoreValue(_anyValue: unknown): void {}
 export function ignore<Error>(self: Task<unknown, Error>): Task<void, Error> {
   return map(self, ignoreValue);
 }
+
+function ignoreValue(_anyValue: unknown): void {}

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+
 import { set } from './set.js';
 
 describe(set, () => {

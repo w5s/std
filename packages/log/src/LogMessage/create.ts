@@ -13,6 +13,7 @@ import type { LogMessage, LogMessageItem } from '../LogMessage.js';
 export function create(parts: Array<LogMessageItem>): LogMessage {
   const returnValue = [];
   let buffer = '';
+  // eslint-disable-next-line ts/prefer-for-of
   for (let index = 0; index < parts.length; index += 1) {
     const value = parts[index]!;
     if (typeof value === 'string') {

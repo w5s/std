@@ -1,7 +1,9 @@
 import type { Task } from '@w5s/task';
+
 import type { FileError } from '../FileError.js';
-import { Internal, errnoTask } from '../Internal.js';
 import type { FilePath } from '../FilePath.js';
+
+import { errnoTask, Internal } from '../Internal.js';
 
 /**
  * Asynchronously copies `source` to `destination`. By default, `destination` is overwritten if it already exists.

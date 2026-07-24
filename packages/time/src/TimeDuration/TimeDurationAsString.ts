@@ -1,4 +1,5 @@
 import type { AsString } from '@w5s/core';
+
 import type { TimeDuration } from './TimeDuration.js';
 
 export const TimeDurationAsString: AsString<TimeDuration> = {

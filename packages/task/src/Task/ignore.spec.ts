@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { ignore } from './ignore.js';
+import { describe, expect, it } from 'vitest';
+
 import { withTask } from '../Testing.js';
+import { ignore } from './ignore.js';
 import { resolve } from './resolve.js';
 
 describe(ignore, () => {

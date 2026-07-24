@@ -1,4 +1,5 @@
 import type { Task } from '@w5s/task';
+
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 
 /**
@@ -11,7 +12,7 @@ import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
  * ```
  * @param resource The Disposable or AsyncDisposable to dispose
  */
-export function dispose(resource: Disposable | AsyncDisposable): Task<void, never> {
+export function dispose(resource: AsyncDisposable | Disposable): Task<void, never> {
   return taskFrom(({ resolve }) =>
     Symbol.asyncDispose in resource
       ? resource[Symbol.asyncDispose]().then(resolve)

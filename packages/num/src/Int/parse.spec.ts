@@ -1,7 +1,8 @@
-import { describe, expect, it } from 'vitest';
 import { Option } from '@w5s/core';
-import { parse } from './parse.js';
+import { describe, expect, it } from 'vitest';
+
 import { IntBounded } from '../Int/IntBounded.js';
+import { parse } from './parse.js';
 
 describe(parse, () => {
   it('should return a valid parsed integer when radix is omitted', () => {

@@ -1,18 +1,18 @@
-import { strip } from './ANSICode/strip.js';
-import { format } from './ANSICode/format.js';
-import { wrap } from './ANSICode/wrap.js';
 import { color } from './ANSICode/color.js';
-import { fontWeight } from './ANSICode/fontWeight.js';
 import { fontStyle } from './ANSICode/fontStyle.js';
+import { fontWeight } from './ANSICode/fontWeight.js';
+import { format } from './ANSICode/format.js';
+import { strip } from './ANSICode/strip.js';
 import { style } from './ANSICode/style.js';
+import { wrap } from './ANSICode/wrap.js';
 
 /**
  * @namespace
  */
 export const ANSICode = {
   color,
-  fontWeight,
   fontStyle,
+  fontWeight,
   format,
   strip,
   style,

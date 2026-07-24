@@ -11,7 +11,7 @@
  * @param self The object
  * @param keys The keys to pick in the new object.
  */
-export function pick<T extends object, K extends keyof T>(self: Readonly<T>, keys: readonly K[]): Pick<T, K> {
+export function pick<T extends object, K extends keyof T>(self: Readonly<T>, keys: ReadonlyArray<K>): Pick<T, K> {
   const returnValue: object = {};
   for (const key of keys) {
     if (typeof key !== 'function' && key != null && Object.hasOwn(self, key)) {

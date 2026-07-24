@@ -1,4 +1,5 @@
 import type { Enum } from '../Enum.js';
+
 import { Symbol } from '../Symbol.js';
 
 /**

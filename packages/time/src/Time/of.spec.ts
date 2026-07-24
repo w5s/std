@@ -1,6 +1,7 @@
-import { describe, it, expect } from 'vitest';
-import { Time } from './Time.js';
+import { describe, expect, it } from 'vitest';
+
 import { of } from './of.js';
+import { Time } from './Time.js';
 
 describe(of, () => {
   it('should throw invariant error', () => {

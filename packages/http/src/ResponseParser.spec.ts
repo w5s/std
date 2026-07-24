@@ -1,11 +1,13 @@
 import { CodecError, Type } from '@w5s/core';
 import { Task } from '@w5s/task';
-import { describe, it, expect } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { ResponseParser } from './ResponseParser.js';
-import { HTTPError } from './HTTPError.js';
-import type { Response } from './Response.js';
+import { describe, expect, it } from 'vitest';
+
 import type { BodyReader, BodyReaderFormat } from './BodyReader.js';
+import type { Response } from './Response.js';
+
+import { HTTPError } from './HTTPError.js';
+import { ResponseParser } from './ResponseParser.js';
 import { FakeBodyReader } from './Testing.js';
 
 const expectTask = withTask(expect);
@@ -115,8 +117,8 @@ describe('ResponseParser', () => {
       );
       await expectTask(parser(response)).toRejectAsync(
         new HTTPError.ParserError({
+          cause: new CodecError({ input: true, message: 'Cannot decode true as string' }),
           message: 'Cannot parse response body',
-          cause: new CodecError({ message: 'Cannot decode true as string', input: true }),
         }),
       );
 

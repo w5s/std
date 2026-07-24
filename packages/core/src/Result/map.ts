@@ -1,6 +1,7 @@
 import type { Result } from '../Result.js';
-import { Ok } from './Ok.js';
+
 import { isOk } from './isOk.js';
+import { Ok } from './Ok.js';
 
 /**
  * Maps a `Result<ValueFrom, Error>` to `Result<ValueTo, Error>` by applying a function to a contained {@link Result.Ok} value, leaving a {@link Result.Error} value untouched.

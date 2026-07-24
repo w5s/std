@@ -1,8 +1,9 @@
 import { Symbol } from '@w5s/core';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { withTask } from '@w5s/task/dist/Testing.js';
-import { emptyDirectory } from './emptyDirectory.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+
 import { fsStub, withFile } from '../Testing.js';
+import { emptyDirectory } from './emptyDirectory.js';
 
 describe(emptyDirectory, () => {
   const expectTask = withTask(expect);

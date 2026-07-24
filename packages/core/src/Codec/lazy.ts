@@ -1,5 +1,6 @@
 import type { Codec } from '../Codec.js';
 import type { Option } from '../Option.js';
+
 import { Symbol } from '../Symbol.js';
 import { decode } from './decode.js';
 import { encode } from './encode.js';

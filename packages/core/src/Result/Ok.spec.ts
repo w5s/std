@@ -1,7 +1,9 @@
-import { describe, expect, it } from 'vitest';
 import { assertType } from '@w5s/core-type';
-import { Ok } from './Ok.js';
+import { describe, expect, it } from 'vitest';
+
 import type { Result } from '../Result.js';
+
+import { Ok } from './Ok.js';
 
 describe(Ok, () => {
   it('should return a new object', () => {

@@ -1,19 +1,20 @@
-import nodePath from 'node:path';
-import type { Tag, Option } from '@w5s/core';
+import type { Option, Tag } from '@w5s/core';
 import type { Task } from '@w5s/task';
-import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
 
-function orEmpty<V>(optionalValue: Option<V>) {
-  return optionalValue ?? '';
-}
+import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+import nodePath from 'node:path';
+
+export type FileName = string;
+
+export type FilePath = string & Tag<'FilePath'>;
 
 function filterNotEmpty<V extends string>(value: string): Option<V> {
   return value === '' ? undefined : (value as V);
 }
 
-export type FileName = string;
-
-export type FilePath = string & Tag<'FilePath'>;
+function orEmpty<V>(optionalValue: Option<V>) {
+  return optionalValue ?? '';
+}
 
 /**
  * @namespace
@@ -24,22 +25,6 @@ export const FilePath = Object.assign(
     return value as FilePath;
   },
   {
-    delimiter: nodePath.delimiter as FilePath.Delimiter,
-    separator: nodePath.sep as FilePath.Separator,
-
-    /**
-     * Normalize a string path, reducing '..' and '.' parts. When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.
-     *
-     * @example
-     * ```typescript
-     * const path = FilePath.normalize('foo/./bar/../baz//quux/');// FilePath('foo/baz/quux/')
-     * ```
-     * @param path The path to normalize
-     */
-    normalize(path: FilePath): FilePath {
-      return nodePath.normalize(path) as FilePath;
-    },
-
     /**
      * Return the last portion of a path. Similar to the Unix basename command.
      * Often used to extract the file name from a fully qualified path.
@@ -54,6 +39,22 @@ export const FilePath = Object.assign(
     basename(path: FilePath, extension?: Option<FilePath.Extension>): FileName {
       return nodePath.basename(path, extension) as FilePath;
     },
+
+    /**
+     * Join all arguments together and normalize the resulting path.
+     *
+     * @example
+     * ```typescript
+     * const paths = [FilePath('hello'), FilePath('world')];
+     * FilePath.concat(paths);// FilePath('hello/world')
+     * ```
+     * @param paths paths to join.
+     */
+    concat(paths: ReadonlyArray<FileName | FilePath>): FilePath {
+      return nodePath.join(...paths) as FilePath;
+    },
+
+    delimiter: nodePath.delimiter as FilePath.Delimiter,
 
     /**
      * Return the directory name of a path. Similar to the Unix dirname command.
@@ -99,12 +100,48 @@ export const FilePath = Object.assign(
      */
     format(parsed: Partial<FilePath.Parsed>): FilePath {
       return nodePath.format({
-        root: orEmpty(parsed.root),
-        dir: orEmpty(parsed.dir),
         base: orEmpty(parsed.base),
+        dir: orEmpty(parsed.dir),
         ext: orEmpty(parsed.ext),
         name: orEmpty(parsed.name),
+        root: orEmpty(parsed.root),
       }) as FilePath;
+    },
+
+    isAbsolute(path: FilePath): boolean {
+      return nodePath.isAbsolute(path);
+    },
+
+    isParentOf(parentPath: FilePath, childPath: FilePath): boolean {
+      const parentPathNormalized = nodePath.normalize(parentPath);
+
+      if (childPath.length <= parentPathNormalized.length) {
+        return false;
+      }
+
+      const subPathNormalized = nodePath.normalize(childPath);
+      const subPathWithTrailingSep = subPathNormalized.endsWith(nodePath.sep)
+        ? subPathNormalized
+        : subPathNormalized + nodePath.sep;
+
+      return subPathWithTrailingSep.startsWith(parentPathNormalized);
+    },
+
+    isRelative(path: FilePath): boolean {
+      return !nodePath.isAbsolute(path);
+    },
+
+    /**
+     * Normalize a string path, reducing '..' and '.' parts. When multiple slashes are found, they're replaced by a single one; when the path contains a trailing slash, it is preserved. On Windows backslashes are used.
+     *
+     * @example
+     * ```typescript
+     * const path = FilePath.normalize('foo/./bar/../baz//quux/');// FilePath('foo/baz/quux/')
+     * ```
+     * @param path The path to normalize
+     */
+    normalize(path: FilePath): FilePath {
+      return nodePath.normalize(path) as FilePath;
     },
 
     /**
@@ -119,11 +156,11 @@ export const FilePath = Object.assign(
     parse(string: FilePath): FilePath.Parsed {
       const parsed = nodePath.parse(string);
       return {
-        root: filterNotEmpty<FilePath>(parsed.root),
-        dir: filterNotEmpty<FilePath>(parsed.dir),
         base: filterNotEmpty<FileName>(parsed.base),
+        dir: filterNotEmpty<FilePath>(parsed.dir),
         ext: filterNotEmpty<FilePath.Extension>(parsed.ext),
         name: filterNotEmpty<FileName>(parsed.name),
+        root: filterNotEmpty<FilePath>(parsed.root),
       };
     },
 
@@ -167,54 +204,19 @@ export const FilePath = Object.assign(
       return taskFrom(({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath));
     },
 
-    /**
-     * Join all arguments together and normalize the resulting path.
-     *
-     * @example
-     * ```typescript
-     * const paths = [FilePath('hello'), FilePath('world')];
-     * FilePath.concat(paths);// FilePath('hello/world')
-     * ```
-     * @param paths paths to join.
-     */
-    concat(paths: ReadonlyArray<FilePath | FileName>): FilePath {
-      return nodePath.join(...paths) as FilePath;
-    },
-
-    isAbsolute(path: FilePath): boolean {
-      return nodePath.isAbsolute(path);
-    },
-
-    isRelative(path: FilePath): boolean {
-      return !nodePath.isAbsolute(path);
-    },
-
-    isParentOf(parentPath: FilePath, childPath: FilePath): boolean {
-      const parentPathNormalized = nodePath.normalize(parentPath);
-
-      if (childPath.length <= parentPathNormalized.length) {
-        return false;
-      }
-
-      const subPathNormalized = nodePath.normalize(childPath);
-      const subPathWithTrailingSep = subPathNormalized.endsWith(nodePath.sep)
-        ? subPathNormalized
-        : subPathNormalized + nodePath.sep;
-
-      return subPathWithTrailingSep.startsWith(parentPathNormalized);
-    },
+    separator: nodePath.sep as FilePath.Separator,
   },
 );
 export namespace FilePath {
   export type Delimiter = ':' | ';';
-  export type Extension = `.${string}` | '';
-  export type Separator = '/' | '\\';
-
+  export type Extension = '' | `.${string}`;
   export interface Parsed {
-    readonly root: Option<FilePath>;
-    readonly dir: Option<FilePath>;
     readonly base: Option<FileName>;
+    readonly dir: Option<FilePath>;
     readonly ext: Option<Extension>;
     readonly name: Option<FileName>;
+    readonly root: Option<FilePath>;
   }
+
+  export type Separator = '/' | '\\';
 }

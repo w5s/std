@@ -1,5 +1,6 @@
-import { describe } from 'vitest';
 import { Result } from '@w5s/core';
+import { describe } from 'vitest';
+
 import { CodecError } from '../CodecError.js';
 import { describeCodec, describeType } from '../Testing.js';
 import { URL } from './URL.js';
@@ -8,9 +9,9 @@ describe('URL', () => {
   const anyValidURL = 'http://localhost:3000/my/path?get=1' as URL;
 
   describeType(URL, () => ({
-    typeName: 'URL',
     instances: [anyValidURL],
     notInstances: [null, ''],
+    typeName: 'URL',
   }));
   describeCodec(URL, () => ({
     decode: [
@@ -19,8 +20,8 @@ describe('URL', () => {
         '',
         Result.Error(
           new CodecError({
-            message: 'Cannot decode "" as URL',
             input: '',
+            message: 'Cannot decode "" as URL',
           }),
         ),
       ],
@@ -28,16 +29,16 @@ describe('URL', () => {
         null,
         Result.Error(
           new CodecError({
-            message: 'Cannot decode null as URL',
             input: null,
+            message: 'Cannot decode null as URL',
           }),
         ),
       ],
     ],
     encode: [[anyValidURL, anyValidURL]],
     schema: {
-      type: 'string',
       format: 'url',
+      type: 'string',
     },
   }));
 });

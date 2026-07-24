@@ -1,13 +1,36 @@
+export type SQLDataType =
+  | SQLDataType.BIGINT
+  | SQLDataType.BINARY
+  | SQLDataType.BLOB
+  | SQLDataType.BOOLEAN
+  | SQLDataType.CHAR
+  | SQLDataType.CLOB
+  | SQLDataType.DATE
+  | SQLDataType.DECIMAL
+  | SQLDataType.DOUBLE_PRECISION
+  | SQLDataType.FLOAT
+  | SQLDataType.INTEGER
+  | SQLDataType.INTERVAL
+  | SQLDataType.NCHAR
+  | SQLDataType.NUMERIC
+  | SQLDataType.NVARCHAR
+  | SQLDataType.REAL
+  | SQLDataType.SMALLINT
+  | SQLDataType.TIME
+  | SQLDataType.TIMESTAMP
+  | SQLDataType.VARBINARY
+  | SQLDataType.VARCHAR;
 type AnyObject = Record<string, unknown>;
-type EmptyObject = {};
 type DataType<T, P extends AnyObject = EmptyObject> = Readonly<
-  {
+  P & {
     /**
      * Data type identifier : CHAR, BINARY, etc
      */
     dataType: T;
-  } & P
+  }
 >;
+// eslint-disable-next-line ts/consistent-type-definitions
+type EmptyObject = {};
 
 function create<T, P extends AnyObject = EmptyObject>(constructor: { dataType: T }, params: P): DataType<T, P> {
   return {
@@ -16,29 +39,6 @@ function create<T, P extends AnyObject = EmptyObject>(constructor: { dataType: T
     ...params,
   };
 }
-
-export type SQLDataType =
-  | SQLDataType.CHAR
-  | SQLDataType.VARCHAR
-  | SQLDataType.NCHAR
-  | SQLDataType.NVARCHAR
-  | SQLDataType.CLOB
-  | SQLDataType.BOOLEAN
-  | SQLDataType.BINARY
-  | SQLDataType.VARBINARY
-  | SQLDataType.BLOB
-  | SQLDataType.INTEGER
-  | SQLDataType.SMALLINT
-  | SQLDataType.BIGINT
-  | SQLDataType.DECIMAL
-  | SQLDataType.NUMERIC
-  | SQLDataType.FLOAT
-  | SQLDataType.DOUBLE_PRECISION
-  | SQLDataType.REAL
-  | SQLDataType.DATE
-  | SQLDataType.TIME
-  | SQLDataType.TIMESTAMP
-  | SQLDataType.INTERVAL;
 
 const CHAR = Object.assign((size: number) => create(CHAR, { size }), {
   dataType: 'CHAR',
@@ -146,32 +146,28 @@ const INTERVAL = {
 } as const;
 
 const Modules = {
-  [BOOLEAN.dataType]: BOOLEAN,
-  [BLOB.dataType]: BLOB,
-  [CLOB.dataType]: CLOB,
-  [INTEGER.dataType]: INTEGER,
-  [SMALLINT.dataType]: SMALLINT,
   [BIGINT.dataType]: BIGINT,
-  [REAL.dataType]: REAL,
-  [DOUBLE_PRECISION.dataType]: DOUBLE_PRECISION,
+  [BINARY.dataType]: BINARY,
+  [BLOB.dataType]: BLOB,
+  [BOOLEAN.dataType]: BOOLEAN,
+  [CHAR.dataType]: CHAR,
+  [CLOB.dataType]: CLOB,
   [DATE.dataType]: DATE,
+  [DECIMAL.dataType]: DECIMAL,
+  [DOUBLE_PRECISION.dataType]: DOUBLE_PRECISION,
+  [FLOAT.dataType]: FLOAT,
+  [INTEGER.dataType]: INTEGER,
+  [INTERVAL.dataType]: INTERVAL,
+  [NCHAR.dataType]: NCHAR,
+  [NUMERIC.dataType]: NUMERIC,
+  [NVARCHAR.dataType]: NVARCHAR,
+  [REAL.dataType]: REAL,
+  [SMALLINT.dataType]: SMALLINT,
   [TIME.dataType]: TIME,
   [TIMESTAMP.dataType]: TIMESTAMP,
-  [INTERVAL.dataType]: INTERVAL,
-  [CHAR.dataType]: CHAR,
-  [VARCHAR.dataType]: VARCHAR,
-  [NCHAR.dataType]: NCHAR,
-  [NVARCHAR.dataType]: NVARCHAR,
-  [FLOAT.dataType]: FLOAT,
-  [DECIMAL.dataType]: DECIMAL,
-  [NUMERIC.dataType]: NUMERIC,
-  [BINARY.dataType]: BINARY,
   [VARBINARY.dataType]: VARBINARY,
+  [VARCHAR.dataType]: VARCHAR,
 };
-
-function isEmpty(anyValue: readonly unknown[]): anyValue is never[] {
-  return anyValue.length === 0;
-}
 
 /**
  * @example
@@ -186,58 +182,46 @@ function format(data: SQLDataType): string {
   return `${data.dataType}${isEmpty(keys) ? '' : `(${keys.map((key) => (data as any)[key]).join(',')})`}`;
 }
 
+function isEmpty(anyValue: ReadonlyArray<unknown>): anyValue is Array<never> {
+  return anyValue.length === 0;
+}
+
 /**
  * @namespace
  */
 export const SQLDataType = {
-  CHAR,
-  VARCHAR,
-  NCHAR,
-  NVARCHAR,
-  CLOB,
-  BOOLEAN,
-  BINARY,
-  VARBINARY,
-  BLOB,
-  INTEGER,
-  SMALLINT,
   BIGINT,
-  DECIMAL,
-  NUMERIC,
-  FLOAT,
-  REAL,
-  DOUBLE_PRECISION,
+  BINARY,
+  BLOB,
+  BOOLEAN,
+  CHAR,
+  CLOB,
   DATE,
+  DECIMAL,
+  DOUBLE_PRECISION,
+  FLOAT,
+  format,
+  INTEGER,
+  INTERVAL,
+  NCHAR,
+  NUMERIC,
+  NVARCHAR,
+  REAL,
+  SMALLINT,
   TIME,
   TIMESTAMP,
-  INTERVAL,
-  format,
+  VARBINARY,
+  VARCHAR,
 };
 export namespace SQLDataType {
-  /**
-   * Character type
-   */
-  export interface CHAR extends DataType<typeof CHAR.dataType, { size: number }> {}
+  export interface BIGINT extends DataType<typeof BIGINT.dataType> {}
 
   /**
-   * Varying character type
+   * Binary types
    */
-  export interface VARCHAR extends DataType<typeof VARCHAR.dataType, { size: number }> {}
+  export interface BINARY extends DataType<typeof BINARY.dataType, { byteLength: number }> {}
 
-  /**
-   * National Character type
-   */
-  export interface NCHAR extends DataType<typeof NCHAR.dataType, { size: number }> {}
-
-  /**
-   * National Character Varying type
-   */
-  export interface NVARCHAR extends DataType<typeof NVARCHAR.dataType, { size: number }> {}
-
-  /**
-   * Character Large Object type
-   */
-  export interface CLOB extends DataType<typeof CLOB.dataType> {}
+  export interface BLOB extends DataType<typeof BLOB.dataType> {}
 
   /**
    * Boolean type
@@ -245,30 +229,49 @@ export namespace SQLDataType {
   export interface BOOLEAN extends DataType<typeof BOOLEAN.dataType> {}
 
   /**
-   * Binary types
+   * Character type
    */
-  export interface BINARY extends DataType<typeof BINARY.dataType, { byteLength: number }> {}
+  export interface CHAR extends DataType<typeof CHAR.dataType, { size: number }> {}
 
-  export interface VARBINARY extends DataType<typeof VARBINARY.dataType, { byteLength: number }> {}
-  export interface BLOB extends DataType<typeof BLOB.dataType> {}
+  /**
+   * Character Large Object type
+   */
+  export interface CLOB extends DataType<typeof CLOB.dataType> {}
+
+  //
+  // Temporal
+  //
+  export interface DATE extends DataType<typeof DATE.dataType> {}
+
+  export interface DECIMAL extends DataType<typeof DECIMAL.dataType, { precision: number; scale: number }> {}
+  export interface DOUBLE_PRECISION extends DataType<typeof DOUBLE_PRECISION.dataType> {}
 
   //
   // Numeric types
   //
 
-  export interface INTEGER extends DataType<typeof INTEGER.dataType> {}
-  export interface SMALLINT extends DataType<typeof SMALLINT.dataType> {}
-  export interface BIGINT extends DataType<typeof BIGINT.dataType> {}
-  export interface DECIMAL extends DataType<typeof DECIMAL.dataType, { precision: number; scale: number }> {}
-  export interface NUMERIC extends DataType<typeof NUMERIC.dataType, { precision: number; scale: number }> {}
   export interface FLOAT extends DataType<typeof FLOAT.dataType, { precision: number }> {}
+  export interface INTEGER extends DataType<typeof INTEGER.dataType> {}
+  export interface INTERVAL extends DataType<typeof INTERVAL.dataType> {}
+
+  /**
+   * National Character type
+   */
+  export interface NCHAR extends DataType<typeof NCHAR.dataType, { size: number }> {}
+  export interface NUMERIC extends DataType<typeof NUMERIC.dataType, { precision: number; scale: number }> {}
+
+  /**
+   * National Character Varying type
+   */
+  export interface NVARCHAR extends DataType<typeof NVARCHAR.dataType, { size: number }> {}
   export interface REAL extends DataType<typeof REAL.dataType> {}
-  export interface DOUBLE_PRECISION extends DataType<typeof DOUBLE_PRECISION.dataType> {}
-  //
-  // Temporal
-  //
-  export interface DATE extends DataType<typeof DATE.dataType> {}
+  export interface SMALLINT extends DataType<typeof SMALLINT.dataType> {}
   export interface TIME extends DataType<typeof TIME.dataType> {}
   export interface TIMESTAMP extends DataType<typeof TIMESTAMP.dataType> {}
-  export interface INTERVAL extends DataType<typeof INTERVAL.dataType> {}
+  export interface VARBINARY extends DataType<typeof VARBINARY.dataType, { byteLength: number }> {}
+
+  /**
+   * Varying character type
+   */
+  export interface VARCHAR extends DataType<typeof VARCHAR.dataType, { size: number }> {}
 }

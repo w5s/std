@@ -1,26 +1,27 @@
 import { describe } from 'vitest';
-import { Option } from './Option.js';
-import { Result } from '../Result.js';
-import { describeCodec, describeType } from '../Testing.js';
+
 import { None } from '../Option/None.js';
-import { define } from './define.js';
+import { Result } from '../Result.js';
 import { Symbol } from '../Symbol.js';
+import { describeCodec, describeType } from '../Testing.js';
+import { define } from './define.js';
+import { Option } from './Option.js';
 
 describe(Option, () => {
   const subject = Option;
   const AnyType = define<string>({
-    typeName: 'AnyType',
     hasInstance: (_) => typeof _ === 'string',
-    [Symbol.encode]: (_) => `_${_}`,
-    [Symbol.decode]: (input, { ok, error }) =>
+    [Symbol.decode]: (input, { error, ok }) =>
       typeof input === 'string' && input[0] === '_' ? ok(input.slice(1)) : error(input, 'UnderscoreString'),
-    [Symbol.schema]: () => ({ type: 'any', format: 'custom_underscore' }),
+    [Symbol.encode]: (_) => `_${_}`,
+    [Symbol.schema]: () => ({ format: 'custom_underscore', type: 'any' }),
+    typeName: 'AnyType',
   });
 
   describeType(subject(AnyType), () => ({
-    typeName: 'Option<AnyType>',
     instances: [undefined, ''],
     notInstances: [null, 1],
+    typeName: 'Option<AnyType>',
   }));
   describeCodec(subject(AnyType), () => ({
     decode: [
@@ -34,6 +35,6 @@ describe(Option, () => {
       ['', '_'],
       ['abc', '_abc'],
     ],
-    schema: { type: 'any', format: 'custom_underscore' },
+    schema: { format: 'custom_underscore', type: 'any' },
   }));
 });

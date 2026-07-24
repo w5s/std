@@ -1,41 +1,9 @@
 import type { Ref } from '@w5s/core';
 import type { Storage } from '@w5s/global-storage';
-import { registry } from './internal/registry.js';
+
 import type { StateKey } from './StateKey.js';
 
-function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: StateKey, initialValue: T): Ref<T> {
-  const propertyRef: Ref<T> = {
-    get current() {
-      return ref.current[propertyName] as T;
-    },
-    set current(value) {
-      ref.current = {
-        ...ref.current,
-        [propertyName]: value,
-      };
-    },
-  };
-
-  if (!Object.hasOwn(ref.current, propertyName)) {
-    propertyRef.current = initialValue;
-  }
-  return propertyRef;
-}
-
-function useRefStorage<V>(hostObject: Storage, key: StateKey, initialValue: V): Ref<V> {
-  const ref: Ref<V> = {
-    get current() {
-      return hostObject.get(key) as V;
-    },
-    set current(value: V) {
-      hostObject.set(key, value);
-    },
-  };
-  if (!hostObject.has(key)) {
-    ref.current = initialValue;
-  }
-  return ref;
-}
+import { registry } from './internal/registry.js';
 
 /**
  * Return a new `Ref` stored at `storage.get(key)` or `ref.value[key]`
@@ -70,4 +38,38 @@ export function useRef<V>(
     hostRegistry.set(key, returnValue);
   }
   return returnValue;
+}
+
+function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: StateKey, initialValue: T): Ref<T> {
+  const propertyRef: Ref<T> = {
+    get current() {
+      return ref.current[propertyName] as T;
+    },
+    set current(value) {
+      ref.current = {
+        ...ref.current,
+        [propertyName]: value,
+      };
+    },
+  };
+
+  if (!Object.hasOwn(ref.current, propertyName)) {
+    propertyRef.current = initialValue;
+  }
+  return propertyRef;
+}
+
+function useRefStorage<V>(hostObject: Storage, key: StateKey, initialValue: V): Ref<V> {
+  const ref: Ref<V> = {
+    get current() {
+      return hostObject.get(key) as V;
+    },
+    set current(value: V) {
+      hostObject.set(key, value);
+    },
+  };
+  if (!hostObject.has(key)) {
+    ref.current = initialValue;
+  }
+  return ref;
 }

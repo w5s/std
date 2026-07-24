@@ -1,6 +1,7 @@
 import type { Numeric } from '../Numeric.js';
-import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 import type { TestingLibrary } from './type.js';
+
+import { defaultTestingLibrary } from './defaultTestingLibrary.js';
 
 /**
  * Create a spec for {@link @w5s/core#Numeric.Subtract} trait
@@ -22,7 +23,7 @@ export function describeSubtract<L, R, Ret>(
   cases: Array<{ call: [L, R]; returns: Ret }>,
   testingLibrary: TestingLibrary = defaultTestingLibrary(),
 ) {
-  const { describe, it, expect } = testingLibrary;
+  const { describe, expect, it } = testingLibrary;
   const op = '-';
   (cases.length === 0 ? describe.todo : describe)(op, () => {
     it.each(cases)(`satisfies ['${op}']($call.0, $call.1) == $returns`, ({ call, returns }) => {

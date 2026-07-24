@@ -1,8 +1,11 @@
 import type { Task } from '@w5s/task';
+
 import { from as taskFrom } from '@w5s/task/dist/Task/from.js';
+
 import type { FileError } from './FileError.js';
-import { errnoTaskSync } from './Internal.js';
 import type { FilePath } from './FilePath.js';
+
+import { errnoTaskSync } from './Internal.js';
 
 /**
  * @namespace

@@ -1,9 +1,11 @@
 import type { Result } from '@w5s/core';
+
 import type { Task, TaskLike } from '../Task.js';
-import { TaskAggregateState } from './TaskAggregateState.js';
+
+import { error as resultError } from './error.js';
 import { from } from './from.js';
 import { ok as resultOk } from './ok.js';
-import { error as resultError } from './error.js';
+import { TaskAggregateState } from './TaskAggregateState.js';
 
 /**
  * Resolves with the record of all task values, or reject with the first error
@@ -28,7 +30,6 @@ export function allSettledKeyed<TaskRecord extends Record<string, TaskLike<any, 
   return from((parameters) => {
     const taskArray = Object.entries(tasks).map(([key, task]) => ({ key, task }));
     if (taskArray.length === 0) {
-      // eslint-disable-next-line ts/consistent-type-assertions
       parameters.resolve({} as { [K in keyof TaskRecord]: Task.ValueOf<TaskRecord[K]> });
     } else {
       const state = TaskAggregateState(taskArray, parameters, { cancelChildrenFromParent: true });

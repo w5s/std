@@ -1,9 +1,10 @@
-import { describe, it, expect, vi } from 'vitest';
 import { Symbol } from '@w5s/core';
-import { create } from './create.js';
-import { ok } from './ok.js';
-import { error } from './error.js';
+import { describe, expect, it, vi } from 'vitest';
+
 import { TaskCanceler } from '../TaskCanceler.js';
+import { create } from './create.js';
+import { error } from './error.js';
+import { ok } from './ok.js';
 
 vi.mock('./run.js', async () => ({
   run: vi.fn(),
@@ -18,7 +19,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
+      task[Symbol.run]({ canceler: anyCanceler, reject, resolve });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('foo');
     });
@@ -27,7 +28,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
+      task[Symbol.run]({ canceler: anyCanceler, reject, resolve });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -36,7 +37,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
+      task[Symbol.run]({ canceler: anyCanceler, reject, resolve });
       expect(reject).toHaveBeenCalledTimes(1);
       expect(reject).toHaveBeenCalledWith('err');
     });
@@ -47,7 +48,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
+      await task[Symbol.run]({ canceler: anyCanceler, reject, resolve });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith('value');
     });
@@ -56,7 +57,7 @@ describe(create, () => {
       const resolve = vi.fn();
       const reject = vi.fn();
 
-      await task[Symbol.run]({ resolve, reject, canceler: anyCanceler });
+      await task[Symbol.run]({ canceler: anyCanceler, reject, resolve });
       expect(resolve).toHaveBeenCalledTimes(1);
       expect(resolve).toHaveBeenCalledWith(undefined);
     });
@@ -70,9 +71,9 @@ describe(create, () => {
     });
 
     task[Symbol.run]({
-      resolve: () => {},
-      reject: () => {},
       canceler: someCanceler,
+      reject: () => {},
+      resolve: () => {},
     });
     expect(innerCanceler).toBe(someCanceler);
   });

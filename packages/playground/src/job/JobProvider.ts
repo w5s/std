@@ -1,8 +1,8 @@
 import type { JobRequest } from './JobRequest.js';
 
 export type JobEnqueueOptions =
-  | { _: 'immediate' }
-  | { _: 'delayed'; delay: number };
+  | { _: 'delayed'; delay: number }
+  | { _: 'immediate' };
 
 export interface JobProvider {
   /**
