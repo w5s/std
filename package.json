@@ -68,7 +68,7 @@
     "@w5s/tsconfig": "3.1.20",
     "@w5s/tsdown-config": "1.0.0-alpha.21",
     "cspell": "10.0.1",
-    "eslint": "10.7.0",
+    "eslint": "10.8.0",
     "markdown-magic": "4.11.0",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "2.1.0",
