@@ -41,8 +41,8 @@ importers:
         specifier: 20.19.43
         version: 20.19.43
       '@w5s/commitlint-config':
-        specifier: 3.8.0
-        version: 3.8.0
+        specifier: 3.9.0
+        version: 3.9.0
       '@w5s/conventional-changelog':
         specifier: 3.10.0
         version: 3.10.0
@@ -4116,8 +4116,8 @@ packages:
   '@vscode/codicons@0.0.35':
     resolution: {integrity: sha512-7iiKdA5wHVYSbO7/Mm0hiHD3i4h+9hKUe1O4hISAe/nHhagMwb2ZbFC8jU6d7Cw+JNT2dWXN2j+WHbkhT5/l2w==}
 
-  '@w5s/commitlint-config@3.8.0':
-    resolution: {integrity: sha512-5CNTX7LKDDJtTlIZyAwH1QL9euT0Ml/aPhK5/saHXqfOv6kF+fBfuHE+iw55LmyP3VXU5JgzZJkevBjkt7R13w==}
+  '@w5s/commitlint-config@3.9.0':
+    resolution: {integrity: sha512-/8qi37vL3cudCj2OxRBfhMn1g+x0uZ6kJRYYwpu9M9cOaIU4E8XnbM8AUoJWHmnYDWQRnocE45SFSB+3scW+yw==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@commitlint/cli': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -14329,7 +14329,7 @@ snapshots:
 
   '@vscode/codicons@0.0.35': {}
 
-  '@w5s/commitlint-config@3.8.0':
+  '@w5s/commitlint-config@3.9.0':
     dependencies:
       '@commitlint/types': 21.1.0
       '@w5s/conventional-changelog': 3.10.0
