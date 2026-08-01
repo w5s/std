@@ -41,8 +41,8 @@ importers:
         specifier: 20.19.43
         version: 20.19.43
       '@w5s/commitlint-config':
-        specifier: 3.9.0
-        version: 3.9.0
+        specifier: 3.12.0
+        version: 3.12.0
       '@w5s/conventional-changelog':
         specifier: 3.10.0
         version: 3.10.0
@@ -4083,8 +4083,8 @@ packages:
   '@vscode/codicons@0.0.35':
     resolution: {integrity: sha512-7iiKdA5wHVYSbO7/Mm0hiHD3i4h+9hKUe1O4hISAe/nHhagMwb2ZbFC8jU6d7Cw+JNT2dWXN2j+WHbkhT5/l2w==}
 
-  '@w5s/commitlint-config@3.9.0':
-    resolution: {integrity: sha512-/8qi37vL3cudCj2OxRBfhMn1g+x0uZ6kJRYYwpu9M9cOaIU4E8XnbM8AUoJWHmnYDWQRnocE45SFSB+3scW+yw==}
+  '@w5s/commitlint-config@3.12.0':
+    resolution: {integrity: sha512-uUITqcJBt8RSFdcpij7ec06rJDn4HeWTR89UyVEU36LD3w4ICCZKr49xUD6kIl8shaHXnL+upAxEzFNOVfW4jQ==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@commitlint/cli': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -4094,6 +4094,10 @@ packages:
 
   '@w5s/conventional-changelog@3.10.0':
     resolution: {integrity: sha512-Zn/KcbB2fveZRgsH8S4eEeP8HGJyT0VxQkcrTc+frUM20HalYJLVOl8tVCsXWCbm7gL8tbvkxY/5k3TsbHPNRA==}
+    engines: {node: '>=22.0.0'}
+
+  '@w5s/conventional-changelog@3.13.0':
+    resolution: {integrity: sha512-ho5+X1MglfHIACSFUQOaAnr55hKJYo+x6M5YQrmJjvH3123PdctweqH6dgik/GVo+dtmRLwId96/P1Pk3HJyVQ==}
     engines: {node: '>=22.0.0'}
 
   '@w5s/cspell-config@3.9.0':
@@ -14247,12 +14251,18 @@ snapshots:
 
   '@vscode/codicons@0.0.35': {}
 
-  '@w5s/commitlint-config@3.9.0':
+  '@w5s/commitlint-config@3.12.0':
     dependencies:
       '@commitlint/types': 21.1.0
-      '@w5s/conventional-changelog': 3.10.0
+      '@w5s/conventional-changelog': 3.13.0
 
   '@w5s/conventional-changelog@3.10.0':
+    dependencies:
+      '@commitlint/types': 21.1.0
+      emoji-regex: 10.6.0
+      gitmojis: 3.15.0
+
+  '@w5s/conventional-changelog@3.13.0':
     dependencies:
       '@commitlint/types': 21.1.0
       emoji-regex: 10.6.0
