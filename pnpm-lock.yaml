@@ -44,8 +44,8 @@ importers:
         specifier: 3.12.0
         version: 3.12.0
       '@w5s/conventional-changelog':
-        specifier: 3.10.0
-        version: 3.10.0
+        specifier: 3.13.0
+        version: 3.13.0
       '@w5s/cspell-config':
         specifier: 3.9.0
         version: 3.9.0(cspell@10.0.1)
@@ -4091,10 +4091,6 @@ packages:
     peerDependenciesMeta:
       '@commitlint/cli':
         optional: true
-
-  '@w5s/conventional-changelog@3.10.0':
-    resolution: {integrity: sha512-Zn/KcbB2fveZRgsH8S4eEeP8HGJyT0VxQkcrTc+frUM20HalYJLVOl8tVCsXWCbm7gL8tbvkxY/5k3TsbHPNRA==}
-    engines: {node: '>=22.0.0'}
 
   '@w5s/conventional-changelog@3.13.0':
     resolution: {integrity: sha512-ho5+X1MglfHIACSFUQOaAnr55hKJYo+x6M5YQrmJjvH3123PdctweqH6dgik/GVo+dtmRLwId96/P1Pk3HJyVQ==}
@@ -14251,12 +14247,6 @@ snapshots:
     dependencies:
       '@commitlint/types': 21.1.0
       '@w5s/conventional-changelog': 3.13.0
-
-  '@w5s/conventional-changelog@3.10.0':
-    dependencies:
-      '@commitlint/types': 21.1.0
-      emoji-regex: 10.6.0
-      gitmojis: 3.15.0
 
   '@w5s/conventional-changelog@3.13.0':
     dependencies:
