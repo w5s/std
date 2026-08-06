@@ -47,8 +47,8 @@ importers:
         specifier: 3.13.0
         version: 3.13.0
       '@w5s/cspell-config':
-        specifier: 3.12.0
-        version: 3.12.0(cspell@10.0.1)
+        specifier: 3.14.0
+        version: 3.14.0(cspell@10.0.1)
       '@w5s/eslint-config':
         specifier: 3.24.0
         version: 3.24.0(eslint@10.8.0(jiti@2.7.0))(ts-declaration-location@1.0.7(typescript@6.0.3))(typescript@6.0.3)(vitest@4.1.10(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0)))
@@ -3889,9 +3889,6 @@ packages:
   '@types/react-router@5.1.20':
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
 
-  '@types/react@19.2.17':
-    resolution: {integrity: sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==}
-
   '@types/react@19.2.18':
     resolution: {integrity: sha512-AnzbBERsrLKtk2XSfTbYRLjQPdy116Sty4q+T+Bp3IC4l6jNBvreVPAHmpq9qhXQM7CXZPjLVmGMw9sy+hxQ3w==}
 
@@ -4099,8 +4096,8 @@ packages:
     resolution: {integrity: sha512-ho5+X1MglfHIACSFUQOaAnr55hKJYo+x6M5YQrmJjvH3123PdctweqH6dgik/GVo+dtmRLwId96/P1Pk3HJyVQ==}
     engines: {node: '>=22.0.0'}
 
-  '@w5s/cspell-config@3.12.0':
-    resolution: {integrity: sha512-QmHcCk4cFnEQ31oRXBQJLfktRdbBubK08mIatSYxpCWOmP+ww/wJ10gAzYyyg2xKA1psIt/pOFtwRIcaNUpPfA==}
+  '@w5s/cspell-config@3.14.0':
+    resolution: {integrity: sha512-1DPb70bV1FC51Y0XkRUKYaoxnHwbrrTjgIWG6qIYHuer6kqxXOgD0fbZ/VAZ2FDJHjxaw8gQRloayrzBVf3PFg==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       cspell: ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
@@ -11991,7 +11988,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@19.2.8)':
     dependencies:
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       react: 19.2.8
 
   '@docusaurus/theme-classic@3.10.2(@docusaurus/faster@3.10.2(@docusaurus/types@3.10.2(@swc/core@1.15.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)))(@rspack/core@1.7.11)(@swc/core@1.15.43)(@types/react@19.2.18)(lightningcss@1.32.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3)':
@@ -12050,7 +12047,7 @@ snapshots:
       '@docusaurus/utils': 3.10.2(@swc/core@1.15.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@docusaurus/utils-common': 3.10.2(@swc/core@1.15.43)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/history': 4.7.11
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       '@types/react-router-config': 5.0.11
       clsx: 2.1.1
       parse-numeric-range: 1.3.0
@@ -12120,7 +12117,7 @@ snapshots:
       '@mdx-js/mdx': 3.1.1
       '@types/history': 4.7.11
       '@types/mdast': 4.0.4
-      '@types/react': 19.2.17
+      '@types/react': 19.2.18
       commander: 5.1.0
       joi: 17.13.3
       react: 19.2.8
@@ -14006,10 +14003,6 @@ snapshots:
       '@types/history': 4.7.11
       '@types/react': 19.2.18
 
-  '@types/react@19.2.17':
-    dependencies:
-      csstype: 3.2.3
-
   '@types/react@19.2.18':
     dependencies:
       csstype: 3.2.3
@@ -14279,7 +14272,7 @@ snapshots:
       emoji-regex: 10.6.0
       gitmojis: 3.15.0
 
-  '@w5s/cspell-config@3.12.0(cspell@10.0.1)':
+  '@w5s/cspell-config@3.14.0(cspell@10.0.1)':
     dependencies:
       '@cspell/cspell-bundled-dicts': 10.0.1
     optionalDependencies:
