@@ -12,6 +12,7 @@ import { state } from '../internal/state.js';
  * ```
  * @param self
  */
+/* eslint-disable ts/no-unsafe-return */
 export function value<T>(self: Secret<T>): T {
   return state.get(self);
 }

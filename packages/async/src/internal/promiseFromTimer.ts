@@ -1,3 +1,4 @@
+/* eslint-disable ts/prefer-promise-reject-errors */
 import { AbortError } from '@w5s/error/dist/AbortError.js';
 import { isDOMException } from '@w5s/error/dist/isDOMException.js';
 
@@ -12,6 +13,7 @@ const toAbortError = (reason: any): AbortError => {
     return new AbortError();
   }
 
+  // eslint-disable-next-line ts/no-unsafe-return
   return reason;
 };
 

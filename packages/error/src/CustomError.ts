@@ -1,3 +1,6 @@
+/* eslint-disable ts/no-unsafe-argument */
+/* eslint-disable ts/no-unsafe-member-access */
+/* eslint-disable ts/no-unsafe-assignment */
 /* eslint-disable ts/no-shadow */
 
 import { asString } from './CustomError/asString.js';

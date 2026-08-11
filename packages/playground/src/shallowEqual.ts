@@ -42,11 +42,10 @@ export function shallowEqual<T = unknown>(
     for (let index = 0; index < leftKeys.length; index += 1) {
       const key = leftKeys[index]!;
 
-      if (
-        !Object.hasOwn(right, key) ||
-        // @ts-ignore Wrong typing
-        !objectIs(left[key], right[key])
-      ) {
+      const leftValue = left[key as keyof typeof left] as ValueOf<T>;
+      const rightValue = right[key as keyof typeof right] as ValueOf<T>;
+
+      if (!Object.hasOwn(right, key) || !objectIs(leftValue, rightValue)) {
         return false;
       }
     }
@@ -60,9 +59,11 @@ export function shallowEqual<T = unknown>(
         return false;
       }
 
-      // @ts-ignore Wrong typing
+      const leftValue = left[key as keyof typeof left] as ValueOf<T>;
+      const rightValue = right[key as keyof typeof right] as ValueOf<T>;
+      const typedKey = key as KeyOf<T>;
 
-      if (!equalValueFn(left[key], right[key], key)) {
+      if (!equalValueFn(leftValue, rightValue, typedKey)) {
         return false;
       }
     }

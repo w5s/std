@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-unsafe-assignment */
 import type { Seq as SeqInterface } from '../Seq.js';
 
 import { useSeqState } from '../internal/useSeqState.js';

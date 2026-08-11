@@ -15,7 +15,7 @@ import { globalStorage } from './globalStorage.js';
 export function useGlobal<Value>(key: unknown, initialValue: () => Value) {
   let returnValue: Value;
   if (globalStorage.has(key)) {
-    returnValue = globalStorage.get(key);
+    returnValue = globalStorage.get(key) as Value;
   } else {
     returnValue = initialValue();
     globalStorage.set(key, returnValue);

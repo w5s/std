@@ -10,6 +10,6 @@ export function call(stringValue: BigDecimalString): BigDecimal;
 export function call(value: bigint, scale?: number): BigDecimal;
 export function call(value: bigint | string, scale?: number): BigDecimal {
   return typeof value === 'string'
-    ? (parse(value) ?? panic(new TypeError(`${String(value)} is not a valid BigDecimal`)))
+    ? (parse(value) ?? panic(new TypeError(`${value} is not a valid BigDecimal`)))
     : of(value, scale ?? 0);
 }

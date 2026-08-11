@@ -100,9 +100,11 @@ export function withFile(expectFn: ExpectFunction) {
         fail(`expected ${filePath} ${isNot ? 'not ' : ''}to exist`);
       }
     },
+    // eslint-disable-next-line ts/require-await
     async toHaveDirContent(content: Array<string>) {
       return expectFn(fs.promises.readdir(filePath)).resolves.toEqual(content);
     },
+    // eslint-disable-next-line ts/require-await
     async toHaveDirLength(length: number) {
       return expectFn(fs.promises.readdir(filePath)).resolves.toHaveProperty('length', length);
     },

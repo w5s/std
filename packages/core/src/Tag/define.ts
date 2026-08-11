@@ -26,7 +26,7 @@ export function define<From, To extends From>(parameters: Tag.Parameters<To>): T
   }
 
   function unwrap(value: To): From {
-    return value as unknown as From;
+    return value;
   }
 
   return Callable({

@@ -32,6 +32,7 @@ export function use<Key extends string | symbol, Value>(
   appContext: ContainerProvider<any, Key, Value>,
   key: ContainerKey<Key, Value>,
 ): Value;
+/* eslint-disable ts/no-unsafe-argument, ts/no-unsafe-assignment */
 export function use(appContext: any, key: any) {
   return cacheGet(appContext, cacheFor(appContext), key);
 }

@@ -19,21 +19,17 @@ export function Tuple<C extends ReadonlyArray<Type.Module<any>>>(
       if (!Array.isArray(input)) {
         return error(input, typeName);
       }
-      const returnValue = [];
+      const returnValue: Array<unknown> = [];
 
       for (let index = 0; index < items.length; index += 1) {
         const decoded = decode(items[index]!, input[index]);
         if (!decoded.ok) {
           return error(input, typeName);
         }
-        // @ts-ignore
 
         returnValue[index] = decoded.value;
       }
-      return ok(
-        // @ts-ignore
-        returnValue,
-      );
+      return ok(returnValue as { readonly [K in keyof C]: Type.TypeOf<C[K]> });
     },
     [Symbol.encode]: (input) => items.map((item, itemIndex) => encode(item, input[itemIndex])),
     [Symbol.schema]: () => ({

@@ -13,5 +13,5 @@ import { keys } from './keys.js';
  * @param enumObject
  */
 export function values<T extends Enum<Record<string, any>>>(enumObject: T): ReadonlyArray<Enum.ValueOf<T>> {
-  return keys(enumObject).map((key) => enumObject[key]) as ReadonlyArray<Enum.ValueOf<T>>;
+  return keys(enumObject).map((key) => enumObject[key]);
 }

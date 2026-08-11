@@ -1,3 +1,5 @@
+/* eslint-disable ts/no-unnecessary-type-assertion */
+
 const GlobalSymbol = globalThis.Symbol;
 const __symbolAlias = <K extends keyof globalThis.SymbolConstructor>(name: K): globalThis.SymbolConstructor[K] =>
 

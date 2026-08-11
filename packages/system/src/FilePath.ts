@@ -37,7 +37,7 @@ export const FilePath = Object.assign(
      * @param extension The extension to remove
      */
     basename(path: FilePath, extension?: Option<FilePath.Extension>): FileName {
-      return nodePath.basename(path, extension) as FilePath;
+      return nodePath.basename(path, extension);
     },
 
     /**
@@ -54,7 +54,7 @@ export const FilePath = Object.assign(
       return nodePath.join(...paths) as FilePath;
     },
 
-    delimiter: nodePath.delimiter as FilePath.Delimiter,
+    delimiter: nodePath.delimiter,
 
     /**
      * Return the directory name of a path. Similar to the Unix dirname command.
@@ -204,7 +204,7 @@ export const FilePath = Object.assign(
       return taskFrom(({ resolve }) => resolve(nodePath.resolve(...from, to) as FilePath));
     },
 
-    separator: nodePath.sep as FilePath.Separator,
+    separator: nodePath.sep,
   },
 );
 export namespace FilePath {

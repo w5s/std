@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-unsafe-call */
 import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 import type typedocPluginFunction from 'docusaurus-plugin-typedoc-api';

@@ -19,5 +19,6 @@ export function flatMap<FromItem, ToItem>(
   self: Array<FromItem>,
   mapFn: (item: FromItem, index: Int, array: Array<FromItem>) => Array<ToItem>,
 ): Array<ToItem> {
+  // eslint-disable-next-line ts/no-unsafe-argument
   return self.length === 0 ? (self as Array<never>) : self.flatMap(mapFn as any);
 }

@@ -1,4 +1,4 @@
-/* eslint-disable ts/no-unsafe-function-type */
+/* eslint-disable ts/no-unsafe-function-type, ts/no-unsafe-return, ts/no-unsafe-call */
 
 interface Pipe<A> {
   to(): A;

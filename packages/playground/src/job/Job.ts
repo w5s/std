@@ -24,9 +24,10 @@ export const Job = {
         const request = { _: jobName, payload };
         const requestEncoded = lazy(() => Codec.encode(Request, request));
         return Task.andThen(Job.nextJobId, (jobId) => {
+          // eslint-disable-next-line ts/require-await
           return Task.create<JobId, never>(async () => {
             console.log(`Running job ${jobName} with payload:`, payload, requestEncoded());
-            return Task.ok(jobId as JobId);
+            return Task.ok(jobId);
           });
         });
       },

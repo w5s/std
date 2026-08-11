@@ -17,5 +17,5 @@ export function encodeByName(
   const { delimiter, recordDelimiter } = options;
   const encodeRecord = (record: CSVNamedRecord) =>
     headers.map((headerName) => record[headerName]).join(delimiter) + recordDelimiter;
-  return taskCreate(async () => ok(asyncIterableMap(data, encodeRecord)));
+  return taskCreate(() => ok(asyncIterableMap(data, encodeRecord)));
 }

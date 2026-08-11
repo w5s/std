@@ -6,7 +6,7 @@ export function main(): void {
   const key = Symbol('someId');
 
   function nextId() {
-    const id = globalStorage.get(key) ?? 0;
+    const id = (globalStorage.get(key) as number) ?? 0;
     globalStorage.set(key, id + 1);
     return id;
   }

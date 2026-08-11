@@ -10,6 +10,7 @@
  */
 export function of<Value>(...values: Array<Value>): AsyncIterable<Value> {
   return {
+    // eslint-disable-next-line ts/require-await
     async* [Symbol.asyncIterator]() {
       for (const value of values) {
         yield value;

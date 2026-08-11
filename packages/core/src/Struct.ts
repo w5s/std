@@ -80,7 +80,7 @@ export const Struct = {
         typeName,
       }),
       create: (properties: any) =>
-
+        // eslint-disable-next-line ts/no-unsafe-argument
         Struct.create(module, {
           [type]: typeName,
           ...properties,

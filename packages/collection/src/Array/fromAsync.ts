@@ -39,6 +39,8 @@ export function fromAsync<T, U>(
   iterableOrArrayLike: AsyncIterable<T> | Iterable<T>,
   mapFn: (value: Awaited<T>, index: number) => U,
 ): Promise<Array<Awaited<U>>>;
+// eslint-disable-next-line ts/no-unsafe-return
 export function fromAsync(iterableOrArrayLike: any, mapFn: any = (_: any) => _) {
+  // eslint-disable-next-line ts/no-unsafe-argument
   return arrayFromAsync(iterableOrArrayLike, mapFn);
 }

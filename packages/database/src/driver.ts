@@ -19,6 +19,7 @@ function notFound(name: string): never {
  */
 export const DatabaseDriver = {
   get<Name extends keyof DatabaseDriverMap>(name: Name): DatabaseDriver.ModuleOf<Name> {
+    // eslint-disable-next-line ts/no-unsafe-return
     return registry.current[name] ?? notFound(name);
   },
   Make<Name extends string, Client>(
@@ -28,6 +29,7 @@ export const DatabaseDriver = {
     return {
       adapter,
       execute,
+      // eslint-disable-next-line ts/require-await
       async handleError(cause: unknown) {
         return new DatabaseError({ cause });
       },

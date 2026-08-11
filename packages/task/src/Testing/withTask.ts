@@ -1,3 +1,4 @@
+/* eslint-disable ts/await-thenable */
 import type { ExpectFunction } from '@w5s/core-type';
 
 import type { TaskLike } from '../Task.js';

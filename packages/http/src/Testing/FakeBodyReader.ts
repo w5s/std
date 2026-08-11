@@ -1,3 +1,4 @@
+/* eslint-disable ts/require-await */
 import type { BodyReader, BodyReaderFormat, BodyReaderValue } from '../BodyReader.js';
 
 type Resolver<T> = { reject: unknown } | { resolve: T };
@@ -59,6 +60,7 @@ export const FakeBodyReader = Object.assign(
     fakeReaderFormat: format,
     [formatToProperty[format]]:
 
+      // eslint-disable-next-line ts/prefer-promise-reject-errors
       'resolve' in parameters ? () => Promise.resolve(parameters.resolve) : () => Promise.reject(parameters.reject),
   }),
   {

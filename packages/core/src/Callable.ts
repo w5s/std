@@ -38,14 +38,17 @@ export const Callable = Object.assign(
    * ```
    * @param properties
    */
-  // eslint-disable-next-line ts/no-shadow
-  function Callable<T extends Callable<AnyFunction>>(properties: T): CallableFunction<T> {
-    return Object.assign((...args: any) => properties[Symbol.call](...args), properties);
+
+  function createCallable<T extends Callable<AnyFunction>>(properties: T): CallableFunction<T> {
+    const call = properties[Symbol.call] as (...args: Array<unknown>) => unknown;
+    const callable = ((...args: Array<unknown>) => call(...args)) as CallableFunction<T>;
+    const assigned = Object.assign(callable, properties) as unknown as CallableFunction<T>;
+    return assigned;
   },
   {
     /**
      * Alias to {@link @w5s/core!Symbol.call}
      */
-    symbol: Symbol.call as Symbol.call,
+    symbol: Symbol.call,
   },
 );

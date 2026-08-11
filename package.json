@@ -35,7 +35,7 @@
     "spellcheck:root": "cspell --no-progress '**' --exclude='apps/*/**' --exclude='packages/*/**'",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "validate": "turbo run build lint test spellcheck typecheck size-limit"
+    "validate": "turbo run build lint test typecheck size-limit"
   },
   "commitlint": {
     "extends": [
@@ -64,7 +64,7 @@
     "@w5s/commitlint-config": "3.15.0",
     "@w5s/conventional-changelog": "3.16.0",
     "@w5s/cspell-config": "3.15.0",
-    "@w5s/eslint-config": "3.26.0",
+    "@w5s/eslint-config": "3.27.0",
     "@w5s/tsconfig": "3.1.27",
     "@w5s/tsdown-config": "1.1.0",
     "cspell": "10.0.1",

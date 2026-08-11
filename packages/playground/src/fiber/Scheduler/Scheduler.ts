@@ -30,9 +30,9 @@ export class Scheduler {
     );
   }
 
-  spawn(callback: FiberCallback): FiberResult<any> {
+  spawn<T>(callback: FiberCallback<T>): FiberResult<T> {
     const id = this.nextId();
-    const deferred = defer();
+    const deferred = defer<T>();
     this.#fiber.set(id, {
       callback,
       deferred,
