@@ -29,6 +29,7 @@ export function Numeric<T>(BaseType: NumericParameters<T>): Numeric<T> {
     asInt,
     compare,
     fromInt,
+    // eslint-disable-next-line ts/no-unsafe-unary-minus
     negate = (self) => fromInt(-asInt(self) as Int),
     one = () => fromInt(1 as Int),
     zero = () => fromInt(0 as Int),

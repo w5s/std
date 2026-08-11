@@ -1,3 +1,6 @@
+/* eslint-disable ts/no-unsafe-member-access */
+/* eslint-disable ts/no-unsafe-call */
+/* eslint-disable ts/no-unsafe-assignment */
 import type { TestingLibrary } from '@w5s/core-type';
 
 /**
@@ -33,7 +36,7 @@ export function describeError(testingLibrary: TestingLibrary) {
   ) => {
     describe('errorName', () => {
       it(`should be ${spec.expectedName}`, () => {
-        expect((subject as any).errorName).toBe(spec.expectedName);
+        expect((subject as { errorName?: string }).errorName).toBe(spec.expectedName);
       });
     });
     describe('#name', () => {

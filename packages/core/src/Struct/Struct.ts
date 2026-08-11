@@ -3,11 +3,8 @@ import type { InspectFunction, InspectOptions } from '../Type.js';
 
 import { compare } from '../String/compare.js';
 
-const {
-
-  Object: { assign },
-  String: toString,
-} = globalThis;
+const assign = globalThis.Object.assign.bind(globalThis.Object);
+const toString = globalThis.String;
 const defaultSort = (left: string | symbol, right: string | symbol) =>
   left === right ? 0 : left === '_' ? -1 : right === '_' ? 1 : compare(toString(left), toString(right));
 
@@ -37,6 +34,7 @@ export const Struct = class Object {
    * @param inspect
    */
   [globalThis.Symbol.for('nodejs.util.inspect.custom')](
+    this: this,
     depth: number,
     inspectOptions: InspectOptions,
     inspect: InspectFunction,
@@ -57,7 +55,7 @@ export const Struct = class Object {
    * struct.toString(); // '[object MyStruct]'
    * ```
    */
-  toString() {
+  toString(this: this): string {
     return this.#module.asString(this);
   }
 };

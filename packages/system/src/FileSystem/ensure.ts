@@ -81,6 +81,7 @@ export async function ensureSymbolicLinkAsync(source: FilePath, destination: Fil
 
 function ensureType(filePath: FilePath, expectedType: FileType, actualType: FileType) {
   if (actualType !== expectedType) {
+    // eslint-disable-next-line ts/only-throw-error
     throw ensureTypeError(filePath, expectedType, actualType);
   }
 }

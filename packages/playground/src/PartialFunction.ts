@@ -1,4 +1,4 @@
-/* eslint-disable ts/unified-signatures */
+/* eslint-disable ts/unified-signatures, ts/no-unsafe-return, ts/no-unsafe-argument */
 export interface PartialFunctionLike<F extends PartialApplyFunction> {
   readonly apply: F;
   readonly isDefinedAt: (anyValue: unknown) => anyValue is PartialParameter<F>;

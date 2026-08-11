@@ -19,6 +19,7 @@ import type { ContainerProviderFunction } from './ContainerProviderFunction.js';
  * @param key
  * @param provider
  */
+/* eslint-disable ts/no-unsafe-return */
 export function provide<Requirement extends {}, Key extends string | symbol, Value>(
   key: ContainerKey<Key, Option<Value>>,
   provider: ContainerProviderFunction<Requirement, Value>,

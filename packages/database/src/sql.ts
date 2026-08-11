@@ -44,6 +44,7 @@ function call({
   values?: ReadonlyArray<SQLStatement.Value>;
 }): SQLStatement {
   return SQLStatementType.create({
+    // eslint-disable-next-line ts/no-unsafe-assignment
     strings: strings.length <= values.length ? [...strings, ...Array(values.length + 1 - strings.length).fill('')] : strings,
     values,
   });

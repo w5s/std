@@ -37,6 +37,7 @@ export class MemoryJobProvider implements JobProvider {
     return this.#queue.shift();
   }
 
+  // eslint-disable-next-line ts/require-await
   async enqueue<Request extends JobRequest>(request: Request, options: JobEnqueueOptions): Promise<void> {
     const enqueuedAt = this.#now();
     const availableAt = options._ === 'delayed'

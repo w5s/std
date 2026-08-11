@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-unsafe-return */
 import { Symbol } from '@w5s/core/dist/Symbol.js';
 
 import type { TaskFunction, TaskLike } from '../Task.js';

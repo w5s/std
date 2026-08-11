@@ -13,7 +13,7 @@ import type { Ref } from '../Ref.js';
 export function property<T extends object, Name extends keyof T>(self: Ref<T>, propertyName: Name): Ref<T[Name]> {
   const propertyRef: Ref<T[Name]> = {
     get current() {
-      return self.current[propertyName] as T[Name];
+      return self.current[propertyName];
     },
     set current(value) {
       self.current = {

@@ -33,11 +33,12 @@ export function TObject(
   const propertyNames = globalThis.Object.keys(Properties);
   const propertyNameCount = propertyNames.length;
   return define({
-    hasInstance: (anyValue): anyValue is Record<string, unknown> => {
+    hasInstance: (anyValue: unknown): anyValue is Record<string, unknown> => {
       if (typeof anyValue === 'object' && anyValue !== null) {
+        const recordValue = anyValue as Record<string, unknown>;
         for (let index = 0; index < propertyNameCount; index += 1) {
           const propertyName = propertyNames[index]!;
-          if (!Properties[propertyName]!.hasInstance((anyValue as Record<string, unknown>)[propertyName])) {
+          if (!Properties[propertyName]!.hasInstance(recordValue[propertyName])) {
             return false;
           }
         }
@@ -74,16 +75,15 @@ export function TObject(
     },
     [Symbol.schema]: () =>
       propertyNames.reduce(
-        (acc, propertyName) => {
+        (acc: { properties: Record<string, unknown>; required: Array<string>; type: 'object' }, propertyName) => {
           acc.properties[propertyName] = schema(Properties[propertyName]!);
 
           return acc;
         },
         {
-
-          properties: {} as Record<string, unknown>,
+          properties: {},
           required: [] as Array<string>,
-          type: 'object',
+          type: 'object' as const,
         },
       ) as JSONValue,
     typeName: typeName ?? 'Object',

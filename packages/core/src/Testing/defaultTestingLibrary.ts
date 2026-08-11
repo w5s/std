@@ -4,7 +4,7 @@ import { panic } from '@w5s/error';
 
 const tryImport = async (path: string): Promise<TestingLibrary | undefined> => {
   try {
-    const module = await import(path);
+    const module = (await import(path)) as TestingLibrary;
 
     return module;
   } catch {

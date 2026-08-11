@@ -27,7 +27,7 @@ export function decode<T>(codec: Pick<Codec<T>, Symbol.decode>, input: unknown):
           message: `Cannot decode ${inspect(inputError)}${asType == null ? '' : ` as ${asType}`}`,
         }),
       ),
-    ok: Ok as Codec.Context<T>['ok'],
+    ok: Ok,
   });
 }
 

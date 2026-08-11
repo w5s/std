@@ -29,5 +29,5 @@ export function requestScheduledCallback(callback: ScheduledRequestCallback, dea
         return deadlineTime - performanceNow();
       },
     });
-  }) as unknown as ScheduledRequestId;
+  });
 }

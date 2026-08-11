@@ -34,6 +34,7 @@ export function Record<Key extends Type.Module<any>, Value extends Type.Module<a
           return error(input, typeName);
         }
 
+        // eslint-disable-next-line ts/no-unsafe-assignment, ts/no-unsafe-member-access
         returnValue[keyDecoded.value] = valueDecoded.value;
       }
 

@@ -74,6 +74,7 @@ export function Indexable<T, Index extends bigint | number = number>(
             if (startIndex <= endIndex) {
               // @ts-ignore
 
+              // eslint-disable-next-line ts/restrict-plus-operands
               for (let index = startIndex; index <= endIndex; index += one) {
                 const value = at(index);
                 if (value != null) {
@@ -82,6 +83,7 @@ export function Indexable<T, Index extends bigint | number = number>(
               }
             } else {
               // @ts-ignore
+
               for (let index = startIndex; index >= endIndex; index -= one) {
                 const value = at(index);
                 if (value != null) {
@@ -99,6 +101,7 @@ export function Indexable<T, Index extends bigint | number = number>(
         const endIndex = indexOf(end);
         // @ts-ignore
 
+        // eslint-disable-next-line ts/no-unsafe-return, ts/restrict-plus-operands
         return startIndex == null || endIndex == null ? zero : endIndex - startIndex + one;
       }),
   };

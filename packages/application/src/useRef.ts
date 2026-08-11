@@ -37,6 +37,7 @@ export function useRef<V>(
     returnValue = 'get' in hostObject ? useRefStorage(hostObject, key, initialValue) : useRefMap(hostObject, key, initialValue);
     hostRegistry.set(key, returnValue);
   }
+  // eslint-disable-next-line ts/no-unsafe-return
   return returnValue;
 }
 

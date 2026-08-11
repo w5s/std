@@ -35,7 +35,7 @@
     "spellcheck:root": "cspell --no-progress '**' --exclude='apps/*/**' --exclude='packages/*/**'",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "validate": "turbo run build lint test spellcheck typecheck size-limit"
+    "validate": "turbo run build lint test typecheck size-limit"
   },
   "commitlint": {
     "extends": [

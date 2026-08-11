@@ -1,4 +1,4 @@
-const state = new WeakMap<Iterable<unknown>, ReturnType<typeof useSeqState<any>>>();
+const state = new WeakMap<object, SeqState<unknown>>();
 
 /**
  * @internal
@@ -21,7 +21,7 @@ export function useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
     };
   }
 
-  let returnValue = state.get(iterable);
+  let returnValue = state.get(iterable as object) as SeqState<T> | undefined;
   if (returnValue === undefined) {
     returnValue = Array.isArray(iterable)
       ? {
@@ -32,7 +32,7 @@ export function useSeqState<T>(iterable: Iterable<T>): SeqState<T> {
           currentIterator: iterable[Symbol.iterator](),
           resolvedValues: [],
         };
-    state.set(iterable, returnValue);
+    state.set(iterable as object, returnValue);
   }
   return returnValue;
 }

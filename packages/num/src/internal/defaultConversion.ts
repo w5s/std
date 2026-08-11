@@ -5,4 +5,5 @@ const defaultConversionInstance: NumberConversion<any> = {
   fromNumber: (n: number) => n,
 };
 
+// eslint-disable-next-line ts/no-unsafe-return
 export const defaultConversion = <T>(): NumberConversion<T> => defaultConversionInstance;

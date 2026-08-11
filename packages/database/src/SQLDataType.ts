@@ -179,6 +179,7 @@ const Modules = {
 function format(data: SQLDataType): string {
   const { keys } = Modules[data.dataType];
 
+  // eslint-disable-next-line ts/no-unsafe-return, ts/no-unsafe-member-access
   return `${data.dataType}${isEmpty(keys) ? '' : `(${keys.map((key) => (data as any)[key]).join(',')})`}`;
 }
 

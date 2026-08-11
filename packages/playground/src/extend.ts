@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-unsafe-return, ts/no-unsafe-assignment, ts/no-unsafe-member-access, ts/no-unsafe-argument */
 import type { Spread } from './Spread.js';
 
 /**
