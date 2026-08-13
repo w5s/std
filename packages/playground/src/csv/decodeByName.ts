@@ -42,6 +42,7 @@ export function decodeByName(
 
       return ok(
 
+        // eslint-disable-next-line ts/no-non-null-assertion
         Object.fromEntries(iterableMap(csvHeader, (field, fieldIndex) => [field, csvRecordTuple[fieldIndex]!])),
       );
     });

@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-non-null-assertion */
 import { Callable } from '@w5s/core/dist/Callable.js';
 import { Struct } from '@w5s/core/dist/Struct.js';
 

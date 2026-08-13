@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-non-null-assertion */
 /* eslint-disable ts/no-unsafe-function-type, ts/no-unsafe-return, ts/no-unsafe-call */
 
 interface Pipe<A> {

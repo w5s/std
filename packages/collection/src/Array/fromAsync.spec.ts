@@ -26,7 +26,7 @@ describe(fromAsync, () => {
     expect(result).toEqual([1, 2, 3]);
   });
 
-  it.skip('should process items sequentially by default', async () => {
+  it('should process items sequentially by default', async () => {
     const order: Array<number> = [];
     const array = [1, 2, 3];
 

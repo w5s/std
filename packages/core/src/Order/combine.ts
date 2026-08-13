@@ -27,6 +27,7 @@ export function combine<T>(self: Order<T>, ...others: Array<Order<T>>): Order<T>
 
     // eslint-disable-next-line ts/prefer-for-of
     for (let index = 0; index < others.length; index += 1) {
+      // eslint-disable-next-line ts/no-non-null-assertion
       returnValue = others[index]!(left, right);
       if (returnValue !== 0) {
         return returnValue;

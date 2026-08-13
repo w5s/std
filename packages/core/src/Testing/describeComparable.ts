@@ -37,7 +37,7 @@ export function describeComparable<T>(
   const equivalent = () => equivalentDefault().map(([left, right]) => ({ left, right }));
   const inferiorData = () => {
     const values = ordered();
-    // eslint-disable-next-line unicorn/prefer-at
+    // eslint-disable-next-line unicorn/prefer-at, ts/no-non-null-assertion
     const inferiorBase = values[values.length - 1]!;
     const inferiorValues = values.slice(1, -1);
     return inferiorValues.map((inferiorValue) => ({ left: inferiorBase, right: inferiorValue }));
@@ -45,6 +45,7 @@ export function describeComparable<T>(
   const superiorData = () => {
     const values = ordered();
     const superiorValues = values.slice(1);
+    // eslint-disable-next-line ts/no-non-null-assertion
     const superiorBase = values[0]!;
     return superiorValues.map((superiorValue) => ({ left: superiorBase, right: superiorValue }));
   };

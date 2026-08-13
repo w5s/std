@@ -40,6 +40,7 @@ export function shallowEqual<T = unknown>(
     // Test for A's keys different from B.
 
     for (let index = 0; index < leftKeys.length; index += 1) {
+      // eslint-disable-next-line ts/no-non-null-assertion
       const key = leftKeys[index]!;
 
       const leftValue = left[key as keyof typeof left] as ValueOf<T>;
@@ -53,6 +54,7 @@ export function shallowEqual<T = unknown>(
     // Test for A's keys different from B.
 
     for (let index = 0; index < leftKeys.length; index += 1) {
+      // eslint-disable-next-line ts/no-non-null-assertion
       const key = leftKeys[index]!;
 
       if (!Object.hasOwn(right, key)) {

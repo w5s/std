@@ -10,6 +10,7 @@ function parse(expression: string): Option<RegExp> {
   try {
     const match = expression.match(/(\/?)(.+)\1([a-z]*)/i);
     if (match != null) {
+      // eslint-disable-next-line ts/no-non-null-assertion
       return new globalThis.RegExp(match[2]!, match[3]);
     }
   } catch {

@@ -7,7 +7,7 @@ import { fromNumber } from './fromNumber.js';
 const unchecked =
   (fn: (left: Int, right: Int) => number) =>
     (left: Int, right: Int): Int =>
-
+      // eslint-disable-next-line ts/no-non-null-assertion
       fromNumber(fn(left, right))!;
 const quot = unchecked((base, divider) => base / divider);
 const mod = unchecked((base, divider) => base % divider);

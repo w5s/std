@@ -33,5 +33,6 @@ const colorMap = new Map(
  * @returns the ANSI escape sequence for the given color
  */
 export function color(value: Color): ANSIWrapper {
+  // eslint-disable-next-line ts/no-non-null-assertion
   return colorMap.get(value)!;
 }

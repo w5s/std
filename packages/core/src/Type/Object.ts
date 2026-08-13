@@ -1,3 +1,4 @@
+/* eslint-disable ts/no-non-null-assertion */
 import type { JSONValue } from '../JSON.js';
 import type { Type } from '../Type.js';
 

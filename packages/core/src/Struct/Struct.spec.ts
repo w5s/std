@@ -15,7 +15,7 @@ describe(Struct, () => {
       const Foo = Type.define<{ foo: boolean }>({
         ...defaultProperties,
       });
-      expect(Struct.create(Foo, { foo: true }));
+      expect(Struct.create(Foo, { foo: true })).toEqual({ foo: true });
     });
   });
   describe('#Symbol(nodejs.util.inspect.custom)', () => {

@@ -37,7 +37,7 @@ export const MoneyNumeric: {
    * @param money money object
    * @param multiplier multiplication factor
    */
-  '*'(money: Money, multiplier: BigDecimal): Money;
+  '*'(this: void, money: Money, multiplier: BigDecimal): Money;
 
   /**
    * Addition operator

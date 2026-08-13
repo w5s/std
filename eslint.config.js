@@ -16,7 +16,7 @@ export default await defineConfig({
     react: false,
     ts: {
       rules: {
-        'jsdoc/check-tag-names': 'off',
+
         'jsdoc/require-example': [
           'warn',
           {
@@ -27,12 +27,7 @@ export default await defineConfig({
           },
         ],
         'ts/naming-convention': 'off',
-        // `void` in unions is intentionally used across public type-level APIs.
-        // Converting to `undefined` would be a semantic change with compatibility risk.
         'ts/no-invalid-void-type': 'off',
-        // Existing APIs intentionally rely on non-null assertions; replacing them safely
-        // needs deeper refactors and test expansion to avoid runtime regressions.
-        'ts/no-non-null-assertion': 'off',
       },
     },
   },
@@ -40,11 +35,7 @@ export default await defineConfig({
   rules: {
     'e18e/prefer-array-at': 'off',
     'e18e/prefer-static-regex': 'off',
-    'jsdoc/require-returns-type': 'off',
-    'next/no-assign-module-variable': 'off',
-    'test/expect-expect': ['error', { assertFunctionNames: ['expect*', 'assert*'] }],
     'test/no-unneeded-async-expect-function': 'off',
-    'test/valid-expect': 'off',
     'unicorn/no-array-from-fill': 'off',
     'unicorn/no-for-each': 'off',
     'unicorn/no-nonstandard-builtin-properties': 'off',

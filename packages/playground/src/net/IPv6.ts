@@ -59,6 +59,7 @@ const IPv6Format = {
     let parts = expression.split(':');
     if (parts.length <= 2) return undefined;
 
+    // eslint-disable-next-line ts/no-non-null-assertion
     const lastPart = parts.pop()!;
     const last32Bits = (() => {
       const ipv4Value = parseIPv4(lastPart);
@@ -80,6 +81,7 @@ const IPv6Format = {
 
     // eslint-disable-next-line ts/prefer-for-of
     for (let index = 0; index < parts.length; index += 1) {
+      // eslint-disable-next-line ts/no-non-null-assertion
       const parsedPart = parseHex(parts[index]!);
       if (parsedPart == null) return undefined;
       bigintAddress = (bigintAddress << 16n) + parsedPart;

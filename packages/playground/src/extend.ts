@@ -34,6 +34,7 @@ function mergeObject(source: any, extension: any): any {
   let keyIndex = 0;
   // Try to copy until the first changed value is found
   while (keyIndex < keyCount) {
+    // eslint-disable-next-line ts/no-non-null-assertion
     const key = keys[keyIndex]!;
     const value = extension[key];
     if (returnValue[key] !== value) {
@@ -45,6 +46,7 @@ function mergeObject(source: any, extension: any): any {
   }
   // Fast Copy every other keys
   while (keyIndex < keyCount) {
+    // eslint-disable-next-line ts/no-non-null-assertion
     const key = keys[keyIndex]!;
     returnValue[key] = extension[key];
     keyIndex += 1;
