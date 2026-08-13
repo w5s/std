@@ -70,7 +70,8 @@ export namespace Codec {
     /**
      * Helper that returns a new Error result
      *
-     * @param message
+     * @param input
+     * @param asType
      */
     error: (input: unknown, asType?: string) => Result<T, CodecError>;
 
