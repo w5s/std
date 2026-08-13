@@ -15,6 +15,7 @@ export function create(parts: Array<LogMessageItem>): LogMessage {
   let buffer = '';
   // eslint-disable-next-line ts/prefer-for-of
   for (let index = 0; index < parts.length; index += 1) {
+    // eslint-disable-next-line ts/no-non-null-assertion
     const value = parts[index]!;
     if (typeof value === 'string') {
       buffer += value;

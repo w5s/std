@@ -38,6 +38,7 @@ export function level(logLevel: LogLevel | LogLevelValue): LogLevelFactory {
 function levelWithData(logLevel: LogLevel, baseData: LogRecord['data']): LogLevelFactory {
   return Object.assign(
     (strings: TemplateStringsArray, ...tokens: Array<null | ReferenceInput | string | undefined>) => {
+      // eslint-disable-next-line ts/no-non-null-assertion
       const message: Array<LogMessageItem> = [strings[0]!];
       const data: Record<string, unknown> = { ...baseData };
       for (const [index, token] of tokens.entries()) {
@@ -50,6 +51,7 @@ function levelWithData(logLevel: LogLevel, baseData: LogRecord['data']): LogLeve
             data[key] = value;
           }
         }
+        // eslint-disable-next-line ts/no-non-null-assertion
         message.push(strings[index + 1]!);
       }
 
