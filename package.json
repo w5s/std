@@ -61,7 +61,7 @@
     "@lerna-lite/publish": "5.6.1",
     "@size-limit/preset-small-lib": "13.0.3",
     "@types/node": "20.19.43",
-    "@w5s/commitlint-config": "3.22.0",
+    "@w5s/commitlint-config": "3.23.0",
     "@w5s/conventional-changelog": "3.23.0",
     "@w5s/cspell-config": "3.22.0",
     "@w5s/eslint-config": "3.27.0",
