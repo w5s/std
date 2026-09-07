@@ -32,7 +32,7 @@ export function withAsyncIterable(expectFn: ExpectFunction) {
       const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
       return (isNot ? expectValue.not : expectValue).toEqual(await arrayFromAsync(iterable));
     },
-    // eslint-disable-next-line ts/require-await
+
     async toHaveValues(expected: Array<unknown>) {
       const expectValue = expectFn(arrayFromAsync(iterable)).resolves;
       return (isNot ? expectValue.not : expectValue).toEqual(expected);

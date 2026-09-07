@@ -41,7 +41,7 @@ function cacheFor(appContext: object): use.Cache {
   // @ts-ignore we know what we are doing
   const cache = appContext[use.cache] as undefined | use.Cache;
 
-  if (cache === undefined || cache.appContext !== appContext) {
+  if (cache?.appContext !== appContext) {
     const cacheNew = { appContext };
 
     (appContext as unknown as Cacheable)[use.cache] = cacheNew;

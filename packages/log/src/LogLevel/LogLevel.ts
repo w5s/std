@@ -24,8 +24,8 @@ const typeName = 'LogLevel';
 const encode = ({ name, value }: LogLevel) => `${name}[${value}]`;
 const decode: Codec<LogLevel>[Symbol.decode] = (input, { error, ok }) => {
   if (typeof input === 'string') {
-    const match = input.match(/^(\w+)\[(\d+)]$/);
-    if (match != null && match.length === 3) {
+    const match = /^(\w+)\[(\d+)]$/.exec(input);
+    if (match?.length === 3) {
       // eslint-disable-next-line ts/no-non-null-assertion
       const name = match[1]!;
       // eslint-disable-next-line ts/no-non-null-assertion

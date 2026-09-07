@@ -1,4 +1,3 @@
-/* eslint-disable ts/require-await */
 import type { BodyReader, BodyReaderFormat, BodyReaderValue } from '../BodyReader.js';
 
 type Resolver<T> = { reject: unknown } | { resolve: T };

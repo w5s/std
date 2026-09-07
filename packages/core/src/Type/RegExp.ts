@@ -8,7 +8,7 @@ function parse(expression: string): Option<RegExp> {
     return /(?:)/;
   }
   try {
-    const match = expression.match(/(\/?)(.+)\1([a-z]*)/i);
+    const match = /(\/?)(.+)\1([a-z]*)/i.exec(expression);
     if (match != null) {
       // eslint-disable-next-line ts/no-non-null-assertion
       return new globalThis.RegExp(match[2]!, match[3]);
