@@ -139,8 +139,8 @@ importers:
         specifier: 3.36.0
         version: 3.36.0(eslint@10.10.0(jiti@2.7.0))(supports-color@8.1.1)(ts-declaration-location@1.0.7(typescript@6.0.3))(typescript@6.0.3)(vitest@4.1.11(@types/node@20.19.43)(vite@7.3.3(@types/node@20.19.43)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.9.0)))
       '@w5s/tsconfig':
-        specifier: 3.1.35
-        version: 3.1.35(typescript@6.0.3)
+        specifier: 3.1.36
+        version: 3.1.36(typescript@6.0.3)
       '@w5s/tsdown-config':
         specifier: 1.9.0
         version: 1.9.0(tsdown@0.23.0(typescript@6.0.3))
@@ -4258,8 +4258,8 @@ packages:
       prettier:
         optional: true
 
-  '@w5s/tsconfig@3.1.35':
-    resolution: {integrity: sha512-N2IX7fXAAM6WQiDBOj1YjpJbAwS4rWdHv/Es9gg0bOoxgsEmVNUyZac8hDMuYJ9rKjJo1hwt8+Q/gvd7NeSZ0A==}
+  '@w5s/tsconfig@3.1.36':
+    resolution: {integrity: sha512-1KL6/CUGCBZ++qxRl/lqp7PfYrzetkw9CN4pFQaewgi9RiM7+5Rx8ienZ1OA12U8avFh+XgskrcJgPbHuYzPyg==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       typescript: '>=5.x'
@@ -14591,7 +14591,7 @@ snapshots:
 
   '@w5s/prettier-config@3.21.0': {}
 
-  '@w5s/tsconfig@3.1.35(typescript@6.0.3)':
+  '@w5s/tsconfig@3.1.36(typescript@6.0.3)':
     optionalDependencies:
       typescript: 6.0.3
 
