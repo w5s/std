@@ -15,7 +15,7 @@ const durationISO8601 = `P(?:${date}(?:${time})?)`;
 export const durationRegexp = new RegExp(durationISO8601);
 
 function parse(expression: string): Option<Duration> {
-  const matches = expression.replaceAll(',', '.').match(durationRegexp);
+  const matches = durationRegexp.exec(expression.replaceAll(',', '.'));
   if (matches == null) {
     return undefined;
   }

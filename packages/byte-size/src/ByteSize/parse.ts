@@ -18,7 +18,7 @@ const byteSizeRegex = /^([\d,.]+)\s*([a-z]+)?$/i;
  * @param value
  */
 export function parse(value: string): Option<ByteSize> {
-  const match = value.trim().match(byteSizeRegex);
+  const match = byteSizeRegex.exec(value.trim());
 
   if (match == null) return undefined;
 

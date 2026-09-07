@@ -29,7 +29,7 @@ export const DatabaseDriver = {
     return {
       adapter,
       execute,
-      // eslint-disable-next-line ts/require-await
+
       async handleError(cause: unknown) {
         return new DatabaseError({ cause });
       },

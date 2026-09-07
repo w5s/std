@@ -1,4 +1,3 @@
-/* eslint-disable ts/no-use-before-define */
 import { describe, expect, it } from 'vitest';
 
 import { resume } from './resume.js';
