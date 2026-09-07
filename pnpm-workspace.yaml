@@ -1,5 +1,8 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  nx: true
+  sqlite3: true
 configDependencies:
-  '@w5s/pnpm-plugin-config': 1.0.0-alpha.4
+  '@w5s/pnpm-plugin-config': 1.7.0
