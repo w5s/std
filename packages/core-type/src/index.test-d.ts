@@ -25,5 +25,7 @@ import type {
   Tag,
   TestingLibrary,
   ValueOf,
+  Writable,
+  WritableKeys,
   Year,
 } from './index.js';

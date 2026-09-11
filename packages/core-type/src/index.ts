@@ -23,4 +23,6 @@ export * from './Second.js';
 export * from './Tag.js';
 export * from './TestingLibrary.js';
 export * from './ValueOf.js';
+export * from './Writable.js';
+export * from './WritableKeys.js';
 export * from './Year.js';
