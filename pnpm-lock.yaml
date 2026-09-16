@@ -133,8 +133,8 @@ importers:
         specifier: 3.24.0
         version: 3.24.0(@commitlint/cli@21.2.2(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
       '@w5s/conventional-changelog':
-        specifier: 3.25.0
-        version: 3.25.0
+        specifier: 3.27.0
+        version: 3.27.0
       '@w5s/cspell-config':
         specifier: 3.24.0
         version: 3.24.0(cspell@10.3.1)
@@ -4465,8 +4465,8 @@ packages:
       '@commitlint/cli':
         optional: true
 
-  '@w5s/conventional-changelog@3.25.0':
-    resolution: {integrity: sha512-qRqIzotYcvgFzv5FUOVLTRkNO72PQo1BQl7wawqPdA9jI6KtWAqd3YkJGAdryAqkxKOOjMFhSXEhc8DbJ8NKRQ==}
+  '@w5s/conventional-changelog@3.27.0':
+    resolution: {integrity: sha512-AHg3FAlr1opUUhXv+zn5fmp5Y7dprhFO0jpd3kKxX8utbmv4RRYmGJl+3nsJy8Wy0I/T6sgFVRl4jRWhRD83yQ==}
     engines: {node: '>=22.0.0'}
 
   '@w5s/cspell-config@3.24.0':
@@ -15063,13 +15063,13 @@ snapshots:
   '@w5s/commitlint-config@3.24.0(@commitlint/cli@21.2.2(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
     dependencies:
       '@commitlint/types': 21.1.0
-      '@w5s/conventional-changelog': 3.25.0
+      '@w5s/conventional-changelog': 3.27.0
     optionalDependencies:
       '@commitlint/cli': 21.2.2(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
 
-  '@w5s/conventional-changelog@3.25.0':
+  '@w5s/conventional-changelog@3.27.0':
     dependencies:
-      '@commitlint/types': 21.1.0
+      '@commitlint/types': 21.2.0
       emoji-regex: 10.6.0
       gitmojis: 3.15.0
 
