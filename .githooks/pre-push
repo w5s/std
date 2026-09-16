@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# BEGIN MANAGED BLOCK
-pnpm run validate
-# END MANAGED BLOCK
