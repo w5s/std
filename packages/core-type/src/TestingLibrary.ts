@@ -30,8 +30,9 @@ export interface TestEachFunction {
 }
 
 export interface TestEachFunctionReturn<T extends Array<any>> {
+  // eslint-disable-next-line ts/prefer-function-type
   (name: Function | string, fn: (...args: T) => Awaitable<void> /* , options?: number | TestCollectorOptions */): void;
-  (name: Function | string, /* , options: TestCollectorOptions, */ fn: (...args: T) => Awaitable<void>): void;
+  // (name: Function | string, /* , options: TestCollectorOptions, */ fn: (...args: T) => Awaitable<void>): void;
 }
 
 /**

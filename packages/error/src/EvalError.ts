@@ -19,11 +19,10 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class EvalError extends Error {
+export interface EvalError extends Error {
   name: 'EvalError';
 }
-// @ts-ignore Ignore duplicate
-export declare function EvalError(message?: string, options?: ErrorOptions): EvalError;
-// @ts-ignore Ignore duplicate
-export const EvalError = globalThis.EvalError;
+export const EvalError = globalThis.EvalError as unknown as {
+  (message?: string, options?: ErrorOptions): EvalError;
+  new (message?: string, options?: ErrorOptions): EvalError;
+};

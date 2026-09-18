@@ -10,8 +10,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * throw new Error('my message', { cause: someError });
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class Error {
+export interface Error {
   /**
    * Error cause
    */
@@ -32,16 +31,8 @@ export declare class Error {
    */
   stack?: string;
 
-  /**
-   * Error constructor
-   *
-   * @param message the error message
-   * @param options the error options
-   */
-  constructor(message?: string, options?: ErrorOptions);
 }
-// @ts-ignore Ignore duplicate
-export declare function Error(message?: string, options?: ErrorOptions): Error;
-
-// @ts-ignore Ignore duplicate
-export const Error: typeof Error = globalThis.Error;
+export const Error = globalThis.Error as unknown as {
+  (message?: string, options?: ErrorOptions): Error;
+  new (message?: string, options?: ErrorOptions): Error;
+};

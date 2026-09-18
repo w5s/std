@@ -19,11 +19,10 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class RangeError extends Error {
+export interface RangeError extends Error {
   name: 'RangeError';
 }
-// @ts-ignore Ignore duplicate
-export declare function RangeError(message?: string, options?: ErrorOptions): RangeError;
-// @ts-ignore Ignore duplicate
-export const RangeError = globalThis.RangeError;
+export const RangeError = globalThis.RangeError as unknown as {
+  (message?: string, options?: ErrorOptions): RangeError;
+  new (message?: string, options?: ErrorOptions): RangeError;
+};

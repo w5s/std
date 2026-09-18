@@ -19,11 +19,10 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class SyntaxError extends Error {
+export interface SyntaxError extends Error {
   name: 'SyntaxError';
 }
-// @ts-ignore Ignore duplicate
-export declare function SyntaxError(message?: string, options?: ErrorOptions): SyntaxError;
-// @ts-ignore Ignore duplicate
-export const SyntaxError = globalThis.SyntaxError;
+export const SyntaxError = globalThis.SyntaxError as unknown as {
+  (message?: string, options?: ErrorOptions): SyntaxError;
+  new (message?: string, options?: ErrorOptions): SyntaxError;
+};

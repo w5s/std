@@ -19,11 +19,10 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class URIError extends Error {
+export interface URIError extends Error {
   name: 'URIError';
 }
-// @ts-ignore Ignore duplicate
-export declare function URIError(message?: string, options?: ErrorOptions): URIError;
-// @ts-ignore Ignore duplicate
-export const URIError = globalThis.URIError;
+export const URIError = globalThis.URIError as unknown as {
+  (message?: string, options?: ErrorOptions): URIError;
+  new (message?: string, options?: ErrorOptions): URIError;
+};

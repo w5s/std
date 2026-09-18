@@ -15,8 +15,7 @@
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class AggregateError<Errors extends Array<any> | Iterable<any>> extends Error {
+export interface AggregateError<Errors extends Array<any> | Iterable<any>> extends Error {
   /**
    * Array of error
    */
@@ -24,15 +23,8 @@ export declare class AggregateError<Errors extends Array<any> | Iterable<any>> e
 
   name: 'AggregateError';
 
-  /**
-   * AggregateError constructor
-   *
-   * @param errors an iterable of error
-   * @param message the error message
-   */
-  constructor(errors: Errors, message?: string);
 }
-// @ts-ignore Ignore duplicate
-export declare function AggregateError(errors: Iterable<any>, message?: string): AggregateError;
-// @ts-ignore Ignore duplicate
-export const AggregateError = globalThis.AggregateError;
+export const AggregateError = globalThis.AggregateError as unknown as {
+  <Errors extends Array<any> | Iterable<any>>(errors: Errors, message?: string): AggregateError<Errors>;
+  new<Errors extends Array<any> | Iterable<any>>(errors: Errors, message?: string): AggregateError<Errors>;
+};
