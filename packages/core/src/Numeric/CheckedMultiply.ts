@@ -14,5 +14,5 @@ export interface CheckedMultiply<Base, Multiplier = Base, Output = Base> {
    * @param base the left operand
    * @param multiplier the right operand
    */
-  '*?'(base: Base, multiplier: Multiplier): Option<Output>;
+  '*?'(this: void, base: Base, multiplier: Multiplier): Option<Output>;
 }

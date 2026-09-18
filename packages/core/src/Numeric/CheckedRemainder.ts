@@ -14,5 +14,5 @@ export interface CheckedRemainder<Base, Divider = Base, Output = Base> {
    * @param left the left operand
    * @param right the right operand
    */
-  '%?'(left: Base, right: Divider): Option<Output>;
+  '%?'(this: void, left: Base, right: Divider): Option<Output>;
 }

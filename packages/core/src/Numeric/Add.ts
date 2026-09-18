@@ -12,5 +12,5 @@ export interface Add<Left, Right = Left, Output = Left> {
    * @param left the left operand
    * @param right the right operand
    */
-  '+'(left: Left, right: Right): Output;
+  '+'(this: void, left: Left, right: Right): Output;
 }
