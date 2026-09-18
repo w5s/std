@@ -12,5 +12,5 @@ export interface Divide<Base, Divider = Base, Output = Base> {
    * @param base the base part
    * @param divider the divider part
    */
-  '/'(base: Base, divider: Divider): Output;
+  '/'(this: void, base: Base, divider: Divider): Output;
 }

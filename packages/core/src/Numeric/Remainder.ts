@@ -12,5 +12,5 @@ export interface Remainder<Base, Divider = Base, Output = Base> {
    * @param left the left operand
    * @param right the right operand
    */
-  '%'(left: Base, right: Divider): Output;
+  '%'(this: void, left: Base, right: Divider): Output;
 }

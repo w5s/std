@@ -19,11 +19,10 @@ import type { ErrorOptions } from './ErrorOptions.js';
  * }
  * ```
  */
-// @ts-ignore Ignore duplicate
-export declare class ReferenceError extends Error {
+export interface ReferenceError extends Error {
   name: 'ReferenceError';
 }
-// @ts-ignore Ignore duplicate
-export declare function ReferenceError(message?: string, options?: ErrorOptions): ReferenceError;
-// @ts-ignore Ignore duplicate
-export const ReferenceError = globalThis.ReferenceError;
+export const ReferenceError = globalThis.ReferenceError as unknown as {
+  (message?: string, options?: ErrorOptions): ReferenceError;
+  new (message?: string, options?: ErrorOptions): ReferenceError;
+};
