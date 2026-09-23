@@ -49,7 +49,7 @@
     "@size-limit/preset-small-lib": "13.1.1",
     "@types/node": "20.19.43",
     "@w5s/commitlint-config": "3.30.0",
-    "@w5s/conventional-changelog": "3.29.0",
+    "@w5s/conventional-changelog": "3.31.0",
     "@w5s/cspell-config": "3.28.0",
     "@w5s/eslint-config": "3.40.0",
     "@w5s/lefthook-config": "1.5.0",
