@@ -51,7 +51,7 @@
     "@w5s/commitlint-config": "3.30.0",
     "@w5s/conventional-changelog": "3.31.0",
     "@w5s/cspell-config": "3.30.0",
-    "@w5s/eslint-config": "3.40.0",
+    "@w5s/eslint-config": "5.0.0",
     "@w5s/lefthook-config": "1.5.0",
     "@w5s/tsconfig": "3.1.42",
     "@w5s/tsdown-config": "1.16.0",
