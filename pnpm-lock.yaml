@@ -181,8 +181,8 @@ importers:
         specifier: 5.6.2
         version: 5.6.2(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(supports-color@8.1.1)
       '@size-limit/preset-small-lib':
-        specifier: 14.0.0
-        version: 14.0.0(size-limit@14.0.0)
+        specifier: 14.0.1
+        version: 14.0.1(size-limit@14.0.1)
       '@types/node':
         specifier: 20.19.43
         version: 20.19.43
@@ -226,11 +226,11 @@ importers:
         specifier: 2.1.0
         version: 2.1.0(markdown-magic@4.11.0)
       size-limit:
-        specifier: 14.0.0
-        version: 14.0.0
+        specifier: 14.0.1
+        version: 14.0.1
       size-limit-preset-node-lib:
         specifier: 0.4.0
-        version: 0.4.0(size-limit@14.0.0)
+        version: 0.4.0(size-limit@14.0.1)
       tsdown:
         specifier: 0.23.0
         version: 0.23.0(typescript@6.0.3)
@@ -3223,22 +3223,22 @@ packages:
     peerDependencies:
       size-limit: 11.2.0
 
-  '@size-limit/file@14.0.0':
-    resolution: {integrity: sha512-CzlXGYuzt+vZM70NxPwi5uFyYHhORrdpDCJtcH+G57oeUPrgnqdUhDoP4jRxa6i2HNBM5Htatw5X5TcDZ8uBWQ==}
+  '@size-limit/file@14.0.1':
+    resolution: {integrity: sha512-F1qJqAPcoK+V9KhLHsKLENwaoqdFfXL4OnGNV9kXI9VaWAOu4ykdyGHR1AOd8ZXcnyeA45PBROSmmKCajfc1hA==}
     engines: {node: ^22.19.0 || ^24.5.0 || >=26.0.0}
     peerDependencies:
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
-  '@size-limit/preset-small-lib@14.0.0':
-    resolution: {integrity: sha512-Rtq5eNDtCohmWcW9vo/oLQSl8RKX+Fcd2e2JyR7GrxRC/AeJvX6FaL/xYfu1nvi1bBd5M/BF30cJSsmehKjjjA==}
+  '@size-limit/preset-small-lib@14.0.1':
+    resolution: {integrity: sha512-BsK9KKIEqlPX3xGO3Gkvw5IUaSsz3Jc86sN72ebCY01KwX3G0bK5jkFLfO9QRZLNZyqD26lp/c4n2sCQv3YOGw==}
     peerDependencies:
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
-  '@size-limit/rolldown@14.0.0':
-    resolution: {integrity: sha512-E5TvfZrtnEjzG9esYMi5+BMKda1ZWNKSooZHipuwosoeKWxc9+8uzBT073I2waDObAlHgDkeRJV+/BBF9s1S1A==}
+  '@size-limit/rolldown@14.0.1':
+    resolution: {integrity: sha512-njMgaAsfx0FP3O+HgKMxDnz7jW9FeljVsLcReatbD2H/5Yo9tUCyb1nbDE7ltjAVJkfBDRQzu368TrCiJvMYQA==}
     engines: {node: ^22.19.0 || ^24.5.0 || >=26.0.0}
     peerDependencies:
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
   '@slorber/react-helmet-async@1.3.0':
     resolution: {integrity: sha512-e9/OK8VhwUSc67diWI8Rb3I0YgI9/SBQtnhe9aEuK6MhZm7ntZZimXgwXnd8W96YTmSOb9M4d8LwhRZyhWr/1A==}
@@ -8724,8 +8724,8 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
-  size-limit@14.0.0:
-    resolution: {integrity: sha512-VqcTCDkYEi+yH6s03bDRWHdC70ipyhI7d8geYiso/rMtUJ5H3uo7bZFYOlUmdrH3N+DCZstBntBJWZBpHp1waQ==}
+  size-limit@14.0.1:
+    resolution: {integrity: sha512-+ht/E62dNimsDEZSIsBubYoUY3V4EkkAZdsOrN6t4IO8h4Xvd9H+xy9okOgj53eodnd7Jub0lsk33kafcjWgRg==}
     engines: {node: ^22.19.0 || ^24.5.0 || >=26.0.0}
     hasBin: true
 
@@ -13594,24 +13594,24 @@ snapshots:
 
   '@sindresorhus/is@5.6.0': {}
 
-  '@size-limit/file@11.2.0(size-limit@14.0.0)':
+  '@size-limit/file@11.2.0(size-limit@14.0.1)':
     dependencies:
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
-  '@size-limit/file@14.0.0(size-limit@14.0.0)':
+  '@size-limit/file@14.0.1(size-limit@14.0.1)':
     dependencies:
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
-  '@size-limit/preset-small-lib@14.0.0(size-limit@14.0.0)':
+  '@size-limit/preset-small-lib@14.0.1(size-limit@14.0.1)':
     dependencies:
-      '@size-limit/file': 14.0.0(size-limit@14.0.0)
-      '@size-limit/rolldown': 14.0.0(size-limit@14.0.0)
-      size-limit: 14.0.0
+      '@size-limit/file': 14.0.1(size-limit@14.0.1)
+      '@size-limit/rolldown': 14.0.1(size-limit@14.0.1)
+      size-limit: 14.0.1
 
-  '@size-limit/rolldown@14.0.0(size-limit@14.0.0)':
+  '@size-limit/rolldown@14.0.1(size-limit@14.0.1)':
     dependencies:
       rolldown: 1.2.11
-      size-limit: 14.0.0
+      size-limit: 14.0.1
 
   '@slorber/react-helmet-async@1.3.0(react-dom@19.3.0(react@19.3.0))(react@19.3.0)':
     dependencies:
@@ -19947,10 +19947,10 @@ snapshots:
       size-limit: 11.2.0
       tslib: 2.8.1
 
-  size-limit-preset-node-lib@0.4.0(size-limit@14.0.0):
+  size-limit-preset-node-lib@0.4.0(size-limit@14.0.1):
     dependencies:
-      '@size-limit/file': 11.2.0(size-limit@14.0.0)
-      size-limit: 14.0.0
+      '@size-limit/file': 11.2.0(size-limit@14.0.1)
+      size-limit: 14.0.1
       size-limit-node-esbuild: 0.4.0
       tslib: 2.8.1
 
@@ -19964,7 +19964,7 @@ snapshots:
       picocolors: 1.1.1
       tinyglobby: 0.2.17
 
-  size-limit@14.0.0:
+  size-limit@14.0.1:
     dependencies:
       lilconfig: 3.1.3
       nanospinner: 1.2.2
