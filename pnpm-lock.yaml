@@ -190,8 +190,8 @@ importers:
         specifier: 3.30.0
         version: 3.30.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
       '@w5s/conventional-changelog':
-        specifier: 3.31.0
-        version: 3.31.0
+        specifier: 3.32.0
+        version: 3.32.0
       '@w5s/cspell-config':
         specifier: 3.30.0
         version: 3.30.0(cspell@10.3.5)
@@ -3820,8 +3820,8 @@ packages:
       '@commitlint/cli':
         optional: true
 
-  '@w5s/conventional-changelog@3.31.0':
-    resolution: {integrity: sha512-g4q6l/C+GpbHujr+FZj7iRLLZcN1P/R0yE4LBnShia2RHn59/F5HvhZh5JUYUsKfMYKGNat8xsE9rxsUOqMP+A==}
+  '@w5s/conventional-changelog@3.32.0':
+    resolution: {integrity: sha512-si6tPbxJuC/99IsMJgJODDCYhpdTJGb6v6aIfBH5TEmOkRCu/YPNHk4lPRr2ATbJMqqZVT40SsMxrEDcBwOQiA==}
     engines: {node: '>=22.0.0'}
 
   '@w5s/cspell-config@3.30.0':
@@ -5198,6 +5198,9 @@ packages:
 
   emoji-regex@10.6.0:
     resolution: {integrity: sha512-toUI84YS5YmxW219erniWD0CIVOo46xGKColeNQRgOzDorgBi1v4D71/OFzgD9GO2UGKIv1C3Sp8DAn0+j5w7A==}
+
+  emoji-regex@11.0.0:
+    resolution: {integrity: sha512-2qQtc7syPcJmvF7BfKxBvwgvhzDth6u3q23+Jr4JOQUcmMGgmj7B4/ePZ2DmOhrrb77S8kMNHq2kilVASysfqA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -14240,14 +14243,14 @@ snapshots:
   '@w5s/commitlint-config@3.30.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
     dependencies:
       '@commitlint/types': 21.2.3
-      '@w5s/conventional-changelog': 3.31.0
+      '@w5s/conventional-changelog': 3.32.0
     optionalDependencies:
       '@commitlint/cli': 21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
 
-  '@w5s/conventional-changelog@3.31.0':
+  '@w5s/conventional-changelog@3.32.0':
     dependencies:
       '@commitlint/types': 21.2.3
-      emoji-regex: 10.6.0
+      emoji-regex: 11.0.0
       gitmojis: 3.15.0
 
   '@w5s/cspell-config@3.30.0(cspell@10.3.5)':
@@ -15685,6 +15688,8 @@ snapshots:
   emoji-regex-xs@1.0.0: {}
 
   emoji-regex@10.6.0: {}
+
+  emoji-regex@11.0.0: {}
 
   emoji-regex@8.0.0: {}
 
