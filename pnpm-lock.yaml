@@ -199,8 +199,8 @@ importers:
         specifier: 5.0.0
         version: 5.0.0(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)(vitest@5.0.2(@types/node@20.19.43)(vite@8.3.1(@types/node@20.19.43)(jiti@2.7.0)(terser@5.51.2)(yaml@2.9.1)))
       '@w5s/lefthook-config':
-        specifier: 1.5.0
-        version: 1.5.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(lefthook@2.1.15)
+        specifier: 1.6.0
+        version: 1.6.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(lefthook@2.1.15)
       '@w5s/tsconfig':
         specifier: 3.1.43
         version: 3.1.43(typescript@6.0.3)
@@ -3864,8 +3864,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/lefthook-config@1.5.0':
-    resolution: {integrity: sha512-QjYW01GVPaYO0bGC1MzdSY7JeVopfYT/W4WVwhc4lvYxrAInbr46M7JhPIA79s1+zlbJ6nj+1zLfzxBWmf9QjQ==}
+  '@w5s/lefthook-config@1.6.0':
+    resolution: {integrity: sha512-LrkdMg0bu6RcJitmNkGLaBrd2Hh+ueap4q1Dgq/jmxTmKZhjfgmL/999mbC4AgsCZrSnFZFdLg1y07u2sZ5AQA==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@commitlint/cli': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -14312,7 +14312,7 @@ snapshots:
       - ts-declaration-location
       - vitest
 
-  '@w5s/lefthook-config@1.5.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(lefthook@2.1.15)':
+  '@w5s/lefthook-config@1.6.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(lefthook@2.1.15)':
     optionalDependencies:
       '@commitlint/cli': 21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
       eslint: 10.11.0(jiti@2.7.0)(supports-color@8.1.1)
