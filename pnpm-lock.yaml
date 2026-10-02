@@ -187,8 +187,8 @@ importers:
         specifier: 20.19.43
         version: 20.19.43
       '@w5s/commitlint-config':
-        specifier: 3.30.0
-        version: 3.30.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
+        specifier: 3.31.0
+        version: 3.31.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
       '@w5s/conventional-changelog':
         specifier: 3.32.0
         version: 3.32.0
@@ -3807,8 +3807,8 @@ packages:
   '@vscode/codicons@0.0.35':
     resolution: {integrity: sha512-7iiKdA5wHVYSbO7/Mm0hiHD3i4h+9hKUe1O4hISAe/nHhagMwb2ZbFC8jU6d7Cw+JNT2dWXN2j+WHbkhT5/l2w==}
 
-  '@w5s/commitlint-config@3.30.0':
-    resolution: {integrity: sha512-4yua8rB8FSJ9DQAM8Ug9+F/omvndWNEMi7WLqN0uB3RU70WsGQ7WWQTPQTny7dfqYo3oR2q2Ver4UjPqpoRDUg==}
+  '@w5s/commitlint-config@3.31.0':
+    resolution: {integrity: sha512-/E4sN7RFfpP16Dt4qJ+XFapbf3RBinZB9tYO7xXUKXU9kwobd6LdTRHCu1aS2EsncBP0S57hG1n26LPdpsdw+Q==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@commitlint/cli': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -14174,7 +14174,7 @@ snapshots:
 
   '@vscode/codicons@0.0.35': {}
 
-  '@w5s/commitlint-config@3.30.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
+  '@w5s/commitlint-config@3.31.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
     dependencies:
       '@commitlint/types': 21.2.3
       '@w5s/conventional-changelog': 3.32.0
