@@ -202,8 +202,8 @@ importers:
         specifier: 1.6.0
         version: 1.6.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))(eslint@10.11.0(jiti@2.7.0)(supports-color@8.1.1))(lefthook@2.1.15)
       '@w5s/tsconfig':
-        specifier: 3.1.43
-        version: 3.1.43(typescript@6.0.3)
+        specifier: 3.1.44
+        version: 3.1.44(typescript@6.0.3)
       '@w5s/tsdown-config':
         specifier: 1.17.0
         version: 1.17.0(tsdown@0.23.0(typescript@6.0.3))
@@ -3887,8 +3887,8 @@ packages:
       prettier:
         optional: true
 
-  '@w5s/tsconfig@3.1.43':
-    resolution: {integrity: sha512-jV9YrRzB11ajXXKCDbLioyDBcyhJm35hz52uvtM0WOF9nTyQLcS0UmHjkTpkGo+tM8TAORr3/aBh6xFQ0fLmMw==}
+  '@w5s/tsconfig@3.1.44':
+    resolution: {integrity: sha512-5gK73tDGAvfIa25zQCFhHJtqaxsSt77AoG73+SqFQH2EEIcyzOvOueVfhnGC/IK+7HC37RN0iQqcjjRwClMJtg==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       typescript: '>=5.x'
@@ -14254,7 +14254,7 @@ snapshots:
 
   '@w5s/prettier-config@3.27.0': {}
 
-  '@w5s/tsconfig@3.1.43(typescript@6.0.3)':
+  '@w5s/tsconfig@3.1.44(typescript@6.0.3)':
     optionalDependencies:
       typescript: 6.0.3
 
