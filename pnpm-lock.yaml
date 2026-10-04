@@ -187,8 +187,8 @@ importers:
         specifier: 20.19.43
         version: 20.19.43
       '@w5s/commitlint-config':
-        specifier: 3.31.0
-        version: 3.31.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
+        specifier: 3.32.0
+        version: 3.32.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))
       '@w5s/conventional-changelog':
         specifier: 3.32.0
         version: 3.32.0
@@ -3807,8 +3807,8 @@ packages:
   '@vscode/codicons@0.0.35':
     resolution: {integrity: sha512-7iiKdA5wHVYSbO7/Mm0hiHD3i4h+9hKUe1O4hISAe/nHhagMwb2ZbFC8jU6d7Cw+JNT2dWXN2j+WHbkhT5/l2w==}
 
-  '@w5s/commitlint-config@3.31.0':
-    resolution: {integrity: sha512-/E4sN7RFfpP16Dt4qJ+XFapbf3RBinZB9tYO7xXUKXU9kwobd6LdTRHCu1aS2EsncBP0S57hG1n26LPdpsdw+Q==}
+  '@w5s/commitlint-config@3.32.0':
+    resolution: {integrity: sha512-RmvPqxbAVSxp7Vc2+9BTO34jog4ZdhY+cvhuoCxX7wd3+VlhivxQNoqf+9x26VNEd6DsYFpJWc6jj2b2iTLDsA==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       '@commitlint/cli': ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0
@@ -3818,6 +3818,10 @@ packages:
 
   '@w5s/conventional-changelog@3.32.0':
     resolution: {integrity: sha512-si6tPbxJuC/99IsMJgJODDCYhpdTJGb6v6aIfBH5TEmOkRCu/YPNHk4lPRr2ATbJMqqZVT40SsMxrEDcBwOQiA==}
+    engines: {node: '>=22.0.0'}
+
+  '@w5s/conventional-changelog@3.33.0':
+    resolution: {integrity: sha512-EkutZdRrszeVjKdn2aHb/GN5WtJEItgL/ZOtZa/cKL3UbE5Bxlnp7wf/qoMESmIyKfdog3HhnmCOfsKyjJ2V9A==}
     engines: {node: '>=22.0.0'}
 
   '@w5s/cspell-config@3.31.0':
@@ -14174,14 +14178,20 @@ snapshots:
 
   '@vscode/codicons@0.0.35': {}
 
-  '@w5s/commitlint-config@3.31.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
+  '@w5s/commitlint-config@3.32.0(@commitlint/cli@21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3))':
     dependencies:
       '@commitlint/types': 21.2.3
-      '@w5s/conventional-changelog': 3.32.0
+      '@w5s/conventional-changelog': 3.33.0
     optionalDependencies:
       '@commitlint/cli': 21.2.3(@types/node@20.19.43)(conventional-commits-filter@6.0.1)(conventional-commits-parser@7.1.2)(typescript@6.0.3)
 
   '@w5s/conventional-changelog@3.32.0':
+    dependencies:
+      '@commitlint/types': 21.2.3
+      emoji-regex: 11.0.0
+      gitmojis: 3.15.0
+
+  '@w5s/conventional-changelog@3.33.0':
     dependencies:
       '@commitlint/types': 21.2.3
       emoji-regex: 11.0.0
