@@ -53,7 +53,7 @@
     "@w5s/cspell-config": "3.31.0",
     "@w5s/eslint-config": "5.0.0",
     "@w5s/lefthook-config": "1.6.0",
-    "@w5s/tsconfig": "3.1.43",
+    "@w5s/tsconfig": "3.1.44",
     "@w5s/tsdown-config": "1.17.0",
     "cspell": "10.3.6",
     "eslint": "10.11.0",
