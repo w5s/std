@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:w5s/std.git",
+    "url": "git+https://github.com/w5s/std.git",
     "directory": "packages/collection"
   },
   "license": "MIT",
