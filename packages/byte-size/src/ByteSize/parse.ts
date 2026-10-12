@@ -28,7 +28,5 @@ export function parse(value: string): Option<ByteSize> {
 
   if (Number.isNaN(amount)) return undefined;
   const multiplier = unit == null ? 1 : byteSizeFormatIndex()[unit];
-  if (multiplier == null) return undefined;
-
-  return (amount * multiplier) as ByteSize;
+  return multiplier == null ? undefined : ((amount * multiplier) as ByteSize);
 }

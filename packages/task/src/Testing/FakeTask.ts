@@ -73,10 +73,7 @@ export function FakeTask<Value = never, Error = never>(options: FakeTaskOptions<
   return isAsync === true
     ? from<Value, Error>(async (parameters) => {
         parameters.canceler.onCancel = canceler;
-        if (await delay(delayMs, parameters.canceler)) {
-          return unsafeCall(base, parameters);
-        }
-        return undefined;
+        return (await delay(delayMs, parameters.canceler)) ? unsafeCall(base, parameters) : undefined;
       })
     : base;
 }

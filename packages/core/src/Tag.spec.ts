@@ -5,6 +5,7 @@ import { define } from './Tag/define.js';
 
 describe('Tag', () => {
   type PositiveNumber = number & Tag<'Positive'>;
+  // eslint-disable-next-line unused-imports/no-unused-vars
   const PositiveNumber = Tag.define<number, PositiveNumber>({
     hasInstance: (value) => typeof value === 'number' && value > 0,
     typeName: 'PositiveNumber',

@@ -36,9 +36,5 @@ export function parse(expression: string): Option<BigDecimal> {
     return undefined;
   }
 
-  if (!digitsRegex.test(digits)) {
-    return undefined;
-  }
-
-  return of(BigInt(digits), scale);
+  return digitsRegex.test(digits) ? of(BigInt(digits), scale) : undefined;
 }
