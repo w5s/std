@@ -32,11 +32,7 @@ export function tryCall<V, E>(block: () => NonPromise<V>, onError: (error: unkno
 export function tryCall<V, E>(block: () => Promise<V> | V, onError: (error: unknown) => E | Promise<E>) {
   try {
     const returnValue = block();
-    if (isPromise(returnValue)) {
-      return returnValue.then(Ok, async (rejectError) => Error(await onError(rejectError)));
-    }
-
-    return Ok(returnValue);
+    return isPromise(returnValue) ? returnValue.then(Ok, async (rejectError) => Error(await onError(rejectError))) : Ok(returnValue);
   } catch (thrownError: unknown) {
     const resultError = onError(thrownError);
 

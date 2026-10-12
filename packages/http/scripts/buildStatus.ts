@@ -55,10 +55,7 @@ function outFile(file: string) {
 async function readStatusFile() {
   const statusContent = await fs.readFile('resource/status.json');
   const statusDecoded = JSON.parse(String(statusContent));
-  if (!statusDecoded.ok) {
-    return statusDecoded;
-  }
-  return Codec.decode(StatusArrayData, statusDecoded.value);
+  return statusDecoded.ok ? Codec.decode(StatusArrayData, statusDecoded.value) : statusDecoded;
 }
 
 function toConstant(str: string) {

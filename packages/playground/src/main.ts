@@ -80,9 +80,7 @@ function main2() {
     if (!uuid.ok) return uuid;
 
     const messageSent = await run(sendMessage(uuid.value + Money.format(amount)));
-    if (!messageSent.ok) return messageSent;
-
-    return Task.ok();
+    return messageSent.ok ? Task.ok() : messageSent;
   });
 
   return Task.orElse(task, (_error) => {

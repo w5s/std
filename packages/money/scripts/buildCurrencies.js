@@ -1,3 +1,4 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import currencyData from 'currencies.json';
 import { writeFile } from 'node:fs/promises';
 import path from 'node:path';

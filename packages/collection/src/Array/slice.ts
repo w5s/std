@@ -25,8 +25,5 @@ export function slice<Item>(self: Array<Item>, start?: Option<number>, end?: Opt
   if (sliceArrayLength === 0) {
     return empty();
   }
-  if (sliceArrayLength === arrayLength) {
-    return self;
-  }
-  return sliceArray;
+  return sliceArrayLength === arrayLength ? self : sliceArray;
 }

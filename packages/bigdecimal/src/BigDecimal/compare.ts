@@ -11,9 +11,5 @@ export function compare(left: BigDecimal, right: BigDecimal): Ordering {
     return bigIntCompare(left.value, bigDecimalScaleValue(right, left.scale));
   }
 
-  if (left.scale < right.scale) {
-    return bigIntCompare(bigDecimalScaleValue(left, right.scale), right.value);
-  }
-
-  return bigIntCompare(left.value, right.value);
+  return left.scale < right.scale ? bigIntCompare(bigDecimalScaleValue(left, right.scale), right.value) : bigIntCompare(left.value, right.value);
 }

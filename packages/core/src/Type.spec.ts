@@ -74,6 +74,7 @@ describe('Type', () => {
       typeName: 'PersonId',
     });
 
+    // eslint-disable-next-line unused-imports/no-unused-vars
     const Person = Type.Object({
       age: Type.Int,
       description: Type.Option(Type.string),

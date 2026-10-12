@@ -21,11 +21,7 @@ export function truncate(self: string, options: truncate.Options = truncate.defa
   if (self.length > maxLength) {
     const end = maxLength - ellipsis.length;
     const truncated = self.slice(0, end);
-    if (end < 1) {
-      return ellipsis;
-    }
-
-    return `${truncated}${ellipsis}`;
+    return end < 1 ? ellipsis : `${truncated}${ellipsis}`;
   }
   return self;
 }

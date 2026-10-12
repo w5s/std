@@ -22,10 +22,9 @@ export async function start<AppContext extends object>(
   initializer: Initializer<AppContext>,
 ): Promise<void> {
   const currentStatus = getStatus(initializer);
-  if (currentStatus === InitializerStatus.Stopped) {
-    setStatus(initializer, InitializerStatus.Starting);
-    const result = await initializer.onStart(appContext);
-    setStatus(initializer, InitializerStatus.Ready);
-    return result;
-  }
+  if (currentStatus !== InitializerStatus.Stopped) return;
+  setStatus(initializer, InitializerStatus.Starting);
+  const result = await initializer.onStart(appContext);
+  setStatus(initializer, InitializerStatus.Ready);
+  return result;
 }

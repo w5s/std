@@ -20,9 +20,11 @@ export class TaskCanceler {
    */
   cancel(): void {
     const { onCancel } = this;
-    if (onCancel != null) {
-      this.onCancel = undefined;
-      onCancel();
+    if (onCancel == null) {
+      return;
     }
+
+    this.onCancel = undefined;
+    onCancel();
   }
 }

@@ -17,6 +17,7 @@ permissions:
 jobs:
   validate:
     name: Node.js ${{ matrix.node-version }}
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

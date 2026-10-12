@@ -69,8 +69,7 @@ const IPv6Format = {
       const previousPartParsed = parseHex(previousPart);
       if (previousPartParsed == null) return undefined;
       const lastPartParsed = parseHex(lastPart);
-      if (lastPartParsed == null) return undefined;
-      return (previousPartParsed << 16n) + lastPartParsed;
+      return lastPartParsed == null ? undefined : (previousPartParsed << 16n) + lastPartParsed;
     })();
     if (last32Bits == null) return undefined;
     if (parts.length >= 6) return undefined;

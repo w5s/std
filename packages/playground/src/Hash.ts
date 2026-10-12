@@ -94,11 +94,7 @@ export const Hash = {
         return UNDEFINED;
       }
       default: {
-        if (anyValue === null) {
-          return NULL;
-        }
-
-        return ZERO;
+        return anyValue === null ? NULL : ZERO;
       }
     }
   },

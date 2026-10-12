@@ -13,9 +13,5 @@ export function bigDecimalScaleValue(self: BigDecimal, newScale: number): bigint
     return value * 10n ** BigInt(newScale - scale);
   }
 
-  if (newScale < scale) {
-    return value / 10n ** BigInt(scale - newScale);
-  }
-
-  return value;
+  return newScale < scale ? value / 10n ** BigInt(scale - newScale) : value;
 }
