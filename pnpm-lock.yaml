@@ -231,8 +231,8 @@ importers:
         specifier: 14.1.0
         version: 14.1.0
       size-limit-preset-node-lib:
-        specifier: 0.5.0
-        version: 0.5.0(size-limit@14.1.0)
+        specifier: 0.5.1
+        version: 0.5.1(size-limit@14.1.0)
       tsdown:
         specifier: 0.23.0
         version: 0.23.0(typescript@6.0.3)
@@ -3386,6 +3386,12 @@ packages:
     engines: {node: ^22.19.0 || ^24.5.0 || >=26.0.0}
     peerDependencies:
       size-limit: 14.1.0
+
+  '@size-limit/file@14.2.0':
+    resolution: {integrity: sha512-ROqMjC8Pi/ogIIm79Y4u8YieXJb++MaZWbdv/am16l4cS9CxSUXmqP3igIXyv3gK3LMG6DkZdWSM5KVND2ug7g==}
+    engines: {node: ^22.19.0 || ^24.5.0 || >=26.0.0}
+    peerDependencies:
+      size-limit: 14.2.0
 
   '@size-limit/preset-small-lib@14.1.0':
     resolution: {integrity: sha512-WK3Qvk0TnnLdQsJcA1V+Ci58RSM3iRGV+axML1QQcF4ZpdrDTFVttrBiMgYRc+ay/skpxPI1D7QZbM+Jv1C05w==}
@@ -8918,11 +8924,11 @@ packages:
     peerDependencies:
       size-limit: ^14.2.0
 
-  size-limit-preset-node-lib@0.5.0:
-    resolution: {integrity: sha512-nF7gHHAxcuCV3iD0Cna7jJQqpyh2bzSryBYloCdETazNXqXKUphGj+VWlmkuNbYyVVEI6yccfbCBBbnZeW9TVQ==}
+  size-limit-preset-node-lib@0.5.1:
+    resolution: {integrity: sha512-csSk6yX3CS+eX5vVGVHFOuekqulONFCROXnm1aRlcSPWaEjkl+gDojuKUt3xsGlJAMW9u5UnkhQcR/1nXx1n4A==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     peerDependencies:
-      size-limit: ^14.0.0
+      size-limit: ^14.2.0
 
   size-limit@14.1.0:
     resolution: {integrity: sha512-ANW8IDwAK3P84y+bElmWqq8ymV/mNS8Jan+otR5XItVVS4AEyAx7MpT+1BsMULbgDaJ1cle3qN/hkOYQS0vF7g==}
@@ -13871,6 +13877,10 @@ snapshots:
       size-limit: 14.1.0
 
   '@size-limit/file@14.1.0(size-limit@14.1.0)':
+    dependencies:
+      size-limit: 14.1.0
+
+  '@size-limit/file@14.2.0(size-limit@14.1.0)':
     dependencies:
       size-limit: 14.1.0
 
@@ -20304,9 +20314,9 @@ snapshots:
       size-limit: 14.1.0
       tslib: 2.8.1
 
-  size-limit-preset-node-lib@0.5.0(size-limit@14.1.0):
+  size-limit-preset-node-lib@0.5.1(size-limit@14.1.0):
     dependencies:
-      '@size-limit/file': 14.1.0(size-limit@14.1.0)
+      '@size-limit/file': 14.2.0(size-limit@14.1.0)
       size-limit: 14.1.0
       size-limit-node-esbuild: 0.5.1(size-limit@14.1.0)
       tslib: 2.8.1
