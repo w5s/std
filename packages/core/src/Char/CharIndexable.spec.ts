@@ -7,7 +7,7 @@ import { CharIndexable } from './CharIndexable.js';
 describe('CharIndexable', () => {
   describeIndexable(CharIndexable, {
     index: [
-      [0, Char('\u0000')],
+      [0, Char('\0')],
       [97, Char('a')],
     ],
     range: [

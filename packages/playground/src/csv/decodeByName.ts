@@ -36,15 +36,12 @@ export function decodeByName(
 
     const csvRecords: CSVParseResult<CSVNamedRecord>['csvRecords'] = asyncIterableMap(restLines, (line, lineNumber) => {
       const csvRecordTuple = line.split(delimiter);
-      if (csvRecordTuple.length < csvHeader.length) {
-        return error(new CSVError({ message: `Cannot decode line number ${lineNumber}` }));
-      }
-
-      return ok(
-
-        // eslint-disable-next-line ts/no-non-null-assertion
-        Object.fromEntries(iterableMap(csvHeader, (field, fieldIndex) => [field, csvRecordTuple[fieldIndex]!])),
-      );
+      return csvRecordTuple.length < csvHeader.length
+        ? error(new CSVError({ message: `Cannot decode line number ${lineNumber}` }))
+        : ok(
+            // eslint-disable-next-line ts/no-non-null-assertion
+            Object.fromEntries(iterableMap(csvHeader, (field, fieldIndex) => [field, csvRecordTuple[fieldIndex]!])),
+          );
     });
 
     return ok({

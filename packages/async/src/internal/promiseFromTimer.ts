@@ -5,16 +5,8 @@ import { isDOMException } from '@w5s/error/dist/isDOMException.js';
 import type { TimerOptions } from '../TimerOptions.js';
 
 const toAbortError = (reason: any): AbortError => {
-  if (reason == null) {
-    return new AbortError();
-  }
-
-  if (isDOMException(reason) && reason.name === 'AbortError') {
-    return new AbortError();
-  }
-
   // eslint-disable-next-line ts/no-unsafe-return
-  return reason;
+  return reason == null || (isDOMException(reason) && reason.name === 'AbortError') ? new AbortError() : reason;
 };
 
 export function promiseFromTimer<Timer>(

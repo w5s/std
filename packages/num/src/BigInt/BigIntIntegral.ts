@@ -1,7 +1,5 @@
 import type { Numeric } from '@w5s/core/dist/Numeric.js';
 
-import type { Int } from '../Int.js';
-
 import { fromInt } from './fromInt.js';
 
 export const BigIntIntegral: Numeric.Integral<bigint> = {
@@ -13,7 +11,7 @@ export const BigIntIntegral: Numeric.Integral<bigint> = {
   '/': (base, divider) => base / divider,
   '/%': (base, divider) => [base / divider, base % divider],
   'abs': (value) => (value < 0n ? -value : value),
-  'asInt': (self) => Number(self) as Int,
+  'asInt': Number as unknown as Numeric.Integral<bigint>['asInt'],
   fromInt,
   'isNegative': (self) => self < 0n,
   'isOne': (self) => self === 1n,
