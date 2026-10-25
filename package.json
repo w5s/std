@@ -46,7 +46,7 @@
   "devDependencies": {
     "@commitlint/cli": "21.2.4",
     "@lerna-lite/publish": "5.6.4",
-    "@size-limit/preset-small-lib": "14.2.0",
+    "@size-limit/preset-small-lib": "14.3.0",
     "@types/node": "20.19.43",
     "@w5s/commitlint-config": "3.32.0",
     "@w5s/conventional-changelog": "3.33.0",
@@ -61,7 +61,7 @@
     "markdown-magic": "4.11.0",
     "markdown-magic-package-json": "2.0.2",
     "markdown-magic-subpackage-list": "2.1.0",
-    "size-limit": "14.2.0",
+    "size-limit": "14.3.0",
     "size-limit-preset-node-lib": "0.5.1",
     "tsdown": "0.23.1",
     "turbo": "2.11.10",
