@@ -1,6 +1,7 @@
 {
   "name": "@w5s/error",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "description": "Error module",
   "keywords": [
     "error",

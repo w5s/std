@@ -1,6 +1,7 @@
 {
   "name": "@w5s/random",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "description": "Random number module",
   "keywords": [
     "fp",

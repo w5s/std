@@ -1,6 +1,7 @@
 {
   "name": "@w5s/task",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "description": "Task modules",
   "keywords": [
     "fp",

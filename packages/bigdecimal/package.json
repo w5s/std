@@ -1,6 +1,7 @@
 {
   "name": "@w5s/bigdecimal",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "description": "BigDecimal module",
   "keywords": [
     "fp",

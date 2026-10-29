@@ -1,6 +1,7 @@
 {
   "name": "@w5s/time",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "description": "Time manipulation",
   "keywords": [
     "fp",
