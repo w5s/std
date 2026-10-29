@@ -1,4 +1,7 @@
 import { globalStorage } from './globalStorage.js';
+import { useStorageGetter } from './useStorageGetter.js';
+
+const getGlobalValue = useStorageGetter(globalStorage);
 
 /**
  * Return a new global value from {@link globalStorage} if not previously set.
@@ -12,13 +15,6 @@ import { globalStorage } from './globalStorage.js';
  * @param key the value key
  * @param initialValue the value initializer
  */
-export function useGlobal<Value>(key: unknown, initialValue: () => Value) {
-  let returnValue: Value;
-  if (globalStorage.has(key)) {
-    returnValue = globalStorage.get(key) as Value;
-  } else {
-    returnValue = initialValue();
-    globalStorage.set(key, returnValue);
-  }
-  return returnValue;
+export function useGlobal<Value>(key: unknown, initialValue: () => Value): Value {
+  return getGlobalValue(key, initialValue);
 }

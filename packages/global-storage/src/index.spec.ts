@@ -12,6 +12,7 @@ describe('index', () => {
         'meta',
         'useGlobal',
         'useStorage',
+        'useStorageGetter',
       ]),
     );
   });

@@ -4,3 +4,4 @@ export * from './meta.js';
 export * from './Storage.js';
 export * from './useGlobal.js';
 export * from './useStorage.js';
+export * from './useStorageGetter.js';
