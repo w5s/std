@@ -1,5 +1,6 @@
 import type { Ref } from '@w5s/core';
-import type { ShadowStorage } from '@w5s/shadow-storage';
+
+import { ShadowStorage } from '@w5s/shadow-storage';
 
 import type { StateKey } from './StateKey.js';
 
@@ -34,7 +35,7 @@ export function useRef<V>(
   }
   let returnValue: Ref<any> | undefined = hostRegistry.get(key);
   if (returnValue === undefined) {
-    returnValue = 'get' in hostObject ? useRefStorage(hostObject, key, initialValue) : useRefMap(hostObject, key, initialValue);
+    returnValue = ShadowStorage.hasInstance(hostObject) ? useRefStorage(hostObject, key, initialValue) : useRefMap(hostObject, key, initialValue);
     hostRegistry.set(key, returnValue);
   }
   // eslint-disable-next-line ts/no-unsafe-return

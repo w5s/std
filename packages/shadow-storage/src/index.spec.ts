@@ -10,6 +10,7 @@ describe('index', () => {
         '$shadowStorage',
         'globalStorage',
         'meta',
+        'ShadowStorage',
         'useGlobal',
         'useShadowStorage',
         'useShadowStorageGetter',
