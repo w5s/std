@@ -1,15 +1,18 @@
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=# W5S ${description} _(${name})_&unknownTxt= ) -->
-# W5S Time manipulation _(@w5s/time)_
+# W5S Shadow storage _(@w5s/shadow-storage)_
 <!-- AUTO-GENERATED-CONTENT:END -->
 
 [![NPM Version][package-version-svg]][package-url]
 [![License][license-image]][license-url]
 
+Attach a `Map` storage to any host object (e.g. `globalThis`) through a well-known symbol (`$shadowStorage`).
+Values survive hot module reload and are shared across modules and package copies.
+
 ## Installation
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=```sh\nnpm install ${name}\n```) -->
 ```sh
-npm install @w5s/time
+npm install @w5s/shadow-storage
 ```
 <!-- AUTO-GENERATED-CONTENT:END -->
 
@@ -26,7 +29,7 @@ export function main(): void {
   const key = Symbol('someId');
 
   function nextId() {
-    const id = globalStorage.get(key) ?? 0;
+    const id = (globalStorage.get(key) as number) ?? 0;
     globalStorage.set(key, id + 1);
     return id;
   }
@@ -45,16 +48,16 @@ export function main(): void {
 <!-- VARIABLES -->
 
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-version-svg]: https://img.shields.io/npm/v/${name}.svg?style=flat-square) -->
-[package-version-svg]: https://img.shields.io/npm/v/@w5s/time.svg?style=flat-square
+[package-version-svg]: https://img.shields.io/npm/v/@w5s/shadow-storage.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[package-url]: https://www.npmjs.com/package/${name}) -->
-[package-url]: https://www.npmjs.com/package/@w5s/time
+[package-url]: https://www.npmjs.com/package/@w5s/shadow-storage
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-image]: https://img.shields.io/badge/license-${license}-green.svg?style=flat-square) -->
 [license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[license-url]: https://www.npmjs.com/package/${name}) -->
-[license-url]: https://www.npmjs.com/package/@w5s/time
+[license-url]: https://www.npmjs.com/package/@w5s/shadow-storage
 <!-- AUTO-GENERATED-CONTENT:END -->
 <!-- AUTO-GENERATED-CONTENT:START (PKG_JSON:template=[issues-url]: ${bugs.url}) -->
 <!-- AUTO-GENERATED-CONTENT:END -->
