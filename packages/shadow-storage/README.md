@@ -18,9 +18,9 @@ npm install @w5s/time
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { globalStorage, useStorage } from '@w5s/global-storage';
+import { globalStorage, useShadowStorage } from '@w5s/shadow-storage';
 
-export const moduleStorage = useStorage({});
+export const moduleStorage = useShadowStorage({});
 
 export function main(): void {
   const key = Symbol('someId');

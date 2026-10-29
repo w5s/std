@@ -1,7 +1,7 @@
-import { useStorage } from './useStorage.js';
+import { useShadowStorage } from './useShadowStorage.js';
 
 /**
- * Get or create a storage {@link Map} at `globalThis[Symbol.for('@w5s/storage')]`.
+ * Get or create a storage {@link Map} at `globalThis[Symbol.for('@w5s/shadow-storage')]`.
  * This storage is persistent through hot module reload and shared across modules.
  *
  * @example
@@ -13,4 +13,4 @@ import { useStorage } from './useStorage.js';
  * globalStorage.get();// ['foo', 'bar']
  * ```
  */
-export const globalStorage = useStorage(globalThis);
+export const globalStorage = useShadowStorage(globalThis);

@@ -1,7 +1,7 @@
 import { globalStorage } from './globalStorage.js';
-import { useStorageGetter } from './useStorageGetter.js';
+import { useShadowStorageGetter } from './useShadowStorageGetter.js';
 
-const getGlobalValue = useStorageGetter(globalStorage);
+const getGlobalValue = useShadowStorageGetter(globalStorage);
 
 /**
  * Return a new global value from {@link globalStorage} if not previously set.

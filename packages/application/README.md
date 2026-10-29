@@ -18,10 +18,11 @@ npm install @w5s/application
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { useRef, useStorage } from '@w5s/application';
+import { useRef } from '@w5s/application';
+import { useShadowStorage } from '@w5s/shadow-storage';
 
 export function main(): void {
-  const globalStorage = useStorage(globalThis);
+  const globalStorage = useShadowStorage(globalThis);
   const counterRef = useRef(globalStorage, 'counter', 1);
 
   counterRef.current += 1;

@@ -1,12 +1,12 @@
 import { Ref } from '@w5s/core';
-import { useStorage } from '@w5s/global-storage';
+import { useShadowStorage } from '@w5s/shadow-storage';
 import { describe, expect, it } from 'vitest';
 
 import { useRef } from './useRef.js';
 
 describe(useRef, () => {
   describe('+ Storage', () => {
-    const anyStorage = useStorage({});
+    const anyStorage = useShadowStorage({});
 
     it('should initialize with initial value', () => {
       const ref = useRef(anyStorage, 'some_test_ref', 0);

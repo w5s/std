@@ -1,6 +1,6 @@
 import type { Ref } from '@w5s/core';
 
-import { useStorage } from '@w5s/global-storage';
+import { useShadowStorage } from '@w5s/shadow-storage';
 
 import type { Meta } from './meta.js';
 import type { State } from './State.js';
@@ -28,5 +28,5 @@ export function useNamespace(
   store?: Ref<State>,
 ): Ref<State> {
   const initialState = Object.freeze({});
-  return useRef(store ?? useStorage(globalThis), meta.name, initialState);
+  return useRef(store ?? useShadowStorage(globalThis), meta.name, initialState);
 }

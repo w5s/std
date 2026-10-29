@@ -1,6 +1,6 @@
 import type { Ref } from '@w5s/core';
 
-import { useGlobal } from '@w5s/global-storage';
+import { useGlobal } from '@w5s/shadow-storage';
 
 import type { StateKey } from '../StateKey.js';
 

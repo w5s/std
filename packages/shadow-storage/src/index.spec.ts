@@ -7,12 +7,12 @@ describe('index', () => {
     expect(new Set(Object.keys(Module))).toEqual(
       new Set([
         // Public API
-        '$storage',
+        '$shadowStorage',
         'globalStorage',
         'meta',
         'useGlobal',
-        'useStorage',
-        'useStorageGetter',
+        'useShadowStorage',
+        'useShadowStorageGetter',
       ]),
     );
   });

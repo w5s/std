@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { useStorageGetter } from './useStorageGetter.js';
+import { useShadowStorageGetter } from './useShadowStorageGetter.js';
 
-describe(useStorageGetter, () => {
+describe(useShadowStorageGetter, () => {
   const anyHostObject = {};
   const anyKey = Symbol('anyKey');
   it('returns a new value', () => {
-    const getMyState = useStorageGetter(anyHostObject);
+    const getMyState = useShadowStorageGetter(anyHostObject);
     const myState = getMyState(anyKey, () => ({ foo: true }));
 
     expect(myState).toEqual({ foo: true });

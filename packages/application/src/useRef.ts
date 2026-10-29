@@ -1,5 +1,5 @@
 import type { Ref } from '@w5s/core';
-import type { Storage } from '@w5s/global-storage';
+import type { ShadowStorage } from '@w5s/shadow-storage';
 
 import type { StateKey } from './StateKey.js';
 
@@ -10,7 +10,7 @@ import { registry } from './internal/registry.js';
  *
  * @example
  * ```typescript
- * const globalStorage = useStorage(globalThis);
+ * const globalStorage = useShadowStorage(globalThis);
  * const counterRef = useRef<number>(globalStorage, 'counter', 1);
  * // globalStorage == Map { counter => 1 }
  *
@@ -23,7 +23,7 @@ import { registry } from './internal/registry.js';
  * @param initialValue the initial value
  */
 export function useRef<V>(
-  hostObject: Ref<Record<string | symbol, unknown>> | Storage,
+  hostObject: Ref<Record<string | symbol, unknown>> | ShadowStorage,
   key: StateKey,
   initialValue: V,
 ): Ref<V> {
@@ -60,7 +60,7 @@ function useRefMap<T>(ref: Ref<Record<string | symbol, unknown>>, propertyName: 
   return propertyRef;
 }
 
-function useRefStorage<V>(hostObject: Storage, key: StateKey, initialValue: V): Ref<V> {
+function useRefStorage<V>(hostObject: ShadowStorage, key: StateKey, initialValue: V): Ref<V> {
   const ref: Ref<V> = {
     get current() {
       return hostObject.get(key) as V;

@@ -1,6 +1,6 @@
-import { globalStorage, useStorage } from '@w5s/global-storage';
+import { globalStorage, useShadowStorage } from '@w5s/shadow-storage';
 
-export const moduleStorage = useStorage({});
+export const moduleStorage = useShadowStorage({});
 
 export function main(): void {
   const key = Symbol('someId');

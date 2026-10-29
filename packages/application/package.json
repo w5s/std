@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@w5s/core": "workspace:^1.0.0-alpha.0",
-    "@w5s/global-storage": "workspace:^1.0.0-alpha.0"
+    "@w5s/shadow-storage": "workspace:^1.0.0-alpha.0"
   },
   "peerDependencies": {
     "typescript": "^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0"

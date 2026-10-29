@@ -1,4 +1,4 @@
 /**
  * Type for the Storage Map that holds all application states
  */
-export interface Storage extends Map<unknown, unknown> {}
+export interface ShadowStorage extends Map<unknown, unknown> {}

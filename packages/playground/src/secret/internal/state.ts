@@ -1,4 +1,4 @@
-import { useGlobal } from '@w5s/global-storage';
+import { useGlobal } from '@w5s/shadow-storage';
 
 import { meta } from '../meta.js';
 

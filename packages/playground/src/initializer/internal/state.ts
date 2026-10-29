@@ -1,5 +1,5 @@
 import { Ref } from '@w5s/core/dist/Ref.js';
-import { useGlobal } from '@w5s/global-storage';
+import { useGlobal } from '@w5s/shadow-storage';
 
 import type { Initializer } from '../Initializer.js';
 

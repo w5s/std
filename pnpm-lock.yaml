@@ -300,9 +300,9 @@ importers:
       '@w5s/core':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../core
-      '@w5s/global-storage':
+      '@w5s/shadow-storage':
         specifier: workspace:^1.0.0-alpha.0
-        version: link:../global-storage
+        version: link:../shadow-storage
       typescript:
         specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
@@ -442,12 +442,6 @@ importers:
         specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
 
-  packages/global-storage:
-    dependencies:
-      typescript:
-        specifier: ^5.0.0 || ^6.0.0
-        version: 6.0.3
-
   packages/http:
     dependencies:
       '@w5s/core':
@@ -564,9 +558,9 @@ importers:
       '@w5s/core-type':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../core-type
-      '@w5s/global-storage':
+      '@w5s/shadow-storage':
         specifier: workspace:^1.0.0-alpha.0
-        version: link:../global-storage
+        version: link:../shadow-storage
       typescript:
         specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
         version: 6.0.3
@@ -594,9 +588,6 @@ importers:
       '@w5s/error':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../error
-      '@w5s/global-storage':
-        specifier: workspace:^1.0.0-alpha.0
-        version: link:../global-storage
       '@w5s/http':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../http
@@ -615,6 +606,9 @@ importers:
       '@w5s/random':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../random
+      '@w5s/shadow-storage':
+        specifier: workspace:^1.0.0-alpha.0
+        version: link:../shadow-storage
       '@w5s/task':
         specifier: workspace:^1.0.0-alpha.0
         version: link:../task
@@ -644,6 +638,12 @@ importers:
         version: link:../task
       typescript:
         specifier: ^3.8.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+        version: 6.0.3
+
+  packages/shadow-storage:
+    dependencies:
+      typescript:
+        specifier: ^5.0.0 || ^6.0.0
         version: 6.0.3
 
   packages/system:
