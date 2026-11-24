@@ -216,8 +216,8 @@ importers:
         specifier: 3.1.44
         version: 3.1.44(typescript@6.0.3)
       '@w5s/tsdown-config':
-        specifier: 1.18.0
-        version: 1.18.0(tsdown@0.23.7(typescript@6.0.3))
+        specifier: 1.18.1
+        version: 1.18.1(tsdown@0.23.7(typescript@6.0.3))
       cspell:
         specifier: 10.5.2
         version: 10.5.2
@@ -4257,8 +4257,8 @@ packages:
       typescript:
         optional: true
 
-  '@w5s/tsdown-config@1.18.0':
-    resolution: {integrity: sha512-vdHYJYzLGzUgfYxi43rs4M8R8+tMcLX4Q0uWbXK1oSN2wafseCajNfNK7copqVYGiIHiM/S8Gn9fTqjzzQ3o3g==}
+  '@w5s/tsdown-config@1.18.1':
+    resolution: {integrity: sha512-M7Or5q0RRIK30EWqTjn9+lstZXu45R0MXHIEEAKYbdOYyaZbPjFpG2WY2eaf+M8M1PfTTC590nBW3m2Phmbt+A==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       tsdown: 0.x
@@ -14860,7 +14860,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  '@w5s/tsdown-config@1.18.0(tsdown@0.23.7(typescript@6.0.3))':
+  '@w5s/tsdown-config@1.18.1(tsdown@0.23.7(typescript@6.0.3))':
     optionalDependencies:
       tsdown: 0.23.7(typescript@6.0.3)
 
