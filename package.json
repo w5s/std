@@ -26,7 +26,6 @@
     "lint:root": "eslint . --ignore-pattern='apps/*/**' --ignore-pattern='packages/*/**'",
     "mrm": "npm exec --package=@w5s/mrm-preset@latest --package=mrm -- mrm --preset @w5s/mrm-preset",
     "prepare": "pnpm run \"/^prepare:.*/\"",
-    "prepare:githooks": "[ -n \"${CI:-}\" ] || git config core.hooksPath .githooks",
     "prepare:packages": "turbo run prepare",
     "release": "[ -n \"${CI:-}\" ] && npx lerna publish --yes || npx lerna publish",
     "rescue": "git clean -fdx;pnpm install",
