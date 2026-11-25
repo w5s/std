@@ -50,7 +50,7 @@
     "@w5s/commitlint-config": "3.32.1",
     "@w5s/conventional-changelog": "3.34.0",
     "@w5s/cspell-config": "3.33.0",
-    "@w5s/eslint-config": "7.1.2",
+    "@w5s/eslint-config": "7.2.0",
     "@w5s/git-worktree-manager": "1.1.0",
     "@w5s/lefthook-config": "1.7.1",
     "@w5s/tsconfig": "3.1.44",

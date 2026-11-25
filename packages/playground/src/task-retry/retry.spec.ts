@@ -211,7 +211,7 @@ describe('RetryPolicy', () => {
   describe('.waitMax', () => {
     it('should always return None', () => {
       const limit = anyDuration;
-      const overDelayPolicy = RetryPolicy.wait(TimeDuration.of(+limit + 1));
+      const overDelayPolicy = RetryPolicy.wait(TimeDuration.of(limit + 1));
       expectTask(RetryPolicy.waitMax(overDelayPolicy, limit)(anyState)).toResolveSync(limit);
       const validPolicy = RetryPolicy.wait(TimeDuration.of(limit - 1));
       expectTask(RetryPolicy.waitMax(validPolicy, limit)(anyState)).toResolveSync(limit - 1);
