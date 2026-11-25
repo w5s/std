@@ -26,7 +26,7 @@ The `@w5s/error` package helps creating type safe errors :
 ## Declaring a new type
 
 ```typescript
-import { ErrorClass } from '@w5s/error';
+import { ErrorClass } from '@w5s/error/ErrorClass';
 
 //           ┌─ ✓ PascalCase
 //           │  ✓ Name + 'Error'
@@ -46,7 +46,7 @@ Example 1 : Basic
 </summary>
 
 ```typescript
-import { ErrorClass } from '@w5s/error';
+import { ErrorClass } from '@w5s/error/ErrorClass';
 
 export class BasicError extends ErrorClass({ 
   errorName: 'BasicError',
@@ -65,7 +65,7 @@ Example 2 : Advanced with extra properties
 </summary>
 
 ```typescript
-import { ErrorClass } from '@w5s/error';
+import { ErrorClass } from '@w5s/error/ErrorClass';
 
 export class AdvancedError extends ErrorClass({ 
   errorName: 'AdvancedError',

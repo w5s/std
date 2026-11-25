@@ -16,7 +16,7 @@ The `BigInt` module provides utilities for working with JavaScript's native `big
 ## Creating BigInt values
 
 ```typescript
-import { BigInt } from '@w5s/num';
+import { BigInt } from '@w5s/num/BigInt';
 
 // From a literal
 const value = 42n;
@@ -36,7 +36,7 @@ const parsed = BigInt.parse('123n'); // Option<bigint>
 `BigInt` supports arithmetic operations using bracket notation:
 
 ```typescript
-import { BigInt } from '@w5s/num';
+import { BigInt } from '@w5s/num/BigInt';
 
 const a = 10n;
 const b = 3n;
@@ -54,7 +54,7 @@ BigInt['*'](a, b); // 30n
 ## Comparison
 
 ```typescript
-import { BigInt } from '@w5s/num';
+import { BigInt } from '@w5s/num/BigInt';
 
 const a = 10n;
 const b = 20n;
@@ -67,7 +67,7 @@ BigInt['=='](a, b); // false
 ## Formatting
 
 ```typescript
-import { BigInt } from '@w5s/num';
+import { BigInt } from '@w5s/num/BigInt';
 
 const value = 1234n;
 BigInt.format(value); // '1234'

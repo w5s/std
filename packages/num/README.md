@@ -19,7 +19,7 @@ npm install @w5s/num
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
 import { Option } from '@w5s/core/Option';
-import { BigInt } from '@w5s/num';
+import { BigInt } from '@w5s/num/BigInt';
 
 export function main() {
   const expressions = ['1n', '2n', 'foo'];

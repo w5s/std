@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { EvalError } from '@w5s/error';
+ * import { EvalError } from '@w5s/error/EvalError';
  *
  * try {
  *   throw new EvalError("Hello");

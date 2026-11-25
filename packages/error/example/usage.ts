@@ -1,4 +1,6 @@
-import { Error, ErrorClass, TypeError } from '@w5s/error';
+import { Error } from '@w5s/error/Error';
+import { ErrorClass } from '@w5s/error/ErrorClass';
+import { TypeError } from '@w5s/error/TypeError';
 
 export class MyError extends ErrorClass({ errorName: 'MyError' })<{
   bar: boolean;

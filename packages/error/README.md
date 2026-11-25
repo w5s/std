@@ -18,7 +18,9 @@ npm install @w5s/error
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { Error, ErrorClass, TypeError } from '@w5s/error';
+import { Error } from '@w5s/error/Error';
+import { ErrorClass } from '@w5s/error/ErrorClass';
+import { TypeError } from '@w5s/error/TypeError';
 
 export class MyError extends ErrorClass({ errorName: 'MyError' })<{
   bar: boolean;

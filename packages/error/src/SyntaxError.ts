@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { SyntaxError } from '@w5s/error';
+ * import { SyntaxError } from '@w5s/error/SyntaxError';
  *
  * try {
  *   throw new SyntaxError("Hello");

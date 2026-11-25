@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { URIError } from '@w5s/error';
+ * import { URIError } from '@w5s/error/URIError';
  *
  * try {
  *   throw new URIError("Hello");

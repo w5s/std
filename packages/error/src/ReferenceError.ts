@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { ReferenceError } from '@w5s/error';
+ * import { ReferenceError } from '@w5s/error/ReferenceError';
  *
  * try {
  *   throw new ReferenceError("Hello");

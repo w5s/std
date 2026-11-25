@@ -5,7 +5,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { Error } from '@w5s/error';
+ * import { Error } from '@w5s/error/Error';
  *
  * throw new Error('my message', { cause: someError });
  * ```

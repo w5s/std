@@ -3,7 +3,7 @@
  *
  * @example
  * ```typescript
- * import { AggregateError } from '@w5s/error';
+ * import { AggregateError } from '@w5s/error/AggregateError';
  *
  * try {
  *   throw new AggregateError([new Error("some error")], "Hello");

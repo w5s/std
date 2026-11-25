@@ -28,7 +28,7 @@ But as a function, it has the advantages :
 - it has a better semantic, implying that the program should stop
 
 ```typescript
-import { panic } from '@w5s/error';
+import { panic } from '@w5s/error/panic';
 
 function unsafeAsNotNullable(value: unknown) {
   return value ?? panic(new TypeError('Value must not be nullable'));
@@ -62,7 +62,7 @@ Example
 </summary>
 
 ```typescript
-import { invariant } from '@w5s/error';
+import { invariant } from '@w5s/error/invariant';
 
 function program() {
   invariant(true, 'This will not throw an error'); 

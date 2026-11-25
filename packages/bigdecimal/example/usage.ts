@@ -1,4 +1,4 @@
-import { BigDecimal } from '@w5s/bigdecimal';
+import { BigDecimal } from '@w5s/bigdecimal/BigDecimal';
 
 export function main(): void {
   const left = BigDecimal('0.1');

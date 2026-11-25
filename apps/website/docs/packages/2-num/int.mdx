@@ -16,7 +16,7 @@ import { PackageBadgeGroup } from '@site/src/components/PackageBadgeGroup';
 ## Creating Int values
 
 ```typescript
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 
 // From a number literal
 const value = Int(42);
@@ -33,7 +33,7 @@ const parsed = Int.parse('123'); // Option<Int>
 `Int` supports standard arithmetic operations using bracket notation:
 
 ```typescript
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 
 const a = Int(10);
 const b = Int(3);
@@ -51,7 +51,7 @@ Int['*'](a, b); // 30
 ## Comparison
 
 ```typescript
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 
 const a = Int(10);
 const b = Int(20);
@@ -66,7 +66,7 @@ Int['>='](a, b); // false
 ## Formatting
 
 ```typescript
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 
 const value = Int(1234);
 Int.format(value); // '1234'
@@ -78,7 +78,7 @@ Int.format(value, { radix: 16 }); // '4d2'
 `Int` provides safe bounds for integers:
 
 ```typescript
-import { Int } from '@w5s/num';
+import { Int } from '@w5s/num/Int';
 
 Int.minValue; // Number.MIN_SAFE_INTEGER
 Int.maxValue; // Number.MAX_SAFE_INTEGER

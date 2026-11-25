@@ -18,7 +18,7 @@ npm install @w5s/async
 <!-- AUTO-GENERATED-CONTENT:START (CODE:src=./example/usage.ts) -->
 <!-- The below code snippet is automatically added from ./example/usage.ts -->
 ```ts
-import { delay } from '@w5s/async';
+import { delay } from '@w5s/async/delay';
 
 export async function main() {
   await delay(1000); // Wait 1 second

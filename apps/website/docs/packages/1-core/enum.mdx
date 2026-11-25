@@ -30,7 +30,7 @@ export type MyEnum = Enum.ValueOf<typeof MyEnum>;
 ## Matching on values
 
 ```typescript
-import { assertNever } from '@w5s/error';
+import { assertNever } from '@w5s/error/assertNever';
 
 export function getName(value: MyEnum) {
   switch (value) {

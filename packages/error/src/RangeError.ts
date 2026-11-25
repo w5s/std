@@ -7,7 +7,7 @@ import type { ErrorOptions } from './ErrorOptions.js';
  *
  * @example
  * ```typescript
- * import { RangeError } from '@w5s/error';
+ * import { RangeError } from '@w5s/error/RangeError';
  *
  * try {
  *   throw new RangeError("Hello");
