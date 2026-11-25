@@ -106,7 +106,7 @@ export const RetryPolicy = {
     return (state: RetryState) => {
       const allTask = taskAll([left(state), right(state)]);
       return taskMap(allTask, ([leftResult, rightResult]) =>
-        leftResult == null || rightResult == null ? undefined : (Math.max(+leftResult, +rightResult) as TimeDuration),
+        leftResult == null || rightResult == null ? undefined : (Math.max(leftResult, rightResult) as TimeDuration),
       );
     };
   },
@@ -129,8 +129,8 @@ export const RetryPolicy = {
       retryPreviousDelay == null
         ? retryPreviousDelay
         : RetryState({
-            retryCumulativeDelay: (+state.retryCumulativeDelay + +retryPreviousDelay) as TimeDuration,
-            retryIndex: (+state.retryIndex + 1) as Int,
+            retryCumulativeDelay: (state.retryCumulativeDelay + retryPreviousDelay) as TimeDuration,
+            retryIndex: (state.retryIndex + 1) as Int,
             retryPreviousDelay,
           }),
     );
@@ -245,7 +245,7 @@ export const RetryPolicy = {
   waitExponentialJitter(initialDelay: TimeDuration, generator = defaultRandom): RetryPolicy {
     return ({ retryIndex }) => {
       const temporary = Math.trunc((initialDelay * 2 ** retryIndex) / 2) as Int;
-      return taskMap(generator, (randomValue) => (+temporary + Math.trunc(randomValue * temporary)) as TimeDuration);
+      return taskMap(generator, (randomValue) => (temporary + Math.trunc(randomValue * temporary)) as TimeDuration);
     };
   },
 
