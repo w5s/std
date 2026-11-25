@@ -48,7 +48,7 @@
     "@size-limit/preset-small-lib": "14.3.0",
     "@types/node": "20.19.43",
     "@w5s/commitlint-config": "3.32.1",
-    "@w5s/conventional-changelog": "3.33.0",
+    "@w5s/conventional-changelog": "3.34.0",
     "@w5s/cspell-config": "3.32.0",
     "@w5s/eslint-config": "7.1.2",
     "@w5s/git-worktree-manager": "1.1.0",
